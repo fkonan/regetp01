@@ -1,0 +1,674 @@
+/* SVN FILE: $Id: cake.generic.css 7118 2008-06-04 20:49:29Z gwoo $ */
+/**
+ *
+ * PHP versions 4 and 5
+ *
+ * CakePHP(tm) :  Rapid Development Framework <http://www.cakephp.org/>
+ * Copyright 2005-2008, Cake Software Foundation, Inc.
+ *								1785 E. Sahara Avenue, Suite 490-204
+ *								Las Vegas, Nevada 89104
+ *
+ * Licensed under The MIT License
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @filesource
+ * @copyright		Copyright 2005-2008, Cake Software Foundation, Inc.
+ * @link				http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
+ * @package			cake
+ * @subpackage		cake.app.webroot.css
+ * @since			CakePHP(tm)
+ * @version			$Revision: 7118 $
+ * @modifiedby		$LastChangedBy: gwoo $
+ * @lastmodified	$Date: 2008-06-04 13:49:29 -0700 (Wed, 04 Jun 2008) $
+ * @license			http://www.opensource.org/licenses/mit-license.php The MIT License
+ */
+
+* {
+	margin:0;
+	padding:0;
+}
+
+/* General Style Info */
+body {
+	color: #fff;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:10pt;
+	margin: 0;
+	background-color: #0B3861;
+}
+p {
+	padding-bottom: 0.8em;
+}
+a {
+	background:#fff;
+	color: #003d4c;
+	text-decoration: underline;
+	font-weight: bold;
+}
+a:hover {
+	background:#fff;
+	color: #003d4c;
+	text-decoration:none;
+}
+a img {
+	border:none;
+}
+h1, h2, h3, h4 {
+	font-weight: normal;
+}
+h1 {
+	background:#fff;
+	color: #003d4c;
+	font-size: 12pt;
+	margin: 0.1em 0;
+	font-weight: bold;
+}
+h2 {
+	color: #045FB4;
+	font-size: x-large;
+	font-weight: bolder;
+	font-family:Arial, Helvetica, sans-serif;
+	padding-top: 0.4em;
+	margin-top: 0.3em;
+	margin-right: 0;
+	margin-bottom: 0.3em;
+	margin-left: 0;
+	border-bottom: solid;
+	border-bottom-color: #CEE3F6;
+}
+h3 {
+	color: #044;
+	font-weight: bold;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size: 14pt;
+	padding-top: 0.4em;
+	padding-left:2em;
+	margin-top: 0.3em;
+	margin-right: 0;
+	margin-bottom: 0.3em;
+	margin-left: 0;
+	border-bottom-style: dashed;
+	border-bottom-color: grey;
+	border-bottom-width: thin;
+}
+h4 {
+	color: #993;
+	font-weight: normal;
+	padding-top: 0.5em;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12pt;
+}
+ul, li {
+	margin: 0 12px;
+}
+
+/* Layout */
+#container {
+	text-align: left;
+	width: 990px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+}
+
+#header{
+	padding: 10px 20px;
+	display: block;
+	clear: both;
+	height: 120px;
+	color: #003d5c;
+	background: #fff url('images/logo_index.gif') no-repeat left;
+	border-top: #003d5c solid;
+	border-top-width: 10px;
+	border-bottom: #003d5c solid;
+	border-bottom-width: 5px;
+}
+#header h1 {
+	background: #0B3861;
+	color: #fff;
+	font-weight: bolder;
+	
+	float: right ;
+	position: relative;
+	top: 50px;
+}
+#header h1 a {
+	color: #fff;
+	background: transparent;
+	font-weight: normal;
+	text-decoration: none;
+	padding: 20px 30px;
+}
+#header h1 a:hover {
+	background: #0B3861;
+	color: #81BEF7;
+	text-decoration: none;
+	border: thin solid grey;
+}
+#content{
+	background: #fff;
+	clear: both;
+	color: #333;
+	padding: 1px 1px;
+	overflow: auto;
+}
+#menu{
+	float: left;
+	width: 170px;
+	padding: 5px 5px;
+	background-color: #F0F0F0;
+	overflow: auto;
+}
+#menu H1{
+	color: #993;
+	font-size: 14pt;
+}
+#menuopt {
+	color: #000000;
+	font-weight: bold;
+}
+#menu a {
+	color: #000000;
+	background-color: #F0F0F0;
+	text-decoration: none;
+}
+#menu a:hover {
+	color: #002;
+	text-decoration: underline;
+}
+#cuerpo{
+	float: right;
+	width: 798px;
+	padding: 5px 5px;
+	background-color: #fff;
+	overflow: auto;
+}
+#footer {
+	clear: both;
+	padding: 6px 10px;
+	text-align: right;
+}
+
+/* Tables */
+table {
+	background: #fff;
+	border:1px solid #ccc;
+	border-right:0;
+	clear: both;
+	color: #333;
+	margin-bottom: 10px;
+	width: 100%;
+}
+th {
+	background: #f2f2f2;
+	border:1px solid #bbb;
+	border-top: 1px solid #fff;
+	border-left: 1px solid #fff;
+	text-align: center;
+}
+th a {
+	background:#f2f2f2;
+	display: block;
+	padding: 2px 4px;
+	text-decoration: none;
+}
+th a:hover {
+	background: #ccc;
+	color: #333;
+	text-decoration: none;
+}
+table tr td {
+	background: #fff;
+	border-right: 1px solid #ccc;
+	padding: 4px;
+	text-align: center;
+	vertical-align: top;
+}
+table tr.altrow td {
+	background: #f4f4f4;
+}
+td.actions {
+	text-align: center;
+	white-space: nowrap;
+}
+td.actions a {
+	margin: 0px 6px;
+}
+.cake-sql-log table {
+	background: #f4f4f4;
+}
+.cake-sql-log td {
+	padding: 4px 8px;
+	text-align: left;
+}
+
+/* Paging */
+div.paging {
+	background:#fff;
+	color: #ccc;
+	margin-bottom: 2em;
+}
+div.paging div.disabled {
+	color: #ddd;
+	display: inline;
+}
+div.paging span {
+}
+div.paging span.current {
+	color: #000;
+}
+div.paging span a {
+}
+
+/* Scaffold View */
+dl {
+	line-height: 2em;
+	margin: 0em 0em;
+	width: 60%;
+}
+dl.altrow {
+	background: #f4f4f4;
+}
+dt {
+	font-weight: bold;
+	padding-left: 4px;
+	vertical-align: top;
+}
+dd {
+	margin-left: 10em;
+	margin-top: -2em;
+	vertical-align: top;
+}
+
+/* Forms */
+form {
+	clear: both;
+	padding: 0;
+	margin: 0px;
+}
+fieldset {
+	border: 1px solid #ccc;
+	margin-top: 10px;
+	padding-top: 5px;
+	padding-right: 10px;
+	padding-bottom: 5px;
+	padding-left: 10px;
+}
+fieldset legend {
+	background:#fff;
+	color: #e32;
+	font-size: 100%;
+	font-weight: bold;
+}
+fieldset fieldset {
+	margin-top: 0px;
+	margin-bottom: 10px;
+	padding-top: 10px;
+	padding-right: 5px;
+	padding-bottom: 10px;
+	padding-left: 5px;
+}
+fieldset fieldset legend {
+	font-size: 100%;
+	font-weight: normal;
+	margin-left: 10px;
+}
+fieldset fieldset div {
+	clear: left;
+	margin-top: 0;
+	margin-right: 10px;
+	margin-bottom: 0;
+	margin-left: 10px;
+}
+form div {
+	clear: both;
+	margin-bottom: 0em;
+	padding: .5em;
+	vertical-align: text-top;
+}
+form div.input {
+	color: #444;
+}
+form div.required {
+	color: #333;
+	font-weight: bold;
+}
+form div.submit {
+	border: 0;
+	clear: both;
+	margin-top: 2px;
+	margin-left: 50px;
+}
+label {
+	display: block;
+	font-size: 100%;
+	padding-right: 10px;
+}
+input, textarea {
+	clear: both;
+	display: block;
+	font-size: 10pt;
+	font-family: Arial, Helvetica, sans-serif;
+	padding: 2px;
+	width: 92%;
+}
+select {
+	clear: both;
+	font-size: 100%;
+	vertical-align: text-bottom;
+}
+select[multiple=multiple] {
+	width: 100%;
+}
+option {
+	font-size: 100%;
+	padding: 0 3px;
+}
+input[type=checkbox] {
+	clear: left;
+	float: left;
+	margin: 0px 6px 7px 2px;
+	width: auto;
+}
+input[type=radio] {
+	float:left;
+	width:auto;
+	margin: 0 3px 7px 0;
+}
+div.radio label {
+	margin: 0 0 6px 20px;
+}
+input[type=submit] {
+	display: inline;
+	font-size: 100%;
+	padding: 2px 5px;
+	width: auto;
+	vertical-align: bottom;
+}
+
+/* Notices and Errors */
+div.message {
+	clear: both;
+	color: #900;
+	font-size: 140%;
+	font-weight: bold;
+	margin: 1em 0;
+}
+div.error-message {
+	clear: both;
+	color: #900;
+	font-weight: bold;
+}
+p.error {
+	background-color: #e32;
+	color: #fff;
+	font-family: Courier, monospace;
+	font-size: 120%;
+	line-height: 140%;
+	padding: 0.8em;
+	margin: 1em 0;
+}
+p.error em {
+	color: #000;
+	font-weight: normal;
+	line-height: 140%;
+}
+.notice {
+	background: #ffcc00;
+	color: #000;
+	display: block;
+	font-family: Courier, monospace;
+	font-size: 120%;
+	line-height: 140%;
+	padding: 0.8em;
+	margin: 1em 0;
+}
+.success {
+	background: green;
+	color: #fff;
+}
+
+/*  Actions  */
+div.actions ul {
+	margin: 0px 0;
+	padding: 0;
+	background-color: #F0F0F0;
+}
+div.actions li {
+	display: inline;
+	list-style-type: none;
+	line-height: 2em;
+	margin: 0 2em 0 0;
+	white-space: nowrap;
+}
+div.actions ul li a {
+	color: #003d4c;
+	text-decoration: none;
+	background-color: #F0F0F0;
+}
+div.actions ul li a:hover {
+	color: #333;
+	text-decoration: underline;
+}
+
+/* Related */
+div.related {
+	clear: both;
+	display: block;
+}
+
+/* Debugging */
+pre {
+	color: #000;
+	background: #f0f0f0;
+	padding: 1em;
+}
+pre.cake-debug {
+	background: #ffcc00;
+	font-size: 120%;
+	line-height: 140%;
+	margin-top: 1em;
+	overflow: auto;
+	position: relative;
+}
+div.cake-stack-trace {
+	background: #fff;
+	border: 4px dotted #ffcc00;
+	color: #333;
+	margin: 0px;
+	padding: 6px;
+	font-size: 120%;
+	line-height: 140%;
+	overflow: auto;
+	position: relative;
+}
+div.cake-code-dump pre {
+	position: relative;
+	overflow: auto;
+}
+div.cake-stack-trace pre, div.cake-code-dump pre {
+	color: #000;
+	background-color: #F0F0F0;
+	margin: 0px;
+	padding: 1em;
+	overflow: auto;
+}
+div.cake-code-dump pre, div.cake-code-dump pre code {
+	clear: both;
+	font-size: 12px;
+	line-height: 15px;
+	margin: 4px 2px;
+	padding: 4px;
+	overflow: auto;
+}
+div.cake-code-dump span.code-highlight {
+	background-color: #ff0;
+	padding: 4px;
+}
+div.code-coverage-results div.code-line {
+	padding-left:5px;
+	display:block;
+	margin-left:10px;
+}
+div.code-coverage-results div.uncovered span.content {
+	background:#ecc;
+}
+div.code-coverage-results div.covered span.content {
+	background:#cec;
+}
+div.code-coverage-results div.ignored span.content {
+	color:#aaa;
+}
+div.code-coverage-results span.line-num {
+	color:#666;
+	display:block;
+	float:left;
+	width:20px;
+	text-align:right;
+	margin-right:5px;
+}
+div.code-coverage-results span.line-num strong {
+	color:#666;
+}
+div.code-coverage-results div.start {
+	border:1px solid #aaa;
+	border-width:1px 1px 0px 1px;
+	margin-top:30px;
+	padding-top:5px;
+}
+div.code-coverage-results div.end {
+	border:1px solid #aaa;
+	border-width:0px 1px 1px 1px;
+	margin-bottom:30px;
+	padding-bottom:5px;
+}
+div.code-coverage-results div.realstart {
+	margin-top:0px;
+}
+div.code-coverage-results p.note {
+	color:#bbb;
+	padding:5px;
+	margin:5px 0 10px;
+	font-size:10px;
+}
+div.code-coverage-results span.result-bad {
+	color: #a00;
+}
+div.code-coverage-results span.result-ok {
+	color: #fa0;
+}
+div.code-coverage-results span.result-good {
+	color: #0a0;
+}
+
+
+
+
+/*************************************************
+Alejandro Design
+*************************************************/
+.alertar_escuela_no_actualizada{
+	background-position: right;
+}
+
+.instit_inactiva{
+	color: red;
+}
+
+
+
+
+.lista_horizontal{
+	font-size: x-small;
+	margin-bottom: 10px;
+}
+
+.lista_horizontal UL{
+		padding: 0px;
+		margin: 0px;
+		clear: both;
+	display: block;
+}
+
+.lista_horizontal LI{
+	display: inline;
+	list-style: none;
+}
+.lista_horizontal A{
+	text-decoration: none;
+}
+.lista_horizontal A:HOVER{
+	text-decoration: underline;
+	color: #fff;
+	background-color: grey;
+}
+
+
+.paginate_msg{
+	font-family: sans-serif;
+	font-variant: small-caps;
+	border-top-style: solid;
+	border-top-color: grey;
+	border-top-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: grey;
+	border-bottom-width: thin;
+	margin-bottom: 10px;
+}
+
+
+/****************
+Listado:
+los listados son realizados utilizando listtas UL->Li
+La intencion es la no utilizacion de tablas. permitiendo 
+darle un aspecto mas bello solo mediante CSS al sistema de registros
+*******************/
+.listado{
+	
+}
+
+.listado UL{
+	
+}
+
+.listado LI{
+	list-style: url('images/list_item.gif');
+	border: thin solid #E0ECF8;
+	min-height: 45px;
+}
+
+.instit_name{
+	font-size: medium;
+}
+
+.instit_atributte{
+	float: left;
+	margin: 0px 4px; 
+}
+
+
+
+
+
+.instit_data_bs{
+	width: 500px;
+	float: left;
+}
+
+.instit_link_list{
+	width: 200px;
+	float: right;
+}
+.listado a{
+	background-color: transparent;
+}
+
+.instit_link_list UL{
+	padding: 0px;
+	margin: 0px;	
+}
+.instit_link_list LI{
+	list-style: none;
+	margin: 0px;
+}
