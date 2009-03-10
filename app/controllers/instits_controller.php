@@ -121,10 +121,15 @@ class InstitsController extends AppController {
             }
 
 			
-			if($this->data['Instit']['jurisdiccion_id'] != '' || $this->data['Instit']['jurisdiccion_id'] != 0){
-				$this->paginate['conditions']['Instit.jurisdiccion_id'] = $this->data['Instit']['jurisdiccion_id'];
-				$array_condiciones['Jurisdiccion'] = $this->data['Instit']['jurisdiccion_id'];
-				$url_conditions['jurisdiccion_id'] = $this->data['Instit']['jurisdiccion_id'];			
+			if($this->data['Instit']['jurisdiccion_id'] != ''){
+				if((int)$this->data['Instit']['jurisdiccion_id'] == 0){
+					$basura = 1;
+				}
+				else{
+					$this->paginate['conditions']['Instit.jurisdiccion_id'] = $this->data['Instit']['jurisdiccion_id'];
+					$array_condiciones['Jurisdiccion'] = $this->data['Instit']['jurisdiccion_id'];
+					$url_conditions['jurisdiccion_id'] = $this->data['Instit']['jurisdiccion_id'];
+				}			
 			}
 						
 			if($this->data['Instit']['nombre'] != ''){
@@ -152,15 +157,23 @@ class InstitsController extends AppController {
 			}
 			
 			if($this->data['Instit']['esanexo']){
-				$this->paginate['conditions']['Instit.esanexo'] = $this->data['Instit']['esanexo'];
-				$array_condiciones['Es Anexo'] = $this->data['Instit']['esanexo'];
-				$url_conditions['esanexo'] = $this->data['Instit']['esanexo'];
+				if((int)$this->data['Instit']['esanexo']== -1){
+					$basura = 1;
+				}else{				
+					$this->paginate['conditions']['Instit.esanexo'] = $this->data['Instit']['esanexo'];
+					$array_condiciones['Es Anexo'] = $this->data['Instit']['esanexo'];
+					$url_conditions['esanexo'] = $this->data['Instit']['esanexo'];
+				}
 			}
 			
 			if($this->data['Instit']['activo']){
-				$this->paginate['conditions']['Instit.activo'] = $this->data['Instit']['activo'];
-				$array_condiciones['Activo'] = $this->data['Instit']['activo'];
-				$url_conditions['activo'] = $this->data['Instit']['activo'];
+				if((int)$this->data['Instit']['activo']== -1){
+					$basura = 1;
+				}else{				
+					$this->paginate['conditions']['Instit.activo'] = $this->data['Instit']['activo'];
+					$array_condiciones['Activo'] = $this->data['Instit']['activo'];
+					$url_conditions['activo'] = $this->data['Instit']['activo'];
+				}
 			}	
 			
 		}	
@@ -186,15 +199,20 @@ class InstitsController extends AppController {
             }
 			
             if(isset($this->passedArgs['jurisdiccion_id'])){	
-            			if($this->passedArgs['jurisdiccion_id'] != '' || $this->passedArgs['jurisdiccion_id'] != 0){
+            	if($this->passedArgs['jurisdiccion_id'] != '' || $this->passedArgs['jurisdiccion_id'] != 0){
+            		if((int)$this->passedArgs['jurisdiccion_id'] == 0){
+						$basura = 1;
+					}
+					else{
 					$this->paginate['conditions']['Instit.jurisdiccion_id'] = $this->passedArgs['jurisdiccion_id'];
 					$array_condiciones['Jurisdiccion'] = $this->passedArgs['jurisdiccion_id'];
-					$url_conditions['jurisdiccion_id'] = $this->passedArgs['jurisdiccion_id'];			
+					$url_conditions['jurisdiccion_id'] = $this->passedArgs['jurisdiccion_id'];
+					}			
 				}
             }
             
             if(isset($this->passedArgs['nombre'])){	
-            			if($this->passedArgs['nombre'] != ''){
+            	if($this->passedArgs['nombre'] != ''){
 					$this->paginate['conditions']['UPPER(Instit.nombre) LIKE'] = '%'.strtoupper($this->passedArgs['nombre']).'%';
 					$array_condiciones['Nombre'] = '%'.($this->passedArgs['nombre']).'%';
 					$url_conditions['nombre'] = $this->passedArgs['nombre'];			
@@ -226,19 +244,29 @@ class InstitsController extends AppController {
 			}
 			
 			if(isset($this->passedArgs['esanexo'])){
-				if($this->passedArgs['esanexo']){
-					$this->paginate['conditions']['Instit.esanexo'] = $this->passedArgs['esanexo'];
-					$array_condiciones['Es Anexo'] = $this->passedArgs['esanexo'];
-					$url_conditions['esanexo'] = $this->passedArgs['esanexo'];
+				if((int)$this->passedArgs['esanexo'] == -1){
+						$basura = 1;
+					}
+				else{
+					if($this->passedArgs['esanexo']){
+						$this->paginate['conditions']['Instit.esanexo'] = $this->passedArgs['esanexo'];
+						$array_condiciones['Es Anexo'] = $this->passedArgs['esanexo'];
+						$url_conditions['esanexo'] = $this->passedArgs['esanexo'];
+					}
 				}
 			}
 			
 			if(isset($this->passedArgs['activo'])){
-				if($this->passedArgs['activo']){
-					$this->paginate['conditions']['Instit.activo'] = $this->passedArgs['activo'];
-					$array_condiciones['Activo'] = $this->passedArgs['activo'];
-					$url_conditions['activo'] = $this->passedArgs['activo'];
-				}		
+				if((int)$this->passedArgs['activo'] == -1){
+						$basura = 1;
+				}
+				else{
+					if($this->passedArgs['activo']){
+						$this->paginate['conditions']['Instit.activo'] = $this->passedArgs['activo'];
+						$array_condiciones['Activo'] = $this->passedArgs['activo'];
+						$url_conditions['activo'] = $this->passedArgs['activo'];
+					}
+				}	
 			}	
 		}	
 		

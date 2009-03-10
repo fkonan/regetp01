@@ -31,10 +31,10 @@
 /* General Style Info */
 body {
 	color: #fff;
-	font-family:Arial, Helvetica, sans-serif;
+	font-family: Verdana, Geneva, sans-serif;
 	font-size:10pt;
 	margin: 0;
-	background-color: #0B3861;
+	background-color: #0B243B;
 }
 p {
 	padding-bottom: 0.8em;
@@ -55,15 +55,10 @@ a img {
 }
 h1, h2, h3, h4 {
 	font-weight: normal;
+	font-family: font-family: Garamond, serif;
 }
+
 h1 {
-	background:#fff;
-	color: #003d4c;
-	font-size: 12pt;
-	margin: 0.1em 0;
-	font-weight: bold;
-}
-h2 {
 	color: #045FB4;
 	font-size: x-large;
 	font-weight: bolder;
@@ -76,7 +71,7 @@ h2 {
 	border-bottom: solid;
 	border-bottom-color: #CEE3F6;
 }
-h3 {
+h2 {
 	color: #044;
 	font-weight: bold;
 	font-family:Arial, Helvetica, sans-serif;
@@ -112,40 +107,58 @@ ul, li {
 	margin-left: auto;
 }
 
+
+
+
+
+
+/************************************************************************
+*
+*
+*		HEADER
+*
+*
+*/
 #header{
+	text-align: center;
 	padding: 10px 20px;
 	display: block;
 	clear: both;
-	height: 120px;
 	color: #003d5c;
-	background: #fff url('images/logo_index.gif') no-repeat left;
-	border-top: #003d5c solid;
+	background: #CEE3F6 url('images/logo_index.gif') no-repeat left;
+	border-top: #0B243B solid;
 	border-top-width: 10px;
-	border-bottom: #003d5c solid;
-	border-bottom-width: 5px;
+	border-bottom: #0B243B solid;
+	border-bottom-width: 1px;
+	height: 70px;
 }
 #header h1 {
-	background: #0B3861;
-	color: #fff;
+	border-bottom: none;
+	font-size: x-large;
+	background:transparent;
+	color: #0B243B;
+	font-size: large;
 	font-weight: bolder;
-	
-	float: right ;
-	position: relative;
-	top: 50px;
+	margin: auto;
+	margin-top: 20px;
 }
 #header h1 a {
-	color: #fff;
-	background: transparent;
-	font-weight: normal;
+	background-color: transparent;
 	text-decoration: none;
-	padding: 20px 30px;
 }
 #header h1 a:hover {
-	background: #0B3861;
-	color: #81BEF7;
-	text-decoration: none;
-	border: thin solid grey;
+	text-decoration: underline;
 }
+
+
+
+/************************************************************************
+*
+*
+*		CONTENEDOR MENU Y CUERPO
+*
+*
+*/
 #content{
 	background: #fff;
 	clear: both;
@@ -153,16 +166,29 @@ ul, li {
 	padding: 1px 1px;
 	overflow: auto;
 }
+
+
+
+/************************************************************************
+*
+*
+*		MENU
+*
+*
+*/
 #menu{
 	float: left;
-	width: 170px;
+	width: 156px;
 	padding: 5px 5px;
-	background-color: #F0F0F0;
-	overflow: auto;
+	background-color: #CEE3F6;
+	height: 100%;
 }
 #menu H1{
-	color: #993;
-	font-size: 14pt;
+	font-size: 9pt;
+	border-top: thin #fff solid; 
+	border-bottom: thin #fff solid; 
+	text-align: center;
+	text-transform: uppercase;
 }
 #menuopt {
 	color: #000000;
@@ -170,13 +196,39 @@ ul, li {
 }
 #menu a {
 	color: #000000;
-	background-color: #F0F0F0;
+	background-color: transparent;
 	text-decoration: none;
+	height: 1.5em;
 }
 #menu a:hover {
 	color: #002;
 	text-decoration: underline;
+	background-color: #fff;
+	
 }
+
+#menu UL{
+	padding: 0px;
+	list-style: square;
+}
+#menu LI{
+	padding: 0px;
+	margin: 0px;
+	width: 100%;
+}
+#menu LI:HOVER{
+	background-color: white;
+}	
+
+
+
+/************************************************************************
+*
+*
+*		CUERPO
+*
+*
+*/
 #cuerpo{
 	float: right;
 	width: 798px;
@@ -190,6 +242,14 @@ ul, li {
 	text-align: right;
 }
 
+
+/************************************************************************
+*
+*
+*		CAKE DEFAULTS
+*
+*
+*/
 /* Tables */
 table {
 	background: #fff;
@@ -330,10 +390,10 @@ form div {
 form div.input {
 	color: #444;
 }
-form div.required {
+form div.required {/*
 	color: #333;
 	font-weight: bold;
-}
+*/}
 form div.submit {
 	border: 0;
 	clear: both;
@@ -565,20 +625,39 @@ div.code-coverage-results span.result-good {
 
 
 
-/*************************************************
-Alejandro Design
-*************************************************/
+
+/************************************************************************
+*
+*
+*		Alejandro Diseño Especial
+*
+*
+*/
 .alertar_escuela_no_actualizada{
-	background-position: right;
 }
 
 .instit_inactiva{
 	color: red;
 }
+.paginate_msg{
+	font-family: sans-serif;
+	font-variant: small-caps;
+	border-top-style: solid;
+	border-top-color: grey;
+	border-top-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: grey;
+	border-bottom-width: thin;
+	margin-bottom: 10px;
+}
 
-
-
-
+/**
+*
+*
+*		LISTA HORIZONTAL
+*
+*
+**/
 .lista_horizontal{
 	font-size: x-small;
 	margin-bottom: 10px;
@@ -588,7 +667,7 @@ Alejandro Design
 		padding: 0px;
 		margin: 0px;
 		clear: both;
-	display: block;
+		display: block;
 }
 
 .lista_horizontal LI{
@@ -605,25 +684,15 @@ Alejandro Design
 }
 
 
-.paginate_msg{
-	font-family: sans-serif;
-	font-variant: small-caps;
-	border-top-style: solid;
-	border-top-color: grey;
-	border-top-width: thin;
-	border-bottom-style: solid;
-	border-bottom-color: grey;
-	border-bottom-width: thin;
-	margin-bottom: 10px;
-}
 
 
-/****************
-Listado:
-los listados son realizados utilizando listtas UL->Li
-La intencion es la no utilizacion de tablas. permitiendo 
-darle un aspecto mas bello solo mediante CSS al sistema de registros
-*******************/
+/************************************************************************
+*
+*
+*		LISTA VERTICAL
+*
+*
+*/
 .listado{
 	
 }
@@ -646,10 +715,6 @@ darle un aspecto mas bello solo mediante CSS al sistema de registros
 	float: left;
 	margin: 0px 4px; 
 }
-
-
-
-
 
 .instit_data_bs{
 	width: 500px;
