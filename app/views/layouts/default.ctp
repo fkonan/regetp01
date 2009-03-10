@@ -32,10 +32,8 @@
 	</title>
 	<?php
 		echo $html->meta('icon');
-
-//		echo $html->css('cake.generic');
 		echo $html->css('regetp');
-
+		echo $javascript->link('prototype');
 		echo $scripts_for_layout;
 	?>
 </head>
@@ -48,7 +46,7 @@
 			<div id="menu">			
 				<h1>Registro</h1>
 				<ul>
-					<li><?php echo $html->link(__('Instituciones', true), '/instits/search'); ?></li>
+					<li><?php echo $html->link(__('Instituciones', true), '/instits/search_form'); ?></li>
 				</ul>
 				
 				<h1>Usuario</h1>				
