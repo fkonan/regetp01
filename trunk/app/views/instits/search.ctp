@@ -1,10 +1,30 @@
+<? //pr($paginator->options(array('url' => $this->passedArgs))); 
+//pr($url_conditions);
+$paginator->options(array('url' => $url_conditions));
+?>
 
+<H4>Los Criterios de búsqueda son los siguientes</H4>
+<dl>
+<?
+
+ foreach($conditions as $key => $value){
+
+	?><dd><?
+		echo '- '.$key.': ';
+	?></dd><?
+	?><dt><?
+		echo $value;
+	?></dt><?
+}
+
+?>
+</dl>
 
 <h4>Ordenar los resultados por:</h4>
 <ul class="lista_horizontal">
-	<li><?php echo $paginator->sort('gestion_id');?></li>
+	<li><?php echo $paginator->sort('Gestión','gestion_id');?></li>
 	<li><?php echo $paginator->sort('dependencia_id');?></li>
-	<li><?php echo $paginator->sort('tipoinstit_id');?></li>
+	<li><?php echo $paginator->sort('Tipo Instit.','tipoinstit_id');?></li>
 	<li><?php echo $paginator->sort('jurisdiccion_id');?></li>
 	<li><?php echo $paginator->sort('cue');?></li>
 	<li><?php echo $paginator->sort('anexo');?></li>
@@ -23,7 +43,7 @@
 
 <ul class="listado">
 
-<?php
+<?php  
 //echo "11111<BR>";
 //pr($instits);
 
@@ -46,7 +66,6 @@ foreach($instits as $instit){
 		<div class="instit_name"><?= $instit['Instit']['nombre'].' <cite>['.$instit['Instit']['cue'].']</cite>'; ?></div>
 		<div class="instit_atributte"><b>Jurisdiccion:</b> <?= $instit['Jurisdiccion']['name'] ?></div>
 		<div class="instit_atributte"><b>Gestion:</b><?= $instit['Gestion']['name'] ?></div>
-		<div class="instit_atributte"><b>Planes:</b> <?= sizeof($instit['Plan']) ?></div>
 	</div>
 	<div class="instit_link_list">
 		<?=$html->link('Ver Datos escuela',array('controller'=> 'Instits', 'action'=>'view/'.$instit['Instit']['id'])) ?>
@@ -61,7 +80,9 @@ foreach($instits as $instit){
 
 <p id="paginator_prev_next_links">
 <?php
-	echo $paginator->prev('« Anterior ', null, null, array('class' => 'disabled'));
+
+	
+	echo $paginator->prev('« Anterior ',null, null, array('class' => 'disabled'));
 	echo " <---> ".$paginator->counter()." <---> ";
 	echo $paginator->next(' Siguiente »', null, null, array('class' => 'disabled'));
 ?> 
