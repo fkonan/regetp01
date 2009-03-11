@@ -1,4 +1,4 @@
-<h2><?= __('Buscar Institución')?></h2>
+<h1><?= __('Buscar Institución')?></h1>
 	
 	<div>
 		<?= $form->create('Instit',array('action' => 'search')); 
