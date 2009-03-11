@@ -77,20 +77,22 @@ h2 {
 	font-family:Arial, Helvetica, sans-serif;
 	font-size: 14pt;
 	padding-top: 0.4em;
-	padding-left:2em;
-	margin-top: 0.3em;
+	padding-left:1.1em;
+	margin-top: 1.2em;
 	margin-right: 0;
 	margin-bottom: 0.3em;
 	margin-left: 0;
 	border-bottom-style: dashed;
-	border-bottom-color: grey;
+	border-bottom-color: #CEE3F6;
 	border-bottom-width: thin;
 }
-h4 {
-	color: #993;
-	font-weight: normal;
-	padding-top: 0.5em;
-	font-family: Arial, Helvetica, sans-serif;
+h3 {
+	color: #045FB4;
+	padding-left: 1.1em;
+	border-bottom-style: dashed;
+	border-bottom-color: #CEE3F6;
+	border-bottom-width: thin;
+	margin-top: 1.1em;
 	font-size: 12pt;
 }
 ul, li {
@@ -125,7 +127,7 @@ ul, li {
 	display: block;
 	clear: both;
 	color: #003d5c;
-	background: #CEE3F6 url('images/logo_index.gif') no-repeat left;
+	background: #F0F7FC url('images/logoinet2.gif') no-repeat left;
 	border-top: #0B243B solid;
 	border-top-width: 10px;
 	border-bottom: #0B243B solid;
@@ -179,14 +181,16 @@ ul, li {
 #menu{
 	float: left;
 	width: 156px;
-	padding: 5px 5px;
-	background-color: #CEE3F6;
+	padding: 27px 5px;
+	margin-top: 0px;
+	border-right: 3px solid #F0F7FC;
 	height: 100%;
 }
 #menu H1{
+	font-weight: bold;
+	color: #3366CC;
 	font-size: 9pt;
-	border-top: thin #fff solid; 
-	border-bottom: thin #fff solid; 
+	border-bottom: thin #CEE3F6 solid; 
 	text-align: center;
 	text-transform: uppercase;
 }
@@ -194,32 +198,35 @@ ul, li {
 	color: #000000;
 	font-weight: bold;
 }
-#menu a {
-	color: #000000;
-	background-color: transparent;
-	text-decoration: none;
-	height: 1.5em;
-}
-#menu a:hover {
-	color: #002;
-	text-decoration: underline;
-	background-color: #fff;
-	
-}
 
 #menu UL{
 	padding: 0px;
 	list-style: square;
+	margin-bottom: 0px 0px 10px 0px;
+	list-style-type: none;
+	
 }
 #menu LI{
 	padding: 0px;
 	margin: 0px;
 	width: 100%;
 }
-#menu LI:HOVER{
-	background-color: white;
-}	
 
+#menu a {
+	font-weight: normal;
+	text-decoration: none;
+	color: #045FB4;
+	background: #F0F7FC;
+	display: block;
+	padding: 3px 6px;
+	width: 100%;
+}
+#menu a:hover {
+	font-weight: bolder;
+	background: #DBEBF6;
+
+	
+}
 
 
 /************************************************************************
@@ -659,31 +666,46 @@ div.code-coverage-results span.result-good {
 *
 **/
 .lista_horizontal{
-	font-size: x-small;
+	font-size: small;
 	margin-bottom: 10px;
-}
-
-.lista_horizontal UL{
-		padding: 0px;
-		margin: 0px;
-		clear: both;
-		display: block;
+	height: 20px;	
+	padding: 0px;
+	margin: 0px 0px 10px 0px;
+	clear: both;
+	display: block;
+	background: #F0F7FC;
 }
 
 .lista_horizontal LI{
 	display: inline;
+	float: left;
 	list-style: none;
+	padding: 0px;
+	margin: 0px;
+	width: 100px;
+	border-left: solid thin white;
+	border-right: solid 4px white;
 }
 .lista_horizontal A{
+	text-align: center;
+	font-weight: normal;
 	text-decoration: none;
+	color: #045FB4;
+	background: #F0F7FC;
+	display: block;
+	padding: 3px 6px;
+	width: 100%;
 }
 .lista_horizontal A:HOVER{
-	text-decoration: underline;
-	color: #fff;
-	background-color: grey;
+	font-weight: bolder;
+	background: #DBEBF6;
 }
 
-
+.marcada{
+	font-weight: bolder;
+	background: #DBEBF6;
+	border: thin solid #045FB4;
+}
 
 
 /************************************************************************
@@ -694,7 +716,8 @@ div.code-coverage-results span.result-good {
 *
 */
 .listado{
-	
+	display: block;
+	clear: both;
 }
 
 .listado UL{
@@ -705,10 +728,19 @@ div.code-coverage-results span.result-good {
 	list-style: url('images/list_item.gif');
 	border: thin solid #E0ECF8;
 	min-height: 45px;
+	display: block;
+	clear: both;
+}
+
+.lista_link{
+	cursor: pointer;
+}
+.lista_link_hover{
+	background-color: #F0F7FC;
+	
 }
 
 .instit_name{
-	font-size: medium;
 }
 
 .instit_atributte{
@@ -717,12 +749,14 @@ div.code-coverage-results span.result-good {
 }
 
 .instit_data_bs{
-	width: 500px;
+	width: 600px;
 	float: left;
 }
 
 .instit_link_list{
-	width: 200px;
+	font-size: small;
+	text-align: right;
+	width: 100px;
 	float: right;
 }
 .listado a{
@@ -736,4 +770,27 @@ div.code-coverage-results span.result-good {
 .instit_link_list LI{
 	list-style: none;
 	margin: 0px;
+}
+
+
+/************************************************************************
+*
+*
+*		DL Para listado de atributos y cosas mas pequeñas
+*
+*
+*/
+.criterios_busq{
+	font-size: 12px;
+	line-height: 1.6em;
+}
+.criterios_busq dt{
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+.criterios_busq dd{
+	margin-top: -1.6em;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	margin-left: 12em;
 }
