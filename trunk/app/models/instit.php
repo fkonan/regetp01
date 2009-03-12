@@ -225,6 +225,15 @@ class Instit extends AppModel {
 				//'on' => 'create', // or: 'update'
 				'message' => 'Debe ingresar formato de año, con 4 dígitos.'	
 			)
+		),
+		'observacion' => array(
+			'notEmpty' => array( // or: array('ruleName', 'param1', 'param2' ...)
+				'rule' => array('maxLength',100),
+				'required' => false,
+				'allowEmpty' => true,
+				//'on' => 'create', // or: 'update'
+				'message' => 'La observación no puedo tener mas de 100 caracteres.'
+			)
 		)
 	);
 	

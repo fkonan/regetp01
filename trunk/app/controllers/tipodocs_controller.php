@@ -57,6 +57,21 @@ class TipodocsController extends AppController {
 			$this->redirect(array('action'=>'index'));
 		}
 	}
+	
+	/**
+	 * devuelve el nombre del Tipo de documento DNI, CI, etc
+	 *
+	 * @param $id del tipodoc
+	 * @return string, con el nombre
+	 */
+	function tipodoc_nombre($id = null){
+		if ($id) {
+			$this->Tipodoc->recursive = -1;
+			$tipodoc = $this->Tipodoc->find('first',array('conditions'=>array('id'=>$id)));
+			return $tipodoc['Tipodoc']['abrev'];			
+		}
+		return '';
+	}
 
 }
 ?>
