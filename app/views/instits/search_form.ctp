@@ -2,44 +2,37 @@
 	
 	<div>
 		<?= $form->create('Instit',array('action' => 'search')); 
-				
-		echo $form->input('cue', array('label'=> 'CUE')); 
-		echo $form->input('nombre', array('label'=>'Nombre de Institución')); 
-		echo $form->input('direccion', array('label'=>'Domicilio'));	
+
+		echo $form->input('gestion_id', array('empty' => 'Todas', 'label'=> 'Gestión'));
 		
+		$meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
+		echo $form->input('jurisdiccion_id', array('empty' => array('0'=>'Todas'),'id'=>'jurisdiccion_id','label'=>'Jurisdicción','after'=>$meter));		
+		echo $form->input('tipoinstit_id', array('empty' => 'Todas','disabled'=>true,'type'=>'select','label'=>'Tipo De Institución','after'=> '<br /><cite>Para activar este campo, seleccione primero una jurisdicción</cite>'));
 		
-		
-		echo $form->input('gestion_id', array('empty' => 'Todas', array('label'=> 'Gestión')));
-		echo $form->input('dependencia_id', array('empty' => 'Todas'));
-		
-		echo $form->input('jurisdiccion_id', array('empty' => array('0'=>'Todas'),'id'=>'jurisdiccion_id','label'=>'Jurisdicción'));
-		echo $form->input('tipoinstit_id', array('empty' => 'Todas','disabled'=>true,'type'=>'select','label'=>'Tipo De Institución'));
-		
-		?><div id="div_tipo_instit"></div><?
-		echo '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
-		
+
 		echo $ajax->observeField('jurisdiccion_id',
                                    array(  	'url' => '/tipoinstits/ajax_select_form_por_jurisdiccion',
                                    			//'controller' => 'TipoInstits',
                                    			//'action' => 'ajax_select_form_por_jurisdiccion',
 		                                   	'update'=>'InstitTipoinstitId',
-		                                   	'loading'=>"$('div_tipo_instit').show()",
-		                                   	'complete'=>'$("ajax_indicator").hide();$("div_tipo_instit").show();$("InstitTipoinstitId").enable()',
+		                                   	'loading'=>'$("ajax_indicator").show();$("InstitTipoinstitId").disable()',
+		                                   	'complete'=>'$("ajax_indicator").hide();$("InstitTipoinstitId").enable()',
 		                                   	'onChange'=>true
                                    ));  
-      	
+		
+		echo $form->input('localidad', array('label'=>'Localidad')); 
+		echo $form->input('dependencia_id', array('empty' => 'Todas'));
 		
 		$array_anexo = array('-1'=>'Buscar Todas','0'=>'No','1'=>'Si');
 		echo $form->input('esanexo',array('options'=> $array_anexo,'label'=>'Anexo'));
+		
 		$array_activa = array('-1'=>'Buscar Todas','0'=>'No','1'=>'Si');
 		echo $form->input('activo',array('options'=> $array_activa,'label'=>'Institución Activa'));
-
 		
-		/*
-		 * <?= $form->input('Plan.oferta_id', array('options'=>$ofertas, 
-												 'label'=>'Ofertas',
-												 'empty' => 'Cualquiera')); ?>
-		 */
+		echo $form->input('cue', array('label'=> 'CUE', 'maxlength'=>7 ,'after'=> '<cite>Ej: 600118-> Instituto Calasanz; 5000216-> Arturo Jaureche. No introducir número de anexo</cite>')); 
+		echo $form->input('nombre', array('label'=>'Nombre de Institución')); 
+		echo $form->input('direccion', array('label'=>'Domicilio'));	
+		
 		echo $form->end('Buscar'); ?>
 		
 	</div>

@@ -3,6 +3,7 @@ class InstitsController extends AppController {
 
 	var $name = 'Instits';
 	var $helpers = array('Html', 'Form','Ajax');
+	var $paginate = array('order'=>array('Instit.cue' => 'asc')); 
 
 	function index() {		
 		$this->Instit->recursive = 0;
@@ -14,6 +15,7 @@ class InstitsController extends AppController {
 			$this->Session->setFlash(__('Institución Inválida.', true));
 			$this->redirect(array('action'=>'index'));
 		}
+		
 		$this->set('instit', $this->Instit->read(null, $id));
 	}
 
@@ -43,7 +45,7 @@ class InstitsController extends AppController {
 		if (!empty($this->data)) {
 			if ($this->Instit->save($this->data)) {
 				$this->Session->setFlash(__('Se ha guardado la Institución correctamente', true));
-				$this->redirect(array('action'=>'index'));
+				$this->redirect(array('action'=>'search_form'));
 			} else {
 				$this->Session->setFlash(__('La Institución no pudo ser guardada. Escriba nuevamente el campo incorrecto.', true));
 			}
@@ -99,8 +101,7 @@ class InstitsController extends AppController {
 		$url_conditions = array();
 
 		$this->Instit->unbindModelosInnecesarios();
-		
-		
+
 		/**
 		 *    INICIALIZACION DE FILTROS
 		 * 
@@ -222,18 +223,33 @@ class InstitsController extends AppController {
 			 *     DIRECCION
 			 */
 			if($this->data['Instit']['direccion'] != ''){
-				$this->paginate['UPPER(Instit.direccion) LIKE'] = '%'.strtoupper($this->data['Instit']['direccion']).'%';
+				$this->paginate['conditions']['UPPER(Instit.direccion) LIKE'] = '%'.strtoupper($this->data['Instit']['direccion']).'%';
 				$array_condiciones['Domicilio'] = $this->data['Instit']['direccion'];			
 				$url_conditions['direccion'] = $this->data['Instit']['direccion'];
 			}
 			if(isset($this->passedArgs['direccion'])){	
             			if($this->passedArgs['direccion'] != ''){
-					$this->paginate['UPPER(Instit.direccion) LIKE'] = '%'.strtoupper($this->passedArgs['direccion']).'%';
+					$this->paginate['conditions']['UPPER(Instit.direccion) LIKE'] = '%'.strtoupper($this->passedArgs['direccion']).'%';
 					$array_condiciones['Domicilio'] = $this->passedArgs['direccion'];			
 					$url_conditions['direccion'] = $this->passedArgs['direccion'];
 				}
 			}	
-			
+			/**
+			 *     LOCALIDAD
+			 */
+			if($this->data['Instit']['localidad'] != ''){
+				$this->paginate['conditions']['UPPER(Instit.localidad) LIKE'] = '%'.strtoupper($this->data['Instit']['localidad']).'%';
+				$array_condiciones['Localidad'] = $this->data['Instit']['localidad'];
+				$url_conditions['localidad'] = $this->data['Instit']['localidad'];			
+			}
+			if(isset($this->passedArgs['localidad'])){	
+            	if($this->passedArgs['localidad'] != ''){
+					$this->paginate['conditions']['UPPER(Instit.localidad) LIKE'] = '%'.strtoupper($this->passedArgs['localidad']).'%';
+					$array_condiciones['Localidad'] = $this->passedArgs['localidad'];
+					$url_conditions['localidad'] = $this->passedArgs['localidad'];			
+				}
+            }
+            
 			/**
 			 *     GESTION 
 			 */
@@ -339,6 +355,18 @@ class InstitsController extends AppController {
 		
         //devuelve un array para mostrar los criterios de busqueda
         $this->set('conditions', $array_condiciones);
+	}
+	
+	
+	
+	
+	
+	function planes_relacionados($id = null){
+		if (!$id) {
+			$this->Session->setFlash(__('Institución Inválida.', true));
+			$this->redirect(array('action'=>'index'));
+		}
+		$this->set('instit', $this->Instit->read(null, $id));
 	}
 
 }
