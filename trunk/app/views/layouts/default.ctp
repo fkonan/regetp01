@@ -36,6 +36,7 @@
 		echo $javascript->link('prototype');
 		echo $scripts_for_layout;
 	?>
+	
 </head>
 <body>
 	<div id="container">

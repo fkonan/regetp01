@@ -24,7 +24,7 @@ class InstitsController extends AppController {
 			$this->Instit->create();
 			if ($this->Instit->save($this->data)) {
 				$this->Session->setFlash(__('Se ha guardado la Institución correctamente', true));
-				$this->redirect(array('action'=>'index'));
+				$this->redirect(array('action'=>'search_form'));
 			} else {
 				$this->Session->setFlash(__('La Institución no pudo ser guardada. Escriba nuevamente el campo incorrecto.', true));
 			}
@@ -39,7 +39,7 @@ class InstitsController extends AppController {
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid Instit', true));
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('action'=>'search_form'));
 		}
 		
 		if (!empty($this->data)) {

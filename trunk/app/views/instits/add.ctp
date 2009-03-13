@@ -1,69 +1,248 @@
+<?php 
+//colocar el CSS en $script_for_layout. o sea, en el HEADER del HTML
+echo $html->css('edit_form',false);
+?>
+
 <div class="instits form">
+<h1>Nueva Institución </h1>
 <?php echo $form->create('Instit');?>
-	<fieldset>
- 		<legend><?php __('Nueva Institución');?></legend>
 	<?php
-		echo $form->input('id');		
+		echo $form->input('id');	
+
+		/**
+		 *    ACTIVO
+		 */	
 		echo $form->input('activo',array('type'=> 'checkbox'));		
-		echo $form->input('cue');
-		echo $form->input('anexo');
-		echo $form->input('esanexo',array('type'=> 'checkbox'));
-						
+		
+		
+		/**
+		 *    CUE
+		 */
+		echo $form->input('cue',array(	'maxlength'=>7,
+										'label'=>array('text' => 'CUE','class'=>'input_label'),
+										'class'=> 'input_text_peque'
+									));
+
+		/**
+		 *    ANEXO
+		 */									
+		echo $form->input('anexo',array('maxlength'=>2,
+										'label'=>array('class'=>'input_label'),
+										'class'=> 'input_text_peque'
+										));
+		
+		
+		/**
+		 *    ES ANEXO
+		 */	
+		echo $form->input('esanexo',array('type'=> 'checkbox','label'=>'Es Anexo'));
+
+		
+		/**
+		 *    NOMBRE
+		 */	
 		echo $form->input('nombre');
-		echo $form->input('nroinstit');		
-				
-		echo $form->input('gestion_id');
+		
+		
+		/**
+		 *    Nro Instit
+		 */	
+		echo $form->input('nroinstit',array('label'=>array(	'text'=>'Nº de Institución',
+															'class'=>'input_label'),
+											'class'=> 'input_text_peque'
+		));		
+			
+		
+		/**
+		 *    GESTION
+		 */	
+		echo $form->input('gestion_id',array('label'=>'Gestión'));
+		
+		/**
+		 *    DEPENDENCIA
+		 */	
 		echo $form->input('dependencia_id');
-		echo $form->input('anio_creacion');		
-		echo $form->input('direccion');
-		echo $form->input('localidad');		
-		echo $form->input('depto');	
-		echo $form->input('jurisdiccion_id');
-		echo $form->input('tipoinstit_id');					
-		echo $form->input('cp');
 		
-		echo $form->input('telefono');				
-		echo $form->input('web');
-		echo $form->input('mail');	
 		
+		/**
+		 *    AÑO CREACION
+		 */	
+		echo $form->input('anio_creacion',array('label'=>array('text'=>'Año de Creación',
+																'class'=>'input_label'),
+												'class'=> 'input_text_peque'
+		));
+
+		/**
+		 *    DIRECCION
+		 */	
+		echo $form->input('direccion',array('label'=>array(	'text'=> 'Domicilio',
+															'class'=>'input_label'),
+											'class' => 'input_text_peque'
+		));
+		
+		/**
+		 *    LOCALIDAD
+		 */	
+		echo $form->input('localidad',array('label'=>array('class'=>'input_label'),
+											'class' => 'input_text_peque'
+		));	
+		
+		/**
+		 *    DEPTO
+		 */	
+		echo $form->input('depto',array('label'=>array('class'=>'input_label'),
+										'class' => 'input_text_peque'
+		));
+		
+		
+		/**
+		 *    JURISDICCION 
+		 * 			Y 
+		 * 	TIPO DE INSTITUCION
+		 */	
+		$meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
+		echo $form->input('jurisdiccion_id', array('empty' => array('0'=>'Todas'),'id'=>'jurisdiccion_id','label'=>'Jurisdicción','after'=>$meter));		
+		echo $form->input('tipoinstit_id', array('empty' => 'Todas','disabled'=>true,'type'=>'select','label'=>'Tipo De Institución','after'=> '<br /><cite>Para activar este campo, seleccione primero una jurisdicción</cite>'));
+		echo $ajax->observeField('jurisdiccion_id',
+                                   array(  	'url' => '/tipoinstits/ajax_select_form_por_jurisdiccion',
+                                   			//'controller' => 'TipoInstits',
+                                   			//'action' => 'ajax_select_form_por_jurisdiccion',
+		                                   	'update'=>'InstitTipoinstitId',
+		                                   	'loading'=>'$("ajax_indicator").show();$("InstitTipoinstitId").disable()',
+		                                   	'complete'=>'$("ajax_indicator").hide();$("InstitTipoinstitId").enable()',
+		                                   	'onChange'=>true
+                                   ));  
+                                   
+                                   
+		/**
+		 *    CODIGO POSTAL
+		 */							
+		echo $form->input('cp',array('label'=>array('class'=>'input_label'),
+									 'class' => 'input_text_peque'
+		));
+		
+		/**
+		 *    TELEFONO
+		 */	
+		echo $form->input('telefono',array('label'=>array(	'text'=>'Teléfono',
+														 	'class'=>'input_label'),
+											'class' => 'input_text_peque'
+		));	
+
+		/**
+		 *    WEB Y MAIL
+		 */	
+		echo $form->input('web',array('label'=>array('class'=>'input_label'),
+									  'class' => 'input_text_peque'));
+		echo $form->input('mail',array('label'=>array('text'=> 'E-Mail',
+													  'class'=>'input_label'),
+									   'class' => 'input_text_peque'
+		));	
+		
+		
+		
+	/******************************************************************************
+	* 
+	* 
+	*    DATOS DIRECTOR
+	* 
+	* 
+	*/	
 		?><H3>Datos Director</H3><?		
-		echo $form->input('dir_nombre');
-		echo $form->input('dir_tipodoc_id');
-		echo $form->input('dir_nrodoc');
-		echo $form->input('dir_telefono');
-		echo $form->input('dir_mail');
+		echo $form->input('dir_nombre',array('label'=>array('text'=>'Nombre y Apellido',
+															'class'=>'input_label'),
+											 'class'=>'input_text_peque'));
+		echo $form->input('dir_tipodoc_id',array('label'=>'Tipo de Documento',
+												 'options'=>$this->requestAction('/Tipodocs/dame_tipodocs'),
+												 'empty'=>array('Seleccionar')));
+		echo $form->input('dir_nrodoc',array('label'=>array('text'=> 'Nº de Documento',
+															'class'=>'input_label'),
+											 'class'=>'input_text_peque'
+		));
+		echo $form->input('dir_telefono',array(	'label'=>array(	'text'=> 'Teléfono',
+																'class'=>'input_label'),
+											 	'class'=>'input_text_peque'
+		));
+		echo $form->input('dir_mail',array('label'=>array(	'text'=> 'E-Mail',
+															'class'=>'input_label'),
+											 'class'=>'input_text_peque'
+		));
 		
+		
+	/******************************************************************************
+	* 
+	* 
+	*    DATOS VICE DIRECTOR
+	* 
+	* 
+	*/	
 		?><H3>Datos Vice Director</H3><?
-		echo $form->input('vice_nombre');
-		echo $form->input('vice_tipodoc_id');
-		echo $form->input('vice_nrodoc');		
+		echo $form->input('vice_nombre',array('label'=>array(	'text'=> 'Nombre y Apellido',
+																'class'=>'input_label'),
+											 'class'=>'input_text_peque'
+		));
+		echo $form->input('vice_tipodoc_id',array('label'=>'Tipo de Documento',
+												  'options'=>$this->requestAction('/Tipodocs/dame_tipodocs'),
+												  'empty'=>'Seleccionar'));
+		echo $form->input('vice_nrodoc',array('label'=>array(	'text'=> 'Nº de Documento',
+																'class'=>'input_label'),
+											  'class'=>'input_text_peque'
+		));		
 		
-		?><H3>Datos Extra</H3><?
-		echo $form->input('actualizacion',array('label'=>'Ingresar solo el año de actualización'));
-		echo $form->input('observacion',array('type'=>'textarea'));
-		echo $form->input('fecha_mod');
-		$ciclos = array('2006','2007','2008','2009','2010','2011');
+		
+		
+		
+		
+	/****************************************************************************
+	 *    
+	 * 
+	 * 
+	 * 				DATOS ADICIONALES
+	 * 
+	 * 
+	 */	
+		?><H3>Datos Adicionales</H3><?
+		/**
+		 *    INGRESO/ACTUALIZACION
+		 */	
+		echo $form->input('actualizacion',array('label'=>array(	'text'=> 'Ingreso/Actualización',
+																'class'=>'input_label'),
+											    'class'=>'input_text_peque'
+		));
+		
+		/**
+		 *    OBSERVACION
+		 */	
+		echo $form->input('observacion',array('type'=>'textarea','rows'=>3,array('label'=>'Observaciones')));
+			//agrego esto para que no se puedan imprimir mas de 100 caracteres en el textarea
+			?>
+			<script type="text/javascript">
+				$('InstitObservacion').observe('keyup', function(){					
+					var maxlength = 100;
+					if ($F('InstitObservacion') && $F('InstitObservacion').length > maxlength){
+						$('InstitObservacion').setValue($F('InstitObservacion').substring(0, maxlength));
+					}
+				});
+			</script>
+
+		<?
+		/**
+		 *    CICLOS ALTA Y MODIFICACION
+		 */	
+		$ciclos = array('2006'=>'2006','2007'=>'2007','2008'=>'2008','2009'=>'2009','2010'=>'2010','2011'=>'2011');
 		echo $form->input('ciclo_alta', array("type" => "select", 
-											  "options" => $ciclos));
+											  "options" => $ciclos,'label'=>'Ciclo Alta',
+											  "selected" => $this->data['Instit']['ciclo_alta'],
+											  "after"=>'<cite>Ingresar el ciclo lectivo en el cual se dio de alta</cite>'			
+		));
 		echo $form->input('ciclo_mod', array("type" => "select", 
 											  "options" => $ciclos,
-											  "label" => 'Ciclo Modificación'));
+											  "label" => 'Ciclo Modificación',
+											  'label'=>'Ciclo Modificación',
+											  "selected" => $this->data['Instit']['ciclo_mod'],
+											  "after" =>"<cite>Ingresar el ciclo lectivo al cual pertenece la actualización</cite>"			
+		));
 	?>
-	</fieldset>
 <?php echo $form->end('Submit');?>
 </div>
-<div class="actions">
-	<ul>
-		<li><?php echo $html->link(__('List Instits', true), array('action'=>'index'));?></li>
-		<li><?php echo $html->link(__('List Gestiones', true), array('controller'=> 'gestiones', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Gestion', true), array('controller'=> 'gestiones', 'action'=>'add')); ?> </li>
-		<li><?php echo $html->link(__('List Dependencias', true), array('controller'=> 'dependencias', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Dependencia', true), array('controller'=> 'dependencias', 'action'=>'add')); ?> </li>
-		<li><?php echo $html->link(__('List Tipoinstits', true), array('controller'=> 'tipoinstits', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Tipoinstit', true), array('controller'=> 'tipoinstits', 'action'=>'add')); ?> </li>
-		<li><?php echo $html->link(__('List Jurisdicciones', true), array('controller'=> 'jurisdicciones', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Jurisdiccion', true), array('controller'=> 'jurisdicciones', 'action'=>'add')); ?> </li>
-		<li><?php echo $html->link(__('List Planes', true), array('controller'=> 'planes', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Plan', true), array('controller'=> 'planes', 'action'=>'add')); ?> </li>
-	</ul>
-</div>
+

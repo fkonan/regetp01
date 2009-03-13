@@ -453,6 +453,8 @@ input[type=submit] {
 	vertical-align: bottom;
 }
 
+
+
 /* Notices and Errors */
 div.message {
 	clear: both;
@@ -652,22 +654,46 @@ div.code-coverage-results span.result-good {
 *
 *
 */
+
+
+/**
+*
+*
+*   ESTADOS DE LA INSITUCION
+*
+*/
+/* usados en la vista de la institucion, al lado del titulo*/
 #escuela_estado{
 	margin-top: -1.5em;
 	margin-right: 0.5em;	
 	font-size: large;
 	float: right;
 }
+/* usados en la vista de la institucion, al lado del titulo*/
 .instit_inactiva{
 	color: red;
 }
+/* usados en la vista de la institucion, al lado del titulo*/
 .instit_activa{
 	color: green;
 }
 
-
 .alertar_escuela_no_actualizada{
 }
+.escuela_inactiva{
+		/*background: transparent url('images/puntorojo.gif') no-repeat left;*/
+		background-position: 0px 0px;
+		list-style-image: url('images/puntorojo.gif');
+}
+.escuela_activa{
+		/*background: transparent url('images/puntoverde.gif') no-repeat left;*/
+		background-position: 0px 0px;
+		list-style-image: url('images/puntoverde.gif');
+}
+
+
+
+
 
 
 .paginate_msg{
@@ -823,12 +849,3 @@ div.code-coverage-results span.result-good {
 	padding-bottom: 0px;
 	margin-left: 12em;
 }
-
-
-/************************************************************************
-*
-*
-*		DEDIT FORM
-*
-*
-*/
