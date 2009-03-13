@@ -72,6 +72,20 @@ class TipodocsController extends AppController {
 		}
 		return '';
 	}
+	
+ 	/** 
+ 	 * Devuelve un Array con todos los Tipos de documentos posibles	 *
+	 * @return Array('id'=>'name')
+	 */
+	function dame_tipodocs(){
+		$this->Tipodoc->recursive = -1;
+		$tipodoc = $this->Tipodoc->find('all');
+		//debug($tipodoc);
+		foreach ($tipodoc as $t){
+			$new_array[$t['Tipodoc']['id']] = $t['Tipodoc']['abrev'];
+		}
+		return $new_array;
+	}
 
 }
 ?>

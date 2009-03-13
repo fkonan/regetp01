@@ -5,7 +5,7 @@
 	</ul>
 </div>
 <div id="escuela_estado" class="<? echo $instit['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $instit['Instit']['activo']? 'Activa':'Inactiva';?></div>
-<h1><?php echo $instit['Instit']['cue'].'-0'.$instit['Instit']['anexo']." -::- ".$instit['Instit']['nombre']." -::-"; ?></h1>
+<h2><?php echo $instit['Instit']['cue'].'-0'.$instit['Instit']['anexo']." <br>-::- ".$instit['Instit']['nombre']." -::-"; ?></h2>
 
 	<dl>
 		

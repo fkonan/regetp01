@@ -57,9 +57,18 @@ foreach($instits as $instit){
 	$fecha_desde = "$año_actual-01-01"; //desde enero     
 	//echo "alalalal------->>_>_>_->_>_-<->_-> $fecha_hasta y fecha mod:::".$instit['Instit']['fecha_mod'];
 	
+	
+	//inicializo la clase CSS de la institucion
+	// esto sirve para procesar y ver visualmente ciertos estados de la institucion
+	$clase = ''; 	
 	if($instit['Instit']['fecha_mod'] < $fecha_hasta && $instit['Instit']['fecha_mod']< $fecha_desde ){
 		$clase = 'alertar_escuela_no_actualizada';
-	}else  $clase = '';
+	}
+	if($instit['Instit']['activo']){
+		$clase .= ' escuela_activa';
+	}else{
+		$clase .= ' escuela_inactiva';
+	}
 	 ?>
 
 <li id="lista_instit_<?= $instit['Instit']['id']?>" class="lista_link <?=$clase ?>" 

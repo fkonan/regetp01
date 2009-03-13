@@ -1,0 +1,133 @@
+
+/* Forms */
+form {
+	clear: both;
+	padding: 0;
+	margin: 0px;
+}
+fieldset {
+	border: 1px solid #ccc;
+	margin-top: 10px;
+	padding-top: 5px;
+	padding-right: 10px;
+	padding-bottom: 5px;
+	padding-left: 10px;
+}
+fieldset legend {
+	background:#fff;
+	color: #e32;
+	font-size: 100%;
+	font-weight: bold;
+}
+fieldset fieldset {
+	margin-top: 0px;
+	margin-bottom: 10px;
+	padding-top: 10px;
+	padding-right: 5px;
+	padding-bottom: 10px;
+	padding-left: 5px;
+}
+fieldset fieldset legend {
+	font-size: 100%;
+	font-weight: normal;
+	margin-left: 10px;
+}
+fieldset fieldset div {
+	clear: left;
+	margin-top: 0;
+	margin-right: 10px;
+	margin-bottom: 0;
+	margin-left: 10px;
+}
+form div {
+	clear: both;
+	margin-bottom: 0em;
+	padding: .5em;
+	vertical-align: text-top;
+}
+form div.input {
+	color: #444;
+}
+form div.required {/*
+	color: #333;
+	font-weight: bold;
+*/}
+form div.submit {
+	border: 0;
+	clear: both;
+	margin-top: 2px;
+	margin-left: 50px;
+}
+label {
+	font-size: 100%;
+	padding-right: 10px;
+	width: 10em;
+	float: left;
+	height: 22px;
+}
+input:focus {
+	background-color: lightyellow;
+}
+
+
+input, textarea {
+	clear: both;
+	display: block;
+	font-size: 10pt;
+	font-family: Arial, Helvetica, sans-serif;
+	padding: 2px;
+	width: 350px;;
+}
+select {
+	clear: none;
+	font-size: 100%;
+	vertical-align: text-bottom;
+	background-color: #F0F7FC;
+}
+select[multiple=multiple] {
+	width: 100%;
+	background-color: #F0F7FC;
+}
+option {
+	font-size: 100%;
+	padding: 0 3px;
+}
+input[type=checkbox] {
+	clear: left;
+	float: left;
+	margin: 0px 6px 7px 2px;
+	width: auto;
+}
+input[type=radio] {
+	float:left;
+	width:auto;
+	margin: 0 3px 7px 0;
+}
+div.radio label {
+	margin: 0 0 6px 20px;
+}
+input[type=submit] {
+	display: inline;
+	font-size: 100%;
+	padding: 2px 5px;
+	width: auto;
+	vertical-align: bottom;
+}
+input[type=textarea] {
+	width: 300px;
+}
+
+input[type=text] {
+	background-color: #F0F7FC;
+}
+input[type=text]:focus {
+	background-color: #FFF;
+}
+.input_label{
+
+}
+.input_text_peque{
+	clear: none;
+	display: inline;
+	width: 200px;
+}
