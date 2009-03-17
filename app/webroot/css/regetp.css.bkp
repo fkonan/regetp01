@@ -75,7 +75,7 @@ h2 {
 	color: #044;
 	font-weight: bold;
 	font-family:Arial, Helvetica, sans-serif;
-	font-size: 13pt;
+	font-size: 14pt;
 	padding-top: 0.4em;
 	padding-left:1em;
 	margin-top: 1.2em;
@@ -101,7 +101,7 @@ ul, li {
 
 /* Layout */
 #container {
-	background: white;
+	background-color: #ffffff;
 	text-align: left;
 	width: 990px;
 	margin-top: 0px;
@@ -168,11 +168,11 @@ ul, li {
 *
 */
 #content{
+	background-color: #ffffff;
 	clear: both;
 	color: #333;
 	padding: 1px 1px;
 	overflow: auto;
-	height: auto;
 }
 
 
@@ -185,7 +185,6 @@ ul, li {
 *
 */
 #menu{
-	background: white;
 	float: left;
 	width: 156px;
 	padding: 27px 5px;
@@ -193,8 +192,7 @@ ul, li {
 	border-right-width: 3px;
 	border-right-style:  solid;
 	border-right-color:  #F0F7FC;
-	height: auto;
-	clear: none;
+	height: 100%;
 }
 #menu H1{
 	font-weight: bold;
@@ -249,11 +247,11 @@ ul, li {
 *
 */
 #cuerpo{
-	clear: none;
+	float: right;
+	width: 798px;
 	padding: 5px 5px;
+	background-color: #fff;
 	overflow: auto;
-	height: auto;
-	width: 790px;
 }
 #footer {
 	clear: both;
@@ -360,116 +358,111 @@ dd {
 	vertical-align: top;
 }
 
-
-
-/************************************************************************
-*
-*
-*		FORMS
-*
-**/
+/* Forms */
 form {
-        clear: both;
-        padding: 0;
-        margin: 0px;
+	clear: both;
+	padding: 0;
+	margin: 0px;
 }
 fieldset {
-        border: 1px solid #ccc;
-        margin-top: 10px;
-        padding-top: 5px;
-        padding-right: 10px;
-        padding-bottom: 5px;
-        padding-left: 10px;
+	border: 1px solid #ccc;
+	margin-top: 10px;
+	padding-top: 5px;
+	padding-right: 10px;
+	padding-bottom: 5px;
+	padding-left: 10px;
 }
 fieldset legend {
-        background:#fff;
-        color: #e32;
-        font-size: 100%;
-        font-weight: bold;
+	background:#fff;
+	color: #e32;
+	font-size: 100%;
+	font-weight: bold;
 }
 fieldset fieldset {
-        margin-top: 0px;
-        margin-bottom: 10px;
-        padding-top: 10px;
-        padding-right: 5px;
-        padding-bottom: 10px;
-        padding-left: 5px;
+	margin-top: 0px;
+	margin-bottom: 10px;
+	padding-top: 10px;
+	padding-right: 5px;
+	padding-bottom: 10px;
+	padding-left: 5px;
 }
 fieldset fieldset legend {
-        font-size: 100%;
-        font-weight: normal;
-        margin-left: 10px;
+	font-size: 100%;
+	font-weight: normal;
+	margin-left: 10px;
 }
 fieldset fieldset div {
-        clear: left;
-        margin-top: 0;
-        margin-right: 10px;
-        margin-bottom: 0;
-        margin-left: 10px;
+	clear: left;
+	margin-top: 0;
+	margin-right: 10px;
+	margin-bottom: 0;
+	margin-left: 10px;
 }
 form div {
-        clear: both;
-        margin-bottom: 0em;
-        padding: .5em;
-        vertical-align: text-top;
+	clear: both;
+	margin-bottom: 0em;
+	padding: .5em;
+	vertical-align: text-top;
 }
 form div.input {
-        color: #444;
+	color: #444;
 }
-form div.required {
-}
+form div.required {/*
+	color: #333;
+	font-weight: bold;
+*/}
 form div.submit {
-        border: 0;
-        clear: both;
-        margin-top: 2px;
-        margin-left: 50px;
+	border: 0;
+	clear: both;
+	margin-top: 2px;
+	margin-left: 50px;
 }
 label {
-        display: block;
-        font-size: 100%;
-        padding-right: 10px;
+	font-size: 100%;
+	padding-right: 10px;
 }
 input, textarea {
-        clear: both;
-        display: block;
-        font-size: 10pt;
-        font-family: Arial, Helvetica, sans-serif;
-        padding: 2px;
-        width: 92%;
+	clear: both;
+	display: block;
+	font-size: 10pt;
+	font-family: Arial, Helvetica, sans-serif;
+	padding: 2px;
+	width: 92%;
 }
 select {
-        clear: both;
-        font-size: 100%;
-        vertical-align: text-bottom;
+	clear: both;
+	font-size: 100%;
+	vertical-align: text-bottom;
 }
 select[multiple=multiple] {
-        width: 100%;
+	width: 100%;
 }
 option {
-        font-size: 100%;
-        padding: 0 3px;
+	font-size: 100%;
+	padding: 0 3px;
 }
 input[type=checkbox] {
-        clear: left;
-        float: left;
-        margin: 0px 6px 7px 2px;
-        width: auto;
+	clear: left;
+	float: left;
+	margin: 0px 6px 7px 2px;
+	width: auto;
 }
 input[type=radio] {
-        float:left;
-        width:auto;
-        margin: 0 3px 7px 0;
+	float:left;
+	width:auto;
+	margin: 0 3px 7px 0;
 }
 div.radio label {
-        margin: 0 0 6px 20px;
+	margin: 0 0 6px 20px;
 }
 input[type=submit] {
-        display: inline;
-        font-size: 100%;
-        padding: 2px 5px;
-        width: auto;
-        vertical-align: bottom;
+	display: inline;
+	font-size: 100%;
+	padding: 2px 5px;
+	width: auto;
+	vertical-align: bottom;
 }
+
 
 
 /* Notices and Errors */
@@ -698,17 +691,16 @@ div.code-coverage-results span.result-good {
 .alertar_escuela_no_actualizada{
 }
 .escuela_inactiva{
-	/*
+		/*background: transparent url('images/puntorojo.gif') no-repeat left;*/
 		background-position: 0px 0px;
-		list-style-image: url('images/puntorojo.gif');
-	*/
+		background-image: url('images/puntorojo.gif');
+		background-repeat: no-repeat;
 }
 .escuela_activa{
-	/*
+		/*background: transparent url('images/puntoverde.gif') no-repeat left;*/
 		background-position: 0px 0px;
-		list-style-image: url('images/puntoverde.gif');
-		list-style-position: 0px 0px;
-	*/
+		background-image: url('images/puntoverde.gif');
+		background-repeat: no-repeat;
 }
 
 
@@ -771,11 +763,10 @@ div.code-coverage-results span.result-good {
 	background: #DBEBF6;
 }
 
-.marcada A{
+.marcada{
 	font-weight: bolder;
 	background: #DBEBF6;
-	cursor: default;
-	color: #045FB4;
+	border: thin solid #045FB4;
 }
 
 
@@ -787,31 +778,26 @@ div.code-coverage-results span.result-good {
 *
 */
 .listado{
-	margin-bottom: 0px 0px 10px 0px;
-	list-style-type: none;
-	padding: 0px;
+	display: block;
+	clear: both;
 }
 
 .listado UL{
-
 	list-style: url('images/list_item.gif');
-
 }
 
-.listado LI{	
+.listado LI{
 	border: thin solid #E0ECF8;
-	padding: 0px;
-	margin: 0px;
-	\width: 778px;
-	width: 762px;
+	display: block;
+	clear: both;
+	background-color: #FFFFFF;	
 }
 
 .lista_link{
 	cursor: pointer;
 }
 .lista_link_hover{
-	background-color: #F0F7FC;
-	
+	background-color: #F0F7FC;	
 }
 
 .instit_name{
@@ -820,23 +806,34 @@ div.code-coverage-results span.result-good {
 }
 
 .instit_atributte{
-	margin: 0px 4px 0px 4px;
-	display: inline;
+	float: left;
+	margin: 0px 4px;
 	color: #6E6E6E;
 }
 
 .instit_data_bs{
+	width: 600px;
+	float: left;
 }
 
 .instit_link_list{
 	font-size: small;
 	text-align: right;
-	margin-top: -1em;
+	width: 100px;
+	float: right;
 }
 .listado a{
 	background-color: transparent;
 }
 
+.instit_link_list UL{
+	padding: 0px;
+	margin: 0px;	
+}
+.instit_link_list LI{
+	list-style: none;
+	margin: 0px;
+}
 
 
 /************************************************************************
@@ -859,26 +856,4 @@ div.code-coverage-results span.result-good {
 	padding-top: 0px;
 	padding-bottom: 0px;
 	margin-left: 12em;
-}
-
-
-
-/************************************************************************
-*
-*
-*		PAGINATOR
-*
-*
-*/
-#paginator_prev_next_links{
-	width: 100%;
-	margin-top: 1.5em;
-}
-
-.paginate_msg{
-	margin-top: 1.5em;
-}
-
-.disabled{
-	display: inline;
 }

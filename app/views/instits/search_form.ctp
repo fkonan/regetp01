@@ -29,7 +29,7 @@
 		$array_activa = array('-1'=>'Buscar Todas','0'=>'No','1'=>'Si');
 		echo $form->input('activo',array('options'=> $array_activa,'label'=>'Institución Activa'));
 		
-		echo $form->input('cue', array('label'=> 'CUE', 'maxlength'=>7 ,'after'=> '<cite>Ej: 600118-> Instituto Calasanz; 5000216-> Arturo Jaureche. No introducir número de anexo</cite>')); 
+		echo $form->input('cue', array('label'=> 'CUE', 'maxlength'=>7 ,'after'=> '<cite>Ej: 600118 o 5000216. No introducir número de anexo</cite>')); 
 		echo $form->input('nombre', array('label'=>'Nombre de Institución')); 
 		echo $form->input('direccion', array('label'=>'Domicilio'));	
 		
