@@ -1,7 +1,3 @@
-<?php 
-//colocar el CSS en $script_for_layout. o sea, en el HEADER del HTML
-echo $html->css('edit_form',false);
-?>
 
 <div class="instits form">
 <h1>Editar Institución </h1>
@@ -90,7 +86,7 @@ echo $html->css('edit_form',false);
 		/**
 		 *    DEPTO
 		 */	
-		echo $form->input('depto',array('label'=>array('class'=>'input_label'),
+		echo $form->input('depto',array('label'=>array('class'=>'input_label','text'=>'Departamento'),
 										'class' => 'input_text_peque'
 		));
 		
@@ -117,7 +113,7 @@ echo $html->css('edit_form',false);
 		/**
 		 *    CODIGO POSTAL
 		 */							
-		echo $form->input('cp',array('label'=>array('class'=>'input_label'),
+		echo $form->input('cp',array('label'=>array('class'=>'input_label','text'=>'CP'),
 									 'class' => 'input_text_peque'
 		));
 		
@@ -148,7 +144,7 @@ echo $html->css('edit_form',false);
 	* 
 	* 
 	*/	
-		?><H3>Datos Director</H3><?		
+		?><H2>Datos Director</H2><?		
 		echo $form->input('dir_nombre',array('label'=>array('text'=>'Nombre y Apellido',
 															'class'=>'input_label'),
 											 'class'=>'input_text_peque'));
@@ -176,7 +172,7 @@ echo $html->css('edit_form',false);
 	* 
 	* 
 	*/	
-		?><H3>Datos Vice Director</H3><?
+		?><H2>Datos Vice Director</H2><?
 		echo $form->input('vice_nombre',array('label'=>array(	'text'=> 'Nombre y Apellido',
 																'class'=>'input_label'),
 											 'class'=>'input_text_peque'
@@ -201,7 +197,7 @@ echo $html->css('edit_form',false);
 	 * 
 	 * 
 	 */	
-		?><H3>Datos Adicionales</H3><?
+		?><H2>Datos Adicionales</H2><?
 		/**
 		 *    INGRESO/ACTUALIZACION
 		 */	
@@ -213,14 +209,20 @@ echo $html->css('edit_form',false);
 		/**
 		 *    OBSERVACION
 		 */	
-		echo $form->input('observacion',array('type'=>'textarea','rows'=>3,array('label'=>'Observaciones')));
+		echo $form->input('observacion',array(	'type'=>'textarea',
+												'rows'=>3,
+												'label'=>'Observaciones',
+												'after'=>'<cite>Puede ingresar hasta 100 caracteres</cite>'));
 			//agrego esto para que no se puedan imprimir mas de 100 caracteres en el textarea
 			?>
 			<script type="text/javascript">
 				$('InstitObservacion').observe('keyup', function(){					
 					var maxlength = 100;
 					if ($F('InstitObservacion') && $F('InstitObservacion').length > maxlength){
+						var paso_flag = false;
+						if(!paso_flag)alert('Solo puede escribir hasta 100 caracteres');
 						$('InstitObservacion').setValue($F('InstitObservacion').substring(0, maxlength));
+						paso_flag = true;
 					}
 				});
 			</script>
@@ -231,16 +233,13 @@ echo $html->css('edit_form',false);
 		 */	
 		$ciclos = array('2006'=>'2006','2007'=>'2007','2008'=>'2008','2009'=>'2009','2010'=>'2010','2011'=>'2011');
 		echo $form->input('ciclo_alta', array("type" => "select", 
-											  "options" => $ciclos,'label'=>'Ciclo Alta',
-											  "selected" => $this->data['Instit']['ciclo_alta'],
-											  "after"=>'<cite>Ingresar el ciclo lectivo en el cual se dio de alta</cite>'			
+											  "options" => $ciclos,'label'=>'Alta',
+											  "selected" => $this->data['Instit']['ciclo_alta']			
 		));
 		echo $form->input('ciclo_mod', array("type" => "select", 
 											  "options" => $ciclos,
-											  "label" => 'Ciclo Modificación',
-											  'label'=>'Ciclo Modificación',
-											  "selected" => $this->data['Instit']['ciclo_mod'],
-											  "after" =>"<cite>Ingresar el ciclo lectivo al cual pertenece la actualización</cite>"			
+											  "label" => 'Modificación',
+											  "selected" => $this->data['Instit']['ciclo_mod']
 		));
 	?>
 <?php echo $form->end('Submit');?>

@@ -6,7 +6,7 @@
 $paginator->options(array('url' => $url_conditions));
 ?>
 
-<H3>Criterios de búsqueda seleccionados</H3>
+<H2>Criterios de búsqueda seleccionados</H2>
 <dl class="criterios_busq">
 <?
 
@@ -22,7 +22,7 @@ $paginator->options(array('url' => $url_conditions));
 ?>
 </dl>
 
-<h3>Ordenar los resultados por:</h3>
+<h2>Ordenar los resultados por:</h2>
 <ul class="lista_horizontal">
 <? 
 	$sort = 'cue';
@@ -73,13 +73,15 @@ foreach($instits as $instit){
 
 <li id="lista_instit_<?= $instit['Instit']['id']?>" class="lista_link <?=$clase ?>" 
 	onclick="window.location='<?= $html->url(array('controller'=> 'Instits', 'action'=>'view/'.$instit['Instit']['id'])) ?>'"
-	onmouseover="Element.addClassName('lista_instit_<?= $instit['Instit']['id']?>','lista_link_hover');"
-	onmouseout="Element.removeClassName('lista_instit_<?= $instit['Instit']['id']?>','lista_link_hover');"
+	onmouseover="$('lista_instit_<?= $instit['Instit']['id']?>').addClassName('lista_link_hover');"
+	onmouseout="$('lista_instit_<?= $instit['Instit']['id']?>').removeClassName('lista_link_hover');"
 	>
 
 	<div class="instit_data_bs">
-		<div class="instit_name"><b>[<?= $instit['Instit']['cue'].'-0'.$instit['Instit']['anexo']?>]</b> -::- <?= $instit['Instit']['nombre']; ?></div>
+		<div class="instit_name"><b><?= $instit['Instit']['cue'].'-0'.$instit['Instit']['anexo']?></b> - <?= $instit['Instit']['nombre']; ?></div>
 		<div class="instit_atributte"><b>Domicilio:</b> <?= $instit['Instit']['direccion'] ?></div>
+		<br />
+		<div class="instit_atributte"><b>Tipo:</b> <?= $instit['Tipoinstit']['name'] ?></div>
 		<br />
 		<div class="instit_atributte"><b>Gestión:</b><?= $instit['Gestion']['name'] ?></div>
 		<div class="instit_atributte"><b>Jurisdicción:</b> <?= $instit['Jurisdiccion']['name'] ?></div>
@@ -97,20 +99,18 @@ foreach($instits as $instit){
 ?>
 </ul>
 
-<p id="paginator_prev_next_links">
-<?php
-
-	
+<div id="paginator_prev_next_links">
+<?php	
 	echo $paginator->prev('« Anterior ',null, null, array('class' => 'disabled'));
 	echo " <---> ".$paginator->counter()." <---> ";
 	echo $paginator->next(' Siguiente »', null, null, array('class' => 'disabled'));
 ?> 
-</p>
+</div>
 
 <p  class="paginate_msg">
 <?php
 echo $paginator->counter(array(
-'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
+'format' => __('Página %page% de %pages%, mostrando %current% registros de %count% encontrados, visualizando registros desde el nº %start%, hasta el %end%', true)
 ));
 ?>
 </p>

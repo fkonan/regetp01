@@ -5,31 +5,31 @@
 	</ul>
 </div>
 <div id="escuela_estado" class="<? echo $instit['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $instit['Instit']['activo']? 'Activa':'Inactiva';?></div>
-<h2><?php echo $instit['Instit']['cue'].'-0'.$instit['Instit']['anexo']." <br>-::- ".$instit['Instit']['nombre']." -::-"; ?></h2>
+<h2><?php echo $instit['Instit']['cue'].'-0'.$instit['Instit']['anexo']." <br>".$instit['Instit']['nombre']; ?></h2>
 
 	<dl>
 		
 		<dt><?php __('Tipo de Institución'); ?></dt>
 		<dd>
-			<?php echo $html->link($instit['Tipoinstit']['name'], array('controller'=> 'tipoinstits', 'action'=>'view', $instit['Tipoinstit']['id'])); ?>
+			<?php echo $instit['Tipoinstit']['name']; ?>
 			&nbsp;
 		</dd>
 		
 		<dt ><?php __('Gestión'); ?></dt>
 		<dd>
-			<?php echo $html->link($instit['Gestion']['name'], array('controller'=> 'gestiones', 'action'=>'view', $instit['Gestion']['id'])); ?>
+			<?php echo $instit['Gestion']['name']; ?>
 			&nbsp;
 		</dd>
 		
 		<dt><?php __('Dependencia'); ?></dt>
 		<dd>
-			<?php echo $html->link($instit['Dependencia']['name'], array('controller'=> 'dependencias', 'action'=>'view', $instit['Dependencia']['id'])); ?>
+			<?php echo $instit['Dependencia']['name']; ?>
 			&nbsp;
 		</dd>
 		
 		<dt><?php __('Jurisdicción'); ?></dt>
 		<dd>
-			<?php echo $html->link($instit['Jurisdiccion']['name'], array('controller'=> 'jurisdicciones', 'action'=>'view', $instit['Jurisdiccion']['id'])); ?>
+			<?php echo $instit['Jurisdiccion']['name']; ?>
 			&nbsp;
 		</dd>
 		
@@ -47,14 +47,14 @@
 		</dd>
 	</dl>
 		
-		<h3>Datos Establecimiento</h3>
+		<h2>Datos Establecimiento</h2>
 	<dl>
 		<dt><?php __('Domicilio'); ?></dt>
 		<dd>
 			<?php echo $instit['Instit']['direccion']; ?>
 			&nbsp;
 		</dd>
-		<dt><?php __('Depto'); ?></dt>
+		<dt><?php __('Departamento'); ?></dt>
 		<dd>
 			<?php echo $instit['Instit']['depto']; ?>
 			&nbsp;
@@ -86,7 +86,7 @@
 		</dd>
 	</dl>
 		
-	<H3>Datos Director</H3>
+	<H2>Datos Director</H2>
 	<dl>		
 		<dt><?php __('Nombre y Apellido'); ?></dt>
 		<dd>
@@ -98,7 +98,7 @@
 			<?php 
 			if($instit['Instit']['dir_nrodoc']>0){
 				echo $this->requestAction('/tipodocs/tipodoc_nombre/'.$instit['Instit']['dir_tipodoc_id']); 
-				echo ': '.$instit['Instit']['dir_nrodoc'];
+				echo ' '.$instit['Instit']['dir_nrodoc'];
 			}
 			?>
 			&nbsp;
@@ -115,7 +115,7 @@
 		</dd>
 	</dl>
 	
-	<H3>Datos Vice Director</H3>
+	<H2>Datos Vice Director</H2>
 	<dl>
 		<dt><?php __('Nombre y Apellido'); ?></dt>
 		<dd>
@@ -127,14 +127,14 @@
 		<?
 			if($instit['Instit']['vice_nrodoc']>0){
 				echo $this->requestAction('/tipodocs/tipodoc_nombre/'.$instit['Instit']['vice_tipodoc_id']); 
-				echo ': '.$instit['Instit']['vice_nrodoc'];
+				echo ' '.$instit['Instit']['vice_nrodoc'];
 			}
 		?>
 			&nbsp;
 		</dd>
 	</dl>
 	
-	<H3>Datos Adicionales</H3>
+	<H2>Datos Adicionales</H2>
 	<dl>
 		<dt><?php __('Actualización o Ingreso'); ?></dt>
 		<dd>
@@ -148,12 +148,12 @@
 		</dd>
 		
 
-		<dt><?php __('Alta perteneciente al ciclo'); ?></dt>
+		<dt><?php __('Alta'); ?></dt>
 		<dd>
 			<?php echo ($instit['Instit']['ciclo_alta']>0)?$instit['Instit']['ciclo_alta']:''; ?>
 			&nbsp;
 		</dd>
-		<dt><?php __('Modificación perteneciente al ciclo'); ?></dt>
+		<dt><?php __('Modificación'); ?></dt>
 		<dd>
 			<?php echo ($instit['Instit']['ciclo_mod']>0)?$instit['Instit']['ciclo_mod']:''; ?>
 			&nbsp;
