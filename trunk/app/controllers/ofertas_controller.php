@@ -57,6 +57,32 @@ class OfertasController extends AppController {
 			$this->redirect(array('action'=>'index'));
 		}
 	}
+	
+	/**
+	 * Request action
+	 * Devuelve el nombre de la oferta ID que se le pase
+	 *
+	 * @param $oferta_id
+	 * @return String, devuelve el nombre
+	 */
+	function dame_nombre($oferta_id){
+		$this->Oferta->recursive = -1;
+		$oferta =  $this->Oferta->read(null,$oferta_id);
+		return $oferta['Oferta']['name'];		
+	}
+	
+	/**
+	 * Request action
+	 * Devuelve la abreviatura de la oferta ID que se le pase
+	 *
+	 * @param $oferta_id
+	 * @return String, devuelve la abreviatura, FP, MT, etc
+	 */
+	function dame_abrev($oferta_id){
+		$this->Oferta->recursive = -1;
+		$oferta =  $this->Oferta->read(null,$oferta_id);
+		return $oferta['Oferta']['abrev'];		
+	}
 
 }
 ?>

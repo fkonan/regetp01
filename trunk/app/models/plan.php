@@ -25,7 +25,7 @@ class Plan extends AppModel {
 								'dependent' => false,
 								'conditions' => '',
 								'fields' => '',
-								'order' => '',
+								'order' => array('ciclo_id ASC','anio ASC'),
 								'limit' => '',
 								'offset' => '',
 								'exclusive' => '',

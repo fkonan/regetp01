@@ -57,6 +57,13 @@ class CiclosController extends AppController {
 			$this->redirect(array('action'=>'index'));
 		}
 	}
+	
+	
+	
+	function dame_ciclos(){
+		$this->Ciclo->recursive = -1;
+		return $this->Ciclo->find('list');
+	}
 
 }
 ?>

@@ -1,36 +1,61 @@
+<h1>Editar Plan</h1>
+<h2><?= $instit['cue'].' - '.$instit['nombre'] ?></h2>
 <div class="planes form">
 <?php echo $form->create('Plan');?>
 	<fieldset>
- 		<legend><?php __('Edit Plan');?></legend>
 	<?php
 		echo $form->input('id');
-		echo $form->input('instit_id');
+		echo $form->input('instit_id',array('type'=>'hidden'));
 		echo $form->input('oferta_id');
-		echo $form->input('old_item');
 		echo $form->input('norma');
 		echo $form->input('nombre');
 		echo $form->input('perfil');
 		echo $form->input('sector');
-		echo $form->input('duracion_hs');
-		echo $form->input('duracion_semanas');
-		echo $form->input('duracion_anios');
-		echo $form->input('matricula');
-		echo $form->input('observacion');
-		echo $form->input('ciclo_alta');
-		echo $form->input('ciclo_mod');
+		echo $form->input('duracion_hs',array('label'=>'Duración Hs'));
+		echo $form->input('duracion_semanas',array('label'=>'Duración Semanas'));
+		echo $form->input('duracion_anios',array('label'=>'Duración Años'));
+		echo $form->input('matricula',array('label'=>'Duración Matrícula'));
+		
+		/**
+		 *    OBSERVACION
+		 */	
+		echo $form->input('observacion',array(	'type'=>'textarea',
+												'rows'=>3,
+												'label'=>'Observaciones',
+												'after'=>'<cite>Puede ingresar hasta 100 caracteres</cite>'));
+			//agrego esto para que no se puedan imprimir mas de 100 caracteres en el textarea
+			?>
+			<script type="text/javascript">
+				$('PlanObservacion').observe('keyup', function(){					
+					var maxlength = 100;
+					if ($F('PlanObservacion') && $F('PlanObservacion').length > maxlength){
+						var paso_flag = false;
+						if(!paso_flag)alert('Solo puede escribir hasta 100 caracteres');
+						$('PlanObservacion').setValue($F('PlanObservacion').substring(0, maxlength));
+						paso_flag = true;
+					}
+				});
+			</script>
+		
+		
+		<?
+		
+		
+		/**
+		 *    CICLOS ALTA Y MODIFICACION
+		 */	
+		$ciclos = $this->requestAction('/Ciclos/dame_ciclos');
+		echo $form->input('ciclo_alta', array("type" => "select", 
+											  "options" => $ciclos,'label'=>'Alta',
+											  "selected" => date('Y')			
+		));
+		echo $form->input('ciclo_mod', array("type" => "select", 
+											  "options" => $ciclos,
+											  "label" => 'Modificación',
+											  "selected" => date('Y')
+		));
 	?>
 	</fieldset>
 <?php echo $form->end('Submit');?>
 </div>
-<div class="actions">
-	<ul>
-		<li><?php echo $html->link(__('Delete', true), array('action'=>'delete', $form->value('Plan.id')), null, sprintf(__('Are you sure you want to delete # %s?', true), $form->value('Plan.id'))); ?></li>
-		<li><?php echo $html->link(__('List Planes', true), array('action'=>'index'));?></li>
-		<li><?php echo $html->link(__('List Instits', true), array('controller'=> 'instits', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Instit', true), array('controller'=> 'instits', 'action'=>'add')); ?> </li>
-		<li><?php echo $html->link(__('List Ofertas', true), array('controller'=> 'ofertas', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Oferta', true), array('controller'=> 'ofertas', 'action'=>'add')); ?> </li>
-		<li><?php echo $html->link(__('List Anios', true), array('controller'=> 'anios', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Anio', true), array('controller'=> 'anios', 'action'=>'add')); ?> </li>
-	</ul>
-</div>
+

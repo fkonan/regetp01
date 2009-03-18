@@ -57,6 +57,17 @@ class EtapasController extends AppController {
 			$this->redirect(array('action'=>'index'));
 		}
 	}
+	
+	function dame_nombre($id = 0){
+		$this->Etapa->recursive = -1;
+		if (!$id) {
+			$this->Session->setFlash(__('Invalid Id.', true));
+			$this->redirect('/Instits/search_form');
+		}
+	
+		$etapa =  $this->Etapa->read(null, $id);
+		return $etapa['Etapa']['name'];
+	}
 
 }
 ?>

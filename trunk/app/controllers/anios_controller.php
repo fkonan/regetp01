@@ -17,19 +17,21 @@ class AniosController extends AppController {
 		$this->set('anio', $this->Anio->read(null, $id));
 	}
 
-	function add() {
+	function add($plan_id = null) {
 		if (!empty($this->data)) {
 			$this->Anio->create();
 			if ($this->Anio->save($this->data)) {
-				$this->Session->setFlash(__('The Anio has been saved', true));
-				$this->redirect(array('action'=>'index'));
+				$this->Session->setFlash(__('Se ha guardado un nuevo año', true));
+				$this->redirect(array('controller'=>'Planes','action'=>'view/'.$this->data['Anio']['plan_id']));
 			} else {
-				$this->Session->setFlash(__('The Anio could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('EL año no ha podido ser guardado. Por favor, intente de nuevo.', true));
 			}
 		}
+		
 		$planes = $this->Anio->Plan->find('list');
 		$ciclos = $this->Anio->Ciclo->find('list');
 		$etapas = $this->Anio->Etapa->find('list');
+		$this->set('plan_id',$plan_id);
 		$this->set(compact('planes', 'ciclos', 'etapas'));
 	}
 

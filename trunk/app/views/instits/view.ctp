@@ -160,6 +160,10 @@
 		</dd>
 	</dl>
 <br />
+<h2>Más Información</h2>
+<ul id="listado_ofertas">
+	<li><?= $html->link('Oferta Educativa',array('action'=>'planes_relacionados', $instit['Instit']['id'])) ?></li>
+</ul>
 <div class="actions">
 	<ul>
 		<li><?php echo $html->link(__('Editar Institución', true), array('action'=>'edit', $instit['Instit']['id'])); ?> </li>
