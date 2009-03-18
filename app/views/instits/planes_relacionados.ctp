@@ -1,26 +1,46 @@
 <div class="related">
-	<h3><?php __('Related Planes');?></h3>
+	<h1><?php __('Oferta Educativa');?></h1>
+	
+	
+	
+	<h2><?php echo $instit['Instit']['cue'].'-0'.$instit['Instit']['anexo']." <br>".$instit['Instit']['nombre']; ?></h2>
+	<dl>	
+		<dt><?php __('Domicilio'); ?></dt>
+		<dd>
+			<?php echo $instit['Instit']['direccion']; ?>
+			&nbsp;
+		</dd>
+			
+		<dt><?php __('Tipo de Institución'); ?></dt>
+		<dd>
+			<?php echo $instit['Tipoinstit']['name']; ?>
+			&nbsp;
+		</dd>					
+		<dt><?php __('Localidad'); ?></dt>
+		<dd>
+			<?php echo $instit['Instit']['localidad']; ?>
+			&nbsp;
+		</dd>		
+		<dt><?php __('Jurisdicción'); ?></dt>
+		<dd>
+			<?php echo $instit['Jurisdiccion']['name']; ?>
+			&nbsp;
+		</dd>
+	</dl>		
+		
+		
+		
+		
+	<h2>Planes</h2>	
+	
 	<?php if (!empty($instit['Plan'])):?>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
-		<th><?php __('Id'); ?></th>
-		<th><?php __('Instit Id'); ?></th>
-		<th><?php __('Oferta Id'); ?></th>
-		<th><?php __('Old Item'); ?></th>
-		<th><?php __('Norma'); ?></th>
+		<th><?php __('Oferta'); ?></th>
 		<th><?php __('Nombre'); ?></th>
-		<th><?php __('Perfil'); ?></th>
 		<th><?php __('Sector'); ?></th>
-		<th><?php __('Duracion Hs'); ?></th>
-		<th><?php __('Duracion Semanas'); ?></th>
-		<th><?php __('Duracion Anios'); ?></th>
-		<th><?php __('Matricula'); ?></th>
-		<th><?php __('Observacion'); ?></th>
-		<th><?php __('Ciclo Alta'); ?></th>
-		<th><?php __('Ciclo Mod'); ?></th>
-		<th><?php __('Created'); ?></th>
-		<th><?php __('Modified'); ?></th>
-		<th class="actions"><?php __('Actions');?></th>
+		<th><?php __('Matrícula'); ?></th>
+		<th class="actions"><?php __('');?></th>
 	</tr>
 	<?php
 		$i = 0;
@@ -30,28 +50,18 @@
 				$class = ' class="altrow"';
 			}
 		?>
-		<tr<?php echo $class;?>>
-			<td><?php echo $plan['id'];?></td>
-			<td><?php echo $plan['instit_id'];?></td>
-			<td><?php echo $plan['oferta_id'];?></td>
-			<td><?php echo $plan['old_item'];?></td>
-			<td><?php echo $plan['norma'];?></td>
+		<tr id="fila_plan_<?= $plan['id'];?>" <?php echo $class;?> 
+			onclick="window.location='<?= $html->url(array('controller'=> 'Planes', 'action'=>'view/'.$plan['id']))?>'"
+			onmouseout="$('fila_plan_<?= $plan['id'];?>').toggleClassName('fila_marcada')" 
+			onmouseover="$('fila_plan_<?= $plan['id'];?>').toggleClassName('fila_marcada')">
+			<td><?php echo $this->requestAction('/Ofertas/dame_abrev/'.$plan['oferta_id']);?></td>
 			<td><?php echo $plan['nombre'];?></td>
-			<td><?php echo $plan['perfil'];?></td>
 			<td><?php echo $plan['sector'];?></td>
-			<td><?php echo $plan['duracion_hs'];?></td>
-			<td><?php echo $plan['duracion_semanas'];?></td>
-			<td><?php echo $plan['duracion_anios'];?></td>
 			<td><?php echo $plan['matricula'];?></td>
-			<td><?php echo $plan['observacion'];?></td>
-			<td><?php echo $plan['ciclo_alta'];?></td>
-			<td><?php echo $plan['ciclo_mod'];?></td>
-			<td><?php echo $plan['created'];?></td>
-			<td><?php echo $plan['modified'];?></td>
 			<td class="actions">
-				<?php echo $html->link(__('View', true), array('controller'=> 'planes', 'action'=>'view', $plan['id'])); ?>
-				<?php echo $html->link(__('Edit', true), array('controller'=> 'planes', 'action'=>'edit', $plan['id'])); ?>
-				<?php echo $html->link(__('Delete', true), array('controller'=> 'planes', 'action'=>'delete', $plan['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $plan['id'])); ?>
+				<?php echo $html->link(__('Ver', true), array('controller'=> 'planes', 'action'=>'view', $plan['id'])); ?>
+				<?php echo $html->link(__('Editar', true), array('controller'=> 'planes', 'action'=>'edit', $plan['id'])); ?>
+				<?php echo $html->link(__('Eliminar', true), array('controller'=> 'planes', 'action'=>'delete', $plan['id']), null, sprintf(__('Seguro que desea eliminar el Plan "%s"?', true), $plan['nombre'])); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
@@ -60,7 +70,7 @@
 
 	<div class="actions" >
 		<ul>
-			<li><?php echo $html->link(__('New Plan', true), array('controller'=> 'planes', 'action'=>'add'));?> </li>
+			<li><?php echo $html->link(__('Nuevo Plan', true), array('controller'=> 'planes', 'action'=>'add/'. $instit['Instit']['id']));?> </li>
 		</ul>
 	</div>
 </div>

@@ -3,8 +3,8 @@
 	<fieldset>
  		<legend><?php __('Add Anio');?></legend>
 	<?php
-		echo $form->input('plan_id');
-		echo $form->input('ciclo_id');
+		echo $form->input('plan_id',array('type'=>'hidden','value'=>$plan_id));
+		echo $form->input('ciclo_id',array('selected'=> date('Y')));
 		echo $form->input('anio');
 		echo $form->input('etapa_id');
 		echo $form->input('matricula');
