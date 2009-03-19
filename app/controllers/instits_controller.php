@@ -5,6 +5,11 @@ class InstitsController extends AppController {
 	var $helpers = array('Html', 'Form','Ajax');
 	var $paginate = array('order'=>array('Instit.cue' => 'asc')); 
 
+	function beforeFilter(){
+		parent::beforeFilter();
+		$this->rutaUrl_for_layout[] =array('name'=> 'Inicio','link'=>'/Instits/search_form' );
+	}
+	
 	function index() {		
 		$this->Instit->recursive = 0;
 		$this->set('instits', $this->paginate());
@@ -58,6 +63,7 @@ class InstitsController extends AppController {
 		$tipoinstits = $this->Instit->Tipoinstit->find('list');
 		$jurisdicciones = $this->Instit->Jurisdiccion->find('list');
 		$this->set(compact('gestiones','dependencias','tipoinstits','jurisdicciones'));
+		$this->rutaUrl_for_layout[] =array('name'=> $this->data['Instit']['nombre'],'link'=>'/Instits/view/'.$id );
 	}
 
 	function delete($id = null) {
@@ -372,7 +378,9 @@ class InstitsController extends AppController {
 			$this->Session->setFlash(__('Institución Inválida.', true));
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->set('instit', $this->Instit->read(null, $id));
+		$this->data = $this->Instit->read(null, $id);
+		$this->set('instit',$this->data );
+		$this->rutaUrl_for_layout[] =array('name'=> $this->data['Instit']['nombre'],'link'=>'/Instits/view/'.$this->data['Instit']['id'] );
 	}
 	
 	

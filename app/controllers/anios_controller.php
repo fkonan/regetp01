@@ -22,6 +22,7 @@ class AniosController extends AppController {
 			$this->Anio->create();
 			if ($this->Anio->save($this->data)) {
 				$this->Session->setFlash(__('Se ha guardado un nuevo año', true));
+		//	debug($this->data);
 				$this->redirect(array('controller'=>'Planes','action'=>'view/'.$this->data['Anio']['plan_id']));
 			} else {
 				$this->Session->setFlash(__('EL año no ha podido ser guardado. Por favor, intente de nuevo.', true));
@@ -42,10 +43,10 @@ class AniosController extends AppController {
 		}
 		if (!empty($this->data)) {
 			if ($this->Anio->save($this->data)) {
-				$this->Session->setFlash(__('The Anio has been saved', true));
-				$this->redirect(array('action'=>'index'));
+				$this->Session->setFlash(__('El año ha sido guardado', true));
+				$this->redirect(array('controller'=>'Planes','action'=>'view/'.$this->data['Anio']['plan_id']));
 			} else {
-				$this->Session->setFlash(__('The Anio could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('El año no pudo ser guardado. Por favor, intente denuevo.', true));
 			}
 		}
 		if (empty($this->data)) {
@@ -59,12 +60,16 @@ class AniosController extends AppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for Anio', true));
-			$this->redirect(array('action'=>'index'));
+			$this->Session->setFlash(__('Id de Año inválido', true));
+			$this->redirect(array('controller'=>'Pages','action'=>'default'));
 		}
+		
+		$this->Anio->recursive = -1;
+		$plan = $this->Anio->read('plan_id',$id);
 		if ($this->Anio->del($id)) {
-			$this->Session->setFlash(__('Anio deleted', true));
-			$this->redirect(array('action'=>'index'));
+	
+			$this->Session->setFlash(__('Año eliminado', true));
+			$this->redirect(array('controller'=>'Planes' ,'action'=>'view/'.$plan['Anio']['plan_id']));
 		}
 	}
 

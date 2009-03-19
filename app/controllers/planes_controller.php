@@ -3,6 +3,13 @@ class PlanesController extends AppController {
 
 	var $name = 'Planes';
 	var $helpers = array('Html', 'Form');
+	
+	function beforeFilter(){
+		parent::beforeFilter();
+		//preparo la rutaUrl_for_layout ver en appController para mas informacion
+		$this->rutaUrl_for_layout[] = array('name'=> 'Inicio','link'=>'/Instits/search_form' );
+		
+	}
 
 	function index() {
 		$this->Plan->recursive = 0;
@@ -11,7 +18,7 @@ class PlanesController extends AppController {
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid Plan.', true));
+			$this->Session->setFlash(__('El Plan no es correcto.', true));
 			$this->redirect(array('action'=>'index'));
 		}
 		
@@ -28,6 +35,9 @@ class PlanesController extends AppController {
 
 		$instit =$this->requestAction('/Instits/dame_datos/'.$plan['Plan']['instit_id']);
 		$this->set('instit',$instit);
+
+		$this->rutaUrl_for_layout[] = array('name'=> $instit['nombre'],'link'=>'/Instits/view/'.$instit['id'] );
+		$this->rutaUrl_for_layout[] = array('name'=> 'Oferta Educativa','link'=>'/Instits/planes_relacionados/'.$this->data['Instit']['id'] );
 	}
 
 	function add($instit_id = null) {
@@ -60,7 +70,7 @@ class PlanesController extends AppController {
 				$this->Session->setFlash(__('El Plan ha sido guardado', true));
 				$this->redirect(array('action'=>'view/'.$this->data['Plan']['id']));
 			} else {
-				$this->Session->setFlash(__('El Plan no pude ser guardado. Por favor, intente de nuevo.', true));
+				$this->Session->setFlash(__('El Plan no pudo ser guardado. Por favor, intente de nuevo.', true));
 			}
 		}
 		if (empty($this->data)) {
@@ -73,6 +83,9 @@ class PlanesController extends AppController {
 		$instits = $this->Plan->Instit->find('list');
 		$ofertas = $this->Plan->Oferta->find('list');
 		$this->set(compact('instits','ofertas'));
+		$this->rutaUrl_for_layout[] = array('name'=> $this->data['Instit']['nombre'],'link'=>'/Instits/view/'.$this->data['Instit']['id'] );
+		$this->rutaUrl_for_layout[] = array('name'=> 'Oferta Educativa','link'=>'/Instits/planes_relacionados/'.$this->data['Instit']['id'] );
+		$this->rutaUrl_for_layout[] = array('name'=> $this->data['Plan']['nombre'],'link'=>'/Planes/view/'.$this->data['Plan']['id'] );
 	}
 
 	function delete($id = null) {

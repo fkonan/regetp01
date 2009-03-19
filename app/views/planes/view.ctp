@@ -103,11 +103,8 @@
 					$class = ' class="altrow"';
 				}
 			?>		
-			
-			<tr id="fila_plan_<?= $anio['ciclo_id'].'_'.$anio['anio']?>" <?php echo $class;?>
-				onclick="window.location='<?= $html->url(array('controller'=> 'Anios', 'action'=>'view/'.$anio['id']))?>'"
-				onmouseout="$('fila_plan_<?= $anio['ciclo_id'].'_'.$anio['anio']?>').toggleClassName('fila_marcada')" 
-				onmouseover="$('fila_plan_<?= $anio['ciclo_id'].'_'.$anio['anio']?>').toggleClassName('fila_marcada')">
+		
+			<tr id="fila_plan_<?= $anio['ciclo_id'].'_'.$anio['anio']?>" <?php echo $class;?>>
 				
 				<td><?php echo $anio['anio'];?></td>
 				<td><?php echo $this->requestAction('/Etapas/dame_nombre/'.$anio['etapa_id']);?></td>
@@ -115,9 +112,9 @@
 				<td><?php echo $anio['secciones'];?></td>
 				<td><?php echo $anio['hs_taller'];?></td>
 				<td class="actions">
-					<?php echo $html->link(__('Ver', true), array('controller'=> 'anios', 'action'=>'view', $anio['id'])); ?>
+					<?php //echo $html->link(__('Ver', true), array('controller'=> 'anios', 'action'=>'view', $anio['id'])); ?>
 					<?php echo $html->link(__('Editar', true), array('controller'=> 'anios', 'action'=>'edit', $anio['id'])); ?>
-					<?php echo $html->link(__('Borrar', true), array('controller'=> 'anios', 'action'=>'delete', $anio['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $anio['id'])); ?>
+					<?php echo $html->link(__('Borrar', true), array('controller'=> 'anios', 'action'=>'delete', $anio['id']), null, sprintf(__('Seguro que desea eliminar el año # %s? del ciclo # %s', true), $anio['anio'], $anio['ciclo_id'])); ?>
 				</td>
 			</tr>
 			<?php endforeach; //el que recorre los anios del ciclo	?>

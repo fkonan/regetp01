@@ -1,27 +1,23 @@
+<? $ganchito = $this->data['Anio']['anio'] == 1?'er':'º';?>	
+<h1> <?= "Nuevo Año" ?></h1>
 <div class="anios form">
 <?php echo $form->create('Anio');?>
-	<fieldset>
- 		<legend><?php __('Add Anio');?></legend>
+	<fieldset>	
 	<?php
+	
 		echo $form->input('plan_id',array('type'=>'hidden','value'=>$plan_id));
-		echo $form->input('ciclo_id',array('selected'=> date('Y')));
-		echo $form->input('anio');
+		
+		$anios = array('1'=>1,'2'=>2,'3'=>3,'4'=>4,'5'=>5,'6'=>6);
+		echo $form->input('anio',array( 'options'=>$anios ,'label'=>'Año'));
 		echo $form->input('etapa_id');
-		echo $form->input('matricula');
+		echo $form->input('ciclo_id',array('selected'=> date('Y')));
+		
+		
+		
+		echo $form->input('matricula',array('label'=>'Matrícula'));
 		echo $form->input('secciones');
-		echo $form->input('hs_taller');
+		echo $form->input('hs_taller',array('label'=>'Hs Taller'));
 	?>
 	</fieldset>
 <?php echo $form->end('Submit');?>
-</div>
-<div class="actions">
-	<ul>
-		<li><?php echo $html->link(__('List Anios', true), array('action'=>'index'));?></li>
-		<li><?php echo $html->link(__('List Planes', true), array('controller'=> 'planes', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Plan', true), array('controller'=> 'planes', 'action'=>'add')); ?> </li>
-		<li><?php echo $html->link(__('List Ciclos', true), array('controller'=> 'ciclos', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Ciclo', true), array('controller'=> 'ciclos', 'action'=>'add')); ?> </li>
-		<li><?php echo $html->link(__('List Etapas', true), array('controller'=> 'etapas', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Etapa', true), array('controller'=> 'etapas', 'action'=>'add')); ?> </li>
-	</ul>
 </div>
