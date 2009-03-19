@@ -36,5 +36,21 @@
  */
 class AppController extends Controller {
 	var $helpers = array('Javascript');
+	
+	
+	
+	
+	//esta es una variable que sera mostrada en el layout
+	// se crea mediante un elemento que le inserta un listado de urls
+	// indicando claramente en que lugar del sitio estoy navegando
+	// es una serie de links PEj:
+	// institucion -> ofertas -> plan -> año
+	// Sencillamente, es un menu de navegacion
+	var $rutaUrl_for_layout = array();	
+	
+	function beforeRender(){
+		parent::beforeRender();
+		$this->set('rutaUrl_for_layout', $this->rutaUrl_for_layout);		
+	}
 }
 ?>

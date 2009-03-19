@@ -42,6 +42,7 @@
 	<div id="container">
 		<div id="header">
 			<h1><?php echo $html->link(__('Sistema Gestión de Registro - Unidad de Información - INET', true), '/pages/home'); ?></h1>
+			
 		</div>
 		<div id="content">
 			<div id="menu">			
@@ -60,6 +61,7 @@
 				</ul>				
 			</div>
 			<div id="cuerpo">
+				<?  echo $this->renderElement('rutaUrl', array("ruta" => $rutaUrl_for_layout)); ?>
 				<?php $session->flash(); ?>
 				<?php echo $content_for_layout; ?>
 			</div>
