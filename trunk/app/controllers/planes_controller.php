@@ -37,7 +37,7 @@ class PlanesController extends AppController {
 		$this->set('instit',$instit);
 
 		$this->rutaUrl_for_layout[] = array('name'=> $instit['nombre'],'link'=>'/Instits/view/'.$instit['id'] );
-		$this->rutaUrl_for_layout[] = array('name'=> 'Oferta Educativa','link'=>'/Instits/planes_relacionados/'.$this->data['Instit']['id'] );
+		$this->rutaUrl_for_layout[] = array('name'=> 'Oferta Educativa','link'=>'/Instits/planes_relacionados/'.$instit['id'] );		
 	}
 
 	function add($instit_id = null) {

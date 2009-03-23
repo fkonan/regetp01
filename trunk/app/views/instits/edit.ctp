@@ -98,7 +98,7 @@
 		 */	
 		$meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
 		echo $form->input('jurisdiccion_id', array('empty' => array('0'=>'Todas'),'id'=>'jurisdiccion_id','label'=>'Jurisdicción','after'=>$meter));		
-		echo $form->input('tipoinstit_id', array('empty' => 'Todas','disabled'=>true,'type'=>'select','label'=>'Tipo De Institución','after'=> '<br /><cite>Para activar este campo, seleccione primero una jurisdicción</cite>'));
+		echo $form->input('tipoinstit_id', array('empty' => 'Todas','type'=>'select','label'=>'Tipo De Institución','after'=> '<br /><cite>Para activar este campo, seleccione primero una jurisdicción</cite>'));
 		echo $ajax->observeField('jurisdiccion_id',
                                    array(  	'url' => '/tipoinstits/ajax_select_form_por_jurisdiccion',
                                    			//'controller' => 'TipoInstits',

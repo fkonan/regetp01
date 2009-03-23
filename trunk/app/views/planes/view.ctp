@@ -113,7 +113,9 @@
 				<td><?php echo $anio['hs_taller'];?></td>
 				<td class="actions">
 					<?php //echo $html->link(__('Ver', true), array('controller'=> 'anios', 'action'=>'view', $anio['id'])); ?>
-					<?php echo $html->link(__('Editar', true), array('controller'=> 'anios', 'action'=>'edit', $anio['id'])); ?>
+					<?php //echo $html->link(__('Editar', true), array('controller'=> 'anios', 'action'=>'edit', $anio['id']));  ?>
+					<a href="<?= $html->url(array('controller'=> 'anios', 'action'=>'edit/'.$anio['id']))?>" onClick="window.open('<?= $html->url(array('controller'=> 'anios', 'action'=>'edit/'.$anio['id']))?>','_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=320,height=490'); return false;">Editar</a>
+					
 					<?php echo $html->link(__('Borrar', true), array('controller'=> 'anios', 'action'=>'delete', $anio['id']), null, sprintf(__('Seguro que desea eliminar el año # %s? del ciclo # %s', true), $anio['anio'], $anio['ciclo_id'])); ?>
 				</td>
 			</tr>
@@ -125,7 +127,8 @@
 
 	<div class="actions">
 		<ul>
-			<li><?php echo $html->link(__('Agregar Nuevo Año', true), array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id']));?> </li>
+			<?php //echo $html->link(__('Agregar Nuevo Año', true), array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id']));?>
+			<li><a href="<?= $html->url(array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id']))?>" onClick="window.open('<?= $html->url(array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id']))?>','_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=320,height=490'); return false;">Agregar Nuevo Año</a></li>
 		</ul>
 	</div>
 </div>

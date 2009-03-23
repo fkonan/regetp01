@@ -229,18 +229,15 @@ echo $html->css('edit_form',false);
 		/**
 		 *    CICLOS ALTA Y MODIFICACION
 		 */	
-		$ciclos = array('2006'=>'2006','2007'=>'2007','2008'=>'2008','2009'=>'2009','2010'=>'2010','2011'=>'2011');
+		$ciclos = $this->requestAction('/Ciclos/dame_ciclos');
 		echo $form->input('ciclo_alta', array("type" => "select", 
-											  "options" => $ciclos,'label'=>'Ciclo Alta',
-											  "selected" => $this->data['Instit']['ciclo_alta'],
-											  "after"=>'<cite>Ingresar el ciclo lectivo en el cual se dio de alta</cite>'			
+											  "options" => $ciclos,'label'=>'Alta',
+											  "selected" => date('Y')			
 		));
 		echo $form->input('ciclo_mod', array("type" => "select", 
 											  "options" => $ciclos,
-											  "label" => 'Ciclo Modificación',
-											  'label'=>'Ciclo Modificación',
-											  "selected" => $this->data['Instit']['ciclo_mod'],
-											  "after" =>"<cite>Ingresar el ciclo lectivo al cual pertenece la actualización</cite>"			
+											  "label" => 'Modificación',
+											  "selected" => date('Y')
 		));
 	?>
 <?php echo $form->end('Submit');?>

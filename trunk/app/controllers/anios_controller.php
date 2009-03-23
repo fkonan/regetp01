@@ -18,12 +18,12 @@ class AniosController extends AppController {
 	}
 
 	function add($plan_id = null) {
+		$this->layout='popup';
 		if (!empty($this->data)) {
 			$this->Anio->create();
 			if ($this->Anio->save($this->data)) {
 				$this->Session->setFlash(__('Se ha guardado un nuevo año', true));
-		//	debug($this->data);
-				$this->redirect(array('controller'=>'Planes','action'=>'view/'.$this->data['Anio']['plan_id']));
+				$this->set('script','<script type="text/javascript">window.opener.location.reload();window.close();</script>">');
 			} else {
 				$this->Session->setFlash(__('EL año no ha podido ser guardado. Por favor, intente de nuevo.', true));
 			}
@@ -36,15 +36,16 @@ class AniosController extends AppController {
 		$this->set(compact('planes', 'ciclos', 'etapas'));
 	}
 
-	function edit($id = null) {
+	function edit($id = null) {		
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid Anio', true));
 			$this->redirect(array('action'=>'index'));
 		}
+		$this->layout='popup';
 		if (!empty($this->data)) {
 			if ($this->Anio->save($this->data)) {
 				$this->Session->setFlash(__('El año ha sido guardado', true));
-				$this->redirect(array('controller'=>'Planes','action'=>'view/'.$this->data['Anio']['plan_id']));
+				$this->set('script','<script type="text/javascript">window.opener.location.reload();window.close();</script>">');
 			} else {
 				$this->Session->setFlash(__('El año no pudo ser guardado. Por favor, intente denuevo.', true));
 			}
