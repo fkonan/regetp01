@@ -16,7 +16,7 @@
 		echo $form->input('duracion_hs',array('label'=>'Duración Hs'));
 		echo $form->input('duracion_semanas',array('label'=>'Duración Semanas'));
 		echo $form->input('duracion_anios',array('label'=>'Duración Años'));
-		echo $form->input('matricula',array('label'=>'Duración Matrícula'));
+		echo $form->input('matricula',array('label'=>'Matrícula'));
 		
 		/**
 		 *    OBSERVACION

@@ -60,7 +60,7 @@ class InstitsController extends AppController {
 		}
 		$gestiones = $this->Instit->Gestion->find('list');
 		$dependencias = $this->Instit->Dependencia->find('list');
-		$tipoinstits = $this->Instit->Tipoinstit->find('list');
+		$tipoinstits = $this->Instit->Tipoinstit->find('list',array('conditions'=>'Tipoinstit.jurisdiccion_id = '.$this->data['Jurisdiccion']['id']));
 		$jurisdicciones = $this->Instit->Jurisdiccion->find('list');
 		$this->set(compact('gestiones','dependencias','tipoinstits','jurisdicciones'));
 		$this->rutaUrl_for_layout[] =array('name'=> $this->data['Instit']['nombre'],'link'=>'/Instits/view/'.$id );
@@ -214,13 +214,13 @@ class InstitsController extends AppController {
 			 *     NOMBRE
 			 */
 			if($this->data['Instit']['nombre'] != ''){
-				$this->paginate['conditions']['UPPER(Instit.nombre) LIKE'] = '%'.strtoupper($this->data['Instit']['nombre']).'%';
+				$this->paginate['conditions']['lower(to_ascii(Instit.nombre)) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->data['Instit']['nombre']));
 				$array_condiciones['Nombre'] = $this->data['Instit']['nombre'];
 				$url_conditions['nombre'] = $this->data['Instit']['nombre'];			
 			}
 			if(isset($this->passedArgs['nombre'])){	
             	if($this->passedArgs['nombre'] != ''){
-					$this->paginate['conditions']['UPPER(Instit.nombre) LIKE'] = '%'.strtoupper($this->passedArgs['nombre']).'%';
+					$this->paginate['conditions']['lower(to_ascii(Instit.nombre)) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->passedArgs['nombre']));
 					$array_condiciones['Nombre'] = $this->passedArgs['nombre'];
 					$url_conditions['nombre'] = $this->passedArgs['nombre'];			
 				}
@@ -229,13 +229,13 @@ class InstitsController extends AppController {
 			 *     DIRECCION
 			 */
 			if($this->data['Instit']['direccion'] != ''){
-				$this->paginate['conditions']['UPPER(Instit.direccion) LIKE'] = '%'.strtoupper($this->data['Instit']['direccion']).'%';
+				$this->paginate['conditions']['lower(to_ascii(Instit.direccion)) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->data['Instit']['direccion']));
 				$array_condiciones['Domicilio'] = $this->data['Instit']['direccion'];			
 				$url_conditions['direccion'] = $this->data['Instit']['direccion'];
 			}
 			if(isset($this->passedArgs['direccion'])){	
             			if($this->passedArgs['direccion'] != ''){
-					$this->paginate['conditions']['UPPER(Instit.direccion) LIKE'] = '%'.strtoupper($this->passedArgs['direccion']).'%';
+					$this->paginate['conditions']['lower(to_ascii(Instit.direccion)) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->passedArgs['direccion']));
 					$array_condiciones['Domicilio'] = $this->passedArgs['direccion'];			
 					$url_conditions['direccion'] = $this->passedArgs['direccion'];
 				}
@@ -244,13 +244,13 @@ class InstitsController extends AppController {
 			 *     LOCALIDAD
 			 */
 			if($this->data['Instit']['localidad'] != ''){
-				$this->paginate['conditions']['UPPER(Instit.localidad) LIKE'] = '%'.strtoupper($this->data['Instit']['localidad']).'%';
+				$this->paginate['conditions']['lower(to_ascii(Instit.localidad)) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->data['Instit']['localidad']));
 				$array_condiciones['Localidad'] = $this->data['Instit']['localidad'];
 				$url_conditions['localidad'] = $this->data['Instit']['localidad'];			
 			}
 			if(isset($this->passedArgs['localidad'])){	
             	if($this->passedArgs['localidad'] != ''){
-					$this->paginate['conditions']['UPPER(Instit.localidad) LIKE'] = '%'.strtoupper($this->passedArgs['localidad']).'%';
+					$this->paginate['conditions']['lower(to_ascii(Instit.localidad)) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->passedArgs['localidad']));
 					$array_condiciones['Localidad'] = $this->passedArgs['localidad'];
 					$url_conditions['localidad'] = $this->passedArgs['localidad'];			
 				}
@@ -356,7 +356,16 @@ class InstitsController extends AppController {
 	    $this->Instit->recursive = 0;//para alivianar la carga del server         
 		
 	    //datos de paginacion
-        $this->set('instits', $this->paginate());
+	    $pagin = $this->paginate();
+	    
+	    //si se encontro solo 1 institucion, ir directame te a la vista de esa institucion
+	    if(sizeof($pagin) == 1){
+	    	$this->Session->setFlash('Mostrando el único resultado que trajo la consulta');
+	    	$this->redirect('view/'.$pagin[0]['Instit']['id']);	    	
+	    }
+	    
+        $this->set('instits', $pagin);
+       
         $this->set('url_conditions', $url_conditions);
 		
         //devuelve un array para mostrar los criterios de busqueda
@@ -396,6 +405,48 @@ class InstitsController extends AppController {
 		
 		$instit = $this->Instit->read(null, $instit_id);
 		return $instit['Instit'];
+	}
+	
+	
+	
+	/**
+	 * Esto no es un ACTION, es una fuincion privada de esta clase, pero que en realidad deberia
+	 * ser una funcion general ya que seguramente me interese usarla en otro controlador
+	 * 
+	 * Lo que hace es convertir una cadena en una expresion regular para 
+	 * buscar el texto sin tener en cuenta los acentos y la eñe
+	 *
+	 * @param $text
+	 */
+	function _convertir_para_busqueda_avanzada($text){		
+		$text = strtolower($text);
+		$text = "%$text%";
+		$patron = array (
+			// Espacios, puntos y comas por guion
+			//'/[\., ]+/' => '-',
+			
+			// Vocales
+			'/a/' => 'á',
+			'/e/' => 'é',
+			'/i/' => 'í',
+			'/o/' => 'ó',
+			'/u/' => 'ú',
+		
+			'/á/' => '(a|á)',
+			'/é/' => '(e|é)',
+			'/í/' => '(i|í)',
+			'/ó/' => '(o|ó)',
+			'/ú/' => '(u|ú)',
+			
+			'/n/' => 'ñ',
+			'/ñ/' => '(n|ñ)'
+ 
+			// Agregar aqui mas caracteres si es necesario
+ 
+		);
+		
+		$text = preg_replace(array_keys($patron),array_values($patron),$text);
+		return $text;		
 	}
 
 }
