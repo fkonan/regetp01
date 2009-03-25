@@ -16,6 +16,36 @@ class PlanesController extends AppController {
 		$this->set('planes', $this->paginate());
 	}
 
+	
+		
+	/**
+	 * Action para mostrar los planes relacionados
+	 * En realidad es una copa de los planes relacionados realizados con
+	 * bake, y que suelen aparecen en la view
+	 *
+	 * @param $instit_id
+	 */
+	function planes_relacionados($id = null){
+		if (!$id) {
+			$this->Session->setFlash(__('Institución Inválida.', true));
+			$this->redirect(array('controller'=>'Istits','action'=>'view/'.$id));
+		}
+		
+		$this->data = $this->Plan->find('all', array('conditions'=>array('instit_id'=>$id), 'order'=>'name ASC'));
+
+		foreach ($this->data as $p){
+			$planes[] = $p['Plan'];	
+			$v_plan_matricula[] = $this->requestAction('/Anios/matricula_del_plan/'.$p['Plan']['id']);
+		}
+		$instit['Instit'] = $this->data[0]['Instit'];
+		$this->set('instit',$instit);
+		$this->set('planes',$planes );
+		$this->set('v_plan_matricula',$v_plan_matricula);
+		$this->rutaUrl_for_layout[] =array('name'=> $this->data[0]['Instit']['nombre'],'link'=>'/Instits/view/'.$this->data[0]['Instit']['id'] );
+	}
+	
+	
+	
 	function view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('El Plan no es correcto.', true));
@@ -35,9 +65,10 @@ class PlanesController extends AppController {
 
 		$instit =$this->requestAction('/Instits/dame_datos/'.$plan['Plan']['instit_id']);
 		$this->set('instit',$instit);
+		$this->set('matricula', $this->requestAction('/Anios/matricula_del_plan/'.$id));
 
 		$this->rutaUrl_for_layout[] = array('name'=> $instit['nombre'],'link'=>'/Instits/view/'.$instit['id'] );
-		$this->rutaUrl_for_layout[] = array('name'=> 'Oferta Educativa','link'=>'/Instits/planes_relacionados/'.$instit['id'] );		
+		$this->rutaUrl_for_layout[] = array('name'=> 'Oferta Educativa','link'=>'/Planes/planes_relacionados/'.$instit['id'] );		
 	}
 
 	function add($instit_id = null) {
@@ -84,7 +115,7 @@ class PlanesController extends AppController {
 		$ofertas = $this->Plan->Oferta->find('list');
 		$this->set(compact('instits','ofertas'));
 		$this->rutaUrl_for_layout[] = array('name'=> $this->data['Instit']['nombre'],'link'=>'/Instits/view/'.$this->data['Instit']['id'] );
-		$this->rutaUrl_for_layout[] = array('name'=> 'Oferta Educativa','link'=>'/Instits/planes_relacionados/'.$this->data['Instit']['id'] );
+		$this->rutaUrl_for_layout[] = array('name'=> 'Oferta Educativa','link'=>'/Planes/planes_relacionados/'.$this->data['Instit']['id'] );
 		$this->rutaUrl_for_layout[] = array('name'=> $this->data['Plan']['nombre'],'link'=>'/Planes/view/'.$this->data['Plan']['id'] );
 	}
 
@@ -98,6 +129,10 @@ class PlanesController extends AppController {
 			$this->redirect(array('action'=>'index'));
 		}
 	}
+	
+	
+	
+
 
 }
 ?>

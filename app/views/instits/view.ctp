@@ -1,11 +1,8 @@
 <div class="instits view">
-<div class="actions">
-	<ul>
-		<li><?php echo $html->link(__('Editar Institución', true), array('action'=>'edit', $instit['Instit']['id'])); ?> </li>
-	</ul>
-</div>
+
+
 <div id="escuela_estado" class="<? echo $instit['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $instit['Instit']['activo']? 'Activa':'Inactiva';?></div>
-<h2><?php echo $instit['Instit']['cue'].'-0'.$instit['Instit']['anexo']." <br>".$instit['Instit']['nombre']; ?></h2>
+<h1><?php echo $instit['Instit']['cue'].'-0'.$instit['Instit']['anexo']." <br>".$instit['Instit']['nombre']; ?></h1>
 
 	<dl>
 		
@@ -47,7 +44,7 @@
 		</dd>
 	</dl>
 		
-		<h2>Datos Establecimiento</h2>
+		<h2>Datos De Institución</h2>
 	<dl>
 		<dt><?php __('Domicilio'); ?></dt>
 		<dd>
@@ -162,7 +159,7 @@
 <br />
 <h2>Más Información</h2>
 <ul id="listado_ofertas">
-	<li><?= $html->link('Oferta Educativa',array('action'=>'planes_relacionados', $instit['Instit']['id'])) ?></li>
+	<li><?= $html->link('Oferta Educativa',array('controller'=>'Planes','action'=>'planes_relacionados', $instit['Instit']['id'])) ?></li>
 </ul>
 <div class="actions">
 	<ul>

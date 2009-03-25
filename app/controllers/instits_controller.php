@@ -374,24 +374,7 @@ class InstitsController extends AppController {
 	
 	
 	
-	
-	/**
-	 * Action para mostrar los planes relacionados
-	 * En realidad es una copa de los planes relacionados realizados con
-	 * bake, y que suelen aparecen en la view
-	 *
-	 * @param $instit_id
-	 */
-	function planes_relacionados($id = null){
-		if (!$id) {
-			$this->Session->setFlash(__('Institución Inválida.', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		$this->data = $this->Instit->read(null, $id);
-		$this->set('instit',$this->data );
-		$this->rutaUrl_for_layout[] =array('name'=> $this->data['Instit']['nombre'],'link'=>'/Instits/view/'.$this->data['Instit']['id'] );
-	}
-	
+
 	
 	/**
 	 * Requestaction, me devuelve los datos relacionados con la Institucion
@@ -401,7 +384,7 @@ class InstitsController extends AppController {
 	 * @return Array con todos los campos de 1 registro de institucion
 	 */
 	function dame_datos($instit_id){
-		$this->Instit->recursive = -1;
+		//$this->Instit->recursive = -1;
 		
 		$instit = $this->Instit->read(null, $instit_id);
 		return $instit['Instit'];

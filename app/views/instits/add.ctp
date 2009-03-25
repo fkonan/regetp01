@@ -148,7 +148,7 @@ echo $html->css('edit_form',false);
 	* 
 	* 
 	*/	
-		?><H3>Datos Director</H3><?		
+		?><H2>Datos Director</H2><?		
 		echo $form->input('dir_nombre',array('label'=>array('text'=>'Nombre y Apellido',
 															'class'=>'input_label'),
 											 'class'=>'input_text_peque'));
@@ -176,7 +176,7 @@ echo $html->css('edit_form',false);
 	* 
 	* 
 	*/	
-		?><H3>Datos Vice Director</H3><?
+		?><H2>Datos Vice Director</H2><?
 		echo $form->input('vice_nombre',array('label'=>array(	'text'=> 'Nombre y Apellido',
 																'class'=>'input_label'),
 											 'class'=>'input_text_peque'
@@ -201,7 +201,7 @@ echo $html->css('edit_form',false);
 	 * 
 	 * 
 	 */	
-		?><H3>Datos Adicionales</H3><?
+		?><H2>Datos Adicionales</H2><?
 		/**
 		 *    INGRESO/ACTUALIZACION
 		 */	

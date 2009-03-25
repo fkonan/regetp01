@@ -13,7 +13,7 @@ if(isset($script)){
 	
 		echo $form->input('plan_id',array('type'=>'hidden','value'=>$plan_id));
 		
-		$anios = array('1'=>1,'2'=>2,'3'=>3,'4'=>4,'5'=>5,'6'=>6,'7'=>7);
+		$anios = array('1'=>1,'2'=>2,'3'=>3,'4'=>4,'5'=>5,'6'=>6,'7'=>7,'99'=>99);
 		echo $form->input('anio',array( 'options'=>$anios ,'label'=>'Año'));
 		echo $form->input('etapa_id');
 		echo $form->input('ciclo_id',array('selected'=> date('Y')));

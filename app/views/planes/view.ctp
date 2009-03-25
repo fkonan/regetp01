@@ -53,7 +53,7 @@
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Matrícula'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $plan['Plan']['matricula']; ?>
+			<?php echo $matricula[$plan['Plan']['id']] ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Observación'); ?></dt>
