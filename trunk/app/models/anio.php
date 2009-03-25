@@ -35,7 +35,7 @@ class Anio extends AppModel {
 				'message' => 'Debe ingresar un número de año.'	
 			),
 			'rango1a7'=> array(
-				'rule' => '/^[1-7]$/',
+				'rule' => '/^([1-7]|99)$/',
 				'required' => true,
 				'allowEmpty' => false,
 				//'on' => 'create', // or: 'update'

@@ -4,6 +4,12 @@ class JurisdiccionesController extends AppController {
 	var $name = 'Jurisdicciones';
 	var $helpers = array('Html', 'Form');
 
+	function get_name($id){
+		$this->Jurisdiccion->recursive = -1;
+		$varaux = $this->Jurisdiccion->read(null,$id);
+		return $varaux['Jurisdiccion']['name'];
+	}
+	
 	function index() {
 		$this->Jurisdiccion->recursive = 0;
 		$this->set('jurisdicciones', $this->paginate());

@@ -12,7 +12,7 @@ if(isset($script)){
 		echo $form->input('id');
 		echo $form->input('plan_id',array('type'=>'hidden'));
 		
-		$anios = array('1'=>1,'2'=>2,'3'=>3,'4'=>4,'5'=>5,'6'=>6,'7'=>7);
+		$anios = array('1'=>1,'2'=>2,'3'=>3,'4'=>4,'5'=>5,'6'=>6,'7'=>7,'99'=>99);
 		echo $form->input('anio',array( 'options'=>$anios ,'label'=>'Año'));
 		echo $form->input('etapa_id');
 		echo $form->input('ciclo_id');

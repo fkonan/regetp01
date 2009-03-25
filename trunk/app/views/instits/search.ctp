@@ -79,13 +79,13 @@ foreach($instits as $instit){
 
 	<div class="instit_data_bs">
 		<div class="instit_name"><b><?= $instit['Instit']['cue'].'-0'.$instit['Instit']['anexo']?></b> - <?= $instit['Instit']['nombre']; ?></div>
-		<div class="instit_atributte"><b>Domicilio:</b> <?= $instit['Instit']['direccion'] ?></div>
+		<div class="instit_atributte"><b>Tipo: </b> <?= $instit['Tipoinstit']['name'] ?></div>
 		<br />
-		<div class="instit_atributte"><b>Tipo:</b> <?= $instit['Tipoinstit']['name'] ?></div>
-		<br />
-		<div class="instit_atributte"><b>Gestión:</b><?= $instit['Gestion']['name'] ?></div>
-		<div class="instit_atributte"><b>Jurisdicción:</b> <?= $instit['Jurisdiccion']['name'] ?></div>
-		<div class="instit_atributte"><b>Localidad:</b><?= $instit['Instit']['localidad'] ?></div>
+		<div class="instit_atributte"><b>Domicilio: </b> <?= $instit['Instit']['direccion'] ?></div>
+		<br />		
+		<div class="instit_atributte"><b>Gestión: </b><?= $instit['Gestion']['name'] ?></div>
+		<div class="instit_atributte"><b>Jurisdicción: </b> <?= $instit['Jurisdiccion']['name'] ?></div>
+		<div class="instit_atributte"><b>Localidad: </b><?= $instit['Instit']['localidad'] ?></div>
 	</div>
 	<div class="instit_link_list">
 		<?=$html->link('Ver Datos',array('controller'=> 'Instits', 'action'=>'view/'.$instit['Instit']['id'])) ?>

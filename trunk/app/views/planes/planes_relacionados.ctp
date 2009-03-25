@@ -1,7 +1,6 @@
 <div class="related">
 	<h1><?php __('Oferta Educativa');?></h1>
-	
-	
+
 	
 	<h2><?php echo $instit['Instit']['cue'].'-0'.$instit['Instit']['anexo']." <br>".$instit['Instit']['nombre']; ?></h2>
 	<dl>	
@@ -13,7 +12,7 @@
 			
 		<dt><?php __('Tipo de Institución'); ?></dt>
 		<dd>
-			<?php echo $instit['Tipoinstit']['name']; ?>
+			<?php echo $this->requestAction('/tipoinstits/get_name/'.$instit['Instit']['tipoinstit_id']);  ?>
 			&nbsp;
 		</dd>					
 		<dt><?php __('Localidad'); ?></dt>
@@ -23,7 +22,7 @@
 		</dd>		
 		<dt><?php __('Jurisdicción'); ?></dt>
 		<dd>
-			<?php echo $instit['Jurisdiccion']['name']; ?>
+			<?php echo $this->requestAction('/jurisdicciones/get_name/'.$instit['Instit']['jurisdiccion_id']);  ?>
 			&nbsp;
 		</dd>
 	</dl>		
@@ -32,8 +31,7 @@
 		
 		
 	<h2>Planes</h2>	
-	
-	<?php if (!empty($instit['Plan'])):?>
+	<?php if ($planes):?>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
 		<th><?php __('Oferta'); ?></th>
@@ -44,7 +42,8 @@
 	</tr>
 	<?php
 		$i = 0;
-		foreach ($instit['Plan'] as $plan):
+
+		foreach ($planes as $plan):
 			$class = null;
 			if ($i++ % 2 == 0) {
 				$class = ' class="altrow"';
@@ -57,7 +56,7 @@
 			<td><?php echo $this->requestAction('/Ofertas/dame_abrev/'.$plan['oferta_id']);?></td>
 			<td><?php echo $plan['nombre'];?></td>
 			<td><?php echo $plan['sector'];?></td>
-			<td><?php echo $plan['matricula'];?></td>
+			<td><?php echo $v_plan_matricula[$i-1][$plan['id']];?></td>
 			<td class="actions">
 				<?php echo $html->link(__('Ver', true), array('controller'=> 'planes', 'action'=>'view', $plan['id'])); ?>
 				<?php echo $html->link(__('Editar', true), array('controller'=> 'planes', 'action'=>'edit', $plan['id'])); ?>
