@@ -18,12 +18,14 @@ class AniosController extends AppController {
 	}
 
 	function add($plan_id = null) {
+	
 		$this->layout='popup';
 		if (!empty($this->data)) {
 			$this->Anio->create();
 			if ($this->Anio->save($this->data)) {
 				$this->Session->setFlash(__('Se ha guardado un nuevo año', true));
 				$this->set('script','<script type="text/javascript">window.opener.location.reload();window.close();</script>">');
+				return 0;
 			} else {
 				$this->Session->setFlash(__('EL año no ha podido ser guardado. Por favor, intente de nuevo.', true));
 			}
@@ -34,6 +36,17 @@ class AniosController extends AppController {
 		$etapas = $this->Anio->Etapa->find('list');
 		$this->set('plan_id',$plan_id);
 		$this->set(compact('planes', 'ciclos', 'etapas'));
+		
+		/**
+		 * esto es para generar una vista distinta 
+		 * para los años que son de una oferta FP
+		 */
+		$this->Anio->Plan->recursive = -1;
+		$plan   = $this->Anio->Plan->find('all',array('conditions'=>array('Plan.id'=>$plan_id)));
+		//pr($plan);
+		if($plan[0]['Plan']['oferta_id']==1){//es un FP, asique mostrar la vista de años para FP
+			$this->render('/Anios/add_FP');
+		}
 	}
 
 	function edit($id = null) {		
@@ -50,13 +63,27 @@ class AniosController extends AppController {
 				$this->Session->setFlash(__('El año no pudo ser guardado. Por favor, intente denuevo.', true));
 			}
 		}
-		if (empty($this->data)) {
-			$this->data = $this->Anio->read(null, $id);
-		}
+		
+		
 		$planes = $this->Anio->Plan->find('list');
 		$ciclos = $this->Anio->Ciclo->find('list');
 		$etapas = $this->Anio->Etapa->find('list');
 		$this->set(compact('planes','ciclos','etapas'));
+	
+		
+		/**
+		 * esto es para generar una vista distinta 
+		 * para los años que son de una oferta FP
+		 */
+		if (empty($this->data)) {
+			$this->data = $this->Anio->read(null, $id);
+		}
+		$this->Anio->Plan->recursive = -1;
+		$plan   = $this->Anio->Plan->find('all',array('conditions'=>array('Plan.id'=>$this->data['Anio']['plan_id'])));
+		//pr($plan);
+		if($plan[0]['Plan']['oferta_id']==1){//es un FP, asique mostrar la vista de años para FP
+			$this->render('/Anios/edit_FP');
+		}
 	}
 
 	function delete($id = null) {

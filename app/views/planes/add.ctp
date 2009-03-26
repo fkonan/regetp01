@@ -1,5 +1,5 @@
-<h1>Nuevo Plan</h1>
-<h2><?= $instit['cue'].' - '.$instit['nombre'] ?></h2>
+<h1>Nueva Oferta Educativa</h1>
+<h2 class="primero"><?= $instit['cue'].' - '.$instit['nombre'] ?></h2>
 
 <div class="planes form">
 <?php echo $form->create('Plan');?>
@@ -16,7 +16,7 @@
 		echo $form->input('duracion_hs',array('label'=>'Duración Hs'));
 		echo $form->input('duracion_semanas',array('label'=>'Duración Semanas'));
 		echo $form->input('duracion_anios',array('label'=>'Duración Años'));
-		echo $form->input('matricula',array('label'=>'Matrícula'));
+		//echo $form->input('matricula',array('label'=>'Matrícula'));
 		
 		/**
 		 *    OBSERVACION
@@ -58,6 +58,6 @@
 		));
 	?>
 	</fieldset>
-<?php echo $form->end('Submit');?>
+<?php echo $form->end('Guardar');?>
 </div>
 	

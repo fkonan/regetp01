@@ -5,7 +5,7 @@ if(isset($script)){
 ?>
 
 <? $ganchito = $this->data['Anio']['anio'] == 1?'er':'º';?>	
-<h1> <?= "Nuevo Año" ?></h1>
+<h1 align="center"> <?= "Nuevo Año" ?></h1>
 <div class="anios form">
 <?php echo $form->create('Anio');?>
 	<fieldset>	
@@ -25,5 +25,5 @@ if(isset($script)){
 		echo $form->input('hs_taller',array('label'=>'Hs Taller'));
 	?>
 	</fieldset>
-<?php echo $form->end('Submit');?>
+<?php echo $form->end('Guardar');?>
 </div>

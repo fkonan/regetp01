@@ -33,15 +33,22 @@ class PlanesController extends AppController {
 		
 		$this->data = $this->Plan->find('all', array('conditions'=>array('instit_id'=>$id), 'order'=>'name ASC'));
 
-		foreach ($this->data as $p){
-			$planes[] = $p['Plan'];	
-			$v_plan_matricula[] = $this->requestAction('/Anios/matricula_del_plan/'.$p['Plan']['id']);
+		if($this->data){
+			foreach ($this->data as $p){
+				$planes[] = $p['Plan'];	
+				$v_plan_matricula[] = $this->requestAction('/Anios/matricula_del_plan/'.$p['Plan']['id']);
+			}
+			$instit['Instit'] = $this->data[0]['Instit'];
+			$this->set('instit',$instit);
+			$this->set('planes',$planes );
+			$this->set('v_plan_matricula',$v_plan_matricula);
+			$this->rutaUrl_for_layout[] =array('name'=> $this->data[0]['Instit']['nombre'],'link'=>'/Instits/view/'.$this->data[0]['Instit']['id'] );
 		}
-		$instit['Instit'] = $this->data[0]['Instit'];
-		$this->set('instit',$instit);
-		$this->set('planes',$planes );
-		$this->set('v_plan_matricula',$v_plan_matricula);
-		$this->rutaUrl_for_layout[] =array('name'=> $this->data[0]['Instit']['nombre'],'link'=>'/Instits/view/'.$this->data[0]['Instit']['id'] );
+		else{ //cuando la institucion no tiene planes relacionados mostrar esto
+			$ins_aux['Instit'] = $this->requestAction("/Instits/dame_datos/$id");
+			$this->set('instit',$ins_aux);
+			$this->set('planes',array() );
+		}
 	}
 	
 	
@@ -68,7 +75,12 @@ class PlanesController extends AppController {
 		$this->set('matricula', $this->requestAction('/Anios/matricula_del_plan/'.$id));
 
 		$this->rutaUrl_for_layout[] = array('name'=> $instit['nombre'],'link'=>'/Instits/view/'.$instit['id'] );
-		$this->rutaUrl_for_layout[] = array('name'=> 'Oferta Educativa','link'=>'/Planes/planes_relacionados/'.$instit['id'] );		
+		$this->rutaUrl_for_layout[] = array('name'=> 'Oferta Educativa','link'=>'/Planes/planes_relacionados/'.$instit['id'] );
+
+		//Si es FP mostrar la vista para FP, sino mostrar la vista por default (view)
+		if ($plan['Plan']['oferta_id']== 1){ // 1, es el numero de ID de una oferta FP
+			$this->render('view_fp');
+		}
 	}
 
 	function add($instit_id = null) {
@@ -76,7 +88,7 @@ class PlanesController extends AppController {
 			$this->Plan->create();
 			if ($this->Plan->save($this->data)) {
 				$this->Session->setFlash(__('Se ha creado un nuevo Plan', true));
-				$this->redirect(array('controller'=>'Instits','action'=>'planes_relacionados/'.$this->data['Plan']['instit_id']));
+				$this->redirect(array('action'=>'planes_relacionados/'.$this->data['Plan']['instit_id']));
 			} else {
 				$this->Session->setFlash(__('No se ha podido crear el Plan. Por favor, intente denuevo.', true));
 			}
@@ -86,9 +98,12 @@ class PlanesController extends AppController {
 		$instit =$this->requestAction('/Instits/dame_datos/'.$instit_id);
 		$this->set('instit',$instit);
 		
-		$instits = $this->Plan->Instit->find('list');
+		//$instits = $this->Plan->Instit->find('list');
 		$ofertas = $this->Plan->Oferta->find('list');
 		$this->set(compact('instits', 'ofertas'));
+		
+
+		$this->rutaUrl_for_layout[] =array('name'=> $instit['nombre'],'link'=>'/Instits/view/'.$instit['id'] );
 	}
 
 	function edit($id = null) {
@@ -120,13 +135,14 @@ class PlanesController extends AppController {
 	}
 
 	function delete($id = null) {
+		$this->Plan->recursive = -1;
+		$this->data = $this->Plan->read(null,$id);
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for Plan', true));
-			$this->redirect(array('action'=>'index'));
 		}
 		if ($this->Plan->del($id)) {
-			$this->Session->setFlash(__('Plan deleted', true));
-			$this->redirect(array('action'=>'index'));
+			$this->Session->setFlash(__('Plan Eliminado', true));			
+			$this->redirect(array('action'=>'planes_relacionados/'.$this->data['Plan']['instit_id']));
 		}
 	}
 	

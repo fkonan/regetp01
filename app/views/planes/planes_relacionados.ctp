@@ -2,19 +2,22 @@
 	<h1><?php __('Oferta Educativa');?></h1>
 
 	
-	<h2><?php echo $instit['Instit']['cue'].'-0'.$instit['Instit']['anexo']." <br>".$instit['Instit']['nombre']; ?></h2>
+	<h2 class="primero"><?php echo $instit['Instit']['cue'].'-0'.$instit['Instit']['anexo']." <br>".$instit['Instit']['nombre']; ?></h2>
 	<dl>	
+	
+		<dt><?php __('Tipo de Institución'); ?></dt>
+		<dd>
+			<?php 
+			echo $this->requestAction('/tipoinstits/get_name/'.$instit['Instit']['tipoinstit_id']);  ?>
+			&nbsp;
+		</dd>	
+	
 		<dt><?php __('Domicilio'); ?></dt>
 		<dd>
 			<?php echo $instit['Instit']['direccion']; ?>
 			&nbsp;
-		</dd>
-			
-		<dt><?php __('Tipo de Institución'); ?></dt>
-		<dd>
-			<?php echo $this->requestAction('/tipoinstits/get_name/'.$instit['Instit']['tipoinstit_id']);  ?>
-			&nbsp;
-		</dd>					
+		</dd>			
+						
 		<dt><?php __('Localidad'); ?></dt>
 		<dd>
 			<?php echo $instit['Instit']['localidad']; ?>
@@ -30,7 +33,7 @@
 		
 		
 		
-	<h2>Planes</h2>	
+	<h2>Oferta</h2>	
 	<?php if ($planes):?>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
@@ -59,8 +62,7 @@
 			<td><?php echo $v_plan_matricula[$i-1][$plan['id']];?></td>
 			<td class="actions">
 				<?php echo $html->link(__('Ver', true), array('controller'=> 'planes', 'action'=>'view', $plan['id'])); ?>
-				<?php echo $html->link(__('Editar', true), array('controller'=> 'planes', 'action'=>'edit', $plan['id'])); ?>
-				<?php echo $html->link(__('Eliminar', true), array('controller'=> 'planes', 'action'=>'delete', $plan['id']), null, sprintf(__('Seguro que desea eliminar el Plan "%s"?', true), $plan['nombre'])); ?>
+				
 			</td>
 		</tr>
 	<?php endforeach; ?>
@@ -69,7 +71,7 @@
 
 	<div class="actions" >
 		<ul>
-			<li><?php echo $html->link(__('Nuevo Plan', true), array('controller'=> 'planes', 'action'=>'add/'. $instit['Instit']['id']));?> </li>
+			<li><?php echo $html->link(__('Nueva Oferta', true), array('controller'=> 'planes', 'action'=>'add/'. $instit['Instit']['id']));?> </li>
 		</ul>
 	</div>
 </div>

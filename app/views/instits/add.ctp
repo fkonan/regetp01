@@ -240,6 +240,6 @@ echo $html->css('edit_form',false);
 											  "selected" => date('Y')
 		));
 	?>
-<?php echo $form->end('Submit');?>
+<?php echo $form->end('Guardar');?>
 </div>
 
