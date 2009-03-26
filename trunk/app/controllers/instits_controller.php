@@ -29,7 +29,7 @@ class InstitsController extends AppController {
 			$this->Instit->create();
 			if ($this->Instit->save($this->data)) {
 				$this->Session->setFlash(__('Se ha guardado la Institución correctamente', true));
-				$this->redirect(array('action'=>'search_form'));
+				$this->redirect(array('action'=>'view/'.$this->Instit->id));
 			} else {
 				$this->Session->setFlash(__('La Institución no pudo ser guardada. Escriba nuevamente el campo incorrecto.', true));
 			}
@@ -50,7 +50,7 @@ class InstitsController extends AppController {
 		if (!empty($this->data)) {
 			if ($this->Instit->save($this->data)) {
 				$this->Session->setFlash(__('Se ha guardado la Institución correctamente', true));
-				$this->redirect(array('action'=>'search_form'));
+				$this->redirect(array("action"=>"view/$id"));
 			} else {
 				$this->Session->setFlash(__('La Institución no pudo ser guardada. Escriba nuevamente el campo incorrecto.', true));
 			}
@@ -58,9 +58,10 @@ class InstitsController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Instit->read(null, $id);
 		}
+		
 		$gestiones = $this->Instit->Gestion->find('list');
 		$dependencias = $this->Instit->Dependencia->find('list');
-		$tipoinstits = $this->Instit->Tipoinstit->find('list',array('conditions'=>'Tipoinstit.jurisdiccion_id = '.$this->data['Jurisdiccion']['id']));
+		$tipoinstits = $this->Instit->Tipoinstit->find('list',array('conditions'=>'Tipoinstit.jurisdiccion_id = '.$this->data['Instit']['jurisdiccion_id']));
 		$jurisdicciones = $this->Instit->Jurisdiccion->find('list');
 		$this->set(compact('gestiones','dependencias','tipoinstits','jurisdicciones'));
 		$this->rutaUrl_for_layout[] =array('name'=> $this->data['Instit']['nombre'],'link'=>'/Instits/view/'.$id );
@@ -299,7 +300,7 @@ class InstitsController extends AppController {
 			/**
 			 *     ES ANEXO 
 			 */
-			if($this->data['Instit']['esanexo']){
+			if(isset($this->data['Instit']['esanexo'])){
 				if((int)$this->data['Instit']['esanexo']== -1){
 					$basura = 1;
 				}else{				
@@ -326,7 +327,7 @@ class InstitsController extends AppController {
 			/**
 			 *     ACTIVO 
 			 */
-			if($this->data['Instit']['activo']){
+			if(isset($this->data['Instit']['activo'])){
 				if((int)$this->data['Instit']['activo']== -1){
 					$basura = 1;
 				}else{				

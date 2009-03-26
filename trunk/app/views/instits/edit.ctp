@@ -239,9 +239,9 @@
 		echo $form->input('ciclo_mod', array("type" => "select", 
 											  "options" => $ciclos,
 											  "label" => 'Modificación',
-											  "selected" => $this->data['Instit']['ciclo_mod']
+											  "selected" => date('Y')
 		));
 	?>
-<?php echo $form->end('Submit');?>
+<?php echo $form->end('Guardar');?>
 </div>
 

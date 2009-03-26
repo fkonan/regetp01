@@ -76,23 +76,19 @@
 	</ul>
 </div>
 <div class="related">
+	<table>
+		<tr>
+			<th><?php __('Ciclo'); ?></th>
+			<th><?php __('Matrícula'); ?></th>
+			<th><?php __('Secciones'); ?></th>
+			<th><?php __('Hs Taller'); ?></th>
+			<th class="actions"><?php __('');?></th>
+		</tr>
 	<?php if (!empty($anios)):
 	//reccorro por cada ciclo
 		while (list($key,$ciclo) = each($anios)){
 		$i = 0;
-		?>
-			
-			<h2><?php echo "Ciclo $key" ?></h2>
-			<table cellpadding = "0" cellspacing = "0">
-			<tr>
-				<th><?php __('Año'); ?></th>
-				<th><?php __('Etapa'); ?></th>
-				<th><?php __('Matrícula'); ?></th>
-				<th><?php __('Secciones'); ?></th>
-				<th><?php __('Hs Taller'); ?></th>
-				<th class="actions"><?php __('');?></th>
-			</tr>
-		<?php	
+		
 			foreach ($ciclo as $anio):
 				$class = null;
 				if ($i++ % 2 == 0) {
@@ -101,9 +97,7 @@
 			?>		
 		
 			<tr id="fila_plan_<?= $anio['ciclo_id'].'_'.$anio['anio']?>" <?php echo $class;?>>
-				
-				<td><?php echo $anio['anio'];?></td>
-				<td><?php echo $this->requestAction('/Etapas/dame_nombre/'.$anio['etapa_id']);?></td>
+				<th><?php echo $key //muestra el año, el ciclo ?></th>
 				<td><?php echo $anio['matricula'];?></td>
 				<td><?php echo $anio['secciones'];?></td>
 				<td><?php echo $anio['hs_taller'];?></td>
@@ -113,9 +107,9 @@
 				</td>
 			</tr>
 			<?php endforeach; //el que recorre los anios del ciclo	?>
-		</table>
+		
 		<?php }// fin del WHILE...el que recorre los ciclos, los años?>
-	
+	</table>
 <?php endif; ?>
 
 	<div class="actions">

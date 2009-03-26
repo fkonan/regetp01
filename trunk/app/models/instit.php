@@ -121,7 +121,7 @@ class Instit extends AppModel {
 				'rule' => VALID_YEAR,
 				'required' => false,
 				'allowEmpty' => true,
-				'message' => 'Debe ingresar un año de 4 dígitos.'
+				'message' => 'Debe ingresar un año de 4 dígitos. Si no conoce la fecha de creación, debe dejar el campo vacio.'
 			),
 		),
 		'direccion' => array(

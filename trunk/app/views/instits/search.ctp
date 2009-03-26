@@ -45,7 +45,8 @@ $paginator->options(array('url' => $url_conditions));
 </ul>
 
 
-<h2>Resultados</h2>
+<h2>Resultados (<? echo $paginator->counter(array('format' => __('Mostrando %current% Instituciones de %count% encontradas', true)
+)); ?>)</h2>
 <ul class="listado">
 <?php  
 foreach($instits as $instit){

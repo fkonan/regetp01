@@ -83,8 +83,12 @@ h2 {
 	margin-left: 0;
 	border-top-style: dashed;
 	border-top-color: #CEE3F6;
-	border-top-width: thin;
+	border-top-width: 1px;
 }
+H2.primero{
+	border: none;
+}
+
 h3 {
 	color: #045FB4;
 	padding-left: 1.1em;
@@ -379,7 +383,7 @@ form {
         margin: 0px;
 }
 fieldset {
-        border: 1px solid #ccc;
+        border: 1px solid #f0f7fc;
         margin-top: 10px;
         padding-top: 5px;
         padding-right: 10px;
@@ -415,7 +419,7 @@ fieldset fieldset div {
 form div {
         clear: both;
         margin-bottom: 0em;
-        padding: .5em;
+        padding: 0.25em;
         vertical-align: text-top;
 }
 form div.input {
