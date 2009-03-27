@@ -1,6 +1,6 @@
 <h1><?php  __('Oferta Educativa');?></h1>
 
-<h2 class="primero"><?= $instit['cue'].' - '.$instit['nombre'] ?></h2>
+<h2><?= $instit['cue'].' - '.$instit['nombre'] ?></h2>
 <div class="planes view">
 	<dl><?php $i = 0; $class = ' class="altrow"';?>
 

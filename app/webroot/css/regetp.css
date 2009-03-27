@@ -60,7 +60,7 @@ h1, h2, h3, h4 {
 
 h1 {
 	color: #045FB4;
-	font-size: 16pt;
+	font-size: 14pt;
 	font-weight: bolder;
 	font-family:Arial, Helvetica, sans-serif;
 	padding-top: 0.4em;
@@ -75,19 +75,16 @@ h2 {
 	color: #045FB4;
 	font-weight: bold;
 	font-family:Arial, Helvetica, sans-serif;
-	font-size: 13pt;
+	font-size: 12pt;
 	padding-left:0.9em;
 	margin-top: 0.9em;
 	margin-bottom: 1em;
 	margin-right: 0;	
 	margin-left: 0;
-	border-top-style: dashed;
-	border-top-color: #CEE3F6;
-	border-top-width: 1px;
-}
-H2.primero{
-	border: none;
-}
+	border-bottom-style: dashed;
+	border-bottom-color: #CEE3F6;
+	border-bottom-width: 1px;
+}	
 
 h3 {
 	color: #045FB4;
@@ -351,7 +348,7 @@ div.paging span a {
 
 /* Scaffold View */
 dl {
-	line-height: 1.82em;
+	line-height: 1.7em;
 	margin: 0em 0em;
 	width: 100%;
 }
