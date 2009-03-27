@@ -1,5 +1,6 @@
 <h1>Nueva Oferta Educativa</h1>
-<h2><?= $instit['cue'].' - '.$instit['nombre'] ?></h2>
+
+<h2><?php echo $instit['cue'].'-0'.$instit['anexo']." <br>".$instit['nombre']; ?></h2>
 
 <div class="planes form">
 <?php echo $form->create('Plan');?>

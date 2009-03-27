@@ -1,6 +1,7 @@
 <h1><?php  __('Oferta Educativa');?></h1>
 
-<h2><?= $instit['cue'].' - '.$instit['nombre'] ?></h2>
+<h2><?php echo $instit['cue'].'-0'.$instit['anexo']." <br>".$instit['nombre']; ?></h2>
+
 <div class="planes view">
 	<dl><?php $i = 0; $class = ' class="altrow"';?>
 
@@ -76,7 +77,7 @@
 	</ul>
 </div>
 <div class="related">
-	<?php if (!empty($anios)):
+	<?php if (!empty($anios)){
 	//reccorro por cada ciclo
 		while (list($key,$ciclo) = each($anios)){
 		$i = 0;
@@ -116,7 +117,10 @@
 		</table>
 		<?php }// fin del WHILE...el que recorre los ciclos, los años?>
 	
-<?php endif; ?>
+<?php }else{?>
+	<h2>No Hay Ciclos</h2>
+	<?
+} ?>
 
 	<div class="actions">
 		<ul>

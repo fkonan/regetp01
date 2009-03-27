@@ -522,39 +522,37 @@ p.error em {
 
 /*  Actions  */
 .actions{
-margin: 0px 0px 5px 0px;
+
 }
 div.actions ul {
+	margin: 0.5em 0em 1.7em 0em;
 	padding: 0px;
-	margin: 0px;
+	background-color: #f0f7fc;
+	list-style: none;
+	width: 100%;
+	float: left;
 }
-div.actions li{
-	margin-left: 0px;
-	background: #F0F7FC;
-	text-align: left;
-	font-weight: normal;
+
+div.actions ul li {
+	display: inline;
+} 
+
+div.actions ul li a:link, div.actions ul li a:visited {
+	background-color: transparent;
+	color: #045fb4;
+	padding: 2px 15px;
+	float: left;
 	text-decoration: none;
-	color: #045FB4;
-	display: block;
-	padding: 0px;
-	width: 90%;
+	border-left: solid 3px #fff;
 }
-div.actions A{
-	text-align: center;
-	font-weight: normal;
-	text-decoration: none;
-	color: #045FB4;
-	background: #F0F7FC;
-	display: block;
-	padding: 3px 6px;
-	width: 200px;
-	border-right: solid 4px #CCE3F6;
+
+
+div.actions ul li a:hover, div.actions ul li a:active{
+	background-color: #dbebf6;
+	border-left: solid 3px #045fb4;
+	color: #003D4C;
 }
-div.actions ul li a:hover {
-	font-weight: bolder;
-	background: #DBEBF6;
-	border-right: solid 4px #045FB4;
-}
+
 
 /* Related */
 div.related {
@@ -898,8 +896,11 @@ div.code-coverage-results span.result-good {
 	margin-bottom: 30px;
 }
 #listado_ofertas A{
+}
+#listado_ofertas A:HOVER{
 	color: #045FB4;
 }
+
 
 
 
