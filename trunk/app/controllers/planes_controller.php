@@ -77,11 +77,7 @@ class PlanesController extends AppController {
 		$this->rutaUrl_for_layout[] = array('name'=> $instit['nombre'],'link'=>'/Instits/view/'.$instit['id'] );
 		$this->rutaUrl_for_layout[] = array('name'=> 'Oferta Educativa','link'=>'/Planes/planes_relacionados/'.$instit['id'] );
 
-		//Si es FP mostrar la vista para FP, sino mostrar la vista por default (view)
-		if ($plan['Plan']['oferta_id']== 1){ // 1, es el numero de ID de una oferta FP
-			$this->render('view_fp');
 		}
-	}
 
 	function add($instit_id = null) {
 		if (!empty($this->data)) {
