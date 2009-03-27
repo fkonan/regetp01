@@ -1,0 +1,15 @@
+#summary One-sentence summary of this page.
+
+= Introduccion =
+
+A continuación voy a detallar varios puntos a resolver en la reunión próxima.
+
+
+= Detalles=
+
+
+  * _Resolucion 800x600_: ¿cambiar el diseño o dejarlo asi?
+  * _Institiciones y Tipo de Institucion_: Que hacer cuando estoy cargando un formulario con un nuevo tipo de institucion? como manejar eso?
+    * Propuestas: link, donde se abra un popup chiquito y que permita agregar un nuevo tipo de institucion. Lo ideal seria cargar con ajax el nuevo combo para no reiniciar la web
+  * _Tabla Planes y Anios_: ¿Tratar Matricula como la duracion hs semanas anio? NO deberia tratarse la duracion como la matricula. O sea quitar la duracion de la tabla Planes y meterlo en anios.
+  
