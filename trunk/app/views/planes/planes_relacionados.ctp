@@ -2,7 +2,7 @@
 	<h1><?php __('Oferta Educativa');?></h1>
 
 	
-	<h2 class="primero"><?php echo $instit['Instit']['cue'].'-0'.$instit['Instit']['anexo']." <br>".$instit['Instit']['nombre']; ?></h2>
+	<h2><?php echo $instit['Instit']['cue'].'-0'.$instit['Instit']['anexo']." <br>".$instit['Instit']['nombre']; ?></h2>
 	<dl>	
 	
 		<dt><?php __('Tipo de Institución'); ?></dt>
