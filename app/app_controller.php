@@ -35,8 +35,8 @@
  * @subpackage    cake.app
  */
 class AppController extends Controller {
-	var $helpers = array('Javascript');
-	
+	var $helpers = array('Javascript','Html', 'Form');
+	var $components = array('Auth');
 	
 	
 	
@@ -48,9 +48,67 @@ class AppController extends Controller {
 	// Sencillamente, es un menu de navegacion
 	var $rutaUrl_for_layout = array();	
 	
+	
+	
+	
+	/**
+	 * Before Render
+	 * Antes de mostrar la vista
+	 *
+	 */
 	function beforeRender(){
 		parent::beforeRender();
 		$this->set('rutaUrl_for_layout', $this->rutaUrl_for_layout);		
 	}
+	
+	
+	
+	/**
+	 * 
+	 * BeforeFilter
+	 * Antes de procesar el action del controlados
+	 *
+	 */
+	function beforeFilter(){		
+	 	//$this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');  
+     	$this->Auth->loginRedirect = array('controller' => 'pages', 'action' => 'home');
+     	$this->Auth->logoutRedirect= array('contoller'=>'pages', 'action'=>'home');  
+
+     	
+     	
+     	$this->Auth->authorize = 'controller'; 
+     	$this->Auth->loginError ='Usuario o Password Incorrectos';
+     	$this->Auth->authError = 'Debe registrarse para acceder a esta página';
+     	
+     	     	
+     	
+     	/**
+     	 * 
+     	 *   PERMISOS QUE SE LE DA AL USUARIO INVITADO
+     	 * 
+     	 */
+     	$this->Auth->allow('display');
+     	$this->Auth->allow(array('controller'=>'users','action'=>'add'));
+     	$this->Auth->allow(array('controller'=>'instits','action'=>'search'));
+     	$this->Auth->allow(array('controller'=>'instits','action'=>'search_form'));
+     	$this->Auth->allow(array('controller'=>'instits','action'=>'view'));
+     	$this->Auth->allow(array('controller'=>'planes','action'=>'view'));
+     	
+     	//Todos los RequiestActions deben estar permitidos para que vea el invitado
+     	$this->Auth->allow(array('controller'=>'tipoinstits'));
+     	
+     	
+     	/**
+     	 * 
+     	 *   PERMISOS QUE SE LE DA AL USUARIO REGISTRADO
+     	 * 
+     	 */
+		if($this->Session->check('Auth.User')){
+			$this->Auth->allow('*');
+		}
+     	
+	}	
+
+		
 }
 ?>

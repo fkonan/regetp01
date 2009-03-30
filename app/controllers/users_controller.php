@@ -2,7 +2,6 @@
 class UsersController extends AppController {
 
 	var $name = 'Users';
-	var $helpers = array('Html', 'Form');
 
 	function index() {
 		$this->User->recursive = 0;
@@ -19,12 +18,17 @@ class UsersController extends AppController {
 
 	function add() {
 		if (!empty($this->data)) {
-			$this->User->create();
-			if ($this->User->save($this->data)) {
-				$this->Session->setFlash(__('The User has been saved', true));
-				$this->redirect(array('action'=>'index'));
-			} else {
-				$this->Session->setFlash(__('The User could not be saved. Please, try again.', true));
+			if($this->Auth->password($this->data['User']['password_check'])==$this->data['User']['password']){
+				$this->User->create();
+				if ($this->User->save($this->data)) {
+					$this->Session->setFlash(__('Su usuario ha sido registrado', true));
+					$this->redirect(array('action'=>'index'));
+				} else {
+					$this->Session->setFlash(__('No se ha podio registrar. Por favor intente nuevamente.', true));
+				}
+			}
+			else{
+				$this->Session->setFlash('Los passwords no coinciden');
 			}
 		}
 	}
@@ -56,6 +60,24 @@ class UsersController extends AppController {
 			$this->Session->setFlash(__('User deleted', true));
 			$this->redirect(array('action'=>'index'));
 		}
+	}
+	
+	
+	
+	/**
+	 * 
+	 *   Cosas de Authentication
+	 * 
+	 */
+	function login(){
+		
+	}
+	
+	
+	function logout(){
+		$this->Auth->logout();
+		$this->Session->setFlash('Ha salido de su cuenta');
+		$this->redirect('/pages/home');
 	}
 
 }

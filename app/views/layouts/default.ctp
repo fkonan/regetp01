@@ -49,6 +49,7 @@
 				<h1>Registro</h1>
 				<ul>
 					<li><?php echo $html->link(__('Instituciones', true), '/instits/search_form'); ?></li>
+					<li><?php echo $html->link(__('Nueva Institución', true), '/instits/add'); ?></li>
 				</ul>
 				
 				<h1>Usuario</h1>				
