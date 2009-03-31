@@ -22,7 +22,7 @@ class UsersController extends AppController {
 				$this->User->create();
 				if ($this->User->save($this->data)) {
 					$this->Session->setFlash(__('Su usuario ha sido registrado', true));
-					$this->redirect(array('action'=>'index'));
+					$this->redirect(array('controller'=>'pages','action'=>'home'));
 				} else {
 					$this->Session->setFlash(__('No se ha podio registrar. Por favor intente nuevamente.', true));
 				}
@@ -70,7 +70,6 @@ class UsersController extends AppController {
 	 * 
 	 */
 	function login(){
-		
 	}
 	
 	

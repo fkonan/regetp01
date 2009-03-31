@@ -6,6 +6,7 @@
 		echo $form->input('username',array('label'=>'Nick'));
 		echo $form->input('nombre');
 		echo $form->input('apellido');
+		echo $form->input('role');
 		echo $form->input('password');
 		echo $form->input('password_check',array('label'=>'Reingrese Password','type'=>'password'));
 	?>

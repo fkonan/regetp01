@@ -250,6 +250,14 @@ ul, li {
 }
 #box_loguin a:HOVER{
 }
+#box_loguin INPUT{
+	height: 14px;
+	font-size: 12px;
+}
+#box_loguin INPUT[type="submit"]{
+	height: 25px;
+	padding: 2px;
+}
 
 
 /************************************************************************
