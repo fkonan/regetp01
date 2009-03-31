@@ -57,7 +57,6 @@ class AppController extends Controller {
 	 *
 	 */
 	function beforeRender(){
-		parent::beforeRender();
 		$this->set('rutaUrl_for_layout', $this->rutaUrl_for_layout);		
 	}
 	
@@ -69,19 +68,15 @@ class AppController extends Controller {
 	 * Antes de procesar el action del controlados
 	 *
 	 */
-	function beforeFilter(){		
-	 	//$this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');  
-     	$this->Auth->loginRedirect = array('controller' => 'pages', 'action' => 'home');
-     	$this->Auth->logoutRedirect= array('contoller'=>'pages', 'action'=>'home');  
-
-     	
-     	
+	function beforeFilter(){
+	 	$this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');  
+     	//$this->Auth->loginRedirect = array('controller' => 'pages', 'action' => 'home');
+     	//$this->Auth->logoutRedirect= array('contoller'=>'pages', 'action'=>'home');  
+   	
      	$this->Auth->authorize = 'controller'; 
      	$this->Auth->loginError ='Usuario o Password Incorrectos';
      	$this->Auth->authError = 'Debe registrarse para acceder a esta página';
-     	
-     	     	
-     	
+
      	/**
      	 * 
      	 *   PERMISOS QUE SE LE DA AL USUARIO INVITADO
@@ -89,26 +84,20 @@ class AppController extends Controller {
      	 */
      	$this->Auth->allow('display');
      	$this->Auth->allow(array('controller'=>'users','action'=>'add'));
-     	$this->Auth->allow(array('controller'=>'instits','action'=>'search'));
-     	$this->Auth->allow(array('controller'=>'instits','action'=>'search_form'));
-     	$this->Auth->allow(array('controller'=>'instits','action'=>'view'));
-     	$this->Auth->allow(array('controller'=>'planes','action'=>'view'));
-     	
-     	//Todos los RequiestActions deben estar permitidos para que vea el invitado
-     	$this->Auth->allow(array('controller'=>'tipoinstits'));
-     	
-     	
-     	/**
-     	 * 
-     	 *   PERMISOS QUE SE LE DA AL USUARIO REGISTRADO
-     	 * 
-     	 */
-		if($this->Session->check('Auth.User')){
-			$this->Auth->allow('*');
-		}
      	
 	}	
+	
 
+	function isAuthorized(){
+		/**
+     	 * 
+     	 *   PERMISOS QUE SE LE DA AL USUARIO EDITOR
+     	 * 
+     	 */
+		if($this->Auth->user('role')== 'editor'){	
+			return true;
+		}
+	}
 		
 }
 ?>
