@@ -69,35 +69,26 @@ class AppController extends Controller {
 	 *
 	 */
 	function beforeFilter(){
-	 	$this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');  
-     	//$this->Auth->loginRedirect = array('controller' => 'pages', 'action' => 'home');
-     	//$this->Auth->logoutRedirect= array('contoller'=>'pages', 'action'=>'home');  
+	 	//$this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');  
+     	$this->Auth->loginRedirect = array('controller' => 'pages', 'action' => 'home');
+     	$this->Auth->logoutRedirect= array('contoller'=>'pages', 'action'=>'home');  
    	
      	$this->Auth->authorize = 'controller'; 
      	$this->Auth->loginError ='Usuario o Password Incorrectos';
      	$this->Auth->authError = 'Debe registrarse para acceder a esta página';
 
+	
      	/**
      	 * 
-     	 *   PERMISOS QUE SE LE DA AL USUARIO INVITADO
+     	 *   PERMISOS QUE TIENEN    T O D O S
      	 * 
      	 */
      	$this->Auth->allow('display');
-     	$this->Auth->allow(array('controller'=>'users','action'=>'add'));
-     	
 	}	
-	
 
+	
 	function isAuthorized(){
-		/**
-     	 * 
-     	 *   PERMISOS QUE SE LE DA AL USUARIO EDITOR
-     	 * 
-     	 */
-		if($this->Auth->user('role')== 'editor'){	
-			return true;
-		}
+		return true;
 	}
-		
 }
 ?>
