@@ -36,8 +36,7 @@
  */
 class AppController extends Controller {
 	var $helpers = array('Javascript','Html', 'Form');
-	var $components = array('Auth');
-	
+	var $components = array('Auth', 'Acl');
 	
 	
 	//esta es una variable que sera mostrada en el layout
@@ -69,13 +68,17 @@ class AppController extends Controller {
 	 *
 	 */
 	function beforeFilter(){
-	 	//$this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');  
+		  //Configure AuthComponent    
+		$this->Auth->authorize = 'actions';    	 	
+		
+		$this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');  
      	$this->Auth->loginRedirect = array('controller' => 'pages', 'action' => 'home');
-     	$this->Auth->logoutRedirect= array('contoller'=>'pages', 'action'=>'home');  
+     	$this->Auth->logoutRedirect= array('display');  
    	
-     	$this->Auth->authorize = 'controller'; 
-     	$this->Auth->loginError ='Usuario o Password Incorrectos';
-     	$this->Auth->authError = 'Debe registrarse para acceder a esta página';
+     	$this->Auth->actionPath = 'controllers/';
+
+     	//$this->Auth->loginError ='Usuario o Password Incorrectos';
+     	//$this->Auth->authError = 'Debe registrarse para acceder a esta página';
 
 	
      	/**
@@ -87,8 +90,104 @@ class AppController extends Controller {
 	}	
 
 	
-	function isAuthorized(){
-		return true;
+
+	
+	
+	 /**
+	 * *
+	 * 
+	 *  ELIMINAR EN PRODUCCION
+	 *  ELIMINAR EN PRODUCCION	 *  ELIMINAR EN PRODUCCION
+	 *  ELIMINAR EN PRODUCCION	 *  ELIMINAR EN PRODUCCION
+	 *  ELIMINAR EN PRODUCCION	 *  ELIMINAR EN PRODUCCION
+	 *  ELIMINAR EN PRODUCCION	 *  ELIMINAR EN PRODUCCION
+	 *  ELIMINAR EN PRODUCCION	 *  ELIMINAR EN PRODUCCION
+	 *  ELIMINAR EN PRODUCCION
+	 *
+	 */	
+	/**
+	 * Rebuild the Acl based on the current controllers in the application 
+	 * 
+	 * Este codigo lo saque del blog de Mark Story
+	 * http://mark-story.com/posts/view/auth-and-acl-an-end-to-end-tutorial-pt-2
+	 * 
+	 * @return void 
+	 * 
+	 */    
+	function buildAcl() {        
+		$log = array();         
+		$aco =& $this->Acl->Aco;        
+		$root = $aco->node('controllers');        
+		if (!$root) {            
+			$aco->create(array('parent_id' => null, 'model' => null, 'alias' => 'controllers'));            
+			$root = $aco->save();            
+			$root['Aco']['id'] = $aco->id;             
+			$log[] = 'Created Aco node for controllers';        
+		} else {            
+			$root = $root[0];        
+		}            
+		
+		App::import('Core', 'File');        
+		$Controllers = Configure::listObjects('controller');        
+		$appIndex = array_search('App', $Controllers);        
+		if ($appIndex !== false ) {            
+			unset($Controllers[$appIndex]);        
+		}        
+		
+		$baseMethods = get_class_methods('Controller');        
+		$baseMethods[] = 'buildAcl';         
+		
+		// look at each controller in app/controllers        
+		foreach ($Controllers  as $ctrlName) {            
+			App::import('Controller', $ctrlName);            
+			$ctrlclass = $ctrlName . 'Controller';            
+			$methods = get_class_methods($ctrlclass);             
+			
+			// find / make controller node            
+			$controllerNode = $aco->node('controllers/'.$ctrlName);            
+			if (!$controllerNode) {                
+				$aco->create(array('parent_id' => $root['Aco']['id'], 'model' => null, 'alias' => $ctrlName));                
+				$controllerNode = $aco->save();                
+				$controllerNode['Aco']['id'] = $aco->id;                
+				$log[] = 'Created Aco node for '.$ctrlName;            
+			} else {                
+				$controllerNode = $controllerNode[0];            
+			}             
+			
+			//clean the methods. to remove those in Controller and private actions.            
+			foreach ($methods as $k => $method) {                
+				if (strpos($method, '_', 0) === 0) {                    
+					unset($methods[$k]);                    
+					continue;                
+				}                
+				if (in_array($method, $baseMethods)) {                    
+					unset($methods[$k]);                    
+					continue;                
+				}                
+				$methodNode = $aco->node('controllers/'.$ctrlName.'/'.$method);                
+				if (!$methodNode) {                    
+					$aco->create(array('parent_id' => $controllerNode['Aco']['id'], 'model' => null, 'alias' => $method));                    
+					$methodNode = $aco->save();                    
+					$log[] = 'Created Aco node for '. $method;                
+				}            
+			}        
+		}        
+		
+		debug($log);    
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 ?>

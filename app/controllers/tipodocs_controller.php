@@ -58,6 +58,15 @@ class TipodocsController extends AppController {
 		}
 	}
 	
+	
+	
+	/********************************************************************
+	 * 
+	 * 
+	 *  RequestAction
+	 * 
+	 * 
+	 */
 	/**
 	 * devuelve el nombre del Tipo de documento DNI, CI, etc
 	 *

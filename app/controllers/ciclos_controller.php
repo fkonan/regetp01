@@ -60,6 +60,11 @@ class CiclosController extends AppController {
 	
 	
 	
+	/**
+	 * 
+	 * 
+	 *  RequestAction
+	 */
 	function dame_ciclos(){
 		$this->Ciclo->recursive = -1;
 		return $this->Ciclo->find('list');
