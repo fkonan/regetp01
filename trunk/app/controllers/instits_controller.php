@@ -376,9 +376,15 @@ class InstitsController extends AppController {
 	
 	
 
-	
+	/********************************************************************
+	 * 
+	 * 
+	 *  RequestAction
+	 * 
+	 * 
+	 */
 	/**
-	 * Requestaction, me devuelve los datos relacionados con la Institucion
+	 * me devuelve los datos relacionados con la Institucion
 	 * me devuelve todos los registros
 	 *
 	 * @param $instit_id
@@ -402,7 +408,7 @@ class InstitsController extends AppController {
 	 *
 	 * @param $text
 	 */
-	function _convertir_para_busqueda_avanzada($text){		
+	private function _convertir_para_busqueda_avanzada($text){		
 		$text = strtolower($text);
 		$text = "%$text%";
 		$patron = array (

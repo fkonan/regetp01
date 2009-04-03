@@ -58,6 +58,14 @@ class EtapasController extends AppController {
 		}
 	}
 	
+	
+	
+	
+	/**
+	 * 
+	 * 
+	 *  RequestAction
+	 */
 	function dame_nombre($id = 0){
 		$this->Etapa->recursive = -1;
 		if (!$id) {

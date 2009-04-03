@@ -4,16 +4,7 @@ class TipoinstitsController extends AppController {
 	var $name = 'Tipoinstits';
 	var $helpers = array('Html', 'Form','Ajax');
 	
-	function get_name($id = 0){
-		if($id == 0){
-			return '';
-		}
-		else{
-			$this->Tipoinstit->recursive = -1;
-			$varaux = $this->Tipoinstit->read(null,$id);
-			return $varaux['Tipoinstit']['name'];
-		}
-	}
+
 
 	function index() {
 		$this->Tipoinstit->recursive = 0;
@@ -75,10 +66,12 @@ class TipoinstitsController extends AppController {
 	
 	
 	
-	/**
+	
+	/********************************************************************
 	 * 
-	 * Esta accion maneja las opciones del select
-	 * cuando es elegida una jurisdiccion
+	 * 
+	 *  RequestAction
+	 * 
 	 * 
 	 */
 	function ajax_select_form_por_jurisdiccion(){
@@ -101,5 +94,17 @@ class TipoinstitsController extends AppController {
 	         $this->render('ajax_select_form_por_jurisdiccion','ajax');
          }	
 	}
+
+	function get_name($id = 0){
+		if($id == 0){
+			return '';
+		}
+		else{
+			$this->Tipoinstit->recursive = -1;
+			$varaux = $this->Tipoinstit->read(null,$id);
+			return $varaux['Tipoinstit']['name'];
+		}
+	}
+
 }
 ?>

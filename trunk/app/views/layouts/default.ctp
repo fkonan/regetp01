@@ -50,9 +50,14 @@
 				<ul>
 					<li><?php echo $html->link(__('Instituciones', true), '/instits/search_form'); ?></li>
 					<li><?php echo $html->link(__('Nueva Institución', true), '/instits/add'); ?></li>
+
 				</ul>
 				
-				<h1>Usuario</h1>				
+				<h1>Usuario</h1>		
+				<ul>
+					<li><?php echo $html->link(__('Nuevo Grupo', true), '/groups/add'); ?></li>
+					<li><?php echo $html->link(__('Nuevo Usuario', true), '/users/add'); ?></li>
+				</ul>		
 				<?  echo $this->renderElement('boxLogin'); ?>
 				
 				<h1><?= __('Soporte Técnico')?></h1>
@@ -64,6 +69,7 @@
 			<div id="cuerpo">
 				<?  echo $this->renderElement('rutaUrl', array("ruta" => $rutaUrl_for_layout)); ?>
 				<?php $session->flash(); ?>
+				<? $session->flash('auth');?>
 				<?php echo $content_for_layout; ?>
 			</div>
 		</div>

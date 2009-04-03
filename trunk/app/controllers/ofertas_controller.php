@@ -58,6 +58,17 @@ class OfertasController extends AppController {
 		}
 	}
 	
+	
+	
+	
+	
+	/********************************************************************
+	 * 
+	 * 
+	 *  RequestAction
+	 * 
+	 * 
+	 */
 	/**
 	 * Request action
 	 * Devuelve el nombre de la oferta ID que se le pase
