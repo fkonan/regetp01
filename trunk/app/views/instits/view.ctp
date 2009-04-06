@@ -133,6 +133,12 @@
 	
 	<H2>Datos Adicionales</H2>
 	<dl>
+		<dt><?php __('Fecha Mod (<2009)'); ?></dt>
+		<dd>
+			<?php echo $instit['Instit']['fecha_mod']; ?>
+			&nbsp;
+		</dd>
+	
 		<dt><?php __('Actualización o Ingreso'); ?></dt>
 		<dd>
 			<?php echo $instit['Instit']['actualizacion']; ?>
@@ -152,7 +158,7 @@
 		</dd>
 		<dt><?php __('Modificación'); ?></dt>
 		<dd>
-			<?php echo ($instit['Instit']['ciclo_mod']>0)?$instit['Instit']['ciclo_mod']:''; ?>
+			<?php echo ($instit['Instit']['modified']>0)?$instit['Instit']['modified']:''; ?>
 			&nbsp;
 		</dd>
 	</dl>

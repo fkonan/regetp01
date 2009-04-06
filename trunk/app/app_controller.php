@@ -36,7 +36,7 @@
  */
 class AppController extends Controller {
 	var $helpers = array('Javascript','Html', 'Form');
-	var $components = array('Auth', 'Acl');
+	var $components = array('Auth');
 	
 	
 	//esta es una variable que sera mostrada en el layout
@@ -60,126 +60,77 @@ class AppController extends Controller {
 	}
 	
 	
-	
-	/**
-	 * 
-	 * BeforeFilter
-	 * Antes de procesar el action del controlados
-	 *
-	 */
+		
 	function beforeFilter(){
-		  //Configure AuthComponent    
-		$this->Auth->authorize = 'actions';    	 	
-		
-		$this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');  
-     	$this->Auth->loginRedirect = array('controller' => 'pages', 'action' => 'home');
-     	$this->Auth->logoutRedirect= array('display');  
-   	
-     	$this->Auth->actionPath = 'controllers/';
-
-     	//$this->Auth->loginError ='Usuario o Password Incorrectos';
-     	//$this->Auth->authError = 'Debe registrarse para acceder a esta página';
-
-	
-     	/**
-     	 * 
-     	 *   PERMISOS QUE TIENEN    T O D O S
-     	 * 
-     	 */
-     	$this->Auth->allow('display');
+		$this->Auth->loginError ='Usuario o Password Incorrectos';
+		$this->Auth->authError = 'Debe registrarse para acceder a esta página';
+		$this->Auth->logoutRedirect='/pages/home';
+		$this->Auth->allow('display','login','logout');
+		$this->Auth->authorize = 'controller'; 
 	}	
-
 	
-
-	
-	
-	 /**
-	 * *
-	 * 
-	 *  ELIMINAR EN PRODUCCION
-	 *  ELIMINAR EN PRODUCCION	 *  ELIMINAR EN PRODUCCION
-	 *  ELIMINAR EN PRODUCCION	 *  ELIMINAR EN PRODUCCION
-	 *  ELIMINAR EN PRODUCCION	 *  ELIMINAR EN PRODUCCION
-	 *  ELIMINAR EN PRODUCCION	 *  ELIMINAR EN PRODUCCION
-	 *  ELIMINAR EN PRODUCCION	 *  ELIMINAR EN PRODUCCION
-	 *  ELIMINAR EN PRODUCCION
-	 *
-	 */	
-	/**
-	 * Rebuild the Acl based on the current controllers in the application 
-	 * 
-	 * Este codigo lo saque del blog de Mark Story
-	 * http://mark-story.com/posts/view/auth-and-acl-an-end-to-end-tutorial-pt-2
-	 * 
-	 * @return void 
-	 * 
-	 */    
-	function buildAcl() {        
-		$log = array();         
-		$aco =& $this->Acl->Aco;        
-		$root = $aco->node('controllers');        
-		if (!$root) {            
-			$aco->create(array('parent_id' => null, 'model' => null, 'alias' => 'controllers'));            
-			$root = $aco->save();            
-			$root['Aco']['id'] = $aco->id;             
-			$log[] = 'Created Aco node for controllers';        
-		} else {            
-			$root = $root[0];        
-		}            
-		
-		App::import('Core', 'File');        
-		$Controllers = Configure::listObjects('controller');        
-		$appIndex = array_search('App', $Controllers);        
-		if ($appIndex !== false ) {            
-			unset($Controllers[$appIndex]);        
-		}        
-		
-		$baseMethods = get_class_methods('Controller');        
-		$baseMethods[] = 'buildAcl';         
-		
-		// look at each controller in app/controllers        
-		foreach ($Controllers  as $ctrlName) {            
-			App::import('Controller', $ctrlName);            
-			$ctrlclass = $ctrlName . 'Controller';            
-			$methods = get_class_methods($ctrlclass);             
+	function isAuthorized() {
+	switch ($this->Auth->user('role')) {
+		case 'admin':
+			$llAuth = true;
+			break;
+		case 'editor':
+			$llAuth = false;
+			if ($this->action == 'edit') {$llAuth = true;}
+			if ($this->action == 'add') {$llAuth = true;}
+			if ($this->action == 'view') {$llAuth = true;}
+			if ($this->name == 'Instits' && $this->action == 'search') {$llAuth = true;}
+			if ($this->name == 'Instits' && $this->action == 'search_form') {$llAuth = true;}
+			if ($this->name == 'Tipoinstits' && $this->action == 'ajax_select_form_por_jurisdiccion') {$llAuth = true;}
+			if ($this->name == 'Temas' && $this->action == 'verdetalle') {$llAuth = true;}
+			if ($this->name == 'Ofertas' && $this->action == 'add') {$llAuth = true;}		
+			if ($this->name == 'Instits' && $this->action == 'dame_datos') {$llAuth = true;}
+			if ($this->name == 'Ciclos' && $this->action == 'dame_ciclos') {$llAuth = true;}
+			if ($this->name == 'Etapas' && $this->action == 'dame_nombre') {$llAuth = true;}
+			if ($this->name == 'Instits' && $this->action == 'view') {$llAuth = true;}
+			if ($this->name == 'Anios' && $this->action == 'matricula_del_plan') {$llAuth = true;}
+			if ($this->name == 'Jurisdicciones' && $this->action == 'get_name') {$llAuth = true;}		
+			if ($this->name == 'Ofertas' && $this->action == 'dame_nombre') {$llAuth = true;}
+			if ($this->name == 'Ofertas' && $this->action == 'dame_abrev') {$llAuth = true;}
+			if ($this->name == 'Planes' && $this->action == 'planes_relacionados') {$llAuth = true;}			
+			if ($this->name == 'Tipodocs' && $this->action == 'tipodoc_nombre') {$llAuth = true;}
+			if ($this->name == 'Tipodocs' && $this->action == 'dame_tipodocs') {$llAuth = true;}
+			if ($this->name == 'Tipoinstits' && $this->action == 'get_name') {$llAuth = true;}
 			
-			// find / make controller node            
-			$controllerNode = $aco->node('controllers/'.$ctrlName);            
-			if (!$controllerNode) {                
-				$aco->create(array('parent_id' => $root['Aco']['id'], 'model' => null, 'alias' => $ctrlName));                
-				$controllerNode = $aco->save();                
-				$controllerNode['Aco']['id'] = $aco->id;                
-				$log[] = 'Created Aco node for '.$ctrlName;            
-			} else {                
-				$controllerNode = $controllerNode[0];            
-			}             
-			
-			//clean the methods. to remove those in Controller and private actions.            
-			foreach ($methods as $k => $method) {                
-				if (strpos($method, '_', 0) === 0) {                    
-					unset($methods[$k]);                    
-					continue;                
-				}                
-				if (in_array($method, $baseMethods)) {                    
-					unset($methods[$k]);                    
-					continue;                
-				}                
-				$methodNode = $aco->node('controllers/'.$ctrlName.'/'.$method);                
-				if (!$methodNode) {                    
-					$aco->create(array('parent_id' => $controllerNode['Aco']['id'], 'model' => null, 'alias' => $method));                    
-					$methodNode = $aco->save();                    
-					$log[] = 'Created Aco node for '. $method;                
-				}            
-			}        
-		}        
-		
-		debug($log);    
+			break;
+		case 'invitado':
+//			$llAuth = false;
+			$llAuth = false;
+			if ($this->action == 'view') {$llAuth = true;}
+			if ($this->name == 'Instits' && $this->action == 'search') {$llAuth = true;}
+			if ($this->name == 'Instits' && $this->action == 'search_form') {$llAuth = true;}
+			if ($this->name == 'Tipoinstits' && $this->action == 'ajax_select_form_por_jurisdiccion') {$llAuth = true;}			
+			if ($this->name == 'Temas' && $this->action == 'verdetalle') {$llAuth = true;}
+			if ($this->name == 'Ofertas' && $this->action == 'add') {$llAuth = true;}			
+			if ($this->name == 'Instits' && $this->action == 'dame_datos') {$llAuth = true;}
+			if ($this->name == 'Ciclos' && $this->action == 'dame_ciclos') {$llAuth = true;}
+			if ($this->name == 'Etapas' && $this->action == 'dame_nombre') {$llAuth = true;}
+			if ($this->name == 'Instits' && $this->action == 'view') {$llAuth = true;}
+			if ($this->name == 'Anios' && $this->action == 'matricula_del_plan') {$llAuth = true;}
+			if ($this->name == 'Jurisdicciones' && $this->action == 'get_name') {$llAuth = true;}		
+			if ($this->name == 'Ofertas' && $this->action == 'dame_nombre') {$llAuth = true;}
+			if ($this->name == 'Ofertas' && $this->action == 'dame_abrev') {$llAuth = true;}
+			if ($this->name == 'Planes' && $this->action == 'planes_relacionados') {$llAuth = true;}
+			if ($this->name == 'Tipodocs' && $this->action == 'tipodoc_nombre') {$llAuth = true;}
+			if ($this->name == 'Tipodocs' && $this->action == 'dame_tipodocs') {$llAuth = true;}
+			if ($this->name == 'Tipoinstits' && $this->action == 'get_name') {$llAuth = true;}
+			break;
+		}
+		if ($llAuth == true) {
+			return true;
+		} else {
+			$this->Session->setFlash('No tiene permisos para acceder a esta opción.', true);
+			$this->redirect('/pages/home');
+			return false;
+		}
 	}
-	
-	
-	
-	
-	
+		
+		
 	
 	
 	

@@ -4,10 +4,10 @@ class UsersController extends AppController {
 	var $name = 'Users';
 
 	
-	function beforeFilter() {    
-		parent::beforeFilter();     
-		$this->Auth->allowedActions = array('*');
-	}
+//	function beforeFilter() {    
+//		parent::beforeFilter();     
+//		$this->Auth->allowedActions = array('*');
+//	}
 	
 	
 	function index() {
@@ -38,7 +38,6 @@ class UsersController extends AppController {
 				$this->Session->setFlash('Los passwords no coinciden');
 			}
 		}
-		$this->set('grupos',$this->User->Group->find('list'));
 	}
 
 	function edit($id = null) {
@@ -127,6 +126,8 @@ class UsersController extends AppController {
 		$this->Acl->allow($group,'controllers/Etapas/dame_nombre');
 		
 		$this->Acl->allow($group,'controllers/Instits/view');
+		
+		$this->Acl->allow($group,'controllers/Anios/matricula_del_plan');
 		
 		$this->Acl->allow($group,'controllers/Jurisdicciones/get_name');
 		$this->Acl->allow($group,'controllers/Ofertas/dame_nombre');

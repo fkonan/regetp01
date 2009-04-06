@@ -361,7 +361,6 @@ class InstitsController extends AppController {
 	    
 	    //si se encontro solo 1 institucion, ir directame te a la vista de esa institucion
 	    if(sizeof($pagin) == 1){
-	    	$this->Session->setFlash('Mostrando el único resultado que trajo la consulta');
 	    	$this->redirect('view/'.$pagin[0]['Instit']['id']);	    	
 	    }
 	    

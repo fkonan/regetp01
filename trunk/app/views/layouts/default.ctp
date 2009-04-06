@@ -55,10 +55,15 @@
 				
 				<h1>Usuario</h1>		
 				<ul>
+					<? if ($session->check('Auth.User')){ ?>
+						<? echo "Hola <B>".$session->read('Auth.User.username')."</b>";?>
+						<li><?php echo $html->link('Salir','/users/logout'); ?></li>
+					<? }else{ ?>
+						<li><?php echo $html->link('Login','/users/login'); ?></li>
+					<? } ?>
 					<li><?php echo $html->link(__('Nuevo Grupo', true), '/groups/add'); ?></li>
 					<li><?php echo $html->link(__('Nuevo Usuario', true), '/users/add'); ?></li>
-				</ul>		
-				<?  echo $this->renderElement('boxLogin'); ?>
+				</ul>
 				
 				<h1><?= __('Soporte Técnico')?></h1>
 				<ul>
