@@ -7,7 +7,6 @@
 		echo $form->input('nombre');
 		echo $form->input('apellido');
 		echo $form->input('role');
-		echo $form->input('group_id',array('type'=>'select','options'=>$grupos, array('empty'=>array(1=>'Invitados'))));
 		echo $form->input('password');
 		echo $form->input('password_check',array('label'=>'Reingrese Password','type'=>'password'));
 	?>
