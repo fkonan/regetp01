@@ -45,24 +45,16 @@
 			
 		</div>
 		<div id="content">
-			<div id="menu">			
+			<div id="menu">	
+			
+				<h1>Usuario</h1>	
+					<?  echo $this->renderElement('boxLogin'); ?>
+					
 				<h1>Registro</h1>
 				<ul>
 					<li><?php echo $html->link(__('Instituciones', true), '/instits/search_form'); ?></li>
 					<li><?php echo $html->link(__('Nueva Institución', true), '/instits/add'); ?></li>
 
-				</ul>
-				
-				<h1>Usuario</h1>		
-				<ul>
-					<? if ($session->check('Auth.User')){ ?>
-						<? echo "Hola <B>".$session->read('Auth.User.username')."</b>";?>
-						<li><?php echo $html->link('Salir','/users/logout'); ?></li>
-					<? }else{ ?>
-						<li><?php echo $html->link('Login','/users/login'); ?></li>
-					<? } ?>
-					<li><?php echo $html->link(__('Nuevo Grupo', true), '/groups/add'); ?></li>
-					<li><?php echo $html->link(__('Nuevo Usuario', true), '/users/add'); ?></li>
 				</ul>
 				
 				<h1><?= __('Soporte Técnico')?></h1>

@@ -3,7 +3,7 @@
 	//pr($session->read());
 	// If the session info hasn't been set...
 	if ($session->check('Auth.User')){
-		echo "<b>Hola ".$session->read('Auth.User.username')."</b>";
+		echo "Hola <b>".$session->read('Auth.User.username')."!</b>";
 		echo $html->link('Salir','/users/logout');
 	}else{
 	if($session->check('Message.auth')) $session->flash('auth');
