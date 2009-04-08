@@ -77,6 +77,11 @@ class UsersController extends AppController {
 	 * 
 	 */
 	function login(){
+		pr($this->Session);
+		if($this->Auth->loginAction == '/Anio/view' || $this->Auth->loginAction == '/Anio/edit' || $this->Auth->loginAction == '/Anio/add' ){
+			$this->layout = 'popup';
+		}
+		
 	}
 	
 	
@@ -86,64 +91,5 @@ class UsersController extends AppController {
 	}
 	
 	
-	
-	/**
-	 * *
-	 * 
-	 *  ELIMINAR EN PRODUCCION
-	 *  ELIMINAR EN PRODUCCION	 *  ELIMINAR EN PRODUCCION
-	 *  ELIMINAR EN PRODUCCION	 *  ELIMINAR EN PRODUCCION
-	 *  ELIMINAR EN PRODUCCION	 *  ELIMINAR EN PRODUCCION
-	 *  ELIMINAR EN PRODUCCION	 *  ELIMINAR EN PRODUCCION
-	 *  ELIMINAR EN PRODUCCION	 *  ELIMINAR EN PRODUCCION
-	 *  ELIMINAR EN PRODUCCION
-	 *
-	 * 
-	 *  Esta funcion se la copie a Mark Story en su blog
-	 * http://mark-story.com/posts/view/auth-and-acl-an-end-to-end-tutorial-pt-2
-	 * 
-	 * Es simplemente para dar permisos a los usuarios
-	 * 
-	 */
-	function initDB() {    
-		$group =& $this->User->Group;    
-		
-		
-		//allow editor para hacer todo    
-		$group->id = 4;         
-		$this->Acl->allow($group, 'controllers');     
-		
-		//allow editor para hacer todo 
-		$group->id = 1;    
-		$this->Acl->deny($group, 'controllers');    
-		$this->Acl->allow($group, 'controllers/Instits/search_form');    
-		
-		$this->Acl->allow($group, 'controllers/Instits/search'); 
-
-		$this->Acl->allow($group,'controllers/Instits/dame_datos');
-		
-		$this->Acl->allow($group,'controllers/Ciclos/dame_ciclos');
-		$this->Acl->allow($group,'controllers/Etapas/dame_nombre');
-		
-		$this->Acl->allow($group,'controllers/Instits/view');
-		
-		$this->Acl->allow($group,'controllers/Anios/matricula_del_plan');
-		
-		$this->Acl->allow($group,'controllers/Jurisdicciones/get_name');
-		$this->Acl->allow($group,'controllers/Ofertas/dame_nombre');
-		$this->Acl->allow($group,'controllers/Ofertas/dame_abrev');
-		
-		$this->Acl->allow($group,'controllers/Planes/planes_relacionados');
-		
-		$this->Acl->allow($group,'controllers/Tipodocs/tipodoc_nombre');
-		$this->Acl->allow($group,'controllers/Tipodocs/dame_tipodocs');
-		
-		$this->Acl->allow($group, 'controllers/Tipoinstits/ajax_select_form_por_jurisdiccion');
-		$this->Acl->allow($group, 'controllers/Tipoinstits/get_name');
-		
-		debug("LISSTO");
-		//die();
-	}
-
 }
 ?>

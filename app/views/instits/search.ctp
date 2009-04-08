@@ -105,7 +105,7 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 			<div class="instit_atributte"><b>Localidad: </b><?= $instit['Instit']['localidad'] ?></div>
 		</div>
 		<div class="instit_link_list">
-			<?=$html->link('Ver Datos',array('controller'=> 'Instits', 'action'=>'view/'.$instit['Instit']['id'])) ?>
+			<?=$html->link('+ Info',array('controller'=> 'Instits', 'action'=>'view/'.$instit['Instit']['id'])) ?>
 		</div>
 		
 	</li>

@@ -25,7 +25,7 @@ class Plan extends AppModel {
 								'dependent' => false,
 								'conditions' => '',
 								'fields' => '',
-								'order' => array('ciclo_id ASC','anio ASC'),
+								'order' => array('ciclo_id ASC','etapa_id ASC, anio ASC'),
 								'limit' => '',
 								'offset' => '',
 								'exclusive' => '',
@@ -59,23 +59,7 @@ class Plan extends AppModel {
 				//'on' => 'create', // or: 'update'
 				'message' => 'Debe ingresar formato de año, con 4 dígitos.'	
 			)
-		),
-		'ciclo_mod' => array(
-			'notEmpty'=> array(
-				'rule' => VALID_NOT_EMPTY,
-				'required' => true,
-				'allowEmpty' => false,
-				//'on' => 'create', // or: 'update'
-				'message' => 'Debe ingresar la fecha de modificación.'	
-			),
-			'year'=> array(
-				'rule' => VALID_YEAR,
-				'required' => true,
-				'allowEmpty' => false,
-				//'on' => 'create', // or: 'update'
-				'message' => 'Debe ingresar formato de año, con 4 dígitos.'	
-			)
-		),
+		)
 	);
 
 }

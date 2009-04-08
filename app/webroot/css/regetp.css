@@ -839,8 +839,17 @@ div.code-coverage-results span.result-good {
 .instit_link_list{
 	font-size: small;
 	text-align: right;
-	margin-top: -1em;
+	margin-top: -3em;
+	float: right;
 }
+.instit_link_list A{
+	text-decoration: none;
+}
+.instit_link_list A:HOVER{
+	text-decoration: underline;
+	color: #084b8a;
+}
+
 .listado a{
 	background-color: transparent;
 }
