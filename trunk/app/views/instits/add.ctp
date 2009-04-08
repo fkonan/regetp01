@@ -234,11 +234,7 @@ echo $html->css('edit_form',false);
 											  "options" => $ciclos,'label'=>'Alta',
 											  "selected" => date('Y')			
 		));
-		echo $form->input('ciclo_mod', array("type" => "select", 
-											  "options" => $ciclos,
-											  "label" => 'Modificación',
-											  "selected" => date('Y')
-		));
+		
 	?>
 <?php echo $form->end('Guardar');?>
 </div>

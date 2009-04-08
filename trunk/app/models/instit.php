@@ -210,22 +210,6 @@ class Instit extends AppModel {
 				'message' => 'Debe ingresar formato de año, con 4 dígitos.'	
 			)
 		),
-		'ciclo_mod' => array(
-			'notEmpty'=> array(
-				'rule' => VALID_NOT_EMPTY,
-				'required' => true,
-				'allowEmpty' => false,
-				//'on' => 'create', // or: 'update'
-				'message' => 'Debe ingresar la fecha de modificación.'	
-			),
-			'year'=> array(
-				'rule' => VALID_YEAR,
-				'required' => true,
-				'allowEmpty' => false,
-				//'on' => 'create', // or: 'update'
-				'message' => 'Debe ingresar formato de año, con 4 dígitos.'	
-			)
-		),
 		'observacion' => array(
 			'notEmpty' => array( // or: array('ruleName', 'param1', 'param2' ...)
 				'rule' => array('maxLength',100),

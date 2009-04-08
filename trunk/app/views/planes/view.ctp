@@ -47,11 +47,7 @@
 			<?php echo $plan['Plan']['duracion_anios']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Matrícula'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $matricula[$plan['Plan']['id']] ?>
-			&nbsp;
-		</dd>
+		
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Observación'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $plan['Plan']['observacion']; ?>
@@ -64,7 +60,7 @@
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Modificación'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<? echo $plan['Plan']['ciclo_mod']?$plan['Plan']['ciclo_mod']:''; ?>
+			<? echo $plan['Plan']['modified']?date("d/m/Y",strtotime($plan['Plan']['modified'])):''; ?>
 			&nbsp;
 		</dd>
 
@@ -94,6 +90,8 @@
 				<th class="actions"><?php __('');?></th>
 			</tr>
 		<?php	
+			$tot_matricula = 0;
+			$tot_secciones = 0;
 			foreach ($ciclo as $anio):
 				$class = null;
 				if ($i++ % 2 == 0) {
@@ -105,8 +103,8 @@
 				
 				<td><?php echo $anio['anio'];?></td>
 				<td><?php echo $this->requestAction('/Etapas/dame_nombre/'.$anio['etapa_id']);?></td>
-				<td><?php echo $anio['matricula'];?></td>
-				<td><?php echo $anio['secciones'];?></td>
+				<td><?php echo $anio['matricula'];$tot_matricula += $anio['matricula']; ?></td>
+				<td><?php echo $anio['secciones'];$tot_secciones += $anio['secciones'];?></td>
 				<td><?php echo $anio['hs_taller'];?></td>
 				<td class="actions">
 					<a href="<?= $html->url(array('controller'=> 'anios', 'action'=>'edit/'.$anio['id']))?>" onClick="window.open('<?= $html->url(array('controller'=> 'anios', 'action'=>'edit/'.$anio['id']))?>','_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=310,height=380'); return false;">Editar</a>
@@ -114,6 +112,14 @@
 				</td>
 			</tr>
 			<?php endforeach; //el que recorre los anios del ciclo	?>
+			<tr <?php echo $class;?> >				
+				<td style="border-top: 1px silver solid;"><?php echo '';?></td>
+				<td style="border-top: 1px silver solid;"><?php echo '';?></td>
+				<td style="border-top: 1px silver solid;"><b><?php echo $tot_matricula;?></b></td>
+				<td style="border-top: 1px silver solid;"><b><?php echo $tot_secciones;?></b></td>
+				<td style="border-top: 1px silver solid;"><?php echo '';?></td>
+				<td class="actions" style="border-top: 1px silver solid;"><?php echo '';?></td>
+			</tr>
 		</table>
 		<?php }// fin del WHILE...el que recorre los ciclos, los años?>
 	

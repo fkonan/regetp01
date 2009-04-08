@@ -135,7 +135,7 @@
 	<dl>
 		<dt><?php __('Fecha Mod (<2009)'); ?></dt>
 		<dd>
-			<?php echo $instit['Instit']['fecha_mod']; ?>
+			<?php echo ($instit['Instit']['fecha_mod']>0)?date("d/m/Y",strtotime($instit['Instit']['fecha_mod'])):''; ?>
 			&nbsp;
 		</dd>
 	
@@ -158,7 +158,9 @@
 		</dd>
 		<dt><?php __('Modificación'); ?></dt>
 		<dd>
-			<?php echo ($instit['Instit']['modified']>0)?$instit['Instit']['modified']:''; ?>
+			<?php //echo ($instit['Instit']['modified']>0)?$instit['Instit']['modified']:''; ?>
+			 
+			<?php echo ($instit['Instit']['modified']>0)?date("d/m/Y",strtotime($instit['Instit']['modified'])):''; ?>
 			&nbsp;
 		</dd>
 	</dl>

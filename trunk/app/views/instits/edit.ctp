@@ -236,11 +236,7 @@
 											  "options" => $ciclos,'label'=>'Alta',
 											  "selected" => $this->data['Instit']['ciclo_alta']			
 		));
-		echo $form->input('ciclo_mod', array("type" => "select", 
-											  "options" => $ciclos,
-											  "label" => 'Modificación',
-											  "selected" => date('Y')
-		));
+		
 	?>
 <?php echo $form->end('Guardar');?>
 </div>
