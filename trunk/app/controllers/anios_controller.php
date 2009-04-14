@@ -126,5 +126,6 @@ class AniosController extends AppController {
 		}
 		return $aux_vec;
 	}
+	
 }
 ?>

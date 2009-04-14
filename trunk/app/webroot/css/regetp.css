@@ -246,11 +246,9 @@ ul, li {
 #box_loguin a:HOVER{
 }
 #box_loguin INPUT{
-	height: 14px;
 	font-size: 12px;
 }
 #box_loguin INPUT[type="submit"]{
-	height: 25px;
 	padding: 2px;
 }
 
@@ -498,6 +496,7 @@ div.message {
 	font-size: 140%;
 	font-weight: bold;
 	margin: 1em 0;
+	text-align: center;
 }
 div.error-message {
 	clear: both;

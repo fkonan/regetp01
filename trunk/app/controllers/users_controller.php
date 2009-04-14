@@ -77,7 +77,6 @@ class UsersController extends AppController {
 	 * 
 	 */
 	function login(){
-		pr($this->Session);
 		if($this->Auth->loginAction == '/Anio/view' || $this->Auth->loginAction == '/Anio/edit' || $this->Auth->loginAction == '/Anio/add' ){
 			$this->layout = 'popup';
 		}
