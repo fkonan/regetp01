@@ -61,8 +61,7 @@
 			<td><?php echo $plan['sector'];?></td>
 			<td><?php echo $v_plan_matricula[$i-1][$plan['id']];?></td>
 			<td class="actions">
-				<?php echo $html->link(__('Ver', true), array('controller'=> 'planes', 'action'=>'view', $plan['id'])); ?>
-				
+				<a href="#Ver">Ver</a>
 			</td>
 		</tr>
 	<?php endforeach; ?>

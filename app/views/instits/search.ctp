@@ -69,10 +69,20 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 	?>
 	
 	<? 
+		//esto es porque ramiro quiere tratar a las escuelas que pertenecen a un ciclo por iguak
+		// por ahora el criterio es hasta Julio (fecha_hasta)
+		// lo que quiere decir que los formularios recibidos hasta julio, entran
+		// dentro del mismo ciclo
+		// por ahora esto no tiene utilidad
+		// pero la idea es que mediante CSS se agregu algun colorcito a las instits
+		// que fueron actualizadas para el ciclo actual
 		$año_actual = date("Y");
 		$fecha_hasta = "$año_actual-07-21"; //hasta julio
-		$fecha_desde = "$año_actual-01-01"; //desde enero     
-		//echo "alalalal------->>_>_>_->_>_-<->_-> $fecha_hasta y fecha mod:::".$instit['Instit']['fecha_mod'];
+		$fecha_desde = "$año_actual-01-01"; //desde enero 
+		
+		
+		
+		
 		
 		
 		//inicializo la clase CSS de la institucion
@@ -105,9 +115,8 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 			<div class="instit_atributte"><b>Localidad: </b><?= $instit['Instit']['localidad'] ?></div>
 		</div>
 		<div class="instit_link_list">
-			<?=$html->link('+ Info',array('controller'=> 'Instits', 'action'=>'view/'.$instit['Instit']['id'])) ?>
-		</div>
-		
+			<a href="#MasInfo">+ Info</a>
+		</div>		
 	</li>
 	
 		<?

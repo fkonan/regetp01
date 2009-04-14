@@ -124,7 +124,12 @@ class AppController extends Controller {
 		if ($llAuth == true) {
 			return true;
 		} else {
+			
 			$this->Session->setFlash('No tiene permisos para acceder a esta opción.', true);
+			
+			if ($this->name == 'Anios' && ($this->action == 'edit' || $this->action == 'add')){
+				$this->redirect('/pages/forbidden');
+			}
 			$this->redirect('/pages/home');
 			return false;
 		}

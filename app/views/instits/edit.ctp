@@ -5,6 +5,7 @@
 	<?php
 		echo $form->input('id');	
 
+
 		/**
 		 *    ACTIVO
 		 */	
@@ -35,6 +36,35 @@
 
 		
 		/**
+		 *    GESTION
+		 */	
+		echo $form->input('gestion_id',array('label'=>'Gestión'));
+		
+		/**
+		 *    DEPENDENCIA
+		 */	
+		echo $form->input('dependencia_id');
+		
+		
+		/**
+		 *    JURISDICCION 
+		 * 			Y 
+		 * 	TIPO DE INSTITUCION
+		 */	
+		$meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
+		echo $form->input('jurisdiccion_id', array('empty' => array('0'=>'Todas'),'id'=>'jurisdiccion_id','label'=>'Jurisdicción','after'=>$meter));		
+		echo $form->input('tipoinstit_id', array('empty' => 'Todas','type'=>'select','label'=>'Tipo De Institución','after'=> '<br /><cite>Para activar este campo, seleccione primero una jurisdicción</cite>'));
+		echo $ajax->observeField('jurisdiccion_id',
+                                   array(  	'url' => '/tipoinstits/ajax_select_form_por_jurisdiccion',
+                                   			//'controller' => 'TipoInstits',
+                                   			//'action' => 'ajax_select_form_por_jurisdiccion',
+		                                   	'update'=>'InstitTipoinstitId',
+		                                   	'loading'=>'$("ajax_indicator").show();$("InstitTipoinstitId").disable()',
+		                                   	'complete'=>'$("ajax_indicator").hide();$("InstitTipoinstitId").enable()',
+		                                   	'onChange'=>true
+                                   ));  
+         		
+		/**
 		 *    NOMBRE
 		 */	
 		echo $form->input('nombre');
@@ -49,15 +79,6 @@
 		));		
 			
 		
-		/**
-		 *    GESTION
-		 */	
-		echo $form->input('gestion_id',array('label'=>'Gestión'));
-		
-		/**
-		 *    DEPENDENCIA
-		 */	
-		echo $form->input('dependencia_id');
 		
 		
 		/**
@@ -86,34 +107,17 @@
 		/**
 		 *    DEPTO
 		 */	
-		echo $form->input('depto',array('label'=>array('class'=>'input_label','text'=>'Departamento'),
+		echo $form->input('depto',array('label'=>array('class'=>'input_label'),
 										'class' => 'input_text_peque'
 		));
 		
 		
-		/**
-		 *    JURISDICCION 
-		 * 			Y 
-		 * 	TIPO DE INSTITUCION
-		 */	
-		$meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
-		echo $form->input('jurisdiccion_id', array('empty' => array('0'=>'Todas'),'id'=>'jurisdiccion_id','label'=>'Jurisdicción','after'=>$meter));		
-		echo $form->input('tipoinstit_id', array('empty' => 'Todas','type'=>'select','label'=>'Tipo De Institución'));
-		echo $ajax->observeField('jurisdiccion_id',
-                                   array(  	'url' => '/tipoinstits/ajax_select_form_por_jurisdiccion',
-                                   			//'controller' => 'TipoInstits',
-                                   			//'action' => 'ajax_select_form_por_jurisdiccion',
-		                                   	'update'=>'InstitTipoinstitId',
-		                                   	'loading'=>'$("ajax_indicator").show();$("InstitTipoinstitId").disable()',
-		                                   	'complete'=>'$("ajax_indicator").hide();$("InstitTipoinstitId").enable()',
-		                                   	'onChange'=>true
-                                   ));  
-                                   
+		                          
                                    
 		/**
 		 *    CODIGO POSTAL
 		 */							
-		echo $form->input('cp',array('label'=>array('class'=>'input_label','text'=>'CP'),
+		echo $form->input('cp',array('label'=>array('class'=>'input_label'),
 									 'class' => 'input_text_peque'
 		));
 		
@@ -128,12 +132,13 @@
 		/**
 		 *    WEB Y MAIL
 		 */	
-		echo $form->input('web',array('label'=>array('class'=>'input_label'),
-									  'class' => 'input_text_peque'));
 		echo $form->input('mail',array('label'=>array('text'=> 'E-Mail',
 													  'class'=>'input_label'),
 									   'class' => 'input_text_peque'
 		));	
+		echo $form->input('web',array('label'=>array('class'=>'input_label'),
+									  'class' => 'input_text_peque'));
+		
 		
 		
 		

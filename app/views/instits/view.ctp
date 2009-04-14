@@ -5,13 +5,7 @@
 <h1><?php echo $instit['Instit']['cue'].'-0'.$instit['Instit']['anexo']." <br>".$instit['Instit']['nombre']; ?></h1>
 
 	<dl>
-		
-		<dt><?php __('Tipo de Institución'); ?></dt>
-		<dd>
-			<?php echo $instit['Tipoinstit']['name']; ?>
-			&nbsp;
-		</dd>
-		
+				
 		<dt ><?php __('Gestión'); ?></dt>
 		<dd>
 			<?php echo $instit['Gestion']['name']; ?>
@@ -30,7 +24,11 @@
 			&nbsp;
 		</dd>
 		
-		
+		<dt><?php __('Tipo de Institución'); ?></dt>
+		<dd>
+			<?php echo $instit['Tipoinstit']['name']; ?>
+			&nbsp;
+		</dd>
 		
 		<dt><?php __('Nº de Institución'); ?></dt>
 		<dd>
@@ -51,17 +49,20 @@
 			<?php echo $instit['Instit']['direccion']; ?>
 			&nbsp;
 		</dd>
-		<dt><?php __('Departamento'); ?></dt>
-		<dd>
-			<?php echo $instit['Instit']['depto']; ?>
-			&nbsp;
-		</dd>
+		
 		<dt><?php __('Localidad'); ?></dt>
 		<dd>
 			<?php echo $instit['Instit']['localidad']; ?>
 			&nbsp;
 		</dd>
-		<dt><?php __('CP'); ?></dt>
+		
+		<dt><?php __('Departamento'); ?></dt>
+		<dd>
+			<?php echo $instit['Instit']['depto']; ?>
+			&nbsp;
+		</dd>
+		
+		<dt><?php __('Código Postal'); ?></dt>
 		<dd>
 			<?php echo $instit['Instit']['cp']; ?>
 			&nbsp;

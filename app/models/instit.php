@@ -53,20 +53,20 @@ class Instit extends AppModel {
 				'required' => true,
 				'allowEmpty' => false,
 				//'on' => 'create', // or: 'update'
-				'message' => 'El CUE no puede quedar vacio.'
+				'message' => 'El CUE no puede quedar vacío.'
 			),
 			'number' => array(
 				'rule' => VALID_NUMBER,
 				'required' => true,
 				'allowEmpty' => false,
-				'message' => 'Debe ingresar un valor numéricos para el CUE.'
+				'message' => 'Debe ingresar un valor numérico para el CUE.'
 			
 			),
 			'between' => array(
 				'rule' => array('between','6','7'),
 				'required' => true,
 				'allowEmpty' => false,
-				'message' => 'El cue esta compuesto por 6 o 7 dígitos. La cantidad ingresada es incorrecta. Es de la forma: JJCCCCC (J= Jurisdicción; C= Cue).'
+				'message' => 'El CUE debe ser de 6 ó 7 dígitos. No es necesario el cero inicial en CUEs de 6 dígitos. Ej: 600118, 5000216.'
 			
 			), 
 			
@@ -76,22 +76,16 @@ class Instit extends AppModel {
 			 * codigos de cada provincia, establecidos tal como se utilizan en la 
 			 * oficina de informacion 309
 			 * 
-			 * Expresion regular para codigos desde 10 (Catamarca) hasta el 94(Tierra del Fuego)
-			 * (^[(10)(14)(18)(22)(26)(30)(34)(38)(42)(46)(50)(54)(58)(62)(66)(70)(74)(78)(82)(86)(90)(94)][0-9]{6}$)
-			 * 
-			 * Expresion regular para cogidos de 1 digito, 02(GCBA) y 06 (Bs As)
-			 * (^[26][0-9]{5}$)
 			 * 
 			 */
-			/* TODAVIA NO IMPLEMENTADO, NO FUNCIONA CORRECTAMENTE
 			'jurisdiccion' => array(
-				'rule' => '/^[(10)(14)(18)(22)(26)(30)(34)(38)(42)(46)(50)(54)(58)(62)(66)(70)(74)(78)(82)(86)(90)(94)][0-9]{6}$/',
+				'rule' => '/^(2|6|10|14|18|22|26|30|34|38|42|46|50|54|58|62|66|70|74|78|82|86|90|94)[0-9]{5}$/',
 				'required' => true,
 				'allowEmpty' => false,
-				'message' => 'El cue esta compuesto por 6 o 7 dígitos. La cantidad ingresada es incorrecta. Es de la forma: JJCCCCC (J= Jurisdicción; C= Cue).'
+				'message' => 'El CUE fue mal ingresado. El número ingresado no es válido.'
 			
 			),
-			*/
+			
    		),
    		'anexo' => array(
 			'notEmpty' => array( // or: array('ruleName', 'param1', 'param2' ...)
@@ -99,7 +93,7 @@ class Instit extends AppModel {
 				'required' => true,
 				'allowEmpty' => false,
 				//'on' => 'create', // or: 'update'
-				'message' => 'El Número de Anexo no puede quedar vacio.'
+				'message' => 'El Número de Anexo no puede quedar vacío.'
 			),
 			'number' => array(
 				'rule' => VALID_NUMBER,
@@ -112,7 +106,7 @@ class Instit extends AppModel {
 				'rule' => array('between','1','2'),
 				'required' => true,
 				'allowEmpty' => false,
-				'message' => 'El número de anexo está compuesto por 1 o 2 dígitos.'
+				'message' => 'Válidos: 0 a 99.'
 			
 			)
    		),
@@ -121,7 +115,7 @@ class Instit extends AppModel {
 				'rule' => VALID_YEAR,
 				'required' => false,
 				'allowEmpty' => true,
-				'message' => 'Debe ingresar un año de 4 dígitos. Si no conoce la fecha de creación, debe dejar el campo vacio.'
+				'message' => 'Debe ingresar un año de 4 dígitos. Si no conoce la fecha de creación, debe dejar el campo vacío.'
 			),
 		),
 		'direccion' => array(
@@ -130,7 +124,7 @@ class Instit extends AppModel {
 				'required' => true,
 				'allowEmpty' => false,
 				//'on' => 'create', // or: 'update'
-				'message' => 'La dirección no puede quedar vacia.'
+				'message' => 'La dirección no puede quedar vacía.'
 			),
 		),
 		'depto' => array(
@@ -139,7 +133,7 @@ class Instit extends AppModel {
 				'required' => true,
 				'allowEmpty' => false,
 				//'on' => 'create', // or: 'update'
-				'message' => 'Depto no puede quedar vacio.'
+				'message' => 'El Departamento no puede quedar vacío.'
 			),
 		),
 		'localidad' => array(
@@ -148,7 +142,7 @@ class Instit extends AppModel {
 				'required' => true,
 				'allowEmpty' => false,
 				//'on' => 'create', // or: 'update'
-				'message' => 'La Localidad no puede quedar vacia.'
+				'message' => 'La Localidad no puede quedar vacía.'
 			),
 		),
 		'cp' => array(
@@ -157,7 +151,7 @@ class Instit extends AppModel {
 				'required' => true,
 				'allowEmpty' => false,
 				//'on' => 'create', // or: 'update'
-				'message' => 'El Código Postal no puede quedar vacio.'
+				'message' => 'El Código Postal no puede quedar vacío.'
 			),
 		),
 		'mail' => array(
@@ -207,7 +201,7 @@ class Instit extends AppModel {
 				'required' => true,
 				'allowEmpty' => false,
 				//'on' => 'create', // or: 'update'
-				'message' => 'Debe ingresar formato de año, con 4 dígitos.'	
+				'message' => 'Debe ingresar formato de año, con 4 dígitos. Ej: 2008.'	
 			)
 		),
 		'observacion' => array(
@@ -216,8 +210,39 @@ class Instit extends AppModel {
 				'required' => false,
 				'allowEmpty' => true,
 				//'on' => 'create', // or: 'update'
-				'message' => 'La observación no puedo tener mas de 100 caracteres.'
+				'message' => 'La observación no puede tener mas de 100 caracteres.'
 			)
+		),
+		'jurisdiccion_id' => array(
+			'notEmpty' => array( // or: array('ruleName', 'param1', 'param2' ...)
+				'rule' => VALID_NOT_EMPTY,
+				'required' => true,
+				'allowEmpty' => false,
+				'message' => 'Seleccione una Jurisdicción.'
+			),
+			'jurisdiccion' => array(
+				'rule' => '/^(2|6|10|14|18|22|26|30|34|38|42|46|50|54|58|62|66|70|74|78|82|86|90|94)$/',
+				'required' => true,
+				'allowEmpty' => false,
+				'message' => 'Seleccione una Jurisdicción.'
+			
+			)
+		),
+		'tipoinstit_id' => array(
+			'notEmpty' => array( // or: array('ruleName', 'param1', 'param2' ...)
+				'rule' => VALID_NOT_EMPTY,
+				'required' => true,
+				'allowEmpty' => false,
+				'message' => 'Seleccione un Tipo de Institución.'
+			),
+		),
+		'nombre' => array(
+			'notEmpty' => array( // or: array('ruleName', 'param1', 'param2' ...)
+				'rule' => VALID_NOT_EMPTY,
+				'required' => true,
+				'allowEmpty' => false,
+				'message' => 'El Nombre no puede quedar vacío.'
+			),
 		)
 	);
 	
