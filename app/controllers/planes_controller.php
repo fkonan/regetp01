@@ -81,6 +81,7 @@ class PlanesController extends AppController {
 
 	function add($instit_id = null) {
 		if (!empty($this->data)) {
+			$instit_id = $this->data['Plan']['instit_id'];
 			$this->Plan->create();
 			if ($this->Plan->save($this->data)) {
 				$this->Session->setFlash(__('Se ha creado un nuevo Plan', true));

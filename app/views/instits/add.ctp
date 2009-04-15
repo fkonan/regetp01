@@ -12,7 +12,7 @@ echo $html->css('edit_form',false);
 		/**
 		 *    ACTIVO
 		 */	
-		echo $form->input('activo',array('type'=> 'checkbox'));		
+		echo $form->input('activo',array('type'=> 'checkbox','checked'=>true));		
 		
 		
 		/**
@@ -56,7 +56,7 @@ echo $html->css('edit_form',false);
 		 */	
 		$meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
 		echo $form->input('jurisdiccion_id', array('empty' => array('0'=>'Todas'),'id'=>'jurisdiccion_id','label'=>'Jurisdicción','after'=>$meter));		
-		echo $form->input('tipoinstit_id', array('empty' => 'Todas','disabled'=>true,'type'=>'select','label'=>'Tipo De Institución','after'=> '<br /><cite>Para activar este campo, seleccione primero una jurisdicción</cite>'));
+		echo $form->input('tipoinstit_id', array('empty' => 'Todas','type'=>'select','label'=>'Tipo De Institución','after'=> '<br /><cite>Para activar este campo, seleccione primero una jurisdicción</cite>'));
 		echo $ajax->observeField('jurisdiccion_id',
                                    array(  	'url' => '/tipoinstits/ajax_select_form_por_jurisdiccion',
                                    			//'controller' => 'TipoInstits',
@@ -65,7 +65,44 @@ echo $html->css('edit_form',false);
 		                                   	'loading'=>'$("ajax_indicator").show();$("InstitTipoinstitId").disable()',
 		                                   	'complete'=>'$("ajax_indicator").hide();$("InstitTipoinstitId").enable()',
 		                                   	'onChange'=>true
-                                   ));  
+                                   )); 
+		?>
+		
+		
+		<script type="text/javascript">
+		/*
+				Este Script lo que hace es tomar la jurisdiccion en base al numero de CUE pasado
+		*/
+		
+			// Observer del cambio en el numero de CUE
+			Event.observe('InstitCue', 'change', function() {
+				var cue = new String($F('InstitCue'));
+				var send = false;
+				var cue_jur = new String();
+
+				//Evaluo si concuerda con el codigo de institucion
+				if (cue.match(/^(10|14|18|22|26|30|34|38|42|46|50|54|58|62|66|70|74|78|82|86|90|94)[0-9]{5}$/)){
+					$('jurisdiccion_id').setValue(cue.substring(0,2));
+					cue_jur= cue.substring(0,2);
+					send = true;
+				}else if(cue.match(/^(2|6)[0-9]{5}$/)){
+					$('jurisdiccion_id').setValue(cue.substring(0,1));
+					cue_jur = cue.substring(0,1); 
+					send = true;
+				}
+				//si el CUE era valido, se envia una peticion AJAX para obtener los datos del tipo de INstitucion para esa jurisdiccion
+				if(send){
+					new Ajax.Updater('InstitTipoinstitId','<?= $html->url('/tipoinstits/ajax_select_form_por_jurisdiccion')?>', {
+						'onLoading': function(){$("ajax_indicator").show();$("InstitTipoinstitId").disable()},
+						'onComplete': function(){$("ajax_indicator").hide();$("InstitTipoinstitId").enable()},
+						'onChange': true,
+						parameters: {'data[Instit][jurisdiccion_id]': cue_jur}
+						}); 
+				}							
+			});
+		</script>
+		
+		<?
          		
 		/**
 		 *    NOMBRE
@@ -110,7 +147,7 @@ echo $html->css('edit_form',false);
 		/**
 		 *    DEPTO
 		 */	
-		echo $form->input('depto',array('label'=>array('class'=>'input_label'),
+		echo $form->input('depto',array('label'=>array('text'=> 'Departamento','class'=>'input_label'),
 										'class' => 'input_text_peque'
 		));
 		
@@ -120,7 +157,7 @@ echo $html->css('edit_form',false);
 		/**
 		 *    CODIGO POSTAL
 		 */							
-		echo $form->input('cp',array('label'=>array('class'=>'input_label'),
+		echo $form->input('cp',array('label'=>array('text'=>'Código Postal','class'=>'input_label'),
 									 'class' => 'input_text_peque'
 		));
 		
