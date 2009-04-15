@@ -107,7 +107,7 @@
 		/**
 		 *    DEPTO
 		 */	
-		echo $form->input('depto',array('label'=>array('class'=>'input_label'),
+		echo $form->input('depto',array('label'=>array('text'=>'Departamento', 'class'=>'input_label'),
 										'class' => 'input_text_peque'
 		));
 		
@@ -117,7 +117,7 @@
 		/**
 		 *    CODIGO POSTAL
 		 */							
-		echo $form->input('cp',array('label'=>array('class'=>'input_label'),
+		echo $form->input('cp',array('label'=>array('text'=>'Código Postal', 'class'=>'input_label'),
 									 'class' => 'input_text_peque'
 		));
 		

@@ -89,6 +89,7 @@ class AppController extends Controller {
 			if ($this->name == 'Etapas' && $this->action == 'dame_nombre') {$llAuth = true;}
 			if ($this->name == 'Instits' && $this->action == 'view') {$llAuth = true;}
 			if ($this->name == 'Anios' && $this->action == 'matricula_del_plan') {$llAuth = true;}
+			if ($this->name == 'Anios' && $this->action == 'delete') {$llAuth = true;}
 			if ($this->name == 'Jurisdicciones' && $this->action == 'get_name') {$llAuth = true;}		
 			if ($this->name == 'Ofertas' && $this->action == 'dame_nombre') {$llAuth = true;}
 			if ($this->name == 'Ofertas' && $this->action == 'dame_abrev') {$llAuth = true;}

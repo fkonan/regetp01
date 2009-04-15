@@ -47,7 +47,23 @@ class Instit extends AppModel {
 	);
 
 	var $validate = array(
-      	'cue' => array(
+      	'cue' => array(			
+			/*
+			 * Esta validacion controla que el cue sea ingersado correctamente. 
+			 * En este caso, corrobora que los 2 primeros digitos correspondan a los
+			 * codigos de cada provincia, establecidos tal como se utilizan en la 
+			 * oficina de informacion 309
+			 * 
+			 * 
+			 */
+			'jurisdiccion' => array(
+				'rule' => '/^(2|6|10|14|18|22|26|30|34|38|42|46|50|54|58|62|66|70|74|78|82|86|90|94)[0-9]{5}$/',
+				'required' => true,
+				'allowEmpty' => false,
+				'message' => 'El CUE ingresado no es válido. No concuerda con el código de jurisdicción'
+			
+			),
+			
 			'notEmpty' => array( // or: array('ruleName', 'param1', 'param2' ...)
 				'rule' => VALID_NOT_EMPTY,
 				'required' => true,
@@ -68,24 +84,7 @@ class Instit extends AppModel {
 				'allowEmpty' => false,
 				'message' => 'El CUE debe ser de 6 ó 7 dígitos. No es necesario el cero inicial en CUEs de 6 dígitos. Ej: 600118, 5000216.'
 			
-			), 
-			
-			/*
-			 * Esta validacion controla que el cue sea ingersado correctamente. 
-			 * En este caso, corrobora que los 2 primeros digitos correspondan a los
-			 * codigos de cada provincia, establecidos tal como se utilizan en la 
-			 * oficina de informacion 309
-			 * 
-			 * 
-			 */
-			'jurisdiccion' => array(
-				'rule' => '/^(2|6|10|14|18|22|26|30|34|38|42|46|50|54|58|62|66|70|74|78|82|86|90|94)[0-9]{5}$/',
-				'required' => true,
-				'allowEmpty' => false,
-				'message' => 'El CUE fue mal ingresado. El número ingresado no es válido.'
-			
-			),
-			
+			)		
    		),
    		'anexo' => array(
 			'notEmpty' => array( // or: array('ruleName', 'param1', 'param2' ...)
@@ -229,7 +228,7 @@ class Instit extends AppModel {
 			)
 		),
 		'tipoinstit_id' => array(
-			'notEmpty' => array( // or: array('ruleName', 'param1', 'param2' ...)
+			'notEmpty' => array(
 				'rule' => VALID_NOT_EMPTY,
 				'required' => true,
 				'allowEmpty' => false,
@@ -237,7 +236,7 @@ class Instit extends AppModel {
 			),
 		),
 		'nombre' => array(
-			'notEmpty' => array( // or: array('ruleName', 'param1', 'param2' ...)
+			'notEmpty' => array(
 				'rule' => VALID_NOT_EMPTY,
 				'required' => true,
 				'allowEmpty' => false,
