@@ -70,62 +70,62 @@ class AppController extends Controller {
 	}	
 	
 	function isAuthorized() {
+		
 	switch ($this->Auth->user('role')) {
 		case 'admin':
 			$llAuth = true;
 			break;
 		case 'editor':
 			$llAuth = false;
-			if ($this->action == 'edit') {$llAuth = true;}
-			if ($this->action == 'add') {$llAuth = true;}
-			if ($this->action == 'view') {$llAuth = true;}
-			if ($this->name == 'Instits' && $this->action == 'search') {$llAuth = true;}
-			if ($this->name == 'Instits' && $this->action == 'search_form') {$llAuth = true;}
-			if ($this->name == 'Tipoinstits' && $this->action == 'ajax_select_form_por_jurisdiccion') {$llAuth = true;}
-			if ($this->name == 'Temas' && $this->action == 'verdetalle') {$llAuth = true;}
-			if ($this->name == 'Ofertas' && $this->action == 'add') {$llAuth = true;}		
-			if ($this->name == 'Instits' && $this->action == 'dame_datos') {$llAuth = true;}
-			if ($this->name == 'Ciclos' && $this->action == 'dame_ciclos') {$llAuth = true;}
-			if ($this->name == 'Etapas' && $this->action == 'dame_nombre') {$llAuth = true;}
-			if ($this->name == 'Instits' && $this->action == 'view') {$llAuth = true;}
-			if ($this->name == 'Anios' && $this->action == 'matricula_del_plan') {$llAuth = true;}
-			if ($this->name == 'Anios' && $this->action == 'delete') {$llAuth = true;}
-			if ($this->name == 'Jurisdicciones' && $this->action == 'get_name') {$llAuth = true;}		
-			if ($this->name == 'Ofertas' && $this->action == 'dame_nombre') {$llAuth = true;}
-			if ($this->name == 'Ofertas' && $this->action == 'dame_abrev') {$llAuth = true;}
-			if ($this->name == 'Planes' && $this->action == 'planes_relacionados') {$llAuth = true;}			
-			if ($this->name == 'Tipodocs' && $this->action == 'tipodoc_nombre') {$llAuth = true;}
-			if ($this->name == 'Tipodocs' && $this->action == 'dame_tipodocs') {$llAuth = true;}
-			if ($this->name == 'Tipoinstits' && $this->action == 'get_name') {$llAuth = true;}
 			
+			if ($this->name == 'Instits' && $this->action == 'search') {$llAuth = true;}
+			if ($this->name == 'Instits' && $this->action == 'add') {$llAuth = true;}
+			if ($this->name == 'Instits' && $this->action == 'search_form') {$llAuth = true;}
+			if ($this->name == 'Instits' && $this->action == 'view') {$llAuth = true;}
+			if ($this->name == 'Instits' && $this->action == 'edit') {$llAuth = true;}
+			
+			if ($this->name == 'Planes' && $this->action == 'planes_relacionados') {$llAuth = true;}
+			if ($this->name == 'Planes' && $this->action == 'add') {$llAuth = true;}
+			if ($this->name == 'Planes' && $this->action == 'view') {$llAuth = true;}
+			if ($this->name == 'Planes' && $this->action == 'edit') {$llAuth = true;}
+			
+			if ($this->name == 'Anios' && $this->action == 'add') {$llAuth = true;}
+			if ($this->name == 'Anios' && $this->action == 'edit') {$llAuth = true;}
+			if ($this->name == 'Anios' && $this->action == 'delete') {$llAuth = true;}
+	
 			break;
 		case 'invitado':
-//			$llAuth = false;
 			$llAuth = false;
-			if ($this->action == 'view') {$llAuth = true;}
+			
 			if ($this->name == 'Instits' && $this->action == 'search') {$llAuth = true;}
 			if ($this->name == 'Instits' && $this->action == 'search_form') {$llAuth = true;}
-			if ($this->name == 'Tipoinstits' && $this->action == 'ajax_select_form_por_jurisdiccion') {$llAuth = true;}			
-			if ($this->name == 'Temas' && $this->action == 'verdetalle') {$llAuth = true;}
-			if ($this->name == 'Ofertas' && $this->action == 'add') {$llAuth = true;}			
-			if ($this->name == 'Instits' && $this->action == 'dame_datos') {$llAuth = true;}
-			if ($this->name == 'Ciclos' && $this->action == 'dame_ciclos') {$llAuth = true;}
-			if ($this->name == 'Etapas' && $this->action == 'dame_nombre') {$llAuth = true;}
 			if ($this->name == 'Instits' && $this->action == 'view') {$llAuth = true;}
-			if ($this->name == 'Anios' && $this->action == 'matricula_del_plan') {$llAuth = true;}
-			if ($this->name == 'Jurisdicciones' && $this->action == 'get_name') {$llAuth = true;}		
-			if ($this->name == 'Ofertas' && $this->action == 'dame_nombre') {$llAuth = true;}
-			if ($this->name == 'Ofertas' && $this->action == 'dame_abrev') {$llAuth = true;}
+	
 			if ($this->name == 'Planes' && $this->action == 'planes_relacionados') {$llAuth = true;}
-			if ($this->name == 'Tipodocs' && $this->action == 'tipodoc_nombre') {$llAuth = true;}
-			if ($this->name == 'Tipodocs' && $this->action == 'dame_tipodocs') {$llAuth = true;}
-			if ($this->name == 'Tipoinstits' && $this->action == 'get_name') {$llAuth = true;}
+			if ($this->name == 'Planes' && $this->action == 'view') {$llAuth = true;}
+			
 			break;
 		}
+		
+		/**
+	 	* Estos son requestedActions, por lo tanto estan disponibles para todos los usuarios
+		*/
+		if ($this->name == 'Instits' && $this->action == 'dame_datos') {$llAuth = true;}
+		if ($this->name == 'Ciclos' && $this->action == 'dame_ciclos') {$llAuth = true;}
+		if ($this->name == 'Etapas' && $this->action == 'dame_nombre') {$llAuth = true;}
+		if ($this->name == 'Anios' && $this->action == 'matricula_del_plan') {$llAuth = true;}			
+		if ($this->name == 'Jurisdicciones' && $this->action == 'get_name') {$llAuth = true;}		
+		if ($this->name == 'Ofertas' && $this->action == 'dame_nombre') {$llAuth = true;}
+		if ($this->name == 'Ofertas' && $this->action == 'dame_abrev') {$llAuth = true;}					
+		if ($this->name == 'Tipodocs' && $this->action == 'tipodoc_nombre') {$llAuth = true;}
+		if ($this->name == 'Tipodocs' && $this->action == 'dame_tipodocs') {$llAuth = true;}
+		if ($this->name == 'Tipoinstits' && $this->action == 'get_name') {$llAuth = true;}
+		if ($this->name == 'Tipoinstits' && $this->action == 'ajax_select_form_por_jurisdiccion') {$llAuth = true;}
+			
+	
 		if ($llAuth == true) {
 			return true;
-		} else {
-			
+		} else {			
 			$this->Session->setFlash('No tiene permisos para acceder a esta opción.', true);
 			
 			if ($this->name == 'Anios' && ($this->action == 'edit' || $this->action == 'add')){

@@ -107,7 +107,7 @@ class Instit extends AppModel {
 				'allowEmpty' => false,
 				'message' => 'Válidos: 0 a 99.'
 			
-			)
+			)	
    		),
    		'anio_creacion' => array(
    			'year' => array(
@@ -209,11 +209,11 @@ class Instit extends AppModel {
 				'required' => false,
 				'allowEmpty' => true,
 				//'on' => 'create', // or: 'update'
-				'message' => 'La observación no puede tener mas de 100 caracteres.'
+				'message' => 'La observación no puede tener más de 100 caracteres.'
 			)
 		),
 		'jurisdiccion_id' => array(
-			'notEmpty' => array( // or: array('ruleName', 'param1', 'param2' ...)
+			'notEmpty' => array(
 				'rule' => VALID_NOT_EMPTY,
 				'required' => true,
 				'allowEmpty' => false,
