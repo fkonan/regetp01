@@ -25,7 +25,7 @@ class Referente extends AppModel {
 			'required' => true,
 			'allowEmpty' => false,
 			//'on' => 'create', // or: 'update'
-			'message' => 'Se debe ingresar un nombre para la Jurisdicción. No puede quedar vacio.')
+			'message' => 'Se debe ingresar un nombre para la Jurisdicción. No puede quedar vacío.')
    );
 	
 }
