@@ -40,13 +40,11 @@ p {
 	padding-bottom: 0.8em;
 }
 a {
-	background-color:#fff;
 	color: #003d4c;
 	text-decoration: underline;
 	font-weight: bold;
 }
 a:hover {
-	background-color:#fff;
 	color: #003d4c;
 	text-decoration:none;
 }
@@ -738,6 +736,7 @@ div.code-coverage-results span.result-good {
 	border-bottom-color: grey;
 	border-bottom-width: thin;
 	margin-bottom: 10px;
+	text-align: center;
 }
 
 /**
@@ -847,6 +846,7 @@ div.code-coverage-results span.result-good {
 .instit_link_list A:HOVER{
 	text-decoration: underline;
 	color: #084b8a;
+	background-color: transparent;
 }
 
 .listado a{

@@ -34,7 +34,7 @@ $paginator->options(array('url' => $url_conditions));
 	<li class="<?= $class?>"><?php echo $paginator->sort('cue');?></li>
 	
 	<? $class = ($sort == 'jurisdiccion_id')?'marcada':'';?>
-	<li class="<?= $class?>"><?php echo $paginator->sort('jurisdiccion_id');?></li>	
+	<li class="<?= $class?>"><?php echo $paginator->sort('Jurisdicción','jurisdiccion_id');?></li>	
 	
 	<? $class = ($sort == 'localidad')?'marcada':'';?>
 	<li class="<?= $class?>"><?php echo $paginator->sort('localidad');?></li>
@@ -136,7 +136,7 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 	<p  class="paginate_msg">
 	<?php
 	echo $paginator->counter(array(
-	'format' => __('Página %page% de %pages%, mostrando %current% registros de %count% encontrados, visualizando registros desde el nº %start%, hasta el %end%', true)
+	'format' => __('Página %page% de %pages%<br />Mostrando %current% registros de %count% encontrados, visualizando registros desde el nº %start%, hasta el %end%', true)
 	));
 	?>
 	</p>
