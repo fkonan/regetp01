@@ -12,8 +12,6 @@
 		echo $form->input('username',array('label'=>'Nick'));
 		echo $form->input('password', array('type'=>'password'));
 		echo $form->end('Entrar');
-		
-		echo $html->link('¿Nuevo Usuario?','/users/add');
 	} ?>
 	
 </div>
