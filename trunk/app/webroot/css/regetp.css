@@ -99,7 +99,6 @@ ul, li {
 
 /* Layout */
 #container {
-	background: white;
 	text-align: left;
 	width: 775px;
 	margin-top: 0px;
@@ -108,7 +107,16 @@ ul, li {
 	margin-left: auto;
 }
 
-
+#popup_container{
+	text-align: left;
+	width: 775px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 5px;
+	margin-left: auto;
+	margin-top: 5px;
+	background-color: white;
+}
 
 
 
@@ -163,6 +171,7 @@ ul, li {
 *
 */
 #content{
+	background-color: white;
 	clear: both;
 	color: #333;
 	padding: 1px 1px;
@@ -269,6 +278,7 @@ ul, li {
 	clear: both;
 	padding: 6px 10px;
 	text-align: right;
+	margin-bottom: 30px;
 }
 
 

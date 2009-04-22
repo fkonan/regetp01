@@ -63,7 +63,7 @@
 				
 				<h1><?= __('Soporte Técnico')?></h1>
 				<ul>
-					<li><a href="#" onclick="alert('No implementado. \nEn breve dispondrá de Ayuda Online')">Ayuda</a></li>
+					<li><a href="<?= $html->url('ayuda'); ?>">Ayuda</a></li>
 					<li><a href="#" onclick="alert('No implementado. \nEn breve podrá enviarnos consejos y errores encontrados.')">Envío de Errores</a></li>
 				</ul>				
 			</div>
