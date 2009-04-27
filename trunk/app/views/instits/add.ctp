@@ -277,7 +277,7 @@ echo $html->css('edit_form',false);
 		$ciclos = $this->requestAction('/Ciclos/dame_ciclos');
 		echo $form->input('ciclo_alta', array("type" => "select", 
 											  "options" => $ciclos,'label'=>'Alta',
-											  "selected" => $this->data['Instit']['ciclo_alta']			
+											  "selected" => date('Y')			
 		));
 		
 	?>

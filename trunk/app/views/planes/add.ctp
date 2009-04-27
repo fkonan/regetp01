@@ -13,11 +13,14 @@
 		echo $form->input('nombre');
 		echo $form->input('perfil');
 		echo $form->input('sector');
-		echo $form->input('duracion_hs',array('label'=>'Duración Hs'));
-		echo $form->input('duracion_semanas',array('label'=>'Duración Semanas'));
-		echo $form->input('duracion_anios',array('label'=>'Duración Años'));
+		
+		echo "<br>Duración:";
+		echo $form->input('duracion_hs',array('label'=>'- Hs'));
+		echo $form->input('duracion_semanas',array('label'=>'- Semanas'));
+		echo $form->input('duracion_anios',array('label'=>'- Años'));
 
 		
+		echo "<br>";
 		/**
 		 *    OBSERVACION
 		 */	

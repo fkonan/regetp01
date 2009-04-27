@@ -32,7 +32,7 @@ class PlanesController extends AppController {
 		}
 		
 		$this->data = $this->Plan->find('all', array('conditions'=>array('instit_id'=>$id), 'order'=>'name ASC'));
-
+		
 		if($this->data){
 			foreach ($this->data as $p){
 				$planes[] = $p['Plan'];	
@@ -94,8 +94,7 @@ class PlanesController extends AppController {
 		$this->set('instit_id',$instit_id);
 		$instit =$this->requestAction('/Instits/dame_datos/'.$instit_id);
 		$this->set('instit',$instit);
-		
-		//$instits = $this->Plan->Instit->find('list');
+
 		$ofertas = $this->Plan->Oferta->find('list');
 		$this->set(compact('instits', 'ofertas'));
 		
@@ -117,9 +116,8 @@ class PlanesController extends AppController {
 			}
 		}
 		if (empty($this->data)) {
-			$this->data = $this->Plan->read(null, $id);
+			$this->data = $this->Plan->read(null, $id);			
 		}
-			
 		$instit =$this->requestAction('/Instits/dame_datos/'.$this->data['Instit']['id']);
 		$this->set('instit',$instit);
 		

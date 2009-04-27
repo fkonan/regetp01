@@ -47,7 +47,18 @@ class Instit extends AppModel {
 	);
 
 	var $validate = array(
-      	'cue' => array(			
+      	'cue' => array(		
+
+			/**
+			 * Aca se verifica que los numeros iniciales del  CUE sean
+			 * macheados con la jurisdiccion para comprobar la validez del CUE.
+			 * 
+			 */
+			'jurisdiccion_y_cue_match' => array(
+				'rule' => array('controlar_coincidencia_cue_jurisdiccion'),
+				'message'=> 'El CUE no corresponde a la Jurisdicción.'
+			),
+			
 			/*
 			 * Esta validacion controla que el cue sea ingersado correctamente. 
 			 * En este caso, corrobora que los 2 primeros digitos correspondan a los
@@ -56,13 +67,14 @@ class Instit extends AppModel {
 			 * 
 			 * 
 			 */
-			'jurisdiccion' => array(
+			'jurisdiccion_correcta' => array(
 				'rule' => '/^(2|6|10|14|18|22|26|30|34|38|42|46|50|54|58|62|66|70|74|78|82|86|90|94)[0-9]{5}$/',
 				'required' => true,
 				'allowEmpty' => false,
 				'message' => 'El CUE ingresado no es válido. No concuerda con el código de jurisdicción'
 			
 			),
+			
 			
 			'notEmpty' => array( // or: array('ruleName', 'param1', 'param2' ...)
 				'rule' => VALID_NOT_EMPTY,
@@ -277,6 +289,24 @@ class Instit extends AppModel {
 	    }
 	    parent::unbindModel($unbind);
   	} 
+  	
+  	
+  	/**
+  	 * Validacion de CUE por jurisdiccion
+  	 *
+  	 * @return unknown
+  	 */
+  	function controlar_coincidencia_cue_jurisdiccion(){
+  		$tam = strlen($this->data[$this->name]['cue']);
+  		if($tam == 7){
+  			$jur = substr($this->data[$this->name]['cue'],0,2);
+  		} elseif($tam == 6){
+  			$jur = substr($this->data[$this->name]['cue'],0,1);
+  		}
+  		else return false;
+  		
+  		return ($this->data[$this->name]['jurisdiccion_id'] == $jur)?true:false;
+  	}
   	
 	
 }

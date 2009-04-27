@@ -15,10 +15,10 @@ La única forma de obtener usuario y contraseña, es dirigiendose a la oficina 309
 <p>
 No todos los usuarios pueden acceder a la misma información. Si usted ve
 un texto advirtiendo que no puede acceder a dicha página, es porque la Unidad de Información
-no le ha dado los privilegios para ver, editar, o eliminar los datos que allí aparecen.
+no le ha otorgado los privilegios para ver, editar, o eliminar los datos que allí aparecen.
 </p>
 
 <h2>¿Cómo realizar búsquedas?</h2>
-<p>En el menú de la izquierda, hace click en "Instituciones" y le aparecerá un formulario
-con todos los campos que puede realizar la búsqueda.</p>
+<p>En el menú de la izquierda, hacer click en "Instituciones" y le aparecerá un formulario
+con todos los campos para realizar la búsqueda.</p>
 

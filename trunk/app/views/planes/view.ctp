@@ -32,19 +32,24 @@
 			<?php echo $plan['Plan']['sector']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Duración Hs'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $plan['Plan']['duracion_hs']; ?>
+		
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Duración:'); ?></dt>
+		<dd<?php echo $class;?>>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Duración Semanas'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $plan['Plan']['duracion_semanas']; ?>
+		<dt<?php echo $class;?>><?php __(' - Hs'); ?></dt>
+		<dd<?php echo $class;?>>
+			<?php echo ($plan['Plan']['duracion_hs']>0)?$plan['Plan']['duracion_hs']:''; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Duración Años'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $plan['Plan']['duracion_anios']; ?>
+		<dt<?php $class;?>><?php __(' - Semanas'); ?></dt>
+		<dd<?php echo $class;?>>
+			<?php echo ($plan['Plan']['duracion_semanas']>0)?$plan['Plan']['duracion_semanas']:''; ?>
+			&nbsp;
+		</dd>
+		<dt<?php $class;?>><?php __(' - Años'); ?></dt>
+		<dd<?php echo $class;?>>
+			<?php echo ($plan['Plan']['duracion_anios']>0)?$plan['Plan']['duracion_anios']:''; ?>
 			&nbsp;
 		</dd>
 		
@@ -114,7 +119,7 @@
 			<?php endforeach; //el que recorre los anios del ciclo	?>
 			<tr <?php echo $class;?> >				
 				<td style="border-top: 1px silver solid;"><?php echo '';?></td>
-				<td style="border-top: 1px silver solid;"><?php echo '';?></td>
+				<td style="border-top: 1px silver solid;"><?php echo '<b>Totales</b>';?></td>
 				<td style="border-top: 1px silver solid;"><b><?php echo $tot_matricula;?></b></td>
 				<td style="border-top: 1px silver solid;"><b><?php echo $tot_secciones;?></b></td>
 				<td style="border-top: 1px silver solid;"><?php echo '';?></td>
