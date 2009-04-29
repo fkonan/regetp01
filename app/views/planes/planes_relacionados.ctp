@@ -1,8 +1,23 @@
+<?
+
+//si el anexo tiene 1 solo digito le coloco un cero adelante
+$anexo = ($instit['Instit']['anexo']<10)?'0'.$instit['Instit']['anexo']:$instit['Instit']['anexo'];
+$cue_instit = $instit['Instit']['cue'].$anexo;
+
+// Genero el nombre completo de la instition para ser mostrado como titulo
+$nombre_instit = $instit['Tipoinstit']['name']." Nº ".$instit['Instit']['nroinstit'].", ".$instit['Instit']['nombre']
+
+?>
+
+
+
 <div class="related">
 	<h1><?php __('Oferta Educativa');?></h1>
 
 	
-	<h2><?php echo $instit['Instit']['cue'].'-0'.$instit['Instit']['anexo']." <br>".$instit['Instit']['nombre']; ?></h2>
+	<h2><?= $cue_instit?><br><?= $nombre_instit ?></h2>
+	
+	
 	<dl>	
 	
 		<dt><?php __('Tipo de Institución'); ?></dt>

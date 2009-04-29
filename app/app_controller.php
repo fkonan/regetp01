@@ -65,6 +65,7 @@ class AppController extends Controller {
 		$this->Auth->loginError ='Usuario o Password Incorrectos';
 		$this->Auth->authError = 'Debe registrarse para acceder a esta página';
 		$this->Auth->logoutRedirect='/pages/home';
+//		$this->Auth->allow('*');
 		$this->Auth->allow('display','login','logout');
 		$this->Auth->authorize = 'controller'; 
 	}	

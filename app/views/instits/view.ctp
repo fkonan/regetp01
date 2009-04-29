@@ -1,12 +1,26 @@
 <div class="instits view">
 
+<?
 
-<div id="escuela_estado" class="<? echo $instit['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $instit['Instit']['activo']? 'Activa':'Inactiva';?></div>
-<h1><?php echo $instit['Instit']['cue'].'-0'.$instit['Instit']['anexo']." <br>".$instit['Instit']['nombre']; ?></h1>
+//si el anexo tiene 1 solo digito le coloco un cero adelante
+$anexo = ($instit['Instit']['anexo']<10)?'0'.$instit['Instit']['anexo']:$instit['Instit']['anexo'];
+$cue_instit = $instit['Instit']['cue'].$anexo;
 
+// Genero el nombre completo de la instition para ser mostrado como titulo
+$nombre_instit = $instit['Tipoinstit']['name']." Nº ".$instit['Instit']['nroinstit'].", ".$instit['Instit']['nombre']
+
+?>
+
+<div id="escuela_estado" class="<? echo $instit['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $instit['Instit']['activo']? 'Ingresada':'No Ingresada';?></div>
+<h1><?= $cue_instit ?>
+	<br><?= $nombre_instit?>
+</h1>
+
+	
+	<h2>Datos de Institución</h2>
 	<dl>
 				
-		<dt ><?php __('Gestión'); ?></dt>
+		<dt ><?php __('Ámbito de Gestión'); ?></dt>
 		<dd>
 			<?php echo $instit['Gestion']['name']; ?>
 			&nbsp;
@@ -24,31 +38,13 @@
 			&nbsp;
 		</dd>
 		
-		<dt><?php __('Tipo de Institución'); ?></dt>
+		
+		<dt><?php __('Departamento'); ?></dt>
 		<dd>
-			<?php echo $instit['Tipoinstit']['name']; ?>
+			<?php echo $instit['Instit']['depto']; ?>
 			&nbsp;
 		</dd>
 		
-		<dt><?php __('Nº de Institución'); ?></dt>
-		<dd>
-			<?php echo $instit['Instit']['nroinstit']; ?>
-			&nbsp;
-		</dd>
-		<dt><?php __('Año de Creación'); ?></dt>
-		<dd>
-			<?php echo $instit['Instit']['anio_creacion']; ?>
-			&nbsp;
-		</dd>
-	</dl>
-		
-		<h2>Datos De Institución</h2>
-	<dl>
-		<dt><?php __('Domicilio'); ?></dt>
-		<dd>
-			<?php echo $instit['Instit']['direccion']; ?>
-			&nbsp;
-		</dd>
 		
 		<dt><?php __('Localidad'); ?></dt>
 		<dd>
@@ -56,11 +52,13 @@
 			&nbsp;
 		</dd>
 		
-		<dt><?php __('Departamento'); ?></dt>
+		
+		<dt><?php __('Domicilio'); ?></dt>
 		<dd>
-			<?php echo $instit['Instit']['depto']; ?>
+			<?php echo $instit['Instit']['direccion']; ?>
 			&nbsp;
 		</dd>
+		
 		
 		<dt><?php __('Código Postal'); ?></dt>
 		<dd>
@@ -82,7 +80,15 @@
 			<?php echo $instit['Instit']['web']; ?>
 			&nbsp;
 		</dd>
+		
+
+		<dt><?php __('Año de Creación'); ?></dt>
+		<dd>
+			<?php echo $instit['Instit']['anio_creacion']; ?>
+			&nbsp;
+		</dd>
 	</dl>
+		
 		
 	<H2>Datos Director</H2>
 	<dl>		

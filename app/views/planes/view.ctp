@@ -37,21 +37,30 @@
 		<dd<?php echo $class;?>>
 			&nbsp;
 		</dd>
-		<dt<?php echo $class;?>><?php __(' - Hs'); ?></dt>
-		<dd<?php echo $class;?>>
-			<?php echo ($plan['Plan']['duracion_hs']>0)?$plan['Plan']['duracion_hs']:''; ?>
-			&nbsp;
-		</dd>
-		<dt<?php $class;?>><?php __(' - Semanas'); ?></dt>
-		<dd<?php echo $class;?>>
-			<?php echo ($plan['Plan']['duracion_semanas']>0)?$plan['Plan']['duracion_semanas']:''; ?>
-			&nbsp;
-		</dd>
-		<dt<?php $class;?>><?php __(' - Años'); ?></dt>
-		<dd<?php echo $class;?>>
-			<?php echo ($plan['Plan']['duracion_anios']>0)?$plan['Plan']['duracion_anios']:''; ?>
-			&nbsp;
-		</dd>
+		
+		<? if(($plan['Plan']['duracion_hs']>0)){ ?>
+			<dt<?php echo $class;?>><?php __(' - Hs'); ?></dt>
+			<dd<?php echo $class;?>>
+				<?php echo $plan['Plan']['duracion_hs']; ?>
+				&nbsp;
+			</dd>
+		<? } ?>
+		
+		<? if ($plan['Plan']['duracion_semanas']>0){ ?>
+			<dt<?php $class;?>><?php __(' - Semanas'); ?></dt>
+			<dd<?php echo $class;?>>
+				<?php echo $plan['Plan']['duracion_semanas']; ?>
+				&nbsp;
+			</dd>
+		<? } ?>
+		
+		<? if ($plan['Plan']['duracion_anios']>0){ ?>
+			<dt<?php $class;?>><?php __(' - Años'); ?></dt>
+			<dd<?php echo $class;?>>
+				<?php echo $plan['Plan']['duracion_anios']; ?>
+				&nbsp;
+			</dd>
+		<? } ?>
 		
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Observación'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
