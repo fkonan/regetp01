@@ -31,21 +31,22 @@ class PlanesController extends AppController {
 			$this->redirect(array('controller'=>'Istits','action'=>'view/'.$id));
 		}
 		
-		$this->data = $this->Plan->find('all', array('conditions'=>array('instit_id'=>$id), 'order'=>'name ASC'));
-		
+		$this->data = $this->Plan->planes_relacionados($id);
 		if($this->data){
 			foreach ($this->data as $p){
 				$planes[] = $p['Plan'];	
-				$v_plan_matricula[] = $this->requestAction('/Anios/matricula_del_plan/'.$p['Plan']['id']);
+				$v_plan_matricula[] = $this->Plan->Anio->matricula_del_plan($p['Plan']['id']);
 			}
 			$instit['Instit'] = $this->data[0]['Instit'];
 			$this->set('instit',$instit);
 			$this->set('planes',$planes );
+			
 			$this->set('v_plan_matricula',$v_plan_matricula);
 			$this->rutaUrl_for_layout[] =array('name'=> $this->data[0]['Instit']['nombre'],'link'=>'/Instits/view/'.$this->data[0]['Instit']['id'] );
 		}
 		else{ //cuando la institucion no tiene planes relacionados mostrar esto
-			$ins_aux['Instit'] = $this->requestAction("/Instits/dame_datos/$id");
+			$ins_aux = $this->Plan->Instit->read(null,$id);
+			
 			$this->set('instit',$ins_aux);
 			$this->set('planes',array() );
 		}
@@ -70,12 +71,12 @@ class PlanesController extends AppController {
 		$this->set('anios',$anios);		
 		$this->set('plan',$plan);	
 
-		$instit =$this->requestAction('/Instits/dame_datos/'.$plan['Plan']['instit_id']);
-		$this->set('instit',$instit);
-		$this->set('matricula', $this->requestAction('/Anios/matricula_del_plan/'.$id));
+		$instit =$this->Plan->Instit->read(null,$id);
+		$this->set('instit',$instit['Instit']);
+		$this->set('matricula', $this->Plan->Anio->matricula_del_plan($id));
 
-		$this->rutaUrl_for_layout[] = array('name'=> $instit['nombre'],'link'=>'/Instits/view/'.$instit['id'] );
-		$this->rutaUrl_for_layout[] = array('name'=> 'Oferta Educativa','link'=>'/Planes/planes_relacionados/'.$instit['id'] );
+		$this->rutaUrl_for_layout[] = array('name'=> 'Datos Instit.','link'=>'/Instits/view/'.$instit['Instit']['id'] );
+		$this->rutaUrl_for_layout[] = array('name'=> 'Oferta Educativa','link'=>'/Planes/planes_relacionados/'.$instit['Instit']['id'] );
 
 		}
 

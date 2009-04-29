@@ -61,6 +61,15 @@ class Plan extends AppModel {
 			)
 		)
 	);
+	
+	
+	function planes_relacionados($instit_id){
+		//$this->Instit->Tipoinstit;
+		$this->Instit->bind('Tipoinstits');
+		$temp =  $this->find('all', array('conditions'=>array('instit_id'=>$instit_id), 
+										'order'=>'name ASC'));
+		return $temp;
+	}
 
 }
 ?>

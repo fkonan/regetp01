@@ -8,7 +8,7 @@
 		echo $form->input('direccion', array('label'=>'Domicilio'));	
 		
 				
-		echo $form->input('gestion_id', array('empty' => 'Todas', 'label'=> 'Gestión'));
+		echo $form->input('gestion_id', array('empty' => 'Todas', 'label'=> 'Ámbito de Gestión'));
 		
 		$meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
 		echo $form->input('jurisdiccion_id', array('empty' => array('0'=>'Todas'),'id'=>'jurisdiccion_id','label'=>'Jurisdicción','after'=>$meter));		
@@ -30,7 +30,7 @@
 		echo $form->input('esanexo',array('options'=> $array_anexo,'label'=>'Anexo'));
 		
 		$array_activa = array('-1'=>'Buscar Todas','0'=>'No','1'=>'Si');
-		echo $form->input('activo',array('options'=> $array_activa,'label'=>'Institución Activa'));
+		echo $form->input('activo',array('options'=> $array_activa,'label'=>'Institución Ingresada a la Base de Datos'));
 		
 		
 		echo $form->end('Buscar'); ?>
