@@ -24,13 +24,14 @@
                                    ));  
 		
 		echo $form->input('localidad', array('label'=>'Localidad')); 
+		echo $form->input('depto', array('label'=> 'Departamento'));
 		echo $form->input('dependencia_id', array('empty' => 'Todas'));
 		
 		$array_anexo = array('-1'=>'Buscar Todas','0'=>'No','1'=>'Si');
 		echo $form->input('esanexo',array('options'=> $array_anexo,'label'=>'Anexo'));
 		
 		$array_activa = array('-1'=>'Buscar Todas','0'=>'No','1'=>'Si');
-		echo $form->input('activo',array('options'=> $array_activa,'label'=>'Institución Ingresada a la Base de Datos'));
+		echo $form->input('activo',array('options'=> $array_activa,'label'=>'Institución Ingresada'));
 		
 		
 		echo $form->end('Buscar'); ?>

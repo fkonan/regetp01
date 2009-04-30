@@ -258,6 +258,23 @@ class InstitsController extends AppController {
             }
             
 			/**
+			 *     DEPARTAMENTO
+			 */
+			if($this->data['Instit']['depto'] != ''){
+				$this->paginate['conditions']['lower(to_ascii(Instit.depto)) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->data['Instit']['depto']));
+				$array_condiciones['depto'] = $this->data['Instit']['depto'];
+				$url_conditions['depto'] = $this->data['Instit']['depto'];			
+			}
+			if(isset($this->passedArgs['depto'])){	
+            	if($this->passedArgs['depto'] != ''){
+					$this->paginate['conditions']['lower(to_ascii(Instit.depto)) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->passedArgs['depto']));
+					$array_condiciones['depto'] = $this->passedArgs['depto'];
+					$url_conditions['depto'] = $this->passedArgs['depto'];			
+				}
+            }
+            
+            
+			/**
 			 *     GESTION 
 			 */
 			if($this->data['Instit']['gestion_id'] != ''){
@@ -374,27 +391,36 @@ class InstitsController extends AppController {
 	
 	
 	
-
-	/********************************************************************
-	 * 
-	 * 
-	 *  RequestAction
-	 * 
-	 * 
-	 */
+	
+		
 	/**
-	 * me devuelve los datos relacionados con la Institucion
-	 * me devuelve todos los registros
+	 * Action para mostrar los planes relacionados
 	 *
 	 * @param $instit_id
-	 * @return Array con todos los campos de 1 registro de institucion
 	 */
-	function dame_datos($instit_id){
-		//$this->Instit->recursive = -1;
+	function planes_relacionados($id = null){
+		if (!$id) {
+			$this->Session->setFlash(__('Institución Inválida.', true));
+			$this->redirect(array('controller'=>'Istits','action'=>'view/'.$id));
+		}
 		
-		$instit = $this->Instit->read(null, $instit_id);
-		return $instit['Instit'];
+		$this->data = $this->Instit->read(null,$id);
+		if($this->data){
+			foreach ($this->data['Plan'] as $p):
+				$v_plan_matricula[] = $this->Instit->Plan->Anio->matricula_del_plan($p['id']);
+			endforeach;
+			$this->set('planes',$this->data);	
+			$this->set('v_plan_matricula',$v_plan_matricula);
+			$this->rutaUrl_for_layout[] =array('name'=> 'Dato Intistitución','link'=>'/Instits/view/'.$this->data['Instit']['id'] );
+		}
+		else{ //cuando la institucion no tiene planes relacionados mostrar esto
+			$ins_aux = $this->Plan->Instit->read(null,$id);
+			
+			$this->set('instit',$ins_aux);
+			$this->set('planes',array() );
+		}
 	}
+	
 	
 	
 	

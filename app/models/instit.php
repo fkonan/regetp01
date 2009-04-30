@@ -307,7 +307,7 @@ class Instit extends AppModel {
   		
   		return ($this->data[$this->name]['jurisdiccion_id'] == $jur)?true:false;
   	}
-  	
+  
 	
 }
 ?>

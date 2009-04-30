@@ -181,7 +181,7 @@ $nombre_instit = $instit['Tipoinstit']['name']." Nº ".$instit['Instit']['nroinst
 
 <h2>Más Información</h2>
 <ul id="listado_ofertas">
-	<li><?= $html->link('Oferta Educativa',array('controller'=>'Planes','action'=>'planes_relacionados', $instit['Instit']['id'])) ?></li>
+	<li><?= $html->link('Oferta Educativa',array('controller'=>'Instits','action'=>'planes_relacionados', $instit['Instit']['id'])) ?></li>
 </ul>
 
 </div>

@@ -27,7 +27,7 @@
 <head>
 	<?php echo $html->charset(); ?>
 	<title>
-		<?php __('Sistema Gestión de Registro'); ?>
+		<?php __('Sistema Gestión de Registro - v1.0 beta'); ?>
 		<?php echo $title_for_layout; ?>
 	</title>
 	<?php
@@ -41,13 +41,12 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<h1><?php echo $html->link(__('Sistema Gestión de Registro - Unidad de Información - INET', true), '/pages/home'); ?></h1>
+			<h1><?php echo $html->link(__('Registro Federal de Instituciones de ETP - RFIETP', true), '/pages/home'); ?></h1>
 			
 		</div>
 		<div id="content">
 			<div id="menu">	
-			
-				
+							
 				<h1>Registro</h1>
 				<ul>
 					<li><?php echo $html->link(__('Instituciones', true), '/instits/search_form'); ?></li>
