@@ -1,11 +1,11 @@
 <?
 
 //si el anexo tiene 1 solo digito le coloco un cero adelante
-$anexo = ($instit['Instit']['anexo']<10)?'0'.$instit['Instit']['anexo']:$instit['Instit']['anexo'];
-$cue_instit = $instit['Instit']['cue'].$anexo;
+$anexo = ($planes['Instit']['anexo']<10)?'0'.$planes['Instit']['anexo']:$planes['Instit']['anexo'];
+$cue_instit = $planes['Instit']['cue'].$anexo;
 
 // Genero el nombre completo de la instition para ser mostrado como titulo
-$nombre_instit = $instit['Tipoinstit']['name']." Nº ".$instit['Instit']['nroinstit'].", ".$instit['Instit']['nombre']
+$nombre_instit = $planes['Tipoinstit']['name']." Nº ".$planes['Instit']['nroinstit'].", ".$planes['Instit']['nombre']
 
 ?>
 
@@ -20,29 +20,32 @@ $nombre_instit = $instit['Tipoinstit']['name']." Nº ".$instit['Instit']['nroinst
 	
 	<dl>	
 	
-		<dt><?php __('Tipo de Institución'); ?></dt>
+		<dt><?php __('Jurisdicción'); ?></dt>
 		<dd>
-			<?php 
-			echo $this->requestAction('/tipoinstits/get_name/'.$instit['Instit']['tipoinstit_id']);  ?>
+			<?php echo $planes['Jurisdiccion']['name'];  ?>
 			&nbsp;
 		</dd>	
-	
-		<dt><?php __('Domicilio'); ?></dt>
-		<dd>
-			<?php echo $instit['Instit']['direccion']; ?>
-			&nbsp;
-		</dd>			
 						
 		<dt><?php __('Localidad'); ?></dt>
 		<dd>
-			<?php echo $instit['Instit']['localidad']; ?>
+			<?php echo $planes['Instit']['localidad']; ?>
 			&nbsp;
 		</dd>		
-		<dt><?php __('Jurisdicción'); ?></dt>
+		
+						
+		<dt><?php __('Departamento'); ?></dt>
 		<dd>
-			<?php echo $this->requestAction('/jurisdicciones/get_name/'.$instit['Instit']['jurisdiccion_id']);  ?>
+			<?php echo $planes['Instit']['depto']; ?>
 			&nbsp;
-		</dd>
+		</dd>		
+		
+	
+		<dt><?php __('Domicilio'); ?></dt>
+		<dd>
+			<?php echo $planes['Instit']['direccion']; ?>
+			&nbsp;
+		</dd>			
+		
 	</dl>		
 		
 		
@@ -61,7 +64,7 @@ $nombre_instit = $instit['Tipoinstit']['name']." Nº ".$instit['Instit']['nroinst
 	<?php
 		$i = 0;
 
-		foreach ($planes as $plan):
+		foreach ($planes['Plan'] as $plan):
 			$class = null;
 			if ($i++ % 2 == 0) {
 				$class = ' class="altrow"';
@@ -85,7 +88,7 @@ $nombre_instit = $instit['Tipoinstit']['name']." Nº ".$instit['Instit']['nroinst
 
 	<div class="actions" >
 		<ul>
-			<li><?php echo $html->link(__('Nueva Oferta', true), array('controller'=> 'planes', 'action'=>'add/'. $instit['Instit']['id']));?> </li>
+			<li><?php echo $html->link(__('Nueva Oferta', true), array('controller'=> 'planes', 'action'=>'add/'. $planes['Instit']['id']));?> </li>
 		</ul>
 	</div>
 </div>

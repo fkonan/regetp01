@@ -84,8 +84,8 @@ class AppController extends Controller {
 			if ($this->name == 'Instits' && $this->action == 'search_form') {$llAuth = true;}
 			if ($this->name == 'Instits' && $this->action == 'view') {$llAuth = true;}
 			if ($this->name == 'Instits' && $this->action == 'edit') {$llAuth = true;}
+			if ($this->name == 'Instits' && $this->action == 'planes_relacionados') {$llAuth = true;}
 			
-			if ($this->name == 'Planes' && $this->action == 'planes_relacionados') {$llAuth = true;}
 			if ($this->name == 'Planes' && $this->action == 'add') {$llAuth = true;}
 			if ($this->name == 'Planes' && $this->action == 'view') {$llAuth = true;}
 			if ($this->name == 'Planes' && $this->action == 'edit') {$llAuth = true;}
@@ -101,8 +101,8 @@ class AppController extends Controller {
 			if ($this->name == 'Instits' && $this->action == 'search') {$llAuth = true;}
 			if ($this->name == 'Instits' && $this->action == 'search_form') {$llAuth = true;}
 			if ($this->name == 'Instits' && $this->action == 'view') {$llAuth = true;}
-	
-			if ($this->name == 'Planes' && $this->action == 'planes_relacionados') {$llAuth = true;}
+			if ($this->name == 'Instits' && $this->action == 'planes_relacionados') {$llAuth = true;}
+			
 			if ($this->name == 'Planes' && $this->action == 'view') {$llAuth = true;}
 			
 			break;

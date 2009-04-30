@@ -7,7 +7,7 @@
 	<fieldset>
 	
 	<?php
-		echo $form->input('instit_id',array('type'=>'hidden','value'=>$instit_id));
+		echo $form->input('instit_id',array('type'=>'hidden','value'=>$instit['id']));
 		echo $form->input('oferta_id');
 		echo $form->input('norma');
 		echo $form->input('nombre');
