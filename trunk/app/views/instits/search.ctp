@@ -1,8 +1,7 @@
 
 <h1><?= __('Buscar Institución')?></h1>
 
-<? //pr($paginator->options(array('url' => $this->passedArgs))); 
-//pr($url_conditions);
+<? 
 $paginator->options(array('url' => $url_conditions));
 ?>
 

@@ -25,19 +25,21 @@ $nombre_instit = $planes['Tipoinstit']['name']." Nº ".$planes['Instit']['nroinst
 			<?php echo $planes['Jurisdiccion']['name'];  ?>
 			&nbsp;
 		</dd>	
+					
 						
+		<dt><?php __('Departamento'); ?></dt>
+		<dd>
+			<?php echo $planes['Instit']['depto']; ?>
+			&nbsp;
+		</dd>	
+			
 		<dt><?php __('Localidad'); ?></dt>
 		<dd>
 			<?php echo $planes['Instit']['localidad']; ?>
 			&nbsp;
 		</dd>		
 		
-						
-		<dt><?php __('Departamento'); ?></dt>
-		<dd>
-			<?php echo $planes['Instit']['depto']; ?>
-			&nbsp;
-		</dd>		
+			
 		
 	
 		<dt><?php __('Domicilio'); ?></dt>

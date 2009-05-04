@@ -43,7 +43,7 @@
 		/**
 		 *    DEPENDENCIA
 		 */	
-		echo $form->input('dependencia_id');
+		echo $form->input('dependencia_id',array('label'=>'Tipo de Dependencia'));
 		
 		
 		/**
