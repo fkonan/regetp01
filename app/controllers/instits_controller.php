@@ -7,7 +7,7 @@ class InstitsController extends AppController {
 
 	function beforeFilter(){
 		parent::beforeFilter();
-		$this->rutaUrl_for_layout[] =array('name'=> 'Inicio','link'=>'/Instits/search_form' );
+		$this->rutaUrl_for_layout[] =array('name'=> 'Buscador','link'=>'/Instits/search_form' );
 	}
 	
 	function index() {		
@@ -262,13 +262,13 @@ class InstitsController extends AppController {
 			 */
 			if($this->data['Instit']['depto'] != ''){
 				$this->paginate['conditions']['lower(to_ascii(Instit.depto)) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->data['Instit']['depto']));
-				$array_condiciones['depto'] = $this->data['Instit']['depto'];
+				$array_condiciones['Departamento'] = $this->data['Instit']['depto'];
 				$url_conditions['depto'] = $this->data['Instit']['depto'];			
 			}
 			if(isset($this->passedArgs['depto'])){	
             	if($this->passedArgs['depto'] != ''){
 					$this->paginate['conditions']['lower(to_ascii(Instit.depto)) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->passedArgs['depto']));
-					$array_condiciones['depto'] = $this->passedArgs['depto'];
+					$array_condiciones['Departamento'] = $this->passedArgs['depto'];
 					$url_conditions['depto'] = $this->passedArgs['depto'];			
 				}
             }
@@ -281,7 +281,7 @@ class InstitsController extends AppController {
 				$this->paginate['conditions']['Instit.gestion_id'] = $this->data['Instit']['gestion_id'];
 				$this->Instit->Gestion->recursive = -1;
 				$aux = $this->Instit->Gestion->findById($this->data['Instit']['gestion_id']);
-				$array_condiciones['Gestión'] = $aux['Gestion']['name'];
+				$array_condiciones['Ámbito de Gestión'] = $aux['Gestion']['name'];
 				$url_conditions['gestion_id'] = $this->data['Instit']['gestion_id'];
 			}
 			if(isset($this->passedArgs['gestion_id'])){
@@ -289,7 +289,7 @@ class InstitsController extends AppController {
 					$this->paginate['conditions']['Instit.gestion_id'] = $this->passedArgs['gestion_id'];
 					$this->Instit->Gestion->recursive = -1;
 					$aux = $this->Instit->Gestion->findById($this->passedArgs['gestion_id']);
-					$array_condiciones['Gestión'] = $aux['Gestion']['name'];
+					$array_condiciones['Ámbito de Gestión'] = $aux['Gestion']['name'];
 					$url_conditions['gestion_id'] = $this->passedArgs['gestion_id'];
 				}
 			}		
@@ -318,54 +318,55 @@ class InstitsController extends AppController {
 			 *     ES ANEXO 
 			 */
 			if(isset($this->data['Instit']['esanexo'])){
-				if((int)$this->data['Instit']['esanexo']== -1){
-					$basura = 1;
-				}else{				
-					$this->paginate['conditions']['Instit.esanexo'] = $this->data['Instit']['esanexo'];
-					$aux = $this->data['Instit']['esanexo']? 'Si':'No';
-					$array_condiciones['Es Anexo'] = $aux;
-					$url_conditions['esanexo'] = $this->data['Instit']['esanexo'];
-				}
+				switch ((int)$this->data['Instit']['esanexo']):
+					case -1: break;
+					case 0:
+					case 1:		
+						$this->paginate['conditions']['Instit.esanexo'] = $this->data['Instit']['esanexo'];
+						$aux = $this->data['Instit']['esanexo']? 'Si':'No';
+						$array_condiciones['Es Anexo'] = $aux;
+						$url_conditions['esanexo'] = $this->data['Instit']['esanexo'];
+					break;
+				endswitch;
 			}
 			if(isset($this->passedArgs['esanexo'])){
-				if((int)$this->passedArgs['esanexo'] == -1){
-						$basura = 1;
-					}
-				else{
-					if($this->passedArgs['esanexo']){
+				switch ((int)$this->passedArgs['esanexo']):
+					case -1: break;
+					case 0:
+					case 1:	
 						$this->paginate['conditions']['Instit.esanexo'] = $this->passedArgs['esanexo'];
 						$aux = $this->passedArgs['esanexo']? 'Si':'No';
-					$array_condiciones['Es Anexo'] = $aux;
+						$array_condiciones['Es Anexo'] = $aux;
 						$url_conditions['esanexo'] = $this->passedArgs['esanexo'];
-					}
-				}
+					break;
+				endswitch;
 			}
 			
 			/**
 			 *     ACTIVO 
 			 */
 			if(isset($this->data['Instit']['activo'])){
-				if((int)$this->data['Instit']['activo']== -1){
-					$basura = 1;
-				}else{				
-					$this->paginate['conditions']['Instit.activo'] = $this->data['Instit']['activo'];
-					$aux = $this->data['Instit']['activo']? 'Si':'No';
-					$array_condiciones['Activo'] = $aux;
-					$url_conditions['activo'] = $this->data['Instit']['activo'];
-				}
+				switch ((int)$this->data['Instit']['activo']):
+					case -1: break; // es el valor vacio. O sea, buscar por todos
+					case 0: // inactivas
+					case 1: //buscar activas				 
+						$this->paginate['conditions']['Instit.activo'] = $this->data['Instit']['activo'];
+						$aux = $this->data['Instit']['activo']? 'Si':'No';
+						$array_condiciones['Ingresada al RFIETP'] = $aux;
+						$url_conditions['activo'] = $this->data['Instit']['activo'];
+				endswitch;
 			}	
 			if(isset($this->passedArgs['activo'])){
-				if((int)$this->passedArgs['activo'] == -1){
-						$basura = 1;
-				}
-				else{
-					if($this->passedArgs['activo']){
+				switch ((int)$this->passedArgs['activo']):
+					case -1: $basura = 1; break; // es el valor empty. O sea, buscar por todos
+					case 0: //inactivas
+					case 1: //activas								
 						$this->paginate['conditions']['Instit.activo'] = $this->passedArgs['activo'];
 						$aux = $this->passedArgs['activo']? 'Si':'No';
-						$array_condiciones['Activo'] = $aux;
+						$array_condiciones['Ingresada al RFIETP'] = $aux;
 						$url_conditions['activo'] = $this->passedArgs['activo'];
-					}
-				}	
+					break;
+				endswitch;	
 			}	
             
 			
@@ -399,6 +400,7 @@ class InstitsController extends AppController {
 	 * @param $instit_id
 	 */
 	function planes_relacionados($id = null){
+		$v_plan_matricula = array();
 		if (!$id) {
 			$this->Session->setFlash(__('Institución Inválida.', true));
 			$this->redirect(array('controller'=>'Istits','action'=>'view/'.$id));

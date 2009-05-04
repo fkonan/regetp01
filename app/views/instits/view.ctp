@@ -11,7 +11,7 @@ $nombre_instit = $instit['Tipoinstit']['name']." Nº ".$instit['Instit']['nroinst
 
 ?>
 
-<div id="escuela_estado" class="<? echo $instit['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $instit['Instit']['activo']? 'Ingresada':'No Ingresada';?></div>
+<div id="escuela_estado" class="<? echo $instit['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $instit['Instit']['activo']? 'Ingresada al RFIETP':'No Ingresada al RFIETP';?></div>
 <h1><?= $cue_instit ?>
 	<br><?= $nombre_instit?>
 </h1>
@@ -26,7 +26,7 @@ $nombre_instit = $instit['Tipoinstit']['name']." Nº ".$instit['Instit']['nroinst
 			&nbsp;
 		</dd>
 		
-		<dt><?php __('Dependencia'); ?></dt>
+		<dt><?php __('Tipo de Dependencia'); ?></dt>
 		<dd>
 			<?php echo $instit['Dependencia']['name']; ?>
 			&nbsp;

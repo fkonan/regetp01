@@ -25,13 +25,15 @@
 		
 		echo $form->input('localidad', array('label'=>'Localidad')); 
 		echo $form->input('depto', array('label'=> 'Departamento'));
-		echo $form->input('dependencia_id', array('empty' => 'Todas'));
+		echo $form->input('dependencia_id', array('empty' => 'Todas','label'=>'Tipo de Dependencia'));
 		
-		$array_anexo = array('-1'=>'Buscar Todas','0'=>'No','1'=>'Si');
-		echo $form->input('esanexo',array('options'=> $array_anexo,'label'=>'Anexo'));
+		// no hay busqueda por anexo
+		//$array_anexo = array('-1'=>'Buscar Todas','0'=>'No','1'=>'Si');
+		//echo $form->input('esanexo',array('options'=> $array_anexo,'label'=>'Anexo'));
 		
-		$array_activa = array('-1'=>'Buscar Todas','0'=>'No','1'=>'Si');
-		echo $form->input('activo',array('options'=> $array_activa,'label'=>'Institución Ingresada'));
+		$array_activa = array('1'=>'Si','-1'=>'Buscar Todas','0'=>'No');
+		echo $form->input('activo',array('options'=> $array_activa,
+						  'label'=>'Institución Ingresada al RFIETP'));
 		
 		
 		echo $form->end('Buscar'); ?>

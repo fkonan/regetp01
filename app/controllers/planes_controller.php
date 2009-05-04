@@ -7,7 +7,7 @@ class PlanesController extends AppController {
 	function beforeFilter(){
 		parent::beforeFilter();
 		//preparo la rutaUrl_for_layout ver en appController para mas informacion
-		$this->rutaUrl_for_layout[] = array('name'=> 'Inicio','link'=>'/Instits/search_form' );
+		$this->rutaUrl_for_layout[] = array('name'=> 'Buscador','link'=>'/Instits/search_form' );
 		
 	}
 
@@ -44,6 +44,11 @@ class PlanesController extends AppController {
 
 		$this->rutaUrl_for_layout[] = array('name'=> 'Dato Institución','link'=>'/Instits/view/'.$instit['Instit']['id'] );
 		$this->rutaUrl_for_layout[] = array('name'=> 'Oferta Educativa','link'=>'/Instits/planes_relacionados/'.$instit['Instit']['id'] );
+		
+		//	Si es FP mostrar la vista para FP, sino mostrar la vista por default (view)
+        if ($plan['Plan']['oferta_id']== 1){ // 1, es el numero de ID de una oferta FP
+            $this->render('view_fp');
+        }
 
 	}
 
