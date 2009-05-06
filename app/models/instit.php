@@ -309,5 +309,53 @@ class Instit extends AppModel {
   	}
   
 	
+  	function find($conditions = null, $fields = array(), $order = null, $recursive = null) {
+  		$instituciones_data = parent::find($conditions, $fields, $order, $recursive);
+	
+		if (is_array($instituciones_data)):
+		/*
+		 * primero calculo laprofundiddad
+		 * o sea, quiero saber cuantos nivles del array tengo que ir para 
+		 * llegar alos datos de Instit
+		 */  		
+			$array_recorro = $instituciones_data;
+		 	
+		 	$profundidad = 0;
+	  		while (list($key, $idata) = each($array_recorro)):  	
+	  			$aux = "$key";
+	  			$instit = "Instit";		
+	  			if($aux == $instit){
+	  				break;
+	  			}else{
+	  				$profundidad++;
+	  			}
+	  		endwhile;
+	  	
+	  		$aux = &$instituciones_data;
+	  		if ($profundidad >0):
+			  	for ($i=0; $i<sizeof($instituciones_data);$i++):		
+			  		$aux = &$instituciones_data[$i]; 		
+		  		
+			  		$nombre = $aux['Instit']['nombre'];
+			  		$numero = $aux['Instit']['nroinstit'];
+			  		$nombre_tipoinstit = $aux['Tipoinstit']['name'];
+			  		
+				  	$aux['Instit']['nombre_completo'] = $nombre_tipoinstit;
+				  	$aux['Instit']['nombre_completo'] .= ($numero > 0 || $numero != '')?" Nº $numero":"";
+				  	$aux['Instit']['nombre_completo'] .= ($nombre != '')?", $nombre":"";
+			  	endfor;
+			 else:
+			 	$nombre = $aux['Instit']['nombre'];
+			  	$numero = $aux['Instit']['nroinstit'];
+			  	$nombre_tipoinstit = $aux['Tipoinstit']['name'];
+			 	$aux['Instit']['nombre_completo'] = $nombre_tipoinstit;
+				$aux['Instit']['nombre_completo'] .= ($numero > 0 || $numero != '')?" Nº $numero":"";
+				$aux['Instit']['nombre_completo'] .= ($nombre != '')?", $nombre":"";
+			endif;
+	  	endif;
+  		
+  		
+  		return $instituciones_data;
+  	}
 }
 ?>

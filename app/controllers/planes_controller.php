@@ -42,7 +42,7 @@ class PlanesController extends AppController {
 		$this->set('instit',$instit['Instit']);
 		$this->set('matricula', $this->Plan->Anio->matricula_del_plan($id));
 
-		$this->rutaUrl_for_layout[] = array('name'=> 'Dato Institución','link'=>'/Instits/view/'.$instit['Instit']['id'] );
+		$this->rutaUrl_for_layout[] = array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$instit['Instit']['id'] );
 		$this->rutaUrl_for_layout[] = array('name'=> 'Oferta Educativa','link'=>'/Instits/planes_relacionados/'.$instit['Instit']['id'] );
 		
 		

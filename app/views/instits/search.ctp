@@ -104,7 +104,12 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 		>
 	
 		<div class="instit_data_bs">
-			<div class="instit_name"><b><?= $instit['Instit']['cue'].'-0'.$instit['Instit']['anexo']?></b> - <?= $instit['Instit']['nombre']; ?></div>
+			<? 
+			//el anexo viene con 1 solo digito por lo general. Pero para leerlo siempre hay que ponerlo
+			// en formato de 2 digitos
+			$armar_anexo = ($instit['Instit']['anexo']<10)?'0'.$instit['Instit']['anexo']:$instit['Instit']['anexo']; 
+			?>
+			<div class="instit_name"><b><?= $instit['Instit']['nombre_completo']; ?></div>
 			<div class="instit_atributte"><b>Tipo: </b> <?= $instit['Tipoinstit']['name'] ?></div>
 			<br />
 			<div class="instit_atributte"><b>Domicilio: </b> <?= $instit['Instit']['direccion'] ?></div>
