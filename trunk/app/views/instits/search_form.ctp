@@ -31,7 +31,7 @@
 		//$array_anexo = array('-1'=>'Buscar Todas','0'=>'No','1'=>'Si');
 		//echo $form->input('esanexo',array('options'=> $array_anexo,'label'=>'Anexo'));
 		
-		$array_activa = array('1'=>'Si','-1'=>'Buscar Todas','0'=>'No');
+		$array_activa = array('-1'=>'Buscar Todas','0'=>'No','1'=>'Si');
 		echo $form->input('activo',array('options'=> $array_activa,
 						  'label'=>'Institución Ingresada al RFIETP'));
 		

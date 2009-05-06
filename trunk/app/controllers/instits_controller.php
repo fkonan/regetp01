@@ -413,7 +413,7 @@ class InstitsController extends AppController {
 			endforeach;
 			$this->set('planes',$this->data);	
 			$this->set('v_plan_matricula',$v_plan_matricula);
-			$this->rutaUrl_for_layout[] =array('name'=> 'Dato Intistitución','link'=>'/Instits/view/'.$this->data['Instit']['id'] );
+			$this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$this->data['Instit']['id'] );
 		}
 		else{ //cuando la institucion no tiene planes relacionados mostrar esto
 			$ins_aux = $this->Plan->Instit->read(null,$id);
