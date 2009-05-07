@@ -246,14 +246,6 @@ class Instit extends AppModel {
 				'allowEmpty' => false,
 				'message' => 'Seleccione un Tipo de Institución.'
 			),
-		),
-		'nombre' => array(
-			'notEmpty' => array(
-				'rule' => VALID_NOT_EMPTY,
-				'required' => true,
-				'allowEmpty' => false,
-				'message' => 'El Nombre no puede quedar vacío.'
-			),
 		)
 	);
 	
@@ -311,8 +303,8 @@ class Instit extends AppModel {
 	
   	function find($conditions = null, $fields = array(), $order = null, $recursive = null) {
   		$instituciones_data = parent::find($conditions, $fields, $order, $recursive);
-	
-		if (is_array($instituciones_data)):
+
+		if (is_array($instituciones_data) && sizeof($instituciones_data)>0 && $conditions != 'list' && $conditions != 'count'):
 		/*
 		 * primero calculo laprofundiddad
 		 * o sea, quiero saber cuantos nivles del array tengo que ir para 

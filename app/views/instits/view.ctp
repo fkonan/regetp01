@@ -5,15 +5,11 @@
 //si el anexo tiene 1 solo digito le coloco un cero adelante
 $anexo = ($instit['Instit']['anexo']<10)?'0'.$instit['Instit']['anexo']:$instit['Instit']['anexo'];
 $cue_instit = $instit['Instit']['cue'].$anexo;
-
-// Genero el nombre completo de la instition para ser mostrado como titulo
-$nombre_instit = $instit['Tipoinstit']['name']." Nº ".$instit['Instit']['nroinstit'].", ".$instit['Instit']['nombre']
-
 ?>
 
-<div id="escuela_estado" class="<? echo $instit['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $instit['Instit']['activo']? 'Ingresada al RFIETP':'No Ingresada al RFIETP';?></div>
+<div id="escuela_estado" class="<? echo $instit['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $instit['Instit']['activo']? 'Institución Ingresada al RFIETP':'Institución NO Ingresada al RFIETP';?></div>
 <h1><?= $cue_instit ?>
-	<br><?= $nombre_instit?>
+	<br><?= $instit['Instit']['nombre_completo']?>
 </h1>
 
 	
@@ -31,6 +27,14 @@ $nombre_instit = $instit['Tipoinstit']['name']." Nº ".$instit['Instit']['nroinst
 			<?php echo $instit['Dependencia']['name']; ?>
 			&nbsp;
 		</dd>
+		
+		<? if($instit['Instit']['nombre_dep']): ?>
+		<dt><?php __('Nombre de la Dependencia'); ?></dt>
+		<dd>
+			<?php echo $instit['Instit']['nombre_dep']; ?>
+			&nbsp;
+		</dd>
+		<? endif; ?>
 		
 		<dt><?php __('Jurisdicción'); ?></dt>
 		<dd>

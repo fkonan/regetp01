@@ -43,11 +43,19 @@ class AniosController extends AppController {
          */
         $this->Anio->Plan->recursive = -1;
         $plan   = $this->Anio->Plan->find('all',array('conditions'=>array('Plan.id'=>$plan_id)));
-        //pr($plan);
-        if($plan[0]['Plan']['oferta_id']==1){//es un FP, asique mostrar la vista de años para FP
-            $this->render('/Anios/add_FP');
-        }
-		
+
+        switch ($plan[0]['Plan']['oferta_id']):
+			case 1://es un FP, asique mostrar la vista de años para FP
+	            $this->render('/Anios/add_fp');
+	            break;
+			case 2: // IT
+			case 3: //MT
+				$this->render('/Anios/add');
+	            break;
+			case 4: //SNU
+				$this->render('/Anios/add_snu');
+	            break;
+        endswitch;		
 	}
 
 	function edit($id = null) {		
@@ -79,9 +87,18 @@ class AniosController extends AppController {
         $this->Anio->Plan->recursive = -1;
         $plan   = $this->Anio->Plan->find('all',array('conditions'=>array('Plan.id'=>$this->data['Anio']['plan_id'])));
  
-        if($plan[0]['Plan']['oferta_id']==1){//es un FP, asique mostrar la vista de años para FP
-        	$this->render('edit_fp');    
-        }
+        switch ($plan[0]['Plan']['oferta_id']):
+			case 1://es un FP, asique mostrar la vista de años para FP
+	            $this->render('/Anios/edit_fp');
+	            break;
+			case 2: // IT
+			case 3: //MT
+				$this->render('/Anios/edit');
+	            break;
+			case 4: //SNU
+				$this->render('/Anios/edit_snu');
+	            break;
+        endswitch;	
 	}
 
 	function delete($id = null) {

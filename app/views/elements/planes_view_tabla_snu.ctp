@@ -26,7 +26,7 @@
 		
 			<tr id="fila_plan_<?= $anio['ciclo_id'].'_'.$anio['anio']?>" <?php echo $class;?>>
 				
-				<td><?php echo $anio['anio'];?></td>
+				<td><?php echo $anio['anio']."º";?></td>
 				
 				<td><?php echo $anio['matricula'];$tot_matricula += $anio['matricula']; ?></td>
 				<td><?php echo $anio['secciones'];$tot_secciones += $anio['secciones'];?></td>

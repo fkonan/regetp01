@@ -833,6 +833,8 @@ div.code-coverage-results span.result-good {
 .instit_name{
 	color: black;
 	font-weight: bold;
+	overflow: hidden;
+	height: 1em;
 }
 
 .instit_atributte{
@@ -847,7 +849,7 @@ div.code-coverage-results span.result-good {
 .instit_link_list{
 	font-size: small;
 	text-align: right;
-	margin-top: -3em;
+	margin-top: 1em;
 	float: right;
 }
 .instit_link_list A{

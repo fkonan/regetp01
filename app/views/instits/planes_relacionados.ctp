@@ -1,22 +1,15 @@
-<?
-
-//si el anexo tiene 1 solo digito le coloco un cero adelante
-$anexo = ($planes['Instit']['anexo']<10)?'0'.$planes['Instit']['anexo']:$planes['Instit']['anexo'];
-$cue_instit = $planes['Instit']['cue'].$anexo;
-
-// Genero el nombre completo de la instition para ser mostrado como titulo
-$nombre_instit = $planes['Tipoinstit']['name']." Nº ".$planes['Instit']['nroinstit'].", ".$planes['Instit']['nombre']
-
-?>
-
 
 
 <div class="related">
 	<h1><?php __('Oferta Educativa');?></h1>
 
 	
-	<h2><?= $cue_instit?><br><?= $nombre_instit ?></h2>
-	
+	<?
+	//si el anexo tiene 1 solo digito le coloco un cero adelante
+	$anexo = ($planes['Instit']['anexo']<10)?'0'.$planes['Instit']['anexo']:$planes['Instit']['anexo'];
+	$cue_instit = $planes['Instit']['cue'].$anexo;
+	?>
+	<h2><?= $cue_instit?><br><?= $planes['Instit']['nombre_completo'] ?></h2>
 	
 	<dl>	
 	
@@ -38,9 +31,7 @@ $nombre_instit = $planes['Tipoinstit']['name']." Nº ".$planes['Instit']['nroinst
 			<?php echo $planes['Instit']['localidad']; ?>
 			&nbsp;
 		</dd>		
-		
 			
-		
 	
 		<dt><?php __('Domicilio'); ?></dt>
 		<dd>
@@ -49,16 +40,14 @@ $nombre_instit = $planes['Tipoinstit']['name']." Nº ".$planes['Instit']['nroinst
 		</dd>			
 		
 	</dl>		
-		
-		
-		
+	
 		
 	<h2>Oferta</h2>	
 	<?php if ($planes):?>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
 		<th><?php __('Oferta'); ?></th>
-		<th><?php __('Nombre'); ?></th>
+		<th><?php __('Nombre del Título/Certificación'); ?></th>
 		<th><?php __('Sector'); ?></th>
 		<th><?php __('Matrícula'); ?></th>
 		<th class="actions"><?php __('');?></th>
