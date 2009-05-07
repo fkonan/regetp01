@@ -64,7 +64,7 @@ class InstitsController extends AppController {
 		$tipoinstits = $this->Instit->Tipoinstit->find('list',array('conditions'=>'Tipoinstit.jurisdiccion_id = '.$this->data['Instit']['jurisdiccion_id']));
 		$jurisdicciones = $this->Instit->Jurisdiccion->find('list');
 		$this->set(compact('gestiones','dependencias','tipoinstits','jurisdicciones'));
-		$this->rutaUrl_for_layout[] =array('name'=> $this->data['Instit']['nombre'],'link'=>'/Instits/view/'.$id );
+		$this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$id );
 	}
 
 	function delete($id = null) {

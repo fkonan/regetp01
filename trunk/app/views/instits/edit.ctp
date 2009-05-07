@@ -9,7 +9,7 @@
 		/**
 		 *    ACTIVO
 		 */	
-		echo $form->input('activo',array('type'=> 'checkbox'));		
+		echo $form->input('activo',array('type'=> 'checkbox','label'=>'Institución ingresada al RFIETP'));		
 		
 		
 		/**
@@ -38,12 +38,17 @@
 		/**
 		 *    GESTION
 		 */	
-		echo $form->input('gestion_id',array('label'=>'Gestión'));
+		echo $form->input('gestion_id',array('label'=>'Ámbito de Gestión'));
 		
 		/**
 		 *    DEPENDENCIA
 		 */	
 		echo $form->input('dependencia_id',array('label'=>'Tipo de Dependencia'));
+		
+		/**
+		 *    NOMBRE DE LA DEPENDENCIA
+		 */	
+		echo $form->input('nombre_dep',array('label'=>'Nombre de la Dependencia'));
 		
 		
 		/**
@@ -53,7 +58,7 @@
 		 */	
 		$meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
 		echo $form->input('jurisdiccion_id', array('empty' => array('0'=>'Todas'),'id'=>'jurisdiccion_id','label'=>'Jurisdicción','after'=>$meter));		
-		echo $form->input('tipoinstit_id', array('empty' => 'Todas','type'=>'select','label'=>'Tipo De Institución','after'=> '<br /><cite>Para activar este campo, seleccione primero una jurisdicción</cite>'));
+		echo $form->input('tipoinstit_id', array('empty' => 'Todas','type'=>'select','label'=>'Tipo de Institución','after'=> '<br /><cite>Para activar este campo, seleccione primero una jurisdicción</cite>'));
 		echo $ajax->observeField('jurisdiccion_id',
                                    array(  	'url' => '/tipoinstits/ajax_select_form_por_jurisdiccion',
                                    			//'controller' => 'TipoInstits',

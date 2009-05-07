@@ -1,6 +1,14 @@
-<h1><?php  __('Oferta Educativa');?></h1>
+<h1><?php  
+	echo " [".$plan['Oferta']['abrev']."]  ";
+	__('Oferta Educativa');
+		?></h1>
 
-<h2><?php echo $instit['cue'].'-0'.$instit['anexo']." <br>".$instit['nombre']; ?></h2>
+
+<?
+$anexo = ($instit['anexo']<10)?'0'.$instit['anexo']:$instit['anexo'];
+$cue_instit = $instit['cue'].$anexo;
+?>
+<h2><?php echo $cue_instit." <br>".$instit['nombre_completo']; ?></h2>
 
 <div class="planes view">
 	<dl><?php $i = 0; $class = ' class="altrow"';?>
@@ -12,7 +20,7 @@
 		</dd>
 		
 
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Norma'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Normativa'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $plan['Plan']['norma']; ?>
 			&nbsp;
@@ -100,7 +108,7 @@
 	<div class="actions">
 		<ul>
 			<?php //echo $html->link(__('Agregar Nuevo Año', true), array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id']));?>
-			<li><a href="<?= $html->url(array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id']))?>" onClick="window.open('<?= $html->url(array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id']))?>','_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=310,height=380'); return false;">Agregar Nuevo Año</a></li>
+			<li><a href="<?= $html->url(array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id']))?>" onClick="window.open('<?= $html->url(array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id']))?>','_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=310,height=380'); return false;">Agregar Datos</a></li>
 		</ul>
 	</div>
 

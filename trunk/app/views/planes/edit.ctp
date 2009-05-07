@@ -1,6 +1,10 @@
 <h1>Editar Plan</h1>
 
-<h2><?php echo $instit['cue'].'-0'.$instit['anexo']." <br>".$instit['nombre']; ?></h2>
+<?
+$anexo = ($instit['anexo']<10)?'0'.$instit['anexo']:$instit['anexo'];
+$cue_instit = $instit['cue'].$anexo;
+?>
+<h2><?php echo $cue_instit." <br>".$instit['nombre_completo']; ?></h2>
 
 <div class="planes form">
 <?php echo $form->create('Plan');?>
@@ -9,7 +13,7 @@
 		echo $form->input('id');
 		echo $form->input('instit_id',array('type'=>'hidden'));
 		echo $form->input('oferta_id');
-		echo $form->input('norma');
+		echo $form->input('norma',array('label'=>'Normativa'));
 		echo $form->input('nombre');
 		echo $form->input('perfil');
 		echo $form->input('sector');

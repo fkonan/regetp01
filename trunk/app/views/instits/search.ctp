@@ -5,21 +5,23 @@
 $paginator->options(array('url' => $url_conditions));
 ?>
 
-<H2>Criterios de búsqueda seleccionados</H2>
-<dl class="criterios_busq">
-<?
-
- foreach($conditions as $key => $value){
-	?><dt><?
-		echo '- '.$key.': ';
-	?></dt><?
-	?><dd><?
-		echo $value;
-	?></dd><?
-}
-
-?>
-</dl>
+<? if (sizeof($conditions)>0): ?>
+	<H2>Criterios de búsqueda seleccionados</H2>
+	<dl class="criterios_busq">
+	<?
+	
+	 foreach($conditions as $key => $value){
+		?><dt><?
+			echo '- '.$key.': ';
+		?></dt><?
+		?><dd><?
+			echo $value;
+		?></dd><?
+	}
+	
+	?>
+	</dl>
+<? endif; ?>
 
 <h2>Ordenar los resultados por:</h2>
 <ul class="lista_horizontal">
@@ -101,26 +103,26 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 		onclick="window.location='<?= $html->url(array('controller'=> 'Instits', 'action'=>'view/'.$instit['Instit']['id'])) ?>'"
 		onmouseover="$('lista_instit_<?= $instit['Instit']['id']?>').addClassName('lista_link_hover');"
 		onmouseout="$('lista_instit_<?= $instit['Instit']['id']?>').removeClassName('lista_link_hover');"
+		title="<?= $instit['Instit']['nombre_completo']?>"
 		>
-	
+		
+		<div class="instit_link_list">
+			<a href="#MasInfo">+ Info</a>
+		</div>	
 		<div class="instit_data_bs">
 			<? 
 			//el anexo viene con 1 solo digito por lo general. Pero para leerlo siempre hay que ponerlo
 			// en formato de 2 digitos
 			$armar_anexo = ($instit['Instit']['anexo']<10)?'0'.$instit['Instit']['anexo']:$instit['Instit']['anexo']; 
 			?>
-			<div class="instit_name"><b><?= $instit['Instit']['nombre_completo']; ?></div>
-			<div class="instit_atributte"><b>Tipo: </b> <?= $instit['Tipoinstit']['name'] ?></div>
-			<br />
+			<div class="instit_name"><b><?= $instit['Instit']['nombre_completo']; ?></b></div>
 			<div class="instit_atributte"><b>Domicilio: </b> <?= $instit['Instit']['direccion'] ?></div>
 			<br />		
 			<div class="instit_atributte"><b>Gestión: </b><?= $instit['Gestion']['name'] ?></div>
 			<div class="instit_atributte"><b>Jurisdicción: </b> <?= $instit['Jurisdiccion']['name'] ?></div>
 			<div class="instit_atributte"><b>Localidad: </b><?= $instit['Instit']['localidad'] ?></div>
 		</div>
-		<div class="instit_link_list">
-			<a href="#MasInfo">+ Info</a>
-		</div>		
+			
 	</li>
 	
 		<?
