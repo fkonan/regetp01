@@ -1,7 +1,4 @@
-<h1><?php  
-	echo " [".$plan['Oferta']['abrev']."]  ";
-	__('Oferta Educativa');
-		?></h1>
+<h1><?php  __('Oferta Educativa');?></h1>
 
 
 <?

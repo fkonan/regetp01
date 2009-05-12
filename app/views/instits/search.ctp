@@ -115,7 +115,7 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 			// en formato de 2 digitos
 			$armar_anexo = ($instit['Instit']['anexo']<10)?'0'.$instit['Instit']['anexo']:$instit['Instit']['anexo']; 
 			?>
-			<div class="instit_name"><b><?= $instit['Instit']['nombre_completo']; ?></b></div>
+			<div class="instit_name"><b><?= "".$instit['Instit']['cue'].$armar_anexo." - ". $instit['Instit']['nombre_completo']; ?></b></div>
 			<div class="instit_atributte"><b>Domicilio: </b> <?= $instit['Instit']['direccion'] ?></div>
 			<br />		
 			<div class="instit_atributte"><b>Gestión: </b><?= $instit['Gestion']['name'] ?></div>
