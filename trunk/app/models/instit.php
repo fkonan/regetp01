@@ -349,5 +349,13 @@ class Instit extends AppModel {
   		
   		return $instituciones_data;
   	}
+  	
+  	function beforeSave(){
+  		if($this->data[$this->name]['anio_creacion']== ''){
+  			$this->data[$this->name]['anio_creacion'] = 0;
+  		}
+  		return true;
+  		//debug($this->data);	
+  	}
 }
 ?>

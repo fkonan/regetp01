@@ -88,7 +88,7 @@ $cue_instit = $instit['Instit']['cue'].$anexo;
 
 		<dt><?php __('Año de Creación'); ?></dt>
 		<dd>
-			<?php echo $instit['Instit']['anio_creacion']; ?>
+			<?php echo ($instit['Instit']['anio_creacion']==0)?'':$instit['Instit']['anio_creacion']; ?>
 			&nbsp;
 		</dd>
 	</dl>

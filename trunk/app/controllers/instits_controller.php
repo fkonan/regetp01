@@ -57,6 +57,11 @@ class InstitsController extends AppController {
 		}
 		if (empty($this->data)) {
 			$this->data = $this->Instit->read(null, $id);
+			
+			//le pongo el valor vacio para que la vista muestre vacio. Luego el beforeSave se va a encargar d eagregarle un CERO para que cumpla con el NOT NULL de la BD
+			if(isset($this->data['Instit']['anio_creacion']) && $this->data['Instit']['anio_creacion'] == 0){
+				$this->data['Instit']['anio_creacion'] = '';
+			}
 		}
 		
 		$gestiones = $this->Instit->Gestion->find('list');

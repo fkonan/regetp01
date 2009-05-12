@@ -819,7 +819,7 @@ div.code-coverage-results span.result-good {
 
 .listado LI{	
 	border: thin solid #E0ECF8;
-	padding: 0px 0px 0px 15px;
+	padding: 6px 0px 6px 15px;
 	margin: 0px;
 }
 
@@ -833,8 +833,6 @@ div.code-coverage-results span.result-good {
 .instit_name{
 	color: black;
 	font-weight: bold;
-	overflow: hidden;
-	height: 1em;
 }
 
 .instit_atributte{
