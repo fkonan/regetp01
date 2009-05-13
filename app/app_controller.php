@@ -89,6 +89,7 @@ class AppController extends Controller {
 			if ($this->name == 'Planes' && $this->action == 'add') {$llAuth = true;}
 			if ($this->name == 'Planes' && $this->action == 'view') {$llAuth = true;}
 			if ($this->name == 'Planes' && $this->action == 'edit') {$llAuth = true;}
+			if ($this->name == 'Planes' && $this->action == 'delete') {$llAuth = true;}
 			
 			if ($this->name == 'Anios' && $this->action == 'add') {$llAuth = true;}
 			if ($this->name == 'Anios' && $this->action == 'edit') {$llAuth = true;}
