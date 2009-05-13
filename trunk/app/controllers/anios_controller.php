@@ -31,7 +31,7 @@ class AniosController extends AppController {
 			}
 		}
 		
-		$planes = $this->Anio->Plan->find('list');
+		//$planes = $this->Anio->Plan->find('list');
 		$ciclos = $this->Anio->Ciclo->find('list');
 		$etapas = $this->Anio->Etapa->find('list');
 		$this->set('plan_id',$plan_id);
@@ -46,14 +46,14 @@ class AniosController extends AppController {
 
         switch ($plan[0]['Plan']['oferta_id']):
 			case 1://es un FP, asique mostrar la vista de años para FP
-	            $this->render('/Anios/add_fp');
+	            $this->render('/anios/add_fp');
 	            break;
 			case 2: // IT
 			case 3: //MT
-				$this->render('/Anios/add');
+				$this->render('/anios/add');
 	            break;
 			case 4: //SNU
-				$this->render('/Anios/add_snu');
+				$this->render('/anios/add_snu');
 	            break;
         endswitch;		
 	}
@@ -75,7 +75,7 @@ class AniosController extends AppController {
         if (empty($this->data)) {
         	$this->data = $this->Anio->read(null, $id);
 	    }
-        $planes = $this->Anio->Plan->find('list');
+        //$planes = $this->Anio->Plan->find('list');
         $ciclos = $this->Anio->Ciclo->find('list');
         $etapas = $this->Anio->Etapa->find('list');
         $this->set(compact('planes','ciclos','etapas'));
@@ -89,14 +89,14 @@ class AniosController extends AppController {
  
         switch ($plan[0]['Plan']['oferta_id']):
 			case 1://es un FP, asique mostrar la vista de años para FP
-	            $this->render('/Anios/edit_fp');
+	            $this->render('/anios/edit_fp');
 	            break;
 			case 2: // IT
 			case 3: //MT
-				$this->render('/Anios/edit');
+				$this->render('/anios/edit');
 	            break;
 			case 4: //SNU
-				$this->render('/Anios/edit_snu');
+				$this->render('/anios/edit_snu');
 	            break;
         endswitch;	
 	}
