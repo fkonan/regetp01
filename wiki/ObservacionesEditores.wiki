@@ -8,6 +8,7 @@
   * que las instituciones las pueda eliminar Ramiro
   * Mostrar referencia puntos verde y rojo
   * Instit:  mostrar mail alternativo. ¿tambien telefono alternativo?
+  * Mostrar si es Formulario F00 y F00A
   * CUE 201877 se ve mal los acentos (viene mal de migracion 2006)
   * En el listado de resultados hay que mostrar el departamento
   * Planes: Mostrar el listado de oferta en orden: SNU - MT - IT - FP
