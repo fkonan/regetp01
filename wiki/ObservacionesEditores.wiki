@@ -19,3 +19,6 @@
     * con pograma de ETP
     * IT, MT, SNU
   * *Sistema de Seguimiento*: Avisos y mensajes sobre Institucions o planes entre Editores e incluo entre los evaluadores
+
+== Agregada por mi==
+  * en los resultados de busquedas, ya no tiene sentido ordenar por nombre. El verdadero nombre ahora es una combination entre TIPO INSTIT+Nº+NOMBRE y no queda muy claro cuando uno ordena por nombre
