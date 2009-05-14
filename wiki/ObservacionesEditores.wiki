@@ -1,13 +1,13 @@
 #labels Featured
 Observaciones realizadas por Julieta, Alexia y Pablo en el transcurso de la Demo
 
-=Observaciones=
+==Observaciones==
 
   * Agregar Nº de Interno: Soporte REGETP= 2010, of 309= 4032/4033
   * Que los editores puedan eliminar planes
-  * que las instituciones las pueda eliminar Ramiro
+  * Que las instituciones las pueda eliminar Ramiro
   * Mostrar referencia puntos verde y rojo
-  * Instit:  mostrar mail alternativo. ¿tambien telefono alternativo?
+  * Instit: Mostrar mail alternativo. ¿tambien telefono alternativo?
   * Mostrar si es Formulario F00 y F00A
   * CUE 201877 se ve mal los acentos (viene mal de migracion 2006)
   * En el listado de resultados hay que mostrar el departamento
@@ -18,7 +18,7 @@ Observaciones realizadas por Julieta, Alexia y Pablo en el transcurso de la Demo
   * Instit: nuevo campo, "categoria" ('nivel' segun Alexia): 
     * con pograma de ETP
     * IT, MT, SNU
-  * *Sistema de Seguimiento*: Avisos y mensajes sobre Institucions o planes entre Editores e incluo entre los evaluadores
+  * *Sistema de Seguimiento*: Avisos y mensajes sobre Institucions o planes entre Editores e incluso entre los evaluadores
 
-== Agregada por mi==
-  * en los resultados de busquedas, ya no tiene sentido ordenar por nombre. El verdadero nombre ahora es una combination entre TIPO INSTIT+Nº+NOMBRE y no queda muy claro cuando uno ordena por nombre
+=Agregada por mi=
+  * En los resultados de busquedas, ya no tiene sentido ordenar por nombre. El verdadero nombre ahora es una combination entre TIPO INSTIT+Nº+NOMBRE y no queda muy claro cuando uno ordena por nombre
