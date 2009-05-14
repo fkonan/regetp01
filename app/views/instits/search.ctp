@@ -120,9 +120,10 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 			<br />		
 			<div class="instit_atributte"><b>Gestión: </b><?= $instit['Gestion']['name'] ?></div>
 			<div class="instit_atributte"><b>Jurisdicción: </b> <?= $instit['Jurisdiccion']['name'] ?></div>
+			<br />
+			<div class="instit_atributte"><b>Departamento: </b><?= $instit['Instit']['depto'] ?></div>
 			<div class="instit_atributte"><b>Localidad: </b><?= $instit['Instit']['localidad'] ?></div>
 		</div>
-			
 	</li>
 	
 		<?
@@ -131,6 +132,7 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 	?>
 	</ul>
 	
+	
 	<div id="paginator_prev_next_links">
 	<?php	
 		echo $paginator->prev('« Anterior ',null, null, array('class' => 'disabled'));
@@ -138,6 +140,14 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 		echo $paginator->next(' Siguiente »', null, null, array('class' => 'disabled'));
 	?> 
 	</div>
+	
+	<p>
+	<h3></h3>
+	<? echo $html->image('/css/images/puntoverde.gif',array('title'=>'Ingresados a la Base de Datos')); ?>
+	- Ingresadas a la Base de Datos<br />
+	<? echo $html->image('/css/images/puntorojo.gif',array('title'=>'NO Ingresados a la Base de Datos')); ?>
+	- NO Ingresadas a la Base de Datos
+	<? echo "</p>"?>
 	
 	<p  class="paginate_msg">
 	<?php
