@@ -1,7 +1,7 @@
 #labels Featured
-#Observaciones que fueron realizando Julieta, Alexia y Pablo en el transcurso de la Demo
+Observaciones realizadas por Julieta, Alexia y Pablo en el transcurso de la Demo
 
-= Observaciones realizadas por EDITORES=
+=Observaciones=
 
   * Agregar Nº de Interno: Soporte REGETP= 2010, of 309= 4032/4033
   * Que los editores puedan eliminar planes
