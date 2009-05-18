@@ -5,7 +5,7 @@
 $anexo = ($instit['anexo']<10)?'0'.$instit['anexo']:$instit['anexo'];
 $cue_instit = $instit['cue'].$anexo;
 ?>
-<h2><?php echo $cue_instit." <br>".$instit['nombre_completo']; ?></h2>
+<h2><?php echo $cue_instit." - ".$instit['nombre_completo']; ?></h2>
 
 <div class="planes view">
 	<dl><?php $i = 0; $class = ' class="altrow"';?>

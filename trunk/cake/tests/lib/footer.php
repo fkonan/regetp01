@@ -24,7 +24,8 @@
  * @lastmodified  $Date: 2008-12-18 18:16:01 -0800 (Thu, 18 Dec 2008) $
  * @license       http://www.opensource.org/licenses/opengroup.php The Open Group Test Suite License
  */
-?>	</div>
+?>
+	</div>
 		</div>
  		<div id="footer">
  			<!--PLEASE USE ONE OF THE POWERED BY CAKEPHP LOGO-->

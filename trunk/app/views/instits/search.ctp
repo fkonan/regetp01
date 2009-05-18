@@ -144,9 +144,9 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 	<p>
 	<h3></h3>
 	<? echo $html->image('/css/images/puntoverde.gif',array('title'=>'Ingresados a la Base de Datos')); ?>
-	- Ingresadas a la Base de Datos<br />
+	- Institución ingresada al RFIETP<br />
 	<? echo $html->image('/css/images/puntorojo.gif',array('title'=>'NO Ingresados a la Base de Datos')); ?>
-	- NO Ingresadas a la Base de Datos
+	- Institución NO ingresada al RFIETP
 	<? echo "</p>"?>
 	
 	<p  class="paginate_msg">
