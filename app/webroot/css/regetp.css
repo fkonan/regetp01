@@ -74,7 +74,7 @@ h2 {
 	font-weight: bold;
 	font-family:Arial, Helvetica, sans-serif;
 	font-size: 11pt;
-	padding-left:0.9em;
+	padding-left:0em;
 	margin-top: 0.9em;
 	margin-bottom: 1em;
 	margin-right: 0;	
@@ -705,7 +705,7 @@ div.code-coverage-results span.result-good {
 */
 /* usados en la vista de la institucion, al lado del titulo*/
 #escuela_estado{
-	margin-top: 0em;
+	margin-top: -1em;
 	margin-right: 0.5em;
 	margin-left: 0.2em;	
 	font-size: large;

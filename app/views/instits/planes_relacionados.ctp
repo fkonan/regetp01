@@ -9,7 +9,7 @@
 	$anexo = ($planes['Instit']['anexo']<10)?'0'.$planes['Instit']['anexo']:$planes['Instit']['anexo'];
 	$cue_instit = $planes['Instit']['cue'].$anexo;
 	?>
-	<h2><?= $cue_instit?><br><?= $planes['Instit']['nombre_completo'] ?></h2>
+	<h2><?= $cue_instit?> - <?= $planes['Instit']['nombre_completo'] ?></h2>
 	
 	<dl>	
 	

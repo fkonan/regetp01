@@ -6,10 +6,10 @@
 $anexo = ($instit['Instit']['anexo']<10)?'0'.$instit['Instit']['anexo']:$instit['Instit']['anexo'];
 $cue_instit = $instit['Instit']['cue'].$anexo;
 ?>
-
+<br>
 <div id="escuela_estado" class="<? echo $instit['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $instit['Instit']['activo']? 'Institución Ingresada al RFIETP':'Institución NO Ingresada al RFIETP';?></div>
 <h1><?= $cue_instit ?>
-	<br><?= $instit['Instit']['nombre_completo']?>
+	 - <?= $instit['Instit']['nombre_completo']?>
 </h1>
 
 	
