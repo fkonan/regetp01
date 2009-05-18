@@ -1,4 +1,14 @@
 <?php
+/**
+ * 
+ *  REGETP VERSION
+ * 
+ */
+Configure::write('regetpVersion', 'v1.0 RC2');
+
+
+
+
 /* SVN FILE: $Id: core.php 7945 2008-12-19 02:16:01Z gwoo $ */
 /**
  * This is core configuration file.

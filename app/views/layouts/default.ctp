@@ -27,7 +27,8 @@
 <head>
 	<?php echo $html->charset(); ?>
 	<title>
-		<?php __('Sistema Gestión de Registro - v1.0 beta'); ?>
+		<?php __('Sistema Gestión de Registro - ');
+			  echo Configure::read('regetpVersion')." - "; ?>
 		<?php echo $title_for_layout; ?>
 	</title>
 	<?php
