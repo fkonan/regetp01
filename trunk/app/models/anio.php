@@ -33,11 +33,10 @@ class Anio extends AppModel {
 				'rule' => VALID_NOT_EMPTY,
 				'required' => true,
 				'allowEmpty' => false,
-				//'on' => 'create', // or: 'update'
 				'message' => 'Debe ingresar un número de año.'	
 			),
 			'rango1a7'=> array(
-				'rule' => '/^([1-7]|99)$/',
+				'rule' => '/^([1-9]|99)$/',
 				'required' => true,
 				'allowEmpty' => false,
 				//'on' => 'create', // or: 'update'
@@ -96,6 +95,23 @@ class Anio extends AppModel {
 		}
 		
 		return $aux_vec;
+	}
+	
+	/**
+	 * Me dice en que ciclo lectivo estan las ultimas matriculas del plan
+	 * o sea, me dice, cual es el ultimo ciclo lectivo del plan
+	 *
+	 * @param $plan_id
+	 * @return Id Ciclo_ID (en realidad es un año, 2006,2008,2009, etc)
+	 */
+	function ciclo_lectivo_matricula_del_plan($plan_id){
+		$this->recursive = -1;
+		$temp= $this->find('first',array(
+						'conditions'=>array('plan_id'=>$plan_id),
+						'order'=>array('ciclo_id DESC'),
+						'fields'=>array('plan_id','ciclo_id')));	
+
+		return $temp['Anio']['ciclo_id'];
 	}
 	
 }

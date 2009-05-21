@@ -3,8 +3,6 @@
 		<tr>
 			<th><?php __('Ciclo'); ?></th>
 			<th><?php __('Matrícula'); ?></th>
-			<th><?php __('Secciones'); ?></th>
-			<th><?php __('Hs Taller'); ?></th>
 			<th class="actions"><?php __('');?></th>
 		</tr>
 	<?php if (!empty($anios)):
@@ -22,8 +20,6 @@
 			<tr id="fila_plan_<?= $anio['ciclo_id'].'_'.$anio['anio']?>" <?php echo $class;?>>
 				<th><?php echo $key //muestra el año, el ciclo ?></th>
 				<td><?php echo $anio['matricula'];?></td>
-				<td><?php echo $anio['secciones'];?></td>
-				<td><?php echo $anio['hs_taller'];?></td>
 				<td class="actions">
 					<a href="<?= $html->url(array('controller'=> 'anios', 'action'=>'edit/'.$anio['id']))?>" onClick="window.open('<?= $html->url(array('controller'=> 'anios', 'action'=>'edit/'.$anio['id']))?>','_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=310,height=380'); return false;">Editar</a>
 					<?php echo $html->link(__('Borrar', true), array('controller'=> 'anios', 'action'=>'delete', $anio['id']), null, sprintf(__('Seguro que desea eliminar el año # %s? del ciclo # %s', true), $anio['anio'], $anio['ciclo_id'])); ?>

@@ -19,8 +19,7 @@ if(isset($script)){
 		echo $form->input('ciclo_id');
 		
 		echo $form->input('matricula',array('label'=>'Matrícula'));
-		echo $form->input('secciones');
-		echo $form->input('hs_taller',array('label'=>'Hs Taller'));
+		
 	?>
 	</fieldset>
 <?php echo $form->end('Guardar');?>

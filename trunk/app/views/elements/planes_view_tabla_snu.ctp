@@ -11,7 +11,7 @@
 				
 				<th><?php __('Matrícula'); ?></th>
 				<th><?php __('Secciones'); ?></th>
-				<th><?php __('Hs Taller'); ?></th>
+				<th><?php __('Horas Taller'); ?></th>
 				<th class="actions"><?php __('');?></th>
 			</tr>
 		<?php	

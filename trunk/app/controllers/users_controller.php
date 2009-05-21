@@ -2,12 +2,6 @@
 class UsersController extends AppController {
 
 	var $name = 'Users';
-
-	
-//	function beforeFilter() {    
-//		parent::beforeFilter();     
-//		$this->Auth->allowedActions = array('*');
-//	}
 	
 	
 	function index() {
