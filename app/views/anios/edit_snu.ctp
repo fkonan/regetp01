@@ -12,14 +12,14 @@ if(isset($script)){
 		echo $form->input('id');
 		echo $form->input('plan_id',array('type'=>'hidden'));
 		
-		$anios = array('1'=>1,'2'=>2,'3'=>3,'4'=>4,'5'=>5,'6'=>6,'7'=>7,'99'=>99);
+		$anios = array('1'=>1,'2'=>2,'3'=>3,'4'=>4);
 		echo $form->input('anio',array( 'options'=>$anios ,'label'=>'Año'));
 		echo $form->input('etapa_id',array('type'=>'hidden'));
 		echo $form->input('ciclo_id');
 		
 		echo $form->input('matricula',array('label'=>'Matrícula'));
 		echo $form->input('secciones');
-		echo $form->input('hs_taller',array('label'=>'Hs Taller'));
+		echo $form->input('hs_taller',array('label'=>'Horas Taller'));
 	?>
 	</fieldset>
 <?php echo $form->end('Guardar');?>

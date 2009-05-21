@@ -301,6 +301,20 @@ class Instit extends AppModel {
   	}
   
 	
+  	/**
+  	 * Esta funcion fue redefinida para que me agregue
+  	 * el nombre completo en el array data de la institucion
+  	 * Entonces, lo que yo logro es que desde mi aplicacion
+  	 * puedo hacer un $this->data[Instit]['nombre_completo']
+  	 * y me va a mostrar el nombre completo tal como si me lo hubiese 
+  	 * traido de la BD
+  	 *
+  	 * @param $conditions
+  	 * @param $fields
+  	 * @param $order
+  	 * @param $recursive
+  	 * @return Array $data
+  	 */
   	function find($conditions = null, $fields = array(), $order = null, $recursive = null) {
   		$instituciones_data = parent::find($conditions, $fields, $order, $recursive);
 
@@ -332,20 +346,26 @@ class Instit extends AppModel {
 			  		$numero = $aux['Instit']['nroinstit'];
 			  		$nombre_tipoinstit = $aux['Tipoinstit']['name'];
 			  		
-				  	$aux['Instit']['nombre_completo'] = $nombre_tipoinstit;
+				  	$aux['Instit']['nombre_completo'] = ($nombre_tipoinstit=='SIN DATOS')?'':$nombre_tipoinstit;
 				  	$aux['Instit']['nombre_completo'] .= ($numero > 0 || $numero != '')?" Nº $numero":"";
-				  	$aux['Instit']['nombre_completo'] .= ($nombre != '')?", $nombre":"";
+  					if ($nombre_tipoinstit != 'SIN DATOS' ||  $numero > 0){
+						$aux['Instit']['nombre_completo'] .= ", ";
+					}
+				  	$aux['Instit']['nombre_completo'] .= ($nombre != '')?$nombre:"";
 			  	endfor;
 			 else:
 			 	$nombre = $aux['Instit']['nombre'];
 			  	$numero = $aux['Instit']['nroinstit'];
 			  	$nombre_tipoinstit = $aux['Tipoinstit']['name'];
-			 	$aux['Instit']['nombre_completo'] = $nombre_tipoinstit;
+			 	$aux['Instit']['nombre_completo'] = ($nombre_tipoinstit=='SIN DATOS')?'':$nombre_tipoinstit;
 				$aux['Instit']['nombre_completo'] .= ($numero > 0 || $numero != '')?" Nº $numero":"";
-				$aux['Instit']['nombre_completo'] .= ($nombre != '')?", $nombre":"";
+				
+				if ($nombre_tipoinstit != 'SIN DATOS' ||  $numero > 0){
+					$aux['Instit']['nombre_completo'] .= ", ";
+				}
+				$aux['Instit']['nombre_completo'] .= ($nombre != '')?$nombre:"";
 			endif;
 	  	endif;
-  		
   		
   		return $instituciones_data;
   	}

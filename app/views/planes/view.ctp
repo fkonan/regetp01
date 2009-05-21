@@ -38,13 +38,13 @@ $cue_instit = $instit['cue'].$anexo;
 			&nbsp;
 		</dd>
 		
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Duración:'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Duración del plan:'); ?></dt>
 		<dd<?php echo $class;?>>
 			&nbsp;
 		</dd>
 		
 		<? if(($plan['Plan']['duracion_hs']>0)){ ?>
-			<dt<?php echo $class;?>><?php __(' - Hs'); ?></dt>
+			<dt<?php echo $class;?>><?php __(' - Horas'); ?></dt>
 			<dd<?php echo $class;?>>
 				<?php echo $plan['Plan']['duracion_hs']; ?>
 				&nbsp;

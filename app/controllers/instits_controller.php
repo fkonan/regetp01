@@ -413,8 +413,11 @@ class InstitsController extends AppController {
 		
 		$this->data = $this->Instit->read(null,$id);
 		if($this->data){
+			$cont = 0;
 			foreach ($this->data['Plan'] as $p):
-				$v_plan_matricula[] = $this->Instit->Plan->Anio->matricula_del_plan($p['id']);
+				$v_plan_matricula[$cont] = $this->Instit->Plan->Anio->matricula_del_plan($p['id']);
+				$v_plan_matricula[$cont]['ciclo'] = $this->Instit->Plan->Anio->ciclo_lectivo_matricula_del_plan($p['id']);
+				$cont++;
 			endforeach;
 			$this->set('planes',$this->data);	
 			$this->set('v_plan_matricula',$v_plan_matricula);

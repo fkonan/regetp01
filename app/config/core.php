@@ -4,7 +4,7 @@
  *  REGETP VERSION
  * 
  */
-Configure::write('regetpVersion', 'v1.0 RC2');
+Configure::write('regetpVersion', 'v1.0 RC3');
 
 
 
@@ -48,7 +48,7 @@ Configure::write('regetpVersion', 'v1.0 RC2');
  * In production mode, flash messages redirect after a time interval.
  * In development mode, you need to click the flash message to continue.
  */
-	Configure::write('debug', 2);
+	Configure::write('debug', 0);
 /**
  * Application wide charset encoding
  */

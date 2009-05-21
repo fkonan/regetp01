@@ -50,6 +50,7 @@
 		<th><?php __('Nombre del Título/Certificación'); ?></th>
 		<th><?php __('Sector'); ?></th>
 		<th><?php __('Matrícula'); ?></th>
+		<th><?php __('Ciclo'); ?></th>
 		<th class="actions"><?php __('');?></th>
 	</tr>
 	<?php
@@ -69,6 +70,7 @@
 			<td><?php echo $plan['nombre'];?></td>
 			<td><?php echo $plan['sector'];?></td>
 			<td><?php echo $v_plan_matricula[$i-1][$plan['id']];?></td>
+			<td><?php echo $v_plan_matricula[$i-1]['ciclo']; ?></td>
 			<td class="actions">
 				<a href="#Ver">Ver</a>
 			</td>
