@@ -50,7 +50,7 @@
 		<th><?php __('Nombre del Título/Certificación'); ?></th>
 		<th><?php __('Sector'); ?></th>
 		<th><?php __('Matrícula'); ?></th>
-		<th><?php __('Ciclo'); ?></th>
+		<th><?php __('Ciclo (1)'); ?></th>
 		<th class="actions"><?php __('');?></th>
 	</tr>
 	<?php
@@ -64,8 +64,8 @@
 		?>
 		<tr id="fila_plan_<?= $plan['id'];?>" <?php echo $class;?> 
 			onclick="window.location='<?= $html->url(array('controller'=> 'Planes', 'action'=>'view/'.$plan['id']))?>'"
-			onmouseout="$('fila_plan_<?= $plan['id'];?>').toggleClassName('fila_marcada')" 
-			onmouseover="$('fila_plan_<?= $plan['id'];?>').toggleClassName('fila_marcada')">
+			onmouseout="$('fila_plan_<?= $plan['id'];?>').removeClassName('fila_marcada')" 
+			onmouseover="$('fila_plan_<?= $plan['id'];?>').addClassName('fila_marcada')">
 			<td><?php echo $this->requestAction('/Ofertas/dame_abrev/'.$plan['oferta_id']);?></td>
 			<td><?php echo $plan['nombre'];?></td>
 			<td><?php echo $plan['sector'];?></td>
@@ -77,6 +77,7 @@
 		</tr>
 	<?php endforeach; ?>
 	</table>
+	<cite>Nota: (1) Indica el ciclo lectivo al que corresponde la matrícula.</cite>
 <?php endif; ?>
 
 	<div class="actions" >

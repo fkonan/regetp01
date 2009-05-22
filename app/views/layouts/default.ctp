@@ -58,7 +58,7 @@
 				
 					
 				<?  echo $this->renderElement('boxLogin'); ?>
-					
+				<?  echo $this->renderElement('boxAdmin'); ?>	
 				
 				
 				<h1><?= __('Soporte Técnico')?></h1>

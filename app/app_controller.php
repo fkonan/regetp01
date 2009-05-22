@@ -65,14 +65,14 @@ class AppController extends Controller {
 		$this->Auth->loginError ='Usuario o Password Incorrectos';
 		$this->Auth->authError = 'Debe registrarse para acceder a esta página';
 		$this->Auth->logoutRedirect='/pages/home';
-//		$this->Auth->allow('*');
+		//$this->Auth->allow('*');
 		$this->Auth->allow('display','login','logout');
 		$this->Auth->authorize = 'controller'; 
 	}	
 	
 	function isAuthorized() {
 		
-	switch ($this->Auth->user('role')) {
+	  switch ($this->Auth->user('role')):
 		case 'admin':
 			$llAuth = true;
 			break;
@@ -96,7 +96,7 @@ class AppController extends Controller {
 			if ($this->name == 'Anios' && $this->action == 'delete') {$llAuth = true;}
 	
 			break;
-		case 'invitado':
+		  case 'invitado':
 			$llAuth = false;
 			
 			if ($this->name == 'Instits' && $this->action == 'search') {$llAuth = true;}
@@ -107,7 +107,7 @@ class AppController extends Controller {
 			if ($this->name == 'Planes' && $this->action == 'view') {$llAuth = true;}
 			
 			break;
-		}
+		endswitch;
 		
 		/**
 	 	* Estos son requestedActions, por lo tanto estan disponibles para todos los usuarios
