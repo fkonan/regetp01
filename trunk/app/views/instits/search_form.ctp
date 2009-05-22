@@ -1,3 +1,4 @@
+
 <h1><?= __('Buscar Institución')?></h1>
 	
 	<div>
@@ -39,3 +40,19 @@
 		echo $form->end('Buscar'); ?>
 		
 	</div>
+	
+
+<!-- 
+	 Con este script hago que cuando se pulse ENTER 
+	 se envie el formulario 
+ -->
+ 
+<? 
+// con esto agrego la funcionalidad para que al preswionar ENTER me envie el formulario
+echo $javascript->link('form_regetp_ria');?>
+<script type="text/javascript">
+<!--
+	var formaux = new FormRia()
+	formaux.agregarOnEnterPressParaElFormulario('InstitSearchForm');
+//-->
+</script>
