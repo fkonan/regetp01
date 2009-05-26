@@ -49,10 +49,10 @@
  
 <? 
 // con esto agrego la funcionalidad para que al preswionar ENTER me envie el formulario
-echo $javascript->link('form_regetp_ria');?>
+//echo $javascript->link('form_regetp_ria');?>
 <script type="text/javascript">
 <!--
-	var formaux = new FormRia()
-	formaux.agregarOnEnterPressParaElFormulario('InstitSearchForm');
+	//var formaux = new FormRia()
+	//formaux.agregarOnEnterPressParaElFormulario('InstitSearchForm');
 //-->
 </script>

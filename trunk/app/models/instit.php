@@ -348,7 +348,7 @@ class Instit extends AppModel {
 			  		
 				  	$aux['Instit']['nombre_completo'] = ($nombre_tipoinstit=='SIN DATOS')?'':$nombre_tipoinstit;
 				  	$aux['Instit']['nombre_completo'] .= ($numero > 0 || $numero != '')?" Nº $numero":"";
-  					if ($nombre_tipoinstit != 'SIN DATOS' ||  $numero > 0){
+  					if (($nombre_tipoinstit != 'SIN DATOS' ||  $numero > 0)&& $nombre){
 						$aux['Instit']['nombre_completo'] .= ", ";
 					}
 				  	$aux['Instit']['nombre_completo'] .= ($nombre != '')?$nombre:"";
@@ -360,7 +360,7 @@ class Instit extends AppModel {
 			 	$aux['Instit']['nombre_completo'] = ($nombre_tipoinstit=='SIN DATOS')?'':$nombre_tipoinstit;
 				$aux['Instit']['nombre_completo'] .= ($numero > 0 || $numero != '')?" Nº $numero":"";
 				
-				if ($nombre_tipoinstit != 'SIN DATOS' ||  $numero > 0){
+				if (($nombre_tipoinstit != 'SIN DATOS' ||  $numero > 0)&& $nombre){
 					$aux['Instit']['nombre_completo'] .= ", ";
 				}
 				$aux['Instit']['nombre_completo'] .= ($nombre != '')?$nombre:"";
