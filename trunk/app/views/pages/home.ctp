@@ -21,8 +21,16 @@ if (Configure::read() > 0):
 	Debugger::checkSessionKey();
 endif;
 ?>
-
+<br />
 <p>Bienvenido al Sistema Gestión de Registro.</p>
-<h2>Soporte técnico</h2>
-<p>Para consultas y solución de problemas técnicos comuníquese al Int. 2010</p>
-<p>Para consultas sobre el Registro comuníquese a la Unidad de Información Int. 4032/4033</p>
+<p>
+Para realizar consultas sobre el funcionamiento del programa ó para 
+notificar problemas técnicos: Int. 2010
+</p>
+<p>
+Para realizar consultas sobre los contenidos de información del Registro 
+de Instituciones: Int. 4032/4033.
+</p>
+<p>
+Unidad de Información, Of. 309.
+</p>
