@@ -63,8 +63,7 @@
 				
 				<h1><?= __('Soporte Técnico')?></h1>
 				<ul>
-					<li><?= $html->link('Ayuda','/pages/ayuda'); ?></li>
-					<li><a href="#" onclick="alert('No implementado. \nEn breve podrá enviarnos consejos y errores encontrados.')">Envío de Errores</a></li>
+					<li><?= $html->link('Contacto','/pages/contacto'); ?></li>
 				</ul>				
 			</div>
 			<div id="cuerpo">
