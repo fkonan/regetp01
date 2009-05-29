@@ -74,9 +74,13 @@ class AppController extends Controller {
 		
 	  switch ($this->Auth->user('role')):
 		case 'admin':
+			//hago que la sesion expire en mas tiempo
+			Configure::write('Security.level', 'low');
 			$llAuth = true;
 			break;
 		case 'editor':
+			//hago que la sesion expire en mas tiempo
+			Configure::write('Security.level', 'low');
 			$llAuth = false;
 			
 			if ($this->name == 'Instits' && $this->action == 'search') {$llAuth = true;}
@@ -138,14 +142,7 @@ class AppController extends Controller {
 		}
 	}
 		
-		
-	
-	
-	
-	
-	
-	
-	
+			
 	
 	
 }

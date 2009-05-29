@@ -4,7 +4,7 @@ class UsersController extends AppController {
 	var $name = 'Users';
 	
 	
-	function index() {
+	function listadoUsuarios() {
 		$this->User->recursive = 0;
 		$this->set('users', $this->paginate());
 	}
@@ -81,6 +81,54 @@ class UsersController extends AppController {
 	function logout(){
 		$this->Session->setFlash('Ha salido de su cuenta');
 		$this->redirect($this->Auth->logout());
+	}
+	
+	
+	/**
+	 *  Este es para que un usuario se edite el perfil
+	 *  
+	 * @param id del usuario
+	 */
+	function self_user_edit($id){
+		if (!$id && empty($this->data)) {
+			$this->Session->setFlash(__('Usuario Incorrecto', true));
+			$this->redirect(array('controller'=>'pages', 'action'=>'index'));
+		}
+		if (!empty($this->data)) {
+			if ($this->User->save($this->data)) {
+				$this->Session->setFlash(__('Se ha guardado la información correctamente', true));
+				$this->redirect(array('controller'=>'pages', 'action'=>'index'));
+			} else {
+				$this->Session->setFlash(__('El usuario no pudo ser guardado. Por favor, intente nuevamente.', true));
+			}
+		}
+		if (empty($this->data)) {
+			$this->data = $this->User->read(null, $id);
+		}
+	}
+	
+	
+/**
+	 *  Este es para que un usuario se edite el perfil
+	 *  
+	 * @param id del usuario
+	 */
+	function cambiarPassword($id){
+		if (!$id && empty($this->data)) {
+			$this->Session->setFlash(__('Usuario Incorrecto', true));
+			$this->redirect(array('controller'=>'pages', 'action'=>'index'));
+		}
+		if (!empty($this->data)) {
+			if ($this->User->save($this->data)) {
+				$this->Session->setFlash(__('Se ha guardado el nuevo password correctamente', true));
+				$this->redirect(array('controller'=>'pages', 'action'=>'index'));
+			} else {
+				$this->Session->setFlash(__('El usuario no pudo ser guardado. Por favor, intente nuevamente.', true));
+			}
+		}
+		if (empty($this->data)) {
+			$this->data = $this->User->read(null, $id);
+		}
 	}
 	
 	

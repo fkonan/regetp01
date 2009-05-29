@@ -12,7 +12,6 @@ echo $paginator->counter(array(
 	<th><?php echo $paginator->sort('username');?></th>
 	<th><?php echo $paginator->sort('nombre');?></th>
 	<th><?php echo $paginator->sort('apellido');?></th>
-	<th><?php echo $paginator->sort('password');?></th>
 	<th class="actions"><?php __('Actions');?></th>
 </tr>
 <?php
@@ -35,9 +34,6 @@ foreach ($users as $user):
 		</td>
 		<td>
 			<?php echo $user['User']['apellido']; ?>
-		</td>
-		<td>
-			<?php echo $user['User']['password']; ?>
 		</td>
 		<td class="actions">
 			<?php echo $html->link(__('View', true), array('action'=>'view', $user['User']['id'])); ?>
