@@ -22,8 +22,8 @@ class UsersController extends AppController {
 			if($this->Auth->password($this->data['User']['password_check'])==$this->data['User']['password']){
 				$this->User->create();
 				if ($this->User->save($this->data)) {
-					$this->Session->setFlash(__('Su usuario ha sido registrado', true));
-					$this->redirect(array('controller'=>'pages','action'=>'home'));
+					$this->Session->setFlash(__('Se ha agregado un nuevo usuario', true));
+					$this->redirect('/users/add');
 				} else {
 					$this->Session->setFlash(__('No se ha podio registrar. Por favor intente nuevamente.', true));
 				}
@@ -37,12 +37,12 @@ class UsersController extends AppController {
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid User', true));
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('controller'=>'Users','action'=>'listadoUsuarios'));
 		}
 		if (!empty($this->data)) {
 			if ($this->User->save($this->data)) {
-				$this->Session->setFlash(__('The User has been saved', true));
-				$this->redirect(array('action'=>'index'));
+				$this->Session->setFlash(__('El usuario fue guardado correctamente', true));
+				$this->redirect(array('controller'=>'Users','action'=>'listadoUsuarios'));
 			} else {
 				$this->Session->setFlash(__('The User could not be saved. Please, try again.', true));
 			}
@@ -55,11 +55,11 @@ class UsersController extends AppController {
 	function delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for User', true));
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('controller'=>'Users','action'=>'listadoUsuarios'));
 		}
 		if ($this->User->del($id)) {
 			$this->Session->setFlash(__('User deleted', true));
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('controller'=>'Users','action'=>'listadoUsuarios'));;
 		}
 	}
 	
@@ -92,12 +92,12 @@ class UsersController extends AppController {
 	function self_user_edit($id){
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Usuario Incorrecto', true));
-			$this->redirect(array('controller'=>'pages', 'action'=>'index'));
+			$this->redirect('/pages/home');
 		}
 		if (!empty($this->data)) {
 			if ($this->User->save($this->data)) {
 				$this->Session->setFlash(__('Se ha guardado la información correctamente', true));
-				$this->redirect(array('controller'=>'pages', 'action'=>'index'));
+				$this->data = $this->User->read(null, $id);
 			} else {
 				$this->Session->setFlash(__('El usuario no pudo ser guardado. Por favor, intente nuevamente.', true));
 			}
@@ -116,19 +116,41 @@ class UsersController extends AppController {
 	function cambiarPassword($id){
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Usuario Incorrecto', true));
-			$this->redirect(array('controller'=>'pages', 'action'=>'index'));
+			$this->redirect('/pages/home');
 		}
 		if (!empty($this->data)) {
-			if ($this->User->save($this->data)) {
-				$this->Session->setFlash(__('Se ha guardado el nuevo password correctamente', true));
-				$this->redirect(array('controller'=>'pages', 'action'=>'index'));
-			} else {
-				$this->Session->setFlash(__('El usuario no pudo ser guardado. Por favor, intente nuevamente.', true));
+			if($this->comparePasswords()){ //me fijo que los passwords coincidan
+				if ($this->User->save($this->data)) {
+					$this->Session->setFlash(__('Se ha guardado el nuevo password correctamente', true));
+					$this->redirect('/pages/home');
+				} else {
+					$this->Session->setFlash(__('El usuario no pudo ser guardado. Por favor, intente nuevamente.', true));
+				}
 			}
+			else $this->Session->setFlash('La contraseña no coincide, por favor reintente.');
 		}
 		if (empty($this->data)) {
 			$this->data = $this->User->read(null, $id);
 		}
+	}
+	
+	
+	/**
+	 *  Esta funcion me convierte los passwors para luego ser comparados
+	 *  sirve cuando quiero generar un nuevio opassword y tengo 2 imputs por comparar
+	 * @return unknown_type
+	 */
+	private function comparePasswords(){
+		if(!empty( $this->data['User']['password'] ) ){
+			$this->data['User']['password'] = $this->Auth->password($this->data['User']['password'] );
+		}
+		if(!empty( $this->data['User']['password_check'] ) ){
+			$this->data['User']['password_check'] = $this->Auth->password( $this->data['User']['password_check'] );
+		}
+		
+		if ($this->data['User']['password'] == $this->data['User']['password_check']){
+			return true;
+		} else return false;
 	}
 	
 	
