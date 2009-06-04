@@ -124,7 +124,7 @@ class UsersController extends AppController {
 					$this->Session->setFlash(__('Se ha guardado el nuevo password correctamente', true));
 					$this->redirect('/pages/home');
 				} else {
-					$this->Session->setFlash(__('El usuario no pudo ser guardado. Por favor, intente nuevamente.', true));
+					$this->Session->setFlash(__('La contraseña no pudo ser guardada. Por favor, intente nuevamente.', true));
 				}
 			}
 			else $this->Session->setFlash('La contraseña no coincide, por favor reintente.');

@@ -98,7 +98,10 @@ class AppController extends Controller {
 			if ($this->name == 'Anios' && $this->action == 'add') {$llAuth = true;}
 			if ($this->name == 'Anios' && $this->action == 'edit') {$llAuth = true;}
 			if ($this->name == 'Anios' && $this->action == 'delete') {$llAuth = true;}
-	
+			
+			if ($this->name == 'Users' && $this->action == 'cambiarPasword') {$llAuth = true;}
+			if ($this->name == 'Users' && $this->action == 'self_user_edit') {$llAuth = true;}
+			
 			break;
 		  case 'invitado':
 			$llAuth = false;
@@ -109,6 +112,9 @@ class AppController extends Controller {
 			if ($this->name == 'Instits' && $this->action == 'planes_relacionados') {$llAuth = true;}
 			
 			if ($this->name == 'Planes' && $this->action == 'view') {$llAuth = true;}
+			
+			if ($this->name == 'Users' && $this->action == 'cambiarPasword') {$llAuth = true;}
+			if ($this->name == 'Users' && $this->action == 'self_user_edit') {$llAuth = true;}
 			
 			break;
 		endswitch;
