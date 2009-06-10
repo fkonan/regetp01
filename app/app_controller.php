@@ -71,16 +71,15 @@ class AppController extends Controller {
 	}	
 	
 	function isAuthorized() {
+//debug($this->passedArgs[0]);exit();
 		
 	  switch ($this->Auth->user('role')):
 		case 'admin':
 			//hago que la sesion expire en mas tiempo
-			Configure::write('Security.level', 'low');
 			$llAuth = true;
 			break;
 		case 'editor':
 			//hago que la sesion expire en mas tiempo
-			Configure::write('Security.level', 'low');
 			$llAuth = false;
 			
 			if ($this->name == 'Instits' && $this->action == 'search') {$llAuth = true;}
@@ -98,10 +97,7 @@ class AppController extends Controller {
 			if ($this->name == 'Anios' && $this->action == 'add') {$llAuth = true;}
 			if ($this->name == 'Anios' && $this->action == 'edit') {$llAuth = true;}
 			if ($this->name == 'Anios' && $this->action == 'delete') {$llAuth = true;}
-			
-			if ($this->name == 'Users' && $this->action == 'cambiarPasword') {$llAuth = true;}
-			if ($this->name == 'Users' && $this->action == 'self_user_edit') {$llAuth = true;}
-			
+						
 			break;
 		  case 'invitado':
 			$llAuth = false;
@@ -111,10 +107,7 @@ class AppController extends Controller {
 			if ($this->name == 'Instits' && $this->action == 'view') {$llAuth = true;}
 			if ($this->name == 'Instits' && $this->action == 'planes_relacionados') {$llAuth = true;}
 			
-			if ($this->name == 'Planes' && $this->action == 'view') {$llAuth = true;}
-			
-			if ($this->name == 'Users' && $this->action == 'cambiarPasword') {$llAuth = true;}
-			if ($this->name == 'Users' && $this->action == 'self_user_edit') {$llAuth = true;}
+			if ($this->name == 'Planes' && $this->action == 'view') {$llAuth = true;}		
 			
 			break;
 		endswitch;
@@ -134,6 +127,13 @@ class AppController extends Controller {
 		if ($this->name == 'Tipoinstits' && $this->action == 'get_name') {$llAuth = true;}
 		if ($this->name == 'Tipoinstits' && $this->action == 'ajax_select_form_por_jurisdiccion') {$llAuth = true;}
 			
+		
+		/**
+		 * Hacer que solo puedan modificar sus datos y contraseña el usuario que es dueño de esos datos
+		 */
+	    if ($this->name == 'Users' && $this->action == 'cambiar_password' && $this->passedArgs[0] == $this->Auth->user('id')) {$llAuth = true;}
+	    if ($this->name == 'Users' && $this->action == 'self_user_edit' && $this->passedArgs[0] == $this->Auth->user('id')) {$llAuth = true;}
+	
 	
 		if ($llAuth == true) {
 			return true;

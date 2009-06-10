@@ -377,5 +377,133 @@ class Instit extends AppModel {
   		return true;
   		//debug($this->data);	
   	}
+  	
+  	
+  	
+  	
+  	
+  	/**
+  	 * 
+  	 * @param $id de la institucion
+  	 * @return me devuelve algo como esto:
+  	 
+  	Array
+(
+    [totales] => Array        (
+            [2007] => Array                (
+                    [FP] => Array                        (
+                            [total_matricula] => 24                        )
+
+                    [SEC] => Array                        (
+                            [total_matricula] => 0                        )
+                )
+
+    [array_de_ciclos] => Array        (
+            [0] => Array                (
+                    [0] => Array                        (
+                            [ciclo_id] => 2007
+                        )
+                )
+
+            [1] => Array                (
+                    [0] => Array                        (
+                            [ciclo_id] => 2008
+                        )
+                )
+
+            [2] => Array                (
+                    [0] => Array                        (
+                            [ciclo_id] => 2009
+                        )
+                )
+        )
+
+    [array_de_ofertas] => Array        (
+            [0] => Array                (
+                    [0] => Array                        (
+                            [id] => 1
+                            [abrev] => FP
+                        )
+                )
+
+            [1] => Array                (
+                    [0] => Array                        (
+                            [id] => 3
+                            [abrev] => SEC
+                        )
+                )
+        )
+)
+        
+                    
+                    la matriz que formo teiene que ser para armar una tabla de la siguiente forma:
+                    
+                    ¬ OFERTA   -    Ciclo 2006    -   Ciclo 2007
+                    ¬   FP     -        12        -      100
+                    ¬   MT     -        154       -      44
+
+
+
+  	 */
+  	function dameSumatoriaDeMatriculasPorOferta($id){
+  		$matriz_rtado = array();
+  		
+  		$data_cliclos_involucrados = "SELECT a.ciclo_id
+										FROM anios as a
+										LEFT JOIN planes as p on (p.id = a.plan_id)
+										LEFT JOIN instits as i on (i.id = p.instit_id)
+										WHERE 
+										i.id = $id
+										GROUP BY a.ciclo_id
+										ORDER BY a.ciclo_id";
+  
+  		
+  		$data_ofertas_involucradas = "SELECT o.id, o.abrev
+										FROM ofertas as o
+										LEFT JOIN planes as p on (p.oferta_id = o.id)
+										LEFT JOIN anios as a on (a.plan_id = p.id)
+										LEFT JOIN instits as i on (i.id = p.instit_id)
+										WHERE 
+										i.id = $id
+										GROUP BY o.id, o.abrev
+										ORDER BY o.id, o.abrev";
+  		
+  		
+  		$ciclos  = $this->query($data_cliclos_involucrados);
+  		$ofertas = $this->query($data_ofertas_involucradas);
+  		
+  		foreach ($ofertas as $o):
+  			$matriz_rtado['array_de_ofertas'][] = $o[0];
+  		endforeach;
+  		
+  		
+  		foreach($ciclos as $c):
+  			$ciclo = $c[0]['ciclo_id'];
+  			$matriz_rtado['array_de_ciclos'][] = $ciclo;
+  			foreach($ofertas as $o):
+  				$oferta = $o[0]['id'];
+  				$oferta_abrev = $o[0]['abrev'];
+  				
+  				$sql_suma_matriculas = "SELECT sum(a.matricula)
+										FROM anios as a
+										LEFT JOIN planes as p ON (p.id = a.plan_id)
+										LEFT JOIN ofertas as o ON (o.id = p.oferta_id)
+										LEFT JOIN instits as i ON (i.id = p.instit_id)
+										WHERE i.id = $id
+										AND a.ciclo_id = $ciclo
+										AND o.id = $oferta";
+  				 $aux = $this->query($sql_suma_matriculas);
+  				 if(isset($aux[0][0]['sum'])):
+  				 	$matriz_rtado['totales'][$ciclo][$oferta_abrev]['total_matricula'] = (int)$aux[0][0]['sum'];
+  				 else:
+  				 	$matriz_rtado['totales'][$ciclo][$oferta_abrev]['total_matricula'] = "<cite>Sin Datos</cite>";
+  				 endif;
+  			endforeach;  		
+  		endforeach;
+  		
+  		return $matriz_rtado;
+  	}
+  	
+  	
 }
 ?>
