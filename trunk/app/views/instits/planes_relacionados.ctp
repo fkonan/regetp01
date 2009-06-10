@@ -43,6 +43,40 @@
 	
 		
 	<h2>Oferta</h2>	
+	
+	
+	<table cellpadding = "0" cellspacing = "0">
+	
+	<tr>
+		<th>Oferta</th>
+		<?php 
+		foreach($sumatoria_matriculas['array_de_ciclos'] as $ciclo):
+			echo "<th>Matrícula $ciclo</th>";
+		endforeach;
+		?>		
+	</tr>	
+	
+	
+		<?php 
+		foreach($sumatoria_matriculas['array_de_ofertas'] as $oferta):
+		
+			?><tr><?php 
+			
+			$primer_columna = true;			
+			foreach($sumatoria_matriculas['array_de_ciclos'] as $ciclo):
+				if($primer_columna):
+					echo "<td>".$oferta['abrev']."</td>";
+					$primer_columna = false;
+				endif;
+				echo "<td>".$sumatoria_matriculas['totales'][$ciclo][$oferta['abrev']]['total_matricula']."</td>";
+			endforeach;
+			
+			?></tr><?php 
+		endforeach;
+		?>	
+	
+	</table>
+	
 	<?php if ($planes):?>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>

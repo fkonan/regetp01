@@ -113,7 +113,7 @@ class UsersController extends AppController {
 	 *  
 	 * @param id del usuario
 	 */
-	function cambiarPassword($id){
+	function cambiar_password($id){
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Usuario Incorrecto', true));
 			$this->redirect('/pages/home');

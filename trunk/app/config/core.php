@@ -48,7 +48,7 @@ Configure::write('regetpVersion', 'v1.0 RC3');
  * In production mode, flash messages redirect after a time interval.
  * In development mode, you need to click the flash message to continue.
  */
-	Configure::write('debug', 2);
+	Configure::write('debug', 3);
 /**
  * Application wide charset encoding
  */
@@ -156,7 +156,7 @@ Configure::write('regetpVersion', 'v1.0 RC3');
  * CakePHP session IDs are also regenerated between requests if
  * 'Security.level' is set to 'high'.
  */
-	Configure::write('Security.level', 'high');
+	Configure::write('Security.level', 'medium');
 /**
  * A random string used in security hashing methods.
  */

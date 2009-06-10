@@ -16,5 +16,5 @@
 		echo $form->input('interno');
 	?>
 	</fieldset>
-<?php echo $form->end('Submit');?>
+<?php echo $form->end('Guardar');?>
 </div>
