@@ -38,7 +38,7 @@
 			</tr>
 			<?php endforeach; //el que recorre los anios del ciclo	?>
 			<tr <?php echo $class;?> >				
-				<td style="border-top: 1px silver solid;"><?php echo '<b>Totales</b>';?></td>
+				<td style="border-top: 1px silver solid;"><b><?php echo 'Totales';?></b></td>
 				
 				<td style="border-top: 1px silver solid;"><b><?php echo $tot_matricula;?></b></td>
 				<td style="border-top: 1px silver solid;"><b><?php echo $tot_secciones;?></b></td>

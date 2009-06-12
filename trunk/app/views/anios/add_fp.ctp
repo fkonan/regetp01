@@ -18,6 +18,7 @@ if(isset($script)){
 		echo $form->input('ciclo_id',array('selected'=> date('Y')));
 
 		echo $form->input('matricula',array('label'=>'Matrícula'));
+		echo $form->input('hs_taller',array('label'=>'Duración en Horas'));
 		
 	?>
 	</fieldset>

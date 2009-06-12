@@ -455,7 +455,8 @@ class Instit extends AppModel {
 										WHERE 
 										i.id = $id
 										GROUP BY a.ciclo_id
-										ORDER BY a.ciclo_id";
+										ORDER BY a.ciclo_id DESC
+										LIMIT 5";
   
   		
   		$data_ofertas_involucradas = "SELECT o.id, o.abrev
