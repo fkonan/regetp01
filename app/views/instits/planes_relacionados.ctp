@@ -3,6 +3,10 @@
 <div class="related">
 	<h1><?php __('Oferta Educativa');?></h1>
 
+	<?php
+	// por ahroa no quiero que se muestre porque viene sucio este campo
+	//echo $this->element('div_observaciones', array("observacion" => $planes['Instit']['observacion']));
+	?>
 	
 	<?
 	//si el anexo tiene 1 solo digito le coloco un cero adelante
@@ -44,26 +48,34 @@
 		
 	<h2>Oferta</h2>	
 	
+	<?php
+		if(isset($sumatoria_matriculas['array_de_ciclos'])>0 && isset($sumatoria_matriculas['array_de_ofertas'])>0):
+		$v_matriculas_ciclos = array_reverse($sumatoria_matriculas['array_de_ciclos']);
+	?>
 	
-	<table cellpadding = "0" cellspacing = "0">
-	
-	<tr>
-		<th>Oferta</th>
-		<?php 
-		foreach($sumatoria_matriculas['array_de_ciclos'] as $ciclo):
-			echo "<th>Matrícula $ciclo</th>";
-		endforeach;
-		?>		
-	</tr>	
-	
-	
+	<div align="center">
+	<table class="mini_tabla" width="80" cellpadding = "0" cellspacing = "0" summary="En esta tabla se muestran los totales de 
+														matrículas por cada ciclo lectivo, para 
+														cada oferta.">
+		<CAPTION>Total de matriculados por oferta según ciclo lectivo</CAPTION>
+		<tr>
+			<th>Oferta</th>
+			<?php 
+			foreach($v_matriculas_ciclos as $ciclo):
+				echo "<th>$ciclo</th>";
+			endforeach;
+			?>		
+		</tr>	
+		
+		
 		<?php 
 		foreach($sumatoria_matriculas['array_de_ofertas'] as $oferta):
-		
-			?><tr><?php 
 			
+		?>
+		<tr><?php 
+				
 			$primer_columna = true;			
-			foreach($sumatoria_matriculas['array_de_ciclos'] as $ciclo):
+			foreach($v_matriculas_ciclos as $ciclo):
 				if($primer_columna):
 					echo "<td>".$oferta['abrev']."</td>";
 					$primer_columna = false;
@@ -76,9 +88,14 @@
 		?>	
 	
 	</table>
+	<div>
+	<br />
+	<?php endif;?>	
 	
-	<?php if ($planes):?>
+	
+	<?php if (sizeof($planes['Plan'])>0):?>
 	<table cellpadding = "0" cellspacing = "0">
+	<CAPTION>Listado de Ofertas</CAPTION>
 	<tr>
 		<th><?php __('Oferta'); ?></th>
 		<th><?php __('Nombre del Título/Certificación'); ?></th>
@@ -112,7 +129,9 @@
 	<?php endforeach; ?>
 	</table>
 	<cite>Nota: (1) Indica el ciclo lectivo al que corresponde la matrícula.</cite>
-<?php endif; ?>
+<?php 
+	else: echo "<cite>Institución sin Ofertas</cite>";
+	endif; ?>
 
 	<div class="actions" >
 		<ul>

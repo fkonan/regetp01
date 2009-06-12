@@ -1,11 +1,16 @@
 <h1><?php  __('Oferta Educativa');?></h1>
 
+<?php 
+	echo $this->element('div_observaciones', array("observacion" => $plan['Plan']['observacion']));
+?>
 
 <?
 $anexo = ($instit['anexo']<10)?'0'.$instit['anexo']:$instit['anexo'];
 $cue_instit = $instit['cue'].$anexo;
 ?>
 <h2><?php echo $cue_instit." - ".$instit['nombre_completo']; ?></h2>
+
+
 
 <div class="planes view">
 	<dl><?php $i = 0; $class = ' class="altrow"';?>
@@ -38,10 +43,14 @@ $cue_instit = $instit['cue'].$anexo;
 			&nbsp;
 		</dd>
 		
+		
+		
+		<? if((($plan['Plan']['duracion_hs']+$plan['Plan']['duracion_semanas']+$plan['Plan']['duracion_anios'])>0)){ ?>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Duración del plan:'); ?></dt>
 		<dd<?php echo $class;?>>
 			&nbsp;
 		</dd>
+		<? } ?>
 		
 		<? if(($plan['Plan']['duracion_hs']>0)){ ?>
 			<dt<?php echo $class;?>><?php __(' - Horas'); ?></dt>
@@ -67,11 +76,7 @@ $cue_instit = $instit['cue'].$anexo;
 			</dd>
 		<? } ?>
 		
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Observación'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $plan['Plan']['observacion']; ?>
-			&nbsp;
-		</dd>
+		
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Alta'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<? echo $plan['Plan']['ciclo_alta']?$plan['Plan']['ciclo_alta']:''; ?>

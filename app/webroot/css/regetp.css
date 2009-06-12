@@ -282,6 +282,24 @@ ul, li {
 }
 
 
+
+
+/************************************************************************
+*
+*
+*
+*                   TABLAS
+*
+*/
+.mini_tabla{
+	width: 396px;	
+	font-size: x-small;
+}
+
+.mini_tabla th{
+	width: 66px;
+}
+
 /************************************************************************
 *
 *
@@ -299,6 +317,11 @@ table {
 	margin-bottom: 10px;
 	width: 100%;
 }
+
+CAPTION{
+	color: #045FB4;
+}
+
 th {
 	background: #f2f2f2;
 	border:1px solid #bbb;
@@ -945,3 +968,25 @@ div.code-coverage-results span.result-good {
 	padding: 4px;
 	font-size: x-small;
 }
+
+
+
+/***********************************************************************
+*
+*
+*   DIV_OBSERVACION: Es usado para poner las observaciones con la imagen de alerta
+*
+*/
+.div_observacion{
+	margin-top: 10px; 
+	
+	height: 50px;
+	padding-left: 68px;
+	/* background-image: url("images/warning.jpg"); */
+	/* publicado.gif */
+	background-image: url("images/publicado.gif");
+	background-repeat: no-repeat;
+	background-position: 8px 0px;
+}
+
+

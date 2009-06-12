@@ -11,7 +11,11 @@ $cue_instit = $instit['Instit']['cue'].$anexo;
 <h1><?= $cue_instit ?>
 	 - <?= $instit['Instit']['nombre_completo']?>
 </h1>
-
+	<?php
+	// por ahora no quiero que se muestre porque viene sucio este campo
+	//echo $this->element('div_observaciones', array("observacion" => $instit['Instit']['observacion']));
+	?>
+	
 	
 	<h2>Datos de Institución</h2>
 	<dl>
@@ -155,13 +159,14 @@ $cue_instit = $instit['Instit']['cue'].$anexo;
 			<?php echo $instit['Instit']['actualizacion']; ?>
 			&nbsp;
 		</dd>
-		<dt><?php __('Observaciones'); ?></dt>
+
+		
+		<dt><?php __('Observación'); ?></dt>
 		<dd>
 			<?php echo $instit['Instit']['observacion']; ?>
 			&nbsp;
 		</dd>
 		
-
 		<dt><?php __('Alta'); ?></dt>
 		<dd>
 			<?php echo ($instit['Instit']['ciclo_alta']>0)?$instit['Instit']['ciclo_alta']:''; ?>

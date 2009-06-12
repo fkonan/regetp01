@@ -411,6 +411,7 @@ class InstitsController extends AppController {
 			$this->redirect(array('controller'=>'Istits','action'=>'view/'.$id));
 		}
 		
+		//$this->Instit->order = 'Plan.oferta_id ASC';
 		$this->data = $this->Instit->read(null,$id);
 		if($this->data){
 			$cont = 0;
@@ -420,8 +421,7 @@ class InstitsController extends AppController {
 				$cont++;
 			endforeach;
 			
-			
-			
+						
 			
 			$this->set('sumatoria_matriculas',$this->Instit->dameSumatoriaDeMatriculasPorOferta($id));
 			
