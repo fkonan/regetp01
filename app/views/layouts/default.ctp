@@ -34,6 +34,7 @@
 	<?php
 		echo $html->meta('icon');
 		echo $html->css('regetp');
+		echo $html->css('printer','stylesheet', array('media'=>'print'));
 		echo $javascript->link('prototype');
 		echo $scripts_for_layout;
 	?>
