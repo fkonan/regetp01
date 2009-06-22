@@ -1,0 +1,23 @@
+@CHARSET "ISO-8859-1";
+
+#rutaUrl{
+ display: none;
+}
+
+
+#menu{
+	display: none;
+}
+
+#footer{
+display: none;
+}
+
+#cuerpo {
+
+width:100%;
+}
+
+
+#header{
+}
