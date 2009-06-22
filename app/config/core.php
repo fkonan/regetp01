@@ -4,7 +4,7 @@
  *  REGETP VERSION
  * 
  */
-Configure::write('regetpVersion', 'v1.0 final');
+Configure::write('regetpVersion', 'v1.0.03 final');
 
 
 
