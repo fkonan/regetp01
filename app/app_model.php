@@ -37,5 +37,7 @@
  * @subpackage    cake.app
  */
 class AppModel extends Model {
+	var $useDbConfig = 'produccion';
 }
+	
 ?>

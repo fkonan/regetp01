@@ -18,8 +18,9 @@ if(isset($script)){
 		echo $form->input('etapa_id',array('type'=>'hidden'));
 		echo $form->input('ciclo_id');
 		
-		echo $form->input('matricula',array('label'=>'Matrícula'));
 		echo $form->input('hs_taller',array('label'=>'Duración en Horas'));
+		echo $form->input('matricula',array('label'=>'Matrícula'));
+		
 	?>
 	</fieldset>
 <?php echo $form->end('Guardar');?>

@@ -88,6 +88,16 @@ class DATABASE_CONFIG {
 		'prefix' => '',
 	);
 	
+	var $produccion = array(
+		'driver' => 'postgres',
+		'persistent' => false,
+		'host' => 'localhost',
+		'login' => 'postgres',
+		'password' => 'r363TP',
+		'database' => 'regetp_produccion',
+		'prefix' => '',
+	);
+	
 /*	var $default = array(
 		'driver' => 'mysql',
 		'persistent' => false,
