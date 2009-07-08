@@ -69,7 +69,7 @@ class PlanesController extends AppController {
 			$this->Plan->create();
 			if ($this->Plan->save($this->data)) {
 				$this->Session->setFlash(__('Se ha creado un nuevo Plan', true));
-				$this->redirect(array('controller'=>'Instits','action'=>'planes_relacionados/'.$this->data['Plan']['instit_id']));
+				$this->redirect(array('controller'=>'Planes','action'=>'view/'.$this->Plan->id));
 			} else {
 				$this->Session->setFlash(__('No se ha podido crear el Plan. Por favor, intente denuevo.', true));
 			}

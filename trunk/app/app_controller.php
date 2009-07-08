@@ -72,7 +72,7 @@ class AppController extends Controller {
 	
 	function isAuthorized() {
 //debug($this->passedArgs[0]);exit();
-		
+
 	  switch ($this->Auth->user('role')):
 		case 'admin':
 			//hago que la sesion expire en mas tiempo
@@ -81,7 +81,7 @@ class AppController extends Controller {
 		case 'editor':
 			//hago que la sesion expire en mas tiempo
 			$llAuth = false;
-			
+		
 			if ($this->name == 'Instits' && $this->action == 'search') {$llAuth = true;}
 			if ($this->name == 'Instits' && $this->action == 'add') {$llAuth = true;}
 			if ($this->name == 'Instits' && $this->action == 'search_form') {$llAuth = true;}
@@ -97,9 +97,12 @@ class AppController extends Controller {
 			if ($this->name == 'Anios' && $this->action == 'add') {$llAuth = true;}
 			if ($this->name == 'Anios' && $this->action == 'edit') {$llAuth = true;}
 			if ($this->name == 'Anios' && $this->action == 'delete') {$llAuth = true;}
+			
+			if ($this->name == 'Departamentos') {$llAuth = true;}
+			if ($this->name == 'Localidades') {$llAuth = true;}
 						
 			break;
-		  case 'invitado':
+		  case 'invitado':	
 			$llAuth = false;
 			
 			if ($this->name == 'Instits' && $this->action == 'search') {$llAuth = true;}
@@ -110,6 +113,7 @@ class AppController extends Controller {
 			if ($this->name == 'Planes' && $this->action == 'view') {$llAuth = true;}		
 			
 			break;
+		  default: die('El tipo de usuario no concuerda con ninguno setteado en el sistema');
 		endswitch;
 		
 		/**
@@ -126,7 +130,8 @@ class AppController extends Controller {
 		if ($this->name == 'Tipodocs' && $this->action == 'dame_tipodocs') {$llAuth = true;}
 		if ($this->name == 'Tipoinstits' && $this->action == 'get_name') {$llAuth = true;}
 		if ($this->name == 'Tipoinstits' && $this->action == 'ajax_select_form_por_jurisdiccion') {$llAuth = true;}
-			
+		if ($this->name == 'Departamentos' && $this->action == 'ajax_select_departamento_form_por_jurisdiccion') {$llAuth = true;}
+		if ($this->name == 'Localidades' && $this->action == 'ajax_select_localidades_form_por_departamento') {$llAuth = true;}	
 		
 		/**
 		 * Hacer que solo puedan modificar sus datos y contraseña el usuario que es dueño de esos datos

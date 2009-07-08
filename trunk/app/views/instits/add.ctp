@@ -55,17 +55,38 @@ echo $html->css('edit_form',false);
 		
 		
 		/**
-		 *    JURISDICCION 
-		 * 			Y 
-		 * 	TIPO DE INSTITUCION
+		 *   AJAX ::> JURISDICCION - Departamentop - Localidad - Tipo de Institucion 
 		 */	
 		$meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
 		echo $form->input('jurisdiccion_id', array('empty' => array('0'=>'Todas'),'id'=>'jurisdiccion_id','label'=>'Jurisdicción','after'=>$meter));		
-		echo $form->input('tipoinstit_id', array('empty' => 'Todas','type'=>'select','label'=>'Tipo de Institución','after'=> '<br /><cite>Para activar este campo, seleccione primero una jurisdicción</cite>'));
+		
+		
+			// DEPARTAMENTO
+		$meter = '<span class="ajax_update" id="ajax_indicator_dpto" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
+		echo $form->input('departamento_id', array('options'=> $departamentos, 'empty' => 'Seleccione','type'=>'select','label'=>'Departamento','after'=> $meter.'<br /><cite>Seleccione primero una jurisdicción.</cite>'));                                   
+        echo $ajax->observeField('jurisdiccion_id',
+                                   array(  	'url' => '/departamentos/ajax_select_departamento_form_por_jurisdiccion',
+		                                   	'update'=>'InstitDepartamentoId',
+		                                   	'loading'=>'$("ajax_indicator").show();$("InstitDepartamentoId").disable()',
+		                                   	'complete'=>'$("ajax_indicator").hide();$("InstitDepartamentoId").enable()',
+		                                   	'onChange'=>true
+                                   ));
+			//LOCALIDAD
+		echo $form->input('localidad_id', array('options'=> $localidades,'empty' => 'Seleccione','type'=>'select','label'=>'Localidad','after'=> '<br /><cite>Seleccione primero un Departamento.</cite>'));                                   
+        echo $ajax->observeField('InstitDepartamentoId',
+                                   array(  	'url' => '/localidades/ajax_select_localidades_form_por_departamento',
+		                                   	'update'=>'InstitLocalidadId',
+		                                   	'loading'=>'$("ajax_indicator_dpto").show();$("InstitLocalidadId").disable()',
+		                                   	'complete'=>'$("ajax_indicator_dpto").hide();$("InstitLocalidadId").enable()',
+		                                   	'onChange'=>true
+                                   ));  
+                            
+                                   
+           // TIPO DE INSTITUCION                  
+		//echo $form->input('tipoinstit_id', array('empty' => 'Todas','disabled'=>true,'type'=>'select','label'=>'Tipo De Institución','after'=> '<br /><cite>Para activar este campo, seleccione primero una jurisdicción</cite>'));
+		echo $form->input('tipoinstit_id', array('empty' => 'Seleccione','type'=>'select','label'=>'Tipo de Institución','after'=> '<br /><cite>Seleccione primero una jurisdicción, asi selecciona los tipos de institución posibles</cite>'));
 		echo $ajax->observeField('jurisdiccion_id',
                                    array(  	'url' => '/tipoinstits/ajax_select_form_por_jurisdiccion',
-                                   			//'controller' => 'TipoInstits',
-                                   			//'action' => 'ajax_select_form_por_jurisdiccion',
 		                                   	'update'=>'InstitTipoinstitId',
 		                                   	'loading'=>'$("ajax_indicator").show();$("InstitTipoinstitId").disable()',
 		                                   	'complete'=>'$("ajax_indicator").hide();$("InstitTipoinstitId").enable()',
@@ -142,21 +163,7 @@ echo $html->css('edit_form',false);
 											'class' => 'input_text_peque'
 		));
 		
-		/**
-		 *    LOCALIDAD
-		 */	
-		echo $form->input('localidad',array('label'=>array('class'=>'input_label'),
-											'class' => 'input_text_peque'
-		));	
-		
-		/**
-		 *    DEPTO
-		 */	
-		echo $form->input('depto',array('label'=>array('text'=> 'Departamento','class'=>'input_label'),
-										'class' => 'input_text_peque'
-		));
-		
-		
+				
 		                          
                                    
 		/**
@@ -257,25 +264,10 @@ echo $html->css('edit_form',false);
 		/**
 		 *    OBSERVACION
 		 */	
-		echo $form->input('observacion',array(	'type'=>'textarea',
-												'rows'=>3,
-												'label'=>'Observaciones',
-												'after'=>'<cite>Puede ingresar hasta 100 caracteres</cite>'));
-			//agrego esto para que no se puedan imprimir mas de 100 caracteres en el textarea
-			?>
-			<script type="text/javascript">
-				$('InstitObservacion').observe('keyup', function(){					
-					var maxlength = 100;
-					if ($F('InstitObservacion') && $F('InstitObservacion').length > maxlength){
-						var paso_flag = false;
-						if(!paso_flag)alert('Solo puede escribir hasta 100 caracteres');
-						$('InstitObservacion').setValue($F('InstitObservacion').substring(0, maxlength));
-						paso_flag = true;
-					}
-				});
-			</script>
-
-		<?
+		echo $form->input('observacion');
+		
+		
+		
 		/**
 		 *    CICLOS ALTA Y MODIFICACION
 		 */	

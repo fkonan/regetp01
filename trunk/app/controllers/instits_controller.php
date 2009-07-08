@@ -34,10 +34,13 @@ class InstitsController extends AppController {
 				$this->Session->setFlash(__('La Institución no pudo ser guardada. Escriba nuevamente el campo incorrecto.', true));
 			}
 		}
-		$gestiones = $this->Instit->Gestion->find('list');
+		$gestiones = $this->Instit->Gestion->find('list',array('order'=>'id ASC'));
 		$dependencias = $this->Instit->Dependencia->find('list');
 		$tipoinstits = $this->Instit->Tipoinstit->find('list');
 		$jurisdicciones = $this->Instit->Jurisdiccion->find('list');
+		$departamentos = $this->Instit->Departamento->find('list',array('order'=>'name'));
+		$localidades = $this->Instit->Localidad->find('list',array('order'=>'name'));
+		$this->set(compact('gestiones','dependencias','tipoinstits','jurisdicciones','departamentos','localidades'));
 		$this->set(compact('gestiones', 'dependencias', 'tipoinstits', 'jurisdicciones'));
 	}
 
@@ -68,18 +71,20 @@ class InstitsController extends AppController {
 		$dependencias = $this->Instit->Dependencia->find('list');
 		$tipoinstits = $this->Instit->Tipoinstit->find('list',array('conditions'=>'Tipoinstit.jurisdiccion_id = '.$this->data['Instit']['jurisdiccion_id']));
 		$jurisdicciones = $this->Instit->Jurisdiccion->find('list');
-		$this->set(compact('gestiones','dependencias','tipoinstits','jurisdicciones'));
+		$departamentos = $this->Instit->Departamento->find('list',array('order'=>'name','conditions'=>array('jurisdiccion_id'=>$this->data['Instit']['jurisdiccion_id'])));
+		$localidades = $this->Instit->Localidad->find('list',array('order'=>'name'));
+		$this->set(compact('gestiones','dependencias','tipoinstits','jurisdicciones','departamentos','localidades'));
 		$this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$id );
 	}
 
 	function delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Se ha pasado un id que no existe para esa Institución', true));
-			$this->redirect(array('action'=>'index'));
+			
 		}
 		if ($this->Instit->del($id)) {
 			$this->Session->setFlash(__('Se ha eliminado la Institución correctamente', true));
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('controller'=>'pages', 'action'=>'home'));
 		}
 	}
 	
@@ -220,15 +225,15 @@ class InstitsController extends AppController {
 			 *     NOMBRE
 			 */
 			if($this->data['Instit']['nombre'] != ''){
-				$this->paginate['conditions']['lower(to_ascii(Instit.nombre)) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->data['Instit']['nombre']));
+				$this->paginate['conditions']['to_ascii(lower(Instit.nombre)) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->data['Instit']['nombre']));
 				$array_condiciones['Nombre'] = $this->data['Instit']['nombre'];
 				$url_conditions['nombre'] = $this->data['Instit']['nombre'];			
 			}
 			if(isset($this->passedArgs['nombre'])){	
             	if($this->passedArgs['nombre'] != ''){
-					$this->paginate['conditions']['lower(to_ascii(Instit.nombre)) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->passedArgs['nombre']));
-					$array_condiciones['Nombre'] = $this->passedArgs['nombre'];
-					$url_conditions['nombre'] = $this->passedArgs['nombre'];			
+					$this->paginate['conditions']['to_ascii(lower(Instit.nombre)) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['nombre'])));
+					$array_condiciones['Nombre'] = utf8_decode($this->passedArgs['nombre']);
+					$url_conditions['nombre'] = utf8_decode($this->passedArgs['nombre']);			
 				}
             }
 			/**
@@ -241,22 +246,22 @@ class InstitsController extends AppController {
 			}
 			if(isset($this->passedArgs['direccion'])){	
             			if($this->passedArgs['direccion'] != ''){
-					$this->paginate['conditions']['lower(to_ascii(Instit.direccion)) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->passedArgs['direccion']));
-					$array_condiciones['Domicilio'] = $this->passedArgs['direccion'];			
-					$url_conditions['direccion'] = $this->passedArgs['direccion'];
+					$this->paginate['conditions']['lower(to_ascii(Instit.direccion)) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['direccion'])));
+					$array_condiciones['Domicilio'] = utf8_decode($this->passedArgs['direccion']);			
+					$url_conditions['direccion'] = utf8_decode($this->passedArgs['direccion']);
 				}
 			}	
 			/**
 			 *     LOCALIDAD
 			 */
 			if($this->data['Instit']['localidad'] != ''){
-				$this->paginate['conditions']['lower(to_ascii(Instit.localidad)) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->data['Instit']['localidad']));
+				$this->paginate['conditions']['lower(Instit.localidad) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->data['Instit']['localidad']));
 				$array_condiciones['Localidad'] = $this->data['Instit']['localidad'];
 				$url_conditions['localidad'] = $this->data['Instit']['localidad'];			
 			}
 			if(isset($this->passedArgs['localidad'])){	
             	if($this->passedArgs['localidad'] != ''){
-					$this->paginate['conditions']['lower(to_ascii(Instit.localidad)) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->passedArgs['localidad']));
+					$this->paginate['conditions']['lower(Instit.localidad) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->passedArgs['localidad']));
 					$array_condiciones['Localidad'] = $this->passedArgs['localidad'];
 					$url_conditions['localidad'] = $this->passedArgs['localidad'];			
 				}
@@ -451,20 +456,36 @@ class InstitsController extends AppController {
 			//'/[\., ]+/' => '-',
 			
 			// Vocales
-			'/a/' => 'á',
-			'/e/' => 'é',
-			'/i/' => 'í',
-			'/o/' => 'ó',
-			'/u/' => 'ú',
+			'/a/' => '(á|a|A|Á)',
+			'/e/' => '(é|e|E|É)',
+			'/i/' => '(í|i|I|Í)',
+			'/o/' => '(ó|o|O|Ó)',
+			'/u/' => '(ú|u|Ú|U)',
 		
-			'/á/' => '(a|á)',
-			'/é/' => '(e|é)',
-			'/í/' => '(i|í)',
-			'/ó/' => '(o|ó)',
-			'/ú/' => '(u|ú)',
+			'/A/' => '(á|a|A|Á)',
+			'/E/' => '(é|e|E|É)',
+			'/I/' => '(í|i|I|Í)',
+			'/O/' => '(ó|o|O|Ó)',
+			'/U/' => '(ú|u|Ú|U)',
+		
+			'/Á/' => '(á|a|A|Á)',
+			'/É/' => '(é|e|E|É)',
+			'/Í/' => '(í|i|I|Í)',
+			'/Ó/' => '(ó|o|O|Ó)',
+			'/Ú/' => '(ú|u|Ú|U)',
+		
+			'/á/' => '(á|a|A|Á)',
+			'/é/' => '(é|e|E|É)',
+			'/í/' => '(í|i|I|Í)',
+			'/ó/' => '(ó|o|O|Ó)',
+			'/ú/' => '(ú|u|Ú|U)',
 			
 			'/n/' => 'ñ',
-			'/ñ/' => '(n|ñ)'
+			'/ñ/' => '(n|ñ)',
+		
+			'/s/' => '(z|s|c)',
+			'/c/' => '(z|s|c)',
+			'/z/' => '(z|s|c)'
  
 			// Agregar aqui mas caracteres si es necesario
  

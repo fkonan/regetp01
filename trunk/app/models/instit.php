@@ -28,6 +28,18 @@ class Instit extends AppModel {
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
+			),
+			'Departamento' => array('className' => 'Departamento',
+								'foreignKey' => 'departamento_id',
+								'conditions' => '',
+								'fields' => '',
+								'order' => ''
+			),
+			'Localidad' => array('className' => 'Localidad',
+								'foreignKey' => 'localidad_id',
+								'conditions' => '',
+								'fields' => '',
+								'order' => ''
 			)
 	);
 
@@ -68,7 +80,7 @@ class Instit extends AppModel {
 			 * 
 			 */
 			'jurisdiccion_correcta' => array(
-				'rule' => '/^(2|6|10|14|18|22|26|30|34|38|42|46|50|54|58|62|66|70|74|78|82|86|90|94)[0-9]{5}$/',
+				'rule' => '/^(2|6|02|06|10|14|18|22|26|30|34|38|42|46|50|54|58|62|66|70|74|78|82|86|90|94)[0-9]{5}$/',
 				'required' => true,
 				'allowEmpty' => false,
 				'message' => 'El CUE ingresado no es válido. No concuerda con el código de jurisdicción'
@@ -138,23 +150,13 @@ class Instit extends AppModel {
 				'message' => 'La dirección no puede quedar vacía.'
 			),
 		),
-		'depto' => array(
-			'notEmpty' => array( // or: array('ruleName', 'param1', 'param2' ...)
-				'rule' => VALID_NOT_EMPTY,
-				'required' => true,
-				'allowEmpty' => false,
-				//'on' => 'create', // or: 'update'
-				'message' => 'El Departamento no puede quedar vacío.'
-			),
+		'departamento_id' => array(
+			'rule' => array('controlar_coincidencia_jurisdiccion_departamento'),
+			'message'=> 'El departamento no corresponde a esa jurisdicción.',	
 		),
-		'localidad' => array(
-			'notEmpty' => array( // or: array('ruleName', 'param1', 'param2' ...)
-				'rule' => VALID_NOT_EMPTY,
-				'required' => true,
-				'allowEmpty' => false,
-				//'on' => 'create', // or: 'update'
-				'message' => 'La Localidad no puede quedar vacía.'
-			),
+		'localidad_id' => array(
+			'rule' => array('controlar_coincidencia_departamento_localidad'),
+			'message'=> 'La localidad no corresponde a ese Departamento.'
 		),
 		'cp' => array(
 			'notEmpty' => array( // or: array('ruleName', 'param1', 'param2' ...)
@@ -215,15 +217,7 @@ class Instit extends AppModel {
 				'message' => 'Debe ingresar formato de año, con 4 dígitos. Ej: 2008.'	
 			)
 		),
-		'observacion' => array(
-			'notEmpty' => array( // or: array('ruleName', 'param1', 'param2' ...)
-				'rule' => array('maxLength',100),
-				'required' => false,
-				'allowEmpty' => true,
-				//'on' => 'create', // or: 'update'
-				'message' => 'La observación no puede tener más de 100 caracteres.'
-			)
-		),
+		
 		'jurisdiccion_id' => array(
 			'notEmpty' => array(
 				'rule' => VALID_NOT_EMPTY,
@@ -289,15 +283,22 @@ class Instit extends AppModel {
   	 * @return unknown
   	 */
   	function controlar_coincidencia_cue_jurisdiccion(){
+  		$jur_id = $this->data[$this->name]['jurisdiccion_id'];
+  		
+  		if($jur_id < 10){
+  			$jur_id = "0$jur_id";
+  		}
+  		
   		$tam = strlen($this->data[$this->name]['cue']);
   		if($tam == 7){
   			$jur = substr($this->data[$this->name]['cue'],0,2);
   		} elseif($tam == 6){
   			$jur = substr($this->data[$this->name]['cue'],0,1);
+  			$jur = "0$jur";
   		}
   		else return false;
   		
-  		return ($this->data[$this->name]['jurisdiccion_id'] == $jur)?true:false;
+  		return ($jur_id == $jur)?true:false;
   	}
   
 	
@@ -344,14 +345,16 @@ class Instit extends AppModel {
 		  		
 			  		$nombre = $aux['Instit']['nombre'];
 			  		$numero = $aux['Instit']['nroinstit'];
-			  		$nombre_tipoinstit = $aux['Tipoinstit']['name'];
-			  		
-				  	$aux['Instit']['nombre_completo'] = ($nombre_tipoinstit=='SIN DATOS')?'':$nombre_tipoinstit;
-				  	$aux['Instit']['nombre_completo'] .= ($numero > 0 || $numero != '')?" Nº $numero":"";
-  					if (($nombre_tipoinstit != 'SIN DATOS' ||  $numero > 0)&& $nombre){
-						$aux['Instit']['nombre_completo'] .= ", ";
-					}
-				  	$aux['Instit']['nombre_completo'] .= ($nombre != '')?$nombre:"";
+			  		if(isset($aux['Tipoinstit']['name'])){
+				  		$nombre_tipoinstit = $aux['Tipoinstit']['name'];
+				  		
+					  	$aux['Instit']['nombre_completo'] = ($nombre_tipoinstit=='SIN DATOS')?'':$nombre_tipoinstit;
+					  	$aux['Instit']['nombre_completo'] .= ($numero > 0 || $numero != '')?" Nº $numero":"";
+	  					if (($nombre_tipoinstit != 'SIN DATOS' ||  $numero > 0)&& $nombre){
+							$aux['Instit']['nombre_completo'] .= ", ";
+						}
+					  	$aux['Instit']['nombre_completo'] .= ($nombre != '')?$nombre:"";
+			  		}
 			  	endfor;
 			 else:
 			 	$nombre = $aux['Instit']['nombre'];
@@ -369,16 +372,7 @@ class Instit extends AppModel {
   		
   		return $instituciones_data;
   	}
-  	
-  	function beforeSave(){
-  		if($this->data[$this->name]['anio_creacion']== ''){
-  			$this->data[$this->name]['anio_creacion'] = 0;
-  		}
-  		return true;
-  		//debug($this->data);	
-  	}
-  	
-  	
+  	 	
   	
   	
   	
@@ -505,6 +499,60 @@ class Instit extends AppModel {
   		return $matriz_rtado;
   	}
   	
+  	
+  	
+  	function controlar_coincidencia_jurisdiccion_departamento(){
+  		if (isset($this->data[$this->name]['departamento_id'])){
+  			if ($this->data[$this->name]['departamento_id'] == '') return true;
+  			
+  			if ($this->data[$this->name]['departamento_id'] != ''){
+		  		$jur_id = $this->data[$this->name]['jurisdiccion_id'];
+		  		$depto_id = $this->data[$this->name]['departamento_id'];
+		  		$tot = $this->Departamento->find('count',array('conditions'=> array('Departamento.id'=>$depto_id, 'Departamento.jurisdiccion_id'=>$jur_id)));
+		  		return ($tot > 0);
+  			}
+  		}
+  		return true;
+  	}
+  	
+	function controlar_coincidencia_departamento_localidad(){
+		if (isset($this->data[$this->name]['localidad_id']) && isset($this->data[$this->name]['departamento_id'])){
+			if ($this->data[$this->name]['localidad_id'] == "") return true;
+				$localidad_id = $this->data[$this->name]['localidad_id'];
+			  	$depto_id = $this->data[$this->name]['departamento_id'];
+			  	$tot = $this->Localidad->find('count',array('conditions'=> array('Localidad.id'=>$localidad_id, 'Localidad.departamento_id'=>$depto_id)));
+			  	return ($tot > 0);
+		}
+		return true;
+  	}
+  	
+  	
+  	function beforeSave(){
+  		if($this->data[$this->name]['anio_creacion']== ''){
+  			$this->data[$this->name]['anio_creacion'] = 0;
+  		}
+  		
+  		$this->data[$this->name]['depto'] = ' ';
+  		if (isset($this->data[$this->name]['localidad_id']) && isset( $this->data[$this->name]['departamento_id'])):
+  			$this->Localidad->recursive = -1;
+  			$this->Departamento->recursive = -1;
+  			if($this->data[$this->name]['localidad_id'] != ""):
+	  			$localidad = $this->Localidad->findById($this->data[$this->name]['localidad_id']);
+	  			if (isset($localidad['Localidad']['name'])):
+	  				$this->data[$this->name]['localidad'] = $localidad['Localidad']['name'];
+	  			endif;
+	  		endif;  			
+	  		
+	  		if($this->data[$this->name]['departamento_id'] != ""):
+	  			$departamento = $this->Departamento->findById($this->data[$this->name]['departamento_id']);	  		 			
+	  			if (isset($departamento['Departamento']['name'])):
+	  				$this->data[$this->name]['depto'] = $departamento['Departamento']['name'];
+	  			endif;
+	  		endif;
+  		endif;
+  		
+  		return true;
+  	}
   	
 }
 ?>
