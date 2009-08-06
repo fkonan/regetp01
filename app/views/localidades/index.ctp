@@ -1,15 +1,26 @@
 <div class="localidades index">
 <h2><?php __('Localidades');?></h2>
+<? 
+$paginator->options(array('url' => $url_conditions));
+?>
 <p>
 <?php
 echo $paginator->counter(array(
 'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
 ));
 ?></p>
+
+<?php echo $form->create('Localidad',array('action'=>'ver'));?>
+<?php echo $form->input('jurisdiccion_id',array('type'=>'select','options'=>$jurisdicciones,'onchange'=>'$("LocalidadVerForm").submit()'));?>
+<?php echo $form->end(null);?>
+
 <table cellpadding="0" cellspacing="0">
 <tr>
 	<th><?php echo $paginator->sort('id');?></th>
-	<th><?php echo $paginator->sort('departamento_id');?></th>
+	<th><?php echo 'Jurisdicción';?></th>
+	
+	<th><?php echo $paginator->sort('departamento','Departamento.name');?></th>
+		
 	<th><?php echo $paginator->sort('name');?></th>
 	<th class="actions"><?php __('Actions');?></th>
 </tr>
@@ -26,7 +37,10 @@ foreach ($localidades as $localidad):
 			<?php echo $localidad['Localidad']['id']; ?>
 		</td>
 		<td>
-			<?php echo $localidad['Localidad']['departamento_id']; ?>
+			<?php echo $localidad['Departamento']['Jurisdiccion']['name']; ?>
+		</td>
+		<td>
+			<?php echo $localidad['Departamento']['name']; ?>
 		</td>
 		<td>
 			<?php echo $localidad['Localidad']['name']; ?>

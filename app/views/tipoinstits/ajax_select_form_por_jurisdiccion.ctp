@@ -1,5 +1,5 @@
 
-<option value="">Todas</option>
+<option value="0">SIN DATOS</option>
 <?
 /**
 * ajax_select_form_por_jurisdiccion.ctp

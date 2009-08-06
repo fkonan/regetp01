@@ -62,6 +62,14 @@ class AppController extends Controller {
 	
 		
 	function beforeFilter(){
+		/**
+		 * 
+		 *  REGETP VERSION
+		 * 
+		 */
+		Configure::write('regetpVersion', 'v1.0.0803 final');
+
+
 		$this->Auth->loginError ='Usuario o Password Incorrectos';
 		$this->Auth->authError = 'Debe registrarse para acceder a esta página';
 		$this->Auth->logoutRedirect='/pages/home';
@@ -88,6 +96,7 @@ class AppController extends Controller {
 			if ($this->name == 'Instits' && $this->action == 'view') {$llAuth = true;}
 			if ($this->name == 'Instits' && $this->action == 'edit') {$llAuth = true;}
 			if ($this->name == 'Instits' && $this->action == 'planes_relacionados') {$llAuth = true;}
+			if ($this->name == 'Instits' && $this->action == 'depurar') {$llAuth = true;}
 			
 			if ($this->name == 'Planes' && $this->action == 'add') {$llAuth = true;}
 			if ($this->name == 'Planes' && $this->action == 'view') {$llAuth = true;}
@@ -100,6 +109,11 @@ class AppController extends Controller {
 			
 			if ($this->name == 'Departamentos') {$llAuth = true;}
 			if ($this->name == 'Localidades') {$llAuth = true;}
+			
+			if ($this->name == 'Queries' && $this->action == 'descargar_queries') {$llAuth = true;}
+			if ($this->name == 'Queries' && $this->action == 'contruye_excel') {$llAuth = true;}
+			
+			if ($this->name == 'Depuradores') {$llAuth = true;}
 						
 			break;
 		  case 'invitado':	

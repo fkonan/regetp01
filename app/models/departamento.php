@@ -19,7 +19,7 @@ class Departamento extends AppModel {
 	var $hasMany = array(
 			'Localidad' => array('className' => 'Localidad',
 								'foreignKey' => 'departamento_id',
-								'dependent' => false,
+								'dependent' => true,
 								'conditions' => '',
 								'fields' => '',
 								'order' => '',

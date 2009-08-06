@@ -1,10 +1,4 @@
 <?php
-/**
- * 
- *  REGETP VERSION
- * 
- */
-Configure::write('regetpVersion', 'v1.0.04 final');
 
 
 

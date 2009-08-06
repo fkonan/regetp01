@@ -2,11 +2,37 @@
 class LocalidadesController extends AppController {
 
 	var $name = 'Localidades';
-	var $helpers = array('Html', 'Form');
+	var $helpers = array('Html', 'Form', 'Ajax');
 
-	function index() {
-		$this->Localidad->recursive = 0;
-		$this->set('localidades', $this->paginate());
+	function index($jurisdiccion = 0) {
+		$this->Localidad->recursive = 2;
+		if ($jurisdiccion != 0):
+		 	$this->paginate = array('limit' => 5000, 'page' => 1); 
+		 	$this->set('localidades', $this->paginate(null,array('Departamento.jurisdiccion_id'=>$jurisdiccion)));
+		else:
+			 $this->set('localidades', $this->paginate());
+		endif;
+		$this->set('jurisdicciones',$this->Localidad->Departamento->Jurisdiccion->find('list'));
+		$this->set('url_conditions', array());
+	}
+	
+	
+	function ver($jurisdiccion = 0) {
+		$this->Localidad->recursive = 2;
+		$jurisdiccion =  (isset($this->passedArgs['jurisdiccion_id']))?$this->passedArgs['jurisdiccion_id']:$jurisdiccion;
+		$jurisdiccion =  (isset($this->data['Localidad']['jurisdiccion_id']))?$this->data['Localidad']['jurisdiccion_id']:$jurisdiccion;
+		
+		if ($jurisdiccion != 0):
+		 	$this->paginate = array('limit' => 5000, 'page' => 1); 
+		 	$this->set('localidades', $this->paginate(null,array('Departamento.jurisdiccion_id'=>$jurisdiccion)));
+		else:
+			 $this->set('localidades', $this->paginate());
+		endif;
+		
+		$condiciones['jurisdiccion_id'] = $jurisdiccion;
+		$this->set('url_conditions', $condiciones);
+		$this->set('jurisdicciones',$this->Localidad->Departamento->Jurisdiccion->find('list'));
+		$this->render('/localidades/index');		
 	}
 
 	function view($id = null) {
@@ -17,18 +43,22 @@ class LocalidadesController extends AppController {
 		$this->set('localidad', $this->Localidad->read(null, $id));
 	}
 
-	function add() {
+	function add() {		
 		if (!empty($this->data)) {
 			$this->Localidad->create();
 			if ($this->Localidad->save($this->data)) {
 				$this->Session->setFlash(__('The Localidad has been saved', true));
-				$this->redirect(array('action'=>'index'));
 			} else {
 				$this->Session->setFlash(__('The Localidad could not be saved. Please, try again.', true));
 			}
 		}
+		$jurisdicciones = $this->Localidad->Departamento->Jurisdiccion->find('list');		
+		if (isset($this->data['Localidad']['jurisdiccion_id'])):
+			$condicion = array('jurisdiccion_id'=>$this->data['Localidad']['jurisdiccion_id']);
+			$departamentos = $this->Localidad->Departamento->find('list',array('conditions'=>$condicion)); 
+		endif;
 		$departamentos = $this->Localidad->Departamento->find('list');
-		$this->set(compact('departamentos'));
+		$this->set(compact('departamentos','jurisdicciones'));
 	}
 
 	function edit($id = null) {
@@ -44,10 +74,11 @@ class LocalidadesController extends AppController {
 				$this->Session->setFlash(__('The Localidad could not be saved. Please, try again.', true));
 			}
 		}
+		$this->Localidad->recursive = 2;
 		if (empty($this->data)) {
 			$this->data = $this->Localidad->read(null, $id);
-		}
-		$departamentos = $this->Localidad->Departamento->find('list');
+		}	
+		$departamentos = $this->Localidad->Departamento->find('list',array('conditions'=>array('jurisdiccion_id'=>$this->data['Departamento']['Jurisdiccion']['id'])));
 		$this->set(compact('departamentos'));
 	}
 
@@ -65,23 +96,28 @@ class LocalidadesController extends AppController {
 	
 	function ajax_select_localidades_form_por_departamento(){
 		 $this->layout = 'ajax';
-        // Configure::write('debug',0);
+         //Configure::write('debug',0);
+         $this->Tipoinstit->recursive = -1;
+
+         $depto_id = 0;
          
-         $this->Tipoinstit->recursive = -1;  
+         if ($jur = current($this->data)):
+         	if (isset($jur)):
+         		$depto_id = $jur['departamento_id'];
+         	endif;
+         endif;
          
-         if (isset($this->data['Instit']['departamento_id'])){
-         	if($this->data['Instit']['departamento_id'] == 0 ){//buscar a todas
-         		$localidades = $this->Localidad->find('all',array('order'=>'Localidad.name ASC'));
-         	}else{
-         		$localidades = $this->Localidad->find('all',array('conditions' => array('departamento_id' => $this->data['Instit']['departamento_id']),
+         if ($depto_id == 0){//buscar a todas
+         	$localidades = $this->Localidad->find('list',array('order'=>'Localidad.name ASC'));
+         }else{ //buscar por el depto_id
+         	$localidades = $this->Localidad->find('list',array('conditions' => array('departamento_id' => $depto_id),
          											  array('order'=>'Localidad.name ASC')));
-         	}
-         	debug(76235475);
-	        $this->set('localidades', $localidades);
+         }
+
+	     $this->set('localidades', $localidades);
 	         
-	         //prevent useless warnings for Ajax
-	         $this->render('ajax_select_localidades_form_por_departamento','ajax');
-         }			
+	     //prevent useless warnings for Ajax
+	     $this->render('ajax_select_localidades_form_por_departamento','ajax');			
 	}
 
 }

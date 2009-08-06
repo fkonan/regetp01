@@ -32,3 +32,13 @@
     	(A) queries
     		
     		
+    		
+    		
+    		
+    6 Agosto
+    #Modificacion campo en tabla
+    	planes
+    		(A) sector_id integer FK
+    #Alta tabla
+    	sectores (tree behaviur)
+    				

@@ -80,7 +80,7 @@ echo $html->css('edit_form',false);
 		                                   	'complete'=>'$("ajax_indicator_dpto").hide();$("InstitLocalidadId").enable()',
 		                                   	'onChange'=>true
                                    ));  
-                            
+        echo $form->input('lugar',array('label'=>'Lugar: Barrio/Pueblo/Comuna/'));                      
                                    
            // TIPO DE INSTITUCION                  
 		//echo $form->input('tipoinstit_id', array('empty' => 'Todas','disabled'=>true,'type'=>'select','label'=>'Tipo De Institución','after'=> '<br /><cite>Para activar este campo, seleccione primero una jurisdicción</cite>'));
@@ -124,7 +124,15 @@ echo $html->css('edit_form',false);
 						'onChange': true,
 						parameters: {'data[Instit][jurisdiccion_id]': cue_jur}
 						}); 
-				}							
+					
+					new Ajax.Updater('InstitDepartamentoId','<?= $html->url('/departamentos/ajax_select_departamento_form_por_jurisdiccion')?>', {
+						'onLoading': function(){$("ajax_indicator").show();$("InstitTipoinstitId").disable()},
+						'onComplete': function(){$("ajax_indicator").hide();$("InstitTipoinstitId").enable()},
+						'onChange': true,
+						parameters: {'data[Instit][jurisdiccion_id]': cue_jur}
+						}); 
+
+				}						
 			});
 		</script>
 		

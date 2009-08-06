@@ -79,6 +79,8 @@
 		                                   	'onChange'=>true
                                    ));  
                                    
+		echo $form->input('lugar',array('label'=>'Lugar: Barrio/Pueblo/Comuna/'));                            
+                                   
            // TIPO DE INSTITUCION                  
 		//echo $form->input('tipoinstit_id', array('empty' => 'Todas','disabled'=>true,'type'=>'select','label'=>'Tipo De Institución','after'=> '<br /><cite>Para activar este campo, seleccione primero una jurisdicción</cite>'));
 		echo $form->input('tipoinstit_id', array('empty' => 'Seleccione','type'=>'select','label'=>'Tipo de Institución','after'=> '<br /><cite>Seleccione primero una jurisdicción, asi selecciona los tipos de institución posibles</cite>'));
