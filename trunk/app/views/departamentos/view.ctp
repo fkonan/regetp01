@@ -16,6 +16,14 @@
 			<?php echo $departamento['Departamento']['name']; ?>
 			&nbsp;
 		</dd>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $departamento['Departamento']['created']; ?>
+			&nbsp;
+		</dd>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $departamento['Departamento']['modified']; ?>
+			&nbsp;
+		</dd>
 	</dl>
 </div>
 <div class="actions">

@@ -82,6 +82,7 @@ class PlanesController extends AppController {
 		$ofertas = $this->Plan->Oferta->find('list');
 		$this->set(compact('ofertas'));
 		
+		$this->set('sectores',$this->Plan->Sector->generatetreelist());
 
 		$this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$instit['Instit']['id'] );
 	}
@@ -111,6 +112,8 @@ class PlanesController extends AppController {
 		$this->rutaUrl_for_layout[] = array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$this->data['Instit']['id'] );
 		$this->rutaUrl_for_layout[] = array('name'=> 'Oferta Educativa','link'=>'/Instits/planes_relacionados/'.$this->data['Instit']['id'] );
 		$this->rutaUrl_for_layout[] = array('name'=> $this->data['Plan']['nombre'],'link'=>'/Planes/view/'.$this->data['Plan']['id'] );
+		
+		$this->set('sectores',$this->Plan->Sector->generatetreelist());
 	}
 
 	function delete($id = null) {

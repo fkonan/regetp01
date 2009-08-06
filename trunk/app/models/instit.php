@@ -59,7 +59,17 @@ class Instit extends AppModel {
 	);
 
 	var $validate = array(
-      	'cue' => array(		
+      	'cue' => array(
+			/**
+			 * Aca se verifica que los numeros iniciales del  CUE sean
+			 * macheados con la jurisdiccion para comprobar la validez del CUE.
+			 * 
+			 */
+			'cue_y_anexo_unico' => array(
+				'rule' => array('cue_y_anexo_unico'),
+				'message'=> 'El CUE o el ANEXO ya existen.',
+				'on' => 'create'
+			),
 
 			/**
 			 * Aca se verifica que los numeros iniciales del  CUE sean
@@ -326,7 +336,7 @@ class Instit extends AppModel {
 		 * llegar alos datos de Instit
 		 */  		
 			$array_recorro = $instituciones_data;
-		 	
+		 
 		 	$profundidad = 0;
 	  		while (list($key, $idata) = each($array_recorro)):  	
 	  			$aux = "$key";
@@ -337,26 +347,27 @@ class Instit extends AppModel {
 	  				$profundidad++;
 	  			}
 	  		endwhile;
-	  	
+	  			  	
 	  		$aux = &$instituciones_data;
 	  		if ($profundidad >0):
+
 			  	for ($i=0; $i<sizeof($instituciones_data);$i++):		
 			  		$aux = &$instituciones_data[$i]; 		
 		  		
 			  		$nombre = $aux['Instit']['nombre'];
 			  		$numero = $aux['Instit']['nroinstit'];
-			  		if(isset($aux['Tipoinstit']['name'])){
+			  		if(isset($aux['Tipoinstit']['name'])){			
 				  		$nombre_tipoinstit = $aux['Tipoinstit']['name'];
 				  		
 					  	$aux['Instit']['nombre_completo'] = ($nombre_tipoinstit=='SIN DATOS')?'':$nombre_tipoinstit;
 					  	$aux['Instit']['nombre_completo'] .= ($numero > 0 || $numero != '')?" Nº $numero":"";
 	  					if (($nombre_tipoinstit != 'SIN DATOS' ||  $numero > 0)&& $nombre){
-							$aux['Instit']['nombre_completo'] .= ", ";
+							$aux['Instit']['nombre_completo'] .= " ";
 						}
 					  	$aux['Instit']['nombre_completo'] .= ($nombre != '')?$nombre:"";
 			  		}
 			  	endfor;
-			 else:
+			 else:	 
 			 	$nombre = $aux['Instit']['nombre'];
 			  	$numero = $aux['Instit']['nroinstit'];
 			  	$nombre_tipoinstit = $aux['Tipoinstit']['name'];
@@ -364,7 +375,7 @@ class Instit extends AppModel {
 				$aux['Instit']['nombre_completo'] .= ($numero > 0 || $numero != '')?" Nº $numero":"";
 				
 				if (($nombre_tipoinstit != 'SIN DATOS' ||  $numero > 0)&& $nombre){
-					$aux['Instit']['nombre_completo'] .= ", ";
+					$aux['Instit']['nombre_completo'] .= " ";
 				}
 				$aux['Instit']['nombre_completo'] .= ($nombre != '')?$nombre:"";
 			endif;
@@ -508,6 +519,7 @@ class Instit extends AppModel {
   			if ($this->data[$this->name]['departamento_id'] != ''){
 		  		$jur_id = $this->data[$this->name]['jurisdiccion_id'];
 		  		$depto_id = $this->data[$this->name]['departamento_id'];
+		  		$this->Departamento->recursive = -1;
 		  		$tot = $this->Departamento->find('count',array('conditions'=> array('Departamento.id'=>$depto_id, 'Departamento.jurisdiccion_id'=>$jur_id)));
 		  		return ($tot > 0);
   			}
@@ -515,12 +527,14 @@ class Instit extends AppModel {
   		return true;
   	}
   	
-	function controlar_coincidencia_departamento_localidad(){
-		if (isset($this->data[$this->name]['localidad_id']) && isset($this->data[$this->name]['departamento_id'])){
-			if ($this->data[$this->name]['localidad_id'] == "") return true;
+  	
+	function controlar_coincidencia_localidad_lugar(){
+		if (isset($this->data[$this->name]['localidad_id']) && isset($this->data[$this->name]['lugar_id'])){
+			if ($this->data[$this->name]['lugar_id'] == "") return true;
 				$localidad_id = $this->data[$this->name]['localidad_id'];
-			  	$depto_id = $this->data[$this->name]['departamento_id'];
-			  	$tot = $this->Localidad->find('count',array('conditions'=> array('Localidad.id'=>$localidad_id, 'Localidad.departamento_id'=>$depto_id)));
+			  	$lugar_id = $this->data[$this->name]['lugar_id'];
+			  	$this->Lugar->recursive = -1;
+			  	$tot = $this->Lugar->find('count',array('conditions'=> array('Lugar.id'=>$lugar_id, 'Lugar.localidad_id'=>$localidad_id)));
 			  	return ($tot > 0);
 		}
 		return true;
@@ -528,21 +542,26 @@ class Instit extends AppModel {
   	
   	
   	function beforeSave(){
+  		//prevenir el error de NOT NULL en postgres
   		if($this->data[$this->name]['anio_creacion']== ''){
   			$this->data[$this->name]['anio_creacion'] = 0;
   		}
   		
+  		
   		$this->data[$this->name]['depto'] = ' ';
-  		if (isset($this->data[$this->name]['localidad_id']) && isset( $this->data[$this->name]['departamento_id'])):
-  			$this->Localidad->recursive = -1;
-  			$this->Departamento->recursive = -1;
-  			if($this->data[$this->name]['localidad_id'] != ""):
+  		$this->data[$this->name]['localidad'] = ' ';
+  		if (isset($this->data[$this->name]['localidad_id'])):
+			$this->Localidad->recursive = -1;
+			if($this->data[$this->name]['localidad_id'] != ""):
 	  			$localidad = $this->Localidad->findById($this->data[$this->name]['localidad_id']);
 	  			if (isset($localidad['Localidad']['name'])):
 	  				$this->data[$this->name]['localidad'] = $localidad['Localidad']['name'];
 	  			endif;
-	  		endif;  			
-	  		
+	  		endif;
+	  	endif;
+  		
+	  	if (isset($this->data[$this->name]['departamento_id'])):  			
+  			$this->Departamento->recursive = -1;
 	  		if($this->data[$this->name]['departamento_id'] != ""):
 	  			$departamento = $this->Departamento->findById($this->data[$this->name]['departamento_id']);	  		 			
 	  			if (isset($departamento['Departamento']['name'])):
@@ -550,8 +569,18 @@ class Instit extends AppModel {
 	  			endif;
 	  		endif;
   		endif;
-  		
+
   		return true;
+  	}
+  	
+  	
+  	function cue_y_anexo_unico(){
+  		$cue   = $this->data[$this->name]['cue'];
+  		$anexo = $this->data[$this->name]['anexo'];
+  		$condiciones = array('cue'=>$cue,'anexo'=>$anexo);
+  		
+  		//si me encuentra algo me tira FALSO, asi evitamos duplicados
+  		return ($this->find('count',array('conditions'=>$condiciones))>0)?false:true;
   	}
   	
 }

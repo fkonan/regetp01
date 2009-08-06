@@ -1,10 +1,17 @@
 <div class="localidades form">
 <?php echo $form->create('Localidad');?>
 	<fieldset>
- 		<legend><?php __('Edit Localidad');?></legend>
+ 		<legend><?php echo 'Editar Localidad de: '.$this->data['Departamento']['Jurisdiccion']['name'];?></legend>
 	<?php
+		
+	
 		echo $form->input('id');
+		
+		
+	
+		// DEPARTAMENTO
 		echo $form->input('departamento_id');
+        
 		echo $form->input('name');
 	?>
 	</fieldset>

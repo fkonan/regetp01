@@ -1,11 +1,20 @@
 <div class="departamentos index">
 <h2><?php __('Departamentos');?></h2>
 <p>
+<? 
+$paginator->options(array('url' => $url_conditions));
+?>
 <?php
 echo $paginator->counter(array(
 'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
 ));
 ?></p>
+
+<?php echo $form->create('Departamento',array('action'=>'ver'));?>
+<?php echo $form->input('jurisdiccion_id',array('type'=>'select','options'=>$jurisdicciones,'onchange'=>'$("DepartamentoVerForm").submit()'));?>
+<?php echo $form->end(null);?>
+
+
 <table cellpadding="0" cellspacing="0">
 <tr>
 	<th><?php echo $paginator->sort('id');?></th>
@@ -26,7 +35,7 @@ foreach ($departamentos as $departamento):
 			<?php echo $departamento['Departamento']['id']; ?>
 		</td>
 		<td>
-			<?php echo $departamento['Departamento']['jurisdiccion_id']; ?>
+			<?php echo "(".$departamento['Departamento']['jurisdiccion_id'].") ".$departamento['Jurisdiccion']['name']; ?>
 		</td>
 		<td>
 			<?php echo $departamento['Departamento']['name']; ?>

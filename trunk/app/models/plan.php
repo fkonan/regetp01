@@ -16,7 +16,13 @@ class Plan extends AppModel {
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			)
+			),
+			'Sector' => array('className' => 'Sector',
+								'foreignKey' => 'sector_id',
+								'conditions' => '',
+								'fields' => '',
+								'order' => ''
+			),
 	);
 
 	var $hasMany = array(
@@ -63,7 +69,17 @@ class Plan extends AppModel {
 	);
 	
 	
-	
+	function beforeSave(){  		  		
+  		if (isset($this->data['Plan']['sector_id'])):
+  			if ($this->data['Plan']['sector_id'] != '' || $this->data['Plan']['sector_id'] != 0): 
+  				$this->Sector->recursive = -1;
+  				$this->Sector->id = $this->data['Plan']['sector_id'];
+  				$sec_aux = $this->Sector->read();
+  				$this->data['Plan']['sector'] = $sec_aux['Sector']['name'];
+  			endif;
+  		endif;
+  		return true;
+  	}
 
 }
 ?>

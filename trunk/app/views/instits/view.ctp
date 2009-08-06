@@ -1,10 +1,7 @@
 <div class="instits view">
 
 <?
-
-//si el anexo tiene 1 solo digito le coloco un cero adelante
-$anexo = ($instit['Instit']['anexo']<10)?'0'.$instit['Instit']['anexo']:$instit['Instit']['anexo'];
-$cue_instit = $instit['Instit']['cue'].$anexo;
+$cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
 ?>
 <br>
 <div id="escuela_estado" class="<? echo $instit['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $instit['Instit']['activo']? 'Institución Ingresada al RFIETP':'Institución NO Ingresada al RFIETP';?></div>
@@ -60,6 +57,11 @@ $cue_instit = $instit['Instit']['cue'].$anexo;
 			&nbsp;
 		</dd>
 		
+		<dt><?php __('Barrio/Pueblo/Comuna'); ?></dt>
+		<dd>
+			<?php echo $instit['Instit']['lugar']; ?>
+			&nbsp;
+		</dd>
 		
 		<dt><?php __('Domicilio'); ?></dt>
 		<dd>

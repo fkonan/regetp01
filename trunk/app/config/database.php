@@ -77,24 +77,14 @@
  *
  */
 class DATABASE_CONFIG {
-
+	
 	var $default = array(
 		'driver' => 'postgres',
 		'persistent' => false,
 		'host' => 'localhost',
 		'login' => 'postgres',
 		'password' => 'r363TP',
-		'database' => 'regetp',
-		'prefix' => '',
-	);
-	
-	var $produccion = array(
-		'driver' => 'postgres',
-		'persistent' => false,
-		'host' => 'localhost',
-		'login' => 'postgres',
-		'password' => 'r363TP',
-		'database' => 'regetp_produccion',
+		'database' => 'regetp_v1.1.01',
 		'prefix' => '',
 	);
 	

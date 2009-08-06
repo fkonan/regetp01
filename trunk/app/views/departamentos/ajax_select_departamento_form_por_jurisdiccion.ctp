@@ -1,9 +1,11 @@
 
+<option value="0">Seleccione</option>
+
 <?
-foreach ($deptos as $d){
+while (list($id, $valor) = each($deptos)):
 	?>
-		<option value="<?= $d['Departamento']['id']?>"><?= utf8_encode($d['Departamento']['name'])?></option>
+		<option value="<?= $id?>"><?= utf8_encode($valor)?></option>
 	<?
-}
+endwhile;
 	
 ?>

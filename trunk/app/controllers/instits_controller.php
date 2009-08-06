@@ -36,8 +36,10 @@ class InstitsController extends AppController {
 		}
 		$gestiones = $this->Instit->Gestion->find('list',array('order'=>'id ASC'));
 		$dependencias = $this->Instit->Dependencia->find('list');
-		$tipoinstits = $this->Instit->Tipoinstit->find('list');
-		$jurisdicciones = $this->Instit->Jurisdiccion->find('list');
+				
+		$tipoinstits = $this->Instit->Tipoinstit->find('list',array('order'=>'Tipoinstit.name'));
+		
+		$jurisdicciones = $this->Instit->Jurisdiccion->find('list',array('order'=>'name'));
 		$departamentos = $this->Instit->Departamento->find('list',array('order'=>'name'));
 		$localidades = $this->Instit->Localidad->find('list',array('order'=>'name'));
 		$this->set(compact('gestiones','dependencias','tipoinstits','jurisdicciones','departamentos','localidades'));
@@ -69,7 +71,9 @@ class InstitsController extends AppController {
 		
 		$gestiones = $this->Instit->Gestion->find('list');
 		$dependencias = $this->Instit->Dependencia->find('list');
-		$tipoinstits = $this->Instit->Tipoinstit->find('list',array('conditions'=>'Tipoinstit.jurisdiccion_id = '.$this->data['Instit']['jurisdiccion_id']));
+		
+		$tipoinstits = $this->Instit->Tipoinstit->find('list',array('conditions'=>'Tipoinstit.jurisdiccion_id = '.$this->data['Instit']['jurisdiccion_id'],'order'=>'Tipoinstit.name'));
+		
 		$jurisdicciones = $this->Instit->Jurisdiccion->find('list');
 		$departamentos = $this->Instit->Departamento->find('list',array('order'=>'name','conditions'=>array('jurisdiccion_id'=>$this->data['Instit']['jurisdiccion_id'])));
 		$localidades = $this->Instit->Localidad->find('list',array('order'=>'name'));
@@ -261,9 +265,9 @@ class InstitsController extends AppController {
 			}
 			if(isset($this->passedArgs['localidad'])){	
             	if($this->passedArgs['localidad'] != ''){
-					$this->paginate['conditions']['lower(Instit.localidad) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->passedArgs['localidad']));
-					$array_condiciones['Localidad'] = $this->passedArgs['localidad'];
-					$url_conditions['localidad'] = $this->passedArgs['localidad'];			
+					$this->paginate['conditions']['lower(Instit.localidad) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['localidad'])));
+					$array_condiciones['Localidad'] = utf8_decode($this->passedArgs['localidad']);
+					$url_conditions['localidad'] = utf8_decode($this->passedArgs['localidad']);			
 				}
             }
             
@@ -277,9 +281,9 @@ class InstitsController extends AppController {
 			}
 			if(isset($this->passedArgs['depto'])){	
             	if($this->passedArgs['depto'] != ''){
-					$this->paginate['conditions']['lower(to_ascii(Instit.depto)) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->passedArgs['depto']));
-					$array_condiciones['Departamento'] = $this->passedArgs['depto'];
-					$url_conditions['depto'] = $this->passedArgs['depto'];			
+					$this->paginate['conditions']['lower(to_ascii(Instit.depto)) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['depto'])));
+					$array_condiciones['Departamento'] = utf8_decode($this->passedArgs['depto']);
+					$url_conditions['depto'] = utf8_decode($this->passedArgs['depto']);			
 				}
             }
             
@@ -493,6 +497,37 @@ class InstitsController extends AppController {
 		
 		$text = preg_replace(array_keys($patron),array_values($patron),$text);
 		return $text;		
+	}
+	
+	function depurar(){		
+		//debug($this->data);die();
+		if (!empty($this->data)) {
+			if ($valor = $this->Instit->save($this->data)) {
+				$this->Session->setFlash(__('Se ha guardado la Institución correctamente', true));
+								
+			} else {
+				print_r($this->Instit->validationErrors);
+				$this->Session->setFlash(__('La Institución no pudo ser guardada. Escriba nuevamente el campo incorrecto.', true));
+			}
+		}			
+		
+		$conditions = array('Instit.activo'=>1,'Instit.departamento_id'=>0, 'Instit.localidad_id'=>0);
+		
+		$this->data =$this->Instit->find('first',array('conditions'=>$conditions,'order'=>'Instit.jurisdiccion_id DESC'));
+		$total =$this->Instit->find('count',array('conditions'=>$conditions));
+			
+		//le pongo el valor vacio para que la vista muestre vacio. Luego el beforeSave se va a encargar d eagregarle un CERO para que cumpla con el NOT NULL de la BD
+		if(isset($this->data['Instit']['anio_creacion']) && $this->data['Instit']['anio_creacion'] == 0){
+			$this->data['Instit']['anio_creacion'] = '';
+		}
+		
+		
+		$tipoinstits = $this->Instit->Tipoinstit->find('list');
+		$jurisdicciones = $this->Instit->Jurisdiccion->find('list');
+		$departamentos = $this->Instit->Departamento->find('list',array('order'=>'name','conditions'=>array('jurisdiccion_id'=>$this->data['Instit']['jurisdiccion_id'])));
+		$localidades = $this->Instit->Localidad->find('list',array('order'=>'name'));
+		$this->set(compact('jurisdicciones','departamentos','localidades','tipoinstits'));	
+		$this->set('falta_depurar',$total);
 	}
 
 }

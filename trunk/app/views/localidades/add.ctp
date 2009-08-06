@@ -1,10 +1,24 @@
 <div class="localidades form">
 <?php echo $form->create('Localidad');?>
 	<fieldset>
- 		<legend><?php __('Add Localidad');?></legend>
+ 		<legend><?php __('Agregar Localidad');?></legend>
 	<?php
-		echo $form->input('departamento_id');
-		echo $form->input('name');
+	
+		$meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
+		echo $form->input('jurisdiccion_id', array('empty' => array('0'=>'Todas'),'id'=>'jurisdiccion_id','label'=>'Jurisdicción','after'=>$meter));		
+		
+			// DEPARTAMENTO
+		$meter = '<span class="ajax_update" id="ajax_indicator_dpto" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
+		echo $form->input('departamento_id', array('empty' => 'Seleccione'));                                   
+        echo $ajax->observeField('jurisdiccion_id',
+                                   array(  	'url' => '/departamentos/ajax_select_departamento_form_por_jurisdiccion',
+		                                   	'update'=>'LocalidadDepartamentoId',
+		                                   	'loading'=>'$("ajax_indicator").show();$("LocalidadDepartamentoId").disable()',
+		                                   	'complete'=>'$("ajax_indicator").hide();$("LocalidadDepartamentoId").enable()',
+		                                   	'onChange'=>true
+                                   ));	
+	
+		echo $form->input('name',array('value'=>""));
 	?>
 	</fieldset>
 <?php echo $form->end('Submit');?>
