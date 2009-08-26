@@ -15,6 +15,20 @@ class DepuradoresController extends AppController {
 	
 	
 	
+	function agregar_sectores(){
+		App::import('Vendor', 'agrega_sectores/main');
+		uses ('model' . DS . 'datasources' . DS . 'datasource');
+		config('database');
+		
+		$this->autoRender = false;
+			//conecto con la BD de cake default
+			$this->db = new DATABASE_CONFIG();
+			
+			$depurador = new AgregaSectores($this->db->default);
+			$depurador->main();	
+		
+	}
+	
 	
 	/**
 	 * 
@@ -29,7 +43,8 @@ class DepuradoresController extends AppController {
 	 * 
 	 * @return nada
 	 */
-	function arreglar_tipoinstits(){
+	//le pongo en private para que no se pueda tocar mas desde la web, ya que este script ya esta corrido y funcionando
+	private function arreglar_tipoinstits(){
 		App::import('Vendor', 'depura_tipoinstit/main');
 		uses ('model' . DS . 'datasources' . DS . 'datasource');
 		config('database');
@@ -63,7 +78,7 @@ class DepuradoresController extends AppController {
 			}
 		}			
 		
-		$conditions = array('Instit.activo'=>1,'Instit.departamento_id'=>0, 'Instit.localidad_id'=>0);
+		$conditions = array('Instit.activo'=>1, array('OR'=> array('Instit.departamento_id'=>0, 'Instit.localidad_id'=>0)));
 		
 		$this->data =$this->Instit->find('first',array('conditions'=>$conditions,'order'=>'Instit.jurisdiccion_id DESC'));
 		$total =$this->Instit->find('count',array('conditions'=>$conditions));

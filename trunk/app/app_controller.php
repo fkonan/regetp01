@@ -107,13 +107,14 @@ class AppController extends Controller {
 			if ($this->name == 'Anios' && $this->action == 'edit') {$llAuth = true;}
 			if ($this->name == 'Anios' && $this->action == 'delete') {$llAuth = true;}
 			
-			if ($this->name == 'Departamentos') {$llAuth = true;}
-			if ($this->name == 'Localidades') {$llAuth = true;}
+			//if ($this->name == 'Departamentos') {$llAuth = true;}
+			//if ($this->name == 'Localidades') {$llAuth = true;}
 			
 			if ($this->name == 'Queries' && $this->action == 'descargar_queries') {$llAuth = true;}
 			if ($this->name == 'Queries' && $this->action == 'contruye_excel') {$llAuth = true;}
 			
 			if ($this->name == 'Depuradores') {$llAuth = true;}
+			if ($this->name == 'Sectores') {$llAuth = true;}
 						
 			break;
 		  case 'invitado':	

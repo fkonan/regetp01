@@ -8,9 +8,10 @@ if ($session->check('Auth.User')){
 				<li><? echo $html->link("Descargas","/Queries/descargar_queries") ?></li>
 				<li><? echo $html->link("Departamentos","/departamentos") ?></li>
 				<li><? echo $html->link("Localidades","/localidades") ?></li>
+				<li><? echo $html->link("Sectores","/Sectores") ?></li>
 				<b>Depuración</b>
-		<li><? echo $html->link("Depto y Loc","/depuradores/deptoyloc") ?></li>
-		<li><? echo $html->link("Tipoinstits","/depuradores/tipoinstits") ?></li>				
+				<li><? echo $html->link("Depto y Loc","/depuradores/deptoyloc") ?></li>
+				<li><? echo $html->link("Tipoinstits","/depuradores/tipoinstits") ?></li>				
 			</ul>
 		</div>
 

@@ -514,7 +514,7 @@ class Instit extends AppModel {
   	
   	function controlar_coincidencia_jurisdiccion_departamento(){
   		if (isset($this->data[$this->name]['departamento_id'])){
-  			if ($this->data[$this->name]['departamento_id'] == '') return true;
+  			if ($this->data[$this->name]['departamento_id'] == '') return false;
   			
   			if ($this->data[$this->name]['departamento_id'] != ''){
 		  		$jur_id = $this->data[$this->name]['jurisdiccion_id'];
@@ -524,20 +524,29 @@ class Instit extends AppModel {
 		  		return ($tot > 0);
   			}
   		}
-  		return true;
+  		return false;
   	}
   	
-  	
-	function controlar_coincidencia_localidad_lugar(){
-		if (isset($this->data[$this->name]['localidad_id']) && isset($this->data[$this->name]['lugar_id'])){
-			if ($this->data[$this->name]['lugar_id'] == "") return true;
-				$localidad_id = $this->data[$this->name]['localidad_id'];
-			  	$lugar_id = $this->data[$this->name]['lugar_id'];
-			  	$this->Lugar->recursive = -1;
-			  	$tot = $this->Lugar->find('count',array('conditions'=> array('Lugar.id'=>$lugar_id, 'Lugar.localidad_id'=>$localidad_id)));
-			  	return ($tot > 0);
-		}
-		return true;
+  	function controlar_coincidencia_departamento_localidad(){
+  		if (isset($this->data[$this->name]['jurisdiccion_id'])){
+  			if ($this->data[$this->name]['jurisdiccion_id'] == 2){
+  				return true	;		
+  			}
+  		}
+  		
+  		if (isset($this->data[$this->name]['localidad_id'])){
+  			if ($this->data[$this->name]['localidad_id'] == '') return false;
+  			
+  			if ($this->data[$this->name]['localidad_id'] != ''){
+		  		$loc = $this->data[$this->name]['localidad_id'];
+		  		$depto_id = $this->data[$this->name]['departamento_id'];
+		  		$this->Departamento->recursive = -1;
+		  		$tot = $this->Localidad->find('count',array('conditions'=> array('Localidad.id'=>$loc, 'Localidad.departamento_id'=>$depto_id)));
+		  		return ($tot > 0);
+  			}
+  		}  		
+  		
+  		return false;
   	}
   	
   	

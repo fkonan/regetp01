@@ -20,7 +20,11 @@ if ($session->check('Auth.User')){
 				<li><? echo $html->link("Departamentos","/departamentos") ?></li>
 				<li><? echo $html->link("Localidades","/localidades") ?></li>
 				
+				<li><? echo $html->link("Sectores","/Sectores") ?></li>
+				
 				<li><? echo $html->link("Descargas SQL","/Queries") ?></li>
+				
+				<li><? echo $html->link("Estadísticas","http://rfietp.inet.edu.ar/awstats/awstats.pl?config=rfietp") ?></li>
 				
 			</ul>
 		</div>
