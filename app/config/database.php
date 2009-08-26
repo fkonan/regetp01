@@ -77,27 +77,29 @@
  *
  */
 class DATABASE_CONFIG {
-	
+/*	
 	var $default = array(
 		'driver' => 'postgres',
 		'persistent' => false,
 		'host' => 'localhost',
 		'login' => 'postgres',
 		'password' => 'r363TP',
-		'database' => 'regetp_v1.1.01',
+		'database' => 'regetp_v1.1.02',
+		//'database' => 'pruebas',
 		'prefix' => '',
 	);
-	
-/*	var $default = array(
-		'driver' => 'mysql',
+*/	
+	var $default = array(
+		'driver' => 'postgres',
 		'persistent' => false,
 		'host' => 'localhost',
-		'login' => 'user',
-		'password' => 'password',
-		'database' => 'database_name',
+		'login' => 'postgres',
+		'password' => 'r363TP',
+		//'database' => 'regetp_v1.1.02',
+		'database' => 'pruebas',
 		'prefix' => '',
 	);
-*/
+
 
 	var $test = array(
 		'driver' => 'mysql',

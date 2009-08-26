@@ -6,11 +6,11 @@
 <br> CUE: <?= $this->data['Instit']['cue']*100+$this->data['Instit']['anexo'] ?> (id:<?php echo $this->data['Instit']['id']?>) 
 <h2><?= $this->data['Instit']['nombre']?></h2>
 <dl>
-<dt>Dependencia:</dt><dd><?php echo " ".$this->data['Dependencia']['name']?></dd>
-<dt>Gestión:</dt><dd><?php echo " ".$this->data['Gestion']['name']?></dd>
-<dt>Jurisdicción:</dt><dd><?php echo " ".$this->data['Jurisdiccion']['name']?></dd>
-<dt>Departamento:</dt><dd><?php echo " ".$this->data['Departamento']['name']?></dd>
-<dt>Localidad:</dt><dd><?php echo " ".$this->data['Localidad']['name']?></dd>
+<dt>Dependencia:</dt><dd><?php echo "&nbsp; ".$this->data['Dependencia']['name']?></dd>
+<dt>Gestión:</dt><dd><?php echo "&nbsp; ".$this->data['Gestion']['name']?></dd>
+<dt>Jurisdicción:</dt><dd><?php echo "&nbsp; ".$this->data['Jurisdiccion']['name']?></dd>
+<dt>Departamento:</dt><dd><?php echo "&nbsp; ".$this->data['Departamento']['name']?></dd>
+<dt>Localidad:</dt><dd><?php echo "&nbsp; ".$this->data['Localidad']['name']?></dd>
 </dl>
 <br>
 <?php echo $form->create('Instit',array('url'=>'/depuradores/tipoinstits','id'=>'InstitDepurarForm'));?>

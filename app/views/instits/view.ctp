@@ -15,8 +15,11 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
 	
 	
 	<h2>Datos de Institución</h2>
+		<?php if($instit_etp){
+			echo "<p class='instit-etp'>Institución con programa de ETP</p>";
+		}?>
 	<dl>
-				
+		
 		<dt ><?php __('Ámbito de Gestión'); ?></dt>
 		<dd>
 			<?php echo $instit['Gestion']['name']; ?>
@@ -193,8 +196,9 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
 </div>
 
 <h2>Más Información</h2>
-<ul id="listado_ofertas">
-	<li><?= $html->link('Oferta Educativa',array('controller'=>'Instits','action'=>'planes_relacionados', $instit['Instit']['id'])) ?></li>
+<ul id="instits-mas-info">
+	<li><?= $html->link('Oferta Educativa ('.sizeof($instit['Plan']).')',array('controller'=>'Instits','action'=>'planes_relacionados', $instit['Instit']['id'])) ?></li>
+	 
 </ul>
 
 </div>

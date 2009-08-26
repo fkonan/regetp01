@@ -101,6 +101,10 @@ class DepartamentosController extends AppController {
 		 //prevent useless warnings for Ajax
 	     $this->render('ajax_select_departamento_form_por_jurisdiccion','ajax');
 	}
+	
+	function ajax_buscar_departamento(){
+		$this->set('deptos',$this->Departamento->find('all'));
+	}
 
 }
 ?>

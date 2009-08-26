@@ -115,14 +115,14 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 			// en formato de 2 digitos
 			$armar_anexo = ($instit['Instit']['anexo']<10)?'0'.$instit['Instit']['anexo']:$instit['Instit']['anexo']; 
 			?>
-			<div class="instit_name"><b><?= "".$instit['Instit']['cue'].$armar_anexo." - ". $instit['Instit']['nombre_completo']; ?></b></div>
+			<div class="instit_name"><b><?= "".($instit['Instit']['cue']*100)+$instit['Instit']['anexo']." - ". $instit['Instit']['nombre_completo']; ?></b></div>
 			<div class="instit_atributte"><b>Domicilio: </b> <?= $instit['Instit']['direccion'] ?></div>
 			<br />		
 			<div class="instit_atributte"><b>Gestión: </b><?= $instit['Gestion']['name'] ?></div>
 			<div class="instit_atributte"><b>Jurisdicción: </b> <?= $instit['Jurisdiccion']['name'] ?></div>
 			<br />
-			<div class="instit_atributte"><b>Departamento: </b><?= $instit['Instit']['depto'] ?></div>
-			<div class="instit_atributte"><b>Localidad: </b><?= $instit['Instit']['localidad'] ?></div>
+			<div class="instit_atributte"><b>Departamento: </b><?= $instit['Departamento']['name'] ?></div>
+			<div class="instit_atributte"><b>Localidad: </b><?= $instit['Localidad']['name'] ?></div>
 		</div>
 	</li>
 	

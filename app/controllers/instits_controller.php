@@ -21,7 +21,22 @@ class InstitsController extends AppController {
 			$this->redirect(array('action'=>'index'));
 		}
 		
-		$this->set('instit', $this->Instit->read(null, $id));
+		$instit = $this->Instit->read(null, $id);
+		
+		// me fijo si todos los planes son 
+		// IT entonces la instit es con programa de ETP
+		$instit_etp = false;
+		foreach ($instit['Plan'] as $p):
+			if ($val = ($p['oferta_id'] == 2)){ // == 2 -> IT
+				$instit_etp = true; 
+			}
+			else{
+				$instit_etp = false;
+				break;
+			}
+		endforeach;
+		$this->set('instit_etp', $instit_etp);
+		$this->set('instit', $instit);
 	}
 
 	function add() {
@@ -121,7 +136,20 @@ class InstitsController extends AppController {
 		// para el paginator que pueda armar la url
 		$url_conditions = array();
 
-		$this->Instit->unbindModelosInnecesarios();
+		
+		// si no vinieron datos GET, asumo que se envió el formulario desde search_form
+		if(isset($this->passedArgs)):		
+			if(sizeof($this->passedArgs) == 0):
+				$vino_formulario = 1;
+			else:
+				$vino_formulario = 0;
+			endif;			
+		else: 
+			$vino_formulario = 1;
+		endif;
+		
+		
+		//$this->Instit->unbindModelosInnecesarios();
 
 		/**
 		 *    INICIALIZACION DE FILTROS
@@ -259,13 +287,13 @@ class InstitsController extends AppController {
 			 *     LOCALIDAD
 			 */
 			if($this->data['Instit']['localidad'] != ''){
-				$this->paginate['conditions']['lower(Instit.localidad) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->data['Instit']['localidad']));
+				$this->paginate['conditions']['lower(Localidad.name) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->data['Instit']['localidad']));
 				$array_condiciones['Localidad'] = $this->data['Instit']['localidad'];
 				$url_conditions['localidad'] = $this->data['Instit']['localidad'];			
 			}
 			if(isset($this->passedArgs['localidad'])){	
             	if($this->passedArgs['localidad'] != ''){
-					$this->paginate['conditions']['lower(Instit.localidad) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['localidad'])));
+					$this->paginate['conditions']['lower(Localidad.name) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['localidad'])));
 					$array_condiciones['Localidad'] = utf8_decode($this->passedArgs['localidad']);
 					$url_conditions['localidad'] = utf8_decode($this->passedArgs['localidad']);			
 				}
@@ -275,13 +303,13 @@ class InstitsController extends AppController {
 			 *     DEPARTAMENTO
 			 */
 			if($this->data['Instit']['depto'] != ''){
-				$this->paginate['conditions']['lower(to_ascii(Instit.depto)) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->data['Instit']['depto']));
+				$this->paginate['conditions']['lower(to_ascii(Departamento.name)) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->data['Instit']['depto']));
 				$array_condiciones['Departamento'] = $this->data['Instit']['depto'];
 				$url_conditions['depto'] = $this->data['Instit']['depto'];			
 			}
 			if(isset($this->passedArgs['depto'])){	
             	if($this->passedArgs['depto'] != ''){
-					$this->paginate['conditions']['lower(to_ascii(Instit.depto)) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['depto'])));
+					$this->paginate['conditions']['lower(to_ascii(Departamento.name)) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['depto'])));
 					$array_condiciones['Departamento'] = utf8_decode($this->passedArgs['depto']);
 					$url_conditions['depto'] = utf8_decode($this->passedArgs['depto']);			
 				}
@@ -386,13 +414,13 @@ class InstitsController extends AppController {
 			
         /***********************************************************************/
 			
-	    $this->Instit->recursive = 0;//para alivianar la carga del server         
+	    $this->Instit->recursive = 1;//para alivianar la carga del server         
 		
 	    //datos de paginacion
 	    $pagin = $this->paginate();
 	    
-	    //si se encontro solo 1 institucion, ir directame te a la vista de esa institucion
-	    if(sizeof($pagin) == 1){
+	    //si se encontro solo 1 institucion, ir directamente a la vista de esa institucion
+	    if(sizeof($pagin) == 1 && $vino_formulario){
 	    	$this->redirect('view/'.$pagin[0]['Instit']['id']);	    	
 	    }
 	    
