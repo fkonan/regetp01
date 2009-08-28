@@ -186,6 +186,26 @@ class InstitsController extends AppController {
             }
             
             
+            
+			/**
+			 *     Nro Institucion
+			 */  
+			if($this->data['Instit']['nroinstit'] != ''){
+				$this->paginate['conditions']['lower(Instit.nroinstit) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->data['Instit']['nroinstit']));
+				$array_condiciones['N° de Institución'] = $this->data['Instit']['nroinstit'];
+				$url_conditions['nroinstit'] = $this->data['Instit']['nroinstit'];			
+			}
+			if(isset($this->passedArgs['nroinstit'])){	
+            	if($this->passedArgs['nroinstit'] != ''){
+					$this->paginate['conditions']['lower(Instit.nroinstit) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['nroinstit'])));
+					$array_condiciones['N° de Institución'] = utf8_decode($this->passedArgs['nroinstit']);
+					$url_conditions['nroinstit'] = utf8_decode($this->passedArgs['nroinstit']);			
+				}
+            }
+            
+            
+            
+            
 			/**
 			 *     JURISDICCION
 			 */
