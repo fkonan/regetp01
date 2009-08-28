@@ -49,14 +49,14 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
 		
 		<dt><?php __('Departamento'); ?></dt>
 		<dd>
-			<?php echo $instit['Instit']['depto']; ?>
+			<?php echo $instit['Departamento']['name']; ?>
 			&nbsp;
 		</dd>
 		
 		
 		<dt><?php __('Localidad'); ?></dt>
 		<dd>
-			<?php echo $instit['Instit']['localidad']; ?>
+			<?php echo $instit['Localidad']['name']; ?>
 			&nbsp;
 		</dd>
 		
