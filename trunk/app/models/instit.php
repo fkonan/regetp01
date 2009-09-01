@@ -254,7 +254,7 @@ class Instit extends AppModel {
 	);
 	
 	
-	
+	/*
 	function unbindModelAll() {
 	    $unbind = array();
 	    foreach ($this->belongsTo as $model=>$info)
@@ -285,7 +285,7 @@ class Instit extends AppModel {
 	    }
 	    parent::unbindModel($unbind);
   	} 
-  	
+  	*/
   	
   	/**
   	 * Validacion de CUE por jurisdiccion
@@ -337,25 +337,23 @@ class Instit extends AppModel {
 		 */  		
 			$array_recorro = $instituciones_data;
 		 
-		 	$profundidad = 0;
-	  		while (list($key, $idata) = each($array_recorro)):  	
-	  			$aux = "$key";
-	  			$instit = "Instit";		
-	  			if($aux == $instit){
-	  				break;
-	  			}else{
-	  				$profundidad++;
-	  			}
-	  		endwhile;
-	  			  	
+	  		list($key, $idata) = each($array_recorro);  	
+	  		$aux = "$key";  $instit = "Instit";		
+	  		if($aux == $instit){
+	  			$profundidad = 0;
+	  		}else{
+	  			$profundidad = 1;
+	  		}
+	  		
 	  		$aux = &$instituciones_data;
-	  		if ($profundidad >0):
-
-			  	for ($i=0; $i<sizeof($instituciones_data);$i++):		
+	  		if ($profundidad == 1):
+			  	for ($i=0; $i<sizeof($instituciones_data);$i++):	
 			  		$aux = &$instituciones_data[$i]; 		
-		  		
-			  		$nombre = $aux['Instit']['nombre'];
-			  		$numero = $aux['Instit']['nroinstit'];
+			  		$aux['Instit']['nombre_completo'] = "";	
+			  		
+		  			$nombre = (isset($aux['Instit']['nombre']))?$aux['Instit']['nombre']:'';
+			  		$numero = (isset($aux['Instit']['nroinstit']))?$aux['Instit']['nroinstit']:'';
+			  		
 			  		if(isset($aux['Tipoinstit']['name'])){			
 				  		$nombre_tipoinstit = $aux['Tipoinstit']['name'];
 				  		
@@ -366,10 +364,16 @@ class Instit extends AppModel {
 						}
 					  	$aux['Instit']['nombre_completo'] .= ($nombre != '')?$nombre:"";
 			  		}
+			  		else {
+			  			$aux['Instit']['nombre_completo'] .= ($numero > 0 || $numero != '')?" Nº $numero":"";
+			  			$aux['Instit']['nombre_completo'] .= ($nombre != '')?$nombre:"";
+			  		}
 			  	endfor;
 			 else:	 
-			 	$nombre = $aux['Instit']['nombre'];
-			  	$numero = $aux['Instit']['nroinstit'];
+			 	$aux['Instit']['nombre_completo'] = "";	
+			 	$nombre = (isset($aux['Instit']['nombre']))?$aux['Instit']['nombre']:'';
+			  	$numero = (isset($aux['Instit']['nroinstit']))?$aux['Instit']['nroinstit']:'';
+			  	
 			  	$nombre_tipoinstit = $aux['Tipoinstit']['name'];
 			 	$aux['Instit']['nombre_completo'] = ($nombre_tipoinstit=='SIN DATOS')?'':$nombre_tipoinstit;
 				$aux['Instit']['nombre_completo'] .= ($numero > 0 || $numero != '')?" Nº $numero":"";
@@ -591,6 +595,27 @@ class Instit extends AppModel {
   		//si me encuentra algo me tira FALSO, asi evitamos duplicados
   		return ($this->find('count',array('conditions'=>$condiciones))>0)?false:true;
   	}
+  	
+  	
+	function isCUEValid($cue = '') {
+		if($cue=='') return 0;
+		
+		//este valida que no se hayan ingresado letras, ni puntos ni nada raro
+		if(!preg_match('/^[0-9]{6,7}$/', $cue)) return -1;
+		
+		$long=strlen($cue);
+		if($long<6) {
+			return 1;
+		
+		} else if($long==6) {
+			if($cue[0]!='2' && $cue[0]!='6') return -2;
+	
+		} else if($long==7) {
+			if(!preg_match('/^(2|6|02|06|10|14|18|22|26|30|34|38|42|46|50|54|58|62|66|70|74|78|82|86|90|94)[0-9]{5}$/', $cue)) return 2;
+		}
+		
+		return 1;
+	}
   	
 }
 ?>

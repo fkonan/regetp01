@@ -37,11 +37,11 @@ $paginator->options(array('url' => $url_conditions));
 	<? $class = ($sort == 'jurisdiccion_id')?'marcada':'';?>
 	<li class="<?= $class?>"><?php echo $paginator->sort('Jurisdicción','jurisdiccion_id');?></li>	
 	
-	<? $class = ($sort == 'depto')?'marcada':'';?>
-	<li class="<?= $class?>"><?php echo $paginator->sort('Departamento','depto');?></li>
+	<? $class = ($sort == 'Departamento.name')?'marcada':'';?>
+	<li class="<?= $class?>"><?php echo $paginator->sort('Departamento','Departamento.name');?></li>
 	
-	<? $class = ($sort == 'localidad')?'marcada':'';?>
-	<li class="<?= $class?>"><?php echo $paginator->sort('localidad');?></li>
+	<? $class = ($sort == 'Localidad.name')?'marcada':'';?>
+	<li class="<?= $class?>"><?php echo $paginator->sort('Localidad','Localidad.name');?></li>
 		
 </ul>
 
