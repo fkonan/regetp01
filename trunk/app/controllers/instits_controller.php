@@ -464,13 +464,17 @@ class InstitsController extends AppController {
 				$a = array();
 				foreach ($instituciones as $i):
 					$a[] = $i['Instit']['id'];
-				endforeach;			
-				$this->paginate['conditions']['Instit.id'] =  $a;
-	
+				endforeach;		
+				if (sizeof($a)>0){	//si me trae resultados que me los pagine
+					$this->paginate['conditions']['Instit.id'] =  $a;
+				}
+				else{
+					$this->paginate['conditions']['Instit.id'] =  0;
+				}	
 				$this->Instit->Plan->Oferta->recursive = -1;
 				$oferta = $this->Instit->Plan->Oferta->findById($this->data['Plan']['oferta_id']);			
 				$array_condiciones['Con Oferta'] = $oferta['Oferta']['name'];
-				$url_conditions['Plan.oferta_id'] = $this->data['Plan']['oferta_id'];	
+				$url_conditions['Plan.oferta_id'] = $this->data['Plan']['oferta_id'];
 			}		
 		}
 		if(isset($this->passedArgs['Plan.oferta_id'])){
@@ -494,13 +498,16 @@ class InstitsController extends AppController {
 				foreach ($instituciones as $i):
 					$a[] = $i['Instit']['id'];
 				endforeach;			
-				$this->paginate['conditions']['Instit.id'] =  $a;
 	
+				if (sizeof($a)>0){	//si me trae resultados que me los pagine
+					$this->paginate['conditions']['Instit.id'] =  $a;
+				}else{
+					$this->paginate['conditions']['Instit.id'] =  0;
+				}
 				$this->Instit->Plan->Oferta->recursive = -1;	
 				$oferta = $this->Instit->Plan->Oferta->findById($this->passedArgs['Plan.oferta_id']);			
 				$array_condiciones['Con Oferta'] = $oferta['Oferta']['name'];
 				$url_conditions['Plan.oferta_id'] = $this->passedArgs['Plan.oferta_id'];
-				
 		}
 			
         /***********************************************************************/

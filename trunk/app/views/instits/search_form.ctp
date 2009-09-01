@@ -9,7 +9,7 @@
 		echo $form->input('nroinstit', array('label'=>'N° de Institución')); 
 		echo $form->input('direccion', array('label'=>'Domicilio'));	
 		
-		echo $form->input('Plan.oferta_id',array('options'=>$ofertas, 'empty'=>'Seleccionar', 'label'=>'Con Oferta'));
+		echo $form->input('Plan.oferta_id',array('options'=>$ofertas, 'empty'=>'Seleccionar', 'label'=>'Con Oferta <cite style:"color:red">nuevo!</cite>'));
 
 		
 		echo $form->input('gestion_id', array('empty' => 'Todas', 'label'=> 'Ámbito de Gestión'));
