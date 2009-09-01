@@ -9,7 +9,9 @@
 		echo $form->input('nroinstit', array('label'=>'N° de Institución')); 
 		echo $form->input('direccion', array('label'=>'Domicilio'));	
 		
-				
+		echo $form->input('Plan.oferta_id',array('options'=>$ofertas, 'empty'=>'Seleccionar', 'label'=>'Con Oferta'));
+
+		
 		echo $form->input('gestion_id', array('empty' => 'Todas', 'label'=> 'Ámbito de Gestión'));
 		
 		$meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
@@ -25,8 +27,8 @@
 		                                   	'onChange'=>true
                                    ));  
 		
-		echo $form->input('localidad', array('label'=>'Localidad')); 
-		echo $form->input('depto', array('label'=> 'Departamento'));
+		echo $form->input('Localidad.name', array('label'=>'Localidad')); 
+		echo $form->input('Departamento.name', array('label'=> 'Departamento'));
 		echo $form->input('dependencia_id', array('empty' => 'Todas','label'=>'Tipo de Dependencia'));
 		
 		// no hay busqueda por anexo

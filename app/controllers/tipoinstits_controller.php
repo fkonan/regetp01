@@ -96,7 +96,7 @@ class TipoinstitsController extends AppController {
          	$inss = $this->Tipoinstit->find('all',array('conditions' => array('jurisdiccion_id' => $jurisdiccion),
          											  'order'=>'Tipoinstit.name ASC'));
          }
-         	
+         
 	     $this->set('tipoinstits', $inss);
 	         
 	         //prevent useless warnings for Ajax

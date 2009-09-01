@@ -96,7 +96,8 @@ class DATABASE_CONFIG {
 		'login' => 'postgres',
 		'password' => 'r363TP',
 		//'database' => 'regetp_v1.1.02',
-		'database' => 'pruebas',
+		//'database' => 'pruebas',
+		'database' => 'regetp_produccion',
 		'prefix' => '',
 	);
 

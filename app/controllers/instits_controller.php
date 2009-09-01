@@ -121,7 +121,8 @@ class InstitsController extends AppController {
 		$dependencias = $this->Instit->Dependencia->find('list');
 		$tipoinstits = $this->Instit->Tipoinstit->find('list');
 		$jurisdicciones = $this->Instit->Jurisdiccion->find('list');
-		$this->set(compact('gestiones', 'dependencias', 'tipoinstits', 'jurisdicciones'));
+		$ofertas = $this->Instit->Plan->Oferta->find('list');
+		$this->set(compact('gestiones', 'dependencias', 'tipoinstits', 'jurisdicciones','ofertas'));
 	}
 	
 	/**
@@ -168,6 +169,10 @@ class InstitsController extends AppController {
 			 */
             if(isset($this->data['Instit']['cue'])){
             	 if($this->data['Instit']['cue'] != '' || $this->data['Instit']['cue'] != 0 ){
+            	 	if($this->Instit->isCUEValid($this->data['Instit']['cue'])<0){
+            	 		$this->Session->setFlash("El CUE: '".$this->data['Instit']['cue']."' no es válido. <cite style='font-size: 12px'>Recuerde no ingresar el N° de Anexo</cite>");
+            	 		$this->redirect('search_form');
+            	 	}
                     // set the conditions
                     $this->paginate['conditions']['Instit.cue'] = $this->data['Instit']['cue'];
                      // set the Search data, so the form remembers the option
@@ -306,32 +311,32 @@ class InstitsController extends AppController {
 			/**
 			 *     LOCALIDAD
 			 */
-			if($this->data['Instit']['localidad'] != ''){
-				$this->paginate['conditions']['lower(Localidad.name) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->data['Instit']['localidad']));
-				$array_condiciones['Localidad'] = $this->data['Instit']['localidad'];
-				$url_conditions['localidad'] = $this->data['Instit']['localidad'];			
+			if($this->data['Localidad']['name'] != ''){
+				$this->paginate['conditions']['lower(Localidad.name) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->data['Localidad']['name']));
+				$array_condiciones['Localidad'] = $this->data['Localidad']['name'];
+				$url_conditions['Localidad.name'] = $this->data['Localidad']['name'];			
 			}
-			if(isset($this->passedArgs['localidad'])){	
-            	if($this->passedArgs['localidad'] != ''){
-					$this->paginate['conditions']['lower(Localidad.name) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['localidad'])));
-					$array_condiciones['Localidad'] = utf8_decode($this->passedArgs['localidad']);
-					$url_conditions['localidad'] = utf8_decode($this->passedArgs['localidad']);			
+			if(isset($this->passedArgs['Localidad.name'])){	
+            	if($this->passedArgs['Localidad.name'] != ''){
+					$this->paginate['conditions']['lower(Localidad.name) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['Localidad.name'])));
+					$array_condiciones['Localidad'] = utf8_decode($this->passedArgs['Localidad.name']);
+					$url_conditions['Localidad.name'] = utf8_decode($this->passedArgs['Localidad.name']);			
 				}
             }
             
 			/**
 			 *     DEPARTAMENTO
 			 */
-			if($this->data['Instit']['depto'] != ''){
-				$this->paginate['conditions']['lower(to_ascii(Departamento.name)) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->data['Instit']['depto']));
-				$array_condiciones['Departamento'] = $this->data['Instit']['depto'];
-				$url_conditions['depto'] = $this->data['Instit']['depto'];			
+			if($this->data['Departamento']['name'] != ''){
+				$this->paginate['conditions']['lower(to_ascii(Departamento.name)) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada($this->data['Departamento']['name']));
+				$array_condiciones['Departamento'] = $this->data['Departamento']['name'];
+				$url_conditions['Departamento.name'] = $this->data['Departamento']['name'];			
 			}
-			if(isset($this->passedArgs['depto'])){	
-            	if($this->passedArgs['depto'] != ''){
-					$this->paginate['conditions']['lower(to_ascii(Departamento.name)) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['depto'])));
-					$array_condiciones['Departamento'] = utf8_decode($this->passedArgs['depto']);
-					$url_conditions['depto'] = utf8_decode($this->passedArgs['depto']);			
+			if(isset($this->passedArgs['Departamento.name'])){	
+            	if($this->passedArgs['Departamento.name'] != ''){
+					$this->paginate['conditions']['lower(to_ascii(Departamento.name)) SIMILAR TO ?'] = array($this->_convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['Departamento.name'])));
+					$array_condiciones['Departamento'] = utf8_decode($this->passedArgs['Departamento.name']);
+					$url_conditions['Departamento.name'] = utf8_decode($this->passedArgs['Departamento.name']);			
 				}
             }
             
@@ -428,9 +433,75 @@ class InstitsController extends AppController {
 						$array_condiciones['Ingresada al RFIETP'] = $aux;
 						$url_conditions['activo'] = $this->passedArgs['activo'];
 					break;
-				endswitch;	
+				endswitch;
 			}	
-            
+			
+			
+			/**
+			 *    PLANES POR OFERTA
+			 */
+		if (isset($this->data['Plan']['oferta_id'])){
+			if ($this->data['Plan']['oferta_id'] == ''){
+				$basura = 1;
+			}
+			else{
+				$this->Instit->recursive = 1;
+				$this->Instit->unbindModel(array('hasMany'=>array('Plan'))); 
+				$this->Instit->bindModel(array('hasOne'=>array('Plan'=>array())));
+							
+				$conditions = array('Plan.oferta_id' => $this->data['Plan']['oferta_id']);
+				
+				$fields = '"Instit"."id"';
+				$group = '"Instit"."id"';
+				
+				$instituciones = $this->Instit->find('all', array(
+					    'conditions' => array('Plan.oferta_id'=>$this->data['Plan']['oferta_id']),
+					    'contain' => array('Plan'),
+						'group' => 'Instit.id',
+						'fields' => 'Instit.id'
+					));
+					
+				$a = array();
+				foreach ($instituciones as $i):
+					$a[] = $i['Instit']['id'];
+				endforeach;			
+				$this->paginate['conditions']['Instit.id'] =  $a;
+	
+				$this->Instit->Plan->Oferta->recursive = -1;
+				$oferta = $this->Instit->Plan->Oferta->findById($this->data['Plan']['oferta_id']);			
+				$array_condiciones['Con Oferta'] = $oferta['Oferta']['name'];
+				$url_conditions['Plan.oferta_id'] = $this->data['Plan']['oferta_id'];	
+			}		
+		}
+		if(isset($this->passedArgs['Plan.oferta_id'])){
+				$this->Instit->recursive = 1;
+				$this->Instit->unbindModel(array('hasMany'=>array('Plan'))); 
+				$this->Instit->bindModel(array('hasOne'=>array('Plan'=>array())));
+
+				$conditions = array('Plan.oferta_id' => $this->passedArgs['Plan.oferta_id']);
+				
+				$fields = '"Instit"."id"';
+				$group = '"Instit"."id"';
+				
+				$instituciones = $this->Instit->find('all', array(
+					    'conditions' => array('Plan.oferta_id'=>$this->passedArgs['Plan.oferta_id']),
+					    'contain' => array('Plan'),
+						'group' => 'Instit.id',
+						'fields' => 'Instit.id'
+					));
+					
+				$a = array();
+				foreach ($instituciones as $i):
+					$a[] = $i['Instit']['id'];
+				endforeach;			
+				$this->paginate['conditions']['Instit.id'] =  $a;
+	
+				$this->Instit->Plan->Oferta->recursive = -1;	
+				$oferta = $this->Instit->Plan->Oferta->findById($this->passedArgs['Plan.oferta_id']);			
+				$array_condiciones['Con Oferta'] = $oferta['Oferta']['name'];
+				$url_conditions['Plan.oferta_id'] = $this->passedArgs['Plan.oferta_id'];
+				
+		}
 			
         /***********************************************************************/
 			
@@ -445,11 +516,12 @@ class InstitsController extends AppController {
 	    }
 	    
         $this->set('instits', $pagin);
-       
+       	
         $this->set('url_conditions', $url_conditions);
 		
         //devuelve un array para mostrar los criterios de busqueda
         $this->set('conditions', $array_condiciones);
+        
 	}
 	
 	
@@ -576,6 +648,35 @@ class InstitsController extends AppController {
 		$localidades = $this->Instit->Localidad->find('list',array('order'=>'name'));
 		$this->set(compact('jurisdicciones','departamentos','localidades','tipoinstits'));	
 		$this->set('falta_depurar',$total);
+	}
+	
+	function prueba(){
+		$this->Instit->recursive = 1;
+		
+		
+		
+		if (isset($this->data['Plan']['oferta_id'])){
+			$this->Instit->unbindModel(array('hasMany'=>array('Plan'))); 
+			$this->Instit->bindModel(array('hasOne'=>array('Plan'=>array())));
+			
+			$conditions = array('Plan.oferta_id' => $this->data['Plan']['oferta_id']);
+			
+			
+			$fields = '"Instit"."id" AS "Instit__id", "Instit"."gestion_id" AS "Instit__gestion_id", "Instit"."dependencia_id" AS "Instit__dependencia_id", "Instit"."nombre_dep" AS "Instit__nombre_dep", "Instit"."tipoinstit_id" AS "Instit__tipoinstit_id", "Instit"."jurisdiccion_id" AS "Instit__jurisdiccion_id", "Instit"."cue" AS "Instit__cue", "Instit"."anexo" AS "Instit__anexo", "Instit"."esanexo" AS "Instit__esanexo", "Instit"."nombre" AS "Instit__nombre", "Instit"."nroinstit" AS "Instit__nroinstit", "Instit"."anio_creacion" AS "Instit__anio_creacion", "Instit"."direccion" AS "Instit__direccion", "Instit"."depto" AS "Instit__depto", "Instit"."localidad" AS "Instit__localidad", "Instit"."cp" AS "Instit__cp", "Instit"."telefono" AS "Instit__telefono", "Instit"."mail" AS "Instit__mail", "Instit"."web" AS "Instit__web", "Instit"."dir_nombre" AS "Instit__dir_nombre", "Instit"."dir_tipodoc_id" AS "Instit__dir_tipodoc_id", "Instit"."dir_nrodoc" AS "Instit__dir_nrodoc", "Instit"."dir_telefono" AS "Instit__dir_telefono", "Instit"."dir_mail" AS "Instit__dir_mail", "Instit"."vice_nombre" AS "Instit__vice_nombre", "Instit"."vice_tipodoc_id" AS "Instit__vice_tipodoc_id", "Instit"."vice_nrodoc" AS "Instit__vice_nrodoc", "Instit"."actualizacion" AS "Instit__actualizacion", "Instit"."observacion" AS "Instit__observacion", "Instit"."fecha_mod" AS "Instit__fecha_mod", "Instit"."activo" AS "Instit__activo", "Instit"."ciclo_alta" AS "Instit__ciclo_alta", "Instit"."ciclo_mod" AS "Instit__ciclo_mod", "Instit"."created" AS "Instit__created", "Instit"."modified" AS "Instit__modified", "Instit"."localidad_id" AS "Instit__localidad_id", "Instit"."departamento_id" AS "Instit__departamento_id", "Instit"."lugar" AS "Instit__lugar", "Gestion"."id" AS "Gestion__id", "Gestion"."name" AS "Gestion__name", "Dependencia"."id" AS "Dependencia__id", "Dependencia"."name" AS "Dependencia__name", "Tipoinstit"."id" AS "Tipoinstit__id", "Tipoinstit"."jurisdiccion_id" AS "Tipoinstit__jurisdiccion_id", "Tipoinstit"."name" AS "Tipoinstit__name", "Jurisdiccion"."id" AS "Jurisdiccion__id", "Jurisdiccion"."name" AS "Jurisdiccion__name", "Departamento"."id" AS "Departamento__id", "Departamento"."jurisdiccion_id" AS "Departamento__jurisdiccion_id", "Departamento"."name" AS "Departamento__name", "Localidad"."id" AS "Localidad__id", "Localidad"."departamento_id" AS "Localidad__departamento_id", "Localidad"."name" AS "Localidad__name"';
+			$group = '"Instit"."id", "Instit"."gestion_id", "Instit"."dependencia_id", "Instit"."nombre_dep", "Instit"."tipoinstit_id", "Instit"."jurisdiccion_id", "Instit"."cue", "Instit"."anexo", "Instit"."esanexo", "Instit"."nombre", "Instit"."nroinstit", "Instit"."anio_creacion", "Instit"."direccion", "Instit"."depto", "Instit"."localidad", "Instit"."cp", "Instit"."telefono", "Instit"."mail", "Instit"."web", "Instit"."dir_nombre", "Instit"."dir_tipodoc_id", "Instit"."dir_nrodoc", "Instit"."dir_telefono", "Instit"."dir_mail", "Instit"."vice_nombre", "Instit"."vice_tipodoc_id", "Instit"."vice_nrodoc", "Instit"."actualizacion", "Instit"."observacion", "Instit"."fecha_mod", "Instit"."activo", "Instit"."ciclo_alta", "Instit"."ciclo_mod", "Instit"."created", "Instit"."modified", "Instit"."localidad_id", "Instit"."departamento_id", "Instit"."lugar", "Gestion"."id", "Gestion"."name", "Dependencia"."id", "Dependencia"."name", "Tipoinstit"."id", "Tipoinstit"."jurisdiccion_id", "Tipoinstit"."name", "Jurisdiccion"."id", "Jurisdiccion"."name", "Departamento"."id", "Departamento"."jurisdiccion_id", "Departamento"."name", "Localidad"."id", "Localidad"."departamento_id", "Localidad"."name"';
+			
+			$campos = '"Instit"."id" AS "Instit__id", "Instit"."gestion_id" AS "Instit__gestion_id", "Instit"."dependencia_id" AS "Instit__dependencia_id", "Instit"."nombre_dep" AS "Instit__nombre_dep", "Instit"."tipoinstit_id" AS "Instit__tipoinstit_id", "Instit"."jurisdiccion_id" AS "Instit__jurisdiccion_id", "Instit"."cue" AS "Instit__cue", "Instit"."anexo" AS "Instit__anexo", "Instit"."esanexo" AS "Instit__esanexo", "Instit"."nombre" AS "Instit__nombre", "Instit"."nroinstit" AS "Instit__nroinstit", "Instit"."anio_creacion" AS "Instit__anio_creacion", "Instit"."direccion" AS "Instit__direccion", "Instit"."depto" AS "Instit__depto", "Instit"."localidad" AS "Instit__localidad", "Instit"."cp" AS "Instit__cp", "Instit"."telefono" AS "Instit__telefono", "Instit"."mail" AS "Instit__mail", "Instit"."web" AS "Instit__web", "Instit"."dir_nombre" AS "Instit__dir_nombre", "Instit"."dir_tipodoc_id" AS "Instit__dir_tipodoc_id", "Instit"."dir_nrodoc" AS "Instit__dir_nrodoc", "Instit"."dir_telefono" AS "Instit__dir_telefono", "Instit"."dir_mail" AS "Instit__dir_mail", "Instit"."vice_nombre" AS "Instit__vice_nombre", "Instit"."vice_tipodoc_id" AS "Instit__vice_tipodoc_id", "Instit"."vice_nrodoc" AS "Instit__vice_nrodoc", "Instit"."actualizacion" AS "Instit__actualizacion", "Instit"."observacion" AS "Instit__observacion", "Instit"."fecha_mod" AS "Instit__fecha_mod", "Instit"."activo" AS "Instit__activo", "Instit"."ciclo_alta" AS "Instit__ciclo_alta", "Instit"."ciclo_mod" AS "Instit__ciclo_mod", "Instit"."created" AS "Instit__created", "Instit"."modified" AS "Instit__modified", "Instit"."localidad_id" AS "Instit__localidad_id", "Instit"."departamento_id" AS "Instit__departamento_id", "Instit"."lugar" AS "Instit__lugar", "Gestion"."id" AS "Gestion__id", "Gestion"."name" AS "Gestion__name", "Dependencia"."id" AS "Dependencia__id", "Dependencia"."name" AS "Dependencia__name", "Tipoinstit"."id" AS "Tipoinstit__id", "Tipoinstit"."jurisdiccion_id" AS "Tipoinstit__jurisdiccion_id", "Tipoinstit"."name" AS "Tipoinstit__name", "Jurisdiccion"."id" AS "Jurisdiccion__id", "Jurisdiccion"."name" AS "Jurisdiccion__name", "Departamento"."id" AS "Departamento__id", "Departamento"."jurisdiccion_id" AS "Departamento__jurisdiccion_id", "Departamento"."name" AS "Departamento__name", "Localidad"."id" AS "Localidad__id", "Localidad"."departamento_id" AS "Localidad__departamento_id", "Localidad"."name" AS "Localidad__name", "Plan"."id" AS "Plan__id", "Plan"."instit_id" AS "Plan__instit_id", "Plan"."oferta_id" AS "Plan__oferta_id", "Plan"."old_item" AS "Plan__old_item", "Plan"."norma" AS "Plan__norma", "Plan"."nombre" AS "Plan__nombre", "Plan"."perfil" AS "Plan__perfil", "Plan"."sector" AS "Plan__sector", "Plan"."duracion_hs" AS "Plan__duracion_hs", "Plan"."duracion_semanas" AS "Plan__duracion_semanas", "Plan"."duracion_anios" AS "Plan__duracion_anios", "Plan"."matricula" AS "Plan__matricula", "Plan"."observacion" AS "Plan__observacion", "Plan"."ciclo_alta" AS "Plan__ciclo_alta", "Plan"."ciclo_mod" AS "Plan__ciclo_mod", "Plan"."created" AS "Plan__created", "Plan"."modified" AS "Plan__modified", "Plan"."sector_id" AS "Plan__sector_id"';
+			$instituciones = $this->Instit->find('all', array(
+								'conditions'=>$conditions,
+								'group'=>$group,
+								'fields'=>$fields));
+			debug(sizeof($instituciones));
+		}
+		
+		$ofertas = $this->Instit->Plan->Oferta->find('list');
+		$this->set('ofertas', $ofertas);
+		
+		//pr($this->Instit->recursive);
 	}
 
 }
