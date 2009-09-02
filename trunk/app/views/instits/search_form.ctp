@@ -5,11 +5,11 @@
 		<?= $form->create('Instit',array('action' => 'search')); 
 
 		echo $form->input('cue', array('label'=> 'CUE', 'maxlength'=>7 ,'after'=> '<cite>Ej: 600118 o 5000216. No introducir número de anexo</cite>')); 
-		echo $form->input('nombre', array('label'=>'Nombre de Institución'));
+		echo $form->input('nombre', array('label'=>'Nombre de Institución','after'=> '<cite>Ej: "Sarmiento" o "Gral. Belgrano". No confundir el nombre con el tipo de institución</cite>'));
 		echo $form->input('nroinstit', array('label'=>'N° de Institución')); 
 		echo $form->input('direccion', array('label'=>'Domicilio'));	
 		
-		echo $form->input('Plan.oferta_id',array('options'=>$ofertas, 'empty'=>'Seleccionar', 'label'=>'Con Oferta'.$html->image('new.gif',array('style'=>"margin-left:52px;"))));
+		echo $form->input('Plan.oferta_id',array('options'=>$ofertas, 'empty'=>'Seleccionar', 'label'=>'Con Oferta'.$html->image('new.gif',array('style'=>"margin-left:78px;"))));
 
 		
 		echo $form->input('gestion_id', array('empty' => 'Todas', 'label'=> 'Ámbito de Gestión'));

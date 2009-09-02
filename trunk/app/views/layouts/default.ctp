@@ -42,9 +42,8 @@
 </head>
 <body>
 	<div id="container">
-		<div id="header">
-			<h1><?php echo $html->link(__('Registro Federal de Instituciones de ETP - RFIETP', true), '/pages/home'); ?></h1>
-			
+		<div id="header" <?= ($_SERVER['HTTP_HOST']=='localhost')?'style="background-color:white; background-image: url('.$html->url('/img/linux-volando-localhost.gif',true).')"':''?>>
+			<h1><?php echo $html->link(__('Registro Federal de Instituciones de ETP - RFIETP', true), '/pages/home'); ?></h1>	
 		</div>
 		<div id="content">
 			<div id="menu">	

@@ -119,8 +119,6 @@ ul, li {
 }
 
 
-
-
 /************************************************************************
 *
 *
@@ -160,7 +158,6 @@ ul, li {
 #header h1 a:hover {
 	text-decoration: underline;
 }
-
 
 
 /************************************************************************
@@ -464,6 +461,10 @@ form div {
 }
 form div.input {
         color: #444;
+}
+.input cite{
+	font-size: 10px;
+    color: #336;
 }
 form div.required {
 }
