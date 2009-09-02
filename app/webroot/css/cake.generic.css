@@ -246,8 +246,13 @@ form div {
 	vertical-align: text-top;
 }
 form div.input {
-	color: #444;
+	color: #444;color: grey;
 }
+
+.input cite  {
+	color: grey;
+}
+
 form div.required {
 	color: #333;
 	font-weight: bold;
