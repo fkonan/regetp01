@@ -36,6 +36,7 @@
 		echo $html->css('regetp');
 		echo $html->css('printer','stylesheet', array('media'=>'print'));
 		echo $javascript->link('prototype');
+		echo $javascript->link('form_regetp_ria');
 		echo $scripts_for_layout;
 	?>
 	

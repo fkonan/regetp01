@@ -96,20 +96,20 @@ class LocalidadesController extends AppController {
 	
 	function ajax_select_localidades_form_por_departamento(){
 		 $this->layout = 'ajax';
-         //Configure::write('debug',0);
-         $this->Tipoinstit->recursive = -1;
+         Configure::write('debug',0);
+         $this->Localidad->recursive = -1;
 
+         $localidades = array();
          $depto_id = 0;
          
-         if ($jur = current($this->data)):
-         	if (isset($jur)):
-         		$depto_id = $jur['departamento_id'];
-         	endif;
+         if (isset($this->data['Departamento']['id'])):
+         	$depto_id = $this->data['Departamento']['id'];
+         endif;
+         if (isset($this->data['Instit']['departamento_id'])):
+         	$depto_id = $this->data['Instit']['departamento_id'];
          endif;
          
-         if ($depto_id == 0){//buscar a todas
-         	$localidades = $this->Localidad->find('list',array('order'=>'Localidad.name ASC'));
-         }else{ //buscar por el depto_id
+         if ($depto_id != 0){
          	$localidades = $this->Localidad->find('list',array('conditions' => array('departamento_id' => $depto_id),
          											  array('order'=>'Localidad.name ASC')));
          }

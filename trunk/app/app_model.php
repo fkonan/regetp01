@@ -37,6 +37,67 @@
  * @subpackage    cake.app
  */
 class AppModel extends Model {
+	
+	
+	/**
+	 * 
+	 * Lo que hace es convertir una cadena en una expresion regular para 
+	 * buscar el texto sin tener en cuenta los acentos y la eñe
+	 *
+	 * @param $text
+	 */
+	function convertir_para_busqueda_avanzada($text){		
+		$text = strtolower($text);
+		$text = "%$text%";
+		$patron = array (
+			// Espacios, puntos y comas por guion
+			//'/[\., ]+/' => '-',
+			
+			// Vocales
+			'/a/' => '(á|a|A|Á)',
+			'/e/' => '(é|e|E|É)',
+			'/i/' => '(í|i|I|Í)',
+			'/o/' => '(ó|o|O|Ó)',
+			'/u/' => '(ú|u|Ú|U)',
+		
+			'/A/' => '(á|a|A|Á)',
+			'/E/' => '(é|e|E|É)',
+			'/I/' => '(í|i|I|Í)',
+			'/O/' => '(ó|o|O|Ó)',
+			'/U/' => '(ú|u|Ú|U)',
+		
+			'/Á/' => '(á|a|A|Á)',
+			'/É/' => '(é|e|E|É)',
+			'/Í/' => '(í|i|I|Í)',
+			'/Ó/' => '(ó|o|O|Ó)',
+			'/Ú/' => '(ú|u|Ú|U)',
+		
+			'/á/' => '(á|a|A|Á)',
+			'/é/' => '(é|e|E|É)',
+			'/í/' => '(í|i|I|Í)',
+			'/ó/' => '(ó|o|O|Ó)',
+			'/ú/' => '(ú|u|Ú|U)',
+			
+			'/n/' => 'ñ',
+			'/ñ/' => '(n|ñ)',
+		
+			'/s/' => '(z|s|c)',
+			'/c/' => '(z|s|c)',
+			'/z/' => '(z|s|c)'
+ 
+			// Agregar aqui mas caracteres si es necesario
+ 
+		);
+		
+		$text_aux = '';
+		for($i=0; $i<strlen($text); $i++){
+	  		$caracter =  $text[$i];
+	  		$text_aux .= preg_replace(array_keys($patron),array_values($patron),$caracter,1);
+		}
+		
+		return $text_aux;		
+	}
+	
 }
 	
 ?>
