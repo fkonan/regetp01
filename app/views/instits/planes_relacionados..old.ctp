@@ -26,13 +26,13 @@
 						
 		<dt><?php __('Departamento'); ?></dt>
 		<dd>
-			<?php echo $planes['Instit']['depto']; ?>
+			<?php echo $planes['Departamento']['name']; ?>
 			&nbsp;
 		</dd>	
 			
 		<dt><?php __('Localidad'); ?></dt>
 		<dd>
-			<?php echo $planes['Instit']['localidad']; ?>
+			<?php echo $planes['Localidad']['name']; ?>
 			&nbsp;
 		</dd>		
 			

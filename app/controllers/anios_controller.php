@@ -46,6 +46,7 @@ class AniosController extends AppController {
 
         switch ($plan[0]['Plan']['oferta_id']):
 			case 1://es un FP, asique mostrar la vista de años para FP
+			case 7://es CL, asique mostrar la vista de años para FP	
 	            $this->render('/anios/add_fp');
 	            break;
 			case 2: // IT
@@ -89,6 +90,7 @@ class AniosController extends AppController {
  
         switch ($plan[0]['Plan']['oferta_id']):
 			case 1://es un FP, asique mostrar la vista de años para FP
+			case 7://es CL, asique mostrar la vista de años para FP	
 	            $this->render('/anios/edit_fp');
 	            break;
 			case 2: // IT

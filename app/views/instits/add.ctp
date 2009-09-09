@@ -3,6 +3,15 @@
 echo $html->css('edit_form',false);
 ?>
 
+<div id="instits-similares">
+	<ul>
+		<?php foreach ($similares as $s):?>
+			<li><?php echo $html->link($s['Instit']['nombre_completo'],'/instits/view/'.$s['Instit']['id'],array('target'=>'_blank'))?></li>
+		<?php endforeach;?>
+	</ul>
+</div>
+
+
 <div class="instits form">
 <h1>Nueva Institución </h1>
 <?php echo $form->create('Instit');?>
@@ -63,7 +72,7 @@ echo $html->css('edit_form',false);
 		
 			// DEPARTAMENTO
 		$meter = '<span class="ajax_update" id="ajax_indicator_dpto" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
-		echo $form->input('departamento_id', array('options'=> $departamentos, 'empty' => 'Seleccione','type'=>'select','label'=>'Departamento','after'=> $meter.'<br /><cite>Seleccione primero una jurisdicción.</cite>'));                                   
+		echo $form->input('departamento_id', array('empty' => 'Seleccione','type'=>'select','label'=>'Departamento','after'=> $meter.'<br /><cite>Seleccione primero una jurisdicción.</cite>'));                                   
         echo $ajax->observeField('jurisdiccion_id',
                                    array(  	'url' => '/departamentos/ajax_select_departamento_form_por_jurisdiccion',
 		                                   	'update'=>'InstitDepartamentoId',
@@ -72,7 +81,7 @@ echo $html->css('edit_form',false);
 		                                   	'onChange'=>true
                                    ));
 			//LOCALIDAD
-		echo $form->input('localidad_id', array('options'=> $localidades,'empty' => 'Seleccione','type'=>'select','label'=>'Localidad','after'=> '<br /><cite>Seleccione primero un Departamento.</cite>'));                                   
+		echo $form->input('localidad_id', array('empty' => 'Seleccione','label'=>'Localidad','after'=> '<br /><cite>Seleccione primero un Departamento.</cite>'));                                   
         echo $ajax->observeField('InstitDepartamentoId',
                                    array(  	'url' => '/localidades/ajax_select_localidades_form_por_departamento',
 		                                   	'update'=>'InstitLocalidadId',
@@ -84,7 +93,7 @@ echo $html->css('edit_form',false);
                                    
            // TIPO DE INSTITUCION                  
 		//echo $form->input('tipoinstit_id', array('empty' => 'Todas','disabled'=>true,'type'=>'select','label'=>'Tipo De Institución','after'=> '<br /><cite>Para activar este campo, seleccione primero una jurisdicción</cite>'));
-		echo $form->input('tipoinstit_id', array('empty' => 'Seleccione','type'=>'select','label'=>'Tipo de Institución','after'=> '<br /><cite>Seleccione primero una jurisdicción, asi selecciona los tipos de institución posibles</cite>'));
+		echo $form->input('tipoinstit_id', array('empty' => 'Seleccione','label'=>'Tipo de Institución','after'=> '<br /><cite>Seleccione primero una jurisdicción, asi selecciona los tipos de institución posibles</cite>'));
 		echo $ajax->observeField('jurisdiccion_id',
                                    array(  	'url' => '/tipoinstits/ajax_select_form_por_jurisdiccion',
 		                                   	'update'=>'InstitTipoinstitId',
@@ -285,6 +294,9 @@ echo $html->css('edit_form',false);
 											  "selected" => date('Y')			
 		));
 		
+		//forzar al checkbox siempre
+		$this->data['Instit']['force_save'] = 0;
+		echo $form->input('force_save',array('type'=> 'checkbox','checked'=>false,'label'=>'Forzar guardado.'));
 	?>
 <?php echo $form->end('Guardar');?>
 </div>

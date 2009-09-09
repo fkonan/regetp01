@@ -88,9 +88,7 @@ class DepartamentosController extends AppController {
          	endif;
          endif;
                 
-         if($jur_id == 0 ){//buscar a todas
-			$deptos = $this->Departamento->find('list',array('order'=>'name ASC'));
-         }else{
+         if($jur_id != 0 ){
         	$deptos = $this->Departamento->find('list',array('order'=>'name ASC',
         													'conditions' => array('jurisdiccion_id' => $jur_id),
         													));

@@ -2,6 +2,7 @@
 class Instit extends AppModel {
 
 	var $name = 'Instit';
+	var $asociarPlan = false;
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array(
@@ -587,14 +588,7 @@ class Instit extends AppModel {
   	}
   	
   	
-  	function cue_y_anexo_unico(){
-  		$cue   = $this->data[$this->name]['cue'];
-  		$anexo = $this->data[$this->name]['anexo'];
-  		$condiciones = array('cue'=>$cue,'anexo'=>$anexo);
-  		
-  		//si me encuentra algo me tira FALSO, asi evitamos duplicados
-  		return ($this->find('count',array('conditions'=>$condiciones))>0)?false:true;
-  	}
+  	
   	
   	
 	function isCUEValid($cue = '') {
@@ -616,6 +610,226 @@ class Instit extends AppModel {
 		
 		return 1;
 	}
+	
+	
+	function paginateCount($conditions = null, $recursive = 0){
+  	
+ 		if ($this->asociarPlan){
+  			$this->getPagFields();
+	  		$this->bindModel(array('hasOne' => array(
+        	                      'Plan' => array(
+                                     'className'  => 'Plan',
+                                     'foreignKey' => 'instit_id',
+                                                 ),
+                                               ),
+                              )
+   	                    );
+	        $selectFields = $this->getPagFields();
+        	$extra = array('group' => $selectFields,'fields' => $selectFields);  	                    
+        	$parameters = compact('conditions');
+        	$this->recursive = 0;
+        	return count($this->find('all', array_merge($parameters, $extra)));
+  		} else {
+            $parameters = compact('conditions');
+			if ($recursive != $this->recursive) {
+				$parameters['recursive'] = $recursive;
+			}
+			$extra = array();
+			return $this->find('count', array_merge($parameters, $extra));
+  		}        	
+    }
+
+    
+	function paginate($conditions = null, $fields = null, $order = null, $limit = null, $page = 1, $recursive = null, $tieneHasMany = false) {
+	
+		if ($this->asociarPlan){
+			$this->bindModel(array('hasOne' => array('Plan' => array('className'  => 'Plan',
+                                                                 'foreignKey' => 'instit_id',
+                                                                ),),));
+
+	        $selectFields = $this->getPagFields();
+    	    $extra = array('group' => $selectFields,'fields' => $selectFields);
+			$parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
+
+			if ($recursive != $this->recursive){
+				$parameters['recursive'] = $recursive;
+    	    }
+
+			return $this->find('all', array_merge($parameters, $extra));
+
+		} else {
+			$parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
+			if ($recursive != $this->recursive) {
+				$parameters['recursive'] = $recursive;
+			}
+			$extra = array();
+			return $this->find('all', array_merge($parameters, $extra));
+		}
+	}    	
+  	
+	
+	/**
+	 * Me trae los campos de los BELONGS para poder hacer el group by de los HASMANY sin problemas
+	 * @return string
+	 */	
+   function getPagFields(){
+      $fields = "";
+
+      // primero traigo los campos de la tabla instits
+      foreach ($this->_schema as $name => $options){
+         $fields .= $this->name . "." . $name . ",";      	
+      }
+
+      // busco los belongs to y sus atributos
+      foreach ($this->belongsTo as $bName => $bOptions){
+         foreach ($this->$bName->_schema as $name => $options){
+      	    $fields .= $bName . "." . $name . ",";
+         }      
+      }
+
+      return substr($fields,0,strlen($fields)-1);	
+   }   
+   
+   
+   /**
+    * si me encuentra algo me tira FALSO, asi evitamos duplicados
+    * @return boolean
+    */
+	function cue_y_anexo_unico()
+  	{
+  		return (count($this->__getInstitByCUEandAnexo())==0)?true:false;
+  	}
+
+   
+   
+	/**
+	 * Me devuelve todas la Instituciones similares
+	 * @param $this->$data
+	 * @return array de Instituciones
+	 */
+	function getSimilars($data) 
+	{
+		$similars = array();
+		$this->data = $data;	
+		
+		// busco por cue y anexo
+		if( $this->data['Instit']['cue'] != "" && $this->data['Instit']['anexo'] != "")
+		{
+			$bycueanexo = $this->__getInstitByCUEandAnexo();
+			if(count($bycueanexo)>0) 
+			{
+				$this->validationErrors += array( 'cue' => 'Hay una institución con éste CUE y Anexo');
+				$this->validationErrors += array( 'anexo' => 'Hay una institución con éste CUE y Anexo');
+				$similars += $bycueanexo;
+			}
+		}
+				
+		// busco por ubicacion
+		if( $this->data['Instit']['localidad_id'] != "" &&
+			$this->data['Instit']['direccion'] != "")
+		{
+			$conditions = array("localidad_id" => $this->data['Instit']['localidad_id'], 
+								"lower(direccion)  SIMILAR TO ?" => $this->convertir_para_busqueda_avanzada($this->data['Instit']['direccion']));
+			$byubucation = $this->__getSimilarsConditions($conditions);
+			if(count($byubucation)>0)
+			{
+				$this->validationErrors += array( 'direccion' => 'Hay una institución con la misma dirección en ésta localidad');
+				$this->validationErrors += array( 'localidad_id' => '');
+				
+				$similars += $byubucation;
+			}
+		}
+			
+		// busco por nombre y localidad
+		if( $this->data['Instit']['nombre'] != "" && $this->data['Instit']['localidad_id'] != "")
+		{
+			$nombre = $this->convertir_para_busqueda_avanzada($this->data['Instit']['nombre']);
+		
+			$conditions = array("lower(nombre)  SIMILAR TO ?" => $nombre,
+								"localidad_id" => $this->data['Instit']['localidad_id']);
+			$bynameyloc = $this->find('all',array('conditions'=> $conditions));
+			if(count($bynameyloc)>0) 
+			{
+				$this->validationErrors += array( 'nombre' => 'Hay una institución en la misma localidad con éste nombre');
+				$this->validationErrors += array( 'localidad_id' => 'Hay una institución con el mismo nombre, en ésta localidad');
+				$similars = array_merge($similars,$bynameyloc);
+			}
+		}
+			
+		// busco por nombre
+		if( $this->data['Instit']['nombre'] != "" &&
+			$this->data['Instit']['nroinstit'] != "" &&
+			$this->data['Instit']['tipoinstit_id'] != "")
+		{
+			$nombre = $this->convertir_para_busqueda_avanzada($this->data['Instit']['nombre']);
+			$conditions = array("lower(nombre)  SIMILAR TO ?" => $nombre,
+								"lower(nroinstit)  SIMILAR TO ?" => $this->convertir_para_busqueda_avanzada($this->data['Instit']['nroinstit']),
+								"tipoinstit_id" => $this->data['Instit']['tipoinstit_id']);
+			$byname = $this->find('all',array('conditions'=> $conditions));
+			if(count($byname)>0) 
+			{
+				$this->validationErrors += array( 'nombre' => 'Hay una institución con el mismo nombre, tipo o número');
+				$this->validationErrors += array( 'nroinstit' => '');
+				$this->validationErrors += array( 'tipoinstit_id' => '');
+				$similars = array_merge($similars,$byname);
+			}
+		}
+			
+		// busco por juridiccion, tipo y numero
+		if( $this->data['Instit']['localidad_id'] != "" &&
+			$this->data['Instit']['nroinstit'] != "" &&
+			$this->data['Instit']['tipoinstit_id'] != "")
+		{
+			$conditions = array("Instit.localidad_id" => $this->data['Instit']['localidad_id'],
+								"lower(nroinstit)  SIMILAR TO ?" => $this->convertir_para_busqueda_avanzada($this->data['Instit']['nroinstit']),
+								"tipoinstit_id" => $this->data['Instit']['tipoinstit_id']);
+			$byjurid = $this->find('all',array('conditions'=> $conditions));
+			if(count($byjurid)>0) 
+			{
+				$this->validationErrors += array( 'nroinstit' => 'Hay una institución con la misma localidad, tipo o número');
+				$this->validationErrors += array( 'localidad_id' => '');
+				$this->validationErrors += array( 'tipoinstit_id' => '');
+				$similars += $byjurid;
+			}
+		}
+					
+		return $similars;
+	}
+	
+	
+	/**
+	 * Me devuelve instituciones cuyo cue y anexo coinciden
+	 * toma los valores de $this->data
+	 * @return array find('all')
+	 */
+	function __getInstitByCUEandAnexo()
+	{
+		$condiciones = array();		
+			
+		// cuando se edita uina institucion
+		// tengo que buscar todas las intituciones que no sea ésta misma en cuestión
+		if (isset($this->data[$this->name]['id'])){
+			if($this->data[$this->name]['id']!= null){
+				$condiciones = array_merge($condiciones, array('Instit.id <>'=>$this->data[$this->name]['id']));
+			}
+		}	
+		if (isset($this->data[$this->name]['cue'])){
+			if($this->data[$this->name]['cue']!= null){
+				$condiciones = array_merge($condiciones, array('cue'=>$this->data[$this->name]['cue']));
+			}
+		}	
+		if (isset($this->data[$this->name]['anexo'])){
+			if($this->data[$this->name]['anexo']!= null){
+				$condiciones = array_merge($condiciones, array('anexo'=>$this->data[$this->name]['anexo']));
+			}
+		}
+ 		$this->recursive = -1;
+  		return $this->find('all',array('conditions'=>$condiciones));
+	}
+
+
+	
+	
   	
 }
 ?>

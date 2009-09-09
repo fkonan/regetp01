@@ -195,11 +195,10 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
 	</ul>
 </div>
 
-<h2>Más Información</h2>
-<ul id="instits-mas-info">
-	<li><?= $html->link('Oferta Educativa ('.sizeof($instit['Plan']).')',array('controller'=>'Instits','action'=>'planes_relacionados', $instit['Instit']['id'])) ?></li>
-	 
-</ul>
+	<h2>Más Información</h2>
+	<ul id="instits-mas-info">
+		<li><?= $html->link('Oferta Educativa ('.sizeof($instit['Plan']).')',array('controller'=>'Planes','action'=>'index', $instit['Instit']['id'])) ?></li>
+	</ul>
 
 </div>
 

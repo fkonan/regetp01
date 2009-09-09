@@ -107,7 +107,7 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 		>
 		
 		<div class="instit_link_list">
-			<a href="#MasInfo">+ Info</a>
+		<?php echo $html->link('+ Info','/instits/view/'.$instit['Instit']['id']);?>
 		</div>	
 		<div class="instit_data_bs">
 			<? 
@@ -135,8 +135,8 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 	
 	<div id="paginator_prev_next_links">
 	<?php	
-		echo $paginator->prev('« Anterior ',null, null, array('class' => 'disabled'));
-		echo " <---> ".$paginator->counter()." <---> ";
+		echo $paginator->prev('« Anterior',null, null, array('class' => 'disabled'));
+		echo " | ".$paginator->numbers(array('modulus'=>'13'))." | ";
 		echo $paginator->next(' Siguiente »', null, null, array('class' => 'disabled'));
 	?> 
 	</div>
