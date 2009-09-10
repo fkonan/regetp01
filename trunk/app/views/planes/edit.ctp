@@ -16,8 +16,8 @@ $cue_instit = $instit['cue'].$anexo;
 		echo $form->input('norma',array('label'=>'Normativa'));
 		echo $form->input('nombre');
 		echo $form->input('perfil');
-//		echo $form->input('sector');
-		echo $form->input('sector_id',array('type'=>'select','empty'=>'Root','options'=>$sectores,'label'=>'Sector ('.$this->data['Plan']['sector'].')'));
+		echo $form->hidden('sector');
+		echo $form->input('sector_id',array('type'=>'select','empty'=>'Seleccione','options'=>$sectores,'label'=>'Sector ('.$this->data['Plan']['sector'].')'));
 		
 		echo "<br>Duración:";
 		echo $form->input('duracion_hs',array('label'=>' - Horas'));

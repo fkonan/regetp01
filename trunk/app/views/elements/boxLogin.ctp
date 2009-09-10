@@ -12,9 +12,7 @@ if ($session->check('Auth.User')){
 <? 
 	//pr($session->read());
 	// If the session info hasn't been set...
-	if ($session->check('Auth.User')){
-		echo "Hola <b>".$session->read('Auth.User.nombre')."!</b>";		
-		
+	if ($session->check('Auth.User')){		
 		echo $html->link('Mis Datos','/users/self_user_edit/'.$session->read('Auth.User.id'));
 		echo $html->link('Cambiar Contraseña','/users/cambiar_password/'.$session->read('Auth.User.id'));
 		

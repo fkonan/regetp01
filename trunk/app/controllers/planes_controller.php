@@ -22,7 +22,6 @@ class PlanesController extends AppController {
 			$id = $this->passedArgs['Instit.id'];
 		}
 
-		// para el buscador
 		if (isset($this->data['Instit']['id']))
 		{
 			$id = $this->data['Instit']['id'];
@@ -46,21 +45,21 @@ class PlanesController extends AppController {
 			endforeach;
 			
 			$this->set('sumatoria_matriculas',$this->Plan->Instit->dameSumatoriaDeMatriculasPorOferta($id));
-			
 			$this->set('planes',$this->institData);	
 			$this->set('v_plan_matricula',$v_plan_matricula);
 			$this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$this->institData['Instit']['id'] );
 		}		
 
 		$ofertas = $this->Plan->Oferta->find('list',array('fields' => array('id','abrev')));
-		$this->set(compact('ofertas'));
+		$ciclos  = $this->Plan->Anio->Ciclo->find('list',array('fields' => array('id','name')));
+		$this->set(compact('ofertas','ciclos'));
 		
 		$this->Plan->recursive = 0;
 
 		/* ************************************ */
 		/* * Filtros de la búsqueda de Planes * */
 		/* ************************************ */
-		
+
 		if(isset($this->data['Plan']['oferta_id'])){
 			if((int)$this->data['Plan']['oferta_id'] != 0){
 				$this->paginate['conditions']['Plan.oferta_id'] = $this->data['Plan']['oferta_id'];
@@ -74,44 +73,50 @@ class PlanesController extends AppController {
 			}
         }
 
-		if(isset($this->data['Plan']['nombre'])){
+		if(isset($this->data['Plan']['nombre']) && $this->data['Plan']['nombre'] != ""){
 			$this->paginate['conditions']['to_ascii(lower(Plan.nombre)) SIMILAR TO ?'] = array($this->Plan->convertir_para_busqueda_avanzada($this->data['Plan']['nombre']));
 			$url_conditions['Plan.nombre'] = $this->data['Plan']['nombre'];					
         }
-		if(isset($this->passedArgs['Plan.nombre'])){
-				$this->paginate['conditions']['to_ascii(lower(Plan.nombre)) SIMILAR TO ?'] = array($this->Plan->convertir_para_busqueda_avanzada($this->passedArgs['Plan.nombre']));
-				$url_conditions['Plan.nombre'] = $this->passedArgs['Plan.nombre'];					
+		if(isset($this->passedArgs['Plan.nombre']) && $this->passedArgs['Plan.nombre'] != ""){
+			$this->paginate['conditions']['to_ascii(lower(Plan.nombre)) SIMILAR TO ?'] = array($this->Plan->convertir_para_busqueda_avanzada($this->passedArgs['Plan.nombre']));
+			$url_conditions['Plan.nombre'] = $this->passedArgs['Plan.nombre'];					
         }
         
-		if(isset($this->data['Plan']['sector'])){
+		if(isset($this->data['Plan']['sector']) && $this->data['Plan']['sector'] != ""){
 			$this->paginate['conditions']['to_ascii(lower(Plan.sector)) SIMILAR TO ?'] = array($this->Plan->convertir_para_busqueda_avanzada($this->data['Plan']['sector']));
 			$url_conditions['Plan.sector'] = $this->data['Plan']['sector'];					
         }
-        if(isset($this->passedArgs['Plan.sector'])){
-				$this->paginate['conditions']['to_ascii(lower(Plan.sector)) SIMILAR TO ?'] = array($this->Plan->convertir_para_busqueda_avanzada($this->passedArgs['Plan.sector']));
-				$url_conditions['Plan.sector'] = $this->passedArgs['Plan.sector'];					
+        if(isset($this->passedArgs['Plan.sector']) && $this->passedArgs['Plan.sector'] != ""){
+			$this->paginate['conditions']['to_ascii(lower(Plan.sector)) SIMILAR TO ?'] = array($this->Plan->convertir_para_busqueda_avanzada($this->passedArgs['Plan.sector']));
+			$url_conditions['Plan.sector'] = $this->passedArgs['Plan.sector'];					
         }
         
-        /* ********************************* */
+        if(isset($this->data['Plan']['ciclo_id'])){
+			if((int)$this->data['Plan']['ciclo_id'] != 0){
+				$this->Plan->setMaxCiclo($this->data['Plan']['ciclo_id']); 
+				$url_conditions['Anio.ciclo_id'] = $this->data['Plan']['ciclo_id'];					
+			}
+        }
+        if(isset($this->passedArgs['Anio.ciclo_id'])){
+			if((int)$this->passedArgs['Anio.ciclo_id'] != 0){
+				$this->Plan->setMaxCiclo($this->passedArgs['Anio.ciclo_id']);
+				$url_conditions['Anio.ciclo_id'] = $this->passedArgs['Anio.ciclo_id'];
+			}
+        }
+
+		/* ********************************* */
         /* * Paginador y seteos a la vista * */
         /* ********************************* */
         
-		$this->paginate['conditions']['Instit.id'] = $id;
-		$url_conditions['Instit.id'] = $id; // para que no pierda el id de instit en los ordenamientos y la paginacion
+		$this->Plan->setAsociarAnio(true);
+        $this->paginate['conditions']['Instit.id'] = $id;
+        $url_conditions['Instit.id'] = $id; // para que no pierda el id de instit en los ordenamientos y la paginacion
 		$data = $this->paginate();
-
-		for ($i=0;$i<count($data);$i++)
-		{
-			$resultMat   = $this->Plan->Anio->matricula_del_plan($data[$i]['Plan']['id']);
-			$resultCiclo = $this->Plan->Anio->ciclo_lectivo_matricula_del_plan($data[$i]['Plan']['id']);
-			$data[$i]['Plan']['matriculaCalc'] = $resultMat[$data[$i]['Plan']['id']];  
-			$data[$i]['Plan']['cicloCalc']     = $resultCiclo;			
-		}	
 
 		$this->set('planesRelacionados', $data);
 		$this->set('url_conditions', $url_conditions);
 	}
-
+	
 	
 	
 	
@@ -161,6 +166,10 @@ class PlanesController extends AppController {
 	}
 
 	function add($instit_id = null) {
+		if (!empty($this->data) && !$instit_id) {
+			$this->Session->setFlash(__('Institución incorrecta', true));
+			$this->redirect(array('controller'=>'pages', 'action'=>'home'));
+		}
 		if (!empty($this->data)) {
 			$instit_id = $this->data['Plan']['instit_id'];
 			$this->Plan->create();
@@ -179,8 +188,9 @@ class PlanesController extends AppController {
 		$ofertas = $this->Plan->Oferta->find('list');
 		$this->set(compact('ofertas'));
 		
-		$this->set('sectores',$this->Plan->Sector->generatetreelist());
-
+		
+		$sectores = $this->Plan->Sector->find('list',array('order'=>'Sector.name'));
+		$this->set('sectores',$sectores);
 		$this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$instit['Instit']['id'] );
 	}
 
@@ -206,11 +216,12 @@ class PlanesController extends AppController {
 
 		$ofertas = $this->Plan->Oferta->find('list');
 		$this->set(compact('ofertas'));
-		$this->rutaUrl_for_layout[] = array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$this->data['Instit']['id'] );
-		$this->rutaUrl_for_layout[] = array('name'=> 'Oferta Educativa','link'=>'/Instits/planes_relacionados/'.$this->data['Instit']['id'] );
+		$this->rutaUrl_for_layout[] = array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$this->data['Plan']['instit_id'] );
+		$this->rutaUrl_for_layout[] = array('name'=> 'Oferta Educativa','link'=>'/Planes/index/'.$this->data['Plan']['instit_id'] );
 		$this->rutaUrl_for_layout[] = array('name'=> $this->data['Plan']['nombre'],'link'=>'/Planes/view/'.$this->data['Plan']['id'] );
 		
-		$this->set('sectores',$this->Plan->Sector->generatetreelist());
+		$sectores = $this->Plan->Sector->find('list',array('order'=>'Sector.name'));
+		$this->set('sectores',$sectores);
 	}
 
 	function delete($id = null) {
