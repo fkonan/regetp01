@@ -18,34 +18,45 @@
 		
 		<h2><a href="#VerUbicacion" onclick="$('search-ubicacion').toggle()">por su ubicación</a></h2>
 		<div id="search-ubicacion" class="search-div" style="display: none">
-				
+			
 			<div id= "departamento-select">		
-				<?php 
-				// 		DEPARTAMENTO
-				$meter = '<span class="ajax_update" id="ajax_indicator_dpto" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
-				echo $form->input('Departamento.id', array('type'=> 'select', 'empty' => 'Seleccione','label'=>'Departamento','after'=> $meter.'<br><cite>Seleccione primero una jurisdicción</cite>'));                                   
-		        echo $ajax->observeField('jurisdiccion_id',
-		                                   array(  	'url' => '/departamentos/ajax_select_departamento_form_por_jurisdiccion',
-				                                   	'update'=>'DepartamentoId',
-				                                   	'loading'=>'$("ajax_indicator").show();$("DepartamentoId").disable();$("LocalidadId").update();',
-				                                   	'complete'=>'$("ajax_indicator").hide();$("DepartamentoId").enable(); $("departamento-select").show();',
-				                                   	'onChange'=>true
-		                                   ));
-				?>
+						<?php 
+						// 		DEPARTAMENTO
+						$meter = '<span class="ajax_update" id="ajax_indicator_dpto" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
+						echo $form->input('Departamento.id', array('type'=> 'select', 'empty' => 'Seleccione','label'=>'Departamento','after'=> $meter.'<br><cite>Seleccione primero una jurisdicción</cite>'));                                   
+				        echo $ajax->observeField('jurisdiccion_id',
+				                                   array(  	'url' => '/departamentos/ajax_select_departamento_form_por_jurisdiccion',
+						                                   	'update'=>'DepartamentoId',
+						                                   	'loading'=>'$("ajax_indicator").show();$("DepartamentoId").disable();$("LocalidadId").update();',
+						                                   	'complete'=>'$("ajax_indicator").hide();$("DepartamentoId").enable(); $("departamento-select").show();',
+						                                   	'onChange'=>true
+				                                   ));
+						?>
+					<script type="text/javascript">
+							Event.observe(window,'load',function(){
+								new Ajax.Updater('DepartamentoId', '<?php echo $html->url(array('controller'=>'departamentos','action'=>'ajax_select_departamento_form_por_jurisdiccion'));?>');
+							});
+					</script>
 			</div>
-		
+			
 			<div id="localidad-select">
-				<?php 
-				//		LOCALIDAD
-				echo $form->input('Localidad.id', array('empty' => 'Seleccione','type'=>'select','label'=>'Localidad','after'=>'<br><cite>Seleccione primero un Departamento</cite>'));                                   
-		        echo $ajax->observeField('DepartamentoId',
-		                                   array(  	'url' => '/localidades/ajax_select_localidades_form_por_departamento',
-				                                   	'update'=>'LocalidadId',
-				                                   	'loading'=>'$("ajax_indicator_dpto").show();$("LocalidadId").disable()',
-				                                   	'complete'=>'$("ajax_indicator_dpto").hide();$("LocalidadId").enable(); $("localidad-select").show();',
-				                                   	'onChange'=>true
-									)); 				
-				?>	
+						<?php 
+						//		LOCALIDAD
+						echo $form->input('Localidad.id', array('empty' => 'Seleccione','type'=>'select','label'=>'Localidad','after'=>'<br><cite>Seleccione primero un Departamento</cite>'));                                   
+				        echo $ajax->observeField('DepartamentoId',
+				                                   array(  	'url' => '/localidades/ajax_select_localidades_form_por_departamento',
+						                                   	'update'=>'LocalidadId',
+						                                   	'loading'=>'$("ajax_indicator_dpto").show();$("LocalidadId").disable()',
+						                                   	'complete'=>'$("ajax_indicator_dpto").hide();$("LocalidadId").enable(); $("localidad-select").show();',
+						                                   	'onChange'=>true
+											)); 				
+						?>	
+						
+						<script type="text/javascript">
+							Event.observe(window,'load',function(){
+								new Ajax.Updater('LocalidadId', '<?php echo $html->url(array('controller'=>'localidades','action'=>'ajax_select_localidades_form_por_departamento'));?>');
+							});
+						</script>
 			</div>
 			
 			<?php echo $form->input('direccion', array('label'=>'Domicilio')); ?>
@@ -74,20 +85,32 @@
 			?>
 		</div>
 		
+		<h2><a href="#VerPlanes" onclick="$('search-planes').toggle()">por su oferta</a></h2>
 		
+		<div id="search-planes"  class="search-div" style="display: none">
+			<?php 			
+			echo $form->input('Plan.oferta_id',array('options'=>$ofertas, 'empty'=>'Seleccionar', 'label'=>'Con Oferta'));
+			
+			$type = 'hidden';
+			// esto solo lo ven los editores y los administradores
+			if($session->read('Auth.User.role') == 'editor' || $session->read('Auth.User.role') == 'admin'){
+				$type = 'text'; //lo muestra como un imputo comun				
+			}
+			
+			echo $form->input('Plan.sector',array(
+								'label'=>'Sector',
+								'type'=>$type,
+								'after'=>'<cite>Ej: Mecánica Automotriz, Informática, etc</cite>'));
+			
+			
+			?>
+			<?php echo $form->button('Buscar',array('onclick'=>'enviar()'));?>
+		</div>
 		
 		<h2><a href="#VerOtros" onclick="$('search-otros').toggle()">por otras características</a></h2>
 		
 		<div id="search-otros"  class="search-div" style="display: none">
 			<?php 
-			echo $form->input('Plan.oferta_id',array('options'=>$ofertas, 'empty'=>'Seleccionar', 'label'=>'Con Oferta'));
-			
-			// esto solo lo ven los editores y los administradores
-			if($session->read('Auth.User.role') == 'editor' || $session->read('Auth.User.role') == 'admin'){
-				echo $form->input('Plan.sector',array(
-								'label'=>'Sector',
-								'after'=>'<cite>Ej: Mecánica Automotriz, Informática, etc</cite>'));
-			}
 				
 			echo $form->input('gestion_id', array('empty' => 'Todas', 'label'=> 'Ámbito de Gestión'));
 		
@@ -150,10 +173,13 @@
 	  		$('InstitNroinstit').disable();
 	  		$('InstitNombre').disable();
 	  	}
-	  	
-	  	if($('search-otros').visible() == false){
+
+	  	if($('search-planes').visible() == false){
 	  		$('PlanOfertaId').disable();
 	  		$('PlanSector').disable();
+	  	}
+	  	
+	  	if($('search-otros').visible() == false){  		
 	  		$('InstitGestionId').disable();
 	  		$('InstitDependenciaId').disable();
 	  		$('InstitActivo').disable();
@@ -161,7 +187,6 @@
 	  	
 	  	$('InstitSearchForm').submit();
 	  }
-
 	
 //-->
 </script>

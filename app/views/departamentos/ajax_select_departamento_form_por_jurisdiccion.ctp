@@ -1,11 +1,15 @@
-
+<?php //debug($deptos);?>
 <option value="0">Seleccione</option>
 
 <?
-while (list($id, $valor) = each($deptos)):
+foreach($deptos as $d):
+		$poner = $d['Departamento']['name'];
+		if($todos){
+			$poner .= ' ('.$d['Jurisdiccion']['name'].')';
+		}
 	?>
-		<option value="<?= $id?>"><?= utf8_encode($valor)?></option>
+		<option value="<?= $d['Departamento']['id']?>"><?= utf8_encode($poner)?></option>
 	<?
-endwhile;
+endforeach;
 	
 ?>

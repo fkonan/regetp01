@@ -97,16 +97,16 @@ echo $form->input('Instit.id', array('value'=>$url_conditions['Instit.id']));
 	<td><?php echo $form->input('oferta_id',array('options'=> $ofertas,'label'=>'','empty'=> array('0'=>'Todas'),'selected' => isset($url_conditions['Plan.oferta_id']) ? $url_conditions['Plan.oferta_id'] : '0'));?></td>
 	<td><?php echo $form->input('nombre', array('label'=>'','value' => isset($url_conditions['Plan.nombre']) ? $url_conditions['Plan.nombre'] : ''));?></td>
 	<td><?php echo $form->input('sector', array('label'=>'', 'value' => isset($url_conditions['Plan.sector']) ? $url_conditions['Plan.sector'] : ''));?></td>
+	<td><?php echo $form->input('ciclo_id',array('options'=> $ciclos,'label'=>'','empty'=> array('0'=>'Todos'),'selected' => isset($url_conditions['Anio.ciclo_id']) ? $url_conditions['Anio.ciclo_id'] : '0'));?></td>
 	<td><?php echo $form->button('Buscar',array('type'=>'submit'));?></td>
-	<td><?php echo '&nbsp';?></td>
 	<td><?php echo '&nbsp';?></td>
 </tr>
 <tr>
 	<th><?php echo $paginator->sort('Oferta','Oferta.abrev');?></th>
 	<th><?php echo $paginator->sort('Nombre del Título/Certificación','nombre');?></th>
 	<th><?php echo $paginator->sort('Sector','sector');?></th>
-	<th><?php echo 'Matrícula';?></th>
-	<th><?php echo 'Ciclo';?></th>
+	<th><?php echo 'Actualizado';?></th>
+	<th><?php echo 'Mat.';?></th>
 	<th class="actions"><?php echo '&nbsp';?></th>
 </tr>
 <?php
@@ -132,10 +132,10 @@ foreach ($planesRelacionados as $plan):
 			<?php echo $plan['Plan']['sector']; ?>
 		</td>
 		<td>
-			<?php echo $plan['Plan']['matriculaCalc']; ?>
+			<?php echo $plan['calculado']['max_ciclo']; ?>
 		</td>
 		<td>
-			<?php echo $plan['Plan']['cicloCalc']; ?>
+			<?php echo $plan['calculado']['sum_matricula']; ?>
 		</td>
 		<td class="actions">
 			<?php echo $html->link(__('Ver', true), array('action'=>'view', $plan['Plan']['id'])); ?>

@@ -1077,3 +1077,21 @@ div.code-coverage-results span.result-good {
 #InstitSearchForm A: focus{
 	background-color: red;
 }
+
+
+
+#box_saludo{
+	color: #333;
+	border-bottom-color: #999;
+	border-bottom-style:solid;
+	border-bottom-width: 1px;
+	border-top-color: #999;
+	border-top-style:solid;
+	border-top-width: 1px;
+	
+	font-family:fantasy;
+	font-size:8pt;
+	margin-top:-4px;
+	text-align:center;
+	
+}

@@ -667,28 +667,7 @@ class Instit extends AppModel {
 		}
 	}    	
   	
-	
-	/**
-	 * Me trae los campos de los BELONGS para poder hacer el group by de los HASMANY sin problemas
-	 * @return string
-	 */	
-   function getPagFields(){
-      $fields = "";
 
-      // primero traigo los campos de la tabla instits
-      foreach ($this->_schema as $name => $options){
-         $fields .= $this->name . "." . $name . ",";      	
-      }
-
-      // busco los belongs to y sus atributos
-      foreach ($this->belongsTo as $bName => $bOptions){
-         foreach ($this->$bName->_schema as $name => $options){
-      	    $fields .= $bName . "." . $name . ",";
-         }      
-      }
-
-      return substr($fields,0,strlen($fields)-1);	
-   }   
    
    
    /**
@@ -730,7 +709,7 @@ class Instit extends AppModel {
 		{
 			$conditions = array("localidad_id" => $this->data['Instit']['localidad_id'], 
 								"lower(direccion)  SIMILAR TO ?" => $this->convertir_para_busqueda_avanzada($this->data['Instit']['direccion']));
-			$byubucation = $this->__getSimilarsConditions($conditions);
+			$byubucation = $this->find('all',array('conditions'=> $conditions));
 			if(count($byubucation)>0)
 			{
 				$this->validationErrors += array( 'direccion' => 'Hay una institución con la misma dirección en ésta localidad');

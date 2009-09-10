@@ -109,11 +109,18 @@ class LocalidadesController extends AppController {
          	$depto_id = $this->data['Instit']['departamento_id'];
          endif;
          
+         $todos = false;
+          $this->Localidad->recursive = 0;
          if ($depto_id != 0){
-         	$localidades = $this->Localidad->find('list',array('conditions' => array('departamento_id' => $depto_id),
-         											  array('order'=>'Localidad.name ASC')));
+         	$localidades = $this->Localidad->find('all',array(	
+         							'conditions' => array('departamento_id' => $depto_id),
+         							'order'=>'Localidad.name ASC'));
+         }else{
+         	$localidades = $this->Localidad->find('all', array('order'=>'Localidad.name ASC'));
+			$todos = true;         											 
          }
 
+         $this->set('todos', $todos);
 	     $this->set('localidades', $localidades);
 	         
 	     //prevent useless warnings for Ajax

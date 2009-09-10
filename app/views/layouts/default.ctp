@@ -48,17 +48,12 @@
 		</div>
 		<div id="content">
 			<div id="menu">	
-							
-				<h1>Instituciones</h1>
-				<ul>
-					<li><?php echo $html->link(__('Buscador', true), '/instits/search_form'); ?></li>
-				</ul>			
-				
-					
-				<?  echo $this->renderElement('boxLogin'); ?>
+				<?  echo $this->renderElement('boxSaludo'); ?>
+				<?  echo $this->renderElement('boxInstituciones'); ?>		
 				<?  echo $this->renderElement('boxInformacion'); ?>
 				<?  echo $this->renderElement('boxAdmin'); ?>	
 				<?  echo $this->renderElement('boxEditores'); ?>
+				<?  echo $this->renderElement('boxLogin'); ?>
 				
 				
 				<h1><?= __('Soporte Técnico')?></h1>

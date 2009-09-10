@@ -77,7 +77,7 @@ class DepartamentosController extends AppController {
 	
 	function ajax_select_departamento_form_por_jurisdiccion(){
 		$this->layout = 'ajax';
-         Configure::write('debug',0);
+       Configure::write('debug',0);
          
          $this->Departamento->recursive = -1;  
          
@@ -87,13 +87,20 @@ class DepartamentosController extends AppController {
          		$jur_id = $jur['jurisdiccion_id'];
          	endif;
          endif;
-                
+
+         
+         $this->Departamento->recursive = 0;
+         $todos = false;
          if($jur_id != 0 ){
-        	$deptos = $this->Departamento->find('list',array('order'=>'name ASC',
+        	$deptos = $this->Departamento->find('all',array('order'=>'Departamento.name ASC',
         													'conditions' => array('jurisdiccion_id' => $jur_id),
         													));
+         }else{
+        	$deptos = $this->Departamento->find('all',array('order'=>'Departamento.name ASC'
+        													));
+         	$todos = true;
          }
-         
+         $this->set('todos', $todos);    
          $this->set('deptos', $deptos);                  	     
          
 		 //prevent useless warnings for Ajax
