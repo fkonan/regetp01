@@ -95,13 +95,20 @@ class Plan extends AppModel {
 		{
 			$this->bindModel(array('hasOne' => array('Anio' => array('className'  => 'Anio','foreignKey' => 'plan_id',),),));
 	        $field        = $this->getPagFields();
-   	        $selectFields = $field . ",max(\"Anio\".\"ciclo_id\") AS Calculado__max_ciclo";
-	        $selectFields = $selectFields . ",sum(\"Anio\".\"matricula\") AS Calculado__sum_matricula";
-			$groupFields  = $field;
+	        
+	       	$selectFields = array("max(\"Anio\".\"ciclo_id\") AS Calculado__max_ciclo");
+	       	$selectFields = array_merge($field, $selectFields); 
+
+	        //debug($selectFields);
+	        
+	        $groupFields  = $field;
 	        
 	        if ($this->maxCiclo != "" )
 	        {
-	        	$groupFields = $groupFields . " HAVING max(\"Anio\".\"ciclo_id\") = " . $this->maxCiclo;
+	        	// le concateno al ultimo detalle del group el HAVING
+	        	$groupFields = array_merge($groupFields ,array('1" HAVING max("Anio"."ciclo_id") = ' . $this->maxCiclo));
+	        	//$groupFields[count($groupFields)-1] = $groupFields[count($groupFields)-1].'HAVING max("Anio"."ciclo_id") = "' . $this->maxCiclo;
+	        	//$groupFields = array_merge($groupFields, array(" HAVING max(\"Anio\".\"ciclo_id\") = " . $this->maxCiclo));
 	        }	
 	        
 	        $extra           = array('group' => $groupFields,'fields' => $selectFields);  	                    
@@ -132,16 +139,17 @@ class Plan extends AppModel {
 			$this->bindModel(array('hasOne' => array('Anio' => array('className'  => 'Anio','foreignKey' => 'plan_id',),),));
 	        $field = $this->getPagFields();
 
-	        $selectFields = $field . ",max(\"Anio\".\"ciclo_id\") AS Calculado__max_ciclo";
-	        $selectFields = $selectFields . ",sum(\"Anio\".\"matricula\") AS Calculado__sum_matricula";
+	        $selectFields = array_merge($field , array("max(\"Anio\".\"ciclo_id\") AS Calculado__max_ciclo"));
+	     //    debug($selectFields);
 	        $groupFields  = $field;
 	        
 	        if ($this->maxCiclo != "" )
 	        {
-	        	$groupFields = $groupFields . " HAVING max(\"Anio\".\"ciclo_id\") = " . $this->maxCiclo;
+	        	//$groupFields[count($groupFields)-1] = $groupFields[count($groupFields)-1].'HAVING max("Anio"."ciclo_id") = "' . $this->maxCiclo;
+	        	$groupFields = array_merge($groupFields ,array('1" HAVING max("Anio"."ciclo_id") = ' . $this->maxCiclo));
 	        }	
 	        
-	        $extra      = array('group' => $groupFields,'fields' => explode(",",$selectFields));
+	        $extra      = array('group' => $groupFields,'fields' => $selectFields);
 			$parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
 
 			if ($recursive != $this->recursive)
@@ -175,5 +183,19 @@ class Plan extends AppModel {
 	{
 		$this->maxCiclo = $ciclo;	
 	}   
+	
+	
+	
+	function dameMatriculaDeCiclo($plan_id,$ciclo){
+		$tot = $this->Anio->find('all',array(
+			'fields'=>'sum(matricula) AS "Anio__matricula"',
+			'conditions'=> array('plan_id'=>$plan_id,'ciclo_id'=>$ciclo),
+			'limit'=> 1
+		));
+		return $tot[0]['Anio']['matricula'];
+	}
+	
+	
+	
 }
 ?>

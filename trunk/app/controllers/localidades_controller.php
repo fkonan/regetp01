@@ -94,11 +94,68 @@ class LocalidadesController extends AppController {
 	}
 	
 	
+	function ajax_select_localidades_form_por_jurisdiccion(){
+		  $this->layout = 'ajax';
+        // Configure::write('debug',0);
+         $this->Localidad->recursive = 0;
+
+         $this->Localidad->unBindModel(array('hasMany' => array('Instit')));
+
+         $this->Localidad->bindModel(array(
+		    'belongsTo' => array(
+		        'Jurisdiccion' => array(
+		            'foreignKey' => false,
+		            'conditions' => array('Jurisdiccion.id = Departamento.jurisdiccion_id')
+		        )
+		)));
+         
+         
+         
+         $localidades = array();
+         $jur_id = 0;
+         
+         if (isset($this->data['Instit']['jurisdiccion_id'])):
+         	$jur_id = $this->data['Instit']['jurisdiccion_id'];
+         endif;
+         
+         $todos = false;
+         if ($jur_id != 0){
+         	$localidades = $this->Localidad->find('all',array(	
+         							'conditions' => array('Jurisdiccion.id' => $jur_id),
+         							'order'=>'Localidad.name ASC'
+         	));
+         }else{
+         	$localidades = $this->Localidad->find('all', array('order'=>'Localidad.name ASC'));
+			$todos = true;         											 
+         }
+         
+         $this->set('todos', $todos);
+	     $this->set('localidades', $localidades);
+	         
+	     //prevent useless warnings for Ajax
+	     $this->render('ajax_select_localidades_form_por_jurisdiccion','ajax');		
+	}
+	
+	
+	
+	
 	function ajax_select_localidades_form_por_departamento(){
 		 $this->layout = 'ajax';
-         Configure::write('debug',0);
-         $this->Localidad->recursive = -1;
+        // Configure::write('debug',0);
+         $this->Localidad->recursive = 0;
 
+         $this->Localidad->unBindModel(array('hasMany' => array('Instit')));
+
+         $this->Localidad->bindModel(array(
+		    'belongsTo' => array(
+		        'Jurisdiccion' => array(
+		            'foreignKey' => false,
+		            'conditions' => array('Jurisdiccion.id = Departamento.jurisdiccion_id')
+		        )
+		)));
+         
+         
+         
          $localidades = array();
          $depto_id = 0;
          
@@ -110,16 +167,16 @@ class LocalidadesController extends AppController {
          endif;
          
          $todos = false;
-          $this->Localidad->recursive = 0;
          if ($depto_id != 0){
          	$localidades = $this->Localidad->find('all',array(	
          							'conditions' => array('departamento_id' => $depto_id),
-         							'order'=>'Localidad.name ASC'));
+         							'order'=>'Localidad.name ASC'
+         	));
          }else{
          	$localidades = $this->Localidad->find('all', array('order'=>'Localidad.name ASC'));
 			$todos = true;         											 
          }
-
+         
          $this->set('todos', $todos);
 	     $this->set('localidades', $localidades);
 	         
