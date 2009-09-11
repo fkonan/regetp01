@@ -3,8 +3,14 @@
 <option value="0">Seleccione</option>
 
 <?
-foreach($localidades as $d):		
-		$poner = $d['Localidad']['name'];
+foreach($localidades as $d):	
+		$depto = $d['Departamento']['name'];
+		if(strlen($depto)>19){
+				$depto = substr($depto,0,19);
+				$depto .= '...';
+		}
+		
+		$poner = $d['Localidad']['name']." (Depto: $depto)";
 		
 		// $todos es una variable boolean que me dice si se estan listando 
 		// TODAS las localidades o solo las de un departamento en particular

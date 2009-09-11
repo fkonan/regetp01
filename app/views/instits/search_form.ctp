@@ -49,7 +49,14 @@
 						                                   	'loading'=>'$("ajax_indicator_dpto").show();$("LocalidadId").disable()',
 						                                   	'complete'=>'$("ajax_indicator_dpto").hide();$("LocalidadId").enable(); $("localidad-select").show();',
 						                                   	'onChange'=>true
-											)); 				
+											)); 	
+						echo $ajax->observeField('jurisdiccion_id',
+				                                   array(  	'url' => '/localidades/ajax_select_localidades_form_por_jurisdiccion',
+						                                   	'update'=>'LocalidadId',
+						                                   	'loading'=>'$("ajax_indicator").show();$("LocalidadId").disable();$("LocalidadId").update();',
+						                                   	'complete'=>'$("ajax_indicator").hide();$("LocalidadId").enable(); $("localidad-selects").show();',
+						                                   	'onChange'=>true
+				                                   ));			
 						?>	
 						
 						<script type="text/javascript">

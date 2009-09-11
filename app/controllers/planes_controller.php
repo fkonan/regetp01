@@ -12,7 +12,10 @@ class PlanesController extends AppController {
 	}
 
 	
-	
+	/**
+	 * Listado de planes para una determinada institucion
+	 * @param $id ID de institucion
+	 */
 	function index($id = null){
 
 		$v_plan_matricula = array();
@@ -78,8 +81,8 @@ class PlanesController extends AppController {
 			$url_conditions['Plan.nombre'] = $this->data['Plan']['nombre'];					
         }
 		if(isset($this->passedArgs['Plan.nombre']) && $this->passedArgs['Plan.nombre'] != ""){
-			$this->paginate['conditions']['to_ascii(lower(Plan.nombre)) SIMILAR TO ?'] = array($this->Plan->convertir_para_busqueda_avanzada($this->passedArgs['Plan.nombre']));
-			$url_conditions['Plan.nombre'] = $this->passedArgs['Plan.nombre'];					
+			$this->paginate['conditions']['to_ascii(lower(Plan.nombre)) SIMILAR TO ?'] = array($this->Plan->convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['Plan.nombre'])));
+			$url_conditions['Plan.nombre'] = utf8_decode($this->passedArgs['Plan.nombre']);					
         }
         
 		if(isset($this->data['Plan']['sector']) && $this->data['Plan']['sector'] != ""){
@@ -87,8 +90,8 @@ class PlanesController extends AppController {
 			$url_conditions['Plan.sector'] = $this->data['Plan']['sector'];					
         }
         if(isset($this->passedArgs['Plan.sector']) && $this->passedArgs['Plan.sector'] != ""){
-			$this->paginate['conditions']['to_ascii(lower(Plan.sector)) SIMILAR TO ?'] = array($this->Plan->convertir_para_busqueda_avanzada($this->passedArgs['Plan.sector']));
-			$url_conditions['Plan.sector'] = $this->passedArgs['Plan.sector'];					
+			$this->paginate['conditions']['to_ascii(lower(Plan.sector)) SIMILAR TO ?'] = array($this->Plan->convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['Plan.sector'])));
+			$url_conditions['Plan.sector'] = utf8_decode($this->passedArgs['Plan.sector']);					
         }
         
         if(isset($this->data['Plan']['ciclo_id'])){
@@ -112,7 +115,11 @@ class PlanesController extends AppController {
         $this->paginate['conditions']['Instit.id'] = $id;
         $url_conditions['Instit.id'] = $id; // para que no pierda el id de instit en los ordenamientos y la paginacion
 		$data = $this->paginate();
-
+		
+		for($i=0; $i< count($data); $i++):
+			$mat = $this->Plan->dameMatriculaDeCiclo($data[$i]['Plan']['id'],$data[$i]['calculado']['max_ciclo']);
+			$data[$i]['calculado']['sum_matricula'] = $mat;
+		endfor;
 		$this->set('planesRelacionados', $data);
 		$this->set('url_conditions', $url_conditions);
 	}

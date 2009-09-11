@@ -101,23 +101,24 @@ class AppModel extends Model {
 		
 	/**
 	 * Me trae los campos de los BELONGS para poder hacer el group by de los HASMANY sin problemas
-	 * @return string
+	 * @return array
 	 */	
 	 function getPagFields(){
-      $fields = "";
+      $fields = array();
 
+      // me pone los campos del mismo modelo que llma  a getPagFields
       foreach ($this->_schema as $name => $options){
-         $fields .= $this->name . "." . $name . ",";      	
+         $fields[] = $this->name . "." . $name;      	
       }
 
       // busco los belongs to y sus atributos
       foreach ($this->belongsTo as $bName => $bOptions){
          foreach ($this->$bName->_schema as $name => $options){
-      	    $fields .= $bName . "." . $name . ",";
+      	    $fields[] = $bName . "." . $name;
          }      
       }
 
-      return substr($fields,0,strlen($fields)-1);	
+      return $fields;	
    } 
    
 	
