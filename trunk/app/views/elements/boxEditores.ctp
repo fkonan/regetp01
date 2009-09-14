@@ -6,7 +6,7 @@ if ($session->check('Auth.User')){
 			<h1>Edición</h1>
 			<ul>
 				<li><? echo $html->link("Nueva Institución","/Instits/add") ?></li>
-				<li>-----------------------------</li>
+				<li style="text-align: center;">-</li>
 				<li><? echo $html->link("Descargas","/Queries/descargar_queries") ?></li>
 				
 				
