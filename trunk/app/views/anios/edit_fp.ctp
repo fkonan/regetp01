@@ -5,7 +5,7 @@ if(isset($script)){
 }
 ?>
 <? $ganchito = $this->data['Anio']['anio'] == 1?'er':'º';?>	
-<h1 align="center"> <?= "Editar FP" ?></h1>
+<h1 align="center"> <?= "Editar FP/CL" ?></h1>
 <div class="anios form">
 <?php echo $form->create('Anio');?>
 	<fieldset>	
@@ -20,7 +20,6 @@ if(isset($script)){
 		
 		echo $form->input('hs_taller',array('label'=>'Duración en Horas'));
 		echo $form->input('matricula',array('label'=>'Matrícula'));
-		
 	?>
 	</fieldset>
 <?php echo $form->end('Guardar');?>

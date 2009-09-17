@@ -679,6 +679,36 @@ class Instit extends AppModel {
   		return (count($this->__getInstitByCUEandAnexo())==0)?true:false;
   	}
 
+  	
+  	
+  	/**
+  	 * me inserta 1 array pero se fija antes que la institucion no exista
+  	 * si existe, no me lo inserta. hace que siempre sean unicas las instits
+  	 * 
+  	 * @param array $vector1[key_index][Instit][campo]
+  	 * @param array $vector2[key_index][Instit][campo]
+  	 * @return array 
+  	 */
+  	private function __armarVectorSinInstitsRepetidas($vector1, $vector2)
+  	{
+  		$v_final = array();
+  		foreach($vector2 as $v2):
+  			$encontro = false;
+  			foreach($vector1 as $v1):  				
+  				if($v2['Instit']['id'] == $v1['Instit']['id']){
+  					$encontro = true;
+  					break;
+  				}
+  			endforeach;
+  			if(!$encontro){
+  				$v_final[] = $v2;
+  			}
+  		endforeach;
+  		
+  		$v_final = array_merge($vector1, $v_final);
+  		
+  		return $v_final;
+  	}
    
    
 	/**
@@ -689,7 +719,7 @@ class Instit extends AppModel {
 	function getSimilars($data) 
 	{
 		$similars = array();
-		$this->data = $data;	
+		$this->data = $data;
 		
 		// busco por cue y anexo
 		if( $this->data['Instit']['cue'] != "" && $this->data['Instit']['anexo'] != "")
@@ -699,7 +729,7 @@ class Instit extends AppModel {
 			{
 				$this->validationErrors += array( 'cue' => 'Hay una institución con éste CUE y Anexo');
 				$this->validationErrors += array( 'anexo' => 'Hay una institución con éste CUE y Anexo');
-				$similars += $bycueanexo;
+				$similars = $this->__armarVectorSinInstitsRepetidas($similars,$bycueanexo);
 			}
 		}
 				
@@ -715,7 +745,7 @@ class Instit extends AppModel {
 				$this->validationErrors += array( 'direccion' => 'Hay una institución con la misma dirección en ésta localidad');
 				$this->validationErrors += array( 'localidad_id' => '');
 				
-				$similars += $byubucation;
+				$similars = $this->__armarVectorSinInstitsRepetidas($similars,$byubucation);
 			}
 		}
 			
@@ -731,7 +761,7 @@ class Instit extends AppModel {
 			{
 				$this->validationErrors += array( 'nombre' => 'Hay una institución en la misma localidad con éste nombre');
 				$this->validationErrors += array( 'localidad_id' => 'Hay una institución con el mismo nombre, en ésta localidad');
-				$similars = array_merge($similars,$bynameyloc);
+				$similars = $this->__armarVectorSinInstitsRepetidas($similars,$bynameyloc);
 			}
 		}
 			
@@ -750,7 +780,7 @@ class Instit extends AppModel {
 				$this->validationErrors += array( 'nombre' => 'Hay una institución con el mismo nombre, tipo o número');
 				$this->validationErrors += array( 'nroinstit' => '');
 				$this->validationErrors += array( 'tipoinstit_id' => '');
-				$similars = array_merge($similars,$byname);
+				$similars = $this->__armarVectorSinInstitsRepetidas($similars,$byname);
 			}
 		}
 			
@@ -768,7 +798,7 @@ class Instit extends AppModel {
 				$this->validationErrors += array( 'nroinstit' => 'Hay una institución con la misma localidad, tipo o número');
 				$this->validationErrors += array( 'localidad_id' => '');
 				$this->validationErrors += array( 'tipoinstit_id' => '');
-				$similars += $byjurid;
+				$similars = $this->__armarVectorSinInstitsRepetidas($similars,$byjurid);
 			}
 		}
 					

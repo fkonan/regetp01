@@ -103,12 +103,12 @@ class DATABASE_CONFIG {
 
 
 	var $test = array(
-		'driver' => 'mysql',
+		'driver' => 'postgres',
 		'persistent' => false,
 		'host' => 'localhost',
-		'login' => 'user',
-		'password' => 'password',
-		'database' => 'test_database_name',
+		'login' => 'postgres',
+		'password' => 'r363TP',
+		'database' => 'pruebas',
 		'prefix' => '',
 	);
 }
