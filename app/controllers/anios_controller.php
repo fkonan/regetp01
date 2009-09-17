@@ -56,6 +56,9 @@ class AniosController extends AppController {
 			case 4: //SNU
 				$this->render('/anios/add_snu');
 	            break;
+	        default: // si no va con ninguno mostrar el de MT
+	        	$this->render('/anios/add');
+	            break;
         endswitch;		
 	}
 
@@ -99,6 +102,9 @@ class AniosController extends AppController {
 	            break;
 			case 4: //SNU
 				$this->render('/anios/edit_snu');
+	            break;
+	        default: // si no va con ninguno mostrar el de MT
+	        	$this->render('/anios/add');
 	            break;
         endswitch;	
 	}

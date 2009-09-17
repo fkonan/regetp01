@@ -5,7 +5,7 @@ if(isset($script)){
 ?>
 
 <? $ganchito = $this->data['Anio']['anio'] == 1?'er':'º';?>	
-<h1 align="center"> <?= "Nuevo Ciclo FP" ?></h1>
+<h1 align="center"> <?= "Nuevo Ciclo FP/CL" ?></h1>
 <div class="anios form">
 <?php echo $form->create('Anio');?>
 	<fieldset>	
