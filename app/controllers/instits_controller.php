@@ -13,6 +13,7 @@ class InstitsController extends AppController {
 	function index() {		
 		$this->Instit->recursive = 0;
 		$this->set('instits', $this->paginate());
+		//return "aaa";
 	}
 
 	function view($id = null) {
@@ -54,7 +55,9 @@ class InstitsController extends AppController {
 			if(count($similares) == 0)
 			{		
 				$this->Instit->create();
-				if ($this->Instit->save($this->data)) {
+				
+				if ($this->Instit->save($this->data)) 
+				{
 					$this->Session->setFlash(__('Se ha guardado la Institución correctamente', true));
 					$this->redirect(array('action'=>'view/'.$this->Instit->id));
 				} else {
@@ -93,8 +96,27 @@ class InstitsController extends AppController {
 			$this->redirect(array('action'=>'search_form'));
 		}
 		
+		
 		if (!empty($this->data)) {
-			if ($this->Instit->save($this->data)) {
+			
+			
+			$cueanterior = array();
+			if ($datos_viejos = $this->Instit->cambioCue($this->data)){
+				$cueanterior['HistorialCue']['cue'] 	  = $datos_viejos['Instit']['cue'];
+				$cueanterior['HistorialCue']['anexo'] 	  = $datos_viejos['Instit']['anexo'];	
+				$cueanterior['HistorialCue']['instit_id'] = $datos_viejos['Instit']['id'];		
+			}
+				
+				
+			if ($this->Instit->save($this->data)) 
+			{
+				// si hay cambio de cue lo inserto en la tabla historial_cues
+				if(count($cueanterior) > 0){
+					if($this->Instit->HistorialCue->hacerCambioDeCue($cueanterior)){
+						$this->Session->setFlash(__('No se pudo insertar el cambio de CUE al historial de CUEs en la base de datos', true));
+					}
+				}
+					
 				$this->Session->setFlash(__('Se ha guardado la Institución correctamente', true));
 				$this->redirect(array("action"=>"view/$id"));
 			} else {
@@ -154,13 +176,24 @@ class InstitsController extends AppController {
 		if (!empty($this->data)) {
 			$this->redirect('search');
 		}
-		
+		$this->Instit->Gestion->order = 'Gestion.name';
 		$gestiones = $this->Instit->Gestion->find('list');
+		
+		$this->Instit->Dependencia->order ='Dependencia.name';
 		$dependencias = $this->Instit->Dependencia->find('list');
+		
 		//$tipoinstits = $this->Instit->Tipoinstit->find('list');
+		 $this->Instit->Jurisdiccion->order = 'Jurisdiccion.name';
 		$jurisdicciones = $this->Instit->Jurisdiccion->find('list');
+		
+		// que me liste todos los detarpamentos
+		$departamentos = $this->Instit->Departamento->de_jurisdiccion(0);  
+		
+		// con CERO me trae TODAS las jurisdicciones
+		$localidades = $this->Instit->Localidad->listado_localidades_con_jurisdiccion(0); 
+		
 		$ofertas = $this->Instit->Plan->Oferta->find('list');
-		$this->set(compact('gestiones', 'dependencias', 'jurisdicciones','ofertas'));
+		$this->set(compact('gestiones', 'dependencias', 'jurisdicciones','ofertas','localidades','departamentos'));
 	}
 	
 	/**
@@ -360,7 +393,7 @@ class InstitsController extends AppController {
 			 *     DEPARTAMENTO
 			 */
 			if(isset($this->data['Departamento']['id'])){				
-				if ($this->data['Departamento']['id'] != 0){ 
+				if (($this->data['Departamento']['id'] != 0) && ($this->data['Departamento']['id'] != '')){ 
 					$this->paginate['conditions']['Departamento.id'] = array($this->data['Departamento']['id']);
 					
 					$this->Instit->Localidad->recursive = -1;
@@ -387,7 +420,7 @@ class InstitsController extends AppController {
 			 *     LOCALIDAD
 			 */
 			if(isset($this->data['Localidad']['id'])){
-				if ($this->data['Localidad']['id'] != 0){ 
+				if (($this->data['Localidad']['id'] != 0) && ($this->data['Localidad']['id'] != '')){ 
 					$this->paginate['conditions']['Localidad.id'] = array($this->data['Localidad']['id']);
 					
 					$this->Instit->Localidad->recursive = -1;

@@ -56,6 +56,18 @@ class Instit extends AppModel {
 								'exclusive' => '',
 								'finderQuery' => '',
 								'counterQuery' => ''
+			),
+			'HistorialCue' => array('className' => 'HistorialCue',
+								'foreignKey' => 'instit_id',
+								'dependent' => true,
+								'conditions' => '',
+								'fields' => '',
+								'order' => '',
+								'limit' => '',
+								'offset' => '',
+								'exclusive' => '',
+								'finderQuery' => '',
+								'counterQuery' => ''
 			)
 	);
 
@@ -375,10 +387,13 @@ class Instit extends AppModel {
 			 	$nombre = (isset($aux['Instit']['nombre']))?$aux['Instit']['nombre']:'';
 			  	$numero = (isset($aux['Instit']['nroinstit']))?$aux['Instit']['nroinstit']:'';
 			  	
-			  	$nombre_tipoinstit = $aux['Tipoinstit']['name'];
-			 	$aux['Instit']['nombre_completo'] = ($nombre_tipoinstit=='SIN DATOS')?'':$nombre_tipoinstit;
-				$aux['Instit']['nombre_completo'] .= ($numero > 0 || $numero != '')?" Nº $numero":"";
-				
+			  	$nombre_tipoinstit = 'SIN DATOS';
+			  	if(isset($aux['Tipoinstit']['name'])){
+				  	$nombre_tipoinstit = $aux['Tipoinstit']['name'];
+				 	$aux['Instit']['nombre_completo'] = ($nombre_tipoinstit=='SIN DATOS')?'':$nombre_tipoinstit;
+					$aux['Instit']['nombre_completo'] .= ($numero > 0 || $numero != '')?" Nº $numero":"";
+			  	}
+			  		
 				if (($nombre_tipoinstit != 'SIN DATOS' ||  $numero > 0)&& $nombre){
 					$aux['Instit']['nombre_completo'] .= " ";
 				}
@@ -555,8 +570,35 @@ class Instit extends AppModel {
   	}
   	
   	
+  	
+  	/**
+  	 *  
+  	 *  me dice si una institucion cambio de cue
+  	 *  si el cue fue modificado, entonces me devuelve un array con lso datos viejos
+  	 *  caso contrario me devuelve null 
+  	 * 
+  	 * @param $institData es el $this->data del formulario
+  	 * @return array son los datos de la Institucion
+  	 */
+  	function cambioCue($institData){
+  		$this->id = $institData['Instit']['id'];
+  		$instit = $this->read(array('id','cue','anexo'));
+  		
+  		if(isset($institData['Instit']['cue']) && isset($institData['Instit']['anexo']) && isset($institData['Instit']['id'])){
+  			if (($this->data['Instit']['cue']*100+$this->data['Instit']['anexo']) != ($institData['Instit']['cue']*100+$institData['Instit']['anexo'])){
+  				return $instit;
+  			}
+  			return null;
+  		}
+  		//else debug('vino vacio el cue, anexo o id de institucion y no se puede comprobar si hubo cambio de cue');
+  	}
+  	
+  	
   	function beforeSave(){
-  		//prevenir el error de NOT NULL en postgres
+  		
+  		// -----------------------------------------------------------------------------------------------------------------------------------------------------------
+  		// prevenir el error de NOT NULL en postgres
+  		//
   		if($this->data[$this->name]['anio_creacion']== ''){
   			$this->data[$this->name]['anio_creacion'] = 0;
   		}
@@ -583,7 +625,10 @@ class Instit extends AppModel {
 	  			endif;
 	  		endif;
   		endif;
+  		// -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  	
+  		
   		return true;
   	}
   	

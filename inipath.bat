@@ -1,1 +1,0 @@
-path=c:\xampp\php;c:\xampp\htdocs\regetp\cake\console

@@ -79,7 +79,6 @@ class DepartamentosController extends AppController {
 		$this->layout = 'ajax';
        Configure::write('debug',0);
          
-         $this->Departamento->recursive = -1;  
          
          $jur_id = 0;
          if ($jur = current($this->data)):
@@ -88,19 +87,12 @@ class DepartamentosController extends AppController {
          	endif;
          endif;
 
+         $deptos = $this->Departamento->de_jurisdiccion($jur_id);
          
-         $this->Departamento->recursive = 0;
-         $todos = false;
-         if($jur_id != 0 ){
-        	$deptos = $this->Departamento->find('all',array('order'=>'Departamento.name ASC',
-        													'conditions' => array('jurisdiccion_id' => $jur_id),
-        													));
-         }else{
-        	$deptos = $this->Departamento->find('all',array('order'=>'Departamento.name ASC'
-        													));
-         	$todos = true;
-         }
+         
+         $todos = ($jur_id != 0 )?false:true;         
          $this->set('todos', $todos);    
+         
          $this->set('deptos', $deptos);                  	     
          
 		 //prevent useless warnings for Ajax
