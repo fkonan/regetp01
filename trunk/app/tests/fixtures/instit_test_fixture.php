@@ -1,8 +1,8 @@
 <?php 
 class InstitTestFixture extends CakeTestFixture {
     var $name = 'InstitTest';
-    
-  
+    var $import = 'Instit'; 
+
     var $fields = array( 
           'id' => 			array	('type' => 'integer', 	'key' => 'primary', 'null' => false), 
           'gestion_id' => 	array	('type' => 'integer', 	'null' => false),

@@ -23,7 +23,7 @@
 						<?php 
 						// 		DEPARTAMENTO
 						$meter = '<span class="ajax_update" id="ajax_indicator_dpto" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
-						echo $form->input('Departamento.id', array('type'=> 'select', 'empty' => 'Seleccione','label'=>'Departamento','after'=> $meter.'<br><cite>Seleccione primero una jurisdicción</cite>'));                                   
+						echo $form->input('Departamento.id', array('type'=> 'select','options'=>$departamentos ,'empty' => 'Seleccione','label'=>'Departamento','after'=> $meter.'<br><cite>Seleccione primero una jurisdicción</cite>'));                                   
 				        echo $ajax->observeField('jurisdiccion_id',
 				                                   array(  	'url' => '/departamentos/ajax_select_departamento_form_por_jurisdiccion',
 						                                   	'update'=>'DepartamentoId',
@@ -33,16 +33,16 @@
 				                                   ));
 						?>
 					<script type="text/javascript">
-							Event.observe(window,'load',function(){
-								new Ajax.Updater('DepartamentoId', '<?php echo $html->url(array('controller'=>'departamentos','action'=>'ajax_select_departamento_form_por_jurisdiccion'));?>');
-							});
+					//		Event.observe(window,'load',function(){
+					//			new Ajax.Updater('DepartamentoId', '<?php echo $html->url(array('controller'=>'departamentos','action'=>'ajax_select_departamento_form_por_jurisdiccion'));?>');
+					//		});
 					</script>
 			</div>
 			
 			<div id="localidad-select">
 						<?php 
 						//		LOCALIDAD
-						echo $form->input('Localidad.id', array('empty' => 'Seleccione','type'=>'select','label'=>'Localidad','after'=>'<br><cite>Seleccione primero un Departamento</cite>'));                                   
+						echo $form->input('Localidad.id', array('empty' => 'Seleccione','options'=>$localidades,'type'=>'select','label'=>'Localidad','after'=>'<br><cite>Seleccione primero un Departamento</cite>'));                                   
 				        echo $ajax->observeField('DepartamentoId',
 				                                   array(  	'url' => '/localidades/ajax_select_localidades_form_por_departamento',
 						                                   	'update'=>'LocalidadId',
@@ -60,9 +60,9 @@
 						?>	
 						
 						<script type="text/javascript">
-							Event.observe(window,'load',function(){
-								new Ajax.Updater('LocalidadId', '<?php echo $html->url(array('controller'=>'localidades','action'=>'ajax_select_localidades_form_por_departamento'));?>');
-							});
+						//	Event.observe(window,'load',function(){
+						//		new Ajax.Updater('LocalidadId', '<?php echo $html->url(array('controller'=>'localidades','action'=>'ajax_select_localidades_form_por_departamento'));?>');
+						//	});
 						</script>
 			</div>
 			
@@ -150,46 +150,30 @@
 //echo $javascript->link('form_regetp_ria');?>
 <script type="text/javascript">
 <!--
-	//var formaux = new FormRia();
-	//formaux.agregarOnEnterPressParaElFormulario('InstitSearchForm');
-
-	// los tengo que activar atodos porque sino cuando el usuario
-	// hace un BACK aparecen desactivados
-	$('LocalidadId').enable();
-	$('InstitDireccion').enable();	  
-	$('InstitTipoinstitId').enable();
-	$('InstitNroinstit').enable();
-	$('InstitNombre').enable();	  		
-	$('PlanOfertaId').enable();
-	$('PlanSector').enable();
-	$('InstitGestionId').enable();
-	$('InstitDependenciaId').enable();
-	$('InstitActivo').enable();
-
 		
 	function enviar()
 	{
 	  	if($('search-ubicacion').visible() == false){
-	  		$('DepartamentoId').disable();
-	  		$('LocalidadId').disable();
-	  		$('InstitDireccion').disable();
+	  		$('DepartamentoId').value = '';
+	  		$('LocalidadId').value = '';
+	  		$('InstitDireccion').value = '';
 	  	}
 	  	
 	  	if($('search-denominacion').visible() == false){
-	  		$('InstitTipoinstitId').disable();
-	  		$('InstitNroinstit').disable();
-	  		$('InstitNombre').disable();
+	  		$('InstitTipoinstitId').value = '';
+	  		$('InstitNroinstit').value = '';
+	  		$('InstitNombre').value = '';
 	  	}
 
 	  	if($('search-planes').visible() == false){
-	  		$('PlanOfertaId').disable();
-	  		$('PlanSector').disable();
+	  		$('PlanOfertaId').value = '';
+	  		$('PlanSector').value = '';
 	  	}
 	  	
 	  	if($('search-otros').visible() == false){  		
-	  		$('InstitGestionId').disable();
-	  		$('InstitDependenciaId').disable();
-	  		$('InstitActivo').disable();
+	  		$('InstitGestionId').value = '';
+	  		$('InstitDependenciaId').value = '';
+	  		$('InstitActivo').value = '';
 	  	}
 	  	
 	  	$('InstitSearchForm').submit();

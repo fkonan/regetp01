@@ -42,6 +42,20 @@ class Departamento extends AppModel {
 								'counterQuery' => ''
 			)
 	);
+	
+	
+	function de_jurisdiccion($jurisdiccion_id){
+		$this->recursive = 0;
+         
+         if($jurisdiccion_id != 0 ){
+        	$deptos = $this->find('all',array('order'=>'Departamento.name ASC',
+        													'conditions' => array('jurisdiccion_id' => $jurisdiccion_id),
+        													));
+         }else{
+        	$deptos = $this->find('all',array('order'=>'Departamento.name ASC'
+        													));
+         }
+	}
 
 }
 ?>

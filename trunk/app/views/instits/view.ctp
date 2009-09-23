@@ -11,8 +11,28 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
 	<?php
 	// por ahora no quiero que se muestre porque viene sucio este campo
 	//echo $this->element('div_observaciones', array("observacion" => $instit['Instit']['observacion']));
+
 	?>
 	
+	<?php if(count($instit['HistorialCue'])>0):?>
+	<p class="cues-anteriores">		
+		<?php echo $html->image('cambio_cue.gif')?>
+		<span class="cues-anteriores-title">
+		<?php if(count($instit['HistorialCue']) == 1):?>
+						  CUE anterior:	
+		<?php else: echo "CUEs anteriores:";?>
+		<?php endif;?>
+		</span>
+		<span class="cues-anteriores-text">
+		<?php $primero = true;?>
+		<?php foreach($instit['HistorialCue'] as $cueant):?>
+		<?php 	echo ($primero)?"<br>":","; $primero = false;?>
+		<?php 	$fechamod = date("d/m/y",strtotime($cueant['created']));?>
+		<?php 	echo "<b>".($cueant['cue']*100+$cueant['anexo'])."</b><cite>(modificado: $fechamod)</cite>";?>
+		<?php endforeach;?>
+		</span>
+	</p>
+	<?php endif;?>	
 	
 	<h2>Datos de Institución</h2>
 		<?php if($instit_etp){
