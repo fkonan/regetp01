@@ -35,6 +35,16 @@ class PlanesController extends AppController {
 			$this->Session->setFlash(__('Institución Inválida.', true));
 			$this->redirect(array('controller'=>'Instits','action'=>'view/'.$id));
 		}
+		
+		/* *************************** */
+		/*  Si tiene ticket pendiente  */
+		/* *************************** */
+		$data_ticket = $this->Plan->Instit->Ticket->dameTicketPendiente($id);
+		$ticket_id = isset($data_ticket['Ticket']['id'])?$data_ticket['Ticket']['id']:0;
+		$this->set('ticket_id', $ticket_id);
+
+		$action = ($this->Auth->user('role')=='admin' || $this->Auth->user('role')=='editor')?'edit':'view';
+		$this->set('action', $action);
 
 		$this->institData = $this->Plan->Instit->read(null,$id);
 

@@ -13,7 +13,6 @@ class InstitsController extends AppController {
 	function index() {		
 		$this->Instit->recursive = 0;
 		$this->set('instits', $this->paginate());
-		//return "aaa";
 	}
 
 	function view($id = null) {
@@ -627,9 +626,6 @@ class InstitsController extends AppController {
         $this->set('conditions', $array_condiciones);
         
 	}
-	
-	
-	
 	
 		
 	/**

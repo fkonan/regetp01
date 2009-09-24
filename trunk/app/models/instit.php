@@ -68,6 +68,18 @@ class Instit extends AppModel {
 								'exclusive' => '',
 								'finderQuery' => '',
 								'counterQuery' => ''
+			),
+			'Ticket' => array('className' => 'Ticket',
+								'foreignKey' => 'instit_id',
+								'dependent' => false,
+								'conditions' => '',
+								'fields' => '',
+								'order' => '',
+								'limit' => '',
+								'offset' => '',
+								'exclusive' => '',
+								'finderQuery' => '',
+								'counterQuery' => ''
 			)
 	);
 
@@ -404,9 +416,7 @@ class Instit extends AppModel {
   		return $instituciones_data;
   	}
   	 	
-  	
-  	
-  	
+  
   	/**
   	 * 
   	 * @param $id de la institucion
@@ -531,7 +541,6 @@ class Instit extends AppModel {
   	}
   	
   	
-  	
   	function controlar_coincidencia_jurisdiccion_departamento(){
   		if (isset($this->data[$this->name]['departamento_id'])){
   			if ($this->data[$this->name]['departamento_id'] == '') return false;
@@ -546,6 +555,7 @@ class Instit extends AppModel {
   		}
   		return false;
   	}
+  	
   	
   	function controlar_coincidencia_departamento_localidad(){
   		if (isset($this->data[$this->name]['jurisdiccion_id'])){
@@ -602,8 +612,7 @@ class Instit extends AppModel {
   		if($this->data[$this->name]['anio_creacion']== ''){
   			$this->data[$this->name]['anio_creacion'] = 0;
   		}
-  		
-  		
+  		  		
   		$this->data[$this->name]['depto'] = ' ';
   		$this->data[$this->name]['localidad'] = ' ';
   		if (isset($this->data[$this->name]['localidad_id'])):
@@ -631,9 +640,6 @@ class Instit extends AppModel {
   		
   		return true;
   	}
-  	
-  	
-  	
   	
   	
 	function isCUEValid($cue = '') {
@@ -713,8 +719,6 @@ class Instit extends AppModel {
 	}    	
   	
 
-   
-   
    /**
     * si me encuentra algo me tira FALSO, asi evitamos duplicados
     * @return boolean
@@ -880,10 +884,6 @@ class Instit extends AppModel {
  		$this->recursive = -1;
   		return $this->find('all',array('conditions'=>$condiciones));
 	}
-
-
-	
-	
-  	
+ 	
 }
 ?>

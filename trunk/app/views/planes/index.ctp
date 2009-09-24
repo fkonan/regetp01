@@ -1,6 +1,18 @@
 <div class="related">
 
-<h1><?php __('Oferta Educativa');?> - <a class="aPend" href="<?= $html->url(array('controller'=> 'tickets', 'action'=>'add/'.$planes['Instit']['id']))?>" onClick="window.open('<?= $html->url(array('controller'=> 'tickets', 'action'=>'edit/'.$planes['Instit']['id']))?>','_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=310,height=260'); return false;">Pendiente de Actualización</a></h1>
+<?php 
+	$link = "";
+	if($ticket_id != 0)
+	{
+		$link = " - <a class=\"aPend\" href=\"";
+		$link .= $html->url(array('controller'=> 'tickets', 'action'=>$action.'/'.$ticket_id));
+		$link .= "\" onClick=\"window.open('".$html->url(array('controller'=> 'tickets', 'action'=>$action.'/'.$ticket_id));
+		$link .= "','_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=310,height=390');";
+		$link .= " return false;\">Pendiente de Actualización</a>"; 
+	}
+?>
+
+<h1><?php __('Oferta Educativa');?><? echo $link; ?></h1>
 
 <? 
 $paginator->options(array('url' => $url_conditions));
@@ -152,6 +164,18 @@ foreach ($planesRelacionados as $plan):
 <div class="actions">
 	<ul>
         <li><?php echo $html->link(__('Nueva Oferta', true), array('controller'=> 'planes', 'action'=>'add/'. $planes['Instit']['id']));?> </li>
-        <li><a href="<?= $html->url(array('controller'=> 'tickets', 'action'=>'add/'.$planes['Instit']['id']))?>" onClick="window.open('<?= $html->url(array('controller'=> 'tickets', 'action'=>'add/'.$planes['Instit']['id']))?>','_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=310,height=260'); return false;">Nuevo Pendiente</a></li>
+        <?php 
+        if($action!='view')
+        {
+        	if($ticket_id != 0)
+			{
+			?><li><a href="<?= $html->url(array('controller'=> 'tickets', 'action'=>'edit/'.$ticket_id))?>" onClick="window.open('<?= $html->url(array('controller'=> 'tickets', 'action'=>'edit/'.$ticket_id))?>','_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=310,height=390'); return false;">Editar Pendiente</a></li><?
+			}
+			else
+			{
+			?><li><a href="<?= $html->url(array('controller'=> 'tickets', 'action'=>'add/'.$planes['Instit']['id']))?>" onClick="window.open('<?= $html->url(array('controller'=> 'tickets', 'action'=>'add/'.$planes['Instit']['id']))?>','_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=310,height=260'); return false;">Nuevo Pendiente</a></li><?	
+			}
+		}
+		?>	
 	</ul>
 </div>

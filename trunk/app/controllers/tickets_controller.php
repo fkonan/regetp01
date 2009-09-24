@@ -12,11 +12,15 @@ class TicketsController extends AppController {
 	}
 
 	function view($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid Ticket.', true));
+		if (!$id && empty($this->data)) {
+			$this->Session->setFlash(__('Invalid Ticket', true));
 			$this->redirect(array('action'=>'index'));
 		}
-		$this->set('ticket', $this->Ticket->read(null, $id));
+		
+		$this->data = $this->Ticket->read(null, $id);
+
+		$user = (isset($this->data['User']))?$this->data['User']:array('nombre'=>'', 'apellido'=>'');
+		$this->set('user', $user);
 	}
 
 	function add() {
@@ -32,6 +36,11 @@ class TicketsController extends AppController {
 				$this->Session->setFlash(__('El Ticket no se guardo. Intente nuevamente.', true));
 			}
 		}
+		else
+		{
+			$this->Ticket->dameTicketPendiente($this->data['Ticket']['instit_id']);
+			//$this->redirect();
+		}
 		
 		$instit_id = (isset($this->passedArgs[0]))?$this->passedArgs[0]:0;
 		$this->set('instit_id', $instit_id);	
@@ -42,20 +51,21 @@ class TicketsController extends AppController {
 			$this->Session->setFlash(__('Invalid Ticket', true));
 			$this->redirect(array('action'=>'index'));
 		}
+		
 		if (!empty($this->data)) {
 			if ($this->Ticket->save($this->data)) {
 				$this->Session->setFlash(__('The Ticket has been saved', true));
-				$this->redirect(array('action'=>'index'));
+				$this->set('script','<script type="text/javascript">window.opener.location.reload();window.close();</script>">');
 			} else {
 				$this->Session->setFlash(__('The Ticket could not be saved. Please, try again.', true));
 			}
 		}
+		
 		if (empty($this->data)) {
 			$this->data = $this->Ticket->read(null, $id);
 		}
-		$instits = $this->Ticket->Instit->find('list');
-		$users = $this->Ticket->User->find('list');
-		$this->set(compact('instits','users'));
+		$user = (isset($this->data['User']))?$this->data['User']:array('nombre'=>'', 'apellido'=>'');
+		$this->set('user', $user);
 	}
 
 	function delete($id = null) {
