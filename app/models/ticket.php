@@ -24,5 +24,16 @@ class Ticket extends AppModel {
 			)
 	);
 
+	/**
+	 * 
+	 * @param $instit_id
+	 * @return unknown_type
+	 */
+	function dameTicketPendiente($instit_id)
+	{
+		$this->recursive = -1;
+		return  $this->find('first', array('conditions' => array('Ticket.instit_id' => $instit_id, 'Ticket.estado' => 0)));
+	}
+
 }
 ?>
