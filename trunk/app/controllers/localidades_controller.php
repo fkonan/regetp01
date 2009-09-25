@@ -103,15 +103,9 @@ class LocalidadesController extends AppController {
          	$jur_id = $this->data['Instit']['jurisdiccion_id'];
          endif;
          
-         $this->Localidad->localidades_con_jurisdiccion($jur_id);
+         $localidades = $this->Localidad->con_depto_y_jurisdiccion('all',$jur_id);
          
-         
-         if ($jur_id != 0){
-         	$todos = false;
-         }else{
-         	$todos = true;
-         }
-         $this->set('todos', $todos);
+         $this->set('todos', ($jur_id != 0)?false:true);
 	     $this->set('localidades', $localidades);
 	         
 	     //prevent useless warnings for Ajax

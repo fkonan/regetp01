@@ -87,11 +87,9 @@ class DepartamentosController extends AppController {
          	endif;
          endif;
 
-         $deptos = $this->Departamento->de_jurisdiccion($jur_id);
-         
-         
-         $todos = ($jur_id != 0 )?false:true;         
-         $this->set('todos', $todos);    
+         $deptos = $this->Departamento->con_jurisdiccion('all',$jur_id);
+              
+         $this->set('todos', ($jur_id != 0 )?false:true);    
          
          $this->set('deptos', $deptos);                  	     
          

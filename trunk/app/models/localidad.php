@@ -37,15 +37,15 @@ class Localidad extends AppModel {
 	 * y me desbindea las instituciones para hacer mucho mas performante la query
 	 * @return array [localidad, departamento, jurisdiccion]
 	 */
-	function localidades_con_jurisdiccion($jurisdiccion_id)
+	function con_depto_y_jurisdiccion($tipo = 'all', $jurisdiccion_id = 0)
 	{
-		$localidades = array(); //inicializacion de la variable del return
+		//inicializacion de la variable del return
+		$localidades = array(); 
 		
 		$this->recursive = 0;
-
-         $this->unBindModel(array('hasMany' => array('Instit')));
-
-         $this->bindModel(array(
+		// EL modelo Instit no me interesa
+        $this->unBindModel(array('hasMany' => array('Instit')));
+        $this->bindModel(array(
 		    'belongsTo' => array(
 		        'Jurisdiccion' => array(
 		            'foreignKey' => false,
@@ -62,6 +62,41 @@ class Localidad extends AppModel {
          	$localidades = $this->find('all', array('order'=>'Localidad.name ASC'));   											 
          }
          
+         
+         // si es un listado  entonces tengo que reescribirlo para que, por ejemplo
+         // en los select options aparezca como name la localidad, y el nombre del 
+         // departamento y jurisdiccion a la que pertenece
+         if($tipo == 'list')
+         {         	
+         	foreach($localidades as $d):		
+				$poner = $d['Localidad']['name'];
+			
+				// $todos es una variable boolean que me dice si se estan listando 
+				// TODAS las localidades o solo las de un departamento en particular				
+				$depto = $d['Departamento']['name'];
+				$jur = $d['Jurisdiccion']['name'];
+			
+				if(strlen($depto)>19){
+					$depto = substr($depto,0,19);
+					$depto .= '...';
+				}
+				if(strlen($jur)>19){
+					$jur = substr($jur,0,19);
+					$jur .= "...";
+				}
+				$poner .= " (Depto: $depto, Jur: $jur)";
+				
+				if(strlen($poner)>66){
+					$poner = substr($poner,0,66);
+					$poner .= "...)";
+					
+				}
+				$loc_aux[$d['Localidad']['id']]   = $poner ;
+				
+			endforeach;		
+			$localidades = $loc_aux;
+         }
+         
          return $localidades;
          
 	}
@@ -71,34 +106,7 @@ class Localidad extends AppModel {
 	{
 		$localidades = $this->localidades_con_jurisdiccion($jurisdiccion_id);
 		
-		foreach($localidades as $d):		
-			$poner = $d['Localidad']['name'];
 		
-		// $todos es una variable boolean que me dice si se estan listando 
-		// TODAS las localidades o solo las de un departamento en particular
-			
-			$depto = $d['Departamento']['name'];
-			$jur = $d['Jurisdiccion']['name'];
-		
-			if(strlen($depto)>19){
-				$depto = substr($depto,0,19);
-				$depto .= '...';
-			}
-			if(strlen($jur)>19){
-				$jur = substr($jur,0,19);
-				$jur .= "...";
-			}
-			$poner .= " (Depto: $depto, Jur: $jur)";
-			
-			if(strlen($poner)>66){
-				$poner = substr($poner,0,66);
-				$poner .= "...)";
-				
-			}
-			$loc_aux[$d['Localidad']['id']]   = $poner ;
-			
-		endforeach;
-	
 	
          return $loc_aux;
          

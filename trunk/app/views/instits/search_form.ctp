@@ -23,7 +23,7 @@
 						<?php 
 						// 		DEPARTAMENTO
 						$meter = '<span class="ajax_update" id="ajax_indicator_dpto" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
-						echo $form->input('Departamento.id', array('type'=> 'select','options'=>$departamentos ,'empty' => 'Seleccione','label'=>'Departamento','after'=> $meter.'<br><cite>Seleccione primero una jurisdicción</cite>'));                                   
+						echo $form->input('Departamento.id', array('type'=> 'select','options'=>$departamentos ,'empty' => 'Seleccione','label'=>'Departamento','after'=> $meter.'<br><cite>Seleccione una jurisdicción para filtrar los Departamentos</cite>'));                                   
 				        echo $ajax->observeField('jurisdiccion_id',
 				                                   array(  	'url' => '/departamentos/ajax_select_departamento_form_por_jurisdiccion',
 						                                   	'update'=>'DepartamentoId',
@@ -42,7 +42,7 @@
 			<div id="localidad-select">
 						<?php 
 						//		LOCALIDAD
-						echo $form->input('Localidad.id', array('empty' => 'Seleccione','options'=>$localidades,'type'=>'select','label'=>'Localidad','after'=>'<br><cite>Seleccione primero un Departamento</cite>'));                                   
+						echo $form->input('Localidad.id', array('empty' => 'Seleccione','options'=>$localidades,'type'=>'select','label'=>'Localidad','after'=>'<br><cite>Seleccione un Departamento para filtrar las Localidades.</cite>'));                                   
 				        echo $ajax->observeField('DepartamentoId',
 				                                   array(  	'url' => '/localidades/ajax_select_localidades_form_por_departamento',
 						                                   	'update'=>'LocalidadId',
