@@ -120,6 +120,7 @@ class AppController extends Controller {
 			if ($this->name == 'Tickets' && $this->action == 'add') {$llAuth = true;}
 			if ($this->name == 'Tickets' && $this->action == 'edit') {$llAuth = true;}
 			if ($this->name == 'Tickets' && $this->action == 'view') {$llAuth = true;}
+			if ($this->name == 'Tickets' && $this->action == 'provincias_pendientes') {$llAuth = true;}
 						
 			break;
 		  case 'invitado':	

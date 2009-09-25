@@ -2,7 +2,7 @@
 class TicketsController extends AppController {
 
 	var $name = 'Tickets';
-	var $helpers = array('Html', 'Form');
+	var $helpers = array('Html', 'Form', 'Ajax');
 	var $component = array('Auth');
 	var $layout = 'popup';
 
@@ -79,5 +79,33 @@ class TicketsController extends AppController {
 		}
 	}
 
+	
+	function provincias_pendientes()
+	{
+		$this->layout = 'ajax';
+		Configure::write('debug',1);
+		
+		$this->Ticket->recursive = 0;
+		$search = $this->Ticket->find('all', array(
+										'fields'=>array('Instit.jurisdiccion_id'),
+										'conditions'=>array('Ticket.estado'=>0),
+										'group'=>'Instit.jurisdiccion_id'));
+		$juris_id = array();
+		foreach($search as $key=>$value)
+		{
+			$juris_id[]=$value['Instit']['jurisdiccion_id'];
+		}
+		
+		$this->Ticket->Instit->Jurisdiccion->recursive = -1;
+		$prov_pend = $this->Ticket->Instit->Jurisdiccion->find('all', array(
+								'fields'=>array('Jurisdiccion.id', 'Jurisdiccion.name'),
+								'conditions'=>array('Jurisdiccion.id'=>$juris_id)));
+		
+		$this->set('prov_pend', $prov_pend);
+		
+		//$this->render('provincias_pendientes','ajax');
+		
+		return $prov_pend;
+	}
 }
 ?>
