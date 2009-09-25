@@ -44,18 +44,49 @@ class Departamento extends AppModel {
 	);
 	
 	
-	function de_jurisdiccion($jurisdiccion_id){
+	
+	/**
+	 * 
+	 * Esta es una funcion con una onda parecida al find de Cake
+	 * Lo que hace es devolverme los departamentos con sus jurisdicciones.
+	 * 
+	 * 
+	 * @param string $tipo 	si es 'all' me devuelve lo del find(), 
+	 * 						si es 'list' me devuelve un array con [id][Departamento.nombre + Jurisdiccion.nombre]
+	 * @param integer $jurisdiccion_id 	si es == 0 me busca TODAS las Jurisdicciones
+	 * 									si es != 0 me busca los deptos de esa jurisdiccion_id
+	 * @return array
+	 */
+	function con_jurisdiccion($tipo = 'all' , $jurisdiccion_id = 0){
 		$this->recursive = 0;
+		
+		//inicializo la variable return
+		$deptos = array();
          
+		$this->unBindModel(array('hasMany' => array('Instit')));
+		
+		$this->order = 'Departamento.name ASC';
          if($jurisdiccion_id != 0 ){
-        	$deptos = $this->find('all',array('order'=>'Departamento.name ASC',
-        													'conditions' => array('jurisdiccion_id' => $jurisdiccion_id),
-        													));
+        	$deptos = $this->find('all',array('conditions' => array('jurisdiccion_id' => $jurisdiccion_id)));
          }else{
-        	$deptos = $this->find('all',array('order'=>'Departamento.name ASC'
-        													));
+        	$deptos = $this->find('all');
          }
+         
+		// me lo prepara para el combo del select  
+         if($tipo == 'list')
+         {
+         	$d_aux = array();
+			foreach($deptos as $d): 
+				$jurisdiccion = $d['Jurisdiccion']['name'];
+				$d_aux[$d['Departamento']['id']] = $d['Departamento']['name']." (Jur: $jurisdiccion)";
+			endforeach;
+	        $deptos = $d_aux;
+         }
+         
+         // si no puse ni 'all', ni 'list', entonces que me devolverá un array vacio
+         return $deptos;
 	}
+	
 
 }
 ?>

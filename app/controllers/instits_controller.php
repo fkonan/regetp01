@@ -175,22 +175,31 @@ class InstitsController extends AppController {
 		if (!empty($this->data)) {
 			$this->redirect('search');
 		}
+		
+		$this->Instit->Gestion->recursive = -1;
 		$this->Instit->Gestion->order = 'Gestion.name';
 		$gestiones = $this->Instit->Gestion->find('list');
 		
+		$this->Instit->Dependencia->recursive = -1;
 		$this->Instit->Dependencia->order ='Dependencia.name';
 		$dependencias = $this->Instit->Dependencia->find('list');
 		
 		//$tipoinstits = $this->Instit->Tipoinstit->find('list');
+		
+		
 		 $this->Instit->Jurisdiccion->order = 'Jurisdiccion.name';
 		$jurisdicciones = $this->Instit->Jurisdiccion->find('list');
 		
 		// que me liste todos los detarpamentos
-		$departamentos = $this->Instit->Departamento->de_jurisdiccion(0);  
+		$departamentos = $this->Instit->Departamento->con_jurisdiccion('list');  
+		//$departamentos = array();
+		
 		
 		// con CERO me trae TODAS las jurisdicciones
-		$localidades = $this->Instit->Localidad->listado_localidades_con_jurisdiccion(0); 
+		$localidades = $this->Instit->Localidad->con_depto_y_jurisdiccion('list'); 
+		//$localidades = array();
 		
+		$this->Instit->Plan->Oferta->recursive = -1;
 		$ofertas = $this->Instit->Plan->Oferta->find('list');
 		$this->set(compact('gestiones', 'dependencias', 'jurisdicciones','ofertas','localidades','departamentos'));
 	}
