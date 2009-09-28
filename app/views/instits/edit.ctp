@@ -83,7 +83,7 @@
                                    
            // TIPO DE INSTITUCION                  
 		//echo $form->input('tipoinstit_id', array('empty' => 'Todas','disabled'=>true,'type'=>'select','label'=>'Tipo De Institución','after'=> '<br /><cite>Para activar este campo, seleccione primero una jurisdicción</cite>'));
-		echo $form->input('tipoinstit_id', array('empty' => 'Seleccione','type'=>'select','label'=>'Tipo de Institución','after'=> '<br /><cite>Seleccione primero una jurisdicción, asi selecciona los tipos de institución posibles</cite>'));
+		echo $form->input('tipoinstit_id', array('empty' => 'Seleccione','type'=>'select','label'=>'Tipo de Establecimiento','after'=> '<br /><cite>Seleccione primero una jurisdicción, asi selecciona los tipos de institución posibles</cite>'));
 		echo $ajax->observeField('jurisdiccion_id',
                                    array(  	'url' => '/tipoinstits/ajax_select_form_por_jurisdiccion',
 		                                   	'update'=>'InstitTipoinstitId',
@@ -142,6 +142,10 @@
 														 	'class'=>'input_label'),
 											'class' => 'input_text_peque'
 		));	
+		echo $form->input('telefono_alternativo',array('label'=>array(	'text'=>'Teléfono Alternativo',
+														 	'class'=>'input_label'),
+											'class' => 'input_text_peque'
+		));	
 
 		/**
 		 *    WEB Y MAIL
@@ -149,7 +153,12 @@
 		echo $form->input('mail',array('label'=>array('text'=> 'E-Mail',
 													  'class'=>'input_label'),
 									   'class' => 'input_text_peque'
-		));	
+		));
+		echo $form->input('mail_alternativo',array('label'=>array('text'=> 'E-Mail Alternativo',
+													  'class'=>'input_label'),
+									   'class' => 'input_text_peque'
+		));
+			
 		echo $form->input('web',array('label'=>array('class'=>'input_label'),
 									  'class' => 'input_text_peque'));
 		
@@ -178,7 +187,15 @@
 																'class'=>'input_label'),
 											 	'class'=>'input_text_peque'
 		));
+		echo $form->input('dir_telefono_alternativo',array(	'label'=>array(	'text'=> 'Teléfono Alternativo',
+																'class'=>'input_label'),
+											 	'class'=>'input_text_peque'
+		));
 		echo $form->input('dir_mail',array('label'=>array(	'text'=> 'E-Mail',
+															'class'=>'input_label'),
+											 'class'=>'input_text_peque'
+		));
+		echo $form->input('dir_mail_alternativo',array('label'=>array(	'text'=> 'E-Mail Alternativo',
 															'class'=>'input_label'),
 											 'class'=>'input_text_peque'
 		));

@@ -273,8 +273,18 @@ class Instit extends AppModel {
 				'rule' => VALID_NOT_EMPTY,
 				'required' => true,
 				'allowEmpty' => false,
-				'message' => 'Seleccione un Tipo de Institución.'
+				//'message' => 'Seleccione un Tipo de Institución.'
+				'message' => 'Seleccione un Tipo de Establecimiento.'
 			),
+		),
+		
+		'gestion_id' => array(
+			'notEmpty' => array(
+				'rule' => VALID_NOT_EMPTY,
+				'required' => true,
+				'allowEmpty' => false,
+				'message' => 'Seleccione un Ámbito de Gestión.'
+			)
 		)
 	);
 	

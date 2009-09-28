@@ -75,7 +75,7 @@
 		<h2><a href="#VerDenominacion" onclick="$('search-denominacion').toggle()">por su nombre</a></h2>
 		<div id="search-denominacion"  class="search-div" style="display: none">
 			<?php 
-			echo $form->input('tipoinstit_id', array('empty' => 'Todas','disabled'=>true,'type'=>'select','label'=>'Tipo de Institución','after'=> '<br /><cite>Para activar este campo, seleccione primero una jurisdicción</cite>'));		
+			echo $form->input('tipoinstit_id', array('empty' => 'Todas','disabled'=>true,'type'=>'select','label'=>'Tipo de Establecimiento','after'=> '<br /><cite>Para activar este campo, seleccione primero una jurisdicción</cite>'));		
 				echo $ajax->observeField('jurisdiccion_id',
 		                                   array(  	'url' => '/tipoinstits/ajax_select_form_por_jurisdiccion',
 		                                           	'update'=>'InstitTipoinstitId',
@@ -86,7 +86,7 @@
 		                                   
 			echo $form->input('nroinstit', array('label'=>'N° de Institución')); 
 			
-			echo $form->input('nombre', array('label'=>'Nombre de Institución','after'=> '<cite>Ej: "Sarmiento" o "Gral. Belgrano". No confundir el nombre con el tipo de institución</cite>'));
+			echo $form->input('nombre', array('label'=>'Nombre de Institución','after'=> '<cite>Ej: "Sarmiento" o "Gral. Belgrano". No confundir el nombre con el tipo de establecimiento</cite>'));
 			
 			echo $form->button('Buscar',array('onclick'=>'enviar()'));
 			?>
