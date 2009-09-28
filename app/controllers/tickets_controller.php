@@ -4,14 +4,56 @@ class TicketsController extends AppController {
 	var $name = 'Tickets';
 	var $helpers = array('Html', 'Form', 'Ajax');
 	var $component = array('Auth');
-	var $layout = 'popup';
+	//var $layout = 'popup';
 
-	function index() {
-		$this->Ticket->recursive = 0;
-		$this->set('tickets', $this->paginate());
+	function index($jurisdiccion_id = null){
+
+		//$this->passedArgs['sort'] = 'user.nombre, user.apellido';
+		if(isset($this->passedArgs['Instit.jurisdiccion_id'])){
+			$jurisdiccion_id = $this->passedArgs['Instit.jurisdiccion_id'];
+        }
+		
+		if (!$jurisdiccion_id){
+			$this->Session->setFlash(__('Jurisdicción Inválida.', true));
+			$this->redirect(array('controller'=>'pages','action'=>'home'));
+		}
+
+		if (isset($this->passedArgs['sort']) && ($this->passedArgs['sort'] == 'user.nombre')){
+			$aux = $this->passedArgs['sort'];
+			unset($this->passedArgs['sort']);
+			$this->passedArgs['order'] = array('User.apellido' => $this->passedArgs['direction'],'User.nombre' => $this->passedArgs['direction']);
+		}
+		
+		$this->Ticket->Instit->Jurisdiccion->recursive = -1;
+		$jurisdiccion = $this->Ticket->Instit->Jurisdiccion->findById($jurisdiccion_id);
+		$this->paginate['conditions']['Instit.jurisdiccion_id'] = $jurisdiccion_id;
+		$this->paginate['conditions']['Ticket.estado'] = '0';
+		$url_conditions['Instit.jurisdiccion_id'] = $jurisdiccion_id; // para que no pierda el id de jurisdiccion en los ordenamientos y la paginacion
+
+		$this->set('jurisdiccion_name', $jurisdiccion['Jurisdiccion']['name']);
+		$this->set('url_conditions', $url_conditions);
+
+		$data = $this->paginate();
+
+		if (isset($this->passedArgs['sort']) && ($this->passedArgs['sort'] == 'user.nombre')){
+			$this->passedArgs['sort'] = $aux;
+		}			
+
+		/* ************************************************************ */
+		/* * Llamo el find de instit para que arme el nombre completo * */
+		/* ************************************************************ */
+
+		$totInstit = count($data);
+		for ($i=0;$i<$totInstit;$i++){
+			$nombre_completo = $this->Ticket->Instit->find(array('Instit.id'=>$data[$i]['Ticket']['instit_id']));
+			$data[$i]['Instit']['nombre_completo'] = $nombre_completo['Instit']['nombre_completo'];
+		}
+		
+		$this->set('tickets', $data);
 	}
 
 	function view($id = null) {
+		$this->layout = 'popup';
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid Ticket', true));
 			$this->redirect(array('action'=>'index'));
@@ -24,6 +66,8 @@ class TicketsController extends AppController {
 	}
 
 	function add() {
+		$this->layout = 'popup';
+		
 		if (!empty($this->data))
 		{
 			$this->Ticket->create();
@@ -47,6 +91,7 @@ class TicketsController extends AppController {
 	}
 
 	function edit($id = null) {
+		$this->layout = 'popup';
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid Ticket', true));
 			$this->redirect(array('action'=>'index'));

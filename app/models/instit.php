@@ -894,6 +894,5 @@ class Instit extends AppModel {
  		$this->recursive = -1;
   		return $this->find('all',array('conditions'=>$condiciones));
 	}
- 	
 }
 ?>
