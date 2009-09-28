@@ -117,6 +117,7 @@ class AppController extends Controller {
 			if ($this->name == 'Depuradores') {$llAuth = true;}
 			if ($this->name == 'Sectores') {$llAuth = true;}
 			
+			if ($this->name == 'Tickets' && $this->action == 'index') {$llAuth = true;}
 			if ($this->name == 'Tickets' && $this->action == 'add') {$llAuth = true;}
 			if ($this->name == 'Tickets' && $this->action == 'edit') {$llAuth = true;}
 			if ($this->name == 'Tickets' && $this->action == 'view') {$llAuth = true;}

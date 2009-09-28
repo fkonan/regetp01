@@ -51,13 +51,17 @@
 		<th><?php __('Localidad'); ?></th>
 		<th><?php __('Cp'); ?></th>
 		<th><?php __('Telefono'); ?></th>
+		<th><?php __('Telefono Alternativo'); ?></th>
 		<th><?php __('Mail'); ?></th>
+		<th><?php __('Mail Alternativo'); ?></th>
 		<th><?php __('Web'); ?></th>
 		<th><?php __('Dir Nombre'); ?></th>
 		<th><?php __('Dir Tipodoc Id'); ?></th>
 		<th><?php __('Dir Nrodoc'); ?></th>
 		<th><?php __('Dir Telefono'); ?></th>
+		<th><?php __('Dir Telefono Alternativo'); ?></th>
 		<th><?php __('Dir Mail'); ?></th>
+		<th><?php __('Dir Mail Alternativo'); ?></th>
 		<th><?php __('Vice Nombre'); ?></th>
 		<th><?php __('Vice Tipodoc Id'); ?></th>
 		<th><?php __('Vice Nrodoc'); ?></th>
@@ -96,13 +100,17 @@
 			<td><?php echo $instit['localidad'];?></td>
 			<td><?php echo $instit['cp'];?></td>
 			<td><?php echo $instit['telefono'];?></td>
+			<td><?php echo $instit['telefono_alternativo'];?></td>
 			<td><?php echo $instit['mail'];?></td>
+			<td><?php echo $instit['mail_alternativo'];?></td>
 			<td><?php echo $instit['web'];?></td>
 			<td><?php echo $instit['dir_nombre'];?></td>
 			<td><?php echo $instit['dir_tipodoc_id'];?></td>
 			<td><?php echo $instit['dir_nrodoc'];?></td>
 			<td><?php echo $instit['dir_telefono'];?></td>
+			<td><?php echo $instit['dir_telefono_alternativo'];?></td>
 			<td><?php echo $instit['dir_mail'];?></td>
+			<td><?php echo $instit['dir_mail_alternativo'];?></td>
 			<td><?php echo $instit['vice_nombre'];?></td>
 			<td><?php echo $instit['vice_tipodoc_id'];?></td>
 			<td><?php echo $instit['vice_nrodoc'];?></td>

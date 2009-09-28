@@ -42,7 +42,7 @@
 		//echo $form->input('tipoinstit_id', array('empty' => 'Todas','disabled'=>true,'type'=>'select','label'=>'Tipo De Institución','after'=> '<br /><cite>Para activar este campo, seleccione primero una jurisdicción</cite>'));
 		echo $form->input('tipoinstit_id', array('empty' => array(0=>'SIN DATOS'),
 												 'type'=>'select',
-												 'label'=>'Tipo de Institución',
+												 'label'=>'Tipo de Establecimiento',
 												 'default'=>$this->data['Instit']['tipoinstit_id']
 												 ));
 		echo $ajax->observeField('jurisdiccion_id',

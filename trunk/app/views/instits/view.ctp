@@ -103,9 +103,19 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
 			<?php echo $instit['Instit']['telefono']; ?>
 			&nbsp;
 		</dd>
+		<dt><?php __('Teléfono Alternativo'); ?></dt>
+		<dd>
+			<?php echo $instit['Instit']['telefono_alternativo']; ?>
+			&nbsp;
+		</dd>
 		<dt><?php __('E-Mail'); ?></dt>
 		<dd>
 			<?php echo $instit['Instit']['mail']; ?>
+			&nbsp;
+		</dd>
+		<dt><?php __('E-Mail Alternativo'); ?></dt>
+		<dd>
+			<?php echo $instit['Instit']['mail_alternativo']; ?>
 			&nbsp;
 		</dd>
 		<dt><?php __('Web'); ?></dt>
@@ -145,9 +155,19 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
 			<?php echo $instit['Instit']['dir_telefono']; ?>
 			&nbsp;
 		</dd>
+		<dt><?php __('Teléfono Alternativo'); ?></dt>
+		<dd>
+			<?php echo $instit['Instit']['dir_telefono_alternativo']; ?>
+			&nbsp;
+		</dd>
 		<dt><?php __('E-Mail'); ?></dt>
 		<dd>
 			<?php echo $instit['Instit']['dir_mail']; ?>
+			&nbsp;
+		</dd>
+		<dt><?php __('E-Mail Alternativo'); ?></dt>
+		<dd>
+			<?php echo $instit['Instit']['dir_mail_alternativo']; ?>
 			&nbsp;
 		</dd>
 	</dl>

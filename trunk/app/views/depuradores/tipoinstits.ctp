@@ -20,7 +20,7 @@
 		echo '<span class="ajax_update" id="ajax_indicator_dpto" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
 		echo $form->input('tipoinstit_id', array('empty' => array(0=>'SIN DATOS'),
 												 'type'=>'select',
-												 'label'=>'Tipo de Institución'
+												 'label'=>'Tipo de Establecimiento'
 												 ));
 												 ///localidades/ajax_select_localidades_form_por_departamento
 		echo $form->button('actualizar Tipos de instituciones',array('id'=>'boton-actualizar',
