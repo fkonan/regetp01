@@ -34,6 +34,27 @@ class Ticket extends AppModel {
 		$this->recursive = -1;
 		return  $this->find('first', array('conditions' => array('Ticket.instit_id' => $instit_id, 'Ticket.estado' => 0)));
 	}
+	
+	function dameProvinciasConPendientes()
+	{
+		$this->recursive = 0;
+		$search = $this->find('all', array(
+										'fields'=>array('Instit.jurisdiccion_id'),
+										'conditions'=>array('Ticket.estado'=>0),
+										'group'=>'Instit.jurisdiccion_id'));
+		$juris_id = array();
+		foreach($search as $key=>$value)
+		{
+			$juris_id[]=$value['Instit']['jurisdiccion_id'];
+		}
+		
+		$this->Instit->Jurisdiccion->recursive = -1;
+		$prov_pend = $this->Instit->Jurisdiccion->find('all', array(
+								'fields'=>array('Jurisdiccion.id', 'Jurisdiccion.name'),
+								'conditions'=>array('Jurisdiccion.id'=>$juris_id)));
+		
+		return $prov_pend;	
+	}
 
 }
 ?>

@@ -656,8 +656,8 @@ class Instit extends AppModel {
 		if($cue=='') return 0;
 		
 		//este valida que no se hayan ingresado letras, ni puntos ni nada raro
-		if(!preg_match('/^[0-9]{6,7}$/', $cue)) return -1;
-		
+		if(!preg_match('/^[0-9]{3,9}$/', $cue)) return -1;
+		/*
 		$long=strlen($cue);
 		if($long<6) {
 			return 1;
@@ -668,6 +668,11 @@ class Instit extends AppModel {
 		} else if($long==7) {
 			if(!preg_match('/^(2|6|02|06|10|14|18|22|26|30|34|38|42|46|50|54|58|62|66|70|74|78|82|86|90|94)[0-9]{5}$/', $cue)) return 2;
 		}
+		*/
+		$long=strlen($cue);
+		if($long<3) {
+			return -2;
+		} 
 		
 		return 1;
 	}
