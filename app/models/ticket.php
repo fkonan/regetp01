@@ -5,7 +5,15 @@ class Ticket extends AppModel {
 	var $validate = array(
 		'instit_id' => array('numeric'),
 		'user_id' => array('numeric'),
-		'estado' => array('numeric')
+		'estado' => array('numeric'),
+		'observacion' => array(
+				'notEmpty'=> array(
+				'rule' => VALID_NOT_EMPTY,
+				'required' => true,
+				'allowEmpty' => false,
+				//'on' => 'create', // or: 'update'
+				'message' => 'Debe ingresar una Observación.')	
+			)
 	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed

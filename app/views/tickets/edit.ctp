@@ -12,7 +12,7 @@ if(isset($script)){
 		echo $form->input('id');
 		echo $form->input('user_name', array('readonly'=>true, 'type'=>'text','label'=>'Usuario responsable', 'value'=>$user['nombre']." ".$user['apellido']));
 		echo $form->input('modified', array('readonly'=>true, 'type'=>'text','label'=>'Última modificación'));				
-		echo $form->input('observacion');
+		echo $form->input('observacion', array('label'=>'Observación'));
 		
 		echo $form->input('estado',array('type'=> 'checkbox','checked'=>false,'label'=>'Resuelto.'));
 	?>
