@@ -4,7 +4,7 @@
 	<div>
 		<?= $form->create('Instit',array('action' => 'search','name'=>'InstitSearchForm'));?> 
 				
-		<?= $form->input('cue', array('label'=> 'CUE', 'minlength'=>3, 'maxlength'=>9 ,'after'=> '<cite>Ej: 600118 o 5000216. No introducir número de anexo</cite>')); ?>
+		<?= $form->input('cue', array('label'=> 'CUE', 'maxlength'=>9 ,'after'=> '<cite>Ej: 600118 o 5000216. No introducir número de anexo</cite>')); ?>
 				
 		
 		<?php 
