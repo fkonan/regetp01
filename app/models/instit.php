@@ -211,6 +211,15 @@ class Instit extends AppModel {
 				'message' => 'La dirección de e-mail no es válida.'
 			)
 		),
+		'mail_alternativo' => array(
+			'email' => array(
+				'rule' => VALID_EMAIL,
+				'required' => false,
+				'allowEmpty' => true,
+				//'on' => 'create', // or: 'update'
+				'message' => 'La dirección de e-mail no es válida.'
+			)
+		),
    		'dir_nrodoc' => array(
    			'number' => array(
 				'rule' => VALID_NUMBER,
@@ -220,6 +229,15 @@ class Instit extends AppModel {
 			),
 		),
 		'dir_mail' => array(
+			'email' => array(
+				'rule' => VALID_EMAIL,
+				'required' => false,
+				'allowEmpty' => true,
+				//'on' => 'create', // or: 'update'
+				'message' => 'La dirección de e-mail no es válida.'
+			)
+		),
+		'dir_mail_alternativo' => array(
 			'email' => array(
 				'rule' => VALID_EMAIL,
 				'required' => false,
@@ -657,18 +675,7 @@ class Instit extends AppModel {
 		
 		//este valida que no se hayan ingresado letras, ni puntos ni nada raro
 		if(!preg_match('/^[0-9]{3,9}$/', $cue)) return -1;
-		/*
-		$long=strlen($cue);
-		if($long<6) {
-			return 1;
-		
-		} else if($long==6) {
-			if($cue[0]!='2' && $cue[0]!='6') return -2;
-	
-		} else if($long==7) {
-			if(!preg_match('/^(2|6|02|06|10|14|18|22|26|30|34|38|42|46|50|54|58|62|66|70|74|78|82|86|90|94)[0-9]{5}$/', $cue)) return 2;
-		}
-		*/
+
 		$long=strlen($cue);
 		if($long<3) {
 			return -2;
