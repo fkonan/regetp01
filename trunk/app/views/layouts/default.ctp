@@ -52,7 +52,6 @@
 				<?  echo $this->renderElement('boxInstituciones'); ?>		
 				<?  echo $this->renderElement('boxInformacion'); ?>
 				<?  echo $this->renderElement('boxAdmin'); ?>	
-				<?  echo $this->renderElement('boxEditores'); ?>
 				<?  echo $this->renderElement('boxLogin'); ?>
 				
 				
