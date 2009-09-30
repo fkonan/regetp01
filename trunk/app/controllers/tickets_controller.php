@@ -127,9 +127,7 @@ class TicketsController extends AppController {
 	
 	function provincias_pendientes()
 	{
-		$prov_pend = $this->Ticket->dameProvinciasConPendientes();
-		$this->set('prov_pend', $prov_pend);
-		
+		$prov_pend = $this->Ticket->dameProvinciasConPendientes();		
 		return $prov_pend;
 	}
 }
