@@ -60,8 +60,8 @@ class Ticket extends AppModel {
 			$juris_id = "";
 		
 		$this->Instit->Jurisdiccion->recursive = -1;
-		$prov_pend = $this->Instit->Jurisdiccion->find('all', array(
-								'fields'=>array('Jurisdiccion.id', 'Jurisdiccion.name'),
+		$prov_pend = array();
+		$prov_pend = $this->Instit->Jurisdiccion->find('list', array(
 								'conditions'=>array('Jurisdiccion.id'=>$juris_id)));
 		
 		return $prov_pend;	
