@@ -28,7 +28,7 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
 		<?php foreach($instit['HistorialCue'] as $cueant):?>
 		<?php 	echo ($primero)?"<br>":","; $primero = false;?>
 		<?php 	$fechamod = date("d/m/y",strtotime($cueant['created']));?>
-		<?php 	echo "<b>".($cueant['cue']*100+$cueant['anexo'])."</b><cite>(modificado: $fechamod)</cite>";?>
+		<?php 	echo "<b>".($cueant['cue']*100+$cueant['anexo'])."</b><cite>(válido hasta: $fechamod)</cite>";?>
 		<?php endforeach;?>
 		</span>
 	</p>
@@ -230,7 +230,7 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
 <div class="actions">
 	<ul>
 		<li><?php echo $html->link(__('Editar Institución', true), array('action'=>'edit', $instit['Instit']['id'])); ?> </li>
-		<li><?php echo $html->link(__('Eliminar Institución', true), array('action'=>'delete', $instit['Instit']['id']), null, sprintf(__('¿Seguro que desea eliminar la institución? CUE: "%s"', true), $instit['Instit']['cue']. "0".$instit['Instit']['anexo'])); ?></li>
+		<li><?php //echo $html->link(__('Eliminar Institución', true), array('action'=>'delete', $instit['Instit']['id']), null, sprintf(__('¿Seguro que desea eliminar la institución? CUE: "%s"', true), $instit['Instit']['cue']. "0".$instit['Instit']['anexo'])); ?></li>
 		
 	</ul>
 </div>
