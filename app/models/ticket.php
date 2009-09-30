@@ -56,6 +56,9 @@ class Ticket extends AppModel {
 			$juris_id[]=$value['Instit']['jurisdiccion_id'];
 		}
 		
+		if(count($juris_id) < 1)
+			$juris_id = "";
+		
 		$this->Instit->Jurisdiccion->recursive = -1;
 		$prov_pend = $this->Instit->Jurisdiccion->find('all', array(
 								'fields'=>array('Jurisdiccion.id', 'Jurisdiccion.name'),

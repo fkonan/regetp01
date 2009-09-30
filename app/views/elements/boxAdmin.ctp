@@ -53,7 +53,15 @@ if ($session->check('Auth.User')){
 								<? echo $html->link($prov['Jurisdiccion']['name'],"/tickets/index/".$prov['Jurisdiccion']['id']) ?>
 							  </li>
 							<?php
-						}				
+						}
+
+						if(count($prov_pend) < 1)
+						{		
+							?><li>
+								<? echo $html->link("No hay pendientes","/pages/home/") ?>
+							  </li>
+							<?php
+						}
 					?>
 				</div>
 				
