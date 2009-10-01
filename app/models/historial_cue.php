@@ -19,11 +19,17 @@ class HistorialCue extends AppModel {
 		)
 	);
 	
-	
 	function hacerCambioDeCue($datosCueAnterior){
 		$this->create();
 		return $this->save($datosCueAnterior);
 	}
 
+	function _setBelongsToInstitType($type){
+		$this->belongsTo['Instit']['type'] = $type;
+	}	
+	
+	function setBelongsToInstitTypeFull(){
+		$this->_setBelongsToInstitType("FULL");
+	}	
 }
 ?>
