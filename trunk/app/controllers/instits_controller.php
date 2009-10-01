@@ -278,7 +278,7 @@ class InstitsController extends AppController {
 					$arr_cond2 = array();
             	 	
 					$cond_text = "";
-               	 	$long=strlen($this->data['Instit']['cue']);
+               	 	$long=strlen($this->passedArgs['cue']);
             	 	if($long == 8 || $long == 9)
             	 	{
             	 		$arr_cond2 = array('CAST(Instit.cue as character(60)) SIMILAR TO ?' => '%'.substr($this->passedArgs['cue'],0,$long-2).'%');
