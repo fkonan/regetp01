@@ -247,11 +247,27 @@ class InstitsController extends AppController {
 			 *     CUE
 			 */
             if(isset($this->data['Instit']['cue'])){
-            	 if($this->data['Instit']['cue'] != '' || $this->data['Instit']['cue'] != 0 ){
-            	 	if($this->Instit->isCUEValid($this->data['Instit']['cue'])<0){
+            	 if($this->data['Instit']['cue'] != '' || $this->data['Instit']['cue'] != 0 )
+            	 {
+            	 	$is_cue_valido = $this->Instit->isCUEValid($this->data['Instit']['cue']);
+            	 	if($is_cue_valido < 1){
+            	 		switch ($is_cue_valido){
+            	 			case -1:
+            	 				$mensaje = "El CUE: '".$this->data['Instit']['cue']."' no es válido.<br> Ingrese un valor numérico de al menos 3 dígitos.";break;
+            	 			case -6:
+            	 				$mensaje = "El CUE: '".$this->data['Instit']['cue']."' no es válido.<br>¿Usted está buscando un establecimiento de Buenos Aires o la Ciudad Autónoma de Bs. As.?<br> probablemente haya escrito mal el primer dígito";break;
+            	 			case -7:
+            	 				$mensaje = "El CUE: '".$this->data['Instit']['cue']."' no es válido.<br>¿Usted ha ingresado correctamente los primeros 2 dígitos del CUE?<br> No hay ninguna provincia que comience con ese número";break;
+            	 			case -8:
+            	 				$mensaje = "El CUE: '".$this->data['Instit']['cue']."' no es válido.<br>¿Está buscando un establecimiento por su CUE y Anexo?<br> El primer dígito no coincide con el de la provincia Bs. As. ni Ciudad Autónoma de Bs. As.";break;
+            	 			case -9:
+            	 				$mensaje = "El CUE: '".$this->data['Instit']['cue']."' no es válido.<br>¿Está buscando un establecimiento por su CUE y Anexo?<br> Los 2 primeros dígitos no corresponden a ninguna provincia ";break;
+            	 				
+            	 		}
             	 		//$this->Session->setFlash("El CUE: '".$this->data['Instit']['cue']."' no es válido. <cite style='font-size: 12px'>Recuerde no ingresar el N° de Anexo</cite>");
-            	 		$this->Session->setFlash("El CUE: '".$this->data['Instit']['cue']."' no es válido.");
+            	 		$this->Session->setFlash($mensaje);
             	 		$this->redirect('search_form');
+            	 		
             	 	}
                     // set the conditions
             	 	$arr_cond1 = array('CAST(Instit.cue as character(60)) SIMILAR TO ?' => '%'.$this->data['Instit']['cue'].'%');
