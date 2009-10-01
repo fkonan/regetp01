@@ -663,23 +663,48 @@ class Instit extends AppModel {
 	  		endif;
   		endif;
   		// -----------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  	
-  		
+	
   		return true;
   	}
   	
   	
+  	/**
+  	 * Verifica si el CUE ingresado es válido 
+  	 * por ahora es utilizado para poder realizar búsqedas
+  	 * @param string $cue
+  	 * @return 	0 si vino vacio el cue
+  	 * 			-1 si no es digito o vinieron < de 3 digitos
+  	 * 			-6 si tiene 6 digitos pero no es de ciudad ni buenos aires
+  	 * 			-7 si tienen 7 digitos pero no son de
+  	 */
 	function isCUEValid($cue = '') {
 		if($cue=='') return 0;
 		
 		//este valida que no se hayan ingresado letras, ni puntos ni nada raro
 		if(!preg_match('/^[0-9]{3,9}$/', $cue)) return -1;
-
-		$long=strlen($cue);
-		if($long<3) {
-			return -2;
-		} 
+		
+		
+		switch(strlen($cue)){
+			case 6:
+				// si son de buenos aires o ciudad
+				if(!preg_match('/^(2|6|02|06)[0-9]*$/', $cue)) return -6;
+				break;
+			case 7:
+				// para el resto de las provincias
+				if(!preg_match('/^(02|06|0|14|18|22|26|30|34|38|42|46|50|54|58|62|66|70|74|78|82|86|90|94)[0-9]*$/', $cue)) return -7;
+				break;	
+			case 8:
+				// si son de buenos aires o ciudad con anexo
+				if(!preg_match('/^(2|6)[0-9]*$/', $cue)) return -8;
+				break;		
+			case 9:
+				// para el resto de las provincias con anexo
+				if(!preg_match('/^(02|06|10|14|18|22|26|30|34|38|42|46|50|54|58|62|66|70|74|78|82|86|90|94)[0-9]*$/', $cue)) return -9;
+				break;
+			default: 
+				return 2;
+				break;
+		}
 		
 		return 1;
 	}

@@ -58,5 +58,33 @@ class InstitTest extends CakeTestCase {
 		
 		$this->assertEqual(count($similares),0,'estas instituciones son distintas'); 
 	}
+	
+	
+	function testIsCUEValid(){
+		// casos que deberian dar 1, porque todo paso bien
+		$this->assertEqual($this->Instit->isCUEValid("601254"),1);
+		$this->assertEqual($this->Instit->isCUEValid("201254"),1);
+		$this->assertEqual($this->Instit->isCUEValid("0601254"),1);
+		$this->assertEqual($this->Instit->isCUEValid("0201254"),1);
+		$this->assertEqual($this->Instit->isCUEValid("2601254"),1);
+		$this->assertEqual($this->Instit->isCUEValid("9401254"),1);
+		
+		// Estos son casos que fallan
+		$this->assertEqual($this->Instit->isCUEValid("2ss54"),-1);		
+		$this->assertEqual($this->Instit->isCUEValid("j.kjas"),-1);
+		
+
+		$this->assertEqual($this->Instit->isCUEValid("501254"),-6);
+		$this->assertEqual($this->Instit->isCUEValid("9810125"),-7);
+		$this->assertEqual($this->Instit->isCUEValid("05101255"),-8);
+		$this->assertEqual($this->Instit->isCUEValid("051012555"),-9);
+		
+		// este es un numero intermedio entre 3 y 6 digitos
+		$this->assertEqual($this->Instit->isCUEValid("6542"),2);
+		
+		//este es un numero menor a 3 digitos
+		$this->assertEqual($this->Instit->isCUEValid("54"),-1);
+
+	}
 }
 ?>
