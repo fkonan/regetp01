@@ -1122,3 +1122,26 @@ CITE.cues-anteriores-text{
 .cues-anteriores-title{
 color: green;
 }
+
+
+
+
+
+/*****************************************
+		FLASH MESSAGES
+		**********************************/
+.flash-warning{
+	color: #993300;
+	padding-left: 60px;
+	background-image: url("images/warning.jpg");
+	background-repeat: no-repeat;
+	background-position:5px 50%;
+}
+.flash-warning H1{
+	color: #660000;
+	text-align: center;
+	font-weight: bold;
+	border: none;
+}
+	
+		
