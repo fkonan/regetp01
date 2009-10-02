@@ -8,11 +8,12 @@ class Ticket extends AppModel {
 		'estado' => array('numeric'),
 		'observacion' => array(
 				'notEmpty'=> array(
-				'rule' => VALID_NOT_EMPTY,
-				'required' => true,
-				'allowEmpty' => false,
-				//'on' => 'create', // or: 'update'
-				'message' => 'Debe ingresar una Observación.')	
+					'rule' => VALID_NOT_EMPTY,
+					'required' => true,
+					'allowEmpty' => false,
+					//'on' => 'create', // or: 'update'
+					'message' => 'Debe ingresar una Observación.'
+					)	
 			)
 	);
 
@@ -62,7 +63,8 @@ class Ticket extends AppModel {
 		$this->Instit->Jurisdiccion->recursive = -1;
 		$prov_pend = array();
 		$prov_pend = $this->Instit->Jurisdiccion->find('list', array(
-								'conditions'=>array('Jurisdiccion.id'=>$juris_id)));
+								'conditions'=>array('Jurisdiccion.id'=>$juris_id),
+								'order'=>'Jurisdiccion.name'));
 		
 		return $prov_pend;	
 	}

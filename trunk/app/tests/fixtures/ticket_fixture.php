@@ -5,16 +5,18 @@
 class TicketFixture extends CakeTestFixture {
 	var $name = 'Ticket';
 	var $table = 'tickets';
+	
 	var $fields = array(
 			'id' => array('type'=>'integer', 'null' => false, 'default' => NULL, 'length' => 11, 'key' => 'primary'),
 			'instit_id' => array('type'=>'integer', 'null' => false),
 			'user_id' => array('type'=>'integer', 'null' => false),
 			'observacion' => array('type'=>'text', 'null' => false, 'length' => 1073741824),
-			'estado' => array('type'=>'integer', 'null' => false),
+			'estado' => array('type'=>'integer', 'null' => false, 'default' => 0),
 			'created' => array('type'=>'datetime', 'null' => true),
-			'modified' => array('type'=>'datetime', 'null' => true),
-			'indexes' => array('0' => array())
+			'modified' => array('type'=>'datetime', 'null' => true)/*,
+			'indexes' => array('0' => array())*/
 			);
+			
 	var $records = array(array(
 			'id'  => 1,
 			'instit_id'  => 1,
@@ -31,7 +33,7 @@ class TicketFixture extends CakeTestFixture {
 									litora luctus suspendisse sed id luctus ut. Pede volutpat quam vitae, ut ornare wisi. Velit dis tincidunt,
 									pede vel eleifend nec curabitur dui pellentesque, volutpat taciti aliquet vivamus viverra, eget tellus ut
 									feugiat lacinia mauris sed, lacinia et felis.',
-			'estado'  => 1,
+			'estado'  => 0,
 			'created'  => '2009-09-23 12:24:15',
 			'modified'  => '2009-09-23 12:24:15'
 			));

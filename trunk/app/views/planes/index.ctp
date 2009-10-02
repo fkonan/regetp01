@@ -4,7 +4,7 @@
 	$link = "";
 	if($ticket_id != 0)
 	{
-		$link = " - <a class=\"aPend\" href=\"";
+		$link = " - <a class='aPend' href=\"";
 		$link .= $html->url(array('controller'=> 'tickets', 'action'=>$action.'/'.$ticket_id));
 		$link .= "\" onClick=\"window.open('".$html->url(array('controller'=> 'tickets', 'action'=>$action.'/'.$ticket_id));
 		$link .= "','_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=310,height=390');";
@@ -165,6 +165,7 @@ foreach ($planesRelacionados as $plan):
 	<ul>
         <li><?php echo $html->link(__('Nueva Oferta', true), array('controller'=> 'planes', 'action'=>'add/'. $planes['Instit']['id']));?> </li>
         <?php 
+        // Si puede editar y tiene ticket edita, sino crea
         if($action!='view')
         {
         	if($ticket_id != 0)

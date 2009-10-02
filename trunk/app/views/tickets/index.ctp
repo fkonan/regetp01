@@ -16,10 +16,11 @@ echo $paginator->counter(array(
 	<th><?php echo $paginator->sort('Cue','Instit.cue');?></th>
 	<th><?php echo $paginator->sort('Anexo','Instit.anexo');?></th>
 	<th><?php echo  __('Nombre');?></th>
-	<th class="actions"><?php __('Actions');?></th>
+	<th class="actions">Ticket</th>
 </tr>
 <?php
 $i = 0;
+//debug($tickets);
 foreach ($tickets as $ticket):
 	$class = null;
 	if ($i++ % 2 == 0) {
@@ -28,7 +29,7 @@ foreach ($tickets as $ticket):
 ?>
 	<tr<?php echo $class;?>>
 		<td>
-			<?php echo $ticket['Ticket']['created'];?>
+			<?php echo date('d/m/y H:i',strtotime($ticket['Ticket']['created']));?>
 		</td>
 		<td>
 			<?php echo $ticket['User']['nombre'] . " " . $ticket['User']['apellido']; ?>
@@ -40,10 +41,15 @@ foreach ($tickets as $ticket):
 			<?php echo $ticket['Instit']['anexo']; ?>
 		</td>
 		<td>
-			<?php echo $ticket['Instit']['nombre_completo']; ?>
+		<?php 
+			echo $html->link($ticket['Instit']['nombre_completo'],
+							 '/instits/view/'.$ticket['Instit']['id']
+			);
+		?> 
+		
 		</td>
 		<td class="actions">
-			<a href="<?= $html->url(array('controller'=> 'tickets', 'action'=>'edit/'.$ticket['Ticket']['id']))?>" onClick="window.open('<?= $html->url(array('controller'=> 'tickets', 'action'=>'edit/'.$ticket['Ticket']['id']))?>','_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=310,height=390'); return false;">Editar</a>
+			<a href="<?= $html->url(array('controller'=> 'tickets', 'action'=>'edit/'.$ticket['Ticket']['id']))?>" onClick="window.open('<?= $html->url(array('controller'=> 'tickets', 'action'=>'edit/'.$ticket['Ticket']['id']))?>','_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=310,height=390'); return false;">Editar</a>			
 		</td>
 	</tr>
 <?php endforeach; ?>

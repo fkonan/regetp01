@@ -11,7 +11,6 @@ if(isset($script)){
 	<fieldset>	
 	<?php
 		echo $form->input('instit_id',array('type'=>'hidden','value'=>$instit_id));
-				
 		echo $form->input('observacion', array('label'=>'Observación'));
 	?>
 	</fieldset>

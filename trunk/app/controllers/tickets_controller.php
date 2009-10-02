@@ -48,8 +48,9 @@ class TicketsController extends AppController {
 			$nombre_completo = $this->Ticket->Instit->find(array('Instit.id'=>$data[$i]['Ticket']['instit_id']));
 			$data[$i]['Instit']['nombre_completo'] = $nombre_completo['Instit']['nombre_completo'];
 		}
-		
+
 		$this->set('tickets', $data);
+		return $data;
 	}
 
 	function view($id = null) {
@@ -80,11 +81,6 @@ class TicketsController extends AppController {
 				$this->Session->setFlash(__('El Ticket no se guardo. Intente nuevamente.', true));
 			}
 		}
-		else
-		{
-			$this->Ticket->dameTicketPendiente($this->data['Ticket']['instit_id']);
-			//$this->redirect();
-		}
 		
 		$instit_id = (isset($this->passedArgs[0]))?$this->passedArgs[0]:0;
 		$this->set('instit_id', $instit_id);	
@@ -93,16 +89,16 @@ class TicketsController extends AppController {
 	function edit($id = null) {
 		$this->layout = 'popup';
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid Ticket', true));
+			$this->Session->setFlash(__('Ticket invalido.', true));
 			$this->redirect(array('action'=>'index'));
 		}
 		
 		if (!empty($this->data)) {
 			if ($this->Ticket->save($this->data)) {
-				$this->Session->setFlash(__('The Ticket has been saved', true));
+				$this->Session->setFlash(__('El Ticket se ha guardado.', true));
 				$this->set('script','<script type="text/javascript">window.opener.location.reload();window.close();</script>">');
 			} else {
-				$this->Session->setFlash(__('The Ticket could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('El Ticket no se pudo guardar. Intente de nuevo.', true));
 			}
 		}
 		
@@ -115,11 +111,11 @@ class TicketsController extends AppController {
 
 	function delete($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for Ticket', true));
+			$this->Session->setFlash(__('Id invalido para el Ticket.', true));
 			$this->redirect(array('action'=>'index'));
 		}
 		if ($this->Ticket->del($id)) {
-			$this->Session->setFlash(__('Ticket deleted', true));
+			$this->Session->setFlash(__('Ticket eliminado.', true));
 			$this->redirect(array('action'=>'index'));
 		}
 	}
@@ -127,7 +123,7 @@ class TicketsController extends AppController {
 	
 	function provincias_pendientes()
 	{
-		$prov_pend = $this->Ticket->dameProvinciasConPendientes();		
+		$prov_pend = $this->Ticket->dameProvinciasConPendientes();	
 		return $prov_pend;
 	}
 }
