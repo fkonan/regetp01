@@ -160,7 +160,7 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 }else{
 	?>
 	<!--	No hubo resutados, entonces muestro un link que permita agregar uinstituciones -->
-	<h2>No Obtuvieron Resultados</h2>
+	<h2>No se obtuvieron resultados</h2>
 	<? 
 	echo $html->link('¿Desea agregar una Nueva Institución?',array('controller'=>'Instits', 'action'=>'add'));
 }
