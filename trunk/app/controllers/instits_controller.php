@@ -272,13 +272,15 @@ class InstitsController extends AppController {
                     // condicion 1 busca lo que puse el CUE y/o anexo
 		            	 	
                	 	$long=strlen($this->data['Instit']['cue']);
+               	 	$instit_cue = $this->Instit->cambioComodin($this->data['Instit']['cue']);
+               	 	//debug($instit_cue);
             	 	if($long == 8 || $long == 9)
             	 	{
-            	 		$arr_cond1 = array('CAST(((Instit.cue*100)+Instit.anexo) as character(60)) SIMILAR TO ?' => '%'.$this->data['Instit']['cue'].'%');
+            	 		$arr_cond1 = array('CAST(((Instit.cue*100)+Instit.anexo) as character(60)) SIMILAR TO ?' => $instit_cue.'%');
             	 	}
             	 	else
             	 	{
-            	 		$arr_cond1 = array('CAST(((Instit.cue)) as character(60)) SIMILAR TO ?' => '%'.$this->data['Instit']['cue'].'%');
+            	 		$arr_cond1 = array('CAST(((Instit.cue)) as character(60)) SIMILAR TO ?' => $instit_cue.'%');
             	 	}
             	 		
                   	$this->paginate['conditions'] = $arr_cond1;
@@ -287,21 +289,23 @@ class InstitsController extends AppController {
                   	$url_conditions['cue'] = $this->data['Instit']['cue'];
             	 }
             }
+            
 			if(isset($this->passedArgs['cue'])){	
             	 if($this->passedArgs['cue'] != '' || $this->passedArgs['cue'] != 0 ){
                     // set the conditions
-                    $arr_cond1 = array('CAST(Instit.cue as character(60)) SIMILAR TO ?' => '%'.$this->passedArgs['cue'].'%');
-					$arr_cond2 = array();
-            	 	
-					$cond_text = "";
+                  
                	 	$long=strlen($this->passedArgs['cue']);
+               	 	$instit_cue = $this->Instit->cambioComodin($this->passedArgs['cue']);
             	 	if($long == 8 || $long == 9)
             	 	{
-            	 		$arr_cond2 = array('CAST(Instit.cue as character(60)) SIMILAR TO ?' => '%'.substr($this->passedArgs['cue'],0,$long-2).'%');
-            	 		$cond_text = substr($this->passedArgs['cue'],0,$long-2)." - " ;
+            	 		$arr_cond1 = array('CAST(((Instit.cue*100)+Instit.anexo) as character(60)) SIMILAR TO ?' => $instit_cue.'%');
+            	 	}
+            	 	else
+            	 	{
+            	 		$arr_cond1 = array('CAST(((Instit.cue)) as character(60)) SIMILAR TO ?' => $instit_cue.'%');
             	 	}
             	 		
-                  	$this->paginate['conditions'] = array('OR'=> array($arr_cond1,$arr_cond2));
+                  	$this->paginate['conditions'] = $arr_cond1;
                     // set the Search data, so the form remembers the option
                   	$array_condiciones['CUE'] = $this->passedArgs['cue'];
                   	$url_conditions['cue'] = $this->passedArgs['cue'];
