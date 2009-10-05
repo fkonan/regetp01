@@ -3,6 +3,7 @@ class InstitTestFixture extends CakeTestFixture {
     var $name = 'InstitTest';
     var $import = 'Instit'; 
 
+    /*
     var $fields = array( 
           'id' => 			array	('type' => 'integer', 	'key' => 'primary', 'null' => false), 
           'gestion_id' => 	array	('type' => 'integer', 	'null' => false),
@@ -41,7 +42,7 @@ class InstitTestFixture extends CakeTestFixture {
       	  'departamento_id' => array('type' => 'integer', 	'default' => '0'),
 		  'lugar' => array			('type' => 'string', 	'length' => 110, 	'null' => false, 	'default' => "''")
    );
-    
+    */
     
     
     var $records = array(
@@ -59,7 +60,7 @@ class InstitTestFixture extends CakeTestFixture {
         'observacion' => "''", 'fecha_mod' => "2007-03-26", 'activo' => 1, 
         'ciclo_alta' => 2007, 'ciclo_mod' => 0, 'created' => "", 
         'modified' => "2009-08-13 12:17:33", 'localidad_id' => 1493, 
-        'departamento_id' => 1,'lugar' => "''"),
+        'departamento_id' => 1,'lugar' => "''")
        
         /*
         array ('id' => 2, ),

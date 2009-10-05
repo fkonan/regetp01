@@ -62,7 +62,7 @@ class Instit extends AppModel {
 								'dependent' => true,
 								'conditions' => '',
 								'fields' => '',
-								'order' => '',
+								'order' => 'HistorialCue.created DESC',
 								'limit' => '',
 								'offset' => '',
 								'exclusive' => '',
@@ -932,8 +932,15 @@ class Instit extends AppModel {
   		return $this->find('all',array('conditions'=>$condiciones));
 	}
 	
-	function cambioComodin($cue) {
-		return str_replace('*', '%', $cue);
+	
+	
+	/**
+	 *  Cambia el "*" utilizado en la busqueda por un "%"
+	 * @param string $texto con *
+	 * @return string @return texto con % para el LIKE de SQL
+	 */
+	function cambioComodin($texto) {
+		return str_replace('*', '%', $texto);
 	}
 }
 ?>
