@@ -14,7 +14,7 @@ header("Expires: 0");
 <HEAD>
 	
 	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=iso-8859-1">
-	<TITLE></TITLE>
+	<TITLE><?php echo $nombre?></TITLE>
 	<META NAME="GENERATOR" CONTENT="Regetp web rfietp.inet.edu.ar">
 	<META NAME="CHANGED" CONTENT="0;0">
 	
