@@ -218,6 +218,7 @@ class InstitsController extends AppController {
 
 		
 		// si no vinieron datos GET, asumo que se envió el formulario desde search_form
+		// sino es porque vino del paginador
 		if(isset($this->passedArgs)):		
 			if(sizeof($this->passedArgs) == 0):
 				$vino_formulario = 1;
@@ -253,37 +254,17 @@ class InstitsController extends AppController {
             	 	if($is_cue_valido < 1){
             	 		switch ($is_cue_valido){
             	 			case -1:
-            	 				$mensaje = "<H1>El CUE: '".$this->data['Instit']['cue']."' no es válido.</H1> Ingrese un valor numérico de al menos 3 dígitos.";break;
-            	 			case -6:
-            	 				$mensaje = "<H1>El CUE: '".$this->data['Instit']['cue']."' no es válido.</H1>¿Usted está buscando un establecimiento de Buenos Aires o la Ciudad Autónoma de Bs. As.?<br> probablemente haya escrito mal el primer dígito";break;
-            	 			case -7:
-            	 				$mensaje = "<H1>El CUE: '".$this->data['Instit']['cue']."' no es válido.</H1>¿Usted ha ingresado correctamente los primeros 2 dígitos del CUE?<br> No hay ninguna provincia que comience con ese número";break;
-            	 			case -8:
-            	 				$mensaje = "<H1>El CUE: '".$this->data['Instit']['cue']."' no es válido.</H1>¿Está buscando un establecimiento por su CUE y Anexo?<br> El primer dígito no coincide con el de la provincia Bs. As. ni Ciudad Autónoma de Bs. As.";break;
-            	 			case -9:
-            	 				$mensaje = "<H1>El CUE: '".$this->data['Instit']['cue']."' no es válido.</H1>¿Está buscando un establecimiento por su CUE y Anexo?<br> Los 2 primeros dígitos no corresponden a ninguna provincia ";break;
-            	 				
-            	 		}
-            	 		$this->Session->setFlash($mensaje,'default',array('class' => 'flash-warning'));
-            	 		$this->redirect('search_form');
-            	 		
+            	 				$mensaje = "<H1>El CUE: '".$this->data['Instit']['cue']."' no es válido.</H1> Ingrese un valor numérico de al menos 3 dígitos.";
+            	 				$this->Session->setFlash($mensaje,'default',array('class' => 'flash-warning'));
+            	 				$this->redirect('search_form');
+            	 				break;
+            	 		}            	 		
             	 	}
                     // set the conditions
-                    // condicion 1 busca lo que puse el CUE y/o anexo
-		            	 	
-               	 	$long=strlen($this->data['Instit']['cue']);
+                    // condicion 1 busca lo que puse el CUE y/o anexo		            	 	
                	 	$instit_cue = $this->Instit->cambioComodin($this->data['Instit']['cue']);
-               	 	//debug($instit_cue);
-            	 	if($long == 8 || $long == 9)
-            	 	{
-            	 		$arr_cond1 = array('CAST(((Instit.cue*100)+Instit.anexo) as character(60)) SIMILAR TO ?' => $instit_cue.'%');
-            	 	}
-            	 	else
-            	 	{
-            	 		$arr_cond1 = array('CAST(((Instit.cue)) as character(60)) SIMILAR TO ?' => $instit_cue.'%');
-            	 	}
-            	 		
-                  	$this->paginate['conditions'] = $arr_cond1;
+            	 			
+                  	$this->paginate['conditions'] = array('CAST(((Instit.cue*100)+Instit.anexo) as character(60)) SIMILAR TO ?' => '%'.$instit_cue.'%');;
                      // set the Search data, so the form remembers the option
                     $array_condiciones['CUE'] = $this->data['Instit']['cue'];
                   	$url_conditions['cue'] = $this->data['Instit']['cue'];
@@ -651,8 +632,7 @@ class InstitsController extends AppController {
 					$url_conditions['Plan.sector'] = utf8_decode($this->passedArgs['Plan.sector']);			
 				}
             }
-                      
-            
+                            
             
             
             
@@ -667,7 +647,14 @@ class InstitsController extends AppController {
 	    
 	    //si se encontro solo 1 institucion, ir directamente a la vista de esa institucion
 	    if(sizeof($pagin) == 1 && $vino_formulario){
-	    	$this->redirect('view/'.$pagin[0]['Instit']['id']);	    	
+	    	// si el resultado me trajo 1, y eestoy buscando por CUE, entonces ir directamente a la vista d esas institucion
+	    	if(isset($this->data['Instit']['cue'])){
+            	 if($this->data['Instit']['cue'] != '' || $this->data['Instit']['cue'] != 0 ){
+	    			if(($pagin[0]['Instit']['cue'] == $this->data['Instit']['cue']) || (($pagin[0]['Instit']['cue']*100+$pagin[0]['Instit']['anexo'] == $this->data['Instit']['cue']))){
+	    				$this->redirect('view/'.$pagin[0]['Instit']['id']);	 
+	    			}
+            	 }
+	    	}	    	   	
 	    }
 	    
         $this->set('instits', $pagin);

@@ -28,7 +28,7 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
 		<?php foreach($instit['HistorialCue'] as $cueant):?>
 		<?php 	echo ($primero)?"<br>":","; $primero = false;?>
 		<?php 	$fechamod = date("d/m/y",strtotime($cueant['created']));?>
-		<?php 	echo "<b title='Éste CUE fue utilizado hasta el día: $fechamod' class='msg-info'>".($cueant['cue']*100+$cueant['anexo'])."</b> ";?>
+		<?php 	echo "<b title='Este CUE fue utilizado hasta el día: $fechamod' class='msg-info'>".($cueant['cue']*100+$cueant['anexo'])."</b> ";?>
 		<?php endforeach;?>
 		</span>
 	</p>
