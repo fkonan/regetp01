@@ -5,6 +5,8 @@
 class HistorialCueFixture extends CakeTestFixture {
 	var $name = 'HistorialCue';
 	var $table = 'historial_cues';
+	//var $import = 'HistorialCue'; 
+	
 	var $fields = array(
 		'id' => array('type'=>'integer', 'null' => false, 'length' => 11, 'key' => 'primary'),
 		'instit_id' => array('type'=>'integer', 'null' => false),
@@ -16,8 +18,8 @@ class HistorialCueFixture extends CakeTestFixture {
 	var $records = array(array(
 		'id'  => 1,
 		'instit_id'  => 1,
-		'cue'  => 1,
-		'anexo'  => 1,
+		'cue'  => 200000,
+		'anexo'  => 0,
 		'created'  => '2009-09-23 10:15:16'
 	));
 }
