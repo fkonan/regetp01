@@ -24,10 +24,22 @@ class HistorialCue extends AppModel {
 		return $this->save($datosCueAnterior);
 	}
 
+	
+	/**
+	 * Esta funcion modifica el belongsTo con Instit de acuerdo
+	 * al parametro que recibe
+	 * @param string $type
+	 * @return unknown_type
+	 */
 	function _setBelongsToInstitType($type){
 		$this->belongsTo['Instit']['type'] = $type;
 	}	
 	
+	/**
+	 * Esta funcion modifica el belongsTo con Instit para
+	 * que sea un full join
+	 * @return unknown_type
+	 */
 	function setBelongsToInstitTypeFull(){
 		$this->_setBelongsToInstitType("FULL");
 	}	
