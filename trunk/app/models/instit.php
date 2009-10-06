@@ -92,8 +92,7 @@ class Instit extends AppModel {
 			 */
 			'cue_y_anexo_unico' => array(
 				'rule' => array('cue_y_anexo_unico'),
-				'message'=> 'El CUE o el ANEXO ya existen.',
-				'on' => 'create'
+				'message'=> 'El CUE o el ANEXO ya existen.'
 			),
 
 			/**
