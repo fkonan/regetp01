@@ -54,12 +54,12 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
               <?php if (isset($instit['HistorialCue']['cue']) && ($instit['HistorialCue']['cue'] != "")) {?> 
 				  <b>El Cue asociado a la institución hasta: </b>
 				  <?=date("d/m/y",strtotime($instit['HistorialCue']['created']));?>
-				  <b>era: </b><?= str_replace($url_conditions['cue'],"<font color='red'>". $url_conditions['cue'] . "</font>",($instit['HistorialCue']['cue']*100)+$instit['HistorialCue']['anexo']); ?>
+				  <b>era: </b><?= str_replace((isset($url_conditions['cue'])?$url_conditions['cue']:""),"<font color='red'>". (isset($url_conditions['cue'])?$url_conditions['cue']:"") . "</font>",($instit['HistorialCue']['cue']*100)+$instit['HistorialCue']['anexo']); ?>
 			  <?php } else { ?>					  
                   <b>La institución no ha sufrido cambio de CUE </b>
 			  <?php } ?>
 			</div>
-			<div class="instit_name"><b><?= str_replace($url_conditions['cue'],"<font color='red'>". $url_conditions['cue'] . "</font>",($instit['Instit']['cue']*100)+$instit['Instit']['anexo']." - " . $instit['Instit']['nombre_completo']);?></b></div>
+			<div class="instit_name"><b><?= str_replace((isset($url_conditions['cue'])?$url_conditions['cue']:""),"<font color='red'>". (isset($url_conditions['cue'])?$url_conditions['cue']:"") . "</font>",($instit['Instit']['cue']*100)+$instit['Instit']['anexo']." - " . $instit['Instit']['nombre_completo']);?></b></div>
 		</div>
 	</li>
 		<?
