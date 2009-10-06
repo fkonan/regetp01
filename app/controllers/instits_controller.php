@@ -96,9 +96,8 @@ class InstitsController extends AppController {
 		}
 		
 		
-		if (!empty($this->data)) {
-			
-			
+		if (!empty($this->data)) 
+		{		
 			$cueanterior = array();
 			if ($datos_viejos = $this->Instit->cambioCue($this->data)){
 				$cueanterior['HistorialCue']['cue'] 	  = $datos_viejos['Instit']['cue'];
@@ -264,7 +263,7 @@ class InstitsController extends AppController {
                     // condicion 1 busca lo que puse el CUE y/o anexo		            	 	
                	 	$instit_cue = $this->Instit->cambioComodin($this->data['Instit']['cue']);
             	 			
-                  	$this->paginate['conditions'] = array('CAST(((Instit.cue*100)+Instit.anexo) as character(60)) SIMILAR TO ?' => '%'.$instit_cue.'%');;
+                  	$this->paginate['conditions'] = array('CAST(((Instit.cue*100)+Instit.anexo) as character(60)) SIMILAR TO ?' => $instit_cue);;
                      // set the Search data, so the form remembers the option
                     $array_condiciones['CUE'] = $this->data['Instit']['cue'];
                   	$url_conditions['cue'] = $this->data['Instit']['cue'];
@@ -275,17 +274,10 @@ class InstitsController extends AppController {
             	 if($this->passedArgs['cue'] != '' || $this->passedArgs['cue'] != 0 ){
                     // set the conditions
                   
-               	 	$long=strlen($this->passedArgs['cue']);
                	 	$instit_cue = $this->Instit->cambioComodin($this->passedArgs['cue']);
-            	 	if($long == 8 || $long == 9)
-            	 	{
-            	 		$arr_cond1 = array('CAST(((Instit.cue*100)+Instit.anexo) as character(60)) SIMILAR TO ?' => $instit_cue.'%');
-            	 	}
-            	 	else
-            	 	{
-            	 		$arr_cond1 = array('CAST(((Instit.cue)) as character(60)) SIMILAR TO ?' => $instit_cue.'%');
-            	 	}
-            	 		
+            	 	
+            	 	$arr_cond1 = array('CAST(((Instit.cue*100)+Instit.anexo) as character(60)) SIMILAR TO ?' => $instit_cue);
+            	 	            	 		
                   	$this->paginate['conditions'] = $arr_cond1;
                     // set the Search data, so the form remembers the option
                   	$array_condiciones['CUE'] = $this->passedArgs['cue'];

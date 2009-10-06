@@ -78,6 +78,7 @@ class AppController extends Controller {
 		$this->Auth->authorize = 'controller'; 
 	}	
 	
+	
 	function isAuthorized() {
 //debug($this->passedArgs[0]);exit();
 
@@ -122,7 +123,9 @@ class AppController extends Controller {
 			if ($this->name == 'Tickets' && $this->action == 'edit') {$llAuth = true;}
 			if ($this->name == 'Tickets' && $this->action == 'view') {$llAuth = true;}
 			if ($this->name == 'Tickets' && $this->action == 'provincias_pendientes') {$llAuth = true;}
-						
+
+			if ($this->name == 'HistorialCues' && $this->action == 'search_form') {$llAuth = true;}
+			
 			break;
 		  case 'invitado':	
 			$llAuth = false;
@@ -137,6 +140,7 @@ class AppController extends Controller {
 
 			if ($this->name == 'Tickets' && $this->action == 'view') {$llAuth = true;}
 			
+			if ($this->name == 'HistorialCues' && $this->action == 'search_form') {$llAuth = true;}
 			break;
 		  default: die('El tipo de usuario no concuerda con ninguno setteado en el sistema y se abortará la operación');
 		endswitch;
@@ -157,6 +161,7 @@ class AppController extends Controller {
 		if ($this->name == 'Tipoinstits' && $this->action == 'ajax_select_form_por_jurisdiccion') {$llAuth = true;}
 		if ($this->name == 'Departamentos' && $this->action == 'ajax_select_departamento_form_por_jurisdiccion') {$llAuth = true;}
 		if ($this->name == 'Localidades' && $this->action == 'ajax_select_localidades_form_por_departamento') {$llAuth = true;}	
+		if ($this->name == 'Localidades' && $this->action == 'ajax_select_localidades_form_por_jurisdiccion') {$llAuth = true;}
 		
 		/**
 		 * Hacer que solo puedan modificar sus datos y contraseña el usuario que es dueño de esos datos
