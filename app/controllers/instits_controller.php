@@ -260,10 +260,9 @@ class InstitsController extends AppController {
             	 		}            	 		
             	 	}
                     // set the conditions
-                    // condicion 1 busca lo que puse el CUE y/o anexo		            	 	
-               	 	$instit_cue = $this->Instit->cambioComodin($this->data['Instit']['cue']);
+                    // condicion 1 busca lo que puse el CUE y/o anexo		
             	 			
-                  	$this->paginate['conditions'] = array('CAST(((Instit.cue*100)+Instit.anexo) as character(60)) SIMILAR TO ?' => $instit_cue);;
+                  	$this->paginate['conditions'] = array('CAST(((Instit.cue*100)+Instit.anexo) as character(60)) SIMILAR TO ?' => '%'.$this->data['Instit']['cue'].'%');;
                      // set the Search data, so the form remembers the option
                     $array_condiciones['CUE'] = $this->data['Instit']['cue'];
                   	$url_conditions['cue'] = $this->data['Instit']['cue'];
@@ -273,10 +272,8 @@ class InstitsController extends AppController {
 			if(isset($this->passedArgs['cue'])){	
             	 if($this->passedArgs['cue'] != '' || $this->passedArgs['cue'] != 0 ){
                     // set the conditions
-                  
-               	 	$instit_cue = $this->Instit->cambioComodin($this->passedArgs['cue']);
             	 	
-            	 	$arr_cond1 = array('CAST(((Instit.cue*100)+Instit.anexo) as character(60)) SIMILAR TO ?' => $instit_cue);
+            	 	$arr_cond1 = array('CAST(((Instit.cue*100)+Instit.anexo) as character(60)) SIMILAR TO ?' => '%'.$this->passedArgs['cue'].'%');
             	 	            	 		
                   	$this->paginate['conditions'] = $arr_cond1;
                     // set the Search data, so the form remembers the option
