@@ -15,15 +15,16 @@ class HistorialCuesController extends AppController {
 			$this->Session->flash('ID de Institución inválida');
 		}	
 		$this->set('cues',$this->HistorialCue->cuesDeInstit($instit_id));
+		$this->set('instit_id',$instit_id);
 	}
 
 
 	function add($instit_id) {
 		if (!empty($this->data)) {
-			$this->HistorialCues->create();
-			if ($this->HistorialCues->save($this->data)) {
-				$this->Session->setFlash(__('El Historial de CUEs no udo ser guardado', true));
-				$this->redirect('index');
+			$this->HistorialCue->create();
+			if ($this->HistorialCue->save($this->data)) {
+				$this->Session->setFlash(__('El Historial fue guardado correctamente', true));
+				$this->redirect('/HistorialCues/index/'.$instit_id);
 			} else {
 				$this->Session->setFlash(__('The Ciclo could not be saved. Please, try again.', true));
 			}

@@ -1,6 +1,6 @@
 <?php 
 
-echo $form->create('HistorialCue');
+echo $form->create('HistorialCue',array('action'=>'add/'.$this->data['HistorialCue']['instit_id']));
 echo $form->input('cue');
 echo $form->input('anexo');
 echo $form->input('created');
