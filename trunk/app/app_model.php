@@ -94,7 +94,8 @@ class AppModel extends Model {
 	  		$caracter =  $text[$i];
 	  		$text_aux .= preg_replace(array_keys($patron),array_values($patron),$caracter,1);
 		}
-		
+		// caracteres especiales de expresiones regulares
+		$text_aux = preg_quote($text_aux);
 		return $text_aux;		
 	}
 	
