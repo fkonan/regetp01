@@ -9,3 +9,7 @@
 	</dd>
 <?php }?>
 <dl>
+
+
+<hr>
+<?php echo $html->link('Agregar Nuevo CUE','/HistorialCues/add/'.$instit_id);?>
