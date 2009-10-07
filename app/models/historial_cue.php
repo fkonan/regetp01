@@ -19,9 +19,26 @@ class HistorialCue extends AppModel {
 		)
 	);
 	
+	
+	/**
+	 *  me guarda el cue anterior en el historico de CUEs
+	 * @param cue $datosCueAnterior
+	 * @return boolean si se guardo bien o no
+	 */
 	function hacerCambioDeCue($datosCueAnterior){
 		$this->create();
 		return $this->save($datosCueAnterior);
+	}
+	
+	
+	/**
+	 * me devuelve los cues hitoricos de una institucion
+	 * @param $instit_id
+	 * @return array de HistorialCue con cues y anexos
+	 */
+	function cuesDeInstit($instit_id){
+		$this->recursive = -1;
+		return $this->find('all',array('conditions'=>array('instit_id'=>$instit_id)));
 	}
 
 	

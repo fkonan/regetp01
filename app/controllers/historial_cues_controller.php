@@ -10,21 +10,54 @@ class HistorialCuesController extends AppController {
 		$this->rutaUrl_for_layout[] =array('name'=> 'Buscador Histórico','link'=>'/HistorialCues/search_form' );
 	}
 	
-	function index() {		
-		$this->Instit->recursive = 0;
-		$this->set('instits', $this->paginate());
+	function index($instit_id) {
+		if(empty($instit_id)){
+			$this->Session->flash('ID de Institución inválida');
+		}	
+		$this->set('cues',$this->HistorialCue->cuesDeInstit($instit_id));
 	}
 
-	function view($id = null) {
+
+	function add($instit_id) {
+		if (!empty($this->data)) {
+			$this->HistorialCues->create();
+			if ($this->HistorialCues->save($this->data)) {
+				$this->Session->setFlash(__('El Historial de CUEs no udo ser guardado', true));
+				$this->redirect('index');
+			} else {
+				$this->Session->setFlash(__('The Ciclo could not be saved. Please, try again.', true));
+			}
+		}
+		$this->data['HistorialCue']['instit_id'] = $instit_id;	
 	}
 
-	function add() {		
-	}
-
+	
 	function edit($id = null) {
+		if (!$id && empty($this->data)) {
+			$this->Session->setFlash(__('Invalid HistorialCues', true));
+		}
+		if (!empty($this->data)) {
+			if ($this->HistorialCue->save($this->data)) {
+				$this->Session->setFlash(__('Se guardó el historial de CUE correctamente', true));
+				$this->redirect(array('controller'=>'Instits','action'=>'view',$this->data['HistorialCue']['instit_id']));
+			} else {
+				$this->Session->setFlash(__('El CUE histórico no pudo ser guardado, por favor intente nuevamente.', true));
+			}
+		}
+		if (empty($this->data)) {
+			$this->data = $this->HistorialCue->read(null, $id);
+		}
 	}
-
+	
 	function delete($id = null) {
+		if (!$id) {
+			$this->Session->setFlash(__('ID inválido para el Historial de CUEs', true));
+			$this->redirect('/pages/home');
+		}
+		if ($this->HistorialCue->del($id)) {
+			$this->Session->setFlash(__('CUE Histórico borrado', true));
+			$this->redirect('/pages/home');
+		}
 	}
 	
 	/**

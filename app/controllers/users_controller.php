@@ -75,6 +75,13 @@ class UsersController extends AppController {
 			$this->layout = 'popup';
 		}
 		
+		if ($this->Auth->login()){
+			$this->log('Se logeó el usuario: '.$this->Auth->data['User']['username'],LOG_INFO);
+			//$this->log($this->Auth->redirect(),LOG_DEBUG);
+			//die($this->Auth->redirect());
+			$this->redirect($this->Auth->redirect());
+			
+		}
 	}
 	
 	

@@ -69,7 +69,7 @@ class AppController extends Controller {
 		 */
 		Configure::write('regetpVersion', 'v1.0.0803 final');
 
-
+		$this->Auth->autoRedirect = false; 
 		$this->Auth->loginError ='Usuario o Password Incorrectos';
 		$this->Auth->authError = 'Debe registrarse para acceder a esta página';
 		$this->Auth->logoutRedirect='/pages/home';
@@ -83,9 +83,15 @@ class AppController extends Controller {
 //debug($this->passedArgs[0]);exit();
 
 	  switch ($this->Auth->user('role')):
+	  
+	    // usuarios con mas privilegios en el sistema
+	    // por lo general éstos usuarios puden ver botones ocultos que solo ellos ven, por ejemplo 
+	    // el boton para eliminar instituciones
+	    case 'superusuario':
+	    	$llAuth = true;
+			break;
 		case 'admin':
-			//hago que la sesion expire en mas tiempo
-			$llAuth = true;
+			$llAuth = true;			
 			break;
 		case 'editor':
 			//hago que la sesion expire en mas tiempo
@@ -169,7 +175,7 @@ class AppController extends Controller {
 		 * Hacer que solo puedan modificar sus datos y contraseña el usuario que es dueño de esos datos
 		 */
 	    if ($this->name == 'Users' && $this->action == 'cambiar_password' && $this->passedArgs[0] == $this->Auth->user('id')) {$llAuth = true;}
-	    if ($this->name == 'Users' && $this->action == 'self_user_edit' && $this->passedArgs[0] == $this->Auth->user('id')) {$llAuth = true;}
+	    if ($this->name == 'Users' && $this->action == 'self_user_edit'   && $this->passedArgs[0] == $this->Auth->user('id')) {$llAuth = true;}
 	
 	
 		if ($llAuth == true) {
