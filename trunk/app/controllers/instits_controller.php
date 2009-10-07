@@ -102,7 +102,8 @@ class InstitsController extends AppController {
 			if ($datos_viejos = $this->Instit->cambioCue($this->data)){
 				$cueanterior['HistorialCue']['cue'] 	  = $datos_viejos['Instit']['cue'];
 				$cueanterior['HistorialCue']['anexo'] 	  = $datos_viejos['Instit']['anexo'];	
-				$cueanterior['HistorialCue']['instit_id'] = $datos_viejos['Instit']['id'];		
+				$cueanterior['HistorialCue']['instit_id'] = $datos_viejos['Instit']['id'];	
+				$cueanterior['HistorialCue']['observaciones'] = 'El CUE fue modificado debido a que se ingresó otro valor cuando se actualizaron los datos de la institución.'; 		
 			}
 				
 				

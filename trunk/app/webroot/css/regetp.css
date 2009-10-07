@@ -1113,6 +1113,12 @@ div.code-coverage-results span.result-good {
 .cues-anteriores-text{
 }
 
+.cues-anteriores-text CITE{
+	
+	font-size: x-small;	
+	font-stretch: condensed;
+}
+
 
 .cues-anteriores IMG{
 	float: left;

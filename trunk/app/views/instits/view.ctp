@@ -14,7 +14,14 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
 
 	?>
 	
-	<?php if(count($instit['HistorialCue'])>0):?>
+	
+	<?php 
+	/*---********************************
+	 * 
+	 * 			HISTORIAL DE CUES
+	 * 
+	 ********************************----*/	
+	?><?php if(count($instit['HistorialCue'])>0):?>
 	<p class="cues-anteriores">		
 		<?php echo $html->image('cambio_cue.gif')?>
 		<span class="cues-anteriores-title">
@@ -27,12 +34,17 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
 		<?php $primero = true;?>
 		<?php foreach($instit['HistorialCue'] as $cueant):?>
 		<?php 	echo ($primero)?"<br>":","; $primero = false;?>
-		<?php 	$fechamod = date("d/m/y",strtotime($cueant['created']));?>
-		<?php 	echo "<b title='Este CUE fue utilizado hasta el día: $fechamod' class='msg-info'>".($cueant['cue']*100+$cueant['anexo'])."</b> ";?>
+		<?php 	$fechamod = "<cite>(utilizado hasta el: ".date("d/m/y",strtotime($cueant['created'])).")</cite>";?>
+		<?php   $observacion = $cueant['observaciones'];?>
+		<?php 	echo "<b title='$observacion' class='msg-info'>".($cueant['cue']*100+$cueant['anexo'])." ".$fechamod."</b>";?>
 		<?php endforeach;?>
 		</span>
 	</p>
 	<?php endif;?>	
+	
+	
+	
+	
 	
 	<h2>Datos de Institución</h2>
 		<?php if($instit_etp){
@@ -230,8 +242,10 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
 <div class="actions">
 	<ul>
 		<li><?php echo $html->link(__('Editar Institución', true), array('action'=>'edit', $instit['Instit']['id'])); ?> </li>
-		<li><?php //echo $html->link(__('Eliminar Institución', true), array('action'=>'delete', $instit['Instit']['id']), null, sprintf(__('¿Seguro que desea eliminar la institución? CUE: "%s"', true), $instit['Instit']['cue']. "0".$instit['Instit']['anexo'])); ?></li>
-		
+		<?php if($session->read('Auth.User.role') == 'superusuario'){?>
+			<li><?php echo $html->link(__('Eliminar Institución', true), array('action'=>'delete', $instit['Instit']['id']), null, sprintf(__('¿Seguro que desea eliminar la institución? CUE: "%s"', true), $instit['Instit']['cue']. "0".$instit['Instit']['anexo'])); ?></li>
+			<li><?php echo $html->link('ABM CUE Histórico', array('controller'=>'HistorialCues','action'=>'index', $instit['Instit']['id'])); ?></li>
+		<?php }?>
 	</ul>
 </div>
 
