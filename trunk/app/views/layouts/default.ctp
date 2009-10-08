@@ -35,14 +35,27 @@
 		echo $html->meta('icon');
 		echo $html->css('regetp');
 		echo $html->css('printer','stylesheet', array('media'=>'print'));
+		
 		echo $javascript->link('prototype');
-		echo $javascript->link('form_regetp_ria');
+		echo $javascript->link('mensaje.class');
+		echo $javascript->link('ejecutar_en_head');
+		//echo $javascript->link('form_regetp_ria');
 		echo $scripts_for_layout;
 	?>
 	
 </head>
 <body>
+	<script type="text/javascript">		
+		var mensajero = new Mensaje('mensajero');
+		mensajero.setImageLoading("<? echo $html->url(IMAGES_URL . 'ajax-loader.gif')?>");
+	</script>
+	
 	<div id="container">
+	
+		<!-- DIV del mensajero, aca se van a mostrar mensajes AJAX, JS -->
+		<div id="mensajero" style="display: none"></div>
+	
+		
 		<div id="header" <?= ($_SERVER['HTTP_HOST']=='localhost')?'style="background-color:white; background-image: url('.$html->url('/img/linux-volando-localhost.gif',true).')"':''?>>
 			<h1><?php echo $html->link(__('Registro Federal de Instituciones de ETP - RFIETP', true), '/pages/home'); ?></h1>	
 		</div>

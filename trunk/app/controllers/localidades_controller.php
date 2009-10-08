@@ -96,7 +96,7 @@ class LocalidadesController extends AppController {
 	
 	function ajax_select_localidades_form_por_jurisdiccion(){
 		  $this->layout = 'ajax';
-        // Configure::write('debug',0);
+         Configure::write('debug',0);
         
          $jur_id = 0;         
          if (isset($this->data['Instit']['jurisdiccion_id'])):

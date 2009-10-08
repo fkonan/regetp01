@@ -187,15 +187,18 @@ class InstitsController extends AppController {
 		//$tipoinstits = $this->Instit->Tipoinstit->find('list');
 		
 		
+		$this->Instit->Jurisdiccion->recursive = -1;
 		 $this->Instit->Jurisdiccion->order = 'Jurisdiccion.name';
 		$jurisdicciones = $this->Instit->Jurisdiccion->find('list');
 		
 		// que me liste todos los detarpamentos
+		$this->Instit->Departamento->recursive = -1;
 		$departamentos = $this->Instit->Departamento->con_jurisdiccion('list');  
 		//$departamentos = array();
 		
 		
 		// con CERO me trae TODAS las jurisdicciones
+		$this->Instit->Localidad->recursive = -1;
 		$localidades = $this->Instit->Localidad->con_depto_y_jurisdiccion('list'); 
 		//$localidades = array();
 		

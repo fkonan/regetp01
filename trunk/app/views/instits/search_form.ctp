@@ -75,7 +75,8 @@
 		<h2><a href="#VerDenominacion" onclick="$('search-denominacion').toggle()">por su nombre</a></h2>
 		<div id="search-denominacion"  class="search-div" style="display: none">
 			<?php 
-			echo $form->input('tipoinstit_id', array('empty' => 'Todas','disabled'=>true,'type'=>'select','label'=>'Tipo de Establecimiento','after'=> '<br /><cite>Para activar este campo, seleccione primero una jurisdicción</cite>'));		
+			echo $form->input('tipoinstit_id', array(	'empty' => 'Todas','disabled'=>true,'type'=>'select',
+														'label'=>'Tipo de Establecimiento','after'=> '<br /><cite>Para activar este campo, seleccione primero una jurisdicción</cite>'));		
 				echo $ajax->observeField('jurisdiccion_id',
 		                                   array(  	'url' => '/tipoinstits/ajax_select_form_por_jurisdiccion',
 		                                           	'update'=>'InstitTipoinstitId',
