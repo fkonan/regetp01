@@ -158,6 +158,14 @@
 //echo $javascript->link('form_regetp_ria');?>
 <script type="text/javascript">
 <!--
+
+	Event.observe(window, "keypress", function(e){ 
+		var cKeyCode = e.keyCode || e.which; 
+		if (cKeyCode == Event.KEY_RETURN){ 
+			$('InstitSearchForm').submit();
+		} 
+	});
+
 		
 	function enviar()
 	{
