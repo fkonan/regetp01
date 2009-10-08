@@ -74,7 +74,56 @@ class Plan extends AppModel {
 				'required' => true,
 				'allowEmpty' => false,
 				'message' => 'Debe ingresar un sector.'	
-			))
+			)
+		),
+		'duracion_hs' => array(
+			'number' => array(
+				'rule' => VALID_NUMBER,
+				'required' => true,
+				'allowEmpty' => false,
+				'message' => 'Debe ingresar un valor numérico para las horas.'
+			
+			),
+			'maxLength' => array(
+				'rule' => array('maxLength','9'),
+				'required' => true,
+				'allowEmpty' => false,
+				'message' => 'La cantidad de horas debe ser de 9 dígitos.'
+			
+			)
+		),
+		'duracion_semanas' => array(
+			'number' => array(
+				'rule' => VALID_NUMBER,
+				'required' => true,
+				'allowEmpty' => false,
+				'message' => 'Debe ingresar un valor numérico para las semanas.'
+			
+			),
+			'maxLength' => array(
+				'rule' => array('maxLength','9'),
+				'required' => true,
+				'allowEmpty' => false,
+				'message' => 'La cantidad de semanas debe ser de 9 dígitos.'
+			
+			)
+		),
+		'duracion_anios' => array(
+			'number' => array(
+				'rule' => VALID_NUMBER,
+				'required' => true,
+				'allowEmpty' => false,
+				'message' => 'Debe ingresar un valor numérico para los años.'
+			
+			),
+			'maxLength' => array(
+				'rule' => array('maxLength','9'),
+				'required' => true,
+				'allowEmpty' => false,
+				'message' => 'La cantidad de años debe ser de 9 dígitos.'
+			
+			)
+		)	
 	);
 	
 	function beforeSave(){  		  		
