@@ -118,9 +118,9 @@ class HistorialCuesController extends AppController {
 				$long = strlen($this->passedArgs['cue']);
 				
 				$arr_cond1 = array('OR' => array(
-					               'CAST(((Instit.cue)) as character(60)) SIMILAR TO ?' => '%'.$this->passedArgs['cue'].'%',
-								   'CAST(((HistorialCue.cue)) as character(60)) SIMILAR TO ?' => '%'.$this->passedArgs['cue'].'%'
-					                ));
+					               'CAST(((Instit.cue*100)+Instit.anexo) as character(60)) SIMILAR TO ?' => '%'.$this->passedArgs['cue'].'%',
+                                   'CAST(((HistorialCue.cue*100)+HistorialCue.anexo) as character(60)) SIMILAR TO ?' => '%'.$this->passedArgs['cue'].'%'
+								   								   ));
 				
 				            	 		
 				$this->paginate['conditions'] = $arr_cond1;
