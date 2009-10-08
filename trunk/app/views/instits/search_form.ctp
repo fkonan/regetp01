@@ -24,13 +24,15 @@
 						// 		DEPARTAMENTO
 						$meter = '<span class="ajax_update" id="ajax_indicator_dpto" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
 						echo $form->input('Departamento.id', array('type'=> 'select','options'=>$departamentos ,'empty' => 'Seleccione','label'=>'Departamento','after'=> $meter.'<br><cite>Seleccione una jurisdicción para filtrar los Departamentos</cite>'));                                   
-				        echo $ajax->observeField('jurisdiccion_id',
+
+						echo $ajax->observeField('jurisdiccion_id',
 				                                   array(  	'url' => '/departamentos/ajax_select_departamento_form_por_jurisdiccion',
 						                                   	'update'=>'DepartamentoId',
 						                                   	'loading'=>'$("ajax_indicator").show();$("DepartamentoId").disable();$("LocalidadId").update();',
 						                                   	'complete'=>'$("ajax_indicator").hide();$("DepartamentoId").enable(); $("departamento-select").show();',
 						                                   	'onChange'=>true
 				                                   ));
+			                                  
 						?>
 					<script type="text/javascript">
 					//		Event.observe(window,'load',function(){
@@ -50,13 +52,17 @@
 						                                   	'complete'=>'$("ajax_indicator_dpto").hide();$("LocalidadId").enable(); $("localidad-select").show();',
 						                                   	'onChange'=>true
 											)); 	
+											
+											
 						echo $ajax->observeField('jurisdiccion_id',
 				                                   array(  	'url' => '/localidades/ajax_select_localidades_form_por_jurisdiccion',
 						                                   	'update'=>'LocalidadId',
-						                                   	'loading'=>'$("ajax_indicator").show();$("LocalidadId").disable();$("LocalidadId").update();',
-						                                   	'complete'=>'$("ajax_indicator").hide();$("LocalidadId").enable(); $("localidad-selects").show();',
+						                                   	'loading'=>'$("ajax_indicator").show();$("LocalidadId").disable()',
+						                                   	'complete'=>'$("ajax_indicator").hide();$("LocalidadId").enable();',
 						                                   	'onChange'=>true
-				                                   ));			
+				                                   ));
+
+
 						?>	
 						
 						<script type="text/javascript">
@@ -75,16 +81,17 @@
 		<h2><a href="#VerDenominacion" onclick="$('search-denominacion').toggle()">por su nombre</a></h2>
 		<div id="search-denominacion"  class="search-div" style="display: none">
 			<?php 
-			echo $form->input('tipoinstit_id', array(	'empty' => 'Todas','disabled'=>true,'type'=>'select',
+			echo $form->input('tipoinstit_id', array(	'empty' => 'Todas','type'=>'select',
 														'label'=>'Tipo de Establecimiento','after'=> '<br /><cite>Para activar este campo, seleccione primero una jurisdicción</cite>'));		
-				echo $ajax->observeField('jurisdiccion_id',
+
+			echo $ajax->observeField('jurisdiccion_id',
 		                                   array(  	'url' => '/tipoinstits/ajax_select_form_por_jurisdiccion',
 		                                           	'update'=>'InstitTipoinstitId',
 				                                   	'loading'=>'$("ajax_indicator").show();$("InstitTipoinstitId").disable()',
 				                                   	'complete'=>'$("ajax_indicator").hide();$("InstitTipoinstitId").enable()',
 				                                   	'onChange'=>true
 		                                   ));  
-		                                   
+                                
 			echo $form->input('nroinstit', array('label'=>'N° de Institución')); 
 			
 			echo $form->input('nombre', array('label'=>'Nombre de Institución','after'=> '<cite>Ej: "Sarmiento" o "Gral. Belgrano". No confundir el nombre con el tipo de establecimiento</cite>'));

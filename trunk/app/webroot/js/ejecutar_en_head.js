@@ -23,8 +23,10 @@ Ajax.Responders.register({
                   {
                          //mostrar_onloading();
                          $('mensajero').show();
-                         $('mensajero').scrollTo();
-;
+                         
+                         // esto no funciona en IE por eso lo saque
+                        // $('mensajero').scrollTo();
+
                          mensajero.playLoading();
                   }
           },

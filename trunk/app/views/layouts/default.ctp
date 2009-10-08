@@ -47,7 +47,6 @@
 <body>
 	<script type="text/javascript">		
 		var mensajero = new Mensaje('mensajero');
-		mensajero.setImageLoading("<? echo $html->url(IMAGES_URL . 'ajax-loader.gif')?>");
 	</script>
 	
 	<div id="container">
