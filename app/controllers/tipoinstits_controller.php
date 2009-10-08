@@ -76,11 +76,8 @@ class TipoinstitsController extends AppController {
 	 */
 	function ajax_select_form_por_jurisdiccion(){
 		 $this->layout = 'ajax';
-         //Configure::write('debug',0);
+         Configure::write('debug',0);
          $jurisdiccion = 0;
-         
-         
-         $this->Tipoinstit->recursive = -1;  
          
           if (isset($this->params['url']['jurisdiccion_id'])){
 			$jurisdiccion = $this->params['url']['jurisdiccion_id']; //este viene del depuradores/tipoinstits porque lo hago directamente con PROTOTYPE y no con el ajax helper
@@ -89,13 +86,9 @@ class TipoinstitsController extends AppController {
           if (isset($this->data['Instit']['jurisdiccion_id'])){
           	$jurisdiccion = $this->data['Instit']['jurisdiccion_id'];
           }
-          
-         if($jurisdiccion == 0 ){//buscar a todas
-         	$inss = $this->Tipoinstit->find('all',array('order'=>'Tipoinstit.name ASC'));
-         }else{
-         	$inss = $this->Tipoinstit->find('all',array('conditions' => array('jurisdiccion_id' => $jurisdiccion),
-         											  'order'=>'Tipoinstit.name ASC'));
-         }
+              
+          $inss = $this->Tipoinstit->dame_por_jurisdiccion($jurisdiccion);
+      
          
 	     $this->set('tipoinstits', $inss);
 	         
