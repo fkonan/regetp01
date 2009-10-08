@@ -20,9 +20,9 @@ $cue_instit = $instit['cue'].$anexo;
 		echo $form->input('sector_id',array('type'=>'select','empty'=>'Seleccione','options'=>$sectores,'label'=>'Sector ('.$this->data['Plan']['sector'].')'));
 		
 		echo "<br>Duración:";
-		echo $form->input('duracion_hs',array('label'=>'- Horas'));
-		echo $form->input('duracion_semanas',array('label'=>'- Semanas'));
-		echo $form->input('duracion_anios',array('label'=>'- Años'));
+		echo $form->input('duracion_hs',array('label'=>'- Horas','maxlength'=>9));
+		echo $form->input('duracion_semanas',array('label'=>'- Semanas','maxlength'=>9));
+		echo $form->input('duracion_anios',array('label'=>'- Años','maxlength'=>9));
 
 		
 		echo "<br>";
