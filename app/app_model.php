@@ -88,14 +88,14 @@ class AppModel extends Model {
 			// Agregar aqui mas caracteres si es necesario
  
 		);
-		
+		// caracteres especiales de expresiones regulares
+		$text = preg_quote($text);
 		$text_aux = '';
 		for($i=0; $i<strlen($text); $i++){
 	  		$caracter =  $text[$i];
 	  		$text_aux .= preg_replace(array_keys($patron),array_values($patron),$caracter,1);
 		}
-		// caracteres especiales de expresiones regulares
-		$text_aux = preg_quote($text_aux);
+
 		return $text_aux;		
 	}
 	
