@@ -1,9 +1,11 @@
 <?
 if ($session->check('Auth.User')){
-	if($session->read('Auth.User.role') == 'admin' || $session->read('Auth.User.role') == 'editor'){
+	if(	$session->read('Auth.User.role') == 'admin' || 
+		$session->read('Auth.User.role') == 'superusuario' ||
+		$session->read('Auth.User.role') == 'editor'){
 	?>
 
-<div id="boxInformacion">
+<div id="boxTickets">
 	<h1>Pendientes de Actualización</h1>
 	
 
