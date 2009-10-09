@@ -43,7 +43,7 @@ class PlanesController extends AppController {
 		$ticket_id = isset($data_ticket['Ticket']['id'])?$data_ticket['Ticket']['id']:0;
 		$this->set('ticket_id', $ticket_id);
 
-		$action = ($this->Auth->user('role')=='admin' || $this->Auth->user('role')=='editor')?'edit':'view';
+		$action = ($this->Auth->user('role')=='admin' || $this->Auth->user('role')=='editor' || $this->Auth->user('role')=='superusuario')?'edit':'view';
 		$this->set('action', $action);
 
 		$this->institData = $this->Plan->Instit->read(null,$id);
