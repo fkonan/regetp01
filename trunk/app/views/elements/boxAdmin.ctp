@@ -1,6 +1,7 @@
 <?
 if ($session->check('Auth.User')){
-	if($session->read('Auth.User.role') == 'admin'){
+	if(	$session->read('Auth.User.role') == 'superusuario' ||
+		$session->read('Auth.User.role') == 'admin'){
 	?>
 		<div id="box_admin">
 			<h1>Administración</h1>

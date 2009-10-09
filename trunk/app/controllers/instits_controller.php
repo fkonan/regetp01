@@ -254,6 +254,7 @@ class InstitsController extends AppController {
             	 if($this->data['Instit']['cue'] != '' || $this->data['Instit']['cue'] != 0 )
             	 {
             	 	$is_cue_valido = $this->Instit->isCUEValid($this->data['Instit']['cue']);
+            	 	
             	 	if($is_cue_valido < 1){
             	 		switch ($is_cue_valido){
             	 			case -1:
@@ -263,9 +264,10 @@ class InstitsController extends AppController {
             	 				break;
             	 		}            	 		
             	 	}
-                    // set the conditions
-                    // condicion 1 busca lo que puse el CUE y/o anexo		
-            	 			
+            	 		
+					// con esto hago que no se busqeu con un cero adelante
+            	 	$this->data['Instit']['cue'] = (int)$this->data['Instit']['cue'];
+            	 	
                   	$this->paginate['conditions'] = array('CAST(((Instit.cue*100)+Instit.anexo) as character(60)) SIMILAR TO ?' => '%'.$this->data['Instit']['cue'].'%');;
                      // set the Search data, so the form remembers the option
                     $array_condiciones['CUE'] = $this->data['Instit']['cue'];
