@@ -80,15 +80,14 @@ class Plan extends AppModel {
 			'number' => array(
 				'rule' => VALID_NUMBER,
 				'required' => true,
-				'allowEmpty' => false,
+				'allowEmpty' => true,
 				'message' => 'Debe ingresar un valor numérico para las horas.'
-			
 			),
-			'maxLength' => array(
-				'rule' => array('maxLength','9'),
+			'between' => array(
+				'rule' => array('between','0','9'),
 				'required' => true,
-				'allowEmpty' => false,
-				'message' => 'La cantidad de horas debe ser de 9 dígitos.'
+				'allowEmpty' => true,
+				'message' => 'La duración no puede ser un valor tan alto'
 			
 			)
 		),
@@ -96,15 +95,15 @@ class Plan extends AppModel {
 			'number' => array(
 				'rule' => VALID_NUMBER,
 				'required' => true,
-				'allowEmpty' => false,
+				'allowEmpty' => true,
 				'message' => 'Debe ingresar un valor numérico para las semanas.'
 			
 			),
-			'maxLength' => array(
-				'rule' => array('maxLength','9'),
+			'between' => array(
+				'rule' => array('between','0','9'),
 				'required' => true,
-				'allowEmpty' => false,
-				'message' => 'La cantidad de semanas debe ser de 9 dígitos.'
+				'allowEmpty' => true,
+				'message' => 'La duración no puede ser un valor tan alto'
 			
 			)
 		),
@@ -112,15 +111,15 @@ class Plan extends AppModel {
 			'number' => array(
 				'rule' => VALID_NUMBER,
 				'required' => true,
-				'allowEmpty' => false,
+				'allowEmpty' => true,
 				'message' => 'Debe ingresar un valor numérico para los años.'
 			
 			),
-			'maxLength' => array(
-				'rule' => array('maxLength','9'),
+			'between' => array(
+				'rule' => array('between','0','9'),
 				'required' => true,
-				'allowEmpty' => false,
-				'message' => 'La cantidad de años debe ser de 9 dígitos.'
+				'allowEmpty' => true,
+				'message' => 'La duración no puede ser un valor tan alto'
 			
 			)
 		)	
@@ -135,6 +134,35 @@ class Plan extends AppModel {
   				$this->data['Plan']['sector'] = $sec_aux['Sector']['name'];
   			endif;
   		endif;
+  		
+  		
+  		if (isset($this->data['Plan']['duracion_hs'])):
+  			if ($this->data['Plan']['duracion_hs'] == ''): 
+  				$this->data['Plan']['duracion_hs'] = 0;
+  			endif;
+  		else:
+  			$this->data['Plan']['duracion_hs'] = 0;
+  		endif;
+  		
+  		
+  		if (isset($this->data['Plan']['duracion_semanas'])):
+  			if ($this->data['Plan']['duracion_semanas'] == ''): 
+  				$this->data['Plan']['duracion_semanas'] = 0;
+  			endif;
+  		else:
+  			$this->data['Plan']['duracion_semanas'] = 0;
+  		endif;
+  		
+  		
+  		if (isset($this->data['Plan']['duracion_anios'])):
+  			if ($this->data['Plan']['duracion_anios'] == ''): 
+  				$this->data['Plan']['duracion_anios'] = 0;
+  			endif;
+  		else:
+  			$this->data['Plan']['duracion_anios'] = 0;
+  		endif;
+  		
+  		
   		return true;
   	}
 
