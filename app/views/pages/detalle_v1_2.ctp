@@ -22,6 +22,8 @@
     <li> - Se agregaron campos "teléfono alternativo" y "mail alternativo" tanto para la institución como para el director.</li>
 	<li> - Se agregó la posibilidad de asignar un CUE histórico a la institución.</li>
 	<li> - Se agregó la funcionalidad para que cuando el CUE es modificado el sistema conserve como histórico el CUE anterior.</li>
+	<li> - Se modificó el atributo "Tipo de Institución" por "Tipo de Establecimiento".</li>
+	<li> - Al momento de dar de alta una institución se modificó para que la opción "estatal" no se encuentre seleccionada por defecto.</li>
   </ul>
   <li>
     <b>Oferta Educativa</b>
@@ -51,5 +53,12 @@
     <li> - Nuevo Informe sobre cantidad de Instituciones ingresadas, No ingresadas por ámbito de gestión y tipo de Establecimiento según jurisdicción.</li>
 	<li> - Nuevo Informe sobre Certificados FP.</li>
 	<li> - En Informe sobre Planes y Títulos se incorporó el dato Sector.</li>
+    <li> - Nuevo Informe sobre planes/títulos con la última información registrada para cada establecimiento.
+  </ul>
+  <li>
+    <b>Optimización</b>
+  </li>
+  <ul type="circle">
+    <li> - Se mejoró la velocidad de respuesta del sistema en las búsquedas y navegación del sitio.</li>
   </ul>
 </ul>
