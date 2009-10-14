@@ -33,7 +33,7 @@ endif;
 	<li><b>Ofertas: </b>Instituciones con planes pendientes de actualización.</li>
 	<li><b>Optimización: </b>Mejoras en la velocidad de búsqueda y navegación.</li>
 	<li><b>Reestructuración de la base de datos:</b> Mejores y más estádisticas.</li>
-	<li><b>Datos de la Institución:</b>Las institucioones ahora tienen normalizado: Tipo, número y nombre de institución, localidad y departamento.</li>
+	<li><b>Datos de la Institución:</b>Las instituciones ahora tienen normalizado: Tipo, número y nombre de institución, localidad y departamento.</li>
 	<br>
 	<ul><li><?php echo $html->link('ver listado completo de mejoras','/pages/detalle_v1_2');?></li></ul>
 </ul>
