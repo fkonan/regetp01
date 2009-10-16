@@ -49,13 +49,16 @@
 		var mensajero = new Mensaje('mensajero');
 	</script>
 	
-	<div id="container">
+	<? if ($_SERVER['HTTP_HOST']=='localhost'){?>
+		<div style="background-color: red; height: 20px; text-align: center">MODO LOCALHOST</div>
+	<? }?>
 	
-		<!-- DIV del mensajero, aca se van a mostrar mensajes AJAX, JS -->
+	<div id="container">	
+		<!-- DIV del mensajero, aca se van a mostrar mensajes AJAX, JS, etc -->
 		<div id="mensajero" style="display: none"></div>
 	
 		
-		<div id="header" <?= ($_SERVER['HTTP_HOST']=='localhost')?'style="background-color:white; background-image: url('.$html->url('/img/linux-volando-localhost.gif',true).')"':''?>>
+		<div id="header" >
 			<h1><?php echo $html->link(__('Registro Federal de Instituciones de ETP - RFIETP', true), '/pages/home'); ?></h1>	
 		</div>
 		<div id="content">
