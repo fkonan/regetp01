@@ -13,8 +13,19 @@
 			echo $form->input('jurisdiccion_id', array('empty' => array('0'=>'Todas'),'id'=>'jurisdiccion_id','label'=>'Jurisdicción','after'=>$meter));
 		?>
 		
-		<?= $form->button('Buscar',array('onclick'=>'enviar()'));?>
-
+		<!-- ?= $form->button('Buscar',array('onclick'=>'enviar()'));? -->
+		<?php echo $form->submit('Buscar', array('style'=>' display: block;
+													        width: 100px;
+													        vertical-align: bottom;
+													        margin-top: 7px;
+													        margin-left: 4px;
+													        border-color: #CEE3F6;
+													        background-color: #DBEBF6;
+													        color: #045FB4;
+													        font-weight: bold;'
+												)
+								); 
+		?>
 		
 		<h2><a href="#VerUbicacion" onclick="$('search-ubicacion').toggle()">por su ubicación</a></h2>
 		<div id="search-ubicacion" class="search-div" style="display: none">
@@ -143,7 +154,7 @@
 			<?php echo $form->button('Buscar',array('onclick'=>'enviar()'));?>
 		</div>
 		
-		<?php echo $form->end(null); ?>
+		<?php echo $form->end(); ?>
 		
 	</div>
 	
