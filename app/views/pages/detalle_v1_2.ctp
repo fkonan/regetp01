@@ -19,11 +19,22 @@
     <b>Instituciones</b>
   </li>
   <ul type="circle">
-    <li> - Se agregaron campos "teléfono alternativo" y "mail alternativo" tanto para la institución como para el director.</li>
 	<li> - Se agregó la posibilidad de asignar un CUE histórico a la institución.</li>
 	<li> - Se agregó la funcionalidad para que cuando el CUE es modificado el sistema conserve como histórico el CUE anterior.</li>
-	<li> - Se modificó el atributo "Tipo de Institución" por "Tipo de Establecimiento".</li>
 	<li> - Al momento de dar de alta una institución se modificó para que la opción "estatal" no se encuentre seleccionada por defecto.</li>
+	<li> - Al momento de dar de alta o de modificar una institución se agregó una búsqueda de datos "similares" con el objetivo de poder visualizar antes de la carga si la institución 
+	       no fue ingresada anteriormente. </li>
+  </ul>
+  <li>
+    <b>Datos de Instituciones</b>
+  </li>
+  <ul type="circle">
+    <li> - Se dividió el atributo "Nombre" en 3 partes: "Tipo de Establecimiento", "Número de Institución" y "Nombre", permitiendo una mejor 
+           clasificación al momento de las estadísticas.</li>
+	<li> - Se modificó el atributo "Tipo de Institución" por "Tipo de Establecimiento".</li>
+	<li> - Se normalizaron y depuraron los datos de Jurisdicción, departamento y Localidad.</li>
+
+	<li> - Se agregaron los atributos "teléfono alternativo" y "mail alternativo" tanto para la institución como para el director.</li>
   </ul>
   <li>
     <b>Oferta Educativa</b>

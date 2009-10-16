@@ -28,13 +28,15 @@ endif;
 
 <p>
 <ul>
-	<li><b>Histórico de CUE:</b> Búsqueda por CUE avanzada. Almacenamiento histórico de CUE para aquellas instituciones que lo hayan cambiado.</li>	
-	<li><b>Buscador:</b> Se incorporaron más criterios de búsqueda y se reordenó el buscador.</li>
-	<li><b>Ofertas: </b>Instituciones con planes pendientes de actualización.</li>
-	<li><b>Optimización: </b>Mejoras en la velocidad de búsqueda y navegación.</li>
-	<li><b>Reestructuración de la base de datos:</b> Mejores y más estádisticas.</li>
-	<li><b>Datos de la Institución:</b>Las instituciones ahora tienen normalizado: Tipo, número y nombre de institución, localidad y departamento.</li>
-	<br>
+<li><b>Buscador:</b> Se incorporaron criterios de búsqueda y se ordenaron las opciones en diferentes categorías: "por su Ubicación", "por su Nombre", "por su Oferta" y "por Otras Características". A su vez,
+se modificó la búsqueda por CUE para que encuentre CUEs parciales.</li>
+<li><b>Datos de Intitución:</b> Se corrigieron, depuraron y normalizaron los datos de las instituciones</li>
+<li><b>Oferta:</b> Se agregó funcionalidad a la página de oferta permitiendo búsquedas y ordenamientos sobre el listado
+de las mismas, y se implementó la posibilidad de marcar como pendiente de actualización a una institución cuando la documentación de la oferta educativa recibida está incompleta. </li>	
+<li><b>Buscador Histórico de CUE:</b> 
+Se agregó la posibilidad de buscar CUEs que hayan pertenecido a una institución.</li>
+<li><b>Optimización:</b> Se mejoró la velocidad de respuesta del sistema en las búsquedas y navegación del sitio.</li>
+<br>
 	<ul><li><?php echo $html->link('ver listado completo de mejoras','/pages/detalle_v1_2');?></li></ul>
 </ul>
 
