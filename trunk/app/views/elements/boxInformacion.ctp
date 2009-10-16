@@ -1,7 +1,7 @@
 <?
 if ($session->check('Auth.User')){
 	if(	$session->read('Auth.User.role') == 'admin' || 
-		$session->read('Auth.User.role') == 'superusuario' ||
+		$session->read('Auth.User.role') == 'desarrollo' ||
 		$session->read('Auth.User.role') == 'editor'){
 	?>
 

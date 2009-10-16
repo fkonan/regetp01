@@ -87,7 +87,7 @@ class AppController extends Controller {
 	    // usuarios con mas privilegios en el sistema
 	    // por lo general éstos usuarios puden ver botones ocultos que solo ellos ven, por ejemplo 
 	    // el boton para eliminar instituciones
-	    case 'superusuario':
+	    case 'desarrollo':
 	    	$llAuth = true;
 			break;
 		case 'admin':
