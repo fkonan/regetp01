@@ -1,4 +1,5 @@
 <?
+
 if(isset($script)){
 	echo $script;
 }
@@ -17,7 +18,7 @@ if(isset($script)){
 		echo $form->input('etapa_id',array('type'=>'hidden','value'=>99));
 		echo $form->input('ciclo_id',array('selected'=> date('Y')));
 
-		echo $form->input('hs_taller',array('label'=>'Duración en Horas'));
+		echo $form->input('hs_taller',array('label'=>'Duración en Horas','value'=>$duracion_hs));
 		echo $form->input('matricula',array('label'=>'Matrícula'));
 		
 		

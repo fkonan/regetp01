@@ -1,4 +1,5 @@
 <?
+
 if(isset($script)){
 	echo $script;
 }
