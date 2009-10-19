@@ -17,7 +17,7 @@ class AniosController extends AppController {
 		$this->set('anio', $this->Anio->read(null, $id));
 	}
 
-	function add($plan_id = null) {
+	function add($plan_id = null,$duracion_hs = null) {
 	
 		$this->layout='popup';
 		if (!empty($this->data)) {
@@ -35,6 +35,7 @@ class AniosController extends AppController {
 		$ciclos = $this->Anio->Ciclo->find('list');
 		$etapas = $this->Anio->Etapa->find('list');
 		$this->set('plan_id',$plan_id);
+		$this->set('duracion_hs',$duracion_hs);
 		$this->set(compact('planes', 'ciclos', 'etapas'));
 		
 		/**
@@ -43,7 +44,6 @@ class AniosController extends AppController {
          */
         $this->Anio->Plan->recursive = -1;
         $plan   = $this->Anio->Plan->find('all',array('conditions'=>array('Plan.id'=>$plan_id)));
-
         switch ($plan[0]['Plan']['oferta_id']):
 			case 1://es un FP, asique mostrar la vista de años para FP
 			case 7://es CL, asique mostrar la vista de años para FP	

@@ -110,7 +110,7 @@ $cue_instit = $instit['cue'].$anexo;
 	<div class="actions">
 		<ul>
 			<?php //echo $html->link(__('Agregar Nuevo Año', true), array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id']));?>
-			<li><a href="<?= $html->url(array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id']))?>" onClick="window.open('<?= $html->url(array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id']))?>','_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=310,height=380'); return false;">Agregar Datos</a></li>
+			<li><a href="<?= $html->url(array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id'] .'/' . $plan['Plan']['duracion_hs']))?>" onClick="window.open('<?= $html->url(array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id'] .'/' . $plan['Plan']['duracion_hs']))?>','_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=310,height=380'); return false;">Agregar Datos</a></li>
 		</ul>
 	</div>
 
