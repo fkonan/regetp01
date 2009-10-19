@@ -10,7 +10,7 @@ class DepuradoresController extends AppController {
 
 	var $name = 'Depuradores';
 	var $helpers = array('Html', 'Form','Ajax');
-	var $uses = array('Instit');
+	var $uses = array('Instit','Plan','Sector','Jurisdiccion');
 	var $db;
 	
 	
@@ -134,6 +134,49 @@ class DepuradoresController extends AppController {
 		$this->set('tipoinstits', $tipoinstis);
 		$this->set('falta_depurar',$total);
 
+	}
+	
+	/**
+	 * 
+	 * @return unknown_type
+	 */
+	function planes($jur_id=0){				
+		if (!empty($this->data)) {
+			if(isset($this->data['Instit']['jurisdiccion_id']))
+			{
+				$jur_id = $this->data['Instit']['jurisdiccion_id'];
+			}
+			else
+			{
+				$this->Plan->id = $this->data['Plan']['id']; 
+				if ($valor = $this->Plan->save(	array('nombre'=>$this->data['Plan']['nombre'], 'sector_id'=>$this->data['Plan']['sector_id']),
+												array('validate'=>true, 'fieldList'=>array('nombre', 'sector_id')))) {	
+					$this->Session->setFlash(__('Se ha guardado el Plan correctamente', true));
+									
+				} else {
+					print_r($this->Plan->validationErrors);
+					$this->Session->setFlash(__('El Plan no pudo ser guardada. Escriba nuevamente el campo incorrecto.', true));
+				}
+			}
+		}
+		
+		$conditions = array('Instit.activo'=>1, 'Plan.sector_id'=>0);
+		if($jur_id!=0) $conditions['Instit.jurisdiccion_id'] =  $jur_id;
+		
+		$this->Plan->recursive = 1;
+		$this->data =$this->Plan->find('first',array('conditions'=>$conditions,'order'=>'Plan.id DESC'));
+		$total =$this->Plan->find('count',array('conditions'=>$conditions));
+
+		$instit = $this->Plan->Instit->find('first',array('conditions'=>array('Instit.id'=>$this->data['Instit']['id'])));
+		$this->data['Instit']['nombre'] = $instit['Instit']['nombre_completo'];
+
+		//$tipoinstis = $this->Instit->Tipoinstit->find('list',array('conditions'=>'Tipoinstit.jurisdiccion_id = '.$this->data['Instit']['jurisdiccion_id'],'order'=>'Tipoinstit.name'));
+		$sectores = $this->Plan->Sector->find('list',array('order'=>'Sector.name'));
+		$this->set('sectores',$sectores);
+		$jurisdicciones = $this->Jurisdiccion->find('list',array('order'=>'Jurisdiccion.name'));
+		$this->set('jurisdicciones',$jurisdicciones);
+		$this->set('falta_depurar',$total);
+		$this->set('jur_id',$jur_id);
 	}
 }
 ?>

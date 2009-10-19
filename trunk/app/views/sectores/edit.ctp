@@ -4,8 +4,6 @@
  		<legend><?php __('Edit Sector');?></legend>
 	<?php
 		echo $form->input('id');
-		
-		echo $form->input('parent_id',array('type'=>'select','empty'=>'Root','options'=>$sectores));
 		echo $form->input('name');
 	?>
 	</fieldset>
