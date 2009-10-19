@@ -9,9 +9,6 @@ echo $paginator->counter(array(
 <table cellpadding="0" cellspacing="0">
 <tr>
 	<th><?php echo $paginator->sort('id');?></th>
-	<th><?php echo $paginator->sort('parent_id');?></th>
-	<th><?php echo $paginator->sort('lft');?></th>
-	<th><?php echo $paginator->sort('rght');?></th>
 	<th><?php echo $paginator->sort('name');?></th>
 	<th class="actions"><?php __('Actions');?></th>
 </tr>
@@ -26,15 +23,6 @@ foreach ($sectores as $sector):
 	<tr<?php echo $class;?>>
 		<td>
 			<?php echo $sector['Sector']['id']; ?>
-		</td>
-		<td>
-			<?php echo $sector['Sector']['parent_id']; ?>
-		</td>
-		<td>
-			<?php echo $sector['Sector']['lft']; ?>
-		</td>
-		<td>
-			<?php echo $sector['Sector']['rght']; ?>
 		</td>
 		<td>
 			<?php echo $sector['Sector']['name']; ?>

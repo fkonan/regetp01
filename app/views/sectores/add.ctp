@@ -3,7 +3,6 @@
 	<fieldset>
  		<legend><?php __('Add Sector');?></legend>
 	<?php
-		echo $form->input('parent_id',array('type'=>'select','empty'=>'Root','options'=>$sectores));
 		echo $form->input('name');
 	?>
 	</fieldset>

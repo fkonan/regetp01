@@ -27,7 +27,6 @@ class SectoresController extends AppController {
 				$this->Session->setFlash(__('The Sector could not be saved. Please, try again.', true));
 			}
 		}
-		$this->set('sectores',$this->Sector->generatetreelist());
 	}
 
 	function edit($id = null) {
@@ -46,7 +45,6 @@ class SectoresController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Sector->read(null, $id);
 		}
-		$this->set('sectores',$this->Sector->generatetreelist());
 	}
 
 	function delete($id = null) {
