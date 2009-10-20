@@ -5,15 +5,13 @@
 		echo $form->input('Instit.jurisdiccion_id', array('empty' => 'Todos',
 											 'type'=>'select',
 											 'label'=>'Jurisdicción',
+											 'value'=>$jur_id,
 											 'options'=>$jurisdicciones
 											 ));
-												 ///localidades/ajax_select_localidades_form_por_departamento
-		 
 		echo $form->end("Cambiar");
 ?> 
 
 <h1>Editar Plan de <?php echo $this->data['Plan']['nombre']?><br>  ¡¡ vamos que faltan solo <?php echo $falta_depurar?>!!</h1>
-<br>
 <h2>Establecimiento</h2>
 <dl>
 <dt>CUE:</dt><dd><?= $this->data['Instit']['cue']*100+$this->data['Instit']['anexo'] ?> (id:<?php echo $this->data['Instit']['id']?>)</dd>
@@ -34,7 +32,5 @@
 											 'label'=>'Sector ('.$this->data['Plan']['sector'].')',
 											 'options'=>$sectores
 											 ));
-												 ///localidades/ajax_select_localidades_form_por_departamento
-		 
 		echo $form->end("Guardar");
 ?> 
