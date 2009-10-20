@@ -258,7 +258,7 @@ class InstitsController extends AppController {
             	 	if($is_cue_valido < 1){
             	 		switch ($is_cue_valido){
             	 			case -1:
-            	 				$mensaje = "<H1>El CUE: '".$this->data['Instit']['cue']."' no es válido.</H1> Ingrese un valor numérico de al menos 3 dígitos.";
+            	 				$mensaje = "<H1>El CUE: '".$this->data['Instit']['cue']."' no es válido.</H1> Ingrese un valor <b>numérico</b> de al menos <b>3 dígitos</b>.";
             	 				$this->Session->setFlash($mensaje,'default',array('class' => 'flash-warning'));
             	 				$this->redirect('search_form');
             	 				break;

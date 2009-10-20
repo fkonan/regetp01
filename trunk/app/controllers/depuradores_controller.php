@@ -140,8 +140,9 @@ class DepuradoresController extends AppController {
 	 * 
 	 * @return unknown_type
 	 */
-	function planes($jur_id=0){				
+	function sectores($jur_id=0){		
 		if (!empty($this->data)) {
+			
 			if(isset($this->data['Instit']['jurisdiccion_id']))
 			{
 				$jur_id = $this->data['Instit']['jurisdiccion_id'];
@@ -164,7 +165,7 @@ class DepuradoresController extends AppController {
 		if($jur_id!=0) $conditions['Instit.jurisdiccion_id'] =  $jur_id;
 		
 		$this->Plan->recursive = 1;
-		$this->data =$this->Plan->find('first',array('conditions'=>$conditions,'order'=>'Plan.id DESC'));
+		$this->data =$this->Plan->find('first',array('conditions'=>$conditions));
 		$total =$this->Plan->find('count',array('conditions'=>$conditions));
 
 		$instit = $this->Plan->Instit->find('first',array('conditions'=>array('Instit.id'=>$this->data['Instit']['id'])));
