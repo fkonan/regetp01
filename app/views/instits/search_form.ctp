@@ -132,8 +132,7 @@
 			
 			<?php 
 			echo $form->input('Plan.norma',array(
-								'label'=>'Normativa',
-								'type'=>$type
+								'label'=>'Normativa'
 								));
 			?>
 			
