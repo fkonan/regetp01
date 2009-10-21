@@ -236,15 +236,6 @@ class Instit extends AppModel {
 				'message' => 'La dirección de e-mail no es válida.'
 			)
 		),
-		'dir_mail_alternativo' => array(
-			'email' => array(
-				'rule' => VALID_EMAIL,
-				'required' => false,
-				'allowEmpty' => true,
-				//'on' => 'create', // or: 'update'
-				'message' => 'La dirección de e-mail no es válida.'
-			)
-		),
 		'vice_nrodoc' => array(
    			'number' => array(
 				'rule' => VALID_NUMBER,

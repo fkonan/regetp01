@@ -21,7 +21,7 @@ class TestTickets extends TicketsController {
 
 class TicketsControllerTest extends CakeTestCase {
 	var $Tickets = null;
-	//var $fixtures = array( 'ticket' ); 
+	//var $fixtures = array( 'app.ticket' ); 
 	
 	function startCase() { 
 		echo '<h1>Starting Test Case</h1>'; 
@@ -47,7 +47,6 @@ class TicketsControllerTest extends CakeTestCase {
 		$this->assertTrue(is_a($this->Tickets, 'TicketsController'));
 	}
 	
-	
 	function testIndex() {
 		$prov_pend = $this->Tickets->provincias_pendientes();
 		
@@ -62,8 +61,6 @@ class TicketsControllerTest extends CakeTestCase {
 		}
 	}
 		
-	
-
 	function tearDown() {
 		unset($this->Tickets);
 	}

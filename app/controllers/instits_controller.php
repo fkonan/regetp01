@@ -2,7 +2,7 @@
 class InstitsController extends AppController {
 
 	var $name = 'Instits';
-	var $helpers = array('Html', 'Form','Ajax');
+	var $helpers = array('Html','Form','Ajax');
 	var $paginate = array('order'=>array('Instit.cue' => 'asc'),'limit'=>'10'); 
 
 	function beforeFilter(){
@@ -245,8 +245,7 @@ class InstitsController extends AppController {
 		 * 
 		 * 
 		 */
-		
-		
+
 			/**
 			 *     CUE
 			 */
@@ -288,8 +287,6 @@ class InstitsController extends AppController {
             	 }
             }
             
-            
-            
 			/**
 			 *     Nro Institucion
 			 */  
@@ -307,9 +304,6 @@ class InstitsController extends AppController {
 					$url_conditions['nroinstit'] = utf8_decode($this->passedArgs['nroinstit']);			
 				}
             }
-            
-            
-            
             
 			/**
 			 *     JURISDICCION
@@ -627,12 +621,27 @@ class InstitsController extends AppController {
 					$url_conditions['Plan.sector'] = utf8_decode($this->passedArgs['Plan.sector']);			
 				}
             }
-                            
             
+	/**
+			 *     NORMA
+			 */
+            if(isset($this->data['Plan']['norma'])){
+	            if($this->data['Plan']['norma'] != ''){
+	            	$this->Instit->asociarPlan = true;
+					$this->paginate['conditions']['to_ascii(lower(Plan.norma)) SIMILAR TO ?'] = array($this->Instit->convertir_para_busqueda_avanzada($this->data['Plan']['norma']));
+					$array_condiciones['Norma'] = $this->data['Plan']['norma'];
+					$url_conditions['Plan.norma'] = $this->data['Plan']['norma'];			
+				}
+            }
+			if(isset($this->passedArgs['Plan.norma'])){	
+            	if($this->passedArgs['Plan.norma'] != ''){
+            		$this->Instit->asociarPlan = true;
+					$this->paginate['conditions']['to_ascii(lower(Plan.norma)) SIMILAR TO ?'] = array($this->Instit->convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['Plan.norma'])));
+					$array_condiciones['Norma'] = utf8_decode($this->passedArgs['Plan.norma']);
+					$url_conditions['Plan.norma'] = utf8_decode($this->passedArgs['Plan.norma']);			
+				}
+            }
             
-            
-            
-			
         /***********************************************************************/
 			
 	    $this->Instit->recursive = 1;//para alivianar la carga del server         
@@ -659,6 +668,7 @@ class InstitsController extends AppController {
         //devuelve un array para mostrar los criterios de busqueda
         $this->set('conditions', $array_condiciones);
         
+        return $pagin;
 	}
 	
 		

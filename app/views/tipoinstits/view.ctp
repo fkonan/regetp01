@@ -108,9 +108,7 @@
 			<td><?php echo $instit['dir_tipodoc_id'];?></td>
 			<td><?php echo $instit['dir_nrodoc'];?></td>
 			<td><?php echo $instit['dir_telefono'];?></td>
-			<td><?php echo $instit['dir_telefono_alternativo'];?></td>
 			<td><?php echo $instit['dir_mail'];?></td>
-			<td><?php echo $instit['dir_mail_alternativo'];?></td>
 			<td><?php echo $instit['vice_nombre'];?></td>
 			<td><?php echo $instit['vice_tipodoc_id'];?></td>
 			<td><?php echo $instit['vice_nrodoc'];?></td>

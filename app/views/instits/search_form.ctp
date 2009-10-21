@@ -119,7 +119,7 @@
 			
 			$type = 'hidden';
 			// esto solo lo ven los editores y los administradores
-			if($session->read('Auth.User.role') == 'editor' || $session->read('Auth.User.role') == 'admin'){
+			if($session->read('Auth.User.role') == 'editor' || $session->read('Auth.User.role') == 'admin' || $session->read('Auth.User.role') == 'desarrollo'){
 				$type = 'text'; //lo muestra como un imputo comun				
 			}
 			
@@ -127,9 +127,16 @@
 								'label'=>'Sector',
 								'type'=>$type,
 								'after'=>'<cite>Ej: Mecánica Automotriz, Informática, etc</cite>'));
-			
-			
 			?>
+			
+			
+			<?php 
+			echo $form->input('Plan.norma',array(
+								'label'=>'Normativa',
+								'type'=>$type
+								));
+			?>
+			
 			<?php echo $form->button('Buscar',array('onclick'=>'enviar()'));?>
 		</div>
 		

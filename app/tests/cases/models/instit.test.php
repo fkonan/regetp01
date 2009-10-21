@@ -72,7 +72,6 @@ class InstitTest extends CakeTestCase {
 		// Estos son casos que fallan
 		$this->assertEqual($this->Instit->isCUEValid("2ss54"),-1);		
 		$this->assertEqual($this->Instit->isCUEValid("j.kjas"),-1);
-		
 
 		$this->assertEqual($this->Instit->isCUEValid("501254"),-6);
 		$this->assertEqual($this->Instit->isCUEValid("9810125"),-7);
