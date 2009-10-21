@@ -39,10 +39,21 @@ $cue_instit = $instit['cue'].$anexo;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Sector'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $plan['Plan']['sector']; ?>
+			<?php 
+				if($plan['Sector']['name']!="")
+					echo $plan['Sector']['name'];
+				else if($plan['Plan']['sector']!="")
+					echo $plan['Plan']['sector'];
+				else
+					echo "---";
+			?>
 			&nbsp;
 		</dd>
-		
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Subsector'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo ($plan['Subsector']['name']=="")? "---" : $plan['Subsector']['name']; ?>
+			&nbsp;
+		</dd>		
 		
 		
 		<? if((($plan['Plan']['duracion_hs']+$plan['Plan']['duracion_semanas']+$plan['Plan']['duracion_anios'])>0)){ ?>

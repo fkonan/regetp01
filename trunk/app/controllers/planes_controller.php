@@ -2,7 +2,7 @@
 class PlanesController extends AppController {
 
 	var $name = 'Planes';
-	var $helpers = array('Html', 'Form');
+	var $helpers = array('Html','Form','Ajax');
 	
 	function beforeFilter(){
 		parent::beforeFilter();
@@ -208,6 +208,11 @@ class PlanesController extends AppController {
 		
 		$sectores = $this->Plan->Sector->find('list',array('order'=>'Sector.name'));
 		$this->set('sectores',$sectores);
+		
+		$subsectores = $this->Plan->Subsector->con_sector('list');
+		$this->set('subsectores',$subsectores);
+		
+		
 		$this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$instit['Instit']['id'] );
 	}
 
@@ -239,6 +244,9 @@ class PlanesController extends AppController {
 		
 		$sectores = $this->Plan->Sector->find('list',array('order'=>'Sector.name'));
 		$this->set('sectores',$sectores);
+		
+		$subsectores = $this->Plan->Subsector->con_sector('list');
+		$this->set('subsectores',$subsectores);
 	}
 
 	function delete($id = null) {
@@ -253,9 +261,5 @@ class PlanesController extends AppController {
 		}
 	}
 	
-	
-	
-
-
 }
 ?>

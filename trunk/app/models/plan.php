@@ -25,6 +25,12 @@ class Plan extends AppModel {
 								'fields' => '',
 								'order' => ''
 			),
+			'Subsector' => array('className' => 'Subsector',
+								'foreignKey' => 'subsector_id',
+								'conditions' => '',
+								'fields' => '',
+								'order' => ''
+			),
 	);
 
 	var $hasMany = array(
@@ -74,6 +80,18 @@ class Plan extends AppModel {
 				'required' => true,
 				'allowEmpty' => false,
 				'message' => 'Debe ingresar un sector.'	
+			)
+		),
+		'subsector_id' => array(
+			'notEmpty'=> array(
+				'rule' => VALID_NOT_EMPTY,
+				'required' => true,
+				'allowEmpty' => false,
+				'message' => 'Debe ingresar un subsector.'	
+			),
+			'correcto_subsector' => array(
+			'rule' => array('controlar_coincidencia_sector_subsector'),
+			'message'=> 'El subsector no corresponde al sector.',	
 			)
 		),
 		'duracion_hs' => array(
@@ -132,6 +150,15 @@ class Plan extends AppModel {
   				$this->Sector->id = $this->data['Plan']['sector_id'];
   				$sec_aux = $this->Sector->read();
   				$this->data['Plan']['sector'] = $sec_aux['Sector']['name'];
+  			endif;
+  		endif;
+  		
+  		if (isset($this->data['Plan']['subsector_id'])):
+  			if ($this->data['Plan']['subsector_id'] != '' || $this->data['Plan']['subsector_id'] != 0): 
+  				$this->Subsector->recursive = -1;
+  				$this->Subsector->id = $this->data['Plan']['subsector_id'];
+  				$sec_aux = $this->Subsector->read();
+  				$this->data['Plan']['subsector'] = $sec_aux['Subsector']['name'];
   			endif;
   		endif;
   		
@@ -261,8 +288,6 @@ class Plan extends AppModel {
 		$this->maxCiclo = $ciclo;	
 	}   
 	
-	
-	
 	function dameMatriculaDeCiclo($plan_id,$ciclo){
 		$tot = $this->Anio->find('all',array(
 			'fields'=>'sum(matricula) AS "Anio__matricula"',
@@ -272,7 +297,22 @@ class Plan extends AppModel {
 		return $tot[0]['Anio']['matricula'];
 	}
 	
-	
+	function controlar_coincidencia_sector_subsector(){
+  		if (isset($this->data[$this->name]['subsector_id'])){
+  			if ($this->data[$this->name]['subsector_id'] == '') return false;
+  			
+  			if ($this->data[$this->name]['subsector_id'] == 0) return true;
+  			
+  			if ($this->data[$this->name]['subsector_id'] != ''){
+		  		$sector_id = $this->data[$this->name]['sector_id'];
+		  		$subsector_id = $this->data[$this->name]['subsector_id'];
+		  		$this->Subsector->recursive = -1;
+		  		$tot = $this->Subsector->find('count',array('conditions'=> array('Subsector.id'=>$subsector_id, 'Subsector.sector_id'=>$sector_id)));
+		  		return ($tot > 0);
+  			}
+  		}
+  		return false;
+  	}
 	
 }
 ?>
