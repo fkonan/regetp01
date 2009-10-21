@@ -32,9 +32,7 @@ echo $paginator->counter(array(
 	<th><?php echo $paginator->sort('dir_tipodoc_id');?></th>
 	<th><?php echo $paginator->sort('dir_nrodoc');?></th>
 	<th><?php echo $paginator->sort('dir_telefono');?></th>
-	<th><?php echo $paginator->sort('dir_telefono_alternativo');?></th>
 	<th><?php echo $paginator->sort('dir_mail');?></th>
-	<th><?php echo $paginator->sort('dir_mail_alternativo');?></th>
 	<th><?php echo $paginator->sort('vice_nombre');?></th>
 	<th><?php echo $paginator->sort('vice_tipodoc_id');?></th>
 	<th><?php echo $paginator->sort('vice_nrodoc');?></th>
@@ -130,13 +128,7 @@ foreach ($instits as $instit):
 			<?php echo $instit['Instit']['dir_telefono']; ?>
 		</td>
 		<td>
-			<?php echo $instit['Instit']['dir_telefono_alternativo']; ?>
-		</td>
-		<td>
 			<?php echo $instit['Instit']['dir_mail']; ?>
-		</td>
-		<td>
-			<?php echo $instit['Instit']['dir_mail_alternativo']; ?>
 		</td>
 		<td>
 			<?php echo $instit['Instit']['vice_nombre']; ?>

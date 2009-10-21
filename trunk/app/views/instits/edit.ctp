@@ -187,19 +187,10 @@
 																'class'=>'input_label'),
 											 	'class'=>'input_text_peque'
 		));
-		echo $form->input('dir_telefono_alternativo',array(	'label'=>array(	'text'=> 'Teléfono Alternativo',
-																'class'=>'input_label'),
-											 	'class'=>'input_text_peque'
-		));
 		echo $form->input('dir_mail',array('label'=>array(	'text'=> 'E-Mail',
 															'class'=>'input_label'),
 											 'class'=>'input_text_peque'
-		));
-		echo $form->input('dir_mail_alternativo',array('label'=>array(	'text'=> 'E-Mail Alternativo',
-															'class'=>'input_label'),
-											 'class'=>'input_text_peque'
-		));
-		
+		));		
 		
 	/******************************************************************************
 	* 

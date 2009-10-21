@@ -191,31 +191,12 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
 			&nbsp;
 		</dd>
 		
-		
-		<?php if($instit['Instit']['dir_telefono_alternativo']): ?>
-		<dt><?php __('Teléfono Alternativo'); ?></dt>
-		<dd>
-			<?php echo $instit['Instit']['dir_telefono_alternativo']; ?>
-			&nbsp;
-		</dd>
-		<?php endif;?>
-		
-		
-		
 		<dt><?php __('E-Mail'); ?></dt>
 		<dd>
 			<?php echo $instit['Instit']['dir_mail']; ?>
 			&nbsp;
 		</dd>
-		
-		
-		<?php if($instit['Instit']['dir_mail_alternativo']): ?>
-		<dt><?php __('E-Mail Alternativo'); ?></dt>
-		<dd>
-			<?php echo $instit['Instit']['dir_mail_alternativo']; ?>
-			&nbsp;
-		</dd>
-		<?php endif;?>
+
 	</dl>
 	
 	<H2>Datos Vice Director</H2>
