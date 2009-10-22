@@ -37,13 +37,14 @@ endif;
 	</ul>
 </li>
 <br>
-<li><b>Datos de Intitución</b>
+<li><b>Datos de Institución</b>
  	<ul><li> Se corrigieron, depuraron y normalizaron los datos de todas las instituciones.</li></ul>
 </li>
 <br>
 <li><b>Oferta</b> 
 	<ul><li>Se agregó funcionalidad a la página de oferta permitiendo búsquedas y ordenamientos sobre el listado
-			de las mismas, y se implementó la posibilidad de marcar como pendiente de actualización a una institución cuando la documentación de la oferta educativa recibida está incompleta. </li>
+			de las mismas.</li>
+		<li>Se implementó la posibilidad de marcar como pendiente de actualización a una institución cuando la documentación de la oferta educativa recibida está incompleta.</li>
 	</ul>
 </li>
 <br>	

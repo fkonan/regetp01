@@ -12,6 +12,7 @@
 	<li> - Se agregó la posibilidad de buscar CUE con Anexo. Ej: 600118<b>00</b></li>
 	<li> - Se ordenaron las opciones de búsqueda en diferentes categorías: "por su Ubicación", "por su Nombre", "por su Oferta" y "por Otras Características".</li>
     <li> - Se agregó opción de búsqueda por Oferta.</li>
+    <li> - Se agregó opción de búsqueda por Normativa.</li>
     <li> - Se normalizaron las búsquedas por localidad y departamento.</li>
 	<li> - Se agregó selector de páginas.</li>
   </ul>

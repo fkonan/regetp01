@@ -27,7 +27,10 @@
 								); 
 		?>
 		
-		<h2><a href="#VerUbicacion" onclick="$('search-ubicacion').toggle()">por su ubicación</a></h2>
+		<!-- 
+				BUSQUEDA POR SU UBICACION
+		-->
+		<div class="boton-para-div-oculto"><a href="#VerUbicacion" onclick="$('search-ubicacion').toggle()">por su ubicación</a></div>
 		<div id="search-ubicacion" class="search-div" style="display: none">
 			
 			<div id= "departamento-select">		
@@ -89,7 +92,11 @@
 		</div>
 		
 		
-		<h2><a href="#VerDenominacion" onclick="$('search-denominacion').toggle()">por su nombre</a></h2>
+		
+		<!-- 
+				BUSQUEDA POR SU NOMBRE 
+		-->
+		<div class="boton-para-div-oculto"><a href="#VerDenominacion" onclick="$('search-denominacion').toggle()">por su nombre</a></div>
 		<div id="search-denominacion"  class="search-div" style="display: none">
 			<?php 
 			echo $form->input('tipoinstit_id', array(	'empty' => 'Todas','type'=>'select',
@@ -111,11 +118,18 @@
 			?>
 		</div>
 		
-		<h2><a href="#VerPlanes" onclick="$('search-planes').toggle()">por su oferta</a></h2>
 		
+		
+		
+		<!-- 
+				BUSQUEDA POR SU OFERTA
+		-->
+		<div class="boton-para-div-oculto"><a href="#VerPlanes" onclick="$('search-planes').toggle()">por su oferta</a></div>		
 		<div id="search-planes"  class="search-div" style="display: none">
 			<?php 			
-			echo $form->input('Plan.oferta_id',array('options'=>$ofertas, 'empty'=>'Seleccionar', 'label'=>'Con Oferta'));
+			echo $form->input('Plan.oferta_id',array('options'=>$ofertas, 
+													 'empty'=>'Seleccionar', 
+													 'label'=>'Con Oferta'));
 			
 			$type = 'hidden';
 			// esto solo lo ven los editores y los administradores
@@ -139,7 +153,14 @@
 			<?php echo $form->button('Buscar',array('onclick'=>'enviar()'));?>
 		</div>
 		
-		<h2><a href="#VerOtros" onclick="$('search-otros').toggle()">por otras características</a></h2>
+		
+		
+		
+		<!-- 
+				BUSQUEDA POR OTRAS CARACTERISTICAS
+		-->
+		
+		<div class="boton-para-div-oculto"><a href="#VerOtros" onclick="$('search-otros').toggle()">por otras características</a></div>
 		
 		<div id="search-otros"  class="search-div" style="display: none">
 			<?php 
