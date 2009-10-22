@@ -19,10 +19,17 @@ $cue_instit = $instit['cue'].$anexo;
 
 		echo $form->hidden('sector');
 		$meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
-		echo $form->input('sector_id',array('type'=>'select','empty'=>'Seleccione','options'=>$sectores,'label'=>'Sector ('.$this->data['Plan']['sector'].')','id'=>'sector_id','after'=>$meter));
+		
+		echo $form->input('sector_id',array(	'type'=>'select',
+												'empty'=>'Seleccione',
+												'options'=>$sectores,
+												'label'=>'Sector ('.$this->data['Plan']['sector'].')','id'=>'sector_id','after'=>$meter));
 
-		echo $form->hidden('subsector');
-		echo $form->input('subsector_id', array('empty' => 'Seleccione','type'=>'select','label'=>'Subsector','after'=> $meter.'<br /><cite>Seleccione primero un sector.</cite>'));
+		
+		echo $form->input('subsector_id', array('empty' => 'Seleccione',
+												'type'=>'select',
+												'label'=>'Subsector',
+												'after'=> $meter.'<br /><cite>Seleccione primero un sector.</cite>'));
 		echo $ajax->observeField('sector_id',
                                    array(  	'url' => '/subsectores/ajax_select_subsector_form_por_sector',
 		                                   	'update'=>'PlanSubsectorId',

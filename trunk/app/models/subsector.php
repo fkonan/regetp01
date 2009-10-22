@@ -33,6 +33,14 @@ class Subsector extends AppModel {
 	);
 	
 	
+	/**
+	 * 
+	 * 	Te trae todos los subsectores que pertenecen a ese sector
+	 * 
+	 * @param string $tipo tipo del find
+	 * @param integer $sector_id id del sector que estoy buscando
+	 * @return array del find
+	 */
 	function con_sector($tipo = 'all' , $sector_id = 0){
 		$this->recursive = 0;
 		

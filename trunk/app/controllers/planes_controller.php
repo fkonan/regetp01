@@ -237,16 +237,19 @@ class PlanesController extends AppController {
 		$this->set('instit',$instit['Instit']);
 
 		$ofertas = $this->Plan->Oferta->find('list');
-		$this->set(compact('ofertas'));
+		
+		$sectores = $this->Plan->Sector->find('list',array('order'=>'Sector.name'));		
+		
+		if(!isset($this->data['Plan']['sector_id'])){
+			$this->data['Plan']['sector_id'] = 0;
+		}		
+		$subsectores = $this->Plan->Subsector->con_sector('list',$this->data['Plan']['sector_id']);
+		
+		$this->set(compact('ofertas','subsectores','sectores'));
+		
 		$this->rutaUrl_for_layout[] = array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$this->data['Plan']['instit_id'] );
 		$this->rutaUrl_for_layout[] = array('name'=> 'Oferta Educativa','link'=>'/Planes/index/'.$this->data['Plan']['instit_id'] );
 		$this->rutaUrl_for_layout[] = array('name'=> $this->data['Plan']['nombre'],'link'=>'/Planes/view/'.$this->data['Plan']['id'] );
-		
-		$sectores = $this->Plan->Sector->find('list',array('order'=>'Sector.name'));
-		$this->set('sectores',$sectores);
-		
-		$subsectores = $this->Plan->Subsector->con_sector('list');
-		$this->set('subsectores',$subsectores);
 	}
 
 	function delete($id = null) {
