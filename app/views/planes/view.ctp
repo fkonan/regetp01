@@ -45,13 +45,13 @@ $cue_instit = $instit['cue'].$anexo;
 				else if($plan['Plan']['sector']!="")
 					echo $plan['Plan']['sector'];
 				else
-					echo "---";
+					echo "&nbsp";
 			?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Subsector'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo ($plan['Subsector']['name']=="")? "---" : $plan['Subsector']['name']; ?>
+			<?php echo ($plan['Subsector']['name']=="")? "&nbsp" : $plan['Subsector']['name']; ?>
 			&nbsp;
 		</dd>		
 		

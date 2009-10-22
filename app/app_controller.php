@@ -170,6 +170,7 @@ class AppController extends Controller {
 		if ($this->name == 'Departamentos' && $this->action == 'ajax_select_departamento_form_por_jurisdiccion') {$llAuth = true;}
 		if ($this->name == 'Localidades' && $this->action == 'ajax_select_localidades_form_por_departamento') {$llAuth = true;}	
 		if ($this->name == 'Localidades' && $this->action == 'ajax_select_localidades_form_por_jurisdiccion') {$llAuth = true;}
+		if ($this->name == 'Subsectores' && $this->action == 'ajax_select_subsector_form_por_sector') {$llAuth = true;}
 		
 		/**
 		 * Hacer que solo puedan modificar sus datos y contraseña el usuario que es dueño de esos datos

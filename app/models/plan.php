@@ -83,15 +83,9 @@ class Plan extends AppModel {
 			)
 		),
 		'subsector_id' => array(
-			'notEmpty'=> array(
-				'rule' => VALID_NOT_EMPTY,
-				'required' => true,
-				'allowEmpty' => false,
-				'message' => 'Debe ingresar un subsector.'	
-			),
 			'correcto_subsector' => array(
-			'rule' => array('controlar_coincidencia_sector_subsector'),
-			'message'=> 'El subsector no corresponde al sector.',	
+				'rule' => array('controlar_coincidencia_sector_subsector'),
+				'message'=> 'El subsector no corresponde al sector.'	
 			)
 		),
 		'duracion_hs' => array(
@@ -299,7 +293,10 @@ class Plan extends AppModel {
 	
 	function controlar_coincidencia_sector_subsector(){
   		if (isset($this->data[$this->name]['subsector_id'])){
-  			if ($this->data[$this->name]['subsector_id'] == '') return false;
+  			if ($this->data[$this->name]['subsector_id'] == ''){
+  				$this->data[$this->name]['subsector_id'] = 0;
+  				return true;
+  			}
   			
   			if ($this->data[$this->name]['subsector_id'] == 0) return true;
   			

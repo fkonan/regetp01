@@ -49,8 +49,11 @@ endif;
 </li>
 <br>	
 <li><b>Buscador Histórico de CUE</b>
-	<ul><li>Se agregó la posibilidad de buscar CUEs que hayan pertenecido a una institución.
-	</li></ul>
+	<ul>
+	  <li>
+	  Se agregó la posibilidad de buscar CUEs que hayan pertenecido a una institución.
+	  </li>
+	</ul>
 </li> 
 <br>
 <li><b>Optimización</b>
