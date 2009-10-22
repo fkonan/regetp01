@@ -22,12 +22,25 @@
 		
 		echo $form->input('nombre', array('value'=>$this->data['Plan']['nombre']));
 				
-		echo '<span class="ajax_update" id="ajax_indicator_dpto" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
-		echo $form->input('sector_id', array('empty' => array(0=>'SIN DATOS'),
-											 'type'=>'select',
+		//echo '<span class="ajax_update" id="ajax_indicator_dpto" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
+		$meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
+		echo $form->input('sector_id', array('type'=>'select',
 											 'label'=>'Sector ('.$this->data['Plan']['sector'].')',
-											 'options'=>$sectores
+											 'options'=>$sectores,
+											 'selected'=>$sector_sug,
+											 'after'=>$meter,
+											 'id'=>'sector_id'
 											 ));
+		echo $form->input('subsector_id', array('empty' => 'Seleccione','options'=>$subsectores,'type'=>'select','label'=>'Subsector','after'=> $meter.'<br /><cite>Seleccione primero un sector.</cite>'));
+		echo $ajax->observeField('sector_id',
+                                   array(  	'url' => '/subsectores/ajax_select_subsector_form_por_sector',
+		                                   	'update'=>'PlanSubsectorId',
+		                                   	'loading'=>'$("ajax_indicator").show();$("PlanSubsectorId").disable()',
+		                                   	'complete'=>'$("ajax_indicator").hide();$("PlanSubsectorId").enable()',
+		                                   	'onChange'=>true
+                                   ));
+											 
+		//debug($sectores);
 		echo $form->end("Guardar");
 ?> 
 
