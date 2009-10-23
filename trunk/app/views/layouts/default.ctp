@@ -59,7 +59,9 @@
 	
 		
 		<div id="header" >
-			<h1><?php echo $html->link(__('Registro Federal de Instituciones de ETP - RFIETP', true), '/pages/home'); ?></h1>	
+			<h1>
+				<?php echo $html->link(__('Registro Federal de Instituciones de Educación Técnico Profesional (RFIETP)', true), '/pages/home'); ?>
+			</h1>	
 		</div>
 		<div id="content">
 			<div id="menu">	
