@@ -29,48 +29,47 @@ endif;
 
 <p>
 Desde su puesta en funcionamiento en junio del presente año el nuevo sistema RFIETP se 
-encuentra en permanente actualización y mejoramiento, tanto respecto del 
+encuentra en permanente actualización y mejoramiento, tanto del 
 contenido de información de la base de datos como de la aplicación que permite 
 su gestión. En esa línea de trabajo a partir del 20 de octubre se ha instalado 
 la versión 1.2 del sistema.
-<br>
-<br>
+</p>
+<p>
 A continuación se ofrece un resumen de algunas de los cambios realizados desde su puesta en 
 funcionamiento. El listado no es exhaustivo y se orienta principalmente a destacar las mejoras 
 que pueden facilitar el uso del sistema desde la perspectiva de un usuario de consulta habitual.
-<br>
-<br>
+</p>
+<p>
 Un listado completo de las modificaciones, más avanzado, se puede consultar siguiendo el link 
 del final: <?php echo $html->link('Ver listado completo de mejoras','/pages/detalle_v1_2');?>
+</p>
+
+<p>
 <ul>
 <li><b>Buscador</b> 
 	<ul>
-		<li>Se incorporaron criterios de búsqueda y se ordenaron las opciones en diferentes categorías: "por su Ubicación", "por su Nombre", "por su Oferta" y "por Otras Características".</li>
-		<li>Se modificó la búsqueda por CUE para que encuentre CUEs parciales (Ej: que contengan "118"), y CUEs con Anexo (Ej: "600118<b>00</b>").</li>
+	   	<li>Se agregó opción de búsqueda por oferta.</li>
+    	<li>Se agregó opción de búsqueda por normativa.</li>
+    	<li>Se mejoraron las búsquedas por localidad y departamento.</li>
+    	<li>Se ordenaron las opciones de búsqueda en diferentes categorías: "por su ubicación", "por su nombre", "por su oferta" y "por otras características".</li>
+    	<li>Se modificó la búsqueda por CUE para que detecte CUEs por coincidencia parcial (Ej: Si se ingresa "118" el programa encuentra todos los CUEs que contengan "118" en cualquier posición).</li>
+    	<li>Se agregó la posibilidad de buscar CUE con Anexo. (Ej: 2"60011800")</li>
 	</ul>
 </li>
 <br>
 <li><b>Datos de Institución</b>
- 	<ul><li> Se corrigieron, depuraron y normalizaron los datos de todas las instituciones.</li></ul>
+ 	<ul><li>Se mejoraron y depuraron los siguientes datos de las instituciones: Tipo de Establecimiento, Número, Nombre, Departamento y Localidad.</li></ul>
 </li>
 <br>
-<li><b>Oferta</b> 
-	<ul><li>Se agregó funcionalidad a la página de oferta permitiendo búsquedas y ordenamientos sobre el listado
-			de las mismas.</li>
-		<li>Se implementó la posibilidad de marcar como pendiente de actualización a una institución cuando la documentación de la oferta educativa recibida está incompleta.</li>
+<li><b>Oferta Educativa</b> 
+	<ul>
+		<li>Se mejoró la presentación de información de oferta educativa: se incorporó paginación de resultados, y se agregaron opciones de filtro y ordenamiento del listado según distintos criterios.</li>
+		<li>Se agregó un sistema de marcas para identificar como pendiente de actualización una institución cuando la documentación de la oferta educativa recibida está incompleta. El sistema informa el motivo del pendiente, el estado del reclamo, etc. Esto permite al usuario conocer el estado de la información e identificar faltantes sin tener que recurrir necesariamente a la Unidad de Información.</li>
 	</ul>
 </li>
-<br>	
-<li><b>Buscador Histórico de CUE</b>
-	<ul>
-	  <li>
-	  Se agregó la posibilidad de buscar CUEs que hayan pertenecido a una institución.
-	  </li>
-	</ul>
-</li> 
 <br>
 <li><b>Optimización</b>
-	<ul><li> Se mejoró la velocidad de respuesta del sistema en las búsquedas y navegación del sitio.</li></ul>
+	<ul><li>Se mejoró la velocidad de respuesta del sistema en búsquedas y presentación de información.</li></ul>
 </li>
 <br>
 </ul>
