@@ -16,7 +16,7 @@ Requerimientos mínimos para utilizar el <b>Sistema Gestión de Registro</b>:<br /
 
 
 
-<h1>Bienvenido a la versión 1.2 del Registro Federal de Instituciones de ETP</h1>
+<h1>Bienvenido al RFIETP</h1>
 
 <?php
 if (Configure::read() > 0):
@@ -25,10 +25,23 @@ endif;
 ?>
 <br />
 
-<?php echo $html->image('nuevo.gif',array('width'=> '39px','style'=>'float:left'));?>
-<h2 style="color: #FE2E2E; padding-left: 55px;">Novedades de la nueva versión</h2>
+<h2>Novedades de la versión 1.2</h2>
 
 <p>
+Desde su puesta en funcionamiento en junio del presente año el nuevo sistema RFIETP se 
+encuentra en permanente actualización y mejoramiento, tanto respecto del 
+contenido de información de la base de datos como de la aplicación que permite 
+su gestión. En esa línea de trabajo a partir del 20 de octubre se ha instalado 
+la versión 1.2 del sistema.
+<br>
+<br>
+A continuación se ofrece un resumen de algunas de los cambios realizados desde su puesta en 
+funcionamiento. El listado no es exhaustivo y se orienta principalmente a destacar las mejoras 
+que pueden facilitar el uso del sistema desde la perspectiva de un usuario de consulta habitual.
+<br>
+<br>
+Un listado completo de las modificaciones, más avanzado, se puede consultar siguiendo el link 
+del final: <?php echo $html->link('Ver listado completo de mejoras','/pages/detalle_v1_2');?>
 <ul>
 <li><b>Buscador</b> 
 	<ul>
@@ -62,8 +75,6 @@ endif;
 <br>
 </ul>
 
-<div><?php echo $html->link('ver listado completo de mejoras','/pages/detalle_v1_2');?></div>
-
 <br>
 <hr>
 <br>
@@ -77,5 +88,5 @@ Para realizar consultas sobre los contenidos de información del Registro
 de Instituciones: Int. 4032/4033.
 </p>
 <p>
-Unidad de Información, Of. 309.
+Unidad de Información: Of. 309.
 </p>
