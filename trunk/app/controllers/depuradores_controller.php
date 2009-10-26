@@ -135,8 +135,7 @@ class DepuradoresController extends AppController {
 	 * @return unknown_type
 	 */
 	function sectores($jur_id=0){		
-		if (!empty($this->data)) {
-			
+		if (!empty($this->data) && !empty($this->data['Plan']['sector_id'])) {			
 			if(isset($this->data['Instit']['jurisdiccion_id']))
 			{
 				$jur_id = $this->data['Instit']['jurisdiccion_id'];
