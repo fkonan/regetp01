@@ -48,6 +48,7 @@ class AppModel extends Model {
 	 */
 	function convertir_para_busqueda_avanzada($text){		
 		$text = strtolower($text);
+		$text = trim($text);
 		$text = "%$text%";
 		$patron = array (
 			// Espacios, puntos y comas por guion
@@ -78,14 +79,19 @@ class AppModel extends Model {
 			'/ó/' => '(ó|o|O|Ó)',
 			'/ú/' => '(ú|u|Ú|U)',
 			
-			'/n/' => 'ñ',
+			'/n/' => '(ñ)',
 			'/ñ/' => '(n|ñ)',
 		
 			'/s/' => '(z|s|c)',
 			'/c/' => '(z|s|c)',
-			'/z/' => '(z|s|c)'
+			'/z/' => '(z|s|c)',
  
 			// Agregar aqui mas caracteres si es necesario
+			'/°/' => '',
+			'/º/' => '',
+			'/n°/' => '%',
+			'/nº/' => '%',
+			'/ /' => '%'
  
 		);
 		// caracteres especiales de expresiones regulares

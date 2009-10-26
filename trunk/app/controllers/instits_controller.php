@@ -287,6 +287,30 @@ class InstitsController extends AppController {
             	 }
             }
             
+            
+		/**
+		 *     NOMBRE COMPLETO
+		 */
+            if(isset($this->data['Instit']['nombre_completo'])){
+				if($this->data['Instit']['nombre_completo'] != ''){
+					$this->paginate['conditions']["to_ascii(lower(Tipoinstit.name))||' n '||".
+													"to_ascii(lower(Instit.nroinstit))||' '||".
+													"to_ascii(lower(Instit.nombre)) SIMILAR TO ?"] = array($this->Instit->convertir_para_busqueda_avanzada($this->data['Instit']['nombre_completo']));
+					$array_condiciones['Nombre'] = $this->data['Instit']['nombre_completo'];
+					$url_conditions['nombre_completo'] = $this->data['Instit']['nombre_completo'];			
+				}
+            }
+			if(isset($this->passedArgs['nombre_completo'])){
+            	if($this->passedArgs['nombre_completo'] != ''){
+					$this->paginate['conditions']["to_ascii(lower(Tipoinstit.name))||' n '||".
+													"to_ascii(lower(Instit.nroinstit))||' '||".
+													"to_ascii(lower(Instit.nombre)) SIMILAR TO ?"] = array($this->Instit->convertir_para_busqueda_avanzada($this->passedArgs['nombre_completo']));
+					$array_condiciones['Nombre'] = $this->passedArgs['nombre_completo'];
+					$url_conditions['nombre_completo'] = $this->passedArgs['nombre_completo'];
+				}
+            }
+			            
+            
 			/**
 			 *     Nro Institucion
 			 */  
