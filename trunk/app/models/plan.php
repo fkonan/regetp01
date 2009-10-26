@@ -6,7 +6,7 @@ class Plan extends AppModel {
 	var $maxCiclo = "";
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
-	var $belongsTo = array(
+	var $belongsTo = array( 
 			'Instit' => array('className' => 'Instit',
 								'foreignKey' => 'instit_id',
 								'conditions' => '',
@@ -146,16 +146,7 @@ class Plan extends AppModel {
   				$this->data['Plan']['sector'] = $sec_aux['Sector']['name'];
   			endif;
   		endif;
-  		
-  		if (isset($this->data['Plan']['subsector_id'])):
-  			if ($this->data['Plan']['subsector_id'] != '' || $this->data['Plan']['subsector_id'] != 0): 
-  				$this->Subsector->recursive = -1;
-  				$this->Subsector->id = $this->data['Plan']['subsector_id'];
-  				$sec_aux = $this->Subsector->read();
-  				$this->data['Plan']['subsector'] = $sec_aux['Subsector']['name'];
-  			endif;
-  		endif;
-  		
+  		  		
   		
   		if (isset($this->data['Plan']['duracion_hs'])):
   			if ($this->data['Plan']['duracion_hs'] == ''): 
