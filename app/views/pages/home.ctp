@@ -29,7 +29,7 @@ endif;
 
 <p>
 Desde su puesta en funcionamiento en junio del presente año el nuevo sistema RFIETP se 
-encuentra en permanente actualización y mejoramiento, tanto del 
+encuentra en permanente actualización y mejora, tanto del 
 contenido de información de la base de datos como de la aplicación que permite 
 su gestión. En esa línea de trabajo a partir del 20 de octubre se ha instalado 
 la versión 1.2 del sistema.
@@ -40,8 +40,7 @@ funcionamiento. El listado no es exhaustivo y se orienta principalmente a destac
 que pueden facilitar el uso del sistema desde la perspectiva de un usuario de consulta habitual.
 </p>
 <p>
-Un listado completo de las modificaciones, más avanzado, se puede consultar siguiendo el link 
-del final: <?php echo $html->link('Ver listado completo de mejoras','/pages/detalle_v1_2');?>
+Un listado completo de las modificaciones, más avanzado, se puede <?php echo $html->link('consultar aquí.','/pages/detalle_v1_2');?>
 </p>
 
 <p>
