@@ -144,12 +144,13 @@ class DepuradoresController extends AppController {
 			else
 			{
 				$this->Plan->id = $this->data['Plan']['id']; 
-				if ($valor = $this->Plan->save(	array('nombre'=>$this->data['Plan']['nombre'], 'sector_id'=>$this->data['Plan']['sector_id']),
-												array('validate'=>true, 'fieldList'=>array('nombre', 'sector_id')))) {	
+				
+				if ($valor = $this->Plan->save(	$this->data ,
+												array('validate'=>true, 'fieldList'=>array('nombre', 'sector_id', 'subsector_id')))) {	
 					$this->Session->setFlash(__('Se ha guardado el Plan correctamente', true));
 									
 				} else {
-					print_r($this->Plan->validationErrors);
+					debug($this->Plan->validationErrors);
 					$this->Session->setFlash(__('El Plan no pudo ser guardada. Escriba nuevamente el campo incorrecto.', true));
 				}
 			}
