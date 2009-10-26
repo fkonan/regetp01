@@ -1148,7 +1148,7 @@ color: green;
 }
 
 #mensajes-loading{
-	background-image: url("images/loading.gif");
+	background-image: url("images/loading-azul.gif");
 	background-repeat: no-repeat;
 	background-position:20px 50%;
 }
