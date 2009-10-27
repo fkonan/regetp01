@@ -152,10 +152,7 @@ class DepuradoresController extends AppController {
 		  				$this->data['Plan']['sector'] = $sec_aux['Sector']['name'];
 		  			endif;
 		  		endif;
-  		  		
-  		
-  		
-				
+
 				if ($valor = $this->Plan->save(	$this->data ,
 												array('validate'=>true, 'fieldList'=>array('nombre', 'sector_id', 'subsector_id','sector')))) {	
 					$this->Session->setFlash(__('Se ha guardado el Plan correctamente', true));
