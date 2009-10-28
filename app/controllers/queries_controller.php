@@ -94,19 +94,15 @@ class QueriesController extends AppController {
 		Configure::write('debug', 0);
 		$this->Query->recursive = -1;
 		
-		$conditions[] = array('categoria <>'=>"");
+		$categorias = array();
 		if(!empty($this->data['Query']['categoria'])){
-			if($this->data['Query']['categoria'] != '*'){
-				$conditions[] = array("categoria LIKE" => "%".$this->data['Query']['categoria']."%");
-			}
+			$categorias = $this->Query->listarCategorias($this->data['Query']['categoria']);
+		}
+		else{
+			$categorias = $this->Query->listarCategorias('*'); // me trae todas
 		}
 		
-		$this->set('categorias', $this->Query->find('all', array(
-					'group' => 'categoria',
-					'conditions'=> $conditions,
-					'fields' => array('categoria')
-		)));
-		
+		$this->set('categorias',$categorias);
 		$this->set('string_categoria',$this->data['Query']['categoria']);
 		$this->layout = 'ajax';
 	}
