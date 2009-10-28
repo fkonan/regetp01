@@ -60,8 +60,29 @@ class QueriesController extends AppController {
 	}
 	
 	
-	function descargar_queries(){
-		$this->set('queries',$this->Query->find('all',array('order'=>'modified DESC')));
+	function descargar_queries() {
+		$categoria=(isset($this->data['Query']['categoria']))? $this->data['Query']['categoria'] : "";
+		$this->set('categoria',$categoria);
+
+		$categorias = array();
+		$categorias[''] = 'Todos';
+		$categorias_aux = $this->Query->listarCategorias();
+		foreach($categorias_aux as $c){
+			$categorias[$c['Query']['categoria']] = $c['Query']['categoria'];
+		}			
+		$this->set('categorias',$categorias);
+		
+		$conditions=array();
+		if($categoria!=""){
+			$conditions['categoria']=$categoria;
+		}
+		if(isset($this->data['Query']['description']) && $this->data['Query']['description']!="") {
+			$conditions['OR']['lower(to_ascii(Query.description)) SIMILAR TO ?'] = array($this->Query->convertir_para_busqueda_avanzada(utf8_decode($this->data['Query']['description'])));
+			$conditions['OR']['lower(to_ascii(Query.name)) SIMILAR TO ?'] = array($this->Query->convertir_para_busqueda_avanzada(utf8_decode($this->data['Query']['description'])));
+		}
+		
+		$queries=$this->Query->find('all',array('order'=>'modified DESC', 'conditions'=>$conditions));
+		$this->set('queries',$queries);
 	}
 	
 	/**
