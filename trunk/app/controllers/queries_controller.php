@@ -2,7 +2,7 @@
 class QueriesController extends AppController {
 
 	var $name = 'Queries';
-	var $helpers = array('Html', 'Form');
+	var $helpers = array('Html', 'Form','Ajax');
 	var $components = array('RequestHandler');
 
 	function index() {
@@ -86,6 +86,29 @@ class QueriesController extends AppController {
 		$this->set('columnas',$columnas);
 		$this->set('filas',$consulta_ejecutada);
 
+	}
+	
+	
+	function listado_categorias()
+	{	
+		Configure::write('debug', 0);
+		$this->Query->recursive = -1;
+		
+		$conditions[] = array('categoria <>'=>"");
+		if(!empty($this->data['Query']['categoria'])){
+			if($this->data['Query']['categoria'] != '*'){
+				$conditions[] = array("categoria LIKE" => "%".$this->data['Query']['categoria']."%");
+			}
+		}
+		
+		$this->set('categorias', $this->Query->find('all', array(
+					'group' => 'categoria',
+					'conditions'=> $conditions,
+					'fields' => array('categoria')
+		)));
+		
+		$this->set('string_categoria',$this->data['Query']['categoria']);
+		$this->layout = 'ajax';
 	}
 
 }
