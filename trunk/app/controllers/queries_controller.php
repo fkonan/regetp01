@@ -59,7 +59,6 @@ class QueriesController extends AppController {
 		}
 	}
 	
-	
 	function descargar_queries() {
 		$categoria=(isset($this->data['Query']['categoria']))? $this->data['Query']['categoria'] : "";
 		$this->set('categoria',$categoria);

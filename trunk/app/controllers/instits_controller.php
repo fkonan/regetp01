@@ -761,7 +761,6 @@ class InstitsController extends AppController {
 		$this->set('falta_depurar',$total);
 	}
 	
-	
 	function prueba(){
 		$this->autoRender = false; // para uqe no muestre la vista
 		

@@ -353,6 +353,16 @@ table tr td {
 	text-align: center;
 	vertical-align: top;
 }
+
+table tr.altrow2 th {
+	background-color:#FFFFFF;
+	color:#045FB4;
+	border:0px;
+	font-weight:bold;
+	padding:3px 6px;
+	text-decoration:none;
+}
+
 table tr.altrow td {
 	background-color: #fcfcfc;
 }
