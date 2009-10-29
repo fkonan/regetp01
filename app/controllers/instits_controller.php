@@ -22,20 +22,12 @@ class InstitsController extends AppController {
 		}
 		
 		$instit = $this->Instit->read(null, $id);
-		
-		// me fijo si todos los planes son 
-		// IT entonces la instit es con programa de ETP
-		$instit_etp = false;
-		foreach ($instit['Plan'] as $p):
-			if ($val = ($p['oferta_id'] == 2)){ // == 2 -> IT
-				$instit_etp = true; 
-			}
-			else{
-				$instit_etp = false;
-				break;
-			}
-		endforeach;
-		$this->set('instit_etp', $instit_etp);
+		$programa_de_etp = false;
+		// si la institucion es con programa de ETP
+		if($instit['EtpEstado']['id']== 1){
+			$programa_de_etp = true;
+		}
+		$this->set('con_programa_de_etp', $programa_de_etp);
 		$this->set('instit', $instit);
 	}
 
@@ -86,7 +78,10 @@ class InstitsController extends AppController {
 				$v_condiciones = array('departamento_id'=>$this->data['Instit']['departamento_id']);
 		}
 		$localidades = $this->Instit->Localidad->find('list',array('order'=>'name','conditions'=>$v_condiciones));
-		$this->set(compact('gestiones','dependencias','jurisdicciones','similares','tipoinstits','departamentos','localidades'));
+		
+		$etp_estados = $this->Instit->EtpEstado->find('list');
+		$claseinstits = $this->Instit->Claseinstit->find('list');
+		$this->set(compact('etp_estados','claseinstits','gestiones','dependencias','jurisdicciones','similares','tipoinstits','departamentos','localidades'));
 	}
 
 	function edit($id = null) {
@@ -150,7 +145,10 @@ class InstitsController extends AppController {
 		}
 		$localidades = $this->Instit->Localidad->find('list',array('order'=>'name','conditions'=>$v_condiciones));
 		
-		$this->set(compact('gestiones','dependencias','jurisdicciones','similares','tipoinstits','departamentos','localidades'));
+		$etp_estados = $this->Instit->EtpEstado->find('list');
+		$claseinstits = $this->Instit->Claseinstit->find('list');
+		
+		$this->set(compact('claseinstits','etp_estados','gestiones','dependencias','jurisdicciones','similares','tipoinstits','departamentos','localidades'));
 				
 		$this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$id );
 	}
