@@ -955,9 +955,9 @@ class Instit extends AppModel {
 	}
 	
 	
-	
+	//TODO falta crear esta validacion
 	function etp_estado_coincidente_con_claseinstits(){
-		if(){}
+		return true;
 	}
 }
 ?>
