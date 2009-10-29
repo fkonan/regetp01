@@ -6,7 +6,8 @@
 				
 		<?= $form->input('cue', array('label'=> 'CUE', 'maxlength'=>9 ,'after'=> '<cite>Ej: 600118 o 5000216. También puede buscar con el n° de anexo, Ej: 60011800 </cite>')); ?>
 		
-		<?php echo $form->input('nombre_completo', array('label'=>'Nombre','after'=> '<cite></cite>'));?>		
+		<?php echo $form->input('nombre_completo', array('label'=>'Nombre',
+														 'after'=> '<cite>Búsqueda libre por nombre. Ej: Escuela 3 San Martín</cite>'));?>		
 		
 		<?php 
 			// 		JURISDICCION
@@ -25,7 +26,7 @@
 													        color: #045FB4;
 													        font-weight: bold;'
 												)
-								); 
+								);
 		?>
 		
 		<!-- 
@@ -111,9 +112,9 @@
 				                                   	'onChange'=>true
 		                                   ));  
                                 
-			echo $form->input('nroinstit', array('label'=>'N° de Institución')); 
+			echo $form->input('nroinstit', array('label'=>'Número')); 
 			
-			echo $form->input('nombre', array('label'=>'Nombre de Institución','after'=> '<cite>Ej: "Sarmiento" o "Gral. Belgrano". No confundir el nombre con el tipo de establecimiento</cite>'));
+			echo $form->input('nombre', array('label'=>'Nombre del Establecimiento','after'=> '<cite>Ej: "Sarmiento" o "Gral. Belgrano". No confundir el nombre con el tipo de establecimiento</cite>'));
 			
 			echo $form->button('Buscar',array('onclick'=>'enviar()'));
 			?>

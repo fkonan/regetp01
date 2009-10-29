@@ -54,6 +54,25 @@
 		
 		
 		/**
+		 *    Clase de Instituicion
+		 */			
+							
+		echo $form->input('claseinstit_id',array(
+											'label'=>'Tipo de Institución',
+											'empty'=>'Seleccione una clase'
+											));
+										
+		/**
+		 *    Estado de la institucion respecto del programa ETP
+		 */									
+		echo $form->input('etp_estado_id',array(
+										'label'=>'Relación con ETP',
+										'empty'=>'Seleccione un estado',
+										'default' => 2 //instit de ETP
+										));
+		
+		
+		/**
 		 *   AJAX ::> JURISDICCION - Departamentop - Localidad - Tipo de Institucion 
 		 */	
 		$meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';

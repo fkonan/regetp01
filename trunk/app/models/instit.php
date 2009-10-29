@@ -41,6 +41,18 @@ class Instit extends AppModel {
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
+			),
+			'Claseinstit' => array('className' => 'Claseinstit',
+								'foreignKey' => 'claseinstit_id',
+								'conditions' => '',
+								'fields' => '',
+								'order' => ''
+			),
+			'EtpEstado' => array('className' => 'EtpEstado',
+								'foreignKey' => 'etp_estado_id',
+								'conditions' => '',
+								'fields' => '',
+								'order' => ''
 			)
 	);
 
@@ -293,7 +305,16 @@ class Instit extends AppModel {
 				'allowEmpty' => false,
 				'message' => 'Seleccione un Ámbito de Gestión.'
 			)
-		)
+		),
+		
+		'etp_estado_id' => array(
+			'etp_estado_coincidente_con_claseinstits' => array(
+				'rule' => 'etp_estado_coincidente_con_claseinstits',
+				'required' => true,
+				'allowEmpty' => false,
+				'message' => 'El estado no concuerda con el valor ingresado como tipo de institución.'
+			)
+		)	
 	);
 	
 	
@@ -931,6 +952,12 @@ class Instit extends AppModel {
 	 */
 	function cambioComodin($texto) {
 		return str_replace('*', '%', $texto);
+	}
+	
+	
+	
+	function etp_estado_coincidente_con_claseinstits(){
+		if(){}
 	}
 }
 ?>
