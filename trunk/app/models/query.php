@@ -25,7 +25,7 @@ class Query extends AppModel {
 		if($filtro != '*'){
 				$conditions[] = array("categoria LIKE" => "%".$filtro."%");
 		}
-		
+		$this->recursive = -1;
 		$categorias =  $this->find('all', array(
 					'group' => 'categoria',
 					'conditions'=> $conditions,
