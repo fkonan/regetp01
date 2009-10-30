@@ -53,8 +53,6 @@ foreach ($queries as $query):
 		</td>
 		<?php endforeach; ?>
 	</tr>
-	<tr><td colspan="5"><?php //echo $query['Query']['description']; ?></td>	</tr>
-	<tr><td colspan="5"> </td></tr>
 <?php endforeach; ?>
 </table>
 </div>
@@ -62,7 +60,9 @@ foreach ($queries as $query):
 	<?php 
 	if (isset($paginator)){
 		echo $paginator->prev('<< '.__('Anterior', true), array(), null, array('class'=>'disabled'));
- 		echo $paginator->numbers();
+		echo "&nbsp;";
+		echo $paginator->numbers();
+		echo "&nbsp;";
 		echo $paginator->next(__('Siguiente', true).' >>', array(), null, array('class'=>'disabled'));
 	}		
 	?>
