@@ -312,9 +312,19 @@ class Instit extends AppModel {
 				'rule' => 'etp_estado_coincidente_con_claseinstits',
 				'required' => true,
 				'allowEmpty' => false,
+				'on' => 'update',
 				'message' => 'El estado no concuerda con el valor ingresado como tipo de institución.'
 			)
-		)	
+		),
+		'clase_instit' => array(
+			'claseinstit_corresponde_con_oferta' => array(
+				'rule' => 'claseinstit_corresponde_con_oferta',
+				'required' => true,
+				'allowEmpty' => false,
+				'on' => 'update',
+				'message' => 'El estado no concuerda con el valor ingresado como tipo de institución.'
+			)
+		),
 	);
 	
 	
@@ -959,5 +969,9 @@ class Instit extends AppModel {
 	function etp_estado_coincidente_con_claseinstits(){
 		return true;
 	}
+	
+	
+	//TODO faltaria incorporar la validacion para corroborar que no se selecciona una clase de institucion
+	function claseinstit_corresponde_con_oferta(){}
 }
 ?>
