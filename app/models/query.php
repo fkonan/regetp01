@@ -50,7 +50,7 @@ class Query extends AppModel {
 				$this->data['Query']['query'] = substr($query,0,strlen($query)-1);
 			}
 		}
+		return true;
 	}
-
 }
 ?>
