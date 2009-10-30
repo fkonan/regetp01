@@ -1,7 +1,7 @@
 <div class="queries index">
-<h2><?php __('Query: '); 
+<p style="color=Beige; font-size: 10px;"><?php
 echo $descripcion;
-?></h2>
+?></p>
 <p>
 <?php
 if (isset($paginator)){

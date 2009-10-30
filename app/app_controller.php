@@ -120,6 +120,7 @@ class AppController extends Controller {
 			
 			if ($this->name == 'Queries' && $this->action == 'descargar_queries') {$llAuth = true;}
 			if ($this->name == 'Queries' && $this->action == 'contruye_excel') {$llAuth = true;}
+			if ($this->name == 'Queries' && $this->action == 'list_view') {$llAuth = true;}
 			
 			if ($this->name == 'Depuradores') {$llAuth = true;}
 			if ($this->name == 'Sectores') {$llAuth = true;}
@@ -153,6 +154,16 @@ class AppController extends Controller {
 		  default: die('El tipo de usuario no concuerda con ninguno setteado en el sistema y se abortará la operación');
 		endswitch;
 		
+		
+		
+		
+		/*****
+		 * 			COSAS DISPONIBLES PARA ToDOS LOS USUARIOS
+		 ****-----------------------------------------------------******/
+		if ($this->name == 'Jurisdicciones' && $this->action == 'planofertajuris') {$llAuth = true;}
+				
+		
+		
 		/**
 	 	* Estos son requestedActions, por lo tanto estan disponibles para todos los usuarios
 		*/
@@ -171,6 +182,8 @@ class AppController extends Controller {
 		if ($this->name == 'Localidades' && $this->action == 'ajax_select_localidades_form_por_departamento') {$llAuth = true;}	
 		if ($this->name == 'Localidades' && $this->action == 'ajax_select_localidades_form_por_jurisdiccion') {$llAuth = true;}
 		if ($this->name == 'Subsectores' && $this->action == 'ajax_select_subsector_form_por_sector') {$llAuth = true;}
+		
+		
 		
 		/**
 		 * Hacer que solo puedan modificar sus datos y contraseña el usuario que es dueño de esos datos
