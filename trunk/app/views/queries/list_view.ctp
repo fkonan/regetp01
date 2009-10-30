@@ -1,8 +1,9 @@
 <div class="queries index">
-<p style="color=Beige; font-size: 10px;"><?php
+<br><p style="color:beige; text-align: left"><?php
 echo $descripcion;
 ?></p>
-<p>
+
+<p style="text-align: center;">
 <?php
 if (isset($paginator)){
 $paginator->options(array('url' => $url_conditions));
@@ -13,7 +14,7 @@ $paginator->options(array('url' => $url_conditions));
 
 if (isset($paginator)){
 echo $paginator->counter(array(
-	'format' => __('Página %page% de %pages% Mostrando %current% registros de %count% encontrados, visualizando registros desde el nº %start%, hasta el %end%', true)
+	'format' => __('Página %page% de %pages% Mostrando %current% registros de %count% encontrados', true)
 ));
 }
 //debug($url_conditions);
@@ -27,8 +28,13 @@ if ($viewAll){
 	echo $html->link('Ver por pagina','/Queries/list_view/query.id:'.$url_conditions['query.id'] . '/viewAll:false/',array('class'=>'clearTag'));	
 }	
 ?>
+
+<?php echo " | "?>
+<?php echo $html->link('descargar excel','/Queries/contruye_excel/'.$url_conditions['query.id'] ,array('class'=>'clearTag'));?>
+
 <?php echo " | "?>
 <?php echo $html->link('Volver','/Queries/descargar_queries/',array('class'=>'clearTag'));?>
+
 </p>
 
 <table cellpadding="0" cellspacing="0">
