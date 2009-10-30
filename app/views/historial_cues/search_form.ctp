@@ -1,14 +1,14 @@
 
 <h1><?=$html->image('cambio_cue.gif');echo __('  Buscar Histórico de Institución');?></h1>
 <p>
-Atravez de esta búsqueda se accede a todas las instituciones cuyo CUE es o fue en 
-algún momento el deseado.  
-<br>
-Como resultado se lístan dichas instituciones con información, si es que corresponde, 
-de sus cambios de CUEs y su CUE actual.
+Esta opción de búsqueda permite visualizar las instituciones a las que  
+ha sido asociado un determinado CUE a lo largo del tiempo. Soporta búsquedas por
+coincidencia parcial (Ej: Si se ingresa "118" el programa encuentra todos los CUEs que contengan "118" en cualquier posición).
+También permite incluir el anexo (Ej: "60011800").
 <br>
 
 </p>
+
 
 
 <h2>Buscar</h2>
