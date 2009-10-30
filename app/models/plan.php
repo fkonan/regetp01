@@ -134,7 +134,7 @@ class Plan extends AppModel {
 				'message' => 'La duración no puede ser un valor tan alto'
 			
 			)
-		)	
+		)
 	);
 	
 	function beforeSave(){  		  		
@@ -300,6 +300,15 @@ class Plan extends AppModel {
   			}
   		}
   		return false;
+  	}
+  	
+  	
+  	
+  	//TODO validar la oferta con la clase de institucion
+  	function validar_oferta_id_con_claseinstit()
+  	{
+		return true;
+  		
   	}
 	
 }
