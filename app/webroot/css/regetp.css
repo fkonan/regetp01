@@ -1214,3 +1214,15 @@ div.auto_complete    {
 li.selected    { 
 	background-color: #ffb; 
 }
+
+.clearTag {
+	color: white;
+	text-decoration: underline;
+	font-weight: bold;
+	over-colar
+}
+
+a:hover.clearTag {
+	color: white;
+	text-decoration:none;
+}
