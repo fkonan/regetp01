@@ -42,7 +42,7 @@ foreach ($queries as $q):?>
 	<li>
 		<?= $html->link($q['Query']['name'].'.xls','contruye_excel/'.$q['Query']['id']); ?>
 		<?= "(".date("j F, Y, g:i a",strtotime($q['Query']['modified'])).")"; ?>
-		<? if($q['Query']['ver_online']) echo $html->link('ver online', '/query/list_view/'.$q['Query']['id']);?>
+		<? if($q['Query']['ver_online']) echo $html->link('ver online', '/queries/list_view/'.$q['Query']['id']);?>
 		<br /><?=  $q['Query']['description'] ?>
 	</li>
 	<br />

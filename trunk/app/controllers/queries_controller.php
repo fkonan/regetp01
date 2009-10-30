@@ -1,4 +1,5 @@
 <?php
+require("models/querystmp.php");
 class QueriesController extends AppController {
 
 	var $name = 'Queries';
@@ -126,6 +127,43 @@ class QueriesController extends AppController {
 		$this->set('string_categoria',$this->data['Query']['categoria']);
 		$this->layout = 'ajax';
 	}
+
+	function list_view($id="") {
+
+		$this->layout = "sin_menu";
+
+		if (isset($this->passedArgs['query.id'])){
+			$id = $this->passedArgs['query.id'];
+		}
+		
+		if (!$id) {
+			$this->Session->setFlash(__('Invalid id for Query', true));
+			$this->redirect(array('action'=>'index'));
+		}
+
+		$this->rutaUrl_for_layout[] =array('name'=> 'Queries','link'=>'/Instits/add' );
+		$res = $this->Query->findById($id);
+
+		$queryTmp = new Querystmp();
+		$queryTmp->setSql($res['Query']['query']);
+		
+		if (isset($this->passedArgs['viewAll']) && $this->passedArgs['viewAll'] == 'true'){
+			$data = $queryTmp->getData();
+			$viewAll = false;		
+		} else {	
+			$data = $this->paginate($queryTmp);
+			$viewAll = true;
+		}			
+
+		$cols = array_keys($data['0']['0']); 
+		$this->set('cols', $cols);
+        $url_conditions['query.id'] = $id;
+		$this->set('queries', $data);
+		$this->set('url_conditions', $url_conditions);
+		$this->set('descripcion', $res['Query']['description']);
+		$this->set('viewAll', $viewAll);
+	}
+	
 
 }
 ?>
