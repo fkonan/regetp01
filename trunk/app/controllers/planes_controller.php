@@ -47,7 +47,6 @@ class PlanesController extends AppController {
 		$this->set('action', $action);
 
 		$this->institData = $this->Plan->Instit->read(null,$id);
-
 		if($this->institData)
 		{
 			$cont = 0;
@@ -64,7 +63,12 @@ class PlanesController extends AppController {
 		}		
 
 		$ofertas = $this->Plan->Oferta->find('list',array('fields' => array('id','abrev')));
-		$ciclos  = $this->Plan->Anio->Ciclo->find('list',array('fields' => array('id','name')));
+		$planes = $this->Plan->find('list', array(  'fields' => array('Plan.id'),
+													'conditions'=>array('instit_id'=>$id)));
+		$ciclos = $this->Plan->Anio->find('list',array('fields' => array('Anio.ciclo_id','Anio.ciclo_id'),
+														'conditions'=>array('Anio.plan_id'=>$planes),
+														'group'=>'Anio.ciclo_id'
+		));
 		$this->set(compact('ofertas','ciclos'));
 		
 		$this->Plan->recursive = 0;
@@ -107,7 +111,7 @@ class PlanesController extends AppController {
         if(isset($this->data['Plan']['ciclo_id'])){
 			if((int)$this->data['Plan']['ciclo_id'] != 0){
 				$this->Plan->setMaxCiclo($this->data['Plan']['ciclo_id']); 
-				$url_conditions['Anio.ciclo_id'] = $this->data['Plan']['ciclo_id'];					
+				$url_conditions['Anio.ciclo_id'] = $this->data['Plan']['ciclo_id'];
 			}
         }
         if(isset($this->passedArgs['Anio.ciclo_id'])){
@@ -133,9 +137,7 @@ class PlanesController extends AppController {
 		$this->set('planesRelacionados', $data);
 		$this->set('url_conditions', $url_conditions);
 	}
-	
-	
-	
+
 	
 	function view($id = null) {
 		if (!$id) {
