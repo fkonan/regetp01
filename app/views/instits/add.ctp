@@ -322,9 +322,11 @@ echo $html->css('edit_form',false);
 											  "selected" => date('Y')			
 		));
 		
-		//forzar al checkbox siempre
-		$this->data['Instit']['force_save'] = 0;
-		echo $form->input('force_save',array('type'=> 'checkbox','checked'=>false,'label'=>'Forzar guardado.'));
+		if($force_save) {
+			//forzar al checkbox siempre
+			$this->data['Instit']['force_save'] = 0;
+			echo $form->input('force_save',array('type'=> 'checkbox','checked'=>false,'label'=>'Forzar guardado.'));
+		}
 	?>
 <?php echo $form->end('Guardar');?>
 </div>

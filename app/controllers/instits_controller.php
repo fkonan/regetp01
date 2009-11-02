@@ -33,12 +33,13 @@ class InstitsController extends AppController {
 
 	function add() {		
 		$similares = array();
+		$force_save = false;
 		
 		$this->rutaUrl_for_layout[] =array('name'=> 'Agregar','link'=>'/Instits/add' );
 		if (!empty($this->data)) {
 			// si ingrese el formulario por primera vez, y la esta variable no esta setteada 
 			// que me busque los similares		
-			if($this->data['Instit']['force_save'] == 0)
+			if(!isset($this->data['Instit']['force_save']) || $this->data['Instit']['force_save'] == 0)
 			{
 				$similares = $this->Instit->getSimilars($this->data);
 			}		
@@ -57,6 +58,7 @@ class InstitsController extends AppController {
 			}else
 			{				
 				$this->Session->setFlash(__('Hay instituciones similares.', true));
+				$force_save = true;
 			}
 		}
 
@@ -82,6 +84,7 @@ class InstitsController extends AppController {
 		$etp_estados = $this->Instit->EtpEstado->find('list');
 		$claseinstits = $this->Instit->Claseinstit->find('list');
 		$this->set(compact('etp_estados','claseinstits','gestiones','dependencias','jurisdicciones','similares','tipoinstits','departamentos','localidades'));
+		$this->set('force_save', $force_save);
 	}
 
 	function edit($id = null) {
@@ -89,7 +92,6 @@ class InstitsController extends AppController {
 			$this->Session->setFlash(__('Invalid Instit', true));
 			$this->redirect(array('action'=>'search_form'));
 		}
-		
 		
 		if (!empty($this->data)) 
 		{		
