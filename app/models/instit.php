@@ -293,7 +293,6 @@ class Instit extends AppModel {
 				'rule' => VALID_NOT_EMPTY,
 				'required' => true,
 				'allowEmpty' => false,
-				//'message' => 'Seleccione un Tipo de Institución.'
 				'message' => 'Seleccione un Tipo de Establecimiento.'
 			),
 		),
@@ -308,59 +307,16 @@ class Instit extends AppModel {
 		),
 		
 		'etp_estado_id' => array(
-			'etp_estado_coincidente_con_claseinstits' => array(
-				'rule' => 'etp_estado_coincidente_con_claseinstits',
+			'coincidente_con_claseinstit' => array(
+				'rule' => 'coincidente_con_claseinstit',
 				'required' => true,
-				'allowEmpty' => false,
-				'on' => 'update',
-				'message' => 'El estado no concuerda con el valor ingresado como tipo de institución.'
+				'allowEmpty' => true,
+				'message' => 'Si la institución es del tipo Itinerario Formativo deberia ser "con programa de ETP".'
 			)
-		),
-		'clase_instit' => array(
-			'claseinstit_corresponde_con_oferta' => array(
-				'rule' => 'claseinstit_corresponde_con_oferta',
-				'required' => true,
-				'allowEmpty' => false,
-				'on' => 'update',
-				'message' => 'El estado no concuerda con el valor ingresado como tipo de institución.'
-			)
-		),
+		)
 	);
 	
 	
-	/*
-	function unbindModelAll() {
-	    $unbind = array();
-	    foreach ($this->belongsTo as $model=>$info)
-	    {
-	      $unbind['belongsTo'][] = $model;
-	    }
-	    foreach ($this->hasOne as $model=>$info)
-	    {
-	      $unbind['hasOne'][] = $model;
-	    }
-	    foreach ($this->hasMany as $model=>$info)
-	    {
-	      $unbind['hasMany'][] = $model;
-	    }
-	    foreach ($this->hasAndBelongsToMany as $model=>$info)
-	    {
-	      $unbind['hasAndBelongsToMany'][] = $model;
-	    }
-	    parent::unbindModel($unbind);
-  	} 
-  	
-  	
-  	function unbindModelosInnecesarios() {
-	    $unbind = array();
-	    foreach ($this->belongsTo as $model=>$info)
-	    {
-	      $unbind['belongsTo'][] = $model;
-	    }
-	    parent::unbindModel($unbind);
-  	} 
-  	*/
-  	
   	/**
   	 * Validacion de CUE por jurisdiccion
   	 *
@@ -465,8 +421,16 @@ class Instit extends AppModel {
   		return $instituciones_data;
   	}
   	 	
+  	
+  	
+  	
+  	
   
   	/**
+  	 * function dameSumatoriaDeMatriculasPorOferta
+  	 * 
+  	 * me suma la matricula por oferta para la institucion a mano.
+  	 * o sea, recorre el array de planes de la instit y va sumando
   	 * 
   	 * @param $id de la institucion
   	 * @return me devuelve algo como esto:
@@ -590,6 +554,16 @@ class Instit extends AppModel {
   	}
   	
   	
+  	
+  	
+  	
+  	
+  	/**
+  	 * funcion de validacion departamento que corresponda 
+  	 * a la jurisdiccion adecuada
+  	 * 
+  	 * @return boolean
+  	 */
   	function controlar_coincidencia_jurisdiccion_departamento(){
   		if (isset($this->data[$this->name]['departamento_id'])){
   			if ($this->data[$this->name]['departamento_id'] == '') return false;
@@ -604,6 +578,8 @@ class Instit extends AppModel {
   		}
   		return false;
   	}
+  	
+  	
   	
   	
   	function controlar_coincidencia_departamento_localidad(){
@@ -965,13 +941,29 @@ class Instit extends AppModel {
 	}
 	
 	
-	//TODO falta crear esta validacion
-	function etp_estado_coincidente_con_claseinstits(){
+	
+	/**
+	 * validaciones
+	 * 
+	 * esta funcion lo que hace es comprobar que si yo puse a una institucion que es del 
+	 * tipo Itinerario formativo, entonces la relacion con ETP
+	 * es que la institucion esta con programa de ETP
+	 * 
+	 * @return boolean
+	 */
+	function coincidente_con_claseinstit()
+	{
+		
+		if (!empty($this->data['Instit']['etp_estado_id']) && !empty($this->data['Instit']['claseinstit_id'])){
+			if($this->data['Instit']['claseinstit_id'] == 1){ //tipo Itinerario formativo
+				if($this->data['Instit']['etp_estado_id'] == 1){ //con programa de ETP
+					return true;					
+				}
+				else return false;
+			}			
+		}
 		return true;
 	}
 	
-	
-	//TODO faltaria incorporar la validacion para corroborar que no se selecciona una clase de institucion
-	function claseinstit_corresponde_con_oferta(){}
 }
 ?>
