@@ -955,7 +955,7 @@ class Instit extends AppModel {
 	{
 		
 		if (!empty($this->data['Instit']['etp_estado_id']) && !empty($this->data['Instit']['claseinstit_id'])){
-			if($this->data['Instit']['claseinstit_id'] == 1){ //tipo Itinerario formativo
+			if($this->data['Instit']['claseinstit_id'] == 2){ //tipo Itinerario formativo
 				if($this->data['Instit']['etp_estado_id'] == 1){ //con programa de ETP
 					return true;					
 				}

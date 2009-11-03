@@ -1232,3 +1232,29 @@ a:hover.clearTag {
 	color: white;
 	text-decoration:none;
 }
+
+
+
+
+
+
+.tabs div{
+	width: 100px;
+	background-color: grey;
+	font-weight: bolder;
+	color: white;
+	float: left;
+	clear: none;
+	border: 1px groove black;
+}
+
+.tabs A{
+	display: block;
+	color: white;
+}
+
+.tab-activa{
+	width: 200px;
+	background-color: beige;
+	font-weight: bolder;
+}
