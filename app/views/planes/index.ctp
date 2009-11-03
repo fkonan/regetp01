@@ -112,7 +112,8 @@ echo $form->input('Instit.id', array('value'=>$url_conditions['Instit.id']));
 		<table class="tabs">
 			<tr><td>
 			<?php foreach ($ciclos as $c):?>
-				<div><?php echo $html->link($c,'/planes/index/Anio.ciclo_id:'.$c);?></div>
+				<?php $instit_id = $planes['Instit']['id']?>
+				<div><?php echo $html->link($c,"/planes/index/$instit_id/Anio.ciclo_id:$c");?></div>
 			<?php endforeach;?>
 			</td>
 			</tr>
