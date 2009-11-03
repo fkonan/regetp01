@@ -46,9 +46,6 @@
 
 <script type="text/javascript">
 <!--
-
-$('sector_id').activate();
-
 Event.observe(window, "keypress", function(e){ 
 		var cKeyCode = e.keyCode || e.which; 
 		if (cKeyCode == Event.KEY_RETURN){ 

@@ -63,27 +63,6 @@ echo $html->css('edit_form',false);
 		
 		
 		
-			/**
-		 *    Clase de Instituicion
-		 */									
-		echo $form->input('claseinstit_id',array(
-										'label'=>'Tipo de Institución',
-										'empty'=>'Seleccione una clase'
-										));
-										
-		/**
-		 *    Estado de la institucion respecto del programa ETP
-		 */									
-		echo $form->input('etp_estado_id',array(
-										'label'=>'Relación con ETP',
-										'default' => 2 //instit de ETP
-										));
-										
-										
-										
-		
-		
-		
 		/**
 		 *   AJAX ::> JURISDICCION - Departamentop - Localidad - Tipo de Institucion 
 		 */	
@@ -322,11 +301,9 @@ echo $html->css('edit_form',false);
 											  "selected" => date('Y')			
 		));
 		
-		if($force_save) {
-			//forzar al checkbox siempre
-			$this->data['Instit']['force_save'] = 0;
-			echo $form->input('force_save',array('type'=> 'checkbox','checked'=>false,'label'=>'Forzar guardado.'));
-		}
+		//forzar al checkbox siempre
+		$this->data['Instit']['force_save'] = 0;
+		echo $form->input('force_save',array('type'=> 'checkbox','checked'=>false,'label'=>'Forzar guardado.'));
 	?>
 <?php echo $form->end('Guardar');?>
 </div>

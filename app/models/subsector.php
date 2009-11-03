@@ -60,8 +60,7 @@ class Subsector extends AppModel {
          	$ss_aux = array();
 			foreach($subsectores as $ss): 
 				$sector = $ss['Sector']['name'];
-				$ss_name = $ss['Subsector']['name']." (Sector: $sector)";
-				$ss_aux[$ss['Subsector']['id']] = (strlen($ss_name)>60)? substr($ss_name,0,60)."..." : $ss_name;
+				$ss_aux[$ss['Subsector']['id']] = $ss['Subsector']['name']." (Sector: $sector)";
 			endforeach;
 	        $subsectores = $ss_aux;
          }

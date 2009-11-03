@@ -86,5 +86,5 @@ Para realizar consultas sobre los contenidos de información del Registro
 de Instituciones: Int. 4032/4033.
 </p>
 <p>
-Unidad de Información: Of. 311.
+Unidad de Información: Of. 309.
 </p>

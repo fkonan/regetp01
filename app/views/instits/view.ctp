@@ -47,21 +47,10 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
 	
 	
 	<h2>Datos de Institución</h2>
-		<?php if($con_programa_de_etp){
+		<?php if($instit_etp){
 			echo "<p class='instit-etp'>Institución con programa de ETP</p>";
 		}?>
 	<dl>
-		
-		<?php 
-		if(!$con_programa_de_etp){
-			if($instit['Instit']['claseinstit_id']){	?>
-			<dt><?php __('Tipo de Institución de ETP'); ?></dt>
-			<dd>
-				<?php echo $instit['Claseinstit']['name']; ?>
-				&nbsp;
-			</dd>
-		<?php }
-		}?>
 		
 		<dt ><?php __('Ámbito de Gestión'); ?></dt>
 		<dd>

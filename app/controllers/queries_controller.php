@@ -1,9 +1,8 @@
 <?php
-require("models/querystmp.php");
 class QueriesController extends AppController {
 
 	var $name = 'Queries';
-	var $helpers = array('Html', 'Form','Ajax');
+	var $helpers = array('Html', 'Form');
 	var $components = array('RequestHandler');
 
 	function index() {
@@ -60,29 +59,9 @@ class QueriesController extends AppController {
 		}
 	}
 	
-	function descargar_queries() {
-		$categoria=(isset($this->data['Query']['categoria']))? $this->data['Query']['categoria'] : "";
-		$this->set('categoria',$categoria);
-
-		$categorias = array();
-		$categorias[''] = 'Todos';
-		$categorias_aux = $this->Query->listarCategorias();
-		foreach($categorias_aux as $c){
-			$categorias[$c['Query']['categoria']] = $c['Query']['categoria'];
-		}			
-		$this->set('categorias',$categorias);
-		
-		$conditions=array();
-		if($categoria!=""){
-			$conditions['categoria']=$categoria;
-		}
-		if(isset($this->data['Query']['description']) && $this->data['Query']['description']!="") {
-			$conditions['OR']['lower(to_ascii(Query.description)) SIMILAR TO ?'] = array($this->Query->convertir_para_busqueda_avanzada(utf8_decode($this->data['Query']['description'])));
-			$conditions['OR']['lower(to_ascii(Query.name)) SIMILAR TO ?'] = array($this->Query->convertir_para_busqueda_avanzada(utf8_decode($this->data['Query']['description'])));
-		}
-		
-		$queries=$this->Query->find('all',array('order'=>'modified DESC', 'conditions'=>$conditions));
-		$this->set('queries',$queries);
+	
+	function descargar_queries(){
+		$this->set('queries',$this->Query->find('all',array('order'=>'modified DESC')));
 	}
 	
 	/**
@@ -108,62 +87,6 @@ class QueriesController extends AppController {
 		$this->set('filas',$consulta_ejecutada);
 
 	}
-	
-	
-	function listado_categorias()
-	{	
-		Configure::write('debug', 0);
-		$this->Query->recursive = -1;
-		
-		$categorias = array();
-		if(!empty($this->data['Query']['categoria'])){
-			$categorias = $this->Query->listarCategorias($this->data['Query']['categoria']);
-		}
-		else{
-			$categorias = $this->Query->listarCategorias('*'); // me trae todas
-		}
-		
-		$this->set('categorias',$categorias);
-		$this->set('string_categoria',$this->data['Query']['categoria']);
-		$this->layout = 'ajax';
-	}
-
-	function list_view($id="") {
-
-		$this->layout = "sin_menu";
-
-		if (isset($this->passedArgs['query.id'])){
-			$id = $this->passedArgs['query.id'];
-		}
-		
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for Query', true));
-			$this->redirect(array('action'=>'index'));
-		}
-
-		$this->rutaUrl_for_layout[] =array('name'=> 'Queries','link'=>'/Instits/add' );
-		$res = $this->Query->findById($id);
-
-		$queryTmp = new Querystmp();
-		$queryTmp->setSql($res['Query']['query']);
-		
-		if (isset($this->passedArgs['viewAll']) && $this->passedArgs['viewAll'] == 'true'){
-			$data = $queryTmp->getData();
-			$viewAll = false;		
-		} else {	
-			$data = $this->paginate($queryTmp);
-			$viewAll = true;
-		}			
-
-		$cols = array_keys($data['0']['0']); 
-		$this->set('cols', $cols);
-        $url_conditions['query.id'] = $id;
-		$this->set('queries', $data);
-		$this->set('url_conditions', $url_conditions);
-		$this->set('descripcion', $res['Query']['description']);
-		$this->set('viewAll', $viewAll);
-	}
-	
 
 }
 ?>

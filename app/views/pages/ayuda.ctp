@@ -7,7 +7,7 @@
 El Sistema de Registros no puede ser accedido por todos los usuarios, 
 por ello pide registro de usuario y contraseña cuando uno quiere 
 ingresar a una página web que va amostrar algún tipo de información.<br />
-La única forma de obtener usuario y contraseña, es dirigiendose a la oficina 311 
+La única forma de obtener usuario y contraseña, es dirigiendose a la oficina 309 
 (unidad de información) y pedir su correspondiente clave.
 </p>
 

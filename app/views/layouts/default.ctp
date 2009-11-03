@@ -37,8 +37,6 @@
 		echo $html->css('printer','stylesheet', array('media'=>'print'));
 		
 		echo $javascript->link('prototype');
-		echo $javascript->link('scriptaculous-js-1.8.3/src/scriptaculous');
-		
 		echo $javascript->link('mensaje.class');
 		echo $javascript->link('ejecutar_en_head');
 		//echo $javascript->link('form_regetp_ria');

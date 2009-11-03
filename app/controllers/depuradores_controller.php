@@ -135,40 +135,37 @@ class DepuradoresController extends AppController {
 	 * @return unknown_type
 	 */
 	function sectores($jur_id=0){		
-		if (!empty($this->data)) 
-		{
+		if (!empty($this->data)) {
+			
+			if(isset($this->data['Instit']['jurisdiccion_id']))
+			{
+				$jur_id = $this->data['Instit']['jurisdiccion_id'];
+			}
+			else
+			{
+				$this->Plan->id = $this->data['Plan']['id']; 
 				
-				if(isset($this->data['Instit']['jurisdiccion_id']))
-				{
-					$jur_id = $this->data['Instit']['jurisdiccion_id'];
+				if (!empty($this->data['Plan']['sector_id'])):
+		  			if ($this->data['Plan']['sector_id'] != '' || $this->data['Plan']['sector_id'] != 0): 
+		  				$this->Sector->recursive = -1;
+		  				$this->Sector->id = $this->data['Plan']['sector_id'];
+		  				$sec_aux = $this->Sector->read();
+		  				$this->data['Plan']['sector'] = $sec_aux['Sector']['name'];
+		  			endif;
+		  		endif;
+  		  		
+  		
+  		
+				
+				if ($valor = $this->Plan->save(	$this->data ,
+												array('validate'=>true, 'fieldList'=>array('nombre', 'sector_id', 'subsector_id','sector')))) {	
+					$this->Session->setFlash(__('Se ha guardado el Plan correctamente', true));
+									
+				} else {
+					debug($this->Plan->validationErrors);
+					$this->Session->setFlash(__('El Plan no pudo ser guardada. Escriba nuevamente el campo incorrecto.', true));
 				}
-				else
-				{
-					$this->Plan->id = $this->data['Plan']['id']; 
-					if (!empty($this->data['Plan']['sector_id'])):
-			  			if ($this->data['Plan']['sector_id'] != '' || $this->data['Plan']['sector_id'] != 0): 
-			  				$this->Sector->recursive = -1;
-			  				$this->Sector->id = $this->data['Plan']['sector_id'];
-			  				$sec_aux = $this->Sector->read();
-			  				$this->data['Plan']['sector'] = $sec_aux['Sector']['name'];
-			  			endif;
-			  		endif;
-	  		  		
-			  		$fields = array('nombre', 'sector_id', 'subsector_id');
-			  		if($this->data['Plan']['sector_id'])
-					{
-						$fields[] = 'sector';
-					}	
-	  		
-					
-					if ($valor = $this->Plan->save(	$this->data ,array('validate'=>true,'fieldList'=>$fields))) {	
-						$this->Session->setFlash(__('Se ha guardado el Plan correctamente', true));
-										
-					} else {
-						debug($this->Plan->validationErrors);
-						$this->Session->setFlash(__('El Plan no pudo ser guardada. Escriba nuevamente el campo incorrecto.', true));
-					}
-				}
+			}
 		}
 		
 		$conditions = array('Instit.activo'=>1, 'Plan.sector_id'=>0);

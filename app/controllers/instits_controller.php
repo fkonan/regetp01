@@ -22,24 +22,31 @@ class InstitsController extends AppController {
 		}
 		
 		$instit = $this->Instit->read(null, $id);
-		$programa_de_etp = false;
-		// si la institucion es con programa de ETP
-		if($instit['EtpEstado']['id']== 1){
-			$programa_de_etp = true;
-		}
-		$this->set('con_programa_de_etp', $programa_de_etp);
+		
+		// me fijo si todos los planes son 
+		// IT entonces la instit es con programa de ETP
+		$instit_etp = false;
+		foreach ($instit['Plan'] as $p):
+			if ($val = ($p['oferta_id'] == 2)){ // == 2 -> IT
+				$instit_etp = true; 
+			}
+			else{
+				$instit_etp = false;
+				break;
+			}
+		endforeach;
+		$this->set('instit_etp', $instit_etp);
 		$this->set('instit', $instit);
 	}
 
 	function add() {		
 		$similares = array();
-		$force_save = false;
 		
 		$this->rutaUrl_for_layout[] =array('name'=> 'Agregar','link'=>'/Instits/add' );
 		if (!empty($this->data)) {
 			// si ingrese el formulario por primera vez, y la esta variable no esta setteada 
 			// que me busque los similares		
-			if(!isset($this->data['Instit']['force_save']) || $this->data['Instit']['force_save'] == 0)
+			if($this->data['Instit']['force_save'] == 0)
 			{
 				$similares = $this->Instit->getSimilars($this->data);
 			}		
@@ -58,7 +65,6 @@ class InstitsController extends AppController {
 			}else
 			{				
 				$this->Session->setFlash(__('Hay instituciones similares.', true));
-				$force_save = true;
 			}
 		}
 
@@ -80,11 +86,7 @@ class InstitsController extends AppController {
 				$v_condiciones = array('departamento_id'=>$this->data['Instit']['departamento_id']);
 		}
 		$localidades = $this->Instit->Localidad->find('list',array('order'=>'name','conditions'=>$v_condiciones));
-		
-		$etp_estados = $this->Instit->EtpEstado->find('list');
-		$claseinstits = $this->Instit->Claseinstit->find('list');
-		$this->set(compact('etp_estados','claseinstits','gestiones','dependencias','jurisdicciones','similares','tipoinstits','departamentos','localidades'));
-		$this->set('force_save', $force_save);
+		$this->set(compact('gestiones','dependencias','jurisdicciones','similares','tipoinstits','departamentos','localidades'));
 	}
 
 	function edit($id = null) {
@@ -92,6 +94,7 @@ class InstitsController extends AppController {
 			$this->Session->setFlash(__('Invalid Instit', true));
 			$this->redirect(array('action'=>'search_form'));
 		}
+		
 		
 		if (!empty($this->data)) 
 		{		
@@ -147,10 +150,7 @@ class InstitsController extends AppController {
 		}
 		$localidades = $this->Instit->Localidad->find('list',array('order'=>'name','conditions'=>$v_condiciones));
 		
-		$etp_estados = $this->Instit->EtpEstado->find('list');
-		$claseinstits = $this->Instit->Claseinstit->find('list');
-		
-		$this->set(compact('claseinstits','etp_estados','gestiones','dependencias','jurisdicciones','similares','tipoinstits','departamentos','localidades'));
+		$this->set(compact('gestiones','dependencias','jurisdicciones','similares','tipoinstits','departamentos','localidades'));
 				
 		$this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$id );
 	}
@@ -286,30 +286,6 @@ class InstitsController extends AppController {
                   	$url_conditions['cue'] = $this->passedArgs['cue'];
             	 }
             }
-            
-            
-		/**
-		 *     NOMBRE COMPLETO
-		 */
-            if(isset($this->data['Instit']['nombre_completo'])){
-				if($this->data['Instit']['nombre_completo'] != ''){
-					$this->paginate['conditions']["to_ascii(lower(Tipoinstit.name))||' n '||".
-													"to_ascii(lower(Instit.nroinstit))||' '||".
-													"to_ascii(lower(Instit.nombre)) SIMILAR TO ?"] = array($this->Instit->convertir_para_busqueda_avanzada($this->data['Instit']['nombre_completo']));
-					$array_condiciones['Nombre'] = $this->data['Instit']['nombre_completo'];
-					$url_conditions['nombre_completo'] = $this->data['Instit']['nombre_completo'];			
-				}
-            }
-			if(isset($this->passedArgs['nombre_completo'])){
-            	if($this->passedArgs['nombre_completo'] != ''){
-					$this->paginate['conditions']["to_ascii(lower(Tipoinstit.name))||' n '||".
-													"to_ascii(lower(Instit.nroinstit))||' '||".
-													"to_ascii(lower(Instit.nombre)) SIMILAR TO ?"] = array($this->Instit->convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['nombre_completo'])));
-					$array_condiciones['Nombre'] = utf8_decode($this->passedArgs['nombre_completo']);
-					$url_conditions['nombre_completo'] = utf8_decode($this->passedArgs['nombre_completo']);
-				}
-            }
-			            
             
 			/**
 			 *     Nro Institucion
@@ -762,6 +738,7 @@ class InstitsController extends AppController {
 		$this->set(compact('jurisdicciones','departamentos','localidades','tipoinstits'));	
 		$this->set('falta_depurar',$total);
 	}
+	
 	
 	function prueba(){
 		$this->autoRender = false; // para uqe no muestre la vista
