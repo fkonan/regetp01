@@ -1240,8 +1240,15 @@ a:hover.clearTag {
 	clear: both;
 }
 
+.tabs-list A{ 
+	text-decoration: none;
+	padding:3px;
+	display: block;
+	text-align: center;
+}
+
 .tab-activa{
-	background-color: white;
+	background-color: #F2F2F2 ;
 	font-weight: bolder;
 	width: 100px;
 	color: white;
@@ -1250,12 +1257,11 @@ a:hover.clearTag {
 	border-top: 1px solid black;
 	border-left: 1px solid black;
 	border-right: 1px solid black;
-	border-bottom: none;
+	border-bottom: 1px solid #F2F2F2;
 	margin-right: -1px;
 }
 .tab-activa A{
 	color:  #045FB4;
-	text-decoration: none;
 }
 
 .tab-inactiva{
@@ -1270,7 +1276,7 @@ a:hover.clearTag {
 
 .tab-inactiva A{
 	color: white;
-	text-decoration: none;
+
 }
 
 .tabs-linea-alargada{
@@ -1279,9 +1285,7 @@ a:hover.clearTag {
 
 
 .tabs-content{
-	
 	clear: both;
-	height:17px;
 	width:100%;
 }
 
