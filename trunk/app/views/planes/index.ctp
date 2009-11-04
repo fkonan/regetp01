@@ -115,7 +115,15 @@ $cue_instit = $planes['Instit']['cue'].$anexo;
 					?>
 				<div class="<?= $clase?>"><?php echo $html->link($c,"/planes/index/$instit_id/Anio.ciclo_id:$c");?></div>
 			<?php endforeach;?>
-			<div class="tabs-linea-alargada"></div>
+			
+				<?php 
+				if($current_ciclo == 0) {
+							$clase = 'tab-activa';
+				}else{
+					$clase = 'tab-inactiva';
+				}
+				?>
+				<div class="<?= $clase?>"><?php echo $html->link('Ver Todos',"/planes/index/$instit_id/Anio.ciclo_id:0");?></div>
 	</div>
 		
 	<div class="tabs-content">	
@@ -152,7 +160,13 @@ $cue_instit = $planes['Instit']['cue'].$anexo;
 					<?php echo $plan['Plan']['sector']; ?>
 				</td>
 				<td>
-					<?php echo $plan['calculado']['sum_matricula']; ?>
+					<?php 
+					$ciclo_actualizacion = '';
+					if($this->passedArgs['Anio.ciclo_id'] ==0){
+						$ciclo_actualizacion = " (".$plan['calculado']['max_ciclo'].")";
+					}
+					
+					echo $plan['calculado']['sum_matricula'].$ciclo_actualizacion; ?>
 				</td>
 				<td class="actions">
 					<?php echo $html->link(__('Ver', true), array('action'=>'view', $plan['Plan']['id'])); ?>
@@ -162,8 +176,6 @@ $cue_instit = $planes['Instit']['cue'].$anexo;
 		</table>
 	</div>	
 </div>	
-	
-
 	
 </div>
 	

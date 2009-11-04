@@ -301,6 +301,12 @@ ul, li {
 	font-size: x-small;
 }
 
+.mini_tabla TD{
+	border-width: 1px;
+	border-color: #F0F7FC; 
+	border-style: solid; 
+}
+
 .mini_tabla th{
 	width: 66px;
 }
@@ -1231,6 +1237,20 @@ a:hover.clearTag {
 
 
 
+
+
+
+
+
+
+/************---------------------------------------------------------------------
+
+
+		DISEÑO DE TABS
+
+
+************---------------------------------------------------------------------*/
+
 .tabs{
 	width: 614px;
 }
@@ -1264,6 +1284,7 @@ a:hover.clearTag {
 	color:  #045FB4;
 }
 
+
 .tab-inactiva{
 	width: 100px;
 	background-color: silver;
@@ -1279,14 +1300,17 @@ a:hover.clearTag {
 
 }
 
-.tabs-linea-alargada{
-	
+.tab-inactiva A:HOVER{
+	background-color: beige ;
 }
+
+
 
 
 .tabs-content{
 	clear: both;
 	width:100%;
+	margin-top: -1px; 
 }
 
 
