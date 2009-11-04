@@ -39,6 +39,7 @@ class PlanesController extends AppController {
 		/* *************************** */
 		/*  Si tiene ticket pendiente  */
 		/* *************************** */
+
 		$data_ticket = $this->Plan->Instit->Ticket->dameTicketPendiente($id);
 		$ticket_id = isset($data_ticket['Ticket']['id'])?$data_ticket['Ticket']['id']:0;
 		$this->set('ticket_id', $ticket_id);
@@ -46,6 +47,10 @@ class PlanesController extends AppController {
 		$action = ($this->Auth->user('role')=='admin' || $this->Auth->user('role')=='editor' || $this->Auth->user('role')=='desarrollo')?'edit':'view';
 		$this->set('action', $action);
 
+		/* *************************** */
+		/*  Fin Si tiene ticket pendiente  */
+		/* *************************** */
+		
 		$this->institData = $this->Plan->Instit->read(null,$id);
 		if($this->institData)
 		{
@@ -67,10 +72,11 @@ class PlanesController extends AppController {
 													'conditions'=>array('instit_id'=>$id)));
 		$ciclos = $this->Plan->Anio->find('list',array('fields' => array('Anio.ciclo_id','Anio.ciclo_id'),
 														'conditions'=>array('Anio.plan_id'=>$planes),
-														'group'=>'Anio.ciclo_id'
-		));
+														'group'=>'Anio.ciclo_id',
+														'order'=>'Anio.ciclo_id DESC'
+														));
+														
 		$this->set(compact('ofertas','ciclos'));
-		
 		$this->Plan->recursive = 0;
 
 		/* ************************************ */
@@ -114,12 +120,24 @@ class PlanesController extends AppController {
 				$url_conditions['Anio.ciclo_id'] = $this->data['Plan']['ciclo_id'];
 			}
         }
-        if(isset($this->passedArgs['Anio.ciclo_id'])){
-			if((int)$this->passedArgs['Anio.ciclo_id'] != 0){
-				$this->Plan->setMaxCiclo($this->passedArgs['Anio.ciclo_id']);
-				$url_conditions['Anio.ciclo_id'] = $this->passedArgs['Anio.ciclo_id'];
-			}
-        }
+		else
+		{        
+	        if(isset($this->passedArgs['Anio.ciclo_id'])){
+				if((int)$this->passedArgs['Anio.ciclo_id'] != 0){
+					$this->Plan->setMaxCiclo($this->passedArgs['Anio.ciclo_id']);
+					$url_conditions['Anio.ciclo_id'] = $this->passedArgs['Anio.ciclo_id'];
+				}
+        	}
+        	else 
+        	{
+        		if(isset($ciclos)){
+					if((int)current($ciclos) != 0){
+						$this->Plan->setMaxCiclo(current($ciclos));
+						$url_conditions['Anio.ciclo_id'] = current($ciclos);
+					}	
+        		}
+        	}
+		}	
 
 		/* ********************************* */
         /* * Paginador y seteos a la vista * */
