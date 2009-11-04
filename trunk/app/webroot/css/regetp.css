@@ -315,9 +315,6 @@ ul, li {
 /* Tables */
 table {
 	background-color: #fff;
-	border:1px solid #f0f7fc;
-	border-right:0;
-	clear: both;
 	color: #333;
 	margin-bottom: 10px;
 	width: 100%;
@@ -345,19 +342,18 @@ th a:hover {
 	color: #333;
 	text-decoration: none;
 }
+
 table tr td {
 	background: #fff;
-	border-right: 1px solid #f0f7fc;
-	border-bottom: 1px solid #f0f7fc;
 	padding: 4px;
 	text-align: center;
 	vertical-align: top;
 }
 
+
 table tr.altrow2 th {
 	background-color:#FFFFFF;
 	color:#045FB4;
-	border:0px;
 	font-weight:bold;
 	padding:3px 6px;
 	text-decoration:none;
@@ -1235,26 +1231,61 @@ a:hover.clearTag {
 
 
 
-
-
-
-.tabs div{
-	width: 100px;
-	background-color: grey;
-	font-weight: bolder;
-	color: white;
-	float: left;
-	clear: none;
-	border: 1px groove black;
+.tabs{
+	width: 614px;
 }
 
-.tabs A{
+.tabs-list{
 	display: block;
-	color: white;
+	clear: both;
 }
 
 .tab-activa{
-	width: 200px;
-	background-color: beige;
+	background-color: white;
 	font-weight: bolder;
+	width: 100px;
+	color: white;
+	float: left;
+	clear: none;
+	border-top: 1px solid black;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	border-bottom: none;
+	margin-right: -1px;
 }
+.tab-activa A{
+	color:  #045FB4;
+	text-decoration: none;
+}
+
+.tab-inactiva{
+	width: 100px;
+	background-color: silver;
+	color: black;
+	float: left;
+	clear: none;
+	border: 1px solid black;
+	margin-right: -1px;
+}
+
+.tab-inactiva A{
+	color: white;
+	text-decoration: none;
+}
+
+.tabs-linea-alargada{
+	
+}
+
+
+.tabs-content{
+	
+	clear: both;
+	height:17px;
+	width:100%;
+}
+
+
+
+
+

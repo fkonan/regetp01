@@ -91,83 +91,83 @@ $cue_instit = $planes['Instit']['cue'].$anexo;
 	?>	
 	
 </table>
-<div>
-<br />
 <?php endif;?>	
-	
-<p>
-<?php
-echo $form->create('Plan',array('action' => 'index'));
-echo $form->input('Instit.id', array('value'=>$url_conditions['Instit.id']));
-//echo $paginator->counter(array('format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)));
-?></p>
-
-
-<table cellpadding="0" cellspacing="0">
-<tr>
-	<td colspan="5">
-		
-		
-		<!-- TABS DE CICLOS ULT. ACTUALIZACIONES  -->
-		<table class="tabs">
-			<tr><td>
-			<?php foreach ($ciclos as $c):?>
-				<?php $instit_id = $planes['Instit']['id']?>
-				<div><?php echo $html->link($c,"/planes/index/$instit_id/Anio.ciclo_id:$c");?></div>
-			<?php endforeach;?>
-			</td>
-			</tr>
-		</table>
-	</td>
-</tr>
-
-<CAPTION>Listado de Ofertas</CAPTION>
-<tr>
-	<td><?php echo $form->input('oferta_id',array('options'=> $ofertas,'label'=>'','empty'=> array('0'=>'Todas'),'selected' => isset($url_conditions['Plan.oferta_id']) ? $url_conditions['Plan.oferta_id'] : '0'));?></td>
-	<td><?php echo $form->input('nombre', array('label'=>'','value' => isset($url_conditions['Plan.nombre']) ? $url_conditions['Plan.nombre'] : ''));?></td>
-	<td><?php echo $form->input('sector', array('label'=>'', 'value' => isset($url_conditions['Plan.sector']) ? $url_conditions['Plan.sector'] : ''));?></td>
-	<td><?php echo $form->button('Buscar',array('type'=>'submit'));?></td>
-	<td><?php echo '&nbsp';?></td>
-</tr>
-<tr>
-	<th><?php echo $paginator->sort('Oferta','Oferta.abrev');?></th>
-	<th><?php echo $paginator->sort('Nombre del Título/Certificación','nombre');?></th>
-	<th><?php echo $paginator->sort('Sector','sector');?></th>
-	<th><?php echo 'Mat.';?></th>
-	<th class="actions"><?php echo '&nbsp';?></th>
-</tr>
-<?php
-$i = 0;
-foreach ($planesRelacionados as $plan):
-	$class = null;
-	if ($i++ % 2 == 0) {
-		$class = ' class="altrow"';
-	}
-?>
-		<tr id="fila_plan_<?= $plan['Plan']['id'];?>" <?php echo $class;?> 
-			onclick="window.location='<?= $html->url(array('controller'=> 'Planes', 'action'=>'view/'.$plan['Plan']['id']))?>'"
-			onmouseout="$('fila_plan_<?= $plan['Plan']['id'];?>').removeClassName('fila_marcada')" 
-			onmouseover="$('fila_plan_<?= $plan['Plan']['id'];?>').addClassName('fila_marcada')">
-
-		<td>
-			<?php echo $plan['Oferta']['abrev']; ?>
-		</td>
-		<td>
-			<?php echo $plan['Plan']['nombre']; ?>
-		</td>
-		<td>
-			<?php echo $plan['Plan']['sector']; ?>
-		</td>
-		<td>
-			<?php echo $plan['calculado']['sum_matricula']; ?>
-		</td>
-		<td class="actions">
-			<?php echo $html->link(__('Ver', true), array('action'=>'view', $plan['Plan']['id'])); ?>
-		</td>
-	</tr>
-<?php endforeach; ?>
-</table>
 </div>
+
+
+
+
+<!-- TABS DE CICLOS ULT. ACTUALIZACIONES  -->
+<div class="tabs">
+	<h2>Listado de Ofertas</h2>
+	<div class="tabs-list">
+			<?php 
+				$current_ciclo = $this->passedArgs['Anio.ciclo_id'];
+				foreach ($ciclos as $c):?>
+					<?php 
+					$instit_id = $planes['Instit']['id'];
+					
+					if($current_ciclo == $c) {
+						$clase = 'tab-activa';
+					}else {
+						$clase = 'tab-inactiva';
+					}
+					?>
+				<div class="<?= $clase?>"><?php echo $html->link($c,"/planes/index/$instit_id/Anio.ciclo_id:$c");?></div>
+			<?php endforeach;?>
+			<div class="tabs-linea-alargada"></div>
+	</div>
+		
+	<div class="tabs-content">	
+
+		<table cellpadding="0" cellspacing="0" class="tabla-con-bordes-celeste">
+	
+		<tr>
+			<th><?php echo $paginator->sort('Oferta','Oferta.abrev');?></th>
+			<th><?php echo $paginator->sort('Nombre del Título/Certificación','nombre');?></th>
+			<th><?php echo $paginator->sort('Sector','sector');?></th>
+			<th><?php echo 'Mat.';?></th>
+			<th class="actions"><?php echo '&nbsp';?></th>
+		</tr>
+		<?php
+		$i = 0;
+		foreach ($planesRelacionados as $plan):
+			$class = null;
+			if ($i++ % 2 == 0) {
+				$class = ' class="altrow"';
+			}
+		?>
+				<tr id="fila_plan_<?= $plan['Plan']['id'];?>" <?php echo $class;?> 
+					onclick="window.location='<?= $html->url(array('controller'=> 'Planes', 'action'=>'view/'.$plan['Plan']['id']))?>'"
+					onmouseout="$('fila_plan_<?= $plan['Plan']['id'];?>').removeClassName('fila_marcada')" 
+					onmouseover="$('fila_plan_<?= $plan['Plan']['id'];?>').addClassName('fila_marcada')">
+		
+				<td>
+					<?php echo $plan['Oferta']['abrev']; ?>
+				</td>
+				<td>
+					<?php echo $plan['Plan']['nombre']; ?>
+				</td>
+				<td>
+					<?php echo $plan['Plan']['sector']; ?>
+				</td>
+				<td>
+					<?php echo $plan['calculado']['sum_matricula']; ?>
+				</td>
+				<td class="actions">
+					<?php echo $html->link(__('Ver', true), array('action'=>'view', $plan['Plan']['id'])); ?>
+				</td>
+			</tr>
+		<?php endforeach; ?>
+		</table>
+	</div>	
+</div>	
+	
+
+	
+</div>
+	
+	
 <div class="paging">
 	<?php echo $paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>
  | 	<?php echo $paginator->numbers();?>
@@ -195,3 +195,4 @@ foreach ($planesRelacionados as $plan):
 		?>	
 	</ul>
 </div>
+
