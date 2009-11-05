@@ -117,8 +117,8 @@ class PlanesController extends AppController {
         if(isset($this->data['Anio']['ciclo_id'])){
 			if((int)$this->data['Anio']['ciclo_id'] != 0){
 				$this->Plan->setMaxCiclo($this->data['Anio']['ciclo_id']); 
-				$url_conditions['Anio.ciclo_id'] = $this->data['Anio']['ciclo_id'];
 			}
+			$url_conditions['Anio.ciclo_id'] = $this->data['Anio']['ciclo_id'];
         }
 		else
 		{        
