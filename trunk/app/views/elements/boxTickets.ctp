@@ -14,22 +14,38 @@ if ($session->check('Auth.User')){
 			$prov_pend = array();
 			$prov_pend = $this->requestAction('/tickets/provincias_pendientes');
 			
+			/************************/
+			?>
 			
-			while(list($id,$name) = each($prov_pend))
-			{		
-				?><li>
-					<? echo $html->link($name,"/tickets/index/".$id) ?>
-				  </li>
-				<?php
-			}
+			<!-- div class="box gradwhite blue" -->
+			<div>
+			<a href="javascript:;" onclick="$('tickets').toggle();">Ver pendientes</a>
 			
-			if(count($prov_pend) < 1)
-			{		
-				?><li>
-					<? echo $html->link("No hay pendientes","/pages/home/") ?>
-				  </li>
-				<?php
-			}									
+			</div>
+			
+		
+			<div id="tickets" style="display: none">
+				<?php 
+					while(list($id,$name) = each($prov_pend))
+					{		
+						?><li>
+							<? echo $html->link($name,"/tickets/index/".$id) ?>
+						  </li>
+						<?php
+					}
+					
+					if(count($prov_pend) < 1)
+					{		
+						?><li>
+							<? echo $html->link("No hay pendientes","/pages/home/") ?>
+						  </li>
+						<?php
+					}
+				?>
+			</div>
+			
+			<?php 
+			/************************/									
 		?> 
 
 </ul>

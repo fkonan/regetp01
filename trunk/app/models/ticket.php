@@ -45,27 +45,28 @@ class Ticket extends AppModel {
 	}
 	
 	function dameProvinciasConPendientes()
-	{
-		$this->recursive = 0;
-		$search = $this->find('all', array(
-										'fields'=>array('Instit.jurisdiccion_id'),
-										'conditions'=>array('Ticket.estado'=>0),
-										'group'=>'Instit.jurisdiccion_id'));
-		$juris_id = array();
-		foreach($search as $key=>$value)
-		{
-			$juris_id[]=$value['Instit']['jurisdiccion_id'];
-		}
-		
-		if(count($juris_id) < 1)
-			$juris_id = "";
-		
+	{		
+		// Busco todas las jurisdicciones
 		$this->Instit->Jurisdiccion->recursive = -1;
 		$prov_pend = array();
-		$prov_pend = $this->Instit->Jurisdiccion->find('list', array(
-								'conditions'=>array('Jurisdiccion.id'=>$juris_id),
-								'order'=>'Jurisdiccion.name'));
+		$prov_pend = $this->Instit->Jurisdiccion->find('list', array('order'=>'Jurisdiccion.name'));
 		
+		// Por cada jurisdiccion veon cuantos pendientes tiene
+		// Si no tiene la saco
+		foreach($prov_pend as $id=>$name)
+		{
+			$this->recursive = 0;
+			$count = $this->find('count', array(
+								'conditions'=>array('Ticket.estado'=>0,
+													'Instit.jurisdiccion_id'=>$id)
+							));
+			
+			if($count>0)
+				$prov_pend[$id] = $name." ($count)";
+			else 
+				 unset($prov_pend[$id]);		 
+		}
+
 		return $prov_pend;	
 	}
 
