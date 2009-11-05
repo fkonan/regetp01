@@ -301,15 +301,44 @@ class Plan extends AppModel {
   		}
   		return false;
   	}
-  	
-  	
+    	
   	
   	//TODO validar la oferta con la clase de institucion
   	function validar_oferta_id_con_claseinstit()
   	{
 		return true;
-  		
   	}
 	
+	/**
+  	 * Esta funcion recibe el id de institucion y 
+  	 * devuelve la última actualización (ciclo) que presenten sus planes
+  	 *
+  	 * @param $instit_id
+  	 * @return Array $vec
+  	 */
+  	
+  	function dame_max_ciclos_por_instits($instit_id){
+  		
+		$sql  = " SELECT ciclo_id ";
+		$sql .= " FROM   planes p ";
+		$sql .= "       ,(        ";
+        $sql .= "         SELECT plan_id, max(ciclo_id) AS ciclo_id  ";
+        $sql .= "         FROM   anios AS an      ";    
+        $sql .= "         GROUP BY plan_id        ";
+        $sql .= "        ) max_ciclo              ";
+		$sql .= " WHERE p.id = max_ciclo.plan_id  ";
+		$sql .= " AND   p.instit_id = " . $instit_id;
+		$sql .= " GROUP BY ciclo_id ";
+		$sql .= " ORDER BY ciclo_id ASC";
+		
+		$data = $this->query($sql);
+
+		foreach ($data as $line){
+			$vec[$line[0]['ciclo_id']] = $line[0]['ciclo_id']; 
+		}
+
+		return $vec;
+  	}
+
 }
 ?>

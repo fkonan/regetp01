@@ -70,11 +70,14 @@ class PlanesController extends AppController {
 		$ofertas = $this->Plan->Oferta->find('list',array('fields' => array('id','abrev')));
 		$planes = $this->Plan->find('list', array(  'fields' => array('Plan.id'),
 													'conditions'=>array('instit_id'=>$id)));
-		$ciclos = $this->Plan->Anio->find('list',array('fields' => array('Anio.ciclo_id','Anio.ciclo_id'),
-														'conditions'=>array('Anio.plan_id'=>$planes),
-														'group'=>'Anio.ciclo_id',
-														'order'=>'Anio.ciclo_id ASC'
-														));
+		//$ciclos = $this->Plan->Anio->find('list',array('fields' => array('Anio.ciclo_id','Anio.ciclo_id'),
+		//												'conditions'=>array('Anio.plan_id'=>$planes),
+		//												'group'=>'Anio.ciclo_id',
+		//												'order'=>'Anio.ciclo_id ASC'
+		//												));
+		//debug($ciclos);														
+		
+		$ciclos = $this->Plan->dame_max_ciclos_por_instits($id);
 														
 		$this->set(compact('ofertas','ciclos'));
 		$this->Plan->recursive = 0;
@@ -143,7 +146,12 @@ class PlanesController extends AppController {
 		/* ********************************* */
         /* * Paginador y seteos a la vista * */
         /* ********************************* */
-        
+
+		if (!isset($this->passedArgs['sort'])){
+			$this->passedArgs['sort'] = 'Plan.oferta_id';
+			$this->passedArgs['direction'] = 'asc';
+		}
+		
 		$this->Plan->setAsociarAnio(true);
         $this->paginate['conditions']['Instit.id'] = $id;
         $url_conditions['Instit.id'] = $id; // para que no pierda el id de instit en los ordenamientos y la paginacion
