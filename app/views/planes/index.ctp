@@ -102,7 +102,7 @@ $cue_instit = $planes['Instit']['cue'].$anexo;
 	<h2>Listado de Ofertas</h2>
 	<div class="tabs-list">
 			<?php 
-				$current_ciclo = $this->passedArgs['Anio.ciclo_id'];
+				$current_ciclo = $url_conditions['Anio.ciclo_id'];
 				foreach ($ciclos as $c):?>
 					<?php 
 					$instit_id = $planes['Instit']['id'];
@@ -127,9 +127,17 @@ $cue_instit = $planes['Instit']['cue'].$anexo;
 	</div>
 		
 	<div class="tabs-content">	
-
 		<table cellpadding="0" cellspacing="0" class="tabla-con-bordes-celeste">
-	
+		<tr>
+            <th style="display:none"><?php echo $form->create('Plan',array('action' =>'index'));
+                  echo $form->hidden('Instit.id',array('value' => $url_conditions['Instit.id']));
+                  echo $form->hidden('Anio.ciclo_id',array('value' => $url_conditions['Anio.ciclo_id']));?>
+            </th>      
+			<th><?php echo $form->input('oferta_id',array('options'=> $ofertas,'label'=>'','empty'=> array('0'=>'Todas'),'selected' => isset($url_conditions['Plan.oferta_id']) ? $url_conditions['Plan.oferta_id'] : '0'));?></th>
+			<th><?php echo $form->input('nombre', array('label'=>'','value' => isset($url_conditions['Plan.nombre']) ? $url_conditions['Plan.nombre'] : ''));?></th>
+			<th><?php echo $form->input('sector', array('label'=>'', 'value' => isset($url_conditions['Plan.sector']) ? $url_conditions['Plan.sector'] : ''));?></th>
+			<th colspan=2><?php echo $form->end('Buscar');?></th>
+		</tr>
 		<tr>
 			<th><?php echo $paginator->sort('Oferta','Oferta.abrev');?></th>
 			<th><?php echo $paginator->sort('Nombre del Título/Certificación','nombre');?></th>
@@ -162,7 +170,7 @@ $cue_instit = $planes['Instit']['cue'].$anexo;
 				<td>
 					<?php 
 					$ciclo_actualizacion = '';
-					if($this->passedArgs['Anio.ciclo_id'] ==0){
+					if($url_conditions['Anio.ciclo_id'] ==0){
 						$ciclo_actualizacion = " (".$plan['calculado']['max_ciclo'].")";
 					}
 					

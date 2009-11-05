@@ -73,7 +73,7 @@ class PlanesController extends AppController {
 		$ciclos = $this->Plan->Anio->find('list',array('fields' => array('Anio.ciclo_id','Anio.ciclo_id'),
 														'conditions'=>array('Anio.plan_id'=>$planes),
 														'group'=>'Anio.ciclo_id',
-														'order'=>'Anio.ciclo_id DESC'
+														'order'=>'Anio.ciclo_id ASC'
 														));
 														
 		$this->set(compact('ofertas','ciclos'));
@@ -114,26 +114,27 @@ class PlanesController extends AppController {
 			$url_conditions['Plan.sector'] = utf8_decode($this->passedArgs['Plan.sector']);					
         }
         
-        if(isset($this->data['Plan']['ciclo_id'])){
-			if((int)$this->data['Plan']['ciclo_id'] != 0){
-				$this->Plan->setMaxCiclo($this->data['Plan']['ciclo_id']); 
-				$url_conditions['Anio.ciclo_id'] = $this->data['Plan']['ciclo_id'];
+        if(isset($this->data['Anio']['ciclo_id'])){
+			if((int)$this->data['Anio']['ciclo_id'] != 0){
+				$this->Plan->setMaxCiclo($this->data['Anio']['ciclo_id']); 
+				$url_conditions['Anio.ciclo_id'] = $this->data['Anio']['ciclo_id'];
 			}
         }
 		else
 		{        
-	        if(isset($this->passedArgs['Anio.ciclo_id'])){
+
+			if(isset($this->passedArgs['Anio.ciclo_id'])){
 				if((int)$this->passedArgs['Anio.ciclo_id'] != 0){
 					$this->Plan->setMaxCiclo($this->passedArgs['Anio.ciclo_id']);
-					$url_conditions['Anio.ciclo_id'] = $this->passedArgs['Anio.ciclo_id'];
 				}
-        	}
+				$url_conditions['Anio.ciclo_id'] = $this->passedArgs['Anio.ciclo_id'];
+			}
         	else 
         	{
         		if(isset($ciclos)){
-					if((int)current($ciclos) != 0){
-						$this->Plan->setMaxCiclo(current($ciclos));
-						$url_conditions['Anio.ciclo_id'] = current($ciclos);
+        			if((int)end($ciclos) != 0){
+						$this->Plan->setMaxCiclo(end($ciclos));
+						$url_conditions['Anio.ciclo_id'] = end($ciclos);
 					}	
         		}
         	}
