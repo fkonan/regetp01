@@ -80,6 +80,7 @@
 					<li><?= $html->link('Contacto','/pages/contacto'); ?></li>
 				</ul>				
 			</div>
+			<div id="menu-footer"></div>
 			<div id="cuerpo">
 				<?  echo $this->renderElement('rutaUrl', array("ruta" => $rutaUrl_for_layout)); ?>
 				<?php $session->flash(); ?>

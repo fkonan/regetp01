@@ -249,6 +249,18 @@ text-transform:uppercase;
 	text-decoration:underline;
 }
 
+#menu-footer{
+	float: left;
+	display: block;
+	clear: both;
+	background-image: url('images/menu-footer.png');
+	background-position: right;
+	background-repeat: no-repeat;
+	height: 150px;
+	width: 139px; /*  IE  */
+	\width: 139px; /*  FF  */
+}
+
 /**
 * BOX LOGIN
 **/
