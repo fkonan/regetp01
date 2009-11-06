@@ -137,17 +137,8 @@ class Plan extends AppModel {
 		)
 	);
 	
-	function beforeSave(){  		  		
-  		if (isset($this->data['Plan']['sector_id'])):
-  			if ($this->data['Plan']['sector_id'] != '' || $this->data['Plan']['sector_id'] != 0): 
-  				$this->Sector->recursive = -1;
-  				$this->Sector->id = $this->data['Plan']['sector_id'];
-  				$sec_aux = $this->Sector->read();
-  				$this->data['Plan']['sector'] = $sec_aux['Sector']['name'];
-  			endif;
-  		endif;
-  		  		
-  		
+	function beforeSave()
+	{  		  		  		
   		if (isset($this->data['Plan']['duracion_hs'])):
   			if ($this->data['Plan']['duracion_hs'] == ''): 
   				$this->data['Plan']['duracion_hs'] = 0;

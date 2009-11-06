@@ -17,13 +17,12 @@ $cue_instit = $instit['cue'].$anexo;
 		echo $form->input('nombre');
 		echo $form->input('perfil');
 
-		echo $form->hidden('sector');
 		$meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
 		
 		echo $form->input('sector_id',array(	'type'=>'select',
 												'empty'=>'Seleccione',
 												'options'=>$sectores,
-												'label'=>'Sector ('.$this->data['Plan']['sector'].')','id'=>'sector_id','after'=>$meter));
+												'label'=>'Sector','id'=>'sector_id','after'=>$meter));
 
 		
 		echo $form->input('subsector_id', array('empty' => 'Seleccione',
