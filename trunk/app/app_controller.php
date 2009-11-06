@@ -70,7 +70,7 @@ class AppController extends Controller {
 		Configure::write('regetpVersion', 'v1.2');
 
 		$this->Auth->autoRedirect = false; 
-		$this->Auth->loginError ='Usuario o Password Incorrectos';
+		$this->Auth->loginError ='Usuario o Contraseña Incorrectos';
 		$this->Auth->authError = 'Debe registrarse para acceder a esta página';
 		$this->Auth->logoutRedirect='/pages/home';
 		//$this->Auth->allow('*');

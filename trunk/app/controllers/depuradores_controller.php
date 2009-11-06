@@ -201,5 +201,56 @@ class DepuradoresController extends AppController {
 		$subsectores = $this->Plan->Subsector->con_sector('list',$sector_sug);
 		$this->set('subsectores',$subsectores);
 	}
+	
+
+	
+	
+	function clases_y_etp()
+	{		
+				
+
+		if (!empty($this->data)) 
+		{	
+			/*
+			if ($this->Instit->save($this->data ,false, array('claseinstit_id, etp_estado_id'))) {	
+				$this->Session->setFlash(__('Se ha guardado la institución correctamente', true));
+			} else {
+				debug($this->Instit->validationErrors);
+				$this->Session->setFlash(__('La institución no pudo ser guardada. Escriba nuevamente el campo incorrecto.', true));
+			}
+			*/
+			$this->Instit->id =  $this->data['Instit']['id'];
+			
+			
+			if($this->Instit->saveField('claseinstit_id',  $this->data['Instit']['claseinstit_id']) &&
+				$this->Instit->saveField('etp_estado_id',  $this->data['Instit']['etp_estado_id'])
+			){
+				$this->Session->setFlash(__('Se ha guardado la institución correctamente', true));
+			}else{
+				debug($this->Instit->validationErrors);
+				$this->Session->setFlash(__('La institución no pudo ser guardada. Escriba nuevamente el campo incorrecto.', true));
+			}
+		}		
+		
+		$conditions = array('activo' =>1,
+							'OR'=>array(	'Instit.claseinstit_id'=>0,
+											'Instit.etp_estado_id' =>0)
+		);
+		
+		
+		$falta_depurar = $this->Instit->find('count',array('conditions'=>$conditions));
+		$this->data = $this->Instit->find('first',array('conditions'=>$conditions));
+		
+		$this->Instit->Plan->unbindModel(array('belongsTo' => array('Instit')));
+		$planes = $this->Instit->Plan->find('all',array('conditions'=>array('Plan.instit_id'=>$this->data['Instit']['id'])));
+		
+		$claseinstits = $this->Instit->Claseinstit->find('list');
+		$etp_estados = $this->Instit->EtpEstado->find('list',array('order'=>'id DESC'));
+		
+		$this->set('falta_depurar', $falta_depurar);
+		$this->set(compact('etp_estados', 'claseinstits','planes'));
+	}
+
+
 }
 ?>

@@ -634,6 +634,9 @@ class Instit extends AppModel {
   		// -----------------------------------------------------------------------------------------------------------------------------------------------------------
   		// prevenir el error de NOT NULL en postgres
   		//
+  		if(empty($this->data[$this->name]['anio_creacion'])){
+  			$this->data[$this->name]['anio_creacion'] = '';
+  		}
   		if($this->data[$this->name]['anio_creacion']== ''){
   			$this->data[$this->name]['anio_creacion'] = 0;
   		}
