@@ -68,6 +68,8 @@ class PlanesController extends AppController {
 		}		
 
 		$ofertas = $this->Plan->Oferta->find('list',array('fields' => array('id','abrev')));
+		
+		/* TODO parece que esto hay que borrarlo
 		$planes = $this->Plan->find('list', array(  'fields' => array('Plan.id'),
 													'conditions'=>array('instit_id'=>$id)));
 		//$ciclos = $this->Plan->Anio->find('list',array('fields' => array('Anio.ciclo_id','Anio.ciclo_id'),
@@ -76,6 +78,7 @@ class PlanesController extends AppController {
 		//												'order'=>'Anio.ciclo_id ASC'
 		//												));
 		//debug($ciclos);														
+		*/
 		
 		$ciclos = $this->Plan->dame_max_ciclos_por_instits($id);
 														

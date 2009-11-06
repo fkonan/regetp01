@@ -139,10 +139,11 @@
 				$type = 'text'; //lo muestra como un imputo comun				
 			}
 			
-			echo $form->input('Plan.sector',array(
+			echo $form->input('Plan.sector_id',array(
 								'label'=>'Sector',
-								'type'=>$type,
-								'after'=>'<cite>Ej: Mecánica Automotriz, Informática, etc</cite>'));
+								'options'=>$sectores,
+								'empty'=>'TODOS'
+							));
 			?>
 			
 			

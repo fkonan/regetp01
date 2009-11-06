@@ -204,7 +204,10 @@ class InstitsController extends AppController {
 		
 		$this->Instit->Plan->Oferta->recursive = -1;
 		$ofertas = $this->Instit->Plan->Oferta->find('list');
-		$this->set(compact('gestiones', 'dependencias', 'jurisdicciones','ofertas','localidades','departamentos'));
+		
+		$this->Instit->Plan->Sector->recursive = -1;
+		$sectores = $this->Instit->Plan->Sector->find('list');
+		$this->set(compact('gestiones', 'dependencias', 'jurisdicciones','ofertas','localidades','departamentos','sectores'));
 	}
 	
 	/**
@@ -629,20 +632,24 @@ class InstitsController extends AppController {
 			/**
 			 *     SECTOR
 			 */
-            if(isset($this->data['Plan']['sector'])){
-	            if($this->data['Plan']['sector'] != ''){
+            if(isset($this->data['Plan']['sector_id'])){
+	            if($this->data['Plan']['sector_id'] != ''){
 	            	$this->Instit->asociarPlan = true;
-					$this->paginate['conditions']['to_ascii(lower(Plan.sector)) SIMILAR TO ?'] = array($this->Instit->convertir_para_busqueda_avanzada($this->data['Plan']['sector']));
-					$array_condiciones['Sector'] = $this->data['Plan']['sector'];
-					$url_conditions['Plan.sector'] = $this->data['Plan']['sector'];			
+					$this->paginate['conditions']['Plan.sector_id'] = $this->data['Plan']['sector_id'];
+					$this->Instit->Plan->Sector->recursive = -1;	
+					$sector = $this->Instit->Plan->Sector->findById( $this->data['Plan']['sector_id']);	
+					$array_condiciones['Sector'] = $sector['Sector']['name'];
+					$url_conditions['Plan.sector_id'] = $this->data['Plan']['sector_id'];			
 				}
             }
-			if(isset($this->passedArgs['Plan.sector'])){	
-            	if($this->passedArgs['Plan.sector'] != ''){
+			if(isset($this->passedArgs['Plan.sector_id'])){	
+            	if($this->passedArgs['Plan.sector_id'] != ''){
             		$this->Instit->asociarPlan = true;
-					$this->paginate['conditions']['to_ascii(lower(Plan.sector)) SIMILAR TO ?'] = array($this->Instit->convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['Plan.sector'])));
-					$array_condiciones['Sector'] = utf8_decode($this->passedArgs['Plan.sector']);
-					$url_conditions['Plan.sector'] = utf8_decode($this->passedArgs['Plan.sector']);			
+					$this->paginate['conditions']['Plan.sector_id'] = $this->passedArgs['Plan.sector_id'];
+					$this->Instit->Plan->Sector->recursive = -1;	
+					$sector = $this->Instit->Plan->Sector->findById($this->passedArgs['Plan.sector_id']);	
+					$array_condiciones['Sector'] = $sector['Sector']['name'];
+					$url_conditions['Plan.sector_id'] = $this->passedArgs['Plan.sector_id'];			
 				}
             }
             
