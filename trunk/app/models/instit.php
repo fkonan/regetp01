@@ -387,15 +387,15 @@ class Instit extends AppModel {
 			  		if(isset($aux['Tipoinstit']['name'])){			
 				  		$nombre_tipoinstit = $aux['Tipoinstit']['name'];
 				  		
-					  	$aux['Instit']['nombre_completo'] = ($nombre_tipoinstit=='SIN DATOS')?'':$nombre_tipoinstit;
-					  	$aux['Instit']['nombre_completo'] .= ($numero > 0 || $numero != '')?" Nº $numero":"";
+					  	$aux['Instit']['nombre_completo'] = ($nombre_tipoinstit=='SIN DATOS')?'':$nombre_tipoinstit.' ';
+					  	$aux['Instit']['nombre_completo'] .= ($numero > 0 || $numero != '')?"Nº $numero ":"";
 	  					if (($nombre_tipoinstit != 'SIN DATOS' ||  $numero > 0)&& $nombre){
 							$aux['Instit']['nombre_completo'] .= " ";
 						}
 					  	$aux['Instit']['nombre_completo'] .= ($nombre != '')?$nombre:"";
 			  		}
 			  		else {
-			  			$aux['Instit']['nombre_completo'] .= ($numero > 0 || $numero != '')?" Nº $numero":"";
+			  			$aux['Instit']['nombre_completo'] .= ($numero > 0 || $numero != '')?"Nº $numero ":"";
 			  			$aux['Instit']['nombre_completo'] .= ($nombre != '')?$nombre:"";
 			  		}
 			  	endfor;
@@ -407,8 +407,8 @@ class Instit extends AppModel {
 			  	$nombre_tipoinstit = 'SIN DATOS';
 			  	if(isset($aux['Tipoinstit']['name'])){
 				  	$nombre_tipoinstit = $aux['Tipoinstit']['name'];
-				 	$aux['Instit']['nombre_completo'] = ($nombre_tipoinstit=='SIN DATOS')?'':$nombre_tipoinstit;
-					$aux['Instit']['nombre_completo'] .= ($numero > 0 || $numero != '')?" Nº $numero":"";
+				 	$aux['Instit']['nombre_completo'] = ($nombre_tipoinstit=='SIN DATOS')?'':$nombre_tipoinstit.' ';
+					$aux['Instit']['nombre_completo'] .= ($numero > 0 || $numero != '')?"Nº $numero ":"";
 			  	}
 			  		
 				if (($nombre_tipoinstit != 'SIN DATOS' ||  $numero > 0)&& $nombre){
