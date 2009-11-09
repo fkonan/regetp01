@@ -52,6 +52,10 @@ $cue_instit = $planes['Instit']['cue'].$anexo;
 	</dd>			
 </dl>		
 
+<?php 
+if ((int)($paginator->counter('%count%')) > 0){
+?>
+
 <h2>Oferta</h2>	
 	
 <?php
@@ -135,7 +139,7 @@ $cue_instit = $planes['Instit']['cue'].$anexo;
             </th>      
 			<th><?php echo $form->input('oferta_id',array('options'=> $ofertas,'label'=>'','empty'=> array('0'=>'Todas'),'selected' => isset($url_conditions['Plan.oferta_id']) ? $url_conditions['Plan.oferta_id'] : '0'));?></th>
 			<th><?php echo $form->input('nombre', array('label'=>'','value' => isset($url_conditions['Plan.nombre']) ? $url_conditions['Plan.nombre'] : ''));?></th>
-			<th><?php echo $form->input('sector', array('label'=>'', 'value' => isset($url_conditions['Plan.sector']) ? $url_conditions['Plan.sector'] : ''));?></th>
+			<th><?php echo $form->input('sector_id',array('options'=> $sectores,'label'=>'','empty'=> array('0'=>'Todas'),'selected' => isset($url_conditions['Plan.sector_id']) ? $url_conditions['Plan.sector_id'] : '0'));?></th>
 			<th colspan=2><?php echo $form->end('Buscar');?></th>
 		</tr>
 		<tr>
@@ -194,7 +198,7 @@ $cue_instit = $planes['Instit']['cue'].$anexo;
 	<?php echo $paginator->next(__('next', true).' >>', array(), null, array('class'=>'disabled'));?>
 </div>
 
-
+<?php } ?>
 
 <div class="actions">
 	<ul>

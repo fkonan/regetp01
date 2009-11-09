@@ -47,9 +47,9 @@ class PlanesController extends AppController {
 		$action = ($this->Auth->user('role')=='admin' || $this->Auth->user('role')=='editor' || $this->Auth->user('role')=='desarrollo')?'edit':'view';
 		$this->set('action', $action);
 
-		/* *************************** */
-		/*  Fin Si tiene ticket pendiente  */
-		/* *************************** */
+		/* ******************************** */
+		/*  Fin Si tiene ticket pendiente * */
+		/* ******************************** */
 		
 		$this->institData = $this->Plan->Instit->read(null,$id);
 		if($this->institData)
@@ -67,22 +67,8 @@ class PlanesController extends AppController {
 			$this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$this->institData['Instit']['id'] );
 		}		
 
-		$ofertas = $this->Plan->Oferta->find('list',array('fields' => array('id','abrev')));
-		
-		/* TODO parece que esto hay que borrarlo
-		$planes = $this->Plan->find('list', array(  'fields' => array('Plan.id'),
-													'conditions'=>array('instit_id'=>$id)));
-		//$ciclos = $this->Plan->Anio->find('list',array('fields' => array('Anio.ciclo_id','Anio.ciclo_id'),
-		//												'conditions'=>array('Anio.plan_id'=>$planes),
-		//												'group'=>'Anio.ciclo_id',
-		//												'order'=>'Anio.ciclo_id ASC'
-		//												));
-		//debug($ciclos);														
-		*/
-		
 		$ciclos = $this->Plan->dame_max_ciclos_por_instits($id);
 														
-		$this->set(compact('ofertas','ciclos'));
 		$this->Plan->recursive = 0;
 
 		/* ************************************ */
@@ -111,13 +97,17 @@ class PlanesController extends AppController {
 			$url_conditions['Plan.nombre'] = utf8_decode($this->passedArgs['Plan.nombre']);					
         }
         
-		if(isset($this->data['Plan']['sector']) && $this->data['Plan']['sector'] != ""){
-			$this->paginate['conditions']['to_ascii(lower(Plan.sector)) SIMILAR TO ?'] = array($this->Plan->convertir_para_busqueda_avanzada($this->data['Plan']['sector']));
-			$url_conditions['Plan.sector'] = $this->data['Plan']['sector'];					
-        }
-        if(isset($this->passedArgs['Plan.sector']) && $this->passedArgs['Plan.sector'] != ""){
-			$this->paginate['conditions']['to_ascii(lower(Plan.sector)) SIMILAR TO ?'] = array($this->Plan->convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['Plan.sector'])));
-			$url_conditions['Plan.sector'] = utf8_decode($this->passedArgs['Plan.sector']);					
+        if(isset($this->data['Plan']['sector_id'])){
+        	if((int)$this->data['Plan']['sector_id'] != 0){
+				$this->paginate['conditions']['Plan.sector_id'] = $this->data['Plan']['sector_id'];
+				$url_conditions['Plan.sector_id'] = $this->data['Plan']['sector_id'];
+        	}
+        }        									
+		if(isset($this->passedArgs['Plan.sector_id'])){
+			if((int)$this->passedArgs['Plan.sector_id'] != 0){
+				$this->paginate['conditions']['Plan.sector_id'] = $this->passedArgs['Plan.sector_id'];
+				$url_conditions['Plan.sector_id'] = $this->passedArgs['Plan.sector_id'];					
+			}
         }
         
         if(isset($this->data['Anio']['ciclo_id'])){
@@ -128,7 +118,6 @@ class PlanesController extends AppController {
         }
 		else
 		{        
-
 			if(isset($this->passedArgs['Anio.ciclo_id'])){
 				if((int)$this->passedArgs['Anio.ciclo_id'] != 0){
 					$this->Plan->setMaxCiclo($this->passedArgs['Anio.ciclo_id']);
@@ -146,6 +135,11 @@ class PlanesController extends AppController {
         	}
 		}	
 
+		$ofertas = $this->Plan->dameOfertaPorInstitucion($id,isset($url_conditions['Anio.ciclo_id'])?$url_conditions['Anio.ciclo_id']:'');
+		$sectores = $this->Plan->dameSectoresPorInstitucion($id,isset($url_conditions['Anio.ciclo_id'])?$url_conditions['Anio.ciclo_id']:'');
+		
+		$this->set(compact('ofertas','ciclos','sectores'));
+		
 		/* ********************************* */
         /* * Paginador y seteos a la vista * */
         /* ********************************* */
