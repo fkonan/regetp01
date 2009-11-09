@@ -310,6 +310,8 @@ class Plan extends AppModel {
   	
   	function dame_max_ciclos_por_instits($instit_id){
   		
+		$vec = array();
+
 		$sql  = " SELECT ciclo_id ";
 		$sql .= " FROM   planes p ";
 		$sql .= "       ,(        ";
@@ -326,6 +328,68 @@ class Plan extends AppModel {
 
 		foreach ($data as $line){
 			$vec[$line[0]['ciclo_id']] = $line[0]['ciclo_id']; 
+		}
+
+		return $vec;
+  	}
+
+  	function dameSectoresPorInstitucion($instit_id,$ciclo_id){
+
+		$vec = array();
+		
+  		$sql  = " SELECT s.id   AS id   ";
+  		$sql .= "       ,s.name AS name ";
+  		$sql .= " FROM   planes   p     ";
+		$sql .= "       ,sectores s     ";
+		$sql .= "       ,anios    a     ";
+		$sql .= " WHERE p.sector_id = s.id  ";
+		$sql .= " AND   p.instit_id = " . $instit_id;
+		$sql .= " AND   p.id        = a.plan_id ";
+
+		if ((int)$ciclo_id > 0){
+			$sql .= " AND a.ciclo_id = " . $ciclo_id;
+		}			
+		
+		$sql .= " GROUP BY s.id, s.name ";
+		$sql .= " ORDER BY s.name ASC";
+		
+		$data = $this->query($sql);
+
+		foreach ($data as $line){
+			if (strlen($line[0]['name']) > 20){
+				$vec[$line[0]['id']] = substr($line[0]['name'],0,20) . "..."; 
+			} else {
+				$vec[$line[0]['id']] = $line[0]['name'];
+			}
+		}
+
+		return $vec;
+  	}
+
+  	function dameOfertaPorInstitucion($instit_id,$ciclo_id){
+
+		$vec = array();
+		
+  		$sql  = " SELECT s.id    AS id    ";
+  		$sql .= "       ,s.abrev AS abrev ";
+  		$sql .= " FROM   planes   p       ";
+		$sql .= "       ,ofertas  s       ";
+		$sql .= "       ,anios    a       ";
+		$sql .= " WHERE p.oferta_id = s.id  ";
+		$sql .= " AND   p.instit_id = " . $instit_id;
+		$sql .= " AND   p.id = a.plan_id ";
+		
+		if ((int)$ciclo_id > 0){
+			$sql .= " AND a.ciclo_id = " . $ciclo_id;
+		}			
+
+		$sql .= " GROUP BY s.id, s.abrev ";
+		$sql .= " ORDER BY s.abrev ASC";
+		
+		$data = $this->query($sql);
+
+		foreach ($data as $line){
+			$vec[$line[0]['id']] = $line[0]['abrev'];
 		}
 
 		return $vec;
