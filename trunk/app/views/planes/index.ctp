@@ -114,7 +114,7 @@ $cue_instit = $planes['Instit']['cue'].$anexo;
 						$clase = 'tab-inactiva';
 					}
 					?>
-				<div class="<?= $clase?>"><?php echo $html->link($c,"/planes/index/$instit_id/Anio.ciclo_id:$c");?></div>
+				<span class="<?= $clase?>"><?php echo $html->link($c,"/planes/index/$instit_id/Anio.ciclo_id:$c");?></span>
 			<?php endforeach;?>
 			
 				<?php 
@@ -124,36 +124,37 @@ $cue_instit = $planes['Instit']['cue'].$anexo;
 					$clase = 'tab-inactiva';
 				}
 				?>
-				<div class="<?= $clase?>"><?php echo $html->link('Ver Todos',"/planes/index/$instit_id/Anio.ciclo_id:0");?></div>
+				<span class="<?= $clase?>"><?php echo $html->link('Ver Todos',"/planes/index/$instit_id/Anio.ciclo_id:0");?></span>
 	</div>
+		
 		
 	<div class="tabs-content">	
 		<table cellpadding="0" cellspacing="0" class="tabla-con-bordes-celeste">
-		<tr>
-            <th style="display:none"><?php echo $form->create('Plan',array('action' =>'index'));
-                  echo $form->hidden('Instit.id',array('value' => $url_conditions['Instit.id']));
-                  echo $form->hidden('Anio.ciclo_id',array('value' => $url_conditions['Anio.ciclo_id']));?>
-            </th>      
-			<th><?php echo $form->input('oferta_id',array('options'=> $ofertas,'label'=>'','empty'=> array('0'=>'Todas'),'selected' => isset($url_conditions['Plan.oferta_id']) ? $url_conditions['Plan.oferta_id'] : '0'));?></th>
-			<th><?php echo $form->input('nombre', array('label'=>'','value' => isset($url_conditions['Plan.nombre']) ? $url_conditions['Plan.nombre'] : ''));?></th>
-			<th><?php echo $form->input('sector_id',array('options'=> $sectores,'label'=>'','empty'=> array('0'=>'Todas'),'selected' => isset($url_conditions['Plan.sector_id']) ? $url_conditions['Plan.sector_id'] : '0'));?></th>
-			<th colspan=2><?php echo $form->end('Buscar');?></th>
-		</tr>
-		<tr>
-			<th><?php echo $paginator->sort('Oferta','Oferta.abrev');?></th>
-			<th><?php echo $paginator->sort('Nombre del Título/Certificación','nombre');?></th>
-			<th><?php echo $paginator->sort('Sector','sector');?></th>
-			<th><?php echo 'Mat.';?></th>
-			<th class="actions"><?php echo '&nbsp';?></th>
-		</tr>
-		<?php
-		$i = 0;
-		foreach ($planesRelacionados as $plan):
-			$class = null;
-			if ($i++ % 2 == 0) {
-				$class = ' class="altrow"';
-			}
-		?>
+			<tr>
+	            <th style="display:none"><?php echo $form->create('Plan',array('action' =>'index'));
+	                  echo $form->hidden('Instit.id',array('value' => $url_conditions['Instit.id']));
+	                  echo $form->hidden('Anio.ciclo_id',array('value' => $url_conditions['Anio.ciclo_id']));?>
+	            </th>      
+				<th><?php echo $form->input('oferta_id',array('options'=> $ofertas,'label'=>'','empty'=> array('0'=>'Todas'),'selected' => isset($url_conditions['Plan.oferta_id']) ? $url_conditions['Plan.oferta_id'] : '0'));?></th>
+				<th><?php echo $form->input('nombre', array('label'=>'','value' => isset($url_conditions['Plan.nombre']) ? $url_conditions['Plan.nombre'] : ''));?></th>
+				<th><?php echo $form->input('sector_id',array('options'=> $sectores,'label'=>'','empty'=> array('0'=>'Todas'),'selected' => isset($url_conditions['Plan.sector_id']) ? $url_conditions['Plan.sector_id'] : '0'));?></th>
+				<th colspan=2><?php echo $form->end('Buscar');?></th>
+			</tr>
+			<tr>
+				<th><?php echo $paginator->sort('Oferta','Oferta.abrev');?></th>
+				<th><?php echo $paginator->sort('Nombre del Título/Certificación','nombre');?></th>
+				<th><?php echo $paginator->sort('Sector','sector');?></th>
+				<th><?php echo 'Mat.';?></th>
+				<th class="actions"><?php echo '&nbsp';?></th>
+			</tr>
+			<?php
+			$i = 0;
+			foreach ($planesRelacionados as $plan):
+				$class = null;
+				if ($i++ % 2 == 0) {
+					$class = ' class="altrow"';
+				}
+			?>
 				<tr id="fila_plan_<?= $plan['Plan']['id'];?>" <?php echo $class;?> 
 					onclick="window.location='<?= $html->url(array('controller'=> 'Planes', 'action'=>'view/'.$plan['Plan']['id']))?>'"
 					onmouseout="$('fila_plan_<?= $plan['Plan']['id'];?>').removeClassName('fila_marcada')" 
