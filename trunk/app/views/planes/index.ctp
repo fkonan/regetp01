@@ -130,6 +130,56 @@ $cue_instit = $planes['Instit']['cue'].$anexo;
 		
 	<div class="tabs-content">	
 		<table cellpadding="0" cellspacing="0" class="tabla-con-bordes-celeste">
+		<tr>
+            <th style="display:none"><?php echo $form->create('Plan',array('action' =>'index'));
+                  echo $form->hidden('Instit.id',array('value' => $url_conditions['Instit.id']));
+                  echo $form->hidden('Anio.ciclo_id',array('value' => $url_conditions['Anio.ciclo_id']));?>
+            </th>      
+			<th><?php echo $form->input('oferta_id',array('options'=> $ofertas,'label'=>'','empty'=> array('0'=>'Todas'),'selected' => isset($url_conditions['Plan.oferta_id']) ? $url_conditions['Plan.oferta_id'] : '0'));?></th>
+			<th><?php echo $form->input('nombre', array('label'=>'','value' => isset($url_conditions['Plan.nombre']) ? $url_conditions['Plan.nombre'] : ''));?></th>
+			<th><?php echo $form->input('sector_id',array('options'=> $sectores,'label'=>'','empty'=> array('0'=>'Todas'),'selected' => isset($url_conditions['Plan.sector_id']) ? $url_conditions['Plan.sector_id'] : '0'));?></th>
+			<th colspan=2><?php echo $form->end('Buscar');?></th>
+		</tr>
+		<tr>
+			<th><?php echo $paginator->sort('Oferta','Oferta.abrev');?></th>
+			<th><?php echo $paginator->sort('Nombre del Título/Certificación','nombre');?></th>
+			<th><?php echo $paginator->sort('Sector','Sector.name');?></th>
+			<th><?php echo 'Mat.';?></th>
+			<th class="actions"><?php echo '&nbsp';?></th>
+		</tr>
+		<?php
+		$i = 0;
+		foreach ($planesRelacionados as $plan):
+			$class = null;
+			if ($i++ % 2 == 0) {
+				$class = ' class="altrow"';
+			}
+		?>
+			<tr>
+	            <th style="display:none"><?php echo $form->create('Plan',array('action' =>'index'));
+	                  echo $form->hidden('Instit.id',array('value' => $url_conditions['Instit.id']));
+	                  echo $form->hidden('Anio.ciclo_id',array('value' => $url_conditions['Anio.ciclo_id']));?>
+	            </th>      
+				<th><?php echo $form->input('oferta_id',array('options'=> $ofertas,'label'=>'','empty'=> array('0'=>'Todas'),'selected' => isset($url_conditions['Plan.oferta_id']) ? $url_conditions['Plan.oferta_id'] : '0'));?></th>
+				<th><?php echo $form->input('nombre', array('label'=>'','value' => isset($url_conditions['Plan.nombre']) ? $url_conditions['Plan.nombre'] : ''));?></th>
+				<th><?php echo $form->input('sector_id',array('options'=> $sectores,'label'=>'','empty'=> array('0'=>'Todas'),'selected' => isset($url_conditions['Plan.sector_id']) ? $url_conditions['Plan.sector_id'] : '0'));?></th>
+				<th colspan=2><?php echo $form->end('Buscar');?></th>
+			</tr>
+			<tr>
+				<th><?php echo $paginator->sort('Oferta','Oferta.abrev');?></th>
+				<th><?php echo $paginator->sort('Nombre del Título/Certificación','nombre');?></th>
+				<th><?php echo $paginator->sort('Sector','sector');?></th>
+				<th><?php echo 'Mat.';?></th>
+				<th class="actions"><?php echo '&nbsp';?></th>
+			</tr>
+			<?php
+			$i = 0;
+			foreach ($planesRelacionados as $plan):
+				$class = null;
+				if ($i++ % 2 == 0) {
+					$class = ' class="altrow"';
+				}
+			?>
 			<tr>
 	            <th style="display:none"><?php echo $form->create('Plan',array('action' =>'index'));
 	                  echo $form->hidden('Instit.id',array('value' => $url_conditions['Instit.id']));
@@ -167,7 +217,7 @@ $cue_instit = $planes['Instit']['cue'].$anexo;
 					<?php echo $plan['Plan']['nombre']; ?>
 				</td>
 				<td>
-					<?php echo $plan['Plan']['sector']; ?>
+					<?php echo $plan['Sector']['name']; ?>
 				</td>
 				<td>
 					<?php 
