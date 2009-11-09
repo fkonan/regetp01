@@ -52,16 +52,13 @@ $cue_instit = $planes['Instit']['cue'].$anexo;
 	</dd>			
 </dl>		
 
-<?php 
-if ((int)($paginator->counter('%count%')) > 0){
-?>
-
-<h2>Oferta</h2>	
-	
 <?php
 	if(isset($sumatoria_matriculas['array_de_ciclos'])>0 && isset($sumatoria_matriculas['array_de_ofertas'])>0):
 	$v_matriculas_ciclos = array_reverse($sumatoria_matriculas['array_de_ciclos']);
 ?>
+		
+<h2>Oferta</h2>	
+	
 	
 <div align="center">
 <table class="mini_tabla" width="80" cellpadding = "0" cellspacing = "0" summary="En esta tabla se muestran los totales de 
@@ -95,7 +92,7 @@ if ((int)($paginator->counter('%count%')) > 0){
 	?>	
 	
 </table>
-<?php endif;?>	
+	
 </div>
 
 
@@ -198,7 +195,7 @@ if ((int)($paginator->counter('%count%')) > 0){
 	<?php echo $paginator->next(__('next', true).' >>', array(), null, array('class'=>'disabled'));?>
 </div>
 
-<?php } ?>
+<?php endif;?>
 
 <div class="actions">
 	<ul>
