@@ -138,7 +138,11 @@ class Plan extends AppModel {
 	);
 	
 	function beforeSave()
-	{  		  		  		
+	{  		
+		if(empty($this->data['Plan']['duracion_hs'])){
+			$this->data['Plan']['duracion_hs'] = 'SECTOR SIN DATO';
+		}
+		  		  		
   		if (isset($this->data['Plan']['duracion_hs'])):
   			if ($this->data['Plan']['duracion_hs'] == ''): 
   				$this->data['Plan']['duracion_hs'] = 0;
