@@ -19,7 +19,7 @@ $cue_instit = $instit['cue'].$anexo;
 		
 		
 		$meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
-		echo $form->input('sector_id',array('type'=>'select','empty'=>'Seleccione','options'=>$sectores,'label'=>'Sector ('.$this->data['Plan']['sector'].')','id'=>'sector_id','after'=>$meter));
+		echo $form->input('sector_id',array('type'=>'select','empty'=>'Seleccione','options'=>$sectores,'label'=>'Sector','id'=>'sector_id','after'=>$meter));
 
 		echo $form->input('subsector_id', array('empty' => 'Seleccione','type'=>'select','label'=>'Subsector','after'=> $meter.'<br /><cite>Seleccione primero un sector.</cite>'));
 		echo $ajax->observeField('sector_id',
