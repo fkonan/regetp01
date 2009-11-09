@@ -4,6 +4,22 @@
 
 
 
+<script type="text/javascript">
+<!--
+
+
+Event.observe(window, "keypress", function(e){ 
+		var cKeyCode = e.keyCode || e.which; 
+		if (cKeyCode == Event.KEY_RETURN){ 
+			$('InstitDepurarForm').submit();
+		} 
+	});
+-->
+</script>
+
+
+
+
 <h2>Planes</h2>
 <?php foreach ($planes as $p):?>
 <?php $div_id = "plan-id-".$p['Plan']['id']; ?>
@@ -130,4 +146,6 @@
 <?php echo $form->end('Guardar');?>
 
 </div>
+
+
 
