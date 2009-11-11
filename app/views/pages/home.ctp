@@ -65,8 +65,8 @@ Un listado completo de las modificaciones, más avanzado, se puede <?php echo $ht
  	<ul>
  	<li>Se crearon dos datos nuevos que se pueden visualizar para cada Institución.</li>
  		<ul>
- 		<li><s>Tipo de institución:</s> La institución puede ser de "Nivel Superior", "Nivel Secundario", "de Formación Profesional" o "Itinerario".</li>
- 		<li><s>Relación con ETP:</s>Nos da aviso que estamos ante una institución con pograma de ETP.</li>
+ 		<li>Tipo de institución: La institución puede ser de "Nivel Superior", "Nivel Secundario", "de Formación Profesional" o "Itinerario".</li>
+ 		<li>Relación con ETP: Nos da aviso que estamos ante una institución con pograma de ETP.</li>
  		</ul>
  	<li>Se mejoraron y depuraron los siguientes datos de las instituciones: Tipo de Establecimiento, Número, Nombre, Departamento y Localidad.</li>
  	</ul>
