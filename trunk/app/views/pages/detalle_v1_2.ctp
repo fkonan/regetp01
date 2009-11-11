@@ -1,4 +1,44 @@
 
+<h1>RFIETP - Novedades de la versión 1.3</h1>
+
+<br>
+<ul >
+  <li>
+    <b>Buscador</b>
+  </li>
+  <ul type="circle">
+    <li>Se agregó la opción de búsqueda libre por nombre. Ahora se puede realizar búsquedas que incluyan el tipo de establecimiento, el número y el nombre.</li>
+  </ul>
+  
+   <br>
+  
+  <li>
+    <b>Instituciones</b>
+  </li>
+ 	<ul type="circle">
+    <li>Se agregaron 2 datos nuevos con el fin de ordenar el Registro Federal de Instituciones de ETP y optimizar y mejorar las estadísticas generadas en la Unidad de Información.</li>
+  	<ul>
+  		<li>Tipo de Institución: Es una clasificación de la Institución que indica el nivel formativo que ofrece. Las opciones que puede tomar éste campo son: "de Nivel Superior", "de Nivel Secundario", "de Formación Profesional", "Itinerario"</li>
+  		<li>Relación de ETP: Institución con programa de ETP o Institución de ETP.</li>
+  	</ul>
+  	</ul>
+  
+  <br>
+  
+  <li>
+    <b>Oferta Educativa</b>
+  </li>
+ 	<ul type="circle">
+    <li>Cuando se va a la oferta de una Institución, por defecto aparecen solo los datos actualizados al ciclo lectivo actual. Hay un navegador por años desde donde podemos visualizar los datos históricos. También se pueden ver todos los datos (de todos los años al mismo tiempo) permitiendo tener una visión mas general.</li>
+  	</ul>
+  	
+  </ul>
+  
+  <br><br>
+  
+  
+  
+
 <h1>RFIETP - Novedades de la versión 1.2</h1>
 
 <br>
@@ -39,8 +79,7 @@
            clasificación al momento de las estadísticas.</li>
 	<li> Se modificó el atributo "Tipo de Institución" por "Tipo de Establecimiento".</li>
 	<li> Se normalizaron y depuraron los datos de Jurisdicción, departamento y Localidad.</li>
-
-	<li> Se agregaron los atributos "teléfono alternativo" y "mail alternativo" tanto para la institución como para el director.</li>
+	<li> Se agregaron los atributos "teléfono alternativo" y "mail alternativo" para la institución.</li>
   </ul>
   
   <br>
