@@ -25,14 +25,14 @@ endif;
 ?>
 <br />
 
-<h2>Novedades de la versión 1.2</h2>
+<h2>Novedades de la versión 1.3</h2>
 
 <p>
 Desde su puesta en funcionamiento en junio del presente año el nuevo sistema RFIETP se 
 encuentra en permanente actualización y mejora, tanto del 
 contenido de información de la base de datos como de la aplicación que permite 
-su gestión. En esa línea de trabajo a partir del 20 de octubre se ha instalado 
-la versión 1.2 del sistema.
+su gestión. En esa línea de trabajo a partir del 14 de Noviembre se ha instalado 
+la versión 1.3 del sistema.
 </p>
 <p>
 A continuación se ofrece un resumen de algunas de los cambios realizados desde su puesta en 
@@ -47,6 +47,7 @@ Un listado completo de las modificaciones, más avanzado, se puede <?php echo $ht
 <ul>
 <li><b>Buscador</b> 
 	<ul>
+		<li>Se agregó opción de búsqueda libre por nombre, pudiendo ahora introducir por ejemplo: "escuela sarmiento", o "politécnico 702 Rawson".</li>
 	   	<li>Se agregó opción de búsqueda por oferta.</li>
     	<li>Se agregó opción de búsqueda por normativa.</li>
     	<li>Se mejoraron las búsquedas por localidad y departamento.</li>
@@ -56,12 +57,24 @@ Un listado completo de las modificaciones, más avanzado, se puede <?php echo $ht
 	</ul>
 </li>
 <br>
+<li><b>Cuadros de Resumen</b>
+ 	<ul><li>Se muestra de manera online un cuadro con la cantidad de ofertas por jurisdicción.</li></ul>
+</li>
+<br>
 <li><b>Datos de Institución</b>
- 	<ul><li>Se mejoraron y depuraron los siguientes datos de las instituciones: Tipo de Establecimiento, Número, Nombre, Departamento y Localidad.</li></ul>
+ 	<ul>
+ 	<li>Se crearon dos datos nuevos que se pueden visualizar para cada Institución.</li>
+ 		<ul>
+ 		<li><s>Tipo de institución:</s> La institución puede ser de "Nivel Superior", "Nivel Secundario", "de Formación Profesional" o "Itinerario".</li>
+ 		<li><s>Relación con ETP:</s>Nos da aviso que estamos ante una institución con pograma de ETP.</li>
+ 		</ul>
+ 	<li>Se mejoraron y depuraron los siguientes datos de las instituciones: Tipo de Establecimiento, Número, Nombre, Departamento y Localidad.</li>
+ 	</ul>
 </li>
 <br>
 <li><b>Oferta Educativa</b> 
 	<ul>
+		<li>Se incorporó una nueva forma de visualizar el listado de ofertas, mostrando inicialmente solo los datos actualizados, pero permitiendo navegar por datos históricos y visualizar todos los años.</li>
 		<li>Se mejoró la presentación de información de oferta educativa: se incorporó paginación de resultados, y se agregaron opciones de filtro y ordenamiento del listado según distintos criterios.</li>
 		<li>Se agregó un sistema de marcas para identificar como pendiente de actualización una institución cuando la documentación de la oferta educativa recibida está incompleta. El sistema informa el motivo del pendiente, el estado del reclamo, etc. Esto permite al usuario conocer el estado de la información e identificar faltantes sin tener que recurrir necesariamente a la Unidad de Información.</li>
 	</ul>
