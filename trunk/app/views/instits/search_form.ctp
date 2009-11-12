@@ -224,7 +224,7 @@
 
 	  	if($('search-planes').visible() == false){
 	  		$('PlanOfertaId').value = '';
-	  		$('PlanSector').value = '';
+	  		$('PlanSectorId').value = '';
 	  	}
 	  	
 	  	if($('search-otros').visible() == false){  		
