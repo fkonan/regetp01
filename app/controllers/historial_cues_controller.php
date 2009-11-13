@@ -102,11 +102,20 @@ class HistorialCuesController extends AppController {
            	 	}
                
            	 	// con esto hago que no se busqeu con un cero adelante
-            	$this->data['HistorialCues']['cue'] = (int)$this->data['HistorialCues']['cue'];
+            	//$this->data['HistorialCues']['cue'] = (int)$this->data['HistorialCues']['cue'];
             	 	
 				$arr_cond1 = array('OR' => array(
-					              'CAST(((Instit.cue*100)+Instit.anexo) as character(60)) SIMILAR TO ?' => '%'.$this->data['HistorialCues']['cue'].'%',
-                                  'CAST(((HistorialCue.cue*100)+HistorialCue.anexo) as character(60)) SIMILAR TO ?' => '%'.$this->data['HistorialCues']['cue'].'%'
+					              "CASE character_length(CAST(((Instit.cue*100)+Instit.anexo) as character(60)))
+	 									WHEN 8 THEN '0'||CAST(((Instit.cue*100)+Instit.anexo) as character(60))
+	 									ELSE CAST(((Instit.cue*100)+Instit.anexo) as character(60))
+									END 
+									SIMILAR TO ?" => '%'.$this->data['HistorialCues']['cue'].'%',
+				
+                                  "CASE character_length(CAST(((HistorialCue.cue*100)+HistorialCue.anexo) as character(60)))
+	 									WHEN 8 THEN '0'||CAST(((HistorialCue.cue*100)+HistorialCue.anexo) as character(60))
+	 									ELSE CAST(((Instit.cue*100)+Instit.anexo) as character(60))
+									END 
+									SIMILAR TO ?" => '%'.$this->data['HistorialCues']['cue'].'%'
 				             ));
 				
            	 	
@@ -121,8 +130,17 @@ class HistorialCuesController extends AppController {
 				$long = strlen($this->passedArgs['cue']);
 				
 				$arr_cond1 = array('OR' => array(
-					               'CAST(((Instit.cue*100)+Instit.anexo) as character(60)) SIMILAR TO ?' => '%'.$this->passedArgs['cue'].'%',
-                                   'CAST(((HistorialCue.cue*100)+HistorialCue.anexo) as character(60)) SIMILAR TO ?' => '%'.$this->passedArgs['cue'].'%'
+					               "CASE character_length(CAST(((Instit.cue*100)+Instit.anexo) as character(60)))
+	 									WHEN 8 THEN '0'||CAST(((Instit.cue*100)+Instit.anexo) as character(60))
+	 									ELSE CAST(((Instit.cue*100)+Instit.anexo) as character(60))
+									END 
+									SIMILAR TO ?" => '%'.$this->passedArgs['cue'].'%',
+				
+                                   "CASE character_length(CAST(((HistorialCue.cue*100)+HistorialCue.anexo) as character(60)))
+	 									WHEN 8 THEN '0'||CAST(((HistorialCue.cue*100)+HistorialCue.anexo) as character(60))
+	 									ELSE CAST(((Instit.cue*100)+Instit.anexo) as character(60))
+									END 
+									SIMILAR TO ?" => '%'.$this->passedArgs['cue'].'%'
 								   								   ));
 				
 				            	 		
