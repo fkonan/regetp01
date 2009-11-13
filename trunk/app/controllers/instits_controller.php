@@ -268,10 +268,18 @@ class InstitsController extends AppController {
             	 		}            	 		
             	 	}
             	 		
-					// con esto hago que no se busqeu con un cero adelante
-            	 	$this->data['Instit']['cue'] = (int)$this->data['Instit']['cue'];
+					// con esto hago que no se busque con un cero adelante
+            	 	//$this->data['Instit']['cue'] = (int)$this->data['Instit']['cue'];
             	 	
-                  	$this->paginate['conditions'] = array('CAST(((Instit.cue*100)+Instit.anexo) as character(60)) SIMILAR TO ?' => '%'.$this->data['Instit']['cue'].'%');;
+				    $this->paginate['conditions'] = array("
+				    		
+				    			CASE character_length(CAST(((Instit.cue*100)+Instit.anexo) as character(60)))
+	 								WHEN 8 THEN '0'||CAST(((Instit.cue*100)+Instit.anexo) as character(60))
+	 								ELSE CAST(((Instit.cue*100)+Instit.anexo) as character(60))
+								END 
+				    	
+						    	SIMILAR TO ?" => '%'.$this->data['Instit']['cue'].'%');
+              
                      // set the Search data, so the form remembers the option
                     $array_condiciones['CUE'] = $this->data['Instit']['cue'];
                   	$url_conditions['cue'] = $this->data['Instit']['cue'];
@@ -281,10 +289,18 @@ class InstitsController extends AppController {
 			if(isset($this->passedArgs['cue'])){	
             	 if($this->passedArgs['cue'] != '' || $this->passedArgs['cue'] != 0 ){
                     // set the conditions
-            	 	
-            	 	$arr_cond1 = array('CAST(((Instit.cue*100)+Instit.anexo) as character(60)) SIMILAR TO ?' => '%'.$this->passedArgs['cue'].'%');
-            	 	            	 		
-                  	$this->paginate['conditions'] = $arr_cond1;
+            	 	//$arr_cond1 = array('CAST(((Instit.cue*100)+Instit.anexo) as character(60)) SIMILAR TO ?' => '%'.$this->passedArgs['cue'].'%');            	 		
+                  	//$this->paginate['conditions'] = $arr_cond1;
+                  	
+            		$this->paginate['conditions'] = array("
+            		
+            					CASE character_length(CAST(((Instit.cue*100)+Instit.anexo) as character(60)))
+	 								WHEN 8 THEN '0'||CAST(((Instit.cue*100)+Instit.anexo) as character(60))
+	 								ELSE CAST(((Instit.cue*100)+Instit.anexo) as character(60))
+								END 
+            					
+            					SIMILAR TO ?" => '%'.$this->passedArgs['cue'].'%');
+                  	
                     // set the Search data, so the form remembers the option
                   	$array_condiciones['CUE'] = $this->passedArgs['cue'];
                   	$url_conditions['cue'] = $this->passedArgs['cue'];
@@ -654,7 +670,7 @@ class InstitsController extends AppController {
 				}
             }
             
-	/**
+			/**
 			 *     NORMA
 			 */
             if(isset($this->data['Plan']['norma'])){

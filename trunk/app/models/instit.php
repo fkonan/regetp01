@@ -555,9 +555,6 @@ class Instit extends AppModel {
   	
   	
   	
-  	
-  	
-  	
   	/**
   	 * funcion de validacion departamento que corresponda 
   	 * a la jurisdiccion adecuada

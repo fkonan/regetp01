@@ -59,7 +59,17 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
                   <b>La institución no ha sufrido cambio de CUE </b>
 			  <?php } ?>
 			</div>
-			<div class="instit_name"><b><?= str_replace((isset($url_conditions['cue'])?$url_conditions['cue']:""),"<font color='red'>". (isset($url_conditions['cue'])?$url_conditions['cue']:"") . "</font>",($instit['Instit']['cue']*100)+$instit['Instit']['anexo']." - " . $instit['Instit']['nombre_completo']);?></b></div>
+			<div class="instit_name"><b>
+									<?
+										$cue_anexo = str_replace((isset($url_conditions['cue'])?$url_conditions['cue']:""),"<font color='red'>". (isset($url_conditions['cue'])?$url_conditions['cue']:"") . "</font>",($instit['Instit']['cue']*100)+$instit['Instit']['anexo'], $count);
+										
+										if(isset($url_conditions['cue']) && $url_conditions['cue'] != "" && $url_conditions['cue'][0]=="0" && $count==0) {
+											$cue_anexo = preg_replace('/'.substr($url_conditions['cue'],1).'/', "<font color='red'>".substr($url_conditions['cue'],1)."</font>", $cue_anexo, 1);
+										}
+										
+										echo $cue_anexo." - " . $instit['Instit']['nombre_completo'];
+									?>
+									</b></div>
 		</div>
 	</li>
 		<?
