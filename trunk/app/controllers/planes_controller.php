@@ -68,7 +68,13 @@ class PlanesController extends AppController {
 		}		
 
 		$ciclos = $this->Plan->dame_max_ciclos_por_instits($id);
-														
+
+		if (isset($ciclos)){
+			if (!(in_array(date("Y"),$ciclos))){
+				$ciclos = array_merge($ciclos,array(date('Y') => date('Y')));
+			}			
+		}
+		
 		$this->Plan->recursive = 0;
 
 		/* ************************************ */
@@ -134,10 +140,9 @@ class PlanesController extends AppController {
         		}
         	}
 		}	
-
+		
 		$ofertas = $this->Plan->dameOfertaPorInstitucion($id,isset($url_conditions['Anio.ciclo_id'])?$url_conditions['Anio.ciclo_id']:'');
 		$sectores = $this->Plan->dameSectoresPorInstitucion($id,isset($url_conditions['Anio.ciclo_id'])?$url_conditions['Anio.ciclo_id']:'');
-		
 		$this->set(compact('ofertas','ciclos','sectores'));
 		
 		/* ********************************* */

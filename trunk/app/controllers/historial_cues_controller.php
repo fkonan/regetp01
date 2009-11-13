@@ -102,7 +102,7 @@ class HistorialCuesController extends AppController {
            	 	}
                
            	 	// con esto hago que no se busqeu con un cero adelante
-            	 $this->data['HistorialCues']['cue'] = (int)$this->data['HistorialCues']['cue'];
+            	$this->data['HistorialCues']['cue'] = (int)$this->data['HistorialCues']['cue'];
             	 	
 				$arr_cond1 = array('OR' => array(
 					              'CAST(((Instit.cue*100)+Instit.anexo) as character(60)) SIMILAR TO ?' => '%'.$this->data['HistorialCues']['cue'].'%',

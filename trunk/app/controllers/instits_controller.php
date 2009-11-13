@@ -216,7 +216,8 @@ class InstitsController extends AppController {
 	 *
 	 */
 	function search(){
-         //para mostrar en vista los patrones de busqueda seleccionados
+
+		//para mostrar en vista los patrones de busqueda seleccionados
 		$array_condiciones = array();
 
 		// para el paginator que pueda armar la url

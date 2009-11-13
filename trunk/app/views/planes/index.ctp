@@ -148,6 +148,7 @@ $cue_instit = $planes['Instit']['cue'].$anexo;
 		</tr>
 		<?php
 		$i = 0;
+		if ((isset($planesRelacionados)) && (count($planesRelacionados) > 0)){
 		foreach ($planesRelacionados as $plan):
 			$class = null;
 			if ($i++ % 2 == 0) {
@@ -181,7 +182,21 @@ $cue_instit = $planes['Instit']['cue'].$anexo;
 					<?php echo $html->link(__('Ver', true), array('action'=>'view', $plan['Plan']['id'])); ?>
 				</td>
 			</tr>
-		<?php endforeach; ?>
+		<?php endforeach;
+		} else {
+		?>
+			<tr>
+				<td colspan=4>
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td colspan=4>
+					<p>La Instituci&oacute;n no presenta actualizaciones para este año</p>
+				</td>
+			</tr>
+		<?php	
+		} ?>
 		</table>
 	</div>	
 </div>	
