@@ -52,6 +52,33 @@ class Anio extends AppModel {
 				//'on' => 'create', // or: 'update'
 				'message' => 'Debe ingresar la etapa a la que corresponde el año seleccionado. (CB, EGB3, Polimodal, etc).'	
 			),
+		),
+		'secciones'=>array(
+			'notEmpty'=> array(
+				'rule' => VALID_NUMBER,
+				'required' => false,
+				'allowEmpty' => true,
+				//'on' => 'create', // or: 'update'
+				'message' => 'Debe ingresar un valor numérico.'	
+			),
+		),
+		'hs_taller'=>array(
+			'notEmpty'=> array(
+				'rule' => VALID_NUMBER,
+				'required' => false,
+				'allowEmpty' => true,
+				//'on' => 'create', // or: 'update'
+				'message' => 'Debe ingresar un valor numérico.'	
+			),
+		),
+		'matricula'=>array(
+			'notEmpty'=> array(
+				'rule' => VALID_NUMBER,
+				'required' => false,
+				'allowEmpty' => true,
+				//'on' => 'create', // or: 'update'
+				'message' => 'Debe ingresar un valor numérico.'	
+			),
 		)
 	);
 
