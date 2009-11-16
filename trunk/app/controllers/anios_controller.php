@@ -18,6 +18,9 @@ class AniosController extends AppController {
 	}
 
 	function add($plan_id = null,$duracion_hs = null) {
+		if(!empty($this->data['Anio']['plan_id'])){
+			$plan_id = $this->data['Anio']['plan_id'];
+		}
 	
 		$this->layout='popup';
 		if (!empty($this->data)) {
@@ -27,7 +30,7 @@ class AniosController extends AppController {
 				$this->set('script','<script type="text/javascript">window.opener.location.reload();window.close();</script>">');
 				return 0;
 			} else {
-				$this->Session->setFlash(__('EL año no ha podido ser guardado. Por favor, intente de nuevo.', true));
+				$this->Session->setFlash(__('Intente de nuevo.', true));
 			}
 		}
 		
@@ -51,8 +54,10 @@ class AniosController extends AppController {
 	            break;
 			case 2: // IT
 			case 3: //MT
+   		    case 5: //SEC NO TECNICO
 				$this->render('/anios/add');
 	            break;
+	        case 6: //SUP NO TECNICO
 			case 4: //SNU
 				$this->render('/anios/add_snu');
 	            break;
@@ -98,9 +103,11 @@ class AniosController extends AppController {
 	            break;
 			case 2: // IT
 			case 3: //MT
+			case 5: //SEC NO TECNICO
 				$this->render('/anios/edit');
 	            break;
 			case 4: //SNU
+			case 6: //SUP NO TECNICO
 				$this->render('/anios/edit_snu');
 	            break;
 	        default: // si no va con ninguno mostrar el de MT

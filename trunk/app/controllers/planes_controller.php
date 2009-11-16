@@ -198,15 +198,19 @@ class PlanesController extends AppController {
 		//	Si es FP mostrar la vista para FP, sino mostrar la vista por default (view)
         switch ($plan['Plan']['oferta_id']):
 		case 1: // FP
-		case 7: // CL Capacitacion Laboral
             $this->set('planes_view_tabla','planes_view_tabla_fp');
             break;
 		case 2: //IT
+		case 5: //SNU
 		case 3: //MT, SEC
 			$this->set('planes_view_tabla','planes_view_tabla_normal');
 			 break;
 		case 4: //SNU
+		case 6: //SUP NO TECNICO
 			 $this->set('planes_view_tabla','planes_view_tabla_snu');
+			 break;
+		default: 
+			$this->set('planes_view_tabla','planes_view_tabla_normal');
 			 break;
         endswitch;
        
