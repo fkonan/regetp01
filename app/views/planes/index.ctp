@@ -173,10 +173,14 @@ $cue_instit = $planes['Instit']['cue'].$anexo;
 					<?php 
 					$ciclo_actualizacion = '';
 					if($url_conditions['Anio.ciclo_id'] ==0){
-						$ciclo_actualizacion = " (".$plan['calculado']['max_ciclo'].")";
+						$ciclo_actualizacion = " (".$plan['Anio']['ciclo_id'].")";
 					}
-					
-					echo $plan['calculado']['sum_matricula'].$ciclo_actualizacion; ?>
+					if ($plan['calculado']['sum_matricula'] > 0){ 					
+						echo $plan['calculado']['sum_matricula'].$ciclo_actualizacion; 
+					} else {
+						echo "0";
+					}
+						?>
 				</td>
 				<td class="actions">
 					<?php echo $html->link(__('Ver', true), array('action'=>'view', $plan['Plan']['id'])); ?>
@@ -192,7 +196,7 @@ $cue_instit = $planes['Instit']['cue'].$anexo;
 			</tr>
 			<tr>
 				<td colspan=4>
-					<p>La Instituci&oacute;n no presenta actualizaciones para este año</p>
+					<p class='msg-atencion'>La Instituci&oacute;n no presenta actualizaciones para este año</p>
 				</td>
 			</tr>
 		<?php	
