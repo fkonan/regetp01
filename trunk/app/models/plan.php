@@ -4,6 +4,7 @@ class Plan extends AppModel {
 	var $name = 'Plan';
 	var $asociarAnio = false; // Se utiliza en el paginador
 	var $maxCiclo = "";
+	var $traerUltimaAct = false; // se utiliza en el paginador.
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array( 
@@ -180,13 +181,14 @@ class Plan extends AppModel {
 			$this->bindModel(array('hasOne' => array('Anio' => array('className'  => 'Anio','foreignKey' => 'plan_id',),),));
 	        $field        = $this->getPagFields();
 	        
-	       	$selectFields = array("max(\"Anio\".\"ciclo_id\") AS Calculado__max_ciclo");
-	       	$selectFields = array_merge($field, $selectFields); 
+			if ($this->traerUltimaAct){
+				$selectFields = array_merge($field,array("max(\"Anio\".\"ciclo_id\") AS Calculado__max_ciclo"));
+	        	$groupFields  = $field;
+			} else {
+				$selectFields = array_merge($field, array('Anio.ciclo_id'));
+				$groupFields = $selectFields;
+			}				
 
-	        //debug($selectFields);
-	        
-	        $groupFields  = $field;
-	        
 	        if ($this->maxCiclo != "" )
 	        {
 	        	// le concateno al ultimo detalle del group el HAVING
@@ -205,8 +207,7 @@ class Plan extends AppModel {
   		{
 			$parameters = compact('conditions');
 
-			if ($recursive != $this->recursive)
-			{
+			if ($recursive != $this->recursive){
 				$parameters['recursive'] = $recursive;
 			}
 
@@ -223,14 +224,21 @@ class Plan extends AppModel {
 			$this->bindModel(array('hasOne' => array('Anio' => array('className'  => 'Anio','foreignKey' => 'plan_id',),),));
 	        $field = $this->getPagFields();
 
-	        $selectFields = array_merge($field , array("max(\"Anio\".\"ciclo_id\") AS Calculado__max_ciclo"));
-	     //    debug($selectFields);
-	        $groupFields  = $field;
+	        //$selectFields = array_merge($field , array("max(\"Anio\".\"ciclo_id\") AS Calculado__max_ciclo"));
+			//$selectFields = array_merge($field,array('Anio.ciclo_id'));
+	        //$groupFields  = array_merge($field,$selectFields);
+
+			if ($this->traerUltimaAct){
+				$selectFields = array_merge($field,array("max(\"Anio\".\"ciclo_id\") AS \"Anio__ciclo_id\""));
+	        	$groupFields  = $field;
+			} else {
+				$selectFields = array_merge($field, array('Anio.ciclo_id'));
+				$groupFields = $selectFields;
+			}				
 	        
 	        if ($this->maxCiclo != "" )
 	        {
-	        	//$groupFields[count($groupFields)-1] = $groupFields[count($groupFields)-1].'HAVING max("Anio"."ciclo_id") = "' . $this->maxCiclo;
-	        	$groupFields = array_merge($groupFields ,array('1" HAVING max("Anio"."ciclo_id") = ' . $this->maxCiclo));
+	        	//$groupFields = array_merge($groupFields ,array('1" HAVING max("Anio"."ciclo_id") = ' . $this->maxCiclo));
 	        }	
 	        
 	        $extra      = array('group' => $groupFields,'fields' => $selectFields);
@@ -258,14 +266,16 @@ class Plan extends AppModel {
 		}
 	}    	
    
-	function setAsociarAnio($asociar)
-	{
+	function setAsociarAnio($asociar){
 		$this->asociarAnio = $asociar;	
 	}   
 
-	function setMaxCiclo($ciclo)
-	{
+	function setMaxCiclo($ciclo){
 		$this->maxCiclo = $ciclo;	
+	}   
+	
+	function setTraerUltimaAct($ult){
+		$this->traerUltimaAct = $ult;	
 	}   
 	
 	function dameMatriculaDeCiclo($plan_id,$ciclo){

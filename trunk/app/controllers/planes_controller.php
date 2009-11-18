@@ -72,6 +72,7 @@ class PlanesController extends AppController {
 		if (isset($ciclos)){
 			if (!(in_array(date("Y"),$ciclos))){
 				$ciclos = array_merge($ciclos,array(date('Y') => date('Y')));
+				sort($ciclos);
 			}			
 		}
 		
@@ -119,6 +120,9 @@ class PlanesController extends AppController {
         if(isset($this->data['Anio']['ciclo_id'])){
 			if((int)$this->data['Anio']['ciclo_id'] != 0){
 				$this->Plan->setMaxCiclo($this->data['Anio']['ciclo_id']); 
+				$this->paginate['conditions']['Anio.ciclo_id'] = $this->data['Anio']['ciclo_id'];
+			} else {
+				$this->Plan->setTraerUltimaAct(true);
 			}
 			$url_conditions['Anio.ciclo_id'] = $this->data['Anio']['ciclo_id'];
         }
@@ -127,6 +131,10 @@ class PlanesController extends AppController {
 			if(isset($this->passedArgs['Anio.ciclo_id'])){
 				if((int)$this->passedArgs['Anio.ciclo_id'] != 0){
 					$this->Plan->setMaxCiclo($this->passedArgs['Anio.ciclo_id']);
+					$this->paginate['conditions']['Anio.ciclo_id'] = $this->passedArgs['Anio.ciclo_id'];
+				} else {
+					// si viene por aca es porque clickeo en la solapa Todos.
+					$this->Plan->setTraerUltimaAct(true);
 				}
 				$url_conditions['Anio.ciclo_id'] = $this->passedArgs['Anio.ciclo_id'];
 			}
@@ -134,8 +142,9 @@ class PlanesController extends AppController {
         	{
         		if(isset($ciclos)){
         			if((int)end($ciclos) != 0){
-						$this->Plan->setMaxCiclo(end($ciclos));
-						$url_conditions['Anio.ciclo_id'] = end($ciclos);
+						$this->Plan->setMaxCiclo(date("Y"));
+						$this->paginate['conditions']['Anio.ciclo_id'] = date("Y");
+						$url_conditions['Anio.ciclo_id'] = date("Y");
 					}	
         		}
         	}
@@ -158,11 +167,12 @@ class PlanesController extends AppController {
         $this->paginate['conditions']['Instit.id'] = $id;
         $url_conditions['Instit.id'] = $id; // para que no pierda el id de instit en los ordenamientos y la paginacion
 		$data = $this->paginate();
-		
 		for($i=0; $i< count($data); $i++):
-			$mat = $this->Plan->dameMatriculaDeCiclo($data[$i]['Plan']['id'],$data[$i]['calculado']['max_ciclo']);
-			$data[$i]['calculado']['sum_matricula'] = $mat;
+		//$mat = $this->Plan->dameMatriculaDeCiclo($data[$i]['Plan']['id'],$data[$i]['calculado']['max_ciclo']);
+		$mat = $this->Plan->dameMatriculaDeCiclo($data[$i]['Plan']['id'],$data[$i]['Anio']['ciclo_id']);
+		$data[$i]['calculado']['sum_matricula'] = $mat;
 		endfor;
+		//debug($data);
 		$this->set('planesRelacionados', $data);
 		$this->set('url_conditions', $url_conditions);
 	}
@@ -196,7 +206,7 @@ class PlanesController extends AppController {
 		
 		
 		//	Si es FP mostrar la vista para FP, sino mostrar la vista por default (view)
-        switch ($plan['Plan']['oferta_id']):
+		switch ($plan['Plan']['oferta_id']):
 		case 1: // FP
             $this->set('planes_view_tabla','planes_view_tabla_fp');
             break;
