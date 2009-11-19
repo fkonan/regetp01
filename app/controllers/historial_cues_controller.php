@@ -16,6 +16,8 @@ class HistorialCuesController extends AppController {
 		}	
 		$this->set('cues',$this->HistorialCue->cuesDeInstit($instit_id));
 		$this->set('instit_id',$instit_id);
+		
+		$this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$instit_id );
 	}
 
 
@@ -29,7 +31,8 @@ class HistorialCuesController extends AppController {
 				$this->Session->setFlash(__('The Ciclo could not be saved. Please, try again.', true));
 			}
 		}
-		$this->data['HistorialCue']['instit_id'] = $instit_id;	
+		$this->data['HistorialCue']['instit_id'] = $instit_id;
+		$this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$instit_id );
 	}
 
 	
@@ -48,6 +51,8 @@ class HistorialCuesController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->HistorialCue->read(null, $id);
 		}
+		
+		$this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$id );
 	}
 	
 	function delete($id = null) {
@@ -127,8 +132,6 @@ class HistorialCuesController extends AppController {
 
 		if(isset($this->passedArgs['cue'])){	
 			if($this->passedArgs['cue'] != '' || $this->passedArgs['cue'] != 0 ){
-				$long = strlen($this->passedArgs['cue']);
-				
 				$arr_cond1 = array('OR' => array(
 					               "CASE character_length(CAST(((Instit.cue*100)+Instit.anexo) as character(60)))
 	 									WHEN 8 THEN '0'||CAST(((Instit.cue*100)+Instit.anexo) as character(60))

@@ -752,11 +752,6 @@ class InstitsController extends AppController {
 		}		
 	}
 	
-	
-	
-	
-	
-	
 	function depurar(){		
 		//debug($this->data);die();
 		if (!empty($this->data)) {
@@ -793,5 +788,55 @@ class InstitsController extends AppController {
 		die($this->Instit->convertir_para_busqueda_avanzada("pepino"));
 	}
 
+	function cuadro_instits_por_juris(){
+		/*
+		$sql = "select j.name as Nombre , i.cue as CUE, i.anexo as Anexo, a.matricula as Matricula, a.anio as Año, a.ciclo_id as Ciclo, a.secciones as Secciones, oz.name as Oferta 
+				from instits i 
+				left join planes p on (p.instit_id = i.id ) 
+				left join anios a on a.plan_id = p.id 
+				left join jurisdicciones j on j.id = i.jurisdiccion_id 
+				left join ofertas oz on p.oferta_id = oz.id 
+				where i.activo = 1 
+				ORDER BY j.name , i.cue 
+				Limit 30";
+		
+		$intit_aux = $this->Instit->query($sql);
+			
+		$intit = array();
+		foreach($intit_aux as $key=>$value) {
+			$intit[] = $value[0];
+		}
+		
+		$headers= array();
+		foreach($intit_aux[0][0] as $key=>$value) {
+			$headers[] = $key;
+		}
+		
+		$this->set('intits', $intit);
+		$this->set('headers', $headers);
+		*/
+		
+		/******************************/
+		/*          Paginador         */
+		/******************************/
+		$this->paginate['fields'] = array(	'Jurisdiccion.name', 
+											'Instit.cue', 
+											'Instit.anexo', 
+											'Anio.matricula', 
+											'Anio.anio', 
+											'Anio.ciclo_id', 
+											'Anio.secciones', 
+											'Oferta.name'
+									);
+		$this->paginate['conditions'] = array(	'Instit.activo' => 1,
+												'Plan.instit_id' => 'Instit.id',
+										);
+		$this->paginate['order'] = array('Jurisdiccion.name', 'Instit.cue');
+		
+		$this->Instit->recursive = 2;		
+		$data = $this->paginate();
+
+		debug($data);
+	}
 }
 ?>

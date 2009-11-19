@@ -4,7 +4,7 @@ class DepuradoresController extends AppController {
 
 	var $name = 'Depuradores';
 	var $helpers = array('Html', 'Form','Ajax');
-	var $uses = array('Instit','Plan','Sector','Jurisdiccion');
+	var $uses = array('Instit','Plan','Sector','Jurisdiccion', 'Tipoinstit');
 	var $db;
 	
 	
@@ -207,8 +207,6 @@ class DepuradoresController extends AppController {
 	
 	function clases_y_etp()
 	{		
-				
-
 		if (!empty($this->data)) 
 		{	
 			/*
@@ -223,8 +221,10 @@ class DepuradoresController extends AppController {
 			
 			
 			if($this->Instit->saveField('claseinstit_id',  $this->data['Instit']['claseinstit_id']) &&
-				$this->Instit->saveField('etp_estado_id',  $this->data['Instit']['etp_estado_id'])
-			){
+				$this->Instit->saveField('etp_estado_id',  $this->data['Instit']['etp_estado_id']) &&
+				$this->Instit->saveField('tipoinstit_id',  $this->data['Instit']['tipoinstit_id'])
+			)
+			{
 				$this->Session->setFlash(__('Se ha guardado la institución correctamente', true));
 			}else{
 				debug($this->Instit->validationErrors);
@@ -241,14 +241,18 @@ class DepuradoresController extends AppController {
 		$falta_depurar = $this->Instit->find('count',array('conditions'=>$conditions));
 		$this->data = $this->Instit->find('first',array('conditions'=>$conditions));
 		
+		$tipoinstit = $this->Instit->Tipoinstit->find('list', array('conditions'=>array('jurisdiccion_id'=>$this->data['Instit']['jurisdiccion_id']) ));
+		
 		$this->Instit->Plan->unbindModel(array('belongsTo' => array('Instit')));
 		$planes = $this->Instit->Plan->find('all',array('conditions'=>array('Plan.instit_id'=>$this->data['Instit']['id'])));
 		
 		$claseinstits = $this->Instit->Claseinstit->find('list');
+		$claseinstits[0] = "Seleccione";
+		
 		$etp_estados = $this->Instit->EtpEstado->find('list',array('order'=>'id DESC'));
 		
 		$this->set('falta_depurar', $falta_depurar);
-		$this->set(compact('etp_estados', 'claseinstits','planes'));
+		$this->set(compact('etp_estados', 'claseinstits','planes','tipoinstit'));
 	}
 
 

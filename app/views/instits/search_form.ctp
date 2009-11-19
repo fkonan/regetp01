@@ -7,7 +7,7 @@
 		<?= $form->input('cue', array('label'=> 'CUE', 'maxlength'=>9 ,'after'=> '<cite>Ej: 600118 o 5000216. También puede buscar con el n° de anexo, Ej: 60011800 </cite>')); ?>
 		
 		<?php echo $form->input('nombre_completo', array('label'=>'Nombre',
-														 'after'=> '<cite>Búsqueda libre por nombre. Ej: Escuela 3 San Martín</cite>'));?>		
+														 'after'=> '<cite>Realiza una búsqueda por tipo de establecimiento, número y nombre propio de la institución.<br>Ej: Escuela 3 San Martín</cite>'));?>		
 		
 		<?php 
 			// 		JURISDICCION
@@ -130,7 +130,7 @@
 		<div id="search-planes"  class="search-div" style="display: none">
 			<?php 			
 			echo $form->input('Plan.oferta_id',array('options'=>$ofertas, 
-													 'empty'=>'Seleccionar', 
+													 'empty'=>'Seleccione', 
 													 'label'=>'Con Oferta'));
 			
 			$type = 'hidden';
@@ -142,7 +142,7 @@
 			echo $form->input('Plan.sector_id',array(
 								'label'=>'Sector',
 								'options'=>$sectores,
-								'empty'=>'TODOS'
+								'empty'=>'Seleccione'
 							));
 			?>
 			
