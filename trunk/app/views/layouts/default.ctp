@@ -69,7 +69,8 @@
 			<div id="menu">	
 				<?  echo $this->renderElement('boxSaludo'); ?>
 				<?  echo $this->renderElement('boxInstituciones'); ?>
-				<?  echo $this->renderElement('boxInformacion'); ?>				
+				<?  echo $this->renderElement('boxCuadros'); ?>
+				<?  echo $this->renderElement('boxInformacion'); ?>						
 				<?  echo $this->renderElement('boxTickets'); ?>
 				<?  echo $this->renderElement('boxAdmin'); ?>	
 				<?  echo $this->renderElement('boxLogin'); ?>

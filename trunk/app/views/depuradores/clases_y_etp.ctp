@@ -1,6 +1,6 @@
 
 <div class="instits form">
-<h1>Editar Institución de <?php echo $this->data['Jurisdiccion']['name']?><br> CUE: <?= $this->data['Instit']['cue']*100+$this->data['Instit']['anexo'] ?> (id:<?php echo $this->data['Instit']['id']?>) <br>  ¡¡ vamos que faltan solo <?php echo $falta_depurar?>!!</h1>
+<h1>Editar Institución de <?php echo $this->data['Jurisdiccion']['name']?> <br> Nombre: <?= $html->link($this->data['Instit']['nombre_completo'],'/instits/view/'.$this->data['Instit']['id']);?> <br> CUE: <?= $this->data['Instit']['cue']*100+$this->data['Instit']['anexo'] ?> (id:<?php echo $this->data['Instit']['id']?>) <br> ¡¡ vamos que faltan solo <?php echo $falta_depurar?>!!</h1>
 
 
 
@@ -16,9 +16,6 @@ Event.observe(window, "keypress", function(e){
 	});
 -->
 </script>
-
-
-
 
 <h2>Planes</h2>
 <?php foreach ($planes as $p):?>
@@ -63,19 +60,25 @@ Event.observe(window, "keypress", function(e){
 	<?php
 		echo $form->input('id');	
 				
-		echo $form->input('claseinstit_id',array('label'=>'Seleccione tipo de Institución'));	
+		echo $form->input('claseinstit_id',array('label'=>'Seleccione tipo de Institución'));
+		
 		echo $form->input('etp_estado_id',array('label'=>'Seleccione Relación de ETP'));
 		
 		
         
-		echo $form->button('Guardar',array('onclick'=>'$("InstitDepurarForm").submit()'));                          
+		echo $form->button('Guardar',array('onclick'=>'$("InstitDepurarForm").submit()'));
+
+		echo $form->input('tipoinstit_id',array('label'=>'Seleccione Jurisdicción',
+												  'type'=>'select',
+												  'options'=>$tipoinstit
+		));
      	
-         
+         /********************************************************************************/
                                    
 		/**
 		 *    NOMBRE
 		 */	
-		echo $form->input('nombre');
+		echo $form->input('nombre', array('readonly'=>true));
 		
 		
 		/**
@@ -83,10 +86,11 @@ Event.observe(window, "keypress", function(e){
 		 */	
 		echo $form->input('nroinstit',array('label'=>array(	'text'=>'Nº de Institución',
 															'class'=>'input_label'),
-											'class'=> 'input_text_peque'
+											'class'=> 'input_text_peque',
+											'readonly'=>true
 		));		
 			
-		echo $form->input('anio_creacion');
+		echo $form->input('anio_creacion', array('readonly'=>true));
 		
 		
 		/**
@@ -94,7 +98,8 @@ Event.observe(window, "keypress", function(e){
 		 */	
 		echo $form->input('direccion',array('label'=>array(	'text'=> 'Domicilio',
 															'class'=>'input_label'),
-											'class' => 'input_text_peque'
+											'class' => 'input_text_peque',
+											'readonly'=>true
 		));
 			                          
                                    
@@ -102,7 +107,8 @@ Event.observe(window, "keypress", function(e){
 		 *    CODIGO POSTAL
 		 */							
 		echo $form->input('cp',array('label'=>array('text'=>'Código Postal', 'class'=>'input_label'),
-									 'class' => 'input_text_peque'
+									 'class' => 'input_text_peque',
+									 'readonly'=>true
 		));
 		
 		
@@ -121,13 +127,14 @@ Event.observe(window, "keypress", function(e){
 		 */	
 		echo $form->input('actualizacion',array('label'=>array(	'text'=> 'Ingreso/Actualización',
 																'class'=>'input_label'),
-											    'class'=>'input_text_peque'
+											    'class'=>'input_text_peque',
+												'readonly'=>true
 		));
 		
 		/**
 		 *    OBSERVACION
 		 */	
-		echo $form->input('observacion');
+		echo $form->input('observacion', array('readonly'=>true));
 			//agrego esto para que no se puedan imprimir mas de 100 caracteres en el textarea
 			?>
 			
@@ -139,7 +146,8 @@ Event.observe(window, "keypress", function(e){
 		$ciclos = $this->requestAction('/Ciclos/dame_ciclos');
 		echo $form->input('ciclo_alta', array("type" => "select", 
 											  "options" => $ciclos,'label'=>'Alta',
-											  "selected" => $this->data['Instit']['ciclo_alta']			
+											  "selected" => $this->data['Instit']['ciclo_alta'],
+											  'disabled' => true		
 		));
 		
 	?>

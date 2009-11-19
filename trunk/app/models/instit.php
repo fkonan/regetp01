@@ -133,7 +133,6 @@ class Instit extends AppModel {
 			
 			),
 			
-			
 			'notEmpty' => array( // or: array('ruleName', 'param1', 'param2' ...)
 				'rule' => VALID_NOT_EMPTY,
 				'required' => true,
