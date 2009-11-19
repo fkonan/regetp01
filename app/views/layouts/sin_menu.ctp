@@ -33,7 +33,7 @@
 	</title>
 	<?php
 		echo $html->meta('icon');
-		echo $html->css('regetp');
+		echo $html->css('printer');
 		echo $html->css('printer','stylesheet', array('media'=>'print'));
 		
 		echo $javascript->link('prototype');
@@ -44,7 +44,7 @@
 	?>
 	
 </head>
-<body>
+<body style="">
 	<script type="text/javascript">		
 		var mensajero = new Mensaje('mensajero');
 	</script>
@@ -58,7 +58,7 @@
 		<div id="mensajero" style="display: none"></div>
 	
 		
-		<div id="header" >
+		<div style="background-color: #F0F7FC; height: 60px; padding-top: 20px; text-align: center; border-bottom: 3px solid #DBEBF6">
 			<h1>
 				<?php echo $html->link(__('Registro Federal de Instituciones de Educación Técnico Profesional (RFIETP)', true), '/pages/home'); ?>
 			</h1>	

@@ -1,5 +1,5 @@
 <div class="queries index">
-<br><p style="color:beige; text-align: left"><?php
+<br><p style="text-align: left"><?php
 echo $descripcion;
 ?></p>
 
@@ -25,12 +25,15 @@ echo $paginator->counter(array(
 if ($viewAll){
 	echo $html->link('Ver Todos','/Queries/list_view/query.id:'.$url_conditions['query.id'] . '/viewAll:true/',array('class'=>'clearTag'));
 } else {
-	echo $html->link('Ver por pagina','/Queries/list_view/query.id:'.$url_conditions['query.id'] . '/viewAll:false/',array('class'=>'clearTag'));	
+	echo $html->link('Ver por página','/Queries/list_view/query.id:'.$url_conditions['query.id'] . '/viewAll:false/',array('class'=>'clearTag'));	
 }	
 ?>
 
 <?php echo " | "?>
 <?php echo $html->link('descargar excel','/Queries/contruye_excel/'.$url_conditions['query.id'] ,array('class'=>'clearTag'));?>
+
+<?php echo " | "?>
+<?php echo $html->link('Imprimir','#Imprimir',array('class'=>'clearTag','onclick'=>'window.print()'));?>
 
 <?php echo " | "?>
 <?php echo $html->link('Volver','/Queries/descargar_queries/',array('class'=>'clearTag'));?>
@@ -62,14 +65,14 @@ foreach ($queries as $query):
 <?php endforeach; ?>
 </table>
 </div>
-<div class="paging">
+<div class="paging" style="background-color: #F0F7FC; height: 60px; padding-top: 20px; text-align: center;border-top: 3px solid #DBEBF6">
 	<?php 
 	if (isset($paginator)){
-		echo $paginator->prev('<< '.__('Anterior', true), array(), null, array('class'=>'disabled'));
+		echo $paginator->prev('<<');
 		echo "&nbsp;";
 		echo $paginator->numbers();
 		echo "&nbsp;";
-		echo $paginator->next(__('Siguiente', true).' >>', array(), null, array('class'=>'disabled'));
+		echo $paginator->next('>>');
 	}		
 	?>
 </div>

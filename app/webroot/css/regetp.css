@@ -1059,7 +1059,7 @@ div.code-coverage-results span.result-good {
 
 
 
-.instit-etp{
+.msg-atencion{
 	text-align: center;
 	color: maroon; 
 	font-weight: bolder;
@@ -1233,26 +1233,6 @@ div.auto_complete    {
 li.selected    { 
 	background-color: #ffb; 
 }
-
-/***-----------******************--------******/
-
-
-.clearTag {
-	color: white;
-	text-decoration: underline;
-	font-weight: bold;
-	over-colar
-}
-
-a:hover.clearTag {
-	color: white;
-	text-decoration:none;
-}
-
-
-
-
-
 
 
 
