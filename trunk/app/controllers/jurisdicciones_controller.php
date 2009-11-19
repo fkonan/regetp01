@@ -3,8 +3,6 @@ class JurisdiccionesController extends AppController {
 
 	var $name = 'Jurisdicciones';
 	var $helpers = array('Html', 'Form');
-
-	
 	
 	function index() {
 		$this->Jurisdiccion->recursive = 0;

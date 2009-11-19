@@ -95,35 +95,21 @@ class HistorialCuesController extends AppController {
 
 		if(isset($this->data['HistorialCues']['cue'])){
 			if($this->data['HistorialCues']['cue'] != '' || $this->data['HistorialCues']['cue'] != 0 ){
-				$is_cue_valido = $this->HistorialCue->Instit->isCUEValid($this->data['HistorialCues']['cue']);
-           	 	if($is_cue_valido < 1){
-           	 		switch ($is_cue_valido){
-           	 			case -1:
-           	 				$mensaje = "<H1>El CUE: '".$this->data['HistorialCues']['cue']."' no es válido.</H1> Ingrese un valor numérico de al menos 3 dígitos.";
+
+				if($this->data['HistorialCues']['cue'] < 99999 || $this->data['HistorialCues']['cue'] > 1000000000){
+           	 				$mensaje = "<H1>El CUE: '".$this->data['HistorialCues']['cue']."' no es válido.</H1> Ingrese un valor numérico entre 6 (Ej: 600118) y 9 dígitos (CUE con anexo. Ej: 500021600).";
            	 				$this->Session->setFlash($mensaje,'default',array('class' => 'flash-warning'));
-           	 				$this->redirect('search_form');
-           	 				break;
-           	 		}           	 		
+           	 				$this->redirect('search_form');         	 		
            	 	}
                
            	 	// con esto hago que no se busqeu con un cero adelante
-            	//$this->data['HistorialCues']['cue'] = (int)$this->data['HistorialCues']['cue'];
+            	$this->data['HistorialCues']['cue'] = (int)$this->data['HistorialCues']['cue'];
             	 	
 				$arr_cond1 = array('OR' => array(
-					              "CASE character_length(CAST(((Instit.cue*100)+Instit.anexo) as character(60)))
-	 									WHEN 8 THEN '0'||CAST(((Instit.cue*100)+Instit.anexo) as character(60))
-	 									ELSE CAST(((Instit.cue*100)+Instit.anexo) as character(60))
-									END 
-									SIMILAR TO ?" => '%'.$this->data['HistorialCues']['cue'].'%',
-				
-                                  "CASE character_length(CAST(((HistorialCue.cue*100)+HistorialCue.anexo) as character(60)))
-	 									WHEN 8 THEN '0'||CAST(((HistorialCue.cue*100)+HistorialCue.anexo) as character(60))
-	 									ELSE CAST(((Instit.cue*100)+Instit.anexo) as character(60))
-									END 
-									SIMILAR TO ?" => '%'.$this->data['HistorialCues']['cue'].'%'
+					              'CAST(((Instit.cue*100)+Instit.anexo) as character(60)) SIMILAR TO ?' => '%'.$this->data['HistorialCues']['cue'].'%',
+                                  'CAST(((HistorialCue.cue*100)+HistorialCue.anexo) as character(60)) SIMILAR TO ?' => '%'.$this->data['HistorialCues']['cue'].'%'
 				             ));
 				
-           	 	
 				$this->paginate['conditions'] = $arr_cond1;
 				$array_condiciones['CUE']     = $this->data['HistorialCues']['cue'];
 				$url_conditions['cue']        = $this->data['HistorialCues']['cue'];
@@ -133,19 +119,9 @@ class HistorialCuesController extends AppController {
 		if(isset($this->passedArgs['cue'])){	
 			if($this->passedArgs['cue'] != '' || $this->passedArgs['cue'] != 0 ){
 				$arr_cond1 = array('OR' => array(
-					               "CASE character_length(CAST(((Instit.cue*100)+Instit.anexo) as character(60)))
-	 									WHEN 8 THEN '0'||CAST(((Instit.cue*100)+Instit.anexo) as character(60))
-	 									ELSE CAST(((Instit.cue*100)+Instit.anexo) as character(60))
-									END 
-									SIMILAR TO ?" => '%'.$this->passedArgs['cue'].'%',
-				
-                                   "CASE character_length(CAST(((HistorialCue.cue*100)+HistorialCue.anexo) as character(60)))
-	 									WHEN 8 THEN '0'||CAST(((HistorialCue.cue*100)+HistorialCue.anexo) as character(60))
-	 									ELSE CAST(((Instit.cue*100)+Instit.anexo) as character(60))
-									END 
-									SIMILAR TO ?" => '%'.$this->passedArgs['cue'].'%'
+					               'CAST(((Instit.cue*100)+Instit.anexo) as character(60)) SIMILAR TO ?' => '%'.$this->passedArgs['cue'].'%',
+                                   'CAST(((HistorialCue.cue*100)+HistorialCue.anexo) as character(60)) SIMILAR TO ?' => '%'.$this->passedArgs['cue'].'%'
 								   								   ));
-				
 				            	 		
 				$this->paginate['conditions'] = $arr_cond1;
 				$array_condiciones['CUE']     = $this->passedArgs['cue'];

@@ -1,16 +1,17 @@
 <?php
+require("models/querystmp.php");
 class InstitsController extends AppController {
 
 	var $name = 'Instits';
 	var $helpers = array('Html','Form','Ajax');
-	var $paginate = array('order'=>array('Instit.cue' => 'asc'),'limit'=>'10'); 
+	var $paginate = array('order'=>array('Instit.cue' => 'asc'),'limit'=>'10');
 
 	function beforeFilter(){
 		parent::beforeFilter();
 		$this->rutaUrl_for_layout[] =array('name'=> 'Buscador','link'=>'/Instits/search_form' );
 	}
 	
-	function index() {		
+	function index() {
 		$this->Instit->recursive = 0;
 		$this->set('instits', $this->paginate());
 	}
@@ -270,16 +271,9 @@ class InstitsController extends AppController {
             	 	}
             	 		
 					// con esto hago que no se busque con un cero adelante
-            	 	//$this->data['Instit']['cue'] = (int)$this->data['Instit']['cue'];
-            	 	
-				    $this->paginate['conditions'] = array("
-				    		
-				    			CASE character_length(CAST(((Instit.cue*100)+Instit.anexo) as character(60)))
-	 								WHEN 8 THEN '0'||CAST(((Instit.cue*100)+Instit.anexo) as character(60))
-	 								ELSE CAST(((Instit.cue*100)+Instit.anexo) as character(60))
-								END 
-				    	
-						    	SIMILAR TO ?" => '%'.$this->data['Instit']['cue'].'%');
+            	 	$this->data['Instit']['cue'] = (int)$this->data['Instit']['cue'];
+
+            	 	$this->paginate['conditions'] = array("CAST(((Instit.cue*100)+Instit.anexo) as character(60)) SIMILAR TO ?" => '%'.$this->data['Instit']['cue'].'%');
               
                      // set the Search data, so the form remembers the option
                     $array_condiciones['CUE'] = $this->data['Instit']['cue'];
@@ -290,19 +284,10 @@ class InstitsController extends AppController {
 			if(isset($this->passedArgs['cue'])){	
             	 if($this->passedArgs['cue'] != '' || $this->passedArgs['cue'] != 0 ){
                     // set the conditions
-            	 	//$arr_cond1 = array('CAST(((Instit.cue*100)+Instit.anexo) as character(60)) SIMILAR TO ?' => '%'.$this->passedArgs['cue'].'%');            	 		
-                  	//$this->paginate['conditions'] = $arr_cond1;
+            	 	$arr_cond1 = array('CAST(((Instit.cue*100)+Instit.anexo) as character(60)) SIMILAR TO ?' => '%'.$this->passedArgs['cue'].'%');            	 		
+                  	$this->paginate['conditions'] = $arr_cond1;
                   	
-            		$this->paginate['conditions'] = array("
-            		
-            					CASE character_length(CAST(((Instit.cue*100)+Instit.anexo) as character(60)))
-	 								WHEN 8 THEN '0'||CAST(((Instit.cue*100)+Instit.anexo) as character(60))
-	 								ELSE CAST(((Instit.cue*100)+Instit.anexo) as character(60))
-								END 
-            					
-            					SIMILAR TO ?" => '%'.$this->passedArgs['cue'].'%');
-                  	
-                    // set the Search data, so the form remembers the option
+                  	// set the Search data, so the form remembers the option
                   	$array_condiciones['CUE'] = $this->passedArgs['cue'];
                   	$url_conditions['cue'] = $this->passedArgs['cue'];
             	 }
@@ -789,55 +774,42 @@ class InstitsController extends AppController {
 		die($this->Instit->convertir_para_busqueda_avanzada("pepino"));
 	}
 
-	function cuadro_instits_por_juris(){
-		/*
-		$sql = "select j.name as Nombre , i.cue as CUE, i.anexo as Anexo, a.matricula as Matricula, a.anio as Año, a.ciclo_id as Ciclo, a.secciones as Secciones, oz.name as Oferta 
+	function cuadro_instits_por_juris(){		
+		// Query id 2
+		$sql = "select 
+					j.name as Nombre, 
+					i.cue ,i.anexo , 
+					a.matricula, 
+					a.anio as Año, 
+					a.ciclo_id as Ciclo, 
+					a.secciones, 
+					oz.name as Oferta
 				from instits i 
 				left join planes p on (p.instit_id = i.id ) 
-				left join anios a on a.plan_id = p.id 
-				left join jurisdicciones j on j.id = i.jurisdiccion_id 
-				left join ofertas oz on p.oferta_id = oz.id 
-				where i.activo = 1 
-				ORDER BY j.name , i.cue 
-				Limit 30";
+				left join anios a on a.plan_id = p.id
+				left join jurisdicciones j on j.id = i.jurisdiccion_id
+				left join ofertas oz on p.oferta_id = oz.id
+				where i.activo = 1  
+				ORDER BY j.name , i.cue";
 		
-		$intit_aux = $this->Instit->query($sql);
-			
-		$intit = array();
-		foreach($intit_aux as $key=>$value) {
-			$intit[] = $value[0];
-		}
+		$queryTmp = new Querystmp();
+		$queryTmp->setSql($sql);
 		
-		$headers= array();
-		foreach($intit_aux[0][0] as $key=>$value) {
-			$headers[] = $key;
-		}
-		
-		$this->set('intits', $intit);
-		$this->set('headers', $headers);
-		*/
-		
-		/******************************/
-		/*          Paginador         */
-		/******************************/
-		$this->paginate['fields'] = array(	'Jurisdiccion.name', 
-											'Instit.cue', 
-											'Instit.anexo', 
-											'Anio.matricula', 
-											'Anio.anio', 
-											'Anio.ciclo_id', 
-											'Anio.secciones', 
-											'Oferta.name'
-									);
-		$this->paginate['conditions'] = array(	'Instit.activo' => 1,
-												'Plan.instit_id' => 'Instit.id',
-										);
-		$this->paginate['order'] = array('Jurisdiccion.name', 'Instit.cue');
-		
-		$this->Instit->recursive = 2;		
-		$data = $this->paginate();
+		if (isset($this->passedArgs['viewAll']) && $this->passedArgs['viewAll'] == 'true'){
+			$data = $queryTmp->getData();
+			$viewAll = false;		
+		} else {	
+			$data = $this->paginate($queryTmp);
+			$viewAll = true;
+		}			
 
-		debug($data);
+		$cols = array_keys($data['0']['0']); 
+		$this->set('cols', $cols);
+        $url_conditions['query.id'] = 2;
+		$this->set('queries', $data);
+		$this->set('url_conditions', $url_conditions);
+		$this->set('descripcion', "Consulta de Instituciones por jurisdicción y oferta");
+		$this->set('viewAll', $viewAll);
 	}
 }
 ?>
