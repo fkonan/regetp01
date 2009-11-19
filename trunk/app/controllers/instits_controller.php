@@ -28,6 +28,7 @@ class InstitsController extends AppController {
 			$programa_de_etp = true;
 		}
 		$this->set('con_programa_de_etp', $programa_de_etp);
+		$this->set('relacion_etp', $instit['EtpEstado']['name']);
 		$this->set('instit', $instit);
 	}
 

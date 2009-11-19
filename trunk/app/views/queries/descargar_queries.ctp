@@ -27,10 +27,10 @@
 											 'onChange'=>'$("FormCategorias").submit();'
 											 ));
 											 
-		echo $form->input('description', array( 'label'=> 'Nombre o Descripción',
+		echo $form->input('description', array( 'label'=> 'Ingrese criterio de búsqueda',
 												'type'=>'text',
-										 		'after'=> '<cite>Escriba una palabra o frace del nombre o la descripción.</cite>'));
-		echo $form->end(null);										 
+										 		'after'=> '<cite>Busca tanto en el nombre del archivo como en la descripción.</cite>'));
+		echo $form->end('Buscar');										 
 ?>
 
 <h2>Descargas Excel</h2>
