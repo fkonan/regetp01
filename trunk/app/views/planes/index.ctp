@@ -53,50 +53,43 @@ $cue_instit = $planes['Instit']['cue'].$anexo;
 </dl>		
 
 <?php
-	if(isset($sumatoria_matriculas['array_de_ciclos'])>0 && isset($sumatoria_matriculas['array_de_ofertas'])>0):
-	$v_matriculas_ciclos = array_reverse($sumatoria_matriculas['array_de_ciclos']);
-?>
-		
-<h2>Oferta</h2>	
-	
-	
-<div align="center">
-<table class="mini_tabla" width="80" cellpadding = "0" cellspacing = "0" summary="En esta tabla se muestran los totales de 
+	//if(isset($sumatoria_matriculas['array_de_ciclos'])>0 && isset($sumatoria_matriculas['array_de_ofertas'])>0):
+	if(isset($planes['Plan'])  && count($planes['Plan'])>0):
+		if(isset($sumatoria_matriculas['array_de_ciclos'])>0 && isset($sumatoria_matriculas['array_de_ofertas'])>0):
+			$v_matriculas_ciclos = array_reverse($sumatoria_matriculas['array_de_ciclos']);
+		?>
+		<h2>Oferta</h2>	
+			<div align="center">
+				<table class="mini_tabla" width="80" cellpadding = "0" cellspacing = "0" summary="En esta tabla se muestran los totales de 
 														matrículas por cada ciclo lectivo, para 
 														cada oferta.">
-	<CAPTION>Total de matriculados por oferta según ciclo lectivo</CAPTION>
-	<tr>
-		<th>Oferta</th>
-		<?php 
-		foreach($v_matriculas_ciclos as $ciclo):
-			echo "<th>$ciclo</th>";
-		endforeach;
-		?>		
-	</tr>	
-		
-	<?php 
-	foreach($sumatoria_matriculas['array_de_ofertas'] as $oferta):
-	?>
-	<tr><?php 
-		$primer_columna = true;			
-		foreach($v_matriculas_ciclos as $ciclo):
-			if($primer_columna):
-				echo "<td>".$oferta['abrev']."</td>";
-				$primer_columna = false;
-			endif;
-			echo "<td>".$sumatoria_matriculas['totales'][$ciclo][$oferta['abrev']]['total_matricula']."</td>";
-		endforeach;
-			
-		?></tr><?php 
-	endforeach;
-	?>	
-	
-</table>
-	
-</div>
-
-
-
+				<CAPTION>Total de matriculados por oferta según ciclo lectivo</CAPTION>
+				<tr>
+					<th>Oferta</th>
+					<?php 
+					foreach($v_matriculas_ciclos as $ciclo):
+					echo "<th>$ciclo</th>";
+					endforeach;
+					?>		
+				</tr>	
+				<?php 
+				foreach($sumatoria_matriculas['array_de_ofertas'] as $oferta):
+				?>
+				<tr><?php 
+					$primer_columna = true;			
+					foreach($v_matriculas_ciclos as $ciclo):
+						if($primer_columna):
+							echo "<td>".$oferta['abrev']."</td>";
+						$primer_columna = false;
+					endif;
+					echo "<td>".$sumatoria_matriculas['totales'][$ciclo][$oferta['abrev']]['total_matricula']."</td>";
+					endforeach;
+				?></tr><?php 
+				endforeach;
+				?>	
+				</table>
+			</div>
+	<?php endif ?>
 
 <!-- TABS DE CICLOS ULT. ACTUALIZACIONES  -->
 <div class="tabs">
@@ -207,11 +200,12 @@ $cue_instit = $planes['Instit']['cue'].$anexo;
 	
 </div>
 	
-	
-<div class="paging">
-	<?php echo $paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>
- | 	<?php echo $paginator->numbers();?>
-	<?php echo $paginator->next(__('next', true).' >>', array(), null, array('class'=>'disabled'));?>
+<div id="paginator_prev_next_links">
+<?php	
+	echo $paginator->prev('« Anterior',null, null, array('class' => 'disabled'));
+	echo " | ".$paginator->numbers(array('modulus'=>'9'))." | ";
+	echo $paginator->next(' Siguiente »', null, null, array('class' => 'disabled'));
+?> 
 </div>
 
 <?php endif;?>
