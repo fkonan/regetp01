@@ -1,5 +1,9 @@
 
-<h1><?=$html->image('cambio_cue.gif');echo __('  Buscar Histórico de Institución');?></h1>
+<h1>
+<?=$html->image('cambio_cue.gif');?>
+Buscador Histórico de CUE
+</h1>
+<br>
 <p>
 Esta opción de búsqueda permite visualizar las instituciones a las que  
 ha sido asociado un determinado CUE a lo largo del tiempo. Soporta búsquedas por
@@ -9,13 +13,13 @@ También permite incluir el anexo (Ej: "60011800").
 
 </p>
 
+<br>
 
-
-<h2>Buscar</h2>
+<br>
 
 	<div>
 		<?= $form->create('HistorialCues',array('action' => 'search','name'=>'HistorialCuesSearchForm'));?> 
-		<?= $form->input('cue', array('label'=> 'CUE', 'maxlength'=>9 ,'after'=> '<cite>Ej: 600118 o 5000216.</cite>')); ?>
+		<?= $form->input('cue', array('label'=> 'Ingrese CUE', 'maxlength'=>9 ,'after'=> '<cite>Ej: 600118 o 5000216.</cite>')); ?>
 		<?= $form->button('Buscar',array('onclick'=>'enviar()'));?>
 	</div>
 	<?php echo $form->end(null); ?>
