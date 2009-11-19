@@ -82,8 +82,8 @@ ALTER TABLE etp_estados ALTER COLUMN id SET DEFAULT nextval('etp_estados_id_seq'
 -- Data for Name: etp_estados; Type: TABLE DATA; Schema: public; Owner: www
 --
 
-INSERT INTO etp_estados VALUES (1, 'Con Programa de ETP');
-INSERT INTO etp_estados VALUES (2, 'ETP');
+INSERT INTO etp_estados VALUES (1, 'Institución con programa de ETP');
+INSERT INTO etp_estados VALUES (2, 'Institución de ETP');
 
 
 --
@@ -163,10 +163,10 @@ ALTER TABLE claseinstits ALTER COLUMN id SET DEFAULT nextval('claseinstits_id_se
 --
 -- Data for Name: claseinstits; Type: TABLE DATA; Schema: public; Owner: www
 --
-INSERT INTO claseinstits VALUES (1, 'de Formación Profesional');
-INSERT INTO claseinstits VALUES (2, 'Itinerario Formativo');
-INSERT INTO claseinstits VALUES (3, 'de Nivel Secundario');
-INSERT INTO claseinstits VALUES (4, 'de Nivel Superior');
+INSERT INTO claseinstits VALUES (1, 'Formación Profesional');
+INSERT INTO claseinstits VALUES (2, 'con Itinerario Formativo');
+INSERT INTO claseinstits VALUES (3, 'Secundario');
+INSERT INTO claseinstits VALUES (4, 'Superior');
 
 
 --
@@ -185,7 +185,7 @@ ALTER TABLE ONLY claseinstits
 
 UPDATE instits 
 SET    etp_estado_id  = 1
-      ,claseinstit_id = 4
+      ,claseinstit_id = 2
 WHERE  activo = 1
 AND    EXISTS (SELECT 1
                FROM   planes 
@@ -200,7 +200,7 @@ AND    NOT EXISTS
 -- FP = 1037
 
 UPDATE instits 
-SET    claseinstit_id = 3
+SET    claseinstit_id = 1
 WHERE  activo = 1
 AND    EXISTS (SELECT 1
                FROM   planes 
@@ -215,7 +215,7 @@ AND    NOT EXISTS
 -- SEC TEC = 1321
 
 UPDATE instits 
-SET    claseinstit_id = 2
+SET    claseinstit_id = 3
 WHERE  activo = 1
 AND    EXISTS (SELECT 1
                FROM   planes 
@@ -230,7 +230,7 @@ AND    NOT EXISTS
 -- SUP TEC = 672
 
 UPDATE instits 
-SET    claseinstit_id = 1
+SET    claseinstit_id = 4
 WHERE  activo = 1
 AND    EXISTS (SELECT 1
                FROM   planes 
@@ -261,18 +261,18 @@ AND    NOT EXISTS
                  WHERE  planes.instit_id = instits.id
                  AND    planes.oferta_id <> 3
                  AND    planes.oferta_id <> 2);
-/*
+
 UPDATE instits
 SET    etp_estado_id = 1
-      ,observacion = ''
-WHERE upper(observacion) LIKE '%CON PROGRAMA DE ETP%';
-*/
-/*
+      ,observacion = replace(observacion, 'INSTITUCIÓN CON PROGRAMA DE ETP.', '')
+WHERE upper(observacion) LIKE '%INSTITUCIÓN CON PROGRAMA DE ETP.%';
+
 UPDATE instits
 SET    etp_estado_id = 1
-      ,observacion = trim( leading 'INSTITUCIÓN CON PROGRAMA DE ETP' from observacion)
-WHERE upper(observacion) LIKE '%CON PROGRAMA DE ETP%';
-*/
+      ,observacion = replace(observacion, 'INSTITUCIÓN CON PROGRAMA DE ETP', '')
+WHERE upper(observacion) LIKE '%INSTITUCIÓN CON PROGRAMA DE ETP%';
+
+
 
 -- SUP TEC y IT --> SUP TEC
 
@@ -295,4 +295,10 @@ AND    NOT EXISTS
                  AND    planes.oferta_id <> 2);
 
 
+DROP TABLE z_depuracion_deptoyloc;
+DROP TABLE z_depura_nroinstit;
+
+-- SE HABILITO NULL EN LA TABLA PLANES EN EL CAMPO SECTOR YA QUE SE ENCUENTRA FUERA DE USO
+
+ALTER TABLE planes ALTER COLUMN sector DROP NOT NULL;
 
