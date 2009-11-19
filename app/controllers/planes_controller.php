@@ -67,7 +67,7 @@ class PlanesController extends AppController {
 			$this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$this->institData['Instit']['id'] );
 		}		
 
-		$ciclos = $this->Plan->dame_max_ciclos_por_instits($id);
+		$ciclos = $this->Plan->dame_ciclos_por_instits($id);
 
 		if (isset($ciclos)){
 			if (!(in_array(date("Y"),$ciclos))){
@@ -119,7 +119,7 @@ class PlanesController extends AppController {
         
         if(isset($this->data['Anio']['ciclo_id'])){
 			if((int)$this->data['Anio']['ciclo_id'] != 0){
-				$this->Plan->setMaxCiclo($this->data['Anio']['ciclo_id']); 
+				//$this->Plan->setMaxCiclo($this->data['Anio']['ciclo_id']); 
 				$this->paginate['conditions']['Anio.ciclo_id'] = $this->data['Anio']['ciclo_id'];
 			} else {
 				$this->Plan->setTraerUltimaAct(true);
@@ -130,7 +130,7 @@ class PlanesController extends AppController {
 		{        
 			if(isset($this->passedArgs['Anio.ciclo_id'])){
 				if((int)$this->passedArgs['Anio.ciclo_id'] != 0){
-					$this->Plan->setMaxCiclo($this->passedArgs['Anio.ciclo_id']);
+					//$this->Plan->setMaxCiclo($this->passedArgs['Anio.ciclo_id']);
 					$this->paginate['conditions']['Anio.ciclo_id'] = $this->passedArgs['Anio.ciclo_id'];
 				} else {
 					// si viene por aca es porque clickeo en la solapa Todos.
@@ -142,7 +142,7 @@ class PlanesController extends AppController {
         	{
         		if(isset($ciclos)){
         			if((int)end($ciclos) != 0){
-						$this->Plan->setMaxCiclo(date("Y"));
+						//$this->Plan->setMaxCiclo(date("Y"));
 						$this->paginate['conditions']['Anio.ciclo_id'] = date("Y");
 						$url_conditions['Anio.ciclo_id'] = date("Y");
 					}	

@@ -37,7 +37,7 @@ class Plan extends AppModel {
 	var $hasMany = array(
 			'Anio' => array('className' => 'Anio',
 								'foreignKey' => 'plan_id',
-								'dependent' => false,
+								'dependent' => true,
 								'conditions' => '',
 								'fields' => '',
 								'order' => array('ciclo_id DESC','etapa_id ASC, anio ASC'),
@@ -107,14 +107,14 @@ class Plan extends AppModel {
 		'duracion_semanas' => array(
 			'number' => array(
 				'rule' => VALID_NUMBER,
-				'required' => true,
+				'required' => false,
 				'allowEmpty' => true,
 				'message' => 'Debe ingresar un valor numérico para las semanas.'
 			
 			),
 			'between' => array(
 				'rule' => array('between','0','9'),
-				'required' => true,
+				'required' => false,
 				'allowEmpty' => true,
 				'message' => 'La duración no puede ser un valor tan alto'
 			
@@ -189,12 +189,9 @@ class Plan extends AppModel {
 				$groupFields = $selectFields;
 			}				
 
-	        if ($this->maxCiclo != "" )
-	        {
+	        if ($this->maxCiclo != "" ){
 	        	// le concateno al ultimo detalle del group el HAVING
 	        	$groupFields = array_merge($groupFields ,array('1" HAVING max("Anio"."ciclo_id") = ' . $this->maxCiclo));
-	        	//$groupFields[count($groupFields)-1] = $groupFields[count($groupFields)-1].'HAVING max("Anio"."ciclo_id") = "' . $this->maxCiclo;
-	        	//$groupFields = array_merge($groupFields, array(" HAVING max(\"Anio\".\"ciclo_id\") = " . $this->maxCiclo));
 	        }	
 	        
 	        $extra           = array('group' => $groupFields,'fields' => $selectFields);  	                    
@@ -236,9 +233,8 @@ class Plan extends AppModel {
 				$groupFields = $selectFields;
 			}				
 	        
-	        if ($this->maxCiclo != "" )
-	        {
-	        	//$groupFields = array_merge($groupFields ,array('1" HAVING max("Anio"."ciclo_id") = ' . $this->maxCiclo));
+	        if ($this->maxCiclo != "" ){
+	        	$groupFields = array_merge($groupFields ,array('1" HAVING max("Anio"."ciclo_id") = ' . $this->maxCiclo));
 	        }	
 	        
 	        $extra      = array('group' => $groupFields,'fields' => $selectFields);
@@ -347,6 +343,28 @@ class Plan extends AppModel {
 		return $vec;
   	}
 
+  	function dame_ciclos_por_instits($instit_id){
+  		
+		$vec = array();
+
+		$sql  = " SELECT ciclo_id ";
+		$sql .= " FROM   planes p ";
+		$sql .= "       ,anios  a ";
+		$sql .= " WHERE  p.instit_id = " . $instit_id;
+		$sql .= " AND    a.plan_id   = p.id ";
+		$sql .= " GROUP  BY ciclo_id ";
+		$sql .= " ORDER  BY ciclo_id ASC";
+		
+		$data = $this->query($sql);
+
+		foreach ($data as $line){
+			$vec[$line[0]['ciclo_id']] = $line[0]['ciclo_id']; 
+		}
+
+		return $vec;
+  	}
+  	
+  	
   	function dameSectoresPorInstitucion($instit_id,$ciclo_id){
 
 		$vec = array();
