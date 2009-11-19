@@ -4,16 +4,9 @@
 Buscador Histórico de CUE
 </h1>
 <br>
-<p>
-Esta opción de búsqueda permite visualizar las instituciones a las que  
-ha sido asociado un determinado CUE a lo largo del tiempo. Soporta búsquedas por
-coincidencia parcial (Ej: Si se ingresa "118" el programa encuentra todos los CUEs que contengan "118" en cualquier posición).
-También permite incluir el anexo (Ej: "60011800").
-<br>
-
-</p>
-
-<br>
+<p><cite>
+Esta opción de búsqueda permite visualizar las instituciones que utilizan, o han utilizado, un determinado CUE.
+</cite></p>
 
 <br>
 
