@@ -17,7 +17,8 @@ class PlanesController extends AppController {
 	 * @param $id ID de institucion
 	 */
 	function index($id = null){
-
+		
+		
 		$v_plan_matricula = array();
 		
 		if (isset($this->passedArgs['Instit.id']))
@@ -28,17 +29,17 @@ class PlanesController extends AppController {
 		if (isset($this->data['Instit']['id']))
 		{
 			$id = $this->data['Instit']['id'];
-		}
+		}	
 
-		if (!$id)
+		if (empty($id))
 		{
-			$this->Session->setFlash(__('Institución Inválida.', true));
-			$this->redirect(array('controller'=>'Instits','action'=>'view/'.$id));
+			$this->Session->setFlash(__('La institución pasada como parámetro es inválida.', true));
+			$this->redirect('/pages/home');
 		}
+		
 		
 		/* *************************** */
 		/*  Si tiene ticket pendiente  */
-		/* *************************** */
 
 		$data_ticket = $this->Plan->Instit->Ticket->dameTicketPendiente($id);
 		$ticket_id = isset($data_ticket['Ticket']['id'])?$data_ticket['Ticket']['id']:0;
@@ -47,40 +48,40 @@ class PlanesController extends AppController {
 		$action = ($this->Auth->user('role')=='admin' || $this->Auth->user('role')=='editor' || $this->Auth->user('role')=='desarrollo')?'edit':'view';
 		$this->set('action', $action);
 
-		/* ******************************** */
 		/*  Fin Si tiene ticket pendiente * */
 		/* ******************************** */
 		
-		$this->institData = $this->Plan->Instit->read(null,$id);
-		if($this->institData)
+		//seteo el ID a la Instit
+		$this->Plan->Instit->id = $id;
+		
+		$this->Plan->Instit->read();
+		
+		if(!empty($this->Plan->Instit->data))
 		{
 			$cont = 0;
-			foreach ($this->institData['Plan'] as $p):
+			foreach ($this->Plan->Instit->data['Plan'] as $p):
 				$v_plan_matricula[$cont] = $this->Plan->Anio->matricula_del_plan($p['id']);
 				$v_plan_matricula[$cont]['ciclo'] = $this->Plan->Anio->ciclo_lectivo_matricula_del_plan($p['id']);
 				$cont++;
 			endforeach;
 			
 			$this->set('sumatoria_matriculas',$this->Plan->Instit->dameSumatoriaDeMatriculasPorOferta($id));
-			$this->set('planes',$this->institData);	
+			$this->set('planes',$this->Plan->Instit->data);	
 			$this->set('v_plan_matricula',$v_plan_matricula);
-			$this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$this->institData['Instit']['id'] );
-		}		
+			$this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$id );
+		}	
 
 		$ciclos = $this->Plan->dame_ciclos_por_instits($id);
 
-		if (isset($ciclos)){
+		if (!empty($ciclos)){
 			if (!(in_array(date("Y"),$ciclos))){
 				$ciclos = array_merge($ciclos,array(date('Y') => date('Y')));
 				sort($ciclos);
 			}			
 		}
-		
-		$this->Plan->recursive = 0;
 
 		/* ************************************ */
 		/* * Filtros de la búsqueda de Planes * */
-		/* ************************************ */
 
 		if(isset($this->data['Plan']['oferta_id'])){
 			if((int)$this->data['Plan']['oferta_id'] != 0){
@@ -150,17 +151,18 @@ class PlanesController extends AppController {
         	}
 		}	
 		
-		$ofertas = $this->Plan->dameOfertaPorInstitucion($id,isset($url_conditions['Anio.ciclo_id'])?$url_conditions['Anio.ciclo_id']:'');
+		$ofertas  = $this->Plan->dameOfertaPorInstitucion($id,isset($url_conditions['Anio.ciclo_id'])?$url_conditions['Anio.ciclo_id']:'');
 		$sectores = $this->Plan->dameSectoresPorInstitucion($id,isset($url_conditions['Anio.ciclo_id'])?$url_conditions['Anio.ciclo_id']:'');
 		$this->set(compact('ofertas','ciclos','sectores'));
 		
+		
+		
 		/* ********************************* */
-        /* * Paginador y seteos a la vista * */
-        /* ********************************* */
+        /* * Paginador 					   * */
 
 		if (!isset($this->passedArgs['sort'])){
 			$this->passedArgs['sort'] = 'Plan.oferta_id';
-			$this->passedArgs['direction'] = 'asc';
+			$this->passedArgs['direction'] = 'desc';
 		}
 		
 		$this->Plan->setAsociarAnio(true);
@@ -168,11 +170,12 @@ class PlanesController extends AppController {
         $url_conditions['Instit.id'] = $id; // para que no pierda el id de instit en los ordenamientos y la paginacion
 		$data = $this->paginate();
 		for($i=0; $i< count($data); $i++):
-		//$mat = $this->Plan->dameMatriculaDeCiclo($data[$i]['Plan']['id'],$data[$i]['calculado']['max_ciclo']);
-		$mat = $this->Plan->dameMatriculaDeCiclo($data[$i]['Plan']['id'],$data[$i]['Anio']['ciclo_id']);
-		$data[$i]['calculado']['sum_matricula'] = $mat;
+			$mat = $this->Plan->dameMatriculaDeCiclo($data[$i]['Plan']['id'],$data[$i]['Anio']['ciclo_id']);
+			$data[$i]['calculado']['sum_matricula'] = $mat;
 		endfor;
-		//debug($data);
+		
+
+		$this->set('datoUltimoCiclo', $this->Plan->dameMatriculaUltimoCiclo($id));
 		$this->set('planesRelacionados', $data);
 		$this->set('url_conditions', $url_conditions);
 	}
