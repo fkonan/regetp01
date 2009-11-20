@@ -34,8 +34,8 @@ $paginator->options(array('url' => $url_conditions));
 	<? $class = ($sort == 'cue')?'marcada':'';?>
 	<li class="<?= $class?>"><?php echo $paginator->sort('cue');?></li>
 	
-	<? $class = ($sort == 'jurisdiccion_id')?'marcada':'';?>
-	<li class="<?= $class?>"><?php echo $paginator->sort('Jurisdicción','jurisdiccion_id');?></li>	
+	<? $class = ($sort == 'Jurisdiccion.name')?'marcada':'';?>
+	<li class="<?= $class?>"><?php echo $paginator->sort('Jurisdicción','Jurisdiccion.name');?></li>	
 	
 	<? $class = ($sort == 'Departamento.name')?'marcada':'';?>
 	<li class="<?= $class?>"><?php echo $paginator->sort('Departamento','Departamento.name');?></li>

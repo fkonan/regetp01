@@ -101,7 +101,7 @@
 		<div class="boton-para-div-oculto"><a href="#VerDenominacion" onclick="$('search-denominacion').toggle()">por su nombre</a></div>
 		<div id="search-denominacion"  class="search-div" style="display: none">
 			<?php 
-			echo $form->input('tipoinstit_id', array(	'empty' => 'Todas','type'=>'select',
+			echo $form->input('tipoinstit_id', array(	'empty' => 'Todos','type'=>'select',
 														'label'=>'Tipo de Establecimiento','after'=> '<br /><cite>Para activar este campo, seleccione primero una jurisdicción</cite>'));		
 
 			echo $ajax->observeField('jurisdiccion_id',

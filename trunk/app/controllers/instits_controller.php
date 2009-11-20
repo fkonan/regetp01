@@ -5,6 +5,10 @@ class InstitsController extends AppController {
 	var $name = 'Instits';
 	var $helpers = array('Html','Form','Ajax');
 	var $paginate = array('order'=>array('Instit.cue' => 'asc'),'limit'=>'10');
+	
+	var $cacheAction = array(
+		'search_form' => 86400
+	);
 
 	function beforeFilter(){
 		parent::beforeFilter();

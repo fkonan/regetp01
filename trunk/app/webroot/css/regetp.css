@@ -1047,7 +1047,8 @@ div.code-coverage-results span.result-good {
 */
 .div_observacion{
 	margin-top: 10px; 
-	
+	overflow-x:hidden;
+	overflow-x:auto;	
 	height: 85px;
 	padding-left: 68px;
 	/* background-image: url("images/warning.jpg"); */

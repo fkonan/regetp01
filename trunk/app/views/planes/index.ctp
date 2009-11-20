@@ -83,6 +83,7 @@ $cue_instit = $planes['Instit']['cue'].$anexo;
 						$primer_columna = false;
 					endif;
 					echo "<td>".$sumatoria_matriculas['totales'][$ciclo][$oferta['abrev']]['total_matricula']."</td>";
+					
 					endforeach;
 				?></tr><?php 
 				endforeach;
@@ -142,43 +143,43 @@ $cue_instit = $planes['Instit']['cue'].$anexo;
 		<?php
 		$i = 0;
 		if ((isset($planesRelacionados)) && (count($planesRelacionados) > 0)){
-		foreach ($planesRelacionados as $plan):
-			$class = null;
-			if ($i++ % 2 == 0) {
-				$class = ' class="altrow"';
-			}
-		?>
-				<tr id="fila_plan_<?= $plan['Plan']['id'];?>" <?php echo $class;?> 
-					onclick="window.location='<?= $html->url(array('controller'=> 'Planes', 'action'=>'view/'.$plan['Plan']['id']))?>'"
-					onmouseout="$('fila_plan_<?= $plan['Plan']['id'];?>').removeClassName('fila_marcada')" 
-					onmouseover="$('fila_plan_<?= $plan['Plan']['id'];?>').addClassName('fila_marcada')">
-		
-				<td>
-					<?php echo $plan['Oferta']['abrev']; ?>
-				</td>
-				<td>
-					<?php echo $plan['Plan']['nombre']; ?>
-				</td>
-				<td>
-					<?php echo $plan['Sector']['name']; ?>
-				</td>
-				<td>
-					<?php 
-					$ciclo_actualizacion = '';
-					if($url_conditions['Anio.ciclo_id'] ==0){
-						$ciclo_actualizacion = " (".$plan['Anio']['ciclo_id'].")";
-					}
-					if ($plan['calculado']['sum_matricula'] > 0){ 					
-						echo $plan['calculado']['sum_matricula'].$ciclo_actualizacion; 
-					} else {
-						echo "0";
-					}
-						?>
-				</td>
-				<td class="actions">
-					<?php echo $html->link(__('Ver', true), array('action'=>'view', $plan['Plan']['id'])); ?>
-				</td>
-			</tr>
+			foreach ($planesRelacionados as $plan):
+				$class = null;
+				if ($i++ % 2 == 0) {
+					$class = ' class="altrow"';
+				}
+			?>
+					<tr id="fila_plan_<?= $plan['Plan']['id'];?>" <?php echo $class;?> 
+						onclick="window.location='<?= $html->url(array('controller'=> 'Planes', 'action'=>'view/'.$plan['Plan']['id']))?>'"
+						onmouseout="$('fila_plan_<?= $plan['Plan']['id'];?>').removeClassName('fila_marcada')" 
+						onmouseover="$('fila_plan_<?= $plan['Plan']['id'];?>').addClassName('fila_marcada')">
+			
+					<td>
+						<?php echo $plan['Oferta']['abrev']; ?>
+					</td>
+					<td>
+						<?php echo $plan['Plan']['nombre']; ?>
+					</td>
+					<td>
+						<?php echo $plan['Sector']['name']; ?>
+					</td>
+					<td>
+						<?php 
+						$ciclo_actualizacion = '';
+						if($url_conditions['Anio.ciclo_id'] ==0){
+							$ciclo_actualizacion = " (".$plan['Anio']['ciclo_id'].")";
+						}
+						if ($plan['calculado']['sum_matricula'] > 0){ 					
+							echo $plan['calculado']['sum_matricula'].$ciclo_actualizacion; 
+						} else {
+							echo "0";
+						}
+							?>
+					</td>
+					<td class="actions">
+						<?php echo $html->link(__('Ver', true), array('action'=>'view', $plan['Plan']['id'])); ?>
+					</td>
+				</tr>
 		<?php endforeach;
 		} else {
 		?>
@@ -189,7 +190,12 @@ $cue_instit = $planes['Instit']['cue'].$anexo;
 			</tr>
 			<tr>
 				<td colspan=4>
-					<p class='msg-atencion'>La Instituci&oacute;n no presenta actualizaciones para este año</p>
+					<?php $año_actual = date('Y',strtotime('now'));?>
+					<?php if($datoUltimoCiclo['max_ciclo'] != $año_actual && $current_ciclo == $año_actual):?>
+						<p class='msg-atencion'>La Instituci&oacute;n no presenta actualizaciones para este año</p>
+					<?php else:?>
+						<p class='msg-atencion'>No se obtuvieron resultados</p>
+					<?php endif;?>
 				</td>
 			</tr>
 		<?php	

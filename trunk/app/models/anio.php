@@ -83,13 +83,6 @@ class Anio extends AppModel {
 	);
 
 	
-/********************************************************************
-	 * 
-	 * 
-	 *  RequestAction
-	 * 
-	 * 
-	 */
 	
 	/**
 	 * Me devuelve un array con el total de matriculas del plan
@@ -113,6 +106,7 @@ class Anio extends AppModel {
 			$ciclo_aux = $temp[0]['Anio']['ciclo_id'];
 		} 
 		
+		//reordeno el vector para que quede de una manera linda para recorrerlo con foreach en la vista
 		foreach($temp as $v){
 			//como el array vine ordenado por cicl_id descendiente, si leo otro ciclo y 
 			//es distinto es porque estoy en un año anterir, por lo tanto 

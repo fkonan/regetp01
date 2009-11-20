@@ -68,7 +68,8 @@ Event.observe(window, "keypress", function(e){
         
 		echo $form->button('Guardar',array('onclick'=>'$("InstitDepurarForm").submit()'));
 
-		echo $form->input('tipoinstit_id',array('label'=>'Seleccione Jurisdicción',
+		echo $form->input('tipoinstit_id',array('label'=>'Seleccione Tipo de Establecimiento',
+												'after'=>'este combo lo incorporamos porque Ramiro dijo que aún faltaban depurar alguos tipos de Establecimientos',
 												  'type'=>'select',
 												  'options'=>$tipoinstit
 		));

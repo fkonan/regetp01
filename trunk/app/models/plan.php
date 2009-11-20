@@ -310,29 +310,33 @@ class Plan extends AppModel {
 		return true;
   	}
 	
+  	
+  	
+  	//TODO refactoring, deberia devolver simplemente el ciclo y no un array
 	/**
   	 * Esta funcion recibe el id de institucion y 
   	 * devuelve la última actualización (ciclo) que presenten sus planes
   	 *
   	 * @param $instit_id
-  	 * @return Array $vec
+  	 * @return Array $vec[ciclo_id][ciclo_id]
   	 */
   	
   	function dame_max_ciclos_por_instits($instit_id){
   		
 		$vec = array();
 
-		$sql  = " SELECT ciclo_id ";
-		$sql .= " FROM   planes p ";
-		$sql .= "       ,(        ";
-        $sql .= "         SELECT plan_id, max(ciclo_id) AS ciclo_id  ";
-        $sql .= "         FROM   anios AS an      ";    
-        $sql .= "         GROUP BY plan_id        ";
-        $sql .= "        ) max_ciclo              ";
-		$sql .= " WHERE p.id = max_ciclo.plan_id  ";
-		$sql .= " AND   p.instit_id = " . $instit_id;
-		$sql .= " GROUP BY ciclo_id ";
-		$sql .= " ORDER BY ciclo_id ASC";
+		$sql  = " SELECT ciclo_id
+					 FROM   planes p,
+					 	(        
+       					SELECT plan_id, max(ciclo_id) AS ciclo_id 
+        				 FROM   anios AS an      
+        					GROUP BY plan_id        
+        				) max_ciclo              
+					WHERE p.id = max_ciclo.plan_id  
+					AND   p.instit_id = $instit_id
+					GROUP BY ciclo_id
+					ORDER BY ciclo_id ASC
+				";
 		
 		$data = $this->query($sql);
 
@@ -365,25 +369,57 @@ class Plan extends AppModel {
   	}
   	
   	
+  	
+  	/**
+  	 * Me devuelve el ultimo ciclo y la matricula del ultimo ciclo de la institucion
+  	 * @param integer $instit_id
+  	 * @return array $vec[max_ciclo] y 
+  	 * 				 $vec[matricula]
+  	 */
+  	function dameMatriculaUltimoCiclo($instit_id){
+  		$sql = "
+  		SELECT max(a.ciclo_id) as max_ciclo, sum(a.matricula) as matricula
+		FROM   planes p
+		LEFT JOIN anios a ON (a.plan_id = p.id) 
+		WHERE 
+		p.instit_id = $instit_id
+		";
+  		
+  		$data = $this->query($sql);
+  		return $data[0][0];
+  	}
+  	
+  	
+  	
+  	//TODO faltaria hacer el test de esto
+  	/**
+  	 * Me devuelve los sectores que abarca la institucion
+  	 * @param integer $instit_id ID de la institucion
+  	 * @param integer $ciclo_id (ciclo del año 2006, 2007, etc)
+  	 * @return array $sectores[id][abrev]
+  	 */
   	function dameSectoresPorInstitucion($instit_id,$ciclo_id){
 
 		$vec = array();
 		
-  		$sql  = " SELECT s.id   AS id   ";
-  		$sql .= "       ,s.name AS name ";
-  		$sql .= " FROM   planes   p     ";
-		$sql .= "       ,sectores s     ";
-		$sql .= "       ,anios    a     ";
-		$sql .= " WHERE p.sector_id = s.id  ";
-		$sql .= " AND   p.instit_id = " . $instit_id;
-		$sql .= " AND   p.id        = a.plan_id ";
-
-		if ((int)$ciclo_id > 0){
-			$sql .= " AND a.ciclo_id = " . $ciclo_id;
-		}			
 		
-		$sql .= " GROUP BY s.id, s.name ";
-		$sql .= " ORDER BY s.name ASC";
+		$sql = "
+						SELECT s.id   AS id  , s.name AS name
+						FROM   planes   p 
+						LEFT JOIN sectores s ON (p.sector_id = s.id)
+						LEFT JOIN anios a ON (a.plan_id = p.id)
+						WHERE
+						p.instit_id = $instit_id";
+		
+  		if ((int)$ciclo_id > 0){
+			$sql .= " 	AND a.ciclo_id = $ciclo_id";
+		}
+		
+		$sql .= "
+						GROUP BY s.id, s.name 
+						ORDER BY s.name ASC
+		";
+		
 		
 		$data = $this->query($sql);
 
@@ -398,32 +434,40 @@ class Plan extends AppModel {
 		return $vec;
   	}
 
-  	function dameOfertaPorInstitucion($instit_id,$ciclo_id){
-
-		$vec = array();
-		
-  		$sql  = " SELECT s.id    AS id    ";
-  		$sql .= "       ,s.abrev AS abrev ";
-  		$sql .= " FROM   planes   p       ";
-		$sql .= "       ,ofertas  s       ";
-		$sql .= "       ,anios    a       ";
-		$sql .= " WHERE p.oferta_id = s.id  ";
-		$sql .= " AND   p.instit_id = " . $instit_id;
-		$sql .= " AND   p.id = a.plan_id ";
-		
+  	
+  	//TODO faltaria hacer el test de esto
+  	/**
+  	 * Me devuelve las ofertas que tiene la institucion pasada como parametro
+  	 * @param integer $instit_id ide de la institucion en cuestion
+  	 * @param integer $ciclo_id id del ciclo que estoy buscando(2006, 2007. 2008, ¿2009?)
+  	 * @return array $oferta[id][abrev]
+  	 */
+  	function dameOfertaPorInstitucion($instit_id,$ciclo_id = 0){
+  		$sql = "  		
+  					SELECT o.id AS id , o.abrev AS abrev
+					FROM   planes   p
+					LEFT JOIN ofertas o ON (o.id = p.oferta_id)
+					LEFT JOIN anios    a ON (a.plan_id = p.id)
+					WHERE  
+					p.instit_id = $instit_id
+				";
+  		
 		if ((int)$ciclo_id > 0){
 			$sql .= " AND a.ciclo_id = " . $ciclo_id;
-		}			
+		}					
 
-		$sql .= " GROUP BY s.id, s.abrev ";
-		$sql .= " ORDER BY s.abrev ASC";
-		
-		$data = $this->query($sql);
+		$sql .= " 		
+  					GROUP BY o.id, o.abrev 
+					ORDER BY o.abrev ASC
+				";
 
+	
+  		$data = $this->query($sql);
+		$vec = array();
 		foreach ($data as $line){
 			$vec[$line[0]['id']] = $line[0]['abrev'];
 		}
-
+		
 		return $vec;
   	}
 
