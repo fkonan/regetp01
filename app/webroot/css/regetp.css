@@ -512,6 +512,10 @@ label {
         font-size: 100%;
         padding-right: 10px;
 }
+.label-checkbox {
+        display: inline;
+
+}
 input, textarea {
         clear: both;
         display: block;
@@ -1299,11 +1303,8 @@ li.selected    {
 	background-color: beige ;
 }
 
-
-
-
 .tabs-content{
-	clear: both;
+ 	float: left; 
 	width:100%;
 	margin-top: -1px; 
 }

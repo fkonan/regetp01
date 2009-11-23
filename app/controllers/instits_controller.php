@@ -6,9 +6,6 @@ class InstitsController extends AppController {
 	var $helpers = array('Html','Form','Ajax','Cache');
 	var $paginate = array('order'=>array('Instit.cue' => 'asc'),'limit'=>'10');
 	
-	
- 	
-
 	function beforeFilter(){
 		parent::beforeFilter();
 		$this->rutaUrl_for_layout[] =array('name'=> 'Buscador','link'=>'/Instits/search_form' );
@@ -264,6 +261,7 @@ class InstitsController extends AppController {
             if(isset($this->data['Instit']['cue'])){
             	 if($this->data['Instit']['cue'] != '' || $this->data['Instit']['cue'] != 0 )
             	 {
+            	 	$this->data['Instit']['cue'] = trim($this->data['Instit']['cue']);
             	 	$is_cue_valido = $this->Instit->isCUEValid($this->data['Instit']['cue']);
             	 	
             	 	if($is_cue_valido < 1){
