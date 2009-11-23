@@ -114,7 +114,7 @@ echo $html->css('edit_form',false);
                                    
            // TIPO DE INSTITUCION                  
 		//echo $form->input('tipoinstit_id', array('empty' => 'Todas','disabled'=>true,'type'=>'select','label'=>'Tipo De Institución','after'=> '<br /><cite>Para activar este campo, seleccione primero una jurisdicción</cite>'));
-		echo $form->input('tipoinstit_id', array('empty' => 'Seleccione','label'=>'Tipo de Establecimiento','after'=> '<br /><cite>Seleccione primero una jurisdicción, asi selecciona los tipos de institución posibles</cite>'));
+		echo $form->input('tipoinstit_id', array('empty' => 'Seleccione','label'=>'Tipo de Establecimiento','after'=> '<br /><cite>Seleccione primero una jurisdicción, así selecciona los tipos de institución posibles</cite>'));
 		echo $ajax->observeField('jurisdiccion_id',
                                    array(  	'url' => '/tipoinstits/ajax_select_form_por_jurisdiccion',
 		                                   	'update'=>'InstitTipoinstitId',
@@ -309,7 +309,7 @@ echo $html->css('edit_form',false);
 		/**
 		 *    OBSERVACION
 		 */	
-		echo $form->input('observacion');
+		echo $form->input('observacion', array('label'=>'Observación'));
 		
 		
 		

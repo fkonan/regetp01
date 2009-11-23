@@ -69,7 +69,7 @@ Event.observe(window, "keypress", function(e){
 		echo $form->button('Guardar',array('onclick'=>'$("InstitDepurarForm").submit()'));
 
 		echo $form->input('tipoinstit_id',array('label'=>'Seleccione Tipo de Establecimiento',
-												'after'=>'este combo lo incorporamos porque Ramiro dijo que aún faltaban depurar alguos tipos de Establecimientos',
+												'after'=>'<br>Este combo lo incorporamos porque Ramiro dijo que aún faltaban depurar alguos tipos de establecimientos',
 												  'type'=>'select',
 												  'options'=>$tipoinstit
 		));
@@ -91,7 +91,7 @@ Event.observe(window, "keypress", function(e){
 											'readonly'=>true
 		));		
 			
-		echo $form->input('anio_creacion', array('readonly'=>true));
+		echo $form->input('anio_creacion', array('readonly'=>true, 'label'=>'Año Creación'));
 		
 		
 		/**
@@ -135,7 +135,7 @@ Event.observe(window, "keypress", function(e){
 		/**
 		 *    OBSERVACION
 		 */	
-		echo $form->input('observacion', array('readonly'=>true));
+		echo $form->input('observacion', array('readonly'=>true, 'label'=>'Observación'));
 			//agrego esto para que no se puedan imprimir mas de 100 caracteres en el textarea
 			?>
 			
@@ -152,7 +152,19 @@ Event.observe(window, "keypress", function(e){
 		));
 		
 	?>
-<?php echo $form->end('Guardar');?>
+	<?php echo $form->submit('Guardar', array('style'=>' display: block;
+													        width: 100px;
+													        vertical-align: bottom;
+													        margin-top: 7px;
+													        margin-left: 4px;
+													        border-color: #CEE3F6;
+													        background-color: #DBEBF6;
+													        color: #045FB4;
+													        font-weight: bold;'
+												)
+								);
+		?>
+<?php echo $form->end();?>
 
 </div>
 
