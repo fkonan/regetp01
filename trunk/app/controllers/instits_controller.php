@@ -3,12 +3,11 @@ require("models/querystmp.php");
 class InstitsController extends AppController {
 
 	var $name = 'Instits';
-	var $helpers = array('Html','Form','Ajax');
+	var $helpers = array('Html','Form','Ajax','Cache');
 	var $paginate = array('order'=>array('Instit.cue' => 'asc'),'limit'=>'10');
 	
-	var $cacheAction = array(
-		'search_form' => 86400
-	);
+	
+ 	
 
 	function beforeFilter(){
 		parent::beforeFilter();
@@ -177,7 +176,10 @@ class InstitsController extends AppController {
 	 * que sera impreso por pantalla
 	 *
 	 */
-	function search_form(){		
+	function search_form(){	
+		$this->cacheAction = '1 day';
+		
+		
 		if (!empty($this->data)) {
 			$this->redirect('search');
 		}

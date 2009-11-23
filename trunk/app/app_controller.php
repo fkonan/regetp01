@@ -79,9 +79,8 @@ class AppController extends Controller {
 	}	
 	
 	
-	function isAuthorized() {
-//debug($this->passedArgs[0]);exit();
-
+	function isAuthorized() 
+	{
 	  switch ($this->Auth->user('role')):
 	  
 	    // usuarios con mas privilegios en el sistema

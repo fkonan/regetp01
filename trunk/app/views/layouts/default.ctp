@@ -70,8 +70,12 @@
 				<?  echo $this->renderElement('boxSaludo'); ?>
 				<?  echo $this->renderElement('boxInstituciones'); ?>
 				<?  echo $this->renderElement('boxCuadros'); ?>
-				<?  echo $this->renderElement('boxInformacion'); ?>						
+				<?  echo $this->renderElement('boxInformacion'); ?>	
+				
+				<cake:nocache>					
 				<?  echo $this->renderElement('boxTickets'); ?>
+				</cake:nocache>
+				
 				<?  echo $this->renderElement('boxAdmin'); ?>	
 				<?  echo $this->renderElement('boxLogin'); ?>
 				
