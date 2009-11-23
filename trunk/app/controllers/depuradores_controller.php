@@ -136,8 +136,7 @@ class DepuradoresController extends AppController {
 	 */
 	function sectores($jur_id=0){		
 		if (!empty($this->data)) 
-		{
-				
+		{				
 				if(isset($this->data['Instit']['jurisdiccion_id']))
 				{
 					$jur_id = $this->data['Instit']['jurisdiccion_id'];
@@ -202,9 +201,6 @@ class DepuradoresController extends AppController {
 		$this->set('subsectores',$subsectores);
 	}
 	
-
-	
-	
 	function clases_y_etp()
 	{		
 		if (!empty($this->data)) 
@@ -254,7 +250,5 @@ class DepuradoresController extends AppController {
 		$this->set('falta_depurar', $falta_depurar);
 		$this->set(compact('etp_estados', 'claseinstits','planes','tipoinstit'));
 	}
-
-
 }
 ?>

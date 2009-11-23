@@ -96,29 +96,29 @@ $cue_instit = $planes['Instit']['cue'].$anexo;
 <div class="tabs">
 	<h2>Listado de Ofertas</h2>
 	<div class="tabs-list">
-			<?php 
-				$current_ciclo = $url_conditions['Anio.ciclo_id'];
-				foreach ($ciclos as $c):?>
-					<?php 
-					$instit_id = $planes['Instit']['id'];
-					
-					if($current_ciclo == $c) {
-						$clase = 'tab-activa';
-					}else {
-						$clase = 'tab-inactiva';
-					}
-					?>
-				<span class="<?= $clase?>"><?php echo $html->link($c,"/planes/index/$instit_id/Anio.ciclo_id:$c");?></span>
-			<?php endforeach;?>
-			
+		<?php 
+			$current_ciclo = $url_conditions['Anio.ciclo_id'];
+			foreach ($ciclos as $c):?>
 				<?php 
-				if($current_ciclo == 0) {
-							$clase = 'tab-activa';
-				}else{
+				$instit_id = $planes['Instit']['id'];
+				
+				if($current_ciclo == $c) {
+					$clase = 'tab-activa';
+				}else {
 					$clase = 'tab-inactiva';
 				}
 				?>
-				<span class="<?= $clase?>"><?php echo $html->link('Ver Todos',"/planes/index/$instit_id/Anio.ciclo_id:0");?></span>
+			<span class="<?= $clase;?>"><?php echo $html->link($c,"/planes/index/$instit_id/Anio.ciclo_id:$c");?></span>
+		<?php endforeach;?>
+		
+			<?php 
+			if($current_ciclo == 0) {
+				$clase = 'tab-activa';
+			}else{
+				$clase = 'tab-inactiva';
+			}
+			?>
+			<span class="<?= $clase;?>"><?php echo $html->link('Ver Todos',"/planes/index/$instit_id/Anio.ciclo_id:0");?></span>
 	</div>
 		
 	<div class="tabs-content">	
@@ -149,10 +149,11 @@ $cue_instit = $planes['Instit']['cue'].$anexo;
 					$class = ' class="altrow"';
 				}
 			?>
-					<tr id="fila_plan_<?= $plan['Plan']['id'];?>" <?php echo $class;?> 
+				<tr id="fila_plan_<?= $plan['Plan']['id'];?>" <?php echo $class;?> 
 						onclick="window.location='<?= $html->url(array('controller'=> 'Planes', 'action'=>'view/'.$plan['Plan']['id']))?>'"
 						onmouseout="$('fila_plan_<?= $plan['Plan']['id'];?>').removeClassName('fila_marcada')" 
-						onmouseover="$('fila_plan_<?= $plan['Plan']['id'];?>').addClassName('fila_marcada')">
+						onmouseover="$('fila_plan_<?= $plan['Plan']['id'];?>').addClassName('fila_marcada')"
+				>
 			
 					<td>
 						<?php echo $plan['Oferta']['abrev']; ?>
@@ -174,7 +175,7 @@ $cue_instit = $planes['Instit']['cue'].$anexo;
 						} else {
 							echo "0";
 						}
-							?>
+						?>
 					</td>
 					<td class="actions">
 						<?php echo $html->link(__('Ver', true), array('action'=>'view', $plan['Plan']['id'])); ?>
@@ -201,18 +202,18 @@ $cue_instit = $planes['Instit']['cue'].$anexo;
 		<?php	
 		} ?>
 		</table>
+		<div id="paginator_prev_next_links">
+		<?php	
+			echo $paginator->prev('« Anterior',null, null, array('class' => 'disabled'));
+			echo " | ".$paginator->numbers(array('modulus'=>'9'))." | ";
+			echo $paginator->next(' Siguiente »', null, null, array('class' => 'disabled'));
+		?> 
+		</div>
 	</div>	
-</div>	
-	
+</div>		
 </div>
 	
-<div id="paginator_prev_next_links">
-<?php	
-	echo $paginator->prev('« Anterior',null, null, array('class' => 'disabled'));
-	echo " | ".$paginator->numbers(array('modulus'=>'9'))." | ";
-	echo $paginator->next(' Siguiente »', null, null, array('class' => 'disabled'));
-?> 
-</div>
+
 
 <?php endif;?>
 

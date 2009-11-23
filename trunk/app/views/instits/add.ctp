@@ -21,7 +21,7 @@ echo $html->css('edit_form',false);
 		/**
 		 *    ACTIVO
 		 */	
-		echo $form->input('activo',array('type'=> 'checkbox','checked'=>true,'label'=>'Institución ingresada al RFIETP'));		
+		echo $form->input('activo',array('type'=> 'checkbox','checked'=>true,'label'=>array('text'=>'Institución ingresada al RFIETP', 'class'=>'label-checkbox')));		
 		
 		
 		/**
@@ -44,7 +44,7 @@ echo $html->css('edit_form',false);
 		/**
 		 *    ES ANEXO
 		 */	
-		echo $form->input('esanexo',array('type'=> 'checkbox','label'=>'Es Anexo'));
+		echo $form->input('esanexo',array('type'=> 'checkbox','label'=>array('text'=>'Es Anexo', 'class'=>'label-checkbox')));
 
 		
 		/**
