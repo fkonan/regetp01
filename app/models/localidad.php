@@ -39,6 +39,11 @@ class Localidad extends AppModel {
 	 */
 	function con_depto_y_jurisdiccion($tipo = 'all', $jurisdiccion_id = 0)
 	{
+		 $localidades = Cache::read("localidades_con_depto_y_juirisdicion_id_$jurisdiccion_id-tipo_$tipo");
+		 if ($localidades !== false) {
+			 return $localidades;
+		 }
+		
 		//inicializacion de la variable del return
 		$localidades = array(); 
 		
@@ -97,6 +102,8 @@ class Localidad extends AppModel {
 			$localidades = $loc_aux;
          }
          
+         
+         Cache::write("localidades_con_depto_y_juirisdicion_id_$jurisdiccion_id-tipo_$tipo", $localidades);
          return $localidades;
          
 	}
