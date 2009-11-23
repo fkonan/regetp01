@@ -24,8 +24,9 @@
 													        border-color: #CEE3F6;
 													        background-color: #DBEBF6;
 													        color: #045FB4;
-													        font-weight: bold;'
-												)
+													        font-weight: bold;',
+ 												'onClick' => 'enviar()'
+											)
 								);
 		?>
 		
@@ -210,7 +211,7 @@
 		
 	function enviar()
 	{
-	  	if($('search-ubicacion').visible() == false){
+		if($('search-ubicacion').visible() == false){
 	  		$('DepartamentoId').value = '';
 	  		$('LocalidadId').value = '';
 	  		$('InstitDireccion').value = '';
