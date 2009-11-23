@@ -59,11 +59,6 @@ class Departamento extends AppModel {
 	 */
 	function con_jurisdiccion($tipo = 'all' , $jurisdiccion_id = 0){
 		
-	 	$deptos = Cache::read("departamentos_con_jurisdiccion_$jurisdiccion_id-tipo_$tipo");
-		 if ($deptos !== false) {
-			 return $deptos;
-		 }
-		 		
 		
 		$this->recursive = 0;
 		
@@ -89,8 +84,7 @@ class Departamento extends AppModel {
 			endforeach;
 	        $deptos = $d_aux;
          }
-         
-         $deptos = Cache::write("departamentos_con_jurisdiccion_$jurisdiccion_id-tipo_$tipo", $deptos);
+        
          // si no puse ni 'all', ni 'list', entonces que me devolverá un array vacio
          return $deptos;
 	}

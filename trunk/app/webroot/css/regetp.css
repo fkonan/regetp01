@@ -1257,7 +1257,7 @@ li.selected    {
 
 .tabs-list A{ 
 	text-decoration: none;
-	padding:3px;
+	\padding:3px;
 	display: block;
 	text-align: center;
 }
