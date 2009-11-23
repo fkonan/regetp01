@@ -78,6 +78,8 @@ class PlanesController extends AppController {
 				$ciclos = array_merge($ciclos,array(date('Y') => date('Y')));
 				sort($ciclos);
 			}			
+		} else {
+			$ciclos = array(date('Y') => date('Y'));
 		}
 
 		/* ************************************ */
