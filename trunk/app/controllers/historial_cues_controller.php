@@ -114,6 +114,12 @@ class HistorialCuesController extends AppController {
 				$array_condiciones['CUE']     = $this->data['HistorialCues']['cue'];
 				$url_conditions['cue']        = $this->data['HistorialCues']['cue'];
 			}
+			else
+			{
+				$mensaje = "<BR>Ingrese un valor numérico entre 6 (Ej: 600118) y 9 dígitos (CUE con anexo. Ej: 500021600).";
+            	$this->Session->setFlash($mensaje,'default',array('class' => 'flash-warning'));
+            	$this->redirect('search_form');
+			}
 		}
 
 		if(isset($this->passedArgs['cue'])){	

@@ -10,7 +10,7 @@ if ($session->check('Auth.User')){
 	<ul>
 		<li><? echo $html->link("Nueva Institución","/Instits/add") ?></li>
 		<li><? echo $html->link("Descargas","/Queries/descargar_queries") ?></li>
-		<li><? echo $html->link("Depurar Sectores","/depuradores/sectores") ?></li>
+		<li><? echo $html->link("Depurar Sectores","/depuradores/sectores_por_sectores") ?></li>
 		<li><? echo $html->link("Depurar Tipo Instits","/depuradores/clases_y_etp") ?></li>
 	</ul>
 			
