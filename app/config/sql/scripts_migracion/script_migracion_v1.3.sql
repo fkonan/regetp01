@@ -299,6 +299,6 @@ DROP TABLE z_depuracion_deptoyloc;
 DROP TABLE z_depura_nroinstit;
 
 -- SE HABILITO NULL EN LA TABLA PLANES EN EL CAMPO SECTOR YA QUE SE ENCUENTRA FUERA DE USO
-
-ALTER TABLE planes ALTER COLUMN sector DROP NOT NULL;
+-- Posiblemente en el futuro el campo sector se borre.
+-- ALTER TABLE planes ALTER COLUMN sector DROP NOT NULL;
 
