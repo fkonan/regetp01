@@ -1267,16 +1267,14 @@ li.selected    {
 }
 
 .tab-activa{
-	background-color: #F2F2F2 ;
+	/*background-color: #F2F2F2 ;*/
+	background-image: url("images/solid_grey_tab-100x23.png");
+	background-repeat: no-repeat;
 	font-weight: bolder;
 	width: 100px;
 	color: white;
 	float: left;
 	clear: none;
-	border-top: 1px solid black;
-	border-left: 1px solid black;
-	border-right: 1px solid black;
-	border-bottom: 1px solid #F2F2F2;
 	margin-right: -1px;
 }
 .tab-activa A{
@@ -1286,11 +1284,11 @@ li.selected    {
 
 .tab-inactiva{
 	width: 100px;
-	background-color: silver;
+	background-image: url("images/darkgrey_tab-100x23.png");
+	background-repeat: no-repeat;
 	color: black;
 	float: left;
 	clear: none;
-	border: 1px solid black;
 	margin-right: -1px;
 }
 
@@ -1300,7 +1298,9 @@ li.selected    {
 }
 
 .tab-inactiva A:HOVER{
-	background-color: beige ;
+	
+	background-image: url("images/grey_tab-100x23.png");
+	background-repeat: no-repeat;
 }
 
 .tabs-content{
@@ -1309,6 +1309,32 @@ li.selected    {
 	margin-top: -1px; 
 }
 
+
+.tabla-con-bordes-celeste{
+	border-right-color: #DBEBF6; 
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-left-color: #DBEBF6; 
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-bottom-color: #DBEBF6; 
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+}
+
+.tabla-con-bordes-celeste TH{
+	background-color: #F0F7FC;
+}
+
+.tabla-con-bordes-celeste A{
+	background-color: transparent;
+}
+
+.tabla-con-bordes-celeste A:HOVER{
+	color: #045FB4;
+	text-decoration: underline;
+	background-color: transparent;
+}
 
 
 
