@@ -39,10 +39,11 @@ body {
 p {
 	padding-bottom: 0.8em;
 }
-a {
+a, a:visited, a:active {
 	color: #003d4c;
 	text-decoration: underline;
 	font-weight: bold;
+	outline: none;
 }
 a:hover {
 	color: #003d4c;
