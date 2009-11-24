@@ -1148,6 +1148,7 @@ color: green;
 	background-image: url("images/warning.jpg");
 	background-repeat: no-repeat;
 	background-position:5px 50%;
+	min-height: 60px;
 }
 .flash-warning H1{
 	color: #660000;
