@@ -221,10 +221,6 @@ class Plan extends AppModel {
 			$this->bindModel(array('hasOne' => array('Anio' => array('className'  => 'Anio','foreignKey' => 'plan_id',),),));
 	        $field = $this->getPagFields();
 
-	        //$selectFields = array_merge($field , array("max(\"Anio\".\"ciclo_id\") AS Calculado__max_ciclo"));
-			//$selectFields = array_merge($field,array('Anio.ciclo_id'));
-	        //$groupFields  = array_merge($field,$selectFields);
-
 			if ($this->traerUltimaAct){
 				$selectFields = array_merge($field,array("max(\"Anio\".\"ciclo_id\") AS \"Anio__ciclo_id\""));
 	        	$groupFields  = $field;
@@ -273,6 +269,10 @@ class Plan extends AppModel {
 	function setTraerUltimaAct($ult){
 		$this->traerUltimaAct = $ult;	
 	}   
+	
+	function getTraerUltimaAct(){
+		return $this->traerUltimaAct;	
+	}
 	
 	function dameMatriculaDeCiclo($plan_id,$ciclo){
 		$tot = $this->Anio->find('all',array(
