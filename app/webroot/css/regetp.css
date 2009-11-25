@@ -61,7 +61,7 @@ a img {
 
 h1, h2, h3, h4 {
 	font-weight: normal;
-	font-family: font-family: Garamond, serif;
+	font-family: Garamond, serif;
 }
 
 h1 {
@@ -322,9 +322,11 @@ text-transform:uppercase;
 	border-style: solid; 
 }
 
-.mini_tabla th{
+/*
+.mini_tabla TH{
 	width: 66px;
 }
+*/
 
 /************************************************************************
 *
@@ -347,7 +349,7 @@ CAPTION{
 
 th {
 	background: #f2f2f2;
-	border:1px solid #bbb;
+	border: 1px solid #bbb;
 	border-top: 1px solid #f0f7fc;
 	border-left: 1px solid #f0f7fc;
 	text-align: center;
@@ -370,7 +372,6 @@ table tr td {
 	text-align: center;
 	vertical-align: top;
 }
-
 
 table tr.altrow2 th {
 	background-color:#FFFFFF;
@@ -1221,7 +1222,7 @@ font-family:Arial,Helvetica,sans-serif;
 	background: #DBEBF6;
 }
 
-.boton-para-div-oculto A: focus{
+.boton-para-div-oculto A:focus{
 	background-color: red;
 }
 
