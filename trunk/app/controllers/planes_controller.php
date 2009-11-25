@@ -18,7 +18,6 @@ class PlanesController extends AppController {
 	 */
 	function index($id = null){
 		
-		
 		$v_plan_matricula = array();
 		
 		if (isset($this->passedArgs['Instit.id']))
@@ -53,7 +52,6 @@ class PlanesController extends AppController {
 		
 		//seteo el ID a la Instit
 		$this->Plan->Instit->id = $id;
-		
 		$this->Plan->Instit->read();
 		
 		if(!empty($this->Plan->Instit->data))
@@ -163,10 +161,13 @@ class PlanesController extends AppController {
         /* * Paginador 					   * */
 
 		if (!isset($this->passedArgs['sort'])){
-			$this->passedArgs['sort'] = 'Plan.oferta_id';
-			$this->passedArgs['direction'] = 'desc';
+			if ($this->Plan->getTraerUltimaAct()){
+				$this->passedArgs['order'] = 'Plan.oferta_id desc, Sector.name asc, Anio__ciclo_id desc';
+			} else {
+				$this->passedArgs['order'] = 'Plan.oferta_id desc, Sector.name asc';
+			}
 		}
-		
+
 		$this->Plan->setAsociarAnio(true);
         $this->paginate['conditions']['Instit.id'] = $id;
         $url_conditions['Instit.id'] = $id; // para que no pierda el id de instit en los ordenamientos y la paginacion
