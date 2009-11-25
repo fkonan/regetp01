@@ -116,7 +116,7 @@ class HistorialCuesController extends AppController {
 			}
 			else
 			{
-				$mensaje = "<BR>Ingrese un valor numérico entre 6 (Ej: 600118) y 9 dígitos (CUE con anexo. Ej: 500021600).";
+				$mensaje = "<H1>CUE inválido</H1>Ingrese un valor numérico entre 6 (Ej: 600118) y 9 dígitos (CUE con anexo. Ej: 500021600).";
             	$this->Session->setFlash($mensaje,'default',array('class' => 'flash-warning'));
             	$this->redirect('search_form');
 			}
