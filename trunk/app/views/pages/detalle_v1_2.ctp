@@ -3,6 +3,19 @@
 
 <br>
 <ul >
+
+	<li>
+    <b>Diseño</b>
+  </li>
+  <ul type="circle">
+    <li>Se modificó el encabezado.</li>
+    <li>Se modificó el menú de navegación.</li>
+    <li>Se agregaron solapas para la navegación de los datos históricos de la matrícula en el listado de ofertas de la institución.</li>
+  </ul>
+  
+   <br>
+
+
   <li>
     <b>Buscador</b>
   </li>
@@ -16,7 +29,7 @@
     <b>Instituciones</b>
   </li>
  	<ul type="circle">
-    <li>Se agregaron 2 datos nuevos con el fin de ordenar el Registro Federal de Instituciones de ETP y optimizar y mejorar las estadísticas generadas en la Unidad de Información.</li>
+    <li>Se agregaron 2 datos nuevos con el fin de ordenar el Registro Federal de Instituciones de ETP, optimizar y mejorar las estadísticas generadas en la Unidad de Información.</li>
   	<ul>
   		<li>Tipo de Institución: Es una clasificación de la Institución que indica el nivel formativo que ofrece. Las opciones que puede tomar éste campo son: "de Nivel Superior", "de Nivel Secundario", "de Formación Profesional", "Itinerario"</li>
   		<li>Relación de ETP: Institución con programa de ETP o Institución de ETP.</li>
@@ -32,7 +45,25 @@
     <li>Cuando se va a la oferta de una Institución, por defecto aparecen solo los datos actualizados al ciclo lectivo actual. Hay un navegador por años desde donde podemos visualizar los datos históricos. También se pueden ver todos los datos (de todos los años al mismo tiempo) permitiendo tener una visión mas general.</li>
   	</ul>
   	
+  	<ul type="circle">
+    <li>El listado de oferta aparece ordenado por: Tipo de Oferta, Sector y Fecha de última actualización (solo cuando se hace click en "ver todos").</li>
+  	</ul>
+  	
   </ul>
+  
+  
+  
+  
+	<li>
+    <b>Optimización</b>
+  </li>
+  <ul type="circle">
+    <li>Se implementó Caché en las páginas clave del sistema para obtener un mejor rendimiento y velocidad de respuesta del servidor.</li>
+  </ul>
+  
+   <br>
+   
+   
   
   <br><br>
   

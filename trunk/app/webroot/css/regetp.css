@@ -1279,6 +1279,7 @@ li.selected    {
 	float: left;
 	clear: none;
 	margin-right: -1px;
+	font-size:14px;
 }
 .tab-activa A{
 	color:  #045FB4;

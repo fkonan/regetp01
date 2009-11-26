@@ -63,7 +63,7 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
 		
 		<?php 
 			if($instit['Instit']['claseinstit_id']){	?>
-			<dt><?php __('Tipo de Institución'); ?></dt>
+			<dt><?php __('Tipo de Institución de ETP'); ?></dt>
 			<dd>
 				<?php echo $instit['Claseinstit']['name']; ?>
 				&nbsp;

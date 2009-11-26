@@ -57,7 +57,7 @@
 		 */			
 							
 		echo $form->input('claseinstit_id',array(
-											'label'=>'Tipo de Institución',
+											'label'=>'Tipo de Institución de ETP',
 											'empty'=>'Seleccione una clase'
 											));
 										
@@ -79,7 +79,7 @@
 		
 			// DEPARTAMENTO
 		$meter = '<span class="ajax_update" id="ajax_indicator_dpto" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
-		echo $form->input('departamento_id', array('options'=> $departamentos, 'empty' => 'Seleccione','type'=>'select','label'=>'Departamento ('.$this->data['Departamento']['name'].')','after'=> $meter.'<br /><cite>Seleccione primero una jurisdicción.</cite>'));                                   
+		echo $form->input('departamento_id', array('options'=> $departamentos, 'empty' => 'Seleccione','type'=>'select','label'=>'Departamento','after'=> $meter.'<br /><cite>Seleccione primero una jurisdicción.</cite>'));                                   
         echo $ajax->observeField('jurisdiccion_id',
                                    array(  	'url' => '/departamentos/ajax_select_departamento_form_por_jurisdiccion',
 		                                   	'update'=>'InstitDepartamentoId',
@@ -88,7 +88,7 @@
 		                                   	'onChange'=>true
                                    ));
 			//LOCALIDAD
-        echo $form->input('localidad_id', array('options'=> $localidades,'empty' => 'Seleccione','type'=>'select','label'=>'Localidad ('.$this->data['Localidad']['name'].')','after'=> '<br /><cite>Seleccione primero un Departamento.</cite>'));                                   
+        echo $form->input('localidad_id', array('options'=> $localidades,'empty' => 'Seleccione','type'=>'select','label'=>'Localidad','after'=> '<br /><cite>Seleccione primero un Departamento.</cite>'));                                   
         echo $ajax->observeField('InstitDepartamentoId',
                                    array(  	'url' => '/localidades/ajax_select_localidades_form_por_departamento',
 		                                   	'update'=>'InstitLocalidadId',

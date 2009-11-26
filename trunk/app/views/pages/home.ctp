@@ -31,7 +31,7 @@ endif;
 Desde su puesta en funcionamiento en junio del presente año el nuevo sistema RFIETP se 
 encuentra en permanente actualización y mejora, tanto del 
 contenido de información de la base de datos como de la aplicación que permite 
-su gestión. En esa línea de trabajo a partir del 14 de Noviembre se ha instalado 
+su gestión. En esa línea de trabajo a partir del 4 de Diciembre se ha instalado 
 la versión 1.3 del sistema.
 </p>
 <p>
@@ -40,11 +40,22 @@ funcionamiento. El listado no es exhaustivo y se orienta principalmente a destac
 que pueden facilitar el uso del sistema desde la perspectiva de un usuario de consulta habitual.
 </p>
 <p>
-Un listado completo de las modificaciones, más avanzado, se puede <?php echo $html->link('consultar aquí.','/pages/detalle_v1_2');?>
+Un listado completo de las modificaciones realizadas en esta última versión, puede encontrarlas <?php echo $html->link('haciendo click aquí.','/pages/detalle_v1_2');?>
 </p>
 
 <p>
 <ul>
+
+
+<li>
+    <b>Diseño</b>
+  </li>
+  <ul type="circle">
+    <li>Nuevo aspecto gráfico de la web en general.</li>
+  </ul>
+  
+   <br>
+
 <li><b>Buscador</b> 
 	<ul>
 		<li>Se agregó opción de búsqueda libre por nombre, pudiendo ahora introducir por ejemplo: "escuela sarmiento", o "politécnico 702 Rawson".</li>
@@ -53,12 +64,12 @@ Un listado completo de las modificaciones, más avanzado, se puede <?php echo $ht
     	<li>Se mejoraron las búsquedas por localidad y departamento.</li>
     	<li>Se ordenaron las opciones de búsqueda en diferentes categorías: "por su ubicación", "por su nombre", "por su oferta" y "por otras características".</li>
     	<li>Se modificó la búsqueda por CUE para que detecte CUEs por coincidencia parcial (Ej: Si se ingresa "118" el programa encuentra todos los CUEs que contengan "118" en cualquier posición).</li>
-    	<li>Se agregó la posibilidad de buscar CUE con Anexo. (Ej: 2"60011800")</li>
+    	<li>Se agregó la posibilidad de buscar CUE con Anexo. (Ej: "60011800")</li>
 	</ul>
 </li>
 <br>
 <li><b>Cuadros de Resumen</b>
- 	<ul><li>Se muestra de manera online un cuadro con la cantidad de ofertas por jurisdicción.</li></ul>
+ 	<ul><li>Se muestra de manera online el primer cuadro estadístico.</li></ul>
 </li>
 <br>
 <li><b>Datos de Institución</b>

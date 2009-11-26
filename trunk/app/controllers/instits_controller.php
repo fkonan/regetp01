@@ -97,6 +97,7 @@ class InstitsController extends AppController {
 		
 		if (!empty($this->data)) 
 		{		
+			/******* Guardo en el historico de CUES si cambió */
 			$cueanterior = array();
 			if ($datos_viejos = $this->Instit->cambioCue($this->data)){
 				$cueanterior['HistorialCue']['cue'] 	  = $datos_viejos['Instit']['cue'];
