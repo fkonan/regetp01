@@ -1,5 +1,4 @@
 <?php
-require("models/querystmp.php");
 class InstitsController extends AppController {
 
 	var $name = 'Instits';
@@ -777,44 +776,6 @@ class InstitsController extends AppController {
 		$this->autoRender = false; // para uqe no muestre la vista
 		
 		die($this->Instit->convertir_para_busqueda_avanzada("pepino"));
-	}
-
-	function cuadro_instits_por_juris(){		
-		// Query id 2
-		$sql = "select 
-					j.name as Nombre, 
-					i.cue ,i.anexo , 
-					a.matricula, 
-					a.anio as Año, 
-					a.ciclo_id as Ciclo, 
-					a.secciones, 
-					oz.name as Oferta
-				from instits i 
-				left join planes p on (p.instit_id = i.id ) 
-				left join anios a on a.plan_id = p.id
-				left join jurisdicciones j on j.id = i.jurisdiccion_id
-				left join ofertas oz on p.oferta_id = oz.id
-				where i.activo = 1  
-				ORDER BY j.name , i.cue";
-		
-		$queryTmp = new Querystmp();
-		$queryTmp->setSql($sql);
-		
-		if (isset($this->passedArgs['viewAll']) && $this->passedArgs['viewAll'] == 'true'){
-			$data = $queryTmp->getData();
-			$viewAll = false;		
-		} else {	
-			$data = $this->paginate($queryTmp);
-			$viewAll = true;
-		}			
-
-		$cols = array_keys($data['0']['0']); 
-		$this->set('cols', $cols);
-        $url_conditions['query.id'] = 2;
-		$this->set('queries', $data);
-		$this->set('url_conditions', $url_conditions);
-		$this->set('descripcion', "Consulta de Instituciones por jurisdicción y oferta");
-		$this->set('viewAll', $viewAll);
 	}
 }
 ?>
