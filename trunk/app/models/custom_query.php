@@ -29,8 +29,20 @@ class CustomQuery extends AppModel{
 		return $this->query($sql);
 	}	
 	
+	
+	//TODO deprecated
 	function getData(){
-		return $this->query($this->sql);
+		$this->query();
+	}
+	
+	
+	function query($sql = null){
+		if(!empty($sql)){
+			return parent::query($sql);
+		}
+		else{
+			return parent::query($this->sql);
+		}
 	}
 	
 }
