@@ -67,7 +67,7 @@ echo $html->css('edit_form',false);
 		 *    Clase de Instituicion
 		 */									
 		echo $form->input('claseinstit_id',array(
-										'label'=>'Tipo de Institución',
+										'label'=>'Tipo de Institución de ETP',
 										'empty'=>'Seleccione una clase'
 										));
 										
