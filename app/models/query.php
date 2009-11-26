@@ -10,7 +10,6 @@ class Query extends AppModel {
 		'query' => array('notempty')
 	);
 	
-	
 	/**
 	 * Me lista todas las categorias que existen en la Queries
 	 * si se le pasa como parametro un "*" me trae todas

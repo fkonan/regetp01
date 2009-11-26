@@ -1,10 +1,11 @@
 <?php
-require("models/querystmp.php");
+
 class QueriesController extends AppController {
 
 	var $name = 'Queries';
 	var $helpers = array('Html', 'Form','Ajax');
 	var $components = array('RequestHandler');
+	var $uses = array('Query','CustomQuery');
 
 	function index() {
 		$this->Query->recursive = 0;
@@ -144,14 +145,13 @@ class QueriesController extends AppController {
 		$this->rutaUrl_for_layout[] =array('name'=> 'Queries','link'=>'/Instits/add' );
 		$res = $this->Query->findById($id);
 
-		$queryTmp = new Querystmp();
-		$queryTmp->setSql($res['Query']['query']);
+		$this->CustomQuery->setSql($res['Query']['query']);
 		
 		if (isset($this->passedArgs['viewAll']) && $this->passedArgs['viewAll'] == 'true'){
-			$data = $queryTmp->getData();
+			$data = $this->CustomQuery->getData();
 			$viewAll = false;		
 		} else {	
-			$data = $this->paginate($queryTmp);
+			$data = $this->paginate($this->CustomQuery);
 			$viewAll = true;
 		}			
 

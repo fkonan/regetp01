@@ -1,16 +1,13 @@
 <?php
-App::import('Model');
-require("app_model.php");
-require("models/query.php");
 
-class Querystmp extends Query{
+class CustomQuery extends AppModel{
 	var $sql;
 	var $limit = 20;
+	var $useTable = false;
 	
 	function setSql($sql){
 		$this->sql = $sql;
 	}
-
 
 	function paginateCount($conditions, $recursive){
 
