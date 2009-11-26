@@ -8,6 +8,10 @@ class CustomQuery extends AppModel{
 	function setSql($sql){
 		$this->sql = $sql;
 	}
+	
+	function setLimit($l=20) {
+		$this->limit=$l;
+	}
 
 	function paginateCount($conditions, $recursive){
 
