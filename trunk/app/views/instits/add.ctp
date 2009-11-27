@@ -325,7 +325,7 @@ echo $html->css('edit_form',false);
 		if($force_save) {
 			//forzar al checkbox siempre
 			$this->data['Instit']['force_save'] = 0;
-			echo $form->input('force_save',array('type'=> 'checkbox','checked'=>false,'label'=>'Forzar guardado.'));
+			echo $form->input('force_save',array('type'=> 'checkbox','checked'=>false,'label'=>array('text'=>'Forzar guardado.', 'class'=>'label-checkbox')));
 		}
 	?>
 <?php echo $form->end('Guardar');?>

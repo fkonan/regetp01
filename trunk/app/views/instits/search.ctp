@@ -15,7 +15,7 @@ $paginator->options(array('url' => $url_conditions));
 			echo '- '.$key.': ';
 		?></dt><?
 		?><dd><?
-			echo $value;
+			echo $value."&nbsp";
 		?></dd><?
 	}
 	

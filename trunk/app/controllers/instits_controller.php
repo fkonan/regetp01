@@ -259,9 +259,9 @@ class InstitsController extends AppController {
 			 *     CUE
 			 */
             if(isset($this->data['Instit']['cue'])){
+            	 $this->data['Instit']['cue'] = trim($this->data['Instit']['cue']);
             	 if($this->data['Instit']['cue'] != '' || $this->data['Instit']['cue'] != 0 )
             	 {
-            	 	$this->data['Instit']['cue'] = trim($this->data['Instit']['cue']);
             	 	$is_cue_valido = $this->Instit->isCUEValid($this->data['Instit']['cue']);
             	 	
             	 	if($is_cue_valido < 1){
@@ -429,6 +429,7 @@ class InstitsController extends AppController {
 			 *     DIRECCION
 			 */
             if(isset($this->data['Instit']['direccion'])){
+            	$this->data['Instit']['direccion'] = trim($this->data['Instit']['direccion']);
 				if($this->data['Instit']['direccion'] != ''){
 					$this->paginate['conditions']['lower(to_ascii(Instit.direccion)) SIMILAR TO ?'] = array($this->Instit->convertir_para_busqueda_avanzada($this->data['Instit']['direccion']));
 					$array_condiciones['Domicilio'] = $this->data['Instit']['direccion'];			
@@ -436,7 +437,7 @@ class InstitsController extends AppController {
 				}
 			}
 			if(isset($this->passedArgs['direccion'])){	
-            			if($this->passedArgs['direccion'] != ''){
+            	if($this->passedArgs['direccion'] != ''){
 					$this->paginate['conditions']['lower(to_ascii(Instit.direccion)) SIMILAR TO ?'] = array($this->Instit->convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['direccion'])));
 					$array_condiciones['Domicilio'] = utf8_decode($this->passedArgs['direccion']);			
 					$url_conditions['direccion'] = utf8_decode($this->passedArgs['direccion']);
