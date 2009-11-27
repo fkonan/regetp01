@@ -47,6 +47,7 @@
 	
 </head>
 <body>
+	<cake:nocache>	
 	<script type="text/javascript">		
 		var mensajero = new Mensaje('mensajero');
 	</script>
@@ -54,10 +55,13 @@
 	<? if ($_SERVER['HTTP_HOST']=='localhost'){?>
 		<div style="background-color: red; height: 20px; text-align: center">MODO LOCALHOST</div>
 	<? }?>
+	</cake:nocache>
 	
 	<div id="container">	
+		<cake:nocache>	
 		<!-- DIV del mensajero, aca se van a mostrar mensajes AJAX, JS, etc -->
 		<div id="mensajero" style="display: none"></div>
+		</cake:nocache>
 	
 		
 		<div id="header" >
@@ -67,7 +71,11 @@
 		</div>
 		<div id="content">
 			<div id="menu">	
+				
+				<cake:nocache>	
 				<?  echo $this->renderElement('boxSaludo'); ?>
+				</cake:nocache>
+				
 				<?  echo $this->renderElement('boxInstituciones'); ?>
 				<?  echo $this->renderElement('boxCuadros'); ?>
 				<?  echo $this->renderElement('boxInformacion'); ?>	

@@ -10,6 +10,6 @@ echo $form->end('Entrar');
 ?>
 <br><br>
 <p>
-<b>Si usted no posee cuenta de usuario</b> debe solicitarla en la Unidad de Informacón, oficina 309. 
+<b>Si usted no posee cuenta de usuario</b> debe solicitarla en la Unidad de Información, oficina 311. 
 </p>
 

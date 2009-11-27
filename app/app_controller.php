@@ -159,7 +159,7 @@ class AppController extends Controller {
 		/*****
 		 * 			COSAS DISPONIBLES PARA ToDOS LOS USUARIOS
 		 ****-----------------------------------------------------******/
-		if ($this->name == 'Jurisdicciones' && $this->action == 'planofertajuris') {$llAuth = true;}
+		if ($this->name == 'Cuadros') {$llAuth = true;}
 				
 		
 		
