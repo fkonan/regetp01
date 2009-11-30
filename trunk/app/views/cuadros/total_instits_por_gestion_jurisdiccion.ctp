@@ -16,10 +16,23 @@
 
 
 <h2 style="clear:both;">Total de Instituciones de Educación Técnica Profesional ingresadas a la Base de Datos del Registro Federal de Instituciones de Educación Técnica Profesional (RFIETP) por ámbito de gestión según división político-territorial.</h2>
-<div align="center">
-<br>
 
+<div align="center">
 <table width="80%" cellpadding = "0" cellspacing = "0" summary="" style="border-style: solid; border-width: 1px; border-color: gray; ">
+
+<tr>
+	<th rowspan="2">División político-territorial</th>
+	<th rowspan="1" colspan="2">
+	 	Ámbito de Gestión
+	</th>
+	<th  rowspan="2">Total</th>
+</tr>
+<tr>
+	<th>Estatal</th>
+	<th>Privada</th>
+</tr>
+
+<!-- 
 <tr class="altrow2">
 	<?php foreach ($precols as $key=>$precol): 
 		$colspan = ($key==1)? "colspan=2":"";	
@@ -32,6 +45,8 @@
 	<th><?php echo $col;?></th>
 	<?php endforeach; ?>
 </tr>
+ -->
+ 
 <?php
 $i = 0;
 foreach ($queries as $query):
@@ -45,6 +60,7 @@ foreach ($queries as $query):
 	?>
 	<tr<?php echo $class;?>>
 	   <?php foreach($query[0] as $head=>$line): 
+	    $style = $style." border-right: solid silver 1px; border-bottom: solid silver 1px;  ";
 	   	if($head == 'División político-territorial') {
 	   		$style1 = $style.'text-align:left;"';
 	   	}
@@ -53,7 +69,7 @@ foreach ($queries as $query):
 	   	}
 	   ?>
 		<td <?php echo $style1?>>
-			<?php echo $line; ?>
+			<?php echo (is_numeric($line))?number_format($line, 0, ',', '.'):$line; ?>
 		</td>
 		<?php endforeach; ?>
 	</tr>
@@ -82,3 +98,6 @@ diferencias que pueden observarse con los informes trimestrales previamente pres
  Se incluyeron de forma diferenciada a las instituciones de ETP dependientes de Universidad Nacionales.
  </p>
  
+<p align="center">
+<a href="javascript:print();" class="btn-imprimir no-ver-para-imprimir ">Imprimir</a>
+</p>

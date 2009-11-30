@@ -1351,3 +1351,13 @@ li.selected    {
 }
 
 
+.btn-imprimir{
+	background-image: url("images/imprimir.gif");
+	background-repeat: no-repeat;
+	text-indent: 14px;
+	display: block;
+	height: 38px;
+	font-size: x-small;
+	width: 110px;
+	padding-top:11px;
+}
