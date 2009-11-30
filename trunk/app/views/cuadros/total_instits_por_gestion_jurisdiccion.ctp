@@ -1,8 +1,25 @@
-<h2>Total de Instituciones de Educación Técnica Profesional ingresadas a la Base de Datos del Registro Federal de Instituciones de Educación Técnica Profesional (RFIETP) por ámbito de gestión según división político-territorial.</h2>
+<style>
+/* ESTO ES PARA QUE NO ME IMPRIMA EL ENCABEZADO CUANDO MANDO A IMPRIMIR*/
+@media print
+  {
+	  #header {
+	   display: none;
+	  }
+  }
+</style>
+
+
+<div class="ver-solo-para-imprimir logos-header">
+				<?php echo $html->image('logo_me_09.JPG',array('style'=>'float:left; height: 80px;'));?>
+				<?php echo $html->image('logoinet1.gif',array('style'=>'float: right; height: 70px;'));?>
+</div>
+
+
+<h2 style="clear:both;">Total de Instituciones de Educación Técnica Profesional ingresadas a la Base de Datos del Registro Federal de Instituciones de Educación Técnica Profesional (RFIETP) por ámbito de gestión según división político-territorial.</h2>
 <div align="center">
 <br>
 
-<table width="80" cellpadding = "0" cellspacing = "0" summary="" style="border-style: solid; border-width: 1px; border-color: gray; ">
+<table width="80%" cellpadding = "0" cellspacing = "0" summary="" style="border-style: solid; border-width: 1px; border-color: gray; ">
 <tr class="altrow2">
 	<?php foreach ($precols as $key=>$precol): 
 		$colspan = ($key==1)? "colspan=2":"";	
@@ -45,6 +62,23 @@ foreach ($queries as $query):
 </div>
 
 <br>
-<cite style="font-size: 10px;"><u>Fuente</u>: INET-Ministerio de Educación. Unidad de información - Área Registro Federal de Instituciones de Educación Profecional. información al <?php echo date("d-m-Y");?></cite>
-<br><br>
-<cite style="font-size: 10px;"><u>Nota</u>: Desde Diciembre de 2007 se adoptó un nuevo criterio de clasificación de las instituciones de ETP ingresadas al Registro Federal de Instituciones de ETP. En los casos que la institución oferta más de un nivel de enseñanza se la categorizó de acuerdo al mayor nivel que brinda, de forma de evitar contabilizar un mismo establecimiento más de una vez. De ahí las diferencias que pueden observarse con los informes trimestrales previamente presentados.<br>Se incluyeron por otra parte de forma diferenciada a las instituciones de ETP dependientes de Universidad Nacionales.</cite>
+
+<p style="font-size: 10px;"><u>Fuente</u>: 
+INET-Ministerio de Educación. Unidad de información - 
+Área Registro Federal de Instituciones de Educación Profesional. 
+Información al <?php echo date("d-m-Y");?>
+</p>
+
+
+<p  style="font-size: 10px;"><u>Nota</u>: 
+<!--  
+/**** ESTO POR AHORA NO VA !!! porque el cuadro lo recortamos esperando a la normalizacion de clases de instits ***/
+Desde Diciembre de 2007 se adoptó un nuevo criterio de clasificación de las instituciones de ETP ingresadas al Registro 
+Federal de Instituciones de ETP. En los casos que la institución oferta más de un nivel de enseñanza se la categorizó de 
+acuerdo al mayor nivel que brinda, de forma de evitar contabilizar un mismo establecimiento más de una vez. De ahí las 
+diferencias que pueden observarse con los informes trimestrales previamente presentados.<br>
+ Se incluyeron por otra parte de forma diferenciada a las instituciones de ETP dependientes de Universidad Nacionales.
+ -->
+ Se incluyeron de forma diferenciada a las instituciones de ETP dependientes de Universidad Nacionales.
+ </p>
+ 

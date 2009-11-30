@@ -3,6 +3,8 @@ class Instit extends AppModel {
 
 	var $name = 'Instit';
 	var $asociarPlan = false;
+	
+	var $actsAs = array('Containable');
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array(

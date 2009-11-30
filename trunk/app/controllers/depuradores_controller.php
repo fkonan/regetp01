@@ -302,7 +302,7 @@ class DepuradoresController extends AppController {
 		$this->data['Instit']['nombre'] = $instit['Instit']['nombre_completo'];
 
 		$sectores = $this->Plan->Sector->find('list',array('order'=>'Sector.name'));
-		$sectores[0]="SIN DATOS";
+		$sectores[0]="TODOS";
 		
 		$this->set('sectores',$sectores);
 		$this->set('falta_depurar',$total);

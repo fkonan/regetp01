@@ -14,8 +14,8 @@ display: none;
 }
 
 #cuerpo {
-
-width:100%;
+	
+	\width: 21cm;
 }
 
 
@@ -24,6 +24,10 @@ width:100%;
 
 H1{
 	font-size: large;
+}
+
+H2{
+	font-size: medium;
 }
 
 A, A:VISITED{
@@ -40,6 +44,15 @@ a:hover {
 }
 
 
+.no-ver-para-imprimir{
+	display: none;
+}
+
+.ver-solo-para-imprimir{
+	display: block;
+}
+
+
 
 /************************************************************************
 *
@@ -53,7 +66,8 @@ table {
 	background-color: #fff;
 	color: #333;
 	margin-bottom: 10px;
-	width: 100%;
+	width: 98%;
+	\width: 18cm;
 }
 
 CAPTION{
@@ -99,3 +113,8 @@ table tr.altrow td {
 	background-color: #fcfcfc;
 }
 
+
+.logos-header{
+	display: block; 
+	width:754px;
+}
