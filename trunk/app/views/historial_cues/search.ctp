@@ -80,7 +80,7 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 	
 	<div id="paginator_prev_next_links">
 	<?php	
-		echo $paginator->prev('« Anterior',null, null, array('class' => 'disabled'));
+		echo $paginator->prev('« Anterior ',null, null, array('class' => 'disabled'));
 		echo " | ".$paginator->numbers(array('modulus'=>'13'))." | ";
 		echo $paginator->next(' Siguiente »', null, null, array('class' => 'disabled'));
 	?> 

@@ -59,7 +59,7 @@ foreach ($tickets as $ticket):
 
 <div id="paginator_prev_next_links">
 	<?php	
-		echo $paginator->prev('« Anterior',null, null, array('class' => 'disabled'));
+		echo $paginator->prev('« Anterior ',null, null, array('class' => 'disabled'));
 		echo " | ".$paginator->numbers(array('modulus'=>'9'))." | ";
 		echo $paginator->next(' Siguiente »', null, null, array('class' => 'disabled'));
 	?> 
