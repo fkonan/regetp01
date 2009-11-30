@@ -5,6 +5,7 @@ class InstitsController extends AppController {
 	var $helpers = array('Html','Form','Ajax','Cache');
 	var $paginate = array('order'=>array('Instit.cue' => 'asc'),'limit'=>'10');
 	
+	
 	function beforeFilter(){
 		parent::beforeFilter();
 		$this->rutaUrl_for_layout[] =array('name'=> 'Buscador','link'=>'/Instits/search_form' );

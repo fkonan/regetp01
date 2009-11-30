@@ -33,13 +33,10 @@
 	</title>
 	<?php
 		echo $html->meta('icon');
-		echo $html->css('regetp','stylesheet', array('media'=>'screen'));
-		//echo $html->css('printer');
+		echo $html->css('printer');
 		echo $html->css('printer','stylesheet', array('media'=>'print'));
 		
 		echo $javascript->link('prototype');
-		echo $javascript->link('scriptaculous-js-1.8.3/src/scriptaculous');
-		
 		echo $javascript->link('mensaje.class');
 		echo $javascript->link('ejecutar_en_head');
 		//echo $javascript->link('form_regetp_ria');
@@ -47,8 +44,7 @@
 	?>
 	
 </head>
-<body>
-	<cake:nocache>	
+<body style="">
 	<script type="text/javascript">		
 		var mensajero = new Mensaje('mensajero');
 	</script>
@@ -56,52 +52,22 @@
 	<? if ($_SERVER['HTTP_HOST']=='localhost'){?>
 		<div style="background-color: red; height: 20px; text-align: center">MODO LOCALHOST</div>
 	<? }?>
-	</cake:nocache>
 	
-	<div id="container">	
-		<cake:nocache>	
+	<div>	
 		<!-- DIV del mensajero, aca se van a mostrar mensajes AJAX, JS, etc -->
 		<div id="mensajero" style="display: none"></div>
-		</cake:nocache>
 	
 		
-		<div id="header" >
+		<div style="background-color: #F0F7FC; height: 60px; padding-top: 20px; text-align: center; border-bottom: 3px solid #DBEBF6">
 			<h1>
 				<?php echo $html->link(__('Registro Federal de Instituciones de Educación Técnico Profesional (RFIETP)', true), '/pages/home'); ?>
 			</h1>	
 		</div>
-		<div id="content">
-			<div id="menu">	
-				
-				<cake:nocache>	
-				<?  echo $this->renderElement('boxSaludo'); ?>
-				</cake:nocache>
-				
-				<?  echo $this->renderElement('boxInstituciones'); ?>
-				<?  echo $this->renderElement('boxCuadros'); ?>
-				<?  echo $this->renderElement('boxInformacion'); ?>	
-				
-				<cake:nocache>					
-				<?  echo $this->renderElement('boxTickets'); ?>
-				</cake:nocache>
-				
-				<?  echo $this->renderElement('boxAdmin'); ?>	
-				<?  echo $this->renderElement('boxLogin'); ?>
-				
-				
-				<h1><?= __('Soporte Técnico')?></h1>
-				<ul>
-					<li><?= $html->link('Contacto','/pages/contacto'); ?></li>
-				</ul>	
-				
-				<div id="menu-footer"></div>			
-			</div>
-			
-			<div id="cuerpo">
-				<?  echo $this->renderElement('rutaUrl', array("ruta" => $rutaUrl_for_layout)); ?>
+		<div>
+			<div>
 				<?php $session->flash(); ?>
-				<? $session->flash('auth');?>
-				<?php echo $content_for_layout; ?>
+				<? $session->flash('auth'); ?>
+				<?php echo $content_for_layout;?>
 			</div>
 		</div>
 		<div id="footer">
