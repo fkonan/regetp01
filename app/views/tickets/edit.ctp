@@ -14,7 +14,7 @@ if(isset($script)){
 		echo $form->input('Modificado', array('value'=>date('d/m/Y - H:i',strtotime($this->data['Ticket']['modified'])).' Hs','readonly'=>true));				
 		echo $form->input('observacion', array('label'=>'Observación'));
 		
-		echo $form->input('estado',array('type'=> 'checkbox','checked'=>false,'label'=>'Resuelto.'));
+		echo $form->input('estado',array('type'=> 'checkbox','checked'=>false,'label'=>array('text'=>'Resuelto.', 'class'=>'label-checkbox')));
 	?>
 	</fieldset>
 <?php echo $form->end('Guardar');?>
