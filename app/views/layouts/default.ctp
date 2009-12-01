@@ -94,8 +94,10 @@
 					<li><?= $html->link('Contacto','/pages/contacto'); ?></li>
 				</ul>	
 				
-				<div id="menu-footer"></div>			
+						
 			</div>
+			
+			<div id="menu-footer"></div>	
 			
 			<div id="cuerpo">
 				<?  echo $this->renderElement('rutaUrl', array("ruta" => $rutaUrl_for_layout)); ?>
@@ -103,7 +105,9 @@
 				<? $session->flash('auth');?>
 				<?php echo $content_for_layout; ?>
 			</div>
+		
 		</div>
+		
 		<div id="footer">
 			<?php echo $html->link(
 					$html->image('cake.power.gif', array('alt'=> __("CakePHP: the rapid development php framework", true), 'border'=>"0")),
