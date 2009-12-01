@@ -415,14 +415,16 @@ class InstitsController extends AppController {
             if(isset($this->data['Instit']['nombre'])){
 				if($this->data['Instit']['nombre'] != ''){
 					$this->paginate['conditions']['to_ascii(lower(Instit.nombre)) SIMILAR TO ?'] = array($this->Instit->convertir_para_busqueda_avanzada($this->data['Instit']['nombre']));
-					$array_condiciones['Nombre'] = $this->data['Instit']['nombre'];
+					$nombre_del_campo = (empty($array_condiciones['Nombre']))?'Nombre':'Nombre del Estab.';
+					$array_condiciones[$nombre_del_campo] = $this->data['Instit']['nombre'];
 					$url_conditions['nombre'] = $this->data['Instit']['nombre'];			
 				}
             }
 			if(isset($this->passedArgs['nombre'])){	
             	if($this->passedArgs['nombre'] != ''){
 					$this->paginate['conditions']['to_ascii(lower(Instit.nombre)) SIMILAR TO ?'] = array($this->Instit->convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['nombre'])));
-					$array_condiciones['Nombre'] = utf8_decode($this->passedArgs['nombre']);
+					$nombre_del_campo = (empty($array_condiciones['Nombre']))?'Nombre':'Nombre del Estab.';
+					$array_condiciones[$nombre_del_campo] = utf8_decode($this->passedArgs['nombre']);
 					$url_conditions['nombre'] = utf8_decode($this->passedArgs['nombre']);			
 				}
             }

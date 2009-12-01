@@ -258,8 +258,7 @@ text-transform:uppercase;
 	background-position: right;
 	background-repeat: no-repeat;
 	height: 150px;
-	width: 139px; /*  IE  */
-	\width: 134px; /*  FF  */
+	width: 139px;
 }
 
 /**
