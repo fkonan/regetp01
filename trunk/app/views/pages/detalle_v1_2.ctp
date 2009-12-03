@@ -20,8 +20,19 @@
     <b>Buscador</b>
   </li>
   <ul type="circle">
-    <li>Se agregó la opción de búsqueda libre por nombre. Ahora se puede realizar búsquedas que incluyan el tipo de establecimiento, el número y el nombre.</li>
+    <li>Se agregó una opción de búsqueda por "nombre completo" que evalúa tipo y número de establecimiento además del nombre propio de la institución. (Ahora se puede buscar, por ejemplo: "Escuela 3 San Martín".)
+	</li>
   </ul>
+  
+  
+   <li>
+    <b>Cuadros</b>
+  </li>
+  <ul type="circle">
+    <li>Se presenta a partir de esta versión una serie de cuadros estadísticos relevantes. El primer cuadro publicado ofrece información sobre "Total de Instituciones de Educación Técnica Profesional por ámbito de gestión según división político-territorial". El cuadro se construye dinámicamente con la información más actual de la base de datos y está preparado para su impresión.
+	</li>
+  </ul>
+  
   
    <br>
   
@@ -29,12 +40,10 @@
     <b>Instituciones</b>
   </li>
  	<ul type="circle">
-    <li>Se agregaron 2 datos nuevos con el fin de ordenar el Registro Federal de Instituciones de ETP, optimizar y mejorar las estadísticas generadas en la Unidad de Información.</li>
-  	<ul>
-  		<li>Tipo de Institución: Es una clasificación de la Institución que indica el nivel formativo que ofrece. Las opciones que puede tomar éste campo son: "de Nivel Superior", "de Nivel Secundario", "de Formación Profesional", "Itinerario"</li>
-  		<li>Relación de ETP: Institución con programa de ETP o Institución de ETP.</li>
+    	<li>Se agregaron dos categorías nuevas para clasificar instituciones. Por el tipo de institución un establecimiento puede ser clasificado como: "Superior", "Secundario", "Formación Profesional" ó "Con Itinerario Formativo". Por otro lado una institución puede ser categorizada como "Institución de ETP" ó "Institución con programa de ETP". Estas categorizaciones facilitan el procesamiento estadístico que realiza la Unidad de Información. En breve se agregará al aplicativo un glosario con las definiciones correspondientes.
+		</li>
   	</ul>
-  	</ul>
+  	
   
   <br>
   
@@ -42,26 +51,31 @@
     <b>Oferta Educativa</b>
   </li>
  	<ul type="circle">
-    <li>Cuando se va a la oferta de una Institución, por defecto aparecen solo los datos actualizados al ciclo lectivo actual. Hay un navegador por años desde donde podemos visualizar los datos históricos. También se pueden ver todos los datos (de todos los años al mismo tiempo) permitiendo tener una visión mas general.</li>
+    <li>Se incorporó una nueva forma de visualizar el listado de ofertas. Se muestran inicialmente los datos correspondientes al año en curso, pero se puede luego navegar por datos históricos y visualizar todos los años.</li>
   	</ul>
   	
-  	<ul type="circle">
-    <li>El listado de oferta aparece ordenado por: Tipo de Oferta, Sector y Fecha de última actualización (solo cuando se hace click en "ver todos").</li>
-  	</ul>
-  	
-  </ul>
-  
-  
+  	<br />  
   
   
 	<li>
     <b>Optimización</b>
   </li>
   <ul type="circle">
-    <li>Se implementó Caché en las páginas clave del sistema para obtener un mejor rendimiento y velocidad de respuesta del servidor.</li>
+    <li>Se implementó Caché  en las páginas clave del sistema para obtener un mejor rendimiento y velocidad de respuesta del servidor.</li>
   </ul>
   
    <br>
+   
+   
+   <li>
+    <b>Varios</b>
+  </li>
+  <ul type="circle">
+    <li>Se desarrolló un nuevo módulo para realizar una revisión y reclasificación del trabajo ya realizado en la primera etapa de depuración de la información de "sectores" de títulos y certificados.</li>
+    <li>Se elaboraron scripts para imputar automáticamente valores en los nuevos campos creados para las categorías "Relación con ETP" y "Tipo de institución".</li>
+    <li>Se desarrolló un depurador para verificación de Relación con ETP y Clase de institución.</li>
+    <li>Se realizaron pruebas de acceso al sistema a través de Internet.</li>
+  </ul>
    
    
   
