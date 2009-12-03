@@ -36,7 +36,7 @@
 		<div class="boton-para-div-oculto"><a href="#VerUbicacion" onclick="$('search-ubicacion').toggle()">por su ubicación</a></div>
 		<div id="search-ubicacion" class="search-div" style="display: none">
 			
-			<div id= "departamento-select">		
+			<div id="departamento-select" style="padding-left:0px;">		
 						<?php 
 						// 		DEPARTAMENTO
 						$meter = '<span class="ajax_update" id="ajax_indicator_dpto" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
@@ -49,7 +49,6 @@
 						                                   	'complete'=>'$("ajax_indicator").hide();$("DepartamentoId").enable(); $("departamento-select").show();',
 						                                   	'onChange'=>true
 				                                   ));
-			                                  
 						?>
 					<script type="text/javascript">
 					//		Event.observe(window,'load',function(){
@@ -58,7 +57,7 @@
 					</script>
 			</div>
 			
-			<div id="localidad-select">
+			<div id="localidad-select" style="padding-left:0px;">
 						<?php 
 						//		LOCALIDAD
 						echo $form->input('Localidad.id', array('empty' => 'Seleccione','options'=>$localidades,'type'=>'select','label'=>'Localidad','after'=>'<br><cite>Seleccione un Departamento para filtrar las Localidades.</cite>'));                                   
@@ -70,7 +69,6 @@
 						                                   	'onChange'=>true
 											)); 	
 											
-											
 						echo $ajax->observeField('jurisdiccion_id',
 				                                   array(  	'url' => '/localidades/ajax_select_localidades_form_por_jurisdiccion',
 						                                   	'update'=>'LocalidadId',
@@ -78,7 +76,6 @@
 						                                   	'complete'=>'$("ajax_indicator").hide();$("LocalidadId").enable();',
 						                                   	'onChange'=>true
 				                                   ));
-
 
 						?>	
 						
@@ -92,6 +89,7 @@
 			<?php echo $form->input('direccion', array('label'=>'Domicilio')); ?>
 		
 			<?php echo $form->button('Buscar',array('onclick'=>'enviar()'));?>
+			
 		</div>
 		
 		
