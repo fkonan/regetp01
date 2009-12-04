@@ -26,7 +26,7 @@ if ($session->check('Auth.User')){
 		
 			<div id="tickets" style="display: none">
 				<?php 
-					while(list($id,$name) = each($prov_pend))
+					foreach($prov_pend as $id=>$name)
 					{		
 						?><li>
 							<? echo $html->link($name,"/tickets/index/".$id) ?>
