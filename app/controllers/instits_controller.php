@@ -84,6 +84,7 @@ class InstitsController extends AppController {
 		$localidades = $this->Instit->Localidad->find('list',array('order'=>'name','conditions'=>$v_condiciones));
 		
 		$etp_estados = $this->Instit->EtpEstado->find('list');
+		$this->Instit->Claseinstit->order = "Claseinstit.name DESC";
 		$claseinstits = $this->Instit->Claseinstit->find('list');
 		$this->set(compact('etp_estados','claseinstits','gestiones','dependencias','jurisdicciones','similares','tipoinstits','departamentos','localidades'));
 		$this->set('force_save', $force_save);
@@ -151,6 +152,7 @@ class InstitsController extends AppController {
 		$localidades = $this->Instit->Localidad->find('list',array('order'=>'name','conditions'=>$v_condiciones));
 		
 		$etp_estados = $this->Instit->EtpEstado->find('list');
+		$this->Instit->Claseinstit->order = "Claseinstit.name DESC";
 		$claseinstits = $this->Instit->Claseinstit->find('list');
 		
 		$this->set(compact('claseinstits','etp_estados','gestiones','dependencias','jurisdicciones','similares','tipoinstits','departamentos','localidades'));
