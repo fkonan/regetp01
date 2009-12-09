@@ -122,3 +122,23 @@ table tr.altrow td {
 	display: block; 
 	width:754px;
 }
+
+
+dl {
+	line-height: 1.6em;
+	margin: 0em 0em;
+	width: 100%;
+}
+dl.altrow {
+	background: #f4f4f4;
+}
+dt {
+	font-weight: bold;
+	padding-left: 4px;
+	vertical-align: top;
+}
+dd {
+	margin-left: 16em;
+	margin-top: -22px;
+	vertical-align: top;
+}
