@@ -1,0 +1,124 @@
+@CHARSET "ISO-8859-1";
+
+#rutaUrl{
+ display: none;
+}
+
+
+#menu{
+	display: none;
+}
+
+#menu-footer{
+	display: none;
+}
+
+#footer{
+display: none;
+}
+
+#cuerpo {
+	
+	\width: 21cm;
+}
+
+
+#header{
+}
+
+H1{
+	font-size: large;
+}
+
+H2{
+	font-size: medium;
+}
+
+A, A:VISITED{
+	color: #003d4c;
+	text-decoration: underline;
+	font-weight: bold;
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+
+a:hover {
+	text-decoration:none;
+}
+
+
+.no-ver-para-imprimir{
+	display: none;
+}
+
+.ver-solo-para-imprimir{
+	display: block;
+}
+
+
+
+/************************************************************************
+*
+*
+*		CAKE DEFAULTS
+*
+*
+*/
+/* Tables */
+table {
+	background-color: #fff;
+	color: #333;
+	margin-bottom: 10px;
+	width: 98%;
+	\width: 18cm;
+}
+
+CAPTION{
+	color: #045FB4;
+}
+
+th {
+	background: #f2f2f2;
+	border:1px solid #bbb;
+	border-top: 1px solid #f0f7fc;
+	border-left: 1px solid #f0f7fc;
+	text-align: center;
+}
+th a {
+	background:#f2f2f2;
+	display: block;
+	padding: 2px 4px;
+	text-decoration: none;
+}
+th a:hover {
+	background: #ccc;
+	color: #333;
+	text-decoration: none;
+}
+
+table tr td {
+	background: #fff;
+	padding: 4px;
+	text-align: center;
+	vertical-align: top;
+}
+
+
+table tr.altrow2 th {
+	background-color:#FFFFFF;
+	color:#045FB4;
+	font-weight:bold;
+	padding:3px 6px;
+	text-decoration:none;
+}
+
+table tr.altrow td {
+	background-color: #fcfcfc;
+}
+
+
+.logos-header{
+	display: block; 
+	width:754px;
+}
