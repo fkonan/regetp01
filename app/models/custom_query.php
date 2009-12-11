@@ -13,6 +13,14 @@ class CustomQuery extends AppModel{
 		$this->limit=$l;
 	}
 
+	/**
+	 * Esta funcion sobreescribe a la del paginador. Como son 
+	 * consultas guardadas en la tabla query, tengo que calcular 
+	 * la cantidad de registros para que pagine bien.
+	 * @param $conditions, $recursive
+	 * @return cantidad de registro.
+	 */
+		
 	function paginateCount($conditions, $recursive){
 
 		$sql  = "SELECT COUNT(*) AS total FROM (" . $this->sql . ") AS CONSUL";
@@ -24,6 +32,14 @@ class CustomQuery extends AppModel{
 		return false;
 	}
 
+	/**
+	 * Esta funcion sobreescribe a la del paginador. Como son 
+	 * consultas guardadas en la tabla query, tengo que  
+	 * reescribir el limit y el offset para poder mostrar por pantalla
+	 * @param $conditions, $recursive
+	 * @return registros paginados.
+	 */
+		
 	function paginate($conditions, $fields, $order, $limit, $page, $recursive){
 
 		$sql  = $this->sql;
