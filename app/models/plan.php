@@ -140,6 +140,7 @@ class Plan extends AppModel {
 	
 	function beforeSave()
 	{  		
+  		//TODO Elimiar esto cuando se elimine el campo sectores de la tabla planes
 		if(empty($this->data['Plan']['sector'])){
 			$this->data['Plan']['sector'] = 'SECTOR SIN DATO';
 		}
@@ -174,6 +175,13 @@ class Plan extends AppModel {
   		return true;
   	}
 
+  	/**
+  	 * Se tuvo que redefinir esta funcion para poder agregar el ultimo 
+  	 * año que presenta cada plan
+  	 * 
+  	 * @return cantidad de registros
+  	 */
+  	
   	function paginateCount($conditions = null, $recursive = 0)
   	{
 		if ($this->asociarAnio)
@@ -214,7 +222,14 @@ class Plan extends AppModel {
   		}        	
     }
 
-	function paginate($conditions = null, $fields = null, $order = null, $limit = null, $page = 1, $recursive = null, $tieneHasMany = false)
+  	/**
+  	 * Se tuvo que redefinir esta funcion para poder agregar el ultimo 
+  	 * año que presenta cada plan
+  	 * 
+  	 * @return cantidad de registros
+  	 */
+        
+    function paginate($conditions = null, $fields = null, $order = null, $limit = null, $page = 1, $recursive = null, $tieneHasMany = false)
 	{
 		if ($this->asociarAnio)
 		{
@@ -274,6 +289,13 @@ class Plan extends AppModel {
 		return $this->traerUltimaAct;	
 	}
 	
+  	/**
+  	 * Suma las matriculas para un determinado plan y ciclo. 
+  	 * 
+  	 * 
+  	 * @return matricula de determinado plan, ciclo.
+  	 */
+		
 	function dameMatriculaDeCiclo($plan_id,$ciclo){
 		$tot = $this->Anio->find('all',array(
 			'fields'=>'sum(matricula) AS "Anio__matricula"',
