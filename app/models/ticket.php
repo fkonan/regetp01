@@ -60,13 +60,13 @@ class Ticket extends AppModel {
 								'conditions'=>array('Ticket.estado'=>0,
 													'Instit.jurisdiccion_id'=>$id)
 							));
-			
+
 			if($count>0)
 				$prov_pend[$id] = $name." ($count)";
 			else 
 				 unset($prov_pend[$id]);		 
 		}
-
+		
 		return $prov_pend;	
 	}
 

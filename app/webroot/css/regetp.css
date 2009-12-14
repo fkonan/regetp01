@@ -328,6 +328,19 @@ text-transform:uppercase;
 */
 
 
+.head_select{
+	background-color: #F0F7FC;
+	color: #333;
+	border-style: solid; 
+	border-width: 1px;
+}
+
+.head_select a{
+	background-color: #F0F7FC;
+	color: #333;
+	border: none;
+}
+
 /************************************************************************
 *
 *
@@ -1274,7 +1287,7 @@ li.selected    {
 	background-image: url("images/solid_grey_tab-100x23.png");
 	background-repeat: no-repeat;
 	font-weight: bolder;
-	width: 100px;
+	width: 150px;
 	color: white;
 	float: left;
 	clear: none;
@@ -1287,7 +1300,7 @@ li.selected    {
 
 
 .tab-inactiva{
-	width: 100px;
+	width: 150px;
 	background-image: url("images/darkgrey_tab-100x23.png");
 	background-repeat: no-repeat;
 	color: black;
@@ -1298,13 +1311,14 @@ li.selected    {
 
 .tab-inactiva A{
 	color: white;
-
+	width:100%;
 }
 
 .tab-inactiva A:HOVER{
 	
 	background-image: url("images/grey_tab-100x23.png");
 	background-repeat: no-repeat;
+	width:100%;
 }
 
 .tabs-content{
