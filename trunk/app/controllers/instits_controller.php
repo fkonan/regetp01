@@ -5,6 +5,10 @@ class InstitsController extends AppController {
 	var $helpers = array('Html','Form','Ajax','Cache');
 	var $paginate = array('order'=>array('Instit.cue' => 'asc'),'limit'=>'10');
 	
+
+	function test(){
+		debug($this->Instit->Plan->dameListadoOfertasPorInstitucion(1,0));
+	}
 	
 	function beforeFilter(){
 		parent::beforeFilter();
@@ -30,6 +34,9 @@ class InstitsController extends AppController {
 		}
 		$this->set('con_programa_de_etp', $programa_de_etp);
 		$this->set('relacion_etp', $instit['EtpEstado']['name']);
+		
+		$cantOfertas = $this->Instit->Plan->dameListadoOfertasPorInstitucion($id, date('Y',strtotime('now')));
+		$this->set('cantOfertas',count($cantOfertas));
 		$this->set('instit', $instit);
 	}
 

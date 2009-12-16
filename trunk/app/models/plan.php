@@ -5,6 +5,8 @@ class Plan extends AppModel {
 	var $asociarAnio = false; // Se utiliza en el paginador
 	var $maxCiclo = "";
 	var $traerUltimaAct = false; // se utiliza en el paginador.
+	
+	var $actsAs = array('Containable');
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array( 
@@ -459,7 +461,10 @@ class Plan extends AppModel {
   	
   	//TODO faltaria hacer el test de esto
   	/**
-  	 * Me devuelve las ofertas que tiene la institucion pasada como parametro
+  	 * Me devuelve las ofertas que tiene la institucion pasada como parametro agrupada por oferta.
+  	 * O sea, me indica la variedad de niveles que tiene una escuela.
+  	 * Ej: SEC, SUP, IT .... o .... SEC, SUP
+  	 * 
   	 * @param integer $instit_id ide de la institucion en cuestion
   	 * @param integer $ciclo_id id del ciclo que estoy buscando(2006, 2007. 2008, ¿2009?)
   	 * @return array $oferta[id][abrev]
@@ -490,6 +495,31 @@ class Plan extends AppModel {
 			$vec[$line[0]['id']] = $line[0]['abrev'];
 		}
 		
+		return $vec;
+  	}
+  	
+  	
+	//TODO faltaria hacer el test de esto
+  	/**
+  	 * Me devuelve las ofertas que tiene la institucion pasada como parametro.
+  	 * Me devuelve el listadop de ofertas al ciclo que se le pasa como parametro
+  	 * 
+  	 * @param integer $instit_id ide de la institucion en cuestion
+  	 * @param integer $ciclo_id id del ciclo que estoy buscando(2006, 2007. 2008, ¿2009?)
+  	 * @return array $oferta[id][abrev]
+  	 */
+  	function dameListadoOfertasPorInstitucion($instit_id,$ciclo_id = 0){
+  		$condiciones = array();
+  		$condiciones[]['Plan.instit_id'] = $instit_id;
+  		if($ciclo_id){
+  			$condiciones[]['Anio.ciclo_id'] = $ciclo_id;
+  		}
+  		$vec = $this->Anio->find('all',array(
+  					'contain'=>array('Plan'=>array('Oferta(abrev)')), 
+  					'group'=>'"Plan"."id", "Plan"."instit_id", "Plan"."oferta_id", "Plan"."old_item", "Plan"."norma", "Plan"."nombre", "Plan"."perfil", "Plan"."sector", "Plan"."duracion_hs", "Plan"."duracion_semanas", "Plan"."duracion_anios", "Plan"."matricula", "Plan"."observacion", "Plan"."ciclo_alta", "Plan"."ciclo_mod", "Plan"."created", "Plan"."modified", "Plan"."sector_id", "Plan"."subsector_id"',
+  					'fields'=>'"Plan"."id" AS "Plan__id", "Plan"."instit_id" AS "Plan__instit_id", "Plan"."oferta_id" AS "Plan__oferta_id", "Plan"."old_item" AS "Plan__old_item", "Plan"."norma" AS "Plan__norma", "Plan"."nombre" AS "Plan__nombre", "Plan"."perfil" AS "Plan__perfil", "Plan"."sector" AS "Plan__sector", "Plan"."duracion_hs" AS "Plan__duracion_hs", "Plan"."duracion_semanas" AS "Plan__duracion_semanas", "Plan"."duracion_anios" AS "Plan__duracion_anios", "Plan"."matricula" AS "Plan__matricula", "Plan"."observacion" AS "Plan__observacion", "Plan"."ciclo_alta" AS "Plan__ciclo_alta", "Plan"."ciclo_mod" AS "Plan__ciclo_mod", "Plan"."created" AS "Plan__created", "Plan"."modified" AS "Plan__modified", "Plan"."sector_id" AS "Plan__sector_id", "Plan"."subsector_id" AS "Plan__subsector_id"',
+  					'conditions'=>$condiciones));
+  		
 		return $vec;
   	}
 
