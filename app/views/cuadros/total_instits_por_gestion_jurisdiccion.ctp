@@ -4,7 +4,7 @@
 		function ver_tabla(tabla){
 			switch(tabla){
 				case "total":	
-					$('gestion-titulo').update('Total por Ámbito de Gestión');				
+					$('gestion-titulo').update('Total de Instituciones');				
 					$("table_total").show();
 					$("tab_total").removeClassName('tab-grande-inactiva');
 					$("tab_total").addClassName('tab-grande-activa');
@@ -89,7 +89,7 @@
 			
 				<thead>					
 					<tr>
-						<th colspan="6" class="head_select"><br /><span id="gestion-titulo">Total por Ámbito de Gestión</span></th>
+						<th colspan="6" class="head_select"><br /><span id="gestion-titulo">Total de Instituciones</span></th>
 					</tr>
 					
 					<tr>
