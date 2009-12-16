@@ -4,7 +4,7 @@
 		function ver_tabla(tabla){
 			switch(tabla){
 				case "total":	
-					$('gestion-titulo').update('Total de Instituciones');				
+					$('gestion-titulo').update('Total por Ámbito de Gestión');				
 					$("table_total").show();
 					$("tab_total").removeClassName('tab-grande-inactiva');
 					$("tab_total").addClassName('tab-grande-activa');
@@ -60,8 +60,8 @@
 	
 	
 	<div class="ver-solo-para-imprimir logos-header">
-		<?php echo $html->image('logo_me_09.JPG',array('style'=>'float:left; height: 80px;'));?>
-		<?php echo $html->image('logoinet1.gif',array('style'=>'float: right; height: 70px;'));?>
+		<?php echo $html->image('logo_me_09.JPG',array('style'=>'float:left; height:86px; width:212px;'));?>
+		<?php echo $html->image('logoinet1.gif',array('style'=>'float:right; height:98px; width:167px;'));?>
 	</div>
 	
 	<h2 style="clear:both;">Total de Instituciones de Educación Técnica Profesional ingresadas a la Base de Datos del Registro Federal de Instituciones de Educación Técnica Profesional (RFIETP) por ámbito de gestión según división político-territorial.</h2>
@@ -89,7 +89,7 @@
 			
 				<thead>					
 					<tr>
-						<th colspan="6" class="head_select"><br /><span id="gestion-titulo">Total de Instituciones</span></th>
+						<th colspan="6" class="head_select"><br /><span id="gestion-titulo">Total por Ámbito de Gestión</span></th>
 					</tr>
 					
 					<tr>
