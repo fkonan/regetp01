@@ -84,7 +84,7 @@
 	<!-- ******************* Div estatal ******************* -->
 	<div>
 		<div align="center" class="tabs-content">		
-			<table 	width="80%" cellpadding = "0" cellspacing = "0" summary="" 
+			<table width="90%" cellpadding = "0" cellspacing = "0" summary="" 
 					style="
 						border-style: solid; 
 						border-width: 1px; 
@@ -290,7 +290,7 @@
 		
 		
 		<p  style="font-size: 10px;"><u>Nota</u>: 
-		Existen instituciones que brindan más de una oferta educativa. En estos casos se casificaron según sus caractéristicas institucionales.
+		Existen instituciones que brindan más de una oferta educativa. En estos casos se casificaron según sus características institucionales.
 		<!-- Se incluyeron de forma diferenciada a las instituciones de ETP dependientes de Universidad Nacionales. -->
 		 </p>
 		 

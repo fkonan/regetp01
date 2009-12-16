@@ -1,7 +1,7 @@
 @CHARSET "ISO-8859-1";
 
 BODY{
-	/*font-size: 12px;*/
+	
 }
 
 
@@ -35,11 +35,11 @@ BODY{
 }
 
 H1{
-	/*font-size: medium;*/
+	font-size: 18px;
 }
 
 H2{
-	/*font-size: small;*/
+	font-size: medium;
 }
 
 A, A:VISITED{
