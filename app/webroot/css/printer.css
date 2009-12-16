@@ -1,5 +1,11 @@
 @CHARSET "ISO-8859-1";
 
+BODY{
+	font-size: 10px;
+}
+
+
+
 #rutaUrl{
  display: none;
 }
@@ -14,24 +20,26 @@
 }
 
 #footer{
-display: none;
+	display: none;
 }
 
-#cuerpo {
-	
-	\width: 21cm;
+#cuerpo {	
 }
 
 
 #header{
 }
 
+#container{
+	width: 19cm;
+}
+
 H1{
-	font-size: large;
+	font-size: medium;
 }
 
 H2{
-	font-size: medium;
+	font-size: small;
 }
 
 A, A:VISITED{
@@ -48,7 +56,7 @@ a:hover {
 }
 
 
-.no-ver-para-imprimir{
+.no-ver-para-imprimir, .no-imprimir{
 	display: none;
 }
 
