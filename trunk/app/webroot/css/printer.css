@@ -31,7 +31,7 @@ BODY{
 }
 
 #container{
-	width: 19cm;
+	width: 100%;
 }
 
 H1{
@@ -78,8 +78,6 @@ table {
 	background-color: #fff;
 	color: #333;
 	margin-bottom: 10px;
-	width: 98%;
-	\width: 18cm;
 }
 
 CAPTION{
@@ -127,8 +125,7 @@ table tr.altrow td {
 
 
 .logos-header{
-	display: block; 
-	width:754px;
+	display: block;
 }
 
 
