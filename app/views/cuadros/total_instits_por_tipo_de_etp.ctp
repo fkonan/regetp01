@@ -286,15 +286,12 @@
 		
 		
 		<p  style="font-size: 10px;"><u>Nota</u>: 
-		<!--  
-		/**** ESTO POR AHORA NO VA !!! porque el cuadro lo recortamos esperando a la normalizacion de clases de instits ***/
 		Desde Diciembre de 2007 se adoptó un nuevo criterio de clasificación de las instituciones de ETP ingresadas al Registro 
 		Federal de Instituciones de ETP. En los casos que la institución oferta más de un nivel de enseñanza se la categorizó de 
 		acuerdo al mayor nivel que brinda, de forma de evitar contabilizar un mismo establecimiento más de una vez. De ahí las 
 		diferencias que pueden observarse con los informes trimestrales previamente presentados.<br>
-		 Se incluyeron por otra parte de forma diferenciada a las instituciones de ETP dependientes de Universidad Nacionales.
-		 -->
-		 Se incluyeron de forma diferenciada a las instituciones de ETP dependientes de Universidad Nacionales.
+		Se incluyeron por otra parte de forma diferenciada a las instituciones de ETP dependientes de Universidad Nacionales.
+		<!-- Se incluyeron de forma diferenciada a las instituciones de ETP dependientes de Universidad Nacionales. -->
 		 </p>
 		 
 		<p align="center">
