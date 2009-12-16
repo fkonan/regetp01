@@ -4,7 +4,7 @@
 		function ver_tabla(tabla){
 			switch(tabla){
 				case "total":	
-					$('gestion-titulo').update('Total por Ámbito de Gestión');				
+					$('gestion-titulo').update('Ámbito de Gestión: Total');				
 					$("table_total").show();
 					$("tab_total").removeClassName('tab-grande-inactiva');
 					$("tab_total").addClassName('tab-grande-activa');
@@ -64,8 +64,12 @@
 		<?php echo $html->image('logoinet1.gif',array('style'=>'float:right; height:98px; width:167px;'));?>
 	</div>
 	
-	<h2 style="clear:both;">Total de Instituciones de Educación Técnica Profesional ingresadas a la Base de Datos del Registro Federal de Instituciones de Educación Técnica Profesional (RFIETP) por ámbito de gestión según división político-territorial.</h2>
-	
+
+	<h2  align="center" style="clear:both;">
+		Total de Instituciones de Educación Técnica Profesional ingresadas a la Base de Datos 
+		del Registro Federal de Instituciones de Educación Técnica Profesional (RFIETP) 
+		por ámbito de gestión y tipo de institución de ETP, según división político-territorial.
+		</h2>
 	
 	<div class="tabs-list no-imprimir">
 		<span id="tab_estatal" 	class="tab-grande-inactiva"><a href="javascript:void(null);" onclick="ver_tabla('estatal');">Gestión Estatal</a></span>
@@ -89,12 +93,12 @@
 			
 				<thead>					
 					<tr>
-						<th colspan="6" class="head_select"><br /><span id="gestion-titulo">Total por Ámbito de Gestión</span></th>
+						<th colspan="6" class="head_select"><br /><span id="gestion-titulo">Ámbito de Gestión: Total</span></th>
 					</tr>
 					
 					<tr>
 						<th rowspan="2" class="head_select" width="130">División <br />político-territorial</th>
-						<th colspan="4" class="head_select">Tipo de Establecimiento</th>
+						<th colspan="4" class="head_select">Tipo de Institución</th>
 						<th rowspan="2" class="head_select" width="60px">Total</th>
 					</tr>
 					
@@ -277,7 +281,7 @@
 	
 	
 	
-	<div style="float:left;">
+	<div style="float:left;" align="justify">
 		<p style="font-size: 10px;"><u>Fuente</u>: 
 		INET-Ministerio de Educación. Unidad de información - 
 		Área Registro Federal de Instituciones de Educación Profesional. 
@@ -286,11 +290,7 @@
 		
 		
 		<p  style="font-size: 10px;"><u>Nota</u>: 
-		Desde Diciembre de 2007 se adoptó un nuevo criterio de clasificación de las instituciones de ETP ingresadas al Registro 
-		Federal de Instituciones de ETP. En los casos que la institución oferta más de un nivel de enseñanza se la categorizó de 
-		acuerdo al mayor nivel que brinda, de forma de evitar contabilizar un mismo establecimiento más de una vez. De ahí las 
-		diferencias que pueden observarse con los informes trimestrales previamente presentados.<br>
-		Se incluyeron por otra parte de forma diferenciada a las instituciones de ETP dependientes de Universidad Nacionales.
+		Existen instituciones que brindan más de una oferta educativa. En estos casos se casificaron según sus caractéristicas institucionales.
 		<!-- Se incluyeron de forma diferenciada a las instituciones de ETP dependientes de Universidad Nacionales. -->
 		 </p>
 		 
