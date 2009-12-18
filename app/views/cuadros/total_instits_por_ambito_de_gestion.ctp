@@ -19,7 +19,8 @@
 <h2 style="clear:both;">Total de Instituciones de Educación Técnica Profesional ingresadas a la Base de Datos del Registro Federal de Instituciones de Educación Técnica Profesional (RFIETP) por ámbito de gestión según división político-territorial.</h2>
 
 <div align="center">
-<table width="80%" cellpadding = "0" cellspacing = "0" summary="" style="border-style: solid; border-width: 1px; border-color: gray; ">
+<table width="80%" cellpadding = "0" cellspacing = "0" summary="" 
+	style="border-style: solid; border-width: 1px; border-color: gray; font-size: 9pt;">
 
 <tr>
 	<th rowspan="2">División político-territorial</th>
@@ -80,14 +81,14 @@ foreach ($queries as $query):
 
 <br>
 
-<p style="font-size: 10px;"><u>Fuente</u>: 
+<p style="font-size: 9pt;"><u>Fuente</u>: 
 INET-Ministerio de Educación. Unidad de información - 
 Área Registro Federal de Instituciones de Educación Profesional. 
 Información al <?php echo date("d-m-Y");?>
 </p>
 
 
-<p  style="font-size: 10px;"><u>Nota</u>: 
+<p  style="font-size: 9pt;"><u>Nota</u>: 
 <!--  
 /**** ESTO POR AHORA NO VA !!! porque el cuadro lo recortamos esperando a la normalizacion de clases de instits ***/
 Desde Diciembre de 2007 se adoptó un nuevo criterio de clasificación de las instituciones de ETP ingresadas al Registro 

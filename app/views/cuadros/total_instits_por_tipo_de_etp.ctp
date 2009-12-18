@@ -68,7 +68,7 @@
 	<h2  align="center" style="clear:both;">
 		Total de Instituciones de Educación Técnica Profesional ingresadas a la Base de Datos 
 		del Registro Federal de Instituciones de Educación Técnica Profesional (RFIETP) 
-		por ámbito de gestión y tipo de institución de ETP, según división político-territorial.
+		por ámbito de gestión y tipo de institución de ETP según división político-territorial.
 		</h2>
 	
 	<div class="tabs-list no-imprimir">
@@ -89,24 +89,24 @@
 						border-style: solid; 
 						border-width: 1px; 
 						border-color: #DBEBF6; 
-						border-top: none;">
+						border-top: none; font-size: 9pt;">
 			
 				<thead>					
 					<tr>
-						<th colspan="6" class="head_select"><br /><span id="gestion-titulo">Ámbito de Gestión: Total</span></th>
+						<th colspan="6" class="head_select" align="center"><br /><span id="gestion-titulo">Ámbito de Gestión: Total</span></th>
 					</tr>
 					
 					<tr>
-						<th rowspan="2" class="head_select" width="130">División <br />político-territorial</th>
-						<th colspan="4" class="head_select">Tipo de Institución</th>
-						<th rowspan="2" class="head_select" width="60px">Total</th>
+						<th rowspan="2" class="head_select" align="center">División <br />político-territorial</th>
+						<th colspan="4" class="head_select" align="center">Tipo de Institución</th>
+						<th rowspan="2" class="head_select" width="60px" align="center">Total</th>
 					</tr>
 					
 					<tr>
-						<th width="40" class="head_select">Secundario</th>
-						<th width="40" class="head_select">Superior</th>
-						<th width="40" class="head_select">Formación Profesional</th>
-						<th width="40" class="head_select">Inst. con Programa de ETP</th>
+						<th width="40" class="head_select" align="center">Secundario</th>
+						<th width="40" class="head_select" align="center">Superior</th>
+						<th width="40" class="head_select" align="center">Formación Profesional</th>
+						<th class="head_select" align="center">Inst. con<br />Programa<br />de ETP</th>
 					</tr>
 				</thead>
 				
@@ -282,14 +282,14 @@
 	
 	
 	<div style="float:left;" align="justify">
-		<p style="font-size: 10px;"><u>Fuente</u>: 
+		<p style="font-size: 9pt;"><u>Fuente</u>: 
 		INET-Ministerio de Educación. Unidad de información - 
 		Área Registro Federal de Instituciones de Educación Profesional. 
 		Información al <?php echo date("d-m-Y");?>
 		</p>
 		
 		
-		<p  style="font-size: 10px;"><u>Nota</u>: 
+		<p  style="font-size: 9pt;"><u>Nota</u>: 
 		Existen instituciones que brindan más de una oferta educativa. En estos casos se casificaron según sus características institucionales.
 		<!-- Se incluyeron de forma diferenciada a las instituciones de ETP dependientes de Universidad Nacionales. -->
 		 </p>
