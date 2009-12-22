@@ -53,7 +53,7 @@ a img {
 	border:none;
 }
 
-.aPend {
+.aPend, .aPend:visited, .aPend:active {
 	color: red;
 	text-decoration: underline;
 	font-weight: bold;
