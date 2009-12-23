@@ -1,0 +1,150 @@
+@CHARSET "ISO-8859-1";
+
+BODY{
+	font-size: 10pt;
+}
+
+
+
+#rutaUrl{
+ display: none;
+}
+
+
+#menu{
+	display: none;
+}
+
+#menu-footer{
+	display: none;
+}
+
+#footer{
+	display: none;
+}
+
+#cuerpo {	
+}
+
+
+#header{
+}
+
+#container{
+	width: 100%;
+}
+
+H1{
+	font-size: 18pt;
+}
+
+H2{
+	font-size: small;
+}
+
+A, A:VISITED{
+	color: #003d4c;
+	text-decoration: underline;
+	font-weight: bold;
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+
+a:hover {
+	text-decoration:none;
+}
+
+
+.no-ver-para-imprimir, .no-imprimir{
+	display: none;
+}
+
+.ver-solo-para-imprimir{
+	display: block;
+}
+
+
+
+/************************************************************************
+*
+*
+*		CAKE DEFAULTS
+*
+*
+*/
+/* Tables */
+table {
+	background-color: #fff;
+	color: #333;
+	margin-bottom: 10px;
+	font-size: 8pt;
+}
+
+CAPTION{
+	color: #045FB4;
+}
+
+th {
+	background: #f2f2f2;
+	border:1px solid #bbb;
+	border-top: 1px solid #f0f7fc;
+	border-left: 1px solid #f0f7fc;
+	text-align: center;
+}
+th a {
+	background:#f2f2f2;
+	display: block;
+	padding: 2px 4px;
+	text-decoration: none;
+}
+th a:hover {
+	background: #ccc;
+	color: #333;
+	text-decoration: none;
+}
+
+table tr td {
+	background: #fff;
+	padding: 4px;
+	text-align: center;
+	vertical-align: top;
+}
+
+
+table tr.altrow2 th {
+	background-color:#FFFFFF;
+	color:#045FB4;
+	font-weight:bold;
+	padding:3px 6px;
+	text-decoration:none;
+}
+
+table tr.altrow td {
+	background-color: #fcfcfc;
+}
+
+
+.logos-header{
+	display: block;
+}
+
+
+dl {
+	line-height: 1.6em;
+	margin: 0em 0em;
+	width: 100%;
+}
+dl.altrow {
+	background: #f4f4f4;
+}
+dt {
+	font-weight: bold;
+	padding-left: 4px;
+	vertical-align: top;
+}
+dd {
+	margin-left: 16em;
+	margin-top: -22px;
+	vertical-align: top;
+}
