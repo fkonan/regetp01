@@ -165,7 +165,10 @@
 		<div class="boton-para-div-oculto"><a href="#VerOtros" onclick="$('search-otros').toggle()">por otras características</a></div>
 		
 		<div id="search-otros"  class="search-div" style="display: none">
-			<?php 
+			<?php
+
+			// 		TIPO INSTIT
+			echo $form->input('claseinstit_id', array('empty' => 'Todas', 'label'=> 'Tipo de Institución de ETP'));
 				
 			echo $form->input('gestion_id', array('empty' => 'Todas', 'label'=> 'Ámbito de Gestión'));
 		

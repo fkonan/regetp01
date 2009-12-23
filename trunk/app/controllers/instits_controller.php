@@ -186,7 +186,6 @@ class InstitsController extends AppController {
 	function search_form(){	
 		$this->cacheAction = '1 day';
 		
-		
 		if (!empty($this->data)) {
 			$this->redirect('search');
 		}
@@ -222,7 +221,12 @@ class InstitsController extends AppController {
 		
 		$this->Instit->Plan->Sector->recursive = -1;
 		$sectores = $this->Instit->Plan->Sector->find('list');
-		$this->set(compact('gestiones', 'dependencias', 'jurisdicciones','ofertas','localidades','departamentos','sectores'));
+		
+		$this->Instit->Claseinstit->recursive = -1;
+		$this->Instit->Claseinstit->order = 'Claseinstit.name';
+		$claseinstits = $this->Instit->Claseinstit->find('list');
+		
+		$this->set(compact('gestiones', 'dependencias', 'jurisdicciones','ofertas','localidades','departamentos','sectores','claseinstits'));
 	}
 	
 	/**
@@ -693,11 +697,31 @@ class InstitsController extends AppController {
 				}
             }
             
+            
+            
+			/**
+			 *     Tipo Instit 
+			 */
+			if(isset($this->data['Instit']['claseinstit_id']) && $this->data['Instit']['claseinstit_id'] != ''){
+				$this->paginate['conditions']['Instit.claseinstit_id'] = $this->data['Instit']['claseinstit_id'];
+				$this->Instit->Claseinstit->id = $this->data['Instit']['claseinstit_id'];
+				$array_condiciones['Tipo de Institución de ETP'] = $this->Instit->Claseinstit->field('name');
+				$url_conditions['Instit.claseinstit_id'] = $this->data['Instit']['claseinstit_id'];
+			}	
+			
+			if(isset($this->passedArgs['claseinstit_id']) && $this->passedArgs['claseinstit_id'] != ''){
+				$this->paginate['conditions']['Instit.tipoinstit_id'] = $this->passedArgs['claseinstit_id'];
+				$this->Instit->Claseinstit->id = $this->data['Instit']['claseinstit_id'];
+				$array_condiciones['Tipo de Institución de ETP'] = $this->Instit->Claseinstit->field('name');
+				$url_conditions['Instit.claseinstit_id'] = $this->data['Instit']['claseinstit_id'];
+			}
+            
         /***********************************************************************/
 			
 	    $this->Instit->recursive = 1;//para alivianar la carga del server         
 		
 	    //datos de paginacion
+	    $this->paginate['order'] = array('Instit.cue ASC, Instit.anexo ASC');
 	    $pagin = $this->paginate();
 	    
 	    //si se encontro solo 1 institucion, ir directamente a la vista de esa institucion
