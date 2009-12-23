@@ -706,14 +706,14 @@ class InstitsController extends AppController {
 				$this->paginate['conditions']['Instit.claseinstit_id'] = $this->data['Instit']['claseinstit_id'];
 				$this->Instit->Claseinstit->id = $this->data['Instit']['claseinstit_id'];
 				$array_condiciones['Tipo de Institución de ETP'] = $this->Instit->Claseinstit->field('name');
-				$url_conditions['Instit.claseinstit_id'] = $this->data['Instit']['claseinstit_id'];
+				$url_conditions['claseinstit_id'] = $this->data['Instit']['claseinstit_id'];
 			}	
 			
 			if(isset($this->passedArgs['claseinstit_id']) && $this->passedArgs['claseinstit_id'] != ''){
-				$this->paginate['conditions']['Instit.tipoinstit_id'] = $this->passedArgs['claseinstit_id'];
-				$this->Instit->Claseinstit->id = $this->data['Instit']['claseinstit_id'];
+				$this->paginate['conditions']['Instit.claseinstit_id'] = $this->passedArgs['claseinstit_id'];
+				$this->Instit->Claseinstit->id = $this->passedArgs['claseinstit_id'];
 				$array_condiciones['Tipo de Institución de ETP'] = $this->Instit->Claseinstit->field('name');
-				$url_conditions['Instit.claseinstit_id'] = $this->data['Instit']['claseinstit_id'];
+				$url_conditions['claseinstit_id'] = $this->passedArgs['claseinstit_id'];
 			}
             
         /***********************************************************************/
