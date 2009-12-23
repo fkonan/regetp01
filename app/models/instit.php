@@ -953,8 +953,7 @@ class Instit extends AppModel {
 	 * @return boolean
 	 */
 	function coincidente_con_claseinstit()
-	{
-		
+	{		
 		if (!empty($this->data['Instit']['etp_estado_id']) && !empty($this->data['Instit']['claseinstit_id'])){
 			if($this->data['Instit']['claseinstit_id'] == 2){ //tipo Itinerario formativo
 				if($this->data['Instit']['etp_estado_id'] == 1){ //con programa de ETP

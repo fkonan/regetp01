@@ -3,6 +3,7 @@ class CuadrosController extends AppController {
 
 	var $name = 'Cuadros';
 	var $uses = array('CustomQuery');
+	var $helpers = array('Phpexcel');
 	
 	function total_instits_por_ambito_de_gestion() {
 		$this->CustomQuery->sql = "
@@ -134,6 +135,15 @@ WHERE i.activo = 1
 		$this->set('precols', $precols); 
 		$this->set('cols', $cols);
 		$this->set('queries', $data);
+	}
+	
+	
+	
+	
+	function test(){
+		Configure::write('debug', 0);
+		$this->layout = 'excel';
+		$this->set("algo","morondanga");
 	}
 }
 ?>

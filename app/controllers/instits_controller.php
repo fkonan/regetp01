@@ -696,7 +696,8 @@ class InstitsController extends AppController {
         /***********************************************************************/
 			
 	    $this->Instit->recursive = 1;//para alivianar la carga del server         
-		
+
+	    
 	    //datos de paginacion
 	    $pagin = $this->paginate();
 	    
