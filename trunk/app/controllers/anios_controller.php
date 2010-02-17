@@ -78,7 +78,7 @@ class AniosController extends AppController {
             $this->Session->setFlash(__('El año ha sido guardado', true));
             $this->set('script','<script type="text/javascript">window.opener.location.reload();window.close();</script>">');
         	} else {
-        		$this->Session->setFlash(__('El año no pudo ser guardado. Por favor, intente denuevo.', true));
+        		$this->Session->setFlash(__('El año no pudo ser guardado. Por favor, intente nuevamente.', true));
 			}
         }
         if (empty($this->data)) {
