@@ -167,12 +167,12 @@
 		<div id="search-otros"  class="search-div" style="display: none">
 			<?php
 
-			// 		TIPO INSTIT
-			echo $form->input('claseinstit_id', array('empty' => 'Todas', 'label'=> 'Tipo de Institución de ETP'));
-				
-			echo $form->input('gestion_id', array('empty' => 'Todas', 'label'=> 'Ámbito de Gestión'));
-		
+			echo $form->input('etp_estado_id', array('empty' => 'Todas', 'label'=> 'Relación con ETP'));
 			
+			echo $form->input('claseinstit_id', array('empty' => 'Todas', 'label'=> 'Tipo de Institución de ETP'));
+			
+			echo $form->input('gestion_id', array('empty' => 'Todas', 'label'=> 'Ámbito de Gestión'));
+					
 			echo $form->input('dependencia_id', array('empty' => 'Todas','label'=>'Tipo de Dependencia'));
 			
 			// no hay busqueda por anexo
@@ -228,11 +228,14 @@
 	  		$('PlanOfertaId').value = '';
 	  		$('PlanSectorId').value = '';
 	  	}
-	  	
+
 	  	if($('search-otros').visible() == false){  		
 	  		$('InstitGestionId').value = '';
 	  		$('InstitDependenciaId').value = '';
 	  		$('InstitActivo').value = '';
+	  		$('InstitClaseinstitId').value =''	;
+	  		$('InstitEtpEstadoId').value =''	;
+	  		
 	  	}
 	  	
 	  	$('InstitSearchForm').submit();

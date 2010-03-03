@@ -70,26 +70,29 @@ class UsersController extends AppController {
 	 *   Cosas de Authentication
 	 * 
 	 */
-	function login(){
+	function login()
+	{
 		if($this->Auth->loginAction == '/Anio/view' || $this->Auth->loginAction == '/Anio/edit' || $this->Auth->loginAction == '/Anio/add' ){
 			$this->layout = 'popup';
 		}
 		
 		if ($this->Auth->login()){
-			$this->log('Se logueó el usuario '.$this->Auth->data['User']['username'],LOG_INFO);
-			//$this->log($this->Auth->redirect(),LOG_DEBUG);
-			//die($this->Auth->redirect());
+			//guardo al usuario actual en la tabla de log 'user_logins'
+			$current_user = $this->Auth->user();
+			$this->User->UserLogin->save(array('user_id'=>$current_user['User']['id']));
+			
 			$this->redirect($this->Auth->redirect());
 			
 		}
-	}
+	}	
 	
 	
-	function logout(){
+	function logout()
+	{
 		$this->Session->setFlash('Ha salido de su cuenta');
 		$this->redirect($this->Auth->logout());
 	}
-	
+
 	
 	/**
 	 *  Este es para que un usuario se edite el perfil
