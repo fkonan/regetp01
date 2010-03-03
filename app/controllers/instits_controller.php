@@ -80,7 +80,7 @@ class InstitsController extends AppController {
 		}
 		
 		$tipoinstits = $this->Instit->Tipoinstit->find('list',array('order'=>'Tipoinstit.name','conditions'=>$v_condiciones));
-		$departamentos = $this->Instit->Departamento->find('list',array('order'=>'name','conditions'=>$v_condiciones));
+		$departamentos = $this->Instit->Departamento->con_jurisdiccion('list');
 		
 		$jurisdicciones = $this->Instit->Jurisdiccion->find('list',array('order'=>'name'));
 		
@@ -88,7 +88,8 @@ class InstitsController extends AppController {
 		if(($this->data['Instit']['departamento_id'] != '') || ($this->data['Instit']['departamento_id'] != 0)){
 				$v_condiciones = array('departamento_id'=>$this->data['Instit']['departamento_id']);
 		}
-		$localidades = $this->Instit->Localidad->find('list',array('order'=>'name','conditions'=>$v_condiciones));
+		
+		$localidades = $this->Instit->Localidad->con_depto_y_jurisdiccion('list',0);
 		
 		$etp_estados = $this->Instit->EtpEstado->find('list');
 		$this->Instit->Claseinstit->order = "Claseinstit.name DESC";
@@ -226,7 +227,11 @@ class InstitsController extends AppController {
 		$this->Instit->Claseinstit->order = 'Claseinstit.name';
 		$claseinstits = $this->Instit->Claseinstit->find('list');
 		
-		$this->set(compact('gestiones', 'dependencias', 'jurisdicciones','ofertas','localidades','departamentos','sectores','claseinstits'));
+		$this->Instit->EtpEstado->recursive = -1;
+		$this->Instit->EtpEstado->order = 'EtpEstado.name';
+		$etpEstados = $this->Instit->EtpEstado->find('list');
+		
+		$this->set(compact('gestiones', 'dependencias', 'jurisdicciones','ofertas','localidades','departamentos','sectores','claseinstits','etpEstados'));
 	}
 	
 	/**
@@ -715,6 +720,30 @@ class InstitsController extends AppController {
 				$array_condiciones['Tipo de Institución de ETP'] = $this->Instit->Claseinstit->field('name');
 				$url_conditions['claseinstit_id'] = $this->passedArgs['claseinstit_id'];
 			}
+			
+			
+			
+			
+			
+			/**
+			 *    Relacion de ETP
+			 */
+			if(isset($this->data['Instit']['etp_estado_id']) && $this->data['Instit']['etp_estado_id'] != ''){
+				$this->paginate['conditions']['Instit.etp_estado_id'] = $this->data['Instit']['etp_estado_id'];
+				$this->Instit->EtpEstado->id = $this->data['Instit']['etp_estado_id'];
+				$array_condiciones['Relación con ETP'] = $this->Instit->EtpEstado->field('name');
+				$url_conditions['etp_estado_id'] = $this->data['Instit']['etp_estado_id'];
+			}	
+			
+			if(isset($this->passedArgs['etp_estado_id']) && $this->passedArgs['etp_estado_id'] != ''){
+				$this->paginate['conditions']['Instit.etp_estado_id'] = $this->passedArgs['etp_estado_id'];
+				$this->Instit->EtpEstado->id = $this->passedArgs['etp_estado_id'];
+				$array_condiciones['Relación con ETP'] = $this->Instit->EtpEstado->field('name');
+				$url_conditions['etp_estado_id'] = $this->passedArgs['etp_estado_id'];
+			}
+			
+			
+			
             
         /***********************************************************************/
 			
