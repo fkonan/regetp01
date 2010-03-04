@@ -146,15 +146,16 @@ class QueriesController extends AppController {
 		$res = $this->Query->findById($id);
 
 		$this->CustomQuery->setSql($res['Query']['query']);
-		
-		if (isset($this->passedArgs['viewAll']) && $this->passedArgs['viewAll'] == 'true'){
-			$data = $this->CustomQuery->getData();
-			$viewAll = false;		
+
+		if (!empty($this->passedArgs['viewAll'])){
+			if ($this->passedArgs['viewAll'] == 'true'){			
+				$data = $this->CustomQuery->query();
+				$viewAll = false;	
+			}
 		} else {	
 			$data = $this->paginate($this->CustomQuery);
 			$viewAll = true;
 		}			
-
 		$cols = array_keys($data['0']['0']); 
 		$this->set('cols', $cols);
         $url_conditions['query.id'] = $id;
