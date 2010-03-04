@@ -160,7 +160,24 @@ class AppController extends Controller {
 		 * 			COSAS DISPONIBLES PARA ToDOS LOS USUARIOS
 		 ****-----------------------------------------------------******/
 		if ($this->name == 'Cuadros') {$llAuth = true;}
-				
+		
+		//Queries/contruye_excel/27 = InstitucionesPorTipoETP.xls
+		if ($this->name == 'Queries' &&
+			$this->action == 'contruye_excel' && 
+			$this->passedArgs[0] == 27
+		) {
+			$llAuth = true;
+		}
+		
+		//Queries/contruye_excel/25 = IntitsXAmbGestionSgnJurisdiccion.xls 
+		if ($this->name == 'Queries' &&
+			$this->action == 'contruye_excel' && 
+			$this->passedArgs[0] == 25
+		) {
+			$llAuth = true;
+		}		
+		
+		
 		
 		
 		/**

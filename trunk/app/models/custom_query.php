@@ -52,12 +52,13 @@ class CustomQuery extends AppModel{
 	
 	//TODO deprecated
 	function getData(){
-		$this->query();
+		return $this->query();
 	}
 	
 	
 	function query($sql = null){
 		if(!empty($sql)){
+			debug("no vacio");
 			return parent::query($sql);
 		}
 		else{
