@@ -100,6 +100,9 @@ diferencias que pueden observarse con los informes trimestrales previamente pres
  Se incluyeron de forma diferenciada a las instituciones de ETP dependientes de Universidad Nacionales.
  </p>
  
-<p align="center">
-<a href="javascript:print();" class="btn-imprimir no-ver-para-imprimir ">Imprimir</a>
+
+<p style="text-align:center;display:block;margin-left:198px; float:left;">
+	<a href="javascript:print();" class="btn-imprimir no-ver-para-imprimir">Imprimir</a>
+	<?php echo $html->link("Descargar", "/queries/contruye_excel/25", array("class"=>"btn-excel no-ver-para-imprimi"));?>
 </p>
+
