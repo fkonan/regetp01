@@ -1459,6 +1459,11 @@ li.selected    {
 	display: none;
 }
 
+.botones-cuadros{
+	float:left;
+	width: 220px;
+	text-align:center;
+}
 
 .btn-imprimir{
 	background-image: url("images/imprimir.gif");
@@ -1469,4 +1474,17 @@ li.selected    {
 	font-size: x-small;
 	width: 110px;
 	padding-top:11px;
+	float:left;
+}
+
+.btn-excel{
+	background-image: url("images/logo_EXCEL.png");
+	background-repeat: no-repeat;
+	text-indent: 26px;
+	display: block;
+	height: 38px;
+	font-size: x-small;
+	width: 110px;
+	padding-top:11px;
+	float:left;
 }
