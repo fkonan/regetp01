@@ -28,9 +28,9 @@ endif;
 <h2>Novedades de la versión 1.3</h2>
 
 <p>
-Desde su puesta en funcionamiento en junio del presente año el nuevo sistema RFIETP se encuentra en permanente actualización y mejora, tanto del
+Desde su puesta en funcionamiento el nuevo sistema RFIETP se encuentra en permanente actualización y mejora, tanto del
 contenido de información de la base de datos como de la aplicación que permite su gestión. En esa línea de trabajo a partir del 4 de Diciembre
-se ha instalado la versión 1.3 del sistema.
+del 2009 se ha instalado la versión 1.3 del sistema.
 </p>
 
 <p>
