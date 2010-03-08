@@ -12,6 +12,7 @@ if ($session->check('Auth.User')){
 		<li><? echo $html->link("Descargas","/Queries/descargar_queries") ?></li>
 		<li><? echo $html->link("Depurar Sectores","/depuradores/sectores_por_sectores") ?></li>
 		<li><? echo $html->link("Depurar Tipo Instits","/depuradores/clases_y_etp") ?></li>
+		<li><? echo $html->link("Listado de similares","/depuradores/depurar_similares") ?></li>
 	</ul>
 			
 </div>

@@ -821,22 +821,30 @@ class Instit extends AppModel {
 			$bycueanexo = $this->__getInstitByCUEandAnexo();
 			if(count($bycueanexo)>0) 
 			{
-				$this->validationErrors += array( 'cue' => 'Hay una institución con éste CUE y Anexo');
-				$this->validationErrors += array( 'anexo' => 'Hay una institución con éste CUE y Anexo');
+				$this->validationErrors += array( 'cue' => 'Hay una institución con éste mismo CUE y Anexo');
+				$this->validationErrors += array( 'anexo' => '');
 				$similars = $this->__armarVectorSinInstitsRepetidas($similars,$bycueanexo);
 			}
 		}
 				
 		// busco por ubicacion
 		if( $this->data['Instit']['localidad_id'] != "" &&
-			$this->data['Instit']['direccion'] != "")
+			$this->data['Instit']['direccion'] )
 		{
-			$conditions = array("localidad_id" => $this->data['Instit']['localidad_id'], 
+			$error = 'Hay una institución con la misma dirección en ésta localidad';
+			$conditions = array('Instit.id <>'=>$this->data['Instit']['id'],
+								"localidad_id" => $this->data['Instit']['localidad_id'], 
 								"lower(direccion)  SIMILAR TO ?" => $this->convertir_para_busqueda_avanzada($this->data['Instit']['direccion']));
+			
+			if ( $this->data['Instit']['jurisdiccion_id'] != "" ) {
+				$conditions['Instit.jurisdiccion_id'] = $this->data['Instit']['jurisdiccion_id'];
+				$error .= " y/o jurisdiccion"; 
+			}
+			
 			$byubucation = $this->find('all',array('conditions'=> $conditions));
 			if(count($byubucation)>0)
 			{
-				$this->validationErrors += array( 'direccion' => 'Hay una institución con la misma dirección en ésta localidad');
+				$this->validationErrors += array( 'direccion' => $error);
 				$this->validationErrors += array( 'localidad_id' => '');
 				
 				$similars = $this->__armarVectorSinInstitsRepetidas($similars,$byubucation);
@@ -848,13 +856,14 @@ class Instit extends AppModel {
 		{
 			$nombre = $this->convertir_para_busqueda_avanzada($this->data['Instit']['nombre']);
 		
-			$conditions = array("lower(nombre)  SIMILAR TO ?" => $nombre,
+			$conditions = array('Instit.id <>'=>$this->data['Instit']['id'],
+								"lower(nombre)  SIMILAR TO ?" => $nombre,
 								"localidad_id" => $this->data['Instit']['localidad_id']);
 			$bynameyloc = $this->find('all',array('conditions'=> $conditions));
 			if(count($bynameyloc)>0) 
 			{
-				$this->validationErrors += array( 'nombre' => 'Hay una institución en la misma localidad con éste nombre');
-				$this->validationErrors += array( 'localidad_id' => 'Hay una institución con el mismo nombre, en ésta localidad');
+				$this->validationErrors += array( 'nombre' => 'Hay una institución con éste nombre en la misma localidad');
+				$this->validationErrors += array( 'localidad_id' => '');
 				$similars = $this->__armarVectorSinInstitsRepetidas($similars,$bynameyloc);
 			}
 		}
@@ -865,13 +874,14 @@ class Instit extends AppModel {
 			$this->data['Instit']['tipoinstit_id'] != "")
 		{
 			$nombre = $this->convertir_para_busqueda_avanzada($this->data['Instit']['nombre']);
-			$conditions = array("lower(nombre)  SIMILAR TO ?" => $nombre,
+			$conditions = array('Instit.id <>'=>$this->data['Instit']['id'],
+								"lower(nombre)  SIMILAR TO ?" => $nombre,
 								"lower(nroinstit)  SIMILAR TO ?" => $this->convertir_para_busqueda_avanzada($this->data['Instit']['nroinstit']),
 								"tipoinstit_id" => $this->data['Instit']['tipoinstit_id']);
 			$byname = $this->find('all',array('conditions'=> $conditions));
 			if(count($byname)>0) 
 			{
-				$this->validationErrors += array( 'nombre' => 'Hay una institución con el mismo nombre, tipo o número');
+				$this->validationErrors += array( 'nombre' => 'Hay una institución con el mismo nombre, tipo y número');
 				$this->validationErrors += array( 'nroinstit' => '');
 				$this->validationErrors += array( 'tipoinstit_id' => '');
 				$similars = $this->__armarVectorSinInstitsRepetidas($similars,$byname);
@@ -883,13 +893,14 @@ class Instit extends AppModel {
 			$this->data['Instit']['nroinstit'] != "" &&
 			$this->data['Instit']['tipoinstit_id'] != "")
 		{
-			$conditions = array("Instit.localidad_id" => $this->data['Instit']['localidad_id'],
+			$conditions = array('Instit.id <>'=>$this->data['Instit']['id'],
+								"Instit.localidad_id" => $this->data['Instit']['localidad_id'],
 								"lower(nroinstit)  SIMILAR TO ?" => $this->convertir_para_busqueda_avanzada($this->data['Instit']['nroinstit']),
 								"tipoinstit_id" => $this->data['Instit']['tipoinstit_id']);
 			$byjurid = $this->find('all',array('conditions'=> $conditions));
 			if(count($byjurid)>0) 
 			{
-				$this->validationErrors += array( 'nroinstit' => 'Hay una institución con la misma localidad, tipo o número');
+				$this->validationErrors += array( 'nroinstit' => 'Hay una institución en la misma localidad, con el mismo tipo y número');
 				$this->validationErrors += array( 'localidad_id' => '');
 				$this->validationErrors += array( 'tipoinstit_id' => '');
 				$similars = $this->__armarVectorSinInstitsRepetidas($similars,$byjurid);
@@ -907,7 +918,7 @@ class Instit extends AppModel {
 	 */
 	function __getInstitByCUEandAnexo()
 	{
-		$condiciones = array();		
+		$condiciones = array();	
 			
 		// cuando se edita uina institucion
 		// tengo que buscar todas las intituciones que no sea ésta misma en cuestión
