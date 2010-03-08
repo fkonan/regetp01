@@ -328,5 +328,26 @@ class DepuradoresController extends AppController {
 		$subsectores = $this->Plan->Subsector->con_sector('list',$sector_sug);
 		$this->set('subsectores',$subsectores);
 	}
+	
+	function depurar_similares() {
+		$vectorcito = array();
+    	$this->paginate['recursive'] = -1;
+    	$this->paginate['limit'] = 50;
+    	$instits = $this->paginate();
+    	$conta = 0;
+    	foreach($instits as $i) {
+    		$similares = $this->Instit->getSimilars($i);
+    		
+    		if ( count($similares) > 0 ) {
+    			$vectorcito[$conta] = $i;
+    			$vectorcito[$conta]['Similares'] = $similares;
+    			$vectorcito[$conta]['Error'] = $this->Instit->validationErrors;
+    			$conta++;
+    		}		    		
+    	}
+    	
+    	$this->set('instits_similars',$vectorcito);
+    	
+    }
 }
 ?>
