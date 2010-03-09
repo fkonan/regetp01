@@ -832,8 +832,7 @@ class Instit extends AppModel {
 			$this->data['Instit']['direccion'] )
 		{
 			$error = 'Hay una institución con la misma dirección en ésta localidad';
-			$conditions = array('Instit.id <>'=>$this->data['Instit']['id'],
-								"localidad_id" => $this->data['Instit']['localidad_id'], 
+			$conditions = array("localidad_id" => $this->data['Instit']['localidad_id'], 
 								"lower(direccion)  SIMILAR TO ?" => $this->convertir_para_busqueda_avanzada($this->data['Instit']['direccion']));
 			
 			if ( $this->data['Instit']['jurisdiccion_id'] != "" ) {
@@ -841,6 +840,12 @@ class Instit extends AppModel {
 				$error .= " y/o jurisdiccion"; 
 			}
 			
+			if (isset($this->data['Instit']['id'])){
+				if($this->data['Instit']['id']!= null){
+					$conditions['Instit.id <>'] = $this->data['Instit']['id']; 
+				}
+			}
+						
 			$byubucation = $this->find('all',array('conditions'=> $conditions));
 			if(count($byubucation)>0)
 			{
@@ -856,9 +861,15 @@ class Instit extends AppModel {
 		{
 			$nombre = $this->convertir_para_busqueda_avanzada($this->data['Instit']['nombre']);
 		
-			$conditions = array('Instit.id <>'=>$this->data['Instit']['id'],
-								"lower(nombre)  SIMILAR TO ?" => $nombre,
+			$conditions = array("lower(nombre)  SIMILAR TO ?" => $nombre,
 								"localidad_id" => $this->data['Instit']['localidad_id']);
+			
+			if (isset($this->data['Instit']['id'])){
+				if($this->data['Instit']['id']!= null){
+					$conditions['Instit.id <>'] = $this->data['Instit']['id']; 
+				}
+			}
+						
 			$bynameyloc = $this->find('all',array('conditions'=> $conditions));
 			if(count($bynameyloc)>0) 
 			{
@@ -874,10 +885,16 @@ class Instit extends AppModel {
 			$this->data['Instit']['tipoinstit_id'] != "")
 		{
 			$nombre = $this->convertir_para_busqueda_avanzada($this->data['Instit']['nombre']);
-			$conditions = array('Instit.id <>'=>$this->data['Instit']['id'],
-								"lower(nombre)  SIMILAR TO ?" => $nombre,
+			$conditions = array("lower(nombre)  SIMILAR TO ?" => $nombre,
 								"lower(nroinstit)  SIMILAR TO ?" => $this->convertir_para_busqueda_avanzada($this->data['Instit']['nroinstit']),
 								"tipoinstit_id" => $this->data['Instit']['tipoinstit_id']);
+			
+			if (isset($this->data['Instit']['id'])){
+				if($this->data['Instit']['id']!= null){
+					$conditions['Instit.id <>'] = $this->data['Instit']['id']; 
+				}
+			}
+			
 			$byname = $this->find('all',array('conditions'=> $conditions));
 			if(count($byname)>0) 
 			{
@@ -893,10 +910,16 @@ class Instit extends AppModel {
 			$this->data['Instit']['nroinstit'] != "" &&
 			$this->data['Instit']['tipoinstit_id'] != "")
 		{
-			$conditions = array('Instit.id <>'=>$this->data['Instit']['id'],
-								"Instit.localidad_id" => $this->data['Instit']['localidad_id'],
+			$conditions = array("Instit.localidad_id" => $this->data['Instit']['localidad_id'],
 								"lower(nroinstit)  SIMILAR TO ?" => $this->convertir_para_busqueda_avanzada($this->data['Instit']['nroinstit']),
 								"tipoinstit_id" => $this->data['Instit']['tipoinstit_id']);
+			
+			if (isset($this->data['Instit']['id'])){
+				if($this->data['Instit']['id']!= null){
+					$conditions['Instit.id <>'] = $this->data['Instit']['id']; 
+				}
+			}
+			
 			$byjurid = $this->find('all',array('conditions'=> $conditions));
 			if(count($byjurid)>0) 
 			{
