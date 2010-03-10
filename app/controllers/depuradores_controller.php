@@ -349,5 +349,20 @@ class DepuradoresController extends AppController {
     	$this->set('instits_similars',$vectorcito);
     	
     }
+    
+    function depurar_orientacion() {
+    	//$this->paginate['Instit'] = array('limit'=>20,'conditions'=>array('Instit.activo'=>1));
+    	//$instits = $this->paginate('Instit');
+    	$this->Instit->recursive = -1;
+    	$instits = $this->Instit->find('all', array('conditions'=>array('Instit.activo'=>1, 'Instit.id >'=>3000)));
+    	$vec = array();
+    	foreach ( $instits as $i ) {
+    		$this->Instit->id = $i['Instit']['id'];
+    		if ($lala = $this->Instit->getOrientacionSegunSusPlanes()){
+    			$vec[] = array($i['Instit']['id'], $lala);
+    		}
+    	}
+    	debug($vec);
+    }
 }
 ?>

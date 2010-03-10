@@ -5,7 +5,8 @@ class SectoresController extends AppController {
 	var $helpers = array('Html', 'Form');
 
 	function index() {
-		$this->Sector->recursive = 0;
+		//$this->Sector->recursive = 0;
+		$this->paginate = array ('contain' => 'Orientacion');
 		$this->set('sectores', $this->paginate());
 	}
 
@@ -27,6 +28,8 @@ class SectoresController extends AppController {
 				$this->Session->setFlash(__('The Sector could not be saved. Please, try again.', true));
 			}
 		}
+		
+		$this->set('orientaciones', $this->Sector->Orientacion->find('list'));
 	}
 
 	function edit($id = null) {
@@ -45,6 +48,7 @@ class SectoresController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Sector->read(null, $id);
 		}
+		$this->set('orientaciones', $this->Sector->Orientacion->find('list'));
 	}
 
 	function delete($id = null) {

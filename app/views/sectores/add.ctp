@@ -4,6 +4,7 @@
  		<legend><?php __('Add Sector');?></legend>
 	<?php
 		echo $form->input('name');
+		echo $form->input('orientacion_id');
 	?>
 	</fieldset>
 <?php echo $form->end('Submit');?>
