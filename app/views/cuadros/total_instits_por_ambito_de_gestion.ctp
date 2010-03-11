@@ -103,6 +103,6 @@ diferencias que pueden observarse con los informes trimestrales previamente pres
 
 <p style="text-align:center;display:block;margin-left:198px; float:left;">
 	<a href="javascript:print();" class="btn-imprimir no-ver-para-imprimir">Imprimir</a>
-	<?php echo $html->link("Descargar", "/queries/contruye_excel/25", array("class"=>"btn-excel no-ver-para-imprimi"));?>
+	<?php //echo $html->link("Descargar", "/queries/contruye_excel/25", array("class"=>"btn-excel no-ver-para-imprimi"));?>
 </p>
 
