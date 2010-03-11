@@ -290,12 +290,12 @@
 		
 		
 		<p  style="font-size: 9pt;"><u>Nota</u>: 
-		Existen instituciones que brindan más de una oferta educativa. En estos casos se casificaron según sus características institucionales.
+		Existen instituciones que brindan más de una oferta educativa. En estos casos se clasificaron según sus características institucionales.
 		<!-- Se incluyeron de forma diferenciada a las instituciones de ETP dependientes de Universidad Nacionales. -->
 		 </p>
 		 
 		<p style="text-align:center;display:block;margin-left:198px; float:left;">
 			<a href="javascript:print();" class="btn-imprimir no-ver-para-imprimir ">Imprimir</a>
-			<?php echo $html->link("Descargar", "/queries/contruye_excel/27", array("class"=>"btn-excel no-ver-para-imprimi"));?>
+			<?php //echo $html->link("Descargar", "/queries/contruye_excel/27", array("class"=>"btn-excel no-ver-para-imprimi"));?>
 		</p>
 	</div>
