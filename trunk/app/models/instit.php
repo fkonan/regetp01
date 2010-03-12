@@ -1080,9 +1080,9 @@ class Instit extends AppModel {
 										'contain'=>array('Sector')));
 		$cantPlanes = count($planes);
 		
-		$ant = 0;
+		$ant = -1;
 		foreach ($planes as $p) {
-			if( $ant != 0 && $p['Sector']['orientacion_id']!= $ant ) {
+			if( $ant != -1 && $p['Sector']['orientacion_id']!= $ant ) {
 				return 0;
 			}
 			$ant = $p['Sector']['orientacion_id'];
