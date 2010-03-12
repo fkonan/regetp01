@@ -2,63 +2,89 @@
 /* SVN FILE: $Id$ */
 /* Instit Test cases generated on: 2009-09-17 10:09:16 : 1253194756*/
 App::import('Model', 'Instit');
+
 class TestInstit extends Instit {
 
 	var $cacheSources = false;
 }
 
-class InstitTest extends CakeTestCase {
+class InstitTestCase extends CakeTestCase {
 
+	var $autoFixtures = false;
+	var $fixtures = array('app.instit', 'app.plan', 'app.sector', 'app.subsector', 'app.orientacion');
+	 
 	function start() {
 		parent::start();
 		$this->Instit = new TestInstit();
 	}
 
 	
-	function testGetSimilarEncuentraSimilar() {
-		$data['Instit'] = array ('gestion_id'=>1, 'dependencia_id'=>1, 'nombre_dep'=>"''",      
-        'tipoinstit_id' => 1, 'jurisdiccion_id' => 2, 'cue' => 200015, 'anexo' => 0 ,
-        'esanexo' => 0, 'nombre' => "EUSTAQUIO CÁRDENAS", 
-        'nroinstit' => "16 D.E. 03º", 'anio_creacion' => 1934, 
-        'direccion' => "SALTA 1226", 'cp' => "1137", 'telefono' => "4305-1244", 
-        'mail' => "''", 'web' => "''", 
-        'dir_nombre' => "MÓNICA LILIANA UGARTE", 
-        'dir_tipodoc_id' => 1, 'dir_nrodoc' => 13285880, 
-        'dir_telefono' => "''", 'dir_mail' => "''", 
-        'vice_nombre' => "ELISA SUSANA BARRERA", 'vice_tipodoc_id' => 1, 
-        'vice_nrodoc' => 5940865, 'actualizacion' => "''",
-        'observacion' => "''", 'fecha_mod' => "2007-03-26", 'activo' => 1, 
-        'ciclo_alta' => 2007, 'ciclo_mod' => 0, 'created' => "", 
-        'modified' => "2009-08-13 12:17:33", 'localidad_id' => 1493, 
-        'departamento_id' => 1,'lugar' => "''");
+	function testGetOrientacionSegunSusPlanes() 
+	{    		
+		$this->loadFixtures('Instit', 'Plan', 'Sector', 'Subsector', 'Orientacion');
+		$instituto = new TestInstit();
 		
-		$similares = $this->Instit->getSimilars($data);		
+		$orientacion = $instituto->getOrientacionSegunSusPlanes(1);
+		$this->assertEqual($orientacion, 3); //orientacion otros
 		
-		$this->assertEqual(count($similares),1,'estas instituciones son similares'); 
+		//creo un plan mixto para la institucion 1
+		$plan = array(
+			
+	    		//'id' 			=> 0,
+				'instit_id'		=> 1,
+				'oferta_id'		=> 1,
+				'old_item'		=> 0,
+				'norma'			=> "",
+				'nombre'		=> "Titulo nuevo",
+				'perfil'		=> "Algun Perfil",
+				'sector'		=> "",
+				'duracion_hs'	=> 3,
+				'duracion_semanas'=>2,
+				'duracion_anios'=> 4,
+				'matricula'		=> 100,
+				'observacion'	=> "Alguna observacion 1",
+				'ciclo_alta'	=> 2007,
+				'ciclo_mod'		=> 0,
+				//'created' 		=> "2010-01-21 13:54:45",
+				//'modified' 		=> "2010-01-21 13:54:45",
+				'sector_id'		=> 3, // Sector = Agropecuaria -> Orientacion = Agropecuaria
+				'subsector_id'	=> 2,
+	    	
+    	);
+    	
+    	$orien = array('name'=> "Agropecuaria 2");
+    	$result = $instituto->Plan->Sector->Orientacion->save($orien);
+    	$instituto->Plan->Sector->Orientacion->recursive = -1;
+    	debug($instituto->Plan->Sector->Orientacion->find('count'));
+    	$this->assertTrue($result);
+		$lastInsertId = $instituto->Plan->Sector->Orientacion->getLastInsertID();
+		$this->assertTrue($lastInsertId != null);
+    	
+    	$this->Instit=$instituto;
+    	
+    	$this->Instit->Plan->recursive = -1;
+    	debug($this->Instit->Plan->find('count'));
+		$this->Instit->Plan->save($plan);
+		debug($this->Instit->Plan->id);
+		debug($this->Instit->Plan->find('count'));
+		
+		//debug($this->Instit->find('all',array('conditions'=>array('Instit.id'=>1))));
+		$orientacion = $this->Instit->getOrientacionSegunSusPlanes(1);	
+		$this->assertEqual($orientacion, 0); //orientacion otros
+		
+		/*
+		$orientacion = $this->Instit->getOrientacionSegunSusPlanes(2);
+		$this->assertEqual($orientacion, 3);
+		
+		$orientacion = $this->Instit->getOrientacionSegunSusPlanes(3);
+		$this->assertEqual($orientacion, 2);
+		
+		$orientacion = $this->Instit->getOrientacionSegunSusPlanes(4);
+		$this->assertEqual($orientacion, 1);
+		*/
 	}
 	
-	function testGetSimilarnoEncuentraInstitDistinta() {
-		$data['Instit'] = array ('id' => 1, 'gestion_id'=>1, 'dependencia_id'=>1, 'nombre_dep'=>"''",      
-        'tipoinstit_id' => 1, 'jurisdiccion_id' => 2, 'cue' => 200013, 'anexo' => 0 ,
-        'esanexo' => 0, 'nombre' => "aaaaaaaaaaaaaaaaaaaa	", 
-        'nroinstit' => "16 D.E. 03º", 'anio_creacion' => 1934, 
-        'direccion' => "SALTA 1226", 'cp' => "1137", 'telefono' => "4305-1244", 
-        'mail' => "''", 'web' => "''", 
-        'dir_nombre' => "MÓNICA LILIANA UGARTE", 
-        'dir_tipodoc_id' => 1, 'dir_nrodoc' => 13285880, 
-        'dir_telefono' => "''", 'dir_mail' => "''", 
-        'vice_nombre' => "ELISA SUSANA BARRERA", 'vice_tipodoc_id' => 1, 
-        'vice_nrodoc' => 5940865, 'actualizacion' => "''",
-        'observacion' => "''", 'fecha_mod' => "2007-03-26", 'activo' => 1, 
-        'ciclo_alta' => 2007, 'ciclo_mod' => 0, 'created' => "", 
-        'modified' => "2009-08-13 12:17:33", 'localidad_id' => 22222, 
-        'departamento_id' => 1,'lugar' => "''");
-		
-		$similares = $this->Instit->getSimilars($data);
-		
-		$this->assertEqual(count($similares),0,'estas instituciones son distintas'); 
-	}
-	
+
 	
 	function testIsCUEValid(){
 		// casos que deberian dar 1, porque todo paso bien
@@ -83,7 +109,7 @@ class InstitTest extends CakeTestCase {
 		
 		//este es un numero menor a 3 digitos
 		$this->assertEqual($this->Instit->isCUEValid("54"),-1);
-
 	}
+
 }
 ?>

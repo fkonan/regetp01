@@ -221,6 +221,7 @@ class InstitsController extends AppController {
 		$ofertas = $this->Instit->Plan->Oferta->find('list');
 		
 		$this->Instit->Plan->Sector->recursive = -1;
+		$this->Instit->Plan->Sector->order ='Sector.name';
 		$sectores = $this->Instit->Plan->Sector->find('list');
 		
 		$this->Instit->Claseinstit->recursive = -1;
