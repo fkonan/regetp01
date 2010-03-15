@@ -17,19 +17,12 @@ class InstitTestCase extends CakeTestCase {
 		parent::start();
 		$this->Instit = new TestInstit();
 	}
-
 	
-	function testGetOrientacionSegunSusPlanes() 
-	{    		
-		$this->loadFixtures('Instit', 'Plan', 'Sector', 'Subsector', 'Orientacion');
-		$instituto = new TestInstit();
-		
-		$orientacion = $instituto->getOrientacionSegunSusPlanes(1);
-		$this->assertEqual($orientacion, 3); //orientacion otros
-		
+	
+	function testGuardar()
+	{
 		//creo un plan mixto para la institucion 1
 		$plan = array(
-			
 	    		//'id' 			=> 0,
 				'instit_id'		=> 1,
 				'oferta_id'		=> 1,
@@ -49,19 +42,17 @@ class InstitTestCase extends CakeTestCase {
 				//'modified' 		=> "2010-01-21 13:54:45",
 				'sector_id'		=> 3, // Sector = Agropecuaria -> Orientacion = Agropecuaria
 				'subsector_id'	=> 2,
-	    	
     	);
     	
     	$orien = array('name'=> "Agropecuaria 2");
-    	$result = $instituto->Plan->Sector->Orientacion->save($orien);
-    	$instituto->Plan->Sector->Orientacion->recursive = -1;
-    	debug($instituto->Plan->Sector->Orientacion->find('count'));
+    	$result = $this->Instit->Plan->Sector->Orientacion->save($orien);
+    	$this->Instit->Plan->Sector->Orientacion->recursive = -1;
     	$this->assertTrue($result);
-		$lastInsertId = $instituto->Plan->Sector->Orientacion->getLastInsertID();
+		$lastInsertId = $this->Instit->Plan->Sector->Orientacion->getLastInsertID();
 		$this->assertTrue($lastInsertId != null);
-    	
-    	$this->Instit=$instituto;
-    	
+		
+		debug($lastInsertId);
+    	/*
     	$this->Instit->Plan->recursive = -1;
     	debug($this->Instit->Plan->find('count'));
 		$this->Instit->Plan->save($plan);
@@ -71,8 +62,17 @@ class InstitTestCase extends CakeTestCase {
 		//debug($this->Instit->find('all',array('conditions'=>array('Instit.id'=>1))));
 		$orientacion = $this->Instit->getOrientacionSegunSusPlanes(1);	
 		$this->assertEqual($orientacion, 0); //orientacion otros
+		*/
+	}
+
+	
+	function testGetOrientacionSegunSusPlanes() 
+	{    		
+		$this->loadFixtures('Instit', 'Plan', 'Sector', 'Subsector', 'Orientacion');
 		
-		/*
+		$orientacion = $this->Instit->getOrientacionSegunSusPlanes(1);
+		$this->assertEqual($orientacion, 3); //orientacion otros
+		
 		$orientacion = $this->Instit->getOrientacionSegunSusPlanes(2);
 		$this->assertEqual($orientacion, 3);
 		
@@ -81,7 +81,6 @@ class InstitTestCase extends CakeTestCase {
 		
 		$orientacion = $this->Instit->getOrientacionSegunSusPlanes(4);
 		$this->assertEqual($orientacion, 1);
-		*/
 	}
 	
 
