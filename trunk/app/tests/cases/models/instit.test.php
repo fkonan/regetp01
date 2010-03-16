@@ -5,19 +5,21 @@ App::import('Model', 'Instit');
 
 class TestInstit extends Instit {
 
-	var $cacheSources = false;
+	//var $cacheSources = false;
 }
 
 class InstitTestCase extends CakeTestCase {
 
 	var $autoFixtures = false;
-	var $fixtures = array('app.instit', 'app.plan', 'app.sector', 'app.subsector', 'app.orientacion');
+	var $fixtures = array(
+		'app.instit', 'app.plan', 'app.sector', 'app.subsector', 'app.orientacion'
+	);
 	 
-	function start() {
+	function start() 
+	{
 		parent::start();
-		$this->Instit = new TestInstit();
+		$this->Instit = new Instit();
 	}
-	
 	
 	function testGuardar()
 	{
@@ -50,21 +52,19 @@ class InstitTestCase extends CakeTestCase {
     	$this->assertTrue($result);
 		$lastInsertId = $this->Instit->Plan->Sector->Orientacion->getLastInsertID();
 		$this->assertTrue($lastInsertId != null);
+				
+//    	$this->Instit->Plan->recursive = -1;
+//    	debug($this->Instit->Plan->find('count'));
+//		$this->Instit->Plan->save($plan);
+//		debug($this->Instit->Plan->id);
+//		debug($this->Instit->Plan->find('count'));
+//		
+//		//debug($this->Instit->find('all',array('conditions'=>array('Instit.id'=>1))));
+//		$orientacion = $this->Instit->getOrientacionSegunSusPlanes(1);	
+//		$this->assertEqual($orientacion, 0); //orientacion otros
 		
-		debug($lastInsertId);
-    	/*
-    	$this->Instit->Plan->recursive = -1;
-    	debug($this->Instit->Plan->find('count'));
-		$this->Instit->Plan->save($plan);
-		debug($this->Instit->Plan->id);
-		debug($this->Instit->Plan->find('count'));
-		
-		//debug($this->Instit->find('all',array('conditions'=>array('Instit.id'=>1))));
-		$orientacion = $this->Instit->getOrientacionSegunSusPlanes(1);	
-		$this->assertEqual($orientacion, 0); //orientacion otros
-		*/
+	
 	}
-
 	
 	function testGetOrientacionSegunSusPlanes() 
 	{    		
