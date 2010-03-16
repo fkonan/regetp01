@@ -2,18 +2,18 @@
 class Instit extends AppModel {
 
 	var $name = 'Instit';
+	
+	/**
+	 * Esto es para el paginador customizado
+	 * @var boolean
+	 */
 	var $asociarPlan = false;
 	
 	var $actsAs = array('Containable');
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array(
-			'Gestion' => array('className' => 'Gestion',
-								'foreignKey' => 'gestion_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => ''
-			),
+			
 			'Dependencia' => array('className' => 'Dependencia',
 								'foreignKey' => 'dependencia_id',
 								'conditions' => '',
@@ -55,7 +55,13 @@ class Instit extends AppModel {
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			)
+			),
+			'Gestion' => array('className' => 'Gestion',
+								'foreignKey' => 'gestion_id',
+								'conditions' => '',
+								'fields' => '',
+								'order' => ''
+			),
 	);
 
 	var $hasMany = array(
