@@ -1,4 +1,4 @@
-<<div class="sectores view">
+<div class="sectores view">
 <h2><?php  __('Sector');?></h2>
 	<dl><?php $i = 0; $class = ' class="altrow"';?>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Id'); ?></dt>
