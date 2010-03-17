@@ -70,5 +70,7 @@ class Subsector extends AppModel {
          return $subsectores;
 	}
 
+       
+
 }
 ?>
