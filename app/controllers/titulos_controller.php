@@ -36,7 +36,9 @@ class TitulosController extends AppController {
 		}
 		if (!empty($this->data)) {
 			if ($this->Titulo->save($this->data)) {
-				$this->flash(__('The Titulo has been saved.', true), array('action'=>'index'));
+				//$this->flash(__('The Titulo has been saved.', true), array('action'=>'index'));
+				$this->Session->setFlash(__('Titulo guardado.', true));
+				$this->redirect(array('action'=>'index'));
 			} else {
 			}
 		}
