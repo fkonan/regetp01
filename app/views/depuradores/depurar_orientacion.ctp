@@ -17,10 +17,31 @@ Event.observe(window, "keypress", function(e){
 -->
 </script>
 
+
+<?php 
+	echo $form->create('Plan',array(	
+					'url'=>'/depuradores/depurar_orientacion',
+					'id'=>'FormOrientacion'));
+		
+	echo $form->input('Form.claseinstit_id', array(
+										 'empty' => 'Todos',
+										 'type'=>'select',
+										 'label'=>'Selecciones un Tipo Instit',
+										 'id'=>'sector_id_filtro',
+										 'onChange'=>'$("FormOrientacion").submit();',
+										 'options'=> $tipoinstits,
+										 'default' =>$tipoinstit_seleccionado,
+										 'empty' => 'Todos',
+										 ));
+	echo $form->end(null);										 
+?> 
+
+
 <h2>Planes</h2>
+
+
 <?php foreach ($planes as $p):?>
 <?php $div_id = "plan-id-".$p['Plan']['id']; ?>
-
 	<dl style="font-size: 12px;">
 		<dt>Nombre:</dt>				<dd style="margin-left: 10em;"><?php echo $html->link($p['Plan']['nombre'],'/Planes/view/'.$p['Plan']['id'])?>&nbsp;</dd>
 		<dt>Sector:</dt>				<dd style="color: OrangeRed; font-size: 12px;"><?php echo $p['Sector']['name']?> &nbsp;( Orientación: <?php echo (!empty($p['Sector']['Orientacion']['name']))?$p['Sector']['Orientacion']['name']:"";?> )&nbsp;</dd>
@@ -60,12 +81,16 @@ Event.observe(window, "keypress", function(e){
 	<?php
 		echo $form->input('id');
 		echo $form->input('orientacion_id',array('label'=>'Seleccione tipo de Orientación',
-												 'selected'=>$orientacionSugerida										
+												 'selected'=>$orientacionSugerida,
+												 'empty' => 'Seleccione',										
 		));
 		
         
 		echo $form->button('Guardar',array('onclick'=>'$("InstitDepurarForm").submit()'));
 
+		
+			echo $form->hidden('claseinstit_id');
+		
          /********************************************************************************/
 
 		/**
