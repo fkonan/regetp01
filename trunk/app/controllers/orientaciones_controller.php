@@ -2,6 +2,7 @@
 class OrientacionesController extends AppController {
 
 	var $name = 'Orientaciones';
+	var $scafold = true;
 
 	function index() {
 		//$this->Sector->recursive = 0;

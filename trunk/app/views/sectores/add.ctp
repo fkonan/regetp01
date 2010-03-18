@@ -1,12 +1,13 @@
 <div class="titulos form"> 
 <?php echo $form->create('Titulo');?>
 	<fieldset>
- 		<legend><?php __('Add Titulo');?></legend>
+ 		<legend><?php __('Nuevo Título');?></legend>
 	<?php
-		echo $form->input('name');
-		echo $form->input('marcoref', array('label'=>'Marco de referencia', 
+		echo $form->input('name', array('label'=>'Nombre del Título'));
+		echo $form->input('marco_ref', array('legend'=>false, 
 											'type'=>'radio', 
-											'options'=>array(1=>'Con', 0=>'Sin'))
+											'options'=>array(1=>'Con Marco de Referencia', 0=>'Sin Marco de Referencia'),
+			)
 		);
 		echo $form->input('oferta_id');
 	?>

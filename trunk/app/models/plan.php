@@ -10,30 +10,11 @@ class Plan extends AppModel {
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array( 
-			'Instit' => array('className' => 'Instit',
-								'foreignKey' => 'instit_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => ''
-			),
-			'Oferta' => array('className' => 'Oferta',
-								'foreignKey' => 'oferta_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => ''
-			),
-			'Sector' => array('className' => 'Sector',
-								'foreignKey' => 'sector_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => ''
-			),
-			'Subsector' => array('className' => 'Subsector',
-								'foreignKey' => 'subsector_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => ''
-			),
+			'Instit' ,
+			'Oferta',
+			'Sector',
+			'Subsector',
+			'Titulo',
 	);
 
 	var $hasMany = array(
