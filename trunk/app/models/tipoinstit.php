@@ -2,6 +2,10 @@
 class Tipoinstit extends AppModel {
 
 	var $name = 'Tipoinstit';
+	
+	var $order = 'Tipoinstit.name';
+	
+	var $actsAs = array('Containable');
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array(
@@ -55,6 +59,39 @@ class Tipoinstit extends AppModel {
          											  'order'=>'Tipoinstit.name ASC'));
         }
         return $inss;
+   }
+   
+   
+   /**
+    * Me devuelve un find de los tipoinstit pero con la jurisdiccion
+    * 
+    * @param string $type "find types"
+    * @param array $options opciones del find
+    * @return array del tipo find
+    */
+   function dameConJurisdiccion($type = 'all', $options = array()){  		
+   		$options = array_merge($options, array('contain'=> array('Jurisdiccion')));
+   		
+   		if ($type == 'list') {
+   			$tras = $this->find('all',$options);
+   			foreach ($tras as $t) {
+   				if(strlen($t['Tipoinstit']['name'])>59){
+					$t['Tipoinstit']['name'] = substr($t['Tipoinstit']['name'],0,19);
+					$t['Tipoinstit']['name'] .= '...';
+				}
+				if(strlen($t['Jurisdiccion']['name'])>19){
+					$t['Jurisdiccion']['name'] = substr($t['Jurisdiccion']['name'],0,19);
+					$t['Jurisdiccion']['name'] .= "...";
+				}
+   				$name = $t['Tipoinstit']['name']." (".$t['Jurisdiccion']['name'].")";
+   				
+   				$tipoins[$t['Tipoinstit']['id']] = $name; 
+   			}
+   			
+   		} else {
+   			$tipoins = $this->find($type,$options);
+   		}
+   		return $tipoins;
    }
 	
 }

@@ -11,7 +11,6 @@
     <?php
     // por ahora no quiero que se muestre porque viene sucio este campo
     //echo $this->element('div_observaciones', array("observacion" => $instit['Instit']['observacion']));
-
     ?>
 
 
@@ -293,7 +292,7 @@ if($instit['Instit']['claseinstit_id']) {	?>
 
     <h2>Más Información</h2>
     <ul id="instits-mas-info">
-        <li><?= $html->link('Oferta Educativa '.date('Y',strtotime('now')).' ('.$cantOfertas.')',array('controller'=>'Planes','action'=>'index', $instit['Instit']['id'])) ?></li>
+        <li><?= $html->link('Oferta Educativa',array('controller'=>'Planes','action'=>'index', $instit['Instit']['id'])) ?></li>
     </ul>
 
 </div>

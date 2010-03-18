@@ -4,7 +4,7 @@ class Titulo extends AppModel {
 	var $name = 'Titulo';
 	var $validate = array(
 		'name' => array('notempty'),
-		'marcoref' => array('boolean'),
+		'marco_ref' => array('boolean'),
 		'oferta_id' => array('numeric')
 	);
 
