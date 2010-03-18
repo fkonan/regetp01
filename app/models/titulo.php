@@ -2,6 +2,8 @@
 class Titulo extends AppModel {
 
 	var $name = 'Titulo';
+	var $order = 'Titulo.name';
+	
 	var $validate = array(
 		'name' => array('notempty'),
 		'marco_ref' => array('boolean'),
@@ -17,6 +19,9 @@ class Titulo extends AppModel {
 								'order' => ''
 			)
 	);
+	
+	
+	var $hasMany = array('Plan');
 
 }
 ?>

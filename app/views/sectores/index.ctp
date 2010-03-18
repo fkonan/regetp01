@@ -10,7 +10,7 @@ echo $paginator->counter(array(
 <tr>
 	<th><?php echo $paginator->sort('id');?></th>
 	<th><?php echo $paginator->sort('name');?></th>
-	<th><?php echo $paginator->sort("Marco de referencia",'marcoref');?></th>
+	<th><?php echo $paginator->sort("Marco de referencia",'marco_ref');?></th>
 	<th><?php echo $paginator->sort("Oferta",'Oferta.name');?></th>
 	<th class="actions"><?php __('Actions');?></th>
 </tr>
@@ -30,7 +30,11 @@ foreach ($titulos as $titulo):
 			<?php echo $titulo['Titulo']['name']; ?>
 		</td>
 		<td>
-			<?php echo ($titulo['Titulo']['marcoref']==1)? "X":""; ?>
+			<?php 
+				if ($titulo['Titulo']['marco_ref']==1) {
+					echo $html->image('check_blue.jpg'); 
+				}
+			?>
 		</td>
 		<td>
 			<?php 
