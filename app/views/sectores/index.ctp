@@ -1,5 +1,5 @@
-<div class="titulos index"> 
-<h2><?php __('Titulos');?></h2>
+<div class="sectores index">
+<h2><?php __('Sectores');?></h2>
 <p>
 <?php
 echo $paginator->counter(array(
@@ -10,13 +10,12 @@ echo $paginator->counter(array(
 <tr>
 	<th><?php echo $paginator->sort('id');?></th>
 	<th><?php echo $paginator->sort('name');?></th>
-	<th><?php echo $paginator->sort("Marco de referencia",'marco_ref');?></th>
-	<th><?php echo $paginator->sort("Oferta",'Oferta.name');?></th>
+	<th><?php echo $paginator->sort("Orientación",'Orientacion.name');?></th>
 	<th class="actions"><?php __('Actions');?></th>
-</tr>
+</tr> 
 <?php
 $i = 0;
-foreach ($titulos as $titulo):
+foreach ($sectores as $sector):
 	$class = null;
 	if ($i++ % 2 == 0) {
 		$class = ' class="altrow"';
@@ -24,28 +23,21 @@ foreach ($titulos as $titulo):
 ?>
 	<tr<?php echo $class;?>>
 		<td>
-			<?php echo $titulo['Titulo']['id']; ?>
+			<?php echo $sector['Sector']['id']; ?>
 		</td>
 		<td>
-			<?php echo $titulo['Titulo']['name']; ?>
-		</td>
-		<td>
-			<?php 
-				if ($titulo['Titulo']['marco_ref']==1) {
-					echo $html->image('check_blue.jpg'); 
-				}
-			?>
+			<?php echo $sector['Sector']['name']; ?>
 		</td>
 		<td>
 			<?php 
-			$show = (empty($titulo['Oferta']['name']))? "" : $titulo['Oferta']['name'];
+			$show = (empty($sector['Orientacion']['name']))? "" : $sector['Orientacion']['name'];
 			echo $show; 
 			?>
 		</td>
 		<td class="actions">
-			<?php echo $html->link(__('View', true), array('action'=>'view', $titulo['Titulo']['id'])); ?>
-			<?php echo $html->link(__('Edit', true), array('action'=>'edit', $titulo['Titulo']['id'])); ?>
-			<?php echo $html->link(__('Delete', true), array('action'=>'delete', $titulo['Titulo']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $titulo['Titulo']['id'])); ?>
+			<?php echo $html->link(__('View', true), array('action'=>'view', $sector['Sector']['id'])); ?>
+			<?php echo $html->link(__('Edit', true), array('action'=>'edit', $sector['Sector']['id'])); ?>
+			<?php echo $html->link(__('Delete', true), array('action'=>'delete', $sector['Sector']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $sector['Sector']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -58,6 +50,6 @@ foreach ($titulos as $titulo):
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $html->link(__('New Titulo', true), array('action'=>'add')); ?></li>
+		<li><?php echo $html->link(__('New Sector', true), array('action'=>'add')); ?></li>
 	</ul>
 </div>
