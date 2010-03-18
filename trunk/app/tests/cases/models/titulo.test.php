@@ -27,10 +27,10 @@ class TituloTestCase extends CakeTestCase {
 		$this->assertTrue(!empty($results));
 
 		$expected = array('Titulo' => array(
-			'id'  => 1,
-			'name'  => 'Lorem ipsum dolor sit amet',
-			'marcoref'  => 1,
-			'oferta_id'  => 1
+			'id'  		=> 1,
+			'name'  	=> 'Lorem ipsum dolor sit amet',
+			'marco_ref' => 1,
+			'oferta_id' => 1
 			));
 		$this->assertEqual($results, $expected);
 	}
