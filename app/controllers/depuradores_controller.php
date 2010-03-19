@@ -413,25 +413,6 @@ class DepuradoresController extends AppController {
 		
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     function depurar_titulos() {
     	/********************** GUARDADO DE LOS PLANES SELECCIONADOS *******/
  		if (!empty($this->data['Plan'])){
@@ -439,7 +420,6 @@ class DepuradoresController extends AppController {
  			$planesGuardar = array();
  				
  			foreach ($this->data['Plan'] as $p=>$a) {
- 				//debug($p);
  				if ( "$p" != 'titulo_id') {	 				
 	 				if ($a['selected']) {
 	 					unset($a['selected']);
@@ -448,7 +428,6 @@ class DepuradoresController extends AppController {
  				}
  			}
  			
-			//debug($planesGuardar);
  			if ($this->Plan->saveAll(
  						$planesGuardar,
  						array('fieldList'=>array('titulo_id'), 'validate'=>false)
@@ -465,14 +444,8 @@ class DepuradoresController extends AppController {
  		
  		/********************** BUSCADOR DE PLANES *******/
  		
- 		//para mostrar en vista los patrones de busqueda seleccionados
-        $array_condiciones['Plan.titulo_id'] = 0;
-		//$array_condiciones = array();
-        // para el paginator que pueda armar la url
-        $url_conditions['Plan.titulo_id'] = 0;
-       // $url_conditions = array();
-    	
-    	// Condiciones de busqueda
+ 	    // para el paginator que pueda armar la url
+        $url_conditions = array();
     	
         /**
          *    PLANES POR OFERTA
@@ -485,7 +458,6 @@ class DepuradoresController extends AppController {
 
                     $this->Plan->Oferta->recursive = -1;
                     $oferta = $this->Plan->Oferta->findById($this->data['FPlan']['oferta_id']);
-                    $array_condiciones['Con Oferta'] = $oferta['Oferta']['name'];
                     $url_conditions['Plan.oferta_id'] = $this->data['FPlan']['oferta_id'];
         }
         if(!empty($this->passedArgs['Plan.oferta_id'])) {
@@ -493,7 +465,6 @@ class DepuradoresController extends AppController {
 
                     $this->Plan->Oferta->recursive = -1;
                     $oferta = $this->Plan->Oferta->findById($this->passedArgs['Plan.oferta_id']);
-                    $array_condiciones['Con Oferta'] = $oferta['Oferta']['name'];
                     $url_conditions['Plan.oferta_id'] = $this->passedArgs['Plan.oferta_id'];
                     
                     $this->data['FPlan']['oferta_id'] = $this->passedArgs['Plan.oferta_id'];
@@ -506,14 +477,12 @@ class DepuradoresController extends AppController {
                 $this->paginate['Plan']['conditions']['Plan.sector_id'] = $this->data['FPlan']['sector_id'];
                 $this->Plan->Sector->recursive = -1;
                 $sector = $this->Plan->Sector->findById( $this->data['FPlan']['sector_id']);
-                $array_condiciones['Sector'] = $sector['Sector']['name'];
                 $url_conditions['Plan.sector_id'] = $this->data['FPlan']['sector_id'];
         }
         if(!empty($this->passedArgs['Plan.sector_id'])) {
                 $this->paginate['Plan']['conditions']['Plan.sector_id'] = $this->passedArgs['Plan.sector_id'];
                 $this->Plan->Sector->recursive = -1;
                 $sector = $this->Plan->Sector->findById($this->passedArgs['Plan.sector_id']);
-                $array_condiciones['Sector'] = $sector['Sector']['name'];
                 $url_conditions['Plan.sector_id'] = $this->passedArgs['Plan.sector_id'];
                 
                 $this->data['FPlan']['sector_id'] = $this->passedArgs['Plan.sector_id'];
@@ -527,14 +496,12 @@ class DepuradoresController extends AppController {
                 $this->paginate['Plan']['conditions']['Plan.subsector_id'] = $this->data['FPlan']['subsector_id'];
                 $this->Plan->Subsector->recursive = -1;
                 $subsector = $this->Plan->Subsector->findById( $this->data['FPlan']['subsector_id']);
-                $array_condiciones['Subsector'] = $subsector['Subsector']['name'];
                 $url_conditions['Plan.subsector_id'] = $this->data['FPlan']['subsector_id'];
         }
         if(!empty($this->passedArgs['Plan.subsector_id'])) {
                 $this->paginate['Plan']['conditions']['Plan.subsector_id'] = $this->passedArgs['Plan.subsector_id'];
                 $this->Plan->Subsector->recursive = -1;
                 $sector = $this->Plan->Subsector->findById($this->passedArgs['Plan.subsector_id']);
-                $array_condiciones['Subsector'] = $sector['Subsector']['name'];
                 $url_conditions['Plan.subsector_id'] = $this->passedArgs['Plan.subsector_id'];
                 
                 $this->data['FPlan']['subsector_id'] = $this->passedArgs['Plan.subsector_id'];
@@ -547,14 +514,12 @@ class DepuradoresController extends AppController {
                 $this->paginate['Plan']['conditions']['Instit.jurisdiccion_id'] = $this->data['FPlan']['jurisdiccion_id'];
                 $this->Plan->Instit->Jurisdiccion->recursive = -1;
                 $jur =  $this->Plan->Instit->Jurisdiccion->findById( $this->data['FPlan']['jurisdiccion_id']);
-                $array_condiciones['Jurisdiccion'] = $jur['Jurisdiccion']['name'];
                 $url_conditions['Instit.jurisdiccion_id'] = $this->data['FPlan']['jurisdiccion_id'];
         }
         if(!empty($this->passedArgs['Instit.jurisdiccion_id'])) {
                 $this->paginate['Plan']['conditions']['Instit.jurisdiccion_id'] = $this->passedArgs['Instit.jurisdiccion_id'];
                 $this->Plan->Instit->Jurisdiccion->recursive = -1;
                 $jur =  $this->Plan->Instit->Jurisdiccion->findById( $this->data['FPlan']['jurisdiccion_id']);
-                $array_condiciones['Jurisdiccion'] = $jur['Jurisdiccion']['name'];
                 $url_conditions['Instit.jurisdiccion_id'] = $this->passedArgs['Instit.jurisdiccion_id'];
                 
                 $this->data['FPlan']['jurisdiccion_id'] = $this->passedArgs['Instit.jurisdiccion_id'];
@@ -580,14 +545,16 @@ class DepuradoresController extends AppController {
             $this->data['FPlan']['limit'] = $this->passedArgs['FPlan.limit'];
         }
         
+        // Condicion necesaria
+        $url_conditions['Plan.titulo_id'] = 0;
+       	$this->paginate['Plan']['conditions']['Plan.titulo_id'] = 0;
+       	//$this->paginate['Plan']['conditions']['Instit.activo'] = 1;
+       	        
         $planes = $this->paginate('Plan');
 
         $this->set('planes', $planes);
 
         $this->set('url_conditions', $url_conditions);
-
-        //devuelve un array para mostrar los criterios de busqueda
-        $this->set('conditions', $array_condiciones);
         
         $ofertas = $this->Plan->Oferta->find('list');
  

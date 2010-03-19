@@ -1,6 +1,5 @@
 <? 
 $paginator->options(array('url' => $url_conditions));
-
 ?>
 
 <h1> ¡¡ vamos que faltan solo <?php echo $paginator->counter(array(
@@ -211,6 +210,12 @@ echo $form->input('Plan.titulo_id', array('label'=>'Asignar título en masa','id'
 echo $form->button('Seleccionar Todos', array('onclick'=>'checkAll()', 'style'=>'clear:none;float:left;width:144px;'));
 echo $form->button('Deseleccionar Todos', array('onclick'=>'unCheckAll()', 'style'=>'clear:none;float:left;width:144px;'));
 
+
+echo $form->hidden('FPlan.limit');
+echo $form->hidden('FPlan.oferta_id');
+echo $form->hidden('FPlan.sector_id');
+echo $form->hidden('FPlan.subsector_id');
+echo $form->hidden('FPlan.jurisdiccion_id');
 
 echo $form->end('Guardar Cambios'); 
 
