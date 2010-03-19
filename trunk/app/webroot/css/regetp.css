@@ -1488,3 +1488,16 @@ li.selected    {
 	padding-top:11px;
 	float:left;
 }
+
+
+
+
+
+
+
+/**** DEPURADOR *****/
+.dep_titulo{
+	width: 150px;
+	background-color: white;
+	border: none;
+}
