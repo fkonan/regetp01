@@ -315,7 +315,7 @@ class DepuradoresController extends AppController {
 		$sector_sug['Sector']['id'] = "";
 		$subsector_sug['Subsector']['id'] = "";
 		if(isset($this->data['Plan'])) {
-			$sector_sug = $this->Plan->Sector->find('first',array('conditions'=>array('id'=>$this->data['Plan']['sector_id'])));
+			$sector_sug = $this->Plan->Sector->find('first',array('conditions'=>array('Sector.id'=>$this->data['Plan']['sector_id'])));
 			$subsector_sug = $this->Plan->Subsector->find('first',array('conditions'=>array('Subsector.id'=>$this->data['Plan']['subsector_id'])));
 		}
 			
