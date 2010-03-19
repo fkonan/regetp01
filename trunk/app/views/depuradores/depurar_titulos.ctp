@@ -1,4 +1,7 @@
+<? 
+$paginator->options(array('url' => $url_conditions));
 
+?>
 
 <h1> ¡¡ vamos que faltan solo <?php echo $paginator->counter(array(
 			'format' => '%count%'));?>!!</h1>

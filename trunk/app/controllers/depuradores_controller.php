@@ -495,6 +495,8 @@ class DepuradoresController extends AppController {
                     $oferta = $this->Plan->Oferta->findById($this->passedArgs['Plan.oferta_id']);
                     $array_condiciones['Con Oferta'] = $oferta['Oferta']['name'];
                     $url_conditions['Plan.oferta_id'] = $this->passedArgs['Plan.oferta_id'];
+                    
+                    $this->data['FPlan']['oferta_id'] = $this->passedArgs['Plan.oferta_id'];
         }
 
         /**
@@ -513,6 +515,8 @@ class DepuradoresController extends AppController {
                 $sector = $this->Plan->Sector->findById($this->passedArgs['Plan.sector_id']);
                 $array_condiciones['Sector'] = $sector['Sector']['name'];
                 $url_conditions['Plan.sector_id'] = $this->passedArgs['Plan.sector_id'];
+                
+                $this->data['FPlan']['sector_id'] = $this->passedArgs['Plan.sector_id'];
         }
 
 
@@ -532,6 +536,8 @@ class DepuradoresController extends AppController {
                 $sector = $this->Plan->Subsector->findById($this->passedArgs['Plan.subsector_id']);
                 $array_condiciones['Subsector'] = $sector['Subsector']['name'];
                 $url_conditions['Plan.subsector_id'] = $this->passedArgs['Plan.subsector_id'];
+                
+                $this->data['FPlan']['subsector_id'] = $this->passedArgs['Plan.subsector_id'];
         }
 
           /**
@@ -550,6 +556,8 @@ class DepuradoresController extends AppController {
                 $jur =  $this->Plan->Instit->Jurisdiccion->findById( $this->data['FPlan']['jurisdiccion_id']);
                 $array_condiciones['Jurisdiccion'] = $jur['Jurisdiccion']['name'];
                 $url_conditions['Instit.jurisdiccion_id'] = $this->passedArgs['Instit.jurisdiccion_id'];
+                
+                $this->data['FPlan']['jurisdiccion_id'] = $this->passedArgs['Instit.jurisdiccion_id'];
         }
         
  
@@ -562,8 +570,16 @@ class DepuradoresController extends AppController {
         //datos de paginacion
         $this->paginate['order'] = array('Plan.titulo_id ASC');
         
-        $limite = (empty($this->data['FPlan']))?"20":$this->data['FPlan']['limit'];
-        $this->paginate['Plan']['limit'] = $limite;
+        $this->paginate['Plan']['limit'] = 20;
+    	if(!empty($this->data['FPlan']['limit'])) {
+    		$url_conditions['FPlan.limit'] = $this->data['FPlan']['limit']; 
+            $this->paginate['Plan']['limit'] = $this->data['FPlan']['limit']; 
+        }
+        if(!empty($this->passedArgs['FPlan.limit'])) {
+        	$url_conditions['FPlan.limit'] = $this->passedArgs['FPlan.limit'];
+            $this->data['FPlan']['limit'] = $this->passedArgs['FPlan.limit'];
+        }
+        
         $planes = $this->paginate('Plan');
 
         $this->set('planes', $planes);
