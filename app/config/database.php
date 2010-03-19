@@ -94,8 +94,8 @@ class DATABASE_CONFIG {
 		'persistent' => false,
 		'host' => 'localhost',
 		'login' => 'postgres',
-		'password' => 'r363TP',
-		'database' => 'regetp_v1.2',
+		'password' => 'postgres',
+		'database' => 'regetp',
 		//'database' => 'pruebas', //esta es la BD de fondo
 		//'database' => 'regetp_produccion',
 		'prefix' => '',
