@@ -1,4 +1,4 @@
-<? 
+<?
 $paginator->options(array('url' => $url_conditions));
 ?>
 
@@ -16,8 +16,8 @@ $paginator->options(array('url' => $url_conditions));
 <?php
 
 echo $form->input('FPlan.limit',array(
-						        'label'=>'Cantidad por hoja',
-						        'options'=>array('10'=>10,'15'=>15,'20'=>20,'25'=>25)
+                    'label'=>'Cantidad por hoja',
+                    'options'=>array('10'=>10,'20'=>20,'40'=>40,'60'=>60)
        			 ));
 
 echo $form->input('FPlan.oferta_id',array('options'=>$ofertas,
@@ -55,19 +55,19 @@ echo $form->input('FPlan.sector_id',array(
         	));
 
         }
-        
+
         // 		JURISDICCION
 	    $meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
-	    echo $form->input('FPlan.jurisdiccion_id', array(	
+	    echo $form->input('FPlan.jurisdiccion_id', array(
 	    											'empty' => array('0'=>'Todas'),
 	    											'id'=>'jurisdiccion_id',
 	    											'label'=>'Jurisdicción',
 	    											'after'=>$meter,
 	    											'options'=>$jurisdicciones,
-	    
+
 	    ));
 
-      ?> 
+      ?>
       <?php echo $form->end('Buscar', array('style'=>' display: block;
 													        width: 100px;
 													        vertical-align: bottom;
@@ -80,9 +80,9 @@ echo $form->input('FPlan.sector_id',array(
 													        )
 		        );
 		?>
-		
-		
- </div>	
+
+
+ </div>
 
 
 
@@ -108,19 +108,44 @@ echo $form->input('FPlan.sector_id',array(
 
 <script type="text/javascript">
 <!--
+        Event.observe(window,'load',function(){
+            checkboxes = $('formPlanes').getInputs('checkbox');
+            checkboxes.each(function(e){ e.checked = 0 });
+
+            $('formPlanes').observe('change',function(){
+                //plan-linea-
+                checkboxes = $('formPlanes').getInputs('checkbox');
+                checkboxes.each(function(e){
+                    if(e.checked == 1){
+                        $('plan-linea-'+e.readAttribute('numero')).setStyle({backgroundColor:'#EFFBEF'});
+                        //alert(e.numero);
+                    } else {
+                        $('plan-linea-'+e.readAttribute('numero')).setStyle({backgroundColor:'white'});
+                    }
+                });
+            });
+
+        });
+
 
 	function checkAll(){
 		checkboxes = $('formPlanes').getInputs('checkbox');
-		checkboxes.each(function(e){ e.checked = 1 });
+		checkboxes.each(function(e){
+                    e.checked = 1;
+                    $('plan-linea-'+e.readAttribute('numero')).setStyle({backgroundColor:'#EFFBEF'});
+                });
 	}
 
 
 	function unCheckAll(){
 		checkboxes = $('formPlanes').getInputs('checkbox');
-		checkboxes.each(function(e){ e.checked = 0 });
+		checkboxes.each(function(e){
+                    e.checked = 0
+                    $('plan-linea-'+e.readAttribute('numero')).setStyle({backgroundColor:'white'});
+            });
 	}
-	
-	
+
+
 	function activarCambios(){
 		alert("Hola");
 		$('formPlanes');
@@ -129,7 +154,7 @@ echo $form->input('FPlan.sector_id',array(
 
 	function cambiarTitulos(e){
 		e.select($F('titulo_general'));
-		
+
 	}
 
 	Event.observe(window, 'load', function(){
@@ -144,9 +169,9 @@ echo $form->input('FPlan.sector_id',array(
 
 
 
-<?php 
+<?php
 echo $form->create('Plan', array(
-			'url'=>'/depuradores/depurar_titulos', 
+			'url'=>'/depuradores/depurar_titulos',
 			//'onsubmit'=>'activarCambios(); return false;',
 			'id'=>'formPlanes'
 ));
@@ -157,19 +182,34 @@ echo $form->button('Deseleccionar Todos', array('onclick'=>'unCheckAll()', 'styl
 
 $i = 0;
 foreach ($planes as $p) {
-	
-	$div_id = "plan-id-".$p['Plan']['id']; 
+
+	$div_id = "plan-id-".$p['Plan']['id'];
 	?>
-	
-	
-	<div style="font-size: 12px;">
+
+
+	<div style="font-size: 12px;" id="plan-linea-<?= $i?>">
 		<?php echo $form->input("Plan.$i.id",array('value' =>$p['Plan']['id']));?>
-		<?php echo $form->checkbox("Plan.$i.selected");?>
-		<?php echo $form->input("Plan.$i.titulo_id", array('class'=>'titulo dep_titulo', 'div'=>false, 'label'=>false, 'style'=>'clear: none;'));?>
-		<a style="font-size: 10px;" href="javascript:" onclick="$('<? echo $div_id?>').toggle(); return false;"><?= $p['Plan']['nombre']?></a>		
+
+                <?php echo $form->checkbox("Plan.$i.selected", array(
+                            'id'=>"checkbox-$i",
+                            'numero'=>$i,
+                    ));
+                ?>
+
+                <?php echo $form->input("Plan.$i.titulo_id", array(
+                        'class'=>'titulo dep_titulo',
+                        'div'=>false,
+                        'label'=>false,
+                        'default'=>'seleccione',
+                        'empty'=>'seleccione',
+                        'style'=>'clear: none;',
+                        'onchange'=> '$("checkbox-'.$i.'").setValue(1);',
+                    ));
+                ?>
+		<a style="font-size: 10px;" href="javascript:" onclick="$('<? echo $div_id?>').toggle(); return false;"><?= $p['Plan']['nombre']?></a>
 	</div>
 	<div style="display: none; background-color: beige;" id="<? echo $div_id?>">
-		
+
 		<?php echo $html->link('ir al plan','/Planes/view/'.$p['Plan']['id'],array('style'=> 'float: right;'))?>
 		<dl>
 			<?php $nombre = (empty($p['Instit']['nombre']))? 'SIN NOMBRE':$p['Instit']['nombre'];?>
@@ -185,23 +225,23 @@ foreach ($planes as $p) {
 			<dt>Observación:</dt>			<dd><?php echo $p['Plan']['observacion']?>&nbsp;</dd>
 			<dt>Alta:</dt>					<dd><?php echo date('d/m/Y',strtotime($p['Plan']['created']))?>&nbsp;</dd>
 			<dt>Modificación:</dt>			<dd><?php echo date('d/m/Y',strtotime($p['Plan']['modified']))?>&nbsp;</dd>
-			
+
 			<?php
 				foreach ($p['Anio'] as $anio):
 					$ciclos[$anio['ciclo_id']] = $anio['ciclo_id'];
 				endforeach;
-				
+
 				$texto = '';
 				foreach ($ciclos as $c):
 					$texto .= " - ".$c;
 				endforeach;
 			?>
 			<dt>Ciclos con información</dt><dd><?php echo $texto?>&nbsp;</dd>
-			
-		</dl> 
+
+		</dl>
 	</div>
 
-<?php 
+<?php
 	$i++;
 }
 
@@ -217,21 +257,15 @@ echo $form->hidden('FPlan.sector_id');
 echo $form->hidden('FPlan.subsector_id');
 echo $form->hidden('FPlan.jurisdiccion_id');
 
-echo $form->end('Guardar Cambios'); 
+echo $form->end('Guardar Cambios');
 
 ?>
 
 <div>
-<?php 
+<?php
 echo $paginator->prev('<< '.__('Anterior', true), array(), null, array('class'=>'disabled'));
 //echo $paginator->numbers();
 echo $paginator->next(__('Siguiente', true).' >>', array('style'=>'float:right;'), null, array('class'=>'disabled'));
 ?>
 </div>
-
-
-
-
-
-
 
