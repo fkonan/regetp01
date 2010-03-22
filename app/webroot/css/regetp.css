@@ -1501,3 +1501,21 @@ li.selected    {
 	background-color: white;
 	border: none;
 }
+
+
+
+/**** DEPURADOR *****/
+.dep_titulo{
+	width: 150px;
+	background-color: transparent;
+	border: none;
+}
+
+.dep_titulo OPTION{
+	background-color: white;
+}
+
+
+input[type="hidden"]{
+	display: none;
+}
