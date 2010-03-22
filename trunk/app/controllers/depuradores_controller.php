@@ -422,32 +422,42 @@ class DepuradoresController extends AppController {
                         //@var $planes_sin_titulo   me indica si fueron seleccionado titulos para
                         //guardar alos cuales no le introdujeron QUE titulo era
                         $planes_sin_titulo = false;
+                       
  			foreach ($this->data['Plan'] as $p=>$a) {
                                 // para evitar que se guarde cuando solo fue
                                 // seleccionado el select que era para indicar el titulo generico, pero no tenia fines de guardado
  				if ( "$p" != 'titulo_id') {
 	 				if ($a['selected']) {
-                                            if (!empty($a['titulo_id'])){
-	 					unset($a['selected']);
-	 					$planesGuardar[] = $a;
-                                            } else {
-                                                 $planes_sin_titulo = true;
-                                            }
+                    	if (!empty($a['titulo_id'])){
+	 						unset($a['selected']);
+	 						$planesGuardar[] = $a;
+                        } else {
+                            $planes_sin_titulo = true;
+                        }
 	 				}
  				}
  			}
-
- 			if ($this->Plan->saveAll(
- 						$planesGuardar,
- 						array('fieldList'=>array('titulo_id'), 'validate'=>false)
-			)){
-                                $text = '';
-                                if ($planes_sin_titulo){
-                                    $text = 'Algunos planes seleccionados no tenian indicado el título';
-                                }
- 				$this->Session->setFlash(__( $text.'<br>Se han guardado '.count($planesGuardar).' planes', true));
- 			} else {
- 				$this->Session->setFlash('Fallo el guardado');
+ 			
+ 			if(count($planesGuardar)>0) {
+	 			if ($this->Plan->saveAll(
+	 						$planesGuardar,
+	 						array('fieldList'=>array('titulo_id'), 'validate'=>false)
+				)){
+	                                $text = '';
+	                                if ($planes_sin_titulo){
+	                                    $text = 'Algunos planes seleccionados no tenían indicado el título';
+	                                }
+	 				$this->Session->setFlash(__( $text.'<br>Se han guardado '.count($planesGuardar).' planes', true));
+	 			} else {
+	 				$this->Session->setFlash('Fallo el guardado');
+	 			}
+ 			}
+ 			else {
+ 				$text = '';
+ 				if ($planes_sin_titulo){
+	            	$text = 'Los planes seleccionados no tenían indicado el título';
+	            }
+	 			$this->Session->setFlash(__($text, true));
  			}
  		}
     	/***************************** FIN GUARDADO DE LOS PLANES ***************/
