@@ -1,15 +1,27 @@
+
 <div class="instits form">
-<?php echo $form->create('Plan',array(	'url'=>'/depuradores/sectores_por_sectores/'.$sec_id,
+
+<?php echo $form->create('Plan',array(	'url'=>"/depuradores/sectores_por_sectores/$sec_id/$subsec_id",
 										'id'=>'FormSectorPorSector'));?>
 <?php		
-		echo $form->input('sector_id_filtro', array('empty' => 'Todos',
-											 'type'=>'select',
-											 'label'=>'Selecciones un Sector',
-											 'value'=>$sec_id,
-											 'options'=>$sectores,
-											 'id'=>'sector_id_filtro',
-											 'onChange'=>'$("FormSectorPorSector").submit();'
-											 ));
+		echo $form->input('sector_id_filtro', array(
+                                                     'empty' => 'Todos',
+                                                     'type'=>'select',
+                                                     'label'=>'Selecciones un Sector',
+                                                     'value'=>$sec_id,
+                                                     'options'=>$sectores,
+                                                     'id'=>'sector_id_filtro',
+                                                     'onChange'=>'$("FormSectorPorSector").submit();'
+                                                     ));
+
+                echo $form->input('subsector_id_filtro', array('empty' => 'Todos',
+                                                     'type'=>'select',
+                                                     'label'=>'Selecciones un Subsector',
+                                                     'value'=>$subsec_id,
+                                                     'options'=>$subsectoreslist,
+                                                     'id'=>'subsector_id_filtro',
+                                                     'onChange'=>'$("FormSectorPorSector").submit();'
+                                                     ));
 		echo $form->end(null);										 
 ?> 
 

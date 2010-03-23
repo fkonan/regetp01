@@ -252,86 +252,90 @@ class DepuradoresController extends AppController {
 	}
 	
 	/**
-	 * 
-	 * @return unknown_type
-	 */
-	function sectores_por_sectores($sec_id=0){		
-		if (!empty($this->data)) 
-		{				
-			if(isset($this->data['Plan']['sector_id_filtro']))
-			{
-				$sec_id = $this->data['Plan']['sector_id_filtro'];
-			}
-			else
-			{
-				$this->Plan->id = $this->data['Plan']['id']; 
-				if (!empty($this->data['Plan']['sector_id'])):
-		  			if ($this->data['Plan']['sector_id'] != '' || $this->data['Plan']['sector_id'] != 0): 
-		  				//$this->Sector->recursive = -1;
-		  				//$this->Sector->id = $this->data['Plan']['sector_id'];
-		  				//$sec_aux = $this->Sector->read();
-		  				//$this->data['Plan']['sector'] = $sec_aux['Sector']['name'];
-		  				$this->data['Plan']['sector'] = "1";
-		  			endif;
-		  		endif;
-  		  		
-		  		$fields = array('nombre', 'sector_id', 'subsector_id');
-		  		if($this->data['Plan']['sector_id'])
-				{
-					$fields[] = 'sector';
-				}	
-  		
-				if ($valor = $this->Plan->save(	$this->data ,array('validate'=>true,'fieldList'=>$fields))) {	
-					$this->Session->setFlash(__('Se ha guardado el Plan correctamente', true));
-									
-				} else {
-					debug($this->Plan->validationErrors);
-					$this->Session->setFlash(__('El Plan no pudo ser guardada. Escriba nuevamente el campo incorrecto.', true));
-				}
-			}
-		}
-		 
-                $conditions = array('Instit.activo'=>1, array('OR' =>
-                                array(	'Plan.sector <>'=>'1',
-                                        'Plan.sector_id'=>0,
-                                        'Plan.subsector_id'=>0,
-                        )));
-		if($sec_id!=0) $conditions['Plan.sector_id'] =  $sec_id;
-		
-		$this->Plan->recursive = 1;
-		$this->data =$this->Plan->find('first',array('conditions'=>$conditions));
-		$total =$this->Plan->find('count',array('conditions'=>$conditions));
+         *
+         * @return unknown_type
+         */
+        function sectores_por_sectores($sec_id=0,$subsec_id=0) {
+            if (!empty($this->data)) {
+                if(isset($this->data['Plan']['sector_id_filtro'])) {
+                    $sec_id = $this->data['Plan']['sector_id_filtro'];
+                }
+                 if(isset($this->data['Plan']['subsector_id_filtro'])) {
+                    $subsec_id = $this->data['Plan']['subsector_id_filtro'];
+                }
+                else {
+                    $this->Plan->id = $this->data['Plan']['id'];
+                    if (!empty($this->data['Plan']['sector_id'])):
+                        if ($this->data['Plan']['sector_id'] != '' || $this->data['Plan']['sector_id'] != 0):
+                            $this->data['Plan']['sector'] = "1";
+                        endif;
+                    endif;
 
-		$instit = $this->Plan->Instit->find('first',array('conditions'=>array('Instit.id'=>$this->data['Instit']['id'])));
-		$this->data['Instit']['nombre'] = $instit['Instit']['nombre_completo'];
+                    $fields = array('nombre', 'sector_id', 'subsector_id');
+                    if($this->data['Plan']['sector_id']) {
+                        $fields[] = 'sector';
+                    }
 
-		$sectores = $this->Plan->Sector->find('list',array('order'=>'Sector.name'));
-		$sectores[0]="TODOS";
-		
-		$this->set('sectores',$sectores);
-		$this->set('falta_depurar',$total);
-		$this->set('sec_id',$sec_id);
-		
-		
-		/***********************************/
-		/*           Sugerencia            */
-		/***********************************/
-		$sector_sug['Sector']['id'] = "";
-		$subsector_sug['Subsector']['id'] = "";
-		if(isset($this->data['Plan'])) {
-			$sector_sug = $this->Plan->Sector->find('first',array('conditions'=>array('Sector.id'=>$this->data['Plan']['sector_id'])));
-			$subsector_sug = $this->Plan->Subsector->find('first',array('conditions'=>array('Subsector.id'=>$this->data['Plan']['subsector_id'])));
-		}
-			
-		$sector_sug = ($sector_sug['Sector']['id']!="")?$sector_sug['Sector']['id']:'0';
-		$this->set('sector_sug',$sector_sug);
-		
-		$subsector_sug = ($subsector_sug['Subsector']['id']!="")?$subsector_sug['Subsector']['id']:'0';
-		$this->set('subsector_sug',$subsector_sug);
-			
-		$subsectores = $this->Plan->Subsector->con_sector('list',$sector_sug);
-		$this->set('subsectores',$subsectores);
-	}
+                    if ($valor = $this->Plan->save(	$this->data ,array('validate'=>true,'fieldList'=>$fields))) {
+                        $this->Session->setFlash(__('Se ha guardado el Plan correctamente', true));
+
+                    } else {
+                        debug($this->Plan->validationErrors);
+                        $this->Session->setFlash(__('El Plan no pudo ser guardada. Escriba nuevamente el campo incorrecto.', true));
+                    }
+                }
+            }
+
+            $conditions = array(/*'Instit.activo'=>1, */array('OR' =>
+                            array('Plan.sector <>'=>'1',
+                                  'Plan.sector_id'=>0,
+                                    //'Plan.subsector_id'=>0,
+                    )));
+            
+            if($sec_id!=0) $conditions['Plan.sector_id'] =  $sec_id;
+            if($subsec_id!=0) $conditions['Plan.subsector_id'] = $subsec_id;
+
+            $this->Plan->recursive = 1;
+            $this->data =$this->Plan->find('first',array('conditions'=>$conditions));
+            $total =$this->Plan->find('count',array('conditions'=>$conditions));
+
+            $instit = $this->Plan->Instit->find('first',array('conditions'=>array('Instit.id'=>$this->data['Instit']['id'])));
+            $this->data['Instit']['nombre'] = $instit['Instit']['nombre_completo'];
+
+            $sectores = $this->Plan->Sector->find('list',array('order'=>'Sector.name'));
+            $sectores[0]="TODOS";
+
+            $condicion_sec = array();
+            
+            $subsectoreslist = $this->Plan->Subsector->con_sector('list',$sec_id);
+            $subsectoreslist[0]="TODOS";
+
+            $this->set(compact('sectores','subsectoreslist'));
+            $this->set('falta_depurar',$total);
+            $this->set('sec_id',$sec_id);
+            $this->set('subsec_id',$subsec_id);
+
+
+            /***********************************/
+            /*           Sugerencia            */
+            /***********************************/
+            $sector_sug['Sector']['id'] = "";
+            $subsector_sug['Subsector']['id'] = "";
+            if(isset($this->data['Plan'])) {
+                $sector_sug = $this->Plan->Sector->find('first',array('conditions'=>array('Sector.id'=>$this->data['Plan']['sector_id'])));
+                $subsector_sug = $this->Plan->Subsector->find('first',array('conditions'=>array('Subsector.id'=>$this->data['Plan']['subsector_id'])));
+            }
+
+            $sector_sug = ($sector_sug['Sector']['id']!="")?$sector_sug['Sector']['id']:'0';
+            $this->set('sector_sug',$sector_sug);
+
+            $subsector_sug = ($subsector_sug['Subsector']['id']!="")?$subsector_sug['Subsector']['id']:'0';
+            $this->set('subsector_sug',$subsector_sug);
+
+            $subsectores = $this->Plan->Subsector->con_sector('list',$sector_sug);
+            $this->set('subsectores',$subsectores);
+        }
+
 	
 	function depurar_similares() {
 		$vectorcito = array();
