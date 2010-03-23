@@ -61,11 +61,7 @@ if(!$con_programa_de_etp) {	?>
     <?php }?>
 
 
-         <dt ><?php __('Orientación'); ?></dt>
-        <dd>
-        <?php echo $instit['Orientacion']['name']; ?>
-            &nbsp;
-        </dd>
+       
         
 
 
@@ -77,6 +73,17 @@ if($instit['Instit']['claseinstit_id']) {	?>
             &nbsp;
         </dd>
     <?php }?>
+
+
+        <? if($instit['Orientacion']['name']) {?>
+          <dt ><?php __('Orientación'); ?></dt>
+        <dd>
+        <?php echo $instit['Orientacion']['name']; ?>
+            &nbsp;
+        </dd>
+        <? } ?>
+
+
 
         <dt ><?php __('Ámbito de Gestión'); ?></dt>
         <dd>
