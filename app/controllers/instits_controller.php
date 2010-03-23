@@ -56,10 +56,10 @@ class InstitsController extends AppController {
                 $this->Instit->create();
 
                 if ($this->Instit->save($this->data)) {
-                    $this->Session->setFlash(__('Se ha guardado la Instituci?n correctamente', true));
+                    $this->Session->setFlash(__('Se ha guardado la Institución correctamente', true));
                     $this->redirect(array('action'=>'view/'.$this->Instit->id));
                 } else {
-                    $this->Session->setFlash(__('La Instituci?n no pudo ser guardada. Escriba nuevamente el campo incorrecto.', true));
+                    $this->Session->setFlash(__('La Institución no pudo ser guardada. Escriba nuevamente el campo incorrecto.', true));
                 }
             }else {
                 $this->Session->setFlash(__('Hay instituciones similares.', true));
@@ -102,13 +102,13 @@ class InstitsController extends AppController {
         }
 
         if (!empty($this->data)) {
-            /******* Guardo en el historico de CUES si cambi? */
+            /******* Guardo en el historico de CUES si cambió */
             $cueanterior = array();
             if ($datos_viejos = $this->Instit->cambioCue($this->data)) {
                 $cueanterior['HistorialCue']['cue'] 	  = $datos_viejos['Instit']['cue'];
                 $cueanterior['HistorialCue']['anexo'] 	  = $datos_viejos['Instit']['anexo'];
                 $cueanterior['HistorialCue']['instit_id'] = $datos_viejos['Instit']['id'];
-                $cueanterior['HistorialCue']['observaciones'] = 'El CUE fue modificado debido a que se ingres? otro valor cuando se actualizaron los datos de la instituci?n.';
+                $cueanterior['HistorialCue']['observaciones'] = 'El CUE fue modificado debido a que se ingresó otro valor cuando se actualizaron los datos de la institución.';
             }
 
 
@@ -120,10 +120,10 @@ class InstitsController extends AppController {
                     }
                 }
 
-                $this->Session->setFlash(__('Se ha guardado la Instituci?n correctamente', true));
+                $this->Session->setFlash(__('Se ha guardado la Institución correctamente', true));
                 $this->redirect(array("action"=>"view/$id"));
             } else {
-                $this->Session->setFlash(__('La Instituci?n no pudo ser guardada. Escriba nuevamente el campo incorrecto.', true));
+                $this->Session->setFlash(__('La Institución no pudo ser guardada. Escriba nuevamente el campo incorrecto.', true));
             }
         }
         if (empty($this->data)) {
@@ -166,11 +166,11 @@ class InstitsController extends AppController {
 
     function delete($id = null) {
         if (!$id) {
-            $this->Session->setFlash(__('Se ha pasado un id que no existe para esa Instituci?n', true));
+            $this->Session->setFlash(__('Se ha pasado un id que no existe para esa Institución', true));
 
         }
         if ($this->Instit->del($id)) {
-            $this->Session->setFlash(__('Se ha eliminado la Instituci?n correctamente', true));
+            $this->Session->setFlash(__('Se ha eliminado la Institución correctamente', true));
             $this->redirect(array('controller'=>'pages', 'action'=>'home'));
         }
     }
@@ -253,7 +253,7 @@ class InstitsController extends AppController {
         $url_conditions = array();
 
 
-        // si no vinieron datos GET, asumo que se envi? el formulario desde search_form
+        // si no vinieron datos GET, asumo que se envió el formulario desde search_form
         // sino es porque vino del paginador
         if(isset($this->passedArgs)):
             if(sizeof($this->passedArgs) == 0):
@@ -288,7 +288,7 @@ class InstitsController extends AppController {
                 if($is_cue_valido < 1) {
                     switch ($is_cue_valido) {
                         case -1:
-                            $mensaje = "<H1>El CUE: '".$this->data['Instit']['cue']."' no es v?lido.</H1> Ingrese un valor <b>num?rico</b> de al menos <b>3 d?gitos</b>.";
+                            $mensaje = "<H1>El CUE: '".$this->data['Instit']['cue']."' no es válido.</H1> Ingrese un valor <b>numúrico</b> de al menos <b>3 dígitos</b>.";
                             $this->Session->setFlash($mensaje,'default',array('class' => 'flash-warning'));
                             $this->redirect('search_form');
                             break;
@@ -348,14 +348,14 @@ class InstitsController extends AppController {
         if(isset($this->data['Instit']['nroinstit'])) {
             if($this->data['Instit']['nroinstit'] != '') {
                 $this->paginate['conditions']['lower(Instit.nroinstit) SIMILAR TO ?'] = array($this->Instit->convertir_para_busqueda_avanzada($this->data['Instit']['nroinstit']));
-                $array_condiciones['N? de Instituci?n'] = $this->data['Instit']['nroinstit'];
+                $array_condiciones['N° de Institución'] = $this->data['Instit']['nroinstit'];
                 $url_conditions['nroinstit'] = $this->data['Instit']['nroinstit'];
             }
         }
         if(isset($this->passedArgs['nroinstit'])) {
             if($this->passedArgs['nroinstit'] != '') {
                 $this->paginate['conditions']['lower(Instit.nroinstit) SIMILAR TO ?'] = array($this->Instit->convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['nroinstit'])));
-                $array_condiciones['N? de Instituci?n'] = utf8_decode($this->passedArgs['nroinstit']);
+                $array_condiciones['N° de Institución'] = utf8_decode($this->passedArgs['nroinstit']);
                 $url_conditions['nroinstit'] = utf8_decode($this->passedArgs['nroinstit']);
             }
         }
@@ -372,7 +372,7 @@ class InstitsController extends AppController {
                     $this->paginate['conditions']['Instit.jurisdiccion_id'] = $this->data['Instit']['jurisdiccion_id'];
                     $this->Instit->Jurisdiccion->recursive = -1;
                     $jurisdiccion = $this->Instit->Jurisdiccion->findById($this->data['Instit']['jurisdiccion_id']);
-                    $array_condiciones['Jurisdicci?n'] = $jurisdiccion['Jurisdiccion']['name'];
+                    $array_condiciones['Jurisdicción'] = $jurisdiccion['Jurisdiccion']['name'];
                     $url_conditions['jurisdiccion_id'] = $this->data['Instit']['jurisdiccion_id'];
                 }
             }
@@ -386,7 +386,7 @@ class InstitsController extends AppController {
                     $this->paginate['conditions']['Instit.jurisdiccion_id'] = $this->passedArgs['jurisdiccion_id'];
                     $this->Instit->Jurisdiccion->recursive = -1;
                     $aux = $this->Instit->Jurisdiccion->findById($this->passedArgs['jurisdiccion_id']);
-                    $array_condiciones['Jurisdicci?n'] = $aux['Jurisdiccion']['name'];
+                    $array_condiciones['Jurisdicción'] = $aux['Jurisdiccion']['name'];
                     $url_conditions['jurisdiccion_id'] = $this->passedArgs['jurisdiccion_id'];
                 }
             }
@@ -404,7 +404,7 @@ class InstitsController extends AppController {
                         $this->paginate['conditions']['Instit.tipoinstit_id'] = $this->data['Instit']['tipoinstit_id'];
                         $this->Instit->Tipoinstit->recursive = -1;
                         $aux = $this->Instit->Tipoinstit->findById($this->data['Instit']['tipoinstit_id']);
-                        $array_condiciones['Tipo Instituci?n'] = $aux['Tipoinstit']['name'];
+                        $array_condiciones['Tipo Institución'] = $aux['Tipoinstit']['name'];
                         $url_conditions['tipoinstit_id'] = $this->data['Instit']['tipoinstit_id'];
                     }
                 }
@@ -420,7 +420,7 @@ class InstitsController extends AppController {
                         $this->paginate['conditions']['Instit.tipoinstit_id'] = $this->passedArgs['tipoinstit_id'];
                         $this->Instit->Tipoinstit->recursive = -1;
                         $aux = $this->Instit->Tipoinstit->findById($this->passedArgs['tipoinstit_id']);
-                        $array_condiciones['Tipo Instituci?n'] = $aux['Tipoinstit']['name'];
+                        $array_condiciones['Tipo Institución'] = $aux['Tipoinstit']['name'];
                         $url_conditions['tipoinstit_id'] = $this->passedArgs['tipoinstit_id'];
                     }
                 }
@@ -528,7 +528,7 @@ class InstitsController extends AppController {
                 $this->paginate['conditions']['Instit.gestion_id'] = $this->data['Instit']['gestion_id'];
                 $this->Instit->Gestion->recursive = -1;
                 $aux = $this->Instit->Gestion->findById($this->data['Instit']['gestion_id']);
-                $array_condiciones['?mbito de Gesti?n'] = $aux['Gestion']['name'];
+                $array_condiciones['Ámbito de Gestión'] = $aux['Gestion']['name'];
                 $url_conditions['gestion_id'] = $this->data['Instit']['gestion_id'];
             }
         }
@@ -537,7 +537,7 @@ class InstitsController extends AppController {
                 $this->paginate['conditions']['Instit.gestion_id'] = $this->passedArgs['gestion_id'];
                 $this->Instit->Gestion->recursive = -1;
                 $aux = $this->Instit->Gestion->findById($this->passedArgs['gestion_id']);
-                $array_condiciones['?mbito de Gesti?n'] = $aux['Gestion']['name'];
+                $array_condiciones['Ámbito de Gestión'] = $aux['Gestion']['name'];
                 $url_conditions['gestion_id'] = $this->passedArgs['gestion_id'];
             }
         }
@@ -763,14 +763,14 @@ class InstitsController extends AppController {
         if(isset($this->data['Instit']['claseinstit_id']) && $this->data['Instit']['claseinstit_id'] != '') {
             $this->paginate['conditions']['Instit.claseinstit_id'] = $this->data['Instit']['claseinstit_id'];
             $this->Instit->Claseinstit->id = $this->data['Instit']['claseinstit_id'];
-            $array_condiciones['Tipo de Instituci?n de ETP'] = $this->Instit->Claseinstit->field('name');
+            $array_condiciones['Tipo de Institución de ETP'] = $this->Instit->Claseinstit->field('name');
             $url_conditions['claseinstit_id'] = $this->data['Instit']['claseinstit_id'];
         }
 
         if(isset($this->passedArgs['claseinstit_id']) && $this->passedArgs['claseinstit_id'] != '') {
             $this->paginate['conditions']['Instit.claseinstit_id'] = $this->passedArgs['claseinstit_id'];
             $this->Instit->Claseinstit->id = $this->passedArgs['claseinstit_id'];
-            $array_condiciones['Tipo de Instituci?n de ETP'] = $this->Instit->Claseinstit->field('name');
+            $array_condiciones['Tipo de Institución de ETP'] = $this->Instit->Claseinstit->field('name');
             $url_conditions['claseinstit_id'] = $this->passedArgs['claseinstit_id'];
         }
 
@@ -784,14 +784,14 @@ class InstitsController extends AppController {
         if(isset($this->data['Instit']['etp_estado_id']) && $this->data['Instit']['etp_estado_id'] != '') {
             $this->paginate['conditions']['Instit.etp_estado_id'] = $this->data['Instit']['etp_estado_id'];
             $this->Instit->EtpEstado->id = $this->data['Instit']['etp_estado_id'];
-            $array_condiciones['Relaci?n con ETP'] = $this->Instit->EtpEstado->field('name');
+            $array_condiciones['Relación con ETP'] = $this->Instit->EtpEstado->field('name');
             $url_conditions['etp_estado_id'] = $this->data['Instit']['etp_estado_id'];
         }
 
         if(isset($this->passedArgs['etp_estado_id']) && $this->passedArgs['etp_estado_id'] != '') {
             $this->paginate['conditions']['Instit.etp_estado_id'] = $this->passedArgs['etp_estado_id'];
             $this->Instit->EtpEstado->id = $this->passedArgs['etp_estado_id'];
-            $array_condiciones['Relaci?n con ETP'] = $this->Instit->EtpEstado->field('name');
+            $array_condiciones['Relación con ETP'] = $this->Instit->EtpEstado->field('name');
             $url_conditions['etp_estado_id'] = $this->passedArgs['etp_estado_id'];
         }
 
@@ -837,7 +837,7 @@ class InstitsController extends AppController {
     function planes_relacionados($id = null) {
         $v_plan_matricula = array();
         if (!$id) {
-            $this->Session->setFlash(__('Instituci?n Inv?lida.', true));
+            $this->Session->setFlash(__('Institución Inválida.', true));
             $this->redirect(array('controller'=>'Istits','action'=>'view/'.$id));
         }
 
@@ -857,7 +857,7 @@ class InstitsController extends AppController {
 
             $this->set('planes',$this->data);
             $this->set('v_plan_matricula',$v_plan_matricula);
-            $this->rutaUrl_for_layout[] =array('name'=> 'Datos Instituci?n','link'=>'/Instits/view/'.$this->data['Instit']['id'] );
+            $this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$this->data['Instit']['id'] );
         }
     }
 
@@ -865,11 +865,11 @@ class InstitsController extends AppController {
         //debug($this->data);die();
         if (!empty($this->data)) {
             if ($valor = $this->Instit->save($this->data)) {
-                $this->Session->setFlash(__('Se ha guardado la Instituci?n correctamente', true));
+                $this->Session->setFlash(__('Se ha guardado la Institución correctamente', true));
 
             } else {
                 print_r($this->Instit->validationErrors);
-                $this->Session->setFlash(__('La Instituci?n no pudo ser guardada. Escriba nuevamente el campo incorrecto.', true));
+                $this->Session->setFlash(__('La Institución no pudo ser guardada. Escriba nuevamente el campo incorrecto.', true));
             }
         }
 
