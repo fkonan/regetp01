@@ -27,11 +27,15 @@ $cue_instit = $instit['cue'].$anexo;
 			<?php echo $plan['Plan']['norma']; ?>
 			&nbsp;
 		</dd>
+
+                <? if ( $plan['Titulo']['name'] ) { ?>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Referencial de Título'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $plan['Titulo']['name']; ?>
 			&nbsp;
 		</dd>
+                <? } ?>
+
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Nombre'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $plan['Plan']['nombre']; ?>

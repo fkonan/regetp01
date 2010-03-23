@@ -14,7 +14,7 @@ $cue_instit = $instit['cue'].$anexo;
 		echo $form->input('instit_id',array('type'=>'hidden','value'=>$instit['id']));
 		echo $form->input('oferta_id');
 		echo $form->input('norma',array('label'=>'Normativa'));
-		echo $form->input('titulo_id', array('label'=> 'Referencial de Título'));
+		echo $form->input('titulo_id', array('label'=> 'Referencial de Título','empty'=>'Seleccione', 'default'=>'Seleccione'));
 		echo $form->input('nombre');		
 		echo $form->input('perfil');
 		
