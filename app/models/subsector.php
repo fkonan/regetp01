@@ -41,7 +41,7 @@ class Subsector extends AppModel {
 	 * @param integer $sector_id id del sector que estoy buscando
 	 * @return array del find
 	 */
-	function con_sector($tipo = 'all' , $sector_id = 0){
+	function con_sector($tipo = 'all' , $sector_id = 0, $conditions = array()){
 		$this->recursive = 0;
 		
 		//inicializo la variable return
@@ -49,10 +49,10 @@ class Subsector extends AppModel {
 		
 		$this->order = 'Subsector.name ASC';
          if($sector_id != 0 ){
-        	$subsectores = $this->find('all',array('conditions' => array('sector_id' => $sector_id)));
-         }else{
-        	$subsectores = $this->find('all');
+                $conditions['sector_id'] = $sector_id;
          }
+         $subsectores = $this->find('all',array('conditions' => $conditions));
+
          
 		// me lo prepara para el combo del select  
          if($tipo == 'list')
