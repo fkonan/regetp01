@@ -30,7 +30,12 @@ foreach ($titulos as $titulo):
 			<?php echo $titulo['Titulo']['name']; ?>
 		</td>
 		<td>
-			<?php echo ($titulo['Titulo']['marco_ref']==1)? "X":""; ?>
+			<?php 
+                        //echo ($titulo['Titulo']['marco_ref']==1)? "X":"";
+                        if ($titulo['Titulo']['marco_ref']==1) {
+                            echo $html->image('check_blue.jpg');
+                        }
+                        ?>
 		</td>
 		<td>
 			<?php 
