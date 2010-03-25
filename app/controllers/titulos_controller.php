@@ -3,6 +3,7 @@ class TitulosController extends AppController {
 
 	var $name = 'Titulos';
 	var $helpers = array('Html', 'Form');
+        var $components = array('RequestHandler');
 
 	function index() {
 		$this->Titulo->recursive = 0;
@@ -15,6 +16,24 @@ class TitulosController extends AppController {
 		}
 		$this->set('titulo', $this->Titulo->read(null, $id));
 	}
+
+
+        function add_and_give_me_select_options() {
+            if ($this->RequestHandler->isAjax()){
+                $this->layout = false;
+            }
+            if (!empty($this->data)) {
+                $this->Titulo->create();
+                if ($this->Titulo->save($this->data)) {
+                    $this->Session->setFlash(__('Titulo guardado.', true));
+                    $this->data['Titulo']['id'] = $this->Titulo->id;
+                } else {
+                    $this->Session->setFlash(__('El Titulo no se pudo guardar. Por favor, intente de nuevo.', true));
+                }
+            }
+            $this->set('titulos',$this->Titulo->find('list'));
+
+        }
 
 	function add() {
 		if (!empty($this->data)) {
