@@ -578,7 +578,6 @@ class DepuradoresController extends AppController {
        	//$this->paginate['Plan']['conditions']['Instit.activo'] = 1;
 
         $planes = $this->paginate('Plan');
-
         $this->set('planes', $planes);
 
         $this->set('url_conditions', $url_conditions);
@@ -594,7 +593,7 @@ class DepuradoresController extends AppController {
         $this->Instit->Jurisdiccion->order = 'Jurisdiccion.name';
         $jurisdicciones = $this->Instit->Jurisdiccion->find('list');
 
- 		$titulos = $this->Plan->Titulo->find('list');
+ 		$titulos = $this->Plan->Titulo->find('list', array('conditions'=>array('oferta_id'=>$this->data['FPlan']['oferta_id'])));
 
     	$this->set(compact('planes','titulos','ofertas',
     	'sectores','subsectores','jurisdicciones'));
