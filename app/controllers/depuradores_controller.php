@@ -595,9 +595,7 @@ class DepuradoresController extends AppController {
 		if(!empty($this->data['FPlan']['oferta_id']))
 			$condicion['conditions']['oferta_id'] = $this->data['FPlan']['oferta_id'];
 
-		debug($condicion);
  		$titulos = $this->Plan->Titulo->find('list', $condicion);
-
 
     	$this->set(compact('planes','titulos','ofertas',
     	'sectores','subsectores','jurisdicciones'));
