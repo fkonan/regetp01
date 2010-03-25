@@ -19,7 +19,6 @@ class DepuradoresController extends AppController {
 			
 			$depurador = new AgregaSectores($this->db->default);
 			$depurador->main();	
-		
 	}
 	
 	
@@ -592,8 +591,12 @@ class DepuradoresController extends AppController {
         $this->Instit->Jurisdiccion->order = 'Jurisdiccion.name';
         $jurisdicciones = $this->Instit->Jurisdiccion->find('list');
 
+		$condicion = array();
+		if(!empty($this->data['FPlan']['oferta_id']))
+			$condicion['conditions']['oferta_id'] = $this->data['FPlan']['oferta_id'];
 
- 	$titulos = $this->Plan->Titulo->find('list', array('conditions'=>array('oferta_id'=>$this->data['FPlan']['oferta_id'])));
+		debug($condicion);
+ 		$titulos = $this->Plan->Titulo->find('list', $condicion);
 
 
     	$this->set(compact('planes','titulos','ofertas',
