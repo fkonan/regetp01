@@ -8,9 +8,7 @@ $paginator->options(array('url' => $url_conditions));
 
 
 
-<!--
-				BUSQUEDA POR SU OFERTA
-		-->
+<!-- 	BUSQUEDA POR SU OFERTA  	-->
 
 <div id="search-planes"><?php echo $form->create('Form',array('url'=>'/depuradores/depurar_titulos','id'=>'Form'));?>
 <?php
@@ -146,24 +144,37 @@ echo $form->input('FPlan.sector_id',array(
 	}
 
 
-	function activarCambios(){
-		alert("Hola");
-		$('formPlanes');
-	}
-
-
 	function cambiarTitulos(e){
-		e.select($F('titulo_general'));
+		e.select($F('titulo_id'));
 
 	}
+
+
+        function seleccionarTitulosEnMasa() {
+            $$('.titulo').each(function(e){
+                e.value = $F('titulo_id');
+            });
+        }
 
 	Event.observe(window, 'load', function(){
-			$('titulo_general').observe('change', function(){
-					$$('.titulo').each(function(e){
-						e.value = $F('titulo_general');
-					});
-				});
-		});
+            $('titulo_id').observe('change', seleccionarTitulosEnMasa);
+	});
+
+
+
+        function actualizarSelects() {
+              selectedText = $('titulo_id').options[$('titulo_id').selectedIndex].text;
+
+              console.info(selectedText);
+
+              $$('.titulo').each(function(e){
+                  var option = new Element('option', {value: $F('titulo_id')});
+                  option.update(selectedText);
+                  e.appendChild(option);
+                  e.value = $F('titulo_id');
+            });
+            
+        }
 -->
 </script>
 
@@ -245,9 +256,17 @@ foreach ($planes as $p) {
 	$i++;
 }
 
-echo $form->input('Plan.titulo_id', array('label'=>'Asignar título en masa','id'=>'titulo_general', 'default'=>'Seleccione'));
+echo $form->input('Plan.titulo_id', array(
+    'label'=>'Asignar título en masa',
+    'div'=>array('id'=>'divTituloGral'),
+    'id'=>'titulo_id',
+    'default'=>'Seleccione'));
 ?>
 
+<<<<<<< .mine
+//echo $form->button('Seleccionar Todos', array('onclick'=>'checkAll()', 'style'=>'clear:none;float:left;width:144px;'));
+//echo $form->button('Deseleccionar Todos', array('onclick'=>'unCheckAll()', 'style'=>'clear:none;float:left;width:144px;'));
+=======
 
 
 
@@ -282,6 +301,7 @@ echo $form->input('Plan.titulo_id', array('label'=>'Asignar título en masa','id'
 
 echo $form->button('Seleccionar Todos', array('onclick'=>'checkAll()', 'style'=>'clear:none;float:left;width:144px;'));
 echo $form->button('Deseleccionar Todos', array('onclick'=>'unCheckAll()', 'style'=>'clear:none;float:left;width:144px;'));
+>>>>>>> .r324
 
 
 echo $form->hidden('FPlan.limit');
@@ -292,7 +312,30 @@ echo $form->hidden('FPlan.jurisdiccion_id');
 
 echo $form->end('Guardar Cambios');
 
+
 ?>
+
+<a href="javascript:" onclick="$('formularioNuevoTitulo').toggle()" style="background-color: gray; color: white; text-decoration: none">Agregar Nuevo Título de Referencia</a>
+<div id="formularioNuevoTitulo" style="display: none; background-color: gray">
+<?
+echo $ajax->form(array('type' => 'post',
+    'options' => array(
+        'model'=>'Titulo',
+        'url' => array(
+            'controller' => 'titulos',
+            'action' => 'add_and_give_me_select_options'
+        ),
+        'id'=> "formAltaTitulo",
+        'complete'=>'$("formAltaTitulo").reset(); actualizarSelects();',
+        'update'=> 'divTituloGral',
+    )
+));
+echo $form->hidden('marco_ref', array('value'=>0));
+echo $form->input('oferta_id', array('options'=>$ofertas, 'label'=>false));
+echo $form->input('name', array('style'=>'clear:none;'));
+echo $form->end('Guardar Título');
+?>
+</div>
 
 <div>
 <?php
