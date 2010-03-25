@@ -8,7 +8,6 @@ class DepuradoresController extends AppController {
 	var $db;
 	
 	
-	
 	function agregar_sectores(){
 		App::import('Vendor', 'agrega_sectores/main');
 		uses ('model' . DS . 'datasources' . DS . 'datasource');
@@ -593,7 +592,9 @@ class DepuradoresController extends AppController {
         $this->Instit->Jurisdiccion->order = 'Jurisdiccion.name';
         $jurisdicciones = $this->Instit->Jurisdiccion->find('list');
 
- 		$titulos = $this->Plan->Titulo->find('list', array('conditions'=>array('oferta_id'=>$this->data['FPlan']['oferta_id'])));
+
+ 	$titulos = $this->Plan->Titulo->find('list', array('conditions'=>array('oferta_id'=>$this->data['FPlan']['oferta_id'])));
+
 
     	$this->set(compact('planes','titulos','ofertas',
     	'sectores','subsectores','jurisdicciones'));
