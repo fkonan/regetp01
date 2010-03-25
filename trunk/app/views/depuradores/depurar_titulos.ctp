@@ -246,6 +246,39 @@ foreach ($planes as $p) {
 }
 
 echo $form->input('Plan.titulo_id', array('label'=>'Asignar título en masa','id'=>'titulo_general', 'default'=>'Seleccione'));
+?>
+
+
+
+
+
+
+
+
+<a style="font-size: 10px;" href="javascript:" onclick="$('nuevo_titulo').toggle(); return false;">Nuevo Título</a>
+<div style="display: none; background-color: withe;" id="nuevo_titulo">
+	<div class="titulos form"> 
+		<?php echo $ajax->form('Título', array('action'));?>
+			<fieldset>
+		 		<legend><?php __('Agregar Título');?></legend>
+			<?php
+				echo $form->input('name', array('label'=>'Nombre'));
+				echo $form->input('oferta_id');
+			?>
+			</fieldset>
+		<?php echo $form->end('Submit');?>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+<?php
 
 echo $form->button('Seleccionar Todos', array('onclick'=>'checkAll()', 'style'=>'clear:none;float:left;width:144px;'));
 echo $form->button('Deseleccionar Todos', array('onclick'=>'unCheckAll()', 'style'=>'clear:none;float:left;width:144px;'));
