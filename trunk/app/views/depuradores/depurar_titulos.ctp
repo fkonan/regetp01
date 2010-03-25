@@ -165,8 +165,6 @@ echo $form->input('FPlan.sector_id',array(
         function actualizarSelects() {
               selectedText = $('titulo_id').options[$('titulo_id').selectedIndex].text;
 
-              console.info(selectedText);
-
               $$('.titulo').each(function(e){
                   var option = new Element('option', {value: $F('titulo_id')});
                   option.update(selectedText);
@@ -256,26 +254,27 @@ foreach ($planes as $p) {
 	$i++;
 }
 
-echo $form->input('Plan.titulo_id', array(
+
+
+echo $form->input('titulo_id', array(
+    'options'=>$titulos,
     'label'=>'Asignar título en masa',
     'div'=>array('id'=>'divTituloGral'),
     'id'=>'titulo_id',
     'default'=>'Seleccione'));
-?>
 
-<<<<<<< .mine
+
+
 //echo $form->button('Seleccionar Todos', array('onclick'=>'checkAll()', 'style'=>'clear:none;float:left;width:144px;'));
 //echo $form->button('Deseleccionar Todos', array('onclick'=>'unCheckAll()', 'style'=>'clear:none;float:left;width:144px;'));
-=======
 
-
-
+?>
 
 
 
 
 <a style="font-size: 10px;" href="javascript:" onclick="$('nuevo_titulo').toggle(); return false;">Nuevo Título</a>
-<div style="display: none; background-color: withe;" id="nuevo_titulo">
+<div style="display: none; background-color: white;" id="nuevo_titulo">
 	<div class="titulos form"> 
 		<?php echo $ajax->form('Título', array('action'));?>
 			<fieldset>
@@ -301,7 +300,7 @@ echo $form->input('Plan.titulo_id', array(
 
 echo $form->button('Seleccionar Todos', array('onclick'=>'checkAll()', 'style'=>'clear:none;float:left;width:144px;'));
 echo $form->button('Deseleccionar Todos', array('onclick'=>'unCheckAll()', 'style'=>'clear:none;float:left;width:144px;'));
->>>>>>> .r324
+
 
 
 echo $form->hidden('FPlan.limit');
