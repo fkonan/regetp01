@@ -5,6 +5,7 @@
 	<?php
 		echo $form->input('id');
 		echo $form->input('name');
+		echo $form->hidden('old_sector_id');
 		echo $form->input('sector_id');
 	?>
 	</fieldset>
