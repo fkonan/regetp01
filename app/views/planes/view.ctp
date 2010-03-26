@@ -29,7 +29,7 @@ $cue_instit = $instit['cue'].$anexo;
 		</dd>
 
                 <? if ( $plan['Titulo']['name'] ) { ?>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Referencial de Título'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Título de Referencia'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $plan['Titulo']['name']; ?>
 			&nbsp;

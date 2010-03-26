@@ -118,8 +118,18 @@ class Plan extends AppModel {
 				'message' => 'La duración no puede ser un valor tan alto'
 			
 			)
-		)
+		),
+
+                'titulo_id' => array(
+                        'coincidir_con_oferta' => array('message'=>'El título seleccionado no corresponde a la oferta indicada.')
+                )
 	);
+
+
+
+        function coincidir_con_oferta(){
+            return false;
+        }
 	
 	function beforeSave()
 	{  		

@@ -10,6 +10,27 @@ class TitulosController extends AppController {
 		$this->set('titulos', $this->paginate());
 	}
 
+
+        function list_por_oferta_id($oferta_id = 0){
+            $conditions = array();
+            if (!empty($oferta_id)) {
+                $conditions = array('Titulo.oferta_id'=>$oferta_id);
+            }
+
+            if (!empty($this->passedArgs['Plan.oferta_id'])) {
+                $conditions = array('Titulo.oferta_id'=>$this->passedArgs['Plan.oferta_id']);
+            }
+
+            if (!empty($this->data['Plan']['oferta_id'])) {
+                $conditions = array('Titulo.oferta_id'=>$this->data['Plan']['oferta_id']);
+            }
+
+            if ($this->RequestHandler->isAjax()) {
+                $this->layout = false;
+            }
+            $this->set('titulos',$this->Titulo->find('list', array('conditions'=>$conditions)));
+        }
+
 	function view($id = null) {
 		if (!$id) {
 			$this->flash(__('Invalid Titulo', true), array('action'=>'index'));

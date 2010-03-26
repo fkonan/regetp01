@@ -160,7 +160,7 @@
 
 
                  echo $form->input('Plan.titulo_id',array(
-                    'label'=>'Referencial de Título',
+                    'label'=>'Título de Referencia',
                     'options'=>$titulos,
                     'empty'=>'Seleccione',
                 ));
