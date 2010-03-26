@@ -157,12 +157,16 @@
                 'label'=>'Orientación',
                 'empty'=>'Seleccione',
                 ));
+
+
+                 echo $form->input('Plan.titulo_id',array(
+                    'label'=>'Referencial de Título',
+                    'options'=>$titulos,
+                    'empty'=>'Seleccione',
+                ));
         }
 
-        ?>
-
-
-        <?php
+        
         echo $form->input('Plan.norma',array(
         'label'=>'Normativa'
         ));
