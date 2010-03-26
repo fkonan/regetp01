@@ -46,7 +46,7 @@ foreach ($titulos as $titulo):
 		<td class="actions">
 			<?php echo $html->link(__('Ver','View', true), array('action'=>'view', $titulo['Titulo']['id'])); ?>
 			<?php echo $html->link(__('Editar','Edit', true), array('action'=>'edit', $titulo['Titulo']['id'])); ?>
-			<?php echo $html->link(__('Borrar','Delete', true), array('action'=>'delete', $titulo['Titulo']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $titulo['Titulo']['id'])); ?>
+			<?php echo $html->link(__('Borrar','Delete', true), array('action'=>'delete', $titulo['Titulo']['id']), null, sprintf(__('Borrar %s?', true), $titulo['Titulo']['name'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

@@ -37,7 +37,7 @@ foreach ($orientaciones as $orientacion):
 		<td class="actions">
 			<?php echo $html->link(__('Ver', true), array('action'=>'view', $orientacion['Orientacion']['id'])); ?>
 			<?php echo $html->link(__('Editar', true), array('action'=>'edit', $orientacion['Orientacion']['id'])); ?>
-			<?php echo $html->link(__('Borrar', true), array('action'=>'delete', $orientacion['Orientacion']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $orientacion['Orientacion']['id'])); ?>
+			<?php echo $html->link(__('Borrar', true), array('action'=>'delete', $orientacion['Orientacion']['id']), null, sprintf(__('Borrar # %s?', true), $orientacion['Orientacion']['name'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
