@@ -37,7 +37,16 @@ class SubsectoresController extends AppController {
 			$this->redirect(array('action'=>'index'));
 		}
 		if (!empty($this->data)) {
+			
 			if ($this->Subsector->save($this->data)) {
+				
+				if($this->data['Subsector']['old_sector_id'] != $this->data['Subsector']['sector_id']) {
+					$sql = "UPDATE planes SET sector_id=".$this->data['Subsector']['sector_id']. 
+							" WHERE sector_id=".$this->data['Subsector']['old_sector_id']." AND subsector_id=".$this->data['Subsector']['id'];
+
+					$this->Subsector->query($sql);
+				}			
+				
 				$this->Session->setFlash(__('The Subsector has been saved', true));
 				$this->redirect(array('action'=>'index'));
 			} else {
@@ -47,7 +56,10 @@ class SubsectoresController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Subsector->read(null, $id);
 		}
+		
 		$sectores = $this->Subsector->Sector->find('list');
+		$this->data['Subsector']['old_sector_id'] = $this->data['Subsector']['sector_id']; 
+		
 		$this->set(compact('sectores'));
 	}
 
