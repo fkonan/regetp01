@@ -233,10 +233,12 @@ class InstitsController extends AppController {
 
         $orientaciones = $this->Instit->Orientacion->find('list');
 
+        $titulos = $this->Instit->Plan->Titulo->find('list');
+
         $this->set(compact(
                 'gestiones', 'dependencias', 'jurisdicciones',
                 'ofertas','localidades','departamentos','sectores',
-                'claseinstits','etpEstados','orientaciones', 'subsectores'));
+                'claseinstits','etpEstados','orientaciones', 'subsectores', 'titulos'));
     }
 
     /**
@@ -709,6 +711,32 @@ class InstitsController extends AppController {
                 $url_conditions['Plan.subsector_id'] = $this->passedArgs['Plan.subsector_id'];
             }
         }
+
+
+
+         /**
+         *     TITULOS REFERENCIALES
+         */
+        if(!empty($this->data['Plan']['titulo_id'])) {
+            $this->Instit->asociarPlan = true;
+            $this->paginate['conditions']['Plan.titulo_id'] = $this->data['Plan']['titulo_id'];
+
+            $this->Instit->Plan->Titulo->recursive = -1;
+            $titulo = $this->Instit->Plan->Titulo->findById($this->data['Plan']['titulo_id']);
+            $array_condiciones['Con Referencial de Título'] = $titulo['Titulo']['name'];
+            $url_conditions['Plan.titulo_id'] = $this->data['Plan']['titulo_id'];
+        }
+        if(!empty($this->passedArgs['Plan.titulo_id'])) {
+            $this->Instit->asociarPlan = true;
+            $this->paginate['conditions']['Plan.titulo_id'] = $this->passedArgs['Plan.titulo_id'];
+
+            $this->Instit->Plan->Titulo->recursive = -1;
+            $titulo = $this->Instit->Plan->Titulo->findById($this->passedArgs['Plan.titulo_id']);
+            $array_condiciones['Con Referencial de Título'] = $titulo['Titulo']['name'];
+            $url_conditions['Plan.titulo_id'] = $this->passedArgs['Plan.titulo_id'];
+        }
+
+
 
 
 
