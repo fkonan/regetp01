@@ -1,3 +1,18 @@
+<script type="text/javascript">
+    function toggleTitulos(){
+         if ($F('PlanOfertaId') != '') {
+            $('divPlanTituloId').show();
+        }
+        else {
+             $('divPlanTituloId').hide();
+        }
+    }
+
+    Event.observe(window, 'load', function(){
+       toggleTitulos();
+    });
+</script>
+
 <h1>Nueva Oferta Educativa</h1>
 
 <?
@@ -12,10 +27,22 @@ $cue_instit = $instit['cue'].$anexo;
 	
 	<?php
 		echo $form->input('instit_id',array('type'=>'hidden','value'=>$instit['id']));
-		echo $form->input('oferta_id');
+		echo $form->input('oferta_id',array('empty'=>'Seleccione','onchange'=>'toggleTitulos();'));
+
+                echo $form->input(
+                        'titulo_id',
+                        array(
+                            'label'=> 'Título de Referencia',
+                            'div'=>array('id'=>'divPlanTituloId')));
+                echo $ajax->observeField(
+                        'PlanOfertaId',
+                        array(
+                            'update'=> 'PlanTituloId',
+                            'url'=>'/titulos/list_por_oferta_id' ));
+        
 		echo $form->input('norma',array('label'=>'Normativa'));
-		echo $form->input('titulo_id', array('label'=> 'Referencial de Título','empty'=>'Seleccione', 'default'=>'Seleccione'));
-		echo $form->input('nombre');		
+		
+                echo $form->input('nombre');
 		echo $form->input('perfil');
 		
 		

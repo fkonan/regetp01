@@ -723,7 +723,7 @@ class InstitsController extends AppController {
 
             $this->Instit->Plan->Titulo->recursive = -1;
             $titulo = $this->Instit->Plan->Titulo->findById($this->data['Plan']['titulo_id']);
-            $array_condiciones['Con Referencial de Título'] = $titulo['Titulo']['name'];
+            $array_condiciones['Con Título de Referencia'] = $titulo['Titulo']['name'];
             $url_conditions['Plan.titulo_id'] = $this->data['Plan']['titulo_id'];
         }
         if(!empty($this->passedArgs['Plan.titulo_id'])) {
@@ -732,7 +732,7 @@ class InstitsController extends AppController {
 
             $this->Instit->Plan->Titulo->recursive = -1;
             $titulo = $this->Instit->Plan->Titulo->findById($this->passedArgs['Plan.titulo_id']);
-            $array_condiciones['Con Referencial de Título'] = $titulo['Titulo']['name'];
+            $array_condiciones['Con Título de Referencia'] = $titulo['Titulo']['name'];
             $url_conditions['Plan.titulo_id'] = $this->passedArgs['Plan.titulo_id'];
         }
 
