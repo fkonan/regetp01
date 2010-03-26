@@ -12,6 +12,7 @@
                                                     'type'=>'radio',
                                                     'options'=>array(1=>'Con Marco de Referencia', 0=>'Sin marco de Referencia'))
 		);
+		echo $form->hidden('old_oferta_id');
 		echo $form->input('oferta_id');
 	?>
 	</fieldset>

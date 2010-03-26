@@ -55,6 +55,15 @@ class TitulosController extends AppController {
 		}
 		if (!empty($this->data)) {
 			if ($this->Titulo->save($this->data)) {
+				
+				if($this->data['Titulo']['old_oferta_id'] != $this->data['Titulo']['oferta_id']) {
+					$sql = "UPDATE planes SET oferta_id=".$this->data['Titulo']['oferta_id']. 
+						   " WHERE oferta_id=".$this->data['Titulo']['old_oferta_id']." AND titulo_id=".$this->data['Titulo']['id'];
+
+					$this->Titulo->query($sql);
+				}
+				
+				
 				//$this->flash(__('The Titulo has been saved.', true), array('action'=>'index'));
 				$this->Session->setFlash(__('Titulo guardado.', true));
 				$this->redirect(array('action'=>'index'));
@@ -64,6 +73,8 @@ class TitulosController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Titulo->read(null, $id);
 		}
+				
+		$this->data['Titulo']['old_oferta_id'] = $this->data['Titulo']['oferta_id'];
 		$ofertas = $this->Titulo->Oferta->find('list');
 		$this->set(compact('ofertas'));
 	}
