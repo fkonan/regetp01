@@ -270,32 +270,6 @@ echo $form->input('titulo_id', array(
 
 ?>
 
-
-
-
-<a style="font-size: 10px;" href="javascript:" onclick="$('nuevo_titulo').toggle(); return false;">Nuevo Título</a>
-<div style="display: none; background-color: white;" id="nuevo_titulo">
-	<div class="titulos form"> 
-		<?php echo $ajax->form('Título', array('action'));?>
-			<fieldset>
-		 		<legend><?php __('Agregar Título');?></legend>
-			<?php
-				echo $form->input('name', array('label'=>'Nombre'));
-				echo $form->input('oferta_id');
-			?>
-			</fieldset>
-		<?php echo $form->end('Submit');?>
-	</div>
-</div>
-
-
-
-
-
-
-
-
-
 <?php
 
 echo $form->button('Seleccionar Todos', array('onclick'=>'checkAll()', 'style'=>'clear:none;float:left;width:144px;'));
