@@ -10,11 +10,7 @@ if ($session->check('Auth.User')){
 	<ul>
 		<li><? echo $html->link("Nueva Institución","/Instits/add") ?></li>
 		<li><? echo $html->link("Descargas","/Queries/descargar_queries") ?></li>
-		<li><? echo $html->link("Depurar Sectores","/depuradores/sectores_por_sectores") ?></li>
-		<li><? echo $html->link("Depurar Orientaciones","/depuradores/depurar_orientacion") ?></li>
-		<li><? echo $html->link("Depurar Tipo Instits","/depuradores/clases_y_etp") ?></li>
-		<li><? echo $html->link("Depurar Titulos de Referencia","/depuradores/depurar_titulos") ?></li>
-		<li><? echo $html->link("Listado de similares","/depuradores/depurar_similares") ?></li>
+		<li><? echo $html->link("Títulos","/Titulos") ?></li>
 	</ul>
 			
 </div>

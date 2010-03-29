@@ -80,7 +80,8 @@
 				<?  echo $this->renderElement('boxInstituciones'); ?>
 				<?  echo $this->renderElement('boxCuadros'); ?>
 				<?  echo $this->renderElement('boxInformacion'); ?>	
-				
+				<?  echo $this->renderElement('boxDepurador'); ?>
+   
 				<cake:nocache>					
 				<?  echo $this->renderElement('boxTickets'); ?>
 				</cake:nocache>
