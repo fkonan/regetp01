@@ -11,74 +11,84 @@ $paginator->options(array('url' => $url_conditions));
 <!-- 	BUSQUEDA POR SU OFERTA  	-->
 
 <div id="search-planes"><?php echo $form->create('Form',array('url'=>'/depuradores/depurar_titulos','id'=>'Form'));?>
+
+    <table align="left">
+        <tr>
+            <td width="308">
+                <?
+                echo $form->input('FPlan.limit',array(
+                        'label'=>'Cantidad de planes por página',
+                        'options'=>array('10'=>10,'20'=>20,'40'=>40,'60'=>60)
+                     ));
+                ?>
+            </td>               
+            <td width="308">
+                 <? //  JURISDICCION
+                $meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
+                echo $form->input('FPlan.jurisdiccion_id', array(
+                                    'empty' => array('0'=>'Todas'),
+                                    'id'=>'jurisdiccion_id',
+                                    'label'=>'Jurisdicción',
+                                    'after'=>$meter,
+                                    'options'=>$jurisdicciones,
+
+                ));
+                ?>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <?
+                echo $form->input('FPlan.oferta_id',array(
+                                    'options'=>$ofertas,
+                                    'empty'=>'Seleccione',
+                                    'label'=>'Con Oferta'));
+                ?>
+            </td>
+            <td>
+                <?
+                echo $form->input('FPlan.sector_id',array(
+                                    'label'=>'Sector',
+                                    'options'=>$sectores,
+                                    'empty'=>'Seleccione'
+                ));
+                ?>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <?
+                echo $form->input('FPlan.subsector_id', array(
+                                    'label'=>'Subsector',
+                                    'empty'=>'Seleccione',
+                        ));
+                ?>
+            </td>
+        </tr>
+    </table>
+
 <?php
+    echo $ajax->observeField(
+            'FPlanSectorId', array(
+                'url' => '/subsectores/ajax_select_subsector_form_por_sector',
+                'update'=>'FPlanSubsectorId',
+                'loading'=>'$("FPlanSubsectorId").disable();',
+                'complete'=>'$("FPlanSubsectorId").enable();',
+                'onChange'=>true
+    ));
 
-echo $form->input('FPlan.limit',array(
-                    'label'=>'Cantidad por hoja',
-                    'options'=>array('10'=>10,'20'=>20,'40'=>40,'60'=>60)
-       			 ));
-
-echo $form->input('FPlan.oferta_id',array('options'=>$ofertas,
-				        'empty'=>'Seleccione',
-				        'label'=>'Con Oferta'));
-
-$type = 'hidden';
-// esto solo lo ven los editores y los administradores
-if($session->read('Auth.User.role') == 'editor' || $session->read('Auth.User.role') == 'admin' || $session->read('Auth.User.role') == 'desarrollo') {
-	$type = 'text'; //lo muestra como un imputo comun
-}
-
-echo $form->input('FPlan.sector_id',array(
-        'label'=>'Sector',
-        'options'=>$sectores,
-        'empty'=>'Seleccione'
-        ));
-
-        if($session->read('Auth.User.role') == 'editor'||
-        $session->read('Auth.User.role') == 'admin' ||
-        $session->read('Auth.User.role') == 'desarrollo') {
-
-        	echo $form->input('FPlan.subsector_id',
-        	array(
-						                'label'=>'Subsector',
-						                'empty'=>'Seleccione',
-        	));
-
-        	echo $ajax->observeField('FPlanSectorId',
-        	array(  'url' => '/subsectores/ajax_select_subsector_form_por_sector',
-				            'update'=>'FPlanSubsectorId',
-				            'loading'=>'$("FPlanSubsectorId").disable();',
-				            'complete'=>'$("FPlanSubsectorId").enable();',
-				            'onChange'=>true
-        	));
-
-        }
-
-        // 		JURISDICCION
-	    $meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
-	    echo $form->input('FPlan.jurisdiccion_id', array(
-	    											'empty' => array('0'=>'Todas'),
-	    											'id'=>'jurisdiccion_id',
-	    											'label'=>'Jurisdicción',
-	    											'after'=>$meter,
-	    											'options'=>$jurisdicciones,
-
-	    ));
-
-      ?>
-      <?php echo $form->end('Buscar', array('style'=>' display: block;
-													        width: 100px;
-													        vertical-align: bottom;
-													        margin-top: 7px;
-													        margin-left: 4px;
-													        border-color: #CEE3F6;
-													        background-color: #DBEBF6;
-													        color: #045FB4;
-													        font-weight: bold;'
-													        )
-		        );
-		?>
-
+   echo $form->end('Buscar', array(
+                    'style'=>'  display: block;
+                                width: 100px;
+                                vertical-align: bottom;
+                                margin-top: 7px;
+                                margin-left: 4px;
+                                border-color: #CEE3F6;
+                                background-color: #DBEBF6;
+                                color: #045FB4;
+                                font-weight: bold;'
+       ));
+?>
 
  </div>
 
@@ -261,7 +271,9 @@ echo $form->input('titulo_id', array(
     'label'=>'Asignar título en masa',
     'div'=>array('id'=>'divTituloGral'),
     'id'=>'titulo_id',
-    'default'=>'Seleccione'));
+    'default'=>'Seleccione',
+    'empty'=>'Seleccione',
+    ));
 
 
 
@@ -269,6 +281,15 @@ echo $form->input('titulo_id', array(
 //echo $form->button('Deseleccionar Todos', array('onclick'=>'unCheckAll()', 'style'=>'clear:none;float:left;width:144px;'));
 
 ?>
+
+<div>
+<?php
+echo $paginator->prev('<< '.__('Anterior', true), array(), null, array('class'=>'disabled'));
+echo $paginator->numbers(array('modulus'=>13));
+echo $paginator->next(__('Siguiente', true).' >>', array('style'=>'float:right;'), null, array('class'=>'disabled'));
+?>
+</div>
+
 
 <?php
 
@@ -287,7 +308,7 @@ echo $form->end('Guardar Cambios');
 
 
 ?>
-
+<br>
 <a href="javascript:" onclick="$('formularioNuevoTitulo').toggle()" style="background-color: gray; color: white; text-decoration: none">Agregar Nuevo Título de Referencia</a>
 <div id="formularioNuevoTitulo" style="display: none; background-color: gray">
 <?
@@ -318,11 +339,6 @@ echo $form->end('Guardar Título');
 ?>
 </div>
 
-<div>
-<?php
-echo $paginator->prev('<< '.__('Anterior', true), array(), null, array('class'=>'disabled'));
-//echo $paginator->numbers();
-echo $paginator->next(__('Siguiente', true).' >>', array('style'=>'float:right;'), null, array('class'=>'disabled'));
-?>
-</div>
+<br>
+
 

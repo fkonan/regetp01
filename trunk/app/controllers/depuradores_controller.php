@@ -585,8 +585,12 @@ class DepuradoresController extends AppController {
         $this->Plan->Sector->order ='Sector.name';
         $sectores = $this->Plan->Sector->find('list');
 
+        $subsecConditions = array();
+        if (!empty($this->data['FPlan']['sector_id'])) {
+            $subsecConditions = array('Subsector.sector_id'=>$this->data['FPlan']['sector_id']);
+        }
         $this->Plan->Subsector->order ='Subsector.name';
-        $subsectores = $this->Plan->Subsector->find('list');
+        $subsectores = $this->Plan->Subsector->find('list', array('conditions'=>$subsecConditions));
 
         $this->Instit->Jurisdiccion->order = 'Jurisdiccion.name';
         $jurisdicciones = $this->Instit->Jurisdiccion->find('list');
