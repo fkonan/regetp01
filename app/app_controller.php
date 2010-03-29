@@ -130,6 +130,11 @@ class AppController extends Controller {
 			if ($this->name == 'Tickets' && $this->action == 'view') {$llAuth = true;}
 			if ($this->name == 'Tickets' && $this->action == 'provincias_pendientes') {$llAuth = true;}
 
+                        if ($this->name == 'Titulos' && $this->action == 'index') {$llAuth = true;}
+			if ($this->name == 'Titulos' && $this->action == 'add') {$llAuth = true;}
+			if ($this->name == 'Titulos' && $this->action == 'edit') {$llAuth = true;}
+			if ($this->name == 'Titulos' && $this->action == 'view') {$llAuth = true;}
+
 			if ($this->name == 'HistorialCues' && $this->action == 'search_form') {$llAuth = true;}
 			if ($this->name == 'HistorialCues' && $this->action == 'search') {$llAuth = true;}
 			
@@ -198,8 +203,7 @@ class AppController extends Controller {
 		if ($this->name == 'Localidades' && $this->action == 'ajax_select_localidades_form_por_departamento') {$llAuth = true;}	
 		if ($this->name == 'Localidades' && $this->action == 'ajax_select_localidades_form_por_jurisdiccion') {$llAuth = true;}
 		if ($this->name == 'Subsectores' && $this->action == 'ajax_select_subsector_form_por_sector') {$llAuth = true;}
-		
-		
+		if ($this->name == 'Titulos' && $this->action == 'add_and_give_me_select_options') {$llAuth = true;}
 		
 		/**
 		 * Hacer que solo puedan modificar sus datos y contraseña el usuario que es dueño de esos datos
