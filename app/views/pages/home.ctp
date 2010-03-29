@@ -27,25 +27,18 @@ endif;
 
 <h2>Versión 1.4</h2>
 
-<ul>
-    <li><b>Orientación de la Institución</b></li>
-    <ul type="circle">
-        <li>Se agregó una "Orientación" a cada Institución ingresada.</li>
-        <li>Se migró información de los excel de la Unidad de Información</li>
-    </ul>
-
-    <li><b>Títulos de Referencia</b></li>
-    <ul type="circle">
-        <li>Se agrego la posibilidad de agregar Títulos de Referencia a los planes.</li>
-        <li>Se migró información de los excel de la Unidad de Información</li>
-    </ul>
-
-    <li><b>Cambios generales</b></li>
-    <ul type="circle">
-        <li>Se proporcionó una interfaz web de depuración, para que el personal especializado defina los nuevos valores y asi poder visualizar esta nueva información lo antes posible.</li>
-        <li>Se realizaron informes estadísticos.</li>
-    </ul>
-</ul>
+<p>En esta nueva versión del registro Federal de Instituciones de ETP, nos
+    encontraremos con dos modificaciones importantes en la base de datos:
+</p>
+<p>
+    <b>1°)</b> Tenemos la <b>Orientación</b>, que es una particularidad de cada
+Institución ingresada y nos indica si la misma es del tipo <b>Agropecuaria</b>, <b>Industrial</b> o
+de <b>Otro</b> tipo.
+</p>
+<p>
+    <b>2°)</b> Tenemos los <b>Títulos de Referencia</b>. Consiste en un <b>catálogo
+        de títulos</b> con y sin marco de referencia, relacionado con cada uno de los planes del registro.
+</p>
 
 <br>
 

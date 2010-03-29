@@ -5,6 +5,7 @@
     <li><b>Orientación de la Institución</b></li>
     <ul type="circle">
         <li>Se agregó una "Orientación" a cada Institución ingresada.</li>
+        <li>Las Orientaciones posibles son: Agropecuaria, Industrial u Otra.</li>
         <li>Se migró información de los excel de la Unidad de Información</li>
     </ul>
 
@@ -14,13 +15,14 @@
         <li>Se migró información de los excel de la Unidad de Información</li>
     </ul>
 
-    <li><b>Cambios generales</b></li>
+    <li><b>Cambios Generales</b></li>
     <ul type="circle">
         <li>Se proporcionó una interfaz web de depuración, para que el personal especializado defina los nuevos valores y asi poder visualizar esta nueva información lo antes posible.</li>
         <li>Se realizaron informes estadísticos.</li>
+        <li>Se modificaron las vistas de Instituciones y Planes.</li>
+        <li>Se incorporaron éstos nuevos campos como criterios de búsqueda en el buscador. (esto solo es válido para los usuarios de la Unidad de Información hasta tanto no se haya cargado toda la información correspondiente a las orientaciones y a los títulos de referencia)</li>
     </ul>
 </ul>
-
 
 <h1>RFIETP - Novedades de la versión 1.3</h1>
 
