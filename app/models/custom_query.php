@@ -58,7 +58,6 @@ class CustomQuery extends AppModel{
 	
 	function query($sql = null){
 		if(!empty($sql)){
-			debug("no vacio");
 			return parent::query($sql);
 		}
 		else{
