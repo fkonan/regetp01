@@ -1,8 +1,32 @@
+<h1>RFIETP - Novedades de la versión 1.4</h1>
+
+<br>
+<ul>
+    <li><b>Orientación de la Institución</b></li>
+    <ul type="circle">
+        <li>Se agregó una "Orientación" a cada Institución ingresada.</li>
+        <li>Se migró información de los excel de la Unidad de Información</li>
+    </ul>
+
+    <li><b>Títulos de Referencia</b></li>
+    <ul type="circle">
+        <li>Se agrego la posibilidad de agregar Títulos de Referencia a los planes.</li>
+        <li>Se migró información de los excel de la Unidad de Información</li>
+    </ul>
+
+    <li><b>Cambios generales</b></li>
+    <ul type="circle">
+        <li>Se proporcionó una interfaz web de depuración, para que el personal especializado defina los nuevos valores y asi poder visualizar esta nueva información lo antes posible.</li>
+        <li>Se realizaron informes estadísticos.</li>
+    </ul>
+</ul>
+
 
 <h1>RFIETP - Novedades de la versión 1.3</h1>
 
 <br>
-<ul >
+
+<ul>
 
 	<li>
     <b>Diseño</b>

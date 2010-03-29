@@ -130,10 +130,7 @@ class AppController extends Controller {
 			if ($this->name == 'Tickets' && $this->action == 'view') {$llAuth = true;}
 			if ($this->name == 'Tickets' && $this->action == 'provincias_pendientes') {$llAuth = true;}
 
-                        if ($this->name == 'Titulos' && $this->action == 'index') {$llAuth = true;}
-			if ($this->name == 'Titulos' && $this->action == 'add') {$llAuth = true;}
-			if ($this->name == 'Titulos' && $this->action == 'edit') {$llAuth = true;}
-			if ($this->name == 'Titulos' && $this->action == 'view') {$llAuth = true;}
+                        if ($this->name == 'Titulos') {$llAuth = true;}
 
 			if ($this->name == 'HistorialCues' && $this->action == 'search_form') {$llAuth = true;}
 			if ($this->name == 'HistorialCues' && $this->action == 'search') {$llAuth = true;}

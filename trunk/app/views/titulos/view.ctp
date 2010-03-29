@@ -11,9 +11,9 @@
 			<?php echo $titulo['Titulo']['name']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Marco referencial'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Marco de referencia'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo ($titulo['Titulo']['marco_ref']==1)? "Con marco referencial":"Sin marco referencial"; ?>
+			<?php echo ($titulo['Titulo']['marco_ref']==1)? "Con marco de referencia":"Sin marco de referencia"; ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Oferta'); ?></dt>
