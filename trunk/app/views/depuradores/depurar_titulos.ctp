@@ -304,7 +304,15 @@ echo $ajax->form(array('type' => 'post',
     )
 ));
 echo $form->hidden('marco_ref', array('value'=>0));
-echo $form->input('oferta_id', array('options'=>$ofertas, 'label'=>false));
+echo $form->input(
+        'oferta_id',
+        array(
+            'options'=>$ofertas,
+            'label'=>false,
+            'empty' => 'Seleccione',
+            'default' => $this->data['FPlan']['oferta_id'],
+        )
+     );
 echo $form->input('name', array('style'=>'clear:none;'));
 echo $form->end('Guardar Título');
 ?>
