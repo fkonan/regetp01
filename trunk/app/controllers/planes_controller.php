@@ -285,7 +285,7 @@ class PlanesController extends AppController {
 		$instit = $this->Plan->Instit->read(null, $this->data['Plan']['instit_id']);
 		$this->set('instit',$instit['Instit']);
 
-		$titulos = $this->Plan->Titulo->find('list');
+		$titulos = $this->Plan->Titulo->find('list', array('conditions'=>array('oferta_id'=>$this->data['Plan']['oferta_id'])));
 		$ofertas = $this->Plan->Oferta->find('list');
 		
 		$sectores = $this->Plan->Sector->find('list',array('order'=>'Sector.name'));		
