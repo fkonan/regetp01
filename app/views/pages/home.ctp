@@ -18,35 +18,35 @@ Requerimientos mínimos para utilizar el <b>Sistema Gestión de Registro</b>:<br /
 
 <h1>Bienvenido al RFIETP</h1>
 
-<?php
-if (Configure::read() > 0):
-	Debugger::checkSessionKey();
-endif;
-?>
+
+
 <br />
 
-<h2>Versión 1.4</h2>
-
-<p>En esta nueva versión del registro Federal de Instituciones de ETP, nos
-    encontraremos con dos modificaciones importantes en la base de datos:
-</p>
-<p>
-    <b>1°)</b> Tenemos la <b>Orientación</b>, que es una particularidad de cada
-Institución ingresada y nos indica si la misma es del tipo <b>Agropecuaria</b>, <b>Industrial</b> o
-de <b>Otro</b> tipo.
-</p>
-<p>
-    <b>2°)</b> Tenemos los <b>Títulos de Referencia</b>. Consiste en un <b>catálogo
-        de títulos</b> con y sin marco de referencia, relacionado con cada uno de los planes del registro.
-</p>
-
-<br>
+<h2>¡Nueva Versión 1.4!</h2>
 
 <p>
-Un listado completo de las modificaciones realizadas en esta última versión, puede encontrarlas haciendo click <?php echo $html->link('aquí','/pages/detalle_v1_2');?>.
+ Desde su puesta en funcionamiento el nuevo sistema RFIETP se encuentra en
+ permanente actualización y mejora, tanto del contenido de información de la
+ base de datos como de la aplicación que permite su gestión. En esa línea de
+ trabajo a partir del <b>8 de Marzo del 2010 se ha instalado la versión 1.4
+ del sistema.</b>
 </p>
 
-	 
+
+<p>
+   En ésta ocasión se está trabajando en relacionar la <b>Orientación</b> con la Institución,
+   para conocer si es del tipo "Agropecuaria", "Industrial" u "Otro Tipo",
+   también se está haciendo incapié en el <b>Catálogo de Títulos</b> para todos los
+   planes ingresados.
+   Estos cambios se verán reflejados una vez que la Unidad de Información
+   haya finalizado con la carga de datos.
+</p>
+
+<p>
+Un listado completo de las modificaciones realizadas en esta última versión, puede encontrarlas haciendo click
+<? echo $html->link('aquí','/pages/detalle_v1_2')?>.
+</p>
+
 <br>
 <hr>
 <br>
