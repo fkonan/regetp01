@@ -24,7 +24,7 @@ if ($session->check('Auth.User')){
 				<li><? echo $html->link("Sectores","/Sectores") ?></li>
 				<li><? echo $html->link("Subsectores","/Subsectores") ?></li>
 				<li><? echo $html->link("Orientaciones","/Orientaciones") ?></li>
-				<li><? echo $html->link("Titulos","/Titulos") ?></li>
+				<li><? echo $html->link("Títulos","/Titulos") ?></li>
 				
 				<li><? echo $html->link("Estados ETP","/EtpEstados") ?></li>
 				<li><? echo $html->link("Clases Instits","/Claseinstits") ?></li>
