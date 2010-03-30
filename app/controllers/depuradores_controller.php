@@ -549,7 +549,21 @@ class DepuradoresController extends AppController {
 
                 $this->data['FPlan']['jurisdiccion_id'] = $this->passedArgs['Instit.jurisdiccion_id'];
         }
-
+        
+        /**
+         *  Por Plan
+         */
+        
+  	  if(!empty($this->data['FPlan']['plan_nombre'])) {
+	      $this->paginate['Plan']['conditions']["to_ascii(lower(Plan.nombre)) SIMILAR TO ?"] = array($this->Instit->convertir_para_busqueda_avanzada($this->data['FPlan']['plan_nombre']));
+          $array_condiciones['Nombre del Plan'] = $this->data['FPlan']['plan_nombre'];
+          $url_conditions['FPlan.plan_nombre'] = $this->data['FPlan']['plan_nombre'];
+      }
+	  if(!empty($this->passedArgs['plan_nombre'])) {
+          $this->paginate['Plan']['conditions']["to_ascii(lower(Plan.nombre)) SIMILAR TO ?"] = array($this->Instit->convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['plan_nombre'])));
+          $array_condiciones['Nombre del Plan'] = utf8_decode($this->passedArgs['plan_nombre']);
+          $url_conditions['FPlan.plan_nombre'] = utf8_decode($this->passedArgs['plan_nombre']);
+      }
 
         /***********************************************************************/
         /*                               Busqueda                              */
@@ -576,8 +590,7 @@ class DepuradoresController extends AppController {
        	//$this->paginate['Plan']['conditions']['Instit.activo'] = 1;
 
         $planes = $this->paginate('Plan');
-        $this->set('planes', $planes);
-
+     
         $this->set('url_conditions', $url_conditions);
 
         $ofertas = $this->Plan->Oferta->find('list');
