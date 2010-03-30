@@ -67,6 +67,9 @@ $paginator->options(array('url' => $url_conditions));
         </tr>
     </table>
 
+<?php echo $form->input('FPlan.plan_nombre', array('label'=>'Nombre del Plan',
+'after'=> '<cite>Realiza una búsqueda por parte del nombre del plan.<br>Ej: SOLDADURA</cite>'));?>
+
 <?php
     echo $ajax->observeField(
             'FPlanSectorId', array(
@@ -94,23 +97,7 @@ $paginator->options(array('url' => $url_conditions));
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <hr>
-
 
 
 
