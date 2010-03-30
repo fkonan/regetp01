@@ -8,7 +8,6 @@ echo $paginator->counter(array(
 ?></p>
 <table cellpadding="0" cellspacing="0">
 <tr>
-	<th><?php echo $paginator->sort('id');?></th>
 	<th><?php echo $paginator->sort('Nombre','name');?></th>
 	<th><?php echo $paginator->sort("Marco de referencia",'marco_ref');?></th>
 	<th><?php echo $paginator->sort("Oferta",'Oferta.name');?></th>
@@ -22,11 +21,11 @@ foreach ($titulos as $titulo):
 		$class = ' class="altrow"';
 	}
 ?>
-	<tr<?php echo $class;?>>
-		<td>
-			<?php echo $titulo['Titulo']['id']; ?>
-		</td>
-		<td>
+<script>
+
+</script>
+<tr onmouseover="$(this).addClassName('altrow')" onmouseout="$(this).removeClassName('altrow')" >
+            <td style="text-align: left;">
 			<?php echo $titulo['Titulo']['name']; ?>
 		</td>
 		<td>
@@ -39,12 +38,12 @@ foreach ($titulos as $titulo):
 		</td>
 		<td>
 			<?php 
-			$show = (empty($titulo['Oferta']['name']))? "" : $titulo['Oferta']['name'];
+			$show = (empty($titulo['Oferta']['abrev']))? "" : $titulo['Oferta']['abrev'];
 			echo $show; 
 			?>
 		</td>
 		<td class="actions">
-			<?php echo $html->link(__('Ver','View', true), array('action'=>'view', $titulo['Titulo']['id'])); ?>
+			<?php //echo $html->link(__('Ver','View', true), array('action'=>'view', $titulo['Titulo']['id'])); ?>
 			<?php echo $html->link(__('Editar','Edit', true), array('action'=>'edit', $titulo['Titulo']['id'])); ?>
 			<?php echo $html->link(__('Borrar','Delete', true), array('action'=>'delete', $titulo['Titulo']['id']), null, sprintf(__('Borrar %s?', true), $titulo['Titulo']['name'])); ?>
 		</td>
