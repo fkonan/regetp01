@@ -121,15 +121,34 @@ class Plan extends AppModel {
 		),
 
                 'titulo_id' => array(
-                        'coincidir_con_oferta' => array('message'=>'El título seleccionado no corresponde a la oferta indicada.')
+                        'coincidir_con_oferta' => array(
+                            'rule'   =>'coincidir_con_oferta',
+                            'message'=>'El título seleccionado no corresponde a la oferta indicada.')
                 )
 	);
 
 
-
+        /**
+         * Me dice si el titulo de referencia
+         * pertenece a la oferta
+         * @return boolean
+         */
         function coincidir_con_oferta(){
-            return false;
+            if(!empty($this->data['Plan']['oferta_id'])){
+                if (!empty($this->data['Plan']['titulo_id'])) {
+                    $cond['conditions'] = array(
+                        'Titulo.oferta_id'=>$this->data['Plan']['oferta_id'],
+                        'Titulo.id'=>$this->data['Plan']['titulo_id'],
+                    );
+                    if ($this->Titulo->find('count',$cond) == 1){
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
         }
+        
 	
 	function beforeSave()
 	{  		
