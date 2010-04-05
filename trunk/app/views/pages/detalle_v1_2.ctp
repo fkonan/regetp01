@@ -23,7 +23,7 @@
         <li>Se incorporaron éstos nuevos campos como criterios de búsqueda en el buscador. (esto solo es válido para los usuarios de la Unidad de Información hasta tanto no se haya cargado toda la información correspondiente a las orientaciones y a los títulos de referencia)</li>
     </ul>
 </ul>
-
+<br>
 <h1>RFIETP - Novedades de la versión 1.3</h1>
 
 <br>
