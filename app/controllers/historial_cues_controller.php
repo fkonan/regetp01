@@ -15,6 +15,9 @@ class HistorialCuesController extends AppController {
 			$this->Session->flash('ID de Institución inválida');
 		}	
 		$this->set('cues',$this->HistorialCue->cuesDeInstit($instit_id));
+
+                $this->HistorialCue->Instit->id = $instit_id;
+                $this->set('instit',$this->HistorialCue->Instit->read());
 		$this->set('instit_id',$instit_id);
 		
 		$this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$instit_id );
@@ -51,8 +54,7 @@ class HistorialCuesController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->HistorialCue->read(null, $id);
 		}
-		
-		$this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$id );
+		$this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$this->data['Instit']['id'] );
 	}
 	
 	function delete($id = null) {
