@@ -8,13 +8,13 @@
         <li>Las Orientaciones posibles son: Agropecuaria, Industrial u Otra.</li>
         <li>Se migró información de los excel de la Unidad de Información</li>
     </ul>
-
+    <br>
     <li><b>Títulos de Referencia</b></li>
     <ul type="circle">
-        <li>Se agrego la posibilidad de agregar Títulos de Referencia a los planes.</li>
+        <li>Se agregó la posibilidad de agregar Títulos de Referencia a los planes.</li>
         <li>Se migró información de los excel de la Unidad de Información</li>
     </ul>
-
+    <br>
     <li><b>Cambios Generales</b></li>
     <ul type="circle">
         <li>Se proporcionó una interfaz web de depuración, para que el personal especializado defina los nuevos valores y asi poder visualizar esta nueva información lo antes posible.</li>

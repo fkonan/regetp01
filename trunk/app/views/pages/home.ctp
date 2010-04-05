@@ -34,9 +34,9 @@ Requerimientos mínimos para utilizar el <b>Sistema Gestión de Registro</b>:<br /
 
 
 <p>
-   En ésta ocasión se está trabajando en relacionar la <b>Orientación</b> con la Institución,
-   para conocer si es del tipo "Agropecuaria", "Industrial" u "Otro Tipo",
-   también se está haciendo incapié en el <b>Catálogo de Títulos</b> para todos los
+   En ésta ocasión se está trabajando en aisgnar una <b>Orientación</b> a la Institución,
+   para conocer si la misma es "Agropecuaria", "Industrial" u "Otro Tipo",
+   también se está haciendo hincapié en el análisis de los <b>Títulos</b> para todos los
    planes ingresados.
    Estos cambios se verán reflejados una vez que la Unidad de Información
    haya finalizado con la carga de datos.
