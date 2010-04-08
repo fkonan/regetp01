@@ -34,6 +34,7 @@ $cue_instit = $instit['cue'].$anexo;
         echo $form->input(
                 'titulo_id',
                 array(
+                    'empty'=>'Seleccione',
                     'label'=> 'Título de Referencia',
                     'div'=>array('id'=>'divPlanTituloId')));
         echo $ajax->observeField(

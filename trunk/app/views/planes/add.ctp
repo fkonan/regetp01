@@ -7,7 +7,7 @@
              $('divPlanTituloId').hide();
         }
     }
-
+    
     Event.observe(window, 'load', function(){
        toggleTitulos();
     });
@@ -28,17 +28,18 @@ $cue_instit = $instit['cue'].$anexo;
 	<?php
 		echo $form->input('instit_id',array('type'=>'hidden','value'=>$instit['id']));
 		echo $form->input('oferta_id',array('empty'=>'Seleccione','onchange'=>'toggleTitulos();'));
-
+                
                 echo $form->input(
-                        'titulo_id',
-                        array(
-                            'label'=> 'Título de Referencia',
-                            'div'=>array('id'=>'divPlanTituloId')));
+                'titulo_id',
+                array(
+                    'empty'=>'Seleccione',
+                    'label'=> 'Título de Referencia',
+                    'div'=>array('id'=>'divPlanTituloId')));
                 echo $ajax->observeField(
-                        'PlanOfertaId',
-                        array(
-                            'update'=> 'PlanTituloId',
-                            'url'=>'/titulos/list_por_oferta_id' ));
+                'PlanOfertaId',
+                array(
+                    'update'=> 'PlanTituloId',
+                    'url'=>'/titulos/list_por_oferta_id' ));
         
 		echo $form->input('norma',array('label'=>'Normativa'));
 		
