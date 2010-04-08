@@ -146,6 +146,7 @@ class Plan extends AppModel {
                         return false;
                     }
                 }
+                return true;
             }
         }
         
