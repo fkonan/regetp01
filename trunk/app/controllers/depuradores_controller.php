@@ -284,7 +284,7 @@ class DepuradoresController extends AppController {
                 }
             }
 
-            $conditions = array(/*'Instit.activo'=>1, */array('OR' =>
+            $conditions = array('Instit.activo'=>1, array('OR' =>
                             array('Plan.sector <>'=>'1',
                                   'Plan.sector_id'=>0,
                                     //'Plan.subsector_id'=>0,

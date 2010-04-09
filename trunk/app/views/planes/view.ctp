@@ -29,9 +29,22 @@ $cue_instit = $instit['cue'].$anexo;
 		</dd>
 
                 <? if ( $plan['Titulo']['name'] ) { ?>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Título de Referencia'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>>
+                    <?php __('Título de Referencia'); ?>
+                    
+                </dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $plan['Titulo']['name']; ?>
+                     <?php echo $plan['Titulo']['name']; ?>
+                      <?php
+                        echo ($plan['Titulo']['marco_ref'])?
+                            $html->image('certificado.png', array(
+                                'height'=>'17px',
+                                'style'=>'position: absolute; botom: -5px; margin-left: -135px;',
+                                'alt'=>'Con Marco de Referencia',
+                                'title'=>'Título con Marco de Referencia'))
+                            :'';
+                        ?>
+                   
 			&nbsp;
 		</dd>
                 <? } ?>
