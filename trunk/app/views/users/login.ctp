@@ -3,8 +3,8 @@
 if($session->check('Message.auth')) $session->flash('auth');
 
 echo $form->create('User', array('action'=>'login'));
-echo $form->input('username',array('label'=>'Usuario'));
-echo $form->input('password', array('type'=>'password','label'=>'Contraseña'));
+echo $form->input('username',array('label'=>'Usuario', 'id'=>'NombreUsuario'));
+echo $form->input('password', array('type'=>'password','label'=>'Contraseña','id'=>'Contrasenia'));
 echo $form->end('Entrar');
 
 ?>
