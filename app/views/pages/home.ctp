@@ -25,21 +25,34 @@ Requerimientos mínimos para utilizar el <b>Sistema Gestión de Registro</b>:<br /
 <h2>¡Nueva Versión 1.4!</h2>
 
 <p>
- Desde su puesta en funcionamiento el nuevo sistema RFIETP se encuentra en
- permanente actualización y mejora, tanto del contenido de información de la
- base de datos como de la aplicación que permite su gestión. En esa línea de
- trabajo a partir del <b>8 de Marzo del 2010 se ha instalado la versión 1.4
- del sistema.</b>
+
+Desde su puesta en funcionamiento en junio de 2009 el sistema RFIETP se encuentra
+en permanente actualización y mejoramiento, tanto del contenido de información de
+la base de datos como de la aplicación que permite su gestión. En esa línea de
+trabajo a partir del 8 de Marzo del 2010 se ha instalado la versión 1.4 del
+sistema.
 </p>
-
-
 <p>
-   En ésta ocasión se está trabajando en aisgnar una <b>Orientación</b> a la Institución,
-   para conocer si la misma es "Agropecuaria", "Industrial" u "Otro Tipo",
-   también se está haciendo hincapié en el análisis de los <b>Títulos</b> para todos los
-   planes ingresados.
-   Estos cambios se verán reflejados una vez que la Unidad de Información
-   haya finalizado con la carga de datos.
+La nueva versión mejora la información del Registro incorporando nuevas categorías
+de clasificación, a saber:
+</p>
+<ul>
+    <li>Orientaciones de Instituciones. Permite identificar a cada institución
+        según su Orientación (Agropecuaria, Industrial, Otra).</li>
+    <br>
+    <li>Títulos de Referencia. Permite agrupar bajo una denominación de
+        referencia a Títulos que son equivalentes pero tienen distinto nombre
+        (porque pertenecen a diferentes jurisdicciones, porque son aprobados por
+        diferente normativa, etc.).</li>
+</ul>
+<br>
+<p>
+Las nuevas categorías facilitan la gestión y búsqueda de información en el
+Registro.
+</p>
+<p>
+Esta información se publicará a medida que la Unidad de Información vaya avanzando
+con la depuración y carga de datos.
 </p>
 
 <p>
