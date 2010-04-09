@@ -461,6 +461,7 @@ class DepuradoresController extends AppController {
 	            }
 	 			$this->Session->setFlash(__($text, true));
  			}
+                        $url_conditions['Plan.titulo_id'] = $this->data['Plan']['titulo_id'];
  		}
     	/***************************** FIN GUARDADO DE LOS PLANES ***************/
 
@@ -592,8 +593,19 @@ class DepuradoresController extends AppController {
         }
 
         // Condicion necesaria
-        $url_conditions['Plan.titulo_id'] = 0;
-       	$this->paginate['Plan']['conditions']['Plan.titulo_id'] = 0;
+        $titulo_id=0;
+        if(!empty($this->data['Plan']['titulo_id'])) {
+            $url_conditions['Plan.titulo_id'] = $this->data['Plan']['titulo_id'];
+            $titulo_id=$this->data['Plan']['titulo_id'];
+        }
+
+        if(!empty($this->passedArgs['Plan.titulo_id'])) {
+            $url_conditions['Plan.titulo_id'] = $this->passedArgs['Plan.titulo_id'];
+            $titulo_id=$this->passedArgs['Plan.titulo_id'];;
+
+        }
+
+        $this->paginate['Plan']['conditions']['Plan.titulo_id'] = 0;
        	//$this->paginate['Plan']['conditions']['Instit.activo'] = 1;
 
         $planes = $this->paginate('Plan');
@@ -623,6 +635,8 @@ class DepuradoresController extends AppController {
 
     	$this->set(compact('planes','titulos','ofertas',
     	'sectores','subsectores','jurisdicciones'));
+
+        $this->set('titulo_id',$titulo_id);
     }
 }
 
