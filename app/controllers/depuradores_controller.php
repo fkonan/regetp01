@@ -557,12 +557,19 @@ class DepuradoresController extends AppController {
   	  if(!empty($this->data['FPlan']['plan_nombre'])) {
 	      $this->paginate['Plan']['conditions']["to_ascii(lower(Plan.nombre)) SIMILAR TO ?"] = array($this->Instit->convertir_para_busqueda_avanzada($this->data['FPlan']['plan_nombre']));
           $array_condiciones['Nombre del Plan'] = $this->data['FPlan']['plan_nombre'];
-          $url_conditions['FPlan.plan_nombre'] = $this->data['FPlan']['plan_nombre'];
-      }
-	  if(!empty($this->passedArgs['plan_nombre'])) {
-          $this->paginate['Plan']['conditions']["to_ascii(lower(Plan.nombre)) SIMILAR TO ?"] = array($this->Instit->convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['plan_nombre'])));
-          $array_condiciones['Nombre del Plan'] = utf8_decode($this->passedArgs['plan_nombre']);
-          $url_conditions['FPlan.plan_nombre'] = utf8_decode($this->passedArgs['plan_nombre']);
+          $url_conditions['Plan.plan_nombre'] = $this->data['FPlan']['plan_nombre'];
+
+          //$this->passedArgs['FPlan.plan_nombre'] = $this->data['FPlan']['plan_nombre'];
+         }
+	  if(!empty($this->passedArgs['Plan.plan_nombre'])) {
+          $this->paginate['Plan']['conditions']["to_ascii(lower(Plan.nombre)) SIMILAR TO ?"] = array($this->Instit->convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['Plan.plan_nombre'])));
+          $array_condiciones['Nombre del Plan'] = utf8_decode($this->passedArgs['Plan.plan_nombre']);
+          $url_conditions['Plan.plan_nombre'] = utf8_decode($this->passedArgs['Plan.plan_nombre']);
+
+          $this->data['FPlan']['plan_nombre'] = $this->passedArgs['Plan.plan_nombre'];
+
+
+
       }
 
         /***********************************************************************/
