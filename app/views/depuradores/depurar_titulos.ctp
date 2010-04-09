@@ -79,6 +79,7 @@ $paginator->options(array('url' => $url_conditions));
                 'onChange'=>true
     ));
 
+   
    echo $form->end('Buscar', array(
                     'style'=>'  display: block;
                                 width: 100px;
@@ -154,6 +155,7 @@ $paginator->options(array('url' => $url_conditions));
 
 	Event.observe(window, 'load', function(){
             $('titulo_id').observe('change', seleccionarTitulosEnMasa);
+            actualizarSelects();
 	});
 
 
@@ -259,6 +261,7 @@ echo $form->input('titulo_id', array(
     'id'=>'titulo_id',
     'default'=>'Seleccione',
     'empty'=>'Seleccione',
+    'value'=>$titulo_id
     ));
 
 
