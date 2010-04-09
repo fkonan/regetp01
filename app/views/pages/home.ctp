@@ -18,8 +18,6 @@ Requerimientos mínimos para utilizar el <b>Sistema Gestión de Registro</b>:<br /
 
 <h1>Bienvenido al RFIETP</h1>
 
-
-
 <br />
 
 <h2>¡Nueva Versión 1.4!</h2>
@@ -39,13 +37,12 @@ de clasificación, a saber:
 <ul>
     <li>Orientaciones de Instituciones. Permite identificar a cada institución
         según su Orientación (Agropecuaria, Industrial, Otra).</li>
-    <br>
     <li>Títulos de Referencia. Permite agrupar bajo una denominación de
         referencia a Títulos que son equivalentes pero tienen distinto nombre
         (porque pertenecen a diferentes jurisdicciones, porque son aprobados por
         diferente normativa, etc.).</li>
 </ul>
-<br>
+<br/>
 <p>
 Las nuevas categorías facilitan la gestión y búsqueda de información en el
 Registro.
@@ -60,9 +57,9 @@ Un listado completo de las modificaciones realizadas en esta última versión, pue
 <? echo $html->link('aquí','/pages/detalle_v1_2')?>.
 </p>
 
-<br>
-<hr>
-<br>
+<br/>
+<hr/>
+<br/>
 
 <p>
 Para realizar consultas sobre el funcionamiento del programa ó para 
