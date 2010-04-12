@@ -441,12 +441,12 @@ class DepuradoresController extends AppController {
                                 // seleccionado el select que era para indicar el titulo generico, pero no tenia fines de guardado
  				if ( "$p" != 'titulo_id') {
 	 				if ($a['selected']) {
-                    	if (!empty($a['titulo_id'])){
-	 						unset($a['selected']);
-	 						$planesGuardar[] = $a;
-                        } else {
-                            $planes_sin_titulo = true;
-                        }
+                                            if (!empty($a['titulo_id'])){
+                                                                            unset($a['selected']);
+                                                                            $planesGuardar[] = $a;
+                                            } else {
+                                                $planes_sin_titulo = true;
+                                            }
 	 				}
  				}
  			}
@@ -587,9 +587,10 @@ class DepuradoresController extends AppController {
         /***********************************************************************/
 
         $this->Plan->recursive = 1;//para alivianar la carga del server
+        $this->Plan->order = array('Plan.nombre ASC');
 
         //datos de paginacion
-        $this->paginate['order'] = array('Plan.titulo_id ASC');
+        //$this->paginate['order'] = array('Plan.nombre ASC');
 
         if(!empty($this->data['FPlan']['last_page'])) {
             $this->paginate['Plan']['page'] = $this->data['FPlan']['last_page'];
