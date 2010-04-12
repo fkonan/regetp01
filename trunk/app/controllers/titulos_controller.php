@@ -45,6 +45,7 @@ class TitulosController extends AppController {
             }
             if (!empty($this->data)) {
                 $this->Titulo->create();
+                $this->data['Titulo']['name'] = utf8_decode($this->data['Titulo']['name']);
                 if ($this->Titulo->save($this->data)) {
                     $this->Session->setFlash(__('Titulo guardado.', true));
                     $this->data['Titulo']['id'] = $this->Titulo->id;
