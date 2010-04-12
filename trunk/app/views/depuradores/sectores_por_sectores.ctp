@@ -1,7 +1,7 @@
 
 <div class="instits form">
 
-<?php echo $form->create('Plan',array(	'url'=>"/depuradores/sectores_por_sectores/$sec_id/$subsec_id",
+<?php echo $form->create('Plan',array(	'url'=>"/depuradores/sectores_por_sectores/$sec_id/$subsec_id/$plan_nombre",
 										'id'=>'FormSectorPorSector'));?>
 <?php		
 		echo $form->input('sector_id_filtro', array(
@@ -22,7 +22,10 @@
                                                      'id'=>'subsector_id_filtro',
                                                      'onChange'=>'$("FormSectorPorSector").submit();'
                                                      ));
-		echo $form->end(null);										 
+
+                echo $form->input('plan_nombre', array('value'=>$plan_nombre, 'label'=>'Nombre del Plan', 'after'=> '<cite>Realiza una búsqueda por parte del nombre del plan.<br>Ej: SOLDADURA</cite>'));
+                
+		echo $form->end('Buscar');
 ?> 
 
 <h1>Plan ID: <?php if(isset($this->data['Plan']['id'])) echo $this->data['Plan']['id'];	?>
@@ -31,7 +34,7 @@
 
 <?php
 if(isset($this->data['Plan']['id'])) { 
-	echo $form->create('Plan',array('url'=>'/depuradores/sectores_por_sectores/'.$sec_id,'id'=>'PlanDepurarForm'));
+	echo $form->create('Plan',array('url'=>'/depuradores/sectores_por_sectores/'.$sec_id.'/plan_nombre:'.$plan_nombre,'id'=>'PlanDepurarForm'));
 		
 		echo $form->hidden('id',array('value'=>$this->data['Plan']['id']));
 		

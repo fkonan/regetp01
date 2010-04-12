@@ -254,6 +254,7 @@ class DepuradoresController extends AppController {
          * @return unknown_type
          */
         function sectores_por_sectores($sec_id=0,$subsec_id=0) {
+            $plan_nombre = '';
             if (!empty($this->data)) {
                 if(isset($this->data['Plan']['sector_id_filtro'])) {
                     $sec_id = $this->data['Plan']['sector_id_filtro'];
@@ -282,7 +283,15 @@ class DepuradoresController extends AppController {
                         $this->Session->setFlash(__('El Plan no pudo ser guardada. Escriba nuevamente el campo incorrecto.', true));
                     }
                 }
+
+                if(isset($this->data['Plan']['plan_nombre'])) {
+                    $plan_nombre = $this->data['Plan']['plan_nombre'];
+                }
             }
+
+            if(isset($this->passedArgs['plan_nombre'])) {
+                    $plan_nombre = $this->passedArgs['plan_nombre'];
+                }
 
             $conditions = array('Instit.activo'=>1, array('OR' =>
                             array('Plan.sector <>'=>'1',
@@ -292,6 +301,7 @@ class DepuradoresController extends AppController {
             
             if($sec_id!=0) $conditions['Plan.sector_id'] =  $sec_id;
             if($subsec_id!=0) $conditions['Plan.subsector_id'] = $subsec_id;
+            if($plan_nombre!='') $conditions["to_ascii(lower(Plan.nombre)) SIMILAR TO ?"] =  array($this->Instit->convertir_para_busqueda_avanzada($plan_nombre));
 
             $this->Plan->recursive = 1;
             $this->data =$this->Plan->find('first',array('conditions'=>$conditions));
@@ -312,6 +322,7 @@ class DepuradoresController extends AppController {
             $this->set('falta_depurar',$total);
             $this->set('sec_id',$sec_id);
             $this->set('subsec_id',$subsec_id);
+            $this->set('plan_nombre',$plan_nombre);
 
 
             /***********************************/
