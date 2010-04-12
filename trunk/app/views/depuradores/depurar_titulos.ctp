@@ -292,6 +292,10 @@ echo $form->hidden('FPlan.oferta_id');
 echo $form->hidden('FPlan.sector_id');
 echo $form->hidden('FPlan.subsector_id');
 echo $form->hidden('FPlan.jurisdiccion_id');
+echo $form->hidden('FPlan.plan_nombre');
+
+if (strlen($paginator->counter(array('format' => '%page%'))))
+    echo $form->hidden('FPlan.last_page', array('value' => $paginator->counter(array('format' => '%page%'))));
 
 echo $form->end('Guardar Cambios');
 

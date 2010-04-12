@@ -559,9 +559,7 @@ class DepuradoresController extends AppController {
 	      $this->paginate['Plan']['conditions']["to_ascii(lower(Plan.nombre)) SIMILAR TO ?"] = array($this->Instit->convertir_para_busqueda_avanzada($this->data['FPlan']['plan_nombre']));
           $array_condiciones['Nombre del Plan'] = $this->data['FPlan']['plan_nombre'];
           $url_conditions['Plan.plan_nombre'] = $this->data['FPlan']['plan_nombre'];
-
-          //$this->passedArgs['FPlan.plan_nombre'] = $this->data['FPlan']['plan_nombre'];
-         }
+          }
 	  if(!empty($this->passedArgs['Plan.plan_nombre'])) {
           $this->paginate['Plan']['conditions']["to_ascii(lower(Plan.nombre)) SIMILAR TO ?"] = array($this->Instit->convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['Plan.plan_nombre'])));
           $array_condiciones['Nombre del Plan'] = utf8_decode($this->passedArgs['Plan.plan_nombre']);
@@ -581,6 +579,10 @@ class DepuradoresController extends AppController {
 
         //datos de paginacion
         $this->paginate['order'] = array('Plan.titulo_id ASC');
+
+        if(!empty($this->data['FPlan']['last_page'])) {
+            $this->paginate['Plan']['page'] = $this->data['FPlan']['last_page'];
+        }
 
         $this->paginate['Plan']['limit'] = 10;
     	if(!empty($this->data['FPlan']['limit'])) {
