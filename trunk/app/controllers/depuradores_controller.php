@@ -608,7 +608,7 @@ class DepuradoresController extends AppController {
         }
 
         $this->paginate['Plan']['conditions']['Plan.titulo_id'] = 0;
-       	//$this->paginate['Plan']['conditions']['Instit.activo'] = 1;
+       	$this->paginate['Plan']['conditions']['Instit.activo'] = 1;
 
         $planes = $this->paginate('Plan');
      
