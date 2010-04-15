@@ -2,7 +2,7 @@
 class FondoTemporal extends AppModel {
 
 	var $name = 'FondoTemporal';
-        var $useTable = 'z_fondo_temp_work';
+        var $useTable = 'z_fondo_work';
 	/*var $validate = array(
 		'instit_id' => array('numeric'),
 		'jurisdiccion_id' => array('numeric'),
