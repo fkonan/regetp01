@@ -23,22 +23,22 @@ echo $paginator->counter(array(
 	<th><?php echo $paginator->sort('departamento');?></th>
         <th><?php echo $paginator->sort('localidad');?></th>
         <th><?php echo $paginator->sort('f01');?></th>
-        <th><?php echo $paginator->sort('f02_a');?></th>
-        <th><?php echo $paginator->sort('f02_b');?></th>
-        <th><?php echo $paginator->sort('f02_c');?></th>
-        <th><?php echo $paginator->sort('f03_a');?></th>
-        <th><?php echo $paginator->sort('f03_b');?></th>
+        <th><?php echo $paginator->sort('f02a');?></th>
+        <th><?php echo $paginator->sort('f02b');?></th>
+        <th><?php echo $paginator->sort('f02c');?></th>
+        <th><?php echo $paginator->sort('f03a');?></th>
+        <th><?php echo $paginator->sort('f03b');?></th>
         <th><?php echo $paginator->sort('f04');?></th>
         <th><?php echo $paginator->sort('f05');?></th>
-        <th><?php echo $paginator->sort('f06_a');?></th>
-        <th><?php echo $paginator->sort('f06_b');?></th>
-        <th><?php echo $paginator->sort('f06_c');?></th>
-        <th><?php echo $paginator->sort('f07_a');?></th>
-        <th><?php echo $paginator->sort('f07_b');?></th>
-        <th><?php echo $paginator->sort('f07_c');?></th>
+        <th><?php echo $paginator->sort('f06a');?></th>
+        <th><?php echo $paginator->sort('f06b');?></th>
+        <th><?php echo $paginator->sort('f06c');?></th>
+        <th><?php echo $paginator->sort('f07a');?></th>
+        <th><?php echo $paginator->sort('f07b');?></th>
+        <th><?php echo $paginator->sort('f07c');?></th>
         <th><?php echo $paginator->sort('f08');?></th>
         <th><?php echo $paginator->sort('f09');?></th>
-        <th><?php echo $paginator->sort('equip_inf');?></th>
+        <th><?php echo $paginator->sort('equipinf');?></th>
         <th><?php echo $paginator->sort('refaccion');?></th>
         <th><?php echo $paginator->sort('total');?></th>
         <th><?php echo $paginator->sort('suma_fila');?></th>
@@ -55,115 +55,115 @@ foreach ($fondos as $fondo):
 ?>
 	<tr<?php echo $class;?>>
 		<td>
-			<?php echo $fondo['FondoTemporales']['id']; ?>
+			<?php echo $fondo['FondoTemporal']['id']; ?>
 		</td>
 		<td>
-			<?php echo $fondo['FondoTemporales']['totales_checked']; ?>
+			<?php echo $fondo['FondoTemporal']['totales_checked']; ?>
 		</td>
 		<td>
-			<?php echo $fondo['FondoTemporales']['cue_checked']; ?>
+			<?php echo $fondo['FondoTemporal']['cue_checked']; ?>
 		</td>
 		<td>
-			<?php echo $fondo['FondoTemporales']['instit_id']; ?>
+			<?php echo $fondo['FondoTemporal']['instit_id']; ?>
 		</td>
 		<td>
-			<?php echo $fondo['FondoTemporales']['anio']; ?>
+			<?php echo $fondo['FondoTemporal']['anio']; ?>
 		</td>
 		<td>
-			<?php echo $fondo['FondoTemporales']['trimestre']; ?>
+			<?php echo $fondo['FondoTemporal']['trimestre']; ?>
 		</td>
 		<td>
-			<?php echo $fondo['FondoTemporales']['jurisdiccion_id']; ?>
+			<?php echo $fondo['FondoTemporal']['jurisdiccion_id']; ?>
 		</td>
 		<td>
-			<?php echo $fondo['FondoTemporales']['jurisdiccion_name']; ?>
+			<?php echo $fondo['FondoTemporal']['jurisdiccion_name']; ?>
 		</td>
 		<td>
-			<?php echo $fondo['FondoTemporales']['memo']; ?>
+			<?php echo $fondo['FondoTemporal']['memo']; ?>
 		</td>
 		<td>
-			<?php echo $fondo['FondoTemporales']['cuecompleto']; ?>
+			<?php echo $fondo['FondoTemporal']['cuecompleto']; ?>
 		</td>
                 <td>
-			<?php echo $fondo['FondoTemporales']['instit']; ?>
+			<?php echo $fondo['FondoTemporal']['instit']; ?>
 		</td>
                 <td>
-			<?php echo $fondo['FondoTemporales']['instit_name']; ?>
+			<?php echo $fondo['FondoTemporal']['instit_name']; ?>
 		</td>
                 <td>
-			<?php echo $fondo['FondoTemporales']['departamento']; ?>
+			<?php echo $fondo['FondoTemporal']['departamento']; ?>
 		</td>
                 <td>
-			<?php echo $fondo['FondoTemporales']['localidad']; ?>
+			<?php echo $fondo['FondoTemporal']['localidad']; ?>
 		</td>
                 <td>
-			<?php echo $fondo['FondoTemporales']['f01']; ?>
+			<?php echo $fondo['FondoTemporal']['f01']; ?>
 		</td>
                 <td>
-			<?php echo $fondo['FondoTemporales']['f02_a']; ?>
+			<?php echo $fondo['FondoTemporal']['f02a']; ?>
 		</td>
                 <td>
-			<?php echo $fondo['FondoTemporales']['f02_b']; ?>
+			<?php echo $fondo['FondoTemporal']['f02b']; ?>
 		</td>
                 <td>
-			<?php echo $fondo['FondoTemporales']['f02_c']; ?>
+			<?php echo $fondo['FondoTemporal']['f02c']; ?>
 		</td>
                 <td>
-			<?php echo $fondo['FondoTemporales']['f03_a']; ?>
+			<?php echo $fondo['FondoTemporal']['f03a']; ?>
 		</td>
                 <td>
-			<?php echo $fondo['FondoTemporales']['f03_b']; ?>
+			<?php echo $fondo['FondoTemporal']['f03b']; ?>
 		</td>
                 <td>
-			<?php echo $fondo['FondoTemporales']['f04']; ?>
+			<?php echo $fondo['FondoTemporal']['f04']; ?>
 		</td>
                 <td>
-			<?php echo $fondo['FondoTemporales']['f05']; ?>
+			<?php echo $fondo['FondoTemporal']['f05']; ?>
 		</td>
                 <td>
-			<?php echo $fondo['FondoTemporales']['f06_a']; ?>
+			<?php echo $fondo['FondoTemporal']['f06a']; ?>
 		</td>
                 <td>
-			<?php echo $fondo['FondoTemporales']['f06_b']; ?>
+			<?php echo $fondo['FondoTemporal']['f06b']; ?>
 		</td>
                 <td>
-			<?php echo $fondo['FondoTemporales']['f06_c']; ?>
+			<?php echo $fondo['FondoTemporal']['f06c']; ?>
 		</td>
                 <td>
-			<?php echo $fondo['FondoTemporales']['f07_a']; ?>
+			<?php echo $fondo['FondoTemporal']['f07a']; ?>
 		</td>
                 <td>
-			<?php echo $fondo['FondoTemporales']['f07_b']; ?>
+			<?php echo $fondo['FondoTemporal']['f07b']; ?>
 		</td>
                 <td>
-			<?php echo $fondo['FondoTemporales']['f07_c']; ?>
+			<?php echo $fondo['FondoTemporal']['f07c']; ?>
 		</td>
                 <td>
-			<?php echo $fondo['FondoTemporales']['f08']; ?>
+			<?php echo $fondo['FondoTemporal']['f08']; ?>
 		</td>
                 <td>
-			<?php echo $fondo['FondoTemporales']['f09']; ?>
+			<?php echo $fondo['FondoTemporal']['f09']; ?>
 		</td>
                 <td>
-			<?php echo $fondo['FondoTemporales']['equip_inf']; ?>
+			<?php echo $fondo['FondoTemporal']['equipinf']; ?>
 		</td>
                 <td>
-			<?php echo $fondo['FondoTemporales']['refaccion']; ?>
+			<?php echo $fondo['FondoTemporal']['refaccion']; ?>
 		</td>
                 <td>
-			<?php echo $fondo['FondoTemporales']['total']; ?>
+			<?php echo $fondo['FondoTemporal']['total']; ?>
 		</td>
                 <td>
-			<?php echo $fondo['FondoTemporales']['suma_fila']; ?>
+			<?php echo $fondo['FondoTemporal']['suma_fila']; ?>
 		</td>
                 <td>
-			<?php echo $fondo['FondoTemporales']['observacion']; ?>
+			<?php echo $fondo['FondoTemporal']['observacion']; ?>
 		</td>
 
 		<td class="actions">
-			<?php echo $html->link(__('View', true), array('action'=>'view', $fondo['FondoTemporales']['id'])); ?>
-			<?php echo $html->link(__('Edit', true), array('action'=>'edit', $fondo['FondoTemporales']['id'])); ?>
-			<?php echo $html->link(__('Delete', true), array('action'=>'delete', $fondo['FondoTemporales']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $fondo['FondoTemporales']['id'])); ?>
+			<?php echo $html->link(__('View', true), array('action'=>'view', $fondo['FondoTemporal']['id'])); ?>
+			<?php echo $html->link(__('Edit', true), array('action'=>'edit', $fondo['FondoTemporal']['id'])); ?>
+			<?php echo $html->link(__('Delete', true), array('action'=>'delete', $fondo['FondoTemporal']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $fondo['FondoTemporal']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

@@ -6,11 +6,17 @@ class FondoTemporalesController extends AppController {
 
 	function index() {
 		$this->FondoTemporal->recursive = 0;
-                pr($this->paginate);
-                $this->paginate['fields'][] = 'FondoTemporal.id';
-                $this->paginate['fields'][] = 'FondoTemporal.*';
-                $this->paginate['fields'][] = 'SUM(f01+f02_a+f02_b+f02_c+f03_a+f03_b+f04+f05+f06_a+f06_b+f06_c+f07_a+f07_b+f07_c+f08+f09+equip_inf+refaccion) as suma_fila';
-		//$this->paginate['groupby'][]
+                
+                $this->paginate['fields'] = array('id','anio','trimestre','jurisdiccion_id','jurisdiccion_name',
+                    'memo','cuecompleto','instit','instit_name','departamento','localidad',
+                    'f01','f02a','f02b','f02c','f03a','f03b','f04','f05','f06a','f06b','f06c','f07a','f07b','f07c',
+                    'f08','f09','total','equipinf','refaccion','instit_id','observacion','totales_checked','cue_checked',
+                    'SUM(f01+f02a+f02b+f02c+f03a+f03b+f04+f05+f06a+f06b+f06c+f07a+f07b+f07c+f08+f09+equipinf+refaccion) as "FondoTemporal__suma_fila"');
+		$this->paginate['group'] = array('id','anio','trimestre','jurisdiccion_id','jurisdiccion_name',
+                    'memo','cuecompleto','instit','instit_name','departamento','localidad',
+                    'f01','f02a','f02b','f02c','f03a','f03b','f04','f05','f06a','f06b','f06c','f07a','f07b','f07c',
+                    'f08','f09','total','equipinf','refaccion','instit_id','observacion','totales_checked','cue_checked');
+                //pr($this->paginate);
                 $this->set('fondos', $this->paginate());
 	}
 
