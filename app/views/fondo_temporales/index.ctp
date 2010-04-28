@@ -11,6 +11,9 @@ echo $paginator->counter(array(
 	<th><?php echo $paginator->sort('id');?></th>
         <th><?php echo $paginator->sort('totales_checked');?></th>
         <th><?php echo $paginator->sort('cue_checked');?></th>
+        <th><?php echo $paginator->sort('total');?></th>
+        <th><?php echo $paginator->sort('suma_fila');?></th>
+        <th><?php echo $paginator->sort('diferencia');?></th>
         <th><?php echo $paginator->sort('instit_id');?></th>
 	<th><?php echo $paginator->sort('anio');?></th>
 	<th><?php echo $paginator->sort('trimestre');?></th>
@@ -40,8 +43,6 @@ echo $paginator->counter(array(
         <th><?php echo $paginator->sort('f09');?></th>
         <th><?php echo $paginator->sort('equipinf');?></th>
         <th><?php echo $paginator->sort('refaccion');?></th>
-        <th><?php echo $paginator->sort('total');?></th>
-        <th><?php echo $paginator->sort('suma_fila');?></th>
         <th><?php echo $paginator->sort('observacion');?></th>
 	<th class="actions"><?php __('Actions');?></th>
 </tr>
@@ -52,6 +53,17 @@ foreach ($fondos as $fondo):
 	if ($i++ % 2 == 0) {
 		$class = ' class="altrow"';
 	}
+
+        $suma_fila = 0;
+        $suma_fila = $fondo['FondoTemporal']['f01']+$fondo['FondoTemporal']['f02a']+
+                    $fondo['FondoTemporal']['f02b']+$fondo['FondoTemporal']['f02c']+
+                    $fondo['FondoTemporal']['f03a']+$fondo['FondoTemporal']['f03b']+
+                    $fondo['FondoTemporal']['f04']+$fondo['FondoTemporal']['f05']+
+                    $fondo['FondoTemporal']['f06a']+$fondo['FondoTemporal']['f06b']+
+                    $fondo['FondoTemporal']['f06c']+$fondo['FondoTemporal']['f07a']+
+                    $fondo['FondoTemporal']['f07b']+$fondo['FondoTemporal']['f07c']+
+                    $fondo['FondoTemporal']['f08']+$fondo['FondoTemporal']['f09']+
+                    $fondo['FondoTemporal']['equipinf']+$fondo['FondoTemporal']['refaccion'];
 ?>
 	<tr<?php echo $class;?>>
 		<td>
@@ -63,6 +75,15 @@ foreach ($fondos as $fondo):
 		<td>
 			<?php echo $fondo['FondoTemporal']['cue_checked']; ?>
 		</td>
+                <td>
+			<?php echo $fondo['FondoTemporal']['total']; ?>
+		</td>
+                <td>
+			<?php echo $suma_fila; ?>
+		</td>
+                <td><b>
+			<?php echo $fondo['FondoTemporal']['total']-$suma_fila; ?>
+                </b></td>
 		<td>
 			<?php echo $fondo['FondoTemporal']['instit_id']; ?>
 		</td>
@@ -149,12 +170,6 @@ foreach ($fondos as $fondo):
 		</td>
                 <td>
 			<?php echo $fondo['FondoTemporal']['refaccion']; ?>
-		</td>
-                <td>
-			<?php echo $fondo['FondoTemporal']['total']; ?>
-		</td>
-                <td>
-			<?php echo $fondo['FondoTemporal']['suma_fila']; ?>
 		</td>
                 <td>
 			<?php echo $fondo['FondoTemporal']['observacion']; ?>
