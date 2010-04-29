@@ -11,11 +11,12 @@ echo $paginator->counter(array(
 	<th><?php echo $paginator->sort('id');?></th>
 	<th><?php echo $paginator->sort('instit_id');?></th>
 	<th><?php echo $paginator->sort('jurisdiccion_id');?></th>
-	<th><?php echo $paginator->sort('lineas_de_accion_id');?></th>
-	<th><?php echo $paginator->sort('valor_asignado');?></th>
-	<th><?php echo $paginator->sort('fecha_aprobacion');?></th>
+	<th><?php echo $paginator->sort('total');?></th>
+	<th><?php echo $paginator->sort('anio');?></th>
+	<th><?php echo $paginator->sort('trimestre');?></th>
 	<th><?php echo $paginator->sort('memo');?></th>
 	<th><?php echo $paginator->sort('resolucion');?></th>
+	<th><?php echo $paginator->sort('description');?></th>
 	<th><?php echo $paginator->sort('created');?></th>
 	<th><?php echo $paginator->sort('modified');?></th>
 	<th class="actions"><?php __('Actions');?></th>
@@ -39,13 +40,13 @@ foreach ($fondos as $fondo):
 			<?php echo $fondo['Fondo']['jurisdiccion_id']; ?>
 		</td>
 		<td>
-			<?php echo $fondo['Fondo']['lineas_de_accion_id']; ?>
+			<?php echo $fondo['Fondo']['total']; ?>
 		</td>
 		<td>
-			<?php echo $fondo['Fondo']['valor_asignado']; ?>
+			<?php echo $fondo['Fondo']['anio']; ?>
 		</td>
 		<td>
-			<?php echo $fondo['Fondo']['fecha_aprobacion']; ?>
+			<?php echo $fondo['Fondo']['trimestre']; ?>
 		</td>
 		<td>
 			<?php echo $fondo['Fondo']['memo']; ?>
@@ -54,15 +55,18 @@ foreach ($fondos as $fondo):
 			<?php echo $fondo['Fondo']['resolucion']; ?>
 		</td>
 		<td>
+			<?php echo $fondo['Fondo']['description']; ?>
+		</td>
+		<td>
 			<?php echo $fondo['Fondo']['created']; ?>
 		</td>
 		<td>
 			<?php echo $fondo['Fondo']['modified']; ?>
 		</td>
 		<td class="actions">
-			<?php echo $html->link(__('View', true), array('action'=>'view', $fondo['Fondo']['id'])); ?>
-			<?php echo $html->link(__('Edit', true), array('action'=>'edit', $fondo['Fondo']['id'])); ?>
-			<?php echo $html->link(__('Delete', true), array('action'=>'delete', $fondo['Fondo']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $fondo['Fondo']['id'])); ?>
+			<?php echo $html->link(__('View', true), array('action' => 'view', $fondo['Fondo']['id'])); ?>
+			<?php echo $html->link(__('Edit', true), array('action' => 'edit', $fondo['Fondo']['id'])); ?>
+			<?php echo $html->link(__('Delete', true), array('action' => 'delete', $fondo['Fondo']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $fondo['Fondo']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -71,10 +75,10 @@ foreach ($fondos as $fondo):
 <div class="paging">
 	<?php echo $paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>
  | 	<?php echo $paginator->numbers();?>
-	<?php echo $paginator->next(__('next', true).' >>', array(), null, array('class'=>'disabled'));?>
+	<?php echo $paginator->next(__('next', true).' >>', array(), null, array('class' => 'disabled'));?>
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $html->link(__('New Fondo', true), array('action'=>'add')); ?></li>
+		<li><?php echo $html->link(__('New Fondo', true), array('action' => 'add')); ?></li>
 	</ul>
 </div>

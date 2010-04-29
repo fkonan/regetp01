@@ -12,7 +12,8 @@ class InstitTestCase extends CakeTestCase {
 
 	var $autoFixtures = false;
 	var $fixtures = array(
-		'app.instit', 'app.plan', 'app.sector', 'app.subsector', 'app.orientacion'
+		'app.instit', 'app.plan', 'app.sector', 'app.subsector', 'app.orientacion',
+            'app.jurisdiccion', 'app.claseinstit'
 	);
 	 
     function start() {

@@ -604,6 +604,7 @@ class DepuradoresController extends AppController {
         if(!empty($this->passedArgs['FPlan.limit'])) {
         	$url_conditions['FPlan.limit'] = $this->passedArgs['FPlan.limit'];
             $this->data['FPlan']['limit'] = $this->passedArgs['FPlan.limit'];
+            $this->paginate['Plan']['limit'] = $this->data['FPlan']['limit'];
         }
 
         // Condicion necesaria

@@ -30,9 +30,9 @@
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $html->link(__('Edit LineasDeAccion', true), array('action'=>'edit', $lineasDeAccion['LineasDeAccion']['id'])); ?> </li>
-		<li><?php echo $html->link(__('Delete LineasDeAccion', true), array('action'=>'delete', $lineasDeAccion['LineasDeAccion']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $lineasDeAccion['LineasDeAccion']['id'])); ?> </li>
-		<li><?php echo $html->link(__('List LineasDeAcciones', true), array('action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New LineasDeAccion', true), array('action'=>'add')); ?> </li>
+		<li><?php echo $html->link(__('Edit LineasDeAccion', true), array('action' => 'edit', $lineasDeAccion['LineasDeAccion']['id'])); ?> </li>
+		<li><?php echo $html->link(__('Delete LineasDeAccion', true), array('action' => 'delete', $lineasDeAccion['LineasDeAccion']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $lineasDeAccion['LineasDeAccion']['id'])); ?> </li>
+		<li><?php echo $html->link(__('List LineasDeAcciones', true), array('action' => 'index')); ?> </li>
+		<li><?php echo $html->link(__('New LineasDeAccion', true), array('action' => 'add')); ?> </li>
 	</ul>
 </div>

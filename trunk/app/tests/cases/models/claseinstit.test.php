@@ -5,7 +5,7 @@ App::import('Model', 'Claseinstit');
 
 class ClaseinstitTestCase extends CakeTestCase {
 	var $Claseinstit = null;
-	var $fixtures = array('app.claseinstit', 'app.instit');
+	var $fixtures = array('app.claseinstit', 'app.instit', 'app.jurisdiccion');
 
 	function startTest() {
 		$this->Claseinstit =& ClassRegistry::init('Claseinstit');

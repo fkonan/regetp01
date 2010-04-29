@@ -45,10 +45,13 @@ class Ticket extends AppModel {
 	}
 	
 	function dameProvinciasConPendientes()
-	{		
+	{
+            if(!is_a($this->Instit->Jurisdiccion,'jurisdiccion')) return array();
+
 		// Busco todas las jurisdicciones
 		$this->Instit->Jurisdiccion->recursive = -1;
 		$prov_pend = array();
+
 		$prov_pend = $this->Instit->Jurisdiccion->find('list', array('order'=>'Jurisdiccion.name'));
 		
 		// Por cada jurisdiccion veon cuantos pendientes tiene
