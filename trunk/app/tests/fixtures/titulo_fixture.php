@@ -10,7 +10,6 @@ class TituloFixture extends CakeTestFixture {
 			'name' => array('type'=>'string', 'null' => false, 'length' => 200),
 			'marco_ref' => array('type'=>'boolean', 'null' => false, 'default' => 'false'),
 			'oferta_id' => array('type'=>'integer', 'null' => false),
-			'indexes' => array('0' => array())
 			);
 	var $records = array(array(
 			'id'  => 1,
