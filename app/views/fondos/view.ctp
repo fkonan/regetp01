@@ -16,19 +16,19 @@
 			<?php echo $fondo['Fondo']['jurisdiccion_id']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Lineas De Accion Id'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Total'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $fondo['Fondo']['lineas_de_accion_id']; ?>
+			<?php echo $fondo['Fondo']['total']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Valor Asignado'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Anio'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $fondo['Fondo']['valor_asignado']; ?>
+			<?php echo $fondo['Fondo']['anio']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Fecha Aprobacion'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Trimestre'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $fondo['Fondo']['fecha_aprobacion']; ?>
+			<?php echo $fondo['Fondo']['trimestre']; ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Memo'); ?></dt>
@@ -39,6 +39,11 @@
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Resolucion'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $fondo['Fondo']['resolucion']; ?>
+			&nbsp;
+		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Description'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $fondo['Fondo']['description']; ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
@@ -55,9 +60,9 @@
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $html->link(__('Edit Fondo', true), array('action'=>'edit', $fondo['Fondo']['id'])); ?> </li>
-		<li><?php echo $html->link(__('Delete Fondo', true), array('action'=>'delete', $fondo['Fondo']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $fondo['Fondo']['id'])); ?> </li>
-		<li><?php echo $html->link(__('List Fondos', true), array('action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Fondo', true), array('action'=>'add')); ?> </li>
+		<li><?php echo $html->link(__('Edit Fondo', true), array('action' => 'edit', $fondo['Fondo']['id'])); ?> </li>
+		<li><?php echo $html->link(__('Delete Fondo', true), array('action' => 'delete', $fondo['Fondo']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $fondo['Fondo']['id'])); ?> </li>
+		<li><?php echo $html->link(__('List Fondos', true), array('action' => 'index')); ?> </li>
+		<li><?php echo $html->link(__('New Fondo', true), array('action' => 'add')); ?> </li>
 	</ul>
 </div>

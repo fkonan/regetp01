@@ -3,7 +3,7 @@ class TicketsController extends AppController {
 
 	var $name = 'Tickets';
 	var $helpers = array('Html', 'Form', 'Ajax');
-	var $component = array('Auth');
+	var $component = array('Auth', 'RequestHandler');
 	//var $layout = 'popup';
 
 	function index($jurisdiccion_id = null){
@@ -123,8 +123,9 @@ class TicketsController extends AppController {
 	
 	function provincias_pendientes()
 	{
-		$prov_pend = $this->Ticket->dameProvinciasConPendientes();	
-		return $prov_pend;
+                $this->layout = 'ajax';
+		$prov_pend = $this->Ticket->dameProvinciasConPendientes();
+		$this->set('prov_pend', $prov_pend);
 	}
 }
 ?>

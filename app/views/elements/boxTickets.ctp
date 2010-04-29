@@ -5,6 +5,30 @@ if ($session->check('Auth.User')){
 		$session->read('Auth.User.role') == 'editor'){
 	?>
 
+
+<script type="text/javascript">
+    /**
+     * me dice si ya fue apretado el link Ver Pendientes,
+     * en tal caso, no me vuelve a hacer un Request, simplemente oculto el div
+     * y listo!
+     */
+    var apretado = false;
+
+    
+    function mostrarPendientes(){
+        $('tickets').toggle();
+
+        if (apretado == false) {
+            new Ajax.Updater('tickets', '<? echo $html->url('/tickets/provincias_pendientes')?>');
+            apretado = true;
+        }
+    }
+    
+    Event.observe(window, 'load', function(){
+        $('linkVerPendientes').observe('click',mostrarPendientes);
+    });
+</script>
+
 <div id="boxTickets">
 	<h1>Pendientes de Actualización</h1>
 	
@@ -19,30 +43,11 @@ if ($session->check('Auth.User')){
 			
 			<!-- div class="box gradwhite blue" -->
 			<div>
-			<a href="javascript:;" onclick="$('tickets').toggle();">Ver pendientes</a>
-			
-			</div>
+                            <a href="javascript:;" id="linkVerPendientes">Ver Pendientes</a>
+                        </div>
 			
 		
-			<div id="tickets" style="display: none">
-				<?php 
-					foreach($prov_pend as $id=>$name)
-					{		
-						?><li>
-							<? echo $html->link($name,"/tickets/index/".$id) ?>
-						  </li>
-						<?php
-					}
-					
-					if(count($prov_pend) < 1)
-					{		
-						?><li>
-							<? echo $html->link("No hay pendientes","/pages/home/") ?>
-						  </li>
-						<?php
-					}
-				?>
-			</div>
+			<div id="tickets" style="display: none;"></div>
 			
 			<?php 
 			/************************/									

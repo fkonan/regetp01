@@ -40,9 +40,9 @@ foreach ($lineasDeAcciones as $lineasDeAccion):
 			<?php echo $lineasDeAccion['LineasDeAccion']['modified']; ?>
 		</td>
 		<td class="actions">
-			<?php echo $html->link(__('View', true), array('action'=>'view', $lineasDeAccion['LineasDeAccion']['id'])); ?>
-			<?php echo $html->link(__('Edit', true), array('action'=>'edit', $lineasDeAccion['LineasDeAccion']['id'])); ?>
-			<?php echo $html->link(__('Delete', true), array('action'=>'delete', $lineasDeAccion['LineasDeAccion']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $lineasDeAccion['LineasDeAccion']['id'])); ?>
+			<?php echo $html->link(__('View', true), array('action' => 'view', $lineasDeAccion['LineasDeAccion']['id'])); ?>
+			<?php echo $html->link(__('Edit', true), array('action' => 'edit', $lineasDeAccion['LineasDeAccion']['id'])); ?>
+			<?php echo $html->link(__('Delete', true), array('action' => 'delete', $lineasDeAccion['LineasDeAccion']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $lineasDeAccion['LineasDeAccion']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -51,10 +51,10 @@ foreach ($lineasDeAcciones as $lineasDeAccion):
 <div class="paging">
 	<?php echo $paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>
  | 	<?php echo $paginator->numbers();?>
-	<?php echo $paginator->next(__('next', true).' >>', array(), null, array('class'=>'disabled'));?>
+	<?php echo $paginator->next(__('next', true).' >>', array(), null, array('class' => 'disabled'));?>
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $html->link(__('New LineasDeAccion', true), array('action'=>'add')); ?></li>
+		<li><?php echo $html->link(__('New LineasDeAccion', true), array('action' => 'add')); ?></li>
 	</ul>
 </div>

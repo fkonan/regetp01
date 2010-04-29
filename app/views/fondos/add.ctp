@@ -1,9 +1,8 @@
 <div class="fondos form">
 <?php echo $form->create('Fondo');?>
 	<fieldset>
- 		<legend><?php __('Edit Fondo');?></legend>
+ 		<legend><?php __('Add Fondo');?></legend>
 	<?php
-		echo $form->input('id');
 		echo $form->input('instit_id');
 		echo $form->input('jurisdiccion_id');
 		echo $form->input('total');
@@ -18,7 +17,6 @@
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $html->link(__('Delete', true), array('action' => 'delete', $form->value('Fondo.id')), null, sprintf(__('Are you sure you want to delete # %s?', true), $form->value('Fondo.id'))); ?></li>
 		<li><?php echo $html->link(__('List Fondos', true), array('action' => 'index'));?></li>
 	</ul>
 </div>
