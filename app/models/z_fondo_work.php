@@ -26,6 +26,7 @@ class ZFondoWork extends AppModel {
 
 
 
+
          /**
          *
          * Me ejecuta la migracion de todos ls campos de z_fondo_work
@@ -289,18 +290,13 @@ class ZFondoWork extends AppModel {
 
             $fondoLineas =& ClassRegistry::init('FondosLineasDeAccion');
             //  $fondo->$this->useDbConfig = 'test';
-            //debug($fondo);
-
-            $data['Fondo']['instit_id'] =28987;
-            $data['Fondo']['jurisdiccion_id'] =2;
-            $data['Fondo']['total'] =464646;
-
-            debug($fondo->find('all'));
-            //debug($fondo->create());
-            debug($fondo->save($data['Fondo']));
-            debug($fondo->find('count'));
-            debug($fondo->validationErrors);
-            debug($fondo->id);
+            
+            foreach ($data as $d) {
+                if (!$fondo->saveAll($d)){
+                    // si no guardo algun registro que me devuelva false
+                    return false; 
+                }
+            }            
             return true;
         }
 }

@@ -16,7 +16,6 @@ class AnioFixture extends CakeTestFixture {
 		'created' => array('type' => 'datetime', 'null' => true),
 		'modified' => array('type' => 'datetime', 'null' => true),
 		'indexes' => array('PRIMARY' => array('unique' => true, 'column' => 'id')),
-		'tableParameters' => array()
 	);
 
 	var $records = array(

@@ -7,8 +7,6 @@ class TipoinstitFixture extends CakeTestFixture {
 		'id' => array('type' => 'integer', 'null' => false, 'default' => NULL, 'length' => 11, 'key' => 'primary'),
 		'jurisdiccion_id' => array('type' => 'integer', 'null' => false),
 		'name' => array('type' => 'string', 'null' => false, 'length' => 100),
-		'indexes' => array('PRIMARY' => array('unique' => true, 'column' => 'id')),
-		'tableParameters' => array()
 	);
 
 	var $records = array(

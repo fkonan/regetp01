@@ -11,10 +11,14 @@ class ZFondoWorkTestCase extends CakeTestCase {
 
     /* @var $fixtures array */
     var $fixtures = array(
-         'app.z_fondo_work', 'app.jurisdiccion', 'app.instit', 'app.claseinstit',
-         'app.orientacion',  'app.sector', 'app.plan', 'app.subsector',
-         'app.lineas_de_accion', 'app.fondos_lineas_de_accion',
-        );
+            'app.z_fondo_work', 'app.jurisdiccion', 'app.instit', 'app.claseinstit',
+            'app.orientacion',  'app.sector', 'app.plan', 'app.subsector',
+            'app.lineas_de_accion', 'app.fondos_lineas_de_accion',
+            'app.tipoinstit', 'app.dependencia', 'app.departamento', 'app.localidad',
+            'app.etp_estado', 'app.oferta', 'app.titulo', 'app.anio', 'app.ciclo',
+            'app.etapa', 'app.gestion', 'app.historial_cue', 'app.ticket', 'app.user',
+            'app.user_login', 'app.fondo',
+    );
 //    var $fixtures = array(
 //            'app.z_fondo_work', 'app.jurisdiccion', 'app.instit', 'app.claseinstit',
 //            'app.lineas_de_accion', 'app.fondos_lineas_de_accion', 'app.orientacion',
@@ -140,7 +144,7 @@ class ZFondoWorkTestCase extends CakeTestCase {
 
     function testDameTemporalFiltrandoLineasVacias() {
         $l = array('f01'=>1, 'f02a' => 2, 'f02b' => 3, 'f02c' => 4);
-        
+
         $t[3]['ZFondoWork'] = array(
                 'id' => 15,
                 'anio' => 2009,
@@ -157,7 +161,7 @@ class ZFondoWorkTestCase extends CakeTestCase {
                 'f02a' => 0,
                 'f02b' => 0,
                 'f02c' => 0,
-                );
+        );
 
         $t[13]['ZFondoWork'] = array(
                 'id' => 21,
@@ -187,7 +191,7 @@ class ZFondoWorkTestCase extends CakeTestCase {
         $this->assertEqual($expected, $lin);
 
         unset($t);
-         $t[0]['ZFondoWork'] = array(
+        $t[0]['ZFondoWork'] = array(
                 'id' => 15,
                 'anio' => 2009,
                 'trimestre' => 1,
@@ -203,14 +207,14 @@ class ZFondoWorkTestCase extends CakeTestCase {
                 'f02a' => 0,
                 'f02b' => 0,
                 'f02c' => 0,
-                );
-         $lin = $this->ZFondoWork->__dameTemporalFiltrandoLineasVacias($l, $t);
-         //veo que me devuelva un array
-         $this->assertTrue(is_array($lin));
-         if(is_array($lin)){
-             //verifico que el array este vacio
+        );
+        $lin = $this->ZFondoWork->__dameTemporalFiltrandoLineasVacias($l, $t);
+        //veo que me devuelva un array
+        $this->assertTrue(is_array($lin));
+        if(is_array($lin)) {
+            //verifico que el array este vacio
             $this->assertEqual(0, count($lin[0]));
-         }
+        }
     }
 
 
@@ -252,12 +256,12 @@ class ZFondoWorkTestCase extends CakeTestCase {
                                 'f10' => 0,
                                 'equipinf' => 0,
                                 'refaccion' => 0,
-                                'total' => 25,                                
+                                'total' => 25,
                                 'instit_id' => 1,
                                 'observacion' => 'Lorem ipsum dolor sit amet',
                                 'totales_checked' => 1,
                                 'cue_checked' => 1,
-                                'tipo' => 'i',                                
+                                'tipo' => 'i',
                         )
                 )
         );
@@ -269,24 +273,24 @@ class ZFondoWorkTestCase extends CakeTestCase {
 
 
         $expected[0]['Fondo'] = array (
-                            'instit_id' => 1,
-                            'jurisdiccion_id' => 2,
-                            'memo' => 'Lorem ipsum dolor sit amet',
-                            'anio' => 2009,
-                            'trimestre' => 1,
-                            'total' => 25,
-                        );
-        
+                'instit_id' => 1,
+                'jurisdiccion_id' => 2,
+                'memo' => 'Lorem ipsum dolor sit amet',
+                'anio' => 2009,
+                'trimestre' => 1,
+                'total' => 25,
+        );
+
         $expected[0]['Fondo']['FondosLineasDeAccion'] = array(
-                    array(
-                            'monto' => 10,
-                            'lineas_de_accion_id' => 1,
-                        ),
-                    array(
-                            'monto' => 15,
-                            'lineas_de_accion_id' => 7,
-                        )
-                );
+                array(
+                        'monto' => 10,
+                        'lineas_de_accion_id' => 1,
+                ),
+                array(
+                        'monto' => 15,
+                        'lineas_de_accion_id' => 7,
+                )
+        );
 
 
         $data = $this->ZFondoWork->__convertirLineasYTempsEnAlgoLindoParaGuardar($temps, $lineasFiltradas);
@@ -296,40 +300,91 @@ class ZFondoWorkTestCase extends CakeTestCase {
 
 
 
-    function testGuardarFondos(){
+    function testGuardarFondos() {
         // $this->assertTrue($this->ZFondoWork->guardarFondos($data));
-         $data[0]['Fondo'] = array (
-                            'instit_id' => 2,
-                            'jurisdiccion_id' => 2,
-                            'memo' => 'Lorem ipsum',
-                            'anio' => 2009,
-                            'trimestre' => 1,
-                            'total' => 25,
-                        );
+        $data[0]['Fondo'] = array (
+                'id' => 452,
+                'instit_id' => 2,
+                'jurisdiccion_id' => 2,
+                'memo' => 'Lorem ipsum',
+                'anio' => 2009,
+                'trimestre' => 1,
+                'total' => 25,
+                'resolucion' => 'una resolucion',
+                'description' => 'unsa descripcion',
+        );
         $data[0]['FondosLineasDeAccion'] = array(
-                    array(
-                            'monto' => 10,
-                            'lineas_de_accion_id' => 1,
-                        ),
-                    array(
-                            'monto' => 15,
-                            'lineas_de_accion_id' => 7,
-                        )
-                );
+                array(
+                        'id' => 900,
+                        'monto' => 10.2,
+                        'lineas_de_accion_id' => 1,
+                ),
+                array(
+                        'id' => 901,
+                        'monto' => 15.5,
+                        'lineas_de_accion_id' => 7,
+                )
+        );
 
-        $this->assertTrue($this->ZFondoWork->guardarFondos($data));
+        $data[1]['Fondo'] = array (
+                'id' => 453,
+                'instit_id' => 2,
+                'jurisdiccion_id' => 2,
+                'memo' => 'Lorem ipsum',
+                'anio' => 2009,
+                'trimestre' => 1,
+                'total' => 25,
+                'resolucion' => 'una resolucion',
+                'description' => 'unsa descripcion',
+        );
+        $data[1]['FondosLineasDeAccion'] = array(
+                array(
+                        'id' => 902,
+                        'monto' => 10,
+                        'lineas_de_accion_id' => 1,
+                )
+        );
 
-       // debug($this->ZFondoWork);
+
+        $data[2]['Fondo'] = array (
+                'id' => 454,
+                'instit_id' => 2,
+                'jurisdiccion_id' => 2,
+                'memo' => 'Lorem ipsum',
+                'anio' => 2009,
+                'trimestre' => 1,
+                'total' => 25,
+                'resolucion' => 'una resolucion',
+                'description' => 'unsa descripcion',
+        );
+        $data[2]['FondosLineasDeAccion'] = array(
+                array(
+                    'id' => 903,
+                    'lineas_de_accion_id' => 1,
+                    'monto' => 100.35,
+                    'created' => '2010-04-22 10:39:45',
+                    'modified' => '2010-04-22 10:39:45'
+                )
+        );
 
         /* @var $fondo Fondo */
         $fondo =& ClassRegistry::init('Fondo');
-        $fondo->recursive = 1;
-         /* @var $lineas LineasDeAccion */
+        /* @var $lineas LineasDeAccion */
         $lineas =& ClassRegistry::init('FondosLineasDeAccion');
-        $lineas->recursive = -1;
-        debug($fondo->find('all'));
+
+        // me guardo los valores totales para luego hacer el assert
+        $cantFondos = $fondo->find('count');
+        $cantLineas = $lineas->find('count');
+        //Guardo y chequeo que haya salido todo OK
+        $this->assertTrue($this->ZFondoWork->guardarFondos($data));
+
+        $this->assertEqual($cantFondos+3, $fondo->find('count'));
+        $this->assertEqual($cantLineas+4, $lineas->find('count'));
+
+        $lineas->find('sum');
     }
 
+    
 
 }
 ?>

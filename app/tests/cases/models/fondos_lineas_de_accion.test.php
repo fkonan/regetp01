@@ -5,7 +5,15 @@ App::import('Model', 'FondosLineasDeAccion');
 
 class FondosLineasDeAccionTestCase extends CakeTestCase {
 	var $FondosLineasDeAccion = null;
-	var $fixtures = array('app.fondos_lineas_de_accion', 'app.fondo', 'app.lineas_de_accion');
+	var $fixtures = array(
+            'app.z_fondo_work', 'app.jurisdiccion', 'app.instit', 'app.claseinstit',
+            'app.orientacion',  'app.sector', 'app.plan', 'app.subsector',
+            'app.lineas_de_accion', 'app.fondos_lineas_de_accion',
+            'app.tipoinstit', 'app.dependencia', 'app.departamento', 'app.localidad',
+            'app.etp_estado', 'app.oferta', 'app.titulo', 'app.anio', 'app.ciclo',
+            'app.etapa', 'app.gestion', 'app.historial_cue', 'app.ticket', 'app.user',
+            'app.user_login', 'app.fondo',
+        );
 
 	function startTest() {
 		$this->FondosLineasDeAccion =& ClassRegistry::init('FondosLineasDeAccion');
@@ -30,5 +38,31 @@ class FondosLineasDeAccionTestCase extends CakeTestCase {
 		));
 		$this->assertEqual($results, $expected);
 	}
+
+
+        function testFind() {
+            $montoSumar = 2.5;
+            $other = array('FondosLineasDeAccion' => array(
+			'id' => 2,
+			'fondo_id' => 1,
+			'lineas_de_accion_id' => 2,
+			'monto' => $montoSumar,
+			'created' => '2010-04-22 10:39:45',
+			'modified' => '2010-04-22 10:39:45',
+		));
+            
+            $suma = $this->FondosLineasDeAccion->find('sum');
+            
+            $this->FondosLineasDeAccion->save($other['FondosLineasDeAccion']);
+
+            $suma2 = $this->FondosLineasDeAccion->find('sum');
+
+            $this->assertEqual($suma+$montoSumar, $suma2);
+
+            $condicion = array('FondosLineasDeAccion.lineas_de_accion_id'=>2);
+            //$suma2 = $this->FondosLineasDeAccion->find('sum', array('conditions'));
+
+
+        }
 }
 ?>
