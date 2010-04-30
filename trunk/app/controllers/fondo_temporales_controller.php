@@ -8,6 +8,7 @@ class FondoTemporalesController extends AppController {
         var $instits=NULL;
         var $tipoInstits=NULL;
         var $localidades=NULL;
+        var $lineasDeAccion=NULL;
 
         function beforeFilter() {
             parent::beforeFilter();
@@ -29,17 +30,30 @@ class FondoTemporalesController extends AppController {
 	}
 
         function checked_instits() {
+                $checkedTotals = null;
+                $checkedInstit = null;
+                
 		$this->FondoTemporal->recursive = 0;
 
-                $checked = 1;
-
-                if (@is_numeric($this->passedArgs['checked'])) {
-                    $checked = $this->passedArgs['checked'];
+                if (@is_numeric($this->passedArgs['checkedInstit'])) {
+                    $checkedInstit = $this->passedArgs['checkedInstit'];
+                    $checkedTotals = null;
+                }
+                elseif(@is_numeric($this->passedArgs['checkedTotals'])){
+                    $checkedTotals = $this->passedArgs['checkedTotals'];
+                    $checkedInstit = null;
+                }
+                
+                if(!empty($checkedInstit)){
+                    $this->paginate = array('conditions'=>array('tipo'=>'i', 'cue_checked'=>$checkedInstit));
+                }
+                else{
+                    $this->paginate = array('conditions'=>array('tipo'=>'i', 'totales_checked'=>$checkedTotals));
                 }
 
-                $this->paginate = array('conditions'=>array('tipo'=>'i', 'cue_checked'=>$checked));
                 $this->set('fondos', $this->paginate());
-                $this->set('checked', $checked);
+                $this->set('checkedInstit', $checkedInstit);
+                $this->set('checkedTotals', $checkedTotals);
 	}
 
 	function view($id = null) {
@@ -59,7 +73,7 @@ class FondoTemporalesController extends AppController {
 		if (!empty($this->data)) {
 			if ($this->FondoTemporal->save($this->data)) {
 				$this->Session->setFlash(__('The FondoTemporal has been saved', true));
-				$this->redirect(array('action'=>'index'));
+				$this->redirect(array('action'=>'checked_instits'));
 			} else {
 				$this->Session->setFlash(__('The FondoTemporal could not be saved. Please, try again.', true));
 			}
@@ -67,13 +81,37 @@ class FondoTemporalesController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->FondoTemporal->read(null, $id);
 		}
+
+                $difference = $this->data['FondoTemporal']['f01'] +
+                             $this->data['FondoTemporal']['f02a'] +
+                             $this->data['FondoTemporal']['f02b'] +
+                             $this->data['FondoTemporal']['f02c'] +
+                             $this->data['FondoTemporal']['f03a'] +
+                             $this->data['FondoTemporal']['f03b'] +
+                             $this->data['FondoTemporal']['f04'] +
+                             $this->data['FondoTemporal']['f05'] +
+                             $this->data['FondoTemporal']['f06a'] +
+                             $this->data['FondoTemporal']['f06b'] +
+                             $this->data['FondoTemporal']['f06c'] +
+                             $this->data['FondoTemporal']['f07a'] +
+                             $this->data['FondoTemporal']['f07b'] +
+                             $this->data['FondoTemporal']['f07c'] +
+                             $this->data['FondoTemporal']['f08'] +
+                             $this->data['FondoTemporal']['f09'] +
+                             $this->data['FondoTemporal']['f10'] +
+                             $this->data['FondoTemporal']['f10'] +
+                             $this->data['FondoTemporal']['equipinf'] +
+                             $this->data['FondoTemporal']['refaccion'] -
+                             $this->data['FondoTemporal']['total'];
+
 		$instits = $this->FondoTemporal->Instit->find('list');
 		$jurisdicciones = $this->FondoTemporal->Jurisdiccion->find('list');
-		$lineasDeAcciones = $this->FondoTemporal->LineasDeAccion->find('list');
-		$this->set(compact('instits','jurisdicciones','lineasDeAcciones'));
+		//$lineasDeAcciones = $this->FondoTemporal->LineasDeAccion->find('list');
+		$this->set('difference', $difference);
+                $this->set(compact('instits','jurisdicciones'));//,'lineasDeAcciones'));
 	}
 
-        function uncheck($id = null) {
+        function uncheckInstit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid FondoTemporal', true));
                 }
@@ -91,7 +129,7 @@ class FondoTemporalesController extends AppController {
                 $this->redirect(array('action'=>'checked_instits'));
 	}
 
-        function check($id = null) {
+        function checkInstit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid FondoTemporal', true));
                 }
@@ -99,6 +137,42 @@ class FondoTemporalesController extends AppController {
                     $this->data = $this->FondoTemporal->read(null, $id);
                     if (!empty($this->data)) {
                         $this->data['FondoTemporal']['cue_checked'] = 1;
+                        if ($this->FondoTemporal->save($this->data)) {
+                        } else {
+                                $this->Session->setFlash(__('El FondoTemporal id '.$fondo['FondoTemporal']['id'].' no pudo ser actualizado.', true));
+                        }
+                    }
+                }
+
+                $this->redirect(array('action'=>'checked_instits', 'checked'=>'2'));
+	}
+
+        function uncheckTotals($id = null) {
+		if (!$id && empty($this->data)) {
+			$this->Session->setFlash(__('Invalid FondoTemporal', true));
+                }
+                else {
+                    $this->data = $this->FondoTemporal->read(null, $id);
+                    if (!empty($this->data)) {
+                        $this->data['FondoTemporal']['totales_checked'] = 0;
+                        if ($this->FondoTemporal->save($this->data)) {
+                        } else {
+                                $this->Session->setFlash(__('El FondoTemporal id '.$fondo['FondoTemporal']['id'].' no pudo ser actualizado.', true));
+                        }
+                    }
+                }
+
+                $this->redirect(array('action'=>'checked_instits'));
+	}
+
+        function checkTotals($id = null) {
+		if (!$id && empty($this->data)) {
+			$this->Session->setFlash(__('Invalid FondoTemporal', true));
+                }
+                else {
+                    $this->data = $this->FondoTemporal->read(null, $id);
+                    if (!empty($this->data)) {
+                        $this->data['FondoTemporal']['totales_checked'] = 1;
                         if ($this->FondoTemporal->save($this->data)) {
                         } else {
                                 $this->Session->setFlash(__('El FondoTemporal id '.$fondo['FondoTemporal']['id'].' no pudo ser actualizado.', true));
@@ -692,6 +766,57 @@ class FondoTemporalesController extends AppController {
 		return trim($text);
 	}
 
+        function validar_totales() {
+            $totalSmallDiference = 10;
+            $totalBigDiference = 100;
+            $total = 0;
 
+            $this->FondoTemporal->recursive = 0;
+
+            /*VALIDACION HORIZONTAL*/
+            $fondos = $this->FondoTemporal->find("all",
+                            array('conditions'=> array('tipo'=>'i', 'totales_checked'=>0)));
+            
+            foreach ($fondos as &$fondo){
+                    $totales_checked = false;
+
+                    $total = abs($fondo['FondoTemporal']['f01'] +
+                             $fondo['FondoTemporal']['f02a'] +
+                             $fondo['FondoTemporal']['f02b'] +
+                             $fondo['FondoTemporal']['f02c'] +
+                             $fondo['FondoTemporal']['f03a'] +
+                             $fondo['FondoTemporal']['f03b'] +
+                             $fondo['FondoTemporal']['f04'] +
+                             $fondo['FondoTemporal']['f05'] +
+                             $fondo['FondoTemporal']['f06a'] +
+                             $fondo['FondoTemporal']['f06b'] +
+                             $fondo['FondoTemporal']['f06c'] +
+                             $fondo['FondoTemporal']['f07a'] +
+                             $fondo['FondoTemporal']['f07b'] +
+                             $fondo['FondoTemporal']['f07c'] +
+                             $fondo['FondoTemporal']['f08'] +
+                             $fondo['FondoTemporal']['f09'] +
+                             $fondo['FondoTemporal']['f10'] -
+                             $fondo['FondoTemporal']['total']);
+
+                    /*Total Chequeado*/
+                    if($total == 0){
+                        $fondo['FondoTemporal']['totales_checked'] = 1;
+                    }/*Total con diferencia pequeña ---> Ajuste*/
+                    elseif($total < $totalSmallDiference){
+                        $fondo['FondoTemporal']['totales_checked'] = 2;
+                    }/*Total con diferencia grande ---> Ajuste*/
+                    elseif($total < $totalBigDiference){
+                        $fondo['FondoTemporal']['totales_checked'] = 3;
+                    }/*Total con diferencia abismal --> Posible error en carga*/
+                    else{
+                        $fondo['FondoTemporal']['totales_checked'] = 0;
+                    }
+            }
+            
+            $this->FondoTemporal->saveAll($fondos);
+
+            $this->redirect(array('action'=>'checked_instits'));
+        }
 }
 ?>
