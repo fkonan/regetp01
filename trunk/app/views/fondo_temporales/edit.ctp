@@ -1,8 +1,8 @@
 <div class="fondo_temporales form">
 <?php echo $form->create('FondoTemporal');?>
 	<fieldset>
- 		<legend><?php __('Edit Fondo Temporal');?></legend>
-                <div style="float:left">La diferencia es de: <?php echo $difference?></div>
+ 		<legend><?php __('Editar Fondo Temporal');?></legend>
+                <div style="float:right">La diferencia es de: <?php echo $difference?></div>
 	<?php
                                 
 		echo $form->input('id');
@@ -27,10 +27,13 @@
                 echo "<br/>-----------------------------------------------------------------------------------------------<br/>";
                 echo $form->input('total');
                 echo $form->hidden('totales_checked',array('value'=>0));
+                echo "<br/>";
+                echo "<label>Observación</label>";
+                echo $form->textarea('observacion', array('label'=>'Observación'));
                 
 	?>
 	</fieldset>
-<?php echo $form->end('Submit');?>
+        <?php echo $form->end(array('label'=>'Submit', 'onClick' => "return confirm('Se aseguro de Ingresar una Observacion?');"));?>
 </div>
 <div class="actions">
 	<ul>
