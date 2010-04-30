@@ -381,7 +381,8 @@ class ZFondoWorkTestCase extends CakeTestCase {
         $this->assertEqual($cantFondos+3, $fondo->find('count'));
         $this->assertEqual($cantLineas+4, $lineas->find('count'));
 
-        $lineas->find('sum');
+        // 137.05 es el total de todos los montos sumados de todas las lineas de accion de los fondos
+        $this->assertEqual(137.05, $lineas->find('sum'));
     }
 
     
