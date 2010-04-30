@@ -40,6 +40,7 @@ class FondosLineasDeAccionTestCase extends CakeTestCase {
 	}
 
 
+       
         function testFind() {
             $montoSumar = 2.5;
             $other = array('FondosLineasDeAccion' => array(
@@ -50,19 +51,68 @@ class FondosLineasDeAccionTestCase extends CakeTestCase {
 			'created' => '2010-04-22 10:39:45',
 			'modified' => '2010-04-22 10:39:45',
 		));
-            
+
             $suma = $this->FondosLineasDeAccion->find('sum');
-            
+            $sumaInicial = floatval($suma);
+
+            //guarda y chequea la suma
             $this->FondosLineasDeAccion->save($other['FondosLineasDeAccion']);
+            $trajo2 = $this->FondosLineasDeAccion->find('sum');            
+            $this->assertEqual($sumaInicial+$montoSumar, floatval($trajo2));
 
-            $suma2 = $this->FondosLineasDeAccion->find('sum');
-
-            $this->assertEqual($suma+$montoSumar, $suma2);
 
             $condicion = array('FondosLineasDeAccion.lineas_de_accion_id'=>2);
-            //$suma2 = $this->FondosLineasDeAccion->find('sum', array('conditions'));
+            $trajo3 = $this->FondosLineasDeAccion->find('sum', array('conditions'=>$condicion));
+            $this->assertEqual($montoSumar, $trajo3);
 
 
+            $montoSumar2 = 10.5;
+            $other2 = array('FondosLineasDeAccion' => array(
+			'id' => 3,
+			'fondo_id' => 1,
+			'lineas_de_accion_id' => 2,
+			'monto' => $montoSumar2,
+			'created' => '2010-04-22 10:39:45',
+			'modified' => '2010-04-22 10:39:45',
+		));
+            $this->FondosLineasDeAccion->save($other2['FondosLineasDeAccion']);
+            $trajo4 = $this->FondosLineasDeAccion->find('sum', array('conditions'=>$condicion));
+            $this->assertEqual($montoSumar+$montoSumar2, $trajo4);
+
+
+           
+            // pruebo agrupar por 2 campos. No se deberia poder hacer esto
+            $trajo5 = $this->FondosLineasDeAccion->find('sum', array(
+                        'group' => '"FondosLineasDeAccion"."lineas_de_accion_id"'
+            ));
+
+            $expected = array(
+                array(
+                    'FondosLineasDeAccion' => array(
+                        'sum' => 13,
+                        'lineas_de_accion_id' => 2,
+                    )
+                ),
+                array(
+                    'FondosLineasDeAccion' => array(
+                        'sum' => 1,
+                        'lineas_de_accion_id' => 1,
+                    )
+                )
+            );
+            
+            // me tenia que haber tirado una excepcion
+            $this->assertEqual($expected, $trajo5);
+
+
+
+            $trajo6 = $this->FondosLineasDeAccion->find('sum');
+            $cont = 0;
+            foreach ($trajo5 as $plata) {
+                $cont += $plata['FondosLineasDeAccion']['sum'];
+            }
+            $this->assertEqual($trajo6, $cont);
+           
         }
 }
 ?>

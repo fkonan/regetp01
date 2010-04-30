@@ -30,7 +30,7 @@ class FondosLineasDeAccion extends AppModel {
      * Returns a result set array.
      *
      * Also used to perform new-notation finds, where the first argument is type of find operation to perform
-     * (all / first / count / neighbors / list / threaded ),
+     * (sum / all / first / count / neighbors / list / threaded ),
      * second parameter options for finding ( indexed array, including: 'conditions', 'limit',
      * 'recursive', 'page', 'fields', 'offset', 'order')
      *
@@ -62,25 +62,29 @@ class FondosLineasDeAccion extends AppModel {
      */
     function find($conditions = null, $fields = array(), $order = null, $recursive = null){
         if (!empty($conditions)) {
+            $conditions = strtolower($conditions);
             if ($conditions == 'sum') {
-                if (is_array($fields)) {
-                    $campoAMeter = array('sum("FondosLineasDeAccion"."monto")');
+                $campoAMeter = array('sum("FondosLineasDeAccion"."monto") AS "FondosLineasDeAccion__sum"');
+                if (is_array($fields)) {                    
                     if (!empty($fields['fields'])) {
-                        array_merge($fields['fields'], $campoAMeter);
+                        $fields['fields'] = Set::merge($fields['fields'], $campoAMeter);
                     } else {
                         $fields['fields'] = $campoAMeter;
                     }
+                    if (!empty($fields['group'])) {
+                        $fields['fields'] = Set::merge($fields['fields'], $fields['group']);
+                    }
                 } elseif (is_string($fields)) {
-                    $fields .= ', sum("FondosLineasDeAccion"."monto")';
-                } else {
-                    $fields .= 'sum("FondosLineasDeAccion"."monto")';
+                    return parent::find($conditions, $fields, $order, $recursive);
                 }
-                $trajo = $this->find('all', $fields, $order, $recursive);
-                return floatval($trajo[0][0]['sum']);
-            }
+                $trajo = parent::find('all', $fields, $order, $recursive);
+                if (count($trajo)> 1)
+                    return $trajo;
+                else
+                    return $trajo[0]['FondosLineasDeAccion']['sum'];
+           }
         }
         return parent::find($conditions, $fields, $order, $recursive);
     }
-
 }
 ?>
