@@ -139,6 +139,9 @@ foreach ($fondos as $fondo):
 	<?php echo $paginator->next(__('next', true).' >>', array(), null, array('class'=>'disabled'));?>
 </div>
 <div class="actions">
+        <ul>
+                <li><?php echo $html->link(__('Ejecutar Validacion de CUEs', true), array('controller'=>'fondo_temporales','action'=>'validar_instits'));?></li>
+	</ul>
 	<ul>
                 <li><?php echo $html->link(__('Ejecutar Validacion de Totales', true), array('controller'=>'fondo_temporales','action'=>'validar_totales'));?></li>
 	</ul>
