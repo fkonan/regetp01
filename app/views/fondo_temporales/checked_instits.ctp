@@ -27,6 +27,9 @@ Ver totales: <select name="checkedTotals" onchange="Javascript: location.href='/
 <table cellpadding="0" cellspacing="0">
 <tr>
 	<th><?php echo $paginator->sort('id');?></th>
+        <th><?php echo $paginator->sort('anio');?></th>
+        <th><?php echo $paginator->sort('trimestre');?></th>
+        <th><?php echo $paginator->sort('linea');?></th>
         <th><?php echo $paginator->sort('instit_id');?></th>
 	<th><?php echo $paginator->sort('Jurisdiccion','Jurisdiccion.name');?></th>
 	<th><?php echo $paginator->sort('cuecompleto');?></th>
@@ -35,7 +38,6 @@ Ver totales: <select name="checkedTotals" onchange="Javascript: location.href='/
 	<th><?php echo $paginator->sort('Instit.nombre');?></th>
         <th><?php echo $paginator->sort('localidad');?></th>
         <th><?php echo $paginator->sort('Diferencia de totales');?></th>
-        <th><?php echo $paginator->sort('observacion');?></th>
         <th class="actions"><?php __('Actions');?></th>
 </tr>
 <?php
@@ -49,6 +51,15 @@ foreach ($fondos as $fondo):
 	<tr<?php echo $class;?>>
 		<td>
 			<?php echo $fondo['FondoTemporal']['id']; ?>
+		</td>
+                <td>
+			<?php echo $fondo['FondoTemporal']['anio']; ?>
+		</td>
+                <td>
+			<?php echo $fondo['FondoTemporal']['trimestre']; ?>
+		</td>
+                <td>
+			<?php echo $fondo['FondoTemporal']['linea']; ?>
 		</td>
 		<td>
 			<?php echo $fondo['FondoTemporal']['instit_id']; ?>
@@ -98,9 +109,6 @@ foreach ($fondos as $fondo):
                              $fondo['FondoTemporal']['refaccion'] -
                              $fondo['FondoTemporal']['total']); ?>
 		</td>
-                <td>
-			<?php echo $fondo['FondoTemporal']['observacion']; ?>
-		</td>
 
 		<td class="actions">
 			<?php echo $html->link(__('Edit', true), array('action'=>'edit', $fondo['FondoTemporal']['id'])); ?>
@@ -133,5 +141,8 @@ foreach ($fondos as $fondo):
 <div class="actions">
 	<ul>
                 <li><?php echo $html->link(__('Ejecutar Validacion de Totales', true), array('controller'=>'fondo_temporales','action'=>'validar_totales'));?></li>
+	</ul>
+        <ul>
+                <li><?php echo $html->link(__('Generar Reporte de Errores', true), array('controller'=>'fondo_temporales','action'=>'error_report'));?></li>
 	</ul>
 </div>

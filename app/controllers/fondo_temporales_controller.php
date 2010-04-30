@@ -56,6 +56,62 @@ class FondoTemporalesController extends AppController {
                 $this->set('checkedTotals', $checkedTotals);
 	}
 
+        function error_report() {
+                $report = '';
+                $fondoInfo = '';
+                $fondoError = '';
+                $i = 1;
+                
+         	$this->FondoTemporal->recursive = 0;
+
+                $fondos = $this->FondoTemporal->find("all",
+                            array('conditions'=>array('tipo'=>'i', "OR" => array('cue_checked'=>2, 'totales_checked'=>array(2,3)))));
+
+                foreach ($fondos as $fondo){
+                    $fondoInfo =  "Año: " . $fondo['FondoTemporal']['anio'] . " " .
+                                  "Trimestre: " . $fondo['FondoTemporal']['trimestre'] . " " .
+                                  "Linea del Excel: " . $fondo['FondoTemporal']['linea'] . " - ";
+                    $difference = abs($fondo['FondoTemporal']['f01'] +
+                                  $fondo['FondoTemporal']['f02a'] +
+                                  $fondo['FondoTemporal']['f02b'] +
+                                  $fondo['FondoTemporal']['f02c'] +
+                                  $fondo['FondoTemporal']['f03a'] +
+                                  $fondo['FondoTemporal']['f03b'] +
+                                  $fondo['FondoTemporal']['f04'] +
+                                  $fondo['FondoTemporal']['f05'] +
+                                  $fondo['FondoTemporal']['f06a'] +
+                                  $fondo['FondoTemporal']['f06b'] +
+                                  $fondo['FondoTemporal']['f06c'] +
+                                  $fondo['FondoTemporal']['f07a'] +
+                                  $fondo['FondoTemporal']['f07b'] +
+                                  $fondo['FondoTemporal']['f07c'] +
+                                  $fondo['FondoTemporal']['f08'] +
+                                  $fondo['FondoTemporal']['f09'] +
+                                  $fondo['FondoTemporal']['f10'] +
+                                  $fondo['FondoTemporal']['f10'] +
+                                  $fondo['FondoTemporal']['equipinf'] +
+                                  $fondo['FondoTemporal']['refaccion'] -
+                                  $fondo['FondoTemporal']['total']);
+
+                    if($fondo['FondoTemporal']['cue_checked'] == 2){
+                        $fondoError = $i . "-" . $fondoInfo .
+                                      "El CUE:" . $fondo['FondoTemporal']['cuecompleto']  . " se encuentra en duda \r\n";
+                    
+                        $i++;
+                    }
+
+                    if($fondo['FondoTemporal']['totales_checked'] == 2 || $fondo['FondoTemporal']['totales_checked'] == 3){
+                        $fondoError = $fondoError . $i . "-" . $fondoInfo .
+                                      "La suma de las lineas de acción tienen una diferencia de $" . $difference  . " con el total \r\n";
+                    
+                        $i++;
+                    }
+
+                }
+
+                $this->set('report', $report);
+	}
+
 	function view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid FondoTemporal.', true));
@@ -814,7 +870,6 @@ class FondoTemporalesController extends AppController {
 
         function validar_totales() {
             $totalSmallDiference = 10;
-            $totalBigDiference = 100;
             $total = 0;
 
             $this->FondoTemporal->recursive = 0;
@@ -851,12 +906,9 @@ class FondoTemporalesController extends AppController {
                     }/*Total con diferencia pequeña ---> Ajuste*/
                     elseif($total < $totalSmallDiference){
                         $fondo['FondoTemporal']['totales_checked'] = 2;
-                    }/*Total con diferencia grande ---> Ajuste*/
-                    elseif($total < $totalBigDiference){
-                        $fondo['FondoTemporal']['totales_checked'] = 3;
-                    }/*Total con diferencia abismal --> Posible error en carga*/
+                    }/*Total con diferencia grande*/
                     else{
-                        $fondo['FondoTemporal']['totales_checked'] = 0;
+                        $fondo['FondoTemporal']['totales_checked'] = 3;
                     }
             }
             
