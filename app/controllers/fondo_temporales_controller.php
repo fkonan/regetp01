@@ -199,7 +199,8 @@ class FondoTemporalesController extends AppController {
             $this->FondoTemporal->recursive = 0;
             $fondos = $this->FondoTemporal->find("all",
                             array('conditions'=> array('tipo'=>'i', 'cue_checked'=>0),
-                                'limit'=>'50'));
+                                  'order'=> array('FondoTemporal.jurisdiccion_id'),
+                                  'limit'=>'500'));
 
             $this->Instits = ClassRegistry::init("Instit");
             $this->Instits->recursive = 0;
@@ -209,14 +210,13 @@ class FondoTemporalesController extends AppController {
             $jurisdiccion_id = '';
 
             // auditoria
-            $fondos_totales = $cue_y_tipo_y_nro = $cue_y_no_tipo_y_nro = $no_cue_y_checked =
-            $no_cue_y_no_checked = 0;
+            $instits_checked = $instits_en_duda = $instits_no_checked = 0;
 
-            if ($fondos_totales=count($fondos))
+            if (count($fondos))
             {
                 foreach ($fondos as $fondo)
                 {
-                    $cue_checked = $en_duda = false;
+                    $cue_checked = $instit_checked = false;
 
                     // 1. Acota proceso a Jurisdiccion con jurisdiccion_id
                     if ($jurisdiccion_id != $fondo['FondoTemporal']['jurisdiccion_id'])
@@ -224,18 +224,13 @@ class FondoTemporalesController extends AppController {
                         // si cambia la jurisdiccion re-setea la coleccion de instits con
                         // la que va a trabajar
                         $jurisdiccion_id = $fondo['FondoTemporal']['jurisdiccion_id'];
-
+                        
                         // acota a instits de esta jurisdiccion
                         $this->instits = $this->Instits->find("all", array(
-                        'limit'=>'500', // SACAR!
                         'conditions'=> array('Instit.jurisdiccion_id' => $jurisdiccion_id),
-                        'fields'=> array('cue','nombre','nroinstit'),
+                        'fields'=> array('id','cue','nombre','nroinstit','anexo'),
                         'contain'=>array('Localidad(name)','Tipoinstit(name)'=>array('Jurisdiccion(name)'))));
 
-                        // acota tipoInstits a esta jurisdiccion
-                        /*$this->tipoInstits = $this->Instits->Tipoinstit->find("all", array(
-                                'conditions'=> array('jurisdiccion_id' => $jurisdiccion_id)));
-                   */
                         // trae todos los tipoInstits de esta jurisdiccion ordenados por cantidad de
                         $this->tipoInstits = $this->Instits->Tipoinstit->find("all", array(
                                 'conditions'=> array('jurisdiccion_id' => $jurisdiccion_id),
@@ -248,14 +243,16 @@ class FondoTemporalesController extends AppController {
                     if (strlen($fondo['FondoTemporal']['cuecompleto']))
                     {
                         // valida por nro de CUE
-                        $instit = $this->Instits->find("all",array(
+                      /* $instit = $this->Instits->find("all",array(
                             'conditions'=> array('"cue"*100+"anexo"'=>$fondo['FondoTemporal']['cuecompleto'],
                                                 'Instit.jurisdiccion_id' => $jurisdiccion_id),
                             'fields'=> array('id','cue','nombre','nroinstit','tipoinstit_id'),
                             'contain'=>array('Localidad(name)','Tipoinstit(name)'=>array('Jurisdiccion(name)')
                             )));
-                       
-                        if (count($instit) == 1)
+                       */
+                        $instit = $this->getInstitByCueIncompleto($this->instits, $fondo['FondoTemporal']['cuecompleto']);
+
+                        if ($instit)
                         {
                             // el CUE fue encontrado
                             pr($instit);
@@ -266,47 +263,55 @@ class FondoTemporalesController extends AppController {
                             $array_words = explode(" ", $string_procesado);
                        pr($string_procesado);
                             // chequea el numero y tipo de instit
-                            if ($this->compara_numeroInstit($array_words, $instit['0']['Instit']['nroinstit']) &&
-                                $this->compara_tipoInstit($string_procesado, $this->tipoInstits))
+                            if ($this->compara_numeroInstit($array_words, $instit['Instit']['nroinstit']))
                             {
-                                $cue_checked = true;
-                                echo "CUE coincide, TIPO y NRO coinciden!";
-                                $cue_y_tipo_y_nro++;
+                                if ($this->compara_tipoInstit($string_procesado, $this->tipoInstits)) 
+                                {
+                                    echo "<br>CUE coincide, TIPO y NRO coinciden!";
+                                    $instit_checked = true;
+                                    $instits_checked++;
 
-                                // edita cue_checked en 1 y asigna instit_id
-                                $this->data = $this->FondoTemporal->read(null, $fondo['FondoTemporal']['id']);
-                                if (!empty($this->data)) {
-                                    $this->data['FondoTemporal']['cue_checked'] = 1;
-                                    $this->data['FondoTemporal']['instit_id'] = $instit['0']['Instit']['id'];
-                                    if ($this->FondoTemporal->save($this->data)) {
-                                    } else {
-                                            $this->Session->setFlash(__('El FondoTemporal id '.$fondo['FondoTemporal']['id'].' no pudo ser actualizado.', true));
+                                    // edita cue_checked en 1 y asigna instit_id
+                                    $this->asignarInstitYEstadoATemp($instit['Instit']['id'], 1, $fondo['FondoTemporal']['id']);
+                                }
+                                else
+                                {
+                                    $string_procesado_aux = $this->optimizar_cadena($instit['Instit']['nombre_completo']);
+                                    $string_procesado_aux = $this->str_sin_tipoInstit($string_procesado_aux, $this->tipoInstits);
+
+                                    $array_words_aux = explode(" ", $string_procesado_aux);
+
+                                    if ($string_procesado == $string_procesado_aux ||
+                                        $this->compara_institNombres($array_words, $array_words_aux)) {
+                                        // tienen el mismo nombre
+                                        $instit_checked = true;
+                                        echo "<br>NOMBRES Y NUMERO COINCIDEN!!! asigna 1";
+
+                                        // edita cue_checked en 1 y asigna instit_id
+                                        $this->asignarInstitYEstadoATemp($instit['Instit']['id'], 1, $fondo['FondoTemporal']['id']);
+
+                                        $instits_checked++;
                                     }
                                 }
                             }
-                            else {
-                                $cue_y_no_tipo_y_nro++;
-                                $en_duda = true;
-                                echo "CUE coincide, TIPO y NRO no coinciden!";
-
-                                 // edita cue_checked en 2 (duda)
-                                $this->data = $this->FondoTemporal->read(null, $fondo['FondoTemporal']['id']);
-                                if (!empty($this->data)) {
-                                    $this->data['FondoTemporal']['cue_checked'] = 2;
-                                    $this->data['FondoTemporal']['instit_id'] = $instit['0']['Instit']['id'];
-                                    if ($this->FondoTemporal->save($this->data)) {
-                                    } else {
-                                            $this->Session->setFlash(__('El FondoTemporal id '.$fondo['FondoTemporal']['id'].' no pudo ser actualizado.', true));
-                                    }
-                                }
+                            
+                            if (!$instit_checked)
+                            {
+                                // edita cue_checked en 2 (duda)
+                                $this->asignarInstitYEstadoATemp($instit['Instit']['id'], 2, $fondo['FondoTemporal']['id']);
+                                $instits_en_duda++;
+                                echo "asigna 2<br>";
+                                pr($array_words);
                             }
+
+                            $cue_checked = true;
                         }
                     }
 
                     if (!$cue_checked)
                     {
-                        echo "CUE NO coincide!";
-                        // 3. Compara nro de instit
+                        echo "<br>CUE NO coincide!";
+                        $instit_checked = false;
                         if (strlen($fondo['FondoTemporal']['instit']))
                         {
                             // compara nombres
@@ -324,57 +329,73 @@ class FondoTemporalesController extends AppController {
 
                                     $array_words_aux = explode(" ", $string_procesado_aux);
 
-                                    $matchea_nombre = false;
-
                                     // chequea el numero de instit
                                     if ($this->compara_numeroInstit($array_words, $instit['Instit']['nroinstit'])) 
                                     {
                                         if ($string_procesado == $string_procesado_aux || 
                                             $this->compara_institNombres($array_words, $array_words_aux)) {
                                             // tienen el mismo nombre
-                                            $matchea_nombre = true;
-                                            echo "NOMBRES Y NUMERO COINCIDEN!!!";
-                                            $no_cue_y_checked++;
-
+                                            $instit_checked = true;
+                                            echo "<br>NOMBRES Y NUMERO COINCIDEN!!!";
+                                            $instits_checked++;
+                                            
                                             // edita cue_checked en 1 y asigna instit_id
-                                            $this->data = $this->FondoTemporal->read(null, $fondo['FondoTemporal']['id']);
-                                            if (!empty($this->data)) {
-                                                $this->data['FondoTemporal']['cue_checked'] = 1;
-                                                $this->data['FondoTemporal']['instit_id'] = $instit['Instit']['id'];
-                                                if ($this->FondoTemporal->save($this->data)) {
-                                                } else {
-                                                        $this->Session->setFlash(__('El FondoTemporal id '.$fondo['FondoTemporal']['id'].' no pudo ser actualizado.', true));
-                                                }
-                                            }
+                                            $this->asignarInstitYEstadoATemp($instit['Instit']['id'], 1, $fondo['FondoTemporal']['id']);
+
+                                            break;
                                         }
-                                        else {
-                                            $no_cue_y_no_checked++;
-                                        }
-                                    }
-                                    else {
-                                        $no_cue_y_no_checked++;
                                     }
 
                                     // si el name de la tabla Tipoinstit contiene parte del nombre
-                                    if ($this->compara_tipoInstit($string_procesado, $this->tipoInstits)) {
+                                    /*if ($this->compara_tipoInstit($string_procesado, $this->tipoInstits)) {
 
-                                    }
-
-                                    // chequea diferencia de palabras
+                                    }*/
                                 }
                             }
+                        }
+
+                        if (!$instit_checked) {
+                            $instits_no_checked++;
+                            echo $string_procesado;
                         }
                     }
                 }
             }
-
-            echo "CUE y Tipo y Nro: ".$cue_y_tipo_y_nro."<br>CUE y NO Tipo y Nro: ".$cue_y_no_tipo_y_nro;
-            echo "<br>NO CUE y Checked: ".$no_cue_y_checked."<br>NO CUE y NO Checked: ".$no_cue_y_no_checked;
+            
+            $this->set('instits_checked', $instits_checked);
+            $this->set('instits_en_duda', $instits_en_duda);
+            $this->set('instits_no_checked', $instits_no_checked);
 	}
 
         function getCueCompleto($cueincompleto, $anexo=0) {
             return $cueincompleto*100 + $anexo;
         }
+
+        function getInstitByCueIncompleto($instits, $cue_incompleto) {
+            foreach ($instits as $k=>$instit) {
+                if ($instit['Instit']['cue']*100+$instit['Instit']['anexo'] == $cue_incompleto)
+                {
+                    return $instit;
+                }
+            }
+        }
+
+        function asignarInstitYEstadoATemp($instit_id, $estado, $temp_id) {
+            /*$this->data = $this->FondoTemporal->read(null, $temp_id);
+            if (!empty($this->data)) {
+                $this->data['FondoTemporal']['cue_checked'] = $estado;
+                $this->data['FondoTemporal']['instit_id'] = $instit_id;
+                if ($this->FondoTemporal->save($this->data)) {
+                } else {
+                        $this->Session->setFlash(__('El FondoTemporal id '.$temp_id.' no pudo ser actualizado.', true));
+                }
+            }
+            */
+            // evita un select gigante en cada update
+            $this->FondoTemporal->query("UPDATE z_fondo_work SET cue_checked=".$estado.", instit_id=".$instit_id." WHERE id=".$temp_id.";");
+        }
+
+        
 
         /**
 	 *
@@ -417,17 +438,13 @@ class FondoTemporalesController extends AppController {
                 $limit = count($array_words_temp);
             }
 
-            if ($peso > 1) {
+            // compara limit con el peso encontrado
+            if ($peso > 0 && $peso > $limit/2) {
                 pr($array_words_temp);
                 pr($array_words);
 
-                echo "limit: ".$limit."   -   peso: ".$peso;
-            }
-
-            // compara limit con el peso encontrado
-            if ($peso > 0 && $limit/$peso > $limit/2) {
-                return true;
                 echo "TRUE! limit: ".$limit."   -   peso: ".$peso;
+                return true;
             }
             
             return false;
@@ -454,6 +471,7 @@ class FondoTemporalesController extends AppController {
                 $pos = strpos($value1,'nº');
                 if ($pos !== false) {
                     $numero = str_replace('nº','',$value1);
+                    break;
                 }
                 else
                 {
@@ -461,6 +479,7 @@ class FondoTemporalesController extends AppController {
                     $pos = strpos($value1,'a-');
                     if ($pos !== false) {
                         $numero = $value1;
+                        break;
                     }
                 }
                 
@@ -520,6 +539,7 @@ class FondoTemporalesController extends AppController {
             $instit = str_replace('.','',strtolower($instit));
             
             $a = array('eet',
+                       'escuela de educacion tecnica',
                        'e alternancia',
                        'et agro ',
                        'etagro ',
@@ -528,21 +548,30 @@ class FondoTemporalesController extends AppController {
                        'et ',
                        'inspt',
                        'centro ',
-                       'cent',
+                       'cent ',
+                       'cfl',
                        'cfp',
                        'centro fp',
+                       'centro de formacion profesional',
+                       'centro de formacion laboral',
                        'cea',
+                       'centro de educacion agricola',
                        'eea',
                        'cfr',
                        'eee',
                        'efa',
+                       'efp',
                        'cept',
+                       'centro educativo para la produccion total',
+                       'centro educativo para la produccion',
                        'cpet',
                        'ies',
                        'iea',
                        'eem',
                        'isfdyt',
+                       'isfd y t',
                        'mm',
+                       'mision monotecnica',
                        'monotec ',
                        'enet',
                        'isp',
@@ -550,6 +579,7 @@ class FondoTemporalesController extends AppController {
                        'ipem',
                        'cens',
                        'copyco',
+                       'centro de orientacion profesional y capacitacion obrera',
                        'uep',
                        'iset',
                        'eeat',
@@ -569,6 +599,7 @@ class FondoTemporalesController extends AppController {
                 );
             
             $b = array("ESCUELA DE EDUCACIÓN TÉCNICA (E.E.T.)",
+                       "ESCUELA DE EDUCACIÓN TÉCNICA (E.E.T.)",
                        "ESCUELA DE ALTERNANCIA",
                        "ESCUELA TÉCNICA AGROPECUARIA ",
                        "ESCUELA TÉCNICA AGROPECUARIA ",
@@ -577,20 +608,29 @@ class FondoTemporalesController extends AppController {
                        "ESCUELA DE EDUCACIÓN TÉCNICA (E.E.T.) ",
                        "INSTITUTO NACIONAL SUPERIOR DEL PROFESORADO TÉCNICO (I.N.S.P.T.)",
                        "centro ",
-                       "CENTRO EDUCATIVO DE NIVEL TERCIARIO (C.E.N.T.)",
+                       "CENTRO EDUCATIVO DE NIVEL TERCIARIO (C.E.N.T.) ",
+                       "CENTRO DE FORMACIÓN LABORAL",
                        "CENTRO DE FORMACIÓN PROFESIONAL (C.F.P.)",
                        "CENTRO DE FORMACIÓN PROFESIONAL (C.F.P.)",
+                       "CENTRO DE FORMACIÓN PROFESIONAL (C.F.P.)",
+                       "CENTRO DE FORMACIÓN LABORAL",
+                       "CENTRO DE EDUCACIÓN AGRÍCOLA (C.E.A.)",
                        "CENTRO DE EDUCACIÓN AGRÍCOLA (C.E.A.)",
                        "ESCUELA DE EDUCACIÓN AGRARIA (E.E.A.)",
                        "CENTRO DE FORMACIÓN RURAL (C.F.R.)",
                        "ESCUELA DE EDUCACIÓN ESPECIAL (E.E.E.)",
                        "ESCUELA DE LA FAMILIA AGRICÓLA (E.F.A.)",
+                       "ESCUELA DE FORMACIÓN PROFESIONAL",
+                       "CENTRO EDUCATIVO PARA LA PRODUCCIÓN TOTAL (C.E.P.T.)",
+                       "CENTRO EDUCATIVO PARA LA PRODUCCIÓN TOTAL (C.E.P.T.)",
                        "CENTRO EDUCATIVO PARA LA PRODUCCIÓN TOTAL (C.E.P.T.)",
                        "COLEGIO PROVINCIAL DE EDUCACIÓN TECNOLÓGICA (C.P.E.T.)",
                        "INSTITUTO DE EDUCACIÓN SUPERIOR (I.E.S.)",
                        "INSTITUTO DE ENSEÑANZA AGROPECUARIA (I.E.A.)",
                        "ESCUELA DE EDUCACIÓN MEDIA (E.E.M.)",
                        "INSTITUTO DE EDUCACIÓN SUPERIOR DE FORMACIÓN DOCENTE Y TÉCNICA (I.S.F.D.yT.)",
+                       "INSTITUTO DE EDUCACIÓN SUPERIOR DE FORMACIÓN DOCENTE Y TÉCNICA (I.S.F.D.yT.)",
+                       "MISIÓN MONOTÉCNICA (M.M.)",
                        "MISIÓN MONOTÉCNICA (M.M.)",
                        "MISIÓN MONOTÉCNICA (M.M.) ",
                        "ESCUELA NACIONAL DE EDUCACIÓN TÉCNICA (E.N.E.T.)",
@@ -598,6 +638,7 @@ class FondoTemporalesController extends AppController {
                        "CENTRO DE DESARROLLO REGIONAL (CE.DE.R.)",
                        "INSTITUTO PROVINCIAL DE EDUCACIÓN MEDIA (I.P.E.M.)",
                        "CENTRO EDUCATIVO DE NIVEL SECUNDARIO (C.E.N.S.)",
+                       "CENTRO DE ORIENTACIÓN PROFESIONAL Y CAPACITACIÓN OBRERA (C.O.P.Y.C.O.)",
                        "CENTRO DE ORIENTACIÓN PROFESIONAL Y CAPACITACIÓN OBRERA (C.O.P.Y.C.O.)",
                        "UNIDAD EDUCATIVA PRIVADA (U.E.P.)",
                        "INSTITUTO DE EDUCACIÓN SUPERIOR DE EDUCACIÓN TÉCNICA (I.S.E.T.)",
@@ -648,18 +689,21 @@ class FondoTemporalesController extends AppController {
                        'inspt',
                        'cent ',
                        'cfp',
+                       'cfl',
                        'centro fp',
                        'cea',
                        'eea',
                        'cfr',
                        'eee',
                        'efa',
+                       'efp',
                        'cept',
                        'cpet',
                        'ies',
                        'iea',
                        'eem',
                        'isfdyt',
+                       'isfd y t',
                        'mm',
                        'enet',
                        'isp',
@@ -704,8 +748,8 @@ class FondoTemporalesController extends AppController {
 	function optimizar_cadena($text){
 		
                 // elimina acentos y especiales
-                $a = array('À', 'Á', 'Â', 'Ã', 'Ä', 'Å', 'Æ', 'Ç', 'È', 'É', 'Ê', 'Ë', 'Ì', 'Í', 'Î', 'Ï', 'Ð', 'Ñ', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ø', 'Ù', 'Ú', 'Û', 'Ü', 'Ý', 'ß', 'à', 'á', 'â', 'ã', 'ä', 'å', 'æ', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', 'ø', 'ù', 'ú', 'û', 'ü', 'ý', 'ÿ', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?');
-                $b = array('A', 'A', 'A', 'A', 'A', 'A', 'AE', 'C', 'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I', 'D', 'N', 'O', 'O', 'O', 'O', 'O', 'O', 'U', 'U', 'U', 'U', 'Y', 's', 'a', 'a', 'a', 'a', 'a', 'a', 'ae', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'n', 'o', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'y', 'y', 'A', 'a', 'A', 'a', 'A', 'a', 'C', 'c', 'C', 'c', 'C', 'c', 'C', 'c', 'D', 'd', 'D', 'd', 'E', 'e', 'E', 'e', 'E', 'e', 'E', 'e', 'E', 'e', 'G', 'g', 'G', 'g', 'G', 'g', 'G', 'g', 'H', 'h', 'H', 'h', 'I', 'i', 'I', 'i', 'I', 'i', 'I', 'i', 'I', 'i', 'IJ', 'ij', 'J', 'j', 'K', 'k', 'L', 'l', 'L', 'l', 'L', 'l', 'L', 'l', 'l', 'l', 'N', 'n', 'N', 'n', 'N', 'n', 'n', 'O', 'o', 'O', 'o', 'O', 'o', 'OE', 'oe', 'R', 'r', 'R', 'r', 'R', 'r', 'S', 's', 'S', 's', 'S', 's', 'S', 's', 'T', 't', 'T', 't', 'T', 't', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'W', 'w', 'Y', 'y', 'Y', 'Z', 'z', 'Z', 'z', 'Z', 'z', 's', 'f', 'O', 'o', 'U', 'u', 'A', 'a', 'I', 'i', 'O', 'o', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'U', 'u', 'A', 'a', 'AE', 'ae', 'O', 'o');
+                $a = array('à', 'á', 'â', 'ã', 'ä', 'å', 'æ', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', 'ø', 'ù', 'ú', 'û', 'ü', 'ý', 'ÿ');
+                $b = array('a', 'a', 'a', 'a', 'a', 'a', 'ae', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'n', 'o', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'y', 'y');
                 $text = str_replace($a, $b, $text);
 
                 $text = strtolower($text);
@@ -741,6 +785,8 @@ class FondoTemporalesController extends AppController {
                 $text = str_replace("nº ","nº",$text);
                 // algunos casos tienen N'
                 $text = str_replace("n' ","nº",$text);
+                // algunos casos tienen N|
+                $text = str_replace("n| ","nº",$text);
                 
                 // separa "nº" si esta pegado al nombre
                 $pos = $pos_fin = '';
