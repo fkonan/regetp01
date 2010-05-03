@@ -44,7 +44,7 @@ class FondoTemporalesController extends AppController {
                     $checkedInstit = null;
                 }
                 
-                if(!empty($checkedInstit)){
+                if($checkedInstit != null){
                     $this->paginate = array('conditions'=>array('tipo'=>'i', 'cue_checked'=>$checkedInstit));
                 }
                 else{
@@ -402,10 +402,13 @@ class FondoTemporalesController extends AppController {
                     }
                 }
             }
-            
-            $this->set('instits_checked', $instits_checked);
-            $this->set('instits_en_duda', $instits_en_duda);
-            $this->set('instits_no_checked', $instits_no_checked);
+
+            $mensaje = "Instits checkeds: " . $instits_checked .
+            "; Instits en duda: " . $instits_en_duda .
+            "; Instits NO checked: " .  $instits_no_checked;
+
+            $this->Session->setFlash(__($mensaje, true));
+	    $this->redirect(array('action'=>'checked_instits'));
 	}
 
         
