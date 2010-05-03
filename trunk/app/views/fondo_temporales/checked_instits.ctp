@@ -9,14 +9,15 @@ echo $paginator->counter(array(
 $paginator->options(array('url' => $this->passedArgs));
 ?>
 <br /><br />
-Ver instits: <select name="checkedInstit" onchange="Javascript: location.href='/regtp/fondo_temporales/checked_instits/checkedInstit:'+this.value">
+
+Ver instits: <select name="checkedInstit" onchange="Javascript: location.href='<?php echo $html->url('/fondo_temporales/checked_instits/');?>checkedInstit:'+this.value;">
     <option value="" <?=($checkedInstit==null?'selected':'')?>>Seleccione</option>
     <option value="0" <?=($checkedInstit=='0'?'selected':'')?>>No Confirmados</option>
     <option value="1" <?=($checkedInstit=='1'?'selected':'')?>>Confirmados</option>
     <option value="2" <?=($checkedInstit=='2'?'selected':'')?>>En duda</option>
 </select>
 <br /><br />
-Ver totales: <select name="checkedTotals" onchange="Javascript: location.href='/regtp/fondo_temporales/checked_instits/checkedTotals:'+this.value">
+Ver totales: <select name="checkedTotals" onchange="Javascript: location.href='<?php echo $html->url('/fondo_temporales/checked_instits/');?>checkedTotals:'+this.value;">
     <option value="" <?=(($checkedTotals==null)?'selected':'')?>>Seleccione</option>
     <option value="0" <?=($checkedTotals=='0'?'selected':'')?>>No Confirmados</option>
     <option value="1" <?=($checkedTotals=='1'?'selected':'')?>>Confirmados</option>
