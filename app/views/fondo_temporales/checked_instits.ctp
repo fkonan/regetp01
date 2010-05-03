@@ -149,4 +149,7 @@ foreach ($fondos as $fondo):
         <ul>
                 <li><?php echo $html->link(__('Generar Reporte de Errores', true), array('controller'=>'fondo_temporales','action'=>'error_report'));?></li>
 	</ul>
+        <ul>
+                <li><?php echo $html->link(__('Generar Reporte de Observaciones Finales', true), array('controller'=>'fondo_temporales','action'=>'observacion_report'));?></li>
+	</ul>
 </div>

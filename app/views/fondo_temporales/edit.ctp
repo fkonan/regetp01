@@ -29,7 +29,7 @@
                 echo $form->hidden('totales_checked',array('value'=>0));
                 echo "<br/>";
                 echo "<label>Observación</label>";
-                echo $form->textarea('observacion', array('label'=>'Observación'));
+                echo $form->textarea('observacion', array('label'=>'Observación','value'=>$error));
                 
 	?>
 	</fieldset>
