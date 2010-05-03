@@ -114,6 +114,29 @@ class FondoTemporalesController extends AppController {
                 $this->set('report', $report);
 	}
 
+        function observacion_report() {
+                $report = '';
+                $fondoInfo = '';
+                $fondoError = '';
+                $i = 1;
+
+         	$this->FondoTemporal->recursive = 0;
+
+                $fondos = $this->FondoTemporal->find("all",
+                            array('conditions'=>array('totales_checked = 1',"FondoTemporal.observacion != ''")));
+                
+                foreach ($fondos as $fondo){
+                    $fondoInfo =  "Año: " . $fondo['FondoTemporal']['anio'] . " " .
+                                  "Trimestre: " . $fondo['FondoTemporal']['trimestre'] . " " .
+                                  "Linea del Excel: " . $fondo['FondoTemporal']['linea'];
+
+                    $report = $report . $fondoInfo . "\r\n-----------------------------------------------------------------\r\n" . $fondo['FondoTemporal']['observacion'] . "\r\n";
+                }
+
+
+                $this->set('report', $report);
+	}
+
 	function view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid FondoTemporal.', true));
@@ -164,8 +187,10 @@ class FondoTemporalesController extends AppController {
 
 		$instits = $this->FondoTemporal->Instit->find('list');
 		$jurisdicciones = $this->FondoTemporal->Jurisdiccion->find('list');
+                $error = $this->data['FondoTemporal']['observacion'] . date('d-m-Y') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($difference)  . " con el total \r\n";
 		//$lineasDeAcciones = $this->FondoTemporal->LineasDeAccion->find('list');
 		$this->set('difference', $difference);
+                $this->set('error', $error);
                 $this->set(compact('instits','jurisdicciones'));//,'lineasDeAcciones'));
 	}
 
@@ -349,6 +374,15 @@ class FondoTemporalesController extends AppController {
                                 // edita cue_checked en 2 (duda)
                                 $this->FondoTemporal->asignarInstitYEstadoATemp($instit['Instit']['id'], 2, $fondo['FondoTemporal']['id']);
                                 $instits_en_duda++;
+
+                                /*if(strlen($this->data['FondoTemporal']['observacion']) > 0){
+                                    $error = $this->data['FondoTemporal']['observacion'] . "\r\n" . date('d-m-Y') . " - " . "El nombre de la institucion se encuentra en duda \r\n";
+                                }
+                                else{
+                                    $error = date('d-m-Y') . " - " . "El nombre de la institucion se encuentra en duda \r\n";
+                                }*/
+
+                                
                                 //pr($text);
                             }
 
@@ -450,9 +484,24 @@ class FondoTemporalesController extends AppController {
                     }/*Total con diferencia pequeña ---> Ajuste*/
                     elseif($total < $totalSmallDiference){
                         $fondo['FondoTemporal']['totales_checked'] = 2;
+
+                        if(strlen($this->data['FondoTemporal']['observacion']) > 0){
+                            $error = $this->data['FondoTemporal']['observacion'] . "\r\n" . date('d-m-Y') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($difference)  . " con el total \r\n";
+                        }
+                        else{
+                            $error = date('d-m-Y') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($total)  . " con el total \r\n";
+                        }
+
                     }/*Total con diferencia grande*/
                     else{
                         $fondo['FondoTemporal']['totales_checked'] = 3;
+
+                        if(strlen($this->data['FondoTemporal']['observacion']) > 0){
+                            $error = $this->data['FondoTemporal']['observacion'] . "\r\n" . date('d-m-Y') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($difference)  . " con el total \r\n";
+                        }
+                        else{
+                            $error = date('d-m-Y') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($difference)  . " con el total \r\n";
+                        }
                     }
             }
             
