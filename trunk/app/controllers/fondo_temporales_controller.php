@@ -66,7 +66,6 @@ class FondoTemporalesController extends AppController {
 
                 $fondos = $this->FondoTemporal->find("all",
                             array('conditions'=>array('tipo'=>'i', "OR" => array('cue_checked'=>2, 'totales_checked'=>array(2,3)))));
-
                 foreach ($fondos as $fondo){
                     $fondoInfo =  "Año: " . $fondo['FondoTemporal']['anio'] . " " .
                                   "Trimestre: " . $fondo['FondoTemporal']['trimestre'] . " " .
@@ -107,7 +106,10 @@ class FondoTemporalesController extends AppController {
                         $i++;
                     }
 
+                    $report = $report . $fondoError;
+
                 }
+                
 
                 $this->set('report', $report);
 	}
