@@ -5,6 +5,7 @@ App::import('Model', 'FondoTemporal');
 
 class FondotemporalTestCase extends CakeTestCase {
     var $FondoTemporal = null;
+    var $tipoInstits = null;
 
     var $fixtures = array(
             'app.z_fondo_work', 'app.jurisdiccion', 'app.instit', 'app.claseinstit',
@@ -21,6 +22,13 @@ class FondotemporalTestCase extends CakeTestCase {
         * @var FondoTemporal
         */
         $this->FondoTemporal =& ClassRegistry::init('FondoTemporal');
+        $this->Tipoinstit =& ClassRegistry::init('Tipoinstit');
+
+        // trae todos los tipoInstits
+        $this->Tipoinstit->recursive = 0;
+        $this->tipoInstits = $this->Tipoinstit->find("all", array(
+                'order'=> array('LENGTH(Tipoinstit.name)'=>'desc')
+            ));
     }
 
     function testFondoInstance() {
@@ -28,78 +36,41 @@ class FondotemporalTestCase extends CakeTestCase {
     }
 
     function testCompara_numeroInstit() {
-        $t1 = $this->FondoTemporal->compara_numeroInstit('BLA N° 63','63');
-        $this->assertTrue($t1);
+        $this->assertTrue($this->FondoTemporal->compara_numeroInstit('BLA N° 63','63'));
+        $this->assertTrue($this->FondoTemporal->compara_numeroInstit('BLA Nº 63','63'));
+        $this->assertTrue($this->FondoTemporal->compara_numeroInstit('BLA N\' 63','63'));
+        $this->assertTrue($this->FondoTemporal->compara_numeroInstit('BLA N°63','63'));
+        $this->assertTrue($this->FondoTemporal->compara_numeroInstit('BLA Nº63','63'));
+        $this->assertTrue($this->FondoTemporal->compara_numeroInstit('BLA N|63','63'));
+        $this->assertTrue($this->FondoTemporal->compara_numeroInstit('ET- Agro - Snopek','63'));
 
-        $t1 = $this->FondoTemporal->compara_numeroInstit('BLA N\' 63','63');
-        $this->assertTrue($t1);
-
-        $t1 = $this->FondoTemporal->compara_numeroInstit('BLA N°63','63');
-        $this->assertTrue($t1);
-
-        $t1 = $this->FondoTemporal->compara_numeroInstit('BLA N|63','63');
-        $this->assertTrue($t1);
-
-        $t1 = $this->FondoTemporal->compara_numeroInstit('BLA N° 73','63');
-        $this->assertFalse($t1);
-
-        $t1 = $this->FondoTemporal->compara_numeroInstit('ET- Agro - Snopek','63');
-        $this->assertTrue($t1);
+        $this->assertFalse($this->FondoTemporal->compara_numeroInstit('BLA Nº 73','63'));
     }
 
     function testCompara_tipoInstit() {
-        $tiposInstit = array('Tipoinstit'=>array(
-                    'id' => 33,
-                    'jurisdiccion_id' => 2,
-                    'name' => 'ESCUELA DE EDUCACIÓN TÉCNICA (E.E.T.)'
-                ),
-            array(
-                    'id' => 9,
-                    'jurisdiccion_id' => 2,
-                    'name' => 'CENTRO EDUCATIVO DE NIVEL TERCIARIO (C.E.N.T.)'
-                ),
-            array(
-                    'id' => 3,
-                    'jurisdiccion_id' => 2,
-                    'name' => 'ESCUELA POLITÉCNICA'
-                ),
-            array(
-                    'id' => 8,
-                    'jurisdiccion_id' => 2,
-                    'name' => 'ESCUELA'
-                )
-        );
-        $instit = array('FondoTemporal'=>array(
-		'id' => 2,
-		'anio' => 2009,
-		'trimestre' => 1,
-		'jurisdiccion_id' => 2,
-		'jurisdiccion_name' => 'CABA',
-		'memo' => 'xx',
-		'cuecompleto' => '24567801',
-		'instit' => 'I.P.E.M. Nº 63 REPÚBLICA DE ITALIA',
-		'instit_name' => '',
-		'departamento' => 'Lorem ipsum dolor sit amet',
-		'localidad' => 'Lorem ipsum dolor sit amet'
-        ));
+        $this->assertTrue($this->FondoTemporal->compara_tipoInstit('EET Nº 15 Maipú', $this->tipoInstits));
+        $this->assertTrue($this->FondoTemporal->compara_tipoInstit('E.E.T. Nº 15 Maipú', $this->tipoInstits));
+        $this->assertTrue($this->FondoTemporal->compara_tipoInstit('eet Nº 15 Maipú', $this->tipoInstits));
+        $this->assertTrue($this->FondoTemporal->compara_tipoInstit('e.e.t. Nº 15 Maipú', $this->tipoInstits));
+        $this->assertTrue($this->FondoTemporal->compara_tipoInstit('escuela Nº 15 Maipú', $this->tipoInstits));
+        $this->assertTrue($this->FondoTemporal->compara_tipoInstit('centro fp Nº 15 Maipú', $this->tipoInstits));
 
-        $t1 = $this->FondoTemporal->testCompara_tipoInstit('BLA N° 63','63');
-        $this->assertTrue($t1);
+        $this->assertFalse($this->FondoTemporal->compara_tipoInstit('Esc Ed T Nº 15 Maipú', $this->tipoInstits));
+    }
 
-        $t1 = $this->FondoTemporal->compara_numeroInstit('BLA N\' 63','63');
-        $this->assertTrue($t1);
+    function testCompara_institNombres() {
+        $this->assertTrue($this->FondoTemporal->compara_institNombres('EET Nº 15 Maipú', 'EET Nº 15 Maipú', $this->tipoInstits));
+        $this->assertTrue($this->FondoTemporal->compara_institNombres('EET Nº 15 Maipú', 'eet Nº 15 Meipú', $this->tipoInstits));
+        $this->assertTrue($this->FondoTemporal->compara_institNombres('C.E.N.T. Nº 2 Clotilde Mercedes G. De Fernández', 'CENT Nº 2 Clotilde Mercedes G. De Fernández', $this->tipoInstits));
+        $this->assertTrue($this->FondoTemporal->compara_institNombres('C.E.N.T. Nº 2 Clotilde Mercedes G. De Fernández', 'CENT Nº 2 Clotilde g De Fernández', $this->tipoInstits));
+        $this->assertTrue($this->FondoTemporal->compara_institNombres('Esc Nº 15 Maipú', 'EET Nº 15 Maipú', $this->tipoInstits));
+        $this->assertTrue($this->FondoTemporal->compara_institNombres('C.E.N.T. Nº 2 Clotilde Mercedes G. De Fernández - anexo', 'CENT Nº 2 Clotilde Mercedes G. De Fernández - anexo', $this->tipoInstits));
 
-        $t1 = $this->FondoTemporal->compara_numeroInstit('BLA N°63','63');
-        $this->assertTrue($t1);
-
-        $t1 = $this->FondoTemporal->compara_numeroInstit('BLA N|63','63');
-        $this->assertTrue($t1);
-
-        $t1 = $this->FondoTemporal->compara_numeroInstit('BLA N° 73','63');
-        $this->assertFalse($t1);
-
-        $t1 = $this->FondoTemporal->compara_numeroInstit('ET- Agro - Snopek','63');
-        $this->assertTrue($t1);
+        $this->assertFalse($this->FondoTemporal->compara_institNombres('EET Nº 15 Maipú', 'eet Nº 15 Meeipú', $this->tipoInstits));
+        $this->assertFalse($this->FondoTemporal->compara_institNombres('Esc Ed T Nº 15 Maipú', 'EET Nº 15 Maipú', $this->tipoInstits));
+        $this->assertFalse($this->FondoTemporal->compara_institNombres('ET Nº 1 - Santa Lucía', 'ET Nº 1 - Anexo Santa Lucía', $this->tipoInstits));
+        $this->assertFalse($this->FondoTemporal->compara_institNombres('C.E.N.T. Nº 2 Clotilde Mercedes G. De Fernández', 'CENT Nº 2 Clotilde Mercedes G. De Fernández anexo', $this->tipoInstits));
+        $this->assertFalse($this->FondoTemporal->compara_institNombres('C.E.N.T. Nº 2 Clotilde Mercedes G. De Fernández - anexo', 'CENT Nº 2 Clotilde Mercedes G. De Fernández', $this->tipoInstits));
     }
     
 }

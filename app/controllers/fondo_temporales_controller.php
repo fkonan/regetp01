@@ -282,8 +282,8 @@ class FondoTemporalesController extends AppController {
             $this->FondoTemporal->recursive = 0;
             $fondos = $this->FondoTemporal->find("all",
                             array('conditions'=> array('tipo'=>'i', 'cue_checked'=>0),
-                                  'order'=> array('FondoTemporal.jurisdiccion_id'),
-                                  'limit'=>'500'));
+                                  'order'=> array('FondoTemporal.jurisdiccion_id')));
+                                  //'limit'=>'500'));
 
             $this->Instits = ClassRegistry::init("Instit");
             $this->Instits->recursive = 0;
@@ -311,15 +311,25 @@ class FondoTemporalesController extends AppController {
                         // acota a instits de esta jurisdiccion
                         $this->instits = $this->Instits->find("all", array(
                         'conditions'=> array('Instit.jurisdiccion_id' => $jurisdiccion_id),
-                        'fields'=> array('id','cue','nombre','nroinstit','anexo'),
-                        'contain'=>array('Localidad(name)','Tipoinstit(name)'=>array('Jurisdiccion(name)'))));
-
+                        'fields'=> array('id','cue','nombre','nroinstit','anexo')));
+                        
                         // trae todos los tipoInstits de esta jurisdiccion ordenados por cantidad de
                         $this->tipoInstits = $this->Instits->Tipoinstit->find("all", array(
                                 'conditions'=> array('jurisdiccion_id' => $jurisdiccion_id),
                                 'order'=> array('LENGTH(Tipoinstit.name)'=>'desc')
                             ));
                         //$localidades = $this->Instits->Departamento->Localidad->con_depto_y_jurisdiccion('all',$jurisdiccion_id);
+                    }
+
+                    // instit_name tiene prioridad, viene mas completo
+                    if (strlen($fondo['FondoTemporal']['instit_name'])) {
+                        $text = $fondo['FondoTemporal']['instit_name'];
+                    }
+                    elseif (strlen($fondo['FondoTemporal']['instit'])) {
+                        $text = $fondo['FondoTemporal']['instit'];
+                    }
+                    else {
+                        $text = '';
                     }
 
                     // 2. Compara CUEs
@@ -331,19 +341,11 @@ class FondoTemporalesController extends AppController {
                         if ($instit)
                         {
                             // el CUE fue encontrado
-                            //pr($instit);
-
-                            $text = $fondo['FondoTemporal']['instit'];
-
-                            /*$string_procesado = $this->FondoTemporal->optimizar_cadena($text);
-                            $array_words = explode(" ", $string_procesado);*/
-                       //pr($string_procesado);
                             // chequea el numero y tipo de instit
                             if ($this->FondoTemporal->compara_numeroInstit($text, $instit['Instit']['nroinstit']))
                             {
                                 if ($this->FondoTemporal->compara_tipoInstit($text, $this->tipoInstits))
                                 {
-                                    //echo "<br>CUE coincide, TIPO y NRO coinciden!";
                                     $instit_checked = true;
                                     $instits_checked++;
 
@@ -352,14 +354,9 @@ class FondoTemporalesController extends AppController {
                                 }
                                 else
                                 {
-                                    //$string_procesado_aux = $this->FondoTemporal->optimizar_cadena($instit['Instit']['nombre_completo']);
-                                    //$string_procesado_aux = $this->FondoTemporal->str_sin_tipoInstit($string_procesado_aux, $this->tipoInstits);
-                                    //$array_words_aux = explode(" ", $string_procesado_aux);
-
                                     if ($this->FondoTemporal->compara_institNombres($text, $instit['Instit']['nombre_completo'], $this->tipoInstits)) {
                                         // tienen el mismo nombre
                                         $instit_checked = true;
-                                        //echo "<br>NOMBRES Y NUMERO COINCIDEN!!! asigna 1";
 
                                         // edita cue_checked en 1 y asigna instit_id
                                         $this->FondoTemporal->asignarInstitYEstadoATemp($instit['Instit']['id'], 1, $fondo['FondoTemporal']['id']);
@@ -372,18 +369,15 @@ class FondoTemporalesController extends AppController {
                             if (!$instit_checked)
                             {
                                 // edita cue_checked en 2 (duda)
-                                $this->FondoTemporal->asignarInstitYEstadoATemp($instit['Instit']['id'], 2, $fondo['FondoTemporal']['id']);
-                                $instits_en_duda++;
-
-                                /*if(strlen($this->data['FondoTemporal']['observacion']) > 0){
-                                    $error = $this->data['FondoTemporal']['observacion'] . "\r\n" . date('d-m-Y') . " - " . "El nombre de la institucion se encuentra en duda \r\n";
+                                if (strlen($fondo['FondoTemporal']['observacion']) > 0) {
+                                    $obs = $fondo['FondoTemporal']['observacion']."\r\n"."[".date('d-m-Y')."] "."La institucion se encuentra en duda, el CUE coincide pero hay inconsistencias en su numero, tipo o nombre\r\n";
                                 }
-                                else{
-                                    $error = date('d-m-Y') . " - " . "El nombre de la institucion se encuentra en duda \r\n";
-                                }*/
+                                else {
+                                    $obs = "[".date('d-m-Y')."] "."La institucion se encuentra en duda, el CUE coincide pero hay inconsistencias en su numero, tipo o nombre\r\n";
+                                }
 
-                                
-                                //pr($text);
+                                $this->FondoTemporal->asignarInstitYEstadoATemp($instit['Instit']['id'], 2, $fondo['FondoTemporal']['id'], $obs);
+                                $instits_en_duda++;
                             }
 
                             $cue_checked = true;
@@ -392,31 +386,20 @@ class FondoTemporalesController extends AppController {
 
                     if (!$cue_checked)
                     {
-                        //echo "<br>CUE NO coincide!";
                         $instit_checked = false;
-                        if (strlen($fondo['FondoTemporal']['instit']))
+                        if (strlen($text))
                         {
                             // compara nombres
-                            $text = $fondo['FondoTemporal']['instit'];
-
-                            /*$string_procesado = $this->FondoTemporal->optimizar_cadena($text);
-                            $string_procesado = $this->FondoTemporal->str_sin_tipoInstit($string_procesado, $this->tipoInstits);
-                            $array_words = explode(" ", $string_procesado);*/
-
                             if (count($this->instits)) {
                                 foreach ($this->instits as $instit)
                                 {
-                                    /*$string_procesado_aux = $this->FondoTemporal->optimizar_cadena($instit['Instit']['nombre_completo']);
-                                    $string_procesado_aux = $this->FondoTemporal->str_sin_tipoInstit($string_procesado_aux, $this->tipoInstits);
-                                    $array_words_aux = explode(" ", $string_procesado_aux);*/
-
                                     // chequea el numero de instit
                                     if ($this->FondoTemporal->compara_numeroInstit($text, $instit['Instit']['nroinstit']))
                                     {
                                         if ($this->FondoTemporal->compara_institNombres($text, $instit['Instit']['nombre_completo'], $this->tipoInstits)) {
                                             // tienen el mismo nombre
                                             $instit_checked = true;
-                                            //echo "<br>NOMBRES Y NUMERO COINCIDEN!!!";
+                                            
                                             $instits_checked++;
                                             
                                             // edita cue_checked en 1 y asigna instit_id
@@ -431,13 +414,12 @@ class FondoTemporalesController extends AppController {
 
                         if (!$instit_checked) {
                             $instits_no_checked++;
-                            //echo $string_procesado;
                         }
                     }
                 }
             }
 
-            $mensaje = "Instits checkeds: " . $instits_checked .
+            echo $mensaje = "Instits checkeds: " . $instits_checked .
             "; Instits en duda: " . $instits_en_duda .
             "; Instits NO checked: " .  $instits_no_checked;
 

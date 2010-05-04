@@ -11,10 +11,30 @@ class TipoinstitFixture extends CakeTestFixture {
 
 	var $records = array(
 		array(
-			'id' => 1,
-			'jurisdiccion_id' => 1,
-			'name' => 'Lorem ipsum dolor sit amet'
+			'id' => 33,
+                        'jurisdiccion_id' => 2,
+                        'name' => 'ESCUELA DE EDUCACIÓN TÉCNICA (E.E.T.)'
 		),
+                array(
+                        'id' => 9,
+                        'jurisdiccion_id' => 2,
+                        'name' => 'CENTRO EDUCATIVO DE NIVEL TERCIARIO (C.E.N.T.)'
+		),
+                array(
+			'id' => 3,
+                        'jurisdiccion_id' => 2,
+                        'name' => 'ESCUELA POLITÉCNICA'
+		),
+                array(
+			'id' => 8,
+                        'jurisdiccion_id' => 2,
+                        'name' => 'ESCUELA'
+		),
+                array(
+			'id' => 18,
+                        'jurisdiccion_id' => 2,
+                        'name' => 'CENTRO DE FORMACIÓN PROFESIONAL (C.F.P.)'
+		)
 	);
 }
 ?>
