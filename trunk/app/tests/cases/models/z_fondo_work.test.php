@@ -263,6 +263,46 @@ class ZFondoWorkTestCase extends CakeTestCase {
                                 'cue_checked' => 1,
                                 'tipo' => 'i',
                         )
+                ), array(
+                        'ZFondoWork' => array
+                        (
+                                'id' => 2,
+                                'anio' => 2009,
+                                'trimestre' => 1,
+                                'jurisdiccion_id' => 2,
+                                'jurisdiccion_name' => 'CABA',
+                                'memo' => 'Lorem ipsum dolor sit amet',
+                                'cuecompleto' => 24567801,
+                                'instit' => 'jurisdiccional',
+                                'instit_name' => 'jurisdiccional',
+                                'departamento' => 'Lorem ipsum dolor sit amet',
+                                'localidad' => 'Lorem ipsum dolor sit amet',
+                                'f01'  => 0,
+                                'f02a' => 0,
+                                'f02b' => 0,
+                                'f02c' => 0,
+                                'f03a' => 0,
+                                'f03b' => 0,
+                                'f04'  => 10,
+                                'f05'  => 0,
+                                'f06a' => 0,
+                                'f06b' => 0,
+                                'f06c' => 0,
+                                'f07a' => 0,
+                                'f07b' => 0,
+                                'f07c' => 0,
+                                'f08'  => 0,
+                                'f09'  => 0,
+                                'f10'  => 0,
+                                'equipinf' => 0,
+                                'refaccion' => 0,
+                                'total' => 10,
+                                'instit_id' => 0,
+                                'observacion' => 'Lorem ipsum dolor sit amet',
+                                'totales_checked' => 1,
+                                'cue_checked' => 1,
+                                'tipo' => 'j',
+                        )
                 )
         );
 
@@ -292,12 +332,24 @@ class ZFondoWorkTestCase extends CakeTestCase {
                 )
         );
 
+        $expected[1]['Fondo'] = array (
+                'instit_id' => 0,
+                'jurisdiccion_id' => 2,
+                'memo' => 'Lorem ipsum dolor sit amet',
+                'anio' => 2009,
+                'trimestre' => 1,
+                'total' => 10,
+        );
 
+        $expected[1]['Fondo']['FondosLineasDeAccion'] = array(
+                array(
+                        'monto' => 10,
+                        'lineas_de_accion_id' => 6,
+                )
+        );
         $data = $this->ZFondoWork->__convertirLineasYTempsEnAlgoLindoParaGuardar($temps, $lineasFiltradas);
-
         $this->assertEqual($expected, $data);
     }
-
 
 
     function testGuardarFondos() {
@@ -383,6 +435,16 @@ class ZFondoWorkTestCase extends CakeTestCase {
 
         // 137.05 es el total de todos los montos sumados de todas las lineas de accion de los fondos
         $this->assertEqual(137.05, $lineas->find('sum'));
+    }
+
+
+    function testCheckCantRegistrosFondoConExcel(){
+        $dio1 = $this->ZFondoWork->checkCantRegistrosFondoConExcel(2);
+        $dio2 = $this->ZFondoWork->checkCantRegistrosFondoConExcel(1);
+        $dio3 = $this->ZFondoWork->checkCantRegistrosFondoConExcel(0);
+        $this->assertTrue ($dio1);
+        $this->assertFalse($dio2);
+        $this->assertFalse($dio3);
     }
 
     
