@@ -3,6 +3,7 @@ class ZFondoWork extends AppModel {
 
 	var $name = 'ZFondoWork';
 	var $useTable = 'z_fondo_work';
+        var $migrationStatus = 'ok';
         
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -57,6 +58,11 @@ class ZFondoWork extends AppModel {
              */
             $temps = $this->__temporalesFiltradosX($cosasMigrar, $registrosATraer);
 
+
+            if (count($temps) == 0){
+                $this->migrationStatus = 'No hay registros en la tabla z_fondo_work!!! se detuvo la migración.';
+                return -2;
+            }
             
 
             if ($borrarDatosFondo == true) {
@@ -67,6 +73,7 @@ class ZFondoWork extends AppModel {
 
             //algunas verificaciones previas
             if (!$this->__verificarQueLasLineasExistanEnFondo($aLineasDeAcciones, $temps[0]['ZFondoWork'])) {
+                $this->migrationStatus = 'fallo la verificacion de las lineas de accion. Hay alguna que no existe en la tabla de fondos';
                 return -1;
             }
 
@@ -78,6 +85,7 @@ class ZFondoWork extends AppModel {
 
            $cosas = implode(',',$this->temporalesFiltradosX);
            pr("se procesaron ".count($data)." fondos de ".count($temps)." $cosas del excel de MR.");
+           $this->migrationStatus = "se procesaron ".count($data)." fondos de ".count($temps)." $cosas del excel de MR.";
            return 1;
             //debug($count . " y el size: ". count($temps));
         }
@@ -298,6 +306,26 @@ class ZFondoWork extends AppModel {
                 }
             }            
             return true;
+        }
+
+
+
+        /**
+         * Me corrobora el numero pasado como parametro y la cantidad de registros que
+         * hay en la tabla fondos
+         * Si coinciden me devuelve un true
+         *
+         * @param integer $totalDelExcel
+         * @return boolean
+         */
+        function checkCantRegistrosFondoConExcel($totalDelExcel){
+            $fondo =& ClassRegistry::init('Fondo');
+            if ($fondo->find('count') == $totalDelExcel){
+                return true;
+            } else {
+                return false;
+            }
+            
         }
 }
 ?>
