@@ -35,7 +35,7 @@ class FondoTemporal extends AppModel {
             }
         }
 
-        function asignarInstitYEstadoATemp($instit_id, $estado, $temp_id) {
+        function asignarInstitYEstadoATemp($instit_id, $estado, $temp_id, $obs=NULL) {
             /*$this->data = $this->read(null, $temp_id);
             if (!empty($this->data)) {
                 $this->data['FondoTemporal']['cue_checked'] = $estado;
@@ -47,7 +47,10 @@ class FondoTemporal extends AppModel {
             }
             */
             // evita un select gigante en cada update
-            $this->query("UPDATE z_fondo_work SET cue_checked=".$estado.", instit_id=".$instit_id." WHERE id=".$temp_id.";");
+            if ($obs)
+                $this->query("UPDATE z_fondo_work SET cue_checked=".$estado.", instit_id=".$instit_id.", observacion='".$obs."' WHERE id=".$temp_id.";");
+            else
+                $this->query("UPDATE z_fondo_work SET cue_checked=".$estado.", instit_id=".$instit_id." WHERE id=".$temp_id.";");
         }
 
 
@@ -69,11 +72,13 @@ class FondoTemporal extends AppModel {
 
             $array_words = explode(" ", $text);
             $array_words_temp = explode(" ", $text_temp);
-            $text = $this->str_sin_tipoInstit($this->optimizar_cadena($text), $tipoInstits);
-            $array_words = explode(" ", $text);
-            //$array_words_temp = $text_temp;
-            // ordena un vector por length de palabras desc
-            //usort($array_words_temp, array("FondoTemporalesController", "length_cmp"));
+            
+            // chequea si uno es anexo y otro no
+            $res1 = array_search('anexo', $array_words);
+            $res2 = array_search('anexo', $array_words_temp);
+
+            if (!$res1 && $res2 || $res1 && !$res2)
+                return false;
 
             // quitar N° , comparar cada posicion con todas las de array_words
             $palabras_totales = count($array_words_temp);
@@ -83,7 +88,7 @@ class FondoTemporal extends AppModel {
                 /*$pos_temp = strpos($array_words_temp[$i],'nº');
                 if ($pos_temp === false) {*/
                     foreach ($array_words as $array_word) {
-                        if ($array_words_temp[$i] == $array_words) {
+                        if ($array_words_temp[$i] == $array_word) {
                             $peso++;
                         }
                         elseif (strlen($array_word) >= 4 && strlen($array_words_temp[$i]) >= 4) {
@@ -106,10 +111,9 @@ class FondoTemporal extends AppModel {
 
             // compara limit con el peso encontrado
             if ($peso > 0 && $peso > $limit/2) {
-                pr($array_words_temp);
+                /*pr($array_words_temp);
                 pr($array_words);
-
-                echo "TRUE! limit: ".$limit."   -   peso: ".$peso;
+                echo "TRUE! limit: ".$limit."   -   peso: ".$peso;*/
                 return true;
             }
 
@@ -248,7 +252,6 @@ class FondoTemporal extends AppModel {
 
             foreach ($tiposInstit as $tipoInstit) {
                 $pos = strpos(strtoupper($instit), strtoupper($tipoInstit['Tipoinstit']['name']));
-
                 if ($pos !== false)
                 {
                     // contiene el TIPO
