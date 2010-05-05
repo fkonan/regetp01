@@ -48,7 +48,7 @@ class FondoTemporalesController extends AppController {
                     $this->paginate = array('conditions'=>array('tipo'=>'i', 'cue_checked'=>$checkedInstit));
                 }
                 else{
-                    $this->paginate = array('conditions'=>array('tipo'=>'i', 'totales_checked'=>$checkedTotals));
+                    $this->paginate = array('conditions'=>array('tipo'=>array('i','j'), 'totales_checked'=>$checkedTotals));
                 }
 
                 $this->set('fondos', $this->paginate());
@@ -65,7 +65,7 @@ class FondoTemporalesController extends AppController {
          	$this->FondoTemporal->recursive = 0;
 
                 $fondos = $this->FondoTemporal->find("all",
-                            array('conditions'=>array('tipo'=>'i', "OR" => array('cue_checked'=>2, 'totales_checked'=>array(2,3)))));
+                            array('conditions'=>array('tipo'=>array('i','j'), "OR" => array('cue_checked'=>2, 'totales_checked'=>array(2,3))), 'order' => array('anio,trimestre,linea')));
                 foreach ($fondos as $fondo){
                     $fondoInfo =  "Año: " . $fondo['FondoTemporal']['anio'] . " " .
                                   "Trimestre: " . $fondo['FondoTemporal']['trimestre'] . " " .
@@ -106,11 +106,10 @@ class FondoTemporalesController extends AppController {
                         $i++;
                     }
 
-                    $report = $report . $fondoError;
-
                 }
                 
-
+                $report = $report . $fondoError;
+                
                 $this->set('report', $report);
 	}
 
@@ -436,7 +435,7 @@ class FondoTemporalesController extends AppController {
 
             /*VALIDACION HORIZONTAL*/
             $fondos = $this->FondoTemporal->find("all",
-                            array('conditions'=> array('tipo'=>'i', 'totales_checked'=>0)));
+                            array('conditions'=> array("OR"=> array("tipo = 'i'","tipo='j'"), 'totales_checked'=>0)));
             
             foreach ($fondos as &$fondo){
                     $totales_checked = false;
@@ -457,7 +456,9 @@ class FondoTemporalesController extends AppController {
                              $fondo['FondoTemporal']['f07c'] +
                              $fondo['FondoTemporal']['f08'] +
                              $fondo['FondoTemporal']['f09'] +
-                             $fondo['FondoTemporal']['f10'] -
+                             $fondo['FondoTemporal']['f10'] +
+                             $fondo['FondoTemporal']['equipinf']+
+                             $fondo['FondoTemporal']['refaccion'] -
                              $fondo['FondoTemporal']['total']);
 
                     /*Total Chequeado*/
@@ -468,7 +469,7 @@ class FondoTemporalesController extends AppController {
                         $fondo['FondoTemporal']['totales_checked'] = 2;
 
                         if(strlen($this->data['FondoTemporal']['observacion']) > 0){
-                            $error = $this->data['FondoTemporal']['observacion'] . "\r\n" . date('d-m-Y') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($difference)  . " con el total \r\n";
+                            $error = $this->data['FondoTemporal']['observacion'] . "\r\n" . date('d-m-Y') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($total)  . " con el total \r\n";
                         }
                         else{
                             $error = date('d-m-Y') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($total)  . " con el total \r\n";
@@ -479,10 +480,10 @@ class FondoTemporalesController extends AppController {
                         $fondo['FondoTemporal']['totales_checked'] = 3;
 
                         if(strlen($this->data['FondoTemporal']['observacion']) > 0){
-                            $error = $this->data['FondoTemporal']['observacion'] . "\r\n" . date('d-m-Y') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($difference)  . " con el total \r\n";
+                            $error = $this->data['FondoTemporal']['observacion'] . "\r\n" . date('d-m-Y') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($total)  . " con el total \r\n";
                         }
                         else{
-                            $error = date('d-m-Y') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($difference)  . " con el total \r\n";
+                            $error = date('d-m-Y') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($total)  . " con el total \r\n";
                         }
                     }
             }
