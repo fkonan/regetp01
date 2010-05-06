@@ -62,10 +62,15 @@ class FondoTemporal extends AppModel {
 	 * @param $text_temp
          * @param $text
 	 */
-        function compara_InstitNombres($text_temp, $text, $tipoInstits=NULL)
+        function compara_InstitNombres($text_temp, $text, $tipoInstits=NULL, $localidades=NULL)
         {
             $text_temp = $this->str_sin_tipoInstit($this->optimizar_cadena($text_temp), $tipoInstits);
             $text = $this->str_sin_tipoInstit($this->optimizar_cadena($text), $tipoInstits);
+
+            if ($localidades) {
+                $text_temp = $this->str_sin_localidades($text_temp, $localidades);
+                $text = $this->str_sin_localidades($text, $localidades);
+            }
 
             if ($text_temp == $text)
                 return true;
@@ -131,59 +136,64 @@ class FondoTemporal extends AppModel {
 	 * @param $text
 	 */
 	function optimizar_cadena($text) {
+            // elimina acentos y especiales
+            $a = array('à', 'á', 'â', 'ã', 'ä', 'å', 'æ', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', 'ø', 'ù', 'ú', 'û', 'ü', 'ý', 'ÿ');
+            $b = array('a', 'a', 'a', 'a', 'a', 'a', 'ae', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'n', 'o', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'y', 'y');
+            $text = str_replace($a, $b, $text);
 
-                // elimina acentos y especiales
-                $a = array('à', 'á', 'â', 'ã', 'ä', 'å', 'æ', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', 'ø', 'ù', 'ú', 'û', 'ü', 'ý', 'ÿ');
-                $b = array('a', 'a', 'a', 'a', 'a', 'a', 'ae', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'n', 'o', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'y', 'y');
-                $text = str_replace($a, $b, $text);
+            $text = strtolower($text);
 
-                $text = strtolower($text);
+            // algunos casos tienen = en lugar de -
+            $text = str_replace("=","-",$text);
 
-                // algunos casos tienen = en lugar de -
-                $text = str_replace("=","-",$text);
+            // mas especiales
+            $a = array('agro.', 'e. ', 'et', 'e.t..'," -", '- ', '. ', '°', '_');
+            $b = array('agro ', 'e ', 'et ', 'et ', ' ', ' ', ' ', 'º', ' ');
+            $text = str_replace($a, $b, $text);
 
-                // mas especiales
-                $a = array('agro.', 'e. ', 'et'," -", '- ', '. ', '°');
-                $b = array('agro ', 'e ', 'et ', ' ', ' ', ' ', 'º');
-                $text = str_replace($a, $b, $text);
+            // elimina espacios en blanco en exceso (maximo deja uno)
+            $text = preg_replace('/\s\s+/', ' ', $text);
 
-                // elimina espacios en blanco en exceso (maximo deja uno)
-                $text = preg_replace('/\s\s+/', ' ', $text);
+            $palabras_reservadas = array("- ", " - ", ".");
 
-                $palabras_reservadas = array("- ", " - ", ".");
+            // elimina palabras reservadas
+            $text = str_replace($palabras_reservadas, '', $text);
 
-                // elimina palabras reservadas
-                $text = str_replace($palabras_reservadas, '', $text);
+            // junta los n°
+            $text = str_replace("nº ","nº",$text);
+            // algunos casos tienen N'
+            $text = str_replace("n' ","nº",$text);
+            // algunos casos tienen N|
+            $text = str_replace("n| ","nº",$text);
 
-                // junta los n°
-                $text = str_replace("nº ","nº",$text);
-                // algunos casos tienen N'
-                $text = str_replace("n' ","nº",$text);
-                // algunos casos tienen N|
-                $text = str_replace("n| ","nº",$text);
-
-                // separa "nº" si esta pegado al nombre
-                $pos = $pos_fin = '';
-                $pos = strpos($text,'º');
-                if ($pos !== false)
+            // separa "nº" si esta pegado al nombre
+            $pos = '';
+            $pos_fin = strlen($text)-1;
+            $pos = strpos($text,'º');
+            if ($pos !== false)
+            {
+                for ($i=($pos+1); $i<strlen($text); $i++)
                 {
-                    $fin = false;
-                    for ($i=($pos+1); $i<strlen($text) && !$fin; $i++)
-                    {
-                        if (!is_numeric($text[$i])) {
-                            $fin = true;
-                            $pos_fin = $i;
-                        }
+                    if ($text[$i]=='-' && !is_numeric($text[$i+1])) {
+                        $pos_fin = $i-1;
+                        break;
                     }
-
-                    if ($pos_fin > $pos) {
-                        // pone espacio luego del numero
-                        $text = substr($text, 0, $pos_fin)."".substr($text, $pos_fin);
+                    elseif ($text[$i]!='-' && !is_numeric($text[$i])) {
+                        $pos_fin = $i;
+                        break;
                     }
                 }
+                
+                if ($pos_fin > $pos) {
+                    // pone espacio luego del numero (...._espacio_nºX_espacio_....)
+                    $text = substr($text, 0, $pos-1)." ".substr($text, $pos-1, $pos_fin-($pos-2))." ".substr($text, $pos_fin+1);
+                }
+            }
 
+            // elimina espacios en blanco en exceso (maximo deja uno)
+            $text = preg_replace('/\s\s+/', ' ', $text);
 
-		return trim($text);
+            return trim($text);
 	}
 
 
@@ -305,6 +315,7 @@ class FondoTemporal extends AppModel {
                        'eem',
                        'isfdyt',
                        'isfd y t',
+                       'instituto superior de formacion docente continua y tecnica',
                        'mm',
                        'mision monotecnica',
                        'monotec ',
@@ -363,6 +374,7 @@ class FondoTemporal extends AppModel {
                        "INSTITUTO DE EDUCACIÓN SUPERIOR (I.E.S.)",
                        "INSTITUTO DE ENSEÑANZA AGROPECUARIA (I.E.A.)",
                        "ESCUELA DE EDUCACIÓN MEDIA (E.E.M.)",
+                       "INSTITUTO DE EDUCACIÓN SUPERIOR DE FORMACIÓN DOCENTE Y TÉCNICA (I.S.F.D.yT.)",
                        "INSTITUTO DE EDUCACIÓN SUPERIOR DE FORMACIÓN DOCENTE Y TÉCNICA (I.S.F.D.yT.)",
                        "INSTITUTO DE EDUCACIÓN SUPERIOR DE FORMACIÓN DOCENTE Y TÉCNICA (I.S.F.D.yT.)",
                        "MISIÓN MONOTÉCNICA (M.M.)",
@@ -473,6 +485,20 @@ class FondoTemporal extends AppModel {
             $instit = preg_replace('/\s\s+/', ' ', $instit);
 
             return trim(strtolower($instit));
+        }
+
+
+        function str_sin_localidades($text, $localidades)
+        {
+            /*foreach ($localidades as $localidad) {
+                $b[] = $this->optimizar_cadena($localidad['Localidad']['name']);
+            }
+
+            return str_replace($b, '', $text);*/
+        }
+
+        function setObservacion(&$fondo, $comment) {
+            $fondo['FondoTemporal']['observacion'] .= "[".date('d-m-Y H:i:s')."] ".$comment."\r\n";
         }
 
 }
