@@ -423,7 +423,7 @@ class FondoTemporalesController extends AppController {
                 }
             }
 
-            echo $mensaje = "Instits checkeds: " . $instits_checked .
+            $mensaje = "Instits checkeds: " . $instits_checked .
             "; Instits en duda: " . $instits_en_duda .
             "; Instits NO checked: " .  $instits_no_checked;
 
