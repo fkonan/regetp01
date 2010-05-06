@@ -319,6 +319,7 @@ class ZFondoWorkTestCase extends CakeTestCase {
                 'anio' => 2009,
                 'trimestre' => 1,
                 'total' => 25,
+                'description' => 'Lorem ipsum dolor sit amet',
         );
 
         $expected[0]['Fondo']['FondosLineasDeAccion'] = array(
@@ -339,6 +340,7 @@ class ZFondoWorkTestCase extends CakeTestCase {
                 'anio' => 2009,
                 'trimestre' => 1,
                 'total' => 10,
+                'description' => 'Lorem ipsum dolor sit amet',
         );
 
         $expected[1]['Fondo']['FondosLineasDeAccion'] = array(

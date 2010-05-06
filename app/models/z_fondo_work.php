@@ -139,6 +139,7 @@ class ZFondoWork extends AppModel {
                     'anio'               => $vAux['anio'],
                     'trimestre'          => $vAux['trimestre'],
                     'total'              => $vAux['total'],
+                    'description'        => $vAux['observacion'],
                     );
                 
                 foreach ($l as $lineaForm=>$monto){                    
@@ -309,7 +310,6 @@ class ZFondoWork extends AppModel {
         }
 
 
-
         /**
          * Me corrobora el numero pasado como parametro y la cantidad de registros que
          * hay en la tabla fondos
@@ -324,8 +324,7 @@ class ZFondoWork extends AppModel {
                 return true;
             } else {
                 return false;
-            }
-            
+            } 
         }
 }
 ?>
