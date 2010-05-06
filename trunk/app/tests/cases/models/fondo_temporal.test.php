@@ -35,6 +35,16 @@ class FondotemporalTestCase extends CakeTestCase {
         $this->assertTrue(is_a($this->FondoTemporal, 'FondoTemporal'));
     }
 
+    function testOptimiza_cadena() {
+        $this->assertEqual($this->FondoTemporal->optimizar_cadena('BLA N° 63'), 'bla nº63');
+        $this->assertEqual($this->FondoTemporal->optimizar_cadena('E.E.T.N° 5'), 'eet nº5');
+        $this->assertEqual($this->FondoTemporal->optimizar_cadena('E.E.T.N° 5-902'), 'eet nº5-902');
+        $this->assertEqual($this->FondoTemporal->optimizar_cadena('BLA N°63-002'), 'bla nº63-002');
+        $this->assertEqual($this->FondoTemporal->optimizar_cadena('BLA N° 63-002'), 'bla nº63-002');
+        $this->assertEqual($this->FondoTemporal->optimizar_cadena('Misión Monotéc.N°72'), 'mision monotec nº72');
+        $this->assertEqual($this->FondoTemporal->optimizar_cadena('ETAgro Nº1-Hued'), 'et agro nº1 -hued');
+    }
+
     function testCompara_numeroInstit() {
         $this->assertTrue($this->FondoTemporal->compara_numeroInstit('BLA N° 63','63'));
         $this->assertTrue($this->FondoTemporal->compara_numeroInstit('BLA Nº 63','63'));
@@ -43,8 +53,23 @@ class FondotemporalTestCase extends CakeTestCase {
         $this->assertTrue($this->FondoTemporal->compara_numeroInstit('BLA Nº63','63'));
         $this->assertTrue($this->FondoTemporal->compara_numeroInstit('BLA N|63','63'));
         $this->assertTrue($this->FondoTemporal->compara_numeroInstit('ET- Agro - Snopek','63'));
+        $this->assertTrue($this->FondoTemporal->compara_numeroInstit('BLA N° 6','06'));
+        $this->assertTrue($this->FondoTemporal->compara_numeroInstit('BLA N° 06','6'));
+        $this->assertTrue($this->FondoTemporal->compara_numeroInstit('Centro de Formación Profesional Nº 402-Pablo Podestá- Tres de Febrero','402'));
+        $this->assertTrue($this->FondoTemporal->compara_numeroInstit('E.E.T.N° 5 - Mar del Plata','05'));
+        $this->assertTrue($this->FondoTemporal->compara_numeroInstit('E.E.T.N° 1 _Dr. Conrado Etchebarne - Villaguay','01'));
+        $this->assertTrue($this->FondoTemporal->compara_numeroInstit('ETAgro Nº1-Hueda','01'));
+        //$this->assertTrue($this->FondoTemporal->compara_numeroInstit('Escuela Técnica Agropecuaria (Ex EMETA N° 1) Chamical','01'));
+        $this->assertTrue($this->FondoTemporal->compara_numeroInstit('Misión Monotéc.N°72','72'));
+        $this->assertTrue($this->FondoTemporal->compara_numeroInstit('I. Form. Prof.Nº6005','6005'));
+        $this->assertTrue($this->FondoTemporal->compara_numeroInstit('I.P.E.M.Nº 291 - Gral Cabrera','291'));
 
         $this->assertFalse($this->FondoTemporal->compara_numeroInstit('BLA Nº 73','63'));
+        $this->assertFalse($this->FondoTemporal->compara_numeroInstit('BLA Nº 163','63'));
+        $this->assertFalse($this->FondoTemporal->compara_numeroInstit('BLA Nº 630','63'));
+        $this->assertFalse($this->FondoTemporal->compara_numeroInstit('BLA Nº 63','630'));
+        $this->assertFalse($this->FondoTemporal->compara_numeroInstit('CFP N° 11 (Ex 30)','30'));
+        $this->assertFalse($this->FondoTemporal->compara_numeroInstit('E.E.T. N° Marco Silvio Ghiglione - América','01'));
     }
 
     function testCompara_tipoInstit() {
@@ -61,6 +86,7 @@ class FondotemporalTestCase extends CakeTestCase {
     function testCompara_institNombres() {
         $this->assertTrue($this->FondoTemporal->compara_institNombres('EET Nº 15 Maipú', 'EET Nº 15 Maipú', $this->tipoInstits));
         $this->assertTrue($this->FondoTemporal->compara_institNombres('EET Nº 15 Maipú', 'eet Nº 15 Meipú', $this->tipoInstits));
+        $this->assertTrue($this->FondoTemporal->compara_institNombres('EET Nº 15 Maipú', 'iet Nº 15 Meipú', $this->tipoInstits));
         $this->assertTrue($this->FondoTemporal->compara_institNombres('C.E.N.T. Nº 2 Clotilde Mercedes G. De Fernández', 'CENT Nº 2 Clotilde Mercedes G. De Fernández', $this->tipoInstits));
         $this->assertTrue($this->FondoTemporal->compara_institNombres('C.E.N.T. Nº 2 Clotilde Mercedes G. De Fernández', 'CENT Nº 2 Clotilde g De Fernández', $this->tipoInstits));
         $this->assertTrue($this->FondoTemporal->compara_institNombres('Esc Nº 15 Maipú', 'EET Nº 15 Maipú', $this->tipoInstits));

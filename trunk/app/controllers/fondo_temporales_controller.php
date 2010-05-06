@@ -10,7 +10,7 @@ class FondoTemporalesController extends AppController {
         var $localidades=NULL;
         var $lineasDeAccion=NULL;
 
-        function beforeFilter() {
+        /*function beforeFilter() {
             parent::beforeFilter();
             
             $this->Instits = ClassRegistry::init("Instit");
@@ -21,7 +21,7 @@ class FondoTemporalesController extends AppController {
 
             //$this->tipoInstits = $this->Instits->Tipoinstit->find("all", array(
             //            'limit'=>'5')); // SACAR!
-        }
+        }*/
 
 	function index() {
 		$this->FondoTemporal->recursive = 0;
@@ -186,7 +186,7 @@ class FondoTemporalesController extends AppController {
 
 		$instits = $this->FondoTemporal->Instit->find('list');
 		$jurisdicciones = $this->FondoTemporal->Jurisdiccion->find('list');
-                $error = $this->data['FondoTemporal']['observacion'] . date('d-m-Y') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($difference)  . " con el total \r\n";
+                $error = $this->data['FondoTemporal']['observacion'] . date('d-m-Y H:i') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($difference)  . " con el total \r\n";
 		//$lineasDeAcciones = $this->FondoTemporal->LineasDeAccion->find('list');
 		$this->set('difference', $difference);
                 $this->set('error', $error);
@@ -287,10 +287,15 @@ class FondoTemporalesController extends AppController {
             $this->Instits = ClassRegistry::init("Instit");
             $this->Instits->recursive = 0;
             $this->Instits->Tipoinstit->recursive = 0;
-            $this->Instits->Departamento->recursive = 0;
+            $this->Instits->Departamento->Localidad->recursive = 0;
 
             $jurisdiccion_id = '';
 
+            // todas las localidades (solo una vez)
+            $localidades = $this->Instits->Departamento->Localidad->find('all', array(
+                                'order'=> array('LENGTH(Localidad.name)'=>'desc')
+                            ));
+            
             // auditoria
             $instits_checked = $instits_en_duda = $instits_no_checked = 0;
 
@@ -317,6 +322,7 @@ class FondoTemporalesController extends AppController {
                                 'conditions'=> array('jurisdiccion_id' => $jurisdiccion_id),
                                 'order'=> array('LENGTH(Tipoinstit.name)'=>'desc')
                             ));
+
                         //$localidades = $this->Instits->Departamento->Localidad->con_depto_y_jurisdiccion('all',$jurisdiccion_id);
                     }
 
@@ -349,33 +355,31 @@ class FondoTemporalesController extends AppController {
                                     $instits_checked++;
 
                                     // edita cue_checked en 1 y asigna instit_id
-                                    $this->FondoTemporal->asignarInstitYEstadoATemp($instit['Instit']['id'], 1, $fondo['FondoTemporal']['id']);
+                                    $this->FondoTemporal->setObservacion($fondo, "Instit checked. Coincidieron número y tipo.");
+                                    $this->FondoTemporal->asignarInstitYEstadoATemp($instit['Instit']['id'], 1, $fondo['FondoTemporal']['id'], $fondo['FondoTemporal']['observacion']);
                                 }
-                                else
-                                {
-                                    if ($this->FondoTemporal->compara_institNombres($text, $instit['Instit']['nombre_completo'], $this->tipoInstits)) {
-                                        // tienen el mismo nombre
-                                        $instit_checked = true;
+                                elseif ($this->FondoTemporal->compara_institNombres($text, $instit['Instit']['nombre_completo'], $this->tipoInstits, $localidades)) {
+                                    // tienen el mismo nombre
+                                    $instit_checked = true;
 
-                                        // edita cue_checked en 1 y asigna instit_id
-                                        $this->FondoTemporal->asignarInstitYEstadoATemp($instit['Instit']['id'], 1, $fondo['FondoTemporal']['id']);
+                                    // edita cue_checked en 1 y asigna instit_id
+                                    $this->FondoTemporal->setObservacion($fondo, "Instit checked. Coincidieron número y nombre, NO tipo.");
+                                    $this->FondoTemporal->asignarInstitYEstadoATemp($instit['Instit']['id'], 1, $fondo['FondoTemporal']['id'], $fondo['FondoTemporal']['observacion']);
 
-                                        $instits_checked++;
-                                    }
+                                    $instits_checked++;
                                 }
+                                else {
+                                    $this->FondoTemporal->setObservacion($fondo, "La institucion se encuentra en duda. No coincidieron tipo y nombre.");
+                                }
+                            }
+                            else {
+                                $this->FondoTemporal->setObservacion($fondo, "La institucion se encuentra en duda. No coincide número.");
                             }
                             
                             if (!$instit_checked)
                             {
                                 // edita cue_checked en 2 (duda)
-                                if (strlen($fondo['FondoTemporal']['observacion']) > 0) {
-                                    $obs = $fondo['FondoTemporal']['observacion']."\r\n"."[".date('d-m-Y')."] "."La institucion se encuentra en duda, el CUE coincide pero hay inconsistencias en su numero, tipo o nombre\r\n";
-                                }
-                                else {
-                                    $obs = "[".date('d-m-Y')."] "."La institucion se encuentra en duda, el CUE coincide pero hay inconsistencias en su numero, tipo o nombre\r\n";
-                                }
-
-                                $this->FondoTemporal->asignarInstitYEstadoATemp($instit['Instit']['id'], 2, $fondo['FondoTemporal']['id'], $obs);
+                                $this->FondoTemporal->asignarInstitYEstadoATemp($instit['Instit']['id'], 2, $fondo['FondoTemporal']['id'], $fondo['FondoTemporal']['observacion']);
                                 $instits_en_duda++;
                             }
 
@@ -395,14 +399,15 @@ class FondoTemporalesController extends AppController {
                                     // chequea el numero de instit
                                     if ($this->FondoTemporal->compara_numeroInstit($text, $instit['Instit']['nroinstit']))
                                     {
-                                        if ($this->FondoTemporal->compara_institNombres($text, $instit['Instit']['nombre_completo'], $this->tipoInstits)) {
+                                        if ($this->FondoTemporal->compara_institNombres($text, $instit['Instit']['nombre_completo'], $this->tipoInstits, $localidades)) {
                                             // tienen el mismo nombre
                                             $instit_checked = true;
                                             
                                             $instits_checked++;
                                             
                                             // edita cue_checked en 1 y asigna instit_id
-                                            $this->FondoTemporal->asignarInstitYEstadoATemp($instit['Instit']['id'], 1, $fondo['FondoTemporal']['id']);
+                                            $this->FondoTemporal->setObservacion($fondo, "Instit checked. El CUE no existe, coinciden número y nombre.");
+                                            $this->FondoTemporal->asignarInstitYEstadoATemp($instit['Instit']['id'], 1, $fondo['FondoTemporal']['id'], $fondo['FondoTemporal']['observacion']);
 
                                             break;
                                         }
@@ -469,10 +474,10 @@ class FondoTemporalesController extends AppController {
                         $fondo['FondoTemporal']['totales_checked'] = 2;
 
                         if(strlen($this->data['FondoTemporal']['observacion']) > 0){
-                            $error = $this->data['FondoTemporal']['observacion'] . "\r\n" . date('d-m-Y') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($total)  . " con el total \r\n";
+                            $error = $this->data['FondoTemporal']['observacion'] . "\r\n" . date('d-m-Y H:i') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($difference)  . " con el total \r\n";
                         }
                         else{
-                            $error = date('d-m-Y') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($total)  . " con el total \r\n";
+                            $error = date('d-m-Y H:i') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($total)  . " con el total \r\n";
                         }
 
                     }/*Total con diferencia grande*/
@@ -480,10 +485,10 @@ class FondoTemporalesController extends AppController {
                         $fondo['FondoTemporal']['totales_checked'] = 3;
 
                         if(strlen($this->data['FondoTemporal']['observacion']) > 0){
-                            $error = $this->data['FondoTemporal']['observacion'] . "\r\n" . date('d-m-Y') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($total)  . " con el total \r\n";
+                            $error = $this->data['FondoTemporal']['observacion'] . "\r\n" . date('d-m-Y H:i') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($difference)  . " con el total \r\n";
                         }
                         else{
-                            $error = date('d-m-Y') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($total)  . " con el total \r\n";
+                            $error = date('d-m-Y H:i') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($difference)  . " con el total \r\n";
                         }
                     }
             }
