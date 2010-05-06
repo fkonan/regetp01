@@ -98,6 +98,12 @@ class FondotemporalTestCase extends CakeTestCase {
         $this->assertFalse($this->FondoTemporal->compara_institNombres('C.E.N.T. Nº 2 Clotilde Mercedes G. De Fernández', 'CENT Nº 2 Clotilde Mercedes G. De Fernández anexo', $this->tipoInstits));
         $this->assertFalse($this->FondoTemporal->compara_institNombres('C.E.N.T. Nº 2 Clotilde Mercedes G. De Fernández - anexo', 'CENT Nº 2 Clotilde Mercedes G. De Fernández', $this->tipoInstits));
     }
-    
+
+
+    function testValidarInstit() {
+        $this->assertEqual($this->FondoTemporal->validarInstit($fondo[0]), 1);
+        $this->assertEqual($this->FondoTemporal->validarInstit($fondo[1]), 2);
+        $this->assertEqual($this->FondoTemporal->validarInstit($fondo[2]), 0);
+    }
 }
 ?>
