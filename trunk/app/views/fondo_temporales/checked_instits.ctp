@@ -31,11 +31,12 @@ Ver totales: <select name="checkedTotals" onchange="Javascript: location.href='<
         <th><?php echo $paginator->sort('anio');?></th>
         <th><?php echo $paginator->sort('trimestre');?></th>
         <th><?php echo $paginator->sort('instit_id');?></th>
-	<th><?php echo $paginator->sort('Jurisdiccion','Jurisdiccion.name');?></th>
+	<th><?php echo $paginator->sort('Jurisdiccion','FondoTemporal.jurisdiccion_name');?></th>
 	<th><?php echo $paginator->sort('cuecompleto');?></th>
 	<th><?php echo $paginator->sort('instit');?></th>
 	<th><?php echo $paginator->sort('instit_name');?></th>
 	<th><?php echo $paginator->sort('Instit.nombre');?></th>
+        <th><?php echo $paginator->sort('Instit.Tipoinstit','Instit.Tipoinstit.name');?></th>
         <th><?php echo $paginator->sort('Instit.nroinstit');?></th>
         <th><?php echo $paginator->sort('localidad');?></th>
         <th><?php echo $paginator->sort('Diferencia de totales');?></th>
@@ -63,7 +64,7 @@ foreach ($fondos as $fondo):
 			<?php echo $fondo['FondoTemporal']['instit_id']; ?>
 		</td>
 		<td>
-			<?php echo $fondo['Jurisdiccion']['name']; ?>
+			<?php echo $fondo['FondoTemporal']['jurisdiccion_name']; ?>
 		</td>
 		<td>
 			<?php echo $fondo['FondoTemporal']['cuecompleto']; ?>
@@ -76,6 +77,9 @@ foreach ($fondos as $fondo):
 		</td>
                 <td>
 			<?php echo $fondo['Instit']['nombre']; ?>
+		</td>
+                <td>
+			<?php echo $fondo['Instit']['Tipoinstit']['name']; ?>
 		</td>
                 <td>
 			<?php echo $fondo['Instit']['nroinstit']; ?>

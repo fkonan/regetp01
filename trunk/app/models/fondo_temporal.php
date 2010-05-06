@@ -3,6 +3,7 @@ class FondoTemporal extends AppModel {
 
 	var $name = 'FondoTemporal';
         var $useTable = 'z_fondo_work';
+        var $actsAs = array('Containable');
         
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array(
@@ -280,7 +281,8 @@ class FondoTemporal extends AppModel {
 	 *
 	 * @param $instit
 	 */
-        function completa_tipoInstit_abreviados($instit) {
+        function completa_tipoInstit_abreviados($instit)
+        {
             $instit = str_replace('.','',strtolower($instit));
 
             $a = array('eet',
@@ -499,6 +501,129 @@ class FondoTemporal extends AppModel {
 
         function setObservacion(&$fondo, $comment) {
             $fondo['FondoTemporal']['observacion'] .= "[".date('d-m-Y H:i:s')."] ".$comment."\r\n";
+        }
+
+
+        function validarInstit($fondo)
+        {
+            //$this->Instits = ClassRegistry::init("Instit");
+            $this->Instits->recursive = 0;
+            $this->Instits->Tipoinstit->recursive = 0;
+            $this->Instits->Departamento->Localidad->recursive = 0;
+
+            $jurisdiccion_id = '';
+
+            // todas las localidades (solo una vez)
+            $localidades = $this->Instits->Departamento->Localidad->find('all', array(
+                                'order'=> array('LENGTH(Localidad.name)'=>'desc')
+                            ));
+
+            // auditoria
+            $instits_checked = $instits_en_duda = $instits_no_checked = 0;
+
+            foreach ($fondos as $fondo)
+            {
+                $cue_checked = $instit_checked = false;
+
+                // 1. Acota proceso a Jurisdiccion con jurisdiccion_id
+                if ($jurisdiccion_id != $fondo['FondoTemporal']['jurisdiccion_id'])
+                {
+                    // si cambia la jurisdiccion re-setea la coleccion de instits con
+                    // la que va a trabajar
+                    $jurisdiccion_id = $fondo['FondoTemporal']['jurisdiccion_id'];
+
+                    // acota a instits de esta jurisdiccion
+                    $instits = $this->Instits->find("all", array(
+                    'conditions'=> array('Instit.jurisdiccion_id' => $jurisdiccion_id),
+                    'fields'=> array('id','cue','nombre','nroinstit','anexo')));
+
+                    // trae todos los tipoInstits de esta jurisdiccion ordenados por cantidad de
+                    $tipoInstits = $this->Instits->Tipoinstit->find("all", array(
+                            'conditions'=> array('jurisdiccion_id' => $jurisdiccion_id),
+                            'order'=> array('LENGTH(Tipoinstit.name)'=>'desc')
+                        ));
+
+                    //$localidades = $this->Instits->Departamento->Localidad->con_depto_y_jurisdiccion('all',$jurisdiccion_id);
+                }
+
+                // instit_name tiene prioridad, viene mas completo
+                if (strlen($fondo['FondoTemporal']['instit_name'])) {
+                    $text = $fondo['FondoTemporal']['instit_name'];
+                }
+                elseif (strlen($fondo['FondoTemporal']['instit'])) {
+                    $text = $fondo['FondoTemporal']['instit'];
+                }
+                else {
+                    $text = '';
+                }
+
+                // 2. Compara CUEs
+                if (strlen($fondo['FondoTemporal']['cuecompleto']))
+                {
+                    // valida por nro de CUE
+                    $instit = $this->getInstitByCueIncompleto($instits, $fondo['FondoTemporal']['cuecompleto']);
+
+                    if ($instit)
+                    {
+                        // el CUE fue encontrado
+                        // chequea el numero y tipo de instit
+                        if ($this->compara_numeroInstit($text, $instit['Instit']['nroinstit']))
+                        {
+                            if ($this->compara_tipoInstit($text, $tipoInstits))
+                            {
+                                $instit_checked = true;
+                                return 1;
+                            }
+                            elseif ($this->compara_institNombres($text, $instit['Instit']['nombre_completo'], $tipoInstits, $localidades)) {
+                                // tienen el mismo nombre
+                                $instit_checked = true;
+                                return 1;
+                            }
+                            else {
+                                //$this->setObservacion($fondo, "La institucion se encuentra en duda. No coincidieron tipo y nombre.");
+                            }
+                        }
+                        else {
+                           //$this->setObservacion($fondo, "La institucion se encuentra en duda. No coincide número.");
+                        }
+
+                        if (!$instit_checked)
+                        {
+                            // edita cue_checked en 2 (duda)
+                            return 2;
+                        }
+
+                        $cue_checked = true;
+                    }
+                }
+
+                if (!$cue_checked)
+                {
+                    $instit_checked = false;
+                    if (strlen($text))
+                    {
+                        // compara nombres
+                        if (count($instits)) {
+                            foreach ($instits as $instit)
+                            {
+                                // chequea el numero de instit
+                                if ($this->compara_numeroInstit($text, $instit['Instit']['nroinstit']))
+                                {
+                                    if ($this->compara_institNombres($text, $instit['Instit']['nombre_completo'], $tipoInstits, $localidades)) {
+                                        // tienen el mismo nombre
+                                        $instit_checked = true;
+                                        return 1;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if (!$instit_checked) {
+                        $instits_no_checked++;
+                    }
+                }
+            }
         }
 
 }

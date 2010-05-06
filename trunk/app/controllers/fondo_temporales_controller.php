@@ -45,10 +45,12 @@ class FondoTemporalesController extends AppController {
                 }
                 
                 if($checkedInstit != null){
-                    $this->paginate = array('conditions'=>array('tipo'=>'i', 'cue_checked'=>$checkedInstit));
+                    $this->paginate = array('conditions'=>array('tipo'=>'i', 'cue_checked'=>$checkedInstit),
+                                            'contain'=>array('Instit'=>array('Tipoinstit(name)')));
                 }
                 else{
-                    $this->paginate = array('conditions'=>array('tipo'=>array('i','j'), 'totales_checked'=>$checkedTotals));
+                    $this->paginate = array('conditions'=>array('tipo'=>array('i','j'), 'totales_checked'=>$checkedTotals),
+                                            'contain'=>array('Instit'=>array('Tipoinstit(name)')));
                 }
 
                 $this->set('fondos', $this->paginate());
