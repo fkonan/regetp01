@@ -42,7 +42,7 @@
 		
 		echo $javascript->link('mensaje.class');
 		echo $javascript->link('ejecutar_en_head');
-		//echo $javascript->link('form_regetp_ria');
+                //echo $javascript->link('form_regetp_ria');
 		echo $scripts_for_layout;
 	?>
 	
