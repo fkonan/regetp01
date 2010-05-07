@@ -116,13 +116,15 @@ foreach ($fondos as $fondo):
 		</td>
 
 		<td class="actions">
-			<?php echo $html->link(__('Edit', true), array('action'=>'edit', $fondo['FondoTemporal']['id'])); ?>
 			<?
                         if($checkedInstit != null){
-                            if ($checkedInstit == 1)
+                            if ($checkedInstit == 1){
                                 echo $html->link(__('Uncheck Instit', true), array('action'=>'uncheckInstit', $fondo['FondoTemporal']['id']), null, sprintf(__('Seguro deseas deschequear %s?', true), $fondo['FondoTemporal']['instit']));
-                            else
+                            }
+                            else{
                                 echo $html->link(__('Check Instit', true), array('action'=>'checkInstit', $fondo['FondoTemporal']['id']), null, sprintf(__('Seguro deseas marcar como chequeado %s?', true), $fondo['FondoTemporal']['instit']));
+                            }
+                            echo $html->link(__('Edit', true), array('action'=>'edit_cue', $fondo['FondoTemporal']['id']));
                         }
                         ?>
                         <?
@@ -131,6 +133,8 @@ foreach ($fondos as $fondo):
                                 echo $html->link(__('Uncheck Total', true), array('action'=>'uncheckTotals', $fondo['FondoTemporal']['id']), null, sprintf(__('Seguro deseas deschequear?', true)));
                             else
                                 echo $html->link(__('Check Total', true), array('action'=>'checkTotals', $fondo['FondoTemporal']['id']), null, sprintf(__('Seguro deseas marcar como chequeado?', true)));
+                        
+                            echo $html->link(__('Edit', true), array('action'=>'edit', $fondo['FondoTemporal']['id']));
                         }
                         ?>
 		</td>

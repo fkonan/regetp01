@@ -9,6 +9,7 @@ class FondoTemporalesController extends AppController {
         var $tipoInstits=NULL;
         var $localidades=NULL;
         var $lineasDeAccion=NULL;
+        var $components = array('RequestHandler');
 
         /*function beforeFilter() {
             parent::beforeFilter();
@@ -194,6 +195,56 @@ class FondoTemporalesController extends AppController {
                 $this->set('error', $error);
                 $this->set(compact('instits','jurisdicciones'));//,'lineasDeAcciones'));
 	}
+
+        function edit_cue($id = null) {
+		if (!$id && empty($this->data)) {
+			$this->Session->setFlash(__('Invalid FondoTemporal', true));
+			$this->redirect(array('action'=>'index'));
+		}
+		if (!empty($this->data)) {
+			if ($this->FondoTemporal->save($this->data)) {
+				$this->Session->setFlash(__('The FondoTemporal has been saved', true));
+				$this->redirect(array('action'=>'checked_instits'));
+			} else {
+				$this->Session->setFlash(__('The FondoTemporal could not be saved. Please, try again.', true));
+			}
+		}
+		if (empty($this->data)) {
+			$this->data = $this->FondoTemporal->read(null, $id);
+                }
+
+		$allinstits = $this->FondoTemporal->Instit->find('list');
+		$jurisdicciones = $this->FondoTemporal->Jurisdiccion->find('list');
+
+                $this->set(compact('allinstits','jurisdicciones'));
+	}
+
+        function search_instits($q = null){
+            $this->autoRender = false;
+            
+            if ( $this->RequestHandler->isAjax() ) {
+              Configure::write ( 'debug', 0 );
+            }
+            
+            $response = '';
+            
+            if($q == null)
+                $q = strtolower($_GET["q"]);
+
+            if (!$q) return;
+
+            $items = $this->FondoTemporal->Instit->find("all",
+                            array('conditions'=> array('Instit.nombre LIKE'=> "%".$q."%"),
+                                  'order'=> array('Instit.nombre')));
+            foreach ($items as $item) {
+                    if (strpos(strtolower($item['Instit']['nombre']), $q) !== false) {
+                            $response = $response . $item['Instit']['nombre']."|" . $item['Instit']['nombre'] ."\n";
+                    }
+            }
+
+            echo $response;
+
+        }
 
         function uncheckInstit($id = null) {
 		if (!$id && empty($this->data)) {
