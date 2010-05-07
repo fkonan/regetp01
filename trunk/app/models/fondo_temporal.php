@@ -504,24 +504,24 @@ class FondoTemporal extends AppModel {
         }
 
 
-        function validarInstit($fondo)
+        function validarInstit($fondo, $instits, $tipoInstits)
         {
-            //$this->Instits = ClassRegistry::init("Instit");
+            /*$this->Instits = ClassRegistry::init("Instit");
             $this->Instits->recursive = 0;
             $this->Instits->Tipoinstit->recursive = 0;
             $this->Instits->Departamento->Localidad->recursive = 0;
-
+*/
             $jurisdiccion_id = '';
 
             // todas las localidades (solo una vez)
-            $localidades = $this->Instits->Departamento->Localidad->find('all', array(
+          /*  $localidades = $this->Instits->Departamento->Localidad->find('all', array(
                                 'order'=> array('LENGTH(Localidad.name)'=>'desc')
                             ));
-
+*/
             // auditoria
             $instits_checked = $instits_en_duda = $instits_no_checked = 0;
 
-            foreach ($fondos as $fondo)
+            if ($fondo)
             {
                 $cue_checked = $instit_checked = false;
 
@@ -531,7 +531,7 @@ class FondoTemporal extends AppModel {
                     // si cambia la jurisdiccion re-setea la coleccion de instits con
                     // la que va a trabajar
                     $jurisdiccion_id = $fondo['FondoTemporal']['jurisdiccion_id'];
-
+                    /*
                     // acota a instits de esta jurisdiccion
                     $instits = $this->Instits->find("all", array(
                     'conditions'=> array('Instit.jurisdiccion_id' => $jurisdiccion_id),
@@ -542,8 +542,9 @@ class FondoTemporal extends AppModel {
                             'conditions'=> array('jurisdiccion_id' => $jurisdiccion_id),
                             'order'=> array('LENGTH(Tipoinstit.name)'=>'desc')
                         ));
-
+                    */
                     //$localidades = $this->Instits->Departamento->Localidad->con_depto_y_jurisdiccion('all',$jurisdiccion_id);
+                    $localidades = '';
                 }
 
                 // instit_name tiene prioridad, viene mas completo
@@ -622,6 +623,8 @@ class FondoTemporal extends AppModel {
                     if (!$instit_checked) {
                         $instits_no_checked++;
                     }
+
+                    return 0;
                 }
             }
         }
