@@ -306,6 +306,7 @@ class FondoTemporalesController extends AppController {
                 foreach ($fondos as $fondo)
                 {
                     $cue_checked = $instit_checked = false;
+                    $en_duda_instit_id = '';
 
                     // 1. Acota proceso a Jurisdiccion con jurisdiccion_id
                     if ($jurisdiccion_id != $fondo['FondoTemporal']['jurisdiccion_id'])
@@ -381,15 +382,16 @@ class FondoTemporalesController extends AppController {
                             if (!$instit_checked)
                             {
                                 // edita cue_checked en 2 (duda)
-                                $this->FondoTemporal->asignarInstitYEstadoATemp($instit['Instit']['id'], 2, $fondo['FondoTemporal']['id'], $fondo['FondoTemporal']['observacion']);
-                                $instits_en_duda++;
+                                /*$this->FondoTemporal->asignarInstitYEstadoATemp($instit['Instit']['id'], 2, $fondo['FondoTemporal']['id'], $fondo['FondoTemporal']['observacion']);
+                                $instits_en_duda++;*/
+                                $en_duda_instit_id = $instit['Instit']['id'];
                             }
 
                             $cue_checked = true;
                         }
                     }
 
-                    if (!$cue_checked)
+                    if (!$instit_checked)
                     {
                         $instit_checked = false;
                         if (strlen($text))
@@ -419,7 +421,17 @@ class FondoTemporalesController extends AppController {
                         }
 
                         if (!$instit_checked) {
-                            $instits_no_checked++;
+                            if ($en_duda_instit_id) {
+                                // edita cue_checked en 2 (duda)
+                                $this->FondoTemporal->asignarInstitYEstadoATemp($en_duda_instit_id, 2, $fondo['FondoTemporal']['id'], $fondo['FondoTemporal']['observacion']);
+                                $instits_en_duda++;
+                            }
+                            else {
+                                // edita cue_checked en 0
+                                $this->FondoTemporal->setObservacion($fondo, "La institucion no pudo ser chequeada.");
+                                $this->FondoTemporal->asignarInstitYEstadoATemp(0, 0, $fondo['FondoTemporal']['id'], $fondo['FondoTemporal']['observacion']);
+                                $instits_no_checked++;
+                            }
                         }
                     }
                 }

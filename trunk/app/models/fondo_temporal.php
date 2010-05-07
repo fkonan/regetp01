@@ -523,7 +523,7 @@ class FondoTemporal extends AppModel {
 
             if ($fondo)
             {
-                $cue_checked = $instit_checked = false;
+                $cue_checked = $instit_checked = $en_duda = false;
 
                 // 1. Acota proceso a Jurisdiccion con jurisdiccion_id
                 if ($jurisdiccion_id != $fondo['FondoTemporal']['jurisdiccion_id'])
@@ -591,16 +591,15 @@ class FondoTemporal extends AppModel {
                         if (!$instit_checked)
                         {
                             // edita cue_checked en 2 (duda)
-                            return 2;
+                            $en_duda = true;
                         }
 
                         $cue_checked = true;
                     }
                 }
 
-                if (!$cue_checked)
+                if (!$instit_checked)
                 {
-                    $instit_checked = false;
                     if (strlen($text))
                     {
                         // compara nombres
@@ -621,10 +620,15 @@ class FondoTemporal extends AppModel {
                     }
 
                     if (!$instit_checked) {
-                        $instits_no_checked++;
+                        if ($en_duda) {
+                            // edita cue_checked en 2 (duda)
+                            return 2;
+                        }
+                        else {
+                            $instits_no_checked++;
+                            return 0;
+                        }
                     }
-
-                    return 0;
                 }
             }
         }
