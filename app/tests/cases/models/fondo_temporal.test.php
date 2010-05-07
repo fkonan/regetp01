@@ -8,13 +8,13 @@ class FondotemporalTestCase extends CakeTestCase {
     var $tipoInstits = null;
 
     var $fixtures = array(
-            'app.z_fondo_work', 'app.jurisdiccion', 'app.instit', 'app.claseinstit',
+            'app.jurisdiccion', 'app.instit', 'app.claseinstit',
             'app.orientacion',  'app.sector', 'app.plan', 'app.subsector',
             'app.lineas_de_accion', 'app.fondos_lineas_de_accion',
             'app.tipoinstit', 'app.dependencia', 'app.departamento', 'app.localidad',
             'app.etp_estado', 'app.oferta', 'app.titulo', 'app.anio', 'app.ciclo',
             'app.etapa', 'app.gestion', 'app.historial_cue', 'app.ticket', 'app.user',
-            'app.user_login', 'app.fondo',
+            'app.user_login', 'app.fondo', 'app.fondo_temporal'
     );
 
     function startTest() {
@@ -23,6 +23,7 @@ class FondotemporalTestCase extends CakeTestCase {
         */
         $this->FondoTemporal =& ClassRegistry::init('FondoTemporal');
         $this->Tipoinstit =& ClassRegistry::init('Tipoinstit');
+        $this->Instit =& ClassRegistry::init('Instit');
 
         // trae todos los tipoInstits
         $this->Tipoinstit->recursive = 0;
@@ -101,9 +102,15 @@ class FondotemporalTestCase extends CakeTestCase {
 
 
     function testValidarInstit() {
-        $this->assertEqual($this->FondoTemporal->validarInstit($fondo[0]), 1);
-        $this->assertEqual($this->FondoTemporal->validarInstit($fondo[1]), 2);
-        $this->assertEqual($this->FondoTemporal->validarInstit($fondo[2]), 0);
+        $fondos = $this->FondoTemporal->find("all");
+        $instits = $this->Instit->find("all");
+        
+        $this->assertEqual($this->FondoTemporal->validarInstit($fondos[0], $instits, $this->tipoInstits), 1);
+        $this->assertEqual($this->FondoTemporal->validarInstit($fondos[1], $instits, $this->tipoInstits), 2);
+        $this->assertEqual($this->FondoTemporal->validarInstit($fondos[2], $instits, $this->tipoInstits), 1);
+        $this->assertEqual($this->FondoTemporal->validarInstit($fondos[3], $instits, $this->tipoInstits), 1);
+        $this->assertEqual($this->FondoTemporal->validarInstit($fondos[4], $instits, $this->tipoInstits), 0); // coincide nro pero no nombre
+        $this->assertEqual($this->FondoTemporal->validarInstit($fondos[5], $instits, $this->tipoInstits), 1);
     }
 }
 ?>
