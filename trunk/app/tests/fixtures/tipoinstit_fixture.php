@@ -34,6 +34,16 @@ class TipoinstitFixture extends CakeTestFixture {
 			'id' => 18,
                         'jurisdiccion_id' => 2,
                         'name' => 'CENTRO DE FORMACIÓN PROFESIONAL (C.F.P.)'
+		),
+                array(
+			'id' => 214,
+                        'jurisdiccion_id' => 2,
+                        'name' => 'INSTITUTO'
+		),
+                array(
+			'id' => 215,
+                        'jurisdiccion_id' => 2,
+                        'name' => 'MISIÓN MONOTÉCNICA Y DE EXTENSION CULTURAL'
 		)
 	);
 }

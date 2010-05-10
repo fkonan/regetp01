@@ -44,6 +44,7 @@ class FondotemporalTestCase extends CakeTestCase {
         $this->assertEqual($this->FondoTemporal->optimizar_cadena('BLA N° 63-002'), 'bla nº63-002');
         $this->assertEqual($this->FondoTemporal->optimizar_cadena('Misión Monotéc.N°72'), 'mision monotec nº72');
         $this->assertEqual($this->FondoTemporal->optimizar_cadena('ETAgro Nº1-Hued'), 'et agro nº1 -hued');
+        //$this->assertEqual($this->FondoTemporal->optimizar_cadena('CFP Nº1Aguilares'), 'cfp nº1 aguilares');
     }
 
     function testCompara_numeroInstit() {
@@ -61,9 +62,12 @@ class FondotemporalTestCase extends CakeTestCase {
         $this->assertTrue($this->FondoTemporal->compara_numeroInstit('E.E.T.N° 1 _Dr. Conrado Etchebarne - Villaguay','01'));
         $this->assertTrue($this->FondoTemporal->compara_numeroInstit('ETAgro Nº1-Hueda','01'));
         //$this->assertTrue($this->FondoTemporal->compara_numeroInstit('Escuela Técnica Agropecuaria (Ex EMETA N° 1) Chamical','01'));
+        //$this->assertTrue($this->FondoTemporal->compara_numeroInstit('Instituto N° P-34 José Ingenieros Hucal','P-34'));
         $this->assertTrue($this->FondoTemporal->compara_numeroInstit('Misión Monotéc.N°72','72'));
         $this->assertTrue($this->FondoTemporal->compara_numeroInstit('I. Form. Prof.Nº6005','6005'));
         $this->assertTrue($this->FondoTemporal->compara_numeroInstit('I.P.E.M.Nº 291 - Gral Cabrera','291'));
+        $this->assertTrue($this->FondoTemporal->compara_numeroInstit('ISP N° 4 Ángel Cárcano Anexo Las Toscas','4'));
+        //$this->assertTrue($this->FondoTemporal->compara_numeroInstit('CFP Nº1Aguilares','1'));
 
         $this->assertFalse($this->FondoTemporal->compara_numeroInstit('BLA Nº 73','63'));
         $this->assertFalse($this->FondoTemporal->compara_numeroInstit('BLA Nº 163','63'));
@@ -80,6 +84,8 @@ class FondotemporalTestCase extends CakeTestCase {
         $this->assertTrue($this->FondoTemporal->compara_tipoInstit('e.e.t. Nº 15 Maipú', $this->tipoInstits));
         $this->assertTrue($this->FondoTemporal->compara_tipoInstit('escuela Nº 15 Maipú', $this->tipoInstits));
         $this->assertTrue($this->FondoTemporal->compara_tipoInstit('centro fp Nº 15 Maipú', $this->tipoInstits));
+        $this->assertTrue($this->FondoTemporal->compara_tipoInstit('Instituto N° P-34 José Ingenieros Hucal', $this->tipoInstits));
+        $this->assertTrue($this->FondoTemporal->compara_tipoInstit('Misión Monotécnica y de Extensión Cultural N° 4 Robles', $this->tipoInstits));
 
         $this->assertFalse($this->FondoTemporal->compara_tipoInstit('Esc Ed T Nº 15 Maipú', $this->tipoInstits));
     }
@@ -92,7 +98,10 @@ class FondotemporalTestCase extends CakeTestCase {
         $this->assertTrue($this->FondoTemporal->compara_institNombres('C.E.N.T. Nº 2 Clotilde Mercedes G. De Fernández', 'CENT Nº 2 Clotilde g De Fernández', $this->tipoInstits));
         $this->assertTrue($this->FondoTemporal->compara_institNombres('Esc Nº 15 Maipú', 'EET Nº 15 Maipú', $this->tipoInstits));
         $this->assertTrue($this->FondoTemporal->compara_institNombres('C.E.N.T. Nº 2 Clotilde Mercedes G. De Fernández - anexo', 'CENT Nº 2 Clotilde Mercedes G. De Fernández - anexo', $this->tipoInstits));
+        //$this->assertTrue($this->FondoTemporal->compara_institNombres('Instituto N° P-34 José Ingenieros Hucal', 'JOSÉ INGENIEROS', $this->tipoInstits));
 
+        $this->assertFalse($this->FondoTemporal->compara_institNombres('Misión Monotécnica y de Extensión Cultural N° 4 Robles', '', $this->tipoInstits));
+        $this->assertFalse($this->FondoTemporal->compara_institNombres('Misión Monotécnica y de Extensión Cultural N° 2 - Santo Domingo', '', $this->tipoInstits));
         $this->assertFalse($this->FondoTemporal->compara_institNombres('EET Nº 15 Maipú', 'eet Nº 15 Meeipú', $this->tipoInstits));
         $this->assertFalse($this->FondoTemporal->compara_institNombres('Esc Ed T Nº 15 Maipú', 'EET Nº 15 Maipú', $this->tipoInstits));
         $this->assertFalse($this->FondoTemporal->compara_institNombres('ET Nº 1 - Santa Lucía', 'ET Nº 1 - Anexo Santa Lucía', $this->tipoInstits));
@@ -111,6 +120,7 @@ class FondotemporalTestCase extends CakeTestCase {
         $this->assertEqual($this->FondoTemporal->validarInstit($fondos[3], $instits, $this->tipoInstits), 1);
         $this->assertEqual($this->FondoTemporal->validarInstit($fondos[4], $instits, $this->tipoInstits), 0); // coincide nro pero no nombre
         $this->assertEqual($this->FondoTemporal->validarInstit($fondos[5], $instits, $this->tipoInstits), 1);
+        //$this->assertEqual($this->FondoTemporal->validarInstit($fondos[6], $instits, $this->tipoInstits), 1); // no chequea el N° P-34
     }
 }
 ?>
