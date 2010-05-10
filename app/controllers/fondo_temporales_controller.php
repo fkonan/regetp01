@@ -430,25 +430,25 @@ class FondoTemporalesController extends AppController {
                                     $instits_checked++;
 
                                     // edita cue_checked en 1 y asigna instit_id
-                                    $this->FondoTemporal->setObservacion($fondo, "Instit checked. Coincidieron número y tipo.");
+                                    $this->FondoTemporal->setObservacion($fondo, "Instit checked. Coincidieron CUE, número y tipo.");
                                     $this->FondoTemporal->asignarInstitYEstadoATemp($instit['Instit']['id'], 1, $fondo['FondoTemporal']['id'], $fondo['FondoTemporal']['observacion']);
                                 }
-                                elseif ($this->FondoTemporal->compara_institNombres($text, $instit['Instit']['nombre_completo'], $this->tipoInstits, $localidades)) {
+                                elseif ($this->FondoTemporal->compara_institNombres($text, $instit['Instit']['nombre'], $this->tipoInstits, $localidades)) {
                                     // tienen el mismo nombre
                                     $instit_checked = true;
 
                                     // edita cue_checked en 1 y asigna instit_id
-                                    $this->FondoTemporal->setObservacion($fondo, "Instit checked. Coincidieron número y nombre, NO tipo.");
+                                    $this->FondoTemporal->setObservacion($fondo, "Instit checked. Coincidieron CUE, número y nombre, NO tipo.");
                                     $this->FondoTemporal->asignarInstitYEstadoATemp($instit['Instit']['id'], 1, $fondo['FondoTemporal']['id'], $fondo['FondoTemporal']['observacion']);
 
                                     $instits_checked++;
                                 }
                                 else {
-                                    $this->FondoTemporal->setObservacion($fondo, "La institucion se encuentra en duda. No coincidieron tipo y nombre.");
+                                    $this->FondoTemporal->setObservacion($fondo, "La institucion se encuentra en duda. Coincide CUE, no coincidieron tipo y nombre.");
                                 }
                             }
                             else {
-                                $this->FondoTemporal->setObservacion($fondo, "La institucion se encuentra en duda. No coincide número.");
+                                $this->FondoTemporal->setObservacion($fondo, "La institucion se encuentra en duda. Coincide CUE, no coincide número.");
                             }
                             
                             if (!$instit_checked)
@@ -460,6 +460,9 @@ class FondoTemporalesController extends AppController {
                             }
 
                             $cue_checked = true;
+                        }
+                        else {
+                            $this->FondoTemporal->setObservacion($fondo, "El CUE no existe en el registro.");
                         }
                     }
 
@@ -475,14 +478,14 @@ class FondoTemporalesController extends AppController {
                                     // chequea el numero de instit
                                     if ($this->FondoTemporal->compara_numeroInstit($text, $instit['Instit']['nroinstit']))
                                     {
-                                        if ($this->FondoTemporal->compara_institNombres($text, $instit['Instit']['nombre_completo'], $this->tipoInstits, $localidades)) {
+                                        if ($this->FondoTemporal->compara_institNombres($text, $instit['Instit']['nombre'], $this->tipoInstits, $localidades)) {
                                             // tienen el mismo nombre
                                             $instit_checked = true;
                                             
                                             $instits_checked++;
                                             
                                             // edita cue_checked en 1 y asigna instit_id
-                                            $this->FondoTemporal->setObservacion($fondo, "Instit checked. El CUE no existe, coinciden número y nombre.");
+                                            $this->FondoTemporal->setObservacion($fondo, "Instit checked. Coinciden número y nombre.");
                                             $this->FondoTemporal->asignarInstitYEstadoATemp($instit['Instit']['id'], 1, $fondo['FondoTemporal']['id'], $fondo['FondoTemporal']['observacion']);
 
                                             break;
