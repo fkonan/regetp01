@@ -1,6 +1,7 @@
 <?
 echo $javascript->link('jquery-1.4.2.min');
-echo $javascript->link('jquery.autocomplete.js');
+echo $javascript->link('jquery.autocomplete');
+echo $javascript->link('jquery.blockUI');
 echo $html->css('jquery.autocomplete.css');
 ?>
 <!--<script language="javascript">
@@ -19,6 +20,12 @@ echo $html->css('jquery.autocomplete.css');
     jQuery(document).ready(function() {
         jQuery.noConflict();
 
+        jQuery(document).ajaxStart(function() {
+            jQuery.blockUI({ message: '<h1>Loading...</h1>' });
+        });
+        
+        jQuery(document).ajaxStop(jQuery.unblockUI);
+
         jQuery("#FondoTemporalSearchPosibleInstit").autocomplete("<?echo $html->url(array('controller'=>'fondo_temporales','action'=>'search_instits'));?>", {
 		dataType: "json",
 		parse: function(data) {
@@ -35,12 +42,32 @@ echo $html->css('jquery.autocomplete.css');
 		}
 	}).result(function(e, item) {
                 jQuery("#hiddenInstitId").remove();
+                jQuery("#FondoTemporalSearchAddForm fieldset #institCueInfo").remove();
+                jQuery("#FondoTemporalSearchAddForm fieldset .institCueInfo").remove();
+
                 jQuery("#FondoTemporalSearchAddForm").append("<input id='hiddenInstitId' name='data[FondoTemporalSearch][instit_id]' type='hidden' value='" + item.id + "' />");
-	});
+
+                var div = "<div id='institCueInfo' class='institCueInfo'>" +
+                              "<h4> Informacion sobre la Institucion </h4>" +
+                              "<div><strong>CUE: </strong>" + item.cue + "</div>" +
+                              "<div><strong>Nro.Instit: </strong>" + item.nroinstit + "</div>" +
+                              "<div><strong>Tipo de Institucion: </strong>" + item.tipo + "</div>" +
+                              "<div><strong>Año de Creacion: </strong>" + item.anio_creacion + "</div>" +
+                              "<div><strong>Direccion: </strong>" + item.direccion + "</div>" +
+                              "<div><strong>Departamento: </strong>" + item.depto + "</div>" +
+                              "<div><strong>Localidad: </strong>" + item.localidad + "</div>" +
+                              "<div><strong>Jurisdiccion: </strong>" + item.jurisdiccion + "</div>" +
+                              "<div><strong>Codigo Postal: </strong>" + item.cp + "</div>" +
+                              "<div><strong>CUE anterior: </strong>" + item.cue_anterior + "</div>" +
+                          "</div>";
+
+                jQuery("#FondoTemporalSearchAddForm fieldset").append(div);
+
+        });
     });
     
     function format(instit) {
-                return instit.nombre;
+                return instit.nombre + " [" + instit.cue + "]";
     }    
 </script>
 
@@ -69,12 +96,11 @@ echo $html->css('jquery.autocomplete.css');
 
 
 	<?php
-                echo $form->input('CUE');
                 echo $form->input('posible_instit');
-                echo $form->input('jurisdiccion_id');
+                //echo $form->input('jurisdiccion_id');
 	?>
 	</fieldset>
-        <?php echo $form->end();?>
+        <?php echo $form->end("Imputar Institucion");?>
 </div>
 <div class="actions">
 	<ul>
