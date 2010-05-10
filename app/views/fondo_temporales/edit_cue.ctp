@@ -3,17 +3,45 @@ echo $javascript->link('jquery-1.4.2.min');
 echo $javascript->link('jquery.autocomplete.js');
 echo $html->css('jquery.autocomplete.css');
 ?>
-<script language="javascript">
+<!--<script language="javascript">
     jQuery(document).ready(function() {
         jQuery.noConflict();
 
         jQuery("#FondoTemporalSearchPosibleInstit").autocomplete("<?echo $html->url(array('controller'=>'fondo_temporales','action'=>'search_instits'));?>", {
             width: 260,
-            selectFirst: false,
+            selectFirst: true,
             matchContains: true
         });
     });
 
+</script>-->
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        jQuery.noConflict();
+
+        jQuery("#FondoTemporalSearchPosibleInstit").autocomplete("<?echo $html->url(array('controller'=>'fondo_temporales','action'=>'search_instits'));?>", {
+		dataType: "json",
+		parse: function(data) {
+			return jQuery.map(data, function(instit) {
+				return {
+					data: instit,
+					value: instit.nombre,
+					result: instit.nombre
+				}
+			});
+		},
+		formatItem: function(item) {
+			return format(item);
+		}
+	}).result(function(e, item) {
+                jQuery("#hiddenInstitId").remove();
+                jQuery("#FondoTemporalSearchAddForm").append("<input id='hiddenInstitId' name='data[FondoTemporalSearch][instit_id]' type='hidden' value='" + item.id + "' />");
+	});
+    });
+    
+    function format(instit) {
+                return instit.nombre;
+    }    
 </script>
 
 <div class="fondo_temporales form">

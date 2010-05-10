@@ -52,7 +52,7 @@ class AppModel extends Model {
 		$text = "%$text%";
 		$patron = array (
 			// Espacios, puntos y comas por guion
-			//'/[\., ]+/' => '-',
+			//'/[\., ]/' => '%',
 			
 			// Vocales
 			'/a/' => '(á|a|A|Á)',
@@ -91,7 +91,7 @@ class AppModel extends Model {
 			'/º/' => '',
 			'/n°/' => '%',
 			'/nº/' => '%',
-			'/ /' => '%'
+			'/ /' => '%',
  
 		);
 		// caracteres especiales de expresiones regulares

@@ -79,7 +79,7 @@ foreach ($fondos as $fondo):
 			<?php echo $fondo['Instit']['nombre']; ?>
 		</td>
                 <td>
-			<?php echo $fondo['Instit']['Tipoinstit']['name']; ?>
+			<?php echo $fondo['FondoTemporal']['tipo']; ?>
 		</td>
                 <td>
 			<?php echo $fondo['Instit']['nroinstit']; ?>

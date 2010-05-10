@@ -227,22 +227,43 @@ class FondoTemporalesController extends AppController {
             }
             
             $response = '';
-            
-            if($q == null)
-                $q = strtolower($_GET["q"]);
-
-            if (!$q) return;
-
-            $items = $this->FondoTemporal->Instit->find("all",
-                            array('conditions'=> array('Instit.nombre LIKE'=> "%".$q."%"),
-                                  'order'=> array('Instit.nombre')));
-            foreach ($items as $item) {
-                    if (strpos(strtolower($item['Instit']['nombre']), $q) !== false) {
-                            $response = $response . $item['Instit']['nombre']."|" . $item['Instit']['nombre'] ."\n";
-                    }
+            debug($this->params['url']['q']);
+            if(empty($q)) {
+                if (!empty($this->params['url']['q'])) {
+                    $q = utf8_decode(strtolower($this->params['url']['q']));
+                } else {
+                    return utf8_encode("parámetro vacio");
+                }
             }
 
-            echo $response;
+            $items = $this->FondoTemporal->Instit->find("all", array(
+
+                'conditions'=> array(
+                    "lower(Instit.nombre) SIMILAR TO ?" => $this->FondoTemporal->Instit->convertir_para_busqueda_avanzada($q),
+                ),
+                'order'=> array('Instit.nombre')
+                ));
+            //debug($items);
+            //foreach ($items as $item) {
+            //   $cuecompleto = $item['Instit']['cue']*100+$item['Instit']['anexo'];
+            //   $response .= utf8_encode($item['Instit']['nombre'])." [CUE: $cuecompleto]|" . utf8_encode($item['Instit']['id']) ."\n";
+            //}
+
+            $result = array();
+
+            foreach ($items as $item) {
+                $cuecompleto = $item['Instit']['cue']*100+$item['Instit']['anexo'];
+                
+                array_push($result, array(
+                        "id" => $item['Instit']['id'],
+                        "cue" => $item['Instit']['cue']*100+$item['Instit']['anexo'],
+                        "nombre" => utf8_encode($item['Instit']['nombre'])." [CUE: $cuecompleto]"
+                ));
+            }
+
+            echo json_encode($result);
+
+            //echo $response;
 
         }
 
