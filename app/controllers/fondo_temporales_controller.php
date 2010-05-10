@@ -227,7 +227,7 @@ class FondoTemporalesController extends AppController {
             }
             
             $response = '';
-            debug($this->params['url']['q']);
+            
             if(empty($q)) {
                 if (!empty($this->params['url']['q'])) {
                     $q = utf8_decode(strtolower($this->params['url']['q']));
@@ -236,18 +236,36 @@ class FondoTemporalesController extends AppController {
                 }
             }
 
-            $items = $this->FondoTemporal->Instit->find("all", array(
-
-                'conditions'=> array(
-                    "lower(Instit.nombre) SIMILAR TO ?" => $this->FondoTemporal->Instit->convertir_para_busqueda_avanzada($q),
-                ),
-                'order'=> array('Instit.nombre')
+            if(is_numeric($q)){
+                $items = $this->FondoTemporal->Instit->find("all", array(
+                    'contain'=> array(
+                        'Tipoinstit', 'Jurisdiccion', 'HistorialCue'
+                    ),
+                    'conditions'=> array(
+                        "to_char(cue*100+anexo, 'FM999999999FM') SIMILAR TO ?" => "%". $q ."%"
+                        
+                    )
                 ));
-            //debug($items);
-            //foreach ($items as $item) {
-            //   $cuecompleto = $item['Instit']['cue']*100+$item['Instit']['anexo'];
-            //   $response .= utf8_encode($item['Instit']['nombre'])." [CUE: $cuecompleto]|" . utf8_encode($item['Instit']['id']) ."\n";
-            //}
+
+                /*$cues_h = $this->FondoTemporal->Instit->HistorialCue->find("all", array(
+                    'conditions'=> array(
+                        "OR"=>array(
+                        "cue = ?" => $q,
+                        "(cue * 100 + anexo) = ?" => $q )
+                    )
+                ));*/
+
+            }
+            else{
+                $items = $this->FondoTemporal->Instit->find("all", array(
+                    'contain'=> array(
+                        'Tipoinstit', 'Jurisdiccion', 'HistorialCue'
+                    ),
+                    'conditions'=> array(
+                        "(lower(Tipoinstit.name) || lower(Instit.nombre)) SIMILAR TO ?" => $this->FondoTemporal->Instit->convertir_para_busqueda_avanzada($q)
+                    )
+                ));
+            }
 
             $result = array();
 
@@ -257,7 +275,16 @@ class FondoTemporalesController extends AppController {
                 array_push($result, array(
                         "id" => $item['Instit']['id'],
                         "cue" => $item['Instit']['cue']*100+$item['Instit']['anexo'],
-                        "nombre" => utf8_encode($item['Instit']['nombre'])." [CUE: $cuecompleto]"
+                        "nombre" => utf8_encode($item['Instit']['nombre']),
+                        "nroinstit" => utf8_encode($item['Instit']['nroinstit']),
+                        "anio_creacion" => utf8_encode($item['Instit']['anio_creacion']),
+                        "direccion" => utf8_encode($item['Instit']['direccion']),
+                        "depto" => utf8_encode($item['Instit']['depto']),
+                        "localidad" => utf8_encode($item['Instit']['localidad']),
+                        "cp" => utf8_encode($item['Instit']['cp']),
+                        "tipo" => utf8_encode($item['Tipoinstit']['name']),
+                        "jurisdiccion" => utf8_encode($item['Jurisdiccion']['name']),
+                        "cue_anterior" => utf8_encode($item['HistorialCue'][0]['cue'])
                 ));
             }
 
