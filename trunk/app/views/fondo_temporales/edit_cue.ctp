@@ -21,7 +21,7 @@ echo $html->css('jquery.autocomplete.css');
         jQuery.noConflict();
 
         jQuery(document).ajaxStart(function() {
-            jQuery.blockUI({ message: '<h1>Loading...</h1>' });
+            jQuery.blockUI({ message: '<h1>Buscando...</h1>',overlayCSS: { backgroundColor: '#00f' }, showOverlay: true });
         });
         
         jQuery(document).ajaxStop(jQuery.unblockUI);
@@ -96,7 +96,7 @@ echo $html->css('jquery.autocomplete.css');
 
 
 	<?php
-                echo $form->input('posible_instit');
+                echo $form->input('posible_instit', array('label'=>'Posible nombre o CUE de la institucion'));
                 //echo $form->input('jurisdiccion_id');
 	?>
 	</fieldset>
