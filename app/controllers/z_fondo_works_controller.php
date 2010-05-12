@@ -19,7 +19,7 @@ class ZFondoWorksController extends AppController {
      */
     function migrator($validar = 1, $cantDeFondosDelExcel = 7021, $cantRegistros = 0, $eliminarArchivosDeFondoYLineas = 1) {
         
-        if (!$validar) {
+        if ($validar) {
             $tempsComprobacion = $this->ZFondoWork->temporalesFiltradosX('ijc', $cantRegistros, $eliminarArchivosDeFondoYLineas);
             $totTemps = count($tempsComprobacion);
             if ( $totTemps != $cantDeFondosDelExcel) {
