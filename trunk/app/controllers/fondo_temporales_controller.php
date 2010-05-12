@@ -604,7 +604,7 @@ class FondoTemporalesController extends AppController {
                             $error = $this->data['FondoTemporal']['observacion'] . "\r\n" . date('d-m-Y H:i') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($difference)  . " con el total \r\n";
                         }
                         else{
-                            $error = date('d-m-Y H:i') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($difference)  . " con el total \r\n";
+                            $error = date('d-m-Y H:i') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($total)  . " con el total \r\n";
                         }
                     }
             }
