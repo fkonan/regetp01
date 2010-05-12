@@ -198,11 +198,12 @@ class FondoTemporalesController extends AppController {
 
         function edit_cue($id = null) {
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid FondoTemporal', true));
-			$this->redirect(array('action'=>'index'));
+                        $this->Session->setFlash(__('Invalid FondoTemporal', true));
+			$this->redirect(array('action'=>'checked_instits'));
 		}
 		if (!empty($this->data)) {
-			if ($this->FondoTemporal->save($this->data)) {
+                        debug($this->data);
+                        if ($this->FondoTemporal->save($this->data)) {
 				$this->Session->setFlash(__('The FondoTemporal has been saved', true));
 				$this->redirect(array('action'=>'checked_instits'));
 			} else {

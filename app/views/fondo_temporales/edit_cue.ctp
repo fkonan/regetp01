@@ -4,19 +4,9 @@ echo $javascript->link('jquery.autocomplete');
 echo $javascript->link('jquery.blockUI');
 echo $html->css('jquery.autocomplete.css');
 ?>
-<!--<script language="javascript">
-    jQuery(document).ready(function() {
-        jQuery.noConflict();
-
-        jQuery("#FondoTemporalSearchPosibleInstit").autocomplete("<?echo $html->url(array('controller'=>'fondo_temporales','action'=>'search_instits'));?>", {
-            width: 260,
-            selectFirst: true,
-            matchContains: true
-        });
-    });
-
-</script>-->
 <script type="text/javascript">
+    jQuery.noConflict();
+    
     jQuery(document).ready(function() {
         jQuery.noConflict();
 
@@ -26,7 +16,7 @@ echo $html->css('jquery.autocomplete.css');
         
         jQuery(document).ajaxStop(jQuery.unblockUI);
 
-        jQuery("#FondoTemporalSearchPosibleInstit").autocomplete("<?echo $html->url(array('controller'=>'fondo_temporales','action'=>'search_instits'));?>", {
+        jQuery("#FondoTemporalPosibleInstit").autocomplete("<?echo $html->url(array('controller'=>'fondo_temporales','action'=>'search_instits'));?>", {
 		dataType: "json",
 		parse: function(data) {
 			return jQuery.map(data, function(instit) {
@@ -42,10 +32,10 @@ echo $html->css('jquery.autocomplete.css');
 		}
 	}).result(function(e, item) {
                 jQuery("#hiddenInstitId").remove();
-                jQuery("#FondoTemporalSearchAddForm fieldset #institCueInfo").remove();
-                jQuery("#FondoTemporalSearchAddForm fieldset .institCueInfo").remove();
+                jQuery("#FondoTemporalEditForm fieldset #institCueInfo").remove();
+                jQuery("#FondoTemporalEditForm fieldset .institCueInfo").remove();
 
-                jQuery("#FondoTemporalSearchAddForm").append("<input id='hiddenInstitId' name='data[FondoTemporalSearch][instit_id]' type='hidden' value='" + item.id + "' />");
+                jQuery("#FondoTemporalEditForm").append("<input id='hiddenInstitId' name='data[FondoTemporal][instit_id]' type='hidden' value='" + item.id + "' />");
 
                 var div = "<div id='institCueInfo' class='institCueInfo'>" +
                               "<h4> Informacion sobre la Institucion </h4>" +
@@ -61,9 +51,10 @@ echo $html->css('jquery.autocomplete.css');
                               "<div><strong>CUE anterior: </strong>" + item.cue_anterior + "</div>" +
                           "</div>";
 
-                jQuery("#FondoTemporalSearchAddForm fieldset").append(div);
+                jQuery("#FondoTemporalEditForm fieldset").append(div);
 
         });
+
     });
     
     function format(instit) {
@@ -72,7 +63,7 @@ echo $html->css('jquery.autocomplete.css');
 </script>
 
 <div class="fondo_temporales form">
-        <?php echo $form->create('FondoTemporal');?>
+        <?php echo $form->create('FondoTemporal', array('id'=>'FondoTemporalDatos','onSubmit'=>'return false;'));?>
 	<fieldset>
  		<legend><?php __('Editar CUEs Temporal');?></legend>
                 
@@ -90,13 +81,13 @@ echo $html->css('jquery.autocomplete.css');
 	</fieldset>
         <?php echo $form->end();?>
 
-        <?php echo $form->create('FondoTemporalSearch');?>
+        <?php echo $form->create('FondoTemporal');?>
 	<fieldset>
  		<h2><?php __('Buscador de Instituciones');?></h2>
 
 
 	<?php
-                echo $form->input('posible_instit', array('label'=>'Posible nombre o CUE de la institucion'));
+                echo $form->input('posible_instit', array('label'=>'Posible nombre o CUE de la institucion','value'=>($this->data['Instit']['cue'] * 100 + $this->data['Instit']['anexo'])));
                 //echo $form->input('jurisdiccion_id');
 	?>
 	</fieldset>
