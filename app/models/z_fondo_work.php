@@ -34,16 +34,16 @@ class ZFondoWork extends AppModel {
          * y me los guarda en las tablas de fondos, lineas-de_acciones, etc
          *
          * @param string $cosasMigrar default en 'ij'
-         * @param integer $registrosATraer default en 0 para que traiga todos
+         * @param integer $registrosATraer es el LIMIT, para utilizar en desarrollo unicamente
          * @param boolean $borrarDatosFondo  default en false
-         * @return array
+         * @return integer cant de registros migrados
          */
         function migrar($cosasMigrar = 'ij', $registrosATraer = 0, $borrarDatosFondo = false) {
-            echo "iniciando";
+            
             /**
              * @var Fondo
              */
-            $this->Fondo       = ClassRegistry::init('Fondo');
+            $this->Fondo       =& ClassRegistry::init('Fondo');
 
             /**
              * array con las lineas de accion del tipo
@@ -56,9 +56,15 @@ class ZFondoWork extends AppModel {
              * find de los registros de z_fondo_work
              * @var array
              */
-            $temps = $this->__temporalesFiltradosX($cosasMigrar, $registrosATraer);
+            $temps = $this->temporalesFiltradosX($cosasMigrar, $registrosATraer);
 
+            /*
+             * Esta variable guarda los mensajes a mostrar del proceso de migracion
+             * @var string $consoleText
+             */
+            $consoleText = "<p>iniciando</p>";
 
+            
             if (count($temps) == 0){
                 $this->migrationStatus = 'No hay registros en la tabla z_fondo_work!!! se detuvo la migración.';
                 return -2;
@@ -68,25 +74,51 @@ class ZFondoWork extends AppModel {
             if ($borrarDatosFondo == true) {
                 $this->query('truncate fondos');
                 $this->query('truncate fondos_lineas_de_acciones');
-                echo "Borre todo lo que habia en fondo.<br />";
+                $consoleText .= "Borre todo lo que habia en fondo.<br />";
             }
 
+            $consoleText = "Chequeando que existan las lineas de accion.....<br />";
             //algunas verificaciones previas
-            if (!$this->__verificarQueLasLineasExistanEnFondo($aLineasDeAcciones, $temps[0]['ZFondoWork'])) {
-                $this->migrationStatus = 'fallo la verificacion de las lineas de accion. Hay alguna que no existe en la tabla de fondos';
+            $lineaChecked = $this->__verificarQueLasLineasExistanEnFondo($aLineasDeAcciones, $temps[0]['ZFondoWork']);
+            if (!empty($lineaChecked)) {
+                $this->migrationStatus = "fallo la verificacion de las lineas de accion. la línea $lineaChecked no existe en la tabla de fondos";
                 return -1;
             }
 
-           
+            $consoleText .= "limpiando temporales dejando solo lineas de accion con datos....<br />";
             /** @var array  */
             $lineasFiltradas = $this->__dameTemporalFiltrandoLineasVacias($aLineasDeAcciones, $temps);
-            
+
+            $consoleText .= "Convirtiendo lineas y temps en algo lindo para guardar.....<br />";
             $data = $this->__convertirLineasYTempsEnAlgoLindoParaGuardar($temps, $lineasFiltradas);
 
+            $consoleText .= "Guardando fondos.....<br />";
+            
+            foreach ($data as $f) {
+                $this->Fondo->create();
+                if ($this->Fondo->save($f['Fondo'])) { // guardar el fondo
+                    foreach ($f['Fondo']['FondosLineasDeAccion'] as $la) {
+                        // guardar cada linea de accion del fondo
+                        $this->Fondo->FondosLineasDeAccion->create();
+                        $la['fondo_id'] = $this->Fondo->id;
+                        if (!$this->Fondo->FondosLineasDeAccion->save($la)) {
+                            return -4;
+                        }
+                    }
+                } else { // no se pudo guardar el fondo
+                    return -5;
+                }
+            }
+
+           $consoleText .= "Finalizando.....<br />";
            $cosas = implode(',',$this->temporalesFiltradosX);
-           pr("se procesaron ".count($data)." fondos de ".count($temps)." $cosas del excel de MR.");
-           $this->migrationStatus = "se procesaron ".count($data)." fondos de ".count($temps)." $cosas del excel de MR.";
-           return 1;
+           $resumen = "se procesaron ".count($data)." fondos de ".count($temps)." $cosas del excel de MR.";
+           $consoleText .= $resumen;
+
+           //pr($consoleText);
+           
+           $this->migrationStatus = $consoleText;
+           return count($data);
             //debug($count . " y el size: ". count($temps));
         }
 
@@ -139,6 +171,7 @@ class ZFondoWork extends AppModel {
                     'anio'               => $vAux['anio'],
                     'trimestre'          => $vAux['trimestre'],
                     'total'              => $vAux['total'],
+                    'resolucion'         => "''",
                     'description'        => $vAux['observacion'],
                     );
                 
@@ -225,13 +258,20 @@ class ZFondoWork extends AppModel {
          * @param string $cosasMigrar
          *  esta variable me dice que elementos traer de la tabla de fondos temp
          *      las opciones son:
-         *      'i': me trae solo instituciones
-         *      'j': me trae solo jurisdiccionales
-         *      'ij': 'me trae instits y jurisdiccionales'
-         *      't': me trae los totales (esto no deberia usarlo nunca
+         *      'i': trae solo instituciones
+         *      'j': trae solo jurisdiccionales
+         *      'ij': trae instits y jurisdiccionales'
+         *      't': trae los totales (esto no deberia usarlo nunca
+         *      'c': trae solo los chekeados (tanto el cue como los totales)
+         *      'd': trae instituciones en duda cue_checked = 2
+         *           para las dudas de los totales solo trae diferencias pequeñas,
+         *           las diferencias grandes no las trae
+         *          (diff Grandes = >totales_checked = 3)
          *      false: me trae todo
+         *
+         * @param integer $registrosATraer es el LIMIT, para utilizar en desarrollo unicamente
          */
-        function __temporalesFiltradosX($cosasMigrar = 'ij', $registrosATraer = 0){
+        function temporalesFiltradosX($cosasMigrar = 'ij', $registrosATraer = 0){
             // me traigo el z_fondo_work con las condiciones:
             // utilizo la variable $cosasMigrar para filtrar
             // ya sea por Instituciones, Jurisdiccionales o Totales
@@ -242,48 +282,48 @@ class ZFondoWork extends AppModel {
             $flag1 = (strlen($cosasMigrar)==2)? true:false;
             // esta variable se usa para mostrar en pantalla que fue lo que se migro
             $this->temporalesFiltradosX = array();
+
+            $conditions = array(
+                'tipo' => array(),
+                'cue_checked' => array(),
+                'totales_checked' => array(),
+            );
+
             if ($cosasMigrar){
-                if (strpos($cosasMigrar,'i') === false) {
-                    if ($flag1){
-                        $arrayQueryATemps[0]["tipo <>"] = 'i';
-                    } else {
-                        $arrayQueryATemps[0]['OR']["tipo NOT"][] = 'i';
-                    }
-                } else {
-                    $arrayQueryATemps[1]['OR']['tipo'][] = 'i';
-                    $this->temporalesFiltradosX[] .= 'instits';
+                if (strpos($cosasMigrar,'i') !== false) {
+                    $conditions['tipo'][] = 'i';
                 }
-                if (strpos($cosasMigrar,'j') === false) {
-                    if ($flag1){
-                        $arrayQueryATemps[0]["tipo <>"] = 'j';
-                    } else {
-                        $arrayQueryATemps[0]['OR']["tipo NOT"][] = 'j';
-                    }
-                } else {
-                    $arrayQueryATemps[1]['OR']['tipo'][] = 'j';
-                    $this->temporalesFiltradosX[] .= 'jurisdiccionales';
+                if (strpos($cosasMigrar,'j') !== false) {
+                    $conditions['tipo'][] = 'j';
                 }
-                if (strpos($cosasMigrar,'t') === false) {
-                    if ($flag1){
-                        $arrayQueryATemps[0]["tipo <>"] = 't';
-                    } else {
-                        $arrayQueryATemps[0]['OR']["tipo NOT"][] = 't';
-                    }
-                } else {
-                    $arrayQueryATemps[1]['OR']['tipo'][] = 't';
-                    $this->temporalesFiltradosX[] .= 'totales';
+                if (strpos($cosasMigrar,'t') !== false) {
+                    $conditions['tipo'][] = 't';
+                }
+                if (strpos($cosasMigrar,'c') !== false) {
+                    $conditions['cue_checked'][] = 1;
+                    $conditions["totales_checked"][] = 1;
+                }
+                if (strpos($cosasMigrar,'d') !== false) {
+                    $conditions['cue_checked'][] = 2;
+                    $conditions["totales_checked"][] = 2;
                 }
             }
-            // cargo las condiciones de acuerdo a lo ingresado en $cosasMigrar
-            $condiciones = array();
 
-            if (count($arrayQueryATemps) > 0)
-                $condiciones = array($arrayQueryATemps);
+            if (count($conditions['tipo']) == 0) {
+                unset ($conditions['tipo']);
+            }
+            if (count($conditions['cue_checked']) == 0) {
+                unset ($conditions['cue_checked']);
+            }
+            if (count($conditions['totales_checked']) == 0) {
+                unset ($conditions['totales_checked']);
+            }
             
             // en $temps van todas las filas del excel filtradas segun las condiciones de arriba
-            return $this->find('all', array(
-                'conditions'=> $condiciones,
+            $temps = $this->find('all', array(
+                'conditions'=> $conditions,
                 'limit' => $registrosATraer));
+             return $temps;
         }
 
 
@@ -313,17 +353,19 @@ class ZFondoWork extends AppModel {
         /**
          * Me corrobora el numero pasado como parametro y la cantidad de registros que
          * hay en la tabla fondos
-         * Si coinciden me devuelve un true
+         * Si coinciden me devuelve 0. Caso contrario me devuelve la cantidad de registros que
+         *  estan en la tabla migrada
          *
          * @param integer $totalDelExcel
-         * @return boolean
+         * @return integer 0 on success, On failure: cant de registros en fondo
          */
         function checkCantRegistrosFondoConExcel($totalDelExcel){
             $fondo =& ClassRegistry::init('Fondo');
-            if ($fondo->find('count') == $totalDelExcel){
-                return true;
+            $cantMig = $fondo->find('count');
+            if ($cantMig == $totalDelExcel){
+                return 0;
             } else {
-                return false;
+                return $cantMig;
             } 
         }
 }
