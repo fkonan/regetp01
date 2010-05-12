@@ -76,7 +76,7 @@
 				<cake:nocache>	
 				<?  echo $this->renderElement('boxSaludo'); ?>
 				</cake:nocache>
-				
+				<?  echo $this->renderElement('boxDesarrollo'); ?>
 				<?  echo $this->renderElement('boxInstituciones'); ?>
 				<?  echo $this->renderElement('boxCuadros'); ?>
 				<?  echo $this->renderElement('boxInformacion'); ?>	
@@ -106,7 +106,6 @@
 				<? $session->flash('auth');?>
 				<?php echo $content_for_layout; ?>
 			</div>
-		
 		</div>
 		
 		<div id="footer">

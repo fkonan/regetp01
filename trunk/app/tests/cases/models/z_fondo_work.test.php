@@ -43,7 +43,7 @@ class ZFondoWorkTestCase extends CakeTestCase {
                 'trimestre' => 1,
                 'jurisdiccion_id' => 2,
                 'jurisdiccion_name' => 'CABA',
-                'memo' => 'Lorem ipsum dolor sit amet',
+                'memo' => 'Lorem ipsum dolor',
                 'cuecompleto' => '24567801',
                 'instit' => 'Lorem ipsum dolor sit amet',
                 'instit_name' => 'Lorem ipsum dolor sit amet',
@@ -80,20 +80,47 @@ class ZFondoWorkTestCase extends CakeTestCase {
 
 
     function testTemporalesFiltradosX() {
-        $t1 = $this->ZFondoWork->__temporalesFiltradosX('j');
+        $t1 = $this->ZFondoWork->temporalesFiltradosX('ijc');
+        $this->assertEqual(1, count($t1));
+
+        $t1 = $this->ZFondoWork->temporalesFiltradosX('j');
+        $this->assertEqual(1, count($t1));
+
+        $t1 = $this->ZFondoWork->temporalesFiltradosX('ij');
+        $this->assertEqual(3, count($t1));
+
+        $t1 = $this->ZFondoWork->temporalesFiltradosX('ijt');
+        $this->assertEqual(4, count($t1));
+
+        $t1 = $this->ZFondoWork->temporalesFiltradosX('tji');
+        $this->assertEqual(4, count($t1));
+
+        $t1 = $this->ZFondoWork->temporalesFiltradosX('i');
+        $this->assertEqual(2, count($t1));
+
+        $t1 = $this->ZFondoWork->temporalesFiltradosX('ic');
+        $this->assertEqual(1, count($t1));
+
+        $t1 = $this->ZFondoWork->temporalesFiltradosX('id');
         $this->assertEqual(0, count($t1));
 
-        $t1 = $this->ZFondoWork->__temporalesFiltradosX('ij');
-        $this->assertEqual(1, count($t1));
+        $t1 = $this->ZFondoWork->temporalesFiltradosX('idc');
+        $this->assertEqual(2, count($t1));
 
-        $t1 = $this->ZFondoWork->__temporalesFiltradosX('ijt');
-        $this->assertEqual(1, count($t1));
+        $t1 = $this->ZFondoWork->temporalesFiltradosX('ijtc');
+        $this->assertEqual(2, count($t1));
 
-        $t1 = $this->ZFondoWork->__temporalesFiltradosX('tji');
-        $this->assertEqual(1, count($t1));
+        $t1 = $this->ZFondoWork->temporalesFiltradosX('d');
+        $this->assertEqual(0, count($t1));
 
-        $t1 = $this->ZFondoWork->__temporalesFiltradosX('i');
-        $this->assertEqual(1, count($t1));
+        $t1 = $this->ZFondoWork->temporalesFiltradosX('c');
+        $this->assertEqual(2, count($t1));
+
+        $t1 = $this->ZFondoWork->temporalesFiltradosX('ijtd');
+        $this->assertEqual(0, count($t1));
+
+        $t1 = $this->ZFondoWork->temporalesFiltradosX('jc');
+        $this->assertEqual(0, count($t1));
     }
 
 
@@ -319,6 +346,7 @@ class ZFondoWorkTestCase extends CakeTestCase {
                 'anio' => 2009,
                 'trimestre' => 1,
                 'total' => 25,
+                'resolucion' => "''",
                 'description' => 'Lorem ipsum dolor sit amet',
         );
 
@@ -340,6 +368,7 @@ class ZFondoWorkTestCase extends CakeTestCase {
                 'anio' => 2009,
                 'trimestre' => 1,
                 'total' => 10,
+                'resolucion' => "''",
                 'description' => 'Lorem ipsum dolor sit amet',
         );
 
@@ -413,18 +442,25 @@ class ZFondoWorkTestCase extends CakeTestCase {
         );
         $data[2]['FondosLineasDeAccion'] = array(
                 array(
-                    'id' => 903,
-                    'lineas_de_accion_id' => 1,
-                    'monto' => 100.35,
-                    'created' => '2010-04-22 10:39:45',
-                    'modified' => '2010-04-22 10:39:45'
+                        'id' => 903,
+                        'lineas_de_accion_id' => 1,
+                        'monto' => 100.35,
+                        'created' => '2010-04-22 10:39:45',
+                        'modified' => '2010-04-22 10:39:45'
                 )
         );
+        
+        /*
+         * Es la suma de las lineas de accion que estan aca arriba
+         * @var float $sumaDeLasLineas
+         */
+        $sumaDeLasLineas = 136.05;
 
         /* @var $fondo Fondo */
         $fondo =& ClassRegistry::init('Fondo');
         /* @var $lineas LineasDeAccion */
         $lineas =& ClassRegistry::init('FondosLineasDeAccion');
+        $lineas->query("truncate fondos_lineas_de_acciones");
 
         // me guardo los valores totales para luego hacer el assert
         $cantFondos = $fondo->find('count');
@@ -436,20 +472,50 @@ class ZFondoWorkTestCase extends CakeTestCase {
         $this->assertEqual($cantLineas+4, $lineas->find('count'));
 
         // 137.05 es el total de todos los montos sumados de todas las lineas de accion de los fondos
-        $this->assertEqual(137.05, $lineas->find('sum'));
+        $this->assertEqual($sumaDeLasLineas, $lineas->find('sum'));
     }
 
 
-    function testCheckCantRegistrosFondoConExcel(){
+    function testCheckCantRegistrosFondoConExcel() {
         $dio1 = $this->ZFondoWork->checkCantRegistrosFondoConExcel(2);
         $dio2 = $this->ZFondoWork->checkCantRegistrosFondoConExcel(1);
         $dio3 = $this->ZFondoWork->checkCantRegistrosFondoConExcel(0);
-        $this->assertTrue ($dio1);
-        $this->assertFalse($dio2);
-        $this->assertFalse($dio3);
+        $this->assertEqual (0, $dio1);
+
+//$dio2 y $dio3 me deberian devolver 2, que es el numero correcto de registors que hay en fondo
+        $this->assertEqual(2, $dio2);
+        $this->assertEqual(2, $dio3);
     }
 
-    
+
+    function testMigrar() {
+        $this->ZFondoWork->Fondo =& ClassRegistry::init('Fondo');
+
+        // Se elimina lo que esta en el fixture
+        $this->ZFondoWork->Fondo->del(1);
+        $this->ZFondoWork->Fondo->del(2);
+
+        // asegurarse que no queda ningun registro
+        $this->assertEqual(0, $this->ZFondoWork->Fondo->find('count'));
+
+        // ciorro la migracion para instituciones y jurisdiccionales checkeados
+        $resu = $this->ZFondoWork->migrar('ijc',0,true);
+
+        $this->assertTrue($resu > 0); // esto asegura que no hubo error
+        $this->assertEqual(1, $resu); // hay 1 registro
+        $this->assertEqual(2, $this->ZFondoWork->Fondo->FondosLineasDeAccion->find('count'));
+        $this->assertEqual(1, $this->ZFondoWork->Fondo->find('count'));
+
+        
+        // corro la migracion para instituciones y jurisdiccionales sin importar si estan  o no checkeados
+        $resu = $this->ZFondoWork->migrar('ij',0,true);
+        
+        $this->assertEqual(3, $resu);
+        $this->assertEqual(3, $this->ZFondoWork->Fondo->find('count'));
+        $this->assertEqual(5, $this->ZFondoWork->Fondo->FondosLineasDeAccion->find('count'));
+    }
+
+
 
 }
 ?>

@@ -6,12 +6,12 @@ class LineasDeAccionFixture extends CakeTestFixture {
 	var $name = 'LineasDeAccion';
 	var $table = 'lineas_de_acciones';
 	var $fields = array(
-		'id' => array('type'=>'integer', 'null' => false, 'default' => NULL, 'length' => 11, 'key' => 'primary'),
+		'id' => array('type'=>'integer', 'null' => true, 'default' => NULL, 'length' => 11, 'key' => 'primary'),
 		'name' => array('type'=>'string', 'null' => false, 'length' => 20),
 		'description' => array('type'=>'text', 'null' => false, 'length' => 1073741824),
 		'created' => array('type'=>'datetime', 'null' => true),
 		'modified' => array('type'=>'datetime', 'null' => true),
-		//'indexes' => array('PRIMARY' => array('unique' => true, 'column' => 'id'))
+		'indexes' => array('PRIMARY' => array('unique' => true, 'column' => 'id'))
 	);
 	var $records = array(
             array(
