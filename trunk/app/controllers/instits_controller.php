@@ -666,50 +666,42 @@ class InstitsController extends AppController {
         /**
          *     SECTOR
          */
-        if(isset($this->data['Plan']['sector_id'])) {
-            if($this->data['Plan']['sector_id'] != '') {
+        if(!empty($this->data['Plan']['sector_id'])) {
                 $this->Instit->asociarPlan = true;
                 $this->paginate['conditions']['Plan.sector_id'] = $this->data['Plan']['sector_id'];
                 $this->Instit->Plan->Sector->recursive = -1;
                 $sector = $this->Instit->Plan->Sector->findById( $this->data['Plan']['sector_id']);
                 $array_condiciones['Sector'] = $sector['Sector']['name'];
                 $url_conditions['Plan.sector_id'] = $this->data['Plan']['sector_id'];
-            }
         }
-        if(isset($this->passedArgs['Plan.sector_id'])) {
-            if($this->passedArgs['Plan.sector_id'] != '') {
+        if(!empty($this->passedArgs['Plan.sector_id'])) {
                 $this->Instit->asociarPlan = true;
                 $this->paginate['conditions']['Plan.sector_id'] = $this->passedArgs['Plan.sector_id'];
                 $this->Instit->Plan->Sector->recursive = -1;
                 $sector = $this->Instit->Plan->Sector->findById($this->passedArgs['Plan.sector_id']);
                 $array_condiciones['Sector'] = $sector['Sector']['name'];
                 $url_conditions['Plan.sector_id'] = $this->passedArgs['Plan.sector_id'];
-            }
         }
 
 
          /**
          *     SUBSECTOR
          */
-        if(isset($this->data['Plan']['subsector_id'])) {
-            if($this->data['Plan']['subsector_id'] != '') {
+        if(!empty($this->data['Plan']['subsector_id'])) {
                 $this->Instit->asociarPlan = true;
                 $this->paginate['conditions']['Plan.subsector_id'] = $this->data['Plan']['subsector_id'];
                 $this->Instit->Plan->Subsector->recursive = -1;
                 $subsector = $this->Instit->Plan->Subsector->findById( $this->data['Plan']['subsector_id']);
                 $array_condiciones['Subsector'] = $subsector['Subsector']['name'];
                 $url_conditions['Plan.subsector_id'] = $this->data['Plan']['subsector_id'];
-            }
         }
-        if(isset($this->passedArgs['Plan.subsector_id'])) {
-            if($this->passedArgs['Plan.subsector_id'] != '') {
+        if(!empty($this->passedArgs['Plan.subsector_id'])) {
                 $this->Instit->asociarPlan = true;
                 $this->paginate['conditions']['Plan.subsector_id'] = $this->passedArgs['Plan.subsector_id'];
                 $this->Instit->Plan->Subsector->recursive = -1;
                 $sector = $this->Instit->Plan->Subsector->findById($this->passedArgs['Plan.subsector_id']);
                 $array_condiciones['Subsector'] = $sector['Subsector']['name'];
                 $url_conditions['Plan.subsector_id'] = $this->passedArgs['Plan.subsector_id'];
-            }
         }
 
 
