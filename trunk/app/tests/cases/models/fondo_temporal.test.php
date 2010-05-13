@@ -77,38 +77,59 @@ class FondotemporalTestCase extends CakeTestCase {
         $this->assertFalse($this->FondoTemporal->compara_numeroInstit('E.E.T. N° Marco Silvio Ghiglione - América','01'));
     }
 
-    function testCompara_tipoInstit() {
-        $this->assertTrue($this->FondoTemporal->compara_tipoInstit('EET Nº 15 Maipú', $this->tipoInstits));
-        $this->assertTrue($this->FondoTemporal->compara_tipoInstit('E.E.T. Nº 15 Maipú', $this->tipoInstits));
-        $this->assertTrue($this->FondoTemporal->compara_tipoInstit('eet Nº 15 Maipú', $this->tipoInstits));
-        $this->assertTrue($this->FondoTemporal->compara_tipoInstit('e.e.t. Nº 15 Maipú', $this->tipoInstits));
-        $this->assertTrue($this->FondoTemporal->compara_tipoInstit('escuela Nº 15 Maipú', $this->tipoInstits));
-        $this->assertTrue($this->FondoTemporal->compara_tipoInstit('centro fp Nº 15 Maipú', $this->tipoInstits));
-        $this->assertTrue($this->FondoTemporal->compara_tipoInstit('Instituto N° P-34 José Ingenieros Hucal', $this->tipoInstits));
-        $this->assertTrue($this->FondoTemporal->compara_tipoInstit('Misión Monotécnica y de Extensión Cultural N° 4 Robles', $this->tipoInstits));
+    function testCompara_tipoInstit() { 
+        $this->assertEqual($this->FondoTemporal->compara_tipoInstit('EET Nº 15 Maipú', $this->tipoInstits), 33);
+        $this->assertEqual($this->FondoTemporal->compara_tipoInstit('E.E.T. Nº 15 Maipú', $this->tipoInstits), 33);
+        $this->assertEqual($this->FondoTemporal->compara_tipoInstit('eet Nº 15 Maipú', $this->tipoInstits), 33);
+        $this->assertEqual($this->FondoTemporal->compara_tipoInstit('e.e.t. Nº 15 Maipú', $this->tipoInstits), 33);
+        $this->assertEqual($this->FondoTemporal->compara_tipoInstit('escuela Nº 15 Maipú', $this->tipoInstits), 8);
+        $this->assertEqual($this->FondoTemporal->compara_tipoInstit('centro fp Nº 15 Maipú', $this->tipoInstits), 18);
+        $this->assertEqual($this->FondoTemporal->compara_tipoInstit('Instituto N° P-34 José Ingenieros Hucal', $this->tipoInstits), 214);
+        $this->assertEqual($this->FondoTemporal->compara_tipoInstit('Misión Monotécnica y de Extensión Cultural N° 4 Robles', $this->tipoInstits), 215);
+        $this->assertEqual($this->FondoTemporal->compara_tipoInstit('Escuela de Educación Secundaria N° 1 General Enrique Mosconi La Matanza', $this->tipoInstits), 8); // ESCUELA
+        $this->assertEqual($this->FondoTemporal->compara_tipoInstit('Instituto de Educación Superior de Comercio N° 114 Tupac Amaru II General San Martín', $this->tipoInstits), 217);
 
-        $this->assertFalse($this->FondoTemporal->compara_tipoInstit('Esc Ed T Nº 15 Maipú', $this->tipoInstits));
+        $this->assertEqual($this->FondoTemporal->compara_tipoInstit('Esc Ed T Nº 15 Maipú', $this->tipoInstits), 0);
     }
 
     function testCompara_institNombres() {
-        $this->assertTrue($this->FondoTemporal->compara_institNombres('EET Nº 15 Maipú', 'EET Nº 15 Maipú', $this->tipoInstits));
+        $this->assertTrue($this->FondoTemporal->compara_institNombres('EET Nº 15 Maipú', 'EET Nº 015 Maipú', $this->tipoInstits));
         $this->assertTrue($this->FondoTemporal->compara_institNombres('EET Nº 15 Maipú', 'eet Nº 15 Meipú', $this->tipoInstits));
         $this->assertTrue($this->FondoTemporal->compara_institNombres('EET Nº 15 Maipú', 'iet Nº 15 Meipú', $this->tipoInstits));
         $this->assertTrue($this->FondoTemporal->compara_institNombres('C.E.N.T. Nº 2 Clotilde Mercedes G. De Fernández', 'CENT Nº 2 Clotilde Mercedes G. De Fernández', $this->tipoInstits));
         $this->assertTrue($this->FondoTemporal->compara_institNombres('C.E.N.T. Nº 2 Clotilde Mercedes G. De Fernández', 'CENT Nº 2 Clotilde g De Fernández', $this->tipoInstits));
-        $this->assertTrue($this->FondoTemporal->compara_institNombres('Esc Nº 15 Maipú', 'EET Nº 15 Maipú', $this->tipoInstits));
         $this->assertTrue($this->FondoTemporal->compara_institNombres('C.E.N.T. Nº 2 Clotilde Mercedes G. De Fernández - anexo', 'CENT Nº 2 Clotilde Mercedes G. De Fernández - anexo', $this->tipoInstits));
+        $this->assertTrue($this->FondoTemporal->compara_institNombres('Escuela Polimodal N° 6 José Hernández', 'JOSÉ HERNÁNDEZ', $this->tipoInstits));
+        $this->assertTrue($this->FondoTemporal->compara_institNombres('Escuela Polimodal N° 4 Ernesto Sábato', 'ERNESTO SÁBATO', $this->tipoInstits));
         //$this->assertTrue($this->FondoTemporal->compara_institNombres('Instituto N° P-34 José Ingenieros Hucal', 'JOSÉ INGENIEROS', $this->tipoInstits));
-
+        //Escuela Técnica Nº 34 Ing. Enrique Martín Hermitte
+        $this->assertFalse($this->FondoTemporal->compara_institNombres('Escuela de Educación Técnica Teolinda Romero de Sotomayor - 25 de Mayo', '25 DE MAYO', $this->tipoInstits));
+        $this->assertFalse($this->FondoTemporal->compara_institNombres('EEM N° 220 Ing. Agr. Mariano J. Frezzi Río Segundo', 'INGENIERO AGRÓNOMO J. FREZZI', $this->tipoInstits));
         $this->assertFalse($this->FondoTemporal->compara_institNombres('Misión Monotécnica y de Extensión Cultural N° 4 Robles', '', $this->tipoInstits));
         $this->assertFalse($this->FondoTemporal->compara_institNombres('Misión Monotécnica y de Extensión Cultural N° 2 - Santo Domingo', '', $this->tipoInstits));
         $this->assertFalse($this->FondoTemporal->compara_institNombres('EET Nº 15 Maipú', 'eet Nº 15 Meeipú', $this->tipoInstits));
+        $this->assertFalse($this->FondoTemporal->compara_institNombres('Esc Nº 15 Maipú', 'EET Nº 15 Maipú', $this->tipoInstits));
         $this->assertFalse($this->FondoTemporal->compara_institNombres('Esc Ed T Nº 15 Maipú', 'EET Nº 15 Maipú', $this->tipoInstits));
         $this->assertFalse($this->FondoTemporal->compara_institNombres('ET Nº 1 - Santa Lucía', 'ET Nº 1 - Anexo Santa Lucía', $this->tipoInstits));
         $this->assertFalse($this->FondoTemporal->compara_institNombres('C.E.N.T. Nº 2 Clotilde Mercedes G. De Fernández', 'CENT Nº 2 Clotilde Mercedes G. De Fernández anexo', $this->tipoInstits));
         $this->assertFalse($this->FondoTemporal->compara_institNombres('C.E.N.T. Nº 2 Clotilde Mercedes G. De Fernández - anexo', 'CENT Nº 2 Clotilde Mercedes G. De Fernández', $this->tipoInstits));
     }
 
+    function testCompara_Localidad() {
+        $fondos = $this->FondoTemporal->find("all");
+        $this->Instit->recursive = 0;
+        $instits = $this->Instit->find("all", array(
+                                        'cointain'=> array('Localidad(name)')
+        ));
+        
+        $this->assertTrue($this->FondoTemporal->compara_Localidad($fondos[0], $instits[0]));
+        $this->assertTrue($this->FondoTemporal->compara_Localidad($fondos[8], $instits[0]));
+        $this->assertTrue($this->FondoTemporal->compara_Localidad($fondos[5], $instits[2]));
+        $this->assertTrue($this->FondoTemporal->compara_Localidad($fondos[6], $instits[2]));
+
+        $this->assertFalse($this->FondoTemporal->compara_Localidad($fondos[7], $instits[0]));
+        $this->assertFalse($this->FondoTemporal->compara_Localidad($fondos[6], $instits[0]));
+    }
 
     function testValidarInstit() {
         $fondos = $this->FondoTemporal->find("all");
@@ -121,6 +142,7 @@ class FondotemporalTestCase extends CakeTestCase {
         $this->assertEqual($this->FondoTemporal->validarInstit($fondos[4], $instits, $this->tipoInstits), 0); // coincide nro pero no nombre
         $this->assertEqual($this->FondoTemporal->validarInstit($fondos[5], $instits, $this->tipoInstits), 1);
         //$this->assertEqual($this->FondoTemporal->validarInstit($fondos[6], $instits, $this->tipoInstits), 1); // no chequea el N° P-34
+        $this->assertEqual($this->FondoTemporal->validarInstit($fondos[7], $instits, $this->tipoInstits), 0);
     }
 }
 ?>

@@ -34,6 +34,11 @@ class FondoTemporal extends AppModel {
                     return $instit;
                 }
             }
+
+            /*$historiales = $this->HistorialCue->find('all', array(
+                                    'conditions'=>array('cue'=>$cue_incompleto)
+                            ));
+            $this->findAllById($historiales[0]['instit_id']);*/
         }
 
         function asignarInstitYEstadoATemp($instit_id, $estado, $temp_id, $obs=NULL) {
@@ -63,15 +68,10 @@ class FondoTemporal extends AppModel {
 	 * @param $text_temp
          * @param $text
 	 */
-        function compara_InstitNombres($text_temp, $text, $tipoInstits=NULL, $localidades=NULL)
+        function compara_InstitNombres($text_temp, $text, $tipoInstits=NULL)
         {
             $text_temp = $this->str_sin_tipoInstit($this->optimizar_cadena($text_temp), $tipoInstits);
             $text = $this->str_sin_tipoInstit($this->optimizar_cadena($text), $tipoInstits);
-
-            if ($localidades) {
-                $text_temp = $this->str_sin_localidades($text_temp, $localidades);
-                $text = $this->str_sin_localidades($text, $localidades);
-            }
 
             if ($text_temp == $text)
                 return true;
@@ -87,34 +87,40 @@ class FondoTemporal extends AppModel {
                 return false;
 
             // quitar N° , comparar cada posicion con todas las de array_words
-            $palabras_totales = count($array_words_temp);
+            $palabras_totales_temp = count($array_words_temp);
+            $palabras_totales = count($array_words);
             $peso = 0;
             for ($i=0; $i < count($array_words_temp); $i++) {
                 // que no sea nº
-                /*$pos_temp = strpos($array_words_temp[$i],'nº');
-                if ($pos_temp === false) {*/
+                if (strpos($array_words_temp[$i],'nº') === false) {
                     foreach ($array_words as $array_word) {
-                        if ($array_words_temp[$i] == $array_word) {
-                            $peso++;
-                        }
-                        elseif (strlen($array_word) >= 4 && strlen($array_words_temp[$i]) >= 4) {
-                            if (levenshtein($array_words_temp[$i], $array_word) <= 1) {
+                        // que no sea nº
+                        if (strpos($array_word,'nº') === false) {
+                            if ($array_words_temp[$i] == $array_word) {
                                 $peso++;
                             }
+                            elseif (strlen($array_word) >= 4 && strlen($array_words_temp[$i]) >= 4) {
+                                if (levenshtein($array_words_temp[$i], $array_word) <= 1) {
+                                    $peso++;
+                                }
+                            }
+                        }
+                        else {
+                            $palabras_totales--;
                         }
                     }
-               /* }
+                }
                 else {
-                    $palabras_totales--;
-                }*/
+                    $palabras_totales_temp--;
+                }
             }
 
-            if (count($array_words) > count($array_words_temp)) {
-                $limit = count($array_words);
+            if ($palabras_totales > $palabras_totales_temp) {
+                $limit = $palabras_totales;
             } else {
-                $limit = count($array_words_temp);
+                $limit = $palabras_totales_temp;
             }
-
+            
             // compara limit con el peso encontrado
             if ($peso > 0 && $peso > $limit/2) {
                 /*pr($array_words_temp);
@@ -138,8 +144,8 @@ class FondoTemporal extends AppModel {
 	 */
 	function optimizar_cadena($text) {
             // elimina acentos y especiales
-            $a = array('à', 'á', 'â', 'ã', 'ä', 'å', 'æ', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', 'ø', 'ù', 'ú', 'û', 'ü', 'ý', 'ÿ');
-            $b = array('a', 'a', 'a', 'a', 'a', 'a', 'ae', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'n', 'o', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'y', 'y');
+            $a = array('Á','É','Í','Ó','Ú','à', 'á', 'â', 'ã', 'ä', 'å', 'æ', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', 'ø', 'ù', 'ú', 'û', 'ü', 'ý', 'ÿ');
+            $b = array('a','e','i','o','u','a', 'a', 'a', 'a', 'a', 'a', 'ae', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'n', 'o', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'y', 'y');
             $text = str_replace($a, $b, $text);
 
             $text = strtolower($text);
@@ -148,8 +154,8 @@ class FondoTemporal extends AppModel {
             $text = str_replace("=","-",$text);
 
             // mas especiales
-            $a = array('agro.', 'e. ', 'et', 'e.t..'," -", '- ', '. ', '°', '_');
-            $b = array('agro ', 'e ', 'et ', 'et ', ' ', ' ', ' ', 'º', ' ');
+            $a = array('etagro','agro.', 'e. ', 'e.t..'," -", '- ', '. ', '°', '_');
+            $b = array('et agro','agro ', 'e ', 'et ', ' ', ' ', ' ', 'º', ' ');
             $text = str_replace($a, $b, $text);
 
             // elimina espacios en blanco en exceso (maximo deja uno)
@@ -216,7 +222,7 @@ class FondoTemporal extends AppModel {
                 // busca por nº
                 $pos = strpos($value1,'nº');
                 if ($pos !== false) {
-                    $numero = str_replace('nº','',$value1);
+                    $numero = trim(str_replace('nº','',$value1));
                     break;
                 }
                 else
@@ -224,7 +230,7 @@ class FondoTemporal extends AppModel {
                     // busca por A- (privados)
                     $pos = strpos($value1,'a-');
                     if ($pos !== false) {
-                        $numero = $value1;
+                        $numero = trim($value1);
                         break;
                     }
                 }
@@ -258,20 +264,48 @@ class FondoTemporal extends AppModel {
 	 */
         function compara_tipoInstit($instit, $tiposInstit)
         {
-            $instit = $this->optimizar_cadena($instit);
+            //$instit = $this->optimizar_cadena($instit);
             $instit = $this->completa_tipoInstit_abreviados($instit);
 
             foreach ($tiposInstit as $tipoInstit) {
-                $pos = strpos(strtoupper($instit), strtoupper($tipoInstit['Tipoinstit']['name']));
+                //$pos = strpos(strtoupper($instit), strtoupper($tipoInstit['Tipoinstit']['name']));
+                $pos = strpos($this->optimizar_cadena($instit), $this->optimizar_cadena($tipoInstit['Tipoinstit']['name']));
                 if ($pos !== false)
                 {
                     // contiene el TIPO
+                    return $tipoInstit['Tipoinstit']['id'];
+                }
+            }
+
+            return 0;
+
+        }
+
+        /**
+	 *
+	 * compara la localidad del fondo con la del instit, la cual puede venir
+         * en un campo o incluida en el nombre del fondo
+	 *
+	 * @param $instit
+	 */
+        function compara_Localidad($fondo, $instit) {
+            if ($instit['Localidad']['name'])
+                return false;
+
+            if (strlen($fondo['FondoTemporal']['localidad'])) {
+                if ($this->optimizar_cadena($instit['Localidad']['name']) == $this->optimizar_cadena($fondo['FondoTemporal']['localidad'])) {
+                    return true;
+                }
+            }
+            else {
+                if ((strlen($fondo['FondoTemporal']['instit_name']) && strpos($this->optimizar_cadena($fondo['FondoTemporal']['instit_name']), $this->optimizar_cadena($instit['Localidad']['name'])) !== false) ||
+                    (strlen($fondo['FondoTemporal']['instit']) && strpos($this->optimizar_cadena($fondo['FondoTemporal']['instit']), $this->optimizar_cadena($instit['Localidad']['name'])) !== false))
+                {
                     return true;
                 }
             }
 
             return false;
-
         }
 
 
@@ -283,6 +317,7 @@ class FondoTemporal extends AppModel {
 	 */
         function completa_tipoInstit_abreviados($instit)
         {
+            $instit = $this->optimizar_cadena($instit);
             $instit = str_replace('.','',strtolower($instit));
 
             $a = array('eet',
@@ -298,6 +333,7 @@ class FondoTemporal extends AppModel {
                        'inspt',
                        'centro ',
                        'cent ',
+                       'centro educativo de nivel terciario',
                        'cfl',
                        'cfp',
                        'centro fp',
@@ -309,7 +345,9 @@ class FondoTemporal extends AppModel {
                        'centro de educacion media',
                        'centro de educacion tecnica',
                        'centro de educacion especial',
+                       'eeat',
                        'eea',
+                       'escuela de educacion agraria',
                        'cfr',
                        'eee',
                        'efa',
@@ -321,9 +359,11 @@ class FondoTemporal extends AppModel {
                        'ies',
                        'iea',
                        'eem',
+                       'escuela de educacion media',
                        'isfdyt',
                        'isfd y t',
                        'instituto superior de formacion docente continua y tecnica',
+                       'instituto superior de formacion docente y tecnica',
                        'mm',
                        'mision monotecnica y de extension cultural',
                        'mision monotecnica',
@@ -337,8 +377,8 @@ class FondoTemporal extends AppModel {
                        'centro de orientacion profesional y capacitacion obrera',
                        'uep',
                        'iset',
-                       'eeat',
                        'cecla',
+                       'centro de capacitacion laboral',
                        'epet',
                        'epnm',
                        'etp',
@@ -366,6 +406,7 @@ class FondoTemporal extends AppModel {
                        "INSTITUTO NACIONAL SUPERIOR DEL PROFESORADO TÉCNICO (I.N.S.P.T.)",
                        "centro ",
                        "CENTRO EDUCATIVO DE NIVEL TERCIARIO (C.E.N.T.) ",
+                       "CENTRO EDUCATIVO DE NIVEL TERCIARIO",
                        "CENTRO DE FORMACIÓN LABORAL",
                        "CENTRO DE FORMACIÓN PROFESIONAL (C.F.P.)",
                        "CENTRO DE FORMACIÓN PROFESIONAL (C.F.P.)",
@@ -377,6 +418,8 @@ class FondoTemporal extends AppModel {
                        "CENTRO DE EDUCACIÓN MEDIA",
                        "CENTRO DE EDUCACIÓN TÉCNICA",
                        "CENTRO DE EDUCACIÓN ESPECIAL",
+                       "ESCUELA DE EDUCACIÓN AGROTÉCNICA (E.E.A.T.)",
+                       "ESCUELA DE EDUCACIÓN AGRARIA (E.E.A.)",
                        "ESCUELA DE EDUCACIÓN AGRARIA (E.E.A.)",
                        "CENTRO DE FORMACIÓN RURAL (C.F.R.)",
                        "ESCUELA DE EDUCACIÓN ESPECIAL (E.E.E.)",
@@ -389,6 +432,8 @@ class FondoTemporal extends AppModel {
                        "INSTITUTO DE EDUCACIÓN SUPERIOR (I.E.S.)",
                        "INSTITUTO DE ENSEÑANZA AGROPECUARIA (I.E.A.)",
                        "ESCUELA DE EDUCACIÓN MEDIA (E.E.M.)",
+                       "ESCUELA DE EDUCACIÓN MEDIA (E.E.M.)",
+                       "INSTITUTO DE EDUCACIÓN SUPERIOR DE FORMACIÓN DOCENTE Y TÉCNICA (I.S.F.D.yT.)",
                        "INSTITUTO DE EDUCACIÓN SUPERIOR DE FORMACIÓN DOCENTE Y TÉCNICA (I.S.F.D.yT.)",
                        "INSTITUTO DE EDUCACIÓN SUPERIOR DE FORMACIÓN DOCENTE Y TÉCNICA (I.S.F.D.yT.)",
                        "INSTITUTO DE EDUCACIÓN SUPERIOR DE FORMACIÓN DOCENTE Y TÉCNICA (I.S.F.D.yT.)",
@@ -405,7 +450,7 @@ class FondoTemporal extends AppModel {
                        "CENTRO DE ORIENTACIÓN PROFESIONAL Y CAPACITACIÓN OBRERA (C.O.P.Y.C.O.)",
                        "UNIDAD EDUCATIVA PRIVADA (U.E.P.)",
                        "INSTITUTO DE EDUCACIÓN SUPERIOR DE EDUCACIÓN TÉCNICA (I.S.E.T.)",
-                       "ESCUELA DE EDUCACIÓN AGROTÉCNICA (E.E.A.T.)",
+                       "CENTRO DE CAPACITACIÓN LABORAL (CE.C.LA.)",
                        "CENTRO DE CAPACITACIÓN LABORAL (CE.C.LA.)",
                        "ESCUELA PROVINCIAL DE EDUCACIÓN TÉCNICA (E.P.E.T.)",
                        "ESCUELA PROVINCIAL DE NIVEL MEDIO (E.P.N.M.)",
@@ -507,11 +552,7 @@ class FondoTemporal extends AppModel {
 
         function str_sin_localidades($text, $localidades)
         {
-            /*foreach ($localidades as $localidad) {
-                $b[] = $this->optimizar_cadena($localidad['Localidad']['name']);
-            }
-
-            return str_replace($b, '', $text);*/
+            return str_replace($localidades, '', $text);
         }
 
         function setObservacion(&$fondo, $comment) {
@@ -538,7 +579,8 @@ class FondoTemporal extends AppModel {
 
             if ($fondo)
             {
-                $cue_checked = $instit_checked = $en_duda = false;
+                $cue_checked = $instit_checked = false;
+                $en_duda_instit_id = $tipoInstitMatchedId = '';
 
                 // 1. Acota proceso a Jurisdiccion con jurisdiccion_id
                 if ($jurisdiccion_id != $fondo['FondoTemporal']['jurisdiccion_id'])
@@ -585,12 +627,13 @@ class FondoTemporal extends AppModel {
                         // chequea el numero y tipo de instit
                         if ($this->compara_numeroInstit($text, $instit['Instit']['nroinstit']))
                         {
-                            if ($this->compara_tipoInstit($text, $tipoInstits))
+                            $tipoInstitMatchedId = $this->compara_tipoInstit($text, $tipoInstits);
+                            if ($tipoInstitMatchedId == @$instit['Instit']['tipoinstit_id'])
                             {
                                 $instit_checked = true;
                                 return 1;
                             }
-                            elseif ($this->compara_institNombres($text, $instit['Instit']['nombre_completo'], $tipoInstits, $localidades)) {
+                            elseif ($this->compara_institNombres($text, $instit['Instit']['nombre'], $tipoInstits, $localidades)) {
                                 // tienen el mismo nombre
                                 $instit_checked = true;
                                 return 1;
@@ -605,8 +648,7 @@ class FondoTemporal extends AppModel {
 
                         if (!$instit_checked)
                         {
-                            // edita cue_checked en 2 (duda)
-                            $en_duda = true;
+                            $en_duda_instit_id = $instit['Instit']['id'];
                         }
 
                         $cue_checked = true;
@@ -635,7 +677,7 @@ class FondoTemporal extends AppModel {
                     }
 
                     if (!$instit_checked) {
-                        if ($en_duda) {
+                        if ($en_duda_instit_id) {
                             // edita cue_checked en 2 (duda)
                             return 2;
                         }

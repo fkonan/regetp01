@@ -14,9 +14,9 @@ class DepartamentoFixture extends CakeTestFixture {
 	var $records = array(
 		array(
 			'id' => 1,
-			'jurisdiccion_id' => 1,
-			'name' => 'Lorem ipsum dolor sit amet'
-		),
+			'jurisdiccion_id' => 2,
+			'name' => 'BUENOS AIRES'
+		)
 	);
 }
 ?>

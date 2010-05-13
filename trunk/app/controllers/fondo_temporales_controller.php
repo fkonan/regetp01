@@ -384,7 +384,7 @@ class FondoTemporalesController extends AppController {
             $fondos = $this->FondoTemporal->find("all",
                             array('conditions'=> array('tipo'=>'i', 'cue_checked'=>0),
                                   'order'=> array('FondoTemporal.jurisdiccion_id')));
-                                  //'limit'=>'500'));
+                                 // 'limit'=>'50'));
 
             $this->Instits = ClassRegistry::init("Instit");
             $this->Instits->recursive = 0;
@@ -394,10 +394,10 @@ class FondoTemporalesController extends AppController {
             $jurisdiccion_id = '';
 
             // todas las localidades (solo una vez)
-            $localidades = $this->Instits->Departamento->Localidad->find('all', array(
+            /*$localidades = $this->Instits->Departamento->Localidad->find('all', array(
                                 'order'=> array('LENGTH(Localidad.name)'=>'desc')
                             ));
-            
+            */
             // auditoria
             $instits_checked = $instits_en_duda = $instits_no_checked = 0;
 
@@ -406,7 +406,8 @@ class FondoTemporalesController extends AppController {
                 foreach ($fondos as $fondo)
                 {
                     $cue_checked = $instit_checked = false;
-                    $en_duda_instit_id = '';
+                    $en_duda_instit_id = $tipoInstitMatchedId = '';
+                    $peso = 0;
 
                     // 1. Acota proceso a Jurisdiccion con jurisdiccion_id
                     if ($jurisdiccion_id != $fondo['FondoTemporal']['jurisdiccion_id'])
@@ -418,15 +419,19 @@ class FondoTemporalesController extends AppController {
                         // acota a instits de esta jurisdiccion
                         $this->instits = $this->Instits->find("all", array(
                         'conditions'=> array('Instit.jurisdiccion_id' => $jurisdiccion_id),
-                        'fields'=> array('id','cue','nombre','nroinstit','anexo')));
+                        'fields'=> array('id','cue','nombre','tipoinstit_id','nroinstit','anexo'),
+                        'contain'=> array('Localidad(name)')));
                         
                         // trae todos los tipoInstits de esta jurisdiccion ordenados por cantidad de
                         $this->tipoInstits = $this->Instits->Tipoinstit->find("all", array(
                                 'conditions'=> array('jurisdiccion_id' => $jurisdiccion_id),
                                 'order'=> array('LENGTH(Tipoinstit.name)'=>'desc')
                             ));
-
-                        //$localidades = $this->Instits->Departamento->Localidad->con_depto_y_jurisdiccion('all',$jurisdiccion_id);
+                        // las localidades de esta jurisdiccion
+                        $array_localidades = $this->Instits->Departamento->Localidad->con_depto_y_jurisdiccion('all',$jurisdiccion_id, "length");
+                        foreach ($array_localidades as $localidad) {
+                            $localidades[] = $this->FondoTemporal->optimizar_cadena($localidad['Localidad']['name']);
+                        }
                     }
 
                     // instit_name tiene prioridad, viene mas completo
@@ -440,6 +445,8 @@ class FondoTemporalesController extends AppController {
                         $text = '';
                     }
 
+                    $text = $this->FondoTemporal->str_sin_localidades($text, $localidades);
+
                     // 2. Compara CUEs
                     if (strlen($fondo['FondoTemporal']['cuecompleto']))
                     {
@@ -449,42 +456,51 @@ class FondoTemporalesController extends AppController {
                         if ($instit)
                         {
                             // el CUE fue encontrado
-                            // chequea el numero y tipo de instit
+                            $this->FondoTemporal->setObservacion($fondo, "El CUE fue encontrado en el registro.");
+
+                            // chequea el numero, tipo de instit y nombre (en caso necesario)
                             if ($this->FondoTemporal->compara_numeroInstit($text, $instit['Instit']['nroinstit']))
                             {
-                                if ($this->FondoTemporal->compara_tipoInstit($text, $this->tipoInstits))
-                                {
-                                    $instit_checked = true;
-                                    $instits_checked++;
-
-                                    // edita cue_checked en 1 y asigna instit_id
-                                    $this->FondoTemporal->setObservacion($fondo, "Instit checked. Coincidieron CUE, número y tipo.");
-                                    $this->FondoTemporal->asignarInstitYEstadoATemp($instit['Instit']['id'], 1, $fondo['FondoTemporal']['id'], $fondo['FondoTemporal']['observacion']);
-                                }
-                                elseif ($this->FondoTemporal->compara_institNombres($text, $instit['Instit']['nombre'], $this->tipoInstits, $localidades)) {
-                                    // tienen el mismo nombre
-                                    $instit_checked = true;
-
-                                    // edita cue_checked en 1 y asigna instit_id
-                                    $this->FondoTemporal->setObservacion($fondo, "Instit checked. Coincidieron CUE, número y nombre, NO tipo.");
-                                    $this->FondoTemporal->asignarInstitYEstadoATemp($instit['Instit']['id'], 1, $fondo['FondoTemporal']['id'], $fondo['FondoTemporal']['observacion']);
-
-                                    $instits_checked++;
-                                }
-                                else {
-                                    $this->FondoTemporal->setObservacion($fondo, "La institucion se encuentra en duda. Coincide CUE, no coincidieron tipo y nombre.");
-                                }
+                                $this->FondoTemporal->setObservacion($fondo, "El Nro coincide.");
+                                $peso++;
                             }
                             else {
-                                $this->FondoTemporal->setObservacion($fondo, "La institucion se encuentra en duda. Coincide CUE, no coincide número.");
+                                $this->FondoTemporal->setObservacion($fondo, "El Nro NO coincide.");
                             }
-                            
-                            if (!$instit_checked)
+
+                            $tipoInstitMatchedId = $this->FondoTemporal->compara_tipoInstit($text, $this->tipoInstits);
+                            if (@$instit['Instit']['tipoinstit_id'] && $tipoInstitMatchedId == $instit['Instit']['tipoinstit_id'])
                             {
+                                $this->FondoTemporal->setObservacion($fondo, "El Tipo coincide.");
+                                $peso++;
+                            }
+                            else {
+                                $this->FondoTemporal->setObservacion($fondo, "El Tipo NO coincide.");
+                            }
+
+                            if ($peso < 2) {
+                                if ($this->FondoTemporal->compara_institNombres($text, $instit['Instit']['nombre'], $this->tipoInstits)) {
+                                    $this->FondoTemporal->setObservacion($fondo, "El Nombre coincide.");
+                                    $peso++;
+                                }
+                                else {
+                                    $this->FondoTemporal->setObservacion($fondo, "El Nombre NO coincide.");
+                                }
+                            }
+
+                            if ($peso >= 2) {
+                                // edita cue_checked en 1 y asigna instit_id
+                                $this->FondoTemporal->setObservacion($fondo, "Instit en CHECKED!");
+                                $this->FondoTemporal->asignarInstitYEstadoATemp($instit['Instit']['id'], 1, $fondo['FondoTemporal']['id'], $fondo['FondoTemporal']['observacion']);
+                                $instit_checked = true;
+                                $instits_checked++;
+                            }
+                            else {
                                 // edita cue_checked en 2 (duda)
-                                /*$this->FondoTemporal->asignarInstitYEstadoATemp($instit['Instit']['id'], 2, $fondo['FondoTemporal']['id'], $fondo['FondoTemporal']['observacion']);
-                                $instits_en_duda++;*/
-                                $en_duda_instit_id = $instit['Instit']['id'];
+                                $this->FondoTemporal->setObservacion($fondo, "Instit en DUDA.");
+                                $this->FondoTemporal->asignarInstitYEstadoATemp($instit['Instit']['id'], 2, $fondo['FondoTemporal']['id'], $fondo['FondoTemporal']['observacion']);
+                                $instits_en_duda++;
+                                //$en_duda_instit_id = $instit['Instit']['id'];
                             }
 
                             $cue_checked = true;
@@ -494,7 +510,8 @@ class FondoTemporalesController extends AppController {
                         }
                     }
 
-                    if (!$instit_checked)
+                    //if (!$instit_checked)
+                    if (!$cue_checked)
                     {
                         $instit_checked = false;
                         if (strlen($text))
@@ -503,20 +520,22 @@ class FondoTemporalesController extends AppController {
                             if (count($this->instits)) {
                                 foreach ($this->instits as $instit)
                                 {
-                                    // chequea el numero de instit
-                                    if ($this->FondoTemporal->compara_numeroInstit($text, $instit['Instit']['nroinstit']))
+                                    // chequea Localidad + Nro + Tipo
+                                    if ($this->FondoTemporal->compara_Localidad($fondo, $instit))
                                     {
-                                        if ($this->FondoTemporal->compara_institNombres($text, $instit['Instit']['nombre'], $this->tipoInstits, $localidades)) {
-                                            // tienen el mismo nombre
-                                            $instit_checked = true;
-                                            
-                                            $instits_checked++;
-                                            
-                                            // edita cue_checked en 1 y asigna instit_id
-                                            $this->FondoTemporal->setObservacion($fondo, "Instit checked. Coinciden número y nombre.");
-                                            $this->FondoTemporal->asignarInstitYEstadoATemp($instit['Instit']['id'], 1, $fondo['FondoTemporal']['id'], $fondo['FondoTemporal']['observacion']);
-
-                                            break;
+                                        if ($this->FondoTemporal->compara_numeroInstit($text, $instit['Instit']['nroinstit']))
+                                        {
+                                            $tipoInstitMatchedId = $this->FondoTemporal->compara_tipoInstit($text, $this->tipoInstits);
+                                            if (@$instit['Instit']['tipoinstit_id'] && $tipoInstitMatchedId == $instit['Instit']['tipoinstit_id'])
+                                            {
+                                                // coincide Localidad + Nro + Tipo:
+                                                // edita cue_checked en 1 y asigna instit_id
+                                                $this->FondoTemporal->setObservacion($fondo, "Coincidieron Localidad, Nro y Tipo. Instit en CHECKED!");
+                                                $this->FondoTemporal->asignarInstitYEstadoATemp($instit['Instit']['id'], 1, $fondo['FondoTemporal']['id'], $fondo['FondoTemporal']['observacion']);
+                                                $instit_checked = true;
+                                                $instits_checked++;
+                                                break;
+                                            }
                                         }
                                     }
                                 }
@@ -524,17 +543,10 @@ class FondoTemporalesController extends AppController {
                         }
 
                         if (!$instit_checked) {
-                            if ($en_duda_instit_id) {
-                                // edita cue_checked en 2 (duda)
-                                $this->FondoTemporal->asignarInstitYEstadoATemp($en_duda_instit_id, 2, $fondo['FondoTemporal']['id'], $fondo['FondoTemporal']['observacion']);
-                                $instits_en_duda++;
-                            }
-                            else {
-                                // edita cue_checked en 0
-                                $this->FondoTemporal->setObservacion($fondo, "La institucion no pudo ser chequeada.");
-                                $this->FondoTemporal->asignarInstitYEstadoATemp(0, 0, $fondo['FondoTemporal']['id'], $fondo['FondoTemporal']['observacion']);
-                                $instits_no_checked++;
-                            }
+                            // edita cue_checked en 0
+                            $this->FondoTemporal->setObservacion($fondo, "La institucion no pudo ser chequeada.");
+                            $this->FondoTemporal->asignarInstitYEstadoATemp(0, 0, $fondo['FondoTemporal']['id'], $fondo['FondoTemporal']['observacion']);
+                            $instits_no_checked++;
                         }
                     }
                 }
