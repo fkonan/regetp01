@@ -44,6 +44,21 @@ class TipoinstitFixture extends CakeTestFixture {
 			'id' => 215,
                         'jurisdiccion_id' => 2,
                         'name' => 'MISIÓN MONOTÉCNICA Y DE EXTENSION CULTURAL'
+		),
+                array(
+			'id' => 216,
+                        'jurisdiccion_id' => 2,
+                        'name' => 'ESCUELA DE EDUCACIÓN MEDIA (E.E.M.)'
+		),
+                array(
+			'id' => 217,
+                        'jurisdiccion_id' => 2,
+                        'name' => 'INSTITUTO DE EDUCACIÓN SUPERIOR DE COMERCIO'
+		),
+                array(
+			'id' => 218,
+                        'jurisdiccion_id' => 2,
+                        'name' => 'ESCUELA POLIMODAL'
 		)
 	);
 }

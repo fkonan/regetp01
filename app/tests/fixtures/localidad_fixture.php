@@ -15,8 +15,13 @@ class LocalidadFixture extends CakeTestFixture {
 		array(
 			'id' => 1,
 			'departamento_id' => 1,
-			'name' => 'Lorem ipsum dolor sit amet'
+			'name' => 'TANDIL'
 		),
+                array(
+                    'id' => 2,
+                    'departamento_id' => 1,
+                    'name' => 'DISTRITO ESCOLAR Nº 4'
+                )
 	);
 }
 ?>

@@ -37,13 +37,19 @@ class Localidad extends AppModel {
 	 * y me desbindea las instituciones para hacer mucho mas performante la query
 	 * @return array [localidad, departamento, jurisdiccion]
 	 */
-	function con_depto_y_jurisdiccion($tipo = 'all', $jurisdiccion_id = 0)
+	function con_depto_y_jurisdiccion($tipo = 'all', $jurisdiccion_id = 0, $order="asc")
 	{
-		 $localidades = Cache::read("localidades_con_depto_y_juirisdicion_id_$jurisdiccion_id-tipo_$tipo");
+		 /*$localidades = Cache::read("localidades_con_depto_y_juirisdicion_id_$jurisdiccion_id-tipo_$tipo");
 		 if ($localidades !== false) {
 			 return $localidades;
 		 }
-		
+		*/
+            if ($order == "length") {
+                $order = "LENGTH(Localidad.name) DESC";
+            }
+            else {
+                $order = "Localidad.name ASC";
+            }
 		//inicializacion de la variable del return
 		$localidades = array(); 
 		
@@ -61,10 +67,10 @@ class Localidad extends AppModel {
          if ($jurisdiccion_id != 0){
          	$localidades = $this->find('all',array(	
          							'conditions' => array('Jurisdiccion.id' => $jurisdiccion_id),
-         							'order'=>'Localidad.name ASC'
+         							'order'=>$order
          	));
          }else{
-         	$localidades = $this->find('all', array('order'=>'Localidad.name ASC'));   											 
+         	$localidades = $this->find('all', array('order'=>$order));
          }
          
          
@@ -103,7 +109,7 @@ class Localidad extends AppModel {
          }
          
          
-         Cache::write("localidades_con_depto_y_juirisdicion_id_$jurisdiccion_id-tipo_$tipo", $localidades);
+         //Cache::write("localidades_con_depto_y_juirisdicion_id_$jurisdiccion_id-tipo_$tipo", $localidades);
          return $localidades;
          
 	}
