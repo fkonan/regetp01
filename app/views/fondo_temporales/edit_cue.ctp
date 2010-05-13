@@ -74,6 +74,8 @@ echo $html->css('jquery.autocomplete.css');
                 echo $form->input('instit');
                 echo $form->input('instit_name');
                 echo $form->input('jurisdiccion_name');
+                echo $form->input('localidad');
+                echo $form->input('departamento');
 
                 echo $form->input('observacion');
 
@@ -88,7 +90,7 @@ echo $html->css('jquery.autocomplete.css');
 
 	<?php
                 echo $form->input('posible_instit', array('label'=>'Posible nombre o CUE de la institucion','value'=>($this->data['Instit']['cue'] * 100 + $this->data['Instit']['anexo'])));
-                //echo $form->input('jurisdiccion_id');
+                //echo $form->input('posible_jurisdiccion_id');
 	?>
 	</fieldset>
         <?php echo $form->end("Imputar Institucion");?>

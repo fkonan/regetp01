@@ -215,9 +215,9 @@ class FondoTemporalesController extends AppController {
                 }
 
 		$allinstits = $this->FondoTemporal->Instit->find('list');
-		$jurisdicciones = $this->FondoTemporal->Jurisdiccion->find('list');
+		$posible_jurisdicciones = $this->FondoTemporal->Jurisdiccion->find('list');
 
-                $this->set(compact('allinstits','jurisdicciones'));
+                $this->set(compact('allinstits','posible_jurisdicciones'));
 	}
 
         function search_instits($q = null){
