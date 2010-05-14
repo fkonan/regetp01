@@ -59,6 +59,11 @@ class TipoinstitFixture extends CakeTestFixture {
 			'id' => 218,
                         'jurisdiccion_id' => 2,
                         'name' => 'ESCUELA POLIMODAL'
+		),
+                array(
+			'id' => 219,
+                        'jurisdiccion_id' => 2,
+                        'name' => 'INSTITUTO POLITÉCNICO'
 		)
 	);
 }

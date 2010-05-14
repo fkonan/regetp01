@@ -98,10 +98,12 @@ class FondoTemporal extends AppModel {
                         if (strpos($array_word,'nº') === false) {
                             if ($array_words_temp[$i] == $array_word) {
                                 $peso++;
+                                break;
                             }
                             elseif (strlen($array_word) >= 4 && strlen($array_words_temp[$i]) >= 4) {
                                 if (levenshtein($array_words_temp[$i], $array_word) <= 1) {
                                     $peso++;
+                                    break;
                                 }
                             }
                         }
@@ -266,16 +268,29 @@ class FondoTemporal extends AppModel {
         {
             //$instit = $this->optimizar_cadena($instit);
             $instit = $this->completa_tipoInstit_abreviados($instit);
+            $instit_optimizado = $this->optimizar_cadena($instit);
 
             foreach ($tiposInstit as $tipoInstit) {
-                //$pos = strpos(strtoupper($instit), strtoupper($tipoInstit['Tipoinstit']['name']));
-                $pos = strpos($this->optimizar_cadena($instit), $this->optimizar_cadena($tipoInstit['Tipoinstit']['name']));
-                if ($pos !== false)
+                $tipo_sin_abrev = '';
+                $pos1 = $pos2 = false;
+                $str_optimizado = $this->optimizar_cadena($tipoInstit['Tipoinstit']['name']);
+                
+                // si no tiene abreviatura
+                $pos = strpos($str_optimizado, "(");
+                if ($pos !== false) {
+                    $tipo_sin_abrev = trim(substr($str_optimizado, 0, $pos-1));
+                    $pos2 = strpos($instit_optimizado, $tipo_sin_abrev);
+                }
+                $pos1 = strpos($instit_optimizado, $str_optimizado);
+                
+                if ($pos1 !== false || $pos2 !== false)
                 {
                     // contiene el TIPO
                     return $tipoInstit['Tipoinstit']['id'];
                 }
             }
+
+
 
             return 0;
 
@@ -289,7 +304,7 @@ class FondoTemporal extends AppModel {
 	 * @param $instit
 	 */
         function compara_Localidad($fondo, $instit) {
-            if ($instit['Localidad']['name'])
+            if (!strlen($instit['Localidad']['name']))
                 return false;
 
             if (strlen($fondo['FondoTemporal']['localidad'])) {
@@ -331,7 +346,6 @@ class FondoTemporal extends AppModel {
                        'escuela de educacion agropecuaria',
                        'et ',
                        'inspt',
-                       'centro ',
                        'cent ',
                        'centro educativo de nivel terciario',
                        'cfl',
@@ -382,7 +396,7 @@ class FondoTemporal extends AppModel {
                        'epet',
                        'epnm',
                        'etp',
-                       'itec',
+                       'itec ',
                        'cct',
                        'cemoe',
                        'epea',
@@ -390,7 +404,8 @@ class FondoTemporal extends AppModel {
                        'ufidet',
                        'eetpi',
                        'eetpa',
-                       'ispi'
+                       'ispi',
+                       'centro ',
                 );
 
             $b = array("ESCUELA DE EDUCACIÓN TÉCNICA (E.E.T.)",
@@ -404,9 +419,8 @@ class FondoTemporal extends AppModel {
                        "ESCUELA DE EDUCACIÓN AGROPECUARIA",
                        "ESCUELA DE EDUCACIÓN TÉCNICA (E.E.T.) ",
                        "INSTITUTO NACIONAL SUPERIOR DEL PROFESORADO TÉCNICO (I.N.S.P.T.)",
-                       "centro ",
                        "CENTRO EDUCATIVO DE NIVEL TERCIARIO (C.E.N.T.) ",
-                       "CENTRO EDUCATIVO DE NIVEL TERCIARIO",
+                       "CENTRO EDUCATIVO DE NIVEL TERCIARIO (C.E.N.T.) ",
                        "CENTRO DE FORMACIÓN LABORAL",
                        "CENTRO DE FORMACIÓN PROFESIONAL (C.F.P.)",
                        "CENTRO DE FORMACIÓN PROFESIONAL (C.F.P.)",
@@ -455,7 +469,7 @@ class FondoTemporal extends AppModel {
                        "ESCUELA PROVINCIAL DE EDUCACIÓN TÉCNICA (E.P.E.T.)",
                        "ESCUELA PROVINCIAL DE NIVEL MEDIO (E.P.N.M.)",
                        "ESCUELA TÉCNICA PROVINCIAL (E.T.P.)",
-                       "INSTITUTO TECNOLÓGICO (I.TEC.)",
+                       "INSTITUTO TECNOLÓGICO (I.TEC.) ",
                        "CENTRO DE CAPACITACIÓN PARA EL TRABAJO (C.C.T.)",
                        "CENTRO DE MANO DE OBRA ESPECIALIZADA (CE.M.O.E.)",
                        "ESCUELA PROVINCIAL DE EDUCACIÓN AGROPECUARIA (E.P.E.A.)",
@@ -463,7 +477,8 @@ class FondoTemporal extends AppModel {
                        "UNIDAD DE FORMACIÓN, INVESTIGACIÓN Y DESARROLLO TECNOLÓGICO (U.F.I.D.E.T.)",
                        "ESCUELA DE ENSEÑANZA TÉCNICA PARTICULAR INCORPORADA (E.E.T.P.I.)",
                        "ESCUELA DE EDUCACIÓN TÉCNICA PARTICULAR AUTORIZADA (E.E.T.P.A.)",
-                       "INSTITUTO DE EDUCACIÓN SUPERIOR PARTICULAR INCORPORADA (I.S.P.I.)"
+                       "INSTITUTO DE EDUCACIÓN SUPERIOR PARTICULAR INCORPORADA (I.S.P.I.)",
+                       "centro "
                 );
 
             return trim(strtolower(str_replace($a, $b, $instit)));
@@ -478,11 +493,20 @@ class FondoTemporal extends AppModel {
 	 */
         function str_sin_tipoInstit($instit, $tiposInstit)
         {
-            //$instit = $this->optimizar_cadena($instit);
-
             foreach ($tiposInstit as $tipoInstit) {
-                $b[] = $this->optimizar_cadena($tipoInstit['Tipoinstit']['name']);
+                $str_optimizado = $this->optimizar_cadena($tipoInstit['Tipoinstit']['name']);
+                $b[] = $str_optimizado;
+
+                // si no tiene abreviatura
+                $pos = strpos($str_optimizado, "(");
+                if ($pos !== false) {
+                    $b[] = trim(substr($str_optimizado, 0, $pos-1));
+                }
             }
+
+            // agregados
+            $b_sin_abrev[] = "centro fp";
+            $b_sin_abrev[] = "mision monotecnica";
 
             $instit = strtolower(str_replace($b, '', $instit));
 
@@ -515,6 +539,7 @@ class FondoTemporal extends AppModel {
                        'eem',
                        'isfdyt',
                        'isfd y t',
+                       'isfd yt',
                        'mm',
                        'enet',
                        'isp',
