@@ -1,6 +1,6 @@
 <style>
     .xls {
-        background-color: lime;
+        background-color: #ECF8E0;
     }
 
     .filita{
@@ -59,38 +59,34 @@
             }
             ?>
         <tr class="filita">
-            <td class="filita">
+            <td>
                     <?php echo $fondo['FondoTemporal']['anio']; ?>
             </td>
             <td>
                     <?php echo $fondo['FondoTemporal']['trimestre']; ?>
             </td>
-            <td>
+            <td  class="xls">
                     <?php echo $fondo['FondoTemporal']['jurisdiccion_id']; ?>
             </td>
             <td class="xls">
                     <?php echo $fondo['FondoTemporal']['cuecompleto']; ?>
             </td>
-            <td>
+            <td class="xls">
                     <?php echo $fondo['FondoTemporal']['instit']; ?>
             </td>
-            <td>
+            <td class="xls">
                     <?php echo $fondo['FondoTemporal']['instit_name']; ?>
             </td>
             <td>
-                    <?php echo $fondo['Instit']['nombre']; ?>
+                    <?php echo 'N° '.$fondo['Instit']['nroinstit'] . ' - ' . $fondo['Instit']['nombre']; ?>
             </td>
-            <td>
-                    <?php echo $fondo['FondoTemporal']['tipo']; ?>
+            <td><?
+                echo $fondo['FondoTemporal']['localidad'];
+                ?>
             </td>
-            <td>
-                    <?php echo $fondo['Instit']['nroinstit']; ?>
-            </td>
-            <td>
-                    <?php if ($checkedInstit == '0')
-                        echo $fondo['FondoTemporal']['localidad'];
-                    else
-                        echo $fondo['Instit']['localidad'];
+            <td class="xls">
+                <?
+                echo $fondo['Instit']['localidad'];
                     ?>
             </td>
             <td>
