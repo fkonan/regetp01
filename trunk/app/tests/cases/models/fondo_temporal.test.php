@@ -91,6 +91,7 @@ class FondotemporalTestCase extends CakeTestCase {
         $this->assertEqual($this->FondoTemporal->compara_tipoInstit('Instituto de Educación Superior de Comercio N° 114 Tupac Amaru II General San Martín', $this->tipoInstits), 217);
         $this->assertEqual($this->FondoTemporal->compara_tipoInstit('Centro Educativo de Nivel Terciario N\' 24', $this->tipoInstits), 9);
         $this->assertEqual($this->FondoTemporal->compara_tipoInstit('Instituto Politécnico N° 37 Juan XXIII', $this->tipoInstits), 219);
+        $this->assertEqual($this->FondoTemporal->compara_tipoInstit('EPET N° 15 Zapala', $this->tipoInstits), 220);
 
         $this->assertEqual($this->FondoTemporal->compara_tipoInstit('Esc Ed T Nº 15 Maipú', $this->tipoInstits), 0);
     }

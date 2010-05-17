@@ -344,6 +344,7 @@ class FondoTemporal extends AppModel {
                        'eagro ',
                        'escuela agrotecnica provincial',
                        'escuela de educacion agropecuaria',
+                       'epet',
                        'et ',
                        'inspt',
                        'cent ',
@@ -393,7 +394,6 @@ class FondoTemporal extends AppModel {
                        'iset',
                        'cecla',
                        'centro de capacitacion laboral',
-                       'epet',
                        'epnm',
                        'etp',
                        'itec ',
@@ -417,6 +417,7 @@ class FondoTemporal extends AppModel {
                        "ESCUELA AGROTÉCNICA ",
                        "ESCUELA AGROTÉCNICA PROVINCIAL",
                        "ESCUELA DE EDUCACIÓN AGROPECUARIA",
+                       "ESCUELA PROVINCIAL DE EDUCACIÓN TÉCNICA (E.P.E.T.)",
                        "ESCUELA DE EDUCACIÓN TÉCNICA (E.E.T.) ",
                        "INSTITUTO NACIONAL SUPERIOR DEL PROFESORADO TÉCNICO (I.N.S.P.T.)",
                        "CENTRO EDUCATIVO DE NIVEL TERCIARIO (C.E.N.T.) ",
@@ -466,7 +467,6 @@ class FondoTemporal extends AppModel {
                        "INSTITUTO DE EDUCACIÓN SUPERIOR DE EDUCACIÓN TÉCNICA (I.S.E.T.)",
                        "CENTRO DE CAPACITACIÓN LABORAL (CE.C.LA.)",
                        "CENTRO DE CAPACITACIÓN LABORAL (CE.C.LA.)",
-                       "ESCUELA PROVINCIAL DE EDUCACIÓN TÉCNICA (E.P.E.T.)",
                        "ESCUELA PROVINCIAL DE NIVEL MEDIO (E.P.N.M.)",
                        "ESCUELA TÉCNICA PROVINCIAL (E.T.P.)",
                        "INSTITUTO TECNOLÓGICO (I.TEC.) ",
@@ -480,7 +480,7 @@ class FondoTemporal extends AppModel {
                        "INSTITUTO DE EDUCACIÓN SUPERIOR PARTICULAR INCORPORADA (I.S.P.I.)",
                        "centro "
                 );
-
+echo "<br>".trim(strtolower(str_replace($a, $b, $instit)));
             return trim(strtolower(str_replace($a, $b, $instit)));
         }
 
