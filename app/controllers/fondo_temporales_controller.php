@@ -54,6 +54,7 @@ class FondoTemporalesController extends AppController {
                                             'contain'=>array('Instit'=>array('Tipoinstit(name)')));
                 }
 
+                $this->layout = 'sin_menu';
                 $this->set('fondos', $this->paginate());
                 $this->set('checkedInstit', $checkedInstit);
                 $this->set('checkedTotals', $checkedTotals);
