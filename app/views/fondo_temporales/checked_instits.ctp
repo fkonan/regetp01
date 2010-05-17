@@ -1,3 +1,10 @@
+<?
+
+echo $javascript->link('prototype');
+echo $javascript->link('scriptaculous-js-1.8.3/src/scriptaculous');
+
+
+?>
 <style>
     .xls {
         background-color: #ECF8E0;
@@ -5,7 +12,16 @@
 
     .filita{
         border-bottom: 1px solid black;
-}
+    }
+
+    .filita TD{
+        border-bottom: 1px solid black;
+    }
+
+    .cambiado{
+        background-color: pink;
+
+    }
 </style>
 <div class="fondos index">
     <h2><?php __('Fondos temporales');?></h2>
@@ -34,21 +50,23 @@
             <option value="3" <?=($checkedTotals=='3'?'selected':'')?>>Diferencias Grandes</option>
         </select>
     </p>
-    <table cellpadding="0" cellspacing="0">
+    <table cellpadding="0" cellspacing="0" width="1600px">
         <tr>
             <th><?php echo $paginator->sort('anio');?></th>
             <th><?php echo $paginator->sort('Trim.');?></th>
-            <th><?php echo $paginator->sort('instit_id');?></th>
             <th><?php echo $paginator->sort('Jur.','FondoTemporal.jurisdiccion_id');?></th>
             <th><?php echo $paginator->sort('cuecompleto');?></th>
+            <th><?php echo $paginator->sort('CUE','Instit.cue');?></th>
             <th><?php echo $paginator->sort('instit');?></th>
             <th><?php echo $paginator->sort('instit_name');?></th>
-            <th><?php echo $paginator->sort('Instit.nombre');?></th>
-            <th><?php echo $paginator->sort('Instit.Tipoinstit','Instit.Tipoinstit.name');?></th>
-            <th><?php echo $paginator->sort('Instit.nroinstit');?></th>
+            <th><?php echo $paginator->sort('Tipoinstit','Tipoinstit.name');?></th>
+            <th><?php echo $paginator->sort('N°','Instit.nroinstit');?></th>
+            <th><?php echo $paginator->sort('Nombre','Instit.nombre');?></th>
             <th><?php echo $paginator->sort('localidad');?></th>
-            <th><?php echo $paginator->sort('Diferencia de totales');?></th>
+            <th><?php echo $paginator->sort('Localidad','Localidad.name');?></th>
+            <th><?php echo $paginator->sort('Diff Totales');?></th>
             <th class="actions"><?php __('Actions');?></th>
+            <th><?php echo $paginator->sort('observacion');?></th>
         </tr>
         <?php
         $i = 0;
@@ -58,7 +76,7 @@
                 $class = ' class="altrow"';
             }
             ?>
-        <tr class="filita">
+        <tr class="filita" onmouseover="cambiarFondo();">
             <td>
                     <?php echo $fondo['FondoTemporal']['anio']; ?>
             </td>
@@ -71,25 +89,35 @@
             <td class="xls">
                     <?php echo $fondo['FondoTemporal']['cuecompleto']; ?>
             </td>
-            <td class="xls">
+            <td >
+                    <?php echo $fondo['Instit']['cue']*100+$fondo['Instit']['anexo'] ?>
+            </td>
+            <td class="xls" width="150">
                     <?php echo $fondo['FondoTemporal']['instit']; ?>
             </td>
-            <td class="xls">
+            <td class="xls" width="150">
                     <?php echo $fondo['FondoTemporal']['instit_name']; ?>
             </td>
+            <td width="100">
+                    <?php
+                    echo empty($fondo['Instit']['Tipoinstit']['name'])?'':$fondo['Instit']['Tipoinstit']['name']; ?>
+            </td>
             <td>
-                    <?php echo 'N° '.$fondo['Instit']['nroinstit'] . ' - ' . $fondo['Instit']['nombre']; ?>
+                    <?php echo empty($fondo['Instit']['nroinstit'])?'':$fondo['Instit']['nroinstit']; ?>
             </td>
-            <td><?
-                echo $fondo['FondoTemporal']['localidad'];
-                ?>
+            <td>
+                    <?php echo $fondo['Instit']['nombre']; ?>
             </td>
-            <td class="xls">
-                <?
-                echo $fondo['Instit']['localidad'];
+            <td class="xls"><?
+                    echo $fondo['FondoTemporal']['localidad'];
                     ?>
             </td>
             <td>
+                    <?
+                    echo $fondo['Instit']['localidad'];
+                    ?>
+            </td>
+            <td class="xls">
                     <?php echo abs($fondo['FondoTemporal']['f01'] +
                     $fondo['FondoTemporal']['f02a'] +
                     $fondo['FondoTemporal']['f02b'] +
@@ -135,6 +163,12 @@
 
                         echo $html->link(__('Edit', true), array('action'=>'edit', $fondo['FondoTemporal']['id']));
                     }
+                    ?>
+            </td>
+
+            <td width="300">
+                    <?
+                    echo $fondo['FondoTemporal']['observacion'];
                     ?>
             </td>
         </tr>
@@ -193,16 +227,23 @@
         <input type="submit" value="RUN MIGRATOR!">
     </form>
     <script type="text/javascript">
-          
-          function runMigrator(){
-              //window.location = "http://www.google.com/";
-                var url = '<?= $html->url('/ZFondoWorks/migrator'); ?>';
-                var urlCompleta =  url +'/'+$F('validar')+"/"+$F('cantFondosExcel')+"/"+$F('limit')+"/"+$F('borrar')
 
-//console.debug(urlCompleta);
-                window.location = urlCompleta;
-                return false;
-           };
+        function runMigrator(){
+            //window.location = "http://www.google.com/";
+            var url = '<?= $html->url('/ZFondoWorks/migrator'); ?>';
+            var urlCompleta =  url +'/'+$F('validar')+"/"+$F('cantFondosExcel')+"/"+$F('limit')+"/"+$F('borrar')
+
+            //console.debug(urlCompleta);
+            window.location = urlCompleta;
+            return false;
+        };
+
+
+
+        function cambiarFondo() {
+            console.debug($(this));
+            $(this).addClassName('cambiado');
+        }
     </script>
 
 
