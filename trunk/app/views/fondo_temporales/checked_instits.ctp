@@ -1,3 +1,12 @@
+<style>
+    .xls {
+        background-color: lime;
+    }
+
+    .filita{
+        border-bottom: 1px solid black;
+}
+</style>
 <div class="fondos index">
     <h2><?php __('Fondos temporales');?></h2>
     <p>
@@ -27,11 +36,10 @@
     </p>
     <table cellpadding="0" cellspacing="0">
         <tr>
-            <th><?php echo $paginator->sort('id');?></th>
             <th><?php echo $paginator->sort('anio');?></th>
-            <th><?php echo $paginator->sort('trimestre');?></th>
+            <th><?php echo $paginator->sort('Trim.');?></th>
             <th><?php echo $paginator->sort('instit_id');?></th>
-            <th><?php echo $paginator->sort('Jurisdiccion','FondoTemporal.jurisdiccion_name');?></th>
+            <th><?php echo $paginator->sort('Jur.','FondoTemporal.jurisdiccion_id');?></th>
             <th><?php echo $paginator->sort('cuecompleto');?></th>
             <th><?php echo $paginator->sort('instit');?></th>
             <th><?php echo $paginator->sort('instit_name');?></th>
@@ -50,23 +58,17 @@
                 $class = ' class="altrow"';
             }
             ?>
-        <tr<?php echo $class;?>>
-            <td>
-                    <?php echo $fondo['FondoTemporal']['id']; ?>
-            </td>
-            <td>
+        <tr class="filita">
+            <td class="filita">
                     <?php echo $fondo['FondoTemporal']['anio']; ?>
             </td>
             <td>
                     <?php echo $fondo['FondoTemporal']['trimestre']; ?>
             </td>
             <td>
-                    <?php echo $fondo['FondoTemporal']['instit_id']; ?>
+                    <?php echo $fondo['FondoTemporal']['jurisdiccion_id']; ?>
             </td>
-            <td>
-                    <?php echo $fondo['FondoTemporal']['jurisdiccion_name']; ?>
-            </td>
-            <td>
+            <td class="xls">
                     <?php echo $fondo['FondoTemporal']['cuecompleto']; ?>
             </td>
             <td>
@@ -124,6 +126,7 @@
                         else {
                             echo $html->link(__('Check Instit', true), array('action'=>'checkInstit', $fondo['FondoTemporal']['id']), null, sprintf(__('Seguro deseas marcar como chequeado %s?', true), $fondo['FondoTemporal']['instit']));
                         }
+                        echo "<br>";
                         echo $html->link(__('Edit', true), array('action'=>'edit_cue', $fondo['FondoTemporal']['id']));
                     }
                     ?>

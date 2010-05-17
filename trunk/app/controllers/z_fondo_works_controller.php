@@ -44,7 +44,7 @@ class ZFondoWorksController extends AppController {
                 break;
 
             case ($iMi < 1):
-                $msg = "La migración resultó con ERRORES";
+                $msg = "La migración resultó con ERRORES: ".$this->ZFondoWork->migrationStatus;
                 $msg_type = "error";
                 break;
         }
