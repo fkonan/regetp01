@@ -329,7 +329,7 @@ class FondoTemporalesController extends AppController {
                     }
                 }
 
-                $this->redirect(array('action'=>'checked_instits', 'checked'=>'2'));
+                $this->redirect(array('action'=>'checked_instits', 'checkedInstit'=>'2'));
 	}
 
         function uncheckTotals($id = null) {
@@ -365,7 +365,7 @@ class FondoTemporalesController extends AppController {
                     }
                 }
 
-                $this->redirect(array('action'=>'checked_instits', 'checked'=>'2'));
+                $this->redirect(array('action'=>'checked_instits', 'checkedTotals'=>'2'));
 	}
 
 	function delete($id = null) {
