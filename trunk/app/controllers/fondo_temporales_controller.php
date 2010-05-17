@@ -46,16 +46,27 @@ class FondoTemporalesController extends AppController {
                 }
                 
                 if($checkedInstit != null){
-                    $this->paginate = array('conditions'=>array('tipo'=>'i', 'cue_checked'=>$checkedInstit),
-                                            'contain'=>array('Instit'=>array('Tipoinstit(name)')));
+                    $this->paginate = array(
+                        'conditions'=>array(
+                            'tipo'=>'i', 'cue_checked'=>$checkedInstit),
+                        );
                 }
                 else{
-                    $this->paginate = array('conditions'=>array('tipo'=>array('i','j'), 'totales_checked'=>$checkedTotals),
-                                            'contain'=>array('Instit'=>array('Tipoinstit(name)')));
+                    $this->paginate = array(
+                        'conditions'=>array(
+                            'tipo'=>array('i','j'),
+                            'totales_checked'=>$checkedTotals
+                            ),
+                        );
                 }
 
+                 $this->paginate['contain'] = array(
+                     'Instit'=>array('Tipoinstit','Localidad','Departamento')
+                 );
+
                 $this->layout = 'sin_menu';
-                $this->set('fondos', $this->paginate());
+                $regs = $this->paginate();
+                $this->set('fondos', $regs);
                 $this->set('checkedInstit', $checkedInstit);
                 $this->set('checkedTotals', $checkedTotals);
 	}
