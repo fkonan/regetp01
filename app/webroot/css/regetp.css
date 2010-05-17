@@ -1529,3 +1529,33 @@ input[type="hidden"]{
 
 }
 
+.lista_fondos .item_fondos .header{
+	-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;
+	background:#5C9CCC url(../img/fondo_panel_collapsible.png) repeat-x scroll 50% 50%;
+	border:1px solid #4297D7;
+	color:#FFFFFF;
+	font-weight:bold;
+}
+
+.lista_fondos .item_fondos .header dt{
+    text-align: right;
+    padding-right: 5px;
+}
+
+.lista_fondos .item_fondos dd{
+    float: right;
+    padding-right: 25px;
+}
+
+.lista_fondos .item_fondos dt{
+    border-bottom:1px dotted #CCCCCC;
+}
+
+.lista_fondos .item_fondos .total{
+    padding-top: 15px ;
+    font-weight:bold;
+    border:0px solid #CCCCCC;
+}
+
