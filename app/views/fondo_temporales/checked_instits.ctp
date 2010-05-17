@@ -141,15 +141,17 @@ echo $javascript->link('scriptaculous-js-1.8.3/src/scriptaculous');
                     $fondo['FondoTemporal']['total']); ?>
             </td>
 
-            <td class="actions">
+            <td class="actions" style="background-color: silver">
                     <?
                     if($checkedInstit != null) {
                         if ($checkedInstit == 1) {
-                            echo $html->link(__('Uncheck Instit', true), array('action'=>'uncheckInstit', $fondo['FondoTemporal']['id']), null, sprintf(__('Seguro deseas deschequear %s?', true), $fondo['FondoTemporal']['instit']));
+                            echo $html->link(__('Uncheck', true), array('action'=>'uncheckInstit', $fondo['FondoTemporal']['id']), null, sprintf(__('Seguro deseas deschequear %s?', true), $fondo['FondoTemporal']['instit']));
                         }
                         else {
-                            echo $html->link(__('Check Instit', true), array('action'=>'checkInstit', $fondo['FondoTemporal']['id']), null, sprintf(__('Seguro deseas marcar como chequeado %s?', true), $fondo['FondoTemporal']['instit']));
+                            echo $html->link(__('Check', true), array('action'=>'checkInstit', $fondo['FondoTemporal']['id']), null, sprintf(__('Seguro deseas marcar como chequeado %s?', true), $fondo['FondoTemporal']['instit']));
                         }
+                        echo "<br>";
+                        echo "<br>";
                         echo "<br>";
                         echo $html->link(__('Edit', true), array('action'=>'edit_cue', $fondo['FondoTemporal']['id']));
                     }
@@ -166,7 +168,7 @@ echo $javascript->link('scriptaculous-js-1.8.3/src/scriptaculous');
                     ?>
             </td>
 
-            <td width="300" style="text-align:left;">
+            <td width="300" style="text-align:left;" class="xls">
                     <?
                     echo nl2br($fondo['FondoTemporal']['observacion']);
                     ?>
