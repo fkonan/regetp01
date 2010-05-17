@@ -304,6 +304,7 @@ class FondoTemporalesController extends AppController {
                     $this->data = $this->FondoTemporal->read(null, $id);
                     if (!empty($this->data)) {
                         $this->data['FondoTemporal']['cue_checked'] = 0;
+                        $this->FondoTemporal->setObservacion($this->data, "El instit fue deschequeado manualmente.");
                         if ($this->FondoTemporal->save($this->data)) {
                         } else {
                                 $this->Session->setFlash(__('El FondoTemporal id '.$fondo['FondoTemporal']['id'].' no pudo ser actualizado.', true));
@@ -322,6 +323,7 @@ class FondoTemporalesController extends AppController {
                     $this->data = $this->FondoTemporal->read(null, $id);
                     if (!empty($this->data)) {
                         $this->data['FondoTemporal']['cue_checked'] = 1;
+                        $this->FondoTemporal->setObservacion($this->data, "El instit fue chequeado manualmente.");
                         if ($this->FondoTemporal->save($this->data)) {
                         } else {
                                 $this->Session->setFlash(__('El FondoTemporal id '.$fondo['FondoTemporal']['id'].' no pudo ser actualizado.', true));
@@ -340,6 +342,7 @@ class FondoTemporalesController extends AppController {
                     $this->data = $this->FondoTemporal->read(null, $id);
                     if (!empty($this->data)) {
                         $this->data['FondoTemporal']['totales_checked'] = 0;
+                        $this->FondoTemporal->setObservacion($this->data, "Los totales fueron deschequeados manualmente.");
                         if ($this->FondoTemporal->save($this->data)) {
                         } else {
                                 $this->Session->setFlash(__('El FondoTemporal id '.$fondo['FondoTemporal']['id'].' no pudo ser actualizado.', true));
@@ -358,6 +361,7 @@ class FondoTemporalesController extends AppController {
                     $this->data = $this->FondoTemporal->read(null, $id);
                     if (!empty($this->data)) {
                         $this->data['FondoTemporal']['totales_checked'] = 1;
+                        $this->FondoTemporal->setObservacion($this->data, "Los totales fueron chequeados manualmente.");
                         if ($this->FondoTemporal->save($this->data)) {
                         } else {
                                 $this->Session->setFlash(__('El FondoTemporal id '.$fondo['FondoTemporal']['id'].' no pudo ser actualizado.', true));
@@ -573,54 +577,41 @@ class FondoTemporalesController extends AppController {
                             array('conditions'=> array("OR"=> array("tipo = 'i'","tipo='j'"), 'totales_checked'=>0)));
             
             foreach ($fondos as &$fondo){
-                    $totales_checked = false;
+                $totales_checked = false;
 
-                    $total = abs($fondo['FondoTemporal']['f01'] +
-                             $fondo['FondoTemporal']['f02a'] +
-                             $fondo['FondoTemporal']['f02b'] +
-                             $fondo['FondoTemporal']['f02c'] +
-                             $fondo['FondoTemporal']['f03a'] +
-                             $fondo['FondoTemporal']['f03b'] +
-                             $fondo['FondoTemporal']['f04'] +
-                             $fondo['FondoTemporal']['f05'] +
-                             $fondo['FondoTemporal']['f06a'] +
-                             $fondo['FondoTemporal']['f06b'] +
-                             $fondo['FondoTemporal']['f06c'] +
-                             $fondo['FondoTemporal']['f07a'] +
-                             $fondo['FondoTemporal']['f07b'] +
-                             $fondo['FondoTemporal']['f07c'] +
-                             $fondo['FondoTemporal']['f08'] +
-                             $fondo['FondoTemporal']['f09'] +
-                             $fondo['FondoTemporal']['f10'] +
-                             $fondo['FondoTemporal']['equipinf']+
-                             $fondo['FondoTemporal']['refaccion'] -
-                             $fondo['FondoTemporal']['total']);
+                $total = abs($fondo['FondoTemporal']['f01'] +
+                         $fondo['FondoTemporal']['f02a'] +
+                         $fondo['FondoTemporal']['f02b'] +
+                         $fondo['FondoTemporal']['f02c'] +
+                         $fondo['FondoTemporal']['f03a'] +
+                         $fondo['FondoTemporal']['f03b'] +
+                         $fondo['FondoTemporal']['f04'] +
+                         $fondo['FondoTemporal']['f05'] +
+                         $fondo['FondoTemporal']['f06a'] +
+                         $fondo['FondoTemporal']['f06b'] +
+                         $fondo['FondoTemporal']['f06c'] +
+                         $fondo['FondoTemporal']['f07a'] +
+                         $fondo['FondoTemporal']['f07b'] +
+                         $fondo['FondoTemporal']['f07c'] +
+                         $fondo['FondoTemporal']['f08'] +
+                         $fondo['FondoTemporal']['f09'] +
+                         $fondo['FondoTemporal']['f10'] +
+                         $fondo['FondoTemporal']['equipinf']+
+                         $fondo['FondoTemporal']['refaccion'] -
+                         $fondo['FondoTemporal']['total']);
 
-                    /*Total Chequeado*/
-                    if($total == 0){
-                        $fondo['FondoTemporal']['totales_checked'] = 1;
-                    }/*Total con diferencia pequeña ---> Ajuste*/
-                    elseif($total < $totalSmallDiference){
-                        $fondo['FondoTemporal']['totales_checked'] = 2;
-
-                        if(strlen($this->data['FondoTemporal']['observacion']) > 0){
-                            $error = $this->data['FondoTemporal']['observacion'] . "\r\n" . date('d-m-Y H:i') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($difference)  . " con el total \r\n";
-                        }
-                        else{
-                            $error = date('d-m-Y H:i') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($total)  . " con el total \r\n";
-                        }
-
-                    }/*Total con diferencia grande*/
-                    else{
-                        $fondo['FondoTemporal']['totales_checked'] = 3;
-
-                        if(strlen($this->data['FondoTemporal']['observacion']) > 0){
-                            $error = $this->data['FondoTemporal']['observacion'] . "\r\n" . date('d-m-Y H:i') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($difference)  . " con el total \r\n";
-                        }
-                        else{
-                            $error = date('d-m-Y H:i') . " - " . "La suma de las lineas de acción tienen una diferencia de $" . abs($total)  . " con el total \r\n";
-                        }
-                    }
+                /*Total Chequeado*/
+                if($total == 0){
+                    $fondo['FondoTemporal']['totales_checked'] = 1;
+                }/*Total con diferencia pequeña ---> Ajuste*/
+                elseif($total < $totalSmallDiference) {
+                    $fondo['FondoTemporal']['totales_checked'] = 2;
+                    $this->FondoTemporal->setObservacion($fondo, "La suma de las lineas de acción tienen una diferencia de $" . abs($total)  . " con el total.");
+                }/*Total con diferencia grande*/
+                else{
+                    $fondo['FondoTemporal']['totales_checked'] = 3;
+                    $this->FondoTemporal->setObservacion($fondo, "La suma de las lineas de acción tienen una diferencia de $" . abs($total)  . " con el total.");
+                }
             }
             
             $this->FondoTemporal->saveAll($fondos);

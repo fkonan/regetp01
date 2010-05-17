@@ -77,7 +77,7 @@ echo $html->css('jquery.autocomplete.css');
                 echo $form->input('localidad');
                 echo $form->input('departamento');
 
-                echo $form->input('observacion');
+                echo $form->textarea('observacion', array('rows'=>6));
 
 	?>
 	</fieldset>
@@ -90,6 +90,7 @@ echo $html->css('jquery.autocomplete.css');
 
 	<?php
                 echo $form->input('posible_instit', array('label'=>'Posible nombre o CUE de la institucion','value'=>($this->data['Instit']['cue'] * 100 + $this->data['Instit']['anexo'])));
+                echo $form->textarea('observacion', array('rows'=>6));
                 //echo $form->input('posible_jurisdiccion_id');
 	?>
 	</fieldset>
