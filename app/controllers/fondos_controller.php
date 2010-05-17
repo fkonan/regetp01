@@ -4,9 +4,21 @@ class FondosController extends AppController {
 	var $name = 'Fondos';
 	var $helpers = array('Html', 'Form');
 
-	function index() {
-		$this->Fondo->recursive = 0;
-		$this->set('fondos', $this->paginate());
+        function beforeFilter() {
+            parent::beforeFilter();
+            $this->rutaUrl_for_layout[] =array('name'=> 'Buscador','link'=>'/Instits/search_form' );
+        }
+	function index($id=null) {
+
+            if($id){
+                $this->paginate = array('conditions'=>array('instit_id'=>$id));
+            }
+
+            $this->Fondo->recursive = 1;
+
+            
+            $this->set('instit', $this->Fondo->Instit->read(null, $id));
+            $this->set('fondos', $this->paginate());
 	}
 
 	function view($id = null) {
