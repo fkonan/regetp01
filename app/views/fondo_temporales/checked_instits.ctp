@@ -166,9 +166,9 @@ echo $javascript->link('scriptaculous-js-1.8.3/src/scriptaculous');
                     ?>
             </td>
 
-            <td width="300">
+            <td width="300" style="text-align:left;">
                     <?
-                    echo $fondo['FondoTemporal']['observacion'];
+                    echo nl2br($fondo['FondoTemporal']['observacion']);
                     ?>
             </td>
         </tr>
