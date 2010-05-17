@@ -480,7 +480,7 @@ class FondoTemporal extends AppModel {
                        "INSTITUTO DE EDUCACIÓN SUPERIOR PARTICULAR INCORPORADA (I.S.P.I.)",
                        "centro "
                 );
-echo "<br>".trim(strtolower(str_replace($a, $b, $instit)));
+
             return trim(strtolower(str_replace($a, $b, $instit)));
         }
 
