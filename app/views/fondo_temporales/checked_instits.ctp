@@ -114,7 +114,8 @@ echo $javascript->link('scriptaculous-js-1.8.3/src/scriptaculous');
             </td>
             <td>
                     <?
-                    echo $fondo['Instit']['localidad'];
+                    echo (empty($fondo['Instit']['Localidad']['name']))? '' : 'Loc:' . $fondo['Instit']['Localidad']['name'].'<br>';
+                    echo $fondo['Instit']['Departamento']['name'];
                     ?>
             </td>
             <td class="xls">
