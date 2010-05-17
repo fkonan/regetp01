@@ -1,6 +1,6 @@
 <?php
 class Fondo extends AppModel {
-
+        var $actsAs = array('Containable');
 	var $name = 'Fondo';
 	var $validate = array(
 		'instit_id' => array('numeric'),

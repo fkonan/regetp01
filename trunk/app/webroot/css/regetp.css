@@ -805,10 +805,10 @@ div.code-coverage-results span.result-good {
 */
 /* usados en la vista de la institucion, al lado del titulo*/
 #escuela_estado{
-	font-size: large;
+	font-size: normal;
 	text-align: right;
 	margin-top: -1.5em;
-	padding-top: 0px;
+	padding-top: 10px;
 }
 /* usados en la vista de la institucion, al lado del titulo*/
 .instit_inactiva{
@@ -1269,6 +1269,7 @@ li.selected    {
 ************---------------------------------------------------------------------*/
 
 .tabs{
+        padding-top: 20px;
 	width: 614px;
 }
 
@@ -1407,16 +1408,6 @@ li.selected    {
 
 /****************************************************************************/
 
-
-
-
-
-
-
-
-
-
-
 .tabs-content{
  	float: left; 
 	width:100%;
@@ -1519,3 +1510,22 @@ li.selected    {
 input[type="hidden"]{
 	display: none;
 }
+
+/*Lista de Fondos*/
+
+.lista_fondos{
+	list-style-type: none;
+	padding: 0px;
+        width:580px;
+}
+
+.lista_fondos .item_fondos{
+	border-top: thin solid #E0ECF8;
+	border-bottom: thin solid #E0ECF8;
+	padding: 6px 0px 6px 0px;
+	margin: 0px;
+        background-color: #E8F2FB;
+        margin-bottom: 10px;
+
+}
+
