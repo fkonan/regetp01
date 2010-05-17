@@ -64,6 +64,11 @@ class TipoinstitFixture extends CakeTestFixture {
 			'id' => 219,
                         'jurisdiccion_id' => 2,
                         'name' => 'INSTITUTO POLITÉCNICO'
+		),
+                array(
+			'id' => 220,
+                        'jurisdiccion_id' => 2,
+                        'name' => 'ESCUELA PROVINCIAL DE EDUCACIÓN TÉCNICA (E.P.E.T.)'
 		)
 	);
 }
