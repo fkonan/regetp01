@@ -3,7 +3,7 @@
             <div class="tabs-list">
                     <span class="tab-grande-inactiva"><?php echo $html->link('Datos',array('controller'=>'Instits','action'=>'view', $planes['Instit']['id']));?></span>
                     <span class="tab-grande-activa"><?php echo $html->link('Oferta Educativa',array('controller'=>'Planes','action'=>'index', $planes['Instit']['id']));?></span>
-                    <span class="tab-grande-inactiva"><?php echo $html->link('Planes de Mejora',array('controller'=>'Fondos','action'=>'index', $planes['Instit']['id']));?></span>
+                    <span class="tab-grande-inactiva"><?php echo $html->link('Planes de Mejora',array('controller'=>'Fondos','action'=>'index_x_instit', $planes['Instit']['id']));?></span>
             </div>
 
             <div class="tabs-content">

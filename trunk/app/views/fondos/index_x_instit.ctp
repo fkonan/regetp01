@@ -20,7 +20,7 @@ echo $html->css('diQuery-collapsiblePanel.css');
             <div class="tabs-list">
                     <span class="tab-grande-inactiva"><?php echo $html->link('Datos',array('controller'=>'Instits','action'=>'view', $instit['Instit']['id']));?></span>
                     <span class="tab-grande-inactiva"><?php echo $html->link('Oferta Educativa',array('controller'=>'Planes','action'=>'index', $instit['Instit']['id']));?></span>
-                    <span class="tab-grande-activa"><?php echo $html->link('Planes de Mejora',array('controller'=>'Fondos','action'=>'index_x_instit', $instit['Instit']['id']));?></span>
+                    <span class="tab-grande-activa"><?php echo $html->link('Planes de Mejora',array('controller'=>'Fondos','action'=>'index', $instit['Instit']['id']));?></span>
             </div>
 
             <div class="tabs-content">
@@ -32,16 +32,22 @@ echo $html->css('diQuery-collapsiblePanel.css');
                      - <?= $instit['Instit']['nombre_completo']?>
                 </h1>
 
-                <h2>Fondos</h2>
+                <h2>Planes de Mejora</h2>
 
                 <ul class="lista_fondos">
                 <?php
+                if(empty($fondos)){
+                ?>
+                    <p class='msg-atencion'>La Instituci&oacute;n no presenta planes de mejora</p>
+                <?php
+                }
                 $i = 0;
                 foreach ($fondos as $fondo):
                 ?>
                      <dl class="item_fondos" STYLE="padding-right: 0px;">
-                        <dt>Periodo:</dt>
-                        <dd><?php echo $fondo['Fondo']['anio'];?> - <?php echo $fondo['Fondo']['trimestre']; ?>º Trimestre</dd>
+                        <div class="header">
+                            <dt><?php echo $fondo['Fondo']['anio'];?> - <?php echo $fondo['Fondo']['trimestre']; ?>º Trimestre </dt>
+                        </div>
                         <dt>Memo:</dt>
                         <dd><?php echo $fondo['Fondo']['memo']; ?></dd>
                         <!--<dt>Resolucion:</dt>
@@ -49,23 +55,35 @@ echo $html->css('diQuery-collapsiblePanel.css');
                         <dt>Descripcion:</dt>
                         <dd><?php echo $fondo['Fondo']['description']; ?></dd>
                         -->
-                        <dt>Total:</dt>
-                        <dd>$<?php echo $fondo['Fondo']['total']; ?></dd>
+                        
                         <h2>Lineas de Accion</h2>
                         <div class="collapsibleContainer" title="Lineas de Accion">
                             <dl>
                             <?php
                                 foreach ($fondo['LineasDeAccion'] as $linea):
                             ?>
-                                <dt><?=$linea['description']?> (<?=$linea['name']?>) </dt> <dd>$<?=$linea['FondosLineasDeAccion']['monto']?></dd>
+                                <dt><?=$linea['name']?> (<?=$linea['description']?>) </dt> <dd>$ <?=number_format($linea['FondosLineasDeAccion']['monto'],2,",",".");?></dd>
                             <?php endforeach; ?>
                             </dl>
+                        </div>
+                        <div class="total">
+                            <dt>Total:</dt>
+                            <dd>$ <?php echo number_format($fondo['Fondo']['total'],2,",","."); ?></dd>
                         </div>
                      </dl>
                 <?php endforeach; ?>
                 </ul>
            </div>
     </div>
+    <?php
+        if($paginator->numbers()){
+    ?>
+            <div style="float:left" class="paging">
+                    <?php echo $paginator->prev('<< '.__('anterior', true), array(), null, array('class'=>'disabled'));?>
+             | 	<?php echo $paginator->numbers();?>
+                    <?php echo $paginator->next(__('siguiente', true).' >>', array(), null, array('class'=>'disabled'));?>
+            </div>
+    <?php  }?>
 </div>
 
 

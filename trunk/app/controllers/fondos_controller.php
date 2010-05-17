@@ -8,16 +8,36 @@ class FondosController extends AppController {
             parent::beforeFilter();
             $this->rutaUrl_for_layout[] =array('name'=> 'Buscador','link'=>'/Instits/search_form' );
         }
-	function index($id=null) {
+        
+	function index_x_instit($id=null) {
 
             if($id){
-                $this->paginate = array('conditions'=>array('instit_id'=>$id));
+                $this->paginate = array('conditions'=>array('Fondo.instit_id'=>$id),'order' => array('Fondo.anio DESC','Fondo.trimestre DESC','Fondo.jurisdiccion_id DESC'));
+            }
+            else{
+                $this->paginate = array('conditions'=>array('Fondo.instit_id !='=>0),'order' => array('Fondo.anio DESC','Fondo.trimestre DESC','Fondo.jurisdiccion_id DESC'));
             }
 
             $this->Fondo->recursive = 1;
 
             
             $this->set('instit', $this->Fondo->Instit->read(null, $id));
+            $this->set('fondos', $this->paginate());
+	}
+
+        function index_x_jurisdiccion($id=null) {
+
+            if($id){
+                $this->paginate = array('conditions'=>array('Fondo.instit_id'=> 0,'Fondo.jurisdiccion_id'=>$id),'order' => array('Fondo.anio DESC','Fondo.trimestre DESC','Fondo.jurisdiccion_id DESC'));
+            }
+            else{
+                $this->paginate = array('conditions'=>array('Fondo.instit_id'=> 0), 'order' => array('Fondo.anio DESC','Fondo.trimestre DESC','Fondo.jurisdiccion_id DESC'));
+            }
+
+            $this->Fondo->recursive = 1;
+
+
+            $this->set('jurisdiccion', $this->Fondo->Jurisdiccion->read(null, $id));
             $this->set('fondos', $this->paginate());
 	}
 
