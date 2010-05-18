@@ -3,6 +3,7 @@ class FondosController extends AppController {
 
 	var $name = 'Fondos';
 	var $helpers = array('Html', 'Form');
+        var $components = array('Filter');
 
         function beforeFilter() {
             parent::beforeFilter();
@@ -41,13 +42,28 @@ class FondosController extends AppController {
             $this->set('fondos', $this->paginate());
 	}
 
-	function view($id = null) {
+        function index() {
+
+            $this->Fondo->recursive = 0;
+            
+            $filter = $this->Filter->process($this);
+
+            $jurisdicciones = $this->Fondo->Jurisdiccion->find('list');
+            $anios = $this->Fondo->Instit->Plan->Anio->Ciclo->find('list');
+
+            $this->set(compact('jurisdicciones','anios'));
+            $this->set('url',$this->Filter->url);
+            $this->set('fondos', $this->paginate(null,$filter));
+            
+	}
+
+	/*function search($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid Fondo', true));
 			$this->redirect(array('action' => 'index'));
 		}
 		$this->set('fondo', $this->Fondo->read(null, $id));
-	}
+	}*/
 
 	function add() {
 		if (!empty($this->data)) {
