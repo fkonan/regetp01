@@ -1,3 +1,4 @@
+<?php echo $html->css('ajaxtabs.css');?>
 <div id="escuela_estado" class="<? echo $planes['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $planes['Instit']['activo']? 'Institución Ingresada al RFIETP':'Institución NO Ingresada al RFIETP';?></div>
 <div class="tabs">
             <div class="tabs-list">
@@ -47,7 +48,7 @@
                                 ?>
                                 <h2>Oferta</h2>
                                         <div align="center">
-                                                <table class="mini_tabla" width="80" cellpadding = "0" cellspacing = "0" summary="En esta tabla se muestran los totales de
+                                                <table class="tabla" width="80" cellpadding = "0" cellspacing = "0" summary="En esta tabla se muestran los totales de
                                                                                                                                 matrículas por cada ciclo lectivo, para
                                                                                                                                 cada oferta.">
                                                 <CAPTION>Total de matriculados por oferta según ciclo lectivo</CAPTION>
@@ -80,25 +81,25 @@
                         <?php endif ?>
 
                 <!-- TABS DE CICLOS ULT. ACTUALIZACIONES  -->
-                <div class="tabs">
+                <div >
                         <h2>Listado de Ofertas</h2>
-                        <div class="tabs-list">
+                        <div class="shadetabs">
                                 <?php
                                         $current_ciclo = $url_conditions['Anio.ciclo_id'];
                                         foreach ($ciclos as $c):?>
                                                 <?php
                                                 $instit_id = $planes['Instit']['id'];
 
-                                                $clase = ($current_ciclo == $c)?'tab-activa':'tab-inactiva';
+                                                $clase = ($current_ciclo == $c)?'selected':'';
                                 ?>
                                 <span class="<?= $clase;?>"><?php echo $html->link($c,"/planes/index/$instit_id/Anio.ciclo_id:$c");?></span>
                                 <?php endforeach;?>
 
-                                        <?php $clase = ($current_ciclo == 0)?'tab-activa':'tab-inactiva';?>
+                                        <?php $clase = ($current_ciclo == 0)?'selected':'';?>
                                         <span class="<?= $clase;?>"><?php echo $html->link('Ver Todos',"/planes/index/$instit_id/Anio.ciclo_id:0");?></span>
                         </div>
 
-                        <div class="tabs-content">
+                        <div style="border:1px solid gray; margin-bottom: 1em; padding: 10px">
                                 <table cellpadding="0" cellspacing="0" class="tabla-con-bordes-celeste">
 
                                         <tr>
