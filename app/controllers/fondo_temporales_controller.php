@@ -281,7 +281,7 @@ class FondoTemporalesController extends AppController {
 			$this->redirect(array('action'=>'checked_instits'));
 		}
 		if (!empty($this->data)) {
-                        debug($this->data);
+                        $this->data['FondoTemporal']['cue_checked'] = 1;
                         if ($this->FondoTemporal->save($this->data)) {
 				$this->Session->setFlash(__('The FondoTemporal has been saved', true));
 				$this->redirect(array('action'=>'checked_instits'));
