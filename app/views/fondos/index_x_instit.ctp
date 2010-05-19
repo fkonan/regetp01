@@ -15,26 +15,25 @@ echo $html->css('diQuery-collapsiblePanel.css');
 
 
 <div class="fondos index">
-    <div id="escuela_estado" class="<? echo $instit['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $instit['Instit']['activo']? 'Institución Ingresada al RFIETP':'Institución NO Ingresada al RFIETP';?></div>
+   <div id="escuela_estado" class="<? echo $instit['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $instit['Instit']['activo']? 'Institución Ingresada al RFIETP':'Institución NO Ingresada al RFIETP';?></div>
+    <?
+    $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
+    ?>
+    <br/>
+    <h2><?= $cue_instit ?> - <?= $instit['Instit']['nombre_completo']?></h2>
+
     <div class="tabs">
             <div class="tabs-list">
-                    <span class="tab-grande-inactiva"><?php echo $html->link('Datos',array('controller'=>'Instits','action'=>'view', $instit['Instit']['id']));?></span>
+                    <span class="tab-grande-inactiva"><?php echo $html->link('Datos Básicos',array('controller'=>'Instits','action'=>'view', $instit['Instit']['id']));?></span>
                     <span class="tab-grande-inactiva"><?php echo $html->link('Oferta Educativa',array('controller'=>'Planes','action'=>'index', $instit['Instit']['id']));?></span>
                     <span class="tab-grande-activa"><?php echo $html->link('Planes de Mejora',array('controller'=>'Fondos','action'=>'index', $instit['Instit']['id']));?></span>
             </div>
 
-            <div class="tabs-content">
-                <?
-                $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
-                ?>
+            <div style="border-top:2px solid #233E87" class="tabs-content">
+                
                 <br>
-                <h1><?= $cue_instit ?>
-                     - <?= $instit['Instit']['nombre_completo']?>
-                </h1>
-
-                <h2>Planes de Mejora</h2>
-
-                <ul class="lista_fondos">
+                
+                <ul style="padding-top: 20px" class="lista_fondos">
                 <?php
                 if(empty($fondos)){
                 ?>

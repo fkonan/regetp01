@@ -128,6 +128,73 @@ class FondoTemporalesController extends AppController {
                 $this->set('report', $report);
 	}
 
+        function error_report_cvs() {
+                $report = '';
+                $fondoInfo = '';
+                $fondoError = '';
+                $i = 1;
+
+                $report = "anio|trimestre|tipo|cuecompleto|linea|difference|f01|f02a|f02b|f02c|f03a|f03b|f04|f05|f06a|f06b|f06c|f07a|f07b|f07c|f08|f09|f10|equipinf|refaccion|total\r\n";
+
+         	$this->FondoTemporal->recursive = 0;
+
+                $fondos = $this->FondoTemporal->find("all",
+                            array('conditions'=>array('tipo'=>array('i','j'), 'totales_checked'=>array(2,3)), 'order' => array('anio,trimestre,linea')));
+                foreach ($fondos as $fondo){
+                    $difference = abs($fondo['FondoTemporal']['f01'] +
+                                  $fondo['FondoTemporal']['f02a'] +
+                                  $fondo['FondoTemporal']['f02b'] +
+                                  $fondo['FondoTemporal']['f02c'] +
+                                  $fondo['FondoTemporal']['f03a'] +
+                                  $fondo['FondoTemporal']['f03b'] +
+                                  $fondo['FondoTemporal']['f04'] +
+                                  $fondo['FondoTemporal']['f05'] +
+                                  $fondo['FondoTemporal']['f06a'] +
+                                  $fondo['FondoTemporal']['f06b'] +
+                                  $fondo['FondoTemporal']['f06c'] +
+                                  $fondo['FondoTemporal']['f07a'] +
+                                  $fondo['FondoTemporal']['f07b'] +
+                                  $fondo['FondoTemporal']['f07c'] +
+                                  $fondo['FondoTemporal']['f08'] +
+                                  $fondo['FondoTemporal']['f09'] +
+                                  $fondo['FondoTemporal']['f10'] +
+                                  $fondo['FondoTemporal']['equipinf'] +
+                                  $fondo['FondoTemporal']['refaccion'] -
+                                  $fondo['FondoTemporal']['total']);
+
+                    $fondoInfo =  $fondo['FondoTemporal']['anio'] . "|" .
+                                  $fondo['FondoTemporal']['trimestre'] . "|" .
+                                  $fondo['FondoTemporal']['tipo'] . "|" .
+                                  $fondo['FondoTemporal']['cuecompleto'] . "|" .
+                                  $fondo['FondoTemporal']['linea'] . "|".
+                                  $difference . "|" .
+                                  $fondo['FondoTemporal']['f01'] . "|" .
+                                  $fondo['FondoTemporal']['f02a'] . "|".
+                                  $fondo['FondoTemporal']['f02b'] . "|".
+                                  $fondo['FondoTemporal']['f02c'] . "|".
+                                  $fondo['FondoTemporal']['f03a'] . "|".
+                                  $fondo['FondoTemporal']['f03b'] . "|".
+                                  $fondo['FondoTemporal']['f04'] . "|".
+                                  $fondo['FondoTemporal']['f05'] . "|".
+                                  $fondo['FondoTemporal']['f06a'] . "|".
+                                  $fondo['FondoTemporal']['f06b'] . "|".
+                                  $fondo['FondoTemporal']['f06c'] . "|".
+                                  $fondo['FondoTemporal']['f07a'] . "|".
+                                  $fondo['FondoTemporal']['f07b'] . "|".
+                                  $fondo['FondoTemporal']['f07c'] . "|".
+                                  $fondo['FondoTemporal']['f08'] . "|".
+                                  $fondo['FondoTemporal']['f09'] . "|".
+                                  $fondo['FondoTemporal']['f10'] . "|".
+                                  $fondo['FondoTemporal']['equipinf'] . "|".
+                                  $fondo['FondoTemporal']['refaccion'] . "|".
+                                  $fondo['FondoTemporal']['total'] . "\r\n";
+
+                    $report = $report . $fondoInfo;
+                }
+
+                $this->set('report', $report);
+	}
+
         function observacion_report() {
                 $report = '';
                 $fondoInfo = '';
