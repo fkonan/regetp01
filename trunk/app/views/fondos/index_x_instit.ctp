@@ -29,11 +29,11 @@ echo $html->css('diQuery-collapsiblePanel.css');
                     <span class="tab-grande-activa"><?php echo $html->link('Planes de Mejora',array('controller'=>'Fondos','action'=>'index', $instit['Instit']['id']));?></span>
             </div>
 
-            <div style="border-top:2px solid #233E87" class="tabs-content">
-                
-                <br>
-                
+            <div style="border-top:2px solid #9DA6C1" class="tabs-content">
+
+                <h2>Listado de Planes de Mejora</h2>
                 <ul style="padding-top: 20px" class="lista_fondos">
+
                 <?php
                 if(empty($fondos)){
                 ?>

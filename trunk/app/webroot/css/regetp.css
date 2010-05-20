@@ -363,11 +363,12 @@ CAPTION{
 }
 
 th {
-	background: #f2f2f2;
+	background: #F0F7FC;
 	border: 1px solid #bbb;
 	border-top: 1px solid #f0f7fc;
 	border-left: 1px solid #f0f7fc;
 	text-align: center;
+        color: #003D4C;
 }
 th a {
 	background:#f2f2f2;
@@ -1524,8 +1525,9 @@ input[type="hidden"]{
 	border-bottom: thin solid #E0ECF8;
 	padding: 6px 0px 6px 0px;
 	margin: 0px;
-        background-color: #E8F2FB;
+        /*background-color: #E8F2FB;*/
         margin-bottom: 10px;
+        border: 3px solid #E8F2FB;
 
 }
 

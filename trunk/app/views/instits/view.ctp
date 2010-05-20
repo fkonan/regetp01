@@ -15,7 +15,7 @@
                     <span class="tab-grande-inactiva"><?php echo $html->link('Planes de Mejora',array('controller'=>'Fondos','action'=>'index_x_instit', $instit['Instit']['id']));?></span>
             </div>
 
-            <div style="border-top:2px solid #233E87" class="tabs-content">
+            <div style="border-top:2px solid #9DA6C1" class="tabs-content">
                     
                     <?php
                     // por ahora no quiero que se muestre porque viene sucio este campo
