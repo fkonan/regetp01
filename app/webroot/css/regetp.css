@@ -149,6 +149,12 @@ ul, li {
 	border-top-width: 10px;
 	height: 90px;
 }
+
+.patrio{
+    background-image: url('images/logoinet33_patrio.png') !important;
+}
+
+
 #header h1 {
 	text-align: center;
 	border-bottom: none;

@@ -64,9 +64,10 @@
 		<div id="mensajero" style="display: none"></div>
 		</cake:nocache>
 	
-		
-		<div id="header" >
+		<?php $headerClass = (Configure::read('es_dia_patrio'))?"patrio":"";?>
+		<div id="header" class="<?php echo $headerClass; ?>" >
 			<h1>
+
 				<?php echo $html->link(__('Registro Federal de Instituciones de Educación Técnico Profesional (RFIETP)', true), '/pages/home'); ?>
 			</h1>	
 		</div>

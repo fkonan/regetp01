@@ -176,6 +176,11 @@
  */
 	Configure::write('Acl.classname', 'DbAcl');
 	Configure::write('Acl.database', 'default');
+
+/*
+ * Inet Options
+ */
+        Configure::write('es_dia_patrio', true);
 /**
  *
  * Cache Engine Configuration
