@@ -34,7 +34,9 @@ body {
 	font-family: Verdana, Geneva, sans-serif;
 	font-size:10pt;
 	margin: 0;
-	background-color: #0B243B;
+	background-color:#87AEC5;
+        background-image:url(images/fondo_blue.gif);
+        background-repeat:repeat-x;
 }
 p {
 	padding-bottom: 0.8em;
@@ -108,11 +110,13 @@ ul, li {
 #container {
 	text-align: left;
 	width: 775px;
-	margin-top: 0px;
+	margin-top: 20px;
 	margin-right: auto;
-	margin-bottom: 0px;
+	margin-bottom: 20px;
 	margin-left: auto;
 	background-color: white;
+	border: 5px solid #6676AA;
+
 }
 
 #popup_container{
@@ -144,9 +148,6 @@ ul, li {
 	background-image: url('images/logoinet33.png');
 	background-position: left;
 	background-repeat: no-repeat;
-	border-top-color: #0B243B;
-	border-top-style: solid;
-	border-top-width: 10px;
 	height: 90px;
 }
 
@@ -204,7 +205,7 @@ ul, li {
 	float: left;
 	width: 135px; /*  IE  */
 	\width: 131px; /*  FF  */
-	padding: 15px 2px 0px 2px;
+	padding: 5px 2px 0px 2px;
 	margin-top: 0px;
 	border-right-width: 2px;
 	border-right-style:  solid;
@@ -304,6 +305,9 @@ text-transform:uppercase;
 	padding: 6px 10px;
 	text-align: right;
 	margin-bottom: 30px;
+        border-bottom:2px dotted #6676AA;
+        border-top:2px dotted #6676AA;
+        background:#F0F7FC none repeat scroll 0 0;
 }
 
 
@@ -1121,17 +1125,9 @@ div.code-coverage-results span.result-good {
 
 #box_saludo{
 	color: #333;
-	border-bottom-color: #999;
-	border-bottom-style:solid;
-	border-bottom-width: 1px;
-	border-top-color: #999;
-	border-top-style:solid;
-	border-top-width: 1px;
-
-	font-size:8pt;
-	margin-top:-4px;
+	font-size:10pt;
+	margin-top:4px;
 	text-align:center;
-	
 }
 
 
