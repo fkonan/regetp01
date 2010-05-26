@@ -1,4 +1,6 @@
 <?php
+set_time_limit(60*60*0.5); // media hora de ejecucion limite
+
 class ZFondoWorksController extends AppController {
 
     var $name = 'ZFondoWorks';
