@@ -48,7 +48,7 @@ class FondosController extends AppController {
             
             $filter = $this->Filter->process($this);
 
-            $jurisdicciones = $this->Fondo->Jurisdiccion->find('list');
+            $jurisdicciones = $this->Fondo->Jurisdiccion->find('list', array('order'=>'name'));
             $anios = $this->Fondo->Instit->Plan->Anio->Ciclo->find('list');
 
             $this->set(compact('jurisdicciones','anios'));
@@ -66,6 +66,7 @@ class FondosController extends AppController {
 	}*/
 
 	function add() {
+                $this->redirect(array('action' => 'index'));
 		if (!empty($this->data)) {
 			$this->Fondo->create();
 			if ($this->Fondo->save($this->data)) {
@@ -78,6 +79,7 @@ class FondosController extends AppController {
 	}
 
 	function edit($id = null) {
+                $this->redirect(array('action' => 'index'));
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid Fondo', true));
 			$this->redirect(array('action' => 'index'));
@@ -96,6 +98,7 @@ class FondosController extends AppController {
 	}
 
 	function delete($id = null) {
+                $this->redirect(array('action' => 'index'));
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for Fondo', true));
 			$this->redirect(array('action' => 'index'));

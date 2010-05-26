@@ -92,6 +92,8 @@ class FondotemporalTestCase extends CakeTestCase {
         $this->assertEqual($this->FondoTemporal->compara_tipoInstit('Centro Educativo de Nivel Terciario N\' 24', $this->tipoInstits), 9);
         $this->assertEqual($this->FondoTemporal->compara_tipoInstit('Instituto Politécnico N° 37 Juan XXIII', $this->tipoInstits), 219);
         $this->assertEqual($this->FondoTemporal->compara_tipoInstit('EPET N° 15 Zapala', $this->tipoInstits), 220);
+        // bug porque entra antes por "mision monotecnica"
+        //$this->assertEqual($this->FondoTemporal->compara_tipoInstit('Misión Monotécnica y de Cultura Rural y Doméstica N° 15 San Salvador', $this->tipoInstits), 221);
 
         $this->assertEqual($this->FondoTemporal->compara_tipoInstit('Esc Ed T Nº 15 Maipú', $this->tipoInstits), 0);
     }
@@ -110,6 +112,7 @@ class FondotemporalTestCase extends CakeTestCase {
         $this->assertTrue($this->FondoTemporal->compara_institNombres('escuela N° 21 Juan Bautista Alberdi - ', 'JUAN BAUTISTA ALBERDI', $this->tipoInstits));
         $this->assertTrue($this->FondoTemporal->compara_institNombres('centro educativo de nivel terciario N° 21 Juan Bautista Alberdi - ', 'JUAN BAUTISTA ALBERDI', $this->tipoInstits));
         $this->assertTrue($this->FondoTemporal->compara_institNombres('Instituto DE Educación superior de COMercio N° 21 Juan Bautista Alberdi - ', 'JUAN BAUTISTA ALBERDI', $this->tipoInstits));
+        $this->assertTrue($this->FondoTemporal->compara_institNombres('EET N° 45 TEC Félix Bourren Meyer', 'FÉLIX BOURREN MEYER', $this->tipoInstits));
         
         //Escuela Técnica Nº 34 Ing. Enrique Martín Hermitte
         // en duda por "de" 2 veces $this->assertFalse($this->FondoTemporal->compara_institNombres('Escuela de Educación Técnica Teolinda Romero de Sotomayor - 25 de Mayo', '25 DE MAYO', $this->tipoInstits));

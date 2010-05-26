@@ -7,6 +7,9 @@
     <?php echo $form->input('jurisdiccion_id') ?>
 <?php echo $form->end('Search'); ?>
 
+<?
+if (count($fondos)) {
+?>
 <table cellpadding="0" cellspacing="0">
 <tr>
 	<th><?php echo $paginator->sort('instit_id');?></th>
@@ -46,19 +49,21 @@ foreach ($fondos as $fondo):
 			<?php echo $fondo['Fondo']['total']; ?>
 		</td>
 		<td class="actions">
-			<?php echo $html->link(__('View', true), array('action' => 'view', $fondo['Fondo']['id'])); ?>
+			<?php echo $html->link(__('ver', true), array('action' => 'index_x_instit', $fondo['Instit']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
 </table>
 </div>
-<div class="paging">
-	<?php echo $paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>
- | 	<?php echo $paginator->numbers(array('url'=>array($url)));?>
-	<?php echo $paginator->next(__('next', true).' >>', array(), null, array('class' => 'disabled'));?>
-</div>
-<div class="actions">
-	<ul>
-		<li><?php echo $html->link(__('New Fondo', true), array('action' => 'add')); ?></li>
-	</ul>
-</div>
+    <?
+    if ($paginator->numbers()) {
+    ?>
+    <div class="paging">
+            <?php echo $paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>
+     | 	<?php echo $paginator->numbers(array('url'=>array($url)));?>
+            <?php echo $paginator->next(__('next', true).' >>', array(), null, array('class' => 'disabled'));?>
+    </div>
+<?
+    }
+}
+?>
