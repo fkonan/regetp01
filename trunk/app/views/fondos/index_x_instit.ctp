@@ -55,7 +55,7 @@ echo $html->css('diQuery-collapsiblePanel.css');
                         <dd><?php echo $fondo['Fondo']['description']; ?></dd>
                         -->
                         
-                        <h2>Lineas de Accion</h2>
+                        <h2>Lineas de Acción</h2>
                         <div class="collapsibleContainer" title="Lineas de Accion">
                             <dl>
                             <?php
