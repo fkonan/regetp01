@@ -115,7 +115,7 @@ ul, li {
 	margin-bottom: 20px;
 	margin-left: auto;
 	background-color: white;
-	border: 5px solid #6676AA;
+	border: 2px solid #203C65;
 
 }
 
@@ -305,9 +305,11 @@ text-transform:uppercase;
 	padding: 6px 10px;
 	text-align: right;
 	margin-bottom: 30px;
-        border-bottom:2px dotted #6676AA;
-        border-top:2px dotted #6676AA;
-        background:#F0F7FC none repeat scroll 0 0;
+        border:2px dotted #6676AA;
+        background:#F0F7FC url('images/ministerioEduc.gif') no-repeat scroll 0 0;
+        width: 760px;
+        margin-left: 112px;
+
 }
 
 

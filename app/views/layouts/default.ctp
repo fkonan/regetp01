@@ -109,22 +109,23 @@
 			</div>
 		</div>
 		
-		<div id="footer">
-                        <p style="float:left;color:black;font-size:8pt;padding-left:250px; padding-top:10px; vertical-align: middle;font-weight: bold" >Instituto Nacional de Educación Tecnologica</p>
-			<?php echo $html->link(
-					$html->image('logoinet1.gif', array('style'=>'vertical-align:middle;width:70px','alt'=> __("Inet", true), 'border'=>"0")),
-					'http://www.cakephp.org/',
-					array('target'=>'_blank'), null, false
-				);
-			?>
-                        <?php echo $html->link(
-					$html->image('cake.power.gif', array('alt'=> __("CakePHP: the rapid development php framework", true), 'border'=>"0")),
-					'http://www.cakephp.org/',
-					array('target'=>'_blank'), null, false
-				);
-			?>
-		</div>
+		
 	</div>
+        <div id="footer">
+                <p style="float:left;color:#003d5c;font-size:8pt;padding-left:250px; padding-top:10px; vertical-align: middle;font-weight: bold" >Instituto Nacional de Educación Tecnologica</p>
+                <?php echo $html->link(
+                                $html->image('logoinet1.gif', array('style'=>'vertical-align:middle;width:70px','alt'=> __("Inet", true), 'border'=>"0")),
+                                'http://www.cakephp.org/',
+                                array('target'=>'_blank'), null, false
+                        );
+                ?>
+                <?php echo $html->link(
+                                $html->image('cake.power.gif', array('alt'=> __("CakePHP: the rapid development php framework", true), 'border'=>"0")),
+                                'http://www.cakephp.org/',
+                                array('target'=>'_blank'), null, false
+                        );
+                ?>
+        </div>
 	<?php echo $cakeDebug; ?>
 </body>
 </html>
