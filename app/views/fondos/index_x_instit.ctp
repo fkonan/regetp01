@@ -43,10 +43,11 @@ echo $html->css('diQuery-collapsiblePanel.css');
                 $i = 0;
                 foreach ($fondos as $fondo):
                 ?>
-                     <dl class="item_fondos" STYLE="padding-right: 0px;">
+                     <li class="item_fondos" STYLE="padding-right: 0px;">
                         <div class="header">
                             <dt><?php echo $fondo['Fondo']['anio'];?> - <?php echo $fondo['Fondo']['trimestre']; ?>º Trimestre </dt>
                         </div>
+                        <dl>
                         <dt>Memo:</dt>
                         <dd><?php echo $fondo['Fondo']['memo']; ?></dd>
                         <!--<dt>Resolucion:</dt>
@@ -54,6 +55,7 @@ echo $html->css('diQuery-collapsiblePanel.css');
                         <dt>Descripcion:</dt>
                         <dd><?php echo $fondo['Fondo']['description']; ?></dd>
                         -->
+                        </dl>
                         
                         <h2>Lineas de Acción</h2>
                         <div class="collapsibleContainer" title="Lineas de Accion">
@@ -69,7 +71,7 @@ echo $html->css('diQuery-collapsiblePanel.css');
                             <dt>Total:</dt>
                             <dd>$ <?php echo number_format($fondo['Fondo']['total'],2,",","."); ?></dd>
                         </div>
-                     </dl>
+                     </li>
                 <?php endforeach; ?>
                 </ul>
            </div>
