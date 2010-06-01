@@ -12,11 +12,13 @@ class FondosController extends AppController {
         
 	function index_x_instit($id=null) {
 
-            if($id){
+            if ($id) {
                 $this->paginate = array('conditions'=>array('Fondo.instit_id'=>$id),'order' => array('Fondo.anio DESC','Fondo.trimestre DESC','Fondo.jurisdiccion_id DESC'));
             }
-            else{
-                $this->paginate = array('conditions'=>array('Fondo.instit_id !='=>0),'order' => array('Fondo.anio DESC','Fondo.trimestre DESC','Fondo.jurisdiccion_id DESC'));
+            else {
+                $this->Session->setFlash(__('No especifica institución', true));
+                $this->redirect(array('action'=>'index'));
+                //$this->paginate = array('conditions'=>array('Fondo.instit_id !='=>0),'order' => array('Fondo.anio DESC','Fondo.trimestre DESC','Fondo.jurisdiccion_id DESC'));
             }
 
             $this->Fondo->recursive = 1;
@@ -28,11 +30,13 @@ class FondosController extends AppController {
 
         function index_x_jurisdiccion($id=null) {
 
-            if($id){
+            if ($id) {
                 $this->paginate = array('conditions'=>array('Fondo.instit_id'=> 0,'Fondo.jurisdiccion_id'=>$id),'order' => array('Fondo.anio DESC','Fondo.trimestre DESC','Fondo.jurisdiccion_id DESC'));
             }
-            else{
-                $this->paginate = array('conditions'=>array('Fondo.instit_id'=> 0), 'order' => array('Fondo.anio DESC','Fondo.trimestre DESC','Fondo.jurisdiccion_id DESC'));
+            else {
+                $this->Session->setFlash(__('No especifica jurisdicción', true));
+                $this->redirect(array('action'=>'index'));
+                //$this->paginate = array('conditions'=>array('Fondo.instit_id'=> 0), 'order' => array('Fondo.anio DESC','Fondo.trimestre DESC','Fondo.jurisdiccion_id DESC'));
             }
 
             $this->Fondo->recursive = 1;
