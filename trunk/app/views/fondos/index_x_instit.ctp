@@ -68,7 +68,7 @@ echo $html->css('diQuery-collapsiblePanel.css');
                             </dl>
                         </div>
                         <div class="total">
-                            <dt>Total:</dt>
+                            <dt>Total</dt>
                             <dd>$ <?php echo number_format($fondo['Fondo']['total'],2,",","."); ?></dd>
                         </div>
                      </li>

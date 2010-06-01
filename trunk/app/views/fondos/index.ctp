@@ -66,11 +66,13 @@ foreach ($fondos as $fondo):
 </table>
 </div>
     <?
+    $paginator->options(array('url' => $this->passedArgs));
+
     if ($paginator->numbers()) {
     ?>
     <div class="paging">
             <?php echo $paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>
-     | 	<?php echo $paginator->numbers(array('url'=>array($url)));?>
+     | 	<?php echo $paginator->numbers();?>
             <?php echo $paginator->next(__('next', true).' >>', array(), null, array('class' => 'disabled'));?>
     </div>
 <?

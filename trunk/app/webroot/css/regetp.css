@@ -1560,14 +1560,16 @@ input[type="hidden"]{
 }
 
 .lista_fondos .item_fondos .total{
-    padding-top: 15px ;
+    padding-top: 5px;
     font-weight:bold;
     border:0px solid #CCCCCC;
     border-top-width:0;
     color:#20326E;
-    font-size:12pt;
+    font-size:11pt;
     margin-top:0;
-    padding-top:0;
     background-color:#F0F7FC
+}
+.lista_fondos .item_fondos .total dd,dt{
+    padding-top: 2px;
 }
 
