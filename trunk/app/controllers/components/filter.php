@@ -47,7 +47,7 @@ class FilterComponent extends Object {
             //Loop for models
             foreach($controller->data as $key=>$value){
 
-                $key = substr($key, 0 ,strlen($key) - 1);
+                //$key = substr($key, 0 ,strlen($key) - 1);
                 
                 if(isset($controller->{$key})){
                     $columns = $controller->{$key}->getColumnTypes();
