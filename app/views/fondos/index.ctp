@@ -56,7 +56,7 @@ foreach ($fondos as $fondo):
 			<?php echo $fondo['Fondo']['memo']; ?>
 		</td>
 		<td>
-			<?php echo $fondo['Fondo']['total']; ?>
+                        $<?=number_format($fondo['Fondo']['total'],2,",",".");?>
 		</td>
 		<td class="actions">
 			<?php echo $html->link(__('ver', true), array('action' => 'index_x_instit', $fondo['Instit']['id'])); ?>
