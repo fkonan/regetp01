@@ -1,15 +1,18 @@
 <div class="fondos index">
 <h2><?php __('Fondos');?></h2>
+<?php
+$trimestres=array(''=>'Todos','1'=>'1º','2'=>'2º','3'=>'3º','4'=>'4º');
+?>
 
 <div style="margin-bottom: 20px">
-    <?php echo $form->create('Fondos',array('url'=>array('action'=>'index'))) ?>
+    <?php echo $form->create('Fondo',array('url'=>array('action'=>'index'))) ?>
         <div>
             <span>Año</span>
             <span style="padding-left:30px">Trimestre</span>
             <span style="padding-left:30px">Jurisdicción</span>
         </div>
         <span><?php echo $form->input('anio',array('label'=>false,'options'=>$anios, 'div'=>false)) ?></span>
-        <span><?php echo $form->input('trimestre', array('label'=>false,'options'=>array(1,2,3,4), 'style'=>'width:100px','div'=>false)) ?></span>
+        <span><?php echo $form->input('trimestre', array('label'=>false,'options'=>$trimestres, 'style'=>'width:100px','div'=>false)) ?></span>
         <span><?php echo $form->input('jurisdiccion_id',array('label'=>false,'div'=>false)) ?></span>
     <?php echo $form->end('Search',array('style'=>'float:right')); ?>
 </div>

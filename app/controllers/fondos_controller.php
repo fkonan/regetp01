@@ -52,9 +52,15 @@ class FondosController extends AppController {
             
             $filter = $this->Filter->process($this);
 
+            $todos = array('' => 'Todos');
+            
             $jurisdicciones = $this->Fondo->Jurisdiccion->find('list', array('order'=>'name'));
-            $anios = $this->Fondo->Instit->Plan->Anio->Ciclo->find('list');
+            $jurisdicciones = $todos + $jurisdicciones;
 
+            $anios = $this->Fondo->Instit->Plan->Anio->Ciclo->find('list');//, array('fields'=>array('anio','anio')));
+            $anios = $todos + $anios;
+
+            
             $this->set(compact('jurisdicciones','anios'));
             $this->set('url',$this->Filter->url);
             $this->set('fondos', $this->paginate(null,$filter));
