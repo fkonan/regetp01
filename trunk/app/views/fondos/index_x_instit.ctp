@@ -1,7 +1,7 @@
 <!--<?
-echo $javascript->link('jquery-1.4.2.min');
-echo $javascript->link('diQuery-collapsiblePanel.js');
-echo $html->css('diQuery-collapsiblePanel.css');
+//echo $javascript->link('jquery-1.4.2.min');
+//echo $javascript->link('diQuery-collapsiblePanel.js');
+//echo $html->css('diQuery-collapsiblePanel.css');
 ?>
 <script language="javascript" type="text/javascript">
     jQuery.noConflict();
@@ -30,50 +30,9 @@ echo $html->css('diQuery-collapsiblePanel.css');
             </div>
 
             <div style="border-top:2px solid #9DA6C1" class="tabs-content">
-
-                <h2>Listado de Planes de Mejora</h2>
-                <ul style="padding-top: 20px" class="lista_fondos">
-
-                <?php
-                if(empty($fondos)){
-                ?>
-                    <p class='msg-atencion'>La Instituci&oacute;n no presenta planes de mejora</p>
-                <?php
-                }
-                $i = 0;
-                foreach ($fondos as $fondo):
-                ?>
-                     <li class="item_fondos" STYLE="padding-right: 0px;">
-                        <div class="header">
-                            <dt><?php echo $fondo['Fondo']['anio'];?> - <?php echo $fondo['Fondo']['trimestre']; ?>º Trimestre </dt>
-                        </div>
-                        <dl>
-                        <dt>Memo:</dt>
-                        <dd><?php echo $fondo['Fondo']['memo']; ?></dd>
-                        <!--<dt>Resolucion:</dt>
-                        <dd><?php echo $fondo['Fondo']['resolucion']; ?></dd>
-                        <dt>Descripcion:</dt>
-                        <dd><?php echo $fondo['Fondo']['description']; ?></dd>
-                        -->
-                        </dl>
-                        
-                        <h2>Lineas de Acción</h2>
-                        <div class="collapsibleContainer" title="Lineas de Accion">
-                            <dl>
-                            <?php
-                                foreach ($fondo['LineasDeAccion'] as $linea):
-                            ?>
-                                <dt><?=$linea['name']?> (<?=$linea['description']?>) </dt> <dd>$ <?=number_format($linea['FondosLineasDeAccion']['monto'],2,",",".");?></dd>
-                            <?php endforeach; ?>
-                            </dl>
-                        </div>
-                        <div class="total">
-                            <dt>Total</dt>
-                            <dd>$ <?php echo number_format($fondo['Fondo']['total'],2,",","."); ?></dd>
-                        </div>
-                     </li>
-                <?php endforeach; ?>
-                </ul>
+                <p><p><p><p>
+                    <p class='msg-atencion'>Los datos sobre planes de mejora aprobados serán publicados a la brevedad.</p>
+                </p></p> </p></p>
            </div>
     </div>
     <?php
