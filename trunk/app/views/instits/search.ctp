@@ -1,3 +1,6 @@
+<?php
+    echo $javascript->link('zeroclipboard/ZeroClipboard.js');
+?>
 
 <h1><?= __('Buscar Institución')?></h1>
 
@@ -107,8 +110,10 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 		>
 		
 		<div class="instit_link_list">
-		<?php echo $html->link('+ Info','/instits/view/'.$instit['Instit']['id']);?>
-		</div>	
+                    <?php echo $html->link('+ Info','/instits/view/'.$instit['Instit']['id']);?>
+		<div id="d_clip_button<?=$instit['Instit']['id']?>" instit="infoToCopy<?=$instit['Instit']['id']?>" class="my_clip_button"></div>
+                </div>
+                <input id="infoToCopy<?=$instit['Instit']['id']?>" type="hidden" value="<?= $instit['Instit']['nombre_completo']?>"/>
 		<div class="instit_data_bs">
 			<? 
 			//el anexo viene con 1 solo digito por lo general. Pero para leerlo siempre hay que ponerlo
@@ -124,6 +129,21 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 			<div class="instit_atributte"><b>Departamento: </b><?= $instit['Departamento']['name'] ?></div>
 			<div class="instit_atributte"><b>Localidad: </b><?= $instit['Localidad']['name'] ?></div>
 		</div>
+                <script language="JavaScript">
+
+                    var clip = new ZeroClipboard.Client();
+
+                    ZeroClipboard.setMoviePath('<?php echo $html->url("/js/zeroclipboard/ZeroClipboard10.swf"); ?>');
+
+                    clip.setText( '' ); // will be set later on mouseDown
+                    clip.setHandCursor( true );
+                    clip.addEventListener( 'mouseDown', function(client) {
+                       client.setText($("infoToCopy<?=$instit['Instit']['id']?>").value);
+                    } );
+
+                    clip.glue( 'd_clip_button<?=$instit['Instit']['id']?>' );
+               </script>
+
 	</li>
 	
 		<?
@@ -131,8 +151,6 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 	}
 	?>
 	</ul>
-	
-	
 	<div id="paginator_prev_next_links">
 	<?php	
 		echo $paginator->prev('« Anterior ',null, null, array('class' => 'disabled'));
