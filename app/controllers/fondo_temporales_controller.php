@@ -102,7 +102,6 @@ class FondoTemporalesController extends AppController {
                                   $fondo['FondoTemporal']['f08'] +
                                   $fondo['FondoTemporal']['f09'] +
                                   $fondo['FondoTemporal']['f10'] +
-                                  $fondo['FondoTemporal']['f10'] +
                                   $fondo['FondoTemporal']['equipinf'] +
                                   $fondo['FondoTemporal']['refaccion'] -
                                   $fondo['FondoTemporal']['total']);
@@ -193,6 +192,79 @@ class FondoTemporalesController extends AppController {
                 }
 
                 $this->set('report', $report);
+	}
+
+        function error_report_txt() {
+            $fondoInfo = '';
+
+            $this->FondoTemporal->recursive = 0;
+
+            if (@$this->passedArgs['obs']) {
+                $fondos = $this->FondoTemporal->find("all",
+                            array('conditions'=>array(
+                                            'tipo'=>array('i','j'),
+                                            'totales_checked'=>array(2,3)),
+                                  'fields'=> array('ABS(("FondoTemporal"."f01"+"FondoTemporal"."f02a"+"FondoTemporal"."f02b"+"FondoTemporal"."f02c"
+                                                    +"FondoTemporal"."f03a"+"FondoTemporal"."f03b"+"FondoTemporal"."f04"+"FondoTemporal"."f05"
+                                                    +"FondoTemporal"."f06a"+"FondoTemporal"."f06b"+"FondoTemporal"."f06c"+"FondoTemporal"."f07a"
+                                                    +"FondoTemporal"."f07b"+"FondoTemporal"."f07c"+"FondoTemporal"."f08"+"FondoTemporal"."f09"
+                                                    +"FondoTemporal"."f10"+"FondoTemporal"."equipinf"+"FondoTemporal"."refaccion") - "FondoTemporal"."total")
+                                                                            AS "FondoTemporal__diff"',
+                                                    '"FondoTemporal"."*"'),
+                                  'order' => array('FondoTemporal__diff'=>'DESC','FondoTemporal.jurisdiccion_id,anio,trimestre')));
+
+                foreach ($fondos as &$fondo)
+                {
+                    $diff=$fondo['FondoTemporal']['diff'];
+                    $fondo['FondoTemporal'] = $fondo['0'];
+                    $fondo['FondoTemporal']['diff'] = $diff;
+                }
+            }
+            else {
+                $fondos = $this->FondoTemporal->find("all",
+                            array('conditions'=>array(
+                                            'tipo'=>array('i','j'),
+                                            'totales_checked'=>array(2,3)),
+                                  'order' => array('FondoTemporal.jurisdiccion_id,anio,trimestre')));
+            }
+
+            foreach ($fondos as $fondo)
+            {
+                $difference = abs($fondo['FondoTemporal']['f01'] +
+                              $fondo['FondoTemporal']['f02a'] +
+                              $fondo['FondoTemporal']['f02b'] +
+                              $fondo['FondoTemporal']['f02c'] +
+                              $fondo['FondoTemporal']['f03a'] +
+                              $fondo['FondoTemporal']['f03b'] +
+                              $fondo['FondoTemporal']['f04'] +
+                              $fondo['FondoTemporal']['f05'] +
+                              $fondo['FondoTemporal']['f06a'] +
+                              $fondo['FondoTemporal']['f06b'] +
+                              $fondo['FondoTemporal']['f06c'] +
+                              $fondo['FondoTemporal']['f07a'] +
+                              $fondo['FondoTemporal']['f07b'] +
+                              $fondo['FondoTemporal']['f07c'] +
+                              $fondo['FondoTemporal']['f08'] +
+                              $fondo['FondoTemporal']['f09'] +
+                              $fondo['FondoTemporal']['f10'] +
+                              $fondo['FondoTemporal']['equipinf'] +
+                              $fondo['FondoTemporal']['refaccion'] -
+                              $fondo['FondoTemporal']['total']);
+
+                if ($difference > 5)
+                {
+                    // instit_name tiene prioridad, viene mas completo
+                    if (!strlen($fondo['FondoTemporal']['instit_name']) && strlen($fondo['FondoTemporal']['instit'])) {
+                        $fondo['FondoTemporal']['instit_name'] = $fondo['FondoTemporal']['instit'];
+                    }
+
+                    $fondo['FondoTemporal']['difference'] = $difference;
+
+                    $fondos_finales[] = $fondo;
+                }
+            }
+
+            $this->set('fondos', $fondos_finales);
 	}
 
         function observacion_report() {
