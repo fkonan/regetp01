@@ -1538,13 +1538,14 @@ input[type="hidden"]{
 }
 
 .lista_fondos .item_fondos{
-	border-top: thin solid #E0ECF8;
-	border-bottom: thin solid #E0ECF8;
-	margin: 0px;
+	border-top: thin solid #6F7BA3;
+	border-bottom: thin solid #6F7BA3;
+	margin-top: 10px;
+        margin-left:  0px;
+        margin-right: 0px;
         /*background-color: #E8F2FB;*/
-        margin-bottom: 10px;
-        border: 3px solid #E8F2FB;
-
+        margin-bottom: 37px;
+        border: 2px solid #6F7BA3;
 }
 
 .lista_fondos .item_fondos .header{
@@ -1552,7 +1553,6 @@ input[type="hidden"]{
 	-moz-background-inline-policy:continuous;
 	-moz-background-origin:padding;
 	background:#5C9CCC url(../img/fondo_panel_collapsible.png) repeat-x scroll 50% 50%;
-	border:1px solid #4297D7;
 	color:#FFFFFF;
 	font-weight:bold;
 }
@@ -1567,21 +1567,45 @@ input[type="hidden"]{
     padding-right: 25px;
 }
 
+.item_fondos_seleccionado{
+    background-color: #F0F7FC;
+}
+
+.total {
+    padding: 1px 10px;
+    margin-right: -1px;
+    -moz-border-radius-bottomleft:14px;
+    -moz-border-radius-bottomright:14px;
+    -webkit-border-bottom-left-radius: 14px;
+    -webkit-border-bottom-right-radius: 14px;
+}
+
 .lista_fondos .item_fondos dt{
     border-bottom:1px dotted #CCCCCC;
 }
 
 .lista_fondos .item_fondos .total{
-    padding-top: 5px;
     font-weight:bold;
     border:0px solid #CCCCCC;
     border-top-width:0;
-    color:#20326E;
+    color: white;
     font-size:11pt;
     margin-top:0;
-    background-color:#F0F7FC
+    background-color:#6F7BA3;
 }
 .lista_fondos .item_fondos .total dd,dt{
     padding-top: 2px;
+    padding-left:15px;
 }
 
+
+
+.lista_fondos dl{
+    line-height: 11pt;
+    
+}
+
+.lista_fondos dd{
+    margin-top: -17px;
+
+}
