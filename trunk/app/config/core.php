@@ -180,7 +180,7 @@
 /*
  * Inet Options
  */
-        Configure::write('es_dia_patrio', true);
+        Configure::write('es_dia_patrio', false);
 /**
  *
  * Cache Engine Configuration
