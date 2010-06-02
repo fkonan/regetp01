@@ -20,14 +20,14 @@ Requerimientos mínimos para utilizar el <b>Sistema Gestión de Registro</b>:<br /
 
 <br />
 
-<h2>¡Nueva Versión 1.4!</h2>
+<h2>¡Nueva Versión 1.4.1!</h2>
 
 <p>
 
 Desde su puesta en funcionamiento en junio de 2009 el sistema RFIETP se encuentra
 en permanente actualización y mejoramiento, tanto del contenido de información de
 la base de datos como de la aplicación que permite su gestión. En esa línea de
-trabajo a partir del 8 de Marzo del 2010 se ha instalado la versión 1.4 del
+trabajo a partir del 7 de Junio del 2010 se ha instalado la versión 1.4.1 del
 sistema.
 </p>
 <p>
@@ -49,7 +49,8 @@ Registro.
 </p>
 <p>
 Esta información se publicará a medida que la Unidad de Información vaya avanzando
-con la depuración y carga de datos.
+con la depuración y carga de datos.<br>
+En particular la versión 1.4.1 ofrece varias mejoras estéticas y de presentación de la información.
 </p>
 
 <p>
