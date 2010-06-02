@@ -23,7 +23,6 @@ Requerimientos mínimos para utilizar el <b>Sistema Gestión de Registro</b>:<br /
 <h2>¡Nueva Versión 1.4.1!</h2>
 
 <p>
-
 Desde su puesta en funcionamiento en junio de 2009 el sistema RFIETP se encuentra
 en permanente actualización y mejoramiento, tanto del contenido de información de
 la base de datos como de la aplicación que permite su gestión. En esa línea de
