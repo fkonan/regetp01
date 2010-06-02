@@ -1609,3 +1609,15 @@ input[type="hidden"]{
     margin-top: -17px;
 
 }
+
+.my_clip_button {
+    width: 30px;
+    height: 30px;
+    background-image:url("images/copy.png");
+    background-repeat: no-repeat;
+    cursor:default;
+    font-size:9pt;
+    margin-top: 42px;
+    margin-left: 15px;
+    position: absolute;
+}
