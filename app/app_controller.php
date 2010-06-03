@@ -134,6 +134,8 @@ class AppController extends Controller {
 
 			if ($this->name == 'HistorialCues' && $this->action == 'search_form') {$llAuth = true;}
 			if ($this->name == 'HistorialCues' && $this->action == 'search') {$llAuth = true;}
+
+                        if ($this->name == 'Fondos' && $this->action == 'index_x_instit') {$llAuth = true;}
 			
 			break;
 		  case 'invitado':	
@@ -151,7 +153,10 @@ class AppController extends Controller {
 			
 			if ($this->name == 'HistorialCues' && $this->action == 'search_form') {$llAuth = true;}
 			if ($this->name == 'HistorialCues' && $this->action == 'search') {$llAuth = true;}
-			break;
+			
+                        if ($this->name == 'Fondos' && $this->action == 'index_x_instit') {$llAuth = true;}
+                        
+                        break;
 		  default: die('El tipo de usuario no concuerda con ninguno setteado en el sistema y se abortará la operación');
 		endswitch;
 		
