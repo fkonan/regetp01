@@ -18,6 +18,10 @@
             CUE: <?=$fondo['FondoTemporal']['cuecompleto']?><br />
             Institución: <?=$fondo['FondoTemporal']['instit_name']?><br />
         <? } ?>
+        <?
+        if (@$this->passedArgs['obs']) { ?>
+            Línea en Excel: <?=$fondo['FondoTemporal']['linea']?><br />
+        <? } ?>
         </div>
             <table border="0" cellspacing="0" cellpadding="0" style="width:50%;font-size:12px;">
                 <tr>
@@ -144,7 +148,7 @@
                     <td style="text-align:right;"><?=number_format($fondo['FondoTemporal']['total'],2,",",".")?></td>
                 </tr>
                 <? } ?>
-                <? if ($fondo['FondoTemporal']['diff']) { ?>
+                <? if (@$this->passedArgs['obs']) { ?>
                 <tr>
                     <td style="text-align:left;"><b>Diferencia</b></td>
                     <td style="text-align:right;"><?=number_format($fondo['FondoTemporal']['diff'],2,",",".")?></td>
