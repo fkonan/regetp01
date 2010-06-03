@@ -1611,13 +1611,12 @@ input[type="hidden"]{
 }
 
 .my_clip_button {
-    width: 30px;
-    height: 30px;
+    width: 18px;
+    height: 18px;
     background-image:url("images/copy.png");
     background-repeat: no-repeat;
     cursor:default;
     font-size:9pt;
-    margin-top: 42px;
-    margin-left: 15px;
-    position: absolute;
+    margin-left: 25px;
+    margin-top: 5px;
 }
