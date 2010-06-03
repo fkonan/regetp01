@@ -113,7 +113,7 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
                     <?php echo $html->link('+ Info','/instits/view/'.$instit['Instit']['id']);?>
 		<div id="d_clip_button<?=$instit['Instit']['id']?>" instit="infoToCopy<?=$instit['Instit']['id']?>" class="my_clip_button"></div>
                 </div>
-                <input id="infoToCopy<?=$instit['Instit']['id']?>" type="hidden" value="<?= $instit['Instit']['nombre_completo']?>"/>
+                <input id="infoToCopy<?=$instit['Instit']['id']?>" type="hidden" value="<?= ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'] . ' - ' . $instit['Instit']['nombre_completo'] . ' - ' . $instit['Instit']['direccion'] . ' - ' . $instit['Departamento']['name'] . ' - ' . $instit['Localidad']['name'] ?> "/>
 		<div class="instit_data_bs">
 			<? 
 			//el anexo viene con 1 solo digito por lo general. Pero para leerlo siempre hay que ponerlo
