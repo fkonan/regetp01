@@ -48,7 +48,9 @@ Registro.
 </p>
 <p>
 Esta información se publicará a medida que la Unidad de Información vaya avanzando
-con la depuración y carga de datos.<br>
+con la depuración y carga de datos.
+</p>
+<p>
 En particular la versión 1.4.1 ofrece varias mejoras estéticas y de presentación de la información.
 </p>
 

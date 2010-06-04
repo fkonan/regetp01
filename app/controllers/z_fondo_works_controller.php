@@ -20,6 +20,9 @@ class ZFondoWorksController extends AppController {
      * @return <type>
      */
     function migrator($validar = 1, $cantDeFondosDelExcel = 7021, $cantRegistros = 0, $eliminarArchivosDeFondoYLineas = 1) {
+        // solo migro por defecto instits y jurisdiccionales
+        // y no me importa si estan chekeados o no
+        $cosasAmigrar = 'ij';
         if ( $validar) {
             $tempsComprobacion = $this->ZFondoWork->temporalesFiltradosX('ijc', $cantRegistros, $eliminarArchivosDeFondoYLineas);
             $totTemps = count($tempsComprobacion);
@@ -30,10 +33,16 @@ class ZFondoWorksController extends AppController {
                 $this->set('msg_check_type', 'error');
                 return;
             }
+            // generalmente si quiero validar es porque estoy realizando
+            // la migracion definitiva
+            // en ese caso quiero aegurarme que tanto las instituciones
+            // como los jurisdiccionales
+            // esten checkeados ya sea su CUE o sus TOTALES
+             $cosasAmigrar = 'ijc';
         }
 
 
-        $iMi = $this->ZFondoWork->migrar('ijc', $cantRegistros, $eliminarArchivosDeFondoYLineas);
+        $iMi = $this->ZFondoWork->migrar($cosasAmigrar, $cantRegistros, $eliminarArchivosDeFondoYLineas);
         switch ($iMi) {
             case -1:
                 $msg =  $this->ZFondoWork->migrationStatus;

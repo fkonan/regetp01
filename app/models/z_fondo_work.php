@@ -97,12 +97,14 @@ class ZFondoWork extends AppModel {
             foreach ($data as $f) {
                 $this->Fondo->create();
                 if ($this->Fondo->save($f['Fondo'])) { // guardar el fondo
-                    foreach ($f['Fondo']['FondosLineasDeAccion'] as $la) {
-                        // guardar cada linea de accion del fondo
-                        $this->Fondo->FondosLineasDeAccion->create();
-                        $la['fondo_id'] = $this->Fondo->id;
-                        if (!$this->Fondo->FondosLineasDeAccion->save($la)) {
-                            return -4;
+                    if (!empty($f['Fondo']['FondosLineasDeAccion'])){
+                        foreach ($f['Fondo']['FondosLineasDeAccion'] as $la) {
+                            // guardar cada linea de accion del fondo
+                            $this->Fondo->FondosLineasDeAccion->create();
+                            $la['fondo_id'] = $this->Fondo->id;
+                            if (!$this->Fondo->FondosLineasDeAccion->save($la)) {
+                                return -4;
+                            }
                         }
                     }
                 } else { // no se pudo guardar el fondo

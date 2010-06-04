@@ -46,10 +46,10 @@ class FondosController extends AppController {
             $this->set('fondos', $this->paginate());
 	}
 
-        function index() {
-
+        function index()
+        {
             $this->Fondo->recursive = 0;
-            
+            $this->Fondo->order = array('Fondo.anio DESC', 'Fondo.trimestre','Fondo.jurisdiccion_id ASC');
             $filter = $this->Filter->process($this);
 
             $todos = array('' => 'Todos');
