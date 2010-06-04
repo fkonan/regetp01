@@ -1620,3 +1620,13 @@ input[type="hidden"]{
     margin-left: 25px;
     margin-top: 5px;
 }
+
+.my_clip_button2 {
+    width: 18px;
+    height: 18px;
+    background-image:url("images/copy.png");
+    background-repeat: no-repeat;
+    cursor:pointer;
+    font-size:9pt;
+    float:right;
+}

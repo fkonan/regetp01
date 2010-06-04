@@ -1,18 +1,3 @@
-<!--<?
-//echo $javascript->link('jquery-1.4.2.min');
-//echo $javascript->link('diQuery-collapsiblePanel.js');
-//echo $html->css('diQuery-collapsiblePanel.css');
-?>
-<script language="javascript" type="text/javascript">
-    jQuery.noConflict();
-
-    jQuery(document).ready(function() {
-        jQuery(".collapsibleContainer").collapsiblePanel();
-        jQuery(".collapsibleContainerContent").hide();
-    });
-</script>
--->
-
 
 <div class="fondos index">
    <div id="escuela_estado" class="<? echo $instit['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $instit['Instit']['activo']? 'Institución Ingresada al RFIETP':'Institución NO Ingresada al RFIETP';?></div>
@@ -29,6 +14,22 @@
                     <span class="tab-grande-activa"><?php echo $html->link('Planes de Mejora',array('controller'=>'Fondos','action'=>'index', $instit['Instit']['id']));?></span>
             </div>
 
+            <div id="d_clip_button" class="my_clip_button2"></div>
+            <input id="infoToCopy" type="hidden" value="<?= ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'] . ' - ' . $instit['Instit']['nombre_completo'] . ' - ' . $instit['Instit']['direccion'] . ' - ' . $instit['Departamento']['name'] . ' - ' . $instit['Localidad']['name'] ?> "/>
+            <script language="JavaScript">
+                var clip = new ZeroClipboard.Client();
+
+                ZeroClipboard.setMoviePath('<?php echo $html->url("/js/zeroclipboard/ZeroClipboard10.swf"); ?>');
+
+                clip.setText( '' ); // will be set later on mouseDown
+                clip.setHandCursor( true );
+                clip.addEventListener( 'mouseDown', function(client) {
+                   client.setText($("infoToCopy").value);
+                } );
+
+                clip.glue( 'd_clip_button' );
+           </script>
+            
             <div style="border-top:2px solid #9DA6C1" class="tabs-content">
 
                 <h2>Listado de Planes de Mejora</h2>
