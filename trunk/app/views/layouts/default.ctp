@@ -112,7 +112,7 @@
 		
 	</div>
         <div id="footer">
-                <p style="float:left;color:#003d5c;font-size:8pt;padding-left:250px; padding-top:10px; vertical-align: middle;font-weight: bold" >Instituto Nacional de Educación Tecnologica</p>
+                <p style="float:left;color:#003d5c;font-size:8pt;padding-left:250px; padding-top:10px; vertical-align: middle;font-weight: bold" >Instituto Nacional de Educación Tecnológica</p>
                 <?php echo $html->link(
                                 $html->image('logoinet1.gif', array('style'=>'vertical-align:middle;width:70px','alt'=> __("Inet", true), 'border'=>"0")),
                                 'http://www.cakephp.org/',
