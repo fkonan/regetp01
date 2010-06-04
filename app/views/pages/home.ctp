@@ -34,6 +34,7 @@ La nueva versión mejora la información del Registro incorporando nuevas categorí
 de clasificación, a saber:
 </p>
 <ul>
+    <li>Mejoras estéticas.</li>
     <li>Orientaciones de Instituciones. Permite identificar a cada institución
         según su Orientación (Agropecuaria, Industrial, Otra).</li>
     <li>Títulos de Referencia. Permite agrupar bajo una denominación de

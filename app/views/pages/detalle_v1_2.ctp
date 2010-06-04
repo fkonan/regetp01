@@ -1,16 +1,24 @@
 <h1>RFIETP - Novedades de la versión 1.4.1</h1>
 <br>
 <ul>
-    <li><b>Orientación de la Institución</b></li>
-    <li>
+    <li><b>Estética</b>
         <ul type="circle">
-            <li>Se agregó una "Orientación" a cada Institución ingresada.</li>
-            <li>Las Orientaciones posibles son: Agropecuaria, Industrial u Otra.</li>
-            <li>Se migró información de los excel de la Unidad de Información</li>
+            <li>Se mejoró el diseño de la interfaz gráfica.</li>
+            <li>Se optimizó la visualización de información sobre institituciones.</li>
         </ul>
     </li>
+    
+    <br>
+<!--
+    <li><b>Planes de Mejora</b>   
+        <ul type="circle">
+            <li>Se migraron los planes de mejora aprobados desde el 2006 hasta el 4to trimestre del 2009.</li>
+            <li>Se crearon las vistas para mostrar dicha información.</li>
+        </ul>
+   </li>
+-->
 </ul>
-
+<br>
 
 <h1>RFIETP - Novedades de la versión 1.4</h1>
 <br>
