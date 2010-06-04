@@ -456,11 +456,15 @@ class ZFondoWorkTestCase extends CakeTestCase {
          */
         $sumaDeLasLineas = 136.05;
 
+       
+
         /* @var $fondo Fondo */
         $fondo =& ClassRegistry::init('Fondo');
         /* @var $lineas LineasDeAccion */
         $lineas =& ClassRegistry::init('FondosLineasDeAccion');
-        $lineas->query("truncate fondos_lineas_de_acciones");
+
+         // le sumo lo que esta en el fixture
+        $sumaDeLasLineas = 136.05 + $lineas->find('sum');
 
         // me guardo los valores totales para luego hacer el assert
         $cantFondos = $fondo->find('count');
@@ -505,6 +509,10 @@ class ZFondoWorkTestCase extends CakeTestCase {
         $this->assertEqual(1, $resu); // hay 1 registro
         $this->assertEqual(2, $this->ZFondoWork->Fondo->FondosLineasDeAccion->find('count'));
         $this->assertEqual(1, $this->ZFondoWork->Fondo->find('count'));
+
+        
+        // Se elimina lo que esta en el fixture
+        $this->ZFondoWork->Fondo->del(1);
 
         
         // corro la migracion para instituciones y jurisdiccionales sin importar si estan  o no checkeados

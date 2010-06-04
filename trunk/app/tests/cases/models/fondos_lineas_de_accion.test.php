@@ -61,11 +61,13 @@ class FondosLineasDeAccionTestCase extends CakeTestCase {
             $this->assertEqual($sumaInicial+$montoSumar, floatval($trajo2));
 
 
+            // este me suma solo la linea de accion id = 2
             $condicion = array('FondosLineasDeAccion.lineas_de_accion_id'=>2);
             $trajo3 = $this->FondosLineasDeAccion->find('sum', array('conditions'=>$condicion));
             $this->assertEqual($montoSumar, $trajo3);
 
 
+            // ahora inserto otra linea de accion 2 para volver a checkear que pasa cuando voy insertando nuevas
             $montoSumar2 = 10.5;
             $other2 = array('FondosLineasDeAccion' => array(
 			'id' => 3,
@@ -83,7 +85,7 @@ class FondosLineasDeAccionTestCase extends CakeTestCase {
            
             // pruebo agrupar por 2 campos. No se deberia poder hacer esto
             $trajo5 = $this->FondosLineasDeAccion->find('sum', array(
-                        'group' => '"FondosLineasDeAccion"."lineas_de_accion_id"'
+                        'group' => '"FondosLineasDeAccion"."lineas_de_accion_id"',
             ));
 
             $expected = array(
@@ -101,7 +103,7 @@ class FondosLineasDeAccionTestCase extends CakeTestCase {
                 )
             );
             
-            // me tenia que haber tirado una excepcion
+            // 
             $this->assertEqual($expected, $trajo5);
 
 
@@ -112,7 +114,6 @@ class FondosLineasDeAccionTestCase extends CakeTestCase {
                 $cont += $plata['FondosLineasDeAccion']['sum'];
             }
             $this->assertEqual($trajo6, $cont);
-           
         }
 }
 ?>
