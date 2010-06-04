@@ -1,3 +1,6 @@
+<?php
+    echo $javascript->link('zeroclipboard/ZeroClipboard.js');
+?>
 <?php echo $html->css('ajaxtabs.css');?>
 <div id="escuela_estado" class="<? echo $planes['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $planes['Instit']['activo']? 'Institución Ingresada al RFIETP':'Institución NO Ingresada al RFIETP';?></div>
 <?
@@ -11,6 +14,21 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                     <span class="tab-grande-activa"><?php echo $html->link('Oferta Educativa',array('controller'=>'Planes','action'=>'index', $planes['Instit']['id']));?></span>
                     <span class="tab-grande-inactiva"><?php echo $html->link('Planes de Mejora',array('controller'=>'Fondos','action'=>'index_x_instit', $planes['Instit']['id']));?></span>
             </div>
+            <div id="d_clip_button" class="my_clip_button2"></div>
+            <input id="infoToCopy" type="hidden" value="<?= ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'] . ' - ' .$planes['Instit']['nombre_completo'] . ' - ' . $planes['Instit']['direccion'] . ' - ' . $planes['Departamento']['name'] . ' - ' . $planes['Localidad']['name'] ?> "/>
+            <script language="JavaScript">
+                var clip = new ZeroClipboard.Client();
+
+                ZeroClipboard.setMoviePath('<?php echo $html->url("/js/zeroclipboard/ZeroClipboard10.swf"); ?>');
+
+                clip.setText( '' ); // will be set later on mouseDown
+                clip.setHandCursor( true );
+                clip.addEventListener( 'mouseDown', function(client) {
+                   client.setText($("infoToCopy").value);
+                } );
+
+                clip.glue( 'd_clip_button' );
+           </script>
             <div style="border-top:2px solid #9DA6C1" class="tabs-content">
                 <div class="related">
 
