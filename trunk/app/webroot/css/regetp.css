@@ -215,7 +215,12 @@ ul, li {
 	border-left-color:  #dbebf6;
 	height: auto;
 	clear: none;
+        background-image: url('images/menu-footer.png');
+        background-position: bottom left;
+        background-repeat: no-repeat;
+        padding-bottom: 150px;
 }
+
 #menu h1 {
 border-bottom:3px solid #DBEBF6;
 border-top:3px solid #DBEBF6;
@@ -251,22 +256,13 @@ text-transform:uppercase;
 	display: block;
 	padding: 3px 6px;
 	text-align:center;
+
 }
 #menu a:hover {
 	color: #084b8a;
 	text-decoration:underline;
 }
 
-#menu-footer{
-	float: left;
-	display: block;
-	clear: both;
-	background-image: url('images/menu-footer.png');
-	background-position: right;
-	background-repeat: no-repeat;
-	height: 150px;
-	width: 139px;
-}
 
 /**
 * BOX LOGIN
@@ -298,6 +294,8 @@ text-transform:uppercase;
 	padding: 0px 7px;
 	overflow: auto;
 	height: auto;
+        width: 620px;
+        float: right;
 }
 #footer {
 	-moz-background-clip:border;
@@ -337,7 +335,7 @@ text-transform:uppercase;
 */
 .mini_tabla{
 	width: 396px;	
-	font-size: x-small;
+	font-size: 7pt;
 }
 
 .mini_tabla TD{
@@ -884,14 +882,13 @@ div.code-coverage-results span.result-good {
 *
 **/
 .lista_horizontal{
-	font-size: small;
+	font-size: 10pt;
 	margin-bottom: 10px;
 	height: 20px;	
 	padding: 0px;
 	margin: 0px 0px 10px 0px;
 	clear: both;
 	display: block;
-	background: #F0F7FC;
 }
 
 .lista_horizontal LI{
@@ -901,7 +898,7 @@ div.code-coverage-results span.result-good {
 	padding: 0px;
 	margin: 0px;
 	width: 118px;
-	border-left: solid thin white;
+	border-left: 5px solid white;
 	border-right: solid 4px white;
 }
 .lista_horizontal A{
@@ -974,7 +971,7 @@ div.code-coverage-results span.result-good {
 }
 
 .instit_link_list{
-	font-size: small;
+	font-size: 10pt;
 	text-align: right;
 	margin-top: 1em;
 	float: right;
@@ -1081,7 +1078,7 @@ div.code-coverage-results span.result-good {
 #rutaUrl{
 	margin: 0px;
 	padding: 4px;
-	font-size: x-small;
+	font-size: 7pt;
 }
 
 
@@ -1158,7 +1155,7 @@ div.code-coverage-results span.result-good {
 
 .cues-anteriores-text CITE{
 	
-	font-size: x-small;	
+	font-size: 7pt;
 	font-stretch: condensed;
 }
 
@@ -1212,6 +1209,8 @@ color: green;
 	margin-right: auto;
 	background-image: url("images/fondo_loader.gif");
 	background-repeat: no-repeat;
+        margin-bottom:23px;
+        margin-top:-41px;
 }
 
 #mensajes-loading{
@@ -1398,9 +1397,11 @@ li.selected    {
 	clear: none;
 	margin-right: -1px;
 	font-size:14px;
+        text-decoration: none !important;
 }
 .tab-grande-activa A{
-	color:  #045FB4;
+	color:  #045FB4 !important;
+        text-decoration: none !important;
 }
 
 
@@ -1412,16 +1413,18 @@ li.selected    {
 	float: left;
 	clear: none;
 	margin-right: -1px;
+         text-decoration: none !important;
 }
 
 .tab-grande-inactiva A{
-	color: white;
-
+	color: white !important;
+        text-decoration: none !important;
 }
 
 .tab-grande-inactiva A:HOVER{
 	background-image: url("images/tab-gris-degrade-150x45.png");
 	background-repeat: no-repeat;
+        text-decoration: none !important;
 }
 
 /****************************************************************************/
@@ -1480,7 +1483,7 @@ li.selected    {
 	text-indent: 14px;
 	display: block;
 	height: 38px;
-	font-size: x-small;
+	font-size: 7pt;
 	width: 110px;
 	padding-top:11px;
 	float:left;
@@ -1492,7 +1495,7 @@ li.selected    {
 	text-indent: 26px;
 	display: block;
 	height: 38px;
-	font-size: x-small;
+	font-size: 7pt;
 	width: 110px;
 	padding-top:11px;
 	float:left;

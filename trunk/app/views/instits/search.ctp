@@ -130,7 +130,7 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 			<div class="instit_atributte"><b>Departamento: </b><?= $instit['Departamento']['name'] ?></div>
 			<div class="instit_atributte"><b>Localidad: </b><?= $instit['Localidad']['name'] ?></div>
 		</div>
-                <script language="JavaScript">
+            <script language="JavaScript" defer="defer" type="text/javascript">
 
                     var clip = new ZeroClipboard.Client();
 
