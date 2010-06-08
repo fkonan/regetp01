@@ -1,4 +1,8 @@
 <?php
+    echo $javascript->link('zeroclipboard/ZeroClipboard.js');
+?>
+
+<?php
 if ($session->check('Auth.User')) {
     if(	$session->read('Auth.User.role') == 'desarrollo') {
         ?>
@@ -62,19 +66,23 @@ if ($session->check('Auth.User')) {
                         -->
                         </dl>
 
-                        <h2>Lineas de Acción</h2>
+                         <h2 style="padding-left: 15px">Lineas de Acción</h2>
                         <div class="collapsibleContainer" title="Lineas de Accion">
                             <dl>
                             <?php
                                 foreach ($fondo['LineasDeAccion'] as $linea):
                             ?>
-                                <dt><?=$linea['name']?> (<?=$linea['description']?>) </dt> <dd>$ <?=number_format($linea['FondosLineasDeAccion']['monto'],2,",",".");?></dd>
+                                <dt onmouseover="$(this).toggleClassName('item_fondos_seleccionado')"
+                                    onmouseout="$(this).toggleClassName('item_fondos_seleccionado')">
+                                    <?=$linea['name']?> (<?=$linea['description']?>)
+                                </dt>
+                                <dd>$ <?=number_format($linea['FondosLineasDeAccion']['monto'],2,",",".");?></dd>
                             <?php endforeach; ?>
+                                <dt>&nbsp;</dt>
                             </dl>
                         </div>
                         <div class="total">
-                            <dt>Total</dt>
-                            <dd>$ <?php echo number_format($fondo['Fondo']['total'],2,",","."); ?></dd>
+                            Total $ <?php echo number_format($fondo['Fondo']['total'],2,",","."); ?>
                         </div>
                      </li>
                 <?php endforeach; ?>
@@ -113,9 +121,7 @@ if ($session->check('Auth.User')) {
     } else {
       ?>
 
-        <?php
-    echo $javascript->link('zeroclipboard/ZeroClipboard.js');
-?>
+      
 <div class="fondos index">
    <div id="escuela_estado" class="<? echo $instit['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $instit['Instit']['activo']? 'Institución Ingresada al RFIETP':'Institución NO Ingresada al RFIETP';?></div>
     <?
