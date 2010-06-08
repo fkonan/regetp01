@@ -38,6 +38,7 @@ color: #2d2b2b;
 .shadetabs span a.selected{ /*selected main tab style */
 position: relative;
 top: 1px;
+color: #045FB4;
 }
 
 .shadetabs span a.selected{ /*selected main tab style */
