@@ -204,7 +204,8 @@ echo $javascript->link('scriptaculous-js-1.8.3/src/scriptaculous');
     <form id="formMigrator" action="#" method="post" onsubmit="return runMigrator();">
 
         <p>¿Validar? 1 = true; 0 = false. Ojo. Validar implica que todos los registros esten checkeados, ya sea su CUE como su total.
-            Si hay algún error, no se migra nada. <br> Por lo general yo quiero poner esto en CERO en un entorno de desarrollo o testing.
+            Si hay algún error, no se migra nada. <br> Por lo general yo quiero poner esto en CERO en un entorno de desarrollo o testing. <br>
+            Si pongo 2 me migra (ijc) instituciones y jurisdiccionales checkeadas nada mas
             <br>
             <input id="validar" name="validar" value="1">
         </p>

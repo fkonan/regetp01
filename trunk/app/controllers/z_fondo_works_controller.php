@@ -23,7 +23,12 @@ class ZFondoWorksController extends AppController {
         // solo migro por defecto instits y jurisdiccionales
         // y no me importa si estan chekeados o no
         $cosasAmigrar = 'ij';
-        if ( $validar) {
+        
+        if ($validar == 2) {
+            $cosasAmigrar = 'ijc';
+        }
+        
+        if ( $validar == 1) {
             $tempsComprobacion = $this->ZFondoWork->temporalesFiltradosX('ijc', $cantRegistros, $eliminarArchivosDeFondoYLineas);
             $totTemps = count($tempsComprobacion);
             if ( $totTemps != $cantDeFondosDelExcel) {
