@@ -66,7 +66,7 @@ if ($session->check('Auth.User')) {
                         -->
                         </dl>
 
-                         <h2 style="padding-left: 15px">Lineas de Acción</h2>
+                         <h2 style="padding-left: 15px">Líneas de Acción</h2>
                         <div class="collapsibleContainer" title="Lineas de Accion">
                             <dl>
                             <?php
