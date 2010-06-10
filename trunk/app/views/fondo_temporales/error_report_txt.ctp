@@ -144,9 +144,17 @@
                 <? } ?>
                 <? if ($fondo['FondoTemporal']['total']) { ?>
                 <tr>
+                    <td style="text-align:left;"><b>Suma Lineas de Accion</b></td>
+                    <td style="text-align:right;"><?=number_format($fondo['FondoTemporal']['suma_lineas'],2,",",".")?></td>
+                </tr>
+                <tr>
                     <td style="text-align:left;"><b>Total</b></td>
                     <td style="text-align:right;"><?=number_format($fondo['FondoTemporal']['total'],2,",",".")?></td>
                 </tr>
+                <!--
+                <tr>
+                    <td style="text-align:left;"><p>La suma de las lineas de acción ($<?=number_format($fondo['FondoTemporal']['suma_lineas'],2,",",".")?>) no coincide con el total ($<?=number_format($fondo['FondoTemporal']['total'],2,",",".")?>). La diferencia es de $<?=number_format($fondo['FondoTemporal']['diff'],2,",",".")?></p></td>
+                </tr>-->
                 <? } ?>
                 <? if (@$this->passedArgs['obs']) { ?>
                 <tr>
@@ -155,6 +163,16 @@
                 </tr>
                 <? } ?>
             </table>
+            <b>Problema:</b> <br/>
+            <?=$fondo['FondoTemporal']['obs_problema']?><br/>
+            <? if (@$this->passedArgs['obs']) { ?>
+            <b>Otras fuentes de información:</b> <br/>
+            Dictamen: <?=$fondo['FondoTemporal']['obs_dictamen']?> <br/>
+            Protocolo: <?=$fondo['FondoTemporal']['obs_protocolo']?> <br/>
+            Resolucion: <?=$fondo['FondoTemporal']['obs_resolucion']?> <br/>
+            <b>Solucion:</b> <br/>
+            <?=$fondo['FondoTemporal']['obs_solucion']?> <br/>
+            <? } ?>
         <div>
         <br />
         Notas: <?for($i=0;$i<=73;$i++) {?>_<? }?><br />

@@ -4,7 +4,7 @@
     <li><b>Estética</b>
         <ul type="circle">
             <li>Se mejoró el diseño de la interfaz gráfica.</li>
-            <li>Se optimizó la visualización de información sobre institituciones.</li>
+            <li>Se optimizó la visualización de información sobre instituciones.</li>
         </ul>
     </li>
     

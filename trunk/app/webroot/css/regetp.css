@@ -110,9 +110,9 @@ ul, li {
 #container {
 	text-align: left;
 	width: 775px;
-	margin-top: 20px;
+	margin-top: 5px;
 	margin-right: auto;
-	margin-bottom: 20px;
+	margin-bottom: 5px;
 	margin-left: auto;
 	background-color: white;
 	border: 1px solid #203C65;
@@ -314,7 +314,7 @@ text-transform:uppercase;
         background:#F0F7FC url(images/ministerioEduc.gif) no-repeat scroll 0 0;
         border:1px solid #203C65;
         clear:both;
-        margin-bottom:30px;
+        margin-bottom:10px;
         margin-left:auto;
         margin-right:auto;
         padding:6px 10px;

@@ -250,6 +250,27 @@ class FondoTemporalesController extends AppController {
                               $fondo['FondoTemporal']['equipinf'] +
                               $fondo['FondoTemporal']['refaccion'] -
                               $fondo['FondoTemporal']['total']);
+                $suma_lineas = $fondo['FondoTemporal']['f01'] +
+                              $fondo['FondoTemporal']['f02a'] +
+                              $fondo['FondoTemporal']['f02b'] +
+                              $fondo['FondoTemporal']['f02c'] +
+                              $fondo['FondoTemporal']['f03a'] +
+                              $fondo['FondoTemporal']['f03b'] +
+                              $fondo['FondoTemporal']['f04'] +
+                              $fondo['FondoTemporal']['f05'] +
+                              $fondo['FondoTemporal']['f06a'] +
+                              $fondo['FondoTemporal']['f06b'] +
+                              $fondo['FondoTemporal']['f06c'] +
+                              $fondo['FondoTemporal']['f07a'] +
+                              $fondo['FondoTemporal']['f07b'] +
+                              $fondo['FondoTemporal']['f07c'] +
+                              $fondo['FondoTemporal']['f08'] +
+                              $fondo['FondoTemporal']['f09'] +
+                              $fondo['FondoTemporal']['f10'] +
+                              $fondo['FondoTemporal']['equipinf'] +
+                              $fondo['FondoTemporal']['refaccion'];
+
+                $fondo['FondoTemporal']['suma_lineas'] = $suma_lineas;
 
                 if ($difference > 5)
                 {
