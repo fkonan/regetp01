@@ -2,6 +2,17 @@
     echo $javascript->link('zeroclipboard/ZeroClipboard.js');
 ?>
 <?php echo $html->css('ajaxtabs.css');?>
+<?php
+	$link = "";
+	if($ticket_id != 0)
+	{
+		$link = "<a class='aPend' href=\"";
+		$link .= $html->url(array('controller'=> 'tickets', 'action'=>$action.'/'.$ticket_id));
+		$link .= "\" onClick=\"window.open('".$html->url(array('controller'=> 'tickets', 'action'=>$action.'/'.$ticket_id));
+		$link .= "','_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=310,height=390');";
+		$link .= " return false;\">Pendiente de Actualización</a>";
+	}
+?>
 <div id="escuela_estado" class="<? echo $planes['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $planes['Instit']['activo']? 'Institución Ingresada al RFIETP':'Institución NO Ingresada al RFIETP';?></div>
 <?
 $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
@@ -35,14 +46,14 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                         $link = "";
                         if($ticket_id != 0)
                         {
-                                $link = " - <a class='aPend' href=\"";
+                                $link = "<div class='aPend' onmouseover=\"this.className='aPend_hover'\" onmouseout=\"this.className='aPend'\"> <a href=\"";
                                 $link .= $html->url(array('controller'=> 'tickets', 'action'=>$action.'/'.$ticket_id));
                                 $link .= "\" onClick=\"window.open('".$html->url(array('controller'=> 'tickets', 'action'=>$action.'/'.$ticket_id));
                                 $link .= "','_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=310,height=390');";
-                                $link .= " return false;\">Pendiente de Actualización</a>";
+                                $link .= " return false;\">Pendiente de Actualización</a></div>";
                         }
                 ?>
-
+                <?=$link?>
                 <?
                 $paginator->options(array('url' => $url_conditions));
                 ?>
