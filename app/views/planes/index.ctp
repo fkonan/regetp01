@@ -6,7 +6,6 @@
 <?
 $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
 ?>
-<br/>
 <h2><?= $cue_instit ?> - <?= $planes['Instit']['nombre_completo']?></h2>
 <div class="tabs">
             <div class="tabs-list">

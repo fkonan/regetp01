@@ -2,7 +2,6 @@
     echo $javascript->link('zeroclipboard/ZeroClipboard.js');
 ?>
 <div class="instits view">
-    
     <div id="escuela_estado" class="<? echo $instit['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $instit['Instit']['activo']? 'Institución Ingresada al RFIETP':'Institución NO Ingresada al RFIETP';?></div>
     <?
     $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
@@ -11,7 +10,6 @@
          - <?= $instit['Instit']['nombre_completo']?>
     </h2>
     <div class="tabs">
-            
             <div class="tabs-list">
                     <span class="tab-grande-activa"><?php echo $html->link('Datos',array('controller'=>'Instits','action'=>'view', $instit['Instit']['id']));?></span>
                     <span class="tab-grande-inactiva"><?php echo $html->link('Oferta Educativa',array('controller'=>'Planes','action'=>'index', $instit['Instit']['id']));?></span>
