@@ -55,10 +55,40 @@ a img {
 	border:none;
 }
 
-.aPend, .aPend:visited, .aPend:active {
-	color: red;
-	text-decoration: underline;
+.aPend{
+    border:3px solid #DF7D7D;
+    background-color: #FF9F9F;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 590px;
+    padding: 5px;
+}
+
+.aPend_hover{
+    background-color: #FFAFAF;
+    border:3px solid #DF7D7D;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 590px;
+    padding: 5px;
+    cursor: pointer;
+}
+.aPend a, .aPend a:visited, .aPend a:active {
+	color: white;
+	text-decoration: none;
 	font-weight: bold;
+        margin-left: 175px;
+}
+
+.aPend_hover a, .aPend_hover a:visited, .aPend_hover a:active {
+	color: white;
+	text-decoration: none;
+	font-weight: bold;
+        margin-left: 175px;
 }
 
 h1, h2, h3, h4 {
