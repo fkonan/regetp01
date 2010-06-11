@@ -82,6 +82,7 @@ a img {
 	text-decoration: none;
 	font-weight: bold;
         margin-left: 175px;
+        width: 100%;
 }
 
 .aPend_hover a, .aPend_hover a:visited, .aPend_hover a:active {
@@ -89,6 +90,7 @@ a img {
 	text-decoration: none;
 	font-weight: bold;
         margin-left: 175px;
+        width: 100%;
 }
 
 h1, h2, h3, h4 {
