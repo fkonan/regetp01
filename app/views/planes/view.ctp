@@ -111,11 +111,19 @@ $cue_instit = $instit['cue'].$anexo;
 			<? echo $plan['Plan']['ciclo_alta']?$plan['Plan']['ciclo_alta']:''; ?>
 			&nbsp;
 		</dd>
+                <?php
+                    if ($session->check('Auth.User')) {
+                        if($session->read('Auth.User.role') != 'invitado') {
+                ?>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Modificación'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<? echo $plan['Plan']['modified']?date("d/m/Y",strtotime($plan['Plan']['modified'])):''; ?>
 			&nbsp;
 		</dd>
+                <?php
+                        }
+                    }
+                ?>
 
 	</dl>
 </div>

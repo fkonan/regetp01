@@ -261,37 +261,54 @@
 
                     <H2>Datos Adicionales</H2>
                     <dl>
+                        <?php
+                            if ($session->check('Auth.User')) {
+                                if($session->read('Auth.User.role') != 'invitado') {
+                        ?>
                         <dt><?php __('Fecha Mod (<2009)'); ?></dt>
                         <dd>
-                <?php echo ($instit['Instit']['fecha_mod']>0)?date("d/m/Y",strtotime($instit['Instit']['fecha_mod'])):''; ?>
+                        <?php echo ($instit['Instit']['fecha_mod']>0)?date("d/m/Y",strtotime($instit['Instit']['fecha_mod'])):''; ?>
                             &nbsp;
                         </dd>
-
+                        <?php
+                                }
+                            }
+                        ?>
                         <dt><?php __('Actualización o Ingreso'); ?></dt>
                         <dd>
-                <?php echo $instit['Instit']['actualizacion']; ?>
+                        <?php echo $instit['Instit']['actualizacion']; ?>
                             &nbsp;
                         </dd>
 
-
+                        <?php if(strlen($instit['Instit']['observacion'])){?>
                         <dt><?php __('Observación'); ?></dt>
                         <dd>
-                <?php echo $instit['Instit']['observacion']; ?>
+                        <?php echo $instit['Instit']['observacion']; ?>
                             &nbsp;
                         </dd>
-
+                        <?php
+                        }
+                        ?>
                         <dt><?php __('Alta'); ?></dt>
                         <dd>
-                <?php echo ($instit['Instit']['ciclo_alta']>0)?$instit['Instit']['ciclo_alta']:''; ?>
+                        <?php echo ($instit['Instit']['ciclo_alta']>0)?$instit['Instit']['ciclo_alta']:''; ?>
                             &nbsp;
                         </dd>
+                        <?php
+                            if ($session->check('Auth.User')) {
+                                if($session->read('Auth.User.role') != 'invitado') {
+                        ?>
                         <dt><?php __('Modificación'); ?></dt>
                         <dd>
-                <?php //echo ($instit['Instit']['modified']>0)?$instit['Instit']['modified']:''; ?>
+                        <?php //echo ($instit['Instit']['modified']>0)?$instit['Instit']['modified']:''; ?>
 
-                <?php echo ($instit['Instit']['modified']>0)?date("d/m/Y",strtotime($instit['Instit']['modified'])):''; ?>
+                        <?php echo ($instit['Instit']['modified']>0)?date("d/m/Y",strtotime($instit['Instit']['modified'])):''; ?>
                             &nbsp;
                         </dd>
+                        <?php
+                                }
+                            }
+                        ?>
                     </dl>
                     <br />
 
