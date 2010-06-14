@@ -56,8 +56,8 @@ if ($session->check('Auth.User')) {
                             <dt><?php echo $fondo['Fondo']['anio'];?> - <?php echo $fondo['Fondo']['trimestre']; ?>º Trimestre </dt>
                         </div>
                         <dl>
-                        <dt>Memo:</dt>
-                        <dd><?php echo $fondo['Fondo']['memo']; ?></dd>
+                            <dt></dt>
+                        <dt>Memo:  <?php echo $fondo['Fondo']['memo']; ?></dt>
                         <!--<dt>Resolucion:</dt>
                         <dd><?php echo $fondo['Fondo']['resolucion']; ?></dd>
                         <dt>Descripcion:</dt>
