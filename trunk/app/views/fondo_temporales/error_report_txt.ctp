@@ -174,12 +174,12 @@
             <?=$fondo['FondoTemporal']['obs_solucion']?> <br/>
             <? } ?>
         <div>
-        <br />
-        Notas: <?for($i=0;$i<=73;$i++) {?>_<? }?><br />
-        <?for($i=0;$i<=80;$i++) {?>_<? }?><br />
-        <?for($i=0;$i<=80;$i++) {?>_<? }?><br />
+            <br>
+        Notas: <br><br><br>
+        
         </div>
-        <br /><br />
+            <br>
+        <hr>
    <?
     }
     ?>
