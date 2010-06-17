@@ -68,8 +68,17 @@
 		<div id="header" class="<?php echo $headerClass; ?>" >
 			<h1>
 
-				<?php echo $html->link(__('Registro Federal de Instituciones de Educación Técnico Profesional (RFIETP)', true), '/pages/home'); ?>
-			</h1>	
+				<?php echo $html->link(__('Registro Federal de Instituciones de Educación Técnico Profesional (RFIETP)', true), '/pages/home', array('class'=>'mainlink')); ?>
+			</h1>
+                    <?php
+                    if ($session->check('Auth.User')) {
+                    ?>
+                    <div id="header_right">
+                        <?php echo $html->link('<img src="/img/editprofile.png" border="0" align="absmiddle" />','/users/self_user_edit/'.$session->read('Auth.User.id'), array('class'=>'userlinks'), false, false); ?> <?php echo $html->link('Mis datos','/users/self_user_edit/'.$session->read('Auth.User.id'), array('class'=>'userlinks'), false, false); ?> ·
+                        <?php echo $html->link('<img src="/img/changepassword.gif" border="0" align="absmiddle" />','/users/cambiar_password/'.$session->read('Auth.User.id'), array('class'=>'userlinks'), false, false); ?> <?php echo $html->link('Cambiar contraseña','/users/cambiar_password/'.$session->read('Auth.User.id'), array('class'=>'userlinks'), false, false); ?> ·
+                        <?php echo $html->link('<img src="/img/exit.gif" border="0" align="absmiddle" />','/users/logout', array('class'=>'userlinks'), false, false); ?> <?php echo $html->link('Salir','/users/logout', array('class'=>'userlinks'), false, false); ?>
+                    </div>
+                    <? } ?>
 		</div>
 		<div id="content">
 			<div id="menu">	
@@ -102,10 +111,22 @@
 			
 			
 			<div id="cuerpo">
-				<?  echo $this->renderElement('rutaUrl', array("ruta" => $rutaUrl_for_layout)); ?>
+                            <div id="cuerpo_top">
+                                <div id="cuerpo_top_left">
+                                    <?  echo $this->renderElement('rutaUrl', array("ruta" => $rutaUrl_for_layout)); ?>
+                                </div>
+                                <!--<div id="cuerpo_top_right">
+                                    <?php echo $html->link('<img src="editprofile.png" /> Mis datos','/users/self_user_edit/'.$session->read('Auth.User.id'), array('class'=>'userlinks')); ?> ·
+                                    <?php echo $html->link('Cambiar contraseña','/users/cambiar_password/'.$session->read('Auth.User.id'), array('class'=>'userlinks')); ?> ·
+                                    <?php echo $html->link('Salir','/users/logout', array('class'=>'userlinks')); ?>
+                                </div>-->
+                            </div>
+                            <br />
+                            <div>
 				<?php $session->flash(); ?>
-				<? $session->flash('auth');?>
+				<?php $session->flash('auth'); ?>
 				<?php echo $content_for_layout; ?>
+                            </div>
 			</div>
 		</div>
 		
