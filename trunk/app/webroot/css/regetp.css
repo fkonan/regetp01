@@ -108,7 +108,7 @@ h1, h2, h3, h4 {
 h1 {
     color: #045FB4;
     font-size: 12pt;
-    font-weight: bolder;
+    font-weight: bold;
     font-family:Arial, Helvetica, sans-serif;
     padding-top: 0.4em;
     margin-top: 0.3em;
@@ -199,16 +199,35 @@ ul, li {
     text-align: center;
     border-bottom: none;
     background-color:transparent;
-    font-weight: bolder;
-    margin-top: 1em;
-    margin-left:25em;
+    font-weight: bold;
+    
+    margin-left:380px;
+    font-size: 12pt;
 }
-#header h1 a {
+#header h1 .mainlink {
     background-color: transparent;
     color:#233E87;
     text-decoration: none;
+    font-size: 12pt;
 }
-#header h1 a:hover {
+#header h1 .mainlink:hover {
+    text-decoration: underline;
+    font-size: 12pt;
+}
+
+#header #header_right{
+    float:right;
+    padding-top: 17px;
+    
+}
+#header #header_right .userlinks:link,.userlinks:visited{
+    font-size: 10px;
+    font-weight: normal;
+    text-decoration: none;
+}
+#header #header_right .userlinks:hover{
+    font-size: 10px;
+    font-weight: normal;
     text-decoration: underline;
 }
 
@@ -335,6 +354,26 @@ ul, li {
     height: auto;
     width: 620px;
     float: right;
+}
+#cuerpo #cuerpo_top{
+
+}
+#cuerpo #cuerpo_top_left{
+    float:left;
+}
+#cuerpo #cuerpo_top_right{
+    float:right;
+    font-weight: bold;
+}
+#cuerpo #cuerpo_top_right .userlinks:link,.userlinks:visited{
+    font-size: 10px;
+    font-weight: normal;
+    text-decoration: none;
+}
+#cuerpo #cuerpo_top_right .userlinks:hover{
+    font-size: 10px;
+    font-weight: normal;
+    text-decoration: underline;
 }
 #footer {
     -moz-background-clip:border;
@@ -870,7 +909,7 @@ div.code-coverage-results span.result-good {
 #escuela_estado{
     font-size: normal;
     text-align: right;
-    margin-top: -1.5em;
+    /*margin-top: -1.5em;*/
     padding-top: 10px;
 }
 /* usados en la vista de la institucion, al lado del titulo*/
