@@ -1717,7 +1717,6 @@ input[type="hidden"]{
 .menu_head {background: url("images/arrow_down.png") top right no-repeat;cursor:pointer}
 .menu_head_open {background: url("images/arrow_up.png") top right no-repeat;cursor:pointer}
 .menu_body {display:none;background:#F0F7FC;}
-.menu_body li{background:#F0F7FC;}
 .menu_body li.alt{background:#DFF2FF;}
 .menu_body li a{color:#FFFFFF; text-decoration:none; display:block;opacity: 0.7}
 .menu_body li a:hover{text-decoration:none;opacity:1}

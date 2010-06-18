@@ -46,9 +46,16 @@
 	?>
         <script type="text/javascript">
         jQuery.noConflict();
-
         jQuery(document).ready(function () {
             jQuery("ul.menu_body li:even").addClass("alt");
+            
+            <?php
+            $showMenu = !($session->check('Auth.User') && ($session->read('Auth.User.role') != 'invitado'));
+            if($showMenu){?>
+                jQuery('.menu_body').show();
+            <?php
+            }
+            ?>
             jQuery('.menu_head').click(function () {
                 if(jQuery(this).hasClass('menu_head')){
                     jQuery(this).removeClass('menu_head').addClass('menu_head_open');
@@ -90,7 +97,7 @@
 				
 				<cake:nocache>	
 				<?  echo $this->renderElement('boxSaludo'); ?>
-				</cake:nocache>
+                                </cake:nocache>
 				<?  echo $this->renderElement('boxDesarrollo'); ?>
 				<?  echo $this->renderElement('boxInstituciones'); ?>
 				<?  echo $this->renderElement('boxCuadros'); ?>
