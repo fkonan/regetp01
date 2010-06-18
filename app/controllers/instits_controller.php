@@ -159,7 +159,7 @@ class InstitsController extends AppController {
         $claseinstits = $this->Instit->Claseinstit->find('list');
 
         $this->set(compact('claseinstits','etp_estados','gestiones','dependencias','jurisdicciones','similares','tipoinstits','departamentos','localidades'));
-        
+
         $this->set('orientaciones', $this->Instit->Orientacion->find('list'));
         $this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$id );
     }
@@ -247,6 +247,40 @@ class InstitsController extends AppController {
      *
      */
     function search() {
+
+        /***************************
+         *
+         * LOG DE LAS BUSQUEDAS REALIZADAS
+         */
+        if (!empty($this->data)) {
+            $logTxt = $headTxt = '';
+            $logTxt .= '|'.$this->Auth->user('nombre'); $headTxt .= '|'.'Usuario';
+            $logTxt .= '|'. $this->data['Instit']['cue']; $headTxt .= '|'.'CUE';
+            $logTxt .= '|'. $this->data['Instit']['nombre_completo']; $headTxt .= '|'.'Nombre Libre';
+            $logTxt .= '|'. $this->data['Instit']['nroinstit']; $headTxt .= '|'.'Nro Instit';
+            $logTxt .= '|'. $this->data['Instit']['jurisdiccion_id']; $headTxt .= '|'.'Jurisdiccion ID';
+            $logTxt .= '|'. $this->data['Instit']['tipoinstit_id']; $headTxt .= '|'.'Tipo Instit ID';
+            $logTxt .= '|'. $this->data['Instit']['nombre']; $headTxt .= '|'.'Nombre Instit';
+            $logTxt .= '|'. $this->data['Instit']['direccion']; $headTxt .= '|'.'Direccion';
+            $logTxt .= '|'. $this->data['Departamento']['id']; $headTxt .= '|'.'Departamento ID';
+            $logTxt .= '|'. $this->data['Localidad']['id']; $headTxt .= '|'.'Localidad ID';
+            $logTxt .= '|'. $this->data['Instit']['gestion_id']; $headTxt .= '|'.'Gestion ID';
+            $logTxt .= '|'. $this->data['Instit']['dependencia_id']; $headTxt .= '|'.'Dependencia ID';
+//            $logTxt .= '|'. $this->data['Instit']['esanexo']; $headTxt .= '|'.'Es Anexo';
+            $logTxt .= '|'. $this->data['Instit']['activo']; $headTxt .= '|'.'Activo';
+            $logTxt .= '|'. $this->data['Plan']['oferta_id']; $headTxt .= '|'.'Plan Oferta ID';
+            $logTxt .= '|'. $this->data['Plan']['sector_id']; $headTxt .= '|'.'Plan Sector ID';
+            $logTxt .= '|'. $this->data['Plan']['subsector_id']; $headTxt .= '|'.'Plan Sub-Sector ID';
+            $logTxt .= '|'. $this->data['Plan']['titulo_id']; $headTxt .= '|'.'Plan Titulo ID';
+            $logTxt .= '|'. $this->data['Instit']['orientacion_id']; $headTxt .= '|'.'Orientacion ID';
+            $logTxt .= '|'. $this->data['Plan']['norma']; $headTxt .= '|'.'Plan Norma';
+            $logTxt .= '|'. $this->data['Instit']['claseinstit_id']; $headTxt .= '|'.'Clase Instit ID';
+            $logTxt .= '|'. $this->data['Instit']['etp_estado_id']; $headTxt .= '|'.'ETP Estado ID';
+
+           
+            $this->log($headTxt,'i_search');
+            $this->log($logTxt,'i_search');
+        }
 
         //para mostrar en vista los patrones de busqueda seleccionados
         $array_condiciones = array();
@@ -566,33 +600,7 @@ class InstitsController extends AppController {
             }
         }
 
-        /**
-         *     ES ANEXO
-         */
-        if(isset($this->data['Instit']['esanexo'])) {
-            switch ((int)$this->data['Instit']['esanexo']):
-                case -1: break;
-                case 0:
-                case 1:
-                    $this->paginate['conditions']['Instit.esanexo'] = $this->data['Instit']['esanexo'];
-                    $aux = $this->data['Instit']['esanexo']? 'Si':'No';
-                    $array_condiciones['Es Anexo'] = $aux;
-                    $url_conditions['esanexo'] = $this->data['Instit']['esanexo'];
-                    break;
-                endswitch;
-        }
-        if(isset($this->passedArgs['esanexo'])) {
-            switch ((int)$this->passedArgs['esanexo']):
-                case -1: break;
-                case 0:
-                case 1:
-                    $this->paginate['conditions']['Instit.esanexo'] = $this->passedArgs['esanexo'];
-                    $aux = $this->passedArgs['esanexo']? 'Si':'No';
-                    $array_condiciones['Es Anexo'] = $aux;
-                    $url_conditions['esanexo'] = $this->passedArgs['esanexo'];
-                    break;
-                endswitch;
-        }
+       
 
         /**
          *     ACTIVO
@@ -667,46 +675,46 @@ class InstitsController extends AppController {
          *     SECTOR
          */
         if(!empty($this->data['Plan']['sector_id'])) {
-                $this->Instit->asociarPlan = true;
-                $this->paginate['conditions']['Plan.sector_id'] = $this->data['Plan']['sector_id'];
-                $this->Instit->Plan->Sector->recursive = -1;
-                $sector = $this->Instit->Plan->Sector->findById( $this->data['Plan']['sector_id']);
-                $array_condiciones['Sector'] = $sector['Sector']['name'];
-                $url_conditions['Plan.sector_id'] = $this->data['Plan']['sector_id'];
+            $this->Instit->asociarPlan = true;
+            $this->paginate['conditions']['Plan.sector_id'] = $this->data['Plan']['sector_id'];
+            $this->Instit->Plan->Sector->recursive = -1;
+            $sector = $this->Instit->Plan->Sector->findById( $this->data['Plan']['sector_id']);
+            $array_condiciones['Sector'] = $sector['Sector']['name'];
+            $url_conditions['Plan.sector_id'] = $this->data['Plan']['sector_id'];
         }
         if(!empty($this->passedArgs['Plan.sector_id'])) {
-                $this->Instit->asociarPlan = true;
-                $this->paginate['conditions']['Plan.sector_id'] = $this->passedArgs['Plan.sector_id'];
-                $this->Instit->Plan->Sector->recursive = -1;
-                $sector = $this->Instit->Plan->Sector->findById($this->passedArgs['Plan.sector_id']);
-                $array_condiciones['Sector'] = $sector['Sector']['name'];
-                $url_conditions['Plan.sector_id'] = $this->passedArgs['Plan.sector_id'];
+            $this->Instit->asociarPlan = true;
+            $this->paginate['conditions']['Plan.sector_id'] = $this->passedArgs['Plan.sector_id'];
+            $this->Instit->Plan->Sector->recursive = -1;
+            $sector = $this->Instit->Plan->Sector->findById($this->passedArgs['Plan.sector_id']);
+            $array_condiciones['Sector'] = $sector['Sector']['name'];
+            $url_conditions['Plan.sector_id'] = $this->passedArgs['Plan.sector_id'];
         }
 
 
-         /**
+        /**
          *     SUBSECTOR
          */
         if(!empty($this->data['Plan']['subsector_id'])) {
-                $this->Instit->asociarPlan = true;
-                $this->paginate['conditions']['Plan.subsector_id'] = $this->data['Plan']['subsector_id'];
-                $this->Instit->Plan->Subsector->recursive = -1;
-                $subsector = $this->Instit->Plan->Subsector->findById( $this->data['Plan']['subsector_id']);
-                $array_condiciones['Subsector'] = $subsector['Subsector']['name'];
-                $url_conditions['Plan.subsector_id'] = $this->data['Plan']['subsector_id'];
+            $this->Instit->asociarPlan = true;
+            $this->paginate['conditions']['Plan.subsector_id'] = $this->data['Plan']['subsector_id'];
+            $this->Instit->Plan->Subsector->recursive = -1;
+            $subsector = $this->Instit->Plan->Subsector->findById( $this->data['Plan']['subsector_id']);
+            $array_condiciones['Subsector'] = $subsector['Subsector']['name'];
+            $url_conditions['Plan.subsector_id'] = $this->data['Plan']['subsector_id'];
         }
         if(!empty($this->passedArgs['Plan.subsector_id'])) {
-                $this->Instit->asociarPlan = true;
-                $this->paginate['conditions']['Plan.subsector_id'] = $this->passedArgs['Plan.subsector_id'];
-                $this->Instit->Plan->Subsector->recursive = -1;
-                $sector = $this->Instit->Plan->Subsector->findById($this->passedArgs['Plan.subsector_id']);
-                $array_condiciones['Subsector'] = $sector['Subsector']['name'];
-                $url_conditions['Plan.subsector_id'] = $this->passedArgs['Plan.subsector_id'];
+            $this->Instit->asociarPlan = true;
+            $this->paginate['conditions']['Plan.subsector_id'] = $this->passedArgs['Plan.subsector_id'];
+            $this->Instit->Plan->Subsector->recursive = -1;
+            $sector = $this->Instit->Plan->Subsector->findById($this->passedArgs['Plan.subsector_id']);
+            $array_condiciones['Subsector'] = $sector['Subsector']['name'];
+            $url_conditions['Plan.subsector_id'] = $this->passedArgs['Plan.subsector_id'];
         }
 
 
 
-         /**
+        /**
          *     TITULOS REFERENCIALES
          */
         if(!empty($this->data['Plan']['titulo_id'])) {
@@ -732,7 +740,7 @@ class InstitsController extends AppController {
 
 
 
-         /**
+        /**
          *     ORIENTACION
          */
         if(isset($this->data['Instit']['orientacion_id'])) {
@@ -821,7 +829,7 @@ class InstitsController extends AppController {
         /***********************************************************************/
 
         $this->Instit->recursive = 1;//para alivianar la carga del server
-
+        //
         //datos de paginacion
         $this->paginate['order'] = array('Instit.cue ASC, Instit.anexo ASC');
         $pagin = $this->paginate();
