@@ -1,3 +1,10 @@
+<?php
+
+echo $javascript->link('prototype');
+echo $javascript->link('scriptaculous-js-1.8.3/src/scriptaculous');
+
+
+?>
 <?
 $paginator->options(array('url' => $url_conditions));
 ?>

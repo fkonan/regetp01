@@ -1,3 +1,10 @@
+<?php
+
+echo $javascript->link('prototype');
+echo $javascript->link('scriptaculous-js-1.8.3/src/scriptaculous');
+
+
+?>
 <div class="fondo_temporales form">
 <?php echo $form->create('FondoTemporal', array('name'=>'FondoTemporal'));?>
 	<fieldset>

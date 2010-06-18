@@ -21,6 +21,6 @@ Esta opción de búsqueda permite visualizar las instituciones que utilizan, o han
 //echo $javascript->link('form_regetp_ria');?>
 <script type="text/javascript">
 	function enviar(){
-	  	$('HistorialCuesSearchForm').submit();
+	  	jQuery('#HistorialCuesSearchForm').submit();
 	}
 </script>

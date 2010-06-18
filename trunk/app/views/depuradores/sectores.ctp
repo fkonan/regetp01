@@ -1,3 +1,10 @@
+<?php
+
+echo $javascript->link('prototype');
+echo $javascript->link('scriptaculous-js-1.8.3/src/scriptaculous');
+
+
+?>
 <div class="instits form">
 <?php echo $form->create('Plan',array(	'url'=>'/depuradores/sectores/'.$jur_id,
 										'id'=>'FormSectorJurisdiccion'));?>

@@ -1,4 +1,10 @@
+<?php
 
+echo $javascript->link('prototype');
+echo $javascript->link('scriptaculous-js-1.8.3/src/scriptaculous');
+
+
+?>
 
 <div class="instits form">
 <h1>Editar Institución de <?php echo $this->data['Jurisdiccion']['name']?><br>  ¡¡ vamos que faltan solo <?php echo $falta_depurar?>!!</h1>

@@ -105,17 +105,20 @@ echo $html->css('edit_form',false);
     echo $ajax->observeField('jurisdiccion_id',
     array(  	'url' => '/departamentos/ajax_select_departamento_form_por_jurisdiccion',
     'update'=>'InstitDepartamentoId',
-    'loading'=>'$("ajax_indicator").show();$("InstitDepartamentoId").disable()',
-    'complete'=>'$("ajax_indicator").hide();$("InstitDepartamentoId").enable()',
+    'loading'=>'jQuery("#ajax_indicator").show();jQuery("#InstitDepartamentoId").attr("disabled","disabled")',
+    'complete'=>'jQuery("#ajax_indicator").hide();jQuery("#InstitDepartamentoId").removeAttr("disabled")',
     'onChange'=>true
     ));
+
+
+
     //LOCALIDAD
     echo $form->input('localidad_id', array('empty' => 'Seleccione','label'=>'Localidad','after'=> '<br /><cite>Seleccione primero un Departamento.</cite>'));
     echo $ajax->observeField('InstitDepartamentoId',
     array(  	'url' => '/localidades/ajax_select_localidades_form_por_departamento',
     'update'=>'InstitLocalidadId',
-    'loading'=>'$("ajax_indicator_dpto").show();$("InstitLocalidadId").disable()',
-    'complete'=>'$("ajax_indicator_dpto").hide();$("InstitLocalidadId").enable()',
+    'loading'=>'jQuery("#ajax_indicator_dpto").show();jQuery("#InstitLocalidadId").attr("disabled","disabled")',
+    'complete'=>'jQuery("#ajax_indicator_dpto").hide();jQuery("#InstitLocalidadId").removeAttr("disabled")',
     'onChange'=>true
     ));
     echo $form->input('lugar',array('label'=>'Lugar: Barrio/Pueblo/Comuna/'));
@@ -126,8 +129,8 @@ echo $html->css('edit_form',false);
     echo $ajax->observeField('jurisdiccion_id',
     array(  	'url' => '/tipoinstits/ajax_select_form_por_jurisdiccion',
     'update'=>'InstitTipoinstitId',
-    'loading'=>'$("ajax_indicator").show();$("InstitTipoinstitId").disable()',
-    'complete'=>'$("ajax_indicator").hide();$("InstitTipoinstitId").enable()',
+    'loading'=>'jQuery("#ajax_indicator").show();jQuery("#InstitTipoinstitId").attr("disabled","disabled")',
+    'complete'=>'jQuery("#ajax_indicator").hide();jQuery("#InstitTipoinstitId").removeAttr("disabled")',
     'onChange'=>true
     ));
     ?>
@@ -137,43 +140,65 @@ echo $html->css('edit_form',false);
         /*
                     Este Script lo que hace es tomar la jurisdiccion en base al numero de CUE pasado
          */
+        
+        jQuery(document).ready(function () {
 
-        // Observer del cambio en el numero de CUE
-        Event.observe('InstitCue', 'change', function() {
-            var cue = new String($F('InstitCue'));
-            var send = false;
-            var cue_jur = new String();
+            jQuery('#InstitCue').change(function(){
+                var cue = this.value;
+                var send = false;
+                var cue_jur;
 
-            //Evaluo si concuerda con el codigo de institucion
-            if (cue.match(/^(10|14|18|22|26|30|34|38|42|46|50|54|58|62|66|70|74|78|82|86|90|94)[0-9]{5}$/)){
-                $('jurisdiccion_id').setValue(cue.substring(0,2));
-                cue_jur= cue.substring(0,2);
-                send = true;
-            }else if(cue.match(/^(2|6)[0-9]{5}$/)){
-                $('jurisdiccion_id').setValue(cue.substring(0,1));
-                cue_jur = cue.substring(0,1);
-                send = true;
-            }
-            //si el CUE era valido, se envia una peticion AJAX para obtener los datos del tipo de INstitucion para esa jurisdiccion
-            if(send){
-                new Ajax.Updater('InstitTipoinstitId','<?= $html->url('/tipoinstits/ajax_select_form_por_jurisdiccion')?>', {
-                    'onLoading': function(){$("ajax_indicator").show();$("InstitTipoinstitId").disable()},
-                    'onComplete': function(){$("ajax_indicator").hide();$("InstitTipoinstitId").enable()},
-                    'onChange': true,
-                    parameters: {'data[Instit][jurisdiccion_id]': cue_jur}
-                });
+                //Evaluo si concuerda con el codigo de institucion
+                if (cue.match(/^(10|14|18|22|26|30|34|38|42|46|50|54|58|62|66|70|74|78|82|86|90|94)[0-9]{5}$/)){
+                    jQuery('#jurisdiccion_id').val(cue.substring(0,2));
+                    cue_jur= cue.substring(0,2);
+                    send = true;
+                }else if(cue.match(/^(2|6)[0-9]{5}$/)){
+                    jQuery('#jurisdiccion_id').val(cue.substring(0,1));
+                    cue_jur = cue.substring(0,1);
+                    send = true;
+                }
 
-                new Ajax.Updater('InstitDepartamentoId','<?= $html->url('/departamentos/ajax_select_departamento_form_por_jurisdiccion')?>', {
-                    'onLoading': function(){$("ajax_indicator").show();$("InstitTipoinstitId").disable()},
-                    'onComplete': function(){$("ajax_indicator").hide();$("InstitTipoinstitId").enable()},
-                    'onChange': true,
-                    parameters: {'data[Instit][jurisdiccion_id]': cue_jur}
-                });
+                if(send){
+                    jQuery.ajax({
+                          type: "POST",
+                          url: '<? echo $html->url('/tipoinstits/ajax_select_form_por_jurisdiccion')?>',
+                          success: function(data) {
+                            jQuery('#InstitTipoinstitId').html(data);
+                            jQuery("#ajax_indicator").hide();
+                            jQuery("#InstitTipoinstitId").removeAttr("disabled");
 
-            }
+                          },
+                          beforeSend: function(data) {
+                              jQuery("#ajax_indicator").show();
+                              jQuery("#InstitTipoinstitId").attr("disabled","disabled");
+                          },
+                          data: "data[Instit][jurisdiccion_id]=" + cue_jur
+
+                    });
+
+                    jQuery.ajax({
+                          type: "POST",
+                          url: '<? echo $html->url('/departamentos/ajax_select_departamento_form_por_jurisdiccion')?>',
+                          success: function(data) {
+                            jQuery('#InstitDepartamentoId').html(data);
+                            jQuery("#ajax_indicator").hide();
+                            jQuery("#InstitDepartamentoId").removeAttr("disabled");
+
+                          },
+                          beforeSend: function(data) {
+                              jQuery("#ajax_indicator").show();
+                              jQuery("#InstitDepartamentoId").attr("disabled","disabled");
+                          },
+                          data: "data[Instit][jurisdiccion_id]=" + cue_jur
+
+                    });
+                }
+            });
         });
     </script>
-
+    <form id="cueinfo" method="post">
+    </form>
     <?
 
     /**

@@ -1,15 +1,15 @@
 <script type="text/javascript">
     function toggleTitulos(){
-         if ($F('PlanOfertaId') != '') {
-            $('divPlanTituloId').show();
+         if (jQuery('#PlanOfertaId').val() != '') {
+            jQuery('#divPlanTituloId').show();
         }
         else {
-             $('divPlanTituloId').hide();
+             jQuery('#divPlanTituloId').hide();
         }
     }
     
-    Event.observe(window, 'load', function(){
-       toggleTitulos();
+    jQuery(document).ready(function () {
+        toggleTitulos();
     });
 </script>
 
@@ -54,8 +54,8 @@ $cue_instit = $instit['cue'].$anexo;
 		echo $ajax->observeField('sector_id',
                                    array(  	'url' => '/subsectores/ajax_select_subsector_form_por_sector',
 		                                   	'update'=>'PlanSubsectorId',
-		                                   	'loading'=>'$("ajax_indicator").show();$("PlanSubsectorId").disable()',
-		                                   	'complete'=>'$("ajax_indicator").hide();$("PlanSubsectorId").enable()',
+		                                   	'loading'=>'jQuery("#ajax_indicator").show();jQuery("#PlanSubsectorId").attr("disabled","disabled")',
+		                                   	'complete'=>'jQuery("#ajax_indicator").hide();jQuery("#PlanSubsectorId").removeAttr("disabled")',
 		                                   	'onChange'=>true
                                    ));
                                    

@@ -1,4 +1,10 @@
+<?php
 
+echo $javascript->link('prototype');
+echo $javascript->link('scriptaculous-js-1.8.3/src/scriptaculous');
+
+
+?>
 <div class="instits form">
 <h1>Editar Institución de <?php echo $this->data['Jurisdiccion']['name']?> <br> Nombre: <?= $html->link($this->data['Instit']['nombre_completo'],'/instits/view/'.$this->data['Instit']['id']);?> <br> CUE: <?= $this->data['Instit']['cue']*100+$this->data['Instit']['anexo'] ?> (id:<?php echo $this->data['Instit']['id']?>) <br> ¡¡ vamos que faltan solo <?php echo $falta_depurar?>!!</h1>
 

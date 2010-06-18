@@ -4,40 +4,40 @@
 		function ver_tabla(tabla){
 			switch(tabla){
 				case "total":	
-					$('gestion-titulo').update('Ámbito de Gestión: Total');				
-					$("table_total").show();
-					$("tab_total").removeClassName('tab-grande-inactiva');
-					$("tab_total").addClassName('tab-grande-activa');
-					$("table_privada").hide();
-					$("tab_privada").removeClassName('tab-grande-activa');
-					$("tab_privada").addClassName('tab-grande-inactiva');
-					$("table_estatal").hide();
-					$("tab_estatal").removeClassName('tab-grande-activa');
-					$("tab_estatal").addClassName('tab-grande-inactiva');
+					jQuery("#gestion-titulo").html('Ámbito de Gestión: Total');
+					jQuery("#table_total").show();
+					jQuery("#tab_total").removeClass('tab-grande-inactiva');
+					jQuery("#tab_total").addClass('tab-grande-activa');
+					jQuery("#table_privada").hide();
+					jQuery("#tab_privada").removeClass('tab-grande-activa');
+					jQuery("#tab_privada").addClass('tab-grande-inactiva');
+					jQuery("#table_estatal").hide();
+					jQuery("#tab_estatal").removeClass('tab-grande-activa');
+					jQuery("#tab_estatal").addClass('tab-grande-inactiva');
 					break;
 				case "privada":
-					$('gestion-titulo').update('Ámbito de Gestión: Privada');
-					$("table_total").hide();
-					$("tab_total").removeClassName('tab-grande-activa');
-					$("tab_total").addClassName('tab-grande-inactiva');
-					$("table_privada").show();
-					$("tab_privada").removeClassName('tab-grande-inactiva');
-					$("tab_privada").addClassName('tab-grande-activa');
-					$("table_estatal").hide();
-					$("tab_estatal").removeClassName('tab-grande-activa');
-					$("tab_estatal").addClassName('tab-grande-inactiva');
+					jQuery("#gestion-titulo").html('Ámbito de Gestión: Privada');
+					jQuery("#table_total").hide();
+					jQuery("#tab_total").removeClass('tab-grande-activa');
+					jQuery("#tab_total").addClass('tab-grande-inactiva');
+					jQuery("#table_privada").show();
+					jQuery("#tab_privada").removeClass('tab-grande-inactiva');
+					jQuery("#tab_privada").addClass('tab-grande-activa');
+					jQuery("#table_estatal").hide();
+					jQuery("#tab_estatal").removeClass('tab-grande-activa');
+					jQuery("#tab_estatal").addClass('tab-grande-inactiva');
 					break;
 				case "estatal":
-					$('gestion-titulo').update('Ámbito de Gestión: Estatal');
-					$("table_total").hide();
-					$("tab_total").removeClassName('tab-grande-activa');
-					$("tab_total").addClassName('tab-grande-inactiva');
-					$("table_privada").hide();
-					$("tab_privada").removeClassName('tab-grande-activa');
-					$("tab_privada").addClassName('tab-grande-inactiva');
-					$("table_estatal").show();
-					$("tab_estatal").removeClassName('tab-grande-inactiva');
-					$("tab_estatal").addClassName('tab-grande-activa');
+					jQuery("#gestion-titulo").html('Ámbito de Gestión: Estatal');
+					jQuery("#table_total").hide();
+					jQuery("#tab_total").removeClass('tab-grande-activa');
+					jQuery("#tab_total").addClass('tab-grande-inactiva');
+					jQuery("#table_privada").hide();
+					jQuery("#tab_privada").removeClass('tab-grande-activa');
+					jQuery("#tab_privada").addClass('tab-grande-inactiva');
+					jQuery("#table_estatal").show();
+					jQuery("#tab_estatal").removeClass('tab-grande-inactiva');
+					jQuery("#tab_estatal").addClass('tab-grande-activa');
 					break;
 				default:
 					ver_tabla('total');

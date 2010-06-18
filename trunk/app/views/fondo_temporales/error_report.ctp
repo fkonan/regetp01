@@ -6,8 +6,7 @@
 
 		echo $form->textarea('report',array('style'=>'font-size:10px; height: 400px;width:600px','value'=>$report));
 	?>
-        <!--<input onclick="$('FondoTemporalReport').copyToClipboard();" type="button" value="Copiar Reporte" name="cpy">-->
-	</fieldset>
+        </fieldset>
 <?php echo $form->end();?>
 </div>
 <div class="actions">

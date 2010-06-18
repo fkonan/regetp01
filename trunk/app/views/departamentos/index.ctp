@@ -11,7 +11,7 @@ echo $paginator->counter(array(
 ?></p>
 
 <?php echo $form->create('Departamento',array('action'=>'ver'));?>
-<?php echo $form->input('jurisdiccion_id',array('type'=>'select','options'=>$jurisdicciones,'onchange'=>'$("DepartamentoVerForm").submit()'));?>
+<?php echo $form->input('jurisdiccion_id',array('type'=>'select','options'=>$jurisdicciones,'onchange'=>'jQuery("#DepartamentoVerForm").submit()'));?>
 <?php echo $form->end(null);?>
 
 
