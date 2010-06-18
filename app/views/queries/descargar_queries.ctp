@@ -2,12 +2,12 @@
 
 <script type="text/javascript">
 <!--
-	Event.observe(window, "keypress", function(e){ 
-		var cKeyCode = e.keyCode || e.which; 
-		if (cKeyCode == Event.KEY_RETURN){ 
-			$('FormCategorias').submit();
-		} 
-	});
+        jQuery(document).keypress(function(event){
+            var cKeyCode = event.keyCode;
+             if (cKeyCode == 13){
+                jQuery('#FormCategorias').submit();
+            }
+        });
 //-->
 </script>
 
@@ -24,7 +24,7 @@
 											 'label'=>'Categoría',
 											 'value'=>$categoria,
 											 'options'=>$categorias,
-											 'onChange'=>'$("FormCategorias").submit();'
+											 'onChange'=>'jQuery("#FormCategorias").submit();'
 											 ));
 											 
 		echo $form->input('description', array( 'label'=> 'Ingrese criterio de búsqueda',

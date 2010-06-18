@@ -25,7 +25,7 @@
     <!--
 				BUSQUEDA POR SU UBICACION
 		-->
-    <div class="boton-para-div-oculto"><a href="#VerUbicacion" onclick="$('search-ubicacion').toggle()">por su ubicación</a></div>
+    <div class="boton-para-div-oculto"><a href="#VerUbicacion" onclick="jQuery('#search-ubicacion').toggle()">por su ubicación</a></div>
     <div id="search-ubicacion" class="search-div" style="display: none">
 
         <div id="departamento-select" style="padding-left:0px;">
@@ -37,8 +37,8 @@
             echo $ajax->observeField('jurisdiccion_id',
             array(  	'url' => '/departamentos/ajax_select_departamento_form_por_jurisdiccion',
             'update'=>'DepartamentoId',
-            'loading'=>'$("ajax_indicator").show();$("DepartamentoId").disable();$("LocalidadId").update();',
-            'complete'=>'$("ajax_indicator").hide();$("DepartamentoId").enable(); $("departamento-select").show();',
+            'loading'=>'jQuery("#ajax_indicator").show();jQuery("#DepartamentoId").attr("disabled","disabled");jQuery("#LocalidadId").html();',
+            'complete'=>'jQuery("#ajax_indicator").hide();jQuery("#DepartamentoId").removeAttr("disabled"); jQuery("#departamento-select").show();',
             'onChange'=>true
             ));
             ?>
@@ -56,16 +56,16 @@
             echo $ajax->observeField('DepartamentoId',
             array(  	'url' => '/localidades/ajax_select_localidades_form_por_departamento',
             'update'=>'LocalidadId',
-            'loading'=>'$("ajax_indicator_dpto").show();$("LocalidadId").disable()',
-            'complete'=>'$("ajax_indicator_dpto").hide();$("LocalidadId").enable(); $("localidad-select").show();',
+            'loading'=>'jQuery("#ajax_indicator_dpto").show();jQuery("#LocalidadId").attr("disabled","disabled")',
+            'complete'=>'jQuery("#ajax_indicator_dpto").hide();jQuery("#LocalidadId").removeAttr("disabled"); jQuery("#localidad-select").show();',
             'onChange'=>true
             ));
 
             echo $ajax->observeField('jurisdiccion_id',
             array(  	'url' => '/localidades/ajax_select_localidades_form_por_jurisdiccion',
             'update'=>'LocalidadId',
-            'loading'=>'$("ajax_indicator").show();$("LocalidadId").disable()',
-            'complete'=>'$("ajax_indicator").hide();$("LocalidadId").enable();',
+            'loading'=>'jQuery("#ajax_indicator").show();jQuery("#LocalidadId").attr("disabled","disabled")',
+            'complete'=>'jQuery("#ajax_indicator").hide();jQuery("#LocalidadId").removeAttr("disabled");',
             'onChange'=>true
             ));
 
@@ -89,7 +89,7 @@
     <!--
 				BUSQUEDA POR SU NOMBRE 
 		-->
-    <div class="boton-para-div-oculto"><a href="#VerDenominacion" onclick="$('search-denominacion').toggle()">por su nombre</a></div>
+    <div class="boton-para-div-oculto"><a href="#VerDenominacion" onclick="jQuery('#search-denominacion').toggle()">por su nombre</a></div>
     <div id="search-denominacion"  class="search-div" style="display: none">
         <?php
         echo $form->input('tipoinstit_id', array(	'empty' => 'Todos','type'=>'select',
@@ -98,8 +98,8 @@
         echo $ajax->observeField('jurisdiccion_id',
         array(  	'url' => '/tipoinstits/ajax_select_form_por_jurisdiccion',
         'update'=>'InstitTipoinstitId',
-        'loading'=>'$("ajax_indicator").show();$("InstitTipoinstitId").disable()',
-        'complete'=>'$("ajax_indicator").hide();$("InstitTipoinstitId").enable()',
+        'loading'=>'jQuery("#ajax_indicator").show();jQuery("#InstitTipoinstitId").attr("disabled","disabled")',
+        'complete'=>'jQuery("#ajax_indicator").hide();jQuery("#InstitTipoinstitId").removeAttr("disabled")',
         'onChange'=>true
         ));
 
@@ -117,7 +117,7 @@
     <!--
 				BUSQUEDA POR SU OFERTA
 		-->
-    <div class="boton-para-div-oculto"><a href="#VerPlanes" onclick="$('search-planes').toggle()">por su oferta</a></div>
+    <div class="boton-para-div-oculto"><a href="#VerPlanes" onclick="jQuery('#search-planes').toggle()">por su oferta</a></div>
     <div id="search-planes"  class="search-div" style="display: none">
         <?php
         echo $form->input('Plan.oferta_id',array('options'=>$ofertas,
@@ -148,8 +148,8 @@
                  echo $ajax->observeField('PlanSectorId',
             array(  	'url' => '/subsectores/ajax_select_subsector_form_por_sector',
             'update'=>'PlanSubsectorId',
-            'loading'=>'$("PlanSubsectorId").disable();',
-            'complete'=>'$("PlanSubsectorId").enable();',
+            'loading'=>'jQuery("#PlanSubsectorId").attr("disabled","disabled");',
+            'complete'=>'jQuery("#PlanSubsectorId").removeAttr("disabled");',
             'onChange'=>true
             ));
 
@@ -182,7 +182,7 @@
 				BUSQUEDA POR OTRAS CARACTERISTICAS
 		-->
 
-    <div class="boton-para-div-oculto"><a href="#VerOtros" onclick="$('search-otros').toggle()">por otras características</a></div>
+    <div class="boton-para-div-oculto"><a href="#VerOtros" onclick="jQuery('#search-otros').toggle()">por otras características</a></div>
 
     <div id="search-otros"  class="search-div" style="display: none">
         <?php
@@ -221,44 +221,42 @@
 //echo $javascript->link('form_regetp_ria');?>
 <script type="text/javascript">
     <!--
-
-    Event.observe(window, "keypress", function(e){
-        var cKeyCode = e.keyCode || e.which;
-        if (cKeyCode == Event.KEY_RETURN){
-            $('InstitSearchForm').submit();
+    jQuery(document).keypress(function(event){
+        var cKeyCode = event.keyCode;
+         if (cKeyCode == 13){
+            jQuery('#InstitSearchForm').submit();
         }
-    });
+    })
 
 
     function enviar()
     {
-        if($('search-ubicacion').visible() == false){
-            $('DepartamentoId').value = '';
-            $('LocalidadId').value = '';
-            $('InstitDireccion').value = '';
+        if(!jQuery('#search-ubicacion').is(':visible')){
+            jQuery('#DepartamentoId').val('');
+            jQuery('#LocalidadId').val('');
+            jQuery('#InstitDireccion').val('');
         }
 
-        if($('search-denominacion').visible() == false){
-            $('InstitTipoinstitId').value = '';
-            $('InstitNroinstit').value = '';
-            $('InstitNombre').value = '';
+        if(!jQuery('#search-denominacion').is(':visible')){
+            jQuery('#InstitTipoinstitId').val('');
+            jQuery('#InstitNroinstit').val('');
+            jQuery('#InstitNombre').val('');
         }
 
-        if($('search-planes').visible() == false){
-            $('PlanOfertaId').value = '';
-            $('PlanSectorId').value = '';
+        if(!jQuery('#search-planes').is(':visible')){
+            jQuery('#PlanOfertaId').value = '';
+            jQuery('#PlanSectorId').value = '';
         }
 
-        if($('search-otros').visible() == false){
-            $('InstitGestionId').value = '';
-            $('InstitDependenciaId').value = '';
-            $('InstitActivo').value = '';
-            $('InstitClaseinstitId').value =''	;
-            $('InstitEtpEstadoId').value =''	;
-
+        if(!jQuery('#search-otros').is(':visible')){
+            jQuery('#InstitGestionId').val('');
+            jQuery('#InstitDependenciaId').val('');
+            jQuery('#InstitActivo').val('');
+            jQuery('#InstitClaseinstitId').val('');
+            jQuery('#InstitEtpEstadoId').val('');
         }
 
-        $('InstitSearchForm').submit();
+        jQuery('#InstitSearchForm').submit();
     }
 
     //-->

@@ -18,20 +18,7 @@
         
             <div id="d_clip_button" class="my_clip_button2"></div>
             <input id="infoToCopy" type="hidden" value="<?= ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'] . ' - ' . $instit['Instit']['nombre_completo'] . ' - ' . $instit['Instit']['direccion'] . ' - ' . $instit['Departamento']['name'] . ' - ' . $instit['Localidad']['name'] ?> "/>
-            <script language="JavaScript" type="text/javascript" defer="defer">
-                var clip = new ZeroClipboard.Client();
-
-                ZeroClipboard.setMoviePath('<?php echo $html->url("/js/zeroclipboard/ZeroClipboard10.swf"); ?>');
-
-                clip.setText( '' ); // will be set later on mouseDown
-                clip.setHandCursor( true );
-                clip.addEventListener( 'mouseDown', function(client) {
-                   client.setText($("infoToCopy").value);
-                } );
-
-                clip.glue( 'd_clip_button' );
-           </script>
-
+            
             <div style="border-top:2px solid #9DA6C1" class="tabs-content">
                     
                     <?php
@@ -325,5 +312,19 @@
             </div>
     </div>    
 </div>
+<script language="JavaScript" type="text/javascript" defer="defer">
+    jQuery(document).ready(function(){
+        var clip = new ZeroClipboard.Client();
 
+        ZeroClipboard.setMoviePath('<?php echo $html->url("/js/zeroclipboard/ZeroClipboard10.swf"); ?>');
+
+        clip.setText( '' ); // will be set later on mouseDown
+        clip.setHandCursor( true );
+        clip.addEventListener( 'mouseDown', function(client) {
+           client.setText(jQuery("#infoToCopy").val());
+        } );
+
+        clip.glue( 'd_clip_button' );
+     })
+</script>
 

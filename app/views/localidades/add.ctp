@@ -13,8 +13,8 @@
         echo $ajax->observeField('jurisdiccion_id',
                                    array(  	'url' => '/departamentos/ajax_select_departamento_form_por_jurisdiccion',
 		                                   	'update'=>'LocalidadDepartamentoId',
-		                                   	'loading'=>'$("ajax_indicator").show();$("LocalidadDepartamentoId").disable()',
-		                                   	'complete'=>'$("ajax_indicator").hide();$("LocalidadDepartamentoId").enable()',
+		                                   	'loading'=>'jQuery("#ajax_indicator").show();jQuery("#LocalidadDepartamentoId").attr("disabled","disabled")',
+		                                   	'complete'=>'jQuery("#ajax_indicator").hide();jQuery("#LocalidadDepartamentoId").removeAttr("disabled")',
 		                                   	'onChange'=>true
                                    ));	
 	

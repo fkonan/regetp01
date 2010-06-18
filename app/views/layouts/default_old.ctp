@@ -36,54 +36,40 @@
 		echo $html->css('regetp','stylesheet', array('media'=>'screen'));
 		//echo $html->css('printer');
 		echo $html->css('printer','stylesheet', array('media'=>'print'));
-
-                //echo $javascript->link('prototype');
-
-		echo $javascript->link('jquery-1.4.2.min.js');
-                echo $javascript->link('jquery.form.js');
-                
+		
+		echo $javascript->link('prototype');
+		echo $javascript->link('scriptaculous-js-1.8.3/src/scriptaculous');
+		
+		echo $javascript->link('mensaje.class');
+		echo $javascript->link('ejecutar_en_head');
+                //echo $javascript->link('form_regetp_ria');
 		echo $scripts_for_layout;
 	?>
-        <script type="text/javascript">
-        jQuery.noConflict();
-
-        jQuery(document).ready(function () {
-            jQuery("ul.menu_body li:even").addClass("alt");
-            jQuery('.menu_head').click(function () {
-                if(jQuery(this).hasClass('menu_head')){
-                    jQuery(this).removeClass('menu_head').addClass('menu_head_open');
-                }else if(jQuery(this).hasClass('menu_head_open')){
-                    jQuery(this).removeClass('menu_head_open').addClass('menu_head');
-                }
-                jQuery('#' + this.id + ' ul.menu_body').slideToggle('medium');
-            });
-        });
-        </script>
 	
 </head>
 <body>
 	<cake:nocache>	
+	<script type="text/javascript">		
+		var mensajero = new Mensaje('mensajero');
+	</script>
+	
 	<? if ($_SERVER['HTTP_HOST']=='localhost'){?>
 		<div style="background-color: red; height: 20px; text-align: center">MODO LOCALHOST</div>
 	<? }?>
 	</cake:nocache>
 	
 	<div id="container">	
+		<cake:nocache>	
+		<!-- DIV del mensajero, aca se van a mostrar mensajes AJAX, JS, etc -->
+		<div id="mensajero" style="display: none"></div>
+		</cake:nocache>
+	
 		<?php $headerClass = (Configure::read('es_dia_patrio'))?"patrio":"";?>
 		<div id="header" class="<?php echo $headerClass; ?>" >
 			<h1>
 
-				<?php echo $html->link(__('Registro Federal de Instituciones de Educación Técnico Profesional (RFIETP)', true), '/pages/home', array('class'=>'mainlink')); ?>
-			</h1>
-                    <?php
-                    if ($session->check('Auth.User')) {
-                    ?>
-                    <div id="header_right">
-                        <?php echo $html->link('<img src="'.$html->url("/img/editprofile.png").'" border="0" align="absmiddle" />','/users/self_user_edit/'.$session->read('Auth.User.id'), array('class'=>'userlinks'), false, false); ?> <?php echo $html->link('Mis datos','/users/self_user_edit/'.$session->read('Auth.User.id'), array('class'=>'userlinks'), false, false); ?> ·
-                        <?php echo $html->link('<img src="'.$html->url("/img/changepassword.gif").'" border="0" align="absmiddle" />','/users/cambiar_password/'.$session->read('Auth.User.id'), array('class'=>'userlinks'), false, false); ?> <?php echo $html->link('Cambiar contraseña','/users/cambiar_password/'.$session->read('Auth.User.id'), array('class'=>'userlinks'), false, false); ?> ·
-                        <?php echo $html->link('<img src="'.$html->url("/img/exit.gif").'" border="0" align="absmiddle" />','/users/logout', array('class'=>'userlinks'), false, false); ?> <?php echo $html->link('Salir','/users/logout', array('class'=>'userlinks'), false, false); ?>
-                    </div>
-                    <? } ?>
+				<?php echo $html->link(__('Registro Federal de Instituciones de Educación Técnico Profesional (RFIETP)', true), '/pages/home'); ?>
+			</h1>	
 		</div>
 		<div id="content">
 			<div id="menu">	
@@ -116,22 +102,10 @@
 			
 			
 			<div id="cuerpo">
-                            <div id="cuerpo_top">
-                                <div id="cuerpo_top_left">
-                                    <?  echo $this->renderElement('rutaUrl', array("ruta" => $rutaUrl_for_layout)); ?>
-                                </div>
-                                <!--<div id="cuerpo_top_right">
-                                    <?php echo $html->link('<img src="editprofile.png" /> Mis datos','/users/self_user_edit/'.$session->read('Auth.User.id'), array('class'=>'userlinks')); ?> ·
-                                    <?php echo $html->link('Cambiar contraseña','/users/cambiar_password/'.$session->read('Auth.User.id'), array('class'=>'userlinks')); ?> ·
-                                    <?php echo $html->link('Salir','/users/logout', array('class'=>'userlinks')); ?>
-                                </div>-->
-                            </div>
-                            <br />
-                            <div>
+				<?  echo $this->renderElement('rutaUrl', array("ruta" => $rutaUrl_for_layout)); ?>
 				<?php $session->flash(); ?>
-				<?php $session->flash('auth'); ?>
+				<? $session->flash('auth');?>
 				<?php echo $content_for_layout; ?>
-                            </div>
 			</div>
 		</div>
 		

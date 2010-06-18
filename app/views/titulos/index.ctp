@@ -24,7 +24,7 @@ foreach ($titulos as $titulo):
 <script>
 
 </script>
-<tr onmouseover="$(this).addClassName('altrow')" onmouseout="$(this).removeClassName('altrow')" >
+<tr onmouseover="jQuery(this).addClass('altrow')" onmouseout="jQuery(this).removeClass('altrow')" >
             <td style="text-align: left;">
 			<?php echo $titulo['Titulo']['name']; ?>
 		</td>

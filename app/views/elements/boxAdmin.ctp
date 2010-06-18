@@ -3,9 +3,9 @@ if ($session->check('Auth.User')){
 	if(	$session->read('Auth.User.role') == 'desarrollo' ||
 		$session->read('Auth.User.role') == 'admin'){
 	?>
-		<div id="box_admin">
-			<h1>Administración</h1>
-			<ul>
+		<div id="boxAdmin">
+			<h1 id="boxAdmin" class="menu_head">Administración</h1>
+                        <ul class="menu_body">
 				<li><? echo $html->link("Agregar Usuario","/Users/add") ?></li>
 				<li><? echo $html->link("Listar Usuarios","/Users/listadoUsuarios") ?></li>
 

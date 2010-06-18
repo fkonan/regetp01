@@ -14,50 +14,49 @@ if ($session->check('Auth.User')){
      */
     var apretado = false;
 
-    
-    function mostrarPendientes(){
-        $('tickets').toggle();
+    var options = {
+        target:        '#tickets',   // target element(s) to be updated with server response
+        url: '<? echo $html->url('/tickets/provincias_pendientes')?>',
+        beforeSubmit: showList
+    };
 
-        if (apretado == false) {
-            new Ajax.Updater('tickets', '<? echo $html->url('/tickets/provincias_pendientes')?>');
-            apretado = true;
-        }
+    function showList(){
+         jQuery('#tickets').toggle();
     }
-    
-    Event.observe(window, 'load', function(){
-        $('linkVerPendientes').observe('click',mostrarPendientes);
+
+    jQuery(document).ready(function () {
+        jQuery('#boxTickets').click(function () {
+            if (apretado == false) {
+                jQuery('#pendientes').ajaxSubmit(options);
+                apretado = true;
+            }
+            
+            return false;
+        });
     });
 </script>
 
 <div id="boxTickets">
-	<h1>Pendientes de Actualización</h1>
-	
+	<h1 id="boxTickets" class="menu_head">Pendientes de Actualización</h1>
+	<ul class="menu_body">
+            <?php
+                $prov_pend = array();
+                $prov_pend = $this->requestAction('/tickets/provincias_pendientes');
 
-<ul>
-	<?php
-			$prov_pend = array();
-			$prov_pend = $this->requestAction('/tickets/provincias_pendientes');
-			
-			/************************/
-			?>
-			
-			<!-- div class="box gradwhite blue" -->
-			<div>
-                            <a href="javascript:;" id="linkVerPendientes">Ver Pendientes</a>
-                        </div>
-			
-		
-			<div id="tickets" style="display: none;"></div>
-			
-			<?php 
-			/************************/									
-		?> 
-
-</ul>
-
+                /************************/
+            ?>
+            <form id="pendientes" method="post">
+            </form>
+            <div id="tickets" style="display: none;">
+                <div style="background-color: rgb(204, 221, 235);">
+                    <li>
+                        <a href="#">Cargando...</a></li>
+                    <li>
+                </div>
+            </div>
+        </ul>
 </div>	
-	<?php 
-	
+<?php 
 	}
 }
-	?>
+?>

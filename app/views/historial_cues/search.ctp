@@ -41,8 +41,8 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 ?>
 	<li id="lista_instit_<?= $instit['Instit']['id']?>" class="lista_link <?=$clase ?>" 
 		onclick="window.location='<?= $html->url(array('controller'=> 'Instits', 'action'=>'view/'.$instit['Instit']['id'])) ?>'"
-		onmouseover="$('lista_instit_<?= $instit['Instit']['id']?>').addClassName('lista_link_hover');"
-		onmouseout="$('lista_instit_<?= $instit['Instit']['id']?>').removeClassName('lista_link_hover');"
+		onmouseover="jQuery('#lista_instit_<?= $instit['Instit']['id']?>').addClass('lista_link_hover');"
+		onmouseout="jQuery('#lista_instit_<?= $instit['Instit']['id']?>').removeClass('lista_link_hover');"
 		title="<?= $instit['Instit']['nombre_completo']?>"
 		>
 		<div class="instit_link_list">

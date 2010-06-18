@@ -26,19 +26,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
             </div>
             <div id="d_clip_button" class="my_clip_button2"></div>
             <input id="infoToCopy" type="hidden" value="<?= ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'] . ' - ' .$planes['Instit']['nombre_completo'] . ' - ' . $planes['Instit']['direccion'] . ' - ' . $planes['Departamento']['name'] . ' - ' . $planes['Localidad']['name'] ?> "/>
-            <script language="JavaScript"  type="text/javascript" defer="defer">
-                var clip = new ZeroClipboard.Client();
-
-                ZeroClipboard.setMoviePath('<?php echo $html->url("/js/zeroclipboard/ZeroClipboard10.swf"); ?>');
-
-                clip.setText( '' ); // will be set later on mouseDown
-                clip.setHandCursor( true );
-                clip.addEventListener( 'mouseDown', function(client) {
-                   client.setText($("infoToCopy").value);
-                } );
-
-                clip.glue( 'd_clip_button' );
-           </script>
+            
             <div style="border-top:2px solid #9DA6C1" class="tabs-content">
                 <div class="related">
 
@@ -161,8 +149,8 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                                                     ?>
                                                             <tr id="fila_plan_<?= $plan['Plan']['id'];?>" <?php echo $class;?>
                                                                             onclick="window.location='<?= $html->url(array('controller'=> 'Planes', 'action'=>'view/'.$plan['Plan']['id']))?>'"
-                                                                            onmouseout="$('fila_plan_<?= $plan['Plan']['id'];?>').removeClassName('fila_marcada')"
-                                                                            onmouseover="$('fila_plan_<?= $plan['Plan']['id'];?>').addClassName('fila_marcada')"
+                                                                            onmouseout="jQuery('#fila_plan_<?= $plan['Plan']['id'];?>').removeClass('fila_marcada')"
+                                                                            onmouseover="jQuery('#fila_plan_<?= $plan['Plan']['id'];?>').addClass('fila_marcada')"
                                                             >
 
                                                                     <td>
@@ -246,4 +234,19 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                 </div>
             </div>
 </div>
+<script language="JavaScript"  type="text/javascript" defer="defer">
+    jQuery(document).ready(function(){
+        var clip = new ZeroClipboard.Client();
+
+        ZeroClipboard.setMoviePath('<?php echo $html->url("/js/zeroclipboard/ZeroClipboard10.swf"); ?>');
+
+        clip.setText( '' ); // will be set later on mouseDown
+        clip.setHandCursor( true );
+        clip.addEventListener( 'mouseDown', function(client) {
+           client.setText(jQuery("#infoToCopy").val());
+        } );
+
+        clip.glue( 'd_clip_button' );
+    })
+</script>
 

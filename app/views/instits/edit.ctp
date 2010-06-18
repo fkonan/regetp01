@@ -93,8 +93,8 @@
     echo $ajax->observeField('jurisdiccion_id',
     array(  	'url' => '/departamentos/ajax_select_departamento_form_por_jurisdiccion',
     'update'=>'InstitDepartamentoId',
-    'loading'=>'$("ajax_indicator").show();$("InstitDepartamentoId").disable()',
-    'complete'=>'$("ajax_indicator").hide();$("InstitDepartamentoId").enable()',
+    'loading'=>'jQuery("#ajax_indicator").show();jQuery("#InstitDepartamentoId").attr("disabled","disabled")',
+    'complete'=>'jQuery("#ajax_indicator").hide();jQuery("#InstitDepartamentoId").removeAttr("disabled")',
     'onChange'=>true
     ));
     //LOCALIDAD
@@ -102,8 +102,8 @@
     echo $ajax->observeField('InstitDepartamentoId',
     array(  	'url' => '/localidades/ajax_select_localidades_form_por_departamento',
     'update'=>'InstitLocalidadId',
-    'loading'=>'$("ajax_indicator_dpto").show();$("InstitLocalidadId").disable()',
-    'complete'=>'$("ajax_indicator_dpto").hide();$("InstitLocalidadId").enable()',
+    'loading'=>'jQuery("#ajax_indicator_dpto").show();jQuery("#InstitLocalidadId").attr("disabled","disabled")',
+    'complete'=>'jQuery("#ajax_indicator_dpto").hide();jQuery("#InstitLocalidadId").removeAttr("disabled")',
     'onChange'=>true
     ));
 
@@ -115,8 +115,8 @@
     echo $ajax->observeField('jurisdiccion_id',
     array(  	'url' => '/tipoinstits/ajax_select_form_por_jurisdiccion',
     'update'=>'InstitTipoinstitId',
-    'loading'=>'$("ajax_indicator").show();$("InstitTipoinstitId").disable()',
-    'complete'=>'$("ajax_indicator").hide();$("InstitTipoinstitId").enable()',
+    'loading'=>'jQuery("#ajax_indicator").show();jQuery("#InstitTipoinstitId").attr("disabled","disabled")',
+    'complete'=>'jQuery("#ajax_indicator").hide();jQuery("#InstitTipoinstitId").removeAttr("disabled")',
     'onChange'=>true
     ));
 

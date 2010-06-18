@@ -1,3 +1,9 @@
+<?php
+
+echo $javascript->link('prototype');
+echo $javascript->link('scriptaculous-js-1.8.3/src/scriptaculous');
+
+?>
 <p>
 <?php
 echo $paginator->counter(array(

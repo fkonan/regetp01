@@ -11,7 +11,7 @@ echo $paginator->counter(array(
 ?></p>
 
 <?php echo $form->create('Localidad',array('action'=>'ver'));?>
-<?php echo $form->input('jurisdiccion_id',array('type'=>'select','options'=>$jurisdicciones,'onchange'=>'$("LocalidadVerForm").submit()'));?>
+<?php echo $form->input('jurisdiccion_id',array('type'=>'select','options'=>$jurisdicciones,'onchange'=>'jQuery("#LocalidadVerForm").submit()'));?>
 <?php echo $form->end(null);?>
 
 <table cellpadding="0" cellspacing="0">

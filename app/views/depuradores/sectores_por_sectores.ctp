@@ -1,4 +1,10 @@
+<?php
 
+echo $javascript->link('prototype');
+echo $javascript->link('scriptaculous-js-1.8.3/src/scriptaculous');
+
+
+?>
 <div class="instits form">
 
 <?php echo $form->create('Plan',array(	'url'=>"/depuradores/sectores_por_sectores/$sec_id/$subsec_id/$plan_nombre",

@@ -104,8 +104,8 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 	
 	<li id="lista_instit_<?= $instit['Instit']['id']?>" class="lista_link <?=$clase ?>" 
 		onclick="window.location='<?= $html->url(array('controller'=> 'Instits', 'action'=>'view/'.$instit['Instit']['id'])) ?>'"
-		onmouseover="$('lista_instit_<?= $instit['Instit']['id']?>').addClassName('lista_link_hover');"
-		onmouseout="$('lista_instit_<?= $instit['Instit']['id']?>').removeClassName('lista_link_hover');"
+		onmouseover="jQuery('#lista_instit_<?= $instit['Instit']['id']?>').addClass('lista_link_hover');"
+		onmouseout="jQuery('#lista_instit_<?= $instit['Instit']['id']?>').removeClass('lista_link_hover');"
 		title="<?= $instit['Instit']['nombre_completo']?>"
 		>
 		
@@ -131,7 +131,7 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 			<div class="instit_atributte"><b>Localidad: </b><?= $instit['Localidad']['name'] ?></div>
 		</div>
             <script language="JavaScript" defer="defer" type="text/javascript">
-
+                jQuery(document).ready(function(){
                     var clip = new ZeroClipboard.Client();
 
                     ZeroClipboard.setMoviePath('<?php echo $html->url("/js/zeroclipboard/ZeroClipboard10.swf"); ?>');
@@ -139,10 +139,11 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
                     clip.setText( '' ); // will be set later on mouseDown
                     clip.setHandCursor( true );
                     clip.addEventListener( 'mouseDown', function(client) {
-                       client.setText($("infoToCopy<?=$instit['Instit']['id']?>").value);
+                       client.setText(jQuery("#infoToCopy<?=$instit['Instit']['id']?>").val());
                     } );
 
                     clip.glue( 'd_clip_button<?=$instit['Instit']['id']?>' );
+                })
                </script>
 
 	</li>
