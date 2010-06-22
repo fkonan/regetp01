@@ -48,7 +48,7 @@
         jQuery.noConflict();
         jQuery(document).ready(function () {
             jQuery("ul.menu_body li:even").addClass("alt");
-            
+            jQuery('#boxInstituciones .menu_body').show();
             <?php
             $showMenu = !($session->check('Auth.User') && ($session->read('Auth.User.role') != 'invitado'));
             if($showMenu){?>
