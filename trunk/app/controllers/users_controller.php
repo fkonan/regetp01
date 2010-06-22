@@ -105,7 +105,7 @@ class UsersController extends AppController {
 	 * @param id del usuario
 	 */
 	function self_user_edit($id){
-		if (!$id && empty($this->data) || $id == $this->Auth->user('id')) {
+		if (!$id && empty($this->data) || $id != $this->Auth->user('id')) {
 			$this->Session->setFlash(__('Usuario Incorrecto', true));
 			$this->redirect('/pages/home');
 		}
@@ -129,7 +129,7 @@ class UsersController extends AppController {
 	 * @param id del usuario
 	 */
 	function cambiar_password($id){
-		if (!$id && empty($this->data) || $id == $this->Auth->user('id')) {
+		if (!$id && empty($this->data) || $id != $this->Auth->user('id')) {
 			$this->Session->setFlash(__('Usuario Incorrecto', true));
 			$this->redirect('/pages/home');
 		}
