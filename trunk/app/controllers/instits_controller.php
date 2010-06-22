@@ -255,27 +255,27 @@ class InstitsController extends AppController {
         if (!empty($this->data)) {
             $logTxt = $headTxt = '';
             $logTxt .= '|'.$this->Auth->user('nombre'); $headTxt .= '|'.'Usuario';
-            $logTxt .= '|'. $this->data['Instit']['cue']; $headTxt .= '|'.'CUE';
-            $logTxt .= '|'. $this->data['Instit']['nombre_completo']; $headTxt .= '|'.'Nombre Libre';
-            $logTxt .= '|'. $this->data['Instit']['nroinstit']; $headTxt .= '|'.'Nro Instit';
-            $logTxt .= '|'. $this->data['Instit']['jurisdiccion_id']; $headTxt .= '|'.'Jurisdiccion ID';
-            $logTxt .= '|'. $this->data['Instit']['tipoinstit_id']; $headTxt .= '|'.'Tipo Instit ID';
-            $logTxt .= '|'. $this->data['Instit']['nombre']; $headTxt .= '|'.'Nombre Instit';
-            $logTxt .= '|'. $this->data['Instit']['direccion']; $headTxt .= '|'.'Direccion';
-            $logTxt .= '|'. $this->data['Departamento']['id']; $headTxt .= '|'.'Departamento ID';
-            $logTxt .= '|'. $this->data['Localidad']['id']; $headTxt .= '|'.'Localidad ID';
-            $logTxt .= '|'. $this->data['Instit']['gestion_id']; $headTxt .= '|'.'Gestion ID';
-            $logTxt .= '|'. $this->data['Instit']['dependencia_id']; $headTxt .= '|'.'Dependencia ID';
+            $logTxt .= '|'. @$this->data['Instit']['cue']; $headTxt .= '|'.'CUE';
+            $logTxt .= '|'. @$this->data['Instit']['nombre_completo']; $headTxt .= '|'.'Nombre Libre';
+            $logTxt .= '|'. @$this->data['Instit']['nroinstit']; $headTxt .= '|'.'Nro Instit';
+            $logTxt .= '|'. @$this->data['Instit']['jurisdiccion_id']; $headTxt .= '|'.'Jurisdiccion ID';
+            $logTxt .= '|'. @$this->data['Instit']['tipoinstit_id']; $headTxt .= '|'.'Tipo Instit ID';
+            $logTxt .= '|'. @$this->data['Instit']['nombre']; $headTxt .= '|'.'Nombre Instit';
+            $logTxt .= '|'. @$this->data['Instit']['direccion']; $headTxt .= '|'.'Direccion';
+            $logTxt .= '|'. @$this->data['Departamento']['id']; $headTxt .= '|'.'Departamento ID';
+            $logTxt .= '|'. @$this->data['Localidad']['id']; $headTxt .= '|'.'Localidad ID';
+            $logTxt .= '|'. @$this->data['Instit']['gestion_id']; $headTxt .= '|'.'Gestion ID';
+            $logTxt .= '|'. @$this->data['Instit']['dependencia_id']; $headTxt .= '|'.'Dependencia ID';
 //            $logTxt .= '|'. $this->data['Instit']['esanexo']; $headTxt .= '|'.'Es Anexo';
-            $logTxt .= '|'. $this->data['Instit']['activo']; $headTxt .= '|'.'Activo';
-            $logTxt .= '|'. $this->data['Plan']['oferta_id']; $headTxt .= '|'.'Plan Oferta ID';
-            $logTxt .= '|'. $this->data['Plan']['sector_id']; $headTxt .= '|'.'Plan Sector ID';
-            $logTxt .= '|'. $this->data['Plan']['subsector_id']; $headTxt .= '|'.'Plan Sub-Sector ID';
-            $logTxt .= '|'. $this->data['Plan']['titulo_id']; $headTxt .= '|'.'Plan Titulo ID';
-            $logTxt .= '|'. $this->data['Instit']['orientacion_id']; $headTxt .= '|'.'Orientacion ID';
-            $logTxt .= '|'. $this->data['Plan']['norma']; $headTxt .= '|'.'Plan Norma';
-            $logTxt .= '|'. $this->data['Instit']['claseinstit_id']; $headTxt .= '|'.'Clase Instit ID';
-            $logTxt .= '|'. $this->data['Instit']['etp_estado_id']; $headTxt .= '|'.'ETP Estado ID';
+            $logTxt .= '|'. @$this->data['Instit']['activo']; $headTxt .= '|'.'Activo';
+            $logTxt .= '|'. @$this->data['Plan']['oferta_id']; $headTxt .= '|'.'Plan Oferta ID';
+            $logTxt .= '|'. @$this->data['Plan']['sector_id']; $headTxt .= '|'.'Plan Sector ID';
+            $logTxt .= '|'. @$this->data['Plan']['subsector_id']; $headTxt .= '|'.'Plan Sub-Sector ID';
+            $logTxt .= '|'. @$this->data['Plan']['titulo_id']; $headTxt .= '|'.'Plan Titulo ID';
+            $logTxt .= '|'. @$this->data['Instit']['orientacion_id']; $headTxt .= '|'.'Orientacion ID';
+            $logTxt .= '|'. @$this->data['Plan']['norma']; $headTxt .= '|'.'Plan Norma';
+            $logTxt .= '|'. @$this->data['Instit']['claseinstit_id']; $headTxt .= '|'.'Clase Instit ID';
+            $logTxt .= '|'. @$this->data['Instit']['etp_estado_id']; $headTxt .= '|'.'ETP Estado ID';
 
            
             $this->log($headTxt,'i_search');
