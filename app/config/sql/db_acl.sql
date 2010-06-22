@@ -6,6 +6,45 @@
 # Redistributions of files must retain the above copyright notice.
 # http://www.opensource.org/licenses/mit-license.php The MIT License
 
+/* postgres */
+CREATE TABLE aros
+(
+  id serial NOT NULL,
+  parent_id integer,
+  model character varying(255) DEFAULT ''::character varying,
+  foreign_key integer,
+  alias character varying(255) DEFAULT ''::character varying,
+  lft integer,
+  rght integer,
+  CONSTRAINT aros_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE acos
+(
+  id serial NOT NULL,
+  parent_id integer,
+  model character varying(255) DEFAULT ''::character varying,
+  foreign_key integer,
+  alias character varying(255) DEFAULT ''::character varying,
+  lft integer,
+  rght integer,
+  CONSTRAINT acos_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE aros_acos
+(
+  id serial NOT NULL,
+  aro_id integer NOT NULL,
+  aco_id integer NOT NULL,
+  _create character(2) NOT NULL DEFAULT 0,
+  _read character(2) NOT NULL DEFAULT 0,
+  _update character(2) NOT NULL DEFAULT 0,
+  _delete character(2) NOT NULL DEFAULT 0,
+  CONSTRAINT aros_acos_pkey PRIMARY KEY (id)
+);
+
+/* mysql */
+
 CREATE TABLE acos (
   id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   parent_id INTEGER(10) DEFAULT NULL,

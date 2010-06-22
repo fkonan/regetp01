@@ -133,7 +133,6 @@
                                     <?php echo $html->link('Salir','/users/logout', array('class'=>'userlinks')); ?>
                                 </div>-->
                             </div>
-                            <br />
                             <div>
 				<?php $session->flash(); ?>
 				<?php $session->flash('auth'); ?>

@@ -36,7 +36,7 @@
  */
 class AppController extends Controller {
 	var $helpers = array('Javascript','Html', 'Form', 'Ajax');
-	var $components = array('Auth');
+	var $components = array('Acl', 'Session', 'Auth');
 	
 	
 	//esta es una variable que sera mostrada en el layout
@@ -68,18 +68,28 @@ class AppController extends Controller {
 		 * 
 		 */
 		Configure::write('regetpVersion', '1.4.1');
-
-		$this->Auth->autoRedirect = false; 
+                /*
+		$this->Auth->autoRedirect = false;
 		$this->Auth->loginError ='Usuario o Contraseña Incorrectos';
 		$this->Auth->authError = 'Debe registrarse para acceder a esta página';
 		$this->Auth->logoutRedirect='/pages/home';
-		//$this->Auth->allow('*');
 		$this->Auth->allow('display','login','logout');
-		$this->Auth->authorize = 'controller'; 
-	}	
-	
-	
-	function isAuthorized() 
+		$this->Auth->authorize = 'controller';
+                */
+                
+                //Configure AuthComponent
+                //$this->Auth->allow('display','login','logout');
+                $this->Auth->allowedActions = array('display','login','logout');
+                $this->Auth->loginError ='Usuario o Contraseña Incorrectos';
+		$this->Auth->authError = 'Usted no tiene acceso a esta página';
+                $this->Auth->authorize = 'actions';
+                //$this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
+                $this->Auth->logoutRedirect='/pages/home';
+                $this->Auth->autoRedirect = false;
+	}
+
+
+	function isAuthorized()
 	{
 	  switch ($this->Auth->user('role')):
 	  
@@ -162,7 +172,6 @@ class AppController extends Controller {
 		
 		
 		
-		
 		/*****
 		 * 			COSAS DISPONIBLES PARA ToDOS LOS USUARIOS
 		 ****-----------------------------------------------------******/
@@ -210,7 +219,7 @@ class AppController extends Controller {
 		/**
 		 * Hacer que solo puedan modificar sus datos y contraseña el usuario que es dueño de esos datos
 		 */
-	    if ($this->name == 'Users' && $this->action == 'cambiar_password' && $this->passedArgs[0] == $this->Auth->user('id')) {$llAuth = true;}
+	   if ($this->name == 'Users' && $this->action == 'cambiar_password' && $this->passedArgs[0] == $this->Auth->user('id')) {$llAuth = true;}
 	    if ($this->name == 'Users' && $this->action == 'self_user_edit'   && $this->passedArgs[0] == $this->Auth->user('id')) {$llAuth = true;}
 	
 	
