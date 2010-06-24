@@ -27,8 +27,8 @@ if ($session->check('Auth.User')) {
             <div style="border-top:2px solid #9DA6C1" class="tabs-content">
 
                 <h2>Listado de Planes de Mejora</h2>
+                <p><strong>La institución presento <?php echo count($fondos) ?> planes de mejora con un total de $ <?=number_format($sumalineas,2,",",".");?></strong></p>
                 <ul style="padding-top: 20px" class="lista_fondos">
-
                 <?php
                 if(empty($fondos)){
                 ?>
