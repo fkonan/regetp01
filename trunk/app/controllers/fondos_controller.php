@@ -22,8 +22,12 @@ class FondosController extends AppController {
             }
 
             $this->Fondo->recursive = 1;
-
+            //$this->set('sumalineas',  $this->Fondo->FondosLineasDeAccion->find('sum',array('conditions'=>array('Fondo.instit_id'=>$id) ) ) );
             
+            $condicion = array('Fondo.instit_id'=>$id);
+
+            $this->set('sumalineas',  $this->Fondo->FondosLineasDeAccion->find('sum', array('conditions'=>$condicion)) );
+
             $this->set('instit', $this->Fondo->Instit->read(null, $id));
             $this->set('fondos', $this->paginate());
 	}
