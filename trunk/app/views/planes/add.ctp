@@ -75,10 +75,11 @@ $cue_instit = $instit['cue'].$anexo;
 		/**
 		 *    CICLOS ALTA Y MODIFICACION
 		 */	
-		$ciclos = $this->requestAction('/Ciclos/dame_ciclos');
-		echo $form->input('ciclo_alta', array("type" => "select", 
-											  "options" => $ciclos,'label'=>'Alta',
-											  "selected" => date('Y')			
+		echo $form->input('ciclo_alta', array(
+                          "type" => "select",
+                          "options" => $ciclos,
+                          'label'=>'Alta',
+                          "selected" => date('Y')
 		));
 	?>
 	</fieldset>

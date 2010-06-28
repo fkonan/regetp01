@@ -259,8 +259,9 @@ class PlanesController extends AppController {
 		$titulos = $this->Plan->Titulo->find('list');
 		$sectores = $this->Plan->Sector->find('list',array('order'=>'Sector.name'));
 		$subsectores = $this->Plan->Subsector->con_sector('list');
-		
-		$this->set(compact('subsectores','sectores','titulos'));
+		$ciclos = $this->Plan->Anio->Ciclo->find('list');
+                
+		$this->set(compact('subsectores','sectores','titulos', 'ciclos'));
 		
 		$this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$instit['Instit']['id'] );
 	}
@@ -294,8 +295,9 @@ class PlanesController extends AppController {
 			$this->data['Plan']['sector_id'] = 0;
 		}		
 		$subsectores = $this->Plan->Subsector->con_sector('list',$this->data['Plan']['sector_id']);
-		
-		$this->set(compact('ofertas','subsectores','sectores','titulos'));
+		$ciclos = $this->Plan->Anio->Ciclo->find('list');
+
+		$this->set(compact('ofertas','subsectores','sectores','titulos','ciclos'));
 		
 		$this->rutaUrl_for_layout[] = array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$this->data['Plan']['instit_id'] );
 		$this->rutaUrl_for_layout[] = array('name'=> 'Oferta Educativa','link'=>'/Planes/index/'.$this->data['Plan']['instit_id'] );
