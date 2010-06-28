@@ -206,7 +206,7 @@
                         <dd>
                             <?php
                             if($instit['Instit']['dir_nrodoc']>0) {
-                                echo $this->requestAction('/tipodocs/tipodoc_nombre/'.$instit['Instit']['dir_tipodoc_id']);
+                                echo ' '.$instit['Instit']['dir_tipodoc_name'];
                                 echo ' '.$instit['Instit']['dir_nrodoc'];
                             }
                 ?>
@@ -238,7 +238,7 @@
                         <dd>
                             <?
                             if($instit['Instit']['vice_nrodoc']>0) {
-                                echo $this->requestAction('/tipodocs/tipodoc_nombre/'.$instit['Instit']['vice_tipodoc_id']);
+                                echo ' '.$instit['Instit']['vice_tipodoc_name'];
                                 echo ' '.$instit['Instit']['vice_nrodoc'];
                             }
                 ?>
