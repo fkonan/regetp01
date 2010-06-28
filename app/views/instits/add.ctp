@@ -285,7 +285,7 @@ echo $html->css('edit_form',false);
             'class'=>'input_label'),
     'class'=>'input_text_peque'));
     echo $form->input('dir_tipodoc_id',array('label'=>'Tipo de Documento',
-    'options'=>$this->requestAction('/Tipodocs/dame_tipodocs'),
+    'options'=>$tipoDocs,
     'empty'=>array('Seleccionar')));
     echo $form->input('dir_nrodoc',array('label'=>array('text'=> 'Nº de Documento',
             'class'=>'input_label'),
@@ -313,7 +313,7 @@ echo $html->css('edit_form',false);
     'class'=>'input_text_peque'
     ));
     echo $form->input('vice_tipodoc_id',array('label'=>'Tipo de Documento',
-    'options'=>$this->requestAction('/Tipodocs/dame_tipodocs'),
+    'options'=>$tipoDocs,
     'empty'=>'Seleccionar'));
     echo $form->input('vice_nrodoc',array('label'=>array(	'text'=> 'Nº de Documento',
             'class'=>'input_label'),
@@ -349,7 +349,6 @@ echo $html->css('edit_form',false);
     /**
      *    CICLOS ALTA Y MODIFICACION
      */
-    $ciclos = $this->requestAction('/Ciclos/dame_ciclos');
     echo $form->input('ciclo_alta', array("type" => "select",
     "options" => $ciclos,'label'=>'Alta',
     "selected" => date('Y')

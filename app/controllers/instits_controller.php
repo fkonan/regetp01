@@ -27,6 +27,20 @@ class InstitsController extends AppController {
         }
 
         $instit = $this->Instit->read(null, $id);
+
+        $instit['Instit']['dir_tipodoc_name'] = '';
+        $tipodoc = ClassRegistry::init('Tipodoc')->find('first', array(
+            'conditions'=>array(
+                'Tipodoc.id'=> $instit['Instit']['dir_tipodoc_id'],
+        )));
+        $instit['Instit']['dir_tipodoc_name'] = $tipodoc['Tipodoc']['abrev'];
+
+        $tipodoc = ClassRegistry::init('Tipodoc')->find('first', array(
+            'conditions'=>array(
+                'Tipodoc.id'=> $instit['Instit']['vice_tipodoc_id'],
+        )));
+        $instit['Instit']['vice_tipodoc_name'] = $tipodoc['Tipodoc']['abrev'];
+
         $programa_de_etp = false;
         // si la institucion es con programa de ETP
         if($instit['EtpEstado']['id']== 1) {
@@ -90,7 +104,10 @@ class InstitsController extends AppController {
         $etp_estados = $this->Instit->EtpEstado->find('list');
         $this->Instit->Claseinstit->order = "Claseinstit.name DESC";
         $claseinstits = $this->Instit->Claseinstit->find('list');
-        $this->set(compact('etp_estados','claseinstits','gestiones','dependencias','jurisdicciones','similares','tipoinstits','departamentos','localidades'));
+        $tipoDocs = ClassRegistry::init('Tipodoc')->find('list',array('fields'=>array('id','abrev')));
+        $ciclos = $this->Instit->Plan->Anio->Ciclo->find('list');
+        
+        $this->set(compact('ciclos','tipoDocs','etp_estados','claseinstits','gestiones','dependencias','jurisdicciones','similares','tipoinstits','departamentos','localidades'));
         $this->set('force_save', $force_save);
         $this->set('orientaciones', $this->Instit->Orientacion->find('list'));
     }
@@ -157,8 +174,10 @@ class InstitsController extends AppController {
         $etp_estados = $this->Instit->EtpEstado->find('list');
         $this->Instit->Claseinstit->order = "Claseinstit.name DESC";
         $claseinstits = $this->Instit->Claseinstit->find('list');
-
-        $this->set(compact('claseinstits','etp_estados','gestiones','dependencias','jurisdicciones','similares','tipoinstits','departamentos','localidades'));
+        $tipoDocs = ClassRegistry::init('Tipodoc')->find('list',array('fields'=>array('id','abrev')));
+        $ciclos = $this->Instit->Plan->Anio->Ciclo->find('list');
+        
+        $this->set(compact('ciclos','tipoDocs','claseinstits','etp_estados','gestiones','dependencias','jurisdicciones','similares','tipoinstits','departamentos','localidades'));
 
         $this->set('orientaciones', $this->Instit->Orientacion->find('list'));
         $this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$id );
