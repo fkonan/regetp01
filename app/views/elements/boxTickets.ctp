@@ -39,12 +39,6 @@ if ($session->check('Auth.User')){
 <div id="boxTickets">
 	<h1 id="boxTickets" class="menu_head">Pendientes de Actualización</h1>
 	<ul class="menu_body">
-            <?php
-                $prov_pend = array();
-                $prov_pend = $this->requestAction('/tickets/provincias_pendientes');
-
-                /************************/
-            ?>
             <form id="pendientes" method="post">
             </form>
             <div id="tickets" style="display: none;">

@@ -92,9 +92,10 @@ $cue_instit = $instit['cue'].$anexo;
         /**
          *    CICLOS ALTA Y MODIFICACION
          */
-        $ciclos = $this->requestAction('/Ciclos/dame_ciclos');
-        echo $form->input('ciclo_alta', array("type" => "select",
-        "options" => $ciclos,'label'=>'Alta'
+        echo $form->input('ciclo_alta', array(
+            "type" => "select",
+            "options" => $ciclos,
+            'label'=>'Alta'
         ));
 
         ?>
