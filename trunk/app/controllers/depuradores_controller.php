@@ -367,63 +367,79 @@ class DepuradoresController extends AppController {
     	
     }
     
-	function depurar_orientacion() {
-		$tipoinstit_seleccionado = 0;
-		
-		if (empty($this->data['Form']['claseinstit_id'])) {
-	    	if (!empty($this->data['Instit'])) 
-			{	
-				$this->Instit->id =  $this->data['Instit']['id'];
-				if($this->Instit->saveField('orientacion_id',  $this->data['Instit']['orientacion_id']))
-				{
-					$this->Session->setFlash(__('Se ha guardado la institución correctamente', true));
-				}else{
-					debug($this->Instit->validationErrors);
-					$this->Session->setFlash(__('La institución no pudo ser guardada. Escriba nuevamente el campo incorrecto.', true));
-				}
-			}
-		}
-		
-		
-    	$conditions = array('activo' =>1, 'Instit.orientacion_id'=>0);
-    	if ( !empty($this->data['Form']['claseinstit_id']) ) {
-    		$tipoinstit_seleccionado = $this->data['Form']['claseinstit_id'];
-    		$conditions['Instit.claseinstit_id'] = $this->data['Form']['claseinstit_id'];
-    	}
-		else {
-			if (!empty($this->data['Instit']['claseinstit_id'])) {
-				$tipoinstit_seleccionado = $this->data['Instit']['claseinstit_id'];
-				$conditions['Instit.claseinstit_id'] = $this->data['Instit']['claseinstit_id'];
-			}
-		}
-		
-		$falta_depurar = $this->Instit->find('count',array('conditions'=>$conditions));
-		$this->data = $this->Instit->find('first',array(
-									'conditions'=>$conditions
-		));
-		
-		$tipoinstits = $this->Instit->Claseinstit->find('list');
-		//$tipoinstits = $this->Instit->Tipoinstit->dameConJurisdiccion('list'); 
-		
-		$planes = $this->Instit->Plan->find('all',array('conditions'=>array('Plan.instit_id'=>$this->data['Instit']['id']),
-														'contain'=>array(
-																'Sector'=>array('Orientacion'),
-																'Anio' => array('Ciclo'),
-		)));
-		
-		
-		$orientaciones = $this->Instit->Plan->Sector->Orientacion->find('list');
-		
-		$etp_estados = $this->Instit->EtpEstado->find('list',array('order'=>'id DESC'));
-		
-		$this->Instit->id = $this->data['Instit']['id'];
-		$orientacionSugerida = $this->Instit->getOrientacionSegunSusPlanes();
-		
-		$this->set('falta_depurar', $falta_depurar);
-		$this->set('tipoinstit_seleccionado', $tipoinstit_seleccionado);
-		$this->set(compact( 'etp_estados', 'orientaciones','planes','tipoinstits',
-							'orientacionSugerida'));
-		
+    function depurar_orientacion() {
+        $tipoinstit_seleccionado = 0;
+
+
+        $condicionJurisdiccion = array();
+
+        if (!empty($this->passedArgs['jurisdiccion_id'])){
+            $condicionJurisdiccion = array('Instit.jurisdiccion_id'=>$this->passedArgs['jurisdiccion_id']);
+        }
+        if (!empty( $this->data['Plan']['jurisdiccion_id'])){
+             $condicionJurisdiccion = array('Instit.jurisdiccion_id'=>$this->data['Plan']['jurisdiccion_id']);
+        } elseif (!empty( $this->data['Instit']['jurisdiccion_id'])){
+            $condicionJurisdiccion = array('Instit.jurisdiccion_id'=>$this->data['Instit']['jurisdiccion_id']);
+        }
+
+        if (empty($this->data['Form']['claseinstit_id'])) {
+            if (!empty($this->data['Instit'])) {
+                $this->Instit->id =  $this->data['Instit']['id'];
+                if($this->Instit->saveField('orientacion_id',  $this->data['Instit']['orientacion_id'])) {
+                    $this->Session->setFlash(__('Se ha guardado la institución correctamente', true));
+                }else {
+                    debug($this->Instit->validationErrors);
+                    $this->Session->setFlash(__('La institución no pudo ser guardada. Escriba nuevamente el campo incorrecto.', true));
+                }
+            }
+        }
+
+
+        $conditions = array('activo' =>1, 'Instit.orientacion_id'=>0);
+        if ( !empty($this->data['Form']['claseinstit_id']) ) {
+            $tipoinstit_seleccionado = $this->data['Form']['claseinstit_id'];
+            $conditions['Instit.claseinstit_id'] = $this->data['Form']['claseinstit_id'];
+        }
+        else {
+            if (!empty($this->data['Instit']['claseinstit_id'])) {
+                $tipoinstit_seleccionado = $this->data['Instit']['claseinstit_id'];
+                $conditions['Instit.claseinstit_id'] = $this->data['Instit']['claseinstit_id'];
+            }
+        }
+
+        $conditions = $conditions + $condicionJurisdiccion;
+
+
+        $falta_depurar = $this->Instit->find('count',array('conditions'=>$conditions));
+        $this->data = $this->Instit->find('first',array(
+                'conditions'=>$conditions
+        ));
+
+        $tipoinstits = $this->Instit->Claseinstit->find('list');
+        //$tipoinstits = $this->Instit->Tipoinstit->dameConJurisdiccion('list');
+
+        $planes = $this->Instit->Plan->find('all',array('conditions'=>array('Plan.instit_id'=>$this->data['Instit']['id']),
+                'contain'=>array(
+                        'Sector'=>array('Orientacion'),
+                        'Anio' => array('Ciclo'),
+        )));
+
+
+        $orientaciones = $this->Instit->Plan->Sector->Orientacion->find('list');
+
+
+        $jurisdicciones = $this->Instit->Jurisdiccion->find('list');
+
+        $etp_estados = $this->Instit->EtpEstado->find('list',array('order'=>'id DESC'));
+
+        $this->Instit->id = $this->data['Instit']['id'];
+        $orientacionSugerida = $this->Instit->getOrientacionSegunSusPlanes();
+
+        $this->set('falta_depurar', $falta_depurar);
+        $this->set('tipoinstit_seleccionado', $tipoinstit_seleccionado);
+        $this->set(compact( 'etp_estados', 'orientaciones','planes','tipoinstits',
+                'orientacionSugerida', 'jurisdicciones'));
+
     }
     
     function depurar_titulos() {
