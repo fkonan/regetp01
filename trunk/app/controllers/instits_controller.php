@@ -273,7 +273,7 @@ class InstitsController extends AppController {
          */
         if (!empty($this->data)) {
             $logTxt = $headTxt = '';
-            $logTxt .= '|'.$this->Auth->user('nombre'); $headTxt .= '|'.'Usuario';
+            $logTxt .= '|'.$this->Auth->user('nombre').' '.$this->Auth->user('apellido'); $headTxt .= '|'.'Usuario';
             $logTxt .= '|'. @$this->data['Instit']['cue']; $headTxt .= '|'.'CUE';
             $logTxt .= '|'. @$this->data['Instit']['nombre_completo']; $headTxt .= '|'.'Nombre Libre';
             $logTxt .= '|'. @$this->data['Instit']['nroinstit']; $headTxt .= '|'.'Nro Instit';
