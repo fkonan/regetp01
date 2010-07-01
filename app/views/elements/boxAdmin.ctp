@@ -8,6 +8,7 @@ if ($session->check('Auth.User')){
                         <ul class="menu_body">
 				<li><? echo $html->link("Agregar Usuario","/Users/add") ?></li>
 				<li><? echo $html->link("Listar Usuarios","/Users/listadoUsuarios") ?></li>
+                                <li><? echo $html->link("Usuarios y permisos","/admin/acl") ?></li>
 
 				<li><? echo $html->link("Ofertas","/ofertas") ?></li>
 				<li><? echo $html->link("Ciclos","/ciclos") ?></li>

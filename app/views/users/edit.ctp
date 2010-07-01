@@ -7,8 +7,9 @@
 		echo $form->input('username',array('label'=>'Usuario'));
 		echo $form->input('nombre');
 		echo $form->input('apellido');
-		$opciones = array('admin'=>'Administrador', 'editor'=> 'Editor', 'invitado'=>'Usuario de Consulta');
-		echo $form->input('role',array('options'=>$opciones));
+		//$opciones = array('admin'=>'Administrador', 'editor'=> 'Editor', 'invitado'=>'Usuario de Consulta');
+		//echo $form->input('role',array('options'=>$opciones));
+                echo $form->input('grupo', array('options'=>$aros, 'selected'=>$parent_aro_seleced));
 		echo $form->input('password');
 		//echo $form->input('password_check',array('label'=>'Reingrese Password','type'=>'password'));
 		

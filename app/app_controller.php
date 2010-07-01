@@ -89,7 +89,7 @@ class AppController extends Controller {
 	}
 
 
-	function isAuthorized()
+	function isAuthorized2()
 	{
 	  switch ($this->Auth->user('role')):
 	  
