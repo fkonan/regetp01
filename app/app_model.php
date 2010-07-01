@@ -46,13 +46,30 @@ class AppModel extends Model {
 	 *
 	 * @param $text
 	 */
-	function convertir_para_busqueda_avanzada($text){		
-		$text = strtolower($text);
+	function convertir_para_busqueda_avanzada($text){
+            $text = strtolower($text);
+
+                // reemplado las palabras abreviadas por su version con puntos
+                //  EJ: a EET quedaria: E.E.T, es para mejorar la busqueda
+                $tipoInstitsAbreviadas = array(
+                    'ipem'  => 'i.p.e.m',
+                    'cfp'   => 'c.f.p',
+                    'eet'   => 'e.e.t',
+                    'cent'  => 'c.e.n.t',
+                    'cea'   => 'c.e.a',
+                    'eea'   => 'e.e.a',
+                    'cfr'   => 'c.f.r',
+                );
+                
+                $text = str_replace(array_keys($tipoInstitsAbreviadas), array_values($tipoInstitsAbreviadas), $text);
+
+                
+		
 		$text = trim($text);
 		$text = "%$text%";
 		$patron = array (
 			// Espacios, puntos y comas por guion
-			//'/[\., ]/' => '%',
+			'/.,/' => '\.',
 			
 			// Vocales
 			'/a/' => '(á|a|A|Á)',
@@ -95,7 +112,8 @@ class AppModel extends Model {
  
 		);
 		// caracteres especiales de expresiones regulares
-		$text = preg_quote($text);
+		//$text = preg_quote($text);
+               
 		$text_aux = '';
 		for($i=0; $i<strlen($text); $i++){
 	  		$caracter =  $text[$i];
