@@ -28,6 +28,9 @@ Event.observe(window, "keypress", function(e){
 	echo $form->create('Plan',array(	
 					'url'=>'/depuradores/depurar_orientacion',
 					'id'=>'FormOrientacion'));
+
+
+        echo $form->input('jurisdiccion_id', array('value'=>$this->data['Instit']['jurisdiccion_id']));
 		
 	echo $form->input('Form.claseinstit_id', array(
 										 'empty' => 'Todos',
@@ -39,7 +42,7 @@ Event.observe(window, "keypress", function(e){
 										 'default' =>$tipoinstit_seleccionado,
 										 'empty' => 'Todos',
 										 ));
-	echo $form->end(null);										 
+	echo $form->end('siguente');
 ?> 
 
 
@@ -86,6 +89,7 @@ Event.observe(window, "keypress", function(e){
 <?php echo $form->create('Instit',array('url'=>'/depuradores/depurar_orientacion','id'=>'InstitDepurarForm'));?>
 	<?php
 		echo $form->input('id');
+                echo $form->hidden('jurisdiccion_id');
 		echo $form->input('orientacion_id',array('label'=>'Seleccione tipo de Orientación',
 												 'selected'=>$orientacionSugerida,
 												 'empty' => 'Seleccione',										
