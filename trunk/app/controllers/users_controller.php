@@ -3,12 +3,7 @@ class UsersController extends AppController {
 
 	var $name = 'Users';
 
-        function beforeFilter() {
-            parent::beforeFilter();
-            //$this->Auth->allowedActions = array('login', 'logout');
-            $this->Auth->allow('*');
-        }
-	
+        
 	function listadoUsuarios() {
 		$this->User->recursive = 0;
 		$this->set('users', $this->paginate());
@@ -35,8 +30,16 @@ class UsersController extends AppController {
 			}
 			else{
 				$this->Session->setFlash('Los passwords no coinciden');
+                                $this->data['User']['password']='';
+                                $this->data['User']['password_check']='';
 			}
 		}
+
+                $jurisdicciones = $this->User->Jurisdiccion->find('list',array('order'=>'name'));
+                // AROS para combo
+                $this->Acl->Aro->recursive = 0;
+                $aros = $this->Acl->Aro->find('list', array('fields' => array('alias'), 'conditions'=>array('parent_id'=>1), 'order'=>'alias'));
+                $this->set(compact('aros','jurisdicciones'));
 	}
 
 	function edit($id = null) {
@@ -54,6 +57,13 @@ class UsersController extends AppController {
 		}
 		if (empty($this->data)) {
 			$this->data = $this->User->read(null, $id);
+
+                        $jurisdicciones = $this->User->Jurisdiccion->find('list',array('order'=>'name'));
+                        // AROS para combo
+                        $this->Acl->Aro->recursive = 0;
+                        $aros = $this->Acl->Aro->find('list', array('fields' => array('alias'), 'conditions'=>array('parent_id'=>1), 'order'=>'alias'));
+                        $this->set(compact('aros','jurisdicciones'));
+                        $this->set('parent_aro_seleced', $this->User->parentNodeId());
 		}
 	}
 
