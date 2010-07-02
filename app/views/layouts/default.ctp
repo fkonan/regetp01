@@ -83,7 +83,7 @@
                 var thisDiv = arrayOfDivs[i];
                 var styleClassName = thisDiv.className.value;
                 
-                if (Get_Cookie( 'opened_tag' ).toString() == thisDiv.id) {
+                if (Get_Cookie( 'opened_tag' ) != null && Get_Cookie( 'opened_tag' ).toString() == thisDiv.id) {
                     //document.getElementById(thisDiv.id).className.value = 'menu_head_open';
                     jQuery('#' + thisDiv.id + ' h1').removeClass('menu_head').addClass('menu_head_open');
                     jQuery('#' + thisDiv.id + ' ul.menu_body').slideToggle('medium');
