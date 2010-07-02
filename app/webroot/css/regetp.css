@@ -117,6 +117,7 @@ h1 {
     margin-left: 0;
     border-bottom: solid;
     border-bottom-color: #CEE3F6;
+    clear: both;
 }
 h2 {
     color: #045FB4;
@@ -1210,15 +1211,19 @@ div.code-coverage-results span.result-good {
 .search-div{
     color: #045FB4;
     font-family:Arial, Helvetica, sans-serif;
-    border-bottom-style: double;
+    border-top-style: solid;
+    border-top-color: #CEE3F6;
+    border-top-width: 1px;
+    border-bottom-style: solid;
     border-bottom-color: #CEE3F6;
-    border-bottom-width: 4px;
-    border-right-style: double;
+    border-bottom-width: 1px;
+    border-right-style: solid;
     border-right-color: #CEE3F6;
-    border-right-width: 4px;
-    border-left-style: double;
+    border-right-width: 1px;
+    border-left-style: solid;
     border-left-color: #CEE3F6;
     border-left-width: 1px;
+    margin-bottom: 10px;
 }
 
 #InstitSearchForm H2{
@@ -1226,7 +1231,7 @@ div.code-coverage-results span.result-good {
     border-bottom-color: #CEE3F6;
     border-bottom-width: 1px;
     margin-bottom: 0px;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 
@@ -1730,6 +1735,70 @@ input[type="hidden"]{
     cursor:pointer;
     font-size:9pt;
     float:right;
+}
+
+/*
+
+Busqueda Simple de Instituciones
+
+*/
+
+.institCueInfo {
+    font-size: 9pt;
+    border-top: thin solid #6F7BA3;
+    border-bottom: thin solid #6F7BA3;
+    margin-top:  10px;
+    margin-left:  0px;
+    margin-right: 0px;
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-bottom: 7px;
+    border: 1px solid #6F7BA3;
+}
+
+.institCueInfo .sear {
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.institCueInfo .institCueInfoDetail h4{
+    -moz-background-clip:border;
+    -moz-background-inline-policy:continuous;
+    -moz-background-origin:padding;
+    -moz-border-radius-bottomleft:14px;
+    -moz-border-radius-bottomright:14px;
+    -webkit-border-bottom-left-radius: 14px;
+    -webkit-border-bottom-right-radius: 14px;
+    background:#5C9CCC url(../img/fondo_panel_collapsible.png) repeat-x scroll 50% 50%;
+    color:#FFFFFF;
+    font-weight:bold;
+    padding: 1px 10px;
+    margin-right: -1px;
+    font-size: 11pt;
+}
+
+
+.link_right{
+    float: right;
+    margin-right: 45px;
+}
+
+/* simple css-based tooltip */
+.tooltip {
+	background-color:#DBEBF6;
+	border:1px solid #fff;
+	padding:10px 15px;
+	width:200px;
+	display:none;
+	color:#045FB4;
+	text-align:left;
+	font-size:12px;
+
+	/* outline radius for mozilla/firefox only */
+	-moz-box-shadow:0 0 10px #000;
+	-webkit-box-shadow:0 0 10px #000;
 }
 
 

@@ -3,6 +3,7 @@ class LocalidadesController extends AppController {
 
 	var $name = 'Localidades';
 	var $helpers = array('Html', 'Form', 'Ajax');
+        var $components = array('RequestHandler');
 
 	function index($jurisdiccion = 0) {
 		$this->Localidad->recursive = 2;
@@ -159,6 +160,89 @@ class LocalidadesController extends AppController {
 	     //prevent useless warnings for Ajax
 	     $this->render('ajax_select_localidades_form_por_departamento','ajax');			
 	}
+
+        function ajax_search_localidades($q = null){
+            $this->autoRender = false;
+            $result = array();
+            $jur= 0;
+
+            if (!empty($this->params['url']['jur'])) {
+                $jur = utf8_decode(strtolower($this->params['url']['jur']));
+            }
+            
+            if(empty($q)) {
+                if (!empty($this->params['url']['q'])) {
+                    $q = utf8_decode(strtolower($this->params['url']['q']));
+                } else {
+                    return utf8_encode("parámetro vacio");
+                }
+            }
+
+            if ( $this->RequestHandler->isAjax() ) {
+                Configure::write ( 'debug', 0 );
+            }
+            
+            $response = '';
+
+            if($jur != 0){
+                $conditions = array(
+                                "to_ascii(lower(Departamento.name)) SIMILAR TO ?" => "%". $q ."%",
+                                "Jurisdiccion.id" => $jur
+                              );
+            }else{
+                $conditions = array(
+                                "to_ascii(lower(Departamento.name)) SIMILAR TO ?" => "%". $q ."%"
+                              );
+            }
+
+            $deptos = $this->Localidad->Departamento->find("all", array(
+                            'contain'=> array(
+                                    'Jurisdiccion'
+                            ),
+                            'conditions'=> $conditions,
+                            'order' => array('Jurisdiccion.id')
+                            )
+                    );
+
+            foreach ($deptos as $item) {
+
+                array_push($result, array(
+                        "id" => $item['Departamento']['id'],
+                        "type" => "Departamento",
+                        "localidad" => '',
+                        "departamento" => utf8_encode($item['Departamento']['name']),
+                        "jurisdiccion" => utf8_encode($item['Jurisdiccion']['name'])
+                ));
+            }
+
+            $localidades = $this->Localidad->find("all", array(
+                            'contain'=> array(
+                                    'Departamento'=>array('Jurisdiccion')
+                            ),
+                            'conditions'=> array(
+                                "OR"=>array(
+                                    "to_ascii(lower(Localidad.name)) SIMILAR TO ?" => "%". $q ."%",
+                                    "to_ascii(lower(Departamento.name)) SIMILAR TO ?" => "%". $q ."%",
+                                ),
+                             //  "Jurisdiccion.id" => $jur,
+                            ),
+                            'order' => array('Departamento.id')
+                        )
+                    );
+            foreach ($localidades as $item) {
+                if($jur== 0 || $item['Departamento']['jurisdiccion_id'] == $jur){
+                    array_push($result, array(
+                            "id" => $item['Localidad']['id'],
+                            "type" => "Localidad",
+                            "localidad" => utf8_encode($item['Localidad']['name']),
+                            "departamento" => utf8_encode($item['Departamento']['name']),
+                            "jurisdiccion" => utf8_encode($item['Departamento']['Jurisdiccion']['name'])
+                    ));
+               }
+            }
+            
+            echo json_encode($result);
+        }
 
 }
 ?>

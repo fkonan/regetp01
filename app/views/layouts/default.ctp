@@ -41,6 +41,7 @@
 
 		echo $javascript->link('jquery-1.4.2.min.js');
                 echo $javascript->link('jquery.form.js');
+                echo $javascript->link('jquery.tools.min.js');
                 
 		echo $scripts_for_layout;
 	?>

@@ -2,9 +2,11 @@
 class Departamento extends AppModel {
 
 	var $name = 'Departamento';
+        var $actsAs = array('Containable');
 	var $validate = array(
 		'name' => array('notempty')
 	);
+        
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array(
