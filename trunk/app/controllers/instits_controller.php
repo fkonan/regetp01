@@ -4,6 +4,7 @@ class InstitsController extends AppController {
     var $name = 'Instits';
     var $helpers = array('Html','Form','Ajax','Cache');
     var $paginate = array('order'=>array('Instit.cue' => 'asc'),'limit'=>'10');
+    var $components = array('RequestHandler');
 
 
     function test() {
@@ -199,7 +200,7 @@ class InstitsController extends AppController {
      * que sera impreso por pantalla
      *
      */
-    function search_form() {
+    function old_search_form() {
         $this->cacheAction = '1 day';
 
         if (!empty($this->data)) {
@@ -258,6 +259,89 @@ class InstitsController extends AppController {
                 'gestiones', 'dependencias', 'jurisdicciones',
                 'ofertas','localidades','departamentos','sectores',
                 'claseinstits','etpEstados','orientaciones', 'subsectores', 'titulos'));
+    }
+
+    function search_form() {
+        $this->cacheAction = '1 day';
+
+        if (!empty($this->data)) {
+            $this->redirect('search');
+        }
+
+    }
+    
+    /**
+     * Esta accion maneja el formulario de busqueda
+     * que sera impreso por pantalla
+     *
+     */
+    function advanced_search_form() {
+        $this->cacheAction = '1 day';
+
+        if (!empty($this->data)) {
+            $this->redirect('search');
+        }
+
+        $this->Instit->Gestion->recursive = -1;
+        $this->Instit->Gestion->order = 'Gestion.name';
+        $gestiones = $this->Instit->Gestion->find('list');
+
+        $this->Instit->Dependencia->recursive = -1;
+        $this->Instit->Dependencia->order ='Dependencia.name';
+        $dependencias = $this->Instit->Dependencia->find('list');
+
+        //$tipoinstits = $this->Instit->Tipoinstit->find('list');
+
+
+        $this->Instit->Jurisdiccion->recursive = -1;
+        $this->Instit->Jurisdiccion->order = 'Jurisdiccion.name';
+        $jurisdicciones = $this->Instit->Jurisdiccion->find('list');
+
+        // que me liste todos los detarpamentos
+        $this->Instit->Departamento->recursive = -1;
+        $departamentos = $this->Instit->Departamento->con_jurisdiccion('list');
+        //$departamentos = array();
+
+
+        // con CERO me trae TODAS las jurisdicciones
+        $this->Instit->Localidad->recursive = -1;
+        $localidades = $this->Instit->Localidad->con_depto_y_jurisdiccion('list');
+        //$localidades = array();
+
+        $this->Instit->Plan->Oferta->recursive = -1;
+        $ofertas = $this->Instit->Plan->Oferta->find('list');
+
+        $this->Instit->Plan->Sector->recursive = -1;
+        $this->Instit->Plan->Sector->order ='Sector.name';
+        $sectores = $this->Instit->Plan->Sector->find('list');
+
+        $this->Instit->Plan->Subsector->order ='Subsector.name';
+        $subsectores = $this->Instit->Plan->Subsector->find('list');
+
+        $this->Instit->Claseinstit->recursive = -1;
+        $this->Instit->Claseinstit->order = 'Claseinstit.name';
+        $claseinstits = $this->Instit->Claseinstit->find('list');
+
+        $this->Instit->EtpEstado->recursive = -1;
+        $this->Instit->EtpEstado->order = 'EtpEstado.name';
+        $etpEstados = $this->Instit->EtpEstado->find('list');
+
+        $orientaciones = $this->Instit->Orientacion->find('list');
+
+        $titulos = $this->Instit->Plan->Titulo->find('list');
+
+        $this->set(compact(
+                'gestiones', 'dependencias', 'jurisdicciones',
+                'ofertas','localidades','departamentos','sectores',
+                'claseinstits','etpEstados','orientaciones', 'subsectores', 'titulos'));
+    }
+
+    function simpleSearch() {
+
+       if (!empty($this->data)) {
+            $this->redirect(array('action' => 'view', $this->data['Instit']['instit_id']));
+       }
+
     }
 
     /**
@@ -875,7 +959,81 @@ class InstitsController extends AppController {
         return $pagin;
     }
 
+    function search_instits($q = null){
+        $this->autoRender = false;
 
+        if ( $this->RequestHandler->isAjax() ) {
+          Configure::write ( 'debug', 0 );
+        }
+
+        $response = '';
+
+        if(empty($q)) {
+            if (!empty($this->params['url']['q'])) {
+                $q = utf8_decode(strtolower($this->params['url']['q']));
+            } else {
+                return utf8_encode("parámetro vacio");
+            }
+        }
+
+        if(is_numeric($q)){
+            $items = $this->Instit->find("all", array(
+                'contain'=> array(
+                    'Tipoinstit', 'Jurisdiccion', 'HistorialCue'
+                ),
+                'conditions'=> array(
+                    "to_char(cue*100+anexo, 'FM999999999FM') SIMILAR TO ?" => "%". $q ."%"
+
+                )
+            ));
+
+            /*$cues_h = $this->FondoTemporal->Instit->HistorialCue->find("all", array(
+                'conditions'=> array(
+                    "OR"=>array(
+                    "cue = ?" => $q,
+                    "(cue * 100 + anexo) = ?" => $q )
+                )
+            ));*/
+
+        }
+        else{
+            $items = $this->Instit->find("all", array(
+                'contain'=> array(
+                    'Tipoinstit', 'Jurisdiccion', 'HistorialCue'
+                ),
+                'conditions'=> array(
+                    "(to_ascii(lower(Tipoinstit.name)) || ' n ' || to_ascii(lower(Instit.nroinstit)) || ' ' || to_ascii(lower(Instit.nombre))) SIMILAR TO ?" => $this->Instit->convertir_para_busqueda_avanzada($q)
+                )
+            ));
+        }
+
+        $result = array();
+
+        foreach ($items as $item) {
+            $cuecompleto = $item['Instit']['cue']*100+$item['Instit']['anexo'];
+
+            array_push($result, array(
+                    "id" => $item['Instit']['id'],
+                    "cue" => $item['Instit']['cue']*100+$item['Instit']['anexo'],
+                    "nombre" => utf8_encode($item['Instit']['nombre']),
+                    "nroinstit" => utf8_encode($item['Instit']['nroinstit']),
+                    "anio_creacion" => utf8_encode($item['Instit']['anio_creacion']),
+                    "direccion" => utf8_encode($item['Instit']['direccion']),
+                    "depto" => utf8_encode($item['Instit']['depto']),
+                    "localidad" => utf8_encode($item['Instit']['localidad']),
+                    "cp" => utf8_encode($item['Instit']['cp']),
+                    "tipo" => utf8_encode($item['Tipoinstit']['name']),
+                    "jurisdiccion" => utf8_encode($item['Jurisdiccion']['name']),
+                    "cue_anterior" => utf8_encode($item['HistorialCue'][0]['cue'])
+            ));
+        }
+
+        echo json_encode($result);
+
+        //echo $response;
+
+    }
+    
     /**
      * Action para mostrar los planes relacionados
      *

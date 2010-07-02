@@ -5,6 +5,7 @@ class Localidad extends AppModel {
 	var $validate = array(
 		'name' => array('notempty')
 	);
+        var $actsAs = array('Containable');
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array(
@@ -114,7 +115,6 @@ class Localidad extends AppModel {
          
 	}
 	
-	
 	function listado_localidades_con_jurisdiccion($jurisdiccion_id)
 	{
 		$localidades = $this->localidades_con_jurisdiccion($jurisdiccion_id);
@@ -124,7 +124,6 @@ class Localidad extends AppModel {
          return $loc_aux;
          
 	}
-	
 	
 }
 ?>
