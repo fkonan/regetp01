@@ -181,6 +181,7 @@
  * Inet Options
  */
         Configure::write('es_dia_patrio', false);
+        Configure::write('grupo_referente', 'referentes');
 /**
  *
  * Cache Engine Configuration

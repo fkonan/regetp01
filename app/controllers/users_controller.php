@@ -47,24 +47,40 @@ class UsersController extends AppController {
 			$this->Session->setFlash(__('Invalid User', true));
 			$this->redirect(array('controller'=>'Users','action'=>'listadoUsuarios'));
 		}
+                
 		if (!empty($this->data)) {
-			if ($this->User->save($this->data)) {
-				$this->Session->setFlash(__('El usuario fue guardado correctamente', true));
-				$this->redirect(array('controller'=>'Users','action'=>'listadoUsuarios'));
-			} else {
-				$this->Session->setFlash(__('The User could not be saved. Please, try again.', true));
-			}
+                    
+                    $validated = true;
+                    if (!empty($this->data['User']['password'])) { 
+                        if ($this->Auth->password($this->data['User']['password_check'])!=$this->data['User']['password'])
+                        {
+                            $validated = false;
+                            $this->Session->setFlash('Los passwords no coinciden');
+                            $this->data['User']['password']='';
+                            $this->data['User']['password_check']='';
+                        }
+                    }
+
+                    if ($validated) {
+                        if ($this->User->save($this->data)) {
+                                $this->Session->setFlash(__('El usuario fue guardado correctamente', true));
+                                $this->redirect(array('controller'=>'Users','action'=>'listadoUsuarios'));
+                        } else {
+                                $this->Session->setFlash(__('The User could not be saved. Please, try again.', true));
+                        }
+                    }
 		}
 		if (empty($this->data)) {
 			$this->data = $this->User->read(null, $id);
-
-                        $jurisdicciones = $this->User->Jurisdiccion->find('list',array('order'=>'name'));
-                        // AROS para combo
-                        $this->Acl->Aro->recursive = 0;
-                        $aros = $this->Acl->Aro->find('list', array('fields' => array('alias'), 'conditions'=>array('parent_id'=>1), 'order'=>'alias'));
-                        $this->set(compact('aros','jurisdicciones'));
-                        $this->set('parent_aro_seleced', $this->User->parentNodeId());
 		}
+
+
+                $jurisdicciones = $this->User->Jurisdiccion->find('list',array('order'=>'name'));
+                // AROS para combo
+                $this->Acl->Aro->recursive = 0;
+                $aros = $this->Acl->Aro->find('list', array('fields' => array('alias'), 'conditions'=>array('parent_id'=>1), 'order'=>'alias'));
+                $this->set(compact('aros','jurisdicciones'));
+                $this->set('parent_aro_seleced', $this->User->parentNodeId());
 	}
 
 	function delete($id = null) {
@@ -95,7 +111,8 @@ class UsersController extends AppController {
 			//guardo al usuario actual en la tabla de log 'user_logins'
 			$current_user = $this->Auth->user();
 			$this->User->UserLogin->save(array('user_id'=>$current_user['User']['id']));
-			
+			//$this->Auth->UserJurisdiccionId = $current_user['User']['jurisdiccion_id'];
+
 			$this->redirect($this->Auth->redirect());
 			
 		}

@@ -14,6 +14,22 @@ class FondosController extends AppController {
 
             if ($id) {
                 $this->paginate = array('conditions'=>array('Fondo.instit_id'=>$id),'order' => array('Fondo.anio DESC','Fondo.trimestre DESC','Fondo.jurisdiccion_id DESC'));
+
+                $instit = $this->Fondo->Instit->read(null, $id);
+
+                // chequea que lo vea usuario de la jurisdiccion (condicion)
+                $this->User = ClassRegistry::init("User");
+                $this->User->recursive = 0;
+                $user = $this->User->findById($this->Auth->user('id'));
+                $parent = $this->User->getParentNode($this->Auth->user('id'));
+                
+                if (strtolower($parent['Aro']['alias']) == strtolower(Configure::read('grupo_referente'))) {
+                    if ($user['User']['jurisdiccion_id'] != $instit['Instit']['jurisdiccion_id']) {
+                        $this->Session->setFlash(__($this->Auth->planesMejoraError, true));
+                        $this->redirect(array('controller'=>'Instits', 'action'=>'view', $id));
+                    }
+                }
+                // fin de chequeo
             }
             else {
                 $this->Session->setFlash(__('No especifica institución', true));
@@ -28,7 +44,7 @@ class FondosController extends AppController {
 
             $this->set('sumalineas',  $this->Fondo->FondosLineasDeAccion->find('sum', array('conditions'=>$condicion)) );
 
-            $this->set('instit', $this->Fondo->Instit->read(null, $id));
+            $this->set('instit', $instit);
             $this->set('fondos', $this->paginate());
 	}
 

@@ -27,7 +27,7 @@ class User extends AppModel {
 				'message' => 'El Usuario no puede quedar vacío.'
 			)
                 ),
-            'password' => array(
+            /*'password' => array(
                 'notEmpty' => array( // or: array('ruleName', 'param1', 'param2' ...)
 				'rule' => VALID_NOT_EMPTY,
 				'required' => true,
@@ -35,7 +35,7 @@ class User extends AppModel {
 				//'on' => 'create', // or: 'update'
 				'message' => 'Debe ingresar una Password.'
 			)
-                )
+                )*/
          );
 
         function parentNode() {
@@ -48,10 +48,22 @@ class User extends AppModel {
            }
 
            $aro = $this->Aro->find('all', array('fields' => array('parent_id'),
-                            'conditions'=>array('foreign_key'=>$this->id)));
+                                'conditions'=>array('foreign_key'=>$this->id)));
 
            return $aro[0]['Aro']['parent_id'];
            //return array('Group' => array('id' => $data['User']['group_id']));
+        }
+
+        function getParentNode($id) {
+            if (!$id) {
+               return null;
+           }
+
+           $aro = $this->Aro->find('all', array('fields' => array('id'),
+                                    'conditions'=>array('foreign_key'=>$id)));
+           $aro_parent = $this->Aro->getparentnode($aro[0]['Aro']['id']);
+           
+           return $aro_parent;
         }
 
 	/**
