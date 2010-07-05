@@ -183,6 +183,7 @@
                                 </cake:nocache>
 				<?  echo $this->renderElement('boxDesarrollo'); ?>
 				<?  echo $this->renderElement('boxInstituciones'); ?>
+                                <?  echo $this->renderElement('boxJurisdicciones'); ?>
 				<?  echo $this->renderElement('boxCuadros'); ?>
 				<?  echo $this->renderElement('boxInformacion'); ?>	
 				<?  echo $this->renderElement('boxDepurador'); ?>

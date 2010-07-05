@@ -3,7 +3,13 @@ class JurisdiccionesController extends AppController {
 
 	var $name = 'Jurisdicciones';
 	var $helpers = array('Html', 'Form');
-	
+	var $paginate = array('limit' => 25, 'order'=>array('name'=>'asc'));
+
+        function beforeFilter() {
+            parent::beforeFilter();
+            $this->rutaUrl_for_layout[] =array('name'=> 'Listado de Jurisdicciones','link'=>'/Jurisdicciones/listado' );
+        }
+
 	function index() {
 		$this->Jurisdiccion->recursive = 0;
 		$this->set('jurisdicciones', $this->paginate());
@@ -12,7 +18,7 @@ class JurisdiccionesController extends AppController {
 	function view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid Jurisdiccion.', true));
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('action'=>'listado'));
 		}
 		$this->set('jurisdiccion', $this->Jurisdiccion->read(null, $id));
 	}
@@ -58,6 +64,10 @@ class JurisdiccionesController extends AppController {
 		}
 	}
 
+        function listado() {
+		$this->Jurisdiccion->recursive = 0;
+		$this->set('jurisdicciones', $this->paginate());
+	}
 	
 	
 	

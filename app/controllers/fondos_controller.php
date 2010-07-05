@@ -49,18 +49,22 @@ class FondosController extends AppController {
 	}
 
         function index_x_jurisdiccion($id=null) {
-
+            $this->rutaUrl_for_layout[] =array('name'=> 'Listado de Jurisdicciones','link'=>'/Jurisdicciones/listado' );
+            
             if ($id) {
                 $this->paginate = array('conditions'=>array('Fondo.instit_id'=> 0,'Fondo.jurisdiccion_id'=>$id),'order' => array('Fondo.anio DESC','Fondo.trimestre DESC','Fondo.jurisdiccion_id DESC'));
             }
             else {
                 $this->Session->setFlash(__('No especifica jurisdicción', true));
-                $this->redirect(array('action'=>'index'));
+                $this->redirect(array('controller'=>'jurisdicciones','action'=>'listado'));
                 //$this->paginate = array('conditions'=>array('Fondo.instit_id'=> 0), 'order' => array('Fondo.anio DESC','Fondo.trimestre DESC','Fondo.jurisdiccion_id DESC'));
             }
 
             $this->Fondo->recursive = 1;
 
+            $condicion = array('Fondo.instit_id'=> 0, 'Fondo.jurisdiccion_id'=>$id);
+
+            $this->set('sumalineas',  $this->Fondo->FondosLineasDeAccion->find('sum', array('conditions'=>$condicion)) );
 
             $this->set('jurisdiccion', $this->Fondo->Jurisdiccion->read(null, $id));
             $this->set('fondos', $this->paginate());
