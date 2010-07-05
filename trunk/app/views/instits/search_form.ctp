@@ -114,7 +114,7 @@ echo $html->css('jquery.autocomplete.css');
 
     <div>
         <?php echo $form->input('cue', array('label'=> 'CUE ó Nombre de la Institución', 'after'=> '<cite>Ej: 600118 o 5000216. También puede buscar con el n° de anexo, Ej: 60011800 </cite>','div'=>false, 'class'=>'submit_mode'));?>
-        <?php echo $html->image("search.png",array('id'=>'busca_cue','style'=>'float:right;display:block;margin-top:-25px;cursor:pointer'));?>
+        <?php echo $html->image("search.png",array('id'=>'busca_cue','style'=>'float:right;display:block;margin-top:-30px;cursor:pointer'));?>
     </div>
     <div id='institCueInfo' class='institCueInfo'>
         <div id='institCueInfoDetail' class='institCueInfoDetail'></div>
