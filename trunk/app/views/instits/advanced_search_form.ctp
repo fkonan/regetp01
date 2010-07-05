@@ -3,6 +3,34 @@ echo $javascript->link('jquery.autocomplete');
 echo $javascript->link('jquery.blockUI');
 echo $html->css('jquery.autocomplete.css');
 ?>
+
+
+<style>
+    INPUT, TEXTAREA, SELECT, option{
+        font-size: 10pt;
+        
+        letter-spacing: normal;
+        line-height: normal;
+        margin: 0em;
+        text-indent: 0px;
+        text-shadow: none;
+        text-transform: none;
+        word-spacing: normal;
+    }
+
+
+    input[type="text"], input.text, input.title, textarea, select{
+        background-color: white;
+        border: 1px solid #BBB;
+    }
+
+    label{
+        font-size: 8pt;
+    }
+
+
+</style>
+
 <script language="javascript">
 jQuery(document).ready(function() {
     jQuery("#InstitJurDepLoc").autocomplete("<?echo $html->url(array('controller'=>'localidades','action'=>'ajax_search_localidades'));?>", {
@@ -64,88 +92,90 @@ function enviar()
 <div>
     <?= $form->create('Instit',array('action' => 'search','name'=>'InstitSearchForm'));?>
 
-    <div id="search" class="search-div" >
-        <h2 style="float:right;border-bottom: 0px">General</h2>
+    <fieldset id="search" class="search-div" >
+        <legend style="float:right;border-bottom: 0px">General</legend>
         
-        <div>
-            <div>
-                <span class="label">CUE</span>
-                <span class="label" style="padding-left:70px">Nombre</span>
-                <span class="label" style="padding-left:265px">Jurisdicción</span>
-            </div>
-            <span><?= $form->input('cue', array('label'=>false,'div'=>false,'style'=> 'display:inline;width:15%','maxlength'=>9 ,'title'=> 'Ej: 600118 o 5000216. También puede buscar con el n° de anexo, Ej: 60011800')); ?></span>
+            <?= $form->input('cue', array(
+                'label'=>'CUE',
+                'div'=>array('style'=>'width:110px; float: left; clear: none'),
+                'style'=> 'width:90px; float: left',
+                'maxlength'=>9 ,
+                'title'=> 'Ej: 600118 o 5000216. También puede buscar con el n° de anexo, Ej: 60011800')); ?>
             <!--JURISDICCION-->
-            <span>
-            <?php echo $form->input('nombre_completo', array('label'=>false,'div'=>false,'style'=> 'display:inline;width:50%',
-            'title'=> 'Realiza una búsqueda por tipo de establecimiento, número y nombre propio de la institución.<br>Ej: Escuela 3 San Martín'));
+            <?php echo $form->input('nombre_completo', array(
+                'label'=>'Nombre',
+                'div'=>array('style'=>'width:270px; float: left; clear: none'),
+                //'style'=> 'width:260px',
+                'title'=> 'Realiza una búsqueda por tipo de establecimiento, número y nombre propio de la institución.<br>Ej: Escuela 3 San Martín'));
             ?>
-            </span>
-            <span>
             <?php
-                echo $form->input('jurisdiccion_id', array('label'=>false,'div'=>false,'style'=> 'display:inline; vertical-align:bottom; width:20%','empty' => array('0'=>'Todas'),'id'=>'jurisdiccion_id'));
-                echo '<span class="ajax_update" id="ajax_indicator" style="display:none;width:15%;vertical-align:bottom">'.$html->image('ajax-loader.gif').'</span>';
+                echo $form->input('jurisdiccion_id', array(
+                    'label'=>'Jurisdicción',
+                    'div'=>array('style'=>'float: left;  clear: none'),
+                    'class'=> 'display: block; clear: both;',
+                    'empty' => array('0'=>'Todas'),
+                    'id'=>'jurisdiccion_id'));
+                echo '<span class="ajax_update" id="ajax_indicator" style="display:none; float: left; clear: none">'.$html->image('ajax-loader.gif').'</span>';
             ?>
-            </span>
-        </div>
-    </div>
+    </fieldset>
     
 
     <!--
 				BUSQUEDA POR SU UBICACION
 		-->
-    <div id="search-ubicacion" class="search-div" >
-        <h2 style="float:right;border-bottom: 0px">Por Ubicación</h2>
-        <cake:nocache>
+    <fieldset id="search-ubicacion" class="search-div" >
+        <legend>Por Ubicación</legend>
             <?php echo $form->input('jur_dep_loc', array('label'=>'Departamento/Localidad','title'=>'Ingrese al menos 3 letras para que comience la busqueda de Departamentos y Localidades.')); ?>
             <?php echo $form->input('direccion', array('label'=>'Domicilio')); ?>
-        </cake:nocache>
-    </div>
+    </fieldset>
 
 
     <!--
 				BUSQUEDA POR SU NOMBRE
 		-->
-    <div id="search-denominacion"  class="search-div" >
-        <h2 style="float:right;border-bottom: 0px">Por Nombre</h2>
-            <div>
-                <span class="label">Tipo:</span>
-                <span>
+    <fieldset id="search-denominacion"  class="search-div" >
+        <legend>Por Nombre</legend>
                     <?php
-                    echo $form->input('tipoinstit_id', array('label'=>false,'div'=>false,'style'=> 'display:inline;width:90%;vertical-align:bottom','empty' => 'Todos','type'=>'select',
-                    'title'=> 'Para activar este campo, seleccione primero una jurisdicción'));
+                    echo $form->input('tipoinstit_id', array(
+                        'label'=>'Tipo',
+                        //'div'=>false,
+                        'style'=> 'display:inline;width:550px;vertical-align:bottom',
+                        'empty' => 'Todos',
+                        'type'=>'select',
+                        'title'=> 'Para activar este campo, seleccione primero una jurisdicción'));
 
                     echo $ajax->observeField('jurisdiccion_id',
-                    array(  	'url' => '/tipoinstits/ajax_select_form_por_jurisdiccion',
+                    array('url' => '/tipoinstits/ajax_select_form_por_jurisdiccion',
                     'update'=>'InstitTipoinstitId',
                     'loading'=>'jQuery("#ajax_indicator").show();jQuery("#InstitTipoinstitId").attr("disabled","disabled")',
                     'complete'=>'jQuery("#ajax_indicator").hide();jQuery("#InstitTipoinstitId").removeAttr("disabled")',
                     'onChange'=>true
                     ));
                     ?>
-                </span>
-            </div>
-            <div>
-                <span class="label">Número</span>
-                <span class="label" style="padding-left:25px">Nombre</span>
-            </div>
-            <span>
                 <?php
-                echo $form->input('nroinstit', array('label'=>false,'div'=>false,'style'=> 'display:inline;width:10%'));
+                echo $form->input('nroinstit', array(
+                    'label'=>'Número',
+                    'style'=> 'width:90px; float: left',
+                    'div'=>array('style'=>'float: left;  clear: none'),
+                    'class'=> 'display: block; clear: both;',
+                    'empty' => array('0'=>'Todas'),
+                   ));
                 ?>
-            </span>
-            <span>
                 <?php
-                echo $form->input('nombre', array('label'=>false,'div'=>false,'style'=> 'display:inline;width:80%','title'=> 'Ej: "Sarmiento" o "Gral. Belgrano". No confundir el nombre con el tipo de establecimiento'));
+                echo $form->input('nombre', array(
+                    'label'=>'Nombre',
+                    'style'=> 'width:441px; float: left',
+                    'div'=>array('style'=>'float: left;  clear: none'),
+                    'title'=> 'Ej: "Sarmiento" o "Gral. Belgrano". No confundir el nombre con el tipo de establecimiento'));
                 ?>
-            </span>
-    </div>
+    </fieldset>
 
 
     <!--
 				BUSQUEDA POR SU OFERTA
 		-->
-    <div id="search-planes"  class="search-div" >
-        <h2 style="float:right;border-bottom: 0px">Por Oferta</h2>
+    <fieldset id="search-planes"  class="search-div" >
+        <legend>Por Oferta</legend>
         <?php
         echo $form->input('Plan.oferta_id',array('options'=>$ofertas,
         'empty'=>'Seleccione',
@@ -155,17 +185,15 @@ function enviar()
                 <span class="label">Sector</span>
                 <span class="label" style="padding-left:202px">Subsector</span>
         </div>
-        <span>
         <?php
                 echo $form->input('Plan.sector_id',array(
                     'label'=>false,
-                    'div'=>false,
+                    'div'=>array('style'=>'float:left;'),
                     'style'=> 'display:inline;width:40%',
                     'options'=>$sectores,
                     'empty'=>'Seleccione'
                 ));
         ?>
-        </span>
         <span>
         <?php
                 echo $form->input('Plan.subsector_id',array(
@@ -218,7 +246,7 @@ function enviar()
                 ));
         ?>
 
-    </div>
+    </fieldset>
 
 
     <!--
@@ -226,7 +254,7 @@ function enviar()
 		-->
 
     <div id="search-otros"  class="search-div" >
-        <h2 style="float:right;border-bottom: 0px">Por Otras Caracteristicas</h2>
+        <legend style="float:right;border-bottom: 0px">Por Otras Caracteristicas</legend>
         <div>
                 <span class="label">Relación con ETP</span>
                 <span class="label" style="padding-left:202px">Tipo de Institución de ETP</span>      
