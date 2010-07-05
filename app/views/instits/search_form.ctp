@@ -18,7 +18,6 @@ echo $html->css('jquery.autocomplete.css');
             else{
                 return false;
             }
-            
     });
 
     jQuery(document).ajaxStop(function(event, request, settings){
@@ -37,10 +36,11 @@ echo $html->css('jquery.autocomplete.css');
                 jQuery('#InstitCue').attr("name","data[Instit][nombre_completo]" );
 
             }
-            jQuery("#InstitSimpleSearchForm").attr("action","/regtp/instits/search");
+            jQuery("#InstitSimpleSearchForm").attr("action","<?echo $html->url(array('controller'=>'instits','action'=>'search'));?>");
             jQuery("#InstitSimpleSearchForm").submit();
         });
-        
+
+
         jQuery("#InstitSimpleSearchForm #institCueInfo").hide();
 
         jQuery('#InstitSimpleSearchForm input[type=submit]').attr('disabled', 'disabled');
@@ -92,7 +92,7 @@ echo $html->css('jquery.autocomplete.css');
                     if(!IsNumeric(jQuery('#InstitCue').val())){
                         jQuery('#InstitCue').attr("name","data[Instit][nombre_completo]" );
                     }
-                    jQuery("#InstitSimpleSearchForm").attr("action","/regtp/instits/search");
+                    jQuery("#InstitSimpleSearchForm").attr("action","<?echo $html->url(array('controller'=>'instits','action'=>'search'));?>");
                     
                     jQuery("#InstitSimpleSearchForm").submit();
                     enterButton = true;
