@@ -48,6 +48,9 @@ echo $html->css('jquery.autocomplete.css');
         jQuery("#InstitCue").autocomplete("<?echo $html->url(array('controller'=>'instits','action'=>'search_instits'));?>", {
 		dataType: "json",
                 delay: 2000,
+                max:30,
+                minChars: 3,
+                cacheLength:1,
 		parse: function(data) {
 			return jQuery.map(data, function(instit) {
 				return {
