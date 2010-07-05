@@ -2,6 +2,7 @@
 class Localidad extends AppModel {
 
 	var $name = 'Localidad';
+        var $actsAs = array('Containable');
 	var $validate = array(
 		'name' => array('notempty')
 	);
@@ -9,12 +10,12 @@ class Localidad extends AppModel {
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array(
-			'Departamento' => array('className' => 'Departamento',
-								'foreignKey' => 'departamento_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => ''
-			)
+                'Departamento' => array('className' => 'Departamento',
+                        'foreignKey' => 'departamento_id',
+                        'conditions' => '',
+                        'fields' => '',
+                        'order' => ''
+                )
 	);
 	
 	var $hasMany = array(

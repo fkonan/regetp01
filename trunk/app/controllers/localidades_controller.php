@@ -6,13 +6,25 @@ class LocalidadesController extends AppController {
         var $components = array('RequestHandler');
 
 	function index($jurisdiccion = 0) {
-		$this->Localidad->recursive = 2;
+                
+                debug($locs);
+                
 		if ($jurisdiccion != 0):
-		 	$this->paginate = array('limit' => 5000, 'page' => 1); 
-		 	$this->set('localidades', $this->paginate(null,array('Departamento.jurisdiccion_id'=>$jurisdiccion)));
+                    $this->paginate['contain'] = array(
+                        'Departamento'=>array('Jurisdiccion')
+                    );
+                    $this->paginate['limit'] = 5000;
+                    $this->paginate['page'] = 1;
+                    $pagin = $this->paginate(null,array('Jurisdiccion.id'=>$jurisdiccion));
 		else:
-			 $this->set('localidades', $this->paginate());
+                    $pagin = $this->paginate();
 		endif;
+                
+                $this->set('localidades', $pagin);
+
+                $this->Localidad->contain(array(
+                        'Departamento' => array('Jurisdiccion'),
+                ));
 		$this->set('jurisdicciones',$this->Localidad->Departamento->Jurisdiccion->find('list'));
 		$this->set('url_conditions', array());
 	}

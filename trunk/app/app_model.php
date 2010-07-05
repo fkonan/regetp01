@@ -38,7 +38,9 @@
  */
 class AppModel extends Model {
 	
-	
+	var $actsAs = array('Containable');
+
+        
 	/**
 	 * 
 	 * Lo que hace es convertir una cadena en una expresion regular para 
