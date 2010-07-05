@@ -38,7 +38,7 @@ class JurisdiccionesController extends AppController {
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid Jurisdiccion', true));
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('action'=>'listado'));
 		}
 		if (!empty($this->data)) {
 			if ($this->Jurisdiccion->save($this->data)) {
