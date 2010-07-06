@@ -33,6 +33,16 @@ echo $html->css('jquery.autocomplete.css');
 
 <script language="javascript">
 jQuery(document).ready(function() {
+    jQuery("#InstitSearchForm :input[title]").tooltip({
+        position: "right center",
+        offset: [-10, 130],
+        effect: "fade",
+        opacity: 0.7,
+        delay: 0,
+        showURL: false
+    });
+
+    
     jQuery("#InstitJurDepLoc").autocomplete("<?echo $html->url(array('controller'=>'localidades','action'=>'ajax_search_localidades'));?>", {
 		dataType: "json",
                 delay: 200,
@@ -59,12 +69,9 @@ jQuery(document).ready(function() {
                 jQuery("#InstitSearchForm #search-ubicacion").append("<input id='hiddenLocDepId' name='data[" + item.type + "][id]' type='hidden' value='" + item.id + "' />");
      });
 
-    jQuery("#InstitSearchForm :input[title]").tooltip({
-        position: "right center",
-        offset: [-10, 130],
-        effect: "fade",
-        opacity: 0.7
-    });
+
+    
+
 });
 
 function formatResult(loc_dep) {
@@ -84,7 +91,7 @@ function enviar()
 }
 
 </script>
-<h1><?= __('Buscar Institución')?></h1>
+<h1><? __('Búsqueda Avanzada de Institución')?></h1>
 <style>
 .label {color:#444444;}
 
@@ -93,29 +100,29 @@ function enviar()
     <?= $form->create('Instit',array('action' => 'search','name'=>'InstitSearchForm'));?>
 
     <fieldset id="search" class="search-div" >
-        <legend style="float:right;border-bottom: 0px">General</legend>
+        <legend>General</legend>
         
-            <?= $form->input('cue', array(
+            <?php
+            echo $form->input('cue', array(
                 'label'=>'CUE',
                 'div'=>array('style'=>'width:110px; float: left; clear: none'),
                 'style'=> 'width:90px; float: left',
                 'maxlength'=>9 ,
-                'title'=> 'Ej: 600118 o 5000216. También puede buscar con el n° de anexo, Ej: 60011800')); ?>
-            <!--JURISDICCION-->
-            <?php echo $form->input('nombre_completo', array(
+                'title'=> 'Ej: 600118 o 5000216. También puede buscar con el n° de anexo, Ej: 60011800'));
+            
+            echo $form->input('nombre_completo', array(
                 'label'=>'Nombre',
-                'div'=>array('style'=>'width:270px; float: left; clear: none'),
+                'div'=>array('style'=>'width:290px; float: left; clear: none'),
                 //'style'=> 'width:260px',
                 'title'=> 'Realiza una búsqueda por tipo de establecimiento, número y nombre propio de la institución.<br>Ej: Escuela 3 San Martín'));
-            ?>
-            <?php
-                echo $form->input('jurisdiccion_id', array(
-                    'label'=>'Jurisdicción',
-                    'div'=>array('style'=>'float: left;  clear: none'),
-                    'class'=> 'display: block; clear: both;',
-                    'empty' => array('0'=>'Todas'),
-                    'id'=>'jurisdiccion_id'));
-                echo '<span class="ajax_update" id="ajax_indicator" style="display:none; float: left; clear: none">'.$html->image('ajax-loader.gif').'</span>';
+            
+            echo $form->input('jurisdiccion_id', array(
+                'label'=>'Jurisdicción',
+                'div'=>array('style'=>'float: left;  clear: none'),
+                'class'=> 'display: block; clear: both;',
+                'empty' => array('0'=>'Todas'),
+                'id'=>'jurisdiccion_id'));
+            echo '<span class="ajax_update" id="ajax_indicator" style="display:none; float: left; clear: none">'.$html->image('ajax-loader.gif').'</span>';
             ?>
     </fieldset>
     
@@ -177,125 +184,116 @@ function enviar()
     <fieldset id="search-planes"  class="search-div" >
         <legend>Por Oferta</legend>
         <?php
-        echo $form->input('Plan.oferta_id',array('options'=>$ofertas,
-        'empty'=>'Seleccione',
-        'label'=>'Con Oferta'));
-        ?>
-        <div>
-                <span class="label">Sector</span>
-                <span class="label" style="padding-left:202px">Subsector</span>
-        </div>
-        <?php
-                echo $form->input('Plan.sector_id',array(
-                    'label'=>false,
-                    'div'=>array('style'=>'float:left;'),
-                    'style'=> 'display:inline;width:40%',
-                    'options'=>$sectores,
-                    'empty'=>'Seleccione'
-                ));
-        ?>
-        <span>
-        <?php
-                echo $form->input('Plan.subsector_id',array(
-                    'label'=>false,
-                    'div'=>false,
-                    'style'=> 'display:inline;width:40%',
-                    'empty'=>'Seleccione',
-                ));
-        ?>
-        </span>
-        <?php
-                echo $ajax->observeField('PlanSectorId',
-                    array('url' => '/subsectores/ajax_select_subsector_form_por_sector',
-                        'update'=>'PlanSubsectorId',
-                        'loading'=>'jQuery("#PlanSubsectorId").attr("disabled","disabled");',
-                        'complete'=>'jQuery("#PlanSubsectorId").removeAttr("disabled");',
-                        'onChange'=>true
-                ));
-        ?>
-        <div>
-                <span class="label">Orientación</span>
-                <span class="label" style="padding-left:85px">Título de Referencia</span>
-        </div>
-        <span>
-        <?php
-                echo $form->input('Instit.orientacion_id',array(
-                'label'=>false,
-                'div'=>false,
-                'style'=> 'display:inline;width:25%',
-                'empty'=>'Seleccione',
-                ));
-        ?>
-        </span>
-        <span>
-        <?php
+        echo $form->input('Plan.oferta_id',array(
+            'options'=>$ofertas,
+            'div'=>array('style'=>'float: left;  clear: none'),
+            'style'=> 'display:inline;width:181px;vertical-align:bottom',
+            'empty'=>'Seleccione',
+            'label'=>'Con Oferta'));
 
-                 echo $form->input('Plan.titulo_id',array(
-                    'label'=>false,
-                    'div'=>false,
-                    'style'=> 'display:inline;width:55%',
-                    'options'=>$titulos,
-                    'empty'=>'Seleccione',
-                ));
         
-        ?>
-        </span>
-        <?php
-                echo $form->input('Plan.norma',array(
-                    'label'=>'Normativa'
-                ));
+         echo $form->input('Plan.titulo_id',array(
+            'label'=> 'Título de Referencia',
+             'div'=>array('style'=>'float: left;  clear: right'),
+            'style'=> 'display:inline;width:181px;vertical-align:bottom',
+            'options'=>$titulos,
+            'empty'=>'Seleccione',
+        ));
+
+
+        echo $form->input('Plan.sector_id',array(
+            'label'=>'Sector',
+            'div'=>array('style'=>'float: left;  clear: left'),
+            'style'=> 'display:inline;width:277px;vertical-align:bottom',
+            'options'=>$sectores,
+            'empty'=>'Seleccione'
+        ));
+
+        echo $form->input('Plan.subsector_id',array(
+            'label'=>'Subsector',
+            'div'=>array('style'=>'float: left;  clear: none'),
+            'style'=> 'display:inline;width:267px;vertical-align:bottom',
+            'empty'=>'Seleccione',
+        ));
+
+        echo $ajax->observeField('PlanSectorId',
+            array('url' => '/subsectores/ajax_select_subsector_form_por_sector',
+                'update'=>'PlanSubsectorId',
+                'loading'=>'jQuery("#PlanSubsectorId").attr("disabled","disabled");',
+                'complete'=>'jQuery("#PlanSubsectorId").removeAttr("disabled");',
+                'onChange'=>true
+        ));
+
+        
+
+        echo $form->input('Plan.norma',array(
+            'label'=>'Normativa',
+            'div'=>array('style'=>'float: left;  clear: left'),
+            'style'=> 'display:inline;width:544px;vertical-align:bottom',
+        ));
         ?>
 
     </fieldset>
 
 
     <!--
-				BUSQUEDA POR OTRAS CARACTERISTICAS
-		-->
+            BUSQUEDA POR OTRAS CARACTERISTICAS
+    -->
 
-    <div id="search-otros"  class="search-div" >
-        <legend style="float:right;border-bottom: 0px">Por Otras Caracteristicas</legend>
-        <div>
-                <span class="label">Relación con ETP</span>
-                <span class="label" style="padding-left:202px">Tipo de Institución de ETP</span>      
-        </div>
-        <span>
+    <fieldset id="search-otros"  class="search-div" >
+        <legend>Por Otras Caracteristicas</legend>
         <?php
-        echo $form->input('etp_estado_id', array('empty' => 'Todas', 'label'=>false,'div'=>false,'style'=> 'display:inline;width:50%'));
-        ?>
-            
-        </span>
-        <span>
-        <?php
-        echo $form->input('claseinstit_id', array('empty' => 'Todas', 'label'=>false,'div'=>false,'style'=> 'display:inline;width:40%',));
-        ?>
-        </span>
-        <div>
-                <span class="label">Ámbito de Gestión</span>
-                <span class="label" style="padding-left:10px">Tipo de Dependencia</span>
-                <span class="label" style="padding-left:120px">Institución Ingresada al RFIETP</span>
-        </div>
-        <span>
-        <?php
-        echo $form->input('gestion_id', array('empty' => 'Todas', 'label'=>false,'div'=>false,'style'=> 'display:inline;width:20%'));
-        ?>
-        </span>
-        <span>
-        <?php
-        echo $form->input('dependencia_id', array('empty' => 'Todas','label'=>false,'div'=>false,'style'=> 'display:inline;width:40%'));
-        ?>
-        </span>
-        <span>
-        <?php
+         echo $form->input('Instit.orientacion_id',array(
+            'label'=> 'Orientación',
+            'div'=>array('style'=>'float: left;  clear: none'),
+            'style'=> 'display:inline;width:272px;vertical-align:bottom',
+            'empty'=>'Seleccione',
+        ));
+
+        echo $form->input('claseinstit_id', array(
+            'empty' => 'Todas',
+            'label'=> 'Tipo de Institución de ETP',
+            'div'=>array('style'=>'float: left;  clear: none'),
+            'style'=> 'display:inline;width:270px;vertical-align:bottom',
+            ));
+
+         
+        echo $form->input('etp_estado_id', array(
+            'empty' => 'Todas',
+            'label'=>'Relación con ETP',
+            'div'=>array('style'=>'float: left;  clear: left'),
+            'style'=> 'display:inline;width:272px;vertical-align:bottom',
+            ));
+        
+        echo $form->input('gestion_id', array(
+                'empty' => 'Todas',
+                'label'=> 'Ámbito de Gestión',
+                'div'=>array('style'=>'float: left;  clear: none'),
+                'style'=> 'display:inline;width: 270px;vertical-align:bottom',
+            ));
+
+        
+        echo $form->input('dependencia_id', array(
+            'empty' => 'Todas',
+            'label'=> 'Tipo de Dependencia',
+            'div'=>array('style'=>'float: left;  clear: left'),
+            'style'=> 'display:inline;width:272px;vertical-align:bottom',));
+
+        
         // no hay busqueda por anexo
         //$array_anexo = array('-1'=>'Buscar Todas','0'=>'No','1'=>'Si');
         //echo $form->input('esanexo',array('options'=> $array_anexo,'label'=>'Anexo'));
 
         $array_activa = array('-1'=>'Buscar Todas','0'=>'No','1'=>'Si');
-        echo $form->input('activo',array('options'=> $array_activa,'label'=>false,'div'=>false,'style'=> 'display:inline;width:30%'));
+        echo $form->input('activo',array(
+            'options'=> $array_activa,
+            'label'=> 'Institución Ingresada al RFIETP',
+            'div'=>array('style'=>'float: left;  clear: none'),
+            'style'=> 'display:inline;width:270px;vertical-align:bottom',
+            ));
         ?>
-        </span>
-    </div>
+            
+    </fieldset>
 
     <?php echo $form->button('Buscar',array('style'=>'float:right; margin-bottom:10px','onclick'=>'enviar()'));?>
     <?php echo $form->end(); ?>
