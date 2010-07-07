@@ -121,7 +121,7 @@ echo $html->css('jquery.autocomplete.css');
     </div>
     <div id='institCueInfo' class='institCueInfo'>
         <div id='institCueInfoDetail' class='institCueInfoDetail'></div>
-        <?php echo $form->submit('Ver Institucion', array('style'=>' display: block; float:right; margin-top:-25px;'));?>
+        <?php echo $form->submit('Ver Institucion', array('style'=>' display: block; float:right; margin-top:-25px; width:200px'));?>
     </div>
     
     <?php echo $html->link('Busqueda Avanzada...','advanced_search_form',array('class'=>'link_right'));?>
