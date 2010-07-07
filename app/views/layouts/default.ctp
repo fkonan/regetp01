@@ -177,22 +177,43 @@
 		</div>
 		<div id="content">
 			<div id="menu">	
-				
+				<? $group_alias = $session->read('User.group_alias'); ?>
 				<cake:nocache>	
 				<?  echo $this->renderElement('boxSaludo'); ?>
                                 </cake:nocache>
-				<?  echo $this->renderElement('boxDesarrollo'); ?>
+				<?
+                                if ($group_alias == strtolower(Configure::read('grupo_desarrolladores'))) {
+                                    echo $this->renderElement('boxDesarrollo');
+                                } ?>
 				<?  echo $this->renderElement('boxInstituciones'); ?>
                                 <?  echo $this->renderElement('boxJurisdicciones'); ?>
 				<?  echo $this->renderElement('boxCuadros'); ?>
-				<?  echo $this->renderElement('boxInformacion'); ?>	
-				<?  echo $this->renderElement('boxDepurador'); ?>
-   
+				<?
+                                if ($group_alias == strtolower(Configure::read('grupo_desarrolladores')) ||
+                                    $group_alias == strtolower(Configure::read('grupo_administradores')) ||
+                                    $group_alias == strtolower(Configure::read('grupo_editores'))) {
+                                    echo $this->renderElement('boxInformacion');
+				} ?>
+                                <?
+                                if ($group_alias == strtolower(Configure::read('grupo_desarrolladores')) ||
+                                    $group_alias == strtolower(Configure::read('grupo_administradores')) ||
+                                    $group_alias == strtolower(Configure::read('grupo_editores'))) {
+                                    echo $this->renderElement('boxDepurador');
+                                } ?>
 				<cake:nocache>					
-				<?  echo $this->renderElement('boxTickets'); ?>
+				<?
+                                if ($group_alias == strtolower(Configure::read('grupo_desarrolladores')) ||
+                                    $group_alias == strtolower(Configure::read('grupo_administradores')) ||
+                                    $group_alias == strtolower(Configure::read('grupo_editores'))) {
+                                    echo $this->renderElement('boxTickets');
+                                } ?>
 				</cake:nocache>
 				
-				<?  echo $this->renderElement('boxAdmin'); ?>	
+				<?
+                                if ($group_alias == strtolower(Configure::read('grupo_desarrolladores')) ||
+                                    $group_alias == strtolower(Configure::read('grupo_administradores'))) {
+                                    echo $this->renderElement('boxAdmin');
+                                } ?>
 				<?  echo $this->renderElement('boxLogin'); ?>
 				
 				

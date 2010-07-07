@@ -1,8 +1,3 @@
-<?
-if ($session->check('Auth.User')){
-	if(	$session->read('Auth.User.role') == 'desarrollo' ||
-		$session->read('Auth.User.role') == 'admin'){
-	?>
 		<div id="boxAdmin">
 			<h1 id="boxAdmin" class="menu_head">Administración</h1>
                         <ul class="menu_body">
@@ -37,6 +32,3 @@ if ($session->check('Auth.User')){
 
 			</ul>
 		</div>
-
-<?	}
-} ?>

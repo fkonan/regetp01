@@ -1,9 +1,3 @@
-
-<?php
-if ($session->check('Auth.User')) {
-    if(	$session->read('Auth.User.role') == 'desarrollo') {
-        ?>
-
 <div class="fondos index">
    <h1><?= $jurisdiccion['Jurisdiccion']['name']?>
    </h1>
@@ -86,52 +80,3 @@ if ($session->check('Auth.User')) {
             </div>
     <?php  }?>
 </div>
-
-
-<?
-/*
- *       ACA ABAJO ESTA LO QUE HAY QUE BORRAR LUEGO DE LA MIGRACIÓN DEFINITIVA
- *
- *          es la vista con un mensaje diciendo que aun no esta listo
- * y solo se ve para el desarrollador los datos de Fondo
- *
-*/
-?>
-        <?php
-    } else {
-      ?>
-
-
-<div class="fondos index">
-   <h1><?= $jurisdiccion['Jurisdiccion']['name']?>
-   </h1>
-   <h2>Listado de Planes de Mejora</h2>
-
-    <div class="tabs">
-            <div class="tabs-list">
-                    <span class="tab-grande-activa"><?php echo $html->link('Datos',array('controller'=>'Jurisdicciones','action'=>'view', $jurisdiccion['Jurisdiccion']['id']));?></span>
-                    <span class="tab-grande-inactiva"><?php echo $html->link('Planes de Mejora',array('controller'=>'Fondos','action'=>'index_x_jurisdiccion', $jurisdiccion['Jurisdiccion']['id']));?></span>
-            </div>
-            
-            <div style="border-top:2px solid #9DA6C1" class="tabs-content">
-                <p><p><p><p>
-                    <p class='msg-atencion'>Los datos sobre planes de mejora aprobados serán publicados a la brevedad.</p>
-                </p></p> </p></p>
-           </div>
-    </div>
-    <?php
-        if($paginator->numbers()){
-    ?>
-            <div style="float:left" class="paging">
-                    <?php echo $paginator->prev('<< '.__('anterior', true), array(), null, array('class'=>'disabled'));?>
-             | 	<?php echo $paginator->numbers();?>
-                    <?php echo $paginator->next(__('siguiente', true).' >>', array(), null, array('class'=>'disabled'));?>
-            </div>
-    <?php  }?>
-</div>
-
-
-        <?
-    }
-
-}?>

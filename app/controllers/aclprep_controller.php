@@ -248,6 +248,10 @@ class AclprepController extends AppController {
                         'alias' => 'invitados',
                         'parent_id' => '1'
                 ),
+                6 => array(
+                        'alias' => 'referentes',
+                        'parent_id' => '1'
+                ),
         );
 
         //Iterate and create ARO groups
@@ -287,6 +291,7 @@ class AclprepController extends AppController {
                 case 'admin':           { $parent_id = 3; break; }
                 case 'editor':          { $parent_id = 4; break; }
                 case 'invitado':        { $parent_id = 5; break; }
+                case 'referente':       { $parent_id = 6; break; }
                 default:                { $parent_id = 5; }
             }
 
@@ -320,24 +325,22 @@ class AclprepController extends AppController {
        
         // Administradores
         $this->Acl->allow('administradores', 'controllers');
-        
-        //$this->Acl->allow('invitados', 'controllers');
-
+        $this->Acl->deny('administradores',  'Fondos/index');
+        $this->Acl->deny('administradores',  'FondoTemporales');
+        $this->Acl->deny('administradores',  'Users/add');
+        $this->Acl->deny('administradores',  'Users/edit');
+        $this->Acl->deny('administradores',  'Users/delete');
+        $this->Acl->deny('administradores',  'Acl');
+        $this->Acl->deny('administradores',  'Aclprep');
         //$this->Acl->deny('desarrolladores/avilar',   'Fondos/index_x_instit');
-        //$this->Acl->allow('invitados',   'Fondos/index_x_instit');
 
         // Editores
-        $this->Acl->allow('editores', 'Instits/search');
         $this->Acl->allow('editores', 'Instits/add');
-        $this->Acl->allow('editores', 'Instits/search_form');
-        $this->Acl->allow('editores', 'Instits/view');
         $this->Acl->allow('editores', 'Instits/edit');
         $this->Acl->allow('editores', 'Instits/planes_relacionados');
         $this->Acl->allow('editores', 'Instits/depurar');
-        $this->Acl->allow('editores', 'Planes/view');
         $this->Acl->allow('editores', 'Planes/edit');
         $this->Acl->allow('editores', 'Planes/delete');
-        $this->Acl->allow('editores', 'Planes/index');
         $this->Acl->allow('editores', 'Anios/add');
         $this->Acl->allow('editores', 'Anios/edit');
         $this->Acl->allow('editores', 'Anios/delete');
@@ -346,36 +349,37 @@ class AclprepController extends AppController {
         $this->Acl->allow('editores', 'Queries/list_view');
         $this->Acl->allow('editores', 'Depuradores');
         $this->Acl->allow('editores', 'Sectores');
-        $this->Acl->allow('editores', 'Tickets/index');
         $this->Acl->allow('editores', 'Tickets/add');
         $this->Acl->allow('editores', 'Tickets/edit');
-        $this->Acl->allow('editores', 'Tickets/view');
         $this->Acl->allow('editores', 'Tickets/provincias_pendientes');
         $this->Acl->allow('editores', 'Titulos');
-        $this->Acl->allow('editores', 'HistorialCues/search_form');
-        $this->Acl->allow('editores', 'HistorialCues/search');
-        $this->Acl->allow('editores', 'Fondos/index_x_instit');
 
+        // invitados;
 
-        // invitados
-        $this->Acl->allow('invitados', 'Instits/search');
-        $this->Acl->allow('invitados', 'Instits/search_form');
-        $this->Acl->allow('invitados', 'Instits/view');
-        $this->Acl->allow('invitados', 'Planes/index');
-        $this->Acl->allow('invitados', 'Planes/edit');
-        $this->Acl->allow('invitados', 'Tickets/view');
-        $this->Acl->allow('invitados', 'HistorialCues/search_form');
-        $this->Acl->allow('invitados', 'HistorialCues/search');
-        $this->Acl->allow('invitados', 'Fondos/index_x_instit');
+        // referentes       
+        //$this->Acl->deny('referentes', 'Tickets/view');
+        
+        
 
         // todos
-        $this->Acl->allow('editores', 'Cuadros');
-        $this->Acl->allow('invitados', 'Cuadros');
-
-        //$this->Acl->allow('usuarios', 'Instits/dame_datos');
+        $this->Acl->allow('usuarios', 'Instits/search');
+        $this->Acl->allow('usuarios', 'Instits/search_form');
+        $this->Acl->allow('usuarios', 'Instits/old_search_form');
+        $this->Acl->allow('usuarios', 'Instits/advanced_search_form');
+        $this->Acl->allow('usuarios', 'Instits/view');
+        $this->Acl->allow('usuarios', 'Planes/index');
+        $this->Acl->allow('usuarios', 'Planes/edit');
+        $this->Acl->allow('usuarios', 'HistorialCues/search_form');
+        $this->Acl->allow('usuarios', 'HistorialCues/search');
+        $this->Acl->allow('usuarios', 'Tickets/index');
+        $this->Acl->allow('usuarios', 'Tickets/view');
+        $this->Acl->allow('usuarios', 'Users/cambiar_password');
+        $this->Acl->allow('usuarios', 'Users/self_user_edit');
+        $this->Acl->allow('usuarios', 'Fondos/index_x_instit');
+        $this->Acl->allow('usuarios', 'Fondos/index_x_jurisdiccion');
+        $this->Acl->allow('usuarios', 'Cuadros');
         $this->Acl->allow('usuarios', 'Ciclos/dame_ciclos');
         $this->Acl->allow('usuarios', 'Etapas/dame_nombre');
-        //$this->Acl->allow('usuarios', 'Anios/matricula_del_plan');
         $this->Acl->allow('usuarios', 'Jurisdicciones/get_name');
         $this->Acl->allow('usuarios', 'Ofertas/dame_nombre');
         $this->Acl->allow('usuarios', 'Ofertas/dame_abrev');

@@ -109,12 +109,15 @@ class UsersController extends AppController {
 		
 		if ($this->Auth->login()){
 			//guardo al usuario actual en la tabla de log 'user_logins'
-			$current_user = $this->Auth->user();
-			$this->User->UserLogin->save(array('user_id'=>$current_user['User']['id']));
-			//$this->Auth->UserJurisdiccionId = $current_user['User']['jurisdiccion_id'];
-
-			$this->redirect($this->Auth->redirect());
-			
+                        $current_user = $this->Auth->user();
+                        $this->User->UserLogin->save(array('user_id'=>$current_user['User']['id']));
+                        // grupo (rol)
+                        $parent = $this->User->getParentNode($this->Auth->user('id'));
+                        // guarda datos en Session
+                        $this->Session->write('User.jurisdiccion_id', $current_user['User']['jurisdiccion_id']);
+                        $this->Session->write('User.group_alias', strtolower($parent['Aro']['alias']));
+                        
+			$this->redirect($this->Auth->redirect());	
 		}
 	}	
 	
@@ -122,6 +125,7 @@ class UsersController extends AppController {
 	function logout()
 	{
 		$this->Session->setFlash('Ha salido de su cuenta');
+                $this->Session->destroy();
 		$this->redirect($this->Auth->logout());
 	}
 

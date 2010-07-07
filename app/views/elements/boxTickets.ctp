@@ -1,11 +1,3 @@
-<?
-if ($session->check('Auth.User')){
-	if(	$session->read('Auth.User.role') == 'admin' || 
-		$session->read('Auth.User.role') == 'desarrollo' ||
-		$session->read('Auth.User.role') == 'editor'){
-	?>
-
-
 <script type="text/javascript">
     /**
      * me dice si ya fue apretado el link Ver Pendientes,
@@ -50,7 +42,3 @@ if ($session->check('Auth.User')){
             </div>
         </ul>
 </div>	
-<?php 
-	}
-}
-?>

@@ -1,10 +1,3 @@
-<?
-if ($session->check('Auth.User')) {
-    if(	$session->read('Auth.User.role') == 'admin' ||
-            $session->read('Auth.User.role') == 'desarrollo' ||
-            $session->read('Auth.User.role') == 'editor') {
-        ?>
-
 <div id="boxDepurador">
     <h1 id="boxDepurador" class="menu_head">Depurador</h1>
     <ul class="menu_body">
@@ -16,9 +9,4 @@ if ($session->check('Auth.User')) {
         
         <li><? echo $html->link("Listado de similares","/depuradores/depurar_similares") ?></li>
     </ul>
-
 </div>
-
-
-        <?	}
-} ?>

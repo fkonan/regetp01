@@ -181,7 +181,11 @@
  * Inet Options
  */
         Configure::write('es_dia_patrio', false);
-        Configure::write('grupo_referente', 'referentes');
+        Configure::write('grupo_desarrolladores', 'desarrolladores');
+        Configure::write('grupo_administradores', 'administradores');
+        Configure::write('grupo_editores', 'editores');
+        Configure::write('grupo_invitados', 'invitados');
+        Configure::write('grupo_referentes', 'referentes');
 /**
  *
  * Cache Engine Configuration
