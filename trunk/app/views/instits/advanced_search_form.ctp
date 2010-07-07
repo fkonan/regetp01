@@ -343,7 +343,7 @@ echo $html->css('jquery.autocomplete.css');
 
     </fieldset>
 
-    <?php echo $form->button('Buscar',array('style'=>'float:right; margin-bottom:10px','onclick'=>'enviar()'));?>
+    <?php echo $form->button('Buscar',array('style'=>'float:right; margin-bottom:10px;width:200px;','onclick'=>'enviar()'));?>
     <?php echo $form->end(); ?>
 
 </div>
