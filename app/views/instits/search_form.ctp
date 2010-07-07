@@ -13,7 +13,7 @@ echo $html->css('jquery.autocomplete.css');
     
     jQuery(document).ajaxStart(function (event, request, settings)  {
             if(!enterButton){
-                jQuery.blockUI({ message: '<h1>Buscando...</h1>',overlayCSS: { backgroundColor: '#00f' }, showOverlay: true });
+                jQuery.blockUI({ message: '<h1>Buscando...</h1>',showOverlay: false });
             }
             else{
                 return false;
