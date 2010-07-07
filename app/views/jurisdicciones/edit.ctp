@@ -4,7 +4,7 @@
 	<fieldset>
 	<?php
 		echo $form->input('id');
-		echo $form->input('name');
+		echo $form->input('name', array('label'=>'Nombre'));
 	?>
 	</fieldset>
 <?php echo $form->end('Guardar');?>
