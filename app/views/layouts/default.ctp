@@ -42,14 +42,12 @@
 		echo $javascript->link('jquery-1.4.2.min.js');
                 echo $javascript->link('jquery.form.js');
                 echo $javascript->link('jquery.tools.min.js');
-                echo $javascript->link('jquery.pngFix.pack');
 
                 
 		echo $scripts_for_layout;
 	?>
         <script type="text/javascript">
         jQuery.noConflict();
-        jQuery(document).pngFix();
         jQuery(document).ready(function () {
             jQuery("ul.menu_body li:even").addClass("alt");
             jQuery('#boxInstituciones .menu_body').show();
