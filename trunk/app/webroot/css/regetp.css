@@ -1787,6 +1787,7 @@ Busqueda Simple de Instituciones
 /* simple css-based tooltip */
 .tooltip {
 	background:transparent url(images/white_arrow.png) no-repeat;
+        _background:transparent url(images/white_arrow_ie.png) no-repeat;
 	padding-top:13px;
         padding-left: 15px;
         padding-right: 30px;
