@@ -111,8 +111,6 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 		
 		<div class="instit_link_list">
                     <?php echo $html->link('+ Info','/instits/view/'.$instit['Instit']['id']);?>
-                    <div id="d_clip_button<?=$instit['Instit']['id']?>" instit="infoToCopy<?=$instit['Instit']['id']?>" class="my_clip_button" title="Copiar resumen al portapapeles"></div>
-                    <input id="infoToCopy<?=$instit['Instit']['id']?>" type="hidden" value="<?= ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'] . ' - ' . $instit['Instit']['nombre_completo'] . ' - ' . $instit['Instit']['direccion'] . ' - ' . $instit['Departamento']['name'] . ' - ' . $instit['Localidad']['name'] ?> "/>
                 </div>
                 
                 <div class="instit_data_bs">
