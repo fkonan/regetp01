@@ -41,7 +41,7 @@ echo $html->css('jquery.autocomplete.css');
         jQuery.tools.tooltip.conf.events.input = 'focus,blur';
         jQuery.tools.tooltip.conf.events.tooltip = '';
         jQuery.tools.tooltip.conf.events.widget = 'focus, blur';
-        jQuery("#InstitSearchForm :input[title]").tooltip({ effect: 'slide', offset:[12,0]});
+        jQuery("#InstitSearchForm :input[title]").tooltip({ effect: 'slide', offset:[22,0]});
         
     }
 
