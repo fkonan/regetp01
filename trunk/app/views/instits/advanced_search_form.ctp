@@ -1,6 +1,11 @@
 <?
-echo $javascript->link('jquery.autocomplete');
-echo $javascript->link('jquery.blockUI');
+echo $javascript->link(array(
+    'jquery.autocomplete',
+    //'jquery.tooltip.min',
+    'jquery.qtip.min',
+    'jquery.blockUI',
+    ));
+
 echo $html->css('jquery.autocomplete.css');
 ?>
 
@@ -28,19 +33,22 @@ echo $html->css('jquery.autocomplete.css');
         font-size: 8pt;
     }
 
-
 </style>
 
 <script language="javascript">
 jQuery(document).ready(function() {
-    jQuery("#InstitSearchForm :input[title]").tooltip({
-        position: "right center",
-        offset: [-10, 130],
-        effect: "fade",
-        opacity: 0.7,
-        delay: 0,
-        showURL: false
-    });
+
+    //jQuery("#search *").tooltip({
+    jQuery("#InstitSearchForm :input[title]").tooltip({ effect: 'slide'});
+
+
+    $('#InstitSearchForm :input[title]').qtip({
+      content: {
+         text: false // Use each elements title attribute
+      },
+      //style: 'cream' // Give it some style
+   });
+
 
     
     jQuery("#InstitJurDepLoc").autocomplete("<?echo $html->url(array('controller'=>'localidades','action'=>'ajax_search_localidades'));?>", {
@@ -112,7 +120,7 @@ function enviar()
             
             echo $form->input('nombre_completo', array(
                 'label'=>'Nombre',
-                'div'=>array('style'=>'width:290px; float: left; clear: none'),
+                'div'=>array('style'=>'width:270px; float: left; clear: none'),
                 //'style'=> 'width:260px',
                 'title'=> 'Realiza una búsqueda por tipo de establecimiento, número y nombre propio de la institución.<br>Ej: Escuela 3 San Martín'));
             
