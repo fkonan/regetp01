@@ -130,7 +130,7 @@ class LocalidadesController extends AppController {
 	
 	function ajax_select_localidades_form_por_departamento(){
 		 $this->layout = 'ajax';
-        // Configure::write('debug',0);
+         Configure::write('debug',0);
          $this->Localidad->recursive = 0;
 
          $this->Localidad->unBindModel(array('hasMany' => array('Instit')));

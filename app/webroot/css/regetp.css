@@ -1687,6 +1687,7 @@ input[type="hidden"]{
 
 .lista_fondos .item_fondos dt{
     border-bottom:1px dotted #CCCCCC;
+    font-size: 12px;
 }
 
 .lista_fondos .item_fondos .total{
