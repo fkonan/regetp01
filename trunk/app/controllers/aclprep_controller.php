@@ -364,6 +364,7 @@ class AclprepController extends AppController {
 
         // todos
         $this->Acl->allow('usuarios', 'Instits/search');
+        $this->Acl->allow('usuarios', 'Instits/search_instits');
         $this->Acl->allow('usuarios', 'Instits/search_form');
         $this->Acl->allow('usuarios', 'Instits/old_search_form');
         $this->Acl->allow('usuarios', 'Instits/advanced_search_form');

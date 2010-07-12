@@ -26,7 +26,7 @@ echo $html->css('jquery.autocomplete.css');
     
     jQuery(document).ajaxError(function(e, xhr, settings, exception) {
       jQuery.unblockUI;
-      alert(exception);
+      //alert(exception);
     });
     
     jQuery(document).ready(function() {
