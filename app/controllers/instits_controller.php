@@ -959,20 +959,14 @@ class InstitsController extends AppController {
         return $pagin;
     }
 
+
+
+
     function search_instits($q = null){
-        $this->autoRender = false;
-
-        if ( $this->RequestHandler->isAjax() ) {
-          Configure::write ( 'debug', 0 );
-        }
-
-        $response = '';
-
+        
         if(empty($q)) {
             if (!empty($this->params['url']['q'])) {
                 $q = utf8_decode(strtolower($this->params['url']['q']));
-            } else {
-                return utf8_encode("parámetro vacio");
             }
         }
 
@@ -986,20 +980,11 @@ class InstitsController extends AppController {
 
                 )
             ));
-
-            /*$cues_h = $this->FondoTemporal->Instit->HistorialCue->find("all", array(
-                'conditions'=> array(
-                    "OR"=>array(
-                    "cue = ?" => $q,
-                    "(cue * 100 + anexo) = ?" => $q )
-                )
-            ));*/
-
         }
         else{
             $items = $this->Instit->find("all", array(
                 'contain'=> array(
-                    'Tipoinstit', 'Jurisdiccion', 'HistorialCue'
+                    'Tipoinstit', 'Jurisdiccion', 'HistorialCue'=>array('order'=>'created DESC')
                 ),
                 'conditions'=> array(
                     "(to_ascii(lower(Tipoinstit.name)) || ' n ' || to_ascii(lower(Instit.nroinstit)) || ' ' || to_ascii(lower(Instit.nombre))) SIMILAR TO ?" => $this->Instit->convertir_para_busqueda_avanzada($q)
@@ -1024,14 +1009,11 @@ class InstitsController extends AppController {
                     "cp" => utf8_encode($item['Instit']['cp']),
                     "tipo" => utf8_encode($item['Tipoinstit']['name']),
                     "jurisdiccion" => utf8_encode($item['Jurisdiccion']['name']),
-                    "cue_anterior" => utf8_encode($item['HistorialCue'][0]['cue'])
+//                    "cue_anterior" => utf8_encode($item['HistorialCue'][0]['cue'])
             ));
         }
 
-        echo json_encode($result);
-
-        //echo $response;
-
+        $this->set('instits', $result);
     }
     
     /**

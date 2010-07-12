@@ -36,7 +36,7 @@
  */
 class AppController extends Controller {
 	var $helpers = array('Javascript','Html', 'Form', 'Ajax');
-	var $components = array('Acl', 'Session', 'Auth');
+	var $components = array('Acl', 'Session', 'Auth', 'Requesthandler');
 	
 	
 	//esta es una variable que sera mostrada en el layout
@@ -56,11 +56,12 @@ class AppController extends Controller {
 	 *
 	 */
 	function beforeRender(){
-		$this->set('rutaUrl_for_layout', $this->rutaUrl_for_layout);		
+		$this->set('rutaUrl_for_layout', $this->rutaUrl_for_layout);
+                //debug($this->Acl->check($this->Auth->user(), $this->action));die("aassas");
+                
 	}
-	
-	
-		
+
+
 	function beforeFilter(){
 		/**
 		 * 
@@ -79,7 +80,7 @@ class AppController extends Controller {
                 
                 //Configure AuthComponent
                 //$this->Auth->allow('display','login','logout');
-                $this->Auth->allow('*');
+                //$this->Auth->allow('*');
                 $this->Auth->allowedActions = array('display','login','logout');
                 $this->Auth->loginError ='Usuario o Contraseña Incorrectos';
 		$this->Auth->authError = 'Usted no tiene acceso a esta página';
@@ -88,6 +89,16 @@ class AppController extends Controller {
                 //$this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
                 $this->Auth->logoutRedirect='/pages/home';
                 $this->Auth->autoRedirect = false;
+
+
+                // si es Ajax y no tengo permisos que me tire un error HTTP
+                // asi lo puedo capturar desde jQuery
+                if($this->Requesthandler->isAjax()){
+                    Configure::write ( 'debug', 0);
+                    if (!$this->Acl->check($this->Auth->user(), $this->action)){
+                        header('HTTP/1.1 401 Unauthorized');
+                    }
+                }           
 	}
 
 
