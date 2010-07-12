@@ -41,7 +41,7 @@ echo $html->css('jquery.autocomplete.css');
 
         jQuery('#InstitSimpleSearchForm input[type=submit]').attr('disabled', 'disabled');
 
-        jQuery("#InstitCue").autocomplete("<?echo $html->url(array('controller'=>'instits','action'=>'search_instits'));?>", {
+        jQuery("#InstitCue").autocomplete("<?echo $html->url(array('controller'=>'instits','action'=>'search_instits.json'));?>", {
 		dataType: "json",
                 delay: 2000,
                 max:30,
