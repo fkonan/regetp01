@@ -24,11 +24,6 @@ echo $html->css('jquery.autocomplete.css');
         jQuery.unblockUI();
     });
     
-    jQuery(document).ajaxError(function(e, xhr, settings, exception) {
-      jQuery.unblockUI;
-      //alert(exception);
-      location.href = '/instits/search_form';
-    });
     
     jQuery(document).ready(function() {
         jQuery('#busca_cue').click(function(){
