@@ -71,7 +71,9 @@
            </div>
     </div>
     <?php
-        if($paginator->numbers()){
+    $paginator->options(array('url' => $this->passedArgs));
+
+    if($paginator->numbers()){
     ?>
             <div style="float:left" class="paging">
                     <?php echo $paginator->prev('<< '.__('anterior', true), array(), null, array('class'=>'disabled'));?>
