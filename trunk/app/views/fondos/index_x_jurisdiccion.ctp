@@ -55,7 +55,7 @@
                             ?>
                                 <dt onmouseover="jQuery(this).toggleClass('item_fondos_seleccionado')"
                                     onmouseout="jQuery(this).toggleClass('item_fondos_seleccionado')">
-                                    <?=$linea['name']?> (<?=$linea['description']?>)
+                                    <?=$linea['description']?>
                                 </dt>
                                 <dd>$ <?=number_format($linea['FondosLineasDeAccion']['monto'],2,",",".");?></dd>
                             <?php endforeach; ?>
