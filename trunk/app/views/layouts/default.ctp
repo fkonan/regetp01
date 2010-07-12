@@ -49,6 +49,13 @@
         <script type="text/javascript">
         jQuery.noConflict();
         jQuery(document).ready(function () {
+
+            jQuery(document).ajaxError(function(e, xhr, settings, exception) {
+                jQuery.unblockUI;
+
+                location.href = './';
+            });
+            
             jQuery("ul.menu_body li:even").addClass("alt");
             jQuery('#boxInstituciones .menu_body').show();
             <?php
