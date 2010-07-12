@@ -343,6 +343,7 @@ class AclprepController extends AppController {
         $this->Acl->allow('usuarios', 'Etapas/dame_nombre');
         $this->Acl->allow('usuarios', 'Jurisdicciones/get_name');
         $this->Acl->allow('usuarios', 'Jurisdicciones/listado');
+        $this->Acl->allow('usuarios', 'Jurisdicciones/view');
         $this->Acl->allow('usuarios', 'Ofertas/dame_nombre');
         $this->Acl->allow('usuarios', 'Ofertas/dame_abrev');
         $this->Acl->allow('usuarios', 'Tipodocs/tipodoc_nombre');
