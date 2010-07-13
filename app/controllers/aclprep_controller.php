@@ -321,43 +321,6 @@ class AclprepController extends AppController {
     }
 
     function assignPermissions() {
-        // todos
-        $this->Acl->allow('usuarios', 'Instits/search');
-        $this->Acl->allow('usuarios', 'Instits/search_instits');
-        $this->Acl->allow('usuarios', 'Instits/search_form');
-        $this->Acl->allow('usuarios', 'Instits/old_search_form');
-        $this->Acl->allow('usuarios', 'Instits/advanced_search_form');
-        $this->Acl->allow('usuarios', 'Instits/view');
-        $this->Acl->allow('usuarios', 'Planes/index');
-        $this->Acl->allow('usuarios', 'Planes/view');
-        $this->Acl->allow('usuarios', 'HistorialCues/search_form');
-        $this->Acl->allow('usuarios', 'HistorialCues/search');
-        $this->Acl->allow('usuarios', 'Tickets/index');
-        $this->Acl->allow('usuarios', 'Tickets/view');
-        $this->Acl->allow('usuarios', 'Users/cambiar_password');
-        $this->Acl->allow('usuarios', 'Users/self_user_edit');
-        $this->Acl->allow('usuarios', 'Fondos/index_x_instit');
-        $this->Acl->allow('usuarios', 'Fondos/index_x_jurisdiccion');
-        $this->Acl->allow('usuarios', 'Cuadros');
-        $this->Acl->allow('usuarios', 'Ciclos/dame_ciclos');
-        $this->Acl->allow('usuarios', 'Etapas/dame_nombre');
-        $this->Acl->allow('usuarios', 'Jurisdicciones/get_name');
-        $this->Acl->allow('usuarios', 'Jurisdicciones/listado');
-        $this->Acl->allow('usuarios', 'Jurisdicciones/view');
-        $this->Acl->allow('usuarios', 'Ofertas/dame_nombre');
-        $this->Acl->allow('usuarios', 'Ofertas/dame_abrev');
-        $this->Acl->allow('usuarios', 'Tipodocs/tipodoc_nombre');
-        $this->Acl->allow('usuarios', 'Tipodocs/dame_tipodocs');
-        $this->Acl->allow('usuarios', 'Tipoinstits/get_name');
-        $this->Acl->allow('usuarios', 'Tipoinstits/ajax_select_form_por_jurisdiccion');
-        $this->Acl->allow('usuarios', 'Departamentos/ajax_select_departamento_form_por_jurisdiccion');
-        $this->Acl->allow('usuarios', 'Localidades/ajax_select_localidades_form_por_departamento');
-        $this->Acl->allow('usuarios', 'Localidades/ajax_select_localidades_form_por_jurisdiccion');
-        $this->Acl->allow('usuarios', 'Localidades/ajax_search_localidades');
-        $this->Acl->allow('usuarios', 'Subsectores/ajax_select_subsector_form_por_sector');
-        $this->Acl->allow('usuarios', 'Titulos/add_and_give_me_select_options');
-
-
         // Desarrolladores
         $this->Acl->allow('desarrolladores', 'controllers');
 
@@ -396,6 +359,43 @@ class AclprepController extends AppController {
 
         // referentes
         //$this->Acl->deny('referentes', 'Tickets/view');
+
+
+        // todos
+        $this->Acl->allow('usuarios', 'Instits/search');
+        $this->Acl->allow('usuarios', 'Instits/search_instits');
+        $this->Acl->allow('usuarios', 'Instits/search_form');
+        $this->Acl->allow('usuarios', 'Instits/old_search_form');
+        $this->Acl->allow('usuarios', 'Instits/advanced_search_form');
+        $this->Acl->allow('usuarios', 'Instits/view');
+        $this->Acl->allow('usuarios', 'Planes/index');
+        $this->Acl->allow('usuarios', 'Planes/view');
+        $this->Acl->allow('usuarios', 'HistorialCues/search_form');
+        $this->Acl->allow('usuarios', 'HistorialCues/search');
+        $this->Acl->allow('usuarios', 'Tickets/index');
+        $this->Acl->allow('usuarios', 'Tickets/view');
+        $this->Acl->allow('usuarios', 'Users/cambiar_password');
+        $this->Acl->allow('usuarios', 'Users/self_user_edit');
+        $this->Acl->allow('usuarios', 'Fondos/index_x_instit');
+        $this->Acl->allow('usuarios', 'Fondos/index_x_jurisdiccion');
+        $this->Acl->allow('usuarios', 'Cuadros');
+        $this->Acl->allow('usuarios', 'Ciclos/dame_ciclos');
+        $this->Acl->allow('usuarios', 'Etapas/dame_nombre');
+        $this->Acl->allow('usuarios', 'Jurisdicciones/get_name');
+        $this->Acl->allow('usuarios', 'Jurisdicciones/listado');
+        $this->Acl->allow('usuarios', 'Jurisdicciones/view');
+        $this->Acl->allow('usuarios', 'Ofertas/dame_nombre');
+        $this->Acl->allow('usuarios', 'Ofertas/dame_abrev');
+        $this->Acl->allow('usuarios', 'Tipodocs/tipodoc_nombre');
+        $this->Acl->allow('usuarios', 'Tipodocs/dame_tipodocs');
+        $this->Acl->allow('usuarios', 'Tipoinstits/get_name');
+        $this->Acl->allow('usuarios', 'Tipoinstits/ajax_select_form_por_jurisdiccion');
+        $this->Acl->allow('usuarios', 'Departamentos/ajax_select_departamento_form_por_jurisdiccion');
+        $this->Acl->allow('usuarios', 'Localidades/ajax_select_localidades_form_por_departamento');
+        $this->Acl->allow('usuarios', 'Localidades/ajax_select_localidades_form_por_jurisdiccion');
+        $this->Acl->allow('usuarios', 'Localidades/ajax_search_localidades');
+        $this->Acl->allow('usuarios', 'Subsectores/ajax_select_subsector_form_por_sector');
+        $this->Acl->allow('usuarios', 'Titulos/add_and_give_me_select_options');
 
 
 
