@@ -1641,6 +1641,13 @@ input[type="hidden"]{
     width:580px;
 }
 
+.lista_fondos H2{
+    margin-left: 0em;
+    margin-right: 0em;
+    margin-top: 0.5em;
+    margin-bottom: 0.3em;
+}
+
 .lista_fondos .item_fondos{
     border-top: thin solid #6F7BA3;
     border-bottom: thin solid #6F7BA3;
@@ -1668,7 +1675,8 @@ input[type="hidden"]{
 
 .lista_fondos .item_fondos dd{
     float: right;
-    padding-right: 25px;
+    padding-right: 10px;
+    font-size: 9pt;
 }
 
 .item_fondos_seleccionado{
@@ -1683,22 +1691,28 @@ input[type="hidden"]{
     -webkit-border-bottom-left-radius: 14px;
     -webkit-border-bottom-right-radius: 14px;
     float: right;
+    background-color: white;
+    border-bottom:1px solid #6F7BA3;
+    border-right: 1px solid #6F7BA3;
+    border-left: 1px solid #6F7BA3;
+
+    font-weight:bold;
+    color: black;
+    font-size:9pt;
+    margin-top:0;
+    padding: 3px 10px;
 }
 
 .lista_fondos .item_fondos dt{
     border-bottom:1px dotted #CCCCCC;
-    font-size: 12px;
+    font-size: 9pt;
 }
 
-.lista_fondos .item_fondos .total{
-    font-weight:bold;
-    border:0px solid #CCCCCC;
-    border-top-width:0;
-    color: white;
-    font-size:11pt;
-    margin-top:0;
-    background-color:#6F7BA3;
+.item_fondos dt{
+    font-weight: normal;
 }
+
+
 .lista_fondos .item_fondos .total dd,dt{
     padding-top: 2px;
     padding-left:15px;
