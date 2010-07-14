@@ -17,7 +17,9 @@
     }
 
     label{
-        font-size: 9pt;
+        font-family: Arial,Helvetica,sans-serif; 
+        font-size: 15px;
+        color: rgb(0, 102, 204);
     }
 
 </style>
@@ -99,18 +101,20 @@ echo $html->css('jquery.autocomplete.css');
 <div>
     <?= $form->create('Instit',array('action' => 'simpleSearch','name'=>'InstitSearchForm'));?>
 
-    <div>
-        <?php echo $form->input('cue', array('label'=> 'CUE ó Nombre de la Institución', 'title'=> 'Ingrese CUE ó Nombre de la institución en forma completa ó parcial. Ej: 600118, 5000216 ó Manuel Belgrano.','div'=>false));?>
-    </div>    
+    <div style="margin-top:30px">
+        <span><?php echo $form->input('cue', array('style'=>'float:left;width:90%;border: 1px solid rgb(156, 184, 250); background: transparent none repeat scroll 0pt 50%; -moz-background-clip: border; -moz-background-origin: padding; -moz-background-inline-policy: continuous; font-size: 22px; height: 29px; color: rgb(117, 117, 117);','label'=> 'CUE ó Nombre de la Institución', 'title'=> 'Ingrese CUE ó Nombre de la institución en forma completa ó parcial. Ej: 600118, 5000216 ó Manuel Belgrano.','div'=>false));?></span>
+        <span class="ajax_update" id="ajax_indicator" style="display:none;"><?php echo $html->image('ajax-loader.gif')?></span>
+    </div>
     <?php echo $html->link('Busqueda Avanzada...','advanced_search_form',array('class'=>'link_right'));?>
     <br/>
-    <span class="ajax_update" id="ajax_indicator" style="display:none;float:right"><?php echo $html->image('ajax-loader.gif')?></span>
+    <br/>
+    <br/>
+    
+    
     <div id='consoleResult' >
-        <h2>Resultados</h2>
-        <div style="height:170px">
-            <div style="border: medium none ; margin: 0px; padding: 15px; z-index: 1001; position: relative; width: 30%; top: 60px; left: 200.5px; text-align: center; color: rgb(255, 255, 255); background-color: rgb(0, 0, 0); cursor: wait; -moz-border-radius-topleft: 10px; -moz-border-radius-topright: 10px; -moz-border-radius-bottomright: 10px; -moz-border-radius-bottomleft: 10px; opacity: 0.5;" class="blockUI blockMsg blockElement">Sin Resultados</div>
-        </div>
+        
     </div>
+    
     <p>
 	<? echo $html->image('/css/images/puntoverde.gif',array('title'=>'Ingresados a la Base de Datos')); ?>
 	- Institución ingresada al RFIETP<br />

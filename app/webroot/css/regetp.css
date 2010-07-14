@@ -1796,7 +1796,10 @@ Busqueda Simple de Instituciones
 
 .link_right{
     float: right;
-    margin-right: 45px;
+    margin-right: 60px;
+    margin-top: 10px;
+    color: #0066CC;
+    font-size: 9pt;
 }
 
 /* simple css-based tooltip */
