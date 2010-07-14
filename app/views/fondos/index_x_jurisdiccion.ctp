@@ -1,3 +1,9 @@
+<?php 
+
+    define("DESCRIPCION_PLURAL", "La Jurisdicci&oacute;n ha recibido %u planes de mejora por un total de <strong>$ %s</strong>");
+    define("DESCRIPCION_SINGULAR", "La Jurisdicci&oacute;n ha recibido 1 plan de mejora por un total de <strong>$ %s</strong>");
+
+?>
 <div class="fondos index">
    <h1><?= $jurisdiccion['Jurisdiccion']['name']?>
    </h1>
@@ -10,14 +16,14 @@
                 <?php
                 if(count($fondos) == 1){
                 ?>
-                <p>La Jurisdicci&oacute;n presento 1 plan de mejora con un total de <strong>$ <?=number_format($sumalineas,2,",",".");?></strong></p>
+                <p><?php echo sprintf(DESCRIPCION_SINGULAR ,number_format($sumalineas,2,",","."))?></p>
                 <?php
                 }
                 ?>
                 <?php
                 if(count($fondos) > 1){
                 ?>
-                <p>La Jurisdicci&oacute;n presento <?php echo count($fondos) ; ?> planes de mejora con un total de <strong>$ <?=number_format($sumalineas,2,",",".");?></strong></p>
+                <p><?php echo sprintf(DESCRIPCION_PLURAL, count($fondos), number_format($sumalineas,2,",","."));?></p>
                 <?php
                 }
                 ?>
