@@ -8,7 +8,7 @@ foreach($deptos as $d):
 			$poner .= ' ('.$d['Jurisdiccion']['name'].')';
 		}
 	?>
-		<option value="<?= $d['Departamento']['id']?>"><?= utf8_encode($poner)?></option>
+		<option value="<?= $d['Departamento']['id']?>"><?=$poner?></option>
 	<?
 endforeach;
 	

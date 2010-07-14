@@ -1,5 +1,3 @@
-
-<?php //debug($deptos);?>
 <option value="0">Seleccione</option>
 
 <?
@@ -35,7 +33,7 @@ foreach($localidades as $d):
 			}
 		}
 	?>
-		<option value="<?= $d['Localidad']['id']?>"><?= utf8_encode($poner)?></option>
+		<option value="<?= $d['Localidad']['id']?>"><?=$poner?></option>
 	<?
 endforeach;
 	

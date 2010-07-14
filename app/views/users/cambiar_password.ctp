@@ -3,8 +3,8 @@
 <?php echo $form->create('User',array('action' => 'cambiar_password'));?>
 	<fieldset>
 	<?php
-		echo $form->input('password',array('label'=>'Ingrese una nueva contraseña'));
-		?><cite>(Borre previamente los asteriscos)</cite><br /><?php 
+		echo $form->input('password',array('label'=>'Ingrese una nueva contraseña', 'value'=>''));
+	
 		echo $form->input('password_check',array('label'=>'Reingrese su contraseña','type'=>'password'));
 
 	?>
