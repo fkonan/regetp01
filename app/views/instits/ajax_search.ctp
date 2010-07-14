@@ -1,0 +1,100 @@
+<?php
+        $paginator->options(array('update' => 'consoleResult', 'url' => $this->passedArgs,'indicator'=> 'ajax_indicator'));
+        $title = $paginator->counter(array('format' => '%count% Resultados'));
+?>
+<h2 id="resultTitle"><?= $title?></h2>
+<p>Ordenar los resultados por:</p>
+<ul class="lista_horizontal">
+<?
+	$sort = 'cue';
+	if(isset($this->passedArgs['sort'])){
+		$sort = $this->passedArgs['sort'];
+	}
+	?>
+	<? $class = ($sort == 'cue')?'marcada':'';?>
+	<li class="<?= $class?>"><?php echo $paginator->sort('cue');?></li>
+
+	<? $class = ($sort == 'Jurisdiccion.name')?'marcada':'';?>
+	<li class="<?= $class?>"><?php echo $paginator->sort('Jurisdicción','Jurisdiccion.name');?></li>
+
+	<? $class = ($sort == 'Departamento.name')?'marcada':'';?>
+	<li class="<?= $class?>"><?php echo $paginator->sort('Departamento','Departamento.name');?></li>
+
+	<? $class = ($sort == 'Localidad.name')?'marcada':'';?>
+	<li class="<?= $class?>"><?php echo $paginator->sort('Localidad','Localidad.name');?></li>
+
+</ul>
+<div style="float:right">
+<?php
+      echo $paginator->numbers();
+?>
+</div>
+<div style="margin-bottom: 30px">
+<?
+if (sizeof($instits) > 0) {?>
+        <ul class="listado" style="margin-left:0px;margin-right:0px">
+	<?php
+	foreach($instits as $instit){
+	?>
+
+	<?
+		$año_actual = date("Y");
+		$fecha_hasta = "$año_actual-07-21"; //hasta julio
+		$fecha_desde = "$año_actual-01-01"; //desde enero
+
+		$clase = '';
+		if($instit['Instit']['fecha_mod'] < $fecha_hasta && $instit['Instit']['fecha_mod']< $fecha_desde ){
+			$clase = 'alertar_escuela_no_actualizada';
+		}
+		if($instit['Instit']['activo']){
+			$clase .= ' escuela_activa';
+		}else{
+			$clase .= ' escuela_inactiva';
+		}
+		 ?>
+
+	<li id="lista_instit_<?= $instit['Instit']['id']?>" class="lista_link <?=$clase ?>"
+		onclick="window.location='<?= $html->url(array('controller'=> 'Instits', 'action'=>'view/'.$instit['Instit']['id'])) ?>'"
+		onmouseover="jQuery('#lista_instit_<?= $instit['Instit']['id']?>').addClass('lista_link_hover');"
+		onmouseout="jQuery('#lista_instit_<?= $instit['Instit']['id']?>').removeClass('lista_link_hover');"
+		title="<?= $instit['Instit']['nombre_completo']?>"
+		>
+
+		<div class="instit_data_bs">
+			<?
+			//el anexo viene con 1 solo digito por lo general. Pero para leerlo siempre hay que ponerlo
+			// en formato de 2 digitos
+			$armar_anexo = ($instit['Instit']['anexo']<10)?'0'.$instit['Instit']['anexo']:$instit['Instit']['anexo'];
+			?>
+			<div class="instit_name"><b><?= "".($instit['Instit']['cue']*100)+$instit['Instit']['anexo']." - ". $instit['Instit']['nombre_completo']; ?></b></div>
+			<div class="instit_atributte"><b>Domicilio: </b> <?= $instit['Instit']['direccion'] ?></div>
+			<br />
+			<div class="instit_atributte"><b>Gestión: </b><?= $instit['Gestion']['name'] ?></div>
+			<div class="instit_atributte"><b>Jurisdicción: </b> <?= $instit['Jurisdiccion']['name'] ?></div>
+			<br />
+			<div class="instit_atributte"><b>Departamento: </b><?= $instit['Departamento']['name'] ?></div>
+			<div class="instit_atributte"><b>Localidad: </b><?= $instit['Localidad']['name'] ?></div>
+		</div>
+
+	</li>
+
+	<?
+	}
+	?>
+	</ul>
+
+        <?
+}else{
+	?>
+        <div style="height:170px">
+            <div style="border: medium none ; margin: 0px; padding: 15px; z-index: 1001; position: relative; width: 30%; top: 60px; left: 200.5px; text-align: center; color: rgb(255, 255, 255); background-color: rgb(0, 0, 0); cursor: wait; -moz-border-radius-topleft: 10px; -moz-border-radius-topright: 10px; -moz-border-radius-bottomright: 10px; -moz-border-radius-bottomleft: 10px; opacity: 0.5;" class="blockUI blockMsg blockElement">Sin Resultados</div>
+        </div>
+	<?
+}
+?>
+<div style="float:right; display:block;margin-bottom: 10px">
+<?php
+      echo $paginator->numbers();
+?>
+</div>
+</div>
