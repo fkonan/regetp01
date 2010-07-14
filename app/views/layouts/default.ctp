@@ -249,7 +249,7 @@ if($showMenu) {
                         <?php echo $html->link('Salir','/users/logout', array('class'=>'userlinks')); ?>
                         </div>-->
                     </div>
-                    <div>
+                    <div id="main-content">
                         <?php $session->flash(); ?>
                         <?php $session->flash('auth'); ?>
                         <?php echo $content_for_layout; ?>
