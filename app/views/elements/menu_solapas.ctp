@@ -22,7 +22,8 @@ if (empty($elementos)) {
     <?php
     foreach ($elementos as $e) {
         $claseActiva = 'tab-grande-inactiva';
-        if ($this->here == $html->url($e['link'],false)) {
+
+        if (strtolower($this->here) == strtolower($html->url($e['link'],false))) {
             $claseActiva = 'tab-grande-activa';
         }
         ?>
