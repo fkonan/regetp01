@@ -1,7 +1,6 @@
 <style>
     INPUT, TEXTAREA, SELECT, option{
         font-size: 10pt;
-
         letter-spacing: normal;
         line-height: normal;
         margin: 0em;
@@ -104,8 +103,6 @@ echo $html->css('jquery.autocomplete.css');
         <?php echo $form->input('cue', array('label'=> 'CUE ó Nombre de la Institución', 'title'=> 'Ingrese CUE ó Nombre de la institución en forma completa ó parcial. Ej: 600118, 5000216 ó Manuel Belgrano.','div'=>false));?>
     </div>    
     <?php echo $html->link('Busqueda Avanzada...','advanced_search_form',array('class'=>'link_right'));?>
-
-    <br/>
     <br/>
     <span class="ajax_update" id="ajax_indicator" style="display:none;float:right"><?php echo $html->image('ajax-loader.gif')?></span>
     <div id='consoleResult' >
