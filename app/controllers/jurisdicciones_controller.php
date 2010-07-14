@@ -3,7 +3,7 @@ class JurisdiccionesController extends AppController {
 
 	var $name = 'Jurisdicciones';
 	var $helpers = array('Html', 'Form');
-	var $paginate = array('limit' => 25, 'order'=>array('name'=>'asc'));
+	var $paginate = array('limit' => 25, 'order'=>array('Jurisdiccion.name'=>'asc'));
 
         function beforeFilter() {
             parent::beforeFilter();
@@ -17,9 +17,10 @@ class JurisdiccionesController extends AppController {
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid Jurisdiccion.', true));
+			$this->Session->setFlash(__('La jurisdicción no existe', true));
 			$this->redirect(array('action'=>'listado'));
 		}
+                $this->Jurisdiccion->recursive = 0;
 		$this->set('jurisdiccion', $this->Jurisdiccion->read(null, $id));
 	}
 
@@ -27,12 +28,16 @@ class JurisdiccionesController extends AppController {
 		if (!empty($this->data)) {
 			$this->Jurisdiccion->create();
 			if ($this->Jurisdiccion->save($this->data)) {
-				$this->Session->setFlash(__('The Jurisdiccion has been saved', true));
+				$this->Session->setFlash(__('La Jurisdiccion ha sido creada', true));
 				$this->redirect(array('action'=>'index'));
 			} else {
 				$this->Session->setFlash(__('The Jurisdiccion could not be saved. Please, try again.', true));
 			}
 		}
+
+                //$localidades = $this->Jurisdiccion->Departamento->Localidad->con_depto_y_jurisdiccion('list',0);
+
+                //$this->set('localidades', $localidades);
 	}
 
 	function edit($id = null) {
@@ -42,7 +47,7 @@ class JurisdiccionesController extends AppController {
 		}
 		if (!empty($this->data)) {
 			if ($this->Jurisdiccion->save($this->data)) {
-				$this->Session->setFlash(__('The Jurisdiccion has been saved', true));
+				$this->Session->setFlash(__('La Jurisdiccion ha sido guardada', true));
 				$this->redirect(array('action'=>'index'));
 			} else {
 				$this->Session->setFlash(__('The Jurisdiccion could not be saved. Please, try again.', true));
@@ -51,6 +56,10 @@ class JurisdiccionesController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Jurisdiccion->read(null, $id);
 		}
+
+                $localidades = $this->Jurisdiccion->Departamento->Localidad->con_depto_y_jurisdiccion('list',$id);
+                
+                $this->set('localidades', $localidades);
 	}
 
 	function delete($id = null) {

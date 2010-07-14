@@ -1,4 +1,4 @@
-<h1>Editar Usuario <b>"<?php echo $this->data['User']['username']?>"</b></h1>
+<h1>Editar datos de usuario <b><?=$this->data['User']['username']?></b></h1>
 <div class="users form">
 <?php echo $form->create('User',array('action' => 'self_user_edit'));?>
 	<fieldset>

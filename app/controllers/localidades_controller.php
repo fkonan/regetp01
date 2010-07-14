@@ -7,17 +7,19 @@ class LocalidadesController extends AppController {
 
 	function index($jurisdiccion = 0) {
                 
-                debug($locs);
-                
-		if ($jurisdiccion != 0):
-                    $this->paginate['contain'] = array(
+                //debug($locs);
+                $this->Localidad->recursive = 0;
+
+                $this->paginate['Localidad']['contain'] = array(
                         'Departamento'=>array('Jurisdiccion')
                     );
-                    $this->paginate['limit'] = 5000;
-                    $this->paginate['page'] = 1;
-                    $pagin = $this->paginate(null,array('Jurisdiccion.id'=>$jurisdiccion));
+                $this->paginate['Localidad']['limit'] = 5000;
+                $this->paginate['Localidad']['page'] = 1;
+
+		if ($jurisdiccion != 0):
+                    $pagin = $this->paginate('Localidad',array('Jurisdiccion.id'=>$jurisdiccion));
 		else:
-                    $pagin = $this->paginate();
+                    $pagin = $this->paginate('Localidad');
 		endif;
                 
                 $this->set('localidades', $pagin);

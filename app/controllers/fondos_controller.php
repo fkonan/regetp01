@@ -51,7 +51,7 @@ class FondosController extends AppController {
                 if ($this->Session->read('User.group_alias') == strtolower(Configure::read('grupo_referentes'))) {
                     if ($this->Session->read('User.jurisdiccion_id') != $id) {
                         $this->Session->setFlash(__($this->Auth->planesMejoraError, true));
-                        $this->redirect(array('controller'=>'Instits', 'action'=>'view', $id));
+                        $this->redirect(array('controller'=>'Jurisdicciones', 'action'=>'view', $id));
                     }
                 }
                 // fin de chequeo
