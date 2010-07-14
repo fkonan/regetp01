@@ -351,6 +351,7 @@ class InstitsController extends AppController {
      */
     function search() {
 
+        
         /***************************
          *
          * LOG DE LAS BUSQUEDAS REALIZADAS
@@ -959,61 +960,46 @@ class InstitsController extends AppController {
         return $pagin;
     }
 
-
-
-
-    function search_instits($q = null){
+    function ajax_search(){
+        $items = null;
         
-        if(empty($q)) {
-            if (!empty($this->params['url']['q'])) {
-                $q = utf8_decode(strtolower($this->params['url']['q']));
+        if($this->Requesthandler->isAjax()){
+            $this->autoLayout = false;
+            $this->layout = '';
+        }
+
+        if(!empty($this->data['Instit']['cue'])) {
+            $this->passedArgs = array('cue' => $this->data['Instit']['cue']);
+        }
+
+        if(!empty($this->passedArgs['cue'])) {
+            $q = utf8_decode(strtolower($this->passedArgs['cue']));
+            
+            if(is_numeric($q)){
+                $this->paginate= array(
+                    'contain'=> array(
+                        'Tipoinstit', 'Jurisdiccion', 'HistorialCue', 'Gestion', 'Departamento', 'Localidad'
+                    ),
+                    'conditions'=> array(
+                        "to_char(cue*100+anexo, 'FM999999999FM') SIMILAR TO ?" => "%". $q ."%"
+
+                    )
+                );
+            }
+            else{
+                $this->paginate = array(
+                    'contain'=> array(
+                        'Tipoinstit', 'Jurisdiccion', 'Gestion', 'Departamento', 'Localidad', 'HistorialCue'=>array('order'=>'created DESC')
+                    ),
+                    'conditions'=> array(
+                        "(to_ascii(lower(Tipoinstit.name)) || ' n ' || to_ascii(lower(Instit.nroinstit)) || ' ' || to_ascii(lower(Instit.nombre))) SIMILAR TO ?" => $this->Instit->convertir_para_busqueda_avanzada($q)
+                    )
+                );
             }
         }
 
-        if(is_numeric($q)){
-            $items = $this->Instit->find("all", array(
-                'contain'=> array(
-                    'Tipoinstit', 'Jurisdiccion', 'HistorialCue'
-                ),
-                'conditions'=> array(
-                    "to_char(cue*100+anexo, 'FM999999999FM') SIMILAR TO ?" => "%". $q ."%"
-
-                )
-            ));
-        }
-        else{
-            $items = $this->Instit->find("all", array(
-                'contain'=> array(
-                    'Tipoinstit', 'Jurisdiccion', 'HistorialCue'=>array('order'=>'created DESC')
-                ),
-                'conditions'=> array(
-                    "(to_ascii(lower(Tipoinstit.name)) || ' n ' || to_ascii(lower(Instit.nroinstit)) || ' ' || to_ascii(lower(Instit.nombre))) SIMILAR TO ?" => $this->Instit->convertir_para_busqueda_avanzada($q)
-                )
-            ));
-        }
-
-        $result = array();
-
-        foreach ($items as $item) {
-            $cuecompleto = $item['Instit']['cue']*100+$item['Instit']['anexo'];
-
-            array_push($result, array(
-                    "id" => $item['Instit']['id'],
-                    "cue" => $item['Instit']['cue']*100+$item['Instit']['anexo'],
-                    "nombre" => utf8_encode($item['Instit']['nombre']),
-                    "nroinstit" => utf8_encode($item['Instit']['nroinstit']),
-                    "anio_creacion" => utf8_encode($item['Instit']['anio_creacion']),
-                    "direccion" => utf8_encode($item['Instit']['direccion']),
-                    "depto" => utf8_encode($item['Instit']['depto']),
-                    "localidad" => utf8_encode($item['Instit']['localidad']),
-                    "cp" => utf8_encode($item['Instit']['cp']),
-                    "tipo" => utf8_encode($item['Tipoinstit']['name']),
-                    "jurisdiccion" => utf8_encode($item['Jurisdiccion']['name']),
-//                    "cue_anterior" => utf8_encode($item['HistorialCue'][0]['cue'])
-            ));
-        }
-
-        $this->set('instits', $result);
+        $this->set('instits', $this->paginate());
+        
     }
     
     /**

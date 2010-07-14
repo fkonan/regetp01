@@ -42,6 +42,7 @@
         echo $javascript->link('jquery-1.4.2.min.js');
         echo $javascript->link('jquery.form.js');
         echo $javascript->link('jquery.tools.min.js');
+        //echo $javascript->link('jquery.tabSlideOut.v1.3.js');
 
 
         echo $scripts_for_layout;
@@ -93,6 +94,19 @@ if($showMenu) {
                         }
                         jQuery('#' + this.id + ' ul.menu_body').slideToggle('medium');
                     });
+
+                    /*jQuery('.slide-out-div').tabSlideOut({
+                            tabHandle: '.handle',                     //class of the element that will become your tab
+                            pathToTabImage: '<?=$html->url("/img/contact_tab.gif")?>', //path to the image for the tab //Optionally can be set using css
+                            imageHeight: '122px',                     //height of tab image           //Optionally can be set using css
+                            imageWidth: '40px',                       //width of tab image            //Optionally can be set using css
+                            tabLocation: 'left',                      //side of screen where tab lives, top, right, bottom, or left
+                            speed: 300,                               //speed of animation
+                            action: 'click',                          //options: 'click' or 'hover', action to trigger animation
+                            topPos: '200px',                          //position from the top/ use if tabLocation is left or right
+                            leftPos: '20px',                          //position from left/ use if tabLocation is bottom or top
+                            fixedPosition: false                      //options: true makes it stick(fixed position) on scroll
+                    });*/
                 });
 
 
@@ -169,6 +183,17 @@ if($showMenu) {
                 }
 
         </script>
+        <style type="text/css">
+
+          .slide-out-div {
+              padding: 20px;
+              width: 250px;
+              background: #F0F7FC;
+              border: 1px solid #29216d;
+              color: black;
+          }
+      </style>
+
 
     </head>
     <body>
@@ -285,4 +310,12 @@ if($showMenu) {
         ?>
         <?php echo $cakeDebug; ?>
     </body>
+     <!--<div class="slide-out-div">
+        <a class="handle" href="http://link-for-non-js-users.html">Content</a>
+        <h2>Contacto</h2>
+        <p>Para realizar consultas sobre el funcionamiento del programa ó para notificar problemas técnicos: Int. 2010</p>
+
+        <p>Para realizar consultas sobre los contenidos de información del Registro de Instituciones: Int. 4032/4033.</p>
+    </div>-->
+
 </html>
