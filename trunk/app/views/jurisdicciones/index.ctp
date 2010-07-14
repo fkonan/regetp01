@@ -44,9 +44,5 @@ foreach ($jurisdicciones as $jurisdiccion):
 <div class="actions">
 	<ul>
 		<li><?php echo $html->link(__('New Jurisdiccion', true), array('action'=>'add')); ?></li>
-		<li><?php echo $html->link(__('List Tipoinstits', true), array('controller'=> 'tipoinstits', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Tipoinstit', true), array('controller'=> 'tipoinstits', 'action'=>'add')); ?> </li>
-		<li><?php echo $html->link(__('List Instits', true), array('controller'=> 'instits', 'action'=>'index')); ?> </li>
-		<li><?php echo $html->link(__('New Instit', true), array('controller'=> 'instits', 'action'=>'add')); ?> </li>
 	</ul>
 </div>

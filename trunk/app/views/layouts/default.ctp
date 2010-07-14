@@ -58,6 +58,15 @@
 
                 });
 
+                jQuery('#boxTickets').click(function () {
+                    if (apretado == false) {
+                        jQuery('#pendientes').ajaxSubmit(options);
+                        apretado = true;
+                    }
+
+                    return false;
+                });
+
                 jQuery("ul.menu_body li:even").addClass("alt");
                 jQuery('#boxInstituciones .menu_body').show();
 <?php

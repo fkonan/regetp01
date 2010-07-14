@@ -4,7 +4,7 @@
 
     <div class="tabs">
             <div class="tabs-list">
-                    <span class="tab-grande-inactiva"><?php echo $html->link('Datos',array('controller'=>'Jurisdicciones','action'=>'view', $jurisdiccion['Jurisdiccion']['id']));?></span>
+                    <span class="tab-grande-inactiva"><?php echo $html->link('Datos Básicos',array('controller'=>'Jurisdicciones','action'=>'view', $jurisdiccion['Jurisdiccion']['id']));?></span>
                     <span class="tab-grande-activa"><?php echo $html->link('Planes de Mejora',array('controller'=>'Fondos','action'=>'index_x_jurisdiccion', $jurisdiccion['Jurisdiccion']['id']));?></span>
             </div>
             <div style="border-top:2px solid #9DA6C1" class="tabs-content">

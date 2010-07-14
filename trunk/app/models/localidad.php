@@ -121,7 +121,7 @@ class Localidad extends AppModel {
 		
 		
 	
-         return $loc_aux;
+         return $localidades;
          
 	}
 	

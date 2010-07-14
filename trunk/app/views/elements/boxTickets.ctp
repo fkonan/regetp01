@@ -16,7 +16,7 @@
          jQuery('#tickets').toggle();
     }
 
-    jQuery(document).ready(function () {
+    /*jQuery(document).ready(function () {
         jQuery('#boxTickets').click(function () {
             if (apretado == false) {
                 jQuery('#pendientes').ajaxSubmit(options);
@@ -25,7 +25,7 @@
             
             return false;
         });
-    });
+    });*/
 </script>
 
 <div id="boxTickets">
