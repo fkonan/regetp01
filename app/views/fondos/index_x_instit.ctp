@@ -1,5 +1,10 @@
 <?php
     echo $javascript->link('zeroclipboard/ZeroClipboard.js');
+    
+    define("DESCRIPCION_PLURAL", "La instituci&oacute;n ha recibido %u planes de mejora por un total de <strong>$ %s</strong>");
+    define("DESCRIPCION_SINGULAR", "La instituci&oacute;n ha recibido 1 plan de mejora por un total de <strong>$ %s</strong>");
+
+    
 ?>
 <div class="fondos index">
    <div id="escuela_estado" class="<? echo $instit['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $instit['Instit']['activo']? 'Institución Ingresada al RFIETP':'Institución NO Ingresada al RFIETP';?></div>
@@ -22,14 +27,14 @@
                 <?php
                 if(count($fondos) == 1){
                 ?>
-                <p>La institución presento 1 plan de mejora con un total de <strong>$ <?=number_format($sumalineas,2,",",".");?></strong></p>
+                <p><?php echo sprintf(DESCRIPCION_SINGULAR,number_format($sumalineas,2,",",".")); ?></p>
                 <?php
                 }
                 ?>
                 <?php
                 if(count($fondos) > 1){
                 ?>
-                <p>La institución presento <?php echo count($fondos) ; ?> planes de mejora con un total de <strong>$ <?=number_format($sumalineas,2,",",".");?></strong></p>
+                <p><?php echo sprintf(DESCRIPCION_PLURAL, count($fondos),number_format($sumalineas,2,",",".")); ?></p>
                 <?php
                 }
                 ?>
