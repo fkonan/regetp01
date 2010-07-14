@@ -11,7 +11,7 @@
 
 foreach ($tipoinstits as $inst){
 	?> 
-		<option value="<?= $inst['Tipoinstit']['id']?>"><?= utf8_encode($inst['Tipoinstit']['name'])?></option>
+		<option value="<?= $inst['Tipoinstit']['id']?>"><?=$inst['Tipoinstit']['name']?></option>
 	<?
 }
 	
