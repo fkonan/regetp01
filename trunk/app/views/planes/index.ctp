@@ -19,11 +19,9 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
 ?>
 <h2><?= $cue_instit ?> - <?= $planes['Instit']['nombre_completo']?></h2>
 <div class="tabs">
-            <div class="tabs-list">
-                    <span class="tab-grande-inactiva"><?php echo $html->link('Datos',array('controller'=>'Instits','action'=>'view', $planes['Instit']['id']));?></span>
-                    <span class="tab-grande-activa"><?php echo $html->link('Oferta Educativa',array('controller'=>'Planes','action'=>'index', $planes['Instit']['id']));?></span>
-                    <span class="tab-grande-inactiva"><?php echo $html->link('Planes de Mejora',array('controller'=>'Fondos','action'=>'index_x_instit', $planes['Instit']['id']));?></span>
-            </div>
+            <?php
+                echo $this->element('menu_solapas_para_instit',array('instit_id' => $planes['Instit']['id']));
+            ?>
             <div id="d_clip_button" class="my_clip_button2"></div>
             <input id="infoToCopy" type="hidden" value="<?= ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'] . ' - ' .$planes['Instit']['nombre_completo'] . ' - ' . $planes['Instit']['direccion'] . ' - ' . $planes['Departamento']['name'] . ' - ' . $planes['Localidad']['name'] ?> "/>
             

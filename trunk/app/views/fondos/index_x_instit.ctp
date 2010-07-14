@@ -9,11 +9,9 @@
     <h2><?= $cue_instit ?> - <?= $instit['Instit']['nombre_completo']?></h2>
 
     <div class="tabs">
-            <div class="tabs-list">
-                    <span class="tab-grande-inactiva"><?php echo $html->link('Datos Básicos',array('controller'=>'Instits','action'=>'view', $instit['Instit']['id']));?></span>
-                    <span class="tab-grande-inactiva"><?php echo $html->link('Oferta Educativa',array('controller'=>'Planes','action'=>'index', $instit['Instit']['id']));?></span>
-                    <span class="tab-grande-activa"><?php echo $html->link('Planes de Mejora',array('controller'=>'Fondos','action'=>'index_x_instit', $instit['Instit']['id']));?></span>
-            </div>
+            <?php
+                echo $this->element('menu_solapas_para_instit',array('instit_id' => $instit['Instit']['id']));
+            ?>
 
             <div id="d_clip_button" class="my_clip_button2"></div>
             <input id="infoToCopy" type="hidden" value="<?= ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'] . ' - ' . $instit['Instit']['nombre_completo'] . ' - ' . $instit['Instit']['direccion'] . ' - ' . $instit['Departamento']['name'] . ' - ' . $instit['Localidad']['name'] ?> "/>
