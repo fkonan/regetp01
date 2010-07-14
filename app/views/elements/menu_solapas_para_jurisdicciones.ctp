@@ -17,7 +17,7 @@ $menuOptions = array(
         array(
                 'nombre'=> 'Datos Básicos',
                 'link'=> array('controller'=>'Jurisdicciones','action'=>'view', $jurisdiccion_id),
-        ),jurisdiccion_id
+        ),
         array(
                 'nombre'=> 'Planes de Mejora',
                 'link'=> array('controller'=>'Fondos','action'=>'index_x_jurisdiccion', $jurisdiccion_id),
