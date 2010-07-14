@@ -977,6 +977,7 @@ class InstitsController extends AppController {
             
             if(is_numeric($q)){
                 $this->paginate= array(
+                    'limit'=> 10,
                     'contain'=> array(
                         'Tipoinstit', 'Jurisdiccion', 'HistorialCue', 'Gestion', 'Departamento', 'Localidad'
                     ),
@@ -988,6 +989,7 @@ class InstitsController extends AppController {
             }
             else{
                 $this->paginate = array(
+                    'limit'=> 10,
                     'contain'=> array(
                         'Tipoinstit', 'Jurisdiccion', 'Gestion', 'Departamento', 'Localidad', 'HistorialCue'=>array('order'=>'created DESC')
                     ),
