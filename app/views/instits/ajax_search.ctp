@@ -1,11 +1,10 @@
 <?php
         $paginator->options(array('update' => 'consoleResult', 'url' => $this->passedArgs,'indicator'=> 'ajax_indicator'));
-        $title = $paginator->counter(array('format' => '%count% Resultados'));
 ?>
-<h2 id="resultTitle"><?= $title?></h2>
-<p>Ordenar los resultados por:</p>
-<ul class="lista_horizontal">
-<?
+<div id="resultTitle">
+    <span>Ordenar por:</span>
+    <ul class="lista_horizontal" style="float: right; clear: right">
+    <?
 	$sort = 'cue';
 	if(isset($this->passedArgs['sort'])){
 		$sort = $this->passedArgs['sort'];
@@ -23,13 +22,17 @@
 	<? $class = ($sort == 'Localidad.name')?'marcada':'';?>
 	<li class="<?= $class?>"><?php echo $paginator->sort('Localidad','Localidad.name');?></li>
 
-</ul>
-<div style="float:right">
-<?php
-      echo $paginator->numbers();
-?>
+    </ul>
 </div>
-<div style="margin-bottom: 30px">
+
+
+<div style="clear: both">
+    <span><?php echo $paginator->counter(array('format' => '%count% Instituciones encontradas'))?></span>
+    <span style="float: right; clear: right"><?php echo $paginator->numbers() ?> </span>
+</div>
+
+
+<div style="margin-top: 30px">
 <?
 if (sizeof($instits) > 0) {?>
         <ul class="listado" style="margin-left:0px;margin-right:0px">
@@ -98,3 +101,9 @@ if (sizeof($instits) > 0) {?>
 ?>
 </div>
 </div>
+<p>
+	<? echo $html->image('/css/images/puntoverde.gif',array('title'=>'Ingresados a la Base de Datos')); ?>
+	- Institución ingresada al RFIETP<br />
+	<? echo $html->image('/css/images/puntorojo.gif',array('title'=>'NO Ingresados a la Base de Datos')); ?>
+	- Institución NO ingresada al RFIETP
+</p>
