@@ -59,10 +59,6 @@
             });
         });
 </script>
-<?php 
-//colocar el CSS en $script_for_layout. o sea, en el HEADER del HTML
-echo $html->css('edit_form',false);
-?>
 
 <div id="instits-similares">
     <ul>
