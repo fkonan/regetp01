@@ -20,13 +20,13 @@ Requerimientos mínimos para utilizar el <b>Sistema Gestión de Registro</b>:<br /
 
 <br />
 
-<h2>¡Nueva Versión 1.4.1!</h2>
+<h2>¡Nueva Versión 1.5!</h2>
 
 <p>
 Desde su puesta en funcionamiento en junio de 2009 el sistema RFIETP se encuentra
 en permanente actualización y mejoramiento, tanto del contenido de información de
 la base de datos como de la aplicación que permite su gestión. En esa línea de
-trabajo a partir del 7 de Junio del 2010 se ha instalado la versión 1.4.1 del
+trabajo a partir del 19 de Julio del 2010 se ha instalado la versión 1.5 del
 sistema.
 </p>
 <p>
@@ -34,27 +34,14 @@ La nueva versión mejora la información del Registro incorporando nuevas categorí
 de clasificación, a saber:
 </p>
 <ul>
+    <li>Presentación de Planes de Mejora, tanto a nivel institucional como jurisdiccional.</li>
+    <li>Listado de Jurisdicciones con datos básicos y los mencionados Planes de Mejora de las mismas.</li>
+    <li>Nuevo Buscador Beta! Más flexible y rápido. Con opción de Búsqueda Avanzada para una búsqueda más detallada.</li>
+    <li>Implementación de nuevo módulo de seguridad, para garantizar la integridad del Registro y la administración de nuestros usuarios.</li>
     <li>Mejoras estéticas.</li>
-    <li>Orientaciones de Instituciones. Permite identificar a cada institución
-        según su Orientación (Agropecuaria, Industrial, Otra).</li>
-    <li>Títulos de Referencia. Permite agrupar bajo una denominación de
-        referencia a Títulos que son equivalentes pero tienen distinto nombre
-        (porque pertenecen a diferentes jurisdicciones, porque son aprobados por
-        diferente normativa, etc.).</li>
 </ul>
 <br/>
-<p>
-Las nuevas categorías facilitan la gestión y búsqueda de información en el
-Registro.
-</p>
-<p>
-Esta información se publicará a medida que la Unidad de Información vaya avanzando
-con la depuración y carga de datos.
-</p>
-<p>
-En particular la versión 1.4.1 ofrece varias mejoras estéticas y de presentación de la información.
-</p>
-
+<br/>
 <p>
 Un listado completo de las modificaciones realizadas en esta última versión, puede encontrarlas haciendo click
 <? echo $html->link('aquí','/pages/detalle_v1_2')?>.
