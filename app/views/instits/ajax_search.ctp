@@ -3,7 +3,7 @@
 ?>
 <div id="resultTitle">
     <span>Ordenar por:</span>
-    <ul class="lista_horizontal" style="float: right; clear: right">
+    <ul class="lista_horizontal" style="float: right; margin-left: -30px">
     <?
 	$sort = 'cue';
 	if(isset($this->passedArgs['sort'])){
@@ -101,9 +101,10 @@ if (sizeof($instits) > 0) {?>
 ?>
 </div>
 </div>
+
 <p>
-	<? echo $html->image('/css/images/puntoverde.gif',array('title'=>'Ingresados a la Base de Datos')); ?>
-	- Institución ingresada al RFIETP<br />
-	<? echo $html->image('/css/images/puntorojo.gif',array('title'=>'NO Ingresados a la Base de Datos')); ?>
-	- Institución NO ingresada al RFIETP
+    <? echo $html->image('/css/images/puntoverde.gif',array('title'=>'Ingresados a la Base de Datos')); ?>
+    - Institución ingresada al RFIETP<br />
+    <? echo $html->image('/css/images/puntorojo.gif',array('title'=>'NO Ingresados a la Base de Datos')); ?>
+    - Institución NO ingresada al RFIETP
 </p>

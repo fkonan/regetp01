@@ -139,7 +139,7 @@ echo $html->css('jquery.autocomplete.css');
     }
 
 </script>
-<h1><? __('Búsqueda Avanzada de Institución')?></h1>
+<h1><? __('Búsqueda Avanzada de Instituciones')?></h1>
 <style>
     .label {color:#444444;}
 
