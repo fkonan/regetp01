@@ -1,3 +1,47 @@
+<h1>RFIETP - Novedades de la versión 1.5</h1>
+<br>
+<ul>
+    <li><b>Planes de Mejora</b>
+        <ul type="circle">
+            <li>Se migraron los Planes de Mejora institucionales y jurisdiccionales aprobados desde el 2006 hasta el 4to trimestre del 2009.</li>
+            <li>Se agregaron las pestañas de acceso a dicha información en las paginas de institucion y de jurisdiccion.</li>
+        </ul>
+   </li>
+   <br>
+   <li><b>Datos de Jurisdicciones</b>
+        <ul type="circle">
+            <li>Se diseñó un mapa para acceder a la información de las jurisdicciones.</li>
+            <li>Se dividió dicha información en Datos Básicos (de autoridades y ministerios) y Planes de Mejora.</li>
+        </ul>
+   </li>
+   <br>
+   <li><b>Buscador Beta</b>
+        <ul type="circle">
+            <li>Nuevo buscador más rápido y flexible.</li>
+            <li>Al ingresar más de 3 letras se inicia la búsqueda automáticamente, sin tener que presionar otro botón y apareceran los resultados en la misma pantalla, permitiendo seguir escribiendo para una nueva búsqueda.</li>
+            <li>Búsqueda Avanzada, con el mismo nivel de detalle que la antigua pero con una mejor distribución de los campos y rapidez.</li>
+        </ul>
+   </li>
+   <br>
+   <li><b>Módulo de seguridad ACL</b>
+        <ul type="circle">
+            <li>Implementación de tecnología Access Control List (ACL), la cual controla el acceso a cada página del sitio por parte de cada usuario.</li>
+            <li>Se adaptó un plugin para la administración de dicha tecnología.</li>
+            <li>Fueron modificados los formularios de alta y edición de usuarios del Registro, los cuales fueron relacionados directamente con ACL, garantizando una integridad total a nivel de seguridad.</li>
+        </ul>
+   </li>
+   <br>
+    <li><b>Estética</b>
+        <ul type="circle">
+            <li>Se mejoró el diseño de la interfaz gráfica.</li>
+            <li>Se mejoró el menu principal, con categorías desplegables.</li>
+        </ul>
+    </li>
+
+    <br>
+</ul>
+<br>
+
 <h1>RFIETP - Novedades de la versión 1.4.1</h1>
 <br>
 <ul>
@@ -9,14 +53,6 @@
     </li>
     
     <br>
-<!--
-    <li><b>Planes de Mejora</b>   
-        <ul type="circle">
-            <li>Se migraron los planes de mejora aprobados desde el 2006 hasta el 4to trimestre del 2009.</li>
-            <li>Se crearon las vistas para mostrar dicha información.</li>
-        </ul>
-   </li>
--->
 </ul>
 <br>
 
