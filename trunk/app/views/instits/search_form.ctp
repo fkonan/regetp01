@@ -53,12 +53,13 @@ echo $html->css(array('jquery.loadmask'));
     });
 </script>
 
-<?php
-echo $this->element('menu_solapas_para_buscadores');
-?>
-<h1><?= __('Buscar Institución')?></h1>
 
-<?php echo $html->link('Busqueda Avanzada...','advanced_search_form',array('class'=>'link_right'));?>
+<h1><?= __('Búsqueda Rápida de Instituciones')?></h1>
+
+<?php echo $html->link('Búsqueda Avanzada','advanced_search_form',array(
+    'class'=>'link_right small',
+    'style'=>'margin-bottom: -20px; padding:0px; margin-right: 4px;'
+    ));?>
 <div>
     <?php
     echo $form->create('Instit',array('action' => 'simpleSearch','name'=>'InstitSearchForm'));
