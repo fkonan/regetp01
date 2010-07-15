@@ -54,7 +54,10 @@
                 jQuery(document).ajaxError(function(e, xhr, settings, exception) {
                     jQuery.unblockUI;
                     if (xhr.status == 401){
-                        alert("El usuario no tiene permisos para acceder aqui");
+                        if (!jQuery('#authMessageJs')){
+                            var authMessage = '<div id="authMessageJs" class="message">Usted no tiene permisos para realizar esta operación</div>';
+                            jQuery('#main-content').prepend(authMessage);
+                        }
                     }
 
                 });
