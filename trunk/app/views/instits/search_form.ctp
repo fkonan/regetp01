@@ -42,6 +42,7 @@ echo $html->css(array('jquery.loadmask'));
             target:        '#consoleResult',   // target element(s) to be updated with server response
             beforeSubmit:  blockResultConsole,  // pre-submit callback
             success:       unblockResultConsole,  // post-submit callback
+            type: 'get',
             url: '<?echo $html->url(array('controller'=>'instits','action'=>'ajax_search'));?>'        // override for form's 'action' attribute
         };
 
