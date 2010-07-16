@@ -2,7 +2,8 @@
     <?php
     foreach($prov_pend as $id=>$name) {
         ?><li>
-        <? echo $html->link($name, array('controller'=>'Tickets', 'action'=>'index', $id), array('onclick'=>'Javascript: location.href="/Tickets/index/'.$id.'"')); ?>
+        <? echo $html->link($name, array('controller'=>'Tickets', 'action'=>'index', $id), array(
+            'onclick'=>'Javascript: location.href="'.$html->url('/tickets/index/'.$id).'"')); ?>
     </li>
         <?php
     }
