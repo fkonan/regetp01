@@ -42,7 +42,7 @@
  * In production mode, flash messages redirect after a time interval.
  * In development mode, you need to click the flash message to continue.
  */
-	Configure::write('debug', 2);
+	Configure::write('debug', 1);
 /**
  * Application wide charset encoding
  */
@@ -105,7 +105,7 @@
  * To use database sessions, execute the SQL file found at /app/config/sql/sessions.sql.
  *
  */
-	Configure::write('Session.save', 'php');
+	Configure::write('Session.save', 'cake');
 /**
  * The name of the table used to store CakePHP database sessions.
  *
@@ -123,7 +123,7 @@
 /**
  * The name of CakePHP's session cookie.
  */
-	Configure::write('Session.cookie', 'CAKEPHP');
+	Configure::write('Session.cookie', 'RFIETP');
 /**
  * Session time out time (in seconds).
  * Actual value depends on 'Security.level' setting.
@@ -150,7 +150,7 @@
  * CakePHP session IDs are also regenerated between requests if
  * 'Security.level' is set to 'high'.
  */
-	Configure::write('Security.level', 'medium');
+	Configure::write('Security.level', 'low');
 /**
  * A random string used in security hashing methods.
  */
