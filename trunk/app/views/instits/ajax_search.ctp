@@ -1,11 +1,4 @@
 <?php
-if (count($instits) == 1) {
-    ?>
-<script type="text/javascript">
-    window.location.href = '<?php echo $html->url('/instits/view/'.$instits[0]['Instit']['id']);?>'
-</script>
-    <?php
-} else {
 
 
     $paginator->options(array('update' => 'consoleResult', 'url' => $this->passedArgs,'indicator'=> 'ajax_indicator'));
@@ -69,6 +62,7 @@ if (count($instits) == 1) {
             onmouseover="jQuery('#lista_instit_<?= $instit['Instit']['id']?>').addClass('lista_link_hover');"
             onmouseout="jQuery('#lista_instit_<?= $instit['Instit']['id']?>').removeClass('lista_link_hover');"
             title="<?= $instit['Instit']['nombre_completo']?>"
+            href="<?= $html->url('/instits/view/'.$instit['Instit']['id'])?>"
             >
 
             <div class="instit_data_bs">
@@ -110,6 +104,3 @@ if (count($instits) == 1) {
         <? echo $html->image('/css/images/puntorojo.gif',array('title'=>'NO Ingresados a la Base de Datos')); ?>
     - Institución NO ingresada al RFIETP
 </p>
-
-    <?php
-}

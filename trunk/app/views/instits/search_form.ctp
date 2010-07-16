@@ -26,8 +26,15 @@ echo $html->css(array('jquery.loadmask'));
     
 
     function unblockResultConsole(responseText, statusText, xhr, $form)  {
-        jQuery('#consoleResultWrapper').unmask();
-        
+        var redirigiendo = false;
+        if (jQuery('.listado li').size() == 1){
+            redirigiendo = true;
+            jQuery('#consoleResultWrapper').mask('Redirigiendo');
+            location.replace(jQuery('.listado li').first().attr('href'));
+        }
+        if (!redirigiendo){
+            jQuery('#consoleResultWrapper').unmask();
+        }
     }
         
     jQuery(document).ready(function() {
