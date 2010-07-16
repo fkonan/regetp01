@@ -254,6 +254,14 @@ class LocalidadesController extends AppController {
                     ));
                }
             }
+
+            if(sizeof($result) == 0){
+                array_push($result, array(
+                            "id" => '',
+                            "type" => "Vacio",
+                            "localidad" => 'No se encontraron resultados'
+                ));
+            }
             
             echo json_encode($result);
         }

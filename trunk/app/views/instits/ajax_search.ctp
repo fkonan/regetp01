@@ -4,8 +4,9 @@
     $paginator->options(array('update' => 'consoleResult', 'url' => $this->passedArgs,'indicator'=> 'ajax_indicator'));
     ?>
 <div id="resultTitle">
-    <span>Ordenar por:</span>
-    <ul class="lista_horizontal" style="float: right; margin-left: -30px;">
+    <span style="width:15%">Ordenar por:</span>
+    <span style="width:85%;float: right; margin-left: -30px;">
+    <ul class="lista_horizontal">
             <?
             $sort = 'cue';
             if(isset($this->passedArgs['sort'])) {
@@ -24,12 +25,13 @@
             <? $class = ($sort == 'Localidad.name')?'marcada':'';?>
         <li class="<?= $class?>"><?php echo $paginator->sort('Localidad','Localidad.name');?></li>
     </ul>
+    </span>
 </div>
 
 
 <div style="clear: both; margin-top:22px;">
-    <span style="font-size: 10pt; font-family: Verdana;"><?php echo $paginator->counter(array('format' => '<b>%count%</b> Instituciones encontradas'))?></span>
-    <span style="float: right; clear: right; margin-top: -4px; text-decoration: none;"><?php echo $paginator->numbers() ?> </span>
+    <span style="width:30%;font-size: 10pt; font-family: Verdana;"><?php echo $paginator->counter(array('format' => '<b>%count%</b> Instituciones encontradas'))?></span>
+    <span style="float: right; margin-top: -4px; text-decoration: none;"><?php echo $paginator->numbers() ?> </span>
 </div>
 
 
