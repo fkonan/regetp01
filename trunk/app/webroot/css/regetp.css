@@ -1006,7 +1006,6 @@ div.code-coverage-results span.result-good {
     background: #F0F7FC;
     display: block;
     padding: 3px 6px;
-    width: 100%;
 }
 .lista_horizontal A:HOVER{
     font-weight: bolder;

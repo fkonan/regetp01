@@ -56,7 +56,7 @@ echo $html->css(array('jquery.loadmask'));
 
 <h1><?= __('Búsqueda Rápida de Instituciones')?></h1>
 
-<?php echo $html->link('Búsqueda Avanzada','advanced_search_form',array(
+<?php echo $html->link('realizar una búsqueda avanzada...','advanced_search_form',array(
     'class'=>'link_right small',
     'style'=>'margin-bottom: -20px; padding:0px; margin-right: 4px;'
     ));?>

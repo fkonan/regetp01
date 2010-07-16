@@ -3,7 +3,7 @@
 ?>
 <div id="resultTitle">
     <span>Ordenar por:</span>
-    <ul class="lista_horizontal" style="float: right; margin-left: -30px">
+    <ul class="lista_horizontal" style="float: right; margin-left: -30px; width: ">
     <?
 	$sort = 'cue';
 	if(isset($this->passedArgs['sort'])){
@@ -21,7 +21,6 @@
 
 	<? $class = ($sort == 'Localidad.name')?'marcada':'';?>
 	<li class="<?= $class?>"><?php echo $paginator->sort('Localidad','Localidad.name');?></li>
-
     </ul>
 </div>
 
@@ -87,12 +86,6 @@ if (sizeof($instits) > 0) {?>
 	</ul>
 
         <?
-}else{
-	?>
-        <div style="height:170px">
-            <div style="border: medium none ; margin: 0px; padding: 15px; z-index: 1001; position: relative; width: 30%; top: 60px; left: 200.5px; text-align: center; color: rgb(255, 255, 255); background-color: rgb(0, 0, 0); cursor: wait; -moz-border-radius-topleft: 10px; -moz-border-radius-topright: 10px; -moz-border-radius-bottomright: 10px; -moz-border-radius-bottomleft: 10px; opacity: 0.5;" class="blockUI blockMsg blockElement">Sin Resultados</div>
-        </div>
-	<?
 }
 ?>
 <div style="float:right; display:block;margin-bottom: 10px">
