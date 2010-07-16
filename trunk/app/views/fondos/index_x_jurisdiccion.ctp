@@ -5,14 +5,16 @@
 
 ?>
 <div class="fondos index">
-   <h1><?= $jurisdiccion['Jurisdiccion']['name']?>
-   </h1>
+   <br />
+   <h2><?= $jurisdiccion['Jurisdiccion']['name']?>
+   </h2>
 
     <div class="tabs">
             <?php echo $this->element('menu_solapas_para_jurisdicciones', array('jurisdiccion_id' => $jurisdiccion['Jurisdiccion']['id'])); ?>
         
             <div style="border-top:2px solid #9DA6C1" class="tabs-content">
-                <br/>
+
+                <h2>Listado de Planes de Mejora</h2>
                 <?php
                 if(count($fondos) == 1){
                 ?>
