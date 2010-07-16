@@ -200,13 +200,15 @@ class AclprepController extends AppController {
 
                 // Get the controller name
                 $file = Inflector::camelize(substr($file, 0, strlen($file)-strlen('_controller.php')));
-                if (!preg_match('/^'. Inflector::humanize($pluginName). 'App/', $file)) {
-                    if (!App::import('Controller', $pluginName.'.'.$file)) {
-                        debug('Error importing '.$file.' for plugin '.$pluginName);
-                    } else {
-                        /// Now prepend the Plugin name ...
-                        // This is required to allow us to fetch the method names.
-                        $arr[] = Inflector::humanize($pluginName) . "/" . $file;
+                if (strpos($pluginName, '.svn') === false && strpos($file, '.svn') === false) {
+                    if (!preg_match('/^'. Inflector::humanize($pluginName). 'App/', $file)) {
+                        if (!App::import('Controller', $pluginName.'.'.$file)) {
+                            debug('Error importing '.$file.' for plugin '.$pluginName);
+                        } else {
+                            /// Now prepend the Plugin name ...
+                            // This is required to allow us to fetch the method names.
+                            $arr[] = Inflector::humanize($pluginName) . "/" . $file;
+                        }
                     }
                 }
             }
@@ -340,6 +342,7 @@ class AclprepController extends AppController {
         $this->Acl->allow('editores', 'Instits/edit');
         $this->Acl->allow('editores', 'Instits/planes_relacionados');
         $this->Acl->allow('editores', 'Instits/depurar');
+        $this->Acl->allow('editores', 'Planes/add');
         $this->Acl->allow('editores', 'Planes/edit');
         $this->Acl->allow('editores', 'Planes/delete');
         $this->Acl->allow('editores', 'Anios/add');
@@ -364,7 +367,6 @@ class AclprepController extends AppController {
         // todos
         $this->Acl->allow('usuarios', 'Instits/search');
         $this->Acl->allow('usuarios', 'Instits/ajax_search');
-        $this->Acl->allow('usuarios', 'Instits/search_instits');
         $this->Acl->allow('usuarios', 'Instits/search_form');
         $this->Acl->allow('usuarios', 'Instits/old_search_form');
         $this->Acl->allow('usuarios', 'Instits/advanced_search_form');

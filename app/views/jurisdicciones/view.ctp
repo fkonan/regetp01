@@ -1,15 +1,15 @@
 <div class="instits view">
-    <h1>
+    <br />
+    <h2>
          <?= $jurisdiccion['Jurisdiccion']['name']?>
-    </h1>
+    </h2>
     <div class="tabs">
             <?php echo $this->element('menu_solapas_para_jurisdicciones', array('jurisdiccion_id' => $jurisdiccion['Jurisdiccion']['id'])); ?>
         
             <div style="border-top:2px solid #9DA6C1" class="tabs-content">
-                    <h2>Datos de Jurisdicción</h2>
                     <dl><?php $i = 0; $class = ' class="altrow"';?>
 
-                        <h3>Datos de la autoridad</h3>
+                        <h2>Datos de la autoridad</h2>
 
                             <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Cargo'); ?></dt>
                             <dd<?php if ($i++ % 2 == 0) echo $class;?>><?php echo $jurisdiccion['Jurisdiccion']['autoridad_cargo']; ?></dd>
@@ -20,7 +20,7 @@
                             <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Fecha de asunción'); ?></dt>
                             <dd<?php if ($i++ % 2 == 0) echo $class;?>><?php echo date("d/m/Y", strtotime($jurisdiccion['Jurisdiccion']['autoridad_fecha_asuncion'])); ?></dd>
 
-                        <h3>Datos del Ministerio</h3>
+                        <h2>Datos del Ministerio</h2>
 
                             <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Denominación'); ?></dt>
                             <dd<?php if ($i++ % 2 == 0) echo $class;?>><?php echo $jurisdiccion['Jurisdiccion']['ministerio_nombre']; ?></dd>
