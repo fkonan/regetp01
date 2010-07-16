@@ -1,9 +1,18 @@
 <?php
+if (count($instits) == 1) {
+    ?>
+<script type="text/javascript">
+    window.location.href = '<?php echo $html->url('/instits/view/'.$instits[0]['Instit']['id']);?>'
+</script>
+    <?php
+} else {
+
+
         $paginator->options(array('update' => 'consoleResult', 'url' => $this->passedArgs,'indicator'=> 'ajax_indicator'));
 ?>
 <div id="resultTitle">
     <span>Ordenar por:</span>
-    <ul class="lista_horizontal" style="float: right; margin-left: -30px; width: ">
+    <ul class="lista_horizontal" style="float: right; margin-left: -30px;">
     <?
 	$sort = 'cue';
 	if(isset($this->passedArgs['sort'])){
@@ -25,9 +34,9 @@
 </div>
 
 
-<div style="clear: both">
-    <span><?php echo $paginator->counter(array('format' => '%count% Instituciones encontradas'))?></span>
-    <span style="float: right; clear: right"><?php echo $paginator->numbers() ?> </span>
+<div style="clear: both; margin-top:22px;">
+    <span style="font-size: 14pt; font-family: Times New Roman;"><?php echo $paginator->counter(array('format' => '<b>%count%</b> Instituciones encontradas'))?></span>
+    <span style="float: right; clear: right; margin-top: -4px;"><?php echo $paginator->numbers() ?> </span>
 </div>
 
 
@@ -101,3 +110,6 @@ if (sizeof($instits) > 0) {?>
     <? echo $html->image('/css/images/puntorojo.gif',array('title'=>'NO Ingresados a la Base de Datos')); ?>
     - Institución NO ingresada al RFIETP
 </p>
+
+<?php
+}

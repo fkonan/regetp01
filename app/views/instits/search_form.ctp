@@ -58,7 +58,7 @@ echo $html->css(array('jquery.loadmask'));
 
 <?php echo $html->link('realizar una búsqueda avanzada...','advanced_search_form',array(
     'class'=>'link_right small',
-    'style'=>'margin-bottom: -20px; padding:0px; margin-right: 4px;'
+    'style'=>'margin-bottom: -18px; padding:0px; margin-right: 4px;'
     ));?>
 <div>
     <?php
