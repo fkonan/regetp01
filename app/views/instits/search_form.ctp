@@ -74,7 +74,7 @@ echo $html->css(array('jquery.loadmask'));
 
     <!-- Aca se muestran los resultados de la busqueda-->
     <div id='consoleResultWrapper'  style="margin-top: 20px;">
-        <div id='consoleResult' style="min-height: 200px"></div>
+        <div id='consoleResult' style="min-height: 200px; margin-bottom: 20px;"></div>
     </div>
     
 </div>
