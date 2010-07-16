@@ -23,9 +23,10 @@
 }
 .loadmask-msg div {
     padding:5px 10px 5px 25px;
-    background: #fff url('images/ajax-loader.gif') 50px bottom no-repeat;
+    background: #fff url('images/ajax-loader.gif') 81px bottom no-repeat;
     height: 50px;
-    width: 100px;
+    text-align: center;
+    width: 150px;
     line-height: 16px;
     color:#888;
     font-size:19px;
