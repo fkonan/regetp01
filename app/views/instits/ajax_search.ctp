@@ -28,7 +28,7 @@
 
 
 <div style="clear: both; margin-top:22px;">
-    <span style="font-size: 12pt; font-family: Verdana;"><?php echo $paginator->counter(array('format' => '<b>%count%</b> Instituciones encontradas'))?></span>
+    <span style="font-size: 10pt; font-family: Verdana;"><?php echo $paginator->counter(array('format' => '<b>%count%</b> Instituciones encontradas'))?></span>
     <span style="float: right; clear: right; margin-top: -4px; text-decoration: none;"><?php echo $paginator->numbers() ?> </span>
 </div>
 
