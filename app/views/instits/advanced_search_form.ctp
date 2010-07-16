@@ -47,12 +47,7 @@ echo $html->css('jquery.autocomplete.css');
 
     jQuery(document).ready(function() {
 
-        //jQuery("#search *").tooltip({
-
-
-
         iniciarTooltip();
-
 
         jQuery("#InstitJurDepLoc").autocomplete("<?echo $html->url(array('controller'=>'localidades','action'=>'ajax_search_localidades'));?>", {
             dataType: "json",
@@ -77,11 +72,13 @@ echo $html->css('jquery.autocomplete.css');
             }
         }).result(function(e, item) {
             jQuery("#hiddenLocDepId").remove();
-            jQuery("#InstitSearchForm #search-ubicacion").append("<input id='hiddenLocDepId' name='data[" + item.type + "][id]' type='hidden' value='" + item.id + "' />");
+            if(item.type == 'Vacio'){
+                jQuery("#InstitJurDepLoc").val('');
+            }
+            else{
+                jQuery("#InstitSearchForm #search-ubicacion").append("<input id='hiddenLocDepId' name='data[" + item.type + "][id]' type='hidden' value='" + item.id + "' />");
+            }
         });
-
-
-
 
     });
 
@@ -89,8 +86,11 @@ echo $html->css('jquery.autocomplete.css');
         if(loc_dep.type == 'Localidad'){
             return loc_dep.localidad + ', ' + loc_dep.departamento + ' (' + loc_dep.jurisdiccion + ')';
         }
-        else{
+        else if(loc_dep.type == 'Departamento'){
             return loc_dep.departamento + ' (' + loc_dep.jurisdiccion + ')';
+        }
+        else{
+            return loc_dep.localidad;
         }
 
     }
