@@ -55,8 +55,9 @@
                     jQuery.unblockUI;
                     if (xhr.status == 401){
                         if (!jQuery('#authMessageJs')){
-                            var authMessage = '<div id="authMessageJs" class="message">Usted no tiene permisos para realizar esta operación</div>';
-                            jQuery('#main-content').prepend(authMessage);
+                            alert('Su usuario no tiene permisos para acceder');
+//                            var authMessage = '<div id="authMessageJs" class="message">Usted no tiene permisos para realizar esta operación</div>';
+//                            jQuery('#main-content').prepend(authMessage);
                         }
                     }
 
