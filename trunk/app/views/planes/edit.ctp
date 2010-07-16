@@ -31,22 +31,28 @@ $cue_instit = $instit['cue'].$anexo;
 
         echo $form->input('oferta_id',array('empty'=>'Seleccione','onchange'=>'toggleTitulos();'));
 
+        $meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
         echo $form->input(
                 'titulo_id',
                 array(
                     'empty'=>'Seleccione',
                     'label'=> 'Título de Referencia',
+                    'after'=> $meter.'<br /><cite>Seleccione primero una oferta.</cite>',
                     'div'=>array('id'=>'divPlanTituloId')));
         echo $ajax->observeField(
                 'PlanOfertaId',
                 array(
                     'update'=> 'PlanTituloId',
-                    'url'=>'/titulos/list_por_oferta_id' ));
+                    'url'=>'/titulos/list_por_oferta_id',
+                    'loading'=>'jQuery("#ajax_indicator").show();jQuery("#PlanTituloId").attr("disabled","disabled")',
+                    'complete'=>'jQuery("#ajax_indicator").hide();jQuery("#PlanTituloId").removeAttr("disabled")',
+                    'onChange'=>true)
+                     );
                 
 
         echo $form->input('norma',array('label'=>'Normativa'));
 
-        $meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
+        $meter = '<span class="ajax_update" id="ajax_indicator2" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
         
         echo $form->input('nombre');
         echo $form->input('perfil');
@@ -71,8 +77,8 @@ $cue_instit = $instit['cue'].$anexo;
             array(
                 'url' => '/subsectores/ajax_select_subsector_form_por_sector',
                 'update'=>'PlanSubsectorId',
-                'loading'=>'jQuery("#ajax_indicator").show();jQuery("#PlanSubsectorId").attr("disabled","disabled")',
-                'complete'=>'jQuery("#ajax_indicator").hide();jQuery("#PlanSubsectorId").removeAttr("disabled")',
+                'loading'=>'jQuery("#ajax_indicator2").show();jQuery("#PlanSubsectorId").attr("disabled","disabled")',
+                'complete'=>'jQuery("#ajax_indicator2").hide();jQuery("#PlanSubsectorId").removeAttr("disabled")',
                 'onChange'=>true
         ));
 
