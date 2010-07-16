@@ -31,7 +31,7 @@
                 <?php
                 if(empty($fondos)){
                 ?>
-                    <p class='msg-atencion'>La Jurisdicci&oacute;n no presenta planes de mejora</p>
+                    <p class='msg-atencion'>La Jurisdicci&oacute;n ha recibido planes de mejora</p>
                 <?php
                 }
                 $i = 0;
