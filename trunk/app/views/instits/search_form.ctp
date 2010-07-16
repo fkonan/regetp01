@@ -23,7 +23,13 @@ echo $html->css(array('jquery.loadmask'));
         return true;
     }
 
-    
+    function autoSubmit(){
+        if(jQuery("#InstitCue").val().length > 3){
+              var form = this;
+              clearTimeout(timerid);
+              timerid = setTimeout(function() { jQuery('#InstitSimpleSearchForm').submit(); }, 1000);
+          }
+    }
 
     function unblockResultConsole(responseText, statusText, xhr, $form)  {
         var redirigiendo = false;
@@ -49,13 +55,29 @@ echo $html->css(array('jquery.loadmask'));
         jQuery('#InstitSimpleSearchForm').ajaxForm(options);
 
         var timerid;
+        
         jQuery("#InstitCue").keyup(function() {
-          if(jQuery("#InstitCue").val().length > 3){
+            if(jQuery("#InstitCue").val().length > 3){
+                  var form = this;
+                  clearTimeout(timerid);
+                  timerid = setTimeout(function() { jQuery('#InstitSimpleSearchForm').submit(); }, 1000);
+            }
+        });
+
+        jQuery("#InstitCue").keypress(function(e) {
+            if (e.keyCode == 10 || e.keyCode == 13){
+                return false;
+            }
+        });
+
+        jQuery(document).bind('paste', function(e){
+            if(jQuery("#InstitCue").val().length > 3){
               var form = this;
               clearTimeout(timerid);
               timerid = setTimeout(function() { jQuery('#InstitSimpleSearchForm').submit(); }, 1000);
           }
         });
+
         iniciarTooltip();
     });
 </script>
