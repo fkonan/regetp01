@@ -3,7 +3,7 @@ class ZFondoWork extends AppModel {
 
 	var $name = 'ZFondoWork';
 	var $useTable = 'z_fondo_work';
-        var $migrationStatus = 'ok';
+        var $migrationStatus = array('ok');
         
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -43,7 +43,7 @@ class ZFondoWork extends AppModel {
             /**
              * @var Fondo
              */
-            $this->Fondo       =& ClassRegistry::init('Fondo');
+            $this->Fondo =& ClassRegistry::init('Fondo');
 
             /**
              * array con las lineas de accion del tipo
@@ -66,7 +66,7 @@ class ZFondoWork extends AppModel {
 
             
             if (count($temps) == 0){
-                $this->migrationStatus = 'No hay registros en la tabla z_fondo_work!!! se detuvo la migración.';
+                $this->migrationStatus[] = 'No hay registros en la tabla z_fondo_work!!! se detuvo la migración.';
                 return -2;
             }
             
@@ -81,7 +81,7 @@ class ZFondoWork extends AppModel {
             //algunas verificaciones previas
             $lineaChecked = $this->__verificarQueLasLineasExistanEnFondo($aLineasDeAcciones, $temps[0]['ZFondoWork']);
             if (!empty($lineaChecked)) {
-                $this->migrationStatus = "fallo la verificacion de las lineas de accion. la línea $lineaChecked no existe en la tabla de fondos";
+                $this->migrationStatus[] = "fallo la verificacion de las lineas de accion. la línea $lineaChecked no existe en la tabla de fondos";
                 return -1;
             }
 
@@ -91,9 +91,12 @@ class ZFondoWork extends AppModel {
 
             $consoleText .= "Convirtiendo lineas y temps en algo lindo para guardar.....<br />";
             $data = $this->__convertirLineasYTempsEnAlgoLindoParaGuardar($temps, $lineasFiltradas);
+           
 
             $consoleText .= "Guardando fondos.....<br />";
-            
+
+            $cantFondos = 0;
+            $cantLineas = 0;
             foreach ($data as $f) {
                 $this->Fondo->create();
                 if ($this->Fondo->save($f['Fondo'])) { // guardar el fondo
@@ -103,11 +106,19 @@ class ZFondoWork extends AppModel {
                             $this->Fondo->FondosLineasDeAccion->create();
                             $la['fondo_id'] = $this->Fondo->id;
                             if (!$this->Fondo->FondosLineasDeAccion->save($la)) {
+                                $this->ZFondoWork->migrationStatus[] = $this->Fondo->FondosLineasDeAccion->validationErrors;
+                                pr('No se pudo guardar la linea de accion');
+                                debug($la);
                                 return -4;
                             }
+                            $cantLineas++;
                         }
                     }
+                    $cantFondos++;
                 } else { // no se pudo guardar el fondo
+                    $this->ZFondoWork->migrationStatus[] = 'Error al guardar el fondo';
+                    pr('No se pudo guardar el fondo');
+                    debug( $this->Fondo->validationErrors);
                     return -5;
                 }
             }
@@ -119,7 +130,8 @@ class ZFondoWork extends AppModel {
 
            //pr($consoleText);
            
-           $this->migrationStatus = $consoleText;
+           $this->migrationStatus[] = $consoleText;
+           debug("Termino todo  perfectamente con $cantFondos fondos y $cantLineas lineas de acción migradas.");
            return count($data);
             //debug($count . " y el size: ". count($temps));
         }
@@ -166,6 +178,12 @@ class ZFondoWork extends AppModel {
                 $cont2 = 0;
 
                 $vAux = $xlsTemps[$fondoTempId]['ZFondoWork'];
+                if (empty($vAux['memo'])){
+                    $vAux['memo'] = '-';
+                }
+                if (empty($vAux['observacion'])){
+                    $vAux['description'] = '';
+                }
                 $data[$cont]['Fondo'] = array(
                     'instit_id'          => $vAux['instit_id'],
                     'jurisdiccion_id'    => $vAux['jurisdiccion_id'],
