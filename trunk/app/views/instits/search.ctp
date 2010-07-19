@@ -1,6 +1,3 @@
-<?php
-    echo $javascript->link('zeroclipboard/ZeroClipboard.js');
-?>
 
 <h1><?= __('Buscar Institución')?></h1>
 
@@ -128,22 +125,6 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 			<div class="instit_atributte"><b>Departamento: </b><?= $instit['Departamento']['name'] ?></div>
 			<div class="instit_atributte"><b>Localidad: </b><?= $instit['Localidad']['name'] ?></div>
 		</div>
-            <script language="JavaScript" defer="defer" type="text/javascript">
-                jQuery(document).ready(function(){
-                    var clip = new ZeroClipboard.Client();
-
-                    ZeroClipboard.setMoviePath('<?php echo $html->url("/js/zeroclipboard/ZeroClipboard10.swf"); ?>');
-
-                    clip.setText( '' ); // will be set later on mouseDown
-                    clip.setHandCursor( true );
-                    clip.addEventListener( 'mouseDown', function(client) {
-                       client.setText(jQuery("#infoToCopy<?=$instit['Instit']['id']?>").val());
-                    } );
-
-                    clip.glue( 'd_clip_button<?=$instit['Instit']['id']?>' );
-                })
-               </script>
-
 	</li>
 	
 		<?

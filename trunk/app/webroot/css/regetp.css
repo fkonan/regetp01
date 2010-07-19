@@ -1501,6 +1501,7 @@ li.selected    {
 .tab-grande-activa A{
     color:  #045FB4 !important;
     text-decoration: none !important;
+    font-weight: lighter;
 }
 
 
@@ -1532,6 +1533,7 @@ li.selected    {
     float: left;
     width:100%;
     margin-top: -1px;
+    border-top:2px solid #707DA4;
 }
 
 

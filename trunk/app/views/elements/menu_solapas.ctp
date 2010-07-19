@@ -21,10 +21,10 @@ if (empty($elementos)) {
 <div class="tabs-list">
     <?php
     foreach ($elementos as $e) {
-        $claseActiva = 'tab-grande-inactiva';
+        $claseActiva = 'tab-grande-activa';
 
         if (strtolower($this->here) == strtolower($html->url($e['link'],false))) {
-            $claseActiva = 'tab-grande-activa';
+            $claseActiva = 'tab-grande-inactiva';
         }
         ?>
     <span class="<?php echo $claseActiva?>">
