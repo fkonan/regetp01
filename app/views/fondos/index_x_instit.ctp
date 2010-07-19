@@ -21,7 +21,7 @@
             <div id="d_clip_button" class="my_clip_button2"></div>
             <input id="infoToCopy" type="hidden" value="<?= ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'] . ' - ' . $instit['Instit']['nombre_completo'] . ' - ' . $instit['Instit']['direccion'] . ' - ' . $instit['Departamento']['name'] . ' - ' . $instit['Localidad']['name'] ?> "/>
             
-            <div style="border-top:2px solid #9DA6C1" class="tabs-content">
+            <div class="tabs-content">
 
                 <h2>Listado de Planes de Mejora</h2>
                 <?php
