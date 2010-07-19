@@ -12,7 +12,7 @@
     <div class="tabs">
             <?php echo $this->element('menu_solapas_para_jurisdicciones', array('jurisdiccion_id' => $jurisdiccion['Jurisdiccion']['id'])); ?>
         
-            <div style="border-top:2px solid #9DA6C1" class="tabs-content">
+            <div class="tabs-content">
 
                 <h2>Listado de Planes de Mejora</h2>
                 <?php
