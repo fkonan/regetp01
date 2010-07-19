@@ -18,19 +18,17 @@ class Query extends AppModel {
 	 * @return array $categorias find(all)
 	 */
 	function listarCategorias($filtro = '*'){
-		
-		$conditions[] = array('categoria <>'=>"");
-		
-		if($filtro != '*'){
-				$conditions[] = array("categoria LIKE" => "%".$filtro."%");
+
+                if($filtro != '*'){
+                    $conditions[] = array("to_ascii(lower(categoria)) SIMILAR TO ?" => "%".$filtro."%");
 		}
 		$this->recursive = -1;
 		$categorias =  $this->find('all', array(
-					'group' => 'categoria',
-					'conditions'=> $conditions,
-					'fields' => array('categoria')
-		));
-		return $categorias;
+                                           'group' => 'categoria',
+                                           'conditions'=> $conditions,
+                                           'fields' => array('categoria')
+                                          ));
+                return $categorias;
 	}
 	
 	
