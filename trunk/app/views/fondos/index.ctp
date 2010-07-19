@@ -9,13 +9,21 @@ $trimestres=array(''=>'Todos','1'=>'1º','2'=>'2º','3'=>'3º','4'=>'4º');
         <div>
             <span>Año</span>
             <span style="padding-left:30px">Trimestre</span>
-            <span style="padding-left:30px">Jurisdicción</span>
+            <span style="padding-left:50px">Jurisdicción</span>
+            <span style="padding-left:80px">Jurisdiccional</span>
         </div>
         <span><?php echo $form->input('anio',array('label'=>false,'options'=>$anios, 'div'=>false)) ?></span>
         <span><?php echo $form->input('trimestre', array('label'=>false,'options'=>$trimestres, 'style'=>'width:100px','div'=>false)) ?></span>
         <span><?php echo $form->input('jurisdiccion_id',array('label'=>false,'div'=>false)) ?></span>
+        <span><?php echo $form->input('instit_id',array('label'=>false,'div'=>false, 'options'=>array('0'=>'Jurisdiccional'),'empty'=>'Seleccione')) ?></span>
     <?php echo $form->end('Search',array('style'=>'float:right')); ?>
 </div>
+<p>
+<?php
+echo $paginator->counter(array(
+'format' => __('Page %page% of %pages%, showing %current% records out of <b>%count%</b> total', true)
+));
+?></p>
 
 <?
 if (count($fondos)) {

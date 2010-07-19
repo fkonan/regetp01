@@ -50,17 +50,17 @@ class ZFondoWorksController extends AppController {
         $iMi = $this->ZFondoWork->migrar($cosasAmigrar, $cantRegistros, $eliminarArchivosDeFondoYLineas);
         switch ($iMi) {
             case -1:
-                $msg =  $this->ZFondoWork->migrationStatus;
+                $msg = "La migración finalizó correctamente: ".implode(', ',$this->ZFondoWork->migrationStatus);
                 $msg_type = "notice";
                 break;
 
             case ($iMi > 0):
-                $msg = $this->ZFondoWork->migrationStatus;
+                 $msg = "La migración finalizó correctamente: ".implode(', ',$this->ZFondoWork->migrationStatus);
                 $msg_type = "success";
                 break;
 
             case ($iMi < 1):
-                $msg = "La migración resultó con ERRORES: ".$this->ZFondoWork->migrationStatus;
+                $msg = "La migración resultó con ERRORES: ".implode(', ',$this->ZFondoWork->migrationStatus);
                 $msg_type = "error";
                 break;
         }
