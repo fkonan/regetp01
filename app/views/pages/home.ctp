@@ -26,19 +26,18 @@ Requerimientos mínimos para utilizar el <b>Sistema Gestión de Registro</b>:<br /
 Desde su puesta en funcionamiento en junio de 2009 el sistema RFIETP se encuentra
 en permanente actualización y mejoramiento, tanto del contenido de información de
 la base de datos como de la aplicación que permite su gestión. En esa línea de
-trabajo a partir del 19 de Julio del 2010 se ha instalado la versión 1.5 del
+trabajo a partir del 20 de Julio del 2010 se ha instalado la versión 1.5 del
 sistema.
 </p>
 <p>
-La nueva versión mejora la información del Registro incorporando nuevas categorías
-de clasificación, a saber:
+La nueva versión presenta varias mejoras, entre las que se destacan:
 </p>
 <ul>
-    <li>Presentación de Planes de Mejora, tanto a nivel institucional como jurisdiccional.</li>
-    <li>Listado de Jurisdicciones con datos básicos y los mencionados Planes de Mejora de las mismas.</li>
-    <li>Nuevo Buscador Beta! Más flexible y rápido. Con opción de Búsqueda Avanzada para una búsqueda más detallada.</li>
-    <li>Implementación de nuevo módulo de seguridad, para garantizar la integridad del Registro y la administración de nuestros usuarios.</li>
-    <li>Mejoras estéticas.</li>
+    <li>Se ha incorporado información sobre Planes de Mejora jurisdiccionales e institucionales aprobados en el período 2006-2009 (con detalle de las líneas de acción de cada Plan).</li>
+    <li>Se ha incorporado información sobre Jurisdicciones (autoridades, datos institucionales, etc.).</li>
+    <li>Se ha agregado un nuevo Buscador Beta más flexible y rápido. Incluye una opción de Búsqueda Avanzada que mejora y simplifica las consultas. Una vez testeado y aprobado reemplazará al buscador actual.</li>
+    <li>Se ha implementado un nuevo módulo de seguridad que garantiza la integridad del Registro y facilita la administración de usuarios.</li>
+    <li>Se han realizado varias mejoras en la estética y usabilidad del programa.</li>
 </ul>
 <br/>
 <br/>
