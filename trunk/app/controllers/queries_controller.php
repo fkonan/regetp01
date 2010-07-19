@@ -111,22 +111,27 @@ class QueriesController extends AppController {
 	}
 	
 	
-	function listado_categorias()
+	function listado_categorias($q = null)
 	{	
 		Configure::write('debug', 0);
 		$this->Query->recursive = -1;
 		
 		$categorias = array();
-		if(!empty($this->data['Query']['categoria'])){
-			$categorias = $this->Query->listarCategorias($this->data['Query']['categoria']);
+                
+                if(empty($q)) {
+                    if (!empty($this->params['url']['q'])) {
+                        $q = utf8_decode(strtolower($this->params['url']['q']));
+                    }
+                }
+
+                if(!empty($q)){
+			$categorias = $this->Query->listarCategorias($q);
 		}
-		else{
+                else{
 			$categorias = $this->Query->listarCategorias('*'); // me trae todas
 		}
 		
 		$this->set('categorias',$categorias);
-		$this->set('string_categoria',$this->data['Query']['categoria']);
-		$this->layout = 'ajax';
 	}
 
 	function list_view($id="") {
