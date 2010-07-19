@@ -46,7 +46,6 @@ echo $html->css('jquery.autocomplete.css');
     }
 
     jQuery(document).ready(function() {
-
         iniciarTooltip();
 
         jQuery("#InstitJurDepLoc").autocomplete("<?echo $html->url(array('controller'=>'localidades','action'=>'ajax_search_localidades'));?>", {
@@ -79,6 +78,8 @@ echo $html->css('jquery.autocomplete.css');
                 jQuery("#InstitSearchForm #search-ubicacion").append("<input id='hiddenLocDepId' name='data[" + item.type + "][id]' type='hidden' value='" + item.id + "' />");
             }
         });
+
+        jQuery("#InstitJurDepLoc").attr('autocomplete','on');
 
     });
 
