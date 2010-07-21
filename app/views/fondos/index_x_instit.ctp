@@ -1,10 +1,24 @@
+<script type="text/javascript">
+    function scrollWin(){
+        jQuery('html, body').animate({
+            scrollTop: jQuery("#notas").offset().top
+        }, 2000);
+    }
+</script>
 <?php
     echo $javascript->link('zeroclipboard/ZeroClipboard.js');
     
-    define("DESCRIPCION_PLURAL", "La instituci&oacute;n ha recibido %u planes de mejora por un total de <strong>$ %s</strong>");
-    define("DESCRIPCION_SINGULAR", "La instituci&oacute;n ha recibido 1 plan de mejora por un total de <strong>$ %s</strong>");
+    $descripcionPlural = "Se presenta información sobre %u Planes de Mejora institucionales aprobados por un total de $%s. <br/>" .
+                         "Período: 2006-2009. <br/>".
+                         "Para mayor información consulte las <notas metodológicas> al final de la página. <br/>";
 
-    
+    $descripcionSingular = "Se presenta información sobre 1 Plan de Mejora institucionales aprobados por un total de $%s. <br/>" .
+                           "Período: 2006-2009. <br/>".
+                           "Para mayor información consulte las <a onclick='scrollWin();'>notas metodológicas</a> al final de la página. <br/>";
+
+    define("DESCRIPCION_PLURAL", $descripcionPlural);
+    define("DESCRIPCION_SINGULAR", $descripcionSingular);
+
 ?>
 <div class="fondos index">
    <div id="escuela_estado" class="<? echo $instit['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $instit['Instit']['activo']? 'Institución Ingresada al RFIETP':'Institución NO Ingresada al RFIETP';?></div>
@@ -27,14 +41,14 @@
                 <?php
                 if(count($fondos) == 1){
                 ?>
-                <p><?php echo sprintf(DESCRIPCION_SINGULAR,number_format($sumalineas,2,",",".")); ?></p>
+                    <p><?php echo sprintf(DESCRIPCION_SINGULAR,number_format($sumalineas,2,",",".")); ?></p>
                 <?php
                 }
                 ?>
                 <?php
                 if(count($fondos) > 1){
                 ?>
-                <p><?php echo sprintf(DESCRIPCION_PLURAL, count($fondos),number_format($sumalineas,2,",",".")); ?></p>
+                    <p><?php echo sprintf(DESCRIPCION_PLURAL, count($fondos),number_format($sumalineas,2,",",".")); ?></p>
                 <?php
                 }
                 ?>
@@ -83,6 +97,31 @@
                      </li>
                 <?php endforeach; ?>
                 </ul>
+                <?php
+                if(!empty($fondos)){
+                ?>
+                    <div id="notas" style="font-size:8pt; font-style: italic; padding-top: 30px; margin-bottom: 30px">
+                        <ul>
+                            <li>
+                                La información publicada corresponde a Planes de Mejora aprobados desde el año 2006 al 2009 inclusive. La información será actualizada periódicamente.
+                            </li>
+                            <li>
+                                Los Planes de Mejora correspondientes a Formularios F04A y F04B se presentan unificados bajo la línea de acción "F04 - Prácticas profesionalizantes".
+                            </li>
+                            <li>
+                                Los Planes de Mejora correspondientes a Formularios F05A, F05B y F05C se presentan unificados bajo la línea de acción "F05 - Equipamiento de talleres, laboratorios y espacios productivos".
+                            </li>
+                            <li>
+                                En algunos Planes de Mejora la suma de líneas de acción no coincide exactamente con el total por razones de redondeo o ajustes menores.
+                            </li>
+                            <li>
+                                El listado anterior no incluye fondos recibidos por la Institución a través de Planes de Mejora jurisdiccionales, con la única excepción de la línea de acción Apoyo al Programa "Una computadora para cada alumno". Los planes jurisdiccionales pueden consultarse haciendo <?php echo $html->link(__('Click Aquí', true), array('controller'=>'jurisdicciones','action' => 'listado')); ?>.
+                            </li>
+                        </ul>
+                    </div>
+                <?php
+                }
+                ?>
            </div>
     </div>
     <?php
@@ -97,11 +136,6 @@
 </div>
 
 
-<!--<div class="actions">
-	<ul>
-		<li><?php echo $html->link(__('New Fondo', true), array('action' => 'add')); ?></li>
-	</ul>
-</div>-->
 <script language="JavaScript" type="text/javascript" defer="defer">
     jQuery(document).ready(function(){
         var clip = new ZeroClipboard.Client();
