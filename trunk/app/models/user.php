@@ -78,14 +78,20 @@ class User extends AppModel {
                 if (!$created) {
                     $node = $this->node();
                     $aro = $node[0];
-                    $aro['Aro']['parent_id'] = $this->data['User']['grupo'];
+                    if (!empty($this->data['User']['grupo'])) {
+                        $aro['Aro']['parent_id'] = $this->data['User']['grupo'];
+                    }
                     $this->Aro->save($aro);
                 }
                 else {
                     $node = $this->node();
                     $aro = $node[0];
-                    $aro['Aro']['alias'] = $this->data['User']['username'];
-                    $aro['Aro']['parent_id'] = $this->data['User']['grupo'];
+                    if (!empty($this->data['User']['username'])) {
+                        $aro['Aro']['alias'] = $this->data['User']['username'];
+                    }
+                    if (!empty($this->data['User']['grupo'])) {
+                        $aro['Aro']['parent_id'] = $this->data['User']['grupo'];
+                    }
                     $this->Aro->save($aro);
                 }
         }

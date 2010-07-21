@@ -66,6 +66,9 @@
             title="<?= $instit['Instit']['nombre_completo']?>"
             href="<?= $html->url('/instits/view/'.$instit['Instit']['id'])?>"
             >
+            <div class="instit_link_list">
+                    <?php echo $html->link('+ Info','/instits/view/'.$instit['Instit']['id']);?>
+            </div>
 
             <div class="instit_data_bs">
                             <?
