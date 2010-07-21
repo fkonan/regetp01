@@ -1,8 +1,22 @@
+<script type="text/javascript">
+    function scrollWin(){
+        jQuery('html, body').animate({
+            scrollTop: jQuery("#notas").offset().top
+        }, 2000);
+    }
+</script>
 <?php 
 
-    define("DESCRIPCION_PLURAL", "La Jurisdicci&oacute;n ha recibido %u planes de mejora por un total de <strong>$ %s</strong>");
-    define("DESCRIPCION_SINGULAR", "La Jurisdicci&oacute;n ha recibido 1 plan de mejora por un total de <strong>$ %s</strong>");
+    $descripcionPlural = "Se presenta información sobre %u Planes de Mejora juridiccionales aprobados por un total de $%s. <br/>" .
+                         "Período: 2006-2009. <br/>".
+                         "Para mayor información consulte las <notas metodológicas> al final de la página. <br/>";
 
+    $descripcionSingular = "Se presenta información sobre 1 Plan de Mejora juridiccionales aprobados por un total de $%s. <br/>" .
+                           "Período: 2006-2009. <br/>".
+                           "Para mayor información consulte las <a onclick='scrollWin();'>notas metodológicas</a> al final de la página. <br/>";
+
+    define("DESCRIPCION_PLURAL", $descripcionPlural);
+    define("DESCRIPCION_SINGULAR", $descripcionSingular);
 ?>
 <div class="fondos index">
    <br />
@@ -74,6 +88,31 @@
                      </li>
                 <?php endforeach; ?>
                 </ul>
+                <?php
+                if(!empty($fondos)){
+                ?>
+                    <div id="notas" style="font-size:8pt; font-style: italic; padding-top: 30px; margin-bottom: 30px">
+                        <ul>
+                            <li>
+                                La información publicada corresponde a Planes de Mejora aprobados desde el año 2006 al 2009 inclusive. La información será actualizada periódicamente.
+                            </li>
+                            <li>
+                                Los Planes de Mejora correspondientes a Formularios F04A y F04B se presentan unificados bajo la línea de acción ?F04 - Prácticas profesionalizantes?.
+                            </li>
+                            <li>
+                                Los Planes de Mejora correspondientes a Formularios F05A, F05B y F05C se presentan unificados bajo la línea de acción ?F05 - Equipamiento de talleres, laboratorios y espacios productivos?.
+                            </li>
+                            <li>
+                                En algunos Planes de Mejora la suma de líneas de acción no coincide exactamente con el total por razones de redondeo o ajustes menores.
+                            </li>
+                            <li>
+                                Los Planes de Mejora jurisdiccionales no se discriminan por institución.
+                            </li>
+                        </ul>
+                    </div>
+                <?php
+                }
+                ?>
            </div>
     </div>
     <?php
