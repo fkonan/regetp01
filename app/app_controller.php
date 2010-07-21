@@ -83,7 +83,7 @@ class AppController extends Controller {
                 //$this->Auth->allow('*');
                 $this->Auth->allowedActions = array('display','login','logout');
                 $this->Auth->loginError ='Usuario o Contraseña Incorrectos';
-		$this->Auth->authError = 'Usted no tiene acceso a esta página';
+		$this->Auth->authError = 'Usted no tiene permisos para acceder a esta página.';
                 $this->Auth->planesMejoraError = 'Usted no tiene acceso a los planes de mejora de otra jurisdicción';
                 $this->Auth->authorize = 'actions';
                 //$this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');

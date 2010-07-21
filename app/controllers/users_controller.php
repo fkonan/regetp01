@@ -3,6 +3,21 @@ class UsersController extends AppController {
 
 	var $name = 'Users';
 
+
+        function verificar(){
+        debug($this->User->Aro->verify());
+        //debug($this->User->Aro->recover());
+            //debug($this->User->Aro->ArosAcos->verify());
+            die("termino");
+        }
+
+        function arreglar(){
+        debug($this->User->Aro->verify());
+        debug($this->User->Aro->recover());
+        debug($this->User->Aro->verify());
+            die("termino");
+        }
+
         
 	function listadoUsuarios() {
 		$this->User->recursive = 0;
@@ -150,6 +165,7 @@ class UsersController extends AppController {
 		}
 		if (empty($this->data)) {
 			$this->data = $this->User->read(null, $id);
+                        $this->data['User']['grupo'] =$this->User->parentNodeId();
 		}
 	}
 	
@@ -166,10 +182,11 @@ class UsersController extends AppController {
 		}
 		if (!empty($this->data)) {
 			if($this->comparePasswords()){ //me fijo que los passwords coincidan
-				if ($this->User->save($this->data)) {
+				if ($this->User->save($this->data, $validate = false)) {
 					$this->Session->setFlash(__('Se ha guardado el nuevo password correctamente', true));
 					$this->redirect('/pages/home');
 				} else {
+                                    debug($this->User->validationErrors);
 					$this->Session->setFlash(__('La contraseña no pudo ser guardada. Por favor, intente nuevamente.', true));
 				}
 			}

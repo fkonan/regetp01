@@ -36,7 +36,8 @@ echo $html->css(array('jquery.loadmask'));
         if (jQuery('.listado li').size() == 1){
             redirigiendo = true;
             jQuery('#consoleResultWrapper').mask('Encontrada');
-            location.replace(jQuery('.listado li').first().attr('href'));
+            jQuery('.listado li A').click();
+            //location.replace(jQuery('.listado li').first().attr('href'));
         }
         if (!redirigiendo){
             jQuery('#consoleResultWrapper').unmask();

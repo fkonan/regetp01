@@ -33,7 +33,7 @@
         </title>
         <?php
         echo $html->meta('icon');
-        echo $html->css('regetp','stylesheet', array('media'=>'screen'));
+        echo $html->css('regetp1.5','stylesheet', array('media'=>'screen'));
         //echo $html->css('printer');
         echo $html->css('printer','stylesheet', array('media'=>'print'));
 
@@ -54,8 +54,8 @@
                 jQuery(document).ajaxError(function(e, xhr, settings, exception) {
                     jQuery.unblockUI;
                     if (xhr.status == 401){
+                        alert('Su usuario no tiene permisos para acceder a esta página');
                         if (!jQuery('#authMessageJs')){
-                            alert('Su usuario no tiene permisos para acceder');
 //                            var authMessage = '<div id="authMessageJs" class="message">Usted no tiene permisos para realizar esta operación</div>';
 //                            jQuery('#main-content').prepend(authMessage);
                         }
@@ -301,7 +301,7 @@ if($showMenu) {
             <p style="float:left;color:#003d5c;font-size:8pt;padding-left:250px; padding-top:10px; vertical-align: middle;font-weight: bold" >Instituto Nacional de Educación Tecnológica</p>
             <?php echo $html->link(
             $html->image('logoinet1.gif', array('style'=>'vertical-align:middle;width:70px;margin-right:10px','alt'=> __("Inet", true), 'border'=>"0")),
-            'http://www.cakephp.org/',
+            'http://www.inet.edu.ar',
             array('target'=>'_blank'), null, false
             );
             ?>
