@@ -359,6 +359,7 @@ class InstitsController extends AppController {
         if (!empty($this->data)) {
             $logTxt = $headTxt = '';
             $logTxt .= '|'.$this->Auth->user('nombre').' '.$this->Auth->user('apellido'); $headTxt .= '|'.'Usuario';
+            $logTxt .= '|' . $this->Session->read('User.group_alias'); $headTxt .= '|'.'Rol';
             $logTxt .= '|'. @$this->data['Instit']['cue']; $headTxt .= '|'.'CUE';
             $logTxt .= '|'. @$this->data['Instit']['nombre_completo']; $headTxt .= '|'.'Nombre Libre';
             $logTxt .= '|'. @$this->data['Instit']['nroinstit']; $headTxt .= '|'.'Nro Instit';
@@ -1007,10 +1008,10 @@ class InstitsController extends AppController {
          */
         if (!empty($q)) {
             $logTxt = $headTxt = '';
-            $logTxt .= '|'.$this->Auth->user('nombre').' '.$this->Auth->user('apellido'); $headTxt .= '|'.'Usuario';
+            $logTxt .= '|'.$this->Auth->user('nombre').' '.$this->Auth->user('apellido') ; $headTxt .= '|'.'Usuario';
+            $logTxt .= '|' . $this->Session->read('User.group_alias'); $headTxt .= '|'.'Rol';
             $logTxt .= '|'. @$q; $headTxt .= '|'.'CUE o Nombre';
             $logTxt .= (@sizeof($intitsResult) > 0)?'|Si': '|No'; $headTxt .= '|'.'Trajo Resultados';
-
             $this->log($headTxt,'i_search_beta');
             $this->log($logTxt,'i_search_beta');
         }
