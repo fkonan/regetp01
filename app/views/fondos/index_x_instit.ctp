@@ -10,11 +10,11 @@
     
     $descripcionPlural = "Se presenta información sobre %u Planes de Mejora institucionales aprobados por un total de $%s. <br/>" .
                          "Período: 2006-2009. <br/>".
-                         "Para mayor información consulte las <notas metodológicas> al final de la página. <br/>";
+                         "Para mayor información consulte las <a href='#notas'>notas metodológicas</a> al final de la página. <br/>";
 
     $descripcionSingular = "Se presenta información sobre 1 Plan de Mejora institucional aprobado por un total de $%s. <br/>" .
                            "Período: 2006-2009. <br/>".
-                           "Para mayor información consulte las <a onclick='scrollWin();'>notas metodológicas</a> al final de la página. <br/>";
+                           "Para mayor información consulte las <a href='#notas'>notas metodológicas</a> al final de la página. <br/>";
 
     define("DESCRIPCION_PLURAL", $descripcionPlural);
     define("DESCRIPCION_SINGULAR", $descripcionSingular);
