@@ -1000,7 +1000,22 @@ class InstitsController extends AppController {
             }
         }
 
-        $this->set('instits', $this->paginate());
+        $intitsResult = $this->paginate();
+        /***************************
+         *
+         * LOG DE LAS BUSQUEDAS REALIZADAS
+         */
+        if (!empty($q)) {
+            $logTxt = $headTxt = '';
+            $logTxt .= '|'.$this->Auth->user('nombre').' '.$this->Auth->user('apellido'); $headTxt .= '|'.'Usuario';
+            $logTxt .= '|'. @$q; $headTxt .= '|'.'CUE o Nombre';
+            $logTxt .= (@sizeof($intitsResult) > 0)?'|Si': '|No'; $headTxt .= '|'.'Trajo Resultados';
+
+            $this->log($headTxt,'i_search_beta');
+            $this->log($logTxt,'i_search_beta');
+        }
+
+        $this->set('instits', $intitsResult);
         
     }
     
