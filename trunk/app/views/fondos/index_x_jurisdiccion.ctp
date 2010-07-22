@@ -1,10 +1,16 @@
 <script type="text/javascript">
-    function scrollWin(){
-        jQuery('html, body').animate({
-            scrollTop: jQuery("#notas").offset().top
-        }, 2000);
-    }
+    jQuery(document).ready(function(){
+        jQuery('A[href="#notas"]').click(function(){
+             // scrollear hasta el div
+            var destination = jQuery('#notas').offset().top;
+            jQuery("html:not(:animated),body:not(:animated)").animate({ scrollTop: destination-20});
+            return false;
+        });
+    });
+
 </script>
+
+
 <?php 
 
     $descripcionPlural = "Se presenta información sobre %u Planes de Mejora juridiccionales aprobados por un total de $%s. <br/>" .
@@ -92,6 +98,7 @@
                 if(!empty($fondos)){
                 ?>
                     <div id="notas" style="font-size:8pt; font-style: italic; padding-top: 30px; margin-bottom: 30px">
+                        <h3>Notas Metodológicas</h3>
                         <ul>
                             <li>
                                 La información publicada corresponde a Planes de Mejora aprobados desde el año 2006 al 2009 inclusive. La información será actualizada periódicamente.
