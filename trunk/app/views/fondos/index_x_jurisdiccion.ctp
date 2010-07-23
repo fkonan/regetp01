@@ -104,10 +104,10 @@
                                 La información publicada corresponde a Planes de Mejora aprobados desde el año 2006 al 2009 inclusive. La información será actualizada periódicamente.
                             </li>
                             <li>
-                                Los Planes de Mejora correspondientes a Formularios F04A y F04B se presentan unificados bajo la línea de acción ?F04 - Prácticas profesionalizantes?.
+                                Los Planes de Mejora correspondientes a Formularios F04A y F04B se presentan unificados bajo la línea de acción "F04 - Prácticas profesionalizantes".
                             </li>
                             <li>
-                                Los Planes de Mejora correspondientes a Formularios F05A, F05B y F05C se presentan unificados bajo la línea de acción ?F05 - Equipamiento de talleres, laboratorios y espacios productivos?.
+                                Los Planes de Mejora correspondientes a Formularios F05A, F05B y F05C se presentan unificados bajo la línea de acción "F05 - Equipamiento de talleres, laboratorios y espacios productivos".
                             </li>
                             <li>
                                 En algunos Planes de Mejora la suma de líneas de acción no coincide exactamente con el total por razones de redondeo o ajustes menores.
