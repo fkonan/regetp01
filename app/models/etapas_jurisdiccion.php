@@ -14,31 +14,5 @@ class EtapasJurisdiccion extends AppModel {
 			'Jurisdiccion',
 	);
 
-        var $hasMany = array(
-			'Etapa' => array('className' => 'Anio',
-                                                            'foreignKey' => 'etapa_id',
-                                                            'dependent' => false,
-                                                            'conditions' => '',
-                                                            'fields' => '',
-                                                            'order' => '',
-                                                            'limit' => '',
-                                                            'offset' => '',
-                                                            'exclusive' => '',
-                                                            'finderQuery' => '',
-                                                            'counterQuery' => ''
-			),
-                        'Jurisdiccion' => array('className' => 'Jurisdiccion',
-                                                            'foreignKey' => 'jurisdiccion_id',
-                                                            'dependent' => false,
-                                                            'conditions' => '',
-                                                            'fields' => '',
-                                                            'order' => '',
-                                                            'limit' => '',
-                                                            'offset' => '',
-                                                            'exclusive' => '',
-                                                            'finderQuery' => '',
-                                                            'counterQuery' => ''
-			)
-	);
 }
 ?>
