@@ -5,18 +5,30 @@ class Etapa extends AppModel {
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $hasMany = array(
-			'Anio' => array('className' => 'Anio',
-								'foreignKey' => 'etapa_id',
-								'dependent' => false,
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'limit' => '',
-								'offset' => '',
-								'exclusive' => '',
-								'finderQuery' => '',
-								'counterQuery' => ''
-			)
+            'Anio' => array('className' => 'Anio',
+                                                    'foreignKey' => 'etapa_id',
+                                                    'dependent' => false,
+                                                    'conditions' => '',
+                                                    'fields' => '',
+                                                    'order' => '',
+                                                    'limit' => '',
+                                                    'offset' => '',
+                                                    'exclusive' => '',
+                                                    'finderQuery' => '',
+                                                    'counterQuery' => ''
+            ),
+            'EtapasJurisdiccion' => array('className' => 'EtapasJurisdiccion',
+                                                    'foreignKey' => 'etapa_id',
+                                                    'dependent' => false,
+                                                    'conditions' => '',
+                                                    'fields' => '',
+                                                    'order' => '',
+                                                    'limit' => '',
+                                                    'offset' => '',
+                                                    'exclusive' => '',
+                                                    'finderQuery' => '',
+                                                    'counterQuery' => ''
+            )
 	);
 	
 	var $validate = array(
@@ -30,6 +42,25 @@ class Etapa extends AppModel {
 			)
 		)
 	);
+
+        /**
+	 * Me devuelve un array con las etapas_jurisdicciones de la jurisdiccion
+	 *	
+	 * @param $plan_id
+	 * @return Array $aux_vec('plan_id'=>'matricula')
+	 */
+	function etapas_de_jurisdiccion($jurisdiccion_id){
+		$this->EtapasJurisdiccion->recursive = 0;
+		$temp= $this->EtapasJurisdiccion->find('all',array(
+                                        'conditions'=>array('jurisdiccion_id'=>$jurisdiccion_id)));
+
+                foreach ($temp as $reg) {
+                    $etapa[$reg['Etapa']['id']] = $reg['Etapa']['name'];
+                }
+                
+                return $etapa;
+        }
+
 
 }
 ?>

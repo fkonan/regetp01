@@ -68,52 +68,61 @@ class AniosController extends AppController {
 	}
 
 	function edit($id = null) {		
-		if (!$id && empty($this->data)) {
-            $this->Session->setFlash(__('Invalid Anio', true));
+            if (!$id && empty($this->data)) {
+                $this->Session->setFlash(__('Invalid Anio', true));
         	$this->redirect(array('action'=>'index'));
-        }
-        $this->layout='popup';
-        if (!empty($this->data)) {
-        	if ($this->Anio->save($this->data)) {
-            $this->Session->setFlash(__('El año ha sido guardado', true));
-            $this->set('script','<script type="text/javascript">window.opener.location.reload();window.close();</script>">');
-        	} else {
-        		$this->Session->setFlash(__('El año no pudo ser guardado. Por favor, intente nuevamente.', true));
-			}
-        }
-        if (empty($this->data)) {
-        	$this->data = $this->Anio->read(null, $id);
-	    }
-        //$planes = $this->Anio->Plan->find('list');
-        $ciclos = $this->Anio->Ciclo->find('list');
-        $etapas = $this->Anio->Etapa->find('list');
-        $this->set(compact('planes','ciclos','etapas'));
-                
-		/**
-         * esto es para generar una vista distinta
-         * para los años que son de una oferta FP
-         */
-        $this->Anio->Plan->recursive = -1;
-        $plan   = $this->Anio->Plan->find('all',array('conditions'=>array('Plan.id'=>$this->data['Anio']['plan_id'])));
- 
-        switch ($plan[0]['Plan']['oferta_id']):
-			case 1://es un FP, asique mostrar la vista de años para FP
-			case 7://es CL, asique mostrar la vista de años para FP	
-	            $this->render('/anios/edit_fp');
-	            break;
-			case 2: // IT
-			case 3: //MT
-			case 5: //SEC NO TECNICO
-				$this->render('/anios/edit');
-	            break;
-			case 4: //SNU
-			case 6: //SUP NO TECNICO
-				$this->render('/anios/edit_snu');
-	            break;
-	        default: // si no va con ninguno mostrar el de MT
-	        	$this->render('/anios/add');
-	            break;
-        endswitch;	
+            }
+
+            $this->layout='popup';
+
+            if (!empty($this->data)) {
+                    if ($this->Anio->save($this->data)) {
+                $this->Session->setFlash(__('El año ha sido guardado', true));
+                $this->set('script','<script type="text/javascript">window.opener.location.reload();window.close();</script>">');
+                    } else {
+                            $this->Session->setFlash(__('El año no pudo ser guardado. Por favor, intente nuevamente.', true));
+                            }
+            }
+            if (empty($this->data)) {
+                    $this->data = $this->Anio->read(null, $id);
+                }
+            //$planes = $this->Anio->Plan->find('list');
+            $ciclos = $this->Anio->Ciclo->find('list');
+
+                    /**
+             * esto es para generar una vista distinta
+             * para los años que son de una oferta FP
+                     * y jurisdiccion_id para etapas (Pablo)
+             */
+            $this->Anio->Plan->recursive = -1;
+            $plan   = $this->Anio->Plan->find('all', array(
+                        'conditions'=>array('Plan.id'=>$this->data['Anio']['plan_id']),
+                        'contain'=>array('Instit')
+                    ));
+
+             //$etapas = $this->Anio->Etapa->find('list');
+            $etapas = $this->Anio->Etapa->etapas_de_jurisdiccion($plan[0]['Instit']['jurisdiccion_id']);
+
+            $this->set(compact('planes','ciclos','etapas'));
+            
+            switch ($plan[0]['Plan']['oferta_id']):
+                            case 1://es un FP, asique mostrar la vista de años para FP
+                            case 7://es CL, asique mostrar la vista de años para FP
+                        $this->render('/anios/edit_fp');
+                        break;
+                            case 2: // IT
+                            case 3: //MT
+                            case 5: //SEC NO TECNICO
+                                    $this->render('/anios/edit');
+                        break;
+                            case 4: //SNU
+                            case 6: //SUP NO TECNICO
+                                    $this->render('/anios/edit_snu');
+                        break;
+                    default: // si no va con ninguno mostrar el de MT
+                            $this->render('/anios/add');
+                        break;
+            endswitch;
 	}
 
 	function delete($id = null) {
