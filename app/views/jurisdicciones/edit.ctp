@@ -29,4 +29,9 @@
 	?>
 	</fieldset>
 <?php echo $form->end('Guardar');?>
+<div class="actions">
+    <ul>
+        <li><?php echo $html->link(__('Editar Etapas', true), array('controller'=>'etapas_jurisdicciones','action'=>'index', $this->data['Jurisdiccion']['id'])); ?> </li>
+    </ul>
+</div>
 </div>
