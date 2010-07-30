@@ -144,7 +144,8 @@
 					div.find(".RemoveAll").addClass('ms2side__hide');
 				else
 					div.find(".RemoveAll").removeClass('ms2side__hide');
-			});
+                                
+                        });
 
 			// DOUBLE CLICK ON LEFT SELECT OPTION
 			leftSel.dblclick(function () {
@@ -156,6 +157,7 @@
 					}
 				});
 				$(this).trigger('change');
+
 			});
 
 			// DOUBLE CLICK ON RIGHT SELECT OPTION
@@ -165,6 +167,8 @@
 					el.find("[value=" + $(selected).val() + "]").attr("selected", false).remove().appendTo(el);
 				});
 				$(this).trigger('change');
+
+                                
 			});
 
 			// CLICK ON OPTION
@@ -275,6 +279,7 @@
 			leftSel.trigger('change');
 			// SHOW WHEN ALL READY
 			$(this).next().show();
+
 		});
 	};
 })(jQuery);
