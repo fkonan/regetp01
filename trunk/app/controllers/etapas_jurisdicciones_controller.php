@@ -11,7 +11,7 @@ class EtapasJurisdiccionesController extends AppController {
                     if(!empty($this->data['EtapasJurisdiccion']['etapas_selected'])){
                         foreach($this->data['EtapasJurisdiccion']['etapas_selected'] as $etapa){
                             $this->EtapasJurisdiccion->create();
-                            $etapaJur = array("EtapasJurisdiccion"=>array("etapa_id"=>$etapa, "jurisdiccion_id"=>$this->data['EtapasJurisdiccion']['jurisdiccion_id']));
+                            $etapaJur = array("EtapasJurisdiccion"=>array("etapa_id"=>$etapa, 'edad_desde'=> $this->data['EtapasJurisdiccion'][$etapa]['edad_desde'], 'edad_hasta'=> $this->data['EtapasJurisdiccion'][$etapa]['edad_hasta'], "jurisdiccion_id"=>$this->data['EtapasJurisdiccion']['jurisdiccion_id']));
                             $this->EtapasJurisdiccion->save($etapaJur);
                         }
                     }
@@ -23,7 +23,7 @@ class EtapasJurisdiccionesController extends AppController {
 
                 $conditions = array('contain'=> array('Etapa'),
                                     'conditions'=> array("jurisdiccion_id" => $id),
-                                    'fields' => array('DISTINCT Etapa.id', 'Etapa.name'));
+                                    'fields' => array('DISTINCT Etapa.id', 'Etapa.name','edad_desde','edad_hasta'));
                 
                 $etapasSeleccionadas = $this->EtapasJurisdiccion->find('all',$conditions);
 
@@ -35,12 +35,12 @@ class EtapasJurisdiccionesController extends AppController {
 
                     $conditions = array('contain'=> array('Etapa'),
                                         'conditions'=> array('NOT'=>array("Etapa.id" => $notIn)),
-                                        'fields' => array('DISTINCT Etapa.id', 'Etapa.name'));
+                                        'fields' => array('DISTINCT Etapa.id', 'Etapa.name','edad_desde','edad_hasta'));
 
                 }
                 else{
                     $conditions = array('contain'=> array('Etapa'),
-                                    'fields' => array('DISTINCT Etapa.id', 'Etapa.name'));
+                                    'fields' => array('DISTINCT Etapa.id', 'Etapa.name','edad_desde','edad_hasta'));
                 }
                 
                 $etapasNoSeleccionadas = $this->EtapasJurisdiccion->find('all',$conditions);
