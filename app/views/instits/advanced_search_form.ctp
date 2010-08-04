@@ -79,7 +79,7 @@ echo $html->css('jquery.autocomplete.css');
             }
         });
 
-        jQuery("#InstitJurDepLoc").attr('autocomplete','on');
+        jQuery("#InstitJurDepLoc").attr('autocomplete','off');
 
     });
 
@@ -100,6 +100,7 @@ echo $html->css('jquery.autocomplete.css');
     {
         //jQuery('#InstitSearchForm input[type=button]').attr('disabled', 'disabled');
         jQuery('#InstitSearchForm').submit();
+        jQuery("#hiddenLocDepId").remove();
     }
 
     function borrarDatos(nombreElemento){
@@ -348,4 +349,3 @@ echo $html->css('jquery.autocomplete.css');
     <?php echo $form->end(); ?>
 
 </div>
-
