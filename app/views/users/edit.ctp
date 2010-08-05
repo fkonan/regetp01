@@ -16,6 +16,10 @@
 
         }
     }
+
+    function RefreshRole() {
+        jQuery('#role').val(jQuery('#grupo :selected').text());
+    }
 </script>
 <h1>Editar Usuario</h1>
 <div class="users form">
@@ -27,9 +31,10 @@
 		echo $form->input('nombre');
 		echo $form->input('apellido');
 		//$opciones = array('admin'=>'Administrador', 'editor'=> 'Editor', 'invitado'=>'Usuario de Consulta');
-		//echo $form->input('role',array('options'=>$opciones));
-                echo $form->input('grupo', array('options'=>$aros, 'selected'=>$parent_aro_seleced));
+                echo $form->input('grupo', array('options'=>$aros, 'selected'=>$parent_aro_seleced, 'id'=>'grupo', 'onchange'=>'Javascript: RefreshRole();'));
                 echo $form->input('jurisdiccion_id', array('empty' => array('0'=>' -- '),'id'=>'jurisdiccion_id','label'=>'Jurisdicción'));
+
+                echo $form->input('role',array('id'=>'role', 'type'=>'hidden'));
 
                 echo "<br />".$form->input('show_password', array('type'=>'checkbox','label'=>'Deseo cambiar la password','onclick'=>'Javascript: ShowPasswordFields();'));
         ?>
@@ -49,6 +54,9 @@
 	</fieldset>
 <?php echo $form->end('Submit');?>
 </div>
+<script type="text/javascript">
+jQuery('#role').val(jQuery('#grupo :selected').text());
+</script>
 <div class="actions">
 	<ul>
 		<li><?php echo $html->link(__('Delete', true), array('action'=>'delete', $form->value('User.id')), null, sprintf(__('Are you sure you want to delete # %s?', true), $form->value('User.id'))); ?></li>

@@ -36,6 +36,7 @@ class UsersController extends AppController {
 		if (!empty($this->data)) {
 			if($this->Auth->password($this->data['User']['password_check'])==$this->data['User']['password']){
 				$this->User->create();
+                                
 				if ($this->User->save($this->data)) {
 					$this->Session->setFlash(__('Se ha agregado un nuevo usuario', true));
 					$this->redirect('/users/add');
