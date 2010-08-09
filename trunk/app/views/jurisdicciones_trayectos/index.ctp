@@ -1,60 +1,102 @@
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        jQuery("#timelineLimiter").click(function(){
+            jQuery(this).toggleClass("green");
+            if(jQuery(this).hasClass("green")){
+                jQuery(this).find("#JurisdiccionesTrayectoAsignado").attr("checked", "checked");
+            }else{
+                jQuery(this).find("#JurisdiccionesTrayectoAsignado").removeAttr("checked");
+            }
+            
+        });
+    });
+</script>
 <div class="jurisdiccionesTrayectos index">
 <h2><?php __('JurisdiccionesTrayectos');?></h2>
-<p>
-<?php
-echo $paginator->counter(array(
-'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
-));
-?></p>
-<table cellpadding="0" cellspacing="0">
-<tr>
-	<th><?php echo $paginator->sort('id');?></th>
-	<th><?php echo $paginator->sort('jurisdiccion_id');?></th>
-	<th><?php echo $paginator->sort('trayecto_id');?></th>
-	<th><?php echo $paginator->sort('created');?></th>
-	<th><?php echo $paginator->sort('modified');?></th>
-	<th class="actions"><?php __('Actions');?></th>
-</tr>
+
+<?php echo $form->create('JurisdiccionesTrayecto', array('action'=>'index'));?>
+<?php echo $form->hidden('jurisdiccion_id',array('name'=>'data[jurisdiccion_id]','value'=> $jurisdiccion_id))?>
+
 <?php
 $i = 0;
-foreach ($jurisdiccionesTrayectos as $jurisdiccionesTrayecto):
-	$class = null;
-	if ($i++ % 2 == 0) {
-		$class = ' class="altrow"';
-	}
+$j = 0;
+$etapa_anterior = '';
+$colors = array('green','blue','chreme');
+foreach ($trayectos_asignados as $jurisdiccionesTrayecto):
 ?>
-	<tr<?php echo $class;?>>
-		<td>
-			<?php echo $jurisdiccionesTrayecto['JurisdiccionesTrayecto']['id']; ?>
-		</td>
-		<td>
-			<?php echo $jurisdiccionesTrayecto['JurisdiccionesTrayecto']['jurisdiccion_id']; ?>
-		</td>
-		<td>
-			<?php echo $jurisdiccionesTrayecto['JurisdiccionesTrayecto']['trayecto_id']; ?>
-		</td>
-		<td>
-			<?php echo $jurisdiccionesTrayecto['JurisdiccionesTrayecto']['created']; ?>
-		</td>
-		<td>
-			<?php echo $jurisdiccionesTrayecto['JurisdiccionesTrayecto']['modified']; ?>
-		</td>
-		<td class="actions">
-			<?php echo $html->link(__('View', true), array('action'=>'view', $jurisdiccionesTrayecto['JurisdiccionesTrayecto']['id'])); ?>
-			<?php echo $html->link(__('Edit', true), array('action'=>'edit', $jurisdiccionesTrayecto['JurisdiccionesTrayecto']['id'])); ?>
-			<?php echo $html->link(__('Delete', true), array('action'=>'delete', $jurisdiccionesTrayecto['JurisdiccionesTrayecto']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $jurisdiccionesTrayecto['JurisdiccionesTrayecto']['id'])); ?>
-		</td>
-	</tr>
-<?php endforeach; ?>
-</table>
+            <?php echo $form->hidden('trayecto_id',array('name'=>'data[JurisdiccionesTrayecto]['. $i . '][trayecto_id]','value'=> $jurisdiccionesTrayecto['Trayecto']['id']))?>
+            <!--<?php echo $jurisdiccionesTrayecto['Trayecto']['name']; ?>-->
+            <div id="timelineLimiter" class="green">
+            <div id="timelineScroll" style="margin-left: 0px;">
+            <?php
+            $j = 0;
+            foreach($jurisdiccionesTrayecto['Trayecto']['TrayectoAnio'] as $anio ):
+                if($etapa_anterior != $anio['Etapa']['id']){
+                    if(!empty($etapa_anterior)){
+                        echo '</ul></div>';
+                    }
+                    $etapa_anterior = $anio['Etapa']['id'];
+                    ?>
+                <div class="event">
+                <div class="eventHeading <?php echo $colors[$j++%3]?>"><?php echo $anio['Etapa']['name']?></div>
+                    <ul class="eventList">
+            <?php
+                }
+            ?>
+                        <li><?php echo $anio['anio'];?>º</li>
+            <?php 
+            $j++;
+            endforeach;
+            ?>
+                    </ul>
+                </div>
+            <div class="instit_link_list" style="clear:none">
+                <?php echo $form->checkbox('asignado',array('name'=>'data[JurisdiccionesTrayecto]['. $i . '][asignado]','checked'=>'checked')); ?>
+            </div>
+            </div>
+            </div>
+<?php
+$i++;
+endforeach; ?>
+
+<?php
+$etapa_anterior = '';
+foreach ($trayectos_restantes as $jurisdiccionesTrayecto):
+?>
+            <?php echo $form->hidden('trayecto_id',array('name'=>'data[JurisdiccionesTrayecto]['. $i . '][trayecto_id]','value'=> $jurisdiccionesTrayecto['Trayecto']['id']))?>
+            <!--<?php echo $jurisdiccionesTrayecto['Trayecto']['name']; ?>-->
+            <div id="timelineLimiter">
+            <div id="timelineScroll" style="margin-left: 0px;">
+            <?php
+            $j = 0;
+            foreach($jurisdiccionesTrayecto['TrayectoAnio'] as $anio ):
+                if($etapa_anterior != $anio['Etapa']['id']){
+                    if(!empty($etapa_anterior)){
+                        echo '</ul></div>';
+                    }
+                    $etapa_anterior = $anio['Etapa']['id'];
+                    ?>
+                <div class="event">
+                <div class="eventHeading <?php echo $colors[$j++%3]?>"><?php echo $anio['Etapa']['name']?></div>
+                    <ul class="eventList">
+            <?php
+                }
+            ?>
+                        <li><?php echo $anio['anio'];?>º</li>
+            <?php
+            $j++;
+            endforeach;
+            ?>
+                    </ul>
+                </div>
+            <div class="instit_link_list" style="clear:none">
+                <?php echo $form->checkbox('asignado',array('name'=>'data[JurisdiccionesTrayecto]['. $i . '][asignado]')); ?>
+            </div>
+            </div>
+            </div>
+<?php
+$i++;
+endforeach; ?>
+
 </div>
-<div class="paging">
-	<?php echo $paginator->prev('<< '.__('previous', true), array(), null, array('class'=>'disabled'));?>
- | 	<?php echo $paginator->numbers();?>
-	<?php echo $paginator->next(__('next', true).' >>', array(), null, array('class'=>'disabled'));?>
-</div>
-<div class="actions">
-	<ul>
-		<li><?php echo $html->link(__('New JurisdiccionesTrayecto', true), array('action'=>'add')); ?></li>
-	</ul>
-</div>
+<?php echo $form->end('Guardar');?>

@@ -1822,3 +1822,104 @@ Busqueda Simple de Instituciones
     font-size: 8pt;
 }
 
+/*
+
+Trayectos
+
+*/
+
+.event{
+	/* Contains the event header and body list */
+	float:left;
+	padding:4px;
+	text-align:left;
+	width:180px;
+	margin:0 5px 50px;
+        clear:none;
+}
+
+.eventList li{
+	/* The individual events */
+	background:#F4F4F4;
+	border:1px solid #EEEEEE;
+	list-style:none;
+	margin:2px;
+	padding:4px 7px;
+        float:left;
+        display:inline;
+
+	/* CSS3 rounded corners */
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+}
+
+.eventList li:hover{
+	/* The hover state: */
+	cursor:pointer;
+	background:#E6F8FF;
+	border:1px solid #D4E6EE;
+	color:#548DA5;
+}
+
+li span{
+	/* The event icon */
+	display:block;
+	float:left;
+	height:16px;
+	margin-right:5px;
+	width:16px;
+}
+
+/* Individual background images for each type of event: */
+
+li.news span.icon { 	background:url(img/icons/newspaper.png) no-repeat; }
+li.image span.icon { 	background:url(img/icons/camera.png) no-repeat; }
+li.milestone span.icon { 	background:url(img/icons/chart.png) no-repeat; }
+
+div.content{
+	/* This div contains additional data for the content */
+	display:none;
+}
+
+.eventHeading{
+	/* The colorful year headings at the top */
+	font-size:1.2em;
+	margin:-5px -5px 10px;
+	padding:2px 5px;
+	text-align:center;
+}
+
+/* Three color styles for the headings: */
+
+.eventHeading.chreme{
+	background:#FBF7F0;
+	border:1px solid #EEE4D4;
+	color:#A78B5F;
+}
+
+.eventHeading.blue{
+	background:#E6F8FF;
+	border:1px solid #D4E6EE;
+	color:#548DA5;
+}
+
+.eventHeading.green{
+	background:#E6FFDF none repeat scroll 0 0;
+	border:1px solid #C9E6C1;
+	color:#6EA85F;
+}
+
+#timelineLimiter{
+	/* Hides the overflowing timeline */
+	overflow:hidden;
+	padding-top:10px;
+	margin:40px 0;
+        border:1px solid #C9E6C1;
+        height:80px;
+}
+
+.green{
+	/* Hides the overflowing timeline */
+	background:#F2FFEF none repeat scroll 0 0;
+}

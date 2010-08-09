@@ -33,7 +33,7 @@
         </title>
         <?php
         echo $html->meta('icon');
-        echo $html->css('regetp1.5','stylesheet', array('media'=>'screen'));
+        echo $html->css('regetp','stylesheet', array('media'=>'screen'));
         //echo $html->css('printer');
         echo $html->css('printer','stylesheet', array('media'=>'print'));
 
