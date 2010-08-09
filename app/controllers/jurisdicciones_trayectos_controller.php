@@ -4,9 +4,66 @@ class JurisdiccionesTrayectosController extends AppController {
 	var $name = 'JurisdiccionesTrayectos';
 	var $helpers = array('Html', 'Form');
 
-	function index() {
+	function index($id = null) {
+                $notIn = array();
+                $trayectos_asignados = array();
+                $trayectos_restantes = array();
+                
 		$this->JurisdiccionesTrayecto->recursive = 0;
-		$this->set('jurisdiccionesTrayectos', $this->paginate());
+
+               
+                if (!empty($this->data['JurisdiccionesTrayecto'])) {
+                    $this->JurisdiccionesTrayecto->deleteAll(array('JurisdiccionesTrayecto.jurisdiccion_id ='. $this->data['jurisdiccion_id']));
+                    if(!empty($this->data['JurisdiccionesTrayecto'])){
+                        foreach($this->data['JurisdiccionesTrayecto'] as $trayecto){
+                            if($trayecto['asignado'] == 1){
+                                $this->JurisdiccionesTrayecto->create();
+                                $trayectoJur = array("JurisdiccionesTrayecto"=>array("jurisdiccion_id"=>$this->data['jurisdiccion_id'], "trayecto_id"=>$trayecto['trayecto_id']));
+                                $this->JurisdiccionesTrayecto->save($trayectoJur);
+                            }
+
+                        }
+                     
+                    }
+                    $this->redirect(array('action' => 'index',$this->data['jurisdiccion_id']));
+                }
+
+
+
+                $trayectos_asignados = $this->JurisdiccionesTrayecto->find('all', array(
+                                                                            'contain'=> array(
+                                                                                'Trayecto'=>array('TrayectoAnio'=>array('Etapa', 'order'=> array('TrayectoAnio.edad_teorica')))
+                                                                            ),
+                                                                            'conditions'=> array(
+                                                                                array('JurisdiccionesTrayecto.jurisdiccion_id' => $id)
+                                                                            )
+                                                                        ));
+                if(!empty($trayectos_asignados)){
+
+                    foreach($trayectos_asignados as $trayecto){
+                        array_push($notIn, $trayecto['Trayecto']['id']);
+                    }
+
+                    $trayectos_restantes = $this->JurisdiccionesTrayecto->Trayecto->find('all', array(
+                                                                                            'contain'=> array(
+                                                                                                'TrayectoAnio'=>array('Etapa', 'order'=> array('TrayectoAnio.edad_teorica'))
+                                                                                            ),
+                                                                                            'conditions'=> array('NOT'=>array("Trayecto.id" => $notIn)),
+                                                                                    ));
+
+                }
+                else{
+                    $trayectos_restantes = $this->JurisdiccionesTrayecto->Trayecto->find('all', array(
+                                                                                            'contain'=> array(
+                                                                                                'TrayectoAnio'=>array('Etapa', 'order'=> array('TrayectoAnio.edad_teorica'))
+                                                                                            )
+                                                                                    ));
+
+                }
+                
+                $this->set('trayectos_asignados', $trayectos_asignados);
+                $this->set('trayectos_restantes', $trayectos_restantes);
+                $this->set('jurisdiccion_id', $id);
 	}
 
 	function view($id = null) {
