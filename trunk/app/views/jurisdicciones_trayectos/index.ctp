@@ -42,7 +42,7 @@ foreach ($trayectos_asignados as $jurisdiccionesTrayecto):
                         <?php
                         $j = 0;
                         foreach($jurisdiccionesTrayecto['Trayecto']['TrayectoAnio'] as $anio ):
-                            if($i == 0 && $j == 0){
+                            if($etapa_anterior == '' && $j == 0){
                                 if($anio['edad_teorica'] != 12){
                                     $class = 'mover';
                                 }
@@ -89,7 +89,7 @@ foreach ($trayectos_restantes as $jurisdiccionesTrayecto):
             <?php echo $jurisdiccionesTrayecto['Trayecto']['name']; ?>
             <div id="timelineLimiter" class="clickeable">
             <div id="timelineScroll" style="margin-left: 0px;">
-                 <span style="width:55px;display:inline;float:left;margin-top:7px">Edades:</span>
+                <span style="width:55px;display:inline;float:left;margin-top:7px">Edades:</span>
                 <ul class="edadesList">
                     <li>12</li>
                     <li>13</li>
@@ -104,6 +104,16 @@ foreach ($trayectos_restantes as $jurisdiccionesTrayecto):
             <?php
             $j = 0;
             foreach($jurisdiccionesTrayecto['TrayectoAnio'] as $anio ):
+                if($etapa_anterior == '' && $j == 0){
+                    if($anio['edad_teorica'] != 12){
+                        $class = 'mover';
+                    }
+                    else {
+                        $class ='';
+                    }
+                }else{
+                    $class ='';
+                }
                 if($etapa_anterior != $anio['Etapa']['id']){
                     if(!empty($etapa_anterior)){
                         echo '</ul></div>';
