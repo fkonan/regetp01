@@ -88,7 +88,7 @@ class TrayectosController extends AppController {
                             $i++;
                         }
 
-                        $etapas = json_encode($etapas_to_serialize);
+                        $etapas = @json_encode($etapas_to_serialize);
                         $this->data['Trayecto']['etapas'] = $etapas;
 		}
 
