@@ -3,6 +3,7 @@ class TrayectoAniosController extends AppController {
 
 	var $name = 'TrayectoAnios';
 	var $helpers = array('Html', 'Form');
+        var $paginate = array('order'=>array('TrayectoAnio.anio_escolaridad'=>'asc'));
 
 	function index() {
 		$this->TrayectoAnio->recursive = 0;

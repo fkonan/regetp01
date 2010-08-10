@@ -19,14 +19,29 @@ class TrayectosController extends AppController {
 
 	function add() {
 		if (!empty($this->data)) {
-			$this->Trayecto->create();
-			if ($this->Trayecto->save($this->data)) {
-				$this->Session->setFlash(__('The Trayecto has been saved', true));
-				$this->redirect(array('action'=>'index'));
-			} else {
-				$this->Session->setFlash(__('The Trayecto could not be saved. Please, try again.', true));
-			}
+                    $this->Trayecto->create();
+
+                    // etapas del trayecto
+                    //$str = '[{"etapa_id":"6","edad_teorica":"11","anio":"1","anio_escolaridad":""},{"etapa_id":"6","edad_teorica":"12","anio":"2","anio_escolaridad":""},{"etapa_id":"6","edad_teorica":"13","anio":"3","anio_escolaridad":""}]';
+                    $aEtapas = json_decode($this->data['Trayecto']['etapas'], true);
+
+                    if ($this->Trayecto->save($this->data)) {
+                        // guarda el trayecto_id a cada etapa
+                        if ($aEtapas) {
+                            foreach ($aEtapas as &$etapa) {
+                                $etapa['trayecto_id'] = $this->Trayecto->id;
+                            }
+                            $this->Trayecto->TrayectoAnio->saveAll($aEtapas);
+                        }
+                        $this->Session->setFlash(__('Se ha creado un nuevo Trayecto', true));
+                        $this->redirect(array('action'=>'index'));
+                    } else {
+                        $this->Session->setFlash(__('No se ha podido crear el Trayecto. Por favor, intente nuevamente.', true));
+                    }
 		}
+                
+                $etapas = $this->Trayecto->TrayectoAnio->Etapa->find('list', array('order'=>'name'));
+		$this->set(compact('etapas'));
 	}
 
 	function edit($id = null) {
@@ -35,16 +50,50 @@ class TrayectosController extends AppController {
 			$this->redirect(array('action'=>'index'));
 		}
 		if (!empty($this->data)) {
+                        // etapas del trayecto
+                        //$str = '[{"etapa_id":"6","edad_teorica":"11","anio":"1","anio_escolaridad":""},{"etapa_id":"6","edad_teorica":"12","anio":"2","anio_escolaridad":""},{"etapa_id":"6","edad_teorica":"13","anio":"3","anio_escolaridad":""}]';
+                        $aEtapas = json_decode($this->data['Trayecto']['etapas'], true);
+
 			if ($this->Trayecto->save($this->data)) {
-				$this->Session->setFlash(__('The Trayecto has been saved', true));
-				$this->redirect(array('action'=>'index'));
+                            // elimina las etapas actuales
+                            $this->Trayecto->TrayectoAnio->deleteAll(array('TrayectoAnio.trayecto_id' => $id));
+                            // guarda el trayecto_id a cada etapa
+                            if ($aEtapas) {
+                                foreach ($aEtapas as &$etapa) {
+                                    $etapa['trayecto_id'] = $this->Trayecto->id;
+                                }
+                            }
+                            $this->Trayecto->TrayectoAnio->saveAll($aEtapas);
+
+                            $this->Session->setFlash(__('El Trayecto ha sido guardado', true));
+                            $this->redirect(array('action'=>'index'));
 			} else {
-				$this->Session->setFlash(__('The Trayecto could not be saved. Please, try again.', true));
+                            $this->Session->setFlash(__('No se ha podido crear el Trayecto. Por favor, intente nuevamente.', true));
 			}
 		}
 		if (empty($this->data)) {
+                        $this->Trayecto->contain(array('TrayectoAnio.Etapa.name'));
 			$this->data = $this->Trayecto->read(null, $id);
+
+                        // adjunta etapas en json
+                        $i = 0;
+                        foreach ($this->data['TrayectoAnio'] as $etapa) {
+                            $etapas_to_serialize[$i]['trayecto_id'] = $etapa['trayecto_id'];
+                            $etapas_to_serialize[$i]['edad_teorica'] = $etapa['edad_teorica'];
+                            $etapas_to_serialize[$i]['anio'] = $etapa['anio'];
+                            $etapas_to_serialize[$i]['etapa_id'] = $etapa['etapa_id'];
+                            $etapas_to_serialize[$i]['etapa_nombre'] = htmlentities($etapa['Etapa']['name']);
+                            $etapas_to_serialize[$i]['anio_escolaridad'] = $etapa['anio_escolaridad'];
+
+                            $i++;
+                        }
+
+                        $etapas = json_encode($etapas_to_serialize);
+                        $this->data['Trayecto']['etapas'] = $etapas;
 		}
+
+                $etapas = $this->Trayecto->TrayectoAnio->Etapa->find('list', array('order'=>'name'));
+		$this->set(compact('etapas'));
 	}
 
 	function delete($id = null) {
