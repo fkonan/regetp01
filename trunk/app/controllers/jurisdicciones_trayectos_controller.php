@@ -74,7 +74,7 @@ class JurisdiccionesTrayectosController extends AppController {
 		$this->set('jurisdiccionesTrayecto', $this->JurisdiccionesTrayecto->read(null, $id));
 	}
 
-	function add() {
+	function add($jurisdiccion_id = null) {
 		if (!empty($this->data)) {
 			$this->JurisdiccionesTrayecto->create();
 			if ($this->JurisdiccionesTrayecto->save($this->data)) {
@@ -84,6 +84,9 @@ class JurisdiccionesTrayectosController extends AppController {
 				$this->Session->setFlash(__('The JurisdiccionesTrayecto could not be saved. Please, try again.', true));
 			}
 		}
+                if (!empty($jurisdiccion_id)){
+                    $this->data['JurisdiccionesTrayecto']['jurisdiccion_id'] = $jurisdiccion_id;
+                }
 		$jurisdicciones = $this->JurisdiccionesTrayecto->Jurisdiccion->find('list');
 		$trayectos = $this->JurisdiccionesTrayecto->Trayecto->find('list');
 		$this->set(compact('jurisdicciones', 'trayectos'));

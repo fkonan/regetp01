@@ -37,6 +37,10 @@ class AniosController extends AppController {
 		//$planes = $this->Anio->Plan->find('list');
 		$ciclos = $this->Anio->Ciclo->find('list');
 		$etapas = $this->Anio->Etapa->find('list');
+
+                $trayectosDisponibles = $this->Anio->TrayectoAnio->find('list');
+                debug($trayectosDisponibles);
+
 		$this->set('plan_id',$plan_id);
 		$this->set('duracion_hs',$duracion_hs);
 		$this->set(compact('planes', 'ciclos', 'etapas'));
