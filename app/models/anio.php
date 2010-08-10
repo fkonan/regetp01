@@ -6,7 +6,13 @@ class Anio extends AppModel {
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array(
-			'Plan' => array('className' => 'Plan',
+			'TrayectoAnio' => array('className' => 'TrayectoAnio',
+								'foreignKey' => 'trayecto_anio_id',
+								'conditions' => '',
+								'fields' => '',
+								'order' => ''
+			),
+                        'Plan' => array('className' => 'Plan',
 								'foreignKey' => 'plan_id',
 								'conditions' => '',
 								'fields' => '',
