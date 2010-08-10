@@ -1831,11 +1831,14 @@ Trayectos
 .event{
 	/* Contains the event header and body list */
 	float:left;
-	padding:4px;
+	padding:0px;
 	text-align:left;
-	width:180px;
-	margin:0 5px 50px;
+	margin:0 0px 50px;
         clear:none;
+}
+
+.eventList{
+    margin:0px 0px 0px 0px !important;
 }
 
 .eventList li{
@@ -1847,6 +1850,7 @@ Trayectos
 	padding:4px 7px;
         float:left;
         display:inline;
+        width: 40px;
 
 	/* CSS3 rounded corners */
 	-moz-border-radius:4px;
@@ -1885,7 +1889,7 @@ div.content{
 .eventHeading{
 	/* The colorful year headings at the top */
 	font-size:1.2em;
-	margin:-5px -5px 10px;
+	margin:0px 0px 10px;
 	padding:2px 5px;
 	text-align:center;
 }
@@ -1916,10 +1920,47 @@ div.content{
 	padding-top:10px;
 	margin:40px 0;
         border:1px solid #C9E6C1;
-        height:80px;
+        height:120px;
 }
 
 .green{
 	/* Hides the overflowing timeline */
 	background:#F2FFEF none repeat scroll 0 0;
+}
+
+.edades {
+    
+}
+.edades span{
+	/* The individual events */
+	border:1px solid #EEEEEE;
+	list-style:none;
+	margin:2px;
+	padding:4px 7px;
+        width: 40px;
+}
+
+.edadesList{
+	margin:0px 0px 0px 0px !important;
+        padding-bottom: 40px;
+}
+
+.edadesList li{
+	/* The individual events */
+	background:#F0F7FC;
+	border:1px solid #EEEEEE;
+	list-style:none;
+	margin:2px;
+	padding:4px 7px;
+        float:left;
+        display:inline;
+        width: 40px;
+}
+
+.events{
+       margin-left: 50px;
+}
+
+.mover{
+       padding-left: 62px;
 }
