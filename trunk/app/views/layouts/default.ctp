@@ -270,7 +270,9 @@ if($showMenu) {
                     <ul>
                         <li><?= $html->link('Contacto','/pages/contacto'); ?></li>
                     </ul>
-
+                    <ul>
+                        <li><?= $html->link('Sugerencias','/sugerencias/add'); ?></li>
+                    </ul>
                 </div>
 
                 <script type="text/javascript">openMenues();</script>
