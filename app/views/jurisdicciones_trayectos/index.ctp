@@ -24,7 +24,7 @@ $colors = array('green','blue','chreme');
 foreach ($trayectos_asignados as $jurisdiccionesTrayecto):
 ?>
             <?php echo $form->hidden('trayecto_id',array('name'=>'data[JurisdiccionesTrayecto]['. $i . '][trayecto_id]','value'=> $jurisdiccionesTrayecto['Trayecto']['id']))?>
-            <!--<?php echo $jurisdiccionesTrayecto['Trayecto']['name']; ?>-->
+            <cite><?php echo $jurisdiccionesTrayecto['Trayecto']['name']; ?></cite>
             <div id="timelineLimiter" class="clickeable green">
                 <div id="timelineScroll" style="margin-left: 0px;">
                 <span style="width:55px;display:inline;float:left;margin-top:7px">Edades:</span>
@@ -86,7 +86,7 @@ endforeach; ?>
 foreach ($trayectos_restantes as $jurisdiccionesTrayecto):
 ?>
             <?php echo $form->hidden('trayecto_id',array('name'=>'data[JurisdiccionesTrayecto]['. $i . '][trayecto_id]','value'=> $jurisdiccionesTrayecto['Trayecto']['id']))?>
-            <!--<?php echo $jurisdiccionesTrayecto['Trayecto']['name']; ?>-->
+            <?php echo $jurisdiccionesTrayecto['Trayecto']['name']; ?>
             <div id="timelineLimiter" class="clickeable">
             <div id="timelineScroll" style="margin-left: 0px;">
                  <span style="width:55px;display:inline;float:left;margin-top:7px">Edades:</span>
