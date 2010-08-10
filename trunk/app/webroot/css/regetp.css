@@ -1918,7 +1918,7 @@ div.content{
 	/* Hides the overflowing timeline */
 	overflow:hidden;
 	padding-top:10px;
-	margin:40px 0;
+	margin:10px 0;
         border:1px solid #C9E6C1;
         height:120px;
 }
