@@ -130,10 +130,11 @@ $cue_instit = $instit['cue'].$anexo;
 <div class="actions">
 	<ul>
 		<li><?php echo $html->link(__('Editar Oferta', true), array('action'=>'edit', $plan['Plan']['id'])); ?> </li>
-		<li><?php echo $html->link(__('¿Eliminar Oferta?', true), array('controller'=> 'planes', 'action'=>'delete', $plan['Plan']['id']), null, sprintf(__('Seguro que desea eliminar el Plan "%s"?', true), $plan['Plan']['nombre'])); ?></li>
+		<li><?php echo $html->link(__('Eliminar Oferta', true), array('controller'=> 'planes', 'action'=>'delete', $plan['Plan']['id']), null, sprintf(__('Seguro que desea eliminar el Plan "%s"?', true), $plan['Plan']['nombre'])); ?></li>
 	</ul>
 </div>
 
+<h2>Datos Históricos de Matrícula</h2>
 	<?
 	/**
 	 *  Esto renderiza el Element de acuerdo a lo que el controlador diga.
@@ -141,6 +142,8 @@ $cue_instit = $instit['cue'].$anexo;
 	 *  Si el plan es otro tipo, renderizará la tabla normal
 	 */
 	echo $this->renderElement($planes_view_tabla);
+
+        echo $this->renderElement('planes_view_tabla_sectec_trayectos');
 	?>
 	
 	

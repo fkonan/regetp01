@@ -31,6 +31,7 @@ foreach ($jurisdicciones as $jurisdiccion):
 			<?php echo $html->link(__('View', true), array('action'=>'view', $jurisdiccion['Jurisdiccion']['id'])); ?>
 			<?php echo $html->link(__('Edit', true), array('action'=>'edit', $jurisdiccion['Jurisdiccion']['id'])); ?>
 			<?php echo $html->link(__('Delete', true), array('action'=>'delete', $jurisdiccion['Jurisdiccion']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $jurisdiccion['Jurisdiccion']['id'])); ?>
+                        <?php echo $html->link(__('Asignar Trayecto', true), array('controller'=>'jurisdicciones_trayectos','action'=>'add', $jurisdiccion['Jurisdiccion']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

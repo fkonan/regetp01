@@ -28,6 +28,10 @@
 				<li><? echo $html->link("Descargas SQL","/Queries") ?></li>
 				
 				<li><? echo $html->link("Estadísticas","http://rfietp.inet.edu.ar/awstats/awstats.pl?config=rfietp") ?></li>
+
+                                <li>Estructora Oferta</li>
+                                <li><? echo $html->link("Trayectos","/trayectos") ?></li>
+                                <li><? echo $html->link("Asign Jurisdicción","/jurisdicciones_trayectos") ?></li>
 				
 
 			</ul>
