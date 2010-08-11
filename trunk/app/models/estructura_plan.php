@@ -1,7 +1,7 @@
 <?php
-class Trayecto extends AppModel {
+class EstructuraPlan extends AppModel {
 
-	var $name = 'Trayecto';
+	var $name = 'EstructuraPlan';
 
         var $validate = array(
 		'name' => array(
@@ -17,8 +17,8 @@ class Trayecto extends AppModel {
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $hasMany = array(
-			'TrayectoAnio' => array('className' => 'TrayectoAnio',
-								'foreignKey' => 'trayecto_id',
+			'EstructuraPlanAnio' => array('className' => 'EstructuraPlanAnio',
+								'foreignKey' => 'estructura_plan_id',
 								'dependent' => false,
 								'conditions' => '',
 								'fields' => '',

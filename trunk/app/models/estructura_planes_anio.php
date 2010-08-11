@@ -1,12 +1,12 @@
 <?php
-class TrayectoAnio extends AppModel {
+class EstructuraPlanAnio extends AppModel {
 
-	var $name = 'TrayectoAnio';
+	var $name = 'EstructuraPlanAnio';
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array(
-			'Trayecto' => array('className' => 'Trayecto',
-								'foreignKey' => 'trayecto_id',
+			'EstructuraPlan' => array('className' => 'EstructuraPlan',
+								'foreignKey' => 'estructura_plan_id',
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
@@ -21,7 +21,7 @@ class TrayectoAnio extends AppModel {
 
 	var $hasMany = array(
 			'Anio' => array('className' => 'Anio',
-								'foreignKey' => 'trayecto_anio_id',
+								'foreignKey' => 'estructura_planes_anio_id',
 								'dependent' => false,
 								'conditions' => '',
 								'fields' => '',
