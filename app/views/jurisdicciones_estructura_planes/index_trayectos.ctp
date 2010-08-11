@@ -24,7 +24,7 @@ $colors = array('green','blue','chreme');
 foreach ($trayectos_asignados as $jurisdiccionesTrayecto):
 ?>
             <?php echo $form->hidden('trayecto_id',array('name'=>'data[JurisdiccionesTrayecto]['. $i . '][trayecto_id]','value'=> $jurisdiccionesTrayecto['Trayecto']['id']))?>
-            <cite><?php echo $jurisdiccionesTrayecto['Trayecto']['name']; ?></cite>
+            <!--<?php echo $jurisdiccionesTrayecto['Trayecto']['name']; ?>-->
             <div id="timelineLimiter" class="clickeable green">
                 <div id="timelineScroll" style="margin-left: 0px;">
                 <span style="width:55px;display:inline;float:left;margin-top:7px">Edades:</span>
@@ -42,7 +42,7 @@ foreach ($trayectos_asignados as $jurisdiccionesTrayecto):
                         <?php
                         $j = 0;
                         foreach($jurisdiccionesTrayecto['Trayecto']['TrayectoAnio'] as $anio ):
-                            if($etapa_anterior == '' && $j == 0){
+                            if($i == 0 && $j == 0){
                                 if($anio['edad_teorica'] != 12){
                                     $class = 'mover';
                                 }
@@ -86,10 +86,10 @@ endforeach; ?>
 foreach ($trayectos_restantes as $jurisdiccionesTrayecto):
 ?>
             <?php echo $form->hidden('trayecto_id',array('name'=>'data[JurisdiccionesTrayecto]['. $i . '][trayecto_id]','value'=> $jurisdiccionesTrayecto['Trayecto']['id']))?>
-            <?php echo $jurisdiccionesTrayecto['Trayecto']['name']; ?>
+            <!--<?php echo $jurisdiccionesTrayecto['Trayecto']['name']; ?>-->
             <div id="timelineLimiter" class="clickeable">
             <div id="timelineScroll" style="margin-left: 0px;">
-                <span style="width:55px;display:inline;float:left;margin-top:7px">Edades:</span>
+                 <span style="width:55px;display:inline;float:left;margin-top:7px">Edades:</span>
                 <ul class="edadesList">
                     <li>12</li>
                     <li>13</li>
@@ -104,16 +104,6 @@ foreach ($trayectos_restantes as $jurisdiccionesTrayecto):
             <?php
             $j = 0;
             foreach($jurisdiccionesTrayecto['TrayectoAnio'] as $anio ):
-                if($etapa_anterior == '' && $j == 0){
-                    if($anio['edad_teorica'] != 12){
-                        $class = 'mover';
-                    }
-                    else {
-                        $class ='';
-                    }
-                }else{
-                    $class ='';
-                }
                 if($etapa_anterior != $anio['Etapa']['id']){
                     if(!empty($etapa_anterior)){
                         echo '</ul></div>';

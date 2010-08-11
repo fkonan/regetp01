@@ -32,7 +32,7 @@ class JurisdiccionesEstructuraPlanesController extends AppController {
 
                 $trayectos_asignados = $this->JurisdiccionesEstructuraPlan->find('all', array(
                                                                             'contain'=> array(
-                                                                                'Trayecto'=>array('TrayectoAnio'=>array('Etapa', 'order'=> array('TrayectoAnio.edad_teorica')))
+                                                                                'EstructuraPlan'=>array('Etapa','EstructuraPlanesAnio'=>array('order'=> array('EstructuraPlanesAnio.edad_teorica')))
                                                                             ),
                                                                             'conditions'=> array(
                                                                                 array('JurisdiccionesEstructuraPlan.jurisdiccion_id' => $id)
@@ -41,21 +41,21 @@ class JurisdiccionesEstructuraPlanesController extends AppController {
                 if(!empty($trayectos_asignados)){
 
                     foreach($trayectos_asignados as $trayecto){
-                        array_push($notIn, $trayecto['Trayecto']['id']);
+                        array_push($notIn, $trayecto['EstructuraPlan']['id']);
                     }
 
-                    $trayectos_restantes = $this->JurisdiccionesEstructuraPlan->Trayecto->find('all', array(
-                                                                                            'contain'=> array(
-                                                                                                'TrayectoAnio'=>array('Etapa', 'order'=> array('TrayectoAnio.edad_teorica'))
+                    $trayectos_restantes = $this->JurisdiccionesEstructuraPlan->EstructuraPlan->find('all', array(
+                                                                                            'contain'=> array('Etapa',
+                                                                                                'EstructuraPlanesAnio'=>array('order'=> array('EstructuraPlanesAnio.edad_teorica'))
                                                                                             ),
-                                                                                            'conditions'=> array('NOT'=>array("Trayecto.id" => $notIn)),
+                                                                                            'conditions'=> array('NOT'=>array("EstructuraPlanesAnio.id" => $notIn)),
                                                                                     ));
 
                 }
                 else{
                     $trayectos_restantes = $this->JurisdiccionesEstructuraPlan->Trayecto->find('all', array(
-                                                                                            'contain'=> array(
-                                                                                                'TrayectoAnio'=>array('Etapa', 'order'=> array('TrayectoAnio.edad_teorica'))
+                                                                                            'contain'=> array('Etapa',
+                                                                                                'EstructuraPlanesAnio'=>array('order'=> array('EstructuraPlanesAnio.edad_teorica'))
                                                                                             )
                                                                                     ));
 
