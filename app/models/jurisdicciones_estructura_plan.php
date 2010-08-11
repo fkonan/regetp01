@@ -1,7 +1,7 @@
 <?php
-class JurisdiccionesTrayecto extends AppModel {
+class JurisdiccionesEstructuraPlan extends AppModel {
 
-	var $name = 'JurisdiccionesTrayecto';
+	var $name = 'JurisdiccionesEstructuraPlan';
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array(
@@ -11,8 +11,8 @@ class JurisdiccionesTrayecto extends AppModel {
 								'fields' => '',
 								'order' => ''
 			),
-			'Trayecto' => array('className' => 'Trayecto',
-								'foreignKey' => 'trayecto_id',
+			'EstructuraPlan' => array('className' => 'EstructuraPlan',
+								'foreignKey' => 'estructura_plan_id',
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
