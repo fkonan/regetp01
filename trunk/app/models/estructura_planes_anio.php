@@ -10,12 +10,6 @@ class EstructuraPlanAnio extends AppModel {
 								'conditions' => '',
 								'fields' => '',
 								'order' => ''
-			),
-			'Etapa' => array('className' => 'Etapa',
-								'foreignKey' => 'etapa_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => ''
 			)
 	);
 
