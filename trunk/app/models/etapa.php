@@ -17,18 +17,6 @@ class Etapa extends AppModel {
                                                     'finderQuery' => '',
                                                     'counterQuery' => ''
             ),
-            'EtapasJurisdiccion' => array('className' => 'EtapasJurisdiccion',
-                                                    'foreignKey' => 'etapa_id',
-                                                    'dependent' => false,
-                                                    'conditions' => '',
-                                                    'fields' => '',
-                                                    'order' => '',
-                                                    'limit' => '',
-                                                    'offset' => '',
-                                                    'exclusive' => '',
-                                                    'finderQuery' => '',
-                                                    'counterQuery' => ''
-            )
 	);
 	
 	var $validate = array(

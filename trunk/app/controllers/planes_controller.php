@@ -210,27 +210,32 @@ class PlanesController extends AppController {
 		$this->rutaUrl_for_layout[] = array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$instit['Instit']['id'] );
 		$this->rutaUrl_for_layout[] = array('name'=> 'Oferta Educativa','link'=>'/Planes/index/'.$instit['Instit']['id'] );
 		
-		
+                $planes_view_tabla['element'] = 'planes_view_tabla_normal';
+                $planes_view_tabla['options'] = array();
 		//	Si es FP mostrar la vista para FP, sino mostrar la vista por default (view)
 		switch ($plan['Plan']['oferta_id']):
-		case 1: // FP
-            $this->set('planes_view_tabla','planes_view_tabla_fp');
-            break;
-		case 2: //IT
-		case 5: //SNU
-		case 3: //MT, SEC
-			$this->set('planes_view_tabla','planes_view_tabla_normal');
-			 break;
-		case 4: //SNU
-		case 6: //SUP NO TECNICO
-			 $this->set('planes_view_tabla','planes_view_tabla_snu');
-			 break;
-		default: 
-			$this->set('planes_view_tabla','planes_view_tabla_normal');
-			 break;
-        endswitch;
-       
+                    case 1: // FP
+                        $planes_view_tabla['element'] = 'planes_view_tabla_fp';
+                        break;
+                    case 4: //SNU
+                    case 6: //SUP NO TECNICO
+                            $planes_view_tabla['element'] = 'planes_view_tabla_snu';
+                             break;
+                    case 2: //IT
+                    case 5: //SNU
+                    case 3: //MT, SEC
+                    default:
+                            $trayectosData = $this->Plan->getEstructuraOfertaYDatos();
+                            if (!empty($trayectosData)){
+                               $planes_view_tabla['element'] = 'planes_view_tabla_sectec_trayectos';
+                               $planes_view_tabla['options'] = array('trayectosData'=>$this->Plan->getEstructuraOfertaYDatos());
+                            } else {
+                               $planes_view_tabla['element'] = 'planes_view_tabla_normal';
+                            }
+                            break;
+            endswitch;
 
+            $this->set('planes_view_tabla',$planes_view_tabla);
 	}
 
 	function add($instit_id = null) {

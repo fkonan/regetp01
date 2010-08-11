@@ -135,15 +135,13 @@ $cue_instit = $instit['cue'].$anexo;
 </div>
 
 <h2>Datos Históricos de Matrícula</h2>
-	<?
-	/**
-	 *  Esto renderiza el Element de acuerdo a lo que el controlador diga.
-	 *  SI el plan es FP, va agenerar una tabla para mostrar FP
-	 *  Si el plan es otro tipo, renderizará la tabla normal
-	 */
-	echo $this->renderElement($planes_view_tabla);
-
-        echo $this->renderElement('planes_view_tabla_sectec_trayectos');
+	<?        
+            /**
+             *  Esto renderiza el Element de acuerdo a lo que el controlador diga.
+             *  SI el plan es FP, va agenerar una tabla para mostrar FP
+             *  Si el plan es otro tipo, renderizará la tabla normal
+             */
+            echo $this->renderElement($planes_view_tabla['element'], $planes_view_tabla['options']);
 	?>
 	
 	

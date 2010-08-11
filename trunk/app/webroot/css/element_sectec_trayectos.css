@@ -6,7 +6,7 @@
 }
 
 .estructura-plan  span{
-	width: 64px;
+	width: 128px;
 	float: left;
 	text-align: center;
 }
@@ -92,11 +92,11 @@
 }
 
 .anio-seccion{
-	width: 32px !important;
+	width: 64px !important;
 }
 
 .anio-hstaller{
-	width: 32px !important;
+	width: 64px !important;
 }
 
 
