@@ -38,7 +38,7 @@ class AniosController extends AppController {
 		$ciclos = $this->Anio->Ciclo->find('list');
 		$etapas = $this->Anio->Etapa->find('list');
 
-                $trayectosDisponibles = $this->Anio->TrayectoAnio->find('list');
+                $trayectosDisponibles = $this->Anio->EstructuraPlanesAnio->find('list');
                 debug($trayectosDisponibles);
 
 		$this->set('plan_id',$plan_id);
