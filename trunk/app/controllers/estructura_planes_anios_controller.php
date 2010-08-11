@@ -1,13 +1,13 @@
 <?php
-class EstructuraPlanAniosController extends AppController {
+class EstructuraPlanesAniosController extends AppController {
 
-	var $name = 'EstructuraPlanAnios';
+	var $name = 'EstructuraPlanesAnios';
 	var $helpers = array('Html', 'Form');
         var $paginate = array('order'=>array('EstructuraPlanesAnio.anio_escolaridad'=>'asc'));
 
 	function index() {
 		$this->EstructuraPlanesAnio->recursive = 0;
-		$this->set('estructuraPlanAnios', $this->paginate());
+		$this->set('estructuraPlanesAnios', $this->paginate());
 	}
 
 	function view($id = null) {
@@ -28,9 +28,9 @@ class EstructuraPlanAniosController extends AppController {
 				$this->Session->setFlash(__('The EstructuraPlanesAnio could not be saved. Please, try again.', true));
 			}
 		}
-		$trayectos = $this->EstructuraPlanesAnio->Trayecto->find('list');
+		$estructuraPlanes = $this->EstructuraPlanesAnio->Trayecto->find('list');
 		$etapas = $this->EstructuraPlanesAnio->Etapa->find('list');
-		$this->set(compact('trayectos', 'etapas'));
+		$this->set(compact('estructuraPlanes', 'etapas'));
 	}
 
 	function edit($id = null) {
@@ -49,9 +49,9 @@ class EstructuraPlanAniosController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->EstructuraPlanesAnio->read(null, $id);
 		}
-		$trayectos = $this->EstructuraPlanesAnio->Trayecto->find('list');
+		$estructuraPlanes = $this->EstructuraPlanesAnio->Trayecto->find('list');
 		$etapas = $this->EstructuraPlanesAnio->Etapa->find('list');
-		$this->set(compact('trayectos','etapas'));
+		$this->set(compact('estructuraPlanes','etapas'));
 	}
 
 	function delete($id = null) {

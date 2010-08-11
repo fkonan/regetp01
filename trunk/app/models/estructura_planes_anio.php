@@ -1,7 +1,7 @@
 <?php
-class EstructuraPlanAnio extends AppModel {
+class EstructuraPlanesAnio extends AppModel {
 
-	var $name = 'EstructuraPlanAnio';
+	var $name = 'EstructuraPlanesAnio';
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array(

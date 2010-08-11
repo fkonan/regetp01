@@ -15,6 +15,12 @@ class Plan extends AppModel {
 			'Sector',
 			'Subsector',
 			'Titulo',
+                        'EstructuraPlan' => array('className' => 'EstructuraPlan',
+                                                                            'foreignKey' => 'estructura_plan_id',
+                                                                            'conditions' => '',
+                                                                            'fields' => '',
+                                                                            'order' => ''
+                                    ),
 	);
 
 	var $hasMany = array(

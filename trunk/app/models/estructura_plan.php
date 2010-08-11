@@ -26,7 +26,7 @@ class EstructuraPlan extends AppModel {
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $hasMany = array(
-			'EstructuraPlanAnio' => array('className' => 'EstructuraPlanAnio',
+			'EstructuraPlanesAnio' => array('className' => 'EstructuraPlanesAnio',
 								'foreignKey' => 'estructura_plan_id',
 								'dependent' => false,
 								'conditions' => '',
