@@ -189,7 +189,9 @@ class PlanesController extends AppController {
 			$this->Session->setFlash(__('El Plan no es correcto.', true));
 			$this->redirect(array('action'=>'index'));
 		}
-		
+                
+		$this->Plan->getEstructuraSugerida();
+
 		$plan = $this->Plan->read(null, $id);
 		
 		//ordenos los años para ue puedan ser mostrados en la vista
@@ -239,7 +241,7 @@ class PlanesController extends AppController {
 	}
 
 	function add($instit_id = null) {
-		if (!empty($this->data) && !$instit_id) {
+                if (!empty($this->data) && !$instit_id) {
 			$this->Session->setFlash(__('Institución incorrecta', true));
 			$this->redirect(array('controller'=>'pages', 'action'=>'home'));
 		}
