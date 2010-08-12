@@ -33,7 +33,7 @@ foreach ($trayectos_asignados as $jurisdiccionesTrayecto):
                         $j = 0;
                         foreach($jurisdiccionesTrayecto['EstructuraPlan']['EstructuraPlanesAnio'] as $anio ):
                         ?>
-                            <li><?php echo $anio['edad_teorica'];?>º</li>
+                            <li><?php echo $anio['edad_teorica'];?></li>
                         <?php
                         endforeach;
                         ?>
@@ -46,7 +46,7 @@ foreach ($trayectos_asignados as $jurisdiccionesTrayecto):
                         $j = 0;
                         foreach($jurisdiccionesTrayecto['EstructuraPlan']['EstructuraPlanesAnio'] as $anio ):
                         ?>
-                            <li><?php echo $anio['anio'];?></li>
+                            <li><?php echo $anio['anio'];?>º</li>
                         <?php
                         endforeach;
                         ?>
