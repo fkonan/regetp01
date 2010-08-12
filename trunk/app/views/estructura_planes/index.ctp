@@ -1,5 +1,5 @@
 <div class="estructuraplanes index">
-<h2><?php __('estructuraplanes');?></h2>
+<h2><?php __('Estructura de Planes');?></h2>
 <p>
 <?php
 echo $paginator->counter(array(
