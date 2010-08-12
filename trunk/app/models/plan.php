@@ -551,7 +551,67 @@ class Plan extends AppModel {
                 $plan_id = $this->id;
             }
 
-            return 1;
+            $anios = $this->Anio->find('all',array(
+                                    'fields'=> array('ciclo_id','etapa_id','count(etapa_id) AS "Anio__total"'),
+                                    'conditions'=> array('plan_id'=>$plan_id),
+                                    'group'=> array('etapa_id', 'ciclo_id'),
+                                    'order'=>'ciclo_id'));
+
+            /*
+            [0] => Array
+                (
+                    [Anio] => Array
+                        (
+                            [ciclo_id] => 2007
+                            [etapa_id] => 4  // (C.B.)
+                            [total] => 3
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [Anio] => Array
+                        (
+                            [ciclo_id] => 2007
+                            [etapa_id] => 5 // (C.S.)
+                            [total] => 3
+                        )
+
+                )
+             */
+            // chequea si existen en un mismo ciclo distintas etapas
+            $ciclo_anterior = '';
+            foreach ($anios as $anio) {
+                if ($anio['Anio']['ciclo_id'] != $ciclo_anterior) {
+                    $ciclo_anterior = $anio['Anio']['ciclo_id'];
+                    $etapas_en_ciclos[$anio['Anio']['ciclo_id']] = $anio['Anio']['etapa_id'];
+                }
+                else {
+                    // etapa repetira en un mismo ciclo
+                    if (!@in_array($anio['Anio']['ciclo_id'], $ciclos_con_repeticiones)) {
+                        $ciclos_con_repeticiones[] = $anio['Anio']['ciclo_id'];
+                    }
+                }
+            }
+            
+            // si hubo repeticiones pero el ultimo ciclo no tuvo, se sugiere el mismo
+            if (!@in_array($ciclo_anterior, $ciclos_con_repeticiones))
+            {
+                $estructuraPlanes = $this->EstructuraPlan->find('all',array(
+                                    'fields'=> array('id'),
+                                    'conditions'=> array('etapa_id'=>$etapas_en_ciclos[$ciclo_anterior])));
+
+                foreach ($estructuraPlanes as $estructuraPlan) {
+                    if (count($estructuraPlan['EstructuraPlanesAnio']) == 2) {
+                        return $estructuraPlan['EstructuraPlan']['id'];
+                    }
+                }
+            }
+            
+            //debug($ciclos_con_repeticiones);
+
+            return 0;
         }
 
 

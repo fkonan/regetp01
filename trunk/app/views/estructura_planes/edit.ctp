@@ -35,7 +35,7 @@ function EtapaAddObject(etapa) {
                   anio_escolaridad: etapa.anio_escolaridad };
 
     // agrega al arbol de etapas
-    jQuery("#etapas-tree").append("<li>"+etapas[i]['etapa_nombre']+" "+etapas[i]['anio']+"</li>");
+    jQuery("#etapas-tree").append("<li>"+etapas[i]['etapa_nombre']+" "+etapas[i]['nro_anio']+"</li>");
 }
 
 function EtapasASubmit() {
