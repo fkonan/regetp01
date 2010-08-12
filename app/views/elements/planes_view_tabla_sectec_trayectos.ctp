@@ -126,12 +126,18 @@ if (empty($trayectosData)) {
 
 <div class="estructura-plan">
 
+    <?php
+    if (!empty($trayectosData['anios'])) :
+    ?>
     <div class="edad-teorica">
         <h1>Año de Escolaridad</h1>
         <?php
         meter_anios($trayectosData);
         ?>
     </div>
+    <?php
+    endif
+    ?>
 
     <div class="clear"></div>
 
