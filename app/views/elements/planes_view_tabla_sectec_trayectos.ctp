@@ -81,10 +81,8 @@ $trayectosData['ciclo_lectivo'] = array(
 ///////////////////////////////////////////////////////////////
 //  Definicion de algunas funciones utilizadas
 function  meter_anios($trayectosData){
-    if (empty($trayectosData['anios'])){
-                debug("faltó el array con años teóricos a mostrar:: 'trayectosData[anios]'");
-        } else {
-            foreach($trayectosData['anios'] as $td) {
+    if (!empty($trayectosData['anios'])) {
+        foreach($trayectosData['anios'] as $td) {
                 ?>
                 <span><?php echo $td ?></span>
                 <?php
@@ -156,8 +154,9 @@ if (empty($trayectosData)) {
 
         <?php
         }
-        ?>
 
+        if(!empty($trayectosData['ciclo_lectivo'])):
+        ?>
         <div class="datos-anios">
             <?php
             foreach ($trayectosData['ciclo_lectivo'] as $cicloLectivo) {
@@ -183,6 +182,9 @@ if (empty($trayectosData)) {
             }
             ?>
         </div>
+        <?php
+        endif;
+        ?>
     </div>
 </div>
 
