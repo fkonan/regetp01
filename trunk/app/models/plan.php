@@ -15,13 +15,8 @@ class Plan extends AppModel {
 			'Sector',
 			'Subsector',
 			'Titulo',
-                        'EstructuraPlan' => array('className' => 'EstructuraPlan',
-                                                                            'foreignKey' => 'estructura_plan_id',
-                                                                            'conditions' => '',
-                                                                            'fields' => '',
-                                                                            'order' => ''
-                                    ),
-	);
+                        'EstructuraPlan'
+            );
 
 	var $hasMany = array(
 			'Anio' => array('className' => 'Anio',
@@ -614,8 +609,8 @@ class Plan extends AppModel {
                             ),
                         )),
                 );
-                return $trayectosData;
-                //return null;
+                //return $trayectosData;
+                return null;
         }
 
 }
