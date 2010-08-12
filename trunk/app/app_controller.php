@@ -94,7 +94,7 @@ class AppController extends Controller {
                 // si es Ajax y no tengo permisos que me tire un error HTTP
                 // asi lo puedo capturar desde jQuery
                 if($this->Requesthandler->isAjax()){
-                    Configure::write ( 'debug', 0);
+                    Configure::write ( 'debug', 1);
                     if (!$this->Acl->check($this->Auth->user(), $this->action)){
                         header('HTTP/1.1 401 Unauthorized');
                     }

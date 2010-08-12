@@ -22,7 +22,7 @@ class AniosController extends AppController {
 			$plan_id = $this->data['Anio']['plan_id'];
 		}
 	
-		$this->layout='popup';
+		//$this->layout='popup';
 		if (!empty($this->data)) {
 			$this->Anio->create();
 			if ($this->Anio->save($this->data)) {
@@ -38,9 +38,14 @@ class AniosController extends AppController {
 		$ciclos = $this->Anio->Ciclo->find('list');
 		$etapas = $this->Anio->Etapa->find('list');
 
-                $trayectosDisponibles = $this->Anio->EstructuraPlanesAnio->find('list');
-                debug($trayectosDisponibles);
+                
+                $estructuraPlanId = $this->Anio->Plan->getEstructuraSugerida($plan_id);
+                $trayectosDisponibles = $this->Anio->EstructuraPlanesAnio->EstructuraPlan->find('first', array(
+                    'contain'=> array('EstructuraPlanesAnio'=>array('order'=>array('EstructuraPlanesAnio.edad_teorica'))),
+                    'conditions'=> array('EstructuraPlan.id'=>$estructuraPlanId),   
+                ));
 
+                $this->set('trayectosDisponibles',$trayectosDisponibles);
 		$this->set('plan_id',$plan_id);
 		$this->set('duracion_hs',$duracion_hs);
 		$this->set(compact('planes', 'ciclos', 'etapas'));

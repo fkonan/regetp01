@@ -143,12 +143,26 @@ $cue_instit = $instit['cue'].$anexo;
              */
             echo $this->renderElement($planes_view_tabla['element'], $planes_view_tabla['options']);
 	?>
-	
+
+<div id="nueva-data"></div>
 	
 	<div class="actions">
 		<ul>
 			<?php //echo $html->link(__('Agregar Nuevo Año', true), array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id']));?>
-			<li><a href="<?= $html->url(array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id'] .'/' . $plan['Plan']['duracion_hs']))?>" onClick="window.open('<?= $html->url(array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id'] .'/' . $plan['Plan']['duracion_hs']))?>','_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=310,height=500'); return false;">Agregar Datos</a></li>
+			<li>
+                            <a  href="<?= $html->url(array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id'] .'/' . $plan['Plan']['duracion_hs']))?>"
+                                onClick="return agregar_datos_anios();">Agregar Datos</a></li>
 		</ul>
 	</div>
 
+
+
+<script type="text/javascript">
+    function agregar_datos_anios(){
+        var urlEnvio = '<?= $html->url(array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id'] .'/' . $plan['Plan']['duracion_hs']))?>';
+
+        jQuery('#nueva-data').load(urlEnvio);
+
+        return false;
+    }
+</script>

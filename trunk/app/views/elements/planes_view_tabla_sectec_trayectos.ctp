@@ -7,6 +7,9 @@
  *
  *  es necesario pasarle un array con la siguiente forma:
  *
+ *  $trayectosData['editable'] si esta en "true" hace que los valores:
+ *                             matricula, secciones y hs taller sean editables
+ * 
  *  array $trayectosData['anios']
  *      Listado de años teoricos. Ej: array(12,13,14,15,16)
  *
@@ -114,7 +117,12 @@ function limpiar_nombre($string){
 ////////////////////////////////////////////////////////////
 
 
-
+$esEditable = false;
+if (!empty($trayectosData['editable'])){
+    if ($trayectosData['editable']) {
+        $esEditable = true;
+    }
+}
 
 // Inicio del HTML a mostrar
 echo $html->css('element_sectec_trayectos','stylesheet', array('media'=>'screen'));
@@ -167,17 +175,17 @@ if (empty($trayectosData)) {
             <?php
             foreach ($trayectosData['ciclo_lectivo'] as $cicloLectivo) {
                 ?>
-                <div class="anio-ciclo-dato izquierda-1"><?php echo $cicloLectivo['title']?></div>
+                <div class="anio-ciclo-dato izquierda-1 <?php echo $esEditable?'editable':''?>"><?php echo $cicloLectivo['title']?></div>
                 <div class="anio-ciclo">
                         <?php
                         foreach ($cicloLectivo['ciclos_data'] as $cd) {
                             ?>
                              <span>
-                                <span class="anio-dato anio-matricula" title="Matrícula"><?php echo $cd['matricula']?></span>
+                                <span class="anio-dato anio-matricula <?php echo $esEditable?'editable':''?>" title="Matrícula" form="data[Anio][matricula]"><?php echo $cd['matricula']?></span>
                                 <span class="anio-dato anio-matricula" title="Matrícula" style="font-size: 6pt !important;">Matrícula</span>
-                                <span class="anio-dato anio-seccion" title="Secciones"  style="clear: left"><?php echo $cd['seccion']?></span>
+                                <span class="anio-dato anio-seccion <?php echo $esEditable?'editable':''?>" title="Secciones"  style="clear: left" form="data[Anio][secciones]"><?php echo $cd['seccion']?></span>
                                 <span class="anio-dato anio-seccion" title="Secciones" style="font-size: 6pt; clear: right">Secciónes</span>
-                                <span class="anio-dato anio-hstaller" title="Hs. Taller" style="clear: left"><?php echo $cd['hs_taller']?></span>
+                                <span class="anio-dato anio-hstaller <?php echo $esEditable?'editable':''?>" title="Hs. Taller" style="clear: left" form="data[Anio][hs_taller]"><?php echo $cd['hs_taller']?></span>
                                 <span class="anio-dato anio-hstaller" title="Hs. Taller" style="font-size: 6pt">Hs Taller</span>
                             </span>
                             <?php
