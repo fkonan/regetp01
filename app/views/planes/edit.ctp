@@ -1,16 +1,28 @@
 <script type="text/javascript">
-    function toggleTitulos(){
+     function toggleTitulos(){
          if (jQuery('#PlanOfertaId').val() != '') {
             jQuery('#divPlanTituloId').show();
         }
         else {
              jQuery('#divPlanTituloId').hide();
         }
+
+        toggleEstructuraPlan();
     }
 
     jQuery(document).ready(function () {
         toggleTitulos();
+        toggleEstructuraPlan();
     });
+
+    function toggleEstructuraPlan() {
+        if (jQuery('#PlanOfertaId :selected').val() != 2 && jQuery('#PlanOfertaId :selected').val() != 3) {
+            jQuery('#PlanEstructuraPlanId').attr('disabled', true);
+        }
+        else {
+            jQuery('#PlanEstructuraPlanId').removeAttr('disabled');
+        }
+    }
 </script>
 
 <h1>Editar Plan</h1>
@@ -30,6 +42,8 @@ $cue_instit = $instit['cue'].$anexo;
 
 
         echo $form->input('oferta_id',array('empty'=>'Seleccione','onchange'=>'toggleTitulos();'));
+
+        echo $form->input('estructura_plan_id',array('empty'=>'Seleccione'));
 
         $meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
         echo $form->input(
