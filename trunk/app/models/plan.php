@@ -542,61 +542,78 @@ class Plan extends AppModel {
 
 
 
+        /**
+         *
+         * Me busca entre los anios del Plan para identificar la estructura de su oferta
+         * Si hay varios ciclos lectivos me busca el ultimo
+         * Devuelve el ID de la estcuctura del plan
+         * 
+         * @param integer $plan_id
+         * @return integer  devuelve el ID de estructura_planes
+         */
+        function getEstructuraSugerida($plan_id = null){
+            if (empty($plan_id)) {
+                $plan_id = $this->id;
+            }
+
+            return 1;
+        }
+
 
         function getEstructuraOfertaYDatos(){
-            //$trayectosData['anios'] = array(12,13,14,15);
+               $trayectosData['anios'] = array(12,13,14,15);
                 $trayectosData['etapa_header'] = array(
                     array('title'=>'Ciclo Básico', 'anios'=>array(1,2,3)),
                     array('title'=>'Ciclo Superior', 'anios'=>array(4)),
                 );
-//                $trayectosData['ciclo_lectivo'] = array(
-//                    array('title'=>2009,
-//                        'ciclos_data'=> array(
-//                            array(
-//                                'matricula'=>12,
-//                                'seccion'=>10,
-//                                'hs_taller'=>1,
-//                            ),
-//                            array(
-//                                'matricula'=>12,
-//                                'seccion'=>10,
-//                                'hs_taller'=>2,
-//                            ),
-//                            array(
-//                                'matricula'=>12,
-//                                'seccion'=>10,
-//                                'hs_taller'=>3,
-//                            ),
-//                            array(
-//                                'matricula'=>12,
-//                                'seccion'=>10,
-//                                'hs_taller'=>4,
-//                            ),
-//                        )),
-//                    array('title'=>2008,
-//                        'ciclos_data'=> array(
-//                            array(
-//                                'matricula'=>12,
-//                                'seccion'=>10,
-//                                'hs_taller'=>1,
-//                            ),
-//                            array(
-//                                'matricula'=>12,
-//                                'seccion'=>10,
-//                                'hs_taller'=>2,
-//                            ),
-//                            array(
-//                                'matricula'=>12,
-//                                'seccion'=>10,
-//                                'hs_taller'=>3,
-//                            ),
-//                            array(
-//                                'matricula'=>12,
-//                                'seccion'=>10,
-//                                'hs_taller'=>4,
-//                            ),
-//                        )),
-//                );
+                $trayectosData['ciclo_lectivo'] = array(
+                    array('title'=>2009,
+                        'ciclos_data'=> array(
+                            array(
+                                'matricula'=>12,
+                                'seccion'=>10,
+                                'hs_taller'=>1,
+                            ),
+                            array(
+                                'matricula'=>12,
+                                'seccion'=>10,
+                                'hs_taller'=>2,
+                            ),
+                            array(
+                                'matricula'=>12,
+                                'seccion'=>10,
+                                'hs_taller'=>3,
+                            ),
+                            array(
+                                'matricula'=>12,
+                                'seccion'=>10,
+                                'hs_taller'=>4,
+                            ),
+                        )),
+                    array('title'=>2008,
+                        'ciclos_data'=> array(
+                            array(
+                                'matricula'=>12,
+                                'seccion'=>10,
+                                'hs_taller'=>1,
+                            ),
+                            array(
+                                'matricula'=>12,
+                                'seccion'=>10,
+                                'hs_taller'=>2,
+                            ),
+                            array(
+                                'matricula'=>12,
+                                'seccion'=>10,
+                                'hs_taller'=>3,
+                            ),
+                            array(
+                                'matricula'=>12,
+                                'seccion'=>10,
+                                'hs_taller'=>4,
+                            ),
+                        )),
+                );
                 return $trayectosData;
                 //return null;
         }
