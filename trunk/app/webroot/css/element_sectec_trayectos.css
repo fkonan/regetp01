@@ -18,8 +18,11 @@
 }
 
 .etapa-anios{
-	padding: 3px 0px;
+    border:thin solid;
+    height:19px;
+    padding:0;
 }
+
 
 .estructura-plan H1, .estructura-plan H2{
 	font-size: 10pt;
