@@ -46,8 +46,10 @@ class JurisdiccionesEstructuraPlanesController extends AppController {
 
                     $trayectos_restantes = $this->JurisdiccionesEstructuraPlan->EstructuraPlan->find('all', array(
                                                                                             'contain'=> array('Etapa',
-                                                                                                'EstructuraPlanesAnio'=>array('order'=> array('EstructuraPlanesAnio.edad_teorica'), 'conditions'=> array('NOT'=>array("EstructuraPlanesAnio.id" => $notIn)))
-                                                                                            )                                                                                            
+                                                                                                'EstructuraPlanesAnio'=>array(
+                                                                                                    'order'=> array('EstructuraPlanesAnio.edad_teorica')
+                                                                                            )),
+                                                                                            'conditions'=> array('NOT'=>array("EstructuraPlan.id" => $notIn))
                                                                                         )
                                                                                 );
 
