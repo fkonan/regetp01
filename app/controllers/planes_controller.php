@@ -190,8 +190,6 @@ class PlanesController extends AppController {
 			$this->redirect(array('action'=>'index'));
 		}
                 
-		$this->Plan->getEstructuraSugerida();
-
 		$plan = $this->Plan->read(null, $id);
 		
 		//ordenos los años para ue puedan ser mostrados en la vista

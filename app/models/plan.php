@@ -544,11 +544,21 @@ class Plan extends AppModel {
          * Devuelve el ID de la estcuctura del plan
          * 
          * @param integer $plan_id
+         * @param bool $busqueda_forzada forza la sugerencia por mas que ya tenga estructura asociada
          * @return integer  devuelve el ID de estructura_planes
          */
-        function getEstructuraSugerida($plan_id = null){
+        function getEstructuraSugerida($plan_id=null, $busqueda_forzada=false){
             if (empty($plan_id)) {
                 $plan_id = $this->id;
+            }
+
+            if (!$busqueda_forzada) {
+                // si ya tiene una estructura asignada
+                $this->recursive = -1;
+                $plan = $this->findById($plan_id);
+                
+                if ($plan['Plan']['estructura_plan_id'] != 0)
+                    return $plan['Plan']['estructura_plan_id'];
             }
 
             $anios = $this->Anio->find('all',array(
@@ -556,7 +566,6 @@ class Plan extends AppModel {
                                     'conditions'=> array('plan_id'=>$plan_id),
                                     'group'=> array('etapa_id', 'ciclo_id'),
                                     'order'=>'ciclo_id'));
-
             /*
             [0] => Array
                 (
@@ -582,13 +591,16 @@ class Plan extends AppModel {
              */
             // chequea si existen en un mismo ciclo distintas etapas
             $ciclo_anterior = '';
+            $totales = '';
             foreach ($anios as $anio) {
                 if ($anio['Anio']['ciclo_id'] != $ciclo_anterior) {
                     $ciclo_anterior = $anio['Anio']['ciclo_id'];
                     $etapas_en_ciclos[$anio['Anio']['ciclo_id']] = $anio['Anio']['etapa_id'];
+
+                    $totales[$anio['Anio']['ciclo_id']][$anio['Anio']['etapa_id']] = $anio['Anio']['total'];
                 }
                 else {
-                    // etapa repetira en un mismo ciclo
+                    // etapa repetida en un mismo ciclo
                     if (!@in_array($anio['Anio']['ciclo_id'], $ciclos_con_repeticiones)) {
                         $ciclos_con_repeticiones[] = $anio['Anio']['ciclo_id'];
                     }
@@ -603,7 +615,7 @@ class Plan extends AppModel {
                                     'conditions'=> array('etapa_id'=>$etapas_en_ciclos[$ciclo_anterior])));
 
                 foreach ($estructuraPlanes as $estructuraPlan) {
-                    if (count($estructuraPlan['EstructuraPlanesAnio']) == 2) {
+                    if (count($estructuraPlan['EstructuraPlanesAnio']) == $totales[$ciclo_anterior][$etapas_en_ciclos[$ciclo_anterior]]) {
                         return $estructuraPlan['EstructuraPlan']['id'];
                     }
                 }
