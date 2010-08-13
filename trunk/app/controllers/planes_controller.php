@@ -269,8 +269,8 @@ class PlanesController extends AppController {
 		$ciclos = $this->Plan->Anio->Ciclo->find('list');
 
                 $estructuraPlanes = $this->Plan->EstructuraPlan->find('list');
-                
-		$this->set(compact('subsectores','sectores','titulos', 'ciclos', 'estructuraPlanes'));
+
+                $this->set(compact('subsectores','sectores','titulos', 'ciclos', 'estructuraPlanes'));
 		
 		$this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$instit['Instit']['id'] );
 	}
