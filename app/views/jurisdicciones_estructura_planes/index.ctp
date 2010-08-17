@@ -1,22 +1,10 @@
-<script type="text/javascript">
-    jQuery(document).ready(function(){
-        jQuery(".clickeable").click(function(){
-            jQuery(this).toggleClass("green");
-            if(jQuery(this).hasClass("green")){
-                jQuery(this).find("#JurisdiccionesTrayectoAsignado").attr("checked", "checked");
-            }else{
-                jQuery(this).find("#JurisdiccionesTrayectoAsignado").removeAttr("checked");
-            }
-            
-        });
-    });
-</script>
 <div class="jurisdiccionesTrayectos index">
 <h2><?php __('JurisdiccionesEstructuraPlan');?></h2>
 <?php echo $form->create('JurisdiccionesEstructuraPlan', array('action'=>'index'));?>
 <?php echo $form->hidden('jurisdiccion_id',array('name'=>'data[jurisdiccion_id]','value'=> $jurisdiccion_id))?>
 
 <?php
+
 $i = 0;
 foreach ($trayectos_asignados as $jurisdiccionesTrayecto):
     $render['estructura'] =  $jurisdiccionesTrayecto['EstructuraPlan'];

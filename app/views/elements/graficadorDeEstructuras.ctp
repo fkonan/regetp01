@@ -45,7 +45,7 @@ if (empty($i)) {
             $j = 0;
             foreach($anios as $anio ):
             ?>
-                <li><?php echo $anio['anio'];?>º</li>
+                <li><?php echo $anio['nro_anio'];?>º</li>
             <?php
             endforeach;
             ?>
