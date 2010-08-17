@@ -610,14 +610,32 @@ class Plan extends AppModel {
             // si hubo repeticiones pero el ultimo ciclo no tuvo, se sugiere el mismo
             if (!@in_array($ciclo_anterior, $ciclos_con_repeticiones))
             {
-                $estructuraPlanes = $this->EstructuraPlan->find('all',array(
+                $plan = $this->find('all', array(
                                     'fields'=> array('id'),
-                                    'conditions'=> array('etapa_id'=>$etapas_en_ciclos[$ciclo_anterior])));
+                                    'contain'=>array('Instit'=>array('fields'=>'jurisdiccion_id')),
+                                    'conditions'=> array('Plan.id'=>$plan_id)
+                                        ));
+                if ($plan)
+                {
+                    $estructuraPlanes = $this->EstructuraPlan->find('all',array(
+                                        'fields'=> array('id'),
+                                        'contain'=>array(
+                                            'EstructuraPlanesAnio',
+                                            'JurisdiccionesEstructuraPlan'=>array(
+                                                'conditions'=>array('jurisdiccion_id'=>$plan['0']['Instit'])
+                                            )
+                                        ),
+                                        'conditions'=> array('etapa_id'=>$etapas_en_ciclos[$ciclo_anterior]
+                                            )));
 
-                foreach ($estructuraPlanes as $estructuraPlan) {
-                    if (count($estructuraPlan['EstructuraPlanesAnio']) == $totales[$ciclo_anterior][$etapas_en_ciclos[$ciclo_anterior]]) {
-                        return $estructuraPlan['EstructuraPlan']['id'];
+                    foreach ($estructuraPlanes as $estructuraPlan) {
+                        if (count($estructuraPlan['EstructuraPlanesAnio']) == $totales[$ciclo_anterior][$etapas_en_ciclos[$ciclo_anterior]]) {
+                            return $estructuraPlan['EstructuraPlan']['id'];
+                        }
                     }
+
+                    // si no coincide la cantidad de años, lo sugiere igual
+                    return $estructuraPlanes['0']['EstructuraPlan']['id'];
                 }
             }
             
