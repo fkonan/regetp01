@@ -1,4 +1,5 @@
 <?php echo $javascript->link('jsonlib.js'); ?>
+<?php echo $javascript->link('jquery.blockUI.js'); ?>
 <script type="text/javascript">
 var etapas = new Array();
 
@@ -21,7 +22,7 @@ function EtapaAdd() {
     jQuery("#anio_escolaridad").val('');
 
     // traba etapa
-    //jQuery('#etapa_id').attr('disabled', true);
+    //jQuery('#bloqueable').block({ message: null });
 }
 
 function EtapaAddObject(etapa) {
@@ -51,9 +52,12 @@ function EtapasASubmit() {
  		<legend><?php __('Crear EstructuraPlan');?></legend>
 	<?php
 		echo $form->input('name');
+        ?>
+        <div id="bloqueable">
+        <?php
                 echo $form->input('etapa_id', array('id'=>'etapa_id'));
 	?>
-
+        </div>
                 <br>
         <b>Agregar años</b>
         <br>
