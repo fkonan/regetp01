@@ -244,6 +244,62 @@ class AnioFixture extends CakeTestFixture {
 			'created' => '2010-04-29 09:26:46',
 			'modified' => '2010-04-29 09:26:46'
 		),
+            array(
+			'id' => 15,
+			'plan_id' => 7,
+			'ciclo_id' => 2007,
+			'old_item' => 1,
+			'anio' => 1,
+			'etapa_id' => 2,
+			'matricula' => 1,
+			'secciones' => 1,
+			'hs_taller' => 1,
+                        'estructura_planes_anio_id' => 0,
+			'created' => '2010-04-29 09:26:46',
+			'modified' => '2010-04-29 09:26:46'
+		),
+            array(
+			'id' => 16,
+			'plan_id' => 7,
+			'ciclo_id' => 2007,
+			'old_item' => 1,
+			'anio' => 1,
+			'etapa_id' => 2,
+			'matricula' => 1,
+			'secciones' => 1,
+			'hs_taller' => 1,
+                        'estructura_planes_anio_id' => 0,
+			'created' => '2010-04-29 09:26:46',
+			'modified' => '2010-04-29 09:26:46'
+		),
+            array(
+			'id' => 17,
+			'plan_id' => 7,
+			'ciclo_id' => 2007,
+			'old_item' => 1,
+			'anio' => 1,
+			'etapa_id' => 2,
+			'matricula' => 1,
+			'secciones' => 1,
+			'hs_taller' => 1,
+                        'estructura_planes_anio_id' => 0,
+			'created' => '2010-04-29 09:26:46',
+			'modified' => '2010-04-29 09:26:46'
+		),
+            array(
+			'id' => 18,
+			'plan_id' => 7,
+			'ciclo_id' => 2007,
+			'old_item' => 1,
+			'anio' => 1,
+			'etapa_id' => 2,
+			'matricula' => 1,
+			'secciones' => 1,
+			'hs_taller' => 1,
+                        'estructura_planes_anio_id' => 0,
+			'created' => '2010-04-29 09:26:46',
+			'modified' => '2010-04-29 09:26:46'
+		),
 	);
 }
 ?>

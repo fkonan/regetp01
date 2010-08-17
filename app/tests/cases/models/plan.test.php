@@ -43,6 +43,7 @@ class PlanTestCase extends CakeTestCase {
 
         $this->assertEqual($this->Plan->getEstructuraSugerida(3), 1);
         $this->assertEqual($this->Plan->getEstructuraSugerida(4), 3);
+        $this->assertEqual($this->Plan->getEstructuraSugerida(7), 2);
 
         $this->assertNotEqual($this->Plan->getEstructuraSugerida(1), 1);
         $this->assertNotEqual($this->Plan->getEstructuraSugerida(2), 3);
