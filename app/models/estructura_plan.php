@@ -28,6 +28,7 @@ class EstructuraPlan extends AppModel {
 	var $hasMany = array(
                         'Plan',
 			'EstructuraPlanesAnio',
+                        'JurisdiccionesEstructuraPlan',
 	);
 
 }
