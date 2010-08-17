@@ -7,13 +7,13 @@ function EtapaAdd() {
     // guarda la etapa
     //etapas[i] = new Array('etapa_id','edad_teorica','nro_anio','anio_escolaridad');
     etapas[i] = { etapa_id: jQuery("#etapa_id").val(),
-                  etapa_nombre: jQuery('#etapa_id :selected').text(),
+                  etapa_nombre: escape(jQuery('#etapa_id :selected').text()),
                   edad_teorica: jQuery("#edad_teorica").val(),
                   nro_anio: jQuery("#nro_anio").val(),
                   anio_escolaridad: jQuery("#anio_escolaridad").val() };
 
     // agrega al arbol de etapas
-    jQuery("#etapas-tree").append("<li>"+etapas[i]['etapa_nombre']+" "+etapas[i]['nro_anio']+"</li>");
+    jQuery("#etapas-tree").append("<li>"+unescape(etapas[i]['etapa_nombre'])+" "+etapas[i]['nro_anio']+"</li>");
 
     // resetea el form
     jQuery("#edad_teorica").val('');
