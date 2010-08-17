@@ -45,6 +45,7 @@ class EstructuraPlanesController extends AppController {
 	}
 
 	function edit($id = null) {
+                //Configure::write('debug', 0);
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid EstructuraPlan', true));
 			$this->redirect(array('action'=>'index'));
@@ -53,17 +54,26 @@ class EstructuraPlanesController extends AppController {
                         // etapas del EstructuraPlan
                         //$str = '[{"etapa_id":"6","edad_teorica":"11","nro_anio":"1","anio_escolaridad":""},{"etapa_id":"6","edad_teorica":"12","nro_anio":"2","anio_escolaridad":""},{"etapa_id":"6","edad_teorica":"13","nro_anio":"3","anio_escolaridad":""}]';
                         $aEtapas = json_decode($this->data['EstructuraPlan']['etapas'], true);
-
+                        
 			if ($this->EstructuraPlan->save($this->data)) {
                             // elimina las etapas actuales
                             $this->EstructuraPlan->EstructuraPlanesAnio->deleteAll(array('EstructuraPlanesAnio.estructura_plan_id' => $id));
                             // guarda el estructura_plan_id a cada etapa
                             if ($aEtapas) {
-                                foreach ($aEtapas as &$etapa) {
-                                    $etapa['estructura_plan_id'] = $this->EstructuraPlan->id;
+                                $i = 0;
+                                foreach ($aEtapas as $etapa) {
+                                    $etapas_aux[$i]['estructura_plan_id'] = $this->EstructuraPlan->id;
+                                    $etapas_aux[$i]['edad_teorica'] = $etapa['edad_teorica'];
+                                    $etapas_aux[$i]['nro_anio'] = $etapa['nro_anio'];
+                                    $etapas_aux[$i]['anio_escolaridad'] = $etapa['anio_escolaridad'];
+                                
+                                    $i++;
                                 }
+
+                                $this->EstructuraPlan->EstructuraPlanesAnio->saveAll($etapas_aux);
                             }
-                            $this->EstructuraPlan->EstructuraPlanesAnio->saveAll($aEtapas);
+                           
+                            
 
                             $this->Session->setFlash(__('El EstructuraPlan ha sido guardado', true));
                             $this->redirect(array('action'=>'index'));
@@ -81,6 +91,7 @@ class EstructuraPlanesController extends AppController {
                                 $etapas_to_serialize[$i]['estructura_plan_id'] = $etapa['estructura_plan_id'];
                                 $etapas_to_serialize[$i]['edad_teorica'] = $etapa['edad_teorica'];
                                 $etapas_to_serialize[$i]['nro_anio'] = $etapa['nro_anio'];
+                                $etapas_to_serialize[$i]['etapa_id'] = $this->data['EstructuraPlan']['etapa_id'];
                                 $etapas_to_serialize[$i]['etapa_nombre'] = htmlentities($this->data['Etapa']['name']);
                                 $etapas_to_serialize[$i]['anio_escolaridad'] = $etapa['anio_escolaridad'];
 

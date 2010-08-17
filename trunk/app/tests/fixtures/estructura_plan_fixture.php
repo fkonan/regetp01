@@ -23,7 +23,7 @@ class EstructuraPlanFixture  extends CakeTestFixture {
             ),
             array(
                 'id' 		=> 2,
-                'name'		=> "Polimodal",
+                'name'		=> "Polimodal de 3",
                 'etapa_id'	=> 2,
             ),
             array(
