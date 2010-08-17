@@ -622,7 +622,7 @@ class Plan extends AppModel {
                                         'contain'=>array(
                                             'EstructuraPlanesAnio',
                                             'JurisdiccionesEstructuraPlan'=>array(
-                                                'conditions'=>array('jurisdiccion_id'=>$plan['0']['Instit'])
+                                                'conditions'=>array('jurisdiccion_id'=>$plan['0']['Instit']['jurisdiccion_id'])
                                             )
                                         ),
                                         'conditions'=> array('etapa_id'=>$etapas_en_ciclos[$ciclo_anterior]

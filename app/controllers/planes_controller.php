@@ -304,9 +304,17 @@ class PlanesController extends AppController {
 		$subsectores = $this->Plan->Subsector->con_sector('list',$this->data['Plan']['sector_id']);
 		$ciclos = $this->Plan->Anio->Ciclo->find('list');
 
-                $estructuraPlanes = $this->Plan->EstructuraPlan->find('list');
+                //$estructuraPlanes = $this->Plan->EstructuraPlan->find('list');
+                $estructuraPlanes = $this->Plan->EstructuraPlan->JurisdiccionesEstructuraPlan->find('all',array(
+                                        'contain'=>array(
+                                            'EstructuraPlan'=>array('Etapa','EstructuraPlanesAnio'=>array('order'=> array('EstructuraPlanesAnio.edad_teorica')))
+                                        ),
+                                        'conditions'=>array('jurisdiccion_id'=>$instit['Instit']['jurisdiccion_id'])
+                                    ));
+                debug($estructuraPlanes);
+                $estructuraSugeridaId = $this->Plan->getEstructuraSugerida();
 
-		$this->set(compact('ofertas','subsectores','sectores','titulos','ciclos', 'estructuraPlanes'));
+		$this->set(compact('ofertas','subsectores','sectores','titulos','ciclos', 'estructuraPlanes', 'estructuraSugeridaId'));
 		
 		$this->rutaUrl_for_layout[] = array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$this->data['Plan']['instit_id'] );
 		$this->rutaUrl_for_layout[] = array('name'=> 'Oferta Educativa','link'=>'/Planes/index/'.$this->data['Plan']['instit_id'] );
