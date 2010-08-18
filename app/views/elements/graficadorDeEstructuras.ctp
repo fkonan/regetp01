@@ -1,21 +1,10 @@
-<script type="text/javascript">
-    jQuery(document).ready(function(){
-        jQuery(".clickeable").click(function(){
-            jQuery(this).toggleClass("green");
-            if(jQuery(this).hasClass("green")){
-                jQuery(this).find("#JurisdiccionesEstructuraPlanAsignado").attr("checked", "checked");
-            }else{
-                jQuery(this).find("#JurisdiccionesEstructuraPlanAsignado").removeAttr("checked");
-            }
-        });
-    });
-</script>
+
 <?php
 // Inicio del HTML a mostrar
 echo $html->css('element_sectec_trayectos','stylesheet', array('media'=>'screen'));
 
 if (empty($estructura) || empty($anios) || empty($etapa)) {
-    debug("la variable trayectosData es necesaria para generar la maqueta de la estructura de éste elemento.");
+    debug("la variable estructura es necesaria para generar la maqueta de la estructura de éste elemento.");
 }
 
 if (empty($i)) {
