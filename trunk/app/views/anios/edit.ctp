@@ -5,7 +5,7 @@
                  * @var $trayectosDisponibles array */
 $trayectosDisponibles;
 
-
+debug($anios);
 
 if (empty($trayectosDisponibles)) {
     ?>

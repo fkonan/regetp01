@@ -191,9 +191,16 @@ if (!empty($trayectosData['form_action'])) {
                     ?>
 
             <div class="anio-ciclo-dato izquierda-1 editable">
-                        <?php
-                        echo $form->select('Info.ciclo_id',$ciclos, date('Y',strtotime('now')));
-                        ?>
+                    <?php
+                    if (!empty($ciclo_seleccionado)) {
+                        $attrs = array('disabled'=>true);
+                        $defaultVal = $ciclo_seleccionado;
+                    } else {
+                        $attrs = array();
+                        $defaultVal = date('Y',strtotime('now'));
+                    }
+                    echo $form->select('Info.ciclo_id',$ciclos, $defaultVal, $attrs);
+                    ?>
             </div>
 
             <div class="anio-ciclo">
