@@ -13,14 +13,27 @@
     jQuery(document).ready(function () {
         toggleTitulos();
         toggleEstructuraPlan();
+
+        jQuery(".clickeable").click(function(){
+            jQuery(".green").toggleClass("green");
+            jQuery(this).removeClass("yellow");
+            jQuery(this).toggleClass("green");
+            jQuery('#estructura_plan_id').remove();
+            if(jQuery(this).hasClass("green")){
+                jQuery('#planAdd').append("<input id='estructura_plan_id' name='data[Plan][estructura_plan_id]' type='hidden' value='" + jQuery(this).attr("estructura_plan_id") + "' />");
+                jQuery(this).find("#JurisdiccionesEstructuraPlanAsignado").attr("checked", "checked");
+            }else{
+                jQuery(this).find("#JurisdiccionesEstructuraPlanAsignado").removeAttr("checked");
+            }
+        });
     });
 
     function toggleEstructuraPlan() {
         if (jQuery('#PlanOfertaId :selected').val() != 2 && jQuery('#PlanOfertaId :selected').val() != 3) {
-            jQuery('#PlanEstructuraPlanId').attr('disabled', true);
+            jQuery('#PlanEstructuraPlanId').hide();
         }
         else {
-            jQuery('#PlanEstructuraPlanId').removeAttr('disabled');
+            jQuery('#PlanEstructuraPlanId').show();
         }
     }
 </script>
@@ -34,17 +47,55 @@ $cue_instit = $instit['cue'].$anexo;
 <h2><?php echo $cue_instit." - ".$instit['nombre_completo']; ?></h2>
 
 <div class="planes form">
-    <?php echo $form->create('Plan');?>
+    <?php echo $form->create('Plan',array('id'=>'planAdd'));?>
     <fieldset>
         <?php
         echo $form->input('id');
         echo $form->input('instit_id',array('type'=>'hidden'));
-
-
+        
         echo $form->input('oferta_id',array('empty'=>'Seleccione','onchange'=>'toggleTitulos();'));
+        ?>
 
-        echo $form->input('estructura_plan_id',array('empty'=>'Seleccione'));
+        <?php
+        if(!empty($this->data['Plan']['estructura_plan_id'])){
+        ?>
+            <input id='estructura_plan_id' name='data[Plan][estructura_plan_id]' type='hidden' value='<?php echo $this->data['Plan']['estructura_plan_id']?>' />
+        <?php
+        }
+        ?>
+        <div id="PlanEstructuraPlanId">
+            <label>Elija una de las estructuras:</label>
+            <?
+                    foreach($estructuraPlanes as $estructura){
+            ?>
 
+            <div id="timelineLimiterMini" estructura_plan_id="<?php echo $estructura['EstructuraPlan']['id']?>" class="clickeable <?php echo (empty($this->data['Plan']['estructura_plan_id']))?(($estructura['EstructuraPlan']['id'] == $estructuraSugeridaId)?' yellow':''):($this->data['Plan']['estructura_plan_id'] == $estructura['EstructuraPlan']['id'])?' green':''?>">
+                <i><?php echo $estructura['EstructuraPlan']['name'];?><?php echo (empty($this->data['Plan']['estructura_plan_id']) && $estructura['EstructuraPlan']['id'] == $estructuraSugeridaId)?' (Sugerida)':''?> </i>
+                <div id="timelineScroll" style="margin-left: 0px;">
+                    <div>
+                        <div class="event">
+                            <div class="eventHeading blue"><?php echo $estructura['EstructuraPlan']['Etapa']['name']?></div>
+                                <ul class="eventList">
+                        <?php
+                        $j = 0;
+                        foreach($estructura['EstructuraPlan']['EstructuraPlanesAnio'] as $anio ):
+                        ?>
+                            <li><?php echo $anio['nro_anio'];?>º</li>
+                        <?php
+                        endforeach;
+                        ?>
+                                </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php
+                }
+        ?>
+        </div>
+
+        <?php
+        
         $meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
         echo $form->input(
                 'titulo_id',

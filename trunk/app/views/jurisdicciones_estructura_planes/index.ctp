@@ -1,3 +1,16 @@
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        jQuery(".clickeable").click(function(){
+            jQuery(this).toggleClass("green");
+            if(jQuery(this).hasClass("green")){
+                jQuery("").append("<input id='estructura_plan_id' name='data[Plan][estructura_plan_id]' type='hidden' value='" + jQuery(this).attr("estructura_plan_id") + "'/>");
+                jQuery(this).find("#JurisdiccionesEstructuraPlanAsignado").attr("checked", "checked");
+            }else{
+                jQuery(this).find("#JurisdiccionesEstructuraPlanAsignado").removeAttr("checked");
+            }
+        });
+    });
+</script>
 <div class="jurisdiccionesTrayectos index">
 <h2><?php __('JurisdiccionesEstructuraPlan');?></h2>
 <?php echo $form->create('JurisdiccionesEstructuraPlan', array('action'=>'index'));?>
