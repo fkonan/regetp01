@@ -112,11 +112,13 @@ class AniosController extends AppController {
                     'group'=>array('Anio.ciclo_id', 'Anio.plan_id'),
                     'order'=>array('Anio.ciclo_id'),
                         ));
-            $ciclosTodos = $this->Anio->Ciclo->find('list', array());
-            foreach ($ciclos as $c) {
-
+            $ciclosTmp = array();
+            foreach ($ciclosUsados as $c) {
+                $ciclosTmp[] = $c['Anio']['ciclo_id'];
             }
-            
+     
+            $ciclos = $this->Anio->Ciclo->find('list', array('conditions'=>array('Ciclo.id NOT'=>$ciclosTmp)));
+     
             $etapas = $this->Anio->Etapa->find('list');
             $this->set(compact('planes', 'ciclos', 'etapas'));
             $this->render($viewToRender);
@@ -125,8 +127,7 @@ class AniosController extends AppController {
 	function edit($id = null) {
             $aPlan = $this->Anio->find('first', array(
                 'conditions'=>array('Anio.id'=>$id),
-                'fields'=>array('Anio.plan_id')));
-            debug($aPlan);
+                'fields'=>array('Anio.plan_id','Anio.ciclo_id')));
             $plan_id = $aPlan['Anio']['plan_id'];
 
             
@@ -166,13 +167,21 @@ class AniosController extends AppController {
                     break;
             endswitch;
 
+            $this->set('ciclo_seleccionado', $aPlan['Anio']['ciclo_id']);
             $this->set('trayectosDisponibles',$trayectosDisponibles);
             $this->set('plan_id',$plan_id);
             //$this->set('duracion_hs',$duracion_hs);
+            $anios = $this->Anio->find('all', array(
+                'recursive'=>-1,
+                'conditions'=>array(
+                    'Anio.plan_id'=>$plan_id,
+                    'Anio.ciclo_id'=>$aPlan['Anio']['ciclo_id']
+                    )
+                ));
 
             $ciclos = $this->Anio->Ciclo->find('list');
             $etapas = $this->Anio->Etapa->find('list');
-            $this->set(compact('planes', 'ciclos', 'etapas'));
+            $this->set(compact('anios', 'ciclos', 'etapas'));
             $this->render($viewToRender);
 	}
 
