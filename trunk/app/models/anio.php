@@ -40,14 +40,14 @@ class Anio extends AppModel {
 				'rule' => VALID_NOT_EMPTY,
 				'required' => true,
 				'allowEmpty' => false,
-				'message' => 'Debe ingresar un número de año.'	
+				'message' => 'Debe ingresar un número de año.'
 			),
 			'rango1a7'=> array(
 				'rule' => '/^([1-9]|99)$/',
 				'required' => true,
 				'allowEmpty' => false,
 				//'on' => 'create', // or: 'update'
-				'message' => 'Debe ingresar un número de año entre 1 y 7.'	
+				'message' => 'Debe ingresar un número de año entre 1 y 7.'
 			)
 		),
 		'etapa_id'=>array(
@@ -56,7 +56,7 @@ class Anio extends AppModel {
 				'required' => true,
 				'allowEmpty' => false,
 				//'on' => 'create', // or: 'update'
-				'message' => 'Debe ingresar la etapa a la que corresponde el año seleccionado. (CB, EGB3, Polimodal, etc).'	
+				'message' => 'Debe ingresar la etapa a la que corresponde el año seleccionado. (CB, EGB3, Polimodal, etc).'
 			),
 		),
 		'secciones'=>array(
