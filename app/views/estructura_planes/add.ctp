@@ -25,6 +25,18 @@ function EtapaAdd() {
     //jQuery('#bloqueable').block({ message: null });
 }
 
+function sortfcn(a,b){
+     if(parseInt(a[0])<parseInt(b[0])){
+        return -1;
+     }
+     else if(parseInt(a[0])>parseInt(b[0])){
+        return 1;
+     }
+     else{
+        return 0;
+     }
+}
+
 function EtapaAddObject(etapa) {
     var i = etapas.length;
     // guarda la etapa
@@ -67,7 +79,7 @@ function EtapasASubmit() {
             echo $form->input('nro_anio', array('id'=>'nro_anio', 'label'=>'Año', 'maxlength'=>2, 'size'=>2, 'style'=>'width: 18px;', 'div' => false));
             echo $form->input('anio_escolaridad', array('id'=>'anio_escolaridad', 'label'=>'Año escolaridad', 'maxlength'=>2, 'size'=>2, 'style'=>'width: 18px;', 'div' => false));
 
-            echo $form->button('Agregar etapa', array('id'=>'add', 'onclick'=>'Javascript: EtapaAdd();'));
+            echo $form->button('Agregar año', array('id'=>'add', 'onclick'=>'Javascript: EtapaAdd();'));
 	?>
         </div>
 	</fieldset>
