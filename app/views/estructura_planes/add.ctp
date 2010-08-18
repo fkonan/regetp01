@@ -1,63 +1,6 @@
 <?php echo $javascript->link('jsonlib.js'); ?>
-<?php echo $javascript->link('jquery.blockUI.js'); ?>
-<script type="text/javascript">
-var etapas = new Array();
+<?php echo $javascript->link('views/estructura_planes/etapas.js'); ?>
 
-function EtapaAdd() {
-    var i = etapas.length;
-    // guarda la etapa
-    //etapas[i] = new Array('etapa_id','edad_teorica','nro_anio','anio_escolaridad');
-    etapas[i] = { etapa_id: jQuery("#etapa_id").val(),
-                  etapa_nombre: escape(jQuery('#etapa_id :selected').text()),
-                  edad_teorica: jQuery("#edad_teorica").val(),
-                  nro_anio: jQuery("#nro_anio").val(),
-                  anio_escolaridad: jQuery("#anio_escolaridad").val() };
-
-    // agrega al arbol de etapas
-    jQuery("#etapas-tree").append("<li>"+unescape(etapas[i]['etapa_nombre'])+" "+etapas[i]['nro_anio']+"</li>");
-
-    // resetea el form
-    jQuery("#edad_teorica").val('');
-    jQuery("#nro_anio").val('');
-    jQuery("#anio_escolaridad").val('');
-
-    // traba etapa
-    //jQuery('#bloqueable').block({ message: null });
-}
-
-function sortfcn(a,b){
-     if(parseInt(a[0])<parseInt(b[0])){
-        return -1;
-     }
-     else if(parseInt(a[0])>parseInt(b[0])){
-        return 1;
-     }
-     else{
-        return 0;
-     }
-}
-
-function EtapaAddObject(etapa) {
-    var i = etapas.length;
-    // guarda la etapa
-    //etapas[i] = new Array('etapa_id','edad_teorica','nro_anio','anio_escolaridad');
-    etapas[i] = { etapa_id: etapa.etapa_id,
-                  etapa_nombre: unescape(etapa.etapa_nombre),
-                  edad_teorica: etapa.edad_teorica,
-                  nro_anio: etapa.nro_anio,
-                  anio_escolaridad: etapa.anio_escolaridad };
-
-    // agrega al arbol de etapas
-    jQuery("#etapas-tree").append("<li>"+etapas[i]['etapa_nombre']+" "+etapas[i]['nro_anio']+"</li>");
-}
-
-function EtapasASubmit() {
-    // pasa vector etapas para submitear
-    jQuery("#etapas").val(array2dToJson(etapas, 'object'));
-
-    return true;
-}
-</script>
 <div class="estructuraplanes form">
 <?php echo $form->create('EstructuraPlan', array('onsubmit'=>'return EtapasASubmit();'));?>
 	<fieldset>
