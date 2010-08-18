@@ -266,7 +266,13 @@ class PlanesController extends AppController {
 		$subsectores = $this->Plan->Subsector->con_sector('list');
 		$ciclos = $this->Plan->Anio->Ciclo->find('list');
 
-                $estructuraPlanes = $this->Plan->EstructuraPlan->find('list');
+                //$estructuraPlanes = $this->Plan->EstructuraPlan->find('list');
+                $estructuraPlanes = $this->Plan->EstructuraPlan->JurisdiccionesEstructuraPlan->find('all',array(
+                                        'contain'=>array(
+                                            'EstructuraPlan'=>array('Etapa','EstructuraPlanesAnio'=>array('order'=> array('EstructuraPlanesAnio.edad_teorica')))
+                                        ),
+                                        'conditions'=>array('jurisdiccion_id'=>$instit['Instit']['jurisdiccion_id'])
+                                    ));
 
                 $this->set(compact('subsectores','sectores','titulos', 'ciclos', 'estructuraPlanes'));
 		
@@ -311,7 +317,7 @@ class PlanesController extends AppController {
                                         ),
                                         'conditions'=>array('jurisdiccion_id'=>$instit['Instit']['jurisdiccion_id'])
                                     ));
-                debug($estructuraPlanes);
+                
                 $estructuraSugeridaId = $this->Plan->getEstructuraSugerida();
 
 		$this->set(compact('ofertas','subsectores','sectores','titulos','ciclos', 'estructuraPlanes', 'estructuraSugeridaId'));

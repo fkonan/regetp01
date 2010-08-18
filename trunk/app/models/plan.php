@@ -628,14 +628,16 @@ class Plan extends AppModel {
                                         'conditions'=> array('etapa_id'=>$etapas_en_ciclos[$ciclo_anterior]
                                             )));
 
-                    foreach ($estructuraPlanes as $estructuraPlan) {
-                        if (count($estructuraPlan['EstructuraPlanesAnio']) == $totales[$ciclo_anterior][$etapas_en_ciclos[$ciclo_anterior]]) {
-                            return $estructuraPlan['EstructuraPlan']['id'];
+                    if ($estructuraPlanes) {
+                        foreach ($estructuraPlanes as $estructuraPlan) {
+                            if (count($estructuraPlan['EstructuraPlanesAnio']) == $totales[$ciclo_anterior][$etapas_en_ciclos[$ciclo_anterior]]) {
+                                return $estructuraPlan['EstructuraPlan']['id'];
+                            }
                         }
-                    }
 
-                    // si no coincide la cantidad de años, lo sugiere igual
-                    return $estructuraPlanes['0']['EstructuraPlan']['id'];
+                        // si no coincide la cantidad de años, lo sugiere igual
+                        return $estructuraPlanes['0']['EstructuraPlan']['id'];
+                    }
                 }
             }
             
