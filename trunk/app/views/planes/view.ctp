@@ -1,3 +1,4 @@
+<?echo $javascript->link('jquery.blockUI');?>
 <h1><?php  __('Oferta Educativa');?></h1>
 
 <?php 
@@ -144,7 +145,7 @@ $cue_instit = $instit['cue'].$anexo;
             echo $this->renderElement($planes_view_tabla['element'], $planes_view_tabla['options']);
 	?>
 
-<div id="nueva-data"></div>
+<div id="nueva-data" stye="display:none"></div>
 
 <div class="actions">
     <ul>
@@ -166,9 +167,22 @@ $cue_instit = $instit['cue'].$anexo;
     
     function agregar_datos_anios(){        
         urlEnvio = jQuery(this).attr('href');
-        jQuery('#nueva-data').load(urlEnvio);
-        
-        jQuery('.estructura-plan')
+        jQuery('#nueva-data').load(urlEnvio, function() {
+          jQuery.blockUI({
+                message: jQuery('#nueva-data'),
+                css: {
+                    width:          'auto',
+                    top:            '10%',
+                    left:           '25%',
+                    right:          '25%',
+                    textAlign:      'left'
+                }
+            });
+
+            jQuery('.blockOverlay').attr('title','Click to unblock').click(jQuery.unblockUI);
+        });
+
+
         return false;
     }
 </script>
