@@ -1,5 +1,5 @@
 <div class="estructuraplanes index">
-<h2><?php __('Estructura de Planes');?></h2>
+<h2><?php __('Estructuras de Planes');?></h2>
 <p>
 <?php
 echo $paginator->counter(array(
@@ -51,6 +51,6 @@ foreach ($estructuraPlanes as $estructuraPlan):
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $html->link(__('New EstructuraPlan', true), array('action'=>'add')); ?></li>
+		<li><?php echo $html->link(__('Nueva estructura', true), array('action'=>'add')); ?></li>
 	</ul>
 </div>

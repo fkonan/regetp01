@@ -120,6 +120,11 @@ function sortfcn(a,b){
 }
 
 function EtapasASubmit() {
+    // debe tener por lo menos un año
+    if (etapas.length == 0) {
+        alert('La estructura debe tener al menos un año');
+        return false;
+    }
     // pasa vector etapas para submitear
     jQuery("#etapas").val(array2dToJson(etapas, 'object'));
 
