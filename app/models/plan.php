@@ -633,20 +633,27 @@ class Plan extends AppModel {
 
                     if ($estructuraPlanes) {
                         $cant_etapas_de_este_ciclo = $etapas[$ciclo_anterior][$etapa_id_de_este_ciclo];
-                        foreach ($estructuraPlanes as $estructuraPlan) {
-                            // si tengo una estructura mayor a la cant de Anios cargados, duda (0)
-                            if (count($estructuraPlan['EstructuraPlanesAnio']) > $cant_etapas_de_este_ciclo) {
-                                return 0;
+
+                        if (count($estructuraPlanes) == 1) {
+                            if (count($estructuraPlan['EstructuraPlanesAnio']) >= $cant_etapas_de_este_ciclo) {
+                                    return $estructuraPlan['EstructuraPlan']['id'];
+                                }
+                        }
+                        else {
+                            foreach ($estructuraPlanes as $estructuraPlan) {
+                                // si tengo una estructura mayor a la cant de Anios cargados, duda (0)
+                                if (count($estructuraPlan['EstructuraPlanesAnio']) > $cant_etapas_de_este_ciclo) {
+                                    return 0;
+                                }
+                            }
+
+                            foreach ($estructuraPlanes as $estructuraPlan) {
+                                // si tengo una estructura con la misma cant de Anios cargados, la retorna
+                                if (count($estructuraPlan['EstructuraPlanesAnio']) == $cant_etapas_de_este_ciclo) {
+                                    return $estructuraPlan['EstructuraPlan']['id'];
+                                }
                             }
                         }
-
-                        foreach ($estructuraPlanes as $estructuraPlan) {
-                            // si tengo una estructura con la misma cant de Anios cargados, la retorna
-                            if (count($estructuraPlan['EstructuraPlanesAnio']) == $cant_etapas_de_este_ciclo) {
-                                return $estructuraPlan['EstructuraPlan']['id'];
-                            }
-                        }
-
                         // si no coincide la cantidad de años, lo sugiere igual
                         //return $estructuraPlanes['0']['EstructuraPlan']['id'];
                     }
