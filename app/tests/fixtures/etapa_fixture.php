@@ -13,7 +13,23 @@ class EtapaFixture extends CakeTestFixture {
 	var $records = array(
 		array(
 			'id' => 1,
-			'name' => 'Lorem ipsum dolor sit amet'
+			'name' => 'EGB'
+		),
+            array(
+			'id' => 2,
+			'name' => 'POLIMODAL'
+		),
+            array(
+			'id' => 3,
+			'name' => 'MEDIA'
+		),
+            array(
+			'id' => 4,
+			'name' => 'CB'
+		),
+            array(
+			'id' => 5,
+			'name' => 'CS'
 		),
 	);
 }
