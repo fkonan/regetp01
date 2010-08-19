@@ -78,7 +78,7 @@ class AniosController extends AppController {
                         $this->redirect('/planes/view/'.$this->data['Anio']['plan_id']);
 
                     } else {
-                        //debug($this->Anio->validationErrors);
+                        debug($this->Anio->validationErrors);
                         $this->Session->setFlash(__('Intente de nuevo. No se pudo guardar el dato.', true));
                         $this->redirect('/planes/view/'.$this->data['Anio']['plan_id']);
                     }
