@@ -55,6 +55,7 @@ $cue_instit = $instit['cue'].$anexo;
 		echo $form->input('oferta_id',array('empty'=>'Seleccione','onchange'=>'toggleTitulos();'));
         ?>
         <div id="PlanEstructuraPlanId" style="display:none">
+            <?php if(sizeof($estructuraPlanes)  > 0){ ?>
             <label>Elija una de las estructuras:</label>
             <?
                     foreach($estructuraPlanes as $estructura){
@@ -89,7 +90,11 @@ $cue_instit = $instit['cue'].$anexo;
             </div>
         <?php
                 }
+            }
+            else{
         ?>
+            <div class="message">No existen estructuras asignadas a la jurisdicción</div>
+        <?php }?>
         </div>
         <?php
                 //echo $form->input('estructura_plan_id',array('id'=>'PlanEstructuraPlanId', 'empty'=>'Seleccione'));

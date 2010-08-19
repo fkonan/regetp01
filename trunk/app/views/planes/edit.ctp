@@ -64,13 +64,27 @@ $cue_instit = $instit['cue'].$anexo;
         }
         ?>
         <div id="PlanEstructuraPlanId">
+            <?php if(sizeof($estructuraPlanes)  > 0){ ?>
             <label>Elija una de las estructuras:</label>
             <?
                     foreach($estructuraPlanes as $estructura){
             ?>
+            <?php
 
-            <div id="timelineLimiterMini" estructura_plan_id="<?php echo $estructura['EstructuraPlan']['id']?>" class="clickeable <?php echo (empty($this->data['Plan']['estructura_plan_id']))?(($estructura['EstructuraPlan']['id'] == $estructuraSugeridaId)?' yellow':''):($this->data['Plan']['estructura_plan_id'] == $estructura['EstructuraPlan']['id'])?' green':''?>">
-                <i><?php echo $estructura['EstructuraPlan']['name'];?><?php echo (empty($this->data['Plan']['estructura_plan_id']) && $estructura['EstructuraPlan']['id'] == $estructuraSugeridaId)?' (Sugerida)':''?> </i>
+            $esSugerida = false;
+            $esElegida = false;
+
+            if(empty($this->data['Plan']['estructura_plan_id'])){
+                if($estructura['EstructuraPlan']['id'] == $estructuraSugeridaId){
+                    $esSugerida = true;
+                }
+            }
+            elseif($this->data['Plan']['estructura_plan_id'] == $estructura['EstructuraPlan']['id']){
+                $esElegida = true;
+            }
+            ?>
+            <div id="timelineLimiterMini" estructura_plan_id="<?php echo $estructura['EstructuraPlan']['id']?>" class="clickeable <?php echo ($esSugerida)?' yellow':(($esElegida)?' green':'')?>">
+                <i><?php echo $estructura['EstructuraPlan']['name'];?><?php echo ($esSugerida)?' (Sugerida)':''?> </i>
                 <div id="timelineScroll" style="margin-left: 0px;">
                     <div>
                         <div class="event">
@@ -91,7 +105,11 @@ $cue_instit = $instit['cue'].$anexo;
             </div>
         <?php
                 }
+            }
+            else{
         ?>
+            <div class="message">No existen estructuras asignadas a la jurisdicción</div>
+        <?php }?>
         </div>
 
         <?php
