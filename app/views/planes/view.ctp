@@ -145,24 +145,30 @@ $cue_instit = $instit['cue'].$anexo;
 	?>
 
 <div id="nueva-data"></div>
-	
-	<div class="actions">
-		<ul>
-			<?php //echo $html->link(__('Agregar Nuevo Año', true), array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id']));?>
-			<li>
-                            <a  href="<?= $html->url(array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id'] .'/' . $plan['Plan']['duracion_hs']))?>"
-                                onClick="return agregar_datos_anios();">Agregar Datos</a></li>
-		</ul>
-	</div>
+
+<div class="actions">
+    <ul>
+<?php //echo $html->link(__('Agregar Nuevo Año', true), array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id']));?>
+        <li>
+            <a  href="<?= $html->url(array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id'] .'/' . $plan['Plan']['duracion_hs']))?>"
+                class="ajax-link"
+               >Agregar Datos
+            </a>
+        </li>
+    </ul>
+</div>
+
 
 
 
 <script type="text/javascript">
-    function agregar_datos_anios(){
-        var urlEnvio = '<?= $html->url(array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id'] .'/' . $plan['Plan']['duracion_hs']))?>';
-
+    jQuery('.ajax-link').click(agregar_datos_anios);
+    
+    function agregar_datos_anios(){        
+        urlEnvio = jQuery(this).attr('href');
         jQuery('#nueva-data').load(urlEnvio);
-
+        
+        jQuery('.estructura-plan')
         return false;
     }
 </script>

@@ -24,13 +24,15 @@ class AniosController extends AppController {
          * @param integer $plan_id
          * @param <type> $duracion_hs Guarda los anios
          */
-        function save($plan_id = null,$duracion_hs = null){
+        function saveAll($plan_id = null,$duracion_hs = null){
             if(!empty($this->data['Info']['plan_id'])){
                     $plan_id = $this->data['Info']['plan_id'];
             }
+            if(!empty($this->data['Info']['ciclo_id'])){
+                    $ciclo_id = $this->data['Info']['ciclo_id'];
+            }
 
             if (!empty($this->data)) {
-                    $ciclo_id = $this->data['Info']['ciclo_id'];
                     $this->Anio->create();
                     $aniosGuardar = array();
                     foreach ($this->data['Anio'] as &$anios){
@@ -61,12 +63,36 @@ class AniosController extends AppController {
             }
         }
 
+
+        /**
+         * Guarda anios. Funciona tanto para el add como para el edit
+         *
+         * @param integer $plan_id
+         * @param <type> $duracion_hs Guarda los anios
+         */
+        function save($plan_id = null,$duracion_hs = null){
+            if (!empty($this->data)) {
+                    $this->Anio->create();
+                    if ($this->Anio->save($this->data)) {
+                        $this->Session->setFlash(__('Se ha guardado un nuevo año', true));
+                        $this->redirect('/planes/view/'.$this->data['Anio']['plan_id']);
+
+                    } else {
+                        //debug($this->Anio->validationErrors);
+                        $this->Session->setFlash(__('Intente de nuevo. No se pudo guardar el dato.', true));
+                        $this->redirect('/planes/view/'.$this->data['Anio']['plan_id']);
+                    }
+            }
+        }
+
+
 	function add($plan_id = null,$duracion_hs = null) {
-            if(!empty($this->data['Info']['plan_id'])){
+            if (!empty($this->data['Info']['plan_id'])) {
                     $plan_id = $this->data['Info']['plan_id'];
-            }     
+            }
             
-            $estructuraPlanId = $this->Anio->Plan->getEstructuraSugerida($plan_id);            
+            $estructuraPlanId = $this->Anio->Plan->getEstructuraSugerida($plan_id);
+            
             $trayectosDisponibles = $this->Anio->EstructuraPlanesAnio->EstructuraPlan->find('first', array(
                 'contain'=> array('EstructuraPlanesAnio'=>array('order'=>array('EstructuraPlanesAnio.edad_teorica'))),
                 'conditions'=> array(
@@ -116,8 +142,10 @@ class AniosController extends AppController {
             foreach ($ciclosUsados as $c) {
                 $ciclosTmp[] = $c['Anio']['ciclo_id'];
             }
-     
-            $ciclos = $this->Anio->Ciclo->find('list', array('conditions'=>array('Ciclo.id NOT'=>$ciclosTmp)));
+
+            
+            $ciclos = $this->Anio->Ciclo->find('list', array(
+                'conditions'=>array(array('NOT'=>array('Ciclo.id'=>$ciclosTmp)))));
      
             $etapas = $this->Anio->Etapa->find('list');
             $this->set(compact('planes', 'ciclos', 'etapas'));
@@ -127,9 +155,10 @@ class AniosController extends AppController {
 	function edit($id = null) {
             $aPlan = $this->Anio->find('first', array(
                 'conditions'=>array('Anio.id'=>$id),
-                'fields'=>array('Anio.plan_id','Anio.ciclo_id')));
+                //'fields'=>array('Anio.plan_id','Anio.ciclo_id')
+                ));
             $plan_id = $aPlan['Anio']['plan_id'];
-
+            $this->data = $aPlan;
             
             if(!empty($this->data['Info']['plan_id'])){
                     $plan_id = $this->data['Info']['plan_id'];

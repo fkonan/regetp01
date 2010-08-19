@@ -41,7 +41,7 @@ endif;
 $trayectosData = array(
         'editable' => true,
         'anios' => $edades,
-        'form_action' => 'save',
+        'form_action' => 'saveAll',
         'etapa_header' => array(
                 array(
                         'title' => $trayectosDisponibles['EstructuraPlan']['name'],

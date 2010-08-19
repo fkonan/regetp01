@@ -1,5 +1,4 @@
-<div class="related">
-	
+<div class="related">	
 	<?php 
 	if (!empty($anios)):
 	?>
