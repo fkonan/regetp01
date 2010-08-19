@@ -635,8 +635,8 @@ class Plan extends AppModel {
                         $cant_etapas_de_este_ciclo = $etapas[$ciclo_anterior][$etapa_id_de_este_ciclo];
 
                         if (count($estructuraPlanes) == 1) {
-                            if (count($estructuraPlan['EstructuraPlanesAnio']) >= $cant_etapas_de_este_ciclo) {
-                                    return $estructuraPlan['EstructuraPlan']['id'];
+                            if (count($estructuraPlanes[0]['EstructuraPlanesAnio']) >= $cant_etapas_de_este_ciclo) {
+                                    return $estructuraPlanes[0]['EstructuraPlan']['id'];
                                 }
                         }
                         else {
