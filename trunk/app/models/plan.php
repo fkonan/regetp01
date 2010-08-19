@@ -593,7 +593,8 @@ class Plan extends AppModel {
             $ciclo_anterior = '';
             $totales = '';
             foreach ($anios as $anio) {
-                if ($anio['Anio']['ciclo_id'] != $ciclo_anterior) {
+                if ($anio['Anio']['ciclo_id'] != $ciclo_anterior)
+                {
                     $ciclo_anterior = $anio['Anio']['ciclo_id'];
                     $etapas_en_ciclos[$anio['Anio']['ciclo_id']] = $anio['Anio']['etapa_id'];
 
@@ -605,6 +606,7 @@ class Plan extends AppModel {
                         $ciclos_con_repeticiones[] = $anio['Anio']['ciclo_id'];
                     }
                 }
+                $etapas[$anio['Anio']['ciclo_id']][$anio['Anio']['etapa_id']] = $anio['Anio']['total'];
             }
             
             // si hubo repeticiones pero el ultimo ciclo no tuvo, se sugiere el mismo
@@ -617,6 +619,7 @@ class Plan extends AppModel {
                                         ));
                 if ($plan)
                 {
+                    $etapa_id_de_este_ciclo = $etapas_en_ciclos[$ciclo_anterior];
                     $estructuraPlanes = $this->EstructuraPlan->find('all',array(
                                         'fields'=> array('id'),
                                         'contain'=>array(
@@ -625,18 +628,27 @@ class Plan extends AppModel {
                                                 'conditions'=>array('jurisdiccion_id'=>$plan['0']['Instit']['jurisdiccion_id'])
                                             )
                                         ),
-                                        'conditions'=> array('etapa_id'=>$etapas_en_ciclos[$ciclo_anterior]
-                                            )));
+                                        'conditions'=> array('etapa_id'=>$etapa_id_de_este_ciclo)
+                                    ));
 
                     if ($estructuraPlanes) {
+                        $cant_etapas_de_este_ciclo = $etapas[$ciclo_anterior][$etapa_id_de_este_ciclo];
                         foreach ($estructuraPlanes as $estructuraPlan) {
-                            if (count($estructuraPlan['EstructuraPlanesAnio']) == $totales[$ciclo_anterior][$etapas_en_ciclos[$ciclo_anterior]]) {
+                            // si tengo una estructura mayor a la cant de Anios cargados, duda (0)
+                            if (count($estructuraPlan['EstructuraPlanesAnio']) > $cant_etapas_de_este_ciclo) {
+                                return 0;
+                            }
+                        }
+
+                        foreach ($estructuraPlanes as $estructuraPlan) {
+                            // si tengo una estructura con la misma cant de Anios cargados, la retorna
+                            if (count($estructuraPlan['EstructuraPlanesAnio']) == $cant_etapas_de_este_ciclo) {
                                 return $estructuraPlan['EstructuraPlan']['id'];
                             }
                         }
 
                         // si no coincide la cantidad de años, lo sugiere igual
-                        return $estructuraPlanes['0']['EstructuraPlan']['id'];
+                        //return $estructuraPlanes['0']['EstructuraPlan']['id'];
                     }
                 }
             }

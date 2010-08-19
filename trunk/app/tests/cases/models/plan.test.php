@@ -35,15 +35,19 @@ class PlanTestCase extends CakeTestCase {
     }
 
     function testGetEstructuraSugerida() {
-        $this->assertEqual($this->Plan->getEstructuraSugerida(1), 3);
+        // plan 1: 2009: mezclado - 2010: 2 de POLI
+        // pero la jurisdiccion 2 tiene tambien el de 3 de POLI asignado
+        $this->assertEqual($this->Plan->getEstructuraSugerida(1), 0);
+
+        //$this->assertEqual($this->Plan->getEstructuraSugerida(1), 3);
         
         // con busqueda forzada, quiere sugerencia igual por mas que tenga el 
         // id de estructura ya asignado en Plan
-        $this->assertEqual($this->Plan->getEstructuraSugerida(1, true), 3);
+        $this->assertEqual($this->Plan->getEstructuraSugerida(1, true), 0);
 
         $this->assertEqual($this->Plan->getEstructuraSugerida(3), 1);
-        $this->assertEqual($this->Plan->getEstructuraSugerida(4), 3);
-        $this->assertEqual($this->Plan->getEstructuraSugerida(7), 2);
+        $this->assertEqual($this->Plan->getEstructuraSugerida(4), 0);
+        $this->assertEqual($this->Plan->getEstructuraSugerida(7), 0);
 
         $this->assertNotEqual($this->Plan->getEstructuraSugerida(1), 1);
         $this->assertNotEqual($this->Plan->getEstructuraSugerida(2), 3);
