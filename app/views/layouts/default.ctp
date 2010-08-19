@@ -311,7 +311,7 @@ if($showMenu) {
         <?php echo $html->link(
         $html->image('cake.power.gif', array('alt'=> __("CakePHP: the rapid development php framework", true), 'border'=>"0", 'style'=>'float:right;margin-right:130px')),
         'http://www.cakephp.org/',
-        array('target'=>'_blank'), null, false
+        array('target'=>'_blank','id'=>'logo-cake-php'), null, false
         );
         ?>
         <?php echo $cakeDebug; ?>
