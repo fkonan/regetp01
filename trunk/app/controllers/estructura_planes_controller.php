@@ -11,7 +11,7 @@ class EstructuraPlanesController extends AppController {
 
 	function view($id = null) {
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid EstructuraPlan.', true));
+			$this->Session->setFlash(__('Invalid Estructura.', true));
 			$this->redirect(array('action'=>'index'));
 		}
 		$this->set('estructuraPlan', $this->EstructuraPlan->read(null, $id));
@@ -36,7 +36,7 @@ class EstructuraPlanesController extends AppController {
                         $this->Session->setFlash(__('Se ha creado un nuevo EstructuraPlan', true));
                         $this->redirect(array('action'=>'index'));
                     } else {
-                        $this->Session->setFlash(__('No se ha podido crear el EstructuraPlan. Por favor, intente nuevamente.', true));
+                        $this->Session->setFlash(__('No se ha podido crear la Estructura. Por favor, intente nuevamente.', true));
                     }
 		}
                 
@@ -47,7 +47,7 @@ class EstructuraPlanesController extends AppController {
 	function edit($id = null) {
                 //Configure::write('debug', 0);
 		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid EstructuraPlan', true));
+			$this->Session->setFlash(__('Invalid Estructura', true));
 			$this->redirect(array('action'=>'index'));
 		}
 		if (!empty($this->data)) {
@@ -75,10 +75,10 @@ class EstructuraPlanesController extends AppController {
                            
                             
 
-                            $this->Session->setFlash(__('El EstructuraPlan ha sido guardado', true));
+                            $this->Session->setFlash(__('La Estructura ha sido guardada', true));
                             $this->redirect(array('action'=>'index'));
 			} else {
-                            $this->Session->setFlash(__('No se ha podido crear el EstructuraPlan. Por favor, intente nuevamente.', true));
+                            $this->Session->setFlash(__('No se ha podido crear la Estructura. Por favor, intente nuevamente.', true));
 			}
 		}
 		if (empty($this->data)) {

@@ -29,10 +29,7 @@
 				
 				<li><? echo $html->link("Estadísticas","http://rfietp.inet.edu.ar/awstats/awstats.pl?config=rfietp") ?></li>
 
-                                <li>Estructura Oferta</li>
                                 <li><? echo $html->link("Estructura Planes","/estructura_planes") ?></li>
-                                <li><? echo $html->link("Estructuras x Jurisdiccion","/jurisdicciones_estructura_planes") ?></li>
-				
 
 			</ul>
 		</div>
