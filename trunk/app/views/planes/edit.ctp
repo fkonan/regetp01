@@ -84,7 +84,7 @@ $cue_instit = $instit['cue'].$anexo;
             }
             ?>
             <div id="timelineLimiterMini" estructura_plan_id="<?php echo $estructura['EstructuraPlan']['id']?>" class="clickeable <?php echo ($esSugerida)?' yellow':(($esElegida)?' green':'')?>">
-                <i><?php echo $estructura['EstructuraPlan']['name'];?><?php echo ($esSugerida)?' (Sugerida)':''?> </i>
+                <i><?php echo $estructura['EstructuraPlan']['name'];?><?php echo ($esSugerida && !$esElegida)?' (Sugerida)':''?> </i>
                 <div id="timelineScroll" style="margin-left: 0px;">
                     <div>
                         <div class="event">
