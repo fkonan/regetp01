@@ -147,6 +147,9 @@ class AniosController extends AppController {
                 $ciclos = $this->Anio->Ciclo->find('list', array(
                     'conditions'=>array(array('NOT'=>array('Ciclo.id'=>$ciclosTmp)))));
             }
+            else{
+                $ciclos = $this->Anio->Ciclo->find('list');
+            }
             
             $etapas = $this->Anio->Etapa->find('list');
             $this->set(compact('planes', 'ciclos', 'etapas'));
