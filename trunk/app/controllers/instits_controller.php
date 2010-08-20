@@ -975,6 +975,8 @@ class InstitsController extends AppController {
 
         if(!empty($this->passedArgs['cue'])) {
             $q = utf8_decode(strtolower($this->passedArgs['cue']));
+
+            $q = (int) $q;
             
             if(is_numeric($q)){
                 $this->paginate= array(
