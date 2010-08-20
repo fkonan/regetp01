@@ -16,10 +16,10 @@ class AclprepController extends AppController {
     var $components =array('Acl');
 
     // comentar una vez corridos los scripts por primera vez
-    function beforeFilter() {
-        parent::beforeFilter();
-        $this->Auth->allow('*');
-    }
+//    function beforeFilter() {
+//        parent::beforeFilter();
+//        //$this->Auth->allow('*');
+//    }
 
     function buildAcos() {
         if (!Configure::read('debug')) {
