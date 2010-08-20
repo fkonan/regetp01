@@ -4,14 +4,17 @@ class JurisdiccionesEstructuraPlanesController extends AppController {
 	var $name = 'JurisdiccionesEstructuraPlanes';
 	var $helpers = array('Html', 'Form');
 
-	function index($id = null) {
+	function index($id) {
+           if (!empty($id)) {
                 $notIn = array();
                 $trayectos_asignados = array();
                 $trayectos_restantes = array();
+
+                $this->JurisdiccionesEstructuraPlan->Jurisdiccion->recursive = 0;
+                $this->set('jurisdiccion', $this->JurisdiccionesEstructuraPlan->Jurisdiccion->read(null, $id));
                 
 		$this->JurisdiccionesEstructuraPlan->recursive = 0;
 
-               
                 if (!empty($this->data['JurisdiccionesEstructuraPlan'])) {
                     $this->JurisdiccionesEstructuraPlan->deleteAll(array('JurisdiccionesEstructuraPlan.jurisdiccion_id ='. $this->data['jurisdiccion_id']));
                     if(!empty($this->data['JurisdiccionesEstructuraPlan'])){
@@ -66,6 +69,8 @@ class JurisdiccionesEstructuraPlanesController extends AppController {
                 $this->set('trayectos_asignados', $trayectos_asignados);
                 $this->set('trayectos_restantes', $trayectos_restantes);
                 $this->set('jurisdiccion_id', $id);
+
+           }
 	}
 
 }

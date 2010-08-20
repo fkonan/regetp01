@@ -12,7 +12,7 @@
     });
 </script>
 <div class="jurisdiccionesTrayectos index">
-<h2><?php __('JurisdiccionesEstructuraPlan');?></h2>
+<h2><?php __('Estructuras para '.$jurisdiccion['Jurisdiccion']['name']);?></h2>
 <?php echo $form->create('JurisdiccionesEstructuraPlan', array('action'=>'index'));?>
 <?php echo $form->hidden('jurisdiccion_id',array('name'=>'data[jurisdiccion_id]','value'=> $jurisdiccion_id))?>
 
