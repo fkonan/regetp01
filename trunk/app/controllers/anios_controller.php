@@ -28,6 +28,9 @@ class AniosController extends AppController {
             if(!empty($this->data['Info']['plan_id'])){
                     $plan_id = $this->data['Info']['plan_id'];
             }
+            if(!empty($this->data['Info']['estructura_plan_id'])){
+                $this->Anio->Plan->guardarEstructuraSiNoLaTiene($this->data['Info']['estructura_plan_id'], $this->data['Info']['plan_id']);
+            }
             if(!empty($this->data['Info']['ciclo_id'])){
                     $ciclo_id = $this->data['Info']['ciclo_id'];
             }
