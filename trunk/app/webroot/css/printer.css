@@ -4,8 +4,6 @@ BODY{
 	font-size: 12pt;
 }
 
-
-
 #rutaUrl{
  display: none;
 }
@@ -63,7 +61,6 @@ a:hover {
 .ver-solo-para-imprimir{
 	display: block;
 }
-
 
 
 /************************************************************************
