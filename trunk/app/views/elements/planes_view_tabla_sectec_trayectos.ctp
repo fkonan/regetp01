@@ -214,12 +214,14 @@ if (!empty($trayectosData['form_action'])) {
                             }
                         ?>
                 <span>
+                    <span class="anio-dato-title anio-matricula" title="Matrícula">Matrícula</span>
                     <span class="anio-dato anio-matricula <?php echo $esEditable?'editable':''?>" title="Matrícula" ><?php echo $form->input($i.'.matricula',array( 'label'=>false, 'value'=>empty($c['matricula'])?null:$c['matricula']))?></span>
-                    <span class="anio-dato anio-matricula" title="Matrícula" style="font-size: 6pt !important;">Matrícula</span>
-                    <span class="anio-dato anio-seccion <?php echo $esEditable?'editable':''?>" title="Secciones"  style="clear: left"><?php echo $form->input($i.'.secciones',array('label'=>false, 'value'=>empty($c['secciones'])?null:$c['secciones']))?></span>
-                    <span class="anio-dato anio-seccion" title="Secciones" style="font-size: 6pt; clear: right">Secciónes</span>
-                    <span class="anio-dato anio-hstaller <?php echo $esEditable?'editable':''?>" title="Hs. Taller" style="clear: left"><?php echo $form->input($i.'.hs_taller',array('label'=>false, 'value'=>empty($c['hs_taller'])?null:$c['hs_taller']))?></span>
-                    <span class="anio-dato anio-hstaller" title="Hs. Taller" style="font-size: 6pt">Hs Taller</span>
+
+                    <span class="anio-dato-title anio-seccion" title="Secciones">Secciones</span>
+                    <span class="anio-dato anio-seccion <?php echo $esEditable?'editable':''?>" title="Secciones"><?php echo $form->input($i.'.secciones',array('label'=>false, 'value'=>empty($c['secciones'])?null:$c['secciones']))?></span>
+
+                    <span class="anio-dato-title anio-hstaller" title="Hs. Taller">Hs Taller</span>
+                    <span class="anio-dato anio-hstaller <?php echo $esEditable?'editable':''?>" title="Hs. Taller"><?php echo $form->input($i.'.hs_taller',array('label'=>false, 'value'=>empty($c['hs_taller'])?null:$c['hs_taller']))?></span>
                 </span>
                             <?php
                             $i++;

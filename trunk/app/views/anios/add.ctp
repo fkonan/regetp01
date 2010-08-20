@@ -10,9 +10,8 @@ $trayectosDisponibles;
 if (empty($trayectosDisponibles)) {
     ?>
     <p class="notice">
-        Debe indicar una estructura de la oferta válida. Para ello
-        debe ir a los datos del plan, editarlo, e indicárselo seleccionando por
-        ejemplo: "Ciclo Básico".<br>
+        La estructura de la oferta no es válida.<br>
+        Debe indicarla antes de agregar nuevos datos haciendo click aquí y seleccionando alguna.<br>
         <?php echo $html->link('editar plan','/planes/edit/'.$plan_id);?>
     </p>
     <?php
