@@ -10,8 +10,7 @@ echo $paginator->counter(array(
 <tr>
 	<th><?php echo $paginator->sort('id');?></th>
 	<th><?php echo $paginator->sort('name');?></th>
-	<th><?php echo $paginator->sort('created');?></th>
-	<th><?php echo $paginator->sort('modified');?></th>
+	<th><?php echo $paginator->sort('etapa_id');?></th>
 	<th class="actions"><?php __('Actions');?></th>
 </tr>
 <?php
@@ -30,10 +29,7 @@ foreach ($estructuraPlanes as $estructuraPlan):
 			<?php echo $estructuraPlan['EstructuraPlan']['name']; ?>
 		</td>
 		<td>
-			<?php echo $estructuraPlan['EstructuraPlan']['created']; ?>
-		</td>
-		<td>
-			<?php echo $estructuraPlan['EstructuraPlan']['modified']; ?>
+			<?php echo $estructuraPlan['Etapa']['name']; ?>
 		</td>
 		<td class="actions">
 			<?php echo $html->link(__('View', true), array('action'=>'view', $estructuraPlan['EstructuraPlan']['id'])); ?>
