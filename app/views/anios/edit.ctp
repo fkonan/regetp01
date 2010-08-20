@@ -19,7 +19,7 @@ if (empty($this->data['Anio']['estructura_planes_anio_id'])) {
     echo $form->input('etapa_id');
    
 } else {
-    echo $form->hidden('anio',array( 'options'=>$anios ,'label'=>'Año'));
+    echo $form->hidden('anio');
     echo $form->hidden('etapa_id');
 }
  echo $form->hidden('ciclo_id');
