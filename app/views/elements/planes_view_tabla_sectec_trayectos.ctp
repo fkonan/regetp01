@@ -17,7 +17,8 @@
  *      Nombre del ciclo a renderizar
  *
  *  array  $trayectosData['etapa_header'] listado de etapas distintas
- *  string $trayectosData['etapa_header'][x]['title'] nombre de la Etapa
+ *  string $trayectosData['etapa_header'][x]['title'] nombre de la Etapa *
+ *  string $trayectosData['etapa_header'][x]['estructura_plan_id'] id la EtapaPlan
  *  array  $trayectosData['etapa_header'][x]['anios'] listado de años. Ej: 1°, 2°, 3°
  *
  *  array $trayectosData['ciclo_lectivo'][x]['title'] nombre o numero de año. Ej: 2009,2010
@@ -154,11 +155,16 @@ if (!empty($trayectosData['form_action'])) {
 
     <div class="clear"></div>
 
+    
     <div class="mover-0">
         <?php
+        $i=0;
         foreach($trayectosData['etapa_header'] as $ch) {
             ?>
         <div class="etapa <?php echo limpiar_nombre($ch['title'])?>">
+            <?php
+                      $estructura_plan_id = $ch['estructura_plan_id'];
+             ?>
             <h2><?php echo $ch['title'] ?></h2>
             <div class="etapa-anios">
                     <?php
@@ -184,10 +190,13 @@ if (!empty($trayectosData['form_action'])) {
                 if ($esEditable ) {
                     echo $form->create('Anio', array('action'=>$form_action));
 
+                    echo $form->hidden('Info.estructura_plan_id', array('value'=>$estructura_plan_id));
+
                     if (empty($plan_id)) {
                         debug("No se pasó el plan_id como parámetro, no se puede editar");
                     }
                     echo $form->hidden('Info.plan_id', array('value'=>$plan_id));
+                    
                     ?>
 
             <div class="anio-ciclo-dato izquierda-1 editable">

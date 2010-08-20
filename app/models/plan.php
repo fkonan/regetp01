@@ -723,5 +723,25 @@ class Plan extends AppModel {
                 return null;
         }
 
+
+        /**
+         *
+         * @param integer $plan_id id del plan, por defecto en nulo
+         * @param integer $estructura_plan_id
+         */
+        function guardarEstructuraSiNoLaTiene($estructura_plan_id, $plan_id = null){
+            $this->recursive = -1;
+            
+            if (!empty($plan_id)) $this->id = $plan_id;
+            
+            $plan = $this->read();
+
+            if (empty($plan['Plan']['estructura_plan_id'])){
+                if (!$this->saveField('estructura_plan_id', $estructura_plan_id)){
+                    debug("error al guardar el ID del plan");
+                }
+            }
+        }
+
 }
 ?>

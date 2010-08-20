@@ -44,6 +44,7 @@ $trayectosData = array(
         'etapa_header' => array(
                 array(
                         'title' => $trayectosDisponibles['EstructuraPlan']['name'],
+                        'estructura_plan_id' => $trayectosDisponibles['EstructuraPlan']['id'],
                         'anios' => $anios,
                 )
         ),
