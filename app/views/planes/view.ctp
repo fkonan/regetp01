@@ -145,7 +145,7 @@ $cue_instit = $instit['cue'].$anexo;
             echo $this->renderElement($planes_view_tabla['element'], $planes_view_tabla['options']);
 	?>
 
-<div id="nueva-data" stye="display:none"></div>
+<div id="nueva-data" style="display:none"></div>
 
 <div class="actions">
     <ul>

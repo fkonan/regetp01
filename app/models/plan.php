@@ -617,7 +617,7 @@ class Plan extends AppModel {
                                     'contain'=>array('Instit'=>array('fields'=>'jurisdiccion_id')),
                                     'conditions'=> array('Plan.id'=>$plan_id)
                                         ));
-                if ($plan)
+                if ($plan && !empty($etapas_en_ciclos))
                 {
                     $etapa_id_de_este_ciclo = $etapas_en_ciclos[$ciclo_anterior];
                     $estructuraPlanes = $this->EstructuraPlan->JurisdiccionesEstructuraPlan->find('all',array(
