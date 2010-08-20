@@ -199,7 +199,7 @@ if (!empty($trayectosData['form_action'])) {
                         $attrs = array();
                         $defaultVal = date('Y',strtotime('now'));
                     }
-                    echo $form->select('Info.ciclo_id',$ciclos, $defaultVal, $attrs);
+                    echo $form->select('Info.ciclo_id',$ciclos, $defaultVal, $attrs,false);
                     ?>
             </div>
 
