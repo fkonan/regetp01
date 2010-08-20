@@ -152,12 +152,10 @@ $cue_instit = $instit['cue'].$anexo;
     <ul>
 <?php //echo $html->link(__('Agregar Nuevo Año', true), array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id']));?>
         <li>
-            <?php if ($this->Acl->check($this->Auth->user(), 'anios','add')){?>
             <a  href="<?= $html->url(array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id'] .'/' . $plan['Plan']['duracion_hs']))?>"
                 class="ajax-link"
                >Agregar Datos
             </a>
-            <?php }?>
         </li>
     </ul>
 </div>
