@@ -975,10 +975,10 @@ class InstitsController extends AppController {
 
         if(!empty($this->passedArgs['cue'])) {
             $q = utf8_decode(strtolower($this->passedArgs['cue']));
-
-            $q = (int) $q;
             
             if(is_numeric($q)){
+                $q = (int) $q;
+                
                 $this->paginate= array(
                     'limit'=> 10,
                     'contain'=> array(
