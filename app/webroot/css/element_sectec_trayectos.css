@@ -89,28 +89,25 @@
 
 .anio-dato{
 	font-size: 10pt;
-	width: 21px !important;
+        clear: both;
+}
 
+.anio-dato-title{
+    clear: both;
 }
 
 .anio-ciclo{
-	display: block;
-	height: 54px;
-	border-bottom: solid thin black;
 }
 
 .anio-matricula{
-	width: 64px !important;
 	font-size: 12pt !important;
         
 }
 
 .anio-seccion{
-	width: 64px !important;
 }
 
 .anio-hstaller{
-	width: 64px !important;
 }
 
 
