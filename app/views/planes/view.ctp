@@ -170,17 +170,19 @@ $cue_instit = $instit['cue'].$anexo;
         urlEnvio = jQuery(this).attr('href');
         jQuery('#nueva-data').load(urlEnvio, function() {
           jQuery.blockUI({
-                message: jQuery('#nueva-data'),
+                message: "<div style='height:18px;background-color:#87AEC5'><img style='cursor:pointer;float:right' src='<?php echo $html->url('/img/close.png')?>' class='cerrar'/></div>" + jQuery('#nueva-data').html(),
                 css: {
                     width:          'auto',
                     top:            '10%',
                     left:           '25%',
                     right:          '25%',
-                    textAlign:      'left'
+                    textAlign:      'left',
+                    cursor:         'auto'
                 }
             });
 
-            jQuery('.blockOverlay').attr('title','Click to unblock').click(jQuery.unblockUI);
+            jQuery('.blockOverlay').attr('title','Cerrar').click(jQuery.unblockUI);
+            jQuery('.cerrar').attr('title','Cerrar').click(jQuery.unblockUI);
         });
 
 
