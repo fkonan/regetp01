@@ -14,26 +14,19 @@
     jQuery(document).ready(function () {
         toggleTitulos();
         toggleEstructuraPlan();
-
-        jQuery(".clickeable").click(function(){
-            jQuery(".green").toggleClass("green");
-            jQuery(this).toggleClass("green");
-            jQuery('#estructura_plan_id').remove();
-            if(jQuery(this).hasClass("green")){
-                jQuery('#planAdd').append("<input id='estructura_plan_id' name='data[Plan][estructura_plan_id]' type='hidden' value='" + jQuery(this).attr("estructura_plan_id") + "' />");
-                jQuery(this).find("#JurisdiccionesEstructuraPlanAsignado").attr("checked", "checked");
-            }else{
-                jQuery(this).find("#JurisdiccionesEstructuraPlanAsignado").removeAttr("checked");
-            }
+        
+        jQuery("#PlanEstructuraPlanId").change(function(){
+            jQuery("div[estructura_plan_id]").hide();
+            jQuery("div[estructura_plan_id=" + jQuery(this).val() + "]").show();
         });
     });
 
     function toggleEstructuraPlan() {
         if (jQuery('#PlanOfertaId :selected').val() != 2 && jQuery('#PlanOfertaId :selected').val() != 3) {
-            jQuery('#PlanEstructuraPlanId').hide();
+            jQuery('#PlanEstructura').hide();
         }
         else {
-            jQuery('#PlanEstructuraPlanId').show();
+            jQuery('#PlanEstructura').show();
         }
     }
 </script>
@@ -54,47 +47,45 @@ $cue_instit = $instit['cue'].$anexo;
 		echo $form->input('instit_id',array('type'=>'hidden','value'=>$instit['id']));
 		echo $form->input('oferta_id',array('empty'=>'Seleccione','onchange'=>'toggleTitulos();'));
         ?>
-        <div id="PlanEstructuraPlanId" style="display:none">
-            <?php if(sizeof($estructuraPlanes)  > 0){ ?>
-            <label>Elija una de las estructuras:</label>
-            <?
-                    foreach($estructuraPlanes as $estructura){
-            ?>
+        <div id="PlanEstructura">
+            <span id="selectEstructura" style="float:left">
+                <?php
+                        echo $form->input('estructura_plan_id',array('empty'=>'Seleccione'));
+                ?>
+            </span>
+            <span id="graficosEstructura">
+                <?php if(sizeof($estructuraPlanesGrafico)  > 0){ ?>
+                <?
+                        foreach($estructuraPlanesGrafico as $estructura){
+                ?>
 
-            <!--<?php echo $estructura['EstructuraPlan']['name'];?>-->
-
-            <div id="timelineLimiterMini" estructura_plan_id="<?php echo $estructura['EstructuraPlan']['id']?>" class="clickeable">
-                <i><?php echo $estructura['EstructuraPlan']['name'];?></i>
-                <div id="timelineScroll" style="margin-left: 0px;">
-                    <div>
-                        <div class="event">
-                            <div class="eventHeading blue"><?php echo $estructura['EstructuraPlan']['Etapa']['name']?></div>
-                                <ul class="eventList">
-                        <?php
-                        $j = 0;
-                        foreach($estructura['EstructuraPlan']['EstructuraPlanesAnio'] as $anio ):
-                        ?>
-                            <li><?php echo $anio['nro_anio'];?>º</li>
-                        <?php
-                        endforeach;
-                        ?>
-                                </ul>
-                        </div>
-                        <!--<div class="instit_link_list" style="clear:none">
+                <div id="timelineLimiterMini" estructura_plan_id="<?php echo $estructura['EstructuraPlan']['id']?>" class="clickeable" style="display:none">
+                    <div id="timelineScroll" style="margin-left: 0px;">
+                        <div>
+                            <div class="event">
+                                <div class="eventHeading blue"><?php echo $estructura['EstructuraPlan']['Etapa']['name']?></div>
+                                    <ul class="eventList">
                             <?php
-                            echo $form->checkbox('asignado',array('name'=>'data[JurisdiccionesEstructuraPlan]['. $i . '][asignado]'));
+                            $j = 0;
+                            foreach($estructura['EstructuraPlan']['EstructuraPlanesAnio'] as $anio ):
                             ?>
-                        </div>-->
+                                <li><?php echo $anio['nro_anio'];?>º</li>
+                            <?php
+                            endforeach;
+                            ?>
+                                    </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        <?php
+            <?php
+                    }
                 }
-            }
-            else{
-        ?>
-            <div class="message">No existen estructuras asignadas a la jurisdicción</div>
-        <?php }?>
+                else{
+            ?>
+                <div class="message">No existen estructuras asignadas a la jurisdicción</div>
+            <?php }?>
+            </span>
         </div>
         <?php
                 //echo $form->input('estructura_plan_id',array('id'=>'PlanEstructuraPlanId', 'empty'=>'Seleccione'));
