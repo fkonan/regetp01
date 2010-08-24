@@ -34,6 +34,8 @@
         <?php
         echo $html->meta('icon');
         echo $html->css('regetp','stylesheet', array('media'=>'screen'));
+        echo $html->css('regetp_for_'.$session->read('User.group_alias'),'stylesheet', array('media'=>'screen'));
+
         //echo $html->css('printer');
         echo $html->css('printer','stylesheet', array('media'=>'print'));
 
