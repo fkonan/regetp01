@@ -1,6 +1,4 @@
 .datos-anios input[type=text]{
-    background-color: white;
-    border: none;
     margin: 0px;
     padding: 0px;
 }
@@ -47,15 +45,7 @@
         color: black;
 }
 
-.ciclo-basico H2{
-	background-color: pink;
-	border: thin solid red;
-}
 
-.ciclo-superior H2{
-	background-color: rgb(203, 192, 255);
-	border: thin solid blue;
-}
 
 .mover-1{
 	margin-left: 64px;
@@ -116,4 +106,20 @@
         font-size:14pt;
         margin-bottom:-20px;
         padding-top:13px;
+}
+
+
+
+
+/*----------------------------------------
+    DETALLE VISUAL POR CICLO
+    ---------------------------------------*/
+.ciclo-basico H2{
+	background-color: pink;
+	border: thin solid red;
+}
+
+.ciclo-superior H2{
+	background-color: pink;
+	border: thin solid red;
 }
