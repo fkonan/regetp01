@@ -32,7 +32,6 @@ foreach ($estructuraPlanes as $estructuraPlan):
 			<?php echo $estructuraPlan['Etapa']['name']; ?>
 		</td>
 		<td class="actions">
-			<?php echo $html->link(__('View', true), array('action'=>'view', $estructuraPlan['EstructuraPlan']['id'])); ?>
 			<?php echo $html->link(__('Edit', true), array('action'=>'edit', $estructuraPlan['EstructuraPlan']['id'])); ?>
 			<?php echo $html->link(__('Delete', true), array('action'=>'delete', $estructuraPlan['EstructuraPlan']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $estructuraPlan['EstructuraPlan']['id'])); ?>
 		</td>
