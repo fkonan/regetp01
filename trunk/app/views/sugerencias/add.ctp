@@ -6,7 +6,7 @@
                             'style'=>'botom: -5px;',
                             'alt'=>'idea',
                             'title'=>'Idea')); ?>
-                           <legend><?php __('Sugerencia...');?></legend></h1>
+                           <?php __('Sugerencias');?></h1>
 Esperamos que su visita sea de su agrado, cualquier sugerencia o mejora para nuestra web, por favor háganosla llegar completando el siguiente formulario.
 <?php echo $form->create('Sugerencia');?>
 	<fieldset>

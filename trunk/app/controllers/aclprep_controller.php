@@ -16,10 +16,10 @@ class AclprepController extends AppController {
     var $components =array('Acl');
 
     // comentar una vez corridos los scripts por primera vez
-//    function beforeFilter() {
-//        parent::beforeFilter();
-//        //$this->Auth->allow('*');
-//    }
+    function beforeFilter() {
+        parent::beforeFilter();
+        //$this->Auth->allow('*');
+    }
 
     function buildAcos() {
         if (!Configure::read('debug')) {
@@ -414,6 +414,27 @@ class AclprepController extends AppController {
 
         //let them use (read) aux, but nothing else!
         //$this->Acl->allow('users', 'Aux_Models','read');
+
+        die('done');
+    }
+
+    function assignPermissions1Dot6() {
+
+        // Administradores
+        $this->Acl->deny('administradores',  'Sugerencias/index');
+        $this->Acl->deny('administradores',  'Sugerencias/view');
+        $this->Acl->deny('administradores',  'Sugerencias/edit');
+        $this->Acl->deny('administradores',  'Sugerencias/delete');
+
+        // Editores
+        $this->Acl->allow('editores', 'Anios/save');
+        $this->Acl->allow('editores', 'Anios/saveAll');
+
+        // todos
+        $this->Acl->allow('usuarios', 'Sugerencias/add');
+        $this->Acl->allow('usuarios', 'Instits/ajax_search');
+        $this->Acl->allow('usuarios', 'Instits/search_form');
+        $this->Acl->allow('usuarios', 'Instits/old_search_form');
 
         die('done');
     }
