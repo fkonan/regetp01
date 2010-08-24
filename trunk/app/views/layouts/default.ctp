@@ -34,7 +34,11 @@
         <?php
         echo $html->meta('icon');
         echo $html->css('regetp','stylesheet', array('media'=>'screen'));
-        echo $html->css('regetp_for_'.$session->read('User.group_alias'),'stylesheet', array('media'=>'screen'));
+
+        $cssForUserRole = 'regetp_for_'.$session->read('User.group_alias');
+        if (is_file(APP.WEBROOT_DIR.DS."css".DS.$cssForUserRole.".css")){
+            echo $html->css($cssForUserRole,'stylesheet', array('media'=>'screen'));
+        }
 
         //echo $html->css('printer');
         echo $html->css('printer','stylesheet', array('media'=>'print'));
