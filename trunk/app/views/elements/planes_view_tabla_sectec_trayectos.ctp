@@ -21,9 +21,9 @@
  *  string $trayectosData['etapa_header'][x]['estructura_plan_id'] id la EtapaPlan
  *  array  $trayectosData['etapa_header'][x]['anios'] listado de años. Ej: 1°, 2°, 3°
  *
- *  array $trayectosData['ciclo_lectivo'][x]['title'] nombre o numero de año. Ej: 2009,2010
+ *  array $trayectosData['ciclos_data'][integer CICLO] nombre o numero de año. Ej: 2009,2010
  *
- *                                          ['ciclos_data'][x] listado de
+ *                                            [integer ANIO] listado de
  *                                                      ['matricula']
  *                                                      ['seccion']
  *                                                      ['hs_taller']
@@ -125,6 +125,7 @@ if (!empty($trayectosData['editable'])) {
     }
 }
 
+
 // Inicio del HTML a mostrar
 echo $html->css('element_sectec_trayectos','stylesheet', array('media'=>'screen'));
 
@@ -155,17 +156,21 @@ if (!empty($trayectosData['form_action'])) {
 
     <div class="clear"></div>
 
-    
+
     <div class="mover-0">
         <?php
         $i=0;
         foreach($trayectosData['etapa_header'] as $ch) {
+
             ?>
+
         <div class="etapa <?php echo limpiar_nombre($ch['title'])?>">
-            <?php
-                      $estructura_plan_id = $ch['estructura_plan_id'];
-             ?>
+                <?php
+                $estructura_plan_id = $ch['estructura_plan_id'];
+                if (!empty($ch['title'])) :
+                    ?>
             <h2><?php echo $ch['title'] ?></h2>
+                <?php endif; ?>
             <div class="etapa-anios">
                     <?php
                     foreach($ch['anios'] as $ca) {
@@ -182,22 +187,15 @@ if (!empty($trayectosData['form_action'])) {
 
         if(!empty($trayectosData['ciclo_lectivo'])):
             ?>
-        <div class="datos-anios">
+        <div class="datos-anios <?php echo $esEditable?'form-editable':'form-disabled';?>">
                 <?php
-                //
-                // hacer formulario EDITABLE
-                //
-                if ($esEditable ) {
-                    echo $form->create('Anio', array('action'=>$form_action));
-
-                    echo $form->hidden('Info.estructura_plan_id', array('value'=>$estructura_plan_id));
-
-                    if (empty($plan_id)) {
-                        debug("No se pasó el plan_id como parámetro, no se puede editar");
-                    }
-                    echo $form->hidden('Info.plan_id', array('value'=>$plan_id));
-                    
-                    ?>
+                echo $form->create('Anio', array('action'=>$form_action));
+                echo $form->hidden('Info.estructura_plan_id', array('value'=>$estructura_plan_id));
+                if (empty($plan_id)) {
+                    debug("No se pasó el plan_id como parámetro, no se puede editar");
+                }
+                echo $form->hidden('Info.plan_id', array('value'=>$plan_id));
+                ?>
 
             <div class="anio-ciclo-dato izquierda-1 editable">
                     <?php
@@ -213,14 +211,14 @@ if (!empty($trayectosData['form_action'])) {
             </div>
 
             <div class="anio-ciclo">
-                        <?php
-                        $i = 0;
-                        foreach ($trayectosData['ciclo_lectivo'][0]['ciclos_data'] as $c) {
-                            
-                            echo $form->hidden($i.'.estructura_planes_anio_id',array('value'=>$c['estructura_planes_anio_id']));                            
-                            if (!empty($c['id'])){
-                               echo $form->hidden($i.'.id',array('value'=>$c['id']));
-                            }
+                    <?php
+                    $i = 0;
+                    foreach ($trayectosData['ciclo_lectivo'][0]['ciclos_data'] as $c) {
+
+                        echo $form->hidden($i.'.estructura_planes_anio_id',array('value'=>$c['estructura_planes_anio_id']));
+                        if (!empty($c['id'])) {
+                            echo $form->hidden($i.'.id',array('value'=>$c['id']));
+                        }
                         ?>
                 <span>
                     <span class="anio-dato-title anio-matricula" title="Matrícula">Matrícula</span>
@@ -232,50 +230,14 @@ if (!empty($trayectosData['form_action'])) {
                     <span class="anio-dato-title anio-hstaller" title="Hs. Taller">Hs Taller</span>
                     <span class="anio-dato anio-hstaller <?php echo $esEditable?'editable':''?>" title="Hs. Taller"><?php echo $form->input($i.'.hs_taller',array('label'=>false, 'value'=>empty($c['hs_taller'])?null:$c['hs_taller']))?></span>
                 </span>
-                            <?php
-                            $i++;
-                        }
-                        ?>
-            </div>
-                    <?php
-                    echo $form->end('Guardar', array('disabled'=>!$esEditable));
-
-
-                }
-                //
-                // mostrar recuadro sin formulario
-                //
-                else {
-
-                    foreach ($trayectosData['ciclo_lectivo'] as $cicloLectivo) {
-                        ?>
-            <div class="anio-ciclo-dato izquierda-1 <?php echo $esEditable?'editable':''?>"><?php echo $cicloLectivo['title']?></div>
-
-            <div class="anio-ciclo">
-                            <?php
-                            $i = 0;
-                            foreach ($cicloLectivo['ciclos_data'] as $cd) {
-                                ?>
-                <span>
-                    <span class="anio-dato anio-matricula <?php echo $esEditable?'editable':''?>" title="Matrícula" ><?php $cd['matricula']?></span>
-                    <span class="anio-dato anio-matricula" title="Matrícula" style="font-size: 6pt !important;">Matrícula</span>
-                    <span class="anio-dato anio-seccion <?php echo $esEditable?'editable':''?>" title="Secciones"  style="clear: left"><?php $cd['secciones']?></span>
-                    <span class="anio-dato anio-seccion" title="Secciones" style="font-size: 6pt; clear: right">Secciónes</span>
-                    <span class="anio-dato anio-hstaller <?php echo $esEditable?'editable':''?>" title="Hs. Taller" style="clear: left"><?php $cd['hs_taller']?></span>
-                    <span class="anio-dato anio-hstaller" title="Hs. Taller" style="font-size: 6pt">Hs Taller</span>
-                </span>
-                                <?php
-                                $i++;
-                            }
-                            ?>
-            </div>
                         <?php
+                        $i++;
                     }
-
-                }
+                    ?>
+            </div>
+                <?php
+                echo $form->end('Guardar', array('disabled'=>!$esEditable));
                 ?>
-
-
         </div>
         <?php
         endif;
