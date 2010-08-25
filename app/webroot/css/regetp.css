@@ -929,6 +929,7 @@ div.code-coverage-results span.result-good {
     text-align: right;
     /*margin-top: -1.5em;*/
     padding-top: 10px;
+    font-weight: bold;
 }
 /* usados en la vista de la institucion, al lado del titulo*/
 .instit_inactiva{
