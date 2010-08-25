@@ -9,10 +9,9 @@ $trayectosDisponibles;
 
 if (empty($trayectosDisponibles)) {
     ?>
-    <p class="notice">
+    <p class="msg-atencion" style="padding: 30px 20px;">
         La estructura de la oferta no es válida.<br>
-        Debe indicarla antes de agregar nuevos datos haciendo click aquí y seleccionando alguna.<br>
-        <?php echo $html->link('editar plan','/planes/edit/'.$plan_id);?>
+        Debe indicarla antes de agregar nuevos datos haciendo <?php echo $html->link('click aquì','/planes/edit/'.$plan_id);?>.
     </p>
     <?php
     return 1;
@@ -29,10 +28,10 @@ $datosMatriculas = array();
 // debug($trayectosDisponibles);
 if (!empty($trayectosDisponibles['EstructuraPlanesAnio'])):
     foreach ($trayectosDisponibles['EstructuraPlanesAnio'] as $a) {
-        $anios[] = $a['nro_anio'];
+        $anios[$a['nro_anio']] = array('matricula'=>null,'secciones'=>null,'hs_taller'=>null, 'estructura_planes_anio_id'=>$a['id']);
         $edades[] = $a['anio_escolaridad'];
         $datosMatriculas[] =  array('matricula'=>null,'secciones'=>null,'hs_taller'=>null, 'estructura_planes_anio_id'=>$a['id']);
-}
+    }
 endif;
 
 
@@ -49,10 +48,7 @@ $trayectosData = array(
                 )
         ),
         'ciclo_lectivo' => array(
-                array(
-                        'title' => 'Ciclo',
-                        'ciclos_data' => $datosMatriculas,
-                )
+                0 => array($anios),
         )
 );	
 
