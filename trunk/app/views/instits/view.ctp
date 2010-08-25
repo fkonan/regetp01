@@ -76,7 +76,12 @@
                 if($instit['Instit']['claseinstit_id']) {	?>
                         <dt><?php __('Tipo de Institución'); ?></dt>
                         <dd>
-                    <?php echo $instit['Claseinstit']['name']; ?>
+	                    <?php 
+	                      if(!empty($instit['Claseinstit']['name'])){
+	                            echo $instit['Claseinstit']['name'];
+	                      }else{
+	                	        echo "<i>No declarado</i>";
+	                      } ?>                       
                             &nbsp;
                         </dd>
                     <?php }?>
@@ -85,120 +90,185 @@
                         <? if($instit['Orientacion']['name']) {?>
                           <dt ><?php __('Orientación'); ?></dt>
                         <dd>
-                        <?php echo $instit['Orientacion']['name']; ?>
+	                    <?php 
+	                      if(!empty($instit['Orientacion']['name'])){
+	                            echo $instit['Orientacion']['name'];
+	                      }else{
+	                	        echo "<i>No declarado</i>";
+	                      } ?>                           
                             &nbsp;
                         </dd>
                         <? } ?>
                         <dt ><?php __('Ámbito de Gestión'); ?></dt>
                         <dd>
-                <?php echo $instit['Gestion']['name']; ?>
+	                    <?php 
+	                      if(!empty($instit['Gestion']['name'])){
+	                            echo $instit['Gestion']['name'];
+	                      }else{
+	                	        echo "<i>No declarado</i>";
+	                      } ?>                   
                             &nbsp;
                         </dd>
-
                         <dt><?php __('Tipo de Dependencia'); ?></dt>
                         <dd>
-                <?php echo $instit['Dependencia']['name']; ?>
+	                    <?php 
+	                      if(!empty($instit['Dependencia']['name'])){
+	                            echo $instit['Dependencia']['name'];
+	                      }else{
+	                	        echo "<i>No declarado</i>";
+	                      } ?>                   
                             &nbsp;
                         </dd>
-
                 <? if($instit['Instit']['nombre_dep']): ?>
                         <dt><?php __('Nombre de la Dependencia'); ?></dt>
                         <dd>
-                    <?php echo $instit['Instit']['nombre_dep']; ?>
+	                    <?php 
+	                      if(!empty($instit['Instit']['nombre_dep'])){
+	                            echo $instit['Instit']['nombre_dep'];
+	                      }else{
+	                	        echo "<i>No declarado</i>";
+	                      } ?>                       
                             &nbsp;
                         </dd>
                 <? endif; ?>
-
                         <dt><?php __('Jurisdicción'); ?></dt>
                         <dd>
-                <?php echo $instit['Jurisdiccion']['name']; ?>
+	                    <?php 
+	                      if(!empty($instit['Jurisdiccion']['name'])){
+	                            echo $instit['Jurisdiccion']['name'];
+	                      }else{
+	                	        echo "<i>No declarado</i>";
+	                      } ?>                   
                             &nbsp;
                         </dd>
-
                         <dt><?php __('Departamento'); ?></dt>
                         <dd>
-                <?php echo $instit['Departamento']['name']; ?>
+	                    <?php 
+	                      if(!empty($instit['Departamento']['name'])){
+	                            echo $instit['Departamento']['name'];
+	                      }else{
+	                	        echo "<i>No declarado</i>";
+	                      } ?>                   
                             &nbsp;
                         </dd>
-
                         <dt><?php __('Localidad'); ?></dt>
                         <dd>
-                <?php echo $instit['Localidad']['name']; ?>
+	                    <?php 
+	                      if(!empty($instit['Localidad']['name'])){
+	                            echo $instit['Localidad']['name'];
+	                      }else{
+	                	        echo "<i>No declarado</i>";
+	                      } ?>                   
                             &nbsp;
                         </dd>
-
                         <dt><?php __('Barrio/Pueblo/Comuna'); ?></dt>
                         <dd>
-                <?php echo $instit['Instit']['lugar']; ?>
+	                    <?php 
+	                      if(!empty($instit['Instit']['lugar'])){
+	                            echo $instit['Instit']['lugar'];
+	                      }else{
+	                	        echo "<i>No declarado</i>";
+	                      } ?>                   
                             &nbsp;
                         </dd>
-
                         <dt><?php __('Domicilio'); ?></dt>
                         <dd>
-                <?php echo $instit['Instit']['direccion']; ?>
+	                    <?php 
+	                      if(!empty($instit['Instit']['direccion'])){
+	                            echo $instit['Instit']['direccion'];
+	                      }else{
+	                	        echo "<i>No declarado</i>";
+	                      } ?>                   
                             &nbsp;
                         </dd>
-
-
                         <dt><?php __('Código Postal'); ?></dt>
                         <dd>
-                <?php echo $instit['Instit']['cp']; ?>
+	                    <?php 
+	                      if(!empty($instit['Instit']['cp'])){
+	                            echo $instit['Instit']['cp'];
+	                      }else{
+	                	        echo "<i>No declarado</i>";
+	                      } ?>                   
                             &nbsp;
                         </dd>
-
                 <?php if($instit['Instit']['telefono']): ?>
                         <dt><?php __('Teléfono'); ?></dt>
                         <dd>
-                    <?php echo $instit['Instit']['telefono']; ?>
+	                    <?php 
+	                      if(!empty($instit['Instit']['telefono'])){
+	                            echo $instit['Instit']['telefono'];
+	                      }else{
+	                	        echo "<i>No declarado</i>";
+	                      } ?>                       
                             &nbsp;
                         </dd>
                 <?php endif;?>
-
-
                 <?php if($instit['Instit']['telefono_alternativo']): ?>
                         <dt><?php __('Teléfono Alternativo'); ?></dt>
                         <dd>
-                    <?php echo $instit['Instit']['telefono_alternativo']; ?>
+	                    <?php 
+	                      if(!empty($instit['Instit']['telefono_alternativo'])){
+	                            echo $instit['Instit']['telefono_alternativo'];
+	                      }else{
+	                	        echo "<i>No declarado</i>";
+	                      } ?>    
+	                                          
                             &nbsp;
                         </dd>
                 <?php endif;?>
-
                 <?php if($instit['Instit']['mail']): ?>
                         <dt><?php __('E-Mail'); ?></dt>
                         <dd>
-                    <?php echo $instit['Instit']['mail']; ?>
-                            &nbsp;
+	                    <?php 
+	                      if(!empty($instit['Instit']['mail'])){
+	                            echo $instit['Instit']['mail'];
+	                      }else{
+	                	        echo "<i>No declarado</i>";
+	                      } ?>                        
+                        &nbsp;
                         </dd>
                 <?php endif;?>
-
                 <?php if($instit['Instit']['mail_alternativo']): ?>
                         <dt><?php __('E-Mail Alternativo'); ?></dt>
                         <dd>
-                    <?php echo $instit['Instit']['mail_alternativo']; ?>
+	                    <?php 
+	                      if(!empty($instit['Instit']['mail_alternativo'])){
+	                            echo $instit['Instit']['mail_alternativo'];
+	                      }else{
+	                	        echo "<i>No declarado</i>";
+	                      } ?>
+
                             &nbsp;
                         </dd>
                 <?php endif;?>
-
                 <?php if($instit['Instit']['web']): ?>
                         <dt><?php __('Web'); ?></dt>
                         <dd>
-                    <?php echo $instit['Instit']['web']; ?>
+	                    <?php 
+	                      if(!empty($instit['Instit']['web'])){
+	                            echo $instit['Instit']['web'];
+	                      }else{
+	                	        echo "<i>No declarado</i>";
+	                      } ?>
                             &nbsp;
                         </dd>
                 <?php endif;?>
-
                         <dt><?php __('Año de Creación'); ?></dt>
                         <dd>
-                <?php echo ($instit['Instit']['anio_creacion']==0)?'':$instit['Instit']['anio_creacion']; ?>
+                <?php echo ($instit['Instit']['anio_creacion']==0)?'<i>No declarado</i>':$instit['Instit']['anio_creacion']; ?>
                             &nbsp;
                         </dd>
                     </dl>
-
                     <H2>Datos Director</H2>
                     <dl>
                         <dt><?php __('Nombre y Apellido'); ?></dt>
                         <dd>
-                <?php echo $instit['Instit']['dir_nombre']; ?>
+                        <?php 
+                          if(!empty( $instit['Instit']['dir_nombre'] )){
+                                echo $instit['Instit']['dir_nombre']; 
+                          }else{
+                	            echo "<i>No declarado</i>";
+                          } ?>
                             &nbsp;
                         </dd>
                         <dt><?php __('Tipo y Nº de Documento'); ?></dt>
@@ -207,20 +277,31 @@
                             if($instit['Instit']['dir_nrodoc']>0) {
                                 echo ' '.$instit['Instit']['dir_tipodoc_name'];
                                 echo ' '.$instit['Instit']['dir_nrodoc'];
-                            }
-                ?>
+                            }else{
+                	            echo "<i>No declarado</i>";
+                            } ?>
                             &nbsp;
                         </dd>
 
                         <dt><?php __('Teléfono'); ?></dt>
                         <dd>
-                <?php echo $instit['Instit']['dir_telefono']; ?>
+		                <?php
+  		                  if(!empty($instit['Instit']['dir_telefono'])){ 
+		                	    echo $instit['Instit']['dir_telefono'];}
+		                   else{
+		                	    echo "<i>No declarado</i>";
+		                  } ?>
                             &nbsp;
                         </dd>
 
                         <dt><?php __('E-Mail'); ?></dt>
                         <dd>
-                <?php echo $instit['Instit']['dir_mail']; ?>
+                        <?php 
+                          if(!empty($instit['Instit']['dir_mail'])){
+                                echo $instit['Instit']['dir_mail'];}
+                          else{
+                	            echo "<i>No declarado</i>";
+                          } ?>
                             &nbsp;
                         </dd>
 
@@ -230,7 +311,12 @@
                     <dl>
                         <dt><?php __('Nombre y Apellido'); ?></dt>
                         <dd>
-                <?php echo $instit['Instit']['vice_nombre']; ?>
+                        <?php 
+                          if(!empty( $instit['Instit']['vice_nombre'] )){
+                                echo $instit['Instit']['vice_nombre']; }
+                          else {
+                      	        echo "<i>No declarado</i>";
+                          } ?>
                             &nbsp;
                         </dd>
                         <dt><?php __('Tipo y Nº de Documento'); ?></dt>
@@ -239,8 +325,10 @@
                             if($instit['Instit']['vice_nrodoc']>0) {
                                 echo ' '.$instit['Instit']['vice_tipodoc_name'];
                                 echo ' '.$instit['Instit']['vice_nrodoc'];
+                            }else {
+                      	        echo "<i>No declarado</i>";
                             }
-                ?>
+                            ?>
                             &nbsp;
                         </dd>
                     </dl>
@@ -253,7 +341,7 @@
                         ?>
                         <dt><?php __('Fecha Mod (<2009)'); ?></dt>
                         <dd>
-                        <?php echo ($instit['Instit']['fecha_mod']>0)?date("d/m/Y",strtotime($instit['Instit']['fecha_mod'])):''; ?>
+                        <?php echo ($instit['Instit']['fecha_mod']>0)?date("d/m/Y",strtotime($instit['Instit']['fecha_mod'])):'<i>No declarado</i>'; ?>
                             &nbsp;
                         </dd>
                         <?php
@@ -262,14 +350,24 @@
                         ?>
                         <dt><?php __('Actualización o Ingreso'); ?></dt>
                         <dd>
-                        <?php echo $instit['Instit']['actualizacion']; ?>
+                        <?php
+                          if(!empty($instit['Instit']['actualizacion'])){ 
+                                echo $instit['Instit']['actualizacion'];
+                            }else {
+                      	        echo "<i>No declarado</i>";
+                            } ?>
                             &nbsp;
                         </dd>
 
                         <?php if(strlen($instit['Instit']['observacion'])){?>
                         <dt><?php __('Observación'); ?></dt>
                         <dd>
-                        <?php echo $instit['Instit']['observacion']; ?>
+                        <?php 
+                          if(!empty($instit['Instit']['observacion'])){
+                                echo $instit['Instit']['observacion']; 
+                          }else {
+                      	        echo "<i>No declarado</i>";
+                          } ?>
                             &nbsp;
                         </dd>
                         <?php
@@ -277,7 +375,7 @@
                         ?>
                         <dt><?php __('Alta'); ?></dt>
                         <dd>
-                        <?php echo ($instit['Instit']['ciclo_alta']>0)?$instit['Instit']['ciclo_alta']:''; ?>
+                        <?php echo ($instit['Instit']['ciclo_alta']>0)?$instit['Instit']['ciclo_alta']:'<i>No declarado</i>'; ?>
                             &nbsp;
                         </dd>
                         <?php
@@ -288,7 +386,7 @@
                         <dd>
                         <?php //echo ($instit['Instit']['modified']>0)?$instit['Instit']['modified']:''; ?>
 
-                        <?php echo ($instit['Instit']['modified']>0)?date("d/m/Y",strtotime($instit['Instit']['modified'])):''; ?>
+                        <?php echo ($instit['Instit']['modified']>0)?date("d/m/Y",strtotime($instit['Instit']['modified'])):'<i>No declarado</i>'; ?>
                             &nbsp;
                         </dd>
                         <?php
