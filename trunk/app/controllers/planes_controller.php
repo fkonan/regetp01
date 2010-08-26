@@ -266,14 +266,20 @@ class PlanesController extends AppController {
 		$subsectores = $this->Plan->Subsector->con_sector('list');
 		$ciclos = $this->Plan->Anio->Ciclo->find('list');
 
-                $estructura_planes = $this->Plan->EstructuraPlan->find('list');
+                
                 $estructuraPlanesGrafico = $this->Plan->EstructuraPlan->JurisdiccionesEstructuraPlan->find('all',array(
                                         'contain'=>array(
                                             'EstructuraPlan'=>array('Etapa','EstructuraPlanesAnio'=>array('order'=> array('EstructuraPlanesAnio.edad_teorica')))
                                         ),
                                         'conditions'=>array('jurisdiccion_id'=>$instit['Instit']['jurisdiccion_id'])
                                     ));
-
+                
+                $estructura_planes = array();
+                foreach($estructuraPlanesGrafico as $estructura){
+                    $estructura_planes[$estructura['EstructuraPlan']['id']] = $estructura['EstructuraPlan']['name'];
+                
+                }
+                
                 $this->set(compact('subsectores','sectores','titulos', 'ciclos', 'estructura_planes','estructuraPlanesGrafico'));
 		
 		$this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$instit['Instit']['id'] );
@@ -310,13 +316,17 @@ class PlanesController extends AppController {
 		$subsectores = $this->Plan->Subsector->con_sector('list',$this->data['Plan']['sector_id']);
 		$ciclos = $this->Plan->Anio->Ciclo->find('list');
 
-                $estructura_planes = $this->Plan->EstructuraPlan->find('list');
                 $estructuraPlanesGrafico = $this->Plan->EstructuraPlan->JurisdiccionesEstructuraPlan->find('all',array(
                                         'contain'=>array(
                                             'EstructuraPlan'=>array('Etapa','EstructuraPlanesAnio'=>array('order'=> array('EstructuraPlanesAnio.edad_teorica')))
                                         ),
                                         'conditions'=>array('jurisdiccion_id'=>$instit['Instit']['jurisdiccion_id'])
                                     ));
+
+                foreach($estructuraPlanesGrafico as $estructura){
+                    $estructura_planes[$estructura['EstructuraPlan']['id']] = $estructura['EstructuraPlan']['name'];
+
+                }
                 
                 $estructuraSugeridaId = $this->Plan->getEstructuraSugerida();
 

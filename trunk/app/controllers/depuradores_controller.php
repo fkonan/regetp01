@@ -4,7 +4,8 @@ class DepuradoresController extends AppController {
 
 	var $name = 'Depuradores';
 	var $helpers = array('Html', 'Form','Ajax');
-	var $uses = array('Instit','Plan','Sector','Jurisdiccion', 'Tipoinstit');
+	var $uses = array('Instit','Plan','Anio','Sector','Jurisdiccion', 'Tipoinstit',
+                    'EstructuraPlan','JurisdiccionesEstructuraPlan','EstructuraPlanesAnio');
 	var $db;
 	
 	
@@ -668,6 +669,47 @@ class DepuradoresController extends AppController {
     	'sectores','subsectores','jurisdicciones'));
 
         $this->set('titulo_id',$titulo_id);
+    }
+
+
+    // depurador de planes
+    function depurar_estructura_planes() {
+        $anios = $this->Anio->find('all', array(
+                    'fields' => array('plan_id','ciclo_id', 'etapa_id'),
+                    'conditions' => array('oferta_id'=> 3),
+                    'order' => array('plan_id'),
+                    'group' => array('plan_id','ciclo_id', 'etapa_id')
+        ));
+
+        $planes = $this->Plan->find('all', array(
+                    'contain' => array('Anio' => array('order'=>array('ciclo_id'))),
+                    'conditions' => array('Plan.oferta_id'=> 3),
+                    'limit' => 100
+        ));
+
+        debug($planes);
+
+        /*$plan_ant = '';
+        foreach($anios as $anio) {
+            if ($plan_ant != $anio['Anio']['plan_id']) {
+                $plan_ant = $anio['Anio']['plan_id'];
+
+            }
+        }*/
+
+        foreach ($planes as $plan) {
+            if (count($anio['Anio']) > 0) {
+                $ciclo_ant = $anio['0']['Anio'];
+                foreach ($plan['Anio'] as $anio) {
+                    if ($anio['ciclo_id'] != $ciclo_ant) {
+                        continue;
+                    }
+                }
+
+            }
+        }
+
+        //debug($anios);
     }
 }
 
