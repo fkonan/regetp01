@@ -28,7 +28,7 @@ $datosMatriculas = array();
 // debug($trayectosDisponibles);
 if (!empty($trayectosDisponibles['EstructuraPlanesAnio'])):
     foreach ($trayectosDisponibles['EstructuraPlanesAnio'] as $a) {
-        $anios[$a['nro_anio']] = array('matricula'=>null,'secciones'=>null,'hs_taller'=>null, 'estructura_planes_anio_id'=>$a['id']);
+        $anios[$a['nro_anio']] = array('anio'=>$a['nro_anio'],'matricula'=>null,'secciones'=>null,'hs_taller'=>null, 'estructura_planes_anio_id'=>$a['id']);
         $edades[] = $a['anio_escolaridad'];
         $datosMatriculas[] =  array('matricula'=>null,'secciones'=>null,'hs_taller'=>null, 'estructura_planes_anio_id'=>$a['id']);
     }
@@ -38,7 +38,7 @@ endif;
 // me armo el array de opciones para el elemento que renderiza el recuadro de estructura
 $trayectosData = array(
         'editable' => true,
-        'anios' => $edades,
+        //'anios' => $edades,
         'form_action' => 'saveAll',
         'etapa_header' => array(
                 array(
@@ -52,6 +52,6 @@ $trayectosData = array(
         )
 );	
 
-echo $this->element('planes_view_tabla_sectec_trayectos', array('trayectosData'=>$trayectosData));
+echo $this->element('planes_view_tabla_st', array('trayectosData'=>$trayectosData));
 
 ?>

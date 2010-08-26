@@ -213,7 +213,7 @@ if (!empty($trayectosData['form_action'])) {
             <div class="anio-ciclo">
                     <?php
                     $i = 0;
-                    foreach ($trayectosData['ciclo_lectivo'][0]['ciclos_data'] as $c) {
+                    foreach ($trayectosData['ciclo_lectivo'][0] as $c) {
 
                         echo $form->hidden($i.'.estructura_planes_anio_id',array('value'=>$c['estructura_planes_anio_id']));
                         if (!empty($c['id'])) {
