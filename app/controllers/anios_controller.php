@@ -164,7 +164,10 @@ class AniosController extends AppController {
                 'conditions'=>array('Anio.id'=>$id),
                 //'fields'=>array('Anio.plan_id','Anio.ciclo_id')
                 ));
+            
             $plan_id = $aPlan['Anio']['plan_id'];
+                       
+            
             $this->data = $aPlan;
             
             if(!empty($this->data['Info']['plan_id'])){
@@ -215,9 +218,17 @@ class AniosController extends AppController {
                     )
                 ));
 
+            $anios_list = $this->Anio->find('list', array(
+                'recursive'=>-1,
+                'conditions'=>array(
+                    'Anio.plan_id'=>$plan_id,
+                    'Anio.ciclo_id'=>$aPlan['Anio']['ciclo_id']
+                    )
+                ));
+
             $ciclos = $this->Anio->Ciclo->find('list');
             $etapas = $this->Anio->Etapa->find('list');
-            $this->set(compact('anios', 'ciclos', 'etapas'));
+            $this->set(compact('anios', 'ciclos', 'etapas','anios_list'));
             $this->render($viewToRender);
 	}
 
