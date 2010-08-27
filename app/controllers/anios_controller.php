@@ -47,11 +47,11 @@ class AniosController extends AppController {
                             ));
                         $anios['anio'] = $estruct['EstructuraPlanesAnio']['nro_anio'];
                         $anios['etapa_id'] = $estruct['EstructuraPlan']['etapa_id'];
-                        if (    !empty($anios['matricula']) ||
+                        /*if (    !empty($anios['matricula']) ||
                                 !empty($anios['secciones']) ||
-                                !empty($anios['hs_taller'])) {
+                                !empty($anios['hs_taller'])) {*/
                             $aniosGuardar[] = $anios;
-                        }
+                       /* }*/
 
                     }
                     if ($this->Anio->saveAll($aniosGuardar)) {
@@ -59,7 +59,7 @@ class AniosController extends AppController {
                         $this->redirect('/planes/view/'.$plan_id);
 
                     } else {
-                        //debug($this->Anio->validationErrors);
+                        debug($this->Anio->validationErrors);
                         $this->Session->setFlash(__('Intente de nuevo. No se pudo guardar el dato.', true));
                         $this->redirect('/planes/view/'.$plan_id);
                     }
@@ -218,7 +218,67 @@ class AniosController extends AppController {
                     )
                 ));
 
-            $anios_list = $this->Anio->find('list', array(
+
+            $ciclos = $this->Anio->Ciclo->find('list');
+            $etapas = $this->Anio->Etapa->find('list');
+            
+            $this->set(compact('anios', 'ciclos', 'etapas'));
+            $this->render($viewToRender);
+	}
+
+        function editCiclo($plan_id = null, $ciclo_id = null) {
+            $aPlan = $this->Anio->find('first', array(
+                'conditions'=>array('Anio.plan_id'=>$plan_id,
+                                    'Anio.ciclo_id'=>$ciclo_id
+                                   )
+                ));
+
+            $plan_id = $aPlan['Anio']['plan_id'];
+
+
+            $this->data = $aPlan;
+
+            if(!empty($this->data['Info']['plan_id'])){
+                    $plan_id = $this->data['Info']['plan_id'];
+            }
+
+            $estructuraPlanId = $this->Anio->Plan->getEstructuraSugerida($plan_id);
+            $trayectosDisponibles = $this->Anio->EstructuraPlanesAnio->EstructuraPlan->find('first', array(
+                'contain'=> array('EstructuraPlanesAnio'=>array('order'=>array('EstructuraPlanesAnio.edad_teorica'))),
+                'conditions'=> array(
+                    'EstructuraPlan.id'=>$estructuraPlanId),
+            ));
+
+            /**
+             * esto es para generar una vista distinta
+             * para los años que son de una oferta FP
+             */
+            $this->Anio->Plan->recursive = -1;
+            $plan   = $this->Anio->Plan->find('all',array('conditions'=>array('Plan.id'=>$plan_id)));
+            switch ($plan[0]['Plan']['oferta_id']):
+                case 1://es un FP, asique mostrar la vista de años para FP
+                case 7://es CL, asique mostrar la vista de años para FP
+                    $viewToRender = '/anios/edit_fp';
+                    break;
+                case 2: // IT
+                case 3: //MT
+                case 5: //SEC NO TECNICO
+                    $viewToRender = '/anios/edit';
+                    break;
+                case 6: //SUP NO TECNICO
+                case 4: //SNU
+                    $viewToRender = '/anios/edit_snu';
+                    break;
+                default: // si no va con ninguno mostrar el de MT
+                    $viewToRender = '/anios/edit';
+                    break;
+            endswitch;
+
+            $this->set('ciclo_seleccionado', $aPlan['Anio']['ciclo_id']);
+            $this->set('trayectosDisponibles',$trayectosDisponibles);
+            $this->set('plan_id',$plan_id);
+            //$this->set('duracion_hs',$duracion_hs);
+            $anios = $this->Anio->find('all', array(
                 'recursive'=>-1,
                 'conditions'=>array(
                     'Anio.plan_id'=>$plan_id,
@@ -226,12 +286,14 @@ class AniosController extends AppController {
                     )
                 ));
 
+
             $ciclos = $this->Anio->Ciclo->find('list');
             $etapas = $this->Anio->Etapa->find('list');
-            $this->set(compact('anios', 'ciclos', 'etapas','anios_list'));
+
+            $this->set(compact('anios', 'ciclos', 'etapas'));
             $this->render($viewToRender);
 	}
-
+        
 	function delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Id de Año inválido', true));
@@ -244,6 +306,14 @@ class AniosController extends AppController {
 	
 			$this->Session->setFlash(__('Año eliminado', true));
 			$this->redirect(array('controller'=>'Planes' ,'action'=>'view/'.$plan['Anio']['plan_id']));
+		}
+	}
+
+        function deleteCiclo($plan_id = null, $ciclo_id = null) {
+		if ($this->Anio->deleteAll(array('Anio.plan_id ='. $plan_id, 'Anio.ciclo_id ='. $ciclo_id))) {
+
+			$this->Session->setFlash(__('Año eliminado', true));
+			$this->redirect(array('controller'=>'Planes' ,'action'=>'view/'.$plan_id));
 		}
 	}
 
