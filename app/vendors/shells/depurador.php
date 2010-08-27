@@ -1,11 +1,48 @@
 <?php
 
-class DepuradorShell extends Shell
-{
+class DepuradorShell extends Shell {
     var $uses = array('Instit','Plan','Sector','Jurisdiccion', 'Tipoinstit');
 
-    function main()
-    {
+    function main($command = null) {
+        while (true) {
+            if (empty($command)) {
+                $command = trim($this->in(''));
+            }
+
+            switch ($command) {
+                case '':
+                case 'help':
+                    $this->out('Ayuda del Depurador:');
+                    $this->out('-------------');
+                    $this->out('debe escribir alguna opción');
+                    $this->out('Las opciones son:');
+                    $this->out('');
+                    $this->out('1) "anios_correlativos"');
+                    //$this->out('2) anios_correlativos:');
+                    $this->out('');
+                    break;
+
+                case 'anios_correlativos':
+                    $this->anios_correlativos();
+                    break;
+
+                case 'quit':
+                case 'exit':
+                    return true;
+                    break;
+
+                default:
+                    $this->out("Invalid command\n");
+                    break;
+            }
+            $command = '';
+        }
+    }
+
+
+
+
+    function anios_correlativos() {
         $this->layout = 'ajax';
         $this->autoRender = false;
         $limit = 100;
@@ -28,19 +65,19 @@ class DepuradorShell extends Shell
             $this->out("comienza la milonga....");
             $offset += $limit;
             $planes = $Plan->find('all', array(
-            'limit'=>$limit,
-            'offset'=> $offset,
-            'recursive' => 1,
-            'contain' => array(
-                'Anio'=> array('order'=>array(
-                    'Anio.ciclo_id',
-                    'Anio.etapa_id',
-                    'Anio.anio')),
-                ),
-            'conditions' => array(
-                'Plan.oferta_id'=>OFERTA_SECTEC,
-                'Plan.z_anios_correlativos' => 0,
-                ),
+                    'limit'=>$limit,
+                    'offset'=> $offset,
+                    'recursive' => 1,
+                    'contain' => array(
+                            'Anio'=> array('order'=>array(
+                                            'Anio.ciclo_id',
+                                            'Anio.etapa_id',
+                                            'Anio.anio')),
+                    ),
+                    'conditions' => array(
+                            'Plan.oferta_id'=>OFERTA_SECTEC,
+                            'Plan.z_anios_correlativos' => 0,
+                    ),
             ));
 
 //            if ($offset > 10){
@@ -84,5 +121,7 @@ class DepuradorShell extends Shell
         //die("TEEERRRMMMIINÓÓÓÓ !!!!");
     }
 }
+
+
 
 ?>
