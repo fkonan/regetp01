@@ -83,6 +83,7 @@
 ////////////////////////////////////////////////////////////
 
 
+
 $esEditable = false;
 if (!empty($trayectosData['editable'])) {
     if ($trayectosData['editable']) {
@@ -138,6 +139,7 @@ foreach($trayectosData['ciclo_lectivo'][0] as $anio_ciclo=>$ciclo){
             if (!empty($ciclo_seleccionado)) {
                 $attrs = array('disabled'=>true);
                 $defaultVal = $ciclo_seleccionado;
+                echo $form->hidden('Info.ciclo_id', array('value'=>$ciclo_seleccionado));
             } else {
                 $attrs = array();
                 $defaultVal = date('Y',strtotime('now'));
@@ -149,10 +151,11 @@ foreach($trayectosData['ciclo_lectivo'][0] as $anio_ciclo=>$ciclo){
         }
         
 ?>
+            <?php echo $form->hidden($j.'.id',array( 'label'=>false, 'value'=>empty($datos_anio["id"])?null:$datos_anio["id"]))?>
             <td><?php echo $datos_anio["anio"]?>º</td>
-            <td><?php echo $form->input($j.'.matricula',array( 'label'=>false, 'value'=>empty($datos_anio["matricula"])?null:$datos_anio["matricula"]))?></td>
-            <td><?php echo $form->input($j.'.secciones',array( 'label'=>false, 'value'=>empty($datos_anio["secciones"])?null:$datos_anio["secciones"]))?></td>
-            <td><?php echo $form->input($j.'.hs_taller',array( 'label'=>false, 'value'=>empty($datos_anio["hs_taller"])?null:$datos_anio["hs_taller"]))?></td>
+            <td><?php echo $form->input($j.'.matricula',array( 'label'=>false, 'value'=>is_null($datos_anio["matricula"])?null:$datos_anio["matricula"]))?></td>
+            <td><?php echo $form->input($j.'.secciones',array( 'label'=>false, 'value'=>is_null($datos_anio["secciones"])?null:$datos_anio["secciones"]))?></td>
+            <td><?php echo $form->input($j.'.hs_taller',array( 'label'=>false, 'value'=>is_null($datos_anio["hs_taller"])?null:$datos_anio["hs_taller"]))?></td>
     </tr>
 <?php
         $i++;

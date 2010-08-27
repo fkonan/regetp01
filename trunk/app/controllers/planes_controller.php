@@ -194,8 +194,9 @@ class PlanesController extends AppController {
 		
 		//ordenos los años para ue puedan ser mostrados en la vista
 		$anios = array();
-		foreach($plan['Anio'] as $p){
-			$anios[$p['ciclo_id']][]= $p;
+
+                foreach($plan['Anio'] as $p){
+                        $anios[$p['ciclo_id']][]= $p;
 		}
 		
 		$this->set('anios',$anios);	
@@ -291,7 +292,7 @@ class PlanesController extends AppController {
 			$this->redirect(array('controller'=>'Pages','action'=>'home'));
 		}
 		if (!empty($this->data)) {
-			if ($this->Plan->save($this->data)) {
+                        if ($this->Plan->save($this->data)) {
 				$this->Session->setFlash(__('El Plan ha sido guardado', true));
 				$this->redirect(array('action'=>'view/'.$this->data['Plan']['id']));
 			} else {
