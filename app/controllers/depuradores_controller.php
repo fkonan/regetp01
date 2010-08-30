@@ -678,7 +678,7 @@ class DepuradoresController extends AppController {
         // planes que contienen solo un ciclo con etapas mezcladas
         $planes_con_un_ciclo_de_etapas_mezclas = $this->Anio->find('all', array(
                     'fields' => array('plan_id'),
-                    'conditions' => array('oferta_id'=> 3, 'z_depurado'=>''),
+                    'conditions' => array('oferta_id'=> 3, 'z_depurado'=>0),
                     'order' => array('plan_id'),
                     'group' => array('plan_id HAVING count(DISTINCT(ciclo_id)) = 1 AND count(DISTINCT(etapa_id)) = 2'),
                     'limit' => 500
@@ -687,7 +687,10 @@ class DepuradoresController extends AppController {
         foreach ($planes_con_un_ciclo_de_etapas_mezclas as $plan) {
             $planes_id_con_un_ciclo[] = $plan['Anio']['plan_id'];
         }
-        
+
+        if (empty($planes_id_con_un_ciclo))
+            return;
+
         // planes completos con sus años
         $planes = $this->Plan->find('all', array(
                     'contain' => array('Anio' => array('order'=>array('etapa_id', 'anio'))),
@@ -771,7 +774,7 @@ class DepuradoresController extends AppController {
                 }
             }
         }
-        debug($casos_mas_de_2);
+        //debug($casos_mas_de_2);
     }
 }
 
