@@ -1,4 +1,5 @@
 <?php
+set_time_limit(30000000);
 
 class DepuradoresController extends AppController {
 
@@ -674,42 +675,103 @@ class DepuradoresController extends AppController {
 
     // depurador de planes
     function depurar_estructura_planes() {
-        $anios = $this->Anio->find('all', array(
-                    'fields' => array('plan_id','ciclo_id', 'etapa_id'),
-                    'conditions' => array('oferta_id'=> 3),
+        // planes que contienen solo un ciclo con etapas mezcladas
+        $planes_con_un_ciclo_de_etapas_mezclas = $this->Anio->find('all', array(
+                    'fields' => array('plan_id'),
+                    'conditions' => array('oferta_id'=> 3, 'z_depurado'=>''),
                     'order' => array('plan_id'),
-                    'group' => array('plan_id','ciclo_id', 'etapa_id')
+                    'group' => array('plan_id HAVING count(DISTINCT(ciclo_id)) = 1 AND count(DISTINCT(etapa_id)) = 2'),
+                    'limit' => 500
         ));
 
+        foreach ($planes_con_un_ciclo_de_etapas_mezclas as $plan) {
+            $planes_id_con_un_ciclo[] = $plan['Anio']['plan_id'];
+        }
+        
+        // planes completos con sus años
         $planes = $this->Plan->find('all', array(
-                    'contain' => array('Anio' => array('order'=>array('ciclo_id'))),
-                    'conditions' => array('Plan.oferta_id'=> 3),
-                    'limit' => 100
+                    'contain' => array('Anio' => array('order'=>array('etapa_id', 'anio'))),
+                    'conditions' => array('Plan.id'=> $planes_id_con_un_ciclo)
         ));
 
-        debug($planes);
-
-        /*$plan_ant = '';
-        foreach($anios as $anio) {
-            if ($plan_ant != $anio['Anio']['plan_id']) {
-                $plan_ant = $anio['Anio']['plan_id'];
-
-            }
-        }*/
-
+        $i = 0;
         foreach ($planes as $plan) {
-            if (count($anio['Anio']) > 0) {
-                $ciclo_ant = $anio['0']['Anio'];
-                foreach ($plan['Anio'] as $anio) {
-                    if ($anio['ciclo_id'] != $ciclo_ant) {
-                        continue;
+            if (!empty($plan['Anio']))
+            {
+                $etapa_ant = $plan['Anio']['0']['etapa_id'];
+                $cant_etapas_distintas = 1;
+                $plan_creado = false;
+                $plan_last_id = '';
+
+                foreach ($plan['Anio'] as &$anio)
+                {
+                    if ($anio['etapa_id'] == $etapa_ant)
+                    {
+                        $planes_nuevos[$i][$anio['id']] = $anio;
+                        // se crea el nuevo plan con los primeros años (por ej: CB)
+                        // solo el segundo usaria el mismo plan, de esta manera se
+                        // asegura que el plan original le queda a uno o mas años
+                        // en la mayoria de los casos (CB - CS), le queda el titulo a CS
+                        if ($i != 2) {
+                            if (!$plan_creado) {
+                                // solo entra cuando i == 0
+                                $this->Plan->create();
+                                $newPlan = $plan['Plan'];
+                                $newPlan['id'] = '';
+                                if ($anio['etapa_id'] == 1 || $anio['etapa_id'] == 4) {
+                                    $newPlan['sector_id'] = 5;
+                                    $newPlan['subsector_id'] = 0;
+                                }
+                                $newPlan['z_depurado'] = 2;
+                                // faltaria titulo, normativa... a definir
+
+                                $this->Plan->save($newPlan);
+
+                                $plan_creado = true;
+                                $plan_last_id = $this->Plan->id;
+
+                                debug($plan_last_id);
+                            }
+                            // le asigna el nuevo plan a sus años
+                            $anio['old_plan_id'] = $anio['plan_id'];
+                            $anio['plan_id'] = $plan_last_id;
+
+                            $this->Anio->save($anio);
+
+                            debug($anio);
+                        }
+                    }
+                    else {
+                        $i++;
+                        $cant_etapas_distintas++;
+                        $etapa_ant = $anio['etapa_id'];
+
+                        $plan['Plan']['z_depurado'] = 1;
+                        $this->Plan->save($plan['Plan']);
+
+                        $plan_creado = false;
+
+                        // si tiene mas de 2 etapas crea el nuevo plan
+                        // A CONFIRMAR!!!
+                        /*if ($i > 2) {
+                            $newPlan = $plan;
+                            $newPlan['id'] = '';
+                            $newPlan['sector_id'] = 5;
+                            $newPlan['subsector_id'] = 0;
+                            $newPlan['depurado'] = 2;
+                            // faltaria titulo, normativa... a definir
+
+                            //$this->Plan->save($newPlan);
+                        }*/
                     }
                 }
 
+                if ($cant_etapas_distintas > 2) {
+                    $casos_mas_de_2[] = $plan['Plan']['id'];
+                }
             }
         }
-
-        //debug($anios);
+        debug($casos_mas_de_2);
     }
 }
 
