@@ -10,11 +10,18 @@ class InstitTest extends Instit {
 
 class InstitTestCase extends CakeTestCase {
 
-	var $autoFixtures = false;
-	var $fixtures = array(
-		'app.instit', 'app.plan', 'app.sector', 'app.subsector', 'app.orientacion',
-            'app.jurisdiccion', 'app.claseinstit'
-	);
+	//var $autoFixtures = false;
+	 /* @var $fixtures array */
+    var $fixtures = array(
+            'app.z_fondo_work', 'app.jurisdiccion', 'app.instit', 'app.claseinstit',
+            'app.orientacion',  'app.sector', 'app.plan', 'app.subsector',
+            'app.lineas_de_accion', 'app.fondos_lineas_de_accion',
+            'app.tipoinstit', 'app.dependencia', 'app.departamento', 'app.localidad',
+            'app.etp_estado', 'app.oferta', 'app.titulo', 'app.anio', 'app.ciclo',
+            'app.etapa', 'app.gestion', 'app.historial_cue', 'app.ticket', 'app.user',
+            'app.user_login', 'app.fondo', 'app.estructura_plan', 'app.estructura_planes_anio',
+            'app.jurisdicciones_estructura_plan'
+    );
 	 
     function start() {
         parent::start();
@@ -152,6 +159,28 @@ class InstitTestCase extends CakeTestCase {
 
         //este es un numero menor a 3 digitos
         $this->assertEqual($this->Instit->isCUEValid("54"),-1);
+    }
+
+
+
+    function testEstructuraPlanes(){
+        $this->assertFalse($this->Instit->estructuraPlanes('depurados', 1));
+
+        $ie = $this->Instit->estructuraPlanes('no-depurados', 2);
+        $canti = count($ie['Plan']);
+        $this->assertTrue(1 == $canti);
+
+        $ie = $this->Instit->estructuraPlanes('depurados', 2);
+        $canti = count($ie['Plan']);
+        $this->assertTrue(1 == $canti);
+
+        $ie = $this->Instit->estructuraPlanes('depurados', 4);
+        $canti = count($ie['Plan']);
+        $this->assertTrue(0 == $canti);
+
+        $ie = $this->Instit->estructuraPlanes('no-depurados', 4);
+        $canti = count($ie['Plan']);
+        $this->assertTrue(2 == $canti);
     }
 
 }
