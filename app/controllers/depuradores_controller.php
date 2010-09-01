@@ -1,5 +1,4 @@
 <?php
-set_time_limit(30000000);
 
 class DepuradoresController extends AppController {
 

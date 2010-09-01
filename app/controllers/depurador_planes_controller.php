@@ -11,7 +11,7 @@ class DepuradorPlanesController extends AppController {
 	
 	
 	function index() {
-
+            $this->layout = '';
         }
 }
 
