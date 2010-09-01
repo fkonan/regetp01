@@ -719,7 +719,7 @@ class DepuradoresController extends AppController {
                             if (!$plan_creado) {
                                 // solo entra cuando i == 0
                                 $this->Plan->create();
-                                $newPlan = $plan['Plan'];
+                                $newPlan = Array();
                                 $newPlan['id'] = '';
                                 if ($anio['etapa_id'] == 1 || $anio['etapa_id'] == 4) {
                                     $newPlan['sector_id'] = 5;
