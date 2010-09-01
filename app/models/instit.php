@@ -330,7 +330,7 @@ class Instit extends AppModel {
   	 *
   	 * @return unknown
   	 */
-  	function controlar_coincidencia_cue_jurisdiccion(){
+  	function controlar_coincidencia_cue_jurisdiccion() {
   		$jur_id = $this->data[$this->name]['jurisdiccion_id'];
   		
   		if($jur_id < 10){
@@ -1097,6 +1097,46 @@ class Instit extends AppModel {
 
             return $ant;
 
+        }
+
+
+
+        /**
+         *  Me trae los planes de una determinada institucion, con sus anios dato
+         * 
+         * @param string $depurado posibilidades:
+         *                          'depurados'
+         *                          'no-depurados'
+         * @param integer $id
+         * @return false si no encontro nada. o un Array de instit con sus planes
+         */
+        function estructuraPlanes($depurado, $id = null){
+            $id = (empty($id)) ? $this->id : $id;
+
+            // inicializo  el flag
+            $flagDep = 0;
+
+            switch ($depurado) {
+                case 'depurados':
+                    $flagDep = ' > 0';
+                    break;
+
+                case 'no-depurados':
+                default:
+                    $flagDep = ' = 0';
+                    break;
+            }            
+
+            $ins = $this->find('first', array(
+                'contain' => array('Plan' => array(
+                    'conditions'=> array( "Plan.estructura_plan_id $flagDep"),
+                    'EstructuraPlan','Anio.EstructuraPlanesAnio')),
+                'conditions' => array(
+                    'Instit.id'=>$id,                   
+                    ),
+            ));
+
+            return empty($ins['Plan'])?false:$ins;
         }
 }
 ?>

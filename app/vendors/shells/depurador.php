@@ -38,7 +38,7 @@ class DepuradorShell extends Shell {
 
                 case 3:
                 case 'arreglar_anios':
-                    $this->anios_anios();
+                    $this->arreglar_anios();
                     break;
 
 
@@ -57,6 +57,8 @@ class DepuradorShell extends Shell {
     }
 
 
+
+    
 
 
     function anios_correlativos() {
@@ -169,7 +171,12 @@ class DepuradorShell extends Shell {
 
 
 
+
+
+    
     function anios_sgn_estructura() {
+        $this->out("comienza la milonga....");
+        
         $this->layout = 'ajax';
         $this->autoRender = false;
         $limit = SS_LIMIT;
@@ -185,7 +192,7 @@ class DepuradorShell extends Shell {
         //$this->out($Plan->query('update planes set z_anios_correctos_sgn_estruct = 0;'));
 
         do {
-            $this->out("comienza la milonga....");
+            // me traigo los planes
             $offset += $limit;
             $planes = $Plan->find('all', array(
                     'limit'=>$limit,
@@ -204,6 +211,7 @@ class DepuradorShell extends Shell {
                     ),
             ));
 
+            // cuando no encuentra mas pplanos termina la ejecucion
             if (empty($planes)){
                 $this->out("¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥ BYE ! Off: $offset");
                 break;
@@ -214,14 +222,15 @@ class DepuradorShell extends Shell {
 //                return -1;
 //            }
 
+            // recorro los planes encontrados
             $this->out("Recorriendo ".count($planes)." planes");
-
             foreach ($planes as $p) {
                 $cantAnios = count($p['Anio']);
 
-                //saco el primer aÒo dato del plan
+                // saco el primer aÒo dato del plan
                 $primerAnio = array_shift($p['Anio']);
 
+                // traigo las estructuras para esa etapa y jurisdiccion
                 $estruc = $EstructPlan->JurisdiccionesEstructuraPlan->find('all', array(
                         'contain' => array(
                             'EstructuraPlan' => array(
@@ -234,18 +243,20 @@ class DepuradorShell extends Shell {
                             ),
                     ));
 
+                // si la jurisdiccion no tiene ese tipo de estructura sigo leyendo el proximo
+                if (empty($estruc)){
+                    $this->out(array_keys($e));
+                    $this->out('finish HIM:::: plan: '.$p['Plan']['id']. ' para jurisdiccion: '.$p['Instit']['jurisdiccion_id']);
+                    $Plan->id =  $primerAnio['plan_id'];
+                    $Plan->saveField('z_anios_correctos_sgn_estruct', 3 );
+                    continue;
+                }
                 
 
+                // recorro las estructuras y verifico si tengo la misma cantidad de aÒos DATO
                 $primerAnioEstruct = array();
                 $this->out("++++++ Se encontraron ".count($estruc)." estructuras posibles, recorrientolas");
                 foreach ($estruc as $e) {
-                    // si la jurisdiccion no tiene ese tipo de estructura sigo leyendo el proximo
-                    if (empty($e['JurisdiccionesEstructuraPlan'])){
-                        $this->out(array_keys($e));
-                        $this->out('finish HIM:::: plan: '.$p['Plan']['id']. ' para jurisdiccion: '.$p['Instit']['jurisdiccion_id']);
-                        return -18;
-                        break;
-                    }
                     if (count($e['EstructuraPlan']['EstructuraPlanesAnio']) == $cantAnios){
                         $this->out("----    joya, tiene la misma cant de aÒos para el plan ".$p['Plan']['id']);
                        //saco el primer aÒo de la estructura
@@ -255,18 +266,19 @@ class DepuradorShell extends Shell {
                     }
                 }
 
+                // si la estructura tiene la misma cantidad de aÒos verifico que el aÒo inicial sea el mismo
                 if (!empty($primerAnioEstruct)){
                     if ($primerAnioEstruct['nro_anio'] == $primerAnio['anio']) {
                         //$this->out(array_keys($primerAnioEstruct));
                         $Plan->id =  $primerAnio['plan_id'];
-                        $Plan->saveField('z_anios_correctos_sgn_estruct', -1 );
+                        $Plan->saveField('z_anios_correctos_sgn_estruct', (-1) * $primerAnioEstruct['estructura_plan_id'] );
                         $this->out("    ++++    Anio correcto con estructura: ".$primerAnioEstruct['name']. " del plan ID: ".$primerAnio['plan_id']);
                     } else {
                         $Plan->id =  $primerAnio['plan_id'];
-                        $Plan->saveField('z_anios_correctos_sgn_estruct', 1 );
+                        $Plan->saveField('z_anios_correctos_sgn_estruct', 100 + $primerAnioEstruct['estructura_plan_id'] );
                         $this->out("    ****    Los aÒos iniciales no coinciden nro_anio: ".$primerAnioEstruct['nro_anio']." primer anio segun datoa actual: ".$primerAnio['anio']);
                     }
-                } else {
+                } else { // no tiene la misma cantidad de aÒos
                      $Plan->id =  $primerAnio['plan_id'];
                      $Plan->saveField('z_anios_correctos_sgn_estruct', 2 );
                      $this->out("****** NO fuÈ encontrada ninguna estructura por culpa de la cantidad de aÒos para el plan ID: ".$primerAnio['plan_id'] ."*****");
@@ -279,16 +291,105 @@ class DepuradorShell extends Shell {
 
 
 
+
+
+
+    
+
     function arreglar_anios() {
         $this->layout = 'ajax';
         $this->autoRender = false;
         $limit = SS_LIMIT;
-        
+
         $Plan =& $this->Instit->Plan;
          /* @var $EstructPlan Model */
         $EstructPlan =& $this->Instit->Plan->EstructuraPlan;
+        /* @var $EstructAnio Model */
+        $EstructAnio =& $this->Instit->Plan->Anio->EstructuraPlanesAnio;
 
         $offset = (-1)*$limit;
+
+        //$this->out($Plan->query('update planes set z_anios_correctos_sgn_estruct = 0;'));
+
+        do {
+            $this->out("comienza la milonga....");
+
+            // me traigo los planes
+            $offset += $limit;
+            $planes = $Plan->find('all', array(
+                    'limit'=>$limit,
+                    'offset'=> $offset,
+                    'recursive' => 1,
+                    'contain' => array(
+                            'Instit(jurisdiccion_id)',
+                            'Anio'=> array('order'=>array(
+                                            'Anio.ciclo_id',
+                                            'Anio.etapa_id',
+                                            'Anio.anio')),
+                    ),
+                    'conditions' => array(
+                            'Plan.oferta_id'=>OFERTA_SECTEC,
+                            'Plan.z_anios_correctos_sgn_estruct >' => 100, // los que tienen anos correlativos mal
+                    ),
+            ));
+
+            // cuando no encuentra mas pplanos termina la ejecucion
+            if (empty($planes)){
+                $this->out("¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥ BYE ! Off: $offset");
+                break;
+            }
+
+            if ($offset > 10){
+                $this->out("termino por el offset");
+                return -1;
+            }
+
+
+//            if ($offset > 10){
+//                $this->out("termino por el offset");
+//                return -1;
+//            }
+
+            // recorro los planes encontrados
+            $this->out("Recorriendo ".count($planes)." planes");
+            foreach ($planes as $p) {
+                $cantAnios = count($p['Anio']);
+
+
+                // traigo la estructura de este plan
+                $estruc = $EstructPlan->find('first', array(
+                            'contain' => array(
+                                    'EstructuraPlanesAnio'=> array(
+                                        'order'=>'EstructuraPlanesAnio.nro_anio'),
+                                    ),
+                            'conditions' => array(
+                                'EstructuraPlan.id'=>$p['Plan']['z_anios_correctos_sgn_estruct']%100,
+                                ),
+                        ));
+
+                if (empty($estruc)){
+                    $this->out("Plan ".$p['Plan']['id']." sin estructura encontrada.");
+                    continue;
+                }
+
+                $diff = $estruc['EstructuraPlanesAnio'][0]['nro_anio'] - $p['Anio'][0]['anio'];
+                $this->out("DIIIFFFF :::: ". $diff. "  nro anio: ".$estruc['EstructuraPlanesAnio'][0]['nro_anio']." << anio: ".$p['Anio'][0]['anio']);
+
+                foreach ($p['Anio'] as &$aa){
+                    $aaa['anio'] += $diff;
+                }
+
+                if ($Plan->Anio->saveAll($p['Anio'])){
+                    $this->out("--- Anios del Plan: ".$p['Plan']['id']. " guardado.");
+                } else {
+                    foreach ($Plan->Anio->validationErrors as $vv) {
+                        $this->out($vv);
+                    }
+                    $this->out("*** ERROR al guardar Anios del Plan: ".$p['Plan']['id']);
+                }
+            }
+        } while (1);
+        $this->out("TEEERRRMMMIIN”””” !!!!");
 
     }
 
