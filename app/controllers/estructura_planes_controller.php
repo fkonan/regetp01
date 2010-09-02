@@ -20,7 +20,7 @@ class EstructuraPlanesController extends AppController {
 	function add() {
 		if (!empty($this->data)) {
                     $this->EstructuraPlan->create();
-
+                   
                     // etapas del EstructuraPlan
                     //$str = '[{"etapa_id":"6","edad_teorica":"11","nro_anio":"1","anio_escolaridad":""},{"etapa_id":"6","edad_teorica":"12","nro_anio":"2","anio_escolaridad":""},{"etapa_id":"6","edad_teorica":"13","nro_anio":"3","anio_escolaridad":""}]';
                     $aEtapas = json_decode($this->data['EstructuraPlan']['etapas'], true);
@@ -28,6 +28,7 @@ class EstructuraPlanesController extends AppController {
                     if ($this->EstructuraPlan->save($this->data)) {
                         // guarda el EstructuraPlan_id a cada etapa
                         if ($aEtapas) {
+                             //debug($aEtapas);die;
                             foreach ($aEtapas as &$etapa) {
                                 $etapa['estructura_plan_id'] = $this->EstructuraPlan->id;
                             }
@@ -65,6 +66,7 @@ class EstructuraPlanesController extends AppController {
                                     $etapas_aux[$i]['estructura_plan_id'] = $this->EstructuraPlan->id;
                                     $etapas_aux[$i]['edad_teorica'] = $etapa['edad_teorica'];
                                     $etapas_aux[$i]['nro_anio'] = $etapa['nro_anio'];
+                                    $etapas_aux[$i]['alias'] = $etapa['alias'];
                                     $etapas_aux[$i]['anio_escolaridad'] = $etapa['anio_escolaridad'];
                                 
                                     $i++;
@@ -91,6 +93,7 @@ class EstructuraPlanesController extends AppController {
                                 $etapas_to_serialize[$i]['estructura_plan_id'] = $etapa['estructura_plan_id'];
                                 $etapas_to_serialize[$i]['edad_teorica'] = $etapa['edad_teorica'];
                                 $etapas_to_serialize[$i]['nro_anio'] = $etapa['nro_anio'];
+                                $etapas_to_serialize[$i]['alias'] = $etapa['alias'];
                                 $etapas_to_serialize[$i]['etapa_id'] = $this->data['EstructuraPlan']['etapa_id'];
                                 $etapas_to_serialize[$i]['etapa_nombre'] = htmlentities($this->data['Etapa']['name']);
                                 $etapas_to_serialize[$i]['anio_escolaridad'] = $etapa['anio_escolaridad'];
