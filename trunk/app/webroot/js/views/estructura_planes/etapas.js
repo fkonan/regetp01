@@ -6,6 +6,7 @@ function EtapaAdd() {
     etapa = { etapa_id: jQuery("#etapa_id").val(),
               etapa_nombre: escape(jQuery('#etapa_id :selected').text()),
               edad_teorica: jQuery("#edad_teorica").val(),
+              alias: jQuery("#alias").val(),
               nro_anio: jQuery("#nro_anio").val(),
               anio_escolaridad: jQuery("#anio_escolaridad").val() };
 
@@ -43,6 +44,7 @@ function EtapaAddObject(etapa) {
               etapa_nombre: etapa.etapa_nombre,
               edad_teorica: etapa.edad_teorica,
               nro_anio: etapa.nro_anio,
+              alias: etapa.alias,
               anio_escolaridad: etapa.anio_escolaridad };
 
     if (!EtapaExists(etapa)) {
@@ -74,6 +76,7 @@ function EtapaEdit(id) {
     jQuery("#edad_teorica").val(etapas[id]['edad_teorica']);
     jQuery("#nro_anio").val(etapas[id]['nro_anio']);
     jQuery("#anio_escolaridad").val(etapas[id]['anio_escolaridad']);
+    jQuery("#alias").val(etapas[id]['alias']);
 
     jQuery("#anio_id").val(id);
 
@@ -105,6 +108,7 @@ function ResetForm() {
     jQuery("#nro_anio").val('');
     jQuery("#anio_escolaridad").val('');
     jQuery("#anio_id").val('');
+    jQuery("#alias").val('');
 }
 
 function sortfcn(a,b){
