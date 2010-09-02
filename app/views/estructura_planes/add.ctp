@@ -19,9 +19,10 @@
         <div id="etapa_1">
         <?php
             echo $form->input('edad_teorica', array('id'=>'edad_teorica', 'label'=>'Edad teórica', 'maxlength'=>2, 'size'=>2, 'style'=>'width: 18px;', 'div' => false));
-            echo $form->input('nro_anio', array('id'=>'nro_anio', 'label'=>'Año', 'maxlength'=>2, 'size'=>2, 'style'=>'width: 18px;', 'div' => false));
             echo $form->input('anio_escolaridad', array('id'=>'anio_escolaridad', 'label'=>'Año escolaridad', 'maxlength'=>2, 'size'=>2, 'style'=>'width: 18px;', 'div' => false));
-
+            echo $form->input('nro_anio', array('id'=>'nro_anio', 'label'=>'Año', 'maxlength'=>2, 'size'=>2, 'style'=>'width: 18px;', 'div' => false));
+            echo $form->input('alias', array('id'=>'alias'));
+            
             echo $form->input('anio_id', array('id'=>'anio_id', 'type'=>'hidden'));
             
             echo $form->button('Agregar año', array('id'=>'add', 'onclick'=>'Javascript: EtapaAdd();'));
