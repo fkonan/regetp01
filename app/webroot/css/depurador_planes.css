@@ -1,0 +1,259 @@
+* {
+    margin:0;
+    padding:0;
+}
+
+/* General Style Info */
+body {
+    color: #000000;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size:10pt;
+    margin: 0;
+    background-color:#FFFFFF;
+}
+p {
+    padding-bottom: 0.8em;
+}
+a, a:visited, a:active {
+    color: #003d4c;
+    text-decoration: underline;
+    font-weight: bold;
+    outline: none;
+}
+a:hover {
+    color: #003d4c;
+    text-decoration:none;
+}
+a img {
+    border:none;
+}
+
+h1 {
+    font-size: 12pt;
+    color: #045FB4;
+    font-weight: bold;
+    font-family:Arial, Helvetica, sans-serif;
+    padding-top: 0.4em;
+    margin-top: 0.3em;
+    margin-right: 0;
+    margin-bottom: 0.3em;
+    margin-left: 0;
+}
+
+/* estructura */
+
+.dato_instit {
+    float:left;
+    padding: 3px 10px 10px;
+}
+
+.dato_instit label {
+    font-weight: bold;
+}
+
+#cuerpo {
+    clear:both;
+    float: none;
+    background-color: #FFFFFF;
+    width:100%;
+}
+#col_izq {
+    float: left;
+    width: 15%;
+    border: 1px solid #000000;
+    margin:0;
+    padding:0;
+}
+
+#col_der {
+    float: left;
+    width: 84%;
+    border: 1px solid #000000;
+    overflow:auto;
+    margin:0;
+    padding:0;
+}
+
+.row_header {
+    height: 20px;
+    clear: both;
+    width: 1500px;
+}
+
+.row_header .ciclo {
+    width: 200px;
+    float: left;
+    text-align: center;
+    font-weight: bold;
+}
+
+.planes_izq {
+    height: 100px;
+    /*padding-bottom: 10px;*/
+    border-bottom: 1px solid #000000;
+}
+
+.planes_der {
+    height: 100px;
+    /*padding-bottom: 10px;*/
+    clear: both;
+    width: 1500px;
+    border-bottom: 1px solid #000000;
+}
+
+.col_ciclos {
+    width: 200px;
+    float: left;
+    margin: 10px 10px 17px;
+    text-align: center;
+}
+
+.col_ciclos .title {
+    font-weight: bold;
+    font-size: 11px;
+    clear: both;
+
+}
+
+/*
+ELEMENTO GRAFICADOR DE PLANES
+*/
+
+.eventHeading{
+	/* The colorful year headings at the top */
+	font-size:1.2em;
+	margin:0px 0px 10px;
+	padding:2px 5px;
+	text-align:center;
+}
+
+/* Three color styles for the headings: */
+
+.eventHeading.chreme{
+	background:#FBF7F0;
+	border:1px solid #EEE4D4;
+	color:#A78B5F;
+}
+
+.eventHeading.blue{
+	background:#E6F8FF;
+	border:1px solid #D4E6EE;
+	color:#548DA5;
+}
+
+.eventHeading.green{
+	background:#E6FFDF none repeat scroll 0 0;
+	border:1px solid #C9E6C1;
+	color:#6EA85F;
+}
+
+#timelineLimiter{
+	/* Hides the overflowing timeline */
+	overflow:hidden;
+	padding-top:10px;
+	margin:10px 0;
+        border:1px solid #C9E6C1;
+        height:120px;
+        width: 350px;
+}
+
+#timelineLimiterMini{
+	/* Hides the overflowing timeline */
+	overflow:hidden;
+	border:1px solid #D8EFD1;
+        height:65px;
+        font-size: 8pt;
+        float:left;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-right: 5px;
+        clear: none;
+}
+
+.green{
+	/* Hides the overflowing timeline */
+	background:#F2FFEF none repeat scroll 0 0;
+        border:1px solid #C9E6C1 !important;
+}
+
+.yellow{
+	/* Hides the overflowing timeline */
+	background:#FFFFDF none repeat scroll 0 0;
+        border:1px solid #FEFF8F !important;
+}
+
+.red{
+	/* Hides the overflowing timeline */
+	background:#FFDFDF none repeat scroll 0 0;
+        border:1px solid #DF8B8B !important;
+}
+
+.edades {
+
+}
+.edades span{
+	/* The individual events */
+	border:1px solid #EEEEEE;
+	list-style:none;
+	margin:2px;
+	padding:4px 7px;
+        width: 40px;
+}
+
+.edadesList{
+	margin:0px 0px 0px 0px !important;
+        padding-bottom: 40px;
+}
+
+.edadesList li{
+	/* The individual events */
+	background:#F0F7FC;
+	border:1px solid #EEEEEE;
+	list-style:none;
+	margin:2px;
+	padding:4px 7px;
+        float:left;
+        display:inline;
+        width: 40px;
+}
+
+.event{
+	/* Contains the event header and body list */
+	float:left;
+	padding:0px;
+	text-align:left;
+	margin:0 0px 50px;
+        clear:none;
+}
+
+.eventList{
+    margin:0px 0px 0px 0px !important;
+}
+
+.eventList li{
+	/* The individual events */
+	background:#F4F4F4;
+	border:1px solid #EEEEEE;
+	list-style:none;
+	margin:2px;
+	padding:4px 7px;
+        float:left;
+        display:inline;
+        width: 40px;
+
+	/* CSS3 rounded corners */
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+}
+
+.eventList li:hover{
+	/* The hover state: */
+	cursor:pointer;
+	background:#E6F8FF;
+	border:1px solid #D4E6EE;
+	color:#548DA5;
+}
+
+
+

@@ -10,8 +10,27 @@ class DepuradorPlanesController extends AppController {
 	var $db;
 	
 	
-	function index() {
+	function index($id) {
             $this->layout = '';
+            //Configure::write('debug', '0');
+
+            if ($id)
+            {
+                //$instit = $this->Instit->findById($id);
+                $instit = $this->Instit->find('all', array(
+                            'contain' => array(
+                                'Jurisdiccion' => 'name',
+                                'Plan' => array(
+                                'Anio' => array(
+                                        'Etapa',
+                                        'order'=>array('ciclo_id','etapa_id', 'anio'))
+                                    )),
+                            'conditions' => array('Instit.id'=> $id)
+                ));
+                //debug($instit);
+
+                $this->set('instit',$instit[0]);
+            }
         }
 
         function test_graficador($id, $ciclo, $depurado) {
