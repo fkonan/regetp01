@@ -49,8 +49,18 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                 $anexo = ($planes['Instit']['anexo']<10)?'0'.$planes['Instit']['anexo']:$planes['Instit']['anexo'];
                 $cue_instit = $planes['Instit']['cue'].$anexo;
                 ?>
-
-
+                <?php
+                if(empty($planes['Plan'])){
+                ?>
+                    <div class="tabs-content">
+                       <h2>Listado de Ofertas</h2>
+                           <ul class="lista_fondos" style="padding-top: 20px;">
+                           <p class='msg-atencion'>La Institución no presentó ofertas</p>
+                       </ul>
+                    </div>
+                <?php
+                }
+                ?>
                 <?php
                         //if(isset($sumatoria_matriculas['array_de_ciclos'])>0 && isset($sumatoria_matriculas['array_de_ofertas'])>0):
                         if(isset($planes['Plan'])  && count($planes['Plan'])>0):?>
