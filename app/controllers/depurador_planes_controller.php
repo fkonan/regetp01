@@ -12,7 +12,7 @@ class DepuradorPlanesController extends AppController {
 	
 	function index($id) {
             $this->layout = '';
-            //Configure::write('debug', '0');
+            Configure::write('debug', '0');
 
             if ($id)
             {
@@ -21,15 +21,21 @@ class DepuradorPlanesController extends AppController {
                             'contain' => array(
                                 'Jurisdiccion' => 'name',
                                 'Plan' => array(
-                                'Anio' => array(
-                                        'Etapa',
-                                        'order'=>array('ciclo_id','etapa_id', 'anio'))
+                                    'Anio' => array(
+                                            'Etapa',
+                                            'order'=>array('ciclo_id','etapa_id', 'anio')),
+                                    'conditions'=> array('Plan.oferta_id'=> 3)
                                     )),
                             'conditions' => array('Instit.id'=> $id)
                 ));
                 //debug($instit);
+                $jurisdiccion_id = $instit[0]['Instit']['jurisdiccion_id'];
+
+                // estructuras posibles en la jurisdiccion
+                $estructuras = $this->JurisdiccionesEstructuraPlan->getEstructurasDeJurisdiccion($jurisdiccion_id, 'list');
 
                 $this->set('instit',$instit[0]);
+                $this->set('estructuras',$estructuras);
             }
         }
 

@@ -30,7 +30,8 @@
             ?>
             <div class="planes_izq">
                 <?=$plan['nombre']?><br />
-                <select><option>EGB3</option></select>
+                <?php echo $form->input('estructura_id', array('options'=>$estructuras,'label'=>'')); ?>
+                <!--<select><option>EGB3</option></select>-->
             </div>
             <?php } ?>
         </div>
@@ -39,11 +40,11 @@
         <div id="col_der">
 
             <div class="row_header">
-                <div class="ciclo">2006</div>
-                <div class="ciclo">2007</div>
-                <div class="ciclo">2008</div>
-                <div class="ciclo">2009</div>
-                <div class="ciclo">2010</div>
+                <?php
+                for ($i=2006; $i <= date('Y'); $i++) {
+                ?>
+                <div class="ciclo"><?=$i?></div>
+                <?php } ?>
             </div>
 
             <?php
