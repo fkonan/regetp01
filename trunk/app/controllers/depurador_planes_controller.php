@@ -45,6 +45,33 @@ class DepuradorPlanesController extends AppController {
             $this->set('plan', $plan);
             $this->set('depurado', $depurado);
         }
+
+
+        function arregladorDeAnios($plan_id, $ciclo_id){
+            $anios = $this->Anio->find('all', array(
+                'contain' => array(
+                    'Plan.Instit',
+                    'EstructuraPlanesAnio',
+                    'Etapa',
+                ),
+                'conditions'=> array(
+                    'Anio.plan_id' => $plan_id,
+                    'Anio.ciclo_id'=> $ciclo_id,
+                ),
+            ));
+
+            $iJurId = 0;
+            if (!empty($anios)) {
+                $iJurId = $anios[0]['Plan']['Instit']['jurisdiccion_id'];
+            }
+
+            $trayecto_anios = $this->Anio
+                    ->EstructuraPlanesAnio->EstructuraPlan->JurisdiccionesEstructuraPlan
+                    ->getEstructurasDeJurisdiccion($iJurId, 'list');
+            
+            $this->set(compact('anios', 'trayecto_anios'));
+            
+        }
 }
 
 ?>
