@@ -255,5 +255,17 @@ ELEMENTO GRAFICADOR DE PLANES
 	color:#548DA5;
 }
 
+.vacio{
+     width:100%;
+     border: 1px #EFEFEF dotted !important;
+     padding: 3px
+}
+
+.vacio p{
+    margin-top:20px;
+    color:#DFDFDF;
+    font-size:10pt;
+}
+
 
 
