@@ -347,7 +347,7 @@ class DepuradoresController extends AppController {
         }
 
 	
-	function depurar_similares() {
+    function depurar_similares() {
 		$vectorcito = array();
     	$this->paginate['recursive'] = -1;
     	$this->paginate['limit'] = 50;
@@ -774,6 +774,59 @@ class DepuradoresController extends AppController {
             }
         }
         //debug($casos_mas_de_2);
+    }
+
+    function depurar_manual_estructura_planes() {
+        $jurisdiccion_id = 0;
+        
+        if(!empty($this->data['Plan'])) {
+            
+            $options['joins'] = array(
+                array('table' => 'instits',
+                    'alias' => 'Instits',
+                    'type' => 'INNER',
+                    'conditions' => array(
+                        'Plan.instit_id = Instits.id',
+                        'Instits.jurisdiccion_id' => $this->data['Plan']['jurisdiccion_id']
+                    )
+                )
+            );
+
+            $options['conditions'] = array(
+                    'Plan.z_depurado' => 0,
+                    'Plan.oferta_id' => array(3,4)
+            );
+
+            $options['limit'] = 10;
+
+            $options['contain'] = array(
+                     'Sector'=>array('Orientacion'),
+                     'Anio' => array('order'=>array('ciclo_id'),'Ciclo')
+            );
+
+            $planes = $this->Plan->find('all',$options);
+
+            $jurisdiccion_id = $this->data['Plan']['jurisdiccion_id'];
+        }
+        else{
+            $planes = $this->Plan->find('all',array(
+                        'contain' => array(
+                            'Sector'=>array('Orientacion'),
+                            'Anio' => array('order'=>array('ciclo_id'),'Ciclo')
+                            ),
+                        'conditions' => array(
+                            'Plan.z_depurado' => 0,
+                            'Plan.oferta_id' => array(3,4)
+                            ),
+                        'limit' => 10
+                      ));
+        }
+        $jurisdicciones = $this->Instit->Jurisdiccion->find('list');
+
+        $this->set(compact('jurisdicciones'));
+        $this->set('planes',$planes);
+        $this->set('jurisdiccion_id',$jurisdiccion_id);
+
     }
 }
 

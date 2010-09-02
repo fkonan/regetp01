@@ -133,7 +133,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                                                 <th><?php echo $paginator->sort('Nombre del Título/Certificación','nombre');?></th>
                                                 <th><?php echo $paginator->sort('Sector','Sector.name');?></th>
                                                 <th><?php echo 'Mat.';?></th>
-                                                <th class="actions"><?php echo '&nbsp';?></th>
+                                                <th><?php echo '&nbsp';?></th>
 
                                             </tr>
                                             <?php
@@ -173,7 +173,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                                                                             }
                                                                             ?>
                                                                     </td>
-                                                                    <td class="actions">
+                                                                    <td>
                                                                             <?php echo $html->link(__('Ver', true), array('action'=>'view', $plan['Plan']['id'])); ?>
                                                                     </td>
                                                             </tr>
