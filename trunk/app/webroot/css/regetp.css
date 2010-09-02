@@ -1953,6 +1953,12 @@ div.content{
         border:1px solid #FEFF8F !important;
 }
 
+.red{
+	/* Hides the overflowing timeline */
+	background:#FFDFDF none repeat scroll 0 0;
+        border:1px solid #DF8B8B !important;
+}
+
 .edades {
     
 }

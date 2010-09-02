@@ -12,11 +12,13 @@
             ?>
     <h2>
             <?php echo "Ciclo $key" ?>
+    <span class="actions">
     <?php if($tiene_estructura){
             echo $html->link($html->image("modify.png", array("alt" => "Editar")), array('controller'=> 'anios', 'action'=>'editCiclo', $plan_id, $key), array('class'=>'ajax-link'),null,false);
             echo $html->link($html->image("delete.png", array("alt" => "Borrar")), array('controller'=> 'anios', 'action'=>'deleteCiclo', $plan_id, $key ),null, sprintf('Seguro que desea eliminar el ciclo %s?',$key), false);
     }
     ?>
+    </span>
     </h2>
     <table cellpadding = "0" cellspacing = "0">
         <tr>
