@@ -33,6 +33,12 @@ if (!empty($anios))
 <?php
 }
 else {
-    echo "<i>Vacio</i>";
+?>
+<div class="vacio" id="timelineLimiterMini">
+    <div id="timelineScroll">
+        <p>Vacío</p>
+    </div>
+</div>
+<?php
 }
 ?>
