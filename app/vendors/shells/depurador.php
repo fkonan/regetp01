@@ -23,6 +23,7 @@ class DepuradorShell extends Shell {
                     $this->out('1) "anios_correlativos"');
                     $this->out('2) "anios_sgn_estructura": me indica cuales son los años, dentro de los correctos, que no coinciden con una estructura válida.');
                     $this->out('3) "arreglar_anios"');
+                    $this->out('99) "Todo Junto". Me ejecuta 1, 2 y 3 de un saque');
                     $this->out('');
                     break;
 
@@ -39,6 +40,15 @@ class DepuradorShell extends Shell {
                 case 3:
                 case 'arreglar_anios':
                     $this->arreglar_anios();
+                    break;
+
+
+                case 99:
+                case 'todo junto':
+                    $this->anios_correlativos();
+                    $this->anios_sgn_estructura();
+                    $this->arreglar_anios();
+                    $this->out("¡¡¡ FIN DE TODO JUNTO !!!!");
                     break;
 
 
@@ -76,7 +86,7 @@ class DepuradorShell extends Shell {
 
         $offset = (-1)*$limit;
 
-        //$this->out($Plan->query('update planes set z_anios_correlativos = 0;'));
+        $this->out($Plan->query('update planes set z_anios_correlativos = 0;'));
 
         $cantPlanes = 0;
         $cantBien = 0;
@@ -119,7 +129,7 @@ class DepuradorShell extends Shell {
 
             // terminar la ejecucion cuando ya no haya planes que recorrer
             if (empty($planes)){
-                $this->out("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´ BYE ! Off: $offset");
+                $this->out("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´ termino 'Anios Correlativos'");
                 break;
             }
     
@@ -139,10 +149,7 @@ class DepuradorShell extends Shell {
                     $aaa = ($cicloAnt == $a['ciclo_id']) ? $aaa : $a['anio'];
                     $cicloAnt = ($cicloAnt != $a['ciclo_id']) ? $a['ciclo_id'] : $cicloAnt;
 
-                    if ($aaa == $a['anio']) {
-//                        $Anio->id = $a['id'];
-//                        $Anio->saveField('z_anio_correcto', 1);
-                    } else {
+                    if ($aaa != $a['anio']) {
                         $this->out("    ---- A actual es: ".$aaa." y el anio que recorro: ".$a['anio']." para el ciclo: ".$a['ciclo_id']);
                         $todosLosAniosCorrectos = false;
                         break;
@@ -167,6 +174,7 @@ class DepuradorShell extends Shell {
         $this->out("Total de planes: $cantPlanes y en el count: $contadorpp");
         $this->out("Bien: $cantBien");
         $this->out("Mal: $cantMal");
+        $this->out("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´ termino 'Anios SGN Estructura'");
     }
 
 
@@ -189,7 +197,7 @@ class DepuradorShell extends Shell {
 
         $offset = (-1)*$limit;
 
-        //$this->out($Plan->query('update planes set z_anios_correctos_sgn_estruct = 0;'));
+        $this->out($Plan->query('update planes set z_anios_correctos_sgn_estruct = 0;'));
 
         do {
             // me traigo los planes
@@ -285,7 +293,7 @@ class DepuradorShell extends Shell {
                 }
             }
         } while (1);
-        $this->out("TEEERRRMMMIINÓÓÓÓ !!!!");
+        $this->out("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´ termino 'Correcciòn de Anios'");
 
     }
 
@@ -309,7 +317,7 @@ class DepuradorShell extends Shell {
 
         $offset = (-1)*$limit;
 
-        //$this->out($Plan->query('update planes set z_anios_correctos_sgn_estruct = 0;'));
+        $this->out($Plan->query('update anios set z_anio_correcto = 0;'));
 
         do {
             $this->out("comienza la milonga....");
@@ -338,13 +346,7 @@ class DepuradorShell extends Shell {
                 $this->out("´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´ BYE ! Off: $offset");
                 break;
             }
-
-            if ($offset > 10){
-                $this->out("termino por el offset");
-                return -1;
-            }
-
-
+//
 //            if ($offset > 10){
 //                $this->out("termino por el offset");
 //                return -1;
@@ -354,7 +356,6 @@ class DepuradorShell extends Shell {
             $this->out("Recorriendo ".count($planes)." planes");
             foreach ($planes as $p) {
                 $cantAnios = count($p['Anio']);
-
 
                 // traigo la estructura de este plan
                 $estruc = $EstructPlan->find('first', array(
@@ -366,19 +367,21 @@ class DepuradorShell extends Shell {
                                 'EstructuraPlan.id'=>$p['Plan']['z_anios_correctos_sgn_estruct']%100,
                                 ),
                         ));
-
+                // si el plan no tiene estructura debo seguir con el pròximo
                 if (empty($estruc)){
                     $this->out("Plan ".$p['Plan']['id']." sin estructura encontrada.");
                     continue;
                 }
 
-                $diff = $estruc['EstructuraPlanesAnio'][0]['nro_anio'] - $p['Anio'][0]['anio'];
-                $this->out("DIIIFFFF :::: ". $diff. "  nro anio: ".$estruc['EstructuraPlanesAnio'][0]['nro_anio']." << anio: ".$p['Anio'][0]['anio']);
-
-                foreach ($p['Anio'] as &$aa){
-                    $aaa['anio'] += $diff;
+                // agrego el ID de la estructura del anio al array de Anio
+                foreach ($p['Anio'] as &$aa) {
+                    $ee = array_shift( $estruc['EstructuraPlanesAnio']);
+                    if (!empty($ee)) {
+                        $aa['z_anio_correcto'] = $ee['id'];
+                    }
                 }
 
+                // guardo el array Anio
                 if ($Plan->Anio->saveAll($p['Anio'])){
                     $this->out("--- Anios del Plan: ".$p['Plan']['id']. " guardado.");
                 } else {
