@@ -73,7 +73,6 @@ class DepuradorPlanesController extends AppController {
                 $this->flash("El plan no existe",'/');
             }
             
-debug($plan);
 
             // guardo en BD si me vino el formulario lleno
             if (!empty($this->data) && $this->Plan->tieneEstructuraDefinida()) {
@@ -96,7 +95,6 @@ debug($plan);
             
              //$ePlanId = $plan['Plan']['estructura_plan_id'];
             $ePlanId = $this->Plan->getEstructuraSugerida();
-            debug($ePlanId);
             
             //$ePlanId = 4;
 
