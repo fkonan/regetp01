@@ -180,38 +180,12 @@ class Anio extends AppModel {
         }
         
 
-        function estructuraValida($plan_id = null){
-            if (empty($plan_id)) {
+         function estructuraValida($plan_id){
+             if (empty($plan_id)) {
                 $plan_id = $this->data['Anio']['plan_id'];
             }
-            
-            if (!empty($plan_id)){
-                    // busca la estructura del plan
-                    $ep = $this->Plan->find('first', array(
-                        'conditions' => array(
-                            'Plan.id' => $plan_id,
-                            ),
-                        'contain' => array('EstructuraPlan'),
-                    ));
-                    
-                    // busco si hay anios que tengan otra estructura
-                    $cant = $this->find('all', array(
-                        'conditions' => array(
-                            'OR' => array (
-                                'EstructuraPlanesAnio.estructura_plan_id <>' => $ep['EstructuraPlan']['id'],
-                                'Anio.estructura_planes_anio_id' => 0,
-                                )
-                        ),
-                        'contain' => array(
-                            'EstructuraPlanesAnio',
-                        ),
-                        'order' => array('Anio.ciclo_id', 'EstructuraPlanesAnio.edad_teorica'),
-                    ));
-
-                    return (count($cant) > 0)  ?    $cant   :    true;
-            }
-            return true;
-        }
+            return $this->Plan->estructuraValida($plan_id);
+         }
 	
 }
 ?>
