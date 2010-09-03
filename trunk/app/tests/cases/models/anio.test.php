@@ -36,7 +36,7 @@ class AnioTestCase extends CakeTestCase {
 
     function testEstructuraValida() {
         $this->assertTrue(false);
-        $this->estructuraValida(1);
+        debug($this->Anio->estructuraValida(1));
 
     }
 

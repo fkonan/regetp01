@@ -192,16 +192,18 @@ class Anio extends AppModel {
                             'Plan.id' => $plan_id,
                             ),
                         'contain' => array('EstructuraPlan'),
-                        'recursive' => -1,
                     ));
-
+                    
                     // busco si hay anios que tengan otra estructura
                     $cant = $this->find('all', array(
                         'conditions' => array(
                             'OR' => array (
                                 'EstructuraPlanesAnio.estructura_plan_id <>' => $ep['EstructuraPlan']['id'],
-                                'EstructuraPlanesAnio.estructura_planes_anio_id' => 0,
+                                'Anio.estructura_planes_anio_id' => 0,
                                 )
+                        ),
+                        'contain' => array(
+                            'EstructuraPlanesAnio',
                         ),
                         'order' => array('Anio.ciclo_id', 'EstructuraPlanesAnio.edad_teorica'),
                     ));
