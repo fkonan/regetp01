@@ -54,28 +54,52 @@ class DepuradorPlanesController extends AppController {
 
 
         function arregladorDeAnios($plan_id, $ciclo_id){
-            $anios = $this->Anio->find('all', array(
-                'contain' => array(
-                    'Plan.Instit',
-                    'EstructuraPlanesAnio',
+            $this->Plan->id = $plan_id;
+            $this->Plan->contain(array(
+                'Instit',
+                'Anio' => array(
                     'Etapa',
-                ),
-                'conditions'=> array(
-                    'Anio.plan_id' => $plan_id,
-                    'Anio.ciclo_id'=> $ciclo_id,
+                    'EstructuraPlanesAnio',
+                    'conditions' => array(
+                        'Anio.plan_id' => $plan_id,
+                        'Anio.ciclo_id'=> $ciclo_id,
+                    )),
+            ));
+            $plan = $this->Plan->read();
+
+            
+             //$ePlanId = $plan['Plan']['estructura_plan_id'];
+            $ePlanId = $this->Plan->getEstructuraSugerida();
+            debug($ePlanId);
+            
+            //$ePlanId = 4;
+
+            // traigo los anios posibles para la estructura definida en estructura_plan_id
+            $estructura_planes_anios = $this->Anio->EstructuraPlanesAnio->find('list', array(
+                'fields' => array('id','nro_anio'),
+                'conditions' => array(
+                    'EstructuraPlanesAnio.estructura_plan_id' => $ePlanId,
                 ),
             ));
 
-            $iJurId = 0;
-            if (!empty($anios)) {
-                $iJurId = $anios[0]['Plan']['Instit']['jurisdiccion_id'];
-            }
 
-            $trayecto_anios = $this->Anio
-                    ->EstructuraPlanesAnio->EstructuraPlan->JurisdiccionesEstructuraPlan
-                    ->getEstructurasDeJurisdiccion($iJurId, 'list');
-            
-            $this->set(compact('anios', 'trayecto_anios'));
+            // traigo TODOS los planes de la institucion, por si quiere MOVER
+            // el dato de los anios hacia otro plan
+            $planes = $this->Plan->find('list', array(
+                'fields' => array('id','nombre'),
+                'conditions' => array(
+                    'Plan.oferta_id' => 3,
+                    'Plan.instit_id' => $plan['Instit']['id'],
+                )
+            ));
+
+
+            $planes[$plan_id] = '::: Dejarlo en el plan que estaba ::: '.$planes[$plan_id];
+
+
+            $this->set('anios', $plan['Anio']);
+            $this->set('estructura_planes_anios', $estructura_planes_anios);
+            $this->set('planes' , $planes);
             
         }
 }
