@@ -743,5 +743,21 @@ class Plan extends AppModel {
             }
         }
 
+
+        function tieneEstructuraDefinida($plan_id = null){
+            if (empty($plan_id)) {
+                $plan_id = $this->id;
+            }
+            $ep = $this->find('count', array(
+                    'conditions' => array(
+                        'Plan.estructura_plan_id <>' => 0,
+                        'Plan.id' => $plan_id,
+                        ),
+                    'recursive' => -1,
+                    ));
+            return ($ep > 0)    ?  true   :   false;
+
+        }
+
 }
 ?>

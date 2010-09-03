@@ -55,5 +55,14 @@ class PlanTestCase extends CakeTestCase {
     }
 
 
+
+    function testTieneEstructuraDefinida() {
+
+        $this->assertFalse($this->Plan->tieneEstructuraDefinida(1));
+        $this->assertTrue($this->Plan->tieneEstructuraDefinida(2));
+        $this->assertFalse($this->Plan->tieneEstructuraDefinida(3));
+    }
+
+
 }
 ?>

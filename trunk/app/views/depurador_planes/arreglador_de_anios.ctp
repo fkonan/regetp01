@@ -5,7 +5,7 @@ $ids_de_anios = array_keys($estructura_planes_anios);
 
 
 
-echo $form->create('Anio');
+echo $form->create('Anio', array('url'=>'/depurador_planes/arregladorDeAnios/'.$plan_id));
 
 
 echo "<hr>";
@@ -20,7 +20,7 @@ foreach ($anios as $a) {
     // armo el input de la estructura con sugerencia
     $asug = null;
     $label = 'Nuevo Año';
-    if (!empty($ids_de_anios)) {
+    if (!empty($ids_de_anios)) {    
         $asug = array_shift($ids_de_anios);
         $label = 'Nuevo Año <b style="color:red; font-size: 7pt;">*** SUGERIDO ***</b>';
     }
