@@ -85,7 +85,25 @@ class Anio extends AppModel {
 				//'on' => 'create', // or: 'update'
 				'message' => 'Debe ingresar un valor numérico.'	
 			),
-		)
+		),
+
+                'estructura_planes_anio'=>array(
+			'estructuraValida'=> array(
+				'rule' => 'validacionEstructura',
+				'required' => false,
+				'allowEmpty' => true,
+				'message' => 'La estructura de la oferta no es correcta, verificarla junto a la estructura del plan (polimodal, CS, CB, etc).'
+			),
+		),
+
+                'estructura_planes_anio'=>array(
+			'elPlanTieneEstructuraDefinida'=> array(
+				'rule' => 'elPlanTieneEstructuraDefinida',
+				'required' => false,
+				'allowEmpty' => true,
+				'message' => 'El Plan no tiene ninguna estructura definida. Edite el plan antes de ingresar datos de los años'
+			),
+		),
 	);
 
 	
@@ -141,6 +159,57 @@ class Anio extends AppModel {
 
 		return $temp['Anio']['ciclo_id'];
 	}
+
+
+        function elPlanTieneEstructuraDefinida($plan_id = null){
+            if (empty($plan_id)) {
+                $plan_id = $this->data['Anio']['plan_id'];
+            }
+            return $this->Plan->tieneEstructuraDefinida($plan_id);
+
+        }
+
+        
+        function validacionEstructura($plan_id = null) {
+            if (empty($plan_id)) {
+                $plan_id = $this->data['Anio']['plan_id'];
+            }
+            $aniosMal = $this->estructuraValida($plan_id);
+
+            return (count($aniosMal) > 0) ? false : true;
+        }
+        
+
+        function estructuraValida($plan_id = null){
+            if (empty($plan_id)) {
+                $plan_id = $this->data['Anio']['plan_id'];
+            }
+            
+            if (!empty($plan_id)){
+                    // busca la estructura del plan
+                    $ep = $this->Plan->find('first', array(
+                        'conditions' => array(
+                            'Plan.id' => $plan_id,
+                            ),
+                        'contain' => array('EstructuraPlan'),
+                        'recursive' => -1,
+                    ));
+
+                    // busco si hay anios que tengan otra estructura
+                    $cant = $this->find('all', array(
+                        'conditions' => array(
+                            'OR' => array (
+                                'EstructuraPlanesAnio.estructura_plan_id <>' => $ep['EstructuraPlan']['id'],
+                                'EstructuraPlanesAnio.estructura_planes_anio_id' => 0,
+                                )
+                        ),
+                        'order' => array('Anio.ciclo_id', 'EstructuraPlanesAnio.edad_teorica'),
+                    ));
+
+                    return (count($cant) > 0)  ?    $cant   :    true;
+            }
+            return true;
+        }
 	
 }
 ?>

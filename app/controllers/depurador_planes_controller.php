@@ -53,10 +53,11 @@ class DepuradorPlanesController extends AppController {
         }
 
 
-        function arregladorDeAnios($plan_id, $ciclo_id){
+        function arregladorDeAnios($plan_id, $ciclo_id = null){
             $this->Plan->id = $plan_id;
             $this->Plan->contain(array(
                 'Instit',
+                'EstructuraPlan.EstructuraPlanesAnio',
                 'Anio' => array(
                     'Etapa',
                     'EstructuraPlanesAnio',
@@ -66,6 +67,31 @@ class DepuradorPlanesController extends AppController {
                     )),
             ));
             $plan = $this->Plan->read();
+
+            // si no encontro un plan redirijo a la pagina ppal
+            if (empty($plan)) {
+                $this->flash("El plan no existe",'/');
+            }
+            
+debug($plan);
+
+            // guardo en BD si me vino el formulario lleno
+            if (!empty($this->data) && $this->Plan->tieneEstructuraDefinida()) {
+                
+                foreach ($this->data['Anio'] as &$a) {
+                    $a['etapa_id'] = $plan['EstructuraPlan']['etapa_id'];
+                    foreach ($plan['EstructuraPlan']['EstructuraPlanesAnio'] as $epp) {
+                        if ($a['estructura_planes_anio_id'] == $epp['id']) {
+                            $a['anio'] = $plan['EstructuraPlan']['EstructuraPlanesAnio']['id'];
+                        }
+                    }
+                }
+                if (!$this->Anio->saveAll($this->data['Anio'])){
+                    debug($this->Anio->validationErrors);
+                    $this->flash('No se pudieron guardar los años');
+                }
+            }
+            
 
             
              //$ePlanId = $plan['Plan']['estructura_plan_id'];
@@ -96,7 +122,7 @@ class DepuradorPlanesController extends AppController {
 
             $planes[$plan_id] = '::: Dejarlo en el plan que estaba ::: '.$planes[$plan_id];
 
-
+            $this->set('plan_id', $plan_id);
             $this->set('anios', $plan['Anio']);
             $this->set('estructura_planes_anios', $estructura_planes_anios);
             $this->set('planes' , $planes);
