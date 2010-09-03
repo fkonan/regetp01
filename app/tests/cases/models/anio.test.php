@@ -35,11 +35,9 @@ class AnioTestCase extends CakeTestCase {
     }
 
     function testEstructuraValida() {
-        $this->assertFalse($this->Anio->estructuraValida(7));
-        $this->assertTrue((count($this->Anio->estructuraValida(8)) === 1));
+        $this->assertEqual(count($this->Anio->estructuraValida(7)), 4);
+        $this->assertEqual(count($this->Anio->estructuraValida(8)),1);
         $this->assertTrue(count($this->Anio->estructuraValida(1)) > 0);
-      
-
     }
 
 

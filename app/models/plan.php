@@ -787,7 +787,7 @@ class Plan extends AppModel {
                         ),
                         'order' => array('Anio.ciclo_id', 'EstructuraPlanesAnio.edad_teorica'),
                     ));
-
+                    
                     return (count($cant) > 0)  ?    $cant   :    true;
             }
             return true;
