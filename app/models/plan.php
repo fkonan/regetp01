@@ -772,10 +772,11 @@ class Plan extends AppModel {
                             ),
                         'contain' => array('EstructuraPlan'),
                     ));
-
+                    
                     // busco si hay anios que tengan otra estructura
                     $cant = $this->Anio->find('all', array(
                         'conditions' => array(
+                                'Anio.plan_id' => $plan_id,
                             'OR' => array (
                                 'EstructuraPlanesAnio.estructura_plan_id <>' => $ep['EstructuraPlan']['id'],
                                 'Anio.estructura_planes_anio_id' => 0,
