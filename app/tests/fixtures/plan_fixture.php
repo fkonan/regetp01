@@ -196,6 +196,29 @@ class PlanFixture  extends CakeTestFixture {
                 'titulo_id'	=> 1,
                 'estructura_plan_id'=> 0,
             ),
+        array(
+                'id' 			=> 8,
+                'instit_id'		=> 4,
+                'oferta_id'		=> 1,
+                'old_item'		=> 0,
+                'norma'			=> "",
+                'nombre'		=> "Titulo 1 de institucion 4",
+                'perfil'		=> "Algun Perfil",
+                'sector'		=> "",
+                'duracion_hs'	=> 3,
+                'duracion_semanas'=>2,
+                'duracion_anios'=> 4,
+                'matricula'		=> 100,
+                'observacion'	=> "Alguna observacion 1",
+                'ciclo_alta'	=> 2007,
+                'ciclo_mod'		=> 0,
+                //'created' 		=> "2010-01-21 13:54:45",
+                //'modified' 		=> "2010-01-21 13:54:45",
+                'sector_id'		=> 3, // Sector = Agropecuaria -> Orientacion = Agropecuaria
+                'subsector_id'	=> 1,
+                'titulo_id'	=> 1,
+                'estructura_plan_id'=> 1,
+            ),
     );
 }
 ?>
