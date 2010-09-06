@@ -130,98 +130,47 @@ class DepuradorPlanesController extends AppController {
 
 
         function listado() {
-        $jurisdiccion_id = 0;
+        $jurisdiccion_id = ' > 0';
         $limit = 10;
-        if(!empty($this->data['Plan'])) {
-
-            $options['joins'] = array(
-                array('table' => 'instits',
-                    'alias' => 'Instits',
-                    'type' => 'INNER',
-                    'conditions' => array(
-                        'Plan.instit_id = Instits.id',
-                        'Instits.jurisdiccion_id' => $this->data['Plan']['jurisdiccion_id']
-                    )
-                )
-            );
-
-            $options['conditions'] = array(
-                    'Plan.z_depurado' => 0,
-                    'Plan.oferta_id' => array(3,4)
-            );
-
-            $options['limit'] = 10;
-
-            $options['contain'] = array(
-                     'Sector'=>array('Orientacion'),
-                     'Anio' => array('order'=>array('ciclo_id'),'Ciclo')
-            );
-
-            //$planes = $this->Plan->find('all',$options);
-//            $this->Instit->find('all', array(
-//                'contain' => array(
-//                    'Plan' => array(
-//                        'conditions' => array('Plan.estructura_plan_id' => 0),
-//                        'Anio' => array('Anio.estructura_planes_anio_id' => 0)
-//                    )
-//                ),
-//                'conditions' => array(
-//
-//                )
-//            ));
-
-            $anios = $this->Anio->find('all', array(
-                'contain' => 'Plan.Instit',
-                'conditions'=> array(
-                    'Anio.estructura_planes_anio_id' => 0,
-                    'Plan.estructura_plan_id' => 0
-                ),
-                'group' => 'Instit.id',
-                'limit' => $limit,
-            ));
-            
-
-            $jurisdiccion_id = $this->data['Plan']['jurisdiccion_id'];
-        }
-        else{
-            $planes = $this->Plan->find('all',array(
-                        'contain' => array(
-                            'Sector'=>array('Orientacion'),
-                            'Anio' => array('order'=>array('ciclo_id'),'Ciclo')
-                            ),
-                        'conditions' => array(
-                            'Plan.z_depurado' => 0,
-                            'Plan.oferta_id' => array(3,4)
-                            ),
-                        'limit' => 10
-                      ));
+        
+        if (!empty($this->data['Depurador']['jurisdiccion_id'])) {
+           $jurisdiccion_id = " = ".$this->data['Depurador']['jurisdiccion_id'];
         }
 
+        $selectSQL = "
+                         select
+                    i.id as \"Instit__id\" ,
+                    i.nombre as \"Instit__nombre\" ,
+                    i.cue as \"Instit__cue\" ,
+                    i.anexo as \"Instit__anexo\"
+                        from instits i
+                        left join planes p on (p.instit_id = i.id)
+                        left join anios a on (a.plan_id = p.id)
+                        where
+                 (
+                        p.estructura_plan_id = 0
+                        or
+                        a.estructura_planes_anio_id = 0
+                 )
+                 and
+                     p.oferta_id = 3
+                 and
+                    i.jurisdiccion_id $jurisdiccion_id
+                        group by i.id, i.nombre, i.cue, i.anexo
+";
 
-$limit = 1;
-            //$planes = $this->Plan->find('all',$options);
-            $anios = $this->Instit->find('all', array(
-                'limit' => $limit,
-                'contain' => array(
-                    'Plan' => array(
-                       // 'conditions' => array('Plan.estructura_plan_id' => 0),
-                        'Anio' => array('conditions' => array('Anio.estructura_planes_anio_id' => 0))
-                    )
-                ),
-                'conditions' => array(
-                    'Plan.estructura_plan_id' => 0,
-                )
-            ));
-        
+        $institsMal = $this->Instit->query($selectSQL. "  limit $limit");
 
-        debug($anios);
-        
+        $cantFaltan = $this->Instit->query("SELECT COUNT(*) AS \"count\" from ($selectSQL) as tablacount");
+        $cantFaltan = empty($cantFaltan[0][0]['count']) ? 0     :   $cantFaltan[0][0]['count'];
+       
         $jurisdicciones = $this->Instit->Jurisdiccion->find('list');
 
         $this->set(compact('jurisdicciones'));
-        $this->set('anios',$anios);
+        $this->set('institsMal',$institsMal);
+        $this->set('cantFaltan',$cantFaltan);
         $this->set('jurisdiccion_id',$jurisdiccion_id);
-
+        
     }
 }
 
