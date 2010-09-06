@@ -1,3 +1,4 @@
+<?php echo $javascript->link('jquery.loadmask.min'); ?>
 <script type="text/javascript">
     function block(formData, jqForm, options) {
         jQuery('#consoleResultWrapper').mask('Buscando');
@@ -79,6 +80,36 @@
         
         return false;
     }
+
+    function toggleTitulos(){
+         if (jQuery('#PlanOfertaId').val() != '') {
+            jQuery('#divPlanTituloId').show();
+        }
+        else {
+             jQuery('#divPlanTituloId').hide();
+        }
+
+        toggleEstructuraPlan();
+    }
+
+    jQuery(document).ready(function () {
+        toggleTitulos();
+        toggleEstructuraPlan();
+
+        jQuery("#PlanEstructuraPlanId").change(function(){
+            jQuery("div[estructura_plan_id]").hide();
+            jQuery("div[estructura_plan_id=" + jQuery(this).val() + "]").show();
+        });
+    });
+
+    function toggleEstructuraPlan() {
+        if (jQuery('#PlanOfertaId :selected').val() != 2 && jQuery('#PlanOfertaId :selected').val() != 3) {
+            jQuery('#PlanEstructura').hide();
+        }
+        else {
+            jQuery('#PlanEstructura').show();
+        }
+    }
 </script>
 
     <h1><?=$html->link('Depurador de Planes', '/depurador_planes/listado')?></h1>
@@ -119,7 +150,7 @@
             </div>
             <?php } ?>
 
-            <?=$html->link('+ Crear Plan', '/Planes/add/'.$instit['Instit']['id'], array('onclick' => 'return CrearPlan(this)'))?>
+            <?=$html->link('+ Crear Plan', '/depurador_planes/add_plan/'.$instit['Instit']['id'], array('onclick' => 'return CrearPlan(this)'))?>
         </div>
         <!-- pantalla principal -->
 
