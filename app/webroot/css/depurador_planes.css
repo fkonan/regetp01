@@ -307,4 +307,10 @@ ELEMENTO GRAFICADOR DE PLANES
 }
 
 
+.message{
+    color: red;
+    font-weight: bolder;
+    background-color: pink;
+    text-align: center;
+}
 

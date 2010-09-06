@@ -5,12 +5,13 @@ $ids_de_anios = array_keys($estructura_planes_anios);
 
 
 
-echo $form->create('Anio', array('url'=>'/depurador_planes/arregladorDeAnios/'.$plan_id));
+echo $form->create('Anio', array('url'=>'/depurador_planes/arregladorDeAnios/'.$plan['Plan']['id']));
 
 
 echo "<hr>";
 
 $i = 0;
+ echo "<h3 style='text-align: center'>Estructura del plan: ".$plan['EstructuraPlan']['name']."</h3>";
 foreach ($anios as $a) {
     echo "<div style='padding-bottom: 0.5em;'>";
    
@@ -28,6 +29,7 @@ foreach ($anios as $a) {
         'label'=>$label,
         'options'=>$estructura_planes_anios,
         'default' => $asug,
+        'style' => 'font-size: 13pt; margin:0px; padding: 0px;',
         ));
 
     echo '<div>Mover este año a otro Plan: ';
