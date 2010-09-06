@@ -2,11 +2,11 @@ var etapas = new Array();
 
 function EtapaAdd() {
     var i = etapas.length;
-
+    
     etapa = { etapa_id: jQuery("#etapa_id").val(),
               etapa_nombre: escape(jQuery('#etapa_id :selected').text()),
               edad_teorica: jQuery("#edad_teorica").val(),
-              alias: jQuery("#alias").val(),
+              alias: escape(jQuery("#alias").val()),
               nro_anio: jQuery("#nro_anio").val(),
               anio_escolaridad: jQuery("#anio_escolaridad").val() };
 
@@ -76,7 +76,7 @@ function EtapaEdit(id) {
     jQuery("#edad_teorica").val(etapas[id]['edad_teorica']);
     jQuery("#nro_anio").val(etapas[id]['nro_anio']);
     jQuery("#anio_escolaridad").val(etapas[id]['anio_escolaridad']);
-    jQuery("#alias").val(etapas[id]['alias']);
+    jQuery("#alias").val(unescape(etapas[id]['alias']));
 
     jQuery("#anio_id").val(id);
 
