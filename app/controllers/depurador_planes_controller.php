@@ -247,17 +247,17 @@ class DepuradorPlanesController extends AppController {
     }
 
 
-    function add_plan() {
+    function add_plan($instit_id) {
         if (!empty($this->data) && !$instit_id) {
             $this->Session->setFlash(__('Institución incorrecta', true));
-            $this->redirect('/depurarPlanes/listado');
+            $this->redirect('/DepuradorPlanes/listado');
         }
         if (!empty($this->data)) {
             $instit_id = $this->data['Plan']['instit_id'];
             $this->Plan->create();
             if ($this->Plan->save($this->data)) {
                 $this->Session->setFlash(__('Se ha creado un nuevo Plan', true));
-                $this->redirect('/depurarPlanes/index/'.$instit_id);
+                $this->redirect('/DepuradorPlanes/index/'.$instit_id);
             } else {
                 $this->Session->setFlash(__('No se ha podido crear el Plan. Por favor, intente nuevamente.', true));
             }
