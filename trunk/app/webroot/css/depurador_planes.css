@@ -10,6 +10,7 @@ body {
     font-size:10pt;
     margin: 0;
     background-color:#FFFFFF;
+    overflow-x: hidden;
 }
 p {
     padding-bottom: 0.8em;
@@ -30,6 +31,18 @@ a img {
 
 h1 {
     font-size: 12pt;
+    color: #045FB4;
+    font-weight: bold;
+    font-family:Arial, Helvetica, sans-serif;
+    padding-top: 0.4em;
+    margin-top: 0.3em;
+    margin-right: 0;
+    margin-bottom: 0.3em;
+    margin-left: 0;
+}
+
+h2 {
+    font-size: 11pt;
     color: #045FB4;
     font-weight: bold;
     font-family:Arial, Helvetica, sans-serif;
@@ -87,23 +100,36 @@ h1 {
     font-weight: bold;
 }
 
+
 .planes_izq {
     height: 100px;
     /*padding-bottom: 10px;*/
     border-bottom: 1px solid #000000;
 }
 
-.planes_der {
-    height: 100px;
-    /*padding-bottom: 10px;*/
-    clear: both;
+.table_planes_der {
     width: 1500px;
     border-bottom: 1px solid #000000;
 }
 
-.col_ciclos {
-    width: 200px;
-    float: left;
+.tr_header {
+    height: 20px;
+    max-width: 1500px !important;
+}
+
+.table_planes_der th {
+
+    text-align: center;
+    font-weight: bold;
+}
+
+.tr_plan {
+    height: 100px;
+}
+
+.td_ciclos {
+    min-width: 200px !important;
+    max-width: 800px !important;
     margin: 0 10px 17px;
     text-align: center;
 }
@@ -114,6 +140,26 @@ h1 {
     clear: both;
 
 }
+
+#editor_anio {
+    
+}
+
+.instit_name {
+    color: black;
+    font-weight: bold;
+    margin: 0px 4px 0px 4px;
+}
+
+.instit_atributte {
+    margin: 0px 4px 0px 4px;
+    display: inline;
+    color: #6E6E6E;
+}
+
+.datos_instit {
+}
+
 
 /*
 ELEMENTO GRAFICADOR DE PLANES
@@ -142,9 +188,8 @@ ELEMENTO GRAFICADOR DE PLANES
 }
 
 .eventHeading.green{
-	background:#E6FFDF none repeat scroll 0 0;
-	border:1px solid #C9E6C1;
-	color:#6EA85F;
+	border:1px solid #666666;
+	color:#333333;
 }
 
 #timelineLimiter{
@@ -172,8 +217,8 @@ ELEMENTO GRAFICADOR DE PLANES
 
 .green{
 	/* Hides the overflowing timeline */
-	background:#F2FFEF none repeat scroll 0 0;
-        border:1px solid #C9E6C1 !important;
+	/*background:#F2FFEF none repeat scroll 0 0;*/
+        border:1px solid #333333 !important;
 }
 
 .yellow{
@@ -240,19 +285,13 @@ ELEMENTO GRAFICADOR DE PLANES
         float:left;
         display:inline;
         width: 40px;
+        font-size: 10pt;
+        text-align: center;
 
 	/* CSS3 rounded corners */
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
 	border-radius:4px;
-}
-
-.eventList li:hover{
-	/* The hover state: */
-	cursor:pointer;
-	background:#E6F8FF;
-	border:1px solid #D4E6EE;
-	color:#548DA5;
 }
 
 .vacio{

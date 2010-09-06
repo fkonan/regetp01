@@ -12,17 +12,17 @@ echo "<hr>";
 
 $i = 0;
 foreach ($anios as $a) {
-    echo "<p>";
+    echo "<div style='padding-bottom: 0.5em;'>";
    
     echo "Dato actual: <b>".$a['anio']."º ".$a['Etapa']['name']."</b><br>";
     echo $form->hidden($i.'.id', array('value'=>$a['id']));
 
     // armo el input de la estructura con sugerencia
     $asug = null;
-    $label = 'Nuevo Año';
+    $label = 'Nuevo Año ';
     if (!empty($ids_de_anios)) {    
         $asug = array_shift($ids_de_anios);
-        $label = 'Nuevo Año <b style="color:red; font-size: 7pt;">*** SUGERIDO ***</b>';
+        $label = 'Nuevo Año <b style="color:red; font-size: 7pt;">*** SUGERIDO ***</b> ';
     }
     echo $form->input($i.'.estructura_planes_anio_id', array(
         'label'=>$label,
@@ -30,9 +30,11 @@ foreach ($anios as $a) {
         'default' => $asug,
         ));
 
-    echo $form->input($i.'.plan_id', array('label'=>'Mover èste año a otro Plan'));
+    echo '<div>Mover este año a otro Plan: ';
+    echo $form->input($i.'.plan_id', array('div' => false, 'label' => false));
+    echo '</div>';
 
-    echo "</p>";
+    echo "</div>";
     echo "<hr>";
 
 }
