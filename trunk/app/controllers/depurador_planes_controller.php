@@ -170,9 +170,30 @@ class DepuradorPlanesController extends AppController {
         function listado() {
         $jurisdiccion_id = ' > 0';
         $limit = 10;
+        $orderBy = 'i.cue*100+i.anexo';
+        $errores = 0; // es una variable pasada en el form de la vista para usar el $orderBy
         
         if (!empty($this->data['Depurador']['jurisdiccion_id'])) {
            $jurisdiccion_id = " = ".$this->data['Depurador']['jurisdiccion_id'];
+        }
+
+        if (!empty($this->data['Depurador']['limit'])) {
+           $limit = $this->data['Depurador']['limit'];
+        }
+
+        if (!empty($this->data['Depurador']['errores'])) {
+            $errores = $this->data['Depurador']['errores'];
+            switch ($errores){
+                case 1: // ordeno por cantidad de errors
+                     $orderBy = 'count(*) DESC';
+                    break;
+                case 2: // ordeno por cantidad de errors
+                     $orderBy = 'count(*)';
+                    break;
+                case 0:
+                default: // lo dejo como està
+                    break;
+            }
         }
 
         $selectSQL = "
@@ -180,7 +201,8 @@ class DepuradorPlanesController extends AppController {
                     i.id as \"Instit__id\" ,
                     i.nombre as \"Instit__nombre\" ,
                     i.cue as \"Instit__cue\" ,
-                    i.anexo as \"Instit__anexo\"
+                    i.anexo as \"Instit__anexo\",
+                    count(*) as \"Instit__errores\"
                         from instits i
                         left join planes p on (p.instit_id = i.id)
                         left join anios a on (a.plan_id = p.id)
@@ -195,6 +217,7 @@ class DepuradorPlanesController extends AppController {
                  and
                     i.jurisdiccion_id $jurisdiccion_id
                         group by i.id, i.nombre, i.cue, i.anexo
+                 order by $orderBy
 ";
 
         $institsMal = $this->Instit->query($selectSQL. "  limit $limit");
@@ -204,11 +227,12 @@ class DepuradorPlanesController extends AppController {
        
         $jurisdicciones = $this->Instit->Jurisdiccion->find('list');
 
+        $this->set('errores',$errores);
         $this->set(compact('jurisdicciones'));
         $this->set('institsMal',$institsMal);
         $this->set('cantFaltan',$cantFaltan);
         $this->set('jurisdiccion_id',$jurisdiccion_id);
-        
+        $this->set('limit',$limit);
     }
 }
 
