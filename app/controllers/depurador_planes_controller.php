@@ -8,10 +8,10 @@ class DepuradorPlanesController extends AppController {
 	var $uses = array('Instit','Plan','Anio','Sector','Jurisdiccion',
                     'EstructuraPlan','JurisdiccionesEstructuraPlan','EstructuraPlanesAnio');
 	var $db;
-	
+
+	var $layout = 'depurador';
 	
 	function index($id) {
-            $this->layout = '';
             Configure::write('debug', '0');
 
             if ($id)
@@ -20,6 +20,9 @@ class DepuradorPlanesController extends AppController {
                 $instit = $this->Instit->find('all', array(
                             'contain' => array(
                                 'Jurisdiccion' => 'name',
+                                'Gestion' => 'name',
+                                'Departamento' => 'name',
+                                'Localidad' => 'name',
                                 'Plan' => array(
                                     'Anio' => array(
                                             'Etapa',
@@ -28,7 +31,7 @@ class DepuradorPlanesController extends AppController {
                                     )),
                             'conditions' => array('Instit.id'=> $id)
                 ));
-                //debug($instit);
+                //print_r($instit);
                 $jurisdiccion_id = $instit[0]['Instit']['jurisdiccion_id'];
 
                 // estructuras posibles en la jurisdiccion
@@ -37,6 +40,41 @@ class DepuradorPlanesController extends AppController {
                 $this->set('instit',$instit[0]);
                 $this->set('estructuras',$estructuras);
             }
+        }
+
+        function tr_plan($plan_id) {
+            $plan = $this->Plan->find('all', array(
+                            'contain' => array(
+                                'Anio' => array(
+                                        'Etapa',
+                                        'order'=>array('ciclo_id','etapa_id', 'anio')),
+                                ),
+                            'conditions' => array('Plan.oferta_id'=> 3,'Plan.id'=> $plan_id)
+                ));
+            
+            // funcion de Ale
+            $return = $this->Plan->estructuraValida($plan_id);
+            
+            $anios_incorrectos = array();
+            if (is_array($return))
+                foreach($return as $anio) {
+                $anios_incorrectos[] = $anio['Anio']['ciclo_id'];
+            }
+            //debug($anios_incorrectos);
+            $this->set('anios_incorrectos', $anios_incorrectos);
+            $this->set('plan', $plan[0]);
+        }
+
+        function cambiarEstructuraPlan($plan_id, $estructura_plan_id) {
+            if ($estructura_plan_id > 0) {
+                $this->Plan->recursive = -1;
+                $plan = $this->Plan->read(null, $plan_id);
+                $plan['Plan']['estructura_plan_id'] = $estructura_plan_id;
+
+                $this->Plan->save($plan);
+            }
+            // renderiza el plan
+            $this->redirect('/depurador_planes/tr_plan/'.$plan_id);
         }
 
         function test_graficador($id, $ciclo, $depurado) {
@@ -118,7 +156,7 @@ class DepuradorPlanesController extends AppController {
             ));
 
 
-            $planes[$plan_id] = '::: Dejarlo en el plan que estaba ::: '.$planes[$plan_id];
+            $planes[$plan_id] = 'No mover de: '.$planes[$plan_id];
 
             $this->set('plan_id', $plan_id);
             $this->set('anios', $plan['Anio']);
