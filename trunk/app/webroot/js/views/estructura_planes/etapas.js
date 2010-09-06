@@ -4,9 +4,9 @@ function EtapaAdd() {
     var i = etapas.length;
     
     etapa = { etapa_id: jQuery("#etapa_id").val(),
-              etapa_nombre: escape(jQuery('#etapa_id :selected').text()),
+              etapa_nombre: urlencode(jQuery('#etapa_id :selected').text()),
               edad_teorica: jQuery("#edad_teorica").val(),
-              alias: escape(jQuery("#alias").val()),
+              alias: urlencode(jQuery("#alias").val()),
               nro_anio: jQuery("#nro_anio").val(),
               anio_escolaridad: jQuery("#anio_escolaridad").val() };
 
@@ -63,8 +63,8 @@ function EtapaDel(id) {
     jQuery.each(etapas, function(key, value) {
         if (key != id) {
             etapas_aux[i] = value;
+            i++;
         }
-        i++;
     });
 
     etapas = etapas_aux;
@@ -76,7 +76,7 @@ function EtapaEdit(id) {
     jQuery("#edad_teorica").val(etapas[id]['edad_teorica']);
     jQuery("#nro_anio").val(etapas[id]['nro_anio']);
     jQuery("#anio_escolaridad").val(etapas[id]['anio_escolaridad']);
-    jQuery("#alias").val(unescape(etapas[id]['alias']));
+    jQuery("#alias").val(urldecode(etapas[id]['alias']));
 
     jQuery("#anio_id").val(id);
 
@@ -98,7 +98,7 @@ function RefreshEtapasTree() {
     // refresca el arbol de etapas
     jQuery("#etapas-tree").html("");
     jQuery.each(etapas, function(key, value) {
-        jQuery("#etapas-tree").append("<li>"+unescape(value['etapa_nombre'])+" "+value['nro_anio']+" [<a style='cursor:pointer;' onclick='javascript: EtapaDel("+key+")'>-</a>] [<a style='cursor:pointer;' onclick='javascript: EtapaEdit("+key+")'>editar</a>]</li>");
+        jQuery("#etapas-tree").append("<li>"+urldecode(value['etapa_nombre'])+" "+value['nro_anio']+" [<a style='cursor:pointer;' onclick='javascript: EtapaDel("+key+")'>-</a>] [<a style='cursor:pointer;' onclick='javascript: EtapaEdit("+key+")'>editar</a>]</li>");
     });
 }
 
@@ -136,4 +136,20 @@ function EtapasASubmit() {
     jQuery('#etapa_id').attr('disabled', false);
 
     return true;
+}
+
+function urlencode(str) {
+    str = escape(str);
+    str = str.replace('+', '%2B');
+    str = str.replace('%20', '+');
+    str = str.replace('*', '%2A');
+    str = str.replace('/', '%2F');
+    str = str.replace('@', '%40');
+    return str;
+}
+
+function urldecode(str) {
+    str = str.replace('+', ' ');
+    str = unescape(str);
+    return str;
 }
