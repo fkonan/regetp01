@@ -3,7 +3,7 @@ if (!empty($anios))
 {
     $j = 0;
     $etapa_anterior = '';
-    $colors = array('green','blue','chreme');
+    $colors = array('color1','color2','color3');
     ?>
     <div id="timelineLimiterMini" style="padding:3px" class="clickeable <?php echo ($depurado)?'green':'red'?>">
         <div id="timelineScroll">

@@ -217,7 +217,7 @@ ELEMENTO GRAFICADOR DE PLANES
 
 .green{
 	/* Hides the overflowing timeline */
-	/*background:#F2FFEF none repeat scroll 0 0;*/
+	background:#F2FFEF none repeat scroll 0 0;
         border:1px solid #333333 !important;
 }
 
@@ -313,4 +313,18 @@ ELEMENTO GRAFICADOR DE PLANES
     background-color: pink;
     text-align: center;
 }
+
+
+.color1{
+    background-color: beige;
+}
+
+.color2{
+    background-color: SeaShell;
+}
+
+.color3{
+    background-color: RosyBrown;
+}
+
 
