@@ -5,6 +5,7 @@
 	<?php
 		echo $form->input('id');
 		echo $form->input('name');
+                echo $form->input('abrev');
 	?>
 	</fieldset>
 <?php echo $form->end('Submit');?>

@@ -4,6 +4,7 @@
  		<legend><?php __('Add Etapa');?></legend>
 	<?php
 		echo $form->input('name');
+                echo $form->input('abrev');
 	?>
 	</fieldset>
 <?php echo $form->end('Submit');?>

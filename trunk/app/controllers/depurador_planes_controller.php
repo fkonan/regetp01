@@ -126,6 +126,103 @@ class DepuradorPlanesController extends AppController {
             $this->set('planes' , $planes);
             
         }
+
+
+
+        function listado() {
+        $jurisdiccion_id = 0;
+        $limit = 10;
+        if(!empty($this->data['Plan'])) {
+
+            $options['joins'] = array(
+                array('table' => 'instits',
+                    'alias' => 'Instits',
+                    'type' => 'INNER',
+                    'conditions' => array(
+                        'Plan.instit_id = Instits.id',
+                        'Instits.jurisdiccion_id' => $this->data['Plan']['jurisdiccion_id']
+                    )
+                )
+            );
+
+            $options['conditions'] = array(
+                    'Plan.z_depurado' => 0,
+                    'Plan.oferta_id' => array(3,4)
+            );
+
+            $options['limit'] = 10;
+
+            $options['contain'] = array(
+                     'Sector'=>array('Orientacion'),
+                     'Anio' => array('order'=>array('ciclo_id'),'Ciclo')
+            );
+
+            //$planes = $this->Plan->find('all',$options);
+//            $this->Instit->find('all', array(
+//                'contain' => array(
+//                    'Plan' => array(
+//                        'conditions' => array('Plan.estructura_plan_id' => 0),
+//                        'Anio' => array('Anio.estructura_planes_anio_id' => 0)
+//                    )
+//                ),
+//                'conditions' => array(
+//
+//                )
+//            ));
+
+            $anios = $this->Anio->find('all', array(
+                'contain' => 'Plan.Instit',
+                'conditions'=> array(
+                    'Anio.estructura_planes_anio_id' => 0,
+                    'Plan.estructura_plan_id' => 0
+                ),
+                'group' => 'Instit.id',
+                'limit' => $limit,
+            ));
+            
+
+            $jurisdiccion_id = $this->data['Plan']['jurisdiccion_id'];
+        }
+        else{
+            $planes = $this->Plan->find('all',array(
+                        'contain' => array(
+                            'Sector'=>array('Orientacion'),
+                            'Anio' => array('order'=>array('ciclo_id'),'Ciclo')
+                            ),
+                        'conditions' => array(
+                            'Plan.z_depurado' => 0,
+                            'Plan.oferta_id' => array(3,4)
+                            ),
+                        'limit' => 10
+                      ));
+        }
+
+
+$limit = 1;
+            //$planes = $this->Plan->find('all',$options);
+            $anios = $this->Instit->find('all', array(
+                'limit' => $limit,
+                'contain' => array(
+                    'Plan' => array(
+                       // 'conditions' => array('Plan.estructura_plan_id' => 0),
+                        'Anio' => array('conditions' => array('Anio.estructura_planes_anio_id' => 0))
+                    )
+                ),
+                'conditions' => array(
+                    'Plan.estructura_plan_id' => 0,
+                )
+            ));
+        
+
+        debug($anios);
+        
+        $jurisdicciones = $this->Instit->Jurisdiccion->find('list');
+
+        $this->set(compact('jurisdicciones'));
+        $this->set('anios',$anios);
+        $this->set('jurisdiccion_id',$jurisdiccion_id);
+
+    }
 }
 
 ?>
