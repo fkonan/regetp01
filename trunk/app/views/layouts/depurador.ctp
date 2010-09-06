@@ -24,47 +24,48 @@
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-	<?php echo $html->charset(); ?>
-	<title>
-		<?php __('Depurador'); ?>
-		<?php echo $title_for_layout; ?>
-	</title>
-	<?php
-		echo $html->meta('icon');
-                echo $html->css('depurador_planes','stylesheet', array('media'=>'screen'));
-		
-		echo $javascript->link('jquery-1.4.2.min.js');
-                echo $javascript->link('jquery.blockUI');
+    <head>
+        <?php echo $html->charset(); ?>
+        <title>
+            <?php __('Depurador'); ?>
+            <?php echo $title_for_layout; ?>
+        </title>
+        <?php
+        echo $html->meta('icon');
+        echo $html->css('depurador_planes','stylesheet', array('media'=>'screen'));
+
+        echo $javascript->link('jquery-1.4.2.min.js');
+        echo $javascript->link('jquery.blockUI');
+
+        echo $scripts_for_layout;
+        ?>
+
+    </head>
+    <body style="">
+
+        <? if ($_SERVER['HTTP_HOST']=='localhost') {?>
+        <div style="background-color: red; height: 20px; text-align: center">MODO LOCALHOST</div>
+            <? }?>
+
+        <div>
+            <!-- DIV del mensajero, aca se van a mostrar mensajes AJAX, JS, etc -->
+            <div id="mensajero" style="display: none"></div>
+
+
+            <div style="background-color: #F0F7FC; height: 60px; padding-top: 20px; text-align: center; border-bottom: 3px solid #DBEBF6">
+                <h1>
+                    <?php echo $html->link(__('Registro Federal de Instituciones de Educación Técnico Profesional (RFIETP)', true), '/pages/home'); ?>
+                </h1>
+            </div>
+            <div>
+                <div>
+                <?php $session->flash(); ?>
+                <?php $session->flash('auth'); ?>
+                </div>
                 
-		echo $scripts_for_layout;
-	?>
-	
-</head>
-<body style="">
-	
-	<? if ($_SERVER['HTTP_HOST']=='localhost'){?>
-		<div style="background-color: red; height: 20px; text-align: center">MODO LOCALHOST</div>
-	<? }?>
-	
-	<div>	
-		<!-- DIV del mensajero, aca se van a mostrar mensajes AJAX, JS, etc -->
-		<div id="mensajero" style="display: none"></div>
-	
-		
-		<div style="background-color: #F0F7FC; height: 60px; padding-top: 20px; text-align: center; border-bottom: 3px solid #DBEBF6">
-			<h1>
-				<?php echo $html->link(__('Registro Federal de Instituciones de Educación Técnico Profesional (RFIETP)', true), '/pages/home'); ?>
-			</h1>	
-		</div>
-		<div>
-			<div>
-				<?php $session->flash(); ?>
-				<? $session->flash('auth'); ?>
-				<?php echo $content_for_layout;?>
-			</div>
-		</div>
-	</div>
-	<?php echo $cakeDebug; ?>
-</body>
+                <?php echo $content_for_layout;?>
+            </div>
+        </div>
+        <?php echo $cakeDebug; ?>
+    </body>
 </html>
