@@ -115,28 +115,32 @@ class DepuradorPlanesController extends AppController {
 
         // guardo en BD si me vino el formulario lleno
         if (!empty($this->data)) {
+             //debug($this->data);
             if (!$this->Plan->tieneEstructuraDefinida()) {
                 $this->Session->setFlash('El plan seleccionado no tiene estructura definida, no puede ser guardado. Primero seleccione una estructura al plan.');
                 $this->redirect('/depuradorPlanes/index/'.$plan['Instit']['id']);
             }
 
+            // meto la etapa y el añio de la estructura para mantener los viejos campos
             foreach ($this->data['Anio'] as &$a) {
                 $a['etapa_id'] = $plan['EstructuraPlan']['etapa_id'];
+                
                 foreach ($plan['EstructuraPlan']['EstructuraPlanesAnio'] as $epp) {
                     if ($a['estructura_planes_anio_id'] == $epp['id']) {
-                        $a['anio'] =  $epp['id'];
+                        $a['anio'] =  $epp['nro_anio'];
                     }
                 }
             }
             if (!$this->Anio->saveAll($this->data['Anio'])) {
                 $txt = '';
-                //debug($this->Anio->validationErrors);
                 foreach($this->Anio->validationErrors as $kk=>$eee) {
                     $txt .= empty($txt)?'':', ';
                     $txt .= array_shift($eee);
                 }
                 $this->Session->setFlash('Error al guardar debido a el/los siguientes errores: '.$txt);
             }
+           
+            $this->Session->setFlash('Se guardó todo Bien');
             $this->redirect('/depuradorPlanes/index/'.$plan['Instit']['id']);
         }
 
