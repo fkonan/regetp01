@@ -9,11 +9,6 @@ echo $javascript->link(array(
 echo $html->css(array('jquery.loadmask'));
 ?>
 
-<script type="text/javascript">
-
-</script>
-
-
 <h1><?= __('Búsqueda Rápida de Instituciones')?></h1>
 
 <?php echo $html->link('realizar una búsqueda avanzada...','advanced_search_form',array(
@@ -22,7 +17,12 @@ echo $html->css(array('jquery.loadmask'));
     ));?>
 <div>
     <?php
-    echo $form->create('Instit',array('action' => 'ajax_search','name'=>'InstitSearchForm'));
+    echo $form->create('Instit', array(
+        'action' => 'ajax_search',
+        'name'=>'InstitSearchForm'
+        )
+    );
+    
     echo $form->input('cue', array(
             'style'=>'border:1px solid #BBBBBB; width: 99%; font-size: 22px; height: 29px; color: rgb(117, 117, 117);',
             'label'=> 'CUE ó Nombre de la Institución',
