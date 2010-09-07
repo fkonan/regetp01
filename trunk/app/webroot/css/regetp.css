@@ -2000,3 +2000,13 @@ div.content{
 #col_izq {
     
 }
+
+
+
+.slide-out-div {
+              padding: 20px;
+              width: 250px;
+              background: #F0F7FC;
+              border: 1px solid #29216d;
+              color: black;
+          }

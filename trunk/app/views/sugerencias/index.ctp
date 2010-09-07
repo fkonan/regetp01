@@ -11,7 +11,7 @@ echo $paginator->counter(array(
 	<th><?php echo $paginator->sort('id');?></th>
 	<th><?php echo $paginator->sort('asunto');?></th>
 	<th><?php echo $paginator->sort('mensaje');?></th>
-	<th><?php echo $paginator->sort('remitente');?></th>
+	<th><?php echo $paginator->sort('user_id');?></th>
 	<th><?php echo $paginator->sort('email');?></th>
 	<th><?php echo $paginator->sort('IP');?></th>
 	<th><?php echo $paginator->sort('created');?></th>
@@ -37,7 +37,7 @@ foreach ($sugerencias as $sugerencia):
 			<?php echo $sugerencia['Sugerencia']['mensaje']; ?>
 		</td>
 		<td>
-			<?php echo $sugerencia['Sugerencia']['remitente']; ?>
+			<?php echo $sugerencia['Sugerencia']['user_id']; ?>
 		</td>
 		<td>
 			<?php echo $sugerencia['Sugerencia']['email']; ?>

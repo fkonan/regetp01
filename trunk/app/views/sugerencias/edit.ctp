@@ -6,7 +6,7 @@
 		echo $form->input('id');
 		echo $form->input('asunto');
 		echo $form->input('mensaje');
-		echo $form->input('remitente');
+		echo $form->input('user_id');
 		echo $form->input('email');
 		echo $form->input('IP');
 		echo $form->input('leido');

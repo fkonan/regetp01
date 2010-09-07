@@ -21,10 +21,10 @@ class SugerenciasController extends AppController {
 		if (!empty($this->data)) {
 			$this->Sugerencia->create();
 			if ($this->Sugerencia->save($this->data)) {
-				$this->Session->setFlash(__('Gracias por su sugerencia!', true));
+				$this->Session->setFlash(__('¡Gracias por enviarnos una sugerencia!', true));
 				$this->redirect('/');
 			} else {
-				$this->Session->setFlash(__('La sugerencia no ha sido enviada por favor , pruebe de nuevo', true));
+				$this->Session->setFlash(__('La sugerencia no ha sido enviada por favor , intente de nuevo', true));
 			}
 		}
 	}
