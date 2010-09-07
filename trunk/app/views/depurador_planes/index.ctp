@@ -1,5 +1,13 @@
-<?php echo $javascript->link('jquery.loadmask.min'); ?>
+<?php
+echo $javascript->link(array(
+    'jquery.loadmask.min',
+    'jquery.autoscroll.packed'
+    ));
+
+?>
 <script type="text/javascript">
+    jQuery.autoscroll.init();
+    
     function block(formData, jqForm, options) {
         jQuery('#consoleResultWrapper').mask('Buscando');
         return true;
