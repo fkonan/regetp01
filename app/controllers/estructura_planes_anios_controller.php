@@ -6,8 +6,14 @@ class EstructuraPlanesAniosController extends AppController {
         var $paginate = array('order'=>array('EstructuraPlanesAnio.anio_escolaridad'=>'asc'));
 
 	function index() {
-		$this->EstructuraPlanesAnio->recursive = 0;
-		$this->set('estructuraPlanesAnios', $this->paginate());
+		//$this->EstructuraPlanesAnio->recursive = 0;
+                $this->paginate['EstructuraPlanesAnio'] = array(
+                    'contain' => array('EstructuraPlan.Etapa'),
+                    'limit' => 30
+
+                    );
+                $ea = $this->paginate('EstructuraPlanesAnio');
+		$this->set('estructuraPlanesAnios', $ea);
 	}
 
 	function view($id = null) {

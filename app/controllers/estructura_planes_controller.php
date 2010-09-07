@@ -5,7 +5,7 @@ class EstructuraPlanesController extends AppController {
 	var $helpers = array('Html', 'Form');
 
 	function index() {
-		$this->EstructuraPlan->recursive = 0;
+		$this->EstructuraPlan->recursive = 1;
 		$this->set('estructuraPlanes', $this->paginate());
 	}
 
