@@ -230,7 +230,8 @@ class AniosController extends AppController {
             $aPlan = $this->Anio->find('first', array(
                 'conditions'=>array('Anio.plan_id'=>$plan_id,
                                     'Anio.ciclo_id'=>$ciclo_id
-                                   )
+                                   ),
+                'order' => 'Anio.anio',
                 ));
 
             $plan_id = $aPlan['Anio']['plan_id'];
@@ -283,7 +284,8 @@ class AniosController extends AppController {
                 'conditions'=>array(
                     'Anio.plan_id'=>$plan_id,
                     'Anio.ciclo_id'=>$aPlan['Anio']['ciclo_id']
-                    )
+                    ),
+                'order' => array('Anio.anio'),
                 ));
 
 
