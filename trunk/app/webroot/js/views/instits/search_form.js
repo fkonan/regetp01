@@ -1,8 +1,38 @@
-    // variables globales
+    /*
+     *
+     *      VARIABLES GLOBALES
+     *
+     *
+     */
+    
     var enterButton = false;
     var timerid;
+
+    /**
+     *  Indica el ID del elemento <form id="">
+     * @var string
+     */
     var formId = 'InstitAjaxSearchForm';
+
+    /**
+     *  es el elemento del formulario, se inicializa en en document.ready()
+     * @var Dom Object
+     */
     var formElement = null;
+
+
+
+    
+
+
+
+    /*
+     *
+     *      FUNCIONES
+     *
+     *
+     */
+
 
     function iniciarTooltip(){
         jQuery.tools.tooltip.conf.events.input = 'focus,blur';
@@ -40,6 +70,14 @@
 
 
 
+
+
+    /*
+     *
+     *  DOCUMENT
+     *  ON READY
+     *  
+     */
 
     jQuery(document).ready(function() {
         formElement = jQuery('#'+formId);
