@@ -36,12 +36,12 @@
 
         echo $javascript->link('jquery-1.4.2.min.js');
         echo $javascript->link('jquery.blockUI');
-        echo $javascript->link('prototype');
+       // echo $javascript->link('prototype');
 
         echo $scripts_for_layout;
         ?>
          <script type="text/javascript">
-            jQuery.noConflict();
+            //jQuery.noConflict();
          </script>
 
     </head>
