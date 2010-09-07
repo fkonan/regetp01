@@ -1,12 +1,14 @@
     // variables globales
     var enterButton = false;
     var timerid;
+    var formId = 'InstitAjaxSearchForm';
+    var formElement = null;
 
     function iniciarTooltip(){
         jQuery.tools.tooltip.conf.events.input = 'focus,blur';
         jQuery.tools.tooltip.conf.events.tooltip = '';
         jQuery.tools.tooltip.conf.events.widget = 'focus, blur';
-        jQuery("#InstitSimpleSearchForm :input[title]").tooltip({ effect: 'slide', offset:[22,0]});
+        jQuery("#"+formId+" :input[title]").tooltip({ effect: 'slide', offset:[22,0]});
     }
 
     function blockResultConsole(formData, jqForm, options) {
@@ -16,9 +18,10 @@
 
     function autoSubmit(){
         if(jQuery("#InstitCue").val().length > 1){
-              var form = this;
               clearTimeout(timerid);
-              timerid = setTimeout(function() { jQuery('#InstitSimpleSearchForm').submit(); }, 1000);
+              timerid = setTimeout(function() {
+                  formElement.submit();
+              }, 1000);
           }
     }
 
@@ -35,17 +38,21 @@
         }
     }
 
+
+
+
     jQuery(document).ready(function() {
+        formElement = jQuery('#'+formId);
+        
         var options = {
             target:        '#consoleResult',   // target element(s) to be updated with server response
             beforeSubmit:  blockResultConsole,  // pre-submit callback
             success:       unblockResultConsole,  // post-submit callback
-            url:   jQuery('#InstitSimpleSearchForm').attr('action')     // override for form's 'action' attribute
+            url:  formElement.attr('action')     // override for form's 'action' attribute
         };
 
         // bind form using 'ajaxForm'
-        jQuery('#InstitSimpleSearchForm').ajaxForm(options);
-
+        formElement.ajaxForm(options);
 
         jQuery("#InstitCue").keyup(autoSubmit);
 
