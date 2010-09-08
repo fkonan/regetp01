@@ -1,4 +1,8 @@
 <?php
+
+
+
+
 if (!empty($anios))
 {
     $j = 0;
@@ -17,12 +21,12 @@ if (!empty($anios))
                         $etapa_anterior = $anio['Etapa']['id'];
                         ?>
                     <div class="event">
-                    <div class="eventHeading <?php echo $colors[$j++%3]?>"><?php echo $anio['Etapa']['name']?></div>
+                    <div class="eventHeading <?php echo limpiar_nombre($anio['Etapa']['name'])?>"><?php echo $anio['Etapa']['name']?></div>
                         <ul class="eventList">
                 <?php
                     }
                 ?>
-                            <li class="<?php echo $colors[$j%3-1]?>"><?php echo $anio['anio'];?>º</li>
+                            <li class="<?php echo limpiar_nombre($anio['Etapa']['name'])?>"><?php echo $anio['anio'];?>º</li>
                 <?php
                 endforeach;
                 ?>
