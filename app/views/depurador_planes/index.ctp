@@ -108,6 +108,7 @@ echo $javascript->link(array(
     <div id="cuerpo">
 
         <div id="col_izq">
+            <div style="height:20px;"><?=$html->link('+ Crear Plan', '/depurador_planes/add_plan/'.$instit['Instit']['id'], array('onclick' => 'return CrearPlan(this)'))?></div>
             <?php
             foreach ($instit['Plan'] as $plan) {
             ?>
@@ -123,7 +124,7 @@ echo $javascript->link(array(
             </div>
             <?php } ?>
 
-            <?=$html->link('+ Crear Plan', '/depurador_planes/add_plan/'.$instit['Instit']['id'], array('onclick' => 'return CrearPlan(this)'))?>
+            <div><?=$html->link('+ Crear Plan', '/depurador_planes/add_plan/'.$instit['Instit']['id'], array('onclick' => 'return CrearPlan(this)'))?></div>
         </div>
         <!-- pantalla principal -->
 
