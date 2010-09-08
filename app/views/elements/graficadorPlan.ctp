@@ -22,7 +22,7 @@ if (!empty($anios))
                 <?php
                     }
                 ?>
-                            <li><?php echo $anio['anio'];?>º</li>
+                            <li class="<?php echo $colors[$j%3-1]?>"><?php echo $anio['anio'];?>º</li>
                 <?php
                 endforeach;
                 ?>
