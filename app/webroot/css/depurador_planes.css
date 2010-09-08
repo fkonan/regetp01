@@ -3,6 +3,10 @@
     padding:0;
 }
 
+TH{
+    border-bottom: 1px solid black;
+}
+
 /* General Style Info */
 body {
     color: #000000;
@@ -102,7 +106,7 @@ h2 {
 
 
 .planes_izq {
-    height: 90px;
+    height: 64px;
     padding-top: 10px;
     border-bottom: 1px solid #000000;
     font-size: 8pt;
@@ -125,7 +129,7 @@ h2 {
 }
 
 .tr_plan {
-    height: 100px;
+    height: 74px;
 }
 
 .td_ciclos {
@@ -336,27 +340,27 @@ li.color1{
     border:1px solid SteelBlue;
 }
 
-.color2{
+.color3{
     color: Sienna;
 }
 
-div.color2{
+div.color3{
     border-bottom:1px solid Sienna;
 }
 
-li.color2{
+li.color3{
     border:1px solid Sienna;
 }
 
-.color3{
+.color2{
     color: -moz-visitedhyperlinktext;
 }
 
-div.color3 {
+div.color2 {
     border-bottom:1px solid -moz-visitedhyperlinktext;
 }
 
-li.color3{
+li.color2{
     border:1px solid -moz-visitedhyperlinktext;
 }
 
