@@ -183,22 +183,41 @@ class DepuradorPlanesController extends AppController {
 
 
     function listado() {
-        $jurisdiccion_id = ' > 0';
+        $jurisdiccionSql = ' > 0';
+        $jurisdiccion_id = 0;
         $limit = 10;
         $orderBy = 'i.cue*100+i.anexo';
         $errores = 0; // es una variable pasada en el form de la vista para usar el $orderBy
 
         if (!empty($this->data['Depurador']['jurisdiccion_id'])) {
-            $jurisdiccion_id = " = ".$this->data['Depurador']['jurisdiccion_id'];
+            $jurisdiccionSql = " = ".$this->data['Depurador']['jurisdiccion_id'];
+            $jurisdiccion_id = $this->data['Depurador']['jurisdiccion_id'];
+        } else {
+            if ($this->Session->check('jurisdiccion_id')) {
+                $jurisdiccionSql = ' = '.$this->Session->read('jurisdiccion_id');
+                $jurisdiccion_id = $this->Session->read('jurisdiccion_id');
+            }
         }
+        $this->Session->write('jurisdiccion_id', $jurisdiccion_id);
 
         if (!empty($this->data['Depurador']['limit'])) {
             $limit = $this->data['Depurador']['limit'];
+        } else {
+            if ($this->Session->check('limit')) {
+                $limit = $this->Session->read('limit');
+            }
         }
+        $this->Session->write('limit', $limit);
 
         if (!empty($this->data['Depurador']['errores'])) {
             $errores = $this->data['Depurador']['errores'];
-            switch ($errores) {
+        } else {
+            if ($this->Session->check('errores')) {
+                $errores = $this->Session->read('errores');
+            }
+        }
+        $this->Session->write('errores', $errores);
+        switch ($errores) {
                 case 1: // ordeno por cantidad de errors
                     $orderBy = 'count(*) DESC';
                     break;
@@ -208,8 +227,8 @@ class DepuradorPlanesController extends AppController {
                 case 0:
                 default: // lo dejo como està
                     break;
-            }
-        }
+       }
+
 
         $selectSQL = "
                          select
@@ -230,7 +249,7 @@ class DepuradorPlanesController extends AppController {
                  and
                      p.oferta_id = 3
                  and
-                    i.jurisdiccion_id $jurisdiccion_id
+                    i.jurisdiccion_id $jurisdiccionSql
                         group by i.id, i.nombre, i.cue, i.anexo
                  order by $orderBy
                 ";
@@ -241,6 +260,8 @@ class DepuradorPlanesController extends AppController {
         $cantFaltan = empty($cantFaltan[0][0]['count']) ? 0     :   $cantFaltan[0][0]['count'];
 
         $jurisdicciones = $this->Instit->Jurisdiccion->find('list');
+
+        
 
         $this->set('errores',$errores);
         $this->set(compact('jurisdicciones'));

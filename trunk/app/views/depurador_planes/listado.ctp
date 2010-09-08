@@ -2,7 +2,7 @@
 
 <div class="instits form">
 <h1>Depurador de Estructuras</h1>
-<h2>¡¡¡ Vamos que faltan sòlo <?php echo $cantFaltan?> !!!</h2>
+<h2>¡¡¡ Vamos que faltan sólo <?php echo $cantFaltan?> Instituciones!!!</h2>
 
 
 <?php 
