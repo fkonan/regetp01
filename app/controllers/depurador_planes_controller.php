@@ -26,7 +26,8 @@ class DepuradorPlanesController extends AppController {
                                     'Anio' => array(
                                             'Etapa',
                                             'order'=>array('ciclo_id','etapa_id', 'anio')),
-                                    'conditions'=> array('Plan.oferta_id'=> 3)
+                                    'conditions'=> array('Plan.oferta_id'=> 3),
+                                    'order' => array('')
                             )),
                     'conditions' => array('Instit.id'=> $id)
             ));
@@ -108,10 +109,7 @@ class DepuradorPlanesController extends AppController {
         // si no encontro un plan redirijo a la pagina ppal
         if (empty($plan)) {
             $this->flash("El plan no existe",'/');
-        }
-
-
-       
+        }     
 
         // guardo en BD si me vino el formulario lleno
         if (!empty($this->data)) {
@@ -123,14 +121,25 @@ class DepuradorPlanesController extends AppController {
 
             // meto la etapa y el añio de la estructura para mantener los viejos campos
             foreach ($this->data['Anio'] as &$a) {
-                $a['etapa_id'] = $plan['EstructuraPlan']['etapa_id'];
-                
+                if ($a['plan_id'] != $plan_id) {
+                    $plan_aux = $this->Plan->find('all', array(
+                                    'contain' => array('EstructuraPlan.EstructuraPlanesAnio'),
+                                    'conditions'=>array('Plan.id'=>$a['plan_id'])));
+
+                    // puede ser vacio si no esta estructurado ese plan
+                    $a['etapa_id'] = $plan_aux[0]['EstructuraPlan']['etapa_id'];
+                }
+                else {
+                     $a['etapa_id'] = $plan['EstructuraPlan']['etapa_id'];
+                }
+
                 foreach ($plan['EstructuraPlan']['EstructuraPlanesAnio'] as $epp) {
                     if ($a['estructura_planes_anio_id'] == $epp['id']) {
                         $a['anio'] =  $epp['nro_anio'];
                     }
                 }
             }
+            
             if (!$this->Anio->saveAll($this->data['Anio'])) {
                 $txt = '';
                 foreach($this->Anio->validationErrors as $kk=>$eee) {

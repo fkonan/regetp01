@@ -36,7 +36,8 @@ echo $javascript->link(array(
         var $dialog = $('<div></div>')
                 .html('... cargando años')
 		.dialog({
-                        width: 500,
+                        width: 550,
+                        position: 'top',
 			title: 'Depurar Datos de los Años'
 		})
                 .load(element.href);
@@ -49,6 +50,7 @@ echo $javascript->link(array(
                 .html('... cargando nuevo plan')
 		.dialog({
                         width: 750,
+                        position: 'top',
 			title: 'Nuevo Plan'
 		})
                 .load(element.href, function(){
@@ -85,8 +87,6 @@ echo $javascript->link(array(
 
 </script>
 
-    <h1><?=$html->link('Depurador de Planes', '/depurador_planes/listado')?></h1>
-
     <div id="datos_instit">
             <?
             //el anexo viene con 1 solo digito por lo general. Pero para leerlo siempre hay que ponerlo
@@ -103,6 +103,8 @@ echo $javascript->link(array(
             <div class="instit_atributte"><b>Localidad: </b><?= $instit['Localidad']['name'] ?></div>
     </div>
 
+    <div id="volver"><h1><?=$html->link('Volver al Depurador de Planes', '/depurador_planes/listado')?></h1></div>
+
     <div id="cuerpo">
 
         <div id="col_izq">
@@ -115,7 +117,7 @@ echo $javascript->link(array(
                         array(  'options'=>$estructuras,
                                 'label'=>'',
                                 'empty'=>' -Seleccione- ',
-                                'style'=>'width:140px; font-size:8pt;',
+                                'style'=>'width:165px; font-size:8pt;',
                                 'onchange'=>'javascript: CambiarEstructuraPlan('.$plan['id'].',this.value)',
                                 'selected'=>$plan['estructura_plan_id'])); ?>
             </div>
