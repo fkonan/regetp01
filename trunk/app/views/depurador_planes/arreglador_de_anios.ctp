@@ -13,6 +13,8 @@ if (!empty($plan['EstructuraPlan']['id'])) {
 
     $i = 0;
     echo "<h3 style='text-align: center'>Estructura del plan: ".$plan['EstructuraPlan']['name']."</h3>";
+    echo "<div id='arregladorAnios'>";
+
     foreach ($anios as $a) {
         echo "<div style='padding-bottom: 0.5em;'>";
 
@@ -30,14 +32,15 @@ if (!empty($plan['EstructuraPlan']['id'])) {
         'label'=>$label,
         'options'=>$estructura_planes_anios,
         'default' => $asug,
-        'style' => 'font-size: 13pt; margin:0px; padding: 0px;',
+        'style' => 'font-size: 9pt; margin:0px; padding: 0px;',
         ));
 
-        echo '<div>Mover este año a otro Plan: ';
+        echo '<div>Plan: ';
         echo $form->input($i.'.plan_id', array(
             'div' => false,
             'label' => false,
             'default' => $plan['Plan']['id'],
+            'style' => 'font-size: 8pt;',
             ));
         echo '</div>';
 
@@ -48,7 +51,10 @@ if (!empty($plan['EstructuraPlan']['id'])) {
 
     }
 
-    echo $form->end('Guardar');
+        echo "<div style='text-align:center; padding-top:4px;'>";
+            echo $form->end('Guardar');
+        echo "</div>";
+    echo "</div>";
 }
 
 else {

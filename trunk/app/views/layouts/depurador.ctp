@@ -61,7 +61,7 @@
             <div id="mensajero" style="display: none"></div>
 
 
-            <div style="background-color: #F0F7FC; height: 60px; padding-top: 20px; text-align: center; border-bottom: 3px solid #DBEBF6">
+            <div style="background-color: #F0F7FC; height: 30px; text-align: center; border-bottom: 3px solid #DBEBF6">
                 <h1>
                     <?php echo $html->link(__('Registro Federal de Instituciones de Educación Técnico Profesional (RFIETP)', true), '/pages/home'); ?>
                 </h1>

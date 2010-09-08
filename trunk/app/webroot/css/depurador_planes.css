@@ -75,16 +75,16 @@ h2 {
     width: 170px;
     border: 1px solid #000000;
     margin:0;
-    padding:0;
+    padding: 24px 0 0;
 }
 
 #col_der {
-    float: left;
+    /*float: left;*/
     border: 1px solid #000000;
     margin:0;
     padding:0;
     overflow: auto;
-    width: 84%;
+    /*width: 84%;*/
 }
 
 .row_header {
@@ -102,14 +102,15 @@ h2 {
 
 
 .planes_izq {
-    height: 100px;
-    /*padding-bottom: 10px;*/
+    height: 90px;
+    padding-top: 10px;
     border-bottom: 1px solid #000000;
     font-size: 8pt;
 }
 
 .table_planes_der {
     border-bottom: 1px solid #000000;
+    width: 100%;
 }
 
 .tr_header {
@@ -131,6 +132,7 @@ h2 {
     max-width: 800px !important;
     margin: 0 10px 17px;
     text-align: center;
+    border-bottom: 1px solid #000000;
 }
 
 .col_ciclos .title {
@@ -156,8 +158,20 @@ h2 {
     color: #6E6E6E;
 }
 
-.datos_instit {
+#datos_instit {
+    float: left;
 }
+#volver {
+    padding-right:4px;
+    float:right;
+}
+
+/**** Arreglador de Años *****/
+#arregladorAnios {
+    padding-bottom: 0.5em;
+    font-size: 9pt;
+}
+
 
 
 /*
@@ -315,7 +329,7 @@ ELEMENTO GRAFICADOR DE PLANES
 
 
 .color1{
-    background-color: beige;
+    background-color: Bisque;
 }
 
 .color2{
