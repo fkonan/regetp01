@@ -33,79 +33,46 @@ echo $javascript->link(array(
 
     function EditarCiclo(element) {
 
-        jQuery('#editor_anio').load(element.href, function() {
-            jQuery.blockUI({
-                message: "<div style='height:18px;background-color:#87AEC5'>\n\
-                            <img style='cursor:pointer;float:right' src='<?php echo $html->url('/img/close.png')?>' class='cerrar'/>\n\
-                          </div>" + jQuery('#editor_anio').html(),
-                css: {
-                    width:          'auto',
-                    top:            '5%',
-                    left:           '20%',
-                    right:          '20%',
-                    textAlign:      'left',
-                    cursor:         'auto',
-                    margin:         '10px'
-                }
-            });
-
-            jQuery('.blockOverlay').attr('title','Cerrar').click(jQuery.unblockUI);
-            jQuery('.cerrar').attr('title','Cerrar').click(jQuery.unblockUI);
-
-            // lo vacía (para no duplicar ids) y oculta
-            jQuery('#editor_anio').empty();
-            jQuery('#editor_anio').hide();
-        });
-
+        var $dialog = $('<div></div>')
+                .html('... cargando años')
+		.dialog({
+                        width: 500,
+			title: 'Depurar Datos de los Años'
+		})
+                .load(element.href);
 
         return false;
     }
 
-    function CrearPlan(element) {
-
-        jQuery('#creador_plan').load(element.href, function() {
-            jQuery.blockUI({
-                message: "<div style='height:18px;background-color:#87AEC5'>\n\
-                            <img style='cursor:pointer;float:right' src='<?php echo $html->url('/img/close.png')?>' class='cerrar'/>\n\
-                          </div>" + jQuery('#creador_plan').html(),
-                css: {
-                    width:          'auto',
-                    top:            '5%',
-                    left:           '20%',
-                    right:          '20%',
-                    textAlign:      'left',
-                    cursor:         'auto',
-                    margin:         '10px'
-                },
-                fadeIn:  200,
-                fadeOut:  400
-            });
-
-            jQuery('.blockOverlay').attr('title','Cerrar').click(jQuery.unblockUI);
-            jQuery('.cerrar').attr('title','Cerrar').click(jQuery.unblockUI);
-
-            // lo vacía (para no duplicar ids) y oculta
-            jQuery('#creador_plan').empty();
-            jQuery('#creador_plan').hide();
-
-            jQuery('#sector_id').change( function() {
-                jQuery('#sector_id').parents('form').ajaxSubmit({
-                    beforeSend:function(request) {
-                        request.setRequestHeader('X-Update', 'PlanSubsectorId');
-                jQuery("#ajax_indicator2").show();
-                jQuery("#PlanSubsectorId").attr("disabled","disabled")
-                },
-                complete:function(request, textStatus) {
-                    jQuery("#ajax_indicator2").hide();
-                    jQuery("#PlanSubsectorId").removeAttr("disabled")},
-                success:function(data, textStatus) {
-                    jQuery('#PlanSubsectorId').html(data);},
-                async:true, type:'post', url:'<?=$html->url('/subsectores/ajax_select_subsector_form_por_sector')?>'
-            });
-            return false;});
-        });
-
-        
+    function CrearPlan(element) {        
+        var $dialog = $('<div></div>')
+                .html('... cargando nuevo plan')
+		.dialog({
+                        width: 750,
+			title: 'Nuevo Plan'
+		})
+                .load(element.href, function(){
+                    jQuery('#sector_id').change( function() {
+                        jQuery('#sector_id').parents('form').ajaxSubmit({
+                            beforeSend:function(request) {
+                                request.setRequestHeader('X-Update', 'PlanSubsectorId');
+                                jQuery("#ajax_indicator2").show();
+                                jQuery("#PlanSubsectorId").attr("disabled","disabled")
+                            },
+                            complete:function(request, textStatus) {
+                                jQuery("#ajax_indicator2").hide();
+                                jQuery("#PlanSubsectorId").removeAttr("disabled")
+                            },
+                            success:function(data, textStatus) {
+                                jQuery('#PlanSubsectorId').html(data);
+                            },
+                            async:true,
+                            type:'post',
+                            url:'<?=$html->url('/subsectores/ajax_select_subsector_form_por_sector')?>'
+                        });
+                    })
+                });
+  
         return false;
     }
 
@@ -184,5 +151,4 @@ echo $javascript->link(array(
         </div>
     </div>
 
-    <div id="editor_anio"></div>
-    <div id="creador_plan"></div>
+   
