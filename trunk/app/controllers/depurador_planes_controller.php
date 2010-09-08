@@ -189,16 +189,19 @@ class DepuradorPlanesController extends AppController {
         $orderBy = 'i.cue*100+i.anexo';
         $errores = 0; // es una variable pasada en el form de la vista para usar el $orderBy
 
-        if (!empty($this->data['Depurador']['jurisdiccion_id'])) {
-            $jurisdiccionSql = " = ".$this->data['Depurador']['jurisdiccion_id'];
+        if (!empty($this->data['Depurador']['jurisdiccion_id'])) {           
             $jurisdiccion_id = $this->data['Depurador']['jurisdiccion_id'];
         } else {
-            if ($this->Session->check('jurisdiccion_id')) {
-                $jurisdiccionSql = ' = '.$this->Session->read('jurisdiccion_id');
-                $jurisdiccion_id = $this->Session->read('jurisdiccion_id');
+            if ($this->data['Depurador']['jurisdiccion_id'] !== '') {
+                if ($this->Session->check('jurisdiccion_id')) {
+                    $jurisdiccion_id = $this->Session->read('jurisdiccion_id');
+                }
             }
         }
         $this->Session->write('jurisdiccion_id', $jurisdiccion_id);
+        if ($jurisdiccion_id > 0) {
+            $jurisdiccionSql = " = ".$jurisdiccion_id;
+        }
 
         if (!empty($this->data['Depurador']['limit'])) {
             $limit = $this->data['Depurador']['limit'];
