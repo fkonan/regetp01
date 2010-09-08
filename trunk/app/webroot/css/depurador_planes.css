@@ -181,8 +181,6 @@ ELEMENTO GRAFICADOR DE PLANES
 .eventHeading{
 	/* The colorful year headings at the top */
 	font-size:1.2em;
-	margin:0px 0px 10px;
-	padding:2px 5px;
 	text-align:center;
 }
 
@@ -219,7 +217,7 @@ ELEMENTO GRAFICADOR DE PLANES
 	/* Hides the overflowing timeline */
 	overflow:hidden;
 	border:1px solid #D8EFD1;
-        height:65px;
+        height:45px;
         font-size: 8pt;
         float:left;
         margin-top: 10px;
@@ -291,7 +289,6 @@ ELEMENTO GRAFICADOR DE PLANES
 .eventList li{
 	/* The individual events */
 	
-	border:1px solid #EEEEEE;
 	list-style:none;
 	margin:2px;
 	padding:4px 7px;
@@ -328,17 +325,38 @@ ELEMENTO GRAFICADOR DE PLANES
 
 
 .color1{
-    color: -moz-visitedhyperlinktext;
-    border-bottom:1px solid -moz-visitedhyperlinktext;
+    color: SteelBlue;
+    
+}
+div.color1{
+    border-bottom:1px solid SteelBlue;
+}
+
+li.color1{
+    border:1px solid SteelBlue;
 }
 
 .color2{
     color: Sienna;
+}
+
+div.color2{
     border-bottom:1px solid Sienna;
 }
 
-.color3{
-    background-color: RosyBrown;
+li.color2{
+    border:1px solid Sienna;
 }
 
+.color3{
+    color: -moz-visitedhyperlinktext;
+}
+
+div.color3 {
+    border-bottom:1px solid -moz-visitedhyperlinktext;
+}
+
+li.color3{
+    border:1px solid -moz-visitedhyperlinktext;
+}
 
