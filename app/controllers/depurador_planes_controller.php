@@ -206,8 +206,10 @@ class DepuradorPlanesController extends AppController {
         if (!empty($this->data['Depurador']['limit'])) {
             $limit = $this->data['Depurador']['limit'];
         } else {
-            if ($this->Session->check('limit')) {
-                $limit = $this->Session->read('limit');
+            if ($this->data['Depurador']['limit'] !== '') {
+                if ($this->Session->check('limit')) {
+                    $limit = $this->Session->read('limit');
+                }
             }
         }
         $this->Session->write('limit', $limit);
@@ -215,8 +217,10 @@ class DepuradorPlanesController extends AppController {
         if (!empty($this->data['Depurador']['errores'])) {
             $errores = $this->data['Depurador']['errores'];
         } else {
-            if ($this->Session->check('errores')) {
-                $errores = $this->Session->read('errores');
+            if ($this->data['Depurador']['errores'] !== '') {
+                if ($this->Session->check('errores')) {
+                    $errores = $this->Session->read('errores');
+                }
             }
         }
         $this->Session->write('errores', $errores);
