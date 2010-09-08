@@ -1,3 +1,30 @@
+<script type="text/javascript">
+    function validarPlan() {
+        var error = '';
+        if (jQuery('#PlanEstructuraPlanId :selected').val() == '') {
+            error += 'Debe seleccionar la estructura\n';
+        }
+        if (jQuery('#PlanNombre').val() == '') {
+            error += 'Debe ingresar el nombre del plan\n';
+        }
+        if (jQuery('#sector_id :selected').val() == '') {
+            error += 'Debe seleccionar el sector del plan\n';
+        }
+        if (jQuery('#PlanDuracionHs').val() == '' || isNaN(jQuery('#PlanDuracionHs').val())) {
+            error += 'Debe ingresar la duracion en horas\n';
+        }
+        if (jQuery('#PlanDuracionAnios').val() == '' || isNaN(jQuery('#PlanDuracionAnios').val())) {
+            error += 'Debe ingresar la duracion en años\n';
+        }
+
+        if (error.length > 0) {
+            alert(error);
+            return false;
+        }
+
+        return true;
+    }
+</script>
 <h1>Nueva Oferta Educativa</h1>
 <?
 $anexo = ($instit['anexo']<10)?'0'.$instit['anexo']:$instit['anexo'];
@@ -6,7 +33,7 @@ $cue_instit = $instit['cue'].$anexo;
 <h2><?php echo $cue_instit." - ".$instit['nombre_completo']; ?></h2>
 
 <div class="depuradorPlanes form">
-<?php echo $form->create('Plan',array('id'=>'planAdd','url' => array('controller' => 'depuradorPlanes', 'action' => 'add_plan/'.$instit['id'])));?>
+<?php echo $form->create('Plan',array('id'=>'planAdd', 'onsubmit'=>'return validarPlan();','url' => array('controller' => 'depuradorPlanes', 'action' => 'add_plan/'.$instit['id'])));?>
 
     <table cellspacing="2">
         <tr>
