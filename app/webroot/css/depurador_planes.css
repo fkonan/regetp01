@@ -290,14 +290,13 @@ ELEMENTO GRAFICADOR DE PLANES
 
 .eventList li{
 	/* The individual events */
-	background:#F4F4F4;
+	
 	border:1px solid #EEEEEE;
 	list-style:none;
 	margin:2px;
 	padding:4px 7px;
         float:left;
         display:inline;
-        width: 40px;
         font-size: 10pt;
         text-align: center;
 
@@ -329,11 +328,13 @@ ELEMENTO GRAFICADOR DE PLANES
 
 
 .color1{
-    background-color: Bisque;
+    color: -moz-visitedhyperlinktext;
+    border-bottom:1px solid -moz-visitedhyperlinktext;
 }
 
 .color2{
-    background-color: SeaShell;
+    color: Sienna;
+    border-bottom:1px solid Sienna;
 }
 
 .color3{
