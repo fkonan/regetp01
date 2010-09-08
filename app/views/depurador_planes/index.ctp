@@ -106,9 +106,6 @@ echo $javascript->link(array(
     <div id="cuerpo">
 
         <div id="col_izq">
-
-            <div class="row_header"></div>
-
             <?php
             foreach ($instit['Plan'] as $plan) {
             ?>
@@ -129,7 +126,7 @@ echo $javascript->link(array(
         <!-- pantalla principal -->
 
         <div id="col_der">
-
+            
             <table class="table_planes_der">
                 <tr class="tr_header">
                 <?php

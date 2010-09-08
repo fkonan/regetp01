@@ -25,6 +25,7 @@
         return true;
     }
 </script>
+
 <h1>Nueva Oferta Educativa</h1>
 <?
 $anexo = ($instit['anexo']<10)?'0'.$instit['anexo']:$instit['anexo'];
