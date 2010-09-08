@@ -1,5 +1,4 @@
 <?php
-if (!empty($plan['Anio'])) {
     for ($i=2006; $i <= date('Y'); $i++) {
         $anios = null;
         foreach($plan['Anio'] as $anio) {
@@ -34,5 +33,6 @@ if (!empty($plan['Anio'])) {
                     ?>
         
     </td>
-<?php }
-} ?>
+<?php
+}
+?>

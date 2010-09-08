@@ -308,13 +308,13 @@ ELEMENTO GRAFICADOR DE PLANES
 
 .vacio{
      width:100%;
-     border: 1px #EFEFEF dotted !important;
+     border: 1px #D7D7D7 dotted !important;
      padding: 3px
 }
 
 .vacio p{
-    margin-top:20px;
-    color:#DFDFDF;
+    margin-top:15px;
+    color:#D7D7D7;
     font-size:10pt;
 }
 
@@ -326,6 +326,8 @@ ELEMENTO GRAFICADOR DE PLANES
     text-align: center;
 }
 
+
+/*** Estilos de etapas (graficadorAnios) ***/
 
 .ciclo-basico{
     color: SteelBlue;
@@ -378,14 +380,75 @@ li.media{
 }
 
 
-.nivel-polimodal{
+.polimodal{
     color: SeaGreen;
 }
 
-div.nivel-polimodal {
+div.polimodal {
     border-bottom:1px solid SeaGreen;
 }
 
-li.nivel-polimodal{
+li.polimodal{
+    border:1px solid SeaGreen;
+}
+
+.año-superior-polimodal{
+    color: SeaGreen;
+}
+
+div.año-superior-polimodal {
+    border-bottom:1px solid SeaGreen;
+}
+
+li.año-superior-polimodal{
+    border:1px solid SeaGreen;
+}
+
+.secundario-no-ciclado{
+    color: SeaGreen;
+}
+
+div.secundario-no-ciclado {
+    border-bottom:1px solid SeaGreen;
+}
+
+li.secundario-no-ciclado {
+    border:1px solid SeaGreen;
+}
+
+.ciclo-orientado{
+    color: SeaGreen;
+}
+
+div.ciclo-orientado {
+    border-bottom:1px solid SeaGreen;
+}
+
+li.ciclo-orientado {
+    border:1px solid SeaGreen;
+}
+
+
+.primer-ciclo{
+    color: SeaGreen;
+}
+
+div.primer-ciclo {
+    border-bottom:1px solid SeaGreen;
+}
+
+li.primer-ciclo {
+    border:1px solid SeaGreen;
+}
+
+.segundo-ciclo{
+    color: SeaGreen;
+}
+
+div.segundo-ciclo {
+    border-bottom:1px solid SeaGreen;
+}
+
+li.segundo-ciclo {
     border:1px solid SeaGreen;
 }
