@@ -28,7 +28,7 @@
             'empty'=>'Seleccione',
             'default'=>$errores,
             'div'=>array('style'=>'float: left; clear:none;'),
-            'options' => array('CUE', 'Cantidad de erores (e) Desc', 'Cantidad de errores (e) Asc'),
+            'options' => array('CUE', 'Cantidad de errores (mayor a menor)', 'Cantidad de errores (menor a mayor)'),
             ));
 
         echo $form->button('Filtrar',  array(
