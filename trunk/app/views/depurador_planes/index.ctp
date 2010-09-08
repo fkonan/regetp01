@@ -6,7 +6,7 @@ echo $javascript->link(array(
 
 ?>
 <script type="text/javascript">
-    jQuery.autoscroll.init();
+    //jQuery.autoscroll.init();
     
     function block(formData, jqForm, options) {
         jQuery('#consoleResultWrapper').mask('Buscando');
@@ -40,7 +40,7 @@ echo $javascript->link(array(
                           </div>" + jQuery('#editor_anio').html(),
                 css: {
                     width:          'auto',
-                    top:            '8%',
+                    top:            '5%',
                     left:           '20%',
                     right:          '20%',
                     textAlign:      'left',
@@ -52,6 +52,8 @@ echo $javascript->link(array(
             jQuery('.blockOverlay').attr('title','Cerrar').click(jQuery.unblockUI);
             jQuery('.cerrar').attr('title','Cerrar').click(jQuery.unblockUI);
 
+            // lo vacía (para no duplicar ids) y oculta
+            jQuery('#editor_anio').empty();
             jQuery('#editor_anio').hide();
         });
 
@@ -68,7 +70,7 @@ echo $javascript->link(array(
                           </div>" + jQuery('#creador_plan').html(),
                 css: {
                     width:          'auto',
-                    top:            '8%',
+                    top:            '5%',
                     left:           '20%',
                     right:          '20%',
                     textAlign:      'left',
@@ -82,42 +84,38 @@ echo $javascript->link(array(
             jQuery('.blockOverlay').attr('title','Cerrar').click(jQuery.unblockUI);
             jQuery('.cerrar').attr('title','Cerrar').click(jQuery.unblockUI);
 
+            // lo vacía (para no duplicar ids) y oculta
+            jQuery('#creador_plan').empty();
             jQuery('#creador_plan').hide();
+
+            jQuery('#sector_id').change( function() {
+                jQuery('#sector_id').parents('form').ajaxSubmit({
+                    beforeSend:function(request) {
+                        request.setRequestHeader('X-Update', 'PlanSubsectorId');
+                jQuery("#ajax_indicator2").show();
+                jQuery("#PlanSubsectorId").attr("disabled","disabled")
+                },
+                complete:function(request, textStatus) {
+                    jQuery("#ajax_indicator2").hide();
+                    jQuery("#PlanSubsectorId").removeAttr("disabled")},
+                success:function(data, textStatus) {
+                    jQuery('#PlanSubsectorId').html(data);},
+                async:true, type:'post', url:'<?=$html->url('/subsectores/ajax_select_subsector_form_por_sector')?>'
+            });
+            return false;});
         });
 
         
         return false;
     }
 
-    function toggleTitulos(){
-         if (jQuery('#PlanOfertaId').val() != '') {
-            jQuery('#divPlanTituloId').show();
-        }
-        else {
-             jQuery('#divPlanTituloId').hide();
-        }
-
-        toggleEstructuraPlan();
+    function ChangeEstructura() {
+        jQuery("div[estructura_plan_id]").hide();
+        jQuery("div[estructura_plan_id=" + jQuery('#PlanEstructuraPlanId :selected').val() + "]").show();
     }
 
-    jQuery(document).ready(function () {
-        toggleTitulos();
-        toggleEstructuraPlan();
+    
 
-        jQuery("#PlanEstructuraPlanId").change(function(){
-            jQuery("div[estructura_plan_id]").hide();
-            jQuery("div[estructura_plan_id=" + jQuery(this).val() + "]").show();
-        });
-    });
-
-    function toggleEstructuraPlan() {
-        if (jQuery('#PlanOfertaId :selected').val() != 2 && jQuery('#PlanOfertaId :selected').val() != 3) {
-            jQuery('#PlanEstructura').hide();
-        }
-        else {
-            jQuery('#PlanEstructura').show();
-        }
-    }
 </script>
 
     <h1><?=$html->link('Depurador de Planes', '/depurador_planes/listado')?></h1>
@@ -153,6 +151,7 @@ echo $javascript->link(array(
                         array(  'options'=>$estructuras,
                                 'label'=>'',
                                 'empty'=>' -Seleccione- ',
+                                'style'=>'width:140px; font-size:8pt;',
                                 'onchange'=>'javascript: CambiarEstructuraPlan('.$plan['id'].',this.value)',
                                 'selected'=>$plan['estructura_plan_id'])); ?>
             </div>

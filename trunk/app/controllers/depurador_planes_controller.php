@@ -261,8 +261,11 @@ class DepuradorPlanesController extends AppController {
             $this->Plan->create();
             if ($this->Plan->save($this->data)) {
                 $this->Session->setFlash(__('Se ha creado un nuevo Plan', true));
+
+                // redirige al depurador
                 $this->redirect('/DepuradorPlanes/index/'.$instit_id);
-            } else {
+            }
+            else {
                 $this->Session->setFlash(__('No se ha podido crear el Plan. Por favor, intente nuevamente.', true));
             }
         }
@@ -271,12 +274,9 @@ class DepuradorPlanesController extends AppController {
         $instit = $this->Plan->Instit->read(null, $instit_id);
         $this->set('instit',$instit['Instit']);
 
-        $ofertas = $this->Plan->Oferta->find('list');
-        $this->set(compact('ofertas'));
-
-        $titulos = $this->Plan->Titulo->find('list');
+        $titulos = $this->Plan->Titulo->find('list',array('conditions'=> array('Titulo.oferta_id'=>3)));
         $sectores = $this->Plan->Sector->find('list',array('order'=>'Sector.name'));
-        $subsectores = $this->Plan->Subsector->con_sector('list');
+        //$subsectores = $this->Plan->Subsector->con_sector('list',array('conditions'=> array('Subsector.sector_id'=>5)));
         $ciclos = $this->Plan->Anio->Ciclo->find('list');
 
 
