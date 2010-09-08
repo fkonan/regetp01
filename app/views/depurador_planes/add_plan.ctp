@@ -1,29 +1,28 @@
 <h1>Nueva Oferta Educativa</h1>
-
 <?
 $anexo = ($instit['anexo']<10)?'0'.$instit['anexo']:$instit['anexo'];
 $cue_instit = $instit['cue'].$anexo;
 ?>
 <h2><?php echo $cue_instit." - ".$instit['nombre_completo']; ?></h2>
 
-<div class="planes form">
-<?php echo $form->create('Plan',array('id'=>'planAdd','action'=>'add/'.$instit['id']));?>
-	<fieldset>
-	
-	<?php
-		echo $form->input('instit_id',array('type'=>'hidden','value'=>$instit['id']));
-		echo $form->input('oferta_id',array('empty'=>'Seleccione','onchange'=>'toggleTitulos();'));
-        ?>
-        <div id="PlanEstructura">
-            <span id="selectEstructura" style="float:left">
-                <?php
-                        echo $form->input('estructura_plan_id',array('empty'=>'Seleccione'));
-                ?>
-            </span>
-            <span id="graficosEstructura">
-                <?php if(sizeof($estructuraPlanesGrafico)  > 0){ ?>
-                <?
-                        foreach($estructuraPlanesGrafico as $estructura){
+<div class="depuradorPlanes form">
+<?php echo $form->create('Plan',array('id'=>'planAdd','url' => array('controller' => 'depuradorPlanes', 'action' => 'add_plan/'.$instit['id'])));?>
+
+    <table cellspacing="2">
+        <tr>
+            <td style="text-align:right;">Estructura Plan</td>
+            <td><?=$form->input('estructura_plan_id',array('empty'=>'Seleccione',
+                                    'id' => 'PlanEstructuraPlanId',
+                                    'onchange' => 'ChangeEstructura()',
+                                    'style' => 'width:230px; font-size:9pt;','div'=>false,'label'=>false))?></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align:center;">
+                <div id="PlanEstructura">
+                <span id="graficosEstructura">
+                <?php 
+                if(sizeof($estructuraPlanesGrafico) > 0) { 
+                    foreach($estructuraPlanesGrafico as $estructura){
                 ?>
 
                 <div id="timelineLimiterMini" estructura_plan_id="<?php echo $estructura['EstructuraPlan']['id']?>" class="clickeable" style="display:none">
@@ -45,78 +44,87 @@ $cue_instit = $instit['cue'].$anexo;
                         </div>
                     </div>
                 </div>
-            <?php
+                <?php
+                        }
                     }
-                }
-                else{
+                    else {
+                ?>
+                    <div class="message">No existen estructuras asignadas a la jurisdicción</div>
+                <?php }?>
+                </span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:right;">Título</td>
+            <td><?=$form->input('titulo_id', array('empty'=>'Seleccione', 'label'=> false,
+                                    'style'=>'width:450px; font-size:9pt;', 'div'=>false))?></td>
+        </tr>
+        <tr>
+            <td style="text-align:right;">Normativa</td>
+            <td><?=$form->input('norma',array('div'=>false,'label'=>false))?></td>
+        </tr>
+        <tr>
+            <td style="text-align:right;">Nombre</td>
+            <td><?=$form->input('nombre',array('div'=>false,'label'=>false))?></td>
+        </tr>
+        <tr>
+            <td style="text-align:right;">Perfil</td>
+            <td><?=$form->input('perfil',array('div'=>false,'label'=>false))?></td>
+        </tr>
+        <tr>
+            <td style="text-align:right;">Sector</td>
+            <td><?php
+                $meter = '<span class="ajax_update" id="ajax_indicator2" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
+		echo $form->input('sector_id',array('type'=>'select','empty'=>'Seleccione',
+                        'options'=>$sectores,'default'=>5,'label'=>false,'id'=>'sector_id',
+                        'style'=>'width:330px; font-size:9pt;', 'after'=>$meter));
             ?>
-                <div class="message">No existen estructuras asignadas a la jurisdicción</div>
-            <?php }?>
-            </span>
-        </div>
-        <?php
-                //echo $form->input('estructura_plan_id',array('id'=>'PlanEstructuraPlanId', 'empty'=>'Seleccione'));
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:right;">Subsector</td>
+            <td><?php
+                echo $form->input('subsector_id', array('empty' => 'Seleccione','type'=>'select',
+                                        'style'=>'width:330px; font-size:9pt;', 'label'=>false,'after'=> $meter.'<br /><cite style="font-size:8pt;">Seleccione primero un sector.</cite>'));
 
-                $meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
-                echo $form->input(
-                'titulo_id',
-                array(
-                    'empty'=>'Seleccione',
-                    'label'=> 'Título de Referencia',
-                    'after'=> $meter.'<br /><cite>Seleccione primero una oferta.</cite>',
-                    'div'=>array('id'=>'divPlanTituloId')));
-                echo $ajax->observeField(
-                'PlanOfertaId',
-                array(
-                    'update'=> 'PlanTituloId',
-                    'url'=>'/titulos/list_por_oferta_id',
-                    'loading'=>'jQuery("#ajax_indicator").show();jQuery("#PlanTituloId").attr("disabled","disabled")',
-                    'complete'=>'jQuery("#ajax_indicator").hide();jQuery("#PlanTituloId").removeAttr("disabled")',
-                    'onChange'=>true)
-                     );
-        
-		echo $form->input('norma',array('label'=>'Normativa'));
-		
-                echo $form->input('nombre');
-		echo $form->input('perfil');
-		
-		
-		$meter = '<span class="ajax_update" id="ajax_indicator2" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
-		echo $form->input('sector_id',array('type'=>'select','empty'=>'Seleccione','options'=>$sectores,'label'=>'Sector','id'=>'sector_id','after'=>$meter));
-
-		echo $form->input('subsector_id', array('empty' => 'Seleccione','type'=>'select','label'=>'Subsector','after'=> $meter.'<br /><cite>Seleccione primero un sector.</cite>'));
-		echo $ajax->observeField('sector_id',
+                echo $ajax->observeField('sector_id',
                                    array(  	'url' => '/subsectores/ajax_select_subsector_form_por_sector',
-		                                   	'update'=>'PlanSubsectorId',
-		                                   	'loading'=>'jQuery("#ajax_indicator2").show();jQuery("#PlanSubsectorId").attr("disabled","disabled")',
-		                                   	'complete'=>'jQuery("#ajax_indicator2").hide();jQuery("#PlanSubsectorId").removeAttr("disabled")',
-		                                   	'onChange'=>true
+                                                'update'=>'PlanSubsectorId',
+                                                'loading'=>'console.debug("lasklaslk"); jQuery("#ajax_indicator2").show();jQuery("#PlanSubsectorId").attr("disabled","disabled")',
+                                                'complete'=>'jQuery("#ajax_indicator2").hide();jQuery("#PlanSubsectorId").removeAttr("disabled")',
+                                                'onChange'=>true
                                    ));
-                                   
-		echo "<br>Duración:";
-		echo $form->input('duracion_hs',array('label'=>'- Horas','maxlength'=>9));
-		//echo $form->input('duracion_semanas',array('label'=>'- Semanas','maxlength'=>9));
-		echo $form->input('duracion_anios',array('label'=>'- Años','maxlength'=>9));
+            ?>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:right;">Duración Hs</td>
+            <td><?=$form->input('duracion_hs',array('div'=>false,'label'=>false, 'style'=>'width: 30px;','maxlength'=>9))?></td>
+        </tr>
+        <tr>
+            <td style="text-align:right;">Duración Años</td>
+            <td><?=$form->input('duracion_anios',array('div'=>false,'label'=>false, 'style'=>'width: 30px;','maxlength'=>9))?></td>
+        </tr>
+        <tr>
+            <td style="text-align:right;">Observación</td>
+            <td><?=$form->input('observacion',array('div'=>false,'label'=>false,'rows'=>'3'))?></td>
+        </tr>
+        <tr>
+            <td style="text-align:right;">Alta</td>
+            <td><?=$form->input('ciclo_alta', array("type" => "select", "options" => $ciclos,
+                                    'style'=>'font-size:9pt;', 'div'=>false,'label'=>false, "selected" => date('Y')))?></td>
+        </tr>
+        <tr>
+            <td><?php
+            echo $form->input('instit_id',array('type'=>'hidden','value'=>$instit['id']));
+            echo $form->input('oferta_id',array('type'=>'hidden','value'=>3));
+            ?>
+            </td>
+            <td style="text-align: center;"><?php echo $form->end('Guardar', array('style'=>'font-weigth:bold;'))?></td>
+        </tr>
 
-		
-		echo "<br>";
-		/**
-		 *    OBSERVACION
-		 */	
-		echo $form->input('observacion');
-		
-		
-		/**
-		 *    CICLOS ALTA Y MODIFICACION
-		 */	
-		echo $form->input('ciclo_alta', array(
-                          "type" => "select",
-                          "options" => $ciclos,
-                          'label'=>'Alta',
-                          "selected" => date('Y')
-		));
-	?>
-	</fieldset>
-<?php echo $form->end('Guardar');?>
+    </table>
+
 </div>
 	
