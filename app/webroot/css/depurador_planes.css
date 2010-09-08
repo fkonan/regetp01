@@ -328,39 +328,65 @@ ELEMENTO GRAFICADOR DE PLANES
 }
 
 
-.color1{
+.ciclo-basico{
     color: SteelBlue;
     
 }
-div.color1{
+div.ciclo-basico{
     border-bottom:1px solid SteelBlue;
 }
 
-li.color1{
+li.ciclo-basico{
     border:1px solid SteelBlue;
 }
 
-.color3{
+.ciclo-superior{
     color: Sienna;
 }
 
-div.color3{
+div.ciclo-superior{
     border-bottom:1px solid Sienna;
 }
 
-li.color3{
+li.ciclo-superior{
     border:1px solid Sienna;
 }
 
-.color2{
+.egb3{
     color: -moz-visitedhyperlinktext;
 }
 
-div.color2 {
+div.egb3 {
     border-bottom:1px solid -moz-visitedhyperlinktext;
 }
 
-li.color2{
+li.egb3{
     border:1px solid -moz-visitedhyperlinktext;
 }
 
+
+
+.media{
+    color: -moz-visitedhyperlinktext;
+}
+
+div.media {
+    border-bottom:1px solid -moz-visitedhyperlinktext;
+}
+
+li.media{
+    border:1px solid -moz-visitedhyperlinktext;
+}
+
+
+.nivel-polimodal{
+    color: SeaGreen;
+}
+
+div.nivel-polimodal {
+    border-bottom:1px solid SeaGreen;
+}
+
+li.nivel-polimodal{
+    border:1px solid SeaGreen;
+}
