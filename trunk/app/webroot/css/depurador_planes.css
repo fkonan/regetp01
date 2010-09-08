@@ -76,7 +76,7 @@ h2 {
 }
 #col_izq {
     float: left;
-    width: 170px;
+    width: 200px;
     border: 1px solid #000000;
     margin:0;
     /*padding: 14px 0 0;*/
@@ -106,10 +106,9 @@ h2 {
 
 
 .planes_izq {
-    height: 64px;
-    padding-top: 10px;
-    border-bottom: 1px solid #000000;
-    font-size: 8pt;
+    border-bottom:1px solid #000000;
+    font-size:8pt;
+    height:75px;
 }
 
 .table_planes_der {
@@ -217,7 +216,7 @@ ELEMENTO GRAFICADOR DE PLANES
         width: 350px;
 }
 
-#timelineLimiterMini{
+.timelineLimiterMini{
 	/* Hides the overflowing timeline */
 	overflow:hidden;
 	border:1px solid #D8EFD1;

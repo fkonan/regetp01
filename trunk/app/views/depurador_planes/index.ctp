@@ -6,7 +6,13 @@ echo $javascript->link(array(
 
 ?>
 <script type="text/javascript">
-    //jQuery.autoscroll.init();
+       
+//    jQuery(document).ready(function(){
+//        console.debug($('.timelineLimiterMini'));
+//        $('.timelineLimiterMini').mouseover(function(){
+//
+//        });
+//    });
     
     function block(formData, jqForm, options) {
         jQuery('#consoleResultWrapper').mask('Buscando');
@@ -108,7 +114,7 @@ echo $javascript->link(array(
     <div id="cuerpo">
 
         <div id="col_izq">
-            <div style="height:20px;"><?=$html->link('+ Crear Plan', '/depurador_planes/add_plan/'.$instit['Instit']['id'], array('onclick' => 'return CrearPlan(this)'))?></div>
+            <div style="border-bottom:1px solid black; height:21px;"><?=$html->link('+ Crear Plan', '/depurador_planes/add_plan/'.$instit['Instit']['id'], array('onclick' => 'return CrearPlan(this)'))?></div>
             <?php
             foreach ($instit['Plan'] as $plan) {
             ?>
