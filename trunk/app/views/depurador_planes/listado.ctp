@@ -47,12 +47,17 @@
 <?php foreach ($institsMal as $i):?>
 <p>
     <?php        
-        echo $html->link($i['Instit']['cue']*100+$i['Instit']['anexo']. " ::: ".$i['Instit']['nombre']. " (".$i['Instit']['errores']."e)", '/instits/view/'.$i['Instit']['id']);
+        echo $html->link($i['Instit']['cue']*100+$i['Instit']['anexo']. " ::: ".$i['Instit']['nombre']. " (".$i['Instit']['errores']." errores)",
+                '/depuradorPlanes/index/'.$i['Instit']['id']
+                );
     ?>
 
     <span>
         <?php
-        echo $html->link($html->image('modify.png'), '/depuradorPlanes/index/'.$i['Instit']['id'], array('escape'=>false));
+        echo $html->link($html->image('search.png', array('width'=>'18px')),
+                '/instits/view/'.$i['Instit']['id'],
+                array('escape'=>false)
+                );
         ?>
     </span>
 </p>
