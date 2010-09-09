@@ -399,7 +399,6 @@
                     <div class="actions">
                         <ul>
                             <li><?php echo $html->link(__('Editar Institución', true), array('action'=>'edit', $instit['Instit']['id'])); ?> </li>
-                            <li><?php echo $html->link(__('Depurar Institución', true), '/depuradorPlanes/index/'.$instit['Instit']['id']); ?> </li>
                 <?php if($session->read('Auth.User.role') == 'desarrollo') {?>
                             <li><?php echo $html->link(__('Eliminar Institución', true), array('action'=>'delete', $instit['Instit']['id']), null, sprintf(__('¿Seguro que desea eliminar la institución? CUE: "%s"', true), $instit['Instit']['cue']. "0".$instit['Instit']['anexo'])); ?></li>
                             <li><?php echo $html->link('ABM CUE Histórico', array('controller'=>'HistorialCues','action'=>'index', $instit['Instit']['id'])); ?></li>
