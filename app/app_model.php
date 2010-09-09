@@ -65,7 +65,11 @@ class AppModel extends Model {
                 
                 $text = str_replace(array_keys($tipoInstitsAbreviadas), array_values($tipoInstitsAbreviadas), $text);
 
-                
+                $posiblesA = '(á|a|A|Á)';
+                $posiblesE = '(é|e|E|É)';
+                $posiblesI = '(í|i|I|Í)';
+                $posiblesO = '(ó|o|O|Ó)';
+                $posiblesU = '(ú|u|ü|Ú|U|Ü)';
 		
 		$text = trim($text);
 		$text = "%$text%";
@@ -74,29 +78,32 @@ class AppModel extends Model {
 			'/.,/' => '\.',
 			
 			// Vocales
-			'/a/' => '(á|a|A|Á)',
-			'/e/' => '(é|e|E|É)',
-			'/i/' => '(í|i|I|Í)',
-			'/o/' => '(ó|o|O|Ó)',
-			'/u/' => '(ú|u|Ú|U)',
+			'/a/' => $posiblesA,
+			'/e/' => $posiblesE,
+			'/i/' => $posiblesI,
+			'/o/' => $posiblesO,
+			'/u/' => $posiblesU,
+
+                        '/Ü/' => $posiblesU,
+                        '/ü/' => $posiblesU,
 		
-			'/A/' => '(á|a|A|Á)',
-			'/E/' => '(é|e|E|É)',
-			'/I/' => '(í|i|I|Í)',
-			'/O/' => '(ó|o|O|Ó)',
-			'/U/' => '(ú|u|Ú|U)',
+			'/A/' => $posiblesA,
+			'/E/' => $posiblesE,
+			'/I/' => $posiblesI,
+			'/O/' => $posiblesO,
+			'/U/' => $posiblesU,
 		
-			'/Á/' => '(á|a|A|Á)',
-			'/É/' => '(é|e|E|É)',
-			'/Í/' => '(í|i|I|Í)',
-			'/Ó/' => '(ó|o|O|Ó)',
-			'/Ú/' => '(ú|u|Ú|U)',
+			'/Á/' => $posiblesA,
+			'/É/' => $posiblesE,
+			'/Í/' => $posiblesI,
+			'/Ó/' => $posiblesO,
+			'/Ú/' => $posiblesU,
 		
-			'/á/' => '(á|a|A|Á)',
-			'/é/' => '(é|e|E|É)',
-			'/í/' => '(í|i|I|Í)',
-			'/ó/' => '(ó|o|O|Ó)',
-			'/ú/' => '(ú|u|Ú|U)',
+			'/á/' => $posiblesA,
+			'/é/' => $posiblesE,
+			'/í/' => $posiblesI,
+			'/ó/' => $posiblesO,
+			'/ú/' => $posiblesU,
 			
 			'/n/' => '(ñ)',
 			'/ñ/' => '(n|ñ)',
