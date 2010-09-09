@@ -42,11 +42,11 @@
         <tr id="fila_plan_<?= $anio['ciclo_id'].'_'.$anio['anio']?>" <?php echo $class;?>>
             <td><?php echo $anio['anio']."º";?></td>
             <td><?php echo $this->requestAction('/Etapas/dame_nombre/'.$anio['etapa_id']);?></td>
-            <td><?php echo $anio['matricula'];
+            <td><?php echo  empty($anio['matricula'])?'-':$anio['matricula'];
             $tot_matricula += $anio['matricula']; ?></td>
-            <td><?php echo $anio['secciones'];
+            <td><?php echo empty($anio['secciones'])?'-':$anio['secciones'];
             $tot_secciones += $anio['secciones'];?></td>
-            <td><?php echo $anio['hs_taller'];?></td>
+            <td><?php echo empty($anio['hs_taller'])?'-':$anio['hs_taller'];?></td>
             <td class="actions">
                 <?if(!$tiene_estructura){?>
                 <a href="<?= $html->url(array('controller'=> 'anios', 'action'=>'edit/'.$anio['id']))?>"
