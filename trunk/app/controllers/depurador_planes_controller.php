@@ -42,6 +42,60 @@ class DepuradorPlanesController extends AppController {
         }
     }
 
+
+
+    function darle_ok_al_plan($plan_id){
+        if (empty($plan_id)) {
+            $this->Session->setFlash("Debe pasar el Plan ID como parámetro");
+            $this->redirect('/');
+        }
+        $this->Plan->contain(array(
+            'EstructuraPlan'=> array(
+                    'EstructuraPlanesAnio'=> array(
+                        'order'=>'EstructuraPlanesAnio.nro_anio'),
+                    ),
+            'Anio' => array(
+                'EstructuraPlanesAnio',
+                'order'=>'Anio.ciclo_id, Anio.anio',
+            )
+        ));        
+        $plan = $this->Plan->read(null,$plan_id);
+
+        if (empty($plan['Plan']['estructura_plan_id'])){
+            $this->Session->setFlash("Primero debe seleccionarle una estructura al plan");
+            $this->redirect('/depuradorPlanes/index/'.$plan['Plan']['instit_id']);
+        }
+
+        $total = 0;
+        $i = 0;
+        foreach ($plan['Anio'] as &$a) {            
+            $ep = $plan['EstructuraPlan']['EstructuraPlanesAnio'][$i];
+            $a['estructura_planes_anio_id'] = $ep['id'];
+           
+            $i++;
+            if (count($plan['EstructuraPlan']['EstructuraPlanesAnio']) == $i) {
+                $i = 0;
+            }
+           
+        }
+
+        if (count($plan['Anio'])%count($plan['EstructuraPlan']['EstructuraPlanesAnio'])==0) {
+            if ($this->Anio->saveAll($plan['Anio'])){
+                $this->Session->setFlash("Se guardó todo el plan en masa.");
+            } else {
+                foreach($this->Anio->validationErrors as $kk=>$eee) {
+                        $txt .= empty($txt)?'':', ';
+                        $txt .= array_shift($eee);
+                    }
+                    $this->Session->setFlash('Error al guardar algún Anio por: '.$txt);
+            }
+        } else {
+            $this->Session->setFlash('No se guardó nada porque la cantidad de años no es correcta');
+        }
+        $this->redirect('/depuradorPlanes/index/'.$plan['Plan']['instit_id']);
+        
+    }
+
     function tr_plan($plan_id) {
         $plan = $this->Plan->find('all', array(
                 'contain' => array(

@@ -98,8 +98,9 @@ echo $javascript->link(array(
             //el anexo viene con 1 solo digito por lo general. Pero para leerlo siempre hay que ponerlo
             // en formato de 2 digitos
             $armar_anexo = ($instit['Instit']['anexo']<10)?'0'.$instit['Instit']['anexo']:$instit['Instit']['anexo'];
+            $nombreInstit = "".($instit['Instit']['cue']*100)+$instit['Instit']['anexo']." - ". $instit['Instit']['nombre_completo'];
             ?>
-            <div class="instit_name"><b><?= "".($instit['Instit']['cue']*100)+$instit['Instit']['anexo']." - ". $instit['Instit']['nombre_completo']; ?></b></div>
+            <div class="instit_name"><b><?= $html->link($nombreInstit, '/instits/view/'.$instit['Instit']['id']) ?></b></div>           
             <div class="instit_atributte"><b>Domicilio: </b> <?= $instit['Instit']['direccion'] ?></div>
             <br />
             <div class="instit_atributte"><b>Gestión: </b><?= $instit['Gestion']['name'] ?></div>
@@ -119,14 +120,19 @@ echo $javascript->link(array(
             foreach ($instit['Plan'] as $plan) {
             ?>
             <div class="planes_izq">
-                <?=$plan['nombre']?><br />
+                <?= $html->link($plan['nombre'],'/planes/view/'.$plan['id'])?><br />
+
+                <br>
                 <?php echo $form->input('estructura_id', 
                         array(  'options'=>$estructuras,
                                 'label'=>'',
                                 'empty'=>' -Seleccione- ',
                                 'style'=>'width:165px; font-size:8pt;',
                                 'onchange'=>'javascript: CambiarEstructuraPlan('.$plan['id'].',this.value)',
-                                'selected'=>$plan['estructura_plan_id'])); ?>
+                                'selected'=>$plan['estructura_plan_id'],
+                                'style'=>'float:left; width: 150px;',
+                            )); ?>
+                <div><b><?= $html->link(':: TODO OK', '/depuradorPlanes/darle_ok_al_plan/'.$plan['id']) ?></b></div>
             </div>
             <?php } ?>
 
