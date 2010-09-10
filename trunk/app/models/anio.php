@@ -87,20 +87,20 @@ class Anio extends AppModel {
 			),
 		),
 
-                'estructura_planes_anio_id'=>array(
-//			'estructuraValida'=> array(
-//				'rule' => 'validacionEstructura',
+//                'estructura_planes_anio_id'=>array(
+////			'estructuraValida'=> array(
+////				'rule' => 'validacionEstructura',
+////				'required' => false,
+////				'allowEmpty' => true,
+////				'message' => 'La estructura de la oferta no es correcta, verificarla junto a la estructura del plan (polimodal, CS, CB, etc).'
+////			),
+//                        'elPlanTieneEstructuraDefinida'=> array(
+//				'rule' => 'elPlanTieneEstructuraDefinida',
 //				'required' => false,
 //				'allowEmpty' => true,
-//				'message' => 'La estructura de la oferta no es correcta, verificarla junto a la estructura del plan (polimodal, CS, CB, etc).'
+//				'message' => 'El Plan no tiene ninguna estructura definida. Edite el plan antes de ingresar datos de los años'
 //			),
-                        'elPlanTieneEstructuraDefinida'=> array(
-				'rule' => 'elPlanTieneEstructuraDefinida',
-				'required' => false,
-				'allowEmpty' => true,
-				'message' => 'El Plan no tiene ninguna estructura definida. Edite el plan antes de ingresar datos de los años'
-			),
-		),
+//		),
 	);
 
 	
