@@ -20,7 +20,9 @@ if (!empty($anios))
                         $etapa_anterior = $anio['Etapa']['id'];
                         ?>
                     <div class="event">
-                    <div class="eventHeading <?php echo limpiar_nombre($anio['Etapa']['name'])?>"><?php echo $anio['Etapa']['name']?></div>
+                    <div class="eventHeading <?php echo limpiar_nombre($anio['Etapa']['name'])?>" 
+                         style="<?=strlen($anio['Etapa']['name'])>10 ?'font-size:0.8em;':''?>">
+                    <?php echo $anio['Etapa']['name']?></div>
                         <ul class="eventList">
                 <?php
                     }

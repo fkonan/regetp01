@@ -83,6 +83,11 @@ h2 {
     /*padding: 14px 0 0;*/
 }
 
+#col_izq select {
+    width:160px;
+    font-size:8pt;
+}
+
 #col_der {
     /*float: left;*/
     border: 1px solid #000000;
@@ -178,6 +183,7 @@ h2 {
     background:#cecece;
     font-weight: bold;
 }
+
 
 /**** Arreglador de Años *****/
 #arregladorAnios {
@@ -402,15 +408,15 @@ li.polimodal{
     border:1px solid #2D8B56;
 }
 
-.año-superior-polimodal{
+.ano-superior-polimodal{
     color: #2D8B56;
 }
 
-div.año-superior-polimodal {
+div.ano-superior-polimodal {
     border-bottom:1px solid #2D8B56;
 }
 
-li.año-superior-polimodal{
+li.ano-superior-polimodal{
     border:1px solid #2D8B56;
 }
 
