@@ -803,29 +803,6 @@ class Plan extends AppModel {
         }
 
 
-        /**
-         *  verifica que no existan anios repetidos para un plan
-         * dentro del mismo ciclo lectivo
-         *
-         * @param integer $plan_id
-         * @param integer $ciclo
-         * @param integer $anio_cmp nº de año a comparar
-         * @return boolean
-         */
-        function validacionAniosNoRepetidos($plan_id, $ciclo_id, $anio_cmp){
-            $plan = $this->find('first', array(
-                'contain' => array('Anio' => array(
-                    'conditions' => array('Anio.ciclo_id' => $ciclo_id)
-                )),
-                'conditions' => array(
-                    'Plan.id' => $plan_id,                    
-                )
-            ));
-
-           // if ($plan[])
-            
-        }
-
         
 }
 ?>
