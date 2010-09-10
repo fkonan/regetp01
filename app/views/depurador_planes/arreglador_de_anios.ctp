@@ -14,10 +14,11 @@ if (!empty($plan['EstructuraPlan']['id'])) {
     foreach ($anios as $a) {
         echo "<div style='padding-bottom: 0.5em;'>";
 
-        echo "Dato actual: <b>".$a['anio']."º ".$a['Etapa']['name']."";
+        echo $a['id']."* Dato actual: <b>".$a['anio']."º ".$a['Etapa']['name']."";
         echo " (matrícula: ".$a['matricula'].")</b>";
         echo "<br>";
         echo $form->hidden($i.'.id', array('value'=>$a['id']));
+        echo $form->hidden($i.'.ciclo_id', array('value'=>$a['ciclo_id']));
 
         // armo el input de la estructura con sugerencia
         $asug = null;

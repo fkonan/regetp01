@@ -665,6 +665,21 @@ class Plan extends AppModel {
         }
 
 
+        /**
+         *  Me devuelve la Etapa del Plan obteniendo el valor de EstructuraPlan
+         *  las etapas son: Ciclo Basico, Ciclo Superior, Polimodal, EGB3, etc etc
+         * @param integer $plan_id
+         * @return array del model Etapa, o false en caso de no tener etapa definida
+         */
+        function getEtapaDeEstructura($plan_id){
+            $plan = $this->find('first', array(
+                'contain' => array('EstructuraPlan.Etapa'),
+                'conditions' => array('Plan.id'=>$plan_id),
+            ));
+            return  (!empty($plan['EstructuraPlan']['Etapa'])) ? $plan['EstructuraPlan']['Etapa']: false;
+        }
+
+
         function getEstructuraOfertaYDatos(){
                $trayectosData['anios'] = array(12,13,14,15);
                 $trayectosData['etapa_header'] = array(
@@ -755,7 +770,8 @@ class Plan extends AppModel {
                         ),
                     'recursive' => -1,
                     ));
-            return ($ep > 0)    ?  true   :   false;
+
+            return $ep;
 
         }
 

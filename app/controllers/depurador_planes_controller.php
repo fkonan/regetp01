@@ -198,18 +198,36 @@ class DepuradorPlanesController extends AppController {
                         $a['anio'] =  $epp['nro_anio'];
                     }
                 }
+
+                // Di quiero mover a otro plan, verifico que no exista ese año formativo
+                if ($plan_id != $a['plan_id']) {
+                    $this->Anio->EstructuraPlanesAnio->recursive = -1;
+                    $currEstPlanAnio = $this->Anio->EstructuraPlanesAnio->read(null, $a['estructura_planes_anio_id']);
+                    $anioMov = $this->Anio->find('count', array(
+                        'conditions' => array(
+                                'Anio.ciclo_id' => $a['ciclo_id'],
+                                'Anio.plan_id' => $a['plan_id'],
+                                'Anio.anio' => $currEstPlanAnio['EstructuraPlanesAnio']['nro_anio'],
+                                'Anio.id <>' => $a['id'],
+                        )
+                    ));
+                    if ($anioMov > 0) {
+                        $this->Session->setFlash("El año ".$currEstPlanAnio['EstructuraPlanesAnio']['nro_anio']." ya existe en el plan al que quiere mover");
+                        $this->redirect('/depuradorPlanes/index/'.$plan['Instit']['id']);
+                    }
+                }
             }
             
-            if (!$this->Anio->saveAll($this->data['Anio'])) {
+            if (!$this->Anio->saveAll($this->data['Anio'], array('validate'=>'first'))) {
                 $txt = '';
                 foreach($this->Anio->validationErrors as $kk=>$eee) {
                     $txt .= empty($txt)?'':', ';
                     $txt .= array_shift($eee);
                 }
-                $this->Session->setFlash('Error al guardar debido a el/los siguientes errores: '.$txt);
+                $this->Session->setFlash('Error al guardar debido a el/los siguientes errores:<br> '.$txt);
+            } else {
+                $this->Session->setFlash('Se guardó todo Bien');
             }
-           
-            $this->Session->setFlash('Se guardó todo Bien');
             $this->redirect('/depuradorPlanes/index/'.$plan['Instit']['id']);
         }
 
@@ -243,7 +261,8 @@ class DepuradorPlanesController extends AppController {
         $planes[$plan_id] = 'No mover de: '.$planes[$plan_id];
 
         $this->set('anios', $plan['Anio']);
-        $this->set(compact('plan', 'planes', 'estructura_planes_anios', 'ciclo_id'));
+        $this->set('estructura_planes_anios', $estructura_planes_anios);
+        $this->set(compact('plan', 'planes', 'ciclo_id'));
 
     }
 
