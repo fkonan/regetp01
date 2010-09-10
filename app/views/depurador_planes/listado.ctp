@@ -15,6 +15,24 @@
             'div'=>array('style'=>'float: left')
                 ));
 
+        echo $form->input('orientacion_id', array(
+            'empty'=>'Seleccione',
+            'default'=>$orientacion_id,
+            'div'=>array('style'=>'float: left')
+                ));
+
+        echo $form->input('gestion_id', array(
+            'empty'=>'Seleccione',
+            'default'=>$gestion_id,
+            'div'=>array('style'=>'float: left')
+                ));
+
+        echo $form->input('cue', array(
+            'empty'=>'Seleccione',
+            'default'=>$cue,
+            'div'=>array('style'=>'float: left')
+                ));
+
         echo $form->input('limit',  array(
             'label' => 'Traer',
             'empty'=>'Seleccione',

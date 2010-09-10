@@ -104,6 +104,15 @@ class Anio extends AppModel {
 				'message' => 'El Plan no tiene ninguna estructura definida. Edite el plan antes de ingresar datos de los años'
 			),
 		),
+
+                'estructura_planes_anio'=>array(
+			'estructuraValida'=> array(
+				'rule' => 'validacionAniosNoRepetidos',
+				'required' => false,
+				'allowEmpty' => true,
+				'message' => 'No se puede ingresar valores para el mismo año de formación'
+			),
+		),
 	);
 
 	
@@ -161,6 +170,11 @@ class Anio extends AppModel {
 	}
 
 
+        /**
+         *  Se fija si el plan padre tiene la estructura definida
+         * @param integer $plan_id
+         * @return boolean
+         */
         function elPlanTieneEstructuraDefinida($plan_id = null){
             if (empty($plan_id)) {
                 $plan_id = $this->data['Anio']['plan_id'];
@@ -169,23 +183,39 @@ class Anio extends AppModel {
 
         }
 
-        
+
+        /**
+         *  Se fija que el año tenga la misma estructura del Plan
+         *  o sea verifica que no estoy insertando algo que rompa la relacion
+         * Plan-> EstructuraPlan ->EstructuraPlanesAnio->Anio->Plan
+         * @param integer $plan_id
+         * @return boolean
+         */
         function validacionEstructura($plan_id = null) {
             if (empty($plan_id)) {
                 $plan_id = $this->data['Anio']['plan_id'];
             }
-            $aniosMal = $this->estructuraValida($plan_id);
+            $aniosMal = $this->Plan->estructuraValida($plan_id);
 
             return (count($aniosMal) > 0) ? false : true;
         }
-        
 
-         function estructuraValida($plan_id){
-             if (empty($plan_id)) {
-                $plan_id = $this->data['Anio']['plan_id'];
-            }
-            return $this->Plan->estructuraValida($plan_id);
-         }
+
+        
+        /**
+         *  verifica que no existan anios repetidos para un plan
+         * dentro del mismo ciclo lectivo
+         *
+         * @param integer $plan_id
+         * @param integer $ciclo
+         * @return boolean
+         */
+        function validacionAniosNoRepetidos(){
+            $plan_id = $this->data['Anio']['plan_id'];
+            $ciclo_id = $this->data['Anio']['ciclo_id'];
+            
+        }
+        
 	
 }
 ?>

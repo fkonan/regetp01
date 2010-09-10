@@ -12,7 +12,7 @@ class DepuradorPlanesController extends AppController {
     var $layout = 'depurador';
 
     function index($id) {
-        Configure::write('debug', '0');
+        //Configure::write('debug', '0');
 
         if ($id) {
             //$instit = $this->Instit->findById($id);
@@ -248,10 +248,37 @@ class DepuradorPlanesController extends AppController {
     function listado() {
         $jurisdiccionSql = ' > 0';
         $jurisdiccion_id = 0;
+
+        $orientacionSql = ' > 0';
+        $orientacion_id = 0;
+
+        $cueSql = ' > 0';
+        $cue = 0;
+
+        $gestionSql  = ' > 0';
+        $gestion_id = 0;
         $limit = 10;
         $orderBy = 'i.cue*100+i.anexo';
         $errores = 0; // es una variable pasada en el form de la vista para usar el $orderBy
 
+
+        // CUE
+        if (!empty($this->data['Depurador']['cue'])) {
+            $cue = $this->data['Depurador']['cue'];
+        } else {
+            if ($this->data['Depurador']['cue'] !== '') {
+                if ($this->Session->check('cue')) {
+                    $cue = $this->Session->read('cue');
+                }
+            }
+        }
+        $this->Session->write('cue', $cue);
+        if ($cue > 0) {
+            $cueSql = " = ".$cue;
+        }
+        
+
+        // JURISDICCION
         if (!empty($this->data['Depurador']['jurisdiccion_id'])) {           
             $jurisdiccion_id = $this->data['Depurador']['jurisdiccion_id'];
         } else {
@@ -266,6 +293,41 @@ class DepuradorPlanesController extends AppController {
             $jurisdiccionSql = " = ".$jurisdiccion_id;
         }
 
+
+        // ORIENTACION
+        if (!empty($this->data['Depurador']['orientacion_id'])) {
+            $orientacion_id = $this->data['Depurador']['orientacion_id'];
+        } else {
+            if ($this->data['Depurador']['orientacion_id'] !== '') {
+                if ($this->Session->check('orientacion_id')) {
+                    $orientacion_id = $this->Session->read('orientacion_id');
+                }
+            }
+        }
+        $this->Session->write('orientacion_id', $orientacion_id);
+        if ($orientacion_id > 0) {
+            $orientacionSql = " = ".$orientacion_id;
+        }
+
+
+
+        // AMBITO GESTION
+        if (!empty($this->data['Depurador']['gestion_id'])) {
+            $gestion_id = $this->data['Depurador']['gestion_id'];
+        } else {
+            if ($this->data['Depurador']['gestion_id'] !== '') {
+                if ($this->Session->check('gestion_id')) {
+                    $gestion_id = $this->Session->read('gestion_id');
+                }
+            }
+        }
+        $this->Session->write('gestion_id', $gestion_id);
+        if ($gestion_id > 0) {
+            $gestionSql =  " = ".$gestion_id;
+        }
+
+
+        // LIMIT
         if (!empty($this->data['Depurador']['limit'])) {
             $limit = $this->data['Depurador']['limit'];
         } else {
@@ -320,7 +382,13 @@ class DepuradorPlanesController extends AppController {
                      p.oferta_id = 3
                  and
                     i.jurisdiccion_id $jurisdiccionSql
-                        group by i.id, i.nombre, i.cue, i.anexo
+                 and
+                    i.gestion_id $gestionSql
+                 and
+                    i.orientacion_id $orientacionSql
+                 and
+                    (i.cue*100+i.anexo) $cueSql
+                 group by i.id, i.nombre, i.cue, i.anexo
                  order by $orderBy
                 ";
 
@@ -331,8 +399,14 @@ class DepuradorPlanesController extends AppController {
 
         $jurisdicciones = $this->Instit->Jurisdiccion->find('list');
 
-        
 
+        $gestiones = $this->Instit->Gestion->find('list');
+        $orientaciones = $this->Instit->Orientacion->find('list');
+        
+        $this->set(compact('gestiones', 'orientaciones'));
+        $this->set('cue',$cue);
+        $this->set('gestion_id',$gestion_id);
+        $this->set('orientacion_id',$orientacion_id);
         $this->set('errores',$errores);
         $this->set(compact('jurisdicciones'));
         $this->set('institsMal',$institsMal);
@@ -383,7 +457,11 @@ class DepuradorPlanesController extends AppController {
 
         }
 
-        $this->set(compact('subsectores','sectores','titulos', 'ciclos', 'estructura_planes','estructuraPlanesGrafico'));
+        
+
+        $this->set(compact(
+                'subsectores','sectores',
+                'titulos', 'ciclos', 'estructura_planes','estructuraPlanesGrafico'));
 
         $this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$instit['Instit']['id'] );
     }
