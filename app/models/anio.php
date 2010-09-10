@@ -213,7 +213,23 @@ class Anio extends AppModel {
         function validacionAniosNoRepetidos(){
             $plan_id = $this->data['Anio']['plan_id'];
             $ciclo_id = $this->data['Anio']['ciclo_id'];
-            
+
+           $epa = $this->EstructuraPlanesAnio->find('first', array(
+               'conditions' => array(
+                   'EstructuraPlanesAnio.id' => $this->data['Anio']['estructura_planes_anio'],
+               )
+           ));
+
+            $existe = $this->find('count', array(
+                'contain' => array('Plan'),
+                'conditions' => array(
+                    'Plan.id' => $plan_id,
+                    'Anio.ciclo_id' => $ciclo_id,
+                    'Anio.anio' => $epa['EstructuraPlanesAnio']['nro_anio']
+                )
+            ));
+
+           return $existe;
         }
         
 	
