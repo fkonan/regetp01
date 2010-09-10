@@ -140,7 +140,7 @@ echo $javascript->link(array(
                         array(  'options'=>$estructuras,
                                 'label'=>'',
                                 'empty'=>' -Seleccione- ',
-                                'style'=>'width:165px; font-size:8pt;',
+                                'style'=>'width:160px; font-size:8pt;',
                                 'onchange'=>'javascript: CambiarEstructuraPlan('.$plan['id'].',this.value)',
                                 'selected'=>$plan['estructura_plan_id'],
                                 'style'=>'float:left; width: 150px;',

@@ -15,14 +15,14 @@ class DepuradorPlanesController extends AppController {
         //Configure::write('debug', '0');
 
         if ($id) {
-            //$instit = $this->Instit->findById($id);
-            $instit = $this->Instit->find('all', array(
+            $instit = $this->Instit->find('first', array(
                     'contain' => array(
                             'Jurisdiccion' => 'name',
                             'Gestion' => 'name',
                             'Departamento' => 'name',
                             'Localidad' => 'name',
                             'Plan' => array(
+                                    'EstructuraPlan',
                                     'Anio' => array(
                                             'Etapa',
                                             'order'=>array('ciclo_id','etapa_id', 'anio')),
@@ -31,15 +31,60 @@ class DepuradorPlanesController extends AppController {
                             )),
                     'conditions' => array('Instit.id'=> $id)
             ));
+
+            $instit['Plan'] = $this->ordenarPlanes($instit['Plan']);
+            
             //print_r($instit);
-            $jurisdiccion_id = $instit[0]['Instit']['jurisdiccion_id'];
+            $jurisdiccion_id = $instit['Instit']['jurisdiccion_id'];
 
             // estructuras posibles en la jurisdiccion
             $estructuras = $this->JurisdiccionesEstructuraPlan->getEstructurasDeJurisdiccion($jurisdiccion_id, 'list');
 
-            $this->set('instit',$instit[0]);
+            $this->set('instit',$instit);
             $this->set('estructuras',$estructuras);
         }
+    }
+
+    /*
+     * Arcaido metodo de ordenamiento de los planes por sus etapas
+     */
+    function ordenarPlanes($planes) {
+        $ordenados = array();
+
+        foreach ($planes as $plan) {
+            if (!in_array($plan['id'], $ordenados)) {
+                // si tiene estructura asociada no importan sus anios erroneos, ordena por estructura del plan
+                if (!empty($plan['EstructuraPlan']))
+                {
+                    if ($plan['EstructuraPlan']['etapa_id'] == 1 ||
+                         $plan['EstructuraPlan']['etapa_id'] == 4 ||
+                         $plan['EstructuraPlan']['etapa_id'] == 102)
+                    {
+                        $planes_aux[] = $plan;
+                        $ordenados[] = $plan['id'];
+                    }
+                }// si no tiene estructura, ordena por la etapa del primer año que tiene
+                elseif (!empty($plan['Anio']) &&
+                    ($plan['Anio'][0]['etapa_id'] == 1 ||
+                     $plan['Anio'][0]['etapa_id'] == 4 ||
+                     $plan['Anio'][0]['etapa_id'] == 102))
+                {
+                    $planes_aux[] = $plan;
+                    $ordenados[] = $plan['id'];
+                }
+
+            }
+        }
+
+        foreach ($planes as $plan) {
+            if (!in_array($plan['id'], $ordenados)) {
+                // guarda el resto
+                $planes_aux[] = $plan;
+                $ordenados[] = $plan['id'];
+            }
+        }
+
+        return $planes_aux;
     }
 
 
