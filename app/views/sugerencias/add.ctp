@@ -12,11 +12,8 @@
     <br>
     
     <p>
-    Puede dejarnos un mensaje con sugerencias, opiniones, defectos y mejoras a
-    realizar en la página web del registro federal de instituciones de ETP 
-    <i>(http://rfietp.inet.edu.ar)</i>.<br>
-    El objetivo es canalizar su experiencia hasta aquí recogida y poder mejorar
-    ésta aplicación para su mayor utilidad.
+    Habilitamos el presente formulario para que Ud. pueda hacernos llegar sugerencias y opiniones sobre la aplicación Registro Federal de Instituciones de ETP (RFIETP). Puede solicitar nuevas características, o proponer modificaciones y ampliaciones de funcionalidad existente. Cualquier sugerencia será bienvenida.
+    Las propuestas serán tomadas en cuenta para mejorar el programa en función de las necesidades de los usuarios.
     </p>
 
     

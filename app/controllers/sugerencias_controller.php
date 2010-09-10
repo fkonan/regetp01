@@ -24,7 +24,7 @@ class SugerenciasController extends AppController {
 				$this->Session->setFlash(__('¡Gracias por enviarnos una sugerencia!', true));
 				$this->redirect('/');
 			} else {
-				$this->Session->setFlash(__('La sugerencia no ha sido enviada por favor , intente de nuevo', true));
+				$this->Session->setFlash(__('Errores al enviar sugerencia', true));
 			}
 		}
 	}
