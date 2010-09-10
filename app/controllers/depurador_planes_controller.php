@@ -117,6 +117,7 @@ class DepuradorPlanesController extends AppController {
         foreach ($plan['Anio'] as &$a) {            
             $ep = $plan['EstructuraPlan']['EstructuraPlanesAnio'][$i];
             $a['estructura_planes_anio_id'] = $ep['id'];
+            $a['anio'] = $ep['nro_anio'];
            
             $i++;
             if (count($plan['EstructuraPlan']['EstructuraPlanesAnio']) == $i) {
