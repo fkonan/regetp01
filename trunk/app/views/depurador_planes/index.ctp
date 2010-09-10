@@ -132,7 +132,7 @@ echo $javascript->link(array(
             ?>
             <div class="planes_izq">
                 <?= $html->link($plan['nombre'],'/planes/view/'.$plan['id'], array('target'=>'_blank'))?>
-                 (duración: <?=$plan['duracion_anios']?> años)
+                 (<?=$plan['duracion_anios']?> años)
                 <br />
 
                 <br />
