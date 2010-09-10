@@ -113,7 +113,7 @@ h2 {
 
 .planes_izq {
     border-bottom:1px solid #000000;
-    font-size:8pt;
+    font-size:7pt;
     height:75px;
 }
 
@@ -142,6 +142,11 @@ h2 {
     margin: 0 10px 17px;
     text-align: center;
     border-bottom: 1px solid #000000;
+    border-right:1px solid;
+}
+
+.td_last{
+    border-right: none;
 }
 
 .col_ciclos .title {
