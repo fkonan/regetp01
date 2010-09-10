@@ -23,6 +23,10 @@ class AclController extends AclAppController {
 
 	}
 
+        function admin_scripts() {
+
+	}
+
 }
 
 ?>

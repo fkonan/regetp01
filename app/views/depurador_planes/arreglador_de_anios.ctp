@@ -1,24 +1,22 @@
 <?php
-//debug($anios);
-
 $ids_de_anios = array_keys($estructura_planes_anios);
-
 
 if (!empty($plan['EstructuraPlan']['id'])) {
 
     echo $form->create('Anio', array('url'=>'/depurador_planes/arregladorDeAnios/'.$plan['Plan']['id']));
 
-
-    echo "<hr>";
-
+    ?>
+    <hr>
+    <h3 style='text-align: center'>Estructura del plan: <?=$plan['EstructuraPlan']['name']?></h3>
+    <div id='arregladorAnios'>
+    <?php
     $i = 0;
-    echo "<h3 style='text-align: center'>Estructura del plan: ".$plan['EstructuraPlan']['name']."</h3>";
-    echo "<div id='arregladorAnios'>";
-
     foreach ($anios as $a) {
         echo "<div style='padding-bottom: 0.5em;'>";
 
-        echo "Dato actual: <b>".$a['anio']."º ".$a['Etapa']['name']."</b><br>";
+        echo "Dato actual: <b>".$a['anio']."º ".$a['Etapa']['name']."";
+        echo " (matrícula: ".$a['matricula'].")</b>";
+        echo "<br>";
         echo $form->hidden($i.'.id', array('value'=>$a['id']));
 
         // armo el input de la estructura con sugerencia
@@ -50,20 +48,23 @@ if (!empty($plan['EstructuraPlan']['id'])) {
         $i++;
 
     }
-
-        echo "<div style='text-align:center; padding-top:4px;'>";
-            echo $form->end('Guardar');
-        echo "</div>";
-    echo "</div>";
+        ?>
+        <div style='text-align:center; padding-top:4px;'>
+        <?php $form->hidden('ciclo_id', array('value'=>$a['id'])); ?>
+        <?php echo $form->end('Guardar'); ?>
+        </div>
+    </div>
+<?php
 }
 
 else {
     ?>
-<br><br>
-<p>
-<h1 class="message">No se pueden editar los años si aún no le seleccionó una estructura al Plan</h1>
-</p>
-<br><br><?php
+    <br>
+    <p>
+    <h1 class="message">No se pueden editar los años si aún no le seleccionó una estructura al Plan</h1>
+    </p>
+    <br>
+<?php
 }
 
 ?>
