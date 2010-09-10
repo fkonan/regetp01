@@ -212,6 +212,9 @@ class DepuradorPlanesController extends AppController {
         ));
         $plan = $this->Plan->read();
 
+
+       
+
         // si no encontro un plan redirijo a la pagina ppal
         if (empty($plan)) {
             $this->flash("El plan no existe",'/');
@@ -227,6 +230,20 @@ class DepuradorPlanesController extends AppController {
 
             // meto la etapa y el añio de la estructura para mantener los viejos campos
             foreach ($this->data['Anio'] as &$a) {
+
+
+                // verifico que no ingrese 2 veces el mismo año
+                // que no repita año
+                foreach ($this->data['Anio'] as &$a2) {
+                    if ($a['estructura_planes_anio_id'] == $a2['estructura_planes_anio_id']
+                        &&
+                        $a['id'] != $a2['id'] ){
+                            $this->Session->setFlash("No se pueden ingresar años repetidos para el mismo plan");
+                            $this->redirect('/depuradorPlanes/index/'.$plan['Instit']['id']);
+                    }
+                }
+
+
                 if ($a['plan_id'] != $plan_id) {
                     $plan_aux = $this->Plan->find('all', array(
                                     'contain' => array('EstructuraPlan.EstructuraPlanesAnio'),
