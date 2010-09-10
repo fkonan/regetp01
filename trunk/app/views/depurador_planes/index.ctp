@@ -23,9 +23,17 @@ echo $javascript->link(array(
         return true;
     }
 
-    function RenderPlan(plan_id) {
+    function RenderPlan(plan_id, estructura_id) {
         jQuery(document).ready(function() {
            jQuery('#plan_'+plan_id).load('<?=$html->url('/depurador_planes/tr_plan/')?>'+plan_id);
+
+           if (estructura_id > 0) {
+               // muestra link para confirmar todo
+               jQuery('#todo_ok_'+plan_id).show();
+           }
+           else {
+               jQuery('#todo_ok_'+plan_id).hide();
+           }
         });
     }
 
@@ -34,6 +42,9 @@ echo $javascript->link(array(
             jQuery(document).ready(function() {
                 jQuery('#plan_'+plan_id).load('<?=$html->url('/depurador_planes/cambiarEstructuraPlan/')?>'+plan_id+'/'+estructura_plan_id);
             });
+
+            // muestra link para confirmar todo
+            jQuery('#todo_ok_'+plan_id).show();
         }
     }
 
@@ -100,7 +111,7 @@ echo $javascript->link(array(
             $armar_anexo = ($instit['Instit']['anexo']<10)?'0'.$instit['Instit']['anexo']:$instit['Instit']['anexo'];
             $nombreInstit = "".($instit['Instit']['cue']*100)+$instit['Instit']['anexo']." - ". $instit['Instit']['nombre_completo'];
             ?>
-            <div class="instit_name"><b><?= $html->link($nombreInstit, '/instits/view/'.$instit['Instit']['id']) ?></b></div>           
+            <div class="instit_name"><b><?= $html->link($nombreInstit, '/instits/view/'.$instit['Instit']['id'], array('target'=>'_blank')) ?></b></div>
             <div class="instit_atributte"><b>Domicilio: </b> <?= $instit['Instit']['direccion'] ?></div>
             <br />
             <div class="instit_atributte"><b>Gestión: </b><?= $instit['Gestion']['name'] ?></div>
@@ -120,9 +131,11 @@ echo $javascript->link(array(
             foreach ($instit['Plan'] as $plan) {
             ?>
             <div class="planes_izq">
-                <?= $html->link($plan['nombre'],'/planes/view/'.$plan['id'])?><br />
+                <?= $html->link($plan['nombre'],'/planes/view/'.$plan['id'], array('target'=>'_blank'))?>
+                 (duración: <?=$plan['duracion_anios']?> años)
+                <br />
 
-                <br>
+                <br />
                 <?php echo $form->input('estructura_id', 
                         array(  'options'=>$estructuras,
                                 'label'=>'',
@@ -132,7 +145,7 @@ echo $javascript->link(array(
                                 'selected'=>$plan['estructura_plan_id'],
                                 'style'=>'float:left; width: 150px;',
                             )); ?>
-                <div><b><?= $html->link(':: TODO OK', '/depuradorPlanes/darle_ok_al_plan/'.$plan['id']) ?></b></div>
+                <div id="todo_ok_<?=$plan['id']?>" class="plan_ok_button"><?= $html->link('TODO OK', '/depuradorPlanes/darle_ok_al_plan/'.$plan['id']) ?></div>
             </div>
             <?php } ?>
 
@@ -155,7 +168,7 @@ echo $javascript->link(array(
                 foreach ($instit['Plan'] as $plan) {
                 ?>
                 <tr class="tr_plan" id="plan_<?=$plan['id']?>">
-                    <script type="text/javascript">RenderPlan(<?=$plan['id']?>);</script>
+                    <script type="text/javascript">RenderPlan(<?=$plan['id']?>, <?=$plan['estructura_plan_id']?>);</script>
                 </tr>
                 <?php } ?>
 

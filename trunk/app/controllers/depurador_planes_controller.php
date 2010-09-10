@@ -68,6 +68,7 @@ class DepuradorPlanesController extends AppController {
 
         $total = 0;
         $i = 0;
+        
         foreach ($plan['Anio'] as &$a) {            
             $ep = $plan['EstructuraPlan']['EstructuraPlanesAnio'][$i];
             $a['estructura_planes_anio_id'] = $ep['id'];
@@ -76,12 +77,17 @@ class DepuradorPlanesController extends AppController {
             if (count($plan['EstructuraPlan']['EstructuraPlanesAnio']) == $i) {
                 $i = 0;
             }
+
+            if ($a['etapa_id'] != $plan['EstructuraPlan']['etapa_id']) {
+                $this->Session->setFlash("La etapa de alguno de los ciclos no es correcta");
+                $this->redirect('/depuradorPlanes/index/'.$plan['Plan']['instit_id']);
+            }
            
         }
 
         if (count($plan['Anio'])%count($plan['EstructuraPlan']['EstructuraPlanesAnio'])==0) {
             if ($this->Anio->saveAll($plan['Anio'])){
-                $this->Session->setFlash("Se guardó todo el plan en masa.");
+                $this->Session->setFlash("Se guardó todo el plan en masa");
             } else {
                 foreach($this->Anio->validationErrors as $kk=>$eee) {
                         $txt .= empty($txt)?'':', ';
@@ -236,10 +242,8 @@ class DepuradorPlanesController extends AppController {
 
         $planes[$plan_id] = 'No mover de: '.$planes[$plan_id];
 
-        $this->set('plan', $plan);
         $this->set('anios', $plan['Anio']);
-        $this->set('estructura_planes_anios', $estructura_planes_anios);
-        $this->set('planes' , $planes);
+        $this->set(compact('plan', 'planes', 'estructura_planes_anios', 'ciclo_id'));
 
     }
 

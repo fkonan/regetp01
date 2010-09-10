@@ -10,12 +10,6 @@
         if (jQuery('#sector_id :selected').val() == '') {
             error += 'Debe seleccionar el sector del plan\n';
         }
-        if (jQuery('#PlanDuracionHs').val() == '' || isNaN(jQuery('#PlanDuracionHs').val())) {
-            error += 'Debe ingresar la duracion en horas\n';
-        }
-        if (jQuery('#PlanDuracionAnios').val() == '' || isNaN(jQuery('#PlanDuracionAnios').val())) {
-            error += 'Debe ingresar la duracion en años\n';
-        }
 
         if (error.length > 0) {
             alert(error);
@@ -125,10 +119,6 @@ $cue_instit = $instit['cue'].$anexo;
                                    ));
             ?>
             </td>
-        </tr>
-        <tr>
-            <td style="text-align:right;">Duración Hs</td>
-            <td><?=$form->input('duracion_hs',array('div'=>false,'label'=>false, 'style'=>'width: 30px;','maxlength'=>9))?></td>
         </tr>
         <tr>
             <td style="text-align:right;">Duración Años</td>
