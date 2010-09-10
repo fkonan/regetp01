@@ -67,7 +67,7 @@
                 </h1>
             </div>
             <div>
-                <div>
+                <div style="text-align: center;">
                 <?php $session->flash(); ?>
                 <?php $session->flash('auth'); ?>
                 </div>

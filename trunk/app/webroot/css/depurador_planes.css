@@ -343,8 +343,10 @@ ELEMENTO GRAFICADOR DE PLANES
 .message{
     color: red;
     font-weight: bolder;
-    background-color: pink;
+    background-color: #FFC0CB;
     text-align: center;
+    width: 80%;
+    border: 3px dotted;
 }
 
 

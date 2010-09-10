@@ -113,25 +113,41 @@ class DepuradorPlanesController extends AppController {
 
         $total = 0;
         $i = 0;
-        
-        foreach ($plan['Anio'] as &$a) {            
-            $ep = $plan['EstructuraPlan']['EstructuraPlanesAnio'][$i];
-            $a['estructura_planes_anio_id'] = $ep['id'];
-            $a['anio'] = $ep['nro_anio'];
-           
-            $i++;
-            if (count($plan['EstructuraPlan']['EstructuraPlanesAnio']) == $i) {
-                $i = 0;
-            }
+        if (!empty($plan['Anio'])) {
+            $ciclo_ant = $plan['Anio'][0]['ciclo_id'];
+            foreach ($plan['Anio'] as &$a) {
+                
+                // error corregido: si estaba incompleto uno el que viene sigue mal
+                // controlar corte de control por ciclo anterior
+                if ($a['ciclo_id'] != $ciclo_ant) {
+                    $i = 0;
+                    $ciclo_ant = $a['ciclo_id'];
+                }
 
-            if ($a['etapa_id'] != $plan['EstructuraPlan']['etapa_id']) {
-                $this->Session->setFlash("La etapa de alguno de los ciclos no es correcta");
-                $this->redirect('/depuradorPlanes/index/'.$plan['Plan']['instit_id']);
+                $epa = $plan['EstructuraPlan']['EstructuraPlanesAnio'][$i];
+
+                if ($a['anio'] != $epa['nro_anio']) {
+                    $this->Session->setFlash("Primero debe ordenar los años del ciclo ".$a['ciclo_id']);
+                    $this->redirect('/depuradorPlanes/index/'.$plan['Plan']['instit_id']);
+                }
+
+                $a['estructura_planes_anio_id'] = $epa['id'];
+
+                $i++;
+                /*if (count($plan['EstructuraPlan']['EstructuraPlanesAnio']) == $i) {
+                    $i = 0;
+                }*/
+                // corregido arriba
+
+                if ($a['etapa_id'] != $plan['EstructuraPlan']['etapa_id']) {
+                    $this->Session->setFlash("La etapa de alguno de los ciclos no es correcta");
+                    $this->redirect('/depuradorPlanes/index/'.$plan['Plan']['instit_id']);
+                }
+
             }
-           
         }
 
-        if (count($plan['Anio'])%count($plan['EstructuraPlan']['EstructuraPlanesAnio'])==0) {
+        if (count($plan['Anio']) % count($plan['EstructuraPlan']['EstructuraPlanesAnio'])==0) {
             if ($this->Anio->saveAll($plan['Anio'])){
                 $this->Session->setFlash("Se guardó todo el plan en masa");
             } else {
