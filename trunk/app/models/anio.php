@@ -87,30 +87,18 @@ class Anio extends AppModel {
 			),
 		),
 
-                'estructura_planes_anio'=>array(
-			'estructuraValida'=> array(
-				'rule' => 'validacionEstructura',
-				'required' => false,
-				'allowEmpty' => true,
-				'message' => 'La estructura de la oferta no es correcta, verificarla junto a la estructura del plan (polimodal, CS, CB, etc).'
-			),
-		),
-
-                'estructura_planes_anio'=>array(
-			'elPlanTieneEstructuraDefinida'=> array(
+                'estructura_planes_anio_id'=>array(
+//			'estructuraValida'=> array(
+//				'rule' => 'validacionEstructura',
+//				'required' => false,
+//				'allowEmpty' => true,
+//				'message' => 'La estructura de la oferta no es correcta, verificarla junto a la estructura del plan (polimodal, CS, CB, etc).'
+//			),
+                        'elPlanTieneEstructuraDefinida'=> array(
 				'rule' => 'elPlanTieneEstructuraDefinida',
 				'required' => false,
 				'allowEmpty' => true,
 				'message' => 'El Plan no tiene ninguna estructura definida. Edite el plan antes de ingresar datos de los años'
-			),
-		),
-
-                'estructura_planes_anio'=>array(
-			'estructuraValida'=> array(
-				'rule' => 'validacionAniosNoRepetidos',
-				'required' => false,
-				'allowEmpty' => true,
-				'message' => 'No se puede ingresar valores para el mismo año de formación'
 			),
 		),
 	);
@@ -175,11 +163,13 @@ class Anio extends AppModel {
          * @param integer $plan_id
          * @return boolean
          */
-        function elPlanTieneEstructuraDefinida($plan_id = null){
-            if (empty($plan_id)) {
-                $plan_id = $this->data['Anio']['plan_id'];
-            }
-            return $this->Plan->tieneEstructuraDefinida($plan_id);
+        function elPlanTieneEstructuraDefinida(){
+            
+            $plan_id = $this->data['Anio']['plan_id'];
+
+             $et = $this->Plan->tieneEstructuraDefinida($plan_id);
+
+             return $et;
 
         }
 
@@ -191,45 +181,25 @@ class Anio extends AppModel {
          * @param integer $plan_id
          * @return boolean
          */
-        function validacionEstructura($plan_id = null) {
-            if (empty($plan_id)) {
-                $plan_id = $this->data['Anio']['plan_id'];
-            }
-            $aniosMal = $this->Plan->estructuraValida($plan_id);
-
-            return (count($aniosMal) > 0) ? false : true;
-        }
-
-
-        
-        /**
-         *  verifica que no existan anios repetidos para un plan
-         * dentro del mismo ciclo lectivo
-         *
-         * @param integer $plan_id
-         * @param integer $ciclo
-         * @return boolean
-         */
-        function validacionAniosNoRepetidos(){
+        function validacionEstructura() {
             $plan_id = $this->data['Anio']['plan_id'];
-            $ciclo_id = $this->data['Anio']['ciclo_id'];
 
-           $epa = $this->EstructuraPlanesAnio->find('first', array(
-               'conditions' => array(
-                   'EstructuraPlanesAnio.id' => $this->data['Anio']['estructura_planes_anio'],
-               )
-           ));
-
-            $existe = $this->find('count', array(
-                'contain' => array('Plan'),
+            $etapaAnio = $this->EstructuraPlanesAnio->find('first', array(
+                'contain'  => array(
+                    'EstructuraPlan' => array(
+                        'Plan' => array('conditions' => array('Plan.id' => $plan_id))
+                        ),
+                ),
                 'conditions' => array(
-                    'Plan.id' => $plan_id,
-                    'Anio.ciclo_id' => $ciclo_id,
-                    'Anio.anio' => $epa['EstructuraPlanesAnio']['nro_anio']
+                    'EstructuraPlanesAnio.id' => $this->data['Anio']['estructura_planes_anio_id'],
                 )
             ));
 
-           return $existe;
+            if (!empty($etapaAnio['EstructuraPlan']['Plan']))
+                return true;
+            else
+                return false;
+
         }
         
 	
