@@ -759,6 +759,15 @@ class Plan extends AppModel {
 
         }
 
+
+
+        /**
+         * Verifica que todos los años del plan tengan la misma estructura que
+         * su Plan padre
+         * 
+         * @param integer $plan_id
+         * @return true si teiene estructura valida o un array con los años incorrectos en caso de no tenerla
+         */
         function estructuraValida($plan_id = null){
             if (empty($plan_id)) {
                 $plan_id = $this->id;
@@ -792,5 +801,31 @@ class Plan extends AppModel {
             }
             return true;
         }
+
+
+        /**
+         *  verifica que no existan anios repetidos para un plan
+         * dentro del mismo ciclo lectivo
+         *
+         * @param integer $plan_id
+         * @param integer $ciclo
+         * @param integer $anio_cmp nº de año a comparar
+         * @return boolean
+         */
+        function validacionAniosNoRepetidos($plan_id, $ciclo_id, $anio_cmp){
+            $plan = $this->find('first', array(
+                'contain' => array('Anio' => array(
+                    'conditions' => array('Anio.ciclo_id' => $ciclo_id)
+                )),
+                'conditions' => array(
+                    'Plan.id' => $plan_id,                    
+                )
+            ));
+
+           // if ($plan[])
+            
+        }
+
+        
 }
 ?>
