@@ -350,6 +350,17 @@ ELEMENTO GRAFICADOR DE PLANES
     border: 3px dotted;
 }
 
+.message_exito {
+    color: green;
+    font-weight: bolder;
+    background-color: #BAFFB2;
+    text-align: center;
+    width: 80%;
+    margin: auto;
+    border: 3px dotted;
+}
+
+
 
 /*** Estilos de etapas (graficadorAnios) ***/
 
