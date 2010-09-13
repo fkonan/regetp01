@@ -114,8 +114,10 @@ class AniosController extends AppController {
                     $viewToRender = '/anios/add_fp';
                     break;
                 case 2: // IT
-                case 3: //MT
                 case 5: //SEC NO TECNICO
+                    $viewToRender = '/anios/add_it';
+                    break;
+                case 3: //MT
                     $viewToRender = '/anios/add';
                     break;
                 case 6: //SUP NO TECNICO

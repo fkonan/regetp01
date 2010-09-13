@@ -552,18 +552,22 @@ class Plan extends AppModel {
                 $plan_id = $this->id;
             }
 
+            $this->recursive = -1;
+            $plan = $this->findById($plan_id);
+            // si el plan no es tecnico que devuelva -1
+            if ($plan['Plan']['oferta_id'] != 3) {
+                return -1;
+            }
             if (!$busqueda_forzada) {
-                // si ya tiene una estructura asignada
-                $this->recursive = -1;
-                $plan = $this->findById($plan_id);
-                
+                // si ya tiene una estructura asignada                
                 if ($plan['Plan']['estructura_plan_id'] != 0)
                     return $plan['Plan']['estructura_plan_id'];
             }
 
             $anios = $this->Anio->find('all',array(
                                     'fields'=> array('ciclo_id','etapa_id','count(etapa_id) AS "Anio__total"'),
-                                    'conditions'=> array('plan_id'=>$plan_id),
+                                    'conditions'=> array(
+                                        'plan_id'=>$plan_id),
                                     'group'=> array('etapa_id', 'ciclo_id'),
                                     'order'=>'ciclo_id'));
             /*
