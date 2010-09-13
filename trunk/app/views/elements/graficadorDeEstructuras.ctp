@@ -12,7 +12,7 @@ if (empty($i)) {
 }
 ?>
 
-<?php echo $estructura['name'];?>
+<?php echo $html->link(__($estructura['name'], true), '/estructura_planes/edit/'.$estructura['id']); ?>
 <div id="timelineLimiter" class="clickeable <?php echo (isset($asignado) && $asignado)?'green':''?>">
     <div id="timelineScroll" style="margin-left: 0px;">
         <span style="width:55px;display:inline;float:left;margin-top:7px">Edades:</span>

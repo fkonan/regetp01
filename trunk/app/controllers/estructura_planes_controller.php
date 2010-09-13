@@ -109,6 +109,16 @@ class EstructuraPlanesController extends AppController {
 		}
 
                 $etapas = $this->EstructuraPlan->Etapa->find('list', array('order'=>'name'));
+
+                $jurisdicciones = $this->EstructuraPlan->JurisdiccionesEstructuraPlan->find('all',
+                                                                                            array('contain'=>array('Jurisdiccion'),
+                                                                                                  'fields'=>array('Jurisdiccion.name'),
+                                                                                                  'conditions'=>array('JurisdiccionesEstructuraPlan.estructura_plan_id'=>$id),
+                                                                                                )
+                                                                                           );
+
+
+                $this->set('jurisdicciones',$jurisdicciones);
 		$this->set(compact('etapas'));
 	}
 
