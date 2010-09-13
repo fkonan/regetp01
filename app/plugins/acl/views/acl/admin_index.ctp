@@ -20,6 +20,14 @@ Things (most often users) that want to use stuff are called access request objec
 Things in the system that are wanted (most often actions or data) are called access control objects
 </div>
 
+<br />
+<h2>Scripts de permisos</h2><br />
+
+<div><?php print $html->link('Version 1.6', '/aclprep/assignPermissions1Dot6',array('target'=>'_blank')) ?></div>
+<div><?php print $html->link('Version inicial', '/aclprep/assignPermissions',array('target'=>'_blank')) ?></div>
+
+<br />
+<br />
 <h2>Known Bugs</h2>
 <ul>
  <li>does not show inherited permissions</li>
