@@ -120,7 +120,7 @@
             coords=146,288,145,264,187,265,188,247,212,247,211,315,195,309,169,308,159,299,152,297,152,290
             href="<?php echo $html->url(array('controller'=>'jurisdicciones','action'=>'view', 42)) ?>">
         <area
-            alt="Pcia.de Buenos Aires"
+            alt="Buenos Aires"
             shape=POLY
             coords=217,343,213,341,213,239,236,238,248,225,253,227,256,222,275,235,266,245,274,257,287,248,296,256,291,267,302,274,288,301,268,308,248,311,230,311,223,309,225,321,222,326,222,341
             href="<?php echo $html->url(array('controller'=>'jurisdicciones','action'=>'view', 6)) ?>">
