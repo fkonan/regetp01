@@ -150,11 +150,13 @@ class DepuradorPlanesController extends AppController {
 
         if (count($plan['Anio']) % count($plan['EstructuraPlan']['EstructuraPlanesAnio'])==0) {
             if ($this->Anio->saveAll($plan['Anio'])){
-                $this->Session->setFlash("Se guardó todo el plan en masa");
+                $this->Session->setFlash("Se guardó todo el plan en masa", 'default', array('class' => 'message_exito'));
             } else {
+                $txt = '';
                 foreach($this->Anio->validationErrors as $kk=>$eee) {
                         $txt .= empty($txt)?'':', ';
-                        $txt .= array_shift($eee);
+                        if (is_array($eee))
+                            $txt .= array_shift($eee);
                     }
                     $this->Session->setFlash('Error al guardar algún Anio por: '.$txt);
             }
@@ -308,7 +310,7 @@ class DepuradorPlanesController extends AppController {
                 }
                 $this->Session->setFlash('Error al guardar debido a el/los siguientes errores:<br> '.$txt);
             } else {
-                $this->Session->setFlash('Se guardó todo Bien');
+                $this->Session->setFlash('Se guardó todo Bien', 'default', array('class' => 'message_exito'));
             }
             $this->redirect('/depuradorPlanes/index/'.$plan['Instit']['id']);
         }
@@ -529,7 +531,7 @@ class DepuradorPlanesController extends AppController {
         if (!empty($this->data)) {
             $this->Plan->create();
             if ($this->Plan->save($this->data)) {
-                $this->Session->setFlash(__('Se ha creado un nuevo Plan', true));
+                $this->Session->setFlash('Se ha creado un nuevo Plan', 'default', array('class' => 'message_exito'));
 
                 // redirige al depurador
                 $this->redirect('/depuradorPlanes/index/'.$instit_id);
