@@ -50,6 +50,7 @@ class DepuradorPlanesController extends AppController {
      */
     function ordenarPlanes($planes) {
         $ordenados = array();
+        $planes_aux = array();
 
         foreach ($planes as $plan) {
             if (!in_array($plan['id'], $ordenados)) {
