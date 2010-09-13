@@ -253,8 +253,10 @@ class DepuradorPlanesController extends AppController {
                 foreach ($this->data['Anio'] as &$a2) {
                     if ($a['estructura_planes_anio_id'] == $a2['estructura_planes_anio_id']
                         &&
-                        $a['id'] != $a2['id'] ){
-                            $this->Session->setFlash("No se pueden ingresar años repetidos para el mismo plan");
+                        $a['id'] != $a2['id']
+                        &&
+                        $a['plan_id'] == $a2['plan_id']){
+                            $this->Session->setFlash("No se pueden ingresar años repetidos para el mismo plan id desde:".$a['plan_id']." hasta: ".$a2['plan_id']);
                             $this->redirect('/depuradorPlanes/index/'.$plan['Instit']['id']);
                     }
                 }
