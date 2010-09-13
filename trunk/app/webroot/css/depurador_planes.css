@@ -346,6 +346,7 @@ ELEMENTO GRAFICADOR DE PLANES
     background-color: #FFC0CB;
     text-align: center;
     width: 80%;
+    margin: auto;
     border: 3px dotted;
 }
 

@@ -126,7 +126,7 @@ class DepuradorPlanesController extends AppController {
 
                 $epa = $plan['EstructuraPlan']['EstructuraPlanesAnio'][$i];
 
-                if ($a['anio'] != $epa['nro_anio']) {
+                if ($a['anio'] != $epa['nro_anio'] && !$a['estructura_planes_anio_id']) {
                     $this->Session->setFlash("Primero debe ordenar los años del ciclo ".$a['ciclo_id']);
                     $this->redirect('/depuradorPlanes/index/'.$plan['Plan']['instit_id']);
                 }
