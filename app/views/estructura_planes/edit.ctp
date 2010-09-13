@@ -30,6 +30,18 @@
     </ul>
 <br />
 <br />
+<h2>Jurisdicciones con la estructura</h2>
+<ul>
+<?php
+foreach($jurisdicciones as $jurisdiccion){
+?>
+    <li><?php echo $html->link(__($jurisdiccion['Jurisdiccion']['name'], true), '/jurisdicciones_estructura_planes/index/'.$jurisdiccion['Jurisdiccion']['id']); ?></li>
+<?php
+}
+?>
+</ul>
+<br />
+<br />
 <?php
 echo $form->input('etapas', array('id'=>'etapas', 'type'=>'hidden'));
 echo $form->end('Guardar');
