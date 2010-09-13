@@ -432,6 +432,7 @@ class AclprepController extends AppController {
         $this->Acl->allow('editores', 'Anios/edit');
         $this->Acl->allow('editores', 'Anios/editCiclo');
         $this->Acl->allow('editores', 'Planes/edit');
+        $this->Acl->allow('editores', 'depuradorPlanes');
 
         // todos
         $this->Acl->allow('usuarios', 'Sugerencias/add');
