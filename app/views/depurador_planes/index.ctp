@@ -1,28 +1,25 @@
 <?php
 echo $javascript->link(array(
     'jquery.loadmask.min',
-    'jquery.autoscroll.packed'
+    'jquery.autoscroll.packed',
+    'jquery.loadmask.min',
     ));
+
+echo $html->css(array('jquery.loadmask'));
 
 ?>
 <script type="text/javascript">
        
-//    jQuery(document).ready(function(){
-//        console.debug($('.timelineLimiterMini'));
-//        $('.timelineLimiterMini').mouseover(function(){
-//
-//        });
-//    });
-    
-    function block(formData, jqForm, options) {
-        jQuery('#consoleResultWrapper').mask('Buscando');
-        return true;
-    }
-    function unblock(formData, jqForm, options) {
-        jQuery('#consoleResultWrapper').mask('Buscando');
-        return true;
-    }
+    jQuery(document).ready(function(){
+        jQuery(".tr_plan").ajaxStart(function(){
+           jQuery('#col_der').mask('Cargando');
+         });
 
+         jQuery(".tr_plan").ajaxStop(function(){
+           jQuery('#col_der').unmask();
+         });
+    });
+    
     function RenderPlan(plan_id, estructura_id) {
         jQuery(document).ready(function() {
            jQuery('#plan_'+plan_id).load('<?=$html->url('/depurador_planes/tr_plan/')?>'+plan_id);
@@ -50,7 +47,7 @@ echo $javascript->link(array(
 
     function EditarCiclo(element) {
 
-        var $dialog = $('<div></div>')
+        var $dialog = jQuery('<div></div>')
                 .html('... cargando años')
 		.dialog({
                         width: 550,
@@ -63,15 +60,22 @@ echo $javascript->link(array(
     }
 
     function CrearPlan(element) {        
-        var $dialog = $('<div></div>')
+        var $dialog = jQuery('<div id="create_dialog"></div>')
                 .html('... cargando nuevo plan')
 		.dialog({
                         width: 750,
                         position: 'top',
-			title: 'Nuevo Plan'
-		})
-                .load(element.href, function(){
-                    jQuery('#sector_id').change( function() {
+			title: 'Nuevo Plan',
+                        beforeclose: function(event, ui) { jQuery(".ui-dialog").remove(); jQuery("#create_dialog").remove(); }
+	});
+
+        jQuery.ajax({
+          url: element.href,
+          cache: false,
+          success: function(data) {
+            $dialog.html(data);
+
+            jQuery('#sector_id').change( function() {
                         jQuery('#sector_id').parents('form').ajaxSubmit({
                             beforeSend:function(request) {
                                 request.setRequestHeader('X-Update', 'PlanSubsectorId');
@@ -90,8 +94,9 @@ echo $javascript->link(array(
                             url:'<?=$html->url('/subsectores/ajax_select_subsector_form_por_sector')?>'
                         });
                     })
-                });
-  
+          }
+        });
+      
         return false;
     }
 
