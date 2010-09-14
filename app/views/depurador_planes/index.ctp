@@ -10,19 +10,12 @@ echo $html->css(array('jquery.loadmask'));
 ?>
 <script type="text/javascript">
        
-    jQuery(document).ready(function(){
-        jQuery(".tr_plan").ajaxStart(function(){
-           jQuery('#col_der').mask('Cargando');
-         });
-
-         jQuery(".tr_plan").ajaxStop(function(){
-           jQuery('#col_der').unmask();
-         });
-    });
-    
     function RenderPlan(plan_id, estructura_id) {
         jQuery(document).ready(function() {
-           jQuery('#plan_'+plan_id).load('<?=$html->url('/depurador_planes/tr_plan/')?>'+plan_id);
+           jQuery('#col_der').mask('Cargando');
+           jQuery('#plan_'+plan_id).load('<?=$html->url('/depurador_planes/tr_plan/')?>'+plan_id, function(){
+               jQuery('#col_der').unmask();
+           });
 
            if (estructura_id > 0) {
                // muestra link para confirmar todo
@@ -37,7 +30,11 @@ echo $html->css(array('jquery.loadmask'));
     function CambiarEstructuraPlan(plan_id, estructura_plan_id) {
         if (estructura_plan_id > 0) {
             jQuery(document).ready(function() {
-                jQuery('#plan_'+plan_id).load('<?=$html->url('/depurador_planes/cambiarEstructuraPlan/')?>'+plan_id+'/'+estructura_plan_id);
+                jQuery('#col_der').mask('Cargando');
+                jQuery('#plan_'+plan_id).load('<?=$html->url('/depurador_planes/cambiarEstructuraPlan/')?>'+plan_id+'/'+estructura_plan_id,
+                function(){
+                    jQuery('#col_der').unmask();
+                });
             });
 
             // muestra link para confirmar todo
@@ -65,6 +62,7 @@ echo $html->css(array('jquery.loadmask'));
 		.dialog({
                         width: 750,
                         position: 'top',
+                        zIndex: 3999,
 			title: 'Nuevo Plan',
                         beforeclose: function(event, ui) { jQuery(".ui-dialog").remove(); jQuery("#create_dialog").remove(); }
 	});

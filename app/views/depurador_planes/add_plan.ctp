@@ -32,14 +32,12 @@ $cue_instit = $instit['cue'].$anexo;
 
     <table cellspacing="2">
         <tr>
-            <td style="text-align:right;">Estructura Plan</td>
+            <td style="vertical-align:top;text-align:right;">Estructura Plan</td>
             <td><?=$form->input('estructura_plan_id',array('empty'=>'Seleccione',
                                     'id' => 'PlanEstructuraPlanId',
                                     'onchange' => 'ChangeEstructura()',
-                                    'style' => 'width:230px; font-size:9pt;','div'=>false,'label'=>false))?></td>
-        </tr>
-        <tr>
-            <td colspan="2" style="text-align:center;">
+                'style' => 'float:left;width:230px; font-size:9pt;','div'=>false,'label'=>false))?>
+        
                 <div id="PlanEstructura">
                 <span id="graficosEstructura">
                 <?php 
@@ -50,7 +48,7 @@ $cue_instit = $instit['cue'].$anexo;
                 <div id="timelineLimiterMini" estructura_plan_id="<?php echo $estructura['EstructuraPlan']['id']?>" class="clickeable" style="display:none">
                     <div id="timelineScroll" style="margin-left: 0px;">
                         <div>
-                            <div class="event">
+                            <div class="event" style="margin-left:5px;margin-bottom:0px">
                                 <div class="eventHeading blue"><?php echo $estructura['EstructuraPlan']['Etapa']['name']?></div>
                                     <ul class="eventList">
                             <?php
