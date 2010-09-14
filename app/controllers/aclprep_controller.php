@@ -425,12 +425,17 @@ class AclprepController extends AppController {
         $this->Acl->deny('administradores',  'Sugerencias/view');
         $this->Acl->deny('administradores',  'Sugerencias/edit');
         $this->Acl->deny('administradores',  'Sugerencias/delete');
+        $this->Acl->deny('administradores',  'EstructuraPlanes/add');
+        $this->Acl->deny('administradores',  'EstructuraPlanes/edit');
+        $this->Acl->deny('administradores',  'EstructuraPlanes/delete');
+        $this->Acl->deny('administradores',  'JurisdiccionesEstructuraPlanes');
 
         // Editores
         $this->Acl->allow('editores', 'Anios/save');
         $this->Acl->allow('editores', 'Anios/saveAll');
         $this->Acl->allow('editores', 'Anios/edit');
         $this->Acl->allow('editores', 'Anios/editCiclo');
+        $this->Acl->allow('editores', 'Anios/deleteCiclo');
         $this->Acl->allow('editores', 'Planes/edit');
         $this->Acl->allow('editores', 'DepuradorPlanes');
 
