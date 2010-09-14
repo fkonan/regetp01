@@ -255,7 +255,7 @@ class DepuradorPlanesController extends AppController {
                 // que no repita año
                 foreach ($this->data['Anio'] as &$a2) {
                     if ($a['estructura_planes_anio_id'] == $a2['estructura_planes_anio_id']
-                        &&
+                        && 
                         $a['id'] != $a2['id']
                         &&
                         $a['plan_id'] == $a2['plan_id']){
@@ -523,7 +523,7 @@ class DepuradorPlanesController extends AppController {
     }
 
 
-    function add_plan($instit_id) {
+    function add_plan($instit_id, $ciclo_id = null) {
         if (!empty($this->data) && !$instit_id) {
             $this->Session->setFlash(__('Institución incorrecta', true));
             $this->redirect('/depuradorPlanes/listado');
@@ -565,7 +565,7 @@ class DepuradorPlanesController extends AppController {
         }
 
         
-
+        $this->set('ciclo_id', $ciclo_id);
         $this->set(compact(
                 'subsectores','sectores',
                 'titulos', 'ciclos', 'estructura_planes','estructuraPlanesGrafico'));

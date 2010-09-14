@@ -160,7 +160,10 @@ echo $javascript->link(array(
                 <?php
                 for ($i=2006; $i <= date('Y'); $i++) {
                 ?>
-                    <th><?=$i?></th>
+                    <th>
+                    <?=$i?>
+                    <?=$html->link('(+)', '/depurador_planes/add_plan/'.$instit['Instit']['id'].'/'.$i, array('onclick' => 'return CrearPlan(this)'))?>
+                    </th>
                 <?php } ?>
                 </tr>
 

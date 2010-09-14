@@ -129,9 +129,22 @@ $cue_instit = $instit['cue'].$anexo;
             <td><?=$form->input('observacion',array('div'=>false,'label'=>false,'rows'=>'3'))?></td>
         </tr>
         <tr>
+            <? if (empty($ciclo_id)) { ?>
             <td style="text-align:right;">Alta</td>
             <td><?=$form->input('ciclo_alta', array("type" => "select", "options" => $ciclos,
-                                    'style'=>'font-size:9pt;', 'div'=>false,'label'=>false, "selected" => date('Y')))?></td>
+                                    'style'=>'font-size:9pt;', 
+                                    'div'=>false,
+                                    'label'=>false,
+                                    "selected" => date('Y'))
+                    )?>
+            </td>
+            <?php } else { ?>
+                <?= $form->hidden('ciclo_alta', array(
+                                    'value' => $ciclo_id,
+                    ))?>
+            <?php
+            }
+            ?>
         </tr>
         <tr>
             <td><?php
