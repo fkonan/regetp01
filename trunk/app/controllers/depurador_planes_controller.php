@@ -572,6 +572,31 @@ class DepuradorPlanesController extends AppController {
 
         $this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$instit['Instit']['id'] );
     }
+
+    function duplicar_plan($plan_id){
+        if (empty($plan_id)) {
+            $this->Session->setFlash("Debe pasar el Plan ID como parámetro");
+            $this->redirect('/');
+        }
+        $this->Plan->contain(array(
+            'EstructuraPlan'=> array(
+                    'EstructuraPlanesAnio'=> array(
+                        'order'=>'EstructuraPlanesAnio.nro_anio'),
+                    )
+        ));
+        $plan = $this->Plan->read(null,$plan_id);
+
+        if (empty($plan['Plan']['estructura_plan_id'])){
+            $this->Session->setFlash("Primero debe seleccionarle una estructura al plan");
+            $this->redirect('/depuradorPlanes/index/'.$plan['Plan']['instit_id']);
+        }
+
+        $plan['Plan']['id'] = 0;
+
+        $this->Plan->save($plan);
+        
+        $this->redirect('/depuradorPlanes/index/'.$plan['Plan']['instit_id']);
+    }
 }
 
 ?>

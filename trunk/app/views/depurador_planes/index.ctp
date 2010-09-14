@@ -20,9 +20,11 @@ echo $html->css(array('jquery.loadmask'));
            if (estructura_id > 0) {
                // muestra link para confirmar todo
                jQuery('#todo_ok_'+plan_id).show();
+               jQuery('#duplicar_'+plan_id).show();
            }
            else {
                jQuery('#todo_ok_'+plan_id).hide();
+               jQuery('#duplicar_'+plan_id).hide();
            }
         });
     }
@@ -39,6 +41,7 @@ echo $html->css(array('jquery.loadmask'));
 
             // muestra link para confirmar todo
             jQuery('#todo_ok_'+plan_id).show();
+            jQuery('#duplicar_'+plan_id).show();
         }
     }
 
@@ -149,6 +152,7 @@ echo $html->css(array('jquery.loadmask'));
                                 'style'=>'float:left; width: 150px;',
                             )); ?>
                 <div id="todo_ok_<?=$plan['id']?>" class="plan_ok_button"><?= $html->link('TODO OK', '/depuradorPlanes/darle_ok_al_plan/'.$plan['id']) ?></div>
+                <div id="duplicar_<?=$plan['id']?>" style="margin-top:5px" class="plan_ok_button"><?= $html->link('DUPLICAR', '/depuradorPlanes/duplicar_plan/'.$plan['id']) ?></div>
             </div>
             <?php } ?>
 
