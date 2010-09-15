@@ -475,8 +475,11 @@ class DepuradorPlanesController extends AppController {
                     i.nombre as \"Instit__nombre\" ,
                     i.cue as \"Instit__cue\" ,
                     i.anexo as \"Instit__anexo\",
+                    i.nroinstit as \"Instit__nro\" ,
+                    t.name as \"Instit__tipoinstit\" ,
                     count(*) as \"Instit__errores\"
                         from instits i
+                        left join tipoinstits t on (t.id = i.tipoinstit_id)
                         left join planes p on (p.instit_id = i.id)
                         left join anios a on (a.plan_id = p.id)
                         where
@@ -495,7 +498,7 @@ class DepuradorPlanesController extends AppController {
                     i.orientacion_id $orientacionSql
                  and
                     (i.cue*100+i.anexo) $cueSql
-                 group by i.id, i.nombre, i.cue, i.anexo
+                 group by i.id, i.nombre, i.cue, i.anexo, i.nroinstit, t.name
                  order by $orderBy
                 ";
 

@@ -5,7 +5,10 @@ echo $script;
 ?>
 <?php
 if (empty($this->data['Anio']['estructura_planes_anio_id'])) {
-?>
+
+    // HACERLO DE LA FORMA VIEJA !!
+    // SIN ESTRUCTURAR
+    ?>
     <? $ganchito = $this->data['Anio']['anio'] == 1?'er':'º';?>
     <h1 align="center"> <?= "Editar ".$this->data['Anio']['anio']."$ganchito Año" ?></h1>
     <div class="anios form">
@@ -25,17 +28,24 @@ if (empty($this->data['Anio']['estructura_planes_anio_id'])) {
     echo $form->input('hs_taller',array('label'=>'Horas Taller'));
     echo $form->end('Guardar');
 } else {
-?>
-<? $ganchito = $this->data['Anio']['anio'] == 1?'er':'º';?>
+
+
+    // HACERLO DE LA NUEVA FORMA
+    // DATOS ESTRUCTURADOS
+
+    $ganchito = $this->data['Anio']['anio'] == 1?'er':'º';?>        
 <h1 align="center"><?= "Editar Ciclo ".$this->data['Anio']['ciclo_id'] ?></h1>
 
 <?php
 
-/* variable que viene del controlador
-                 * @var $trayectosDisponibles array */
+/*
+ * variable que viene del controlador
+ * @var $trayectosDisponibles array 
+ */
 $trayectosDisponibles;
 
-
+// verificar que estè estructurado el dato
+// caso contrario mando a seleccionar estructura
 if (empty($trayectosDisponibles)) {
     ?>
     <p class="msg-atencion" style="padding: 30px 20px;">
@@ -47,18 +57,14 @@ if (empty($trayectosDisponibles)) {
 }
 
 
-//		$anios = array('1'=>1,'2'=>2,'3'=>3,'4'=>4,'5'=>5,'6'=>6,'7'=>7,'8'=>8,'9'=>9);
-//		echo $form->input('anio',array( 'options'=>$anios ,'label'=>'Año'));
-//		echo $form->input('etapa_id');
-
 $anio_tmp = array();
 $edades = array();
 $datosMatriculas = array();
-// debug($trayectosDisponibles);
+ //debug($trayectosDisponibles['EstructuraPlanesAnio']);
 if (!empty($trayectosDisponibles['EstructuraPlanesAnio'])):
     foreach ($trayectosDisponibles['EstructuraPlanesAnio'] as $a) {
         $anio_tmp[$a['nro_anio']] = array('id'=>$a['id'],'anio'=>$a['nro_anio'],'matricula'=>null,'secciones'=>null,'hs_taller'=>null, 'estructura_planes_anio_id'=>$a['id']);
-        $edades[] = $a['anio_escolaridad'];
+        $edades[] = $a['alias'];
         $datosMatriculas[] =  array('matricula'=>null,'secciones'=>null,'hs_taller'=>null, 'estructura_planes_anio_id'=>$a['id']);
     }
 endif;
@@ -66,7 +72,7 @@ endif;
 // me armo el array de opciones para el elemento que renderiza el recuadro de estructura
 $trayectosData = array(
         'editable' => true,
-        //'anios' => $edades,
+        'anios' => $edades,
         'form_action' => 'saveAll',
         'etapa_header' => array(
                 array(
@@ -75,9 +81,7 @@ $trayectosData = array(
                         'anios' => $anios,
                 )
         ),
-        'ciclo_lectivo' => array(
-                0 => array($anios),
-        )
+        'ciclo_lectivo' => array($anios),
 );
 
 echo $this->element('planes_view_tabla_st', array('trayectosData'=>$trayectosData));
