@@ -1,9 +1,7 @@
 		<div id="boxAdmin">
 			<h1 id="boxAdmin" class="menu_head">Administración</h1>
                         <ul class="menu_body">
-				<li><? echo $html->link("Agregar Usuario","/Users/add") ?></li>
 				<li><? echo $html->link("Listar Usuarios","/Users/listadoUsuarios") ?></li>
-                                <li><? echo $html->link("Usuarios y permisos","/admin/acl") ?></li>
 
 				<li><? echo $html->link("Ofertas","/ofertas") ?></li>
 				<li><? echo $html->link("Ciclos","/ciclos") ?></li>
@@ -28,8 +26,6 @@
 				<li><? echo $html->link("Descargas SQL","/Queries") ?></li>
 				
 				<li><? echo $html->link("Estadísticas","http://rfietp.inet.edu.ar/awstats/awstats.pl?config=rfietp") ?></li>
-
-                                <li><? echo $html->link("Estructura Planes","/estructura_planes") ?></li>
 
 			</ul>
 		</div>
