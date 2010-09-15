@@ -327,15 +327,17 @@ class AclprepController extends AppController {
         $this->Acl->allow('desarrolladores', 'controllers');
 
         // Administradores
-        $this->Acl->allow('administradores', 'controllers');
+        // modificado 15/09/2010 administradores pasan a usar ALLOWS
+        /*$this->Acl->allow('administradores', 'controllers');
         $this->Acl->deny('administradores',  'Fondos/index');
         $this->Acl->deny('administradores',  'FondoTemporales');
         $this->Acl->deny('administradores',  'Users/add');
         $this->Acl->deny('administradores',  'Users/edit');
         $this->Acl->deny('administradores',  'Users/delete');
         $this->Acl->deny('administradores',  'Acl');
-        $this->Acl->deny('administradores',  'Aclprep');
+        $this->Acl->deny('administradores',  'Aclprep');*/
         //$this->Acl->deny('desarrolladores/avilar',   'Fondos/index_x_instit');
+
 
         // Editores
         $this->Acl->allow('editores', 'Instits/add');
@@ -421,14 +423,55 @@ class AclprepController extends AppController {
     function assignPermissions1Dot6() {
 
         // Administradores
-        $this->Acl->deny('administradores',  'Sugerencias/index');
+        // modificado 15/09/2010 administradores pasan a usar ALLOWS
+        /*$this->Acl->deny('administradores',  'Sugerencias/index');
         $this->Acl->deny('administradores',  'Sugerencias/view');
         $this->Acl->deny('administradores',  'Sugerencias/edit');
         $this->Acl->deny('administradores',  'Sugerencias/delete');
         $this->Acl->deny('administradores',  'EstructuraPlanes/add');
         $this->Acl->deny('administradores',  'EstructuraPlanes/edit');
         $this->Acl->deny('administradores',  'EstructuraPlanes/delete');
-        $this->Acl->deny('administradores',  'JurisdiccionesEstructuraPlanes');
+        $this->Acl->deny('administradores',  'JurisdiccionesEstructuraPlanes');*/
+        // Administradores
+        $this->Acl->allow('administradores', 'Instits/add');
+        $this->Acl->allow('administradores', 'Instits/edit');
+        $this->Acl->allow('administradores', 'Instits/planes_relacionados');
+        $this->Acl->allow('administradores', 'Instits/depurar');
+        $this->Acl->allow('administradores', 'Planes/add');
+        $this->Acl->allow('administradores', 'Planes/edit');
+        $this->Acl->allow('administradores', 'Planes/delete');
+        $this->Acl->allow('administradores', 'Anios/add');
+        $this->Acl->allow('administradores', 'Anios/edit');
+        $this->Acl->allow('administradores', 'Anios/delete');
+        $this->Acl->allow('administradores', 'Queries');
+        $this->Acl->allow('administradores', 'Depuradores');
+        $this->Acl->allow('administradores', 'Sectores');
+        $this->Acl->allow('administradores', 'Tickets/add');
+        $this->Acl->allow('administradores', 'Tickets/edit');
+        $this->Acl->allow('administradores', 'Tickets/provincias_pendientes');
+        $this->Acl->allow('administradores', 'Titulos');
+        $this->Acl->allow('administradores', 'Users/listadoUsuarios');
+        $this->Acl->allow('administradores', 'Ofertas');
+        $this->Acl->allow('administradores', 'Ciclos');
+        $this->Acl->allow('administradores', 'Dependencias');
+        $this->Acl->allow('administradores', 'Etapas');
+        $this->Acl->allow('administradores', 'Tipoinstits');
+        $this->Acl->allow('administradores', 'Jurisdicciones');
+        $this->Acl->allow('administradores', 'Departamentos');
+        $this->Acl->allow('administradores', 'Localidades');
+        $this->Acl->allow('administradores', 'Sectores');
+        $this->Acl->allow('administradores', 'Subsectores');
+        $this->Acl->allow('administradores', 'Orientaciones');
+        $this->Acl->allow('administradores', 'EtpEstados');
+        $this->Acl->allow('administradores', 'Claseinstits');
+
+        $this->Acl->allow('administradores', 'Anios/save');
+        $this->Acl->allow('administradores', 'Anios/saveAll');
+        $this->Acl->allow('administradores', 'Anios/edit');
+        $this->Acl->allow('administradores', 'Anios/editCiclo');
+        $this->Acl->allow('administradores', 'Anios/deleteCiclo');
+        $this->Acl->allow('administradores', 'Planes/edit');
+        $this->Acl->allow('administradores', 'DepuradorPlanes');
 
         // Editores
         $this->Acl->allow('editores', 'Anios/save');
@@ -445,7 +488,7 @@ class AclprepController extends AppController {
         $this->Acl->allow('usuarios', 'Instits/search_form');
         $this->Acl->allow('usuarios', 'Instits/old_search_form');
 
-        die('done');
+        die('done 1.6');
     }
 
     function checkPermissions() {
