@@ -33,12 +33,8 @@ sistema.
 La nueva versión presenta varias mejoras, entre las que se destacan:
 </p>
 <ul>
-    <li>Se ha incorporado una pantalla especial, de ofertas educativas, para todas las instituciones del Registro con la cual la <i>Unidad de Información</i> realizará un trabajo de depuración y reordenamiento de la información</li>
-    <li>Se ha incorporado información sobre Planes de Mejora jurisdiccionales e institucionales aprobados en el período 2006-2009 (con detalle de las líneas de acción de cada Plan).</li>
-    <li>Se ha incorporado información sobre Jurisdicciones (autoridades, datos institucionales, etc.).</li>
-    <li>Se ha agregado un nuevo Buscador Beta más flexible y rápido. Incluye una opción de Búsqueda Avanzada que mejora y simplifica las consultas. Una vez testeado y aprobado reemplazará al buscador actual.</li>
-    <li>Se ha implementado un nuevo módulo de seguridad que garantiza la integridad del Registro y facilita la administración de usuarios.</li>
-    <li>Se han realizado varias mejoras en la estética y usabilidad del programa.</li>
+    <li>Se ha incorporado la estructuracion de Ofertas Educativas del Registro, con la cual la <i>Unidad de Información</i> realizará un trabajo de depuración y reordenamiento de la información.</li>
+   
 </ul>
 <br/>
 <br/>
