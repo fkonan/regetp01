@@ -5,8 +5,8 @@
                  * @var $trayectosDisponibles array */
 $trayectosDisponibles;
 
-
-
+// verificar que estè estructurado el dato
+// caso contrario mando a seleccionar estructura
 if (empty($trayectosDisponibles)) {
     ?>
     <p class="msg-atencion" style="padding: 30px 20px;">
@@ -18,39 +18,18 @@ if (empty($trayectosDisponibles)) {
 }
 
 
-//		$anios = array('1'=>1,'2'=>2,'3'=>3,'4'=>4,'5'=>5,'6'=>6,'7'=>7,'8'=>8,'9'=>9);
-//		echo $form->input('anio',array( 'options'=>$anios ,'label'=>'Año'));
-//		echo $form->input('etapa_id');
-
-$anios = array();
-$edades = array();
-$datosMatriculas = array();
-// debug($trayectosDisponibles);
-if (!empty($trayectosDisponibles['EstructuraPlanesAnio'])):
-    foreach ($trayectosDisponibles['EstructuraPlanesAnio'] as $a) {
-        $anios[$a['nro_anio']] = array('anio'=>$a['nro_anio'],'matricula'=>null,'secciones'=>null,'hs_taller'=>null, 'estructura_planes_anio_id'=>$a['id']);
-        $edades[] = $a['anio_escolaridad'];
-        $datosMatriculas[] =  array('matricula'=>null,'secciones'=>null,'hs_taller'=>null, 'estructura_planes_anio_id'=>$a['id']);
-    }
-endif;
-
-
 // me armo el array de opciones para el elemento que renderiza el recuadro de estructura
 $trayectosData = array(
         'editable' => true,
-        //'anios' => $edades,
         'form_action' => 'saveAll',
-        'etapa_header' => array(
+        'estructura' => array( // relacionado con la estructura para el encabezado
                 array(
                         'title' => $trayectosDisponibles['EstructuraPlan']['name'],
                         'estructura_plan_id' => $trayectosDisponibles['EstructuraPlan']['id'],
-                        'anios' => $anios,
+                        'anios' => $trayectosDisponibles['EstructuraPlanesAnio'],
                 )
         ),
-        'ciclo_lectivo' => array(
-                0 => array($anios),
-        )
-);	
+);
 
 echo $this->element('planes_view_tabla_st', array('trayectosData'=>$trayectosData));
 
