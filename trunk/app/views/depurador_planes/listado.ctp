@@ -64,8 +64,10 @@
 
 <?php foreach ($institsMal as $i):?>
 <p>
-    <?php        
-        echo $html->link($i['Instit']['cue']*100+$i['Instit']['anexo']. " ::: ".$i['Instit']['nombre']. " (".$i['Instit']['errores']." errores)",
+    <?php
+        $nro = empty($i['Instit']['nro'])?'': ' Nº '.$i['Instit']['nro'];
+        $nombre = $i['Instit']['tipoinstit'].$nro." - ".$i['Instit']['nombre'];
+        echo "-- ".$html->link($i['Instit']['cue']*100+$i['Instit']['anexo']. " ::: ".$nombre. " (".$i['Instit']['errores']." errores)",
                 '/depuradorPlanes/index/'.$i['Instit']['id']
                 );
     ?>

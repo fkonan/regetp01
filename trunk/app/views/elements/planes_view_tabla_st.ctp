@@ -120,20 +120,21 @@ echo $form->hidden('Info.plan_id', array('value'=>$plan_id));
 <?php
 $i = 0;
 $j = 0;
-foreach($trayectosData['ciclo_lectivo'][0] as $anio_ciclo=>$ciclo){
-    
-    foreach($ciclo as $anio=>$datos_anio){
-        if(isset($datos_anio['Anio'])){
-            $datos_anio =  $datos_anio['Anio'];
-        }
-        
-        echo $form->hidden($j.'.estructura_planes_anio_id',array('value'=>$datos_anio['estructura_planes_anio_id']));
+debug($trayectosData);
+//foreach($trayectosData['ciclo_lectivo'][0] as $anio_ciclo=>$ciclo){
+
+    foreach($trayectosData['anios'] as $a){
+        $cicloLectivo = array_shift($trayectosData['ciclo_lectivo']);
+    //foreach($ciclo as $anio=>$datos_anio){
+        if(!empty($cicloLectivo[0][0])){
+            $cicloLectivo =  $cicloLectivo[0][0]['Anio'];
+        }        
+        echo $form->hidden($j.'.estructura_planes_anio_id',array('value'=>$cicloLectivo['estructura_planes_anio_id']));
 ?>
     <tr>
 <?php
         if($i == 0){
 ?>
-
             <td rowspan="<?php echo sizeof($ciclo)?>">
             <?php
             if (!empty($ciclo_seleccionado)) {
@@ -151,11 +152,11 @@ foreach($trayectosData['ciclo_lectivo'][0] as $anio_ciclo=>$ciclo){
         }
         
 ?>
-            <?php echo $form->hidden($j.'.id',array( 'label'=>false, 'value'=>empty($datos_anio["id"])?null:$datos_anio["id"]))?>
-            <td><?php echo $datos_anio["anio"]?>º</td>
-            <td><?php echo $form->input($j.'.matricula',array( 'label'=>false, 'value'=>is_null($datos_anio["matricula"])?null:$datos_anio["matricula"]))?></td>
-            <td><?php echo $form->input($j.'.secciones',array( 'label'=>false, 'value'=>is_null($datos_anio["secciones"])?null:$datos_anio["secciones"]))?></td>
-            <td><?php echo $form->input($j.'.hs_taller',array( 'label'=>false, 'value'=>is_null($datos_anio["hs_taller"])?null:$datos_anio["hs_taller"]))?></td>
+            <?php echo $form->hidden($j.'.id',array( 'label'=>false, 'value'=>empty($cicloLectivo["id"])?null:$cicloLectivo["id"]))?>
+            <td><?php echo $cicloLectivo["anio"]?>º</td>
+            <td><?php echo $form->input($j.'.matricula',array( 'label'=>false, 'value'=>is_null($cicloLectivo["matricula"])?null:$cicloLectivo["matricula"]))?></td>
+            <td><?php echo $form->input($j.'.secciones',array( 'label'=>false, 'value'=>is_null($cicloLectivo["secciones"])?null:$cicloLectivo["secciones"]))?></td>
+            <td><?php echo $form->input($j.'.hs_taller',array( 'label'=>false, 'value'=>is_null($cicloLectivo["hs_taller"])?null:$cicloLectivo["hs_taller"]))?></td>
     </tr>
 <?php
         $i++;
@@ -164,7 +165,7 @@ foreach($trayectosData['ciclo_lectivo'][0] as $anio_ciclo=>$ciclo){
     $i = 0;
 ?>
 <?php
-}
+//}
 ?>
 </table>
 <?php
