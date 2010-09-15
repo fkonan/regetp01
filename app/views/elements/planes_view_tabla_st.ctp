@@ -10,18 +10,17 @@
  *  $trayectosData['editable'] si esta en "true" hace que los valores:
  *                             matricula, secciones y hs taller sean editables
  *
- *  array $trayectosData['anios']
- *      Listado de años teoricos. Ej: array(12,13,14,15,16)
+ *   $trayectosData['form_action'] es el action a donde va a submitear el form
  *
  *  string $trayectosData['nombre_etapa']
  *      Nombre del ciclo a renderizar
  *
- *  array  $trayectosData['etapa_header'] listado de etapas distintas
- *  string $trayectosData['etapa_header'][x]['title'] nombre de la Etapa *
- *  string $trayectosData['etapa_header'][x]['estructura_plan_id'] id la EtapaPlan
- *  array  $trayectosData['etapa_header'][x]['anios'] listado de años. Ej: 1°, 2°, 3°
+ *  array  $trayectosData['estructura'] listado de etapas distintas
+ *  string $trayectosData['estructura'][x]['title'] nombre de la Etapa *
+ *  string $trayectosData['estructura'][x]['estructura_plan_id'] id la EtapaPlan
+ *  array  $trayectosData['estructura'][x]['anios'] array de años. del tipo find all 'EstructuraPlanesAnio'
  *
- *  array $trayectosData['ciclos_data'][integer CICLO] nombre o numero de año. Ej: 2009,2010
+ *  array $trayectosData['ciclos'][integer CICLO] nombre o numero de año. Ej: 2009,2010
  *
  *                                            [integer ANIO] listado de
  *                                                      ['matricula']
@@ -103,39 +102,27 @@ if (!empty($trayectosData['form_action'])) {
 } else {
     $form_action = 'add';
 }
-?>
-<?php
+
+// lo inicializo con el ciclo actual pero sin años dato
+$ciclosData = array(date('Y',strtotime('now'))=>array());
+if (!empty($trayectosData['ciclos'])) {
+    $ciclosData = $trayectosData['ciclos'];
+}
+
+
+$estructura_plan_id = $trayectosData['estructura'][0]['estructura_plan_id'];
+$anios = $trayectosData['estructura'][0]['anios'];
+
+
 echo $form->create('Anio', array('action'=>$form_action));
-$estructura_plan_id = $trayectosData['etapa_header'][0]['estructura_plan_id'];
+
 echo $form->hidden('Info.estructura_plan_id', array('value'=>$estructura_plan_id));
 echo $form->hidden('Info.plan_id', array('value'=>$plan_id));
 ?>
-<table border="2" widtd="100%" cellpadding="2" cellspacing="0">
+<table border="2" cellpadding="2" cellspacing="0">
+    <thead><?php echo $trayectosData['estructura'][0]['title']?></thead>
     <tr>
-            <th colspan="2"><?php echo $trayectosData['etapa_header'][0]['title']?></th>
-            <th>Matrícula</th>
-            <th>Secciones</th>
-            <th>Horas Taller</th>
-    </tr>
-<?php
-$i = 0;
-$j = 0;
-debug($trayectosData);
-//foreach($trayectosData['ciclo_lectivo'][0] as $anio_ciclo=>$ciclo){
-
-    foreach($trayectosData['anios'] as $a){
-        $cicloLectivo = array_shift($trayectosData['ciclo_lectivo']);
-    //foreach($ciclo as $anio=>$datos_anio){
-        if(!empty($cicloLectivo[0][0])){
-            $cicloLectivo =  $cicloLectivo[0][0]['Anio'];
-        }        
-        echo $form->hidden($j.'.estructura_planes_anio_id',array('value'=>$cicloLectivo['estructura_planes_anio_id']));
-?>
-    <tr>
-<?php
-        if($i == 0){
-?>
-            <td rowspan="<?php echo sizeof($ciclo)?>">
+        <th>
             <?php
             if (!empty($ciclo_seleccionado)) {
                 $attrs = array('disabled'=>true);
@@ -147,26 +134,77 @@ debug($trayectosData);
             }
             echo $form->select('Info.ciclo_id',$ciclos, $defaultVal, $attrs,false);
             ?>
-            </td>
-<?php
-        }
-        
-?>
-            <?php echo $form->hidden($j.'.id',array( 'label'=>false, 'value'=>empty($cicloLectivo["id"])?null:$cicloLectivo["id"]))?>
-            <td><?php echo $cicloLectivo["anio"]?>º</td>
-            <td><?php echo $form->input($j.'.matricula',array( 'label'=>false, 'value'=>is_null($cicloLectivo["matricula"])?null:$cicloLectivo["matricula"]))?></td>
-            <td><?php echo $form->input($j.'.secciones',array( 'label'=>false, 'value'=>is_null($cicloLectivo["secciones"])?null:$cicloLectivo["secciones"]))?></td>
-            <td><?php echo $form->input($j.'.hs_taller',array( 'label'=>false, 'value'=>is_null($cicloLectivo["hs_taller"])?null:$cicloLectivo["hs_taller"]))?></td>
+        </th>
+        <th>Matrícula</th>
+        <th>Secciones</th>
+        <th>Horas Taller</th>
     </tr>
-<?php
-        $i++;
-        $j++;
-    }
+    <?php
     $i = 0;
-?>
-<?php
-//}
-?>
+    $j = 0;
+
+
+    // recorro los ciclos lectivos, por lo general va a haber 1 solo, sobre todo si estoy editando
+    foreach ($ciclosData as $ciclo_seleccionado=>$cicloLectivoAnios) {
+        // recorro la estruictura estructura_planes_anio para mostrar cada año
+        foreach($anios as $a) {
+            $encontrado = false;
+            // busco el año dato que tenga esta estructura
+            foreach ($cicloLectivoAnios as $anioDato) {
+                // muestro los datos para esa estructura que estoy recorriendo
+                if ($a['id'] == $anioDato['Anio']['estructura_planes_anio_id']) {
+                    ?>
+    <tr>
+        <td><?php echo $a["alias"]?></td>
+                        <?php
+                        echo $form->hidden($j.'.estructura_planes_anio_id',array(
+                        'value'=>$anioDato['Anio']['estructura_planes_anio_id']));
+
+                        echo $form->hidden($j.'.id',array('label'=>false,
+                        'value'=> $anioDato['Anio']['id']));
+
+                        echo '<td>'.$form->input($j.'.matricula',array(
+                                'label'=>false,
+                                'value'=>$anioDato['Anio']["matricula"]))
+                                .'</td>';
+
+                        echo '<td>'.$form->input($j.'.secciones',array(
+                                'label'=>false,
+                                'value'=>$anioDato['Anio']["secciones"]))
+                                .'</td>';
+
+                        echo '<td>'.$form->input($j.'.hs_taller',array(
+                                'label'=>false,
+                                'value'=>$anioDato['Anio']["hs_taller"]))
+                                .'</td>';
+                        ?>
+    </tr>                        <?php
+                    $encontrado = true;
+                    break;
+                }
+            }
+            // si No hay datos para el año de la estrctura_anio, entonces lo agrego para que lo pueda editar
+            if (!$encontrado) {
+                ?>
+     <tr>
+        <td><?php echo $a["alias"]?></td>
+        <?php
+                echo $form->hidden($j.'.estructura_planes_anio_id',array('value'=>$a['id']));
+                echo '<td>'.$form->input($j.'.matricula',array('label'=>false, 'value'=>0)).'</td>';
+                echo '<td>'.$form->input($j.'.secciones',array('label'=>false, 'value'=>0)).'</td>';
+                echo '<td>'.$form->input($j.'.hs_taller',array('label'=>false, 'value'=>0)).'</td>';
+            }
+            ?>
+     </tr>
+            <?php
+            $i++;
+            $j++;
+        }
+        $i = 0;
+
+
+    }
+    ?>
 </table>
 <?php
 echo $form->end('Guardar');
@@ -174,7 +212,7 @@ echo $form->end('Guardar');
 
 
 
-       
+
 
 
 

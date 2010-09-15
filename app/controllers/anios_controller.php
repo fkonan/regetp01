@@ -228,26 +228,39 @@ class AniosController extends AppController {
             $this->render($viewToRender);
 	}
 
+
+        /**
+         *
+         * @param integer $plan_id
+         * @param integer $ciclo_id
+         */
         function editCiclo($plan_id = null, $ciclo_id = null) {
-            $aPlan = $this->Anio->find('first', array(
-                'conditions'=>array('Anio.plan_id'=>$plan_id,
-                                    'Anio.ciclo_id'=>$ciclo_id
-                                   ),
-                'order' => 'Anio.anio',
-                ));
-
-            $plan_id = $aPlan['Anio']['plan_id'];
-
-
-            $this->data = $aPlan;
-
+            $conditions = array();
+            
+            // datos que pueden venir del formulario
             if(!empty($this->data['Info']['plan_id'])){
                     $plan_id = $this->data['Info']['plan_id'];
             }
+            if(!empty($this->data['Info']['ciclo_id'])){
+                    $ciclo_id = $this->data['Info']['ciclo_id'];
+            }
 
+                // agarro la Info del Plan para plan_id y su ciclo
+                $aPlan = $this->Anio->find('first', array(
+                    'conditions'=>array('Anio.plan_id'=>$plan_id,
+                                        'Anio.ciclo_id'=>$ciclo_id
+                                       ),
+                    'order' => 'Anio.anio',
+                    ));
+                $this->data = $aPlan;
+
+
+            // agarro la estructura y su trayecto con los años
             $estructuraPlanId = $this->Anio->Plan->getEstructuraSugerida($plan_id);
             $trayectosDisponibles = $this->Anio->EstructuraPlanesAnio->EstructuraPlan->find('first', array(
-                'contain'=> array('EstructuraPlanesAnio'=>array('order'=>array('EstructuraPlanesAnio.edad_teorica'))),
+                'contain'=> array(
+                    'EstructuraPlanesAnio'=>array(
+                        'order'=>array('EstructuraPlanesAnio.edad_teorica'))),
                 'conditions'=> array(
                     'EstructuraPlan.id'=>$estructuraPlanId),
             ));
@@ -264,9 +277,11 @@ class AniosController extends AppController {
                     $viewToRender = '/anios/edit_fp';
                     break;
                 case 2: // IT
+                    $viewToRender = '/anios/edit';
+                    break;
                 case 3: //MT
                 case 5: //SEC NO TECNICO
-                    $viewToRender = '/anios/edit';
+                    $viewToRender = '/anios/edit_estructurados';
                     break;
                 case 6: //SUP NO TECNICO
                 case 4: //SNU
@@ -282,7 +297,7 @@ class AniosController extends AppController {
             $this->set('plan_id',$plan_id);
             //$this->set('duracion_hs',$duracion_hs);
             $anios = $this->Anio->find('all', array(
-                'recursive'=>-1,
+                'contain'=> array('EstructuraPlanesAnio'),
                 'conditions'=>array(
                     'Anio.plan_id'=>$plan_id,
                     'Anio.ciclo_id'=>$aPlan['Anio']['ciclo_id']
