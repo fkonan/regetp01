@@ -153,9 +153,10 @@ echo $form->hidden('Info.plan_id', array('value'=>$plan_id));
             foreach ($cicloLectivoAnios as $anioDato) {
                 // muestro los datos para esa estructura que estoy recorriendo
                 if ($a['id'] == $anioDato['Anio']['estructura_planes_anio_id']) {
+                    $encontrado = true;
                     ?>
     <tr>
-        <td><?php echo $a["alias"]?></td>
+        <td><?php echo $a["nro_anio"].'º'?></td>
                         <?php
                         echo $form->hidden($j.'.estructura_planes_anio_id',array(
                         'value'=>$anioDato['Anio']['estructura_planes_anio_id']));
@@ -179,7 +180,6 @@ echo $form->hidden('Info.plan_id', array('value'=>$plan_id));
                                 .'</td>';
                         ?>
     </tr>                        <?php
-                    $encontrado = true;
                     break;
                 }
             }
@@ -187,7 +187,7 @@ echo $form->hidden('Info.plan_id', array('value'=>$plan_id));
             if (!$encontrado) {
                 ?>
      <tr>
-        <td><?php echo $a["alias"]?></td>
+        <td><?php echo $a["nro_anio"].'º'?></td>
         <?php
                 echo $form->hidden($j.'.estructura_planes_anio_id',array('value'=>$a['id']));
                 echo '<td>'.$form->input($j.'.matricula',array('label'=>false, 'value'=>0)).'</td>';
