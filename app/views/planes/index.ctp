@@ -221,7 +221,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                 </div>
                 <?php endif;?>
 
-                <div class="actions">
+                <div class="actions acl-editores-actions">
                         <ul>
                         <li><?php echo $html->link(__('Nueva Oferta', true), array('controller'=> 'planes', 'action'=>'add/'. $planes['Instit']['id']));?> </li>
                         <li><?php echo $html->link(__('Depurar Institución', true), '/depuradorPlanes/index/'.$planes['Instit']['id']); ?> </li>
