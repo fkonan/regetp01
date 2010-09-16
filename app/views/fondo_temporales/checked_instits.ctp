@@ -65,7 +65,7 @@ echo $javascript->link('scriptaculous-js-1.8.3/src/scriptaculous');
             <th><?php echo $paginator->sort('localidad');?></th>
             <th><?php echo $paginator->sort('Localidad','Localidad.name');?></th>
             <th><?php echo $paginator->sort('Diff Totales');?></th>
-            <th class="actions"><?php __('Actions');?></th>
+            <th><?php __('Actions');?></th>
             <th><?php echo $paginator->sort('observacion');?></th>
         </tr>
         <?php
@@ -136,13 +136,12 @@ echo $javascript->link('scriptaculous-js-1.8.3/src/scriptaculous');
                     $fondo['FondoTemporal']['f08'] +
                     $fondo['FondoTemporal']['f09'] +
                     $fondo['FondoTemporal']['f10'] +
-                    $fondo['FondoTemporal']['f10'] +
                     $fondo['FondoTemporal']['equipinf'] +
                     $fondo['FondoTemporal']['refaccion'] -
                     $fondo['FondoTemporal']['total']); ?>
             </td>
 
-            <td class="actions" style="background-color: silver">
+            <td style="background-color: silver">
                     <?
                     if($checkedInstit != null) {
                         if ($checkedInstit == 1) {
@@ -246,8 +245,8 @@ echo $javascript->link('scriptaculous-js-1.8.3/src/scriptaculous');
 
 
         function cambiarFondo() {
-            console.debug($(this));
-            $(this).addClassName('cambiado');
+            console.debug(jQuery(this));
+            jQuery(this).addClass('cambiado');
         }
     </script>
 
