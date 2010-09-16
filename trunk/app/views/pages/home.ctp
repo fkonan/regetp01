@@ -33,8 +33,9 @@ sistema.
 La nueva versión presenta varias mejoras, entre las que se destacan:
 </p>
 <ul>
-    <li>Se ha incorporado la estructuracion de Ofertas Educativas del Registro, con la cual la <i>Unidad de Información</i> realizará un trabajo de depuración y reordenamiento de la información.</li>
-   
+    <li>Se han estructurado, en la base de datos, a todas las Ofertas Educativas de acuerdo a su ciclo o etapa (Ciclo Básico, Ciclo Superior, EGB3, Polimodal, etc) según su jurisdicción.</li>
+    <li>Se ha desarrollado una página especial donde la <i>Unidad de Información</i>
+        realizará un trabajo de depuración y reordenamiento de datos.</li>
 </ul>
 <br/>
 <br/>

@@ -24,6 +24,7 @@ $menuOptions = array(
         array(
                 'nombre'=> 'Planes de Mejora',
                 'link'=> array('controller'=>'Fondos','action'=>'index_x_instit', $instit_id),
+                'options'=> array('class'=>'actions'),
         ),
 );
 

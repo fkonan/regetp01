@@ -7,6 +7,7 @@
  *          OPCIONES POSIBLES
  *              string 'nombre' = 'nombre' del elemento
  *              string 'link'   = link del elemento es una url de cake
+ *              array  'options'= opciones para el TAG, puede ser 'class', 'style', etc etc etc
  *              boolean activa  =  si existe este KEY lo toma como true
  *
  *
@@ -21,16 +22,34 @@ if (empty($elementos)) {
 <div class="tabs-list">
     <?php
     foreach ($elementos as $e) {
+        // marco la pestaña activa segun la pagina donde estoy ahora
         $claseActiva = 'tab-grande-activa';
-
-        if (strtolower($this->here) == strtolower($html->url($e['link'],false))) {
+        if (strtolower($e['link']['controller']) == strtolower($this->params['controller'])
+                &&
+            strtolower($e['link']['action']) == strtolower($this->params['action'])
+            ){
             $claseActiva = 'tab-grande-inactiva';
         }
-        ?>
-    <span class="<?php echo $claseActiva?>">
-        <?php echo $html->link($e['nombre'],$e['link']);?>
-    </span>
-        <?php
+
+        $options = array();
+        if (!empty($e['options'])){
+            $options = $e['options'];
+        }
+
+        // agrego la claseActiva a las opciones
+        if (!empty($options['class'])) {
+            // si me vino el options cargado con clase CONCATENO
+            $options['class'] = $claseActiva. " " .$options['class'];
+        } else {
+            // si no habia class en el options, entonces meto directo
+            $options['class'] = $claseActiva;
+        }
+        
+        echo $html->tag('span',
+                $html->link($e['nombre'],$e['link']),
+                   $options
+                    );
+
     }
     ?>
 </div>
