@@ -21,6 +21,7 @@ $menuOptions = array(
         array(
                 'nombre'=> 'Planes de Mejora',
                 'link'=> array('controller'=>'Fondos','action'=>'index_x_jurisdiccion', $jurisdiccion_id),
+                'options' => array('class' => 'acl-fondo-actions')
         ),
 );
 

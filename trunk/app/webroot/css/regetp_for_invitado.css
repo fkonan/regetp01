@@ -1,3 +1,7 @@
-.actions{
+.acl-fondo-actions{
+    display: none;
+}
+
+.acl-editores-actions{
     display: none;
 }
