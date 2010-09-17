@@ -6,6 +6,7 @@
 		echo $form->input('id');
 		echo $form->input('name');
                 echo $form->input('abrev');
+                echo $form->input('orden');
 	?>
 	</fieldset>
 <?php echo $form->end('Submit');?>

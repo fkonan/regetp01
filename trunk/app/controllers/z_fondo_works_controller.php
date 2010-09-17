@@ -14,12 +14,12 @@ class ZFondoWorksController extends AppController {
     /**
      *
      * @param boolean $validar default en true Esta variable es para que no me haga el checkeo de totales al inicio y al final
-     * @param integer $cantDeFondosDelExcel default en 7021. Indica el numero de registros que hay en el excel original
+     * @param integer $cantDeFondosDelExcel default en 0. Indica el numero de registros que hay en el excel original
      * @param integer $cantRegistros, default en 0 para que traiga todos. Es el LIMIT que quiero ponerle al traerme registros para procesar
      * @param boolean $eliminarArchivosDeFondoYLineas default en true. Si esta en true me elimina los registros que haya en fondos y fondos_lineas_de_acciones
      * @return <type>
      */
-    function migrator($validar = 1, $cantDeFondosDelExcel = 7021, $cantRegistros = 0, $eliminarArchivosDeFondoYLineas = 1) {
+    function migrator($validar = 1, $cantDeFondosDelExcel = 0, $cantRegistros = 0, $eliminarArchivosDeFondoYLineas = 1) {
         // solo migro por defecto instits y jurisdiccionales
         // y no me importa si estan chekeados o no
         $cosasAmigrar = 'ij';
@@ -31,7 +31,7 @@ class ZFondoWorksController extends AppController {
         if ( $validar == 1) {
             $tempsComprobacion = $this->ZFondoWork->temporalesFiltradosX('ijc', $cantRegistros, $eliminarArchivosDeFondoYLineas);
             $totTemps = count($tempsComprobacion);
-            if ( $totTemps != $cantDeFondosDelExcel) {
+            if ( $totTemps != $cantDeFondosDelExcel || $cantDeFondosDelExcel == 0) {
                 $this->set('msg', '');
                 $this->set('msg_type', '');
                 $this->set('msg_check', "hay solo $totTemps registros en z_fondo_work, cuando en el excel hay $cantDeFondosDelExcel.");
