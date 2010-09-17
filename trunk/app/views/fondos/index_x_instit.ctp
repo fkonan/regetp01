@@ -44,16 +44,16 @@
 
                 <h2>Listado de Planes de Mejora</h2>
                 <?php
-                if(count($fondos) == 1){
+                if($paginator->counter(array('format' => __('%count%', true))) == 1){
                 ?>
                     <p><?php echo sprintf(DESCRIPCION_SINGULAR,number_format($sumalineas,2,",",".")); ?></p>
                 <?php
                 }
                 ?>
                 <?php
-                if(count($fondos) > 1){
+                if($paginator->counter(array('format' => __('%count%', true))) > 1){
                 ?>
-                    <p><?php echo sprintf(DESCRIPCION_PLURAL, count($fondos),number_format($sumalineas,2,",",".")); ?></p>
+                    <p><?php echo sprintf(DESCRIPCION_PLURAL, $paginator->counter(array('format' => __('%count%', true))),number_format($sumalineas,2,",",".")); ?></p>
                 <?php
                 }
                 ?>
