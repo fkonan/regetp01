@@ -27,7 +27,6 @@ class DepuradorPlanesController extends AppController {
                                             'Etapa',
                                             'order'=>array('ciclo_id','etapa_id', 'anio')),
                                     'conditions'=> array('Plan.oferta_id'=> 3),
-                                    'order' => array('')
                             )),
                     'conditions' => array('Instit.id'=> $id)
             ));

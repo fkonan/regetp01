@@ -1,0 +1,1 @@
+ALTER TABLE "public"."etapas" ADD COLUMN "orden" integer;
