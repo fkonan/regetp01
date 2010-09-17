@@ -21,6 +21,7 @@ class DepuradorPlanesController extends AppController {
                             'Gestion' => 'name',
                             'Departamento' => 'name',
                             'Localidad' => 'name',
+                            'Tipoinstit' => 'name',
                             'Plan' => array(
                                     'EstructuraPlan',
                                     'Anio' => array(

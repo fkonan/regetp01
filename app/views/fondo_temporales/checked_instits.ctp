@@ -206,26 +206,33 @@ echo $javascript->link('scriptaculous-js-1.8.3/src/scriptaculous');
             Si hay algún error, no se migra nada. <br> Por lo general yo quiero poner esto en CERO en un entorno de desarrollo o testing. <br>
             Si pongo 2 me migra (ijc) instituciones y jurisdiccionales checkeadas nada mas
             <br>
-            <input id="validar" name="validar" value="1">
+            <select id="validar" name="validar">
+                <option value="2" selected>Migrar instituciones y Jurisdiccionales Checkeados</option>
+                <option value="0">No Validar</option>
+                <option value="1">Validar</option>
+            </select>
         </p>
 
         <p>
             Cantidad de fondos que hay en el excel original (j y i). Se usa para verificar la migración
             <span>
-                <input id="cantFondosExcel" name="cantFondosExcel" value="7594">
+                <input id="cantFondosExcel" name="cantFondosExcel" value="0">
             </span>
         </p>
         <p>
             ¿Cuantos registros migrar? es un LIMIT (0 migra todos).
             <span>
-                <input id="limit" name="limit" value="0">
+                <input id="limit" name="limit"  value="0">
             </span>
         </p>
         <p>
-            Borrar datos existentes en "fondos" y "fondos_lineas_de_acciones". Poner 1 o 0
+            Borrar datos existentes en "fondos" y "fondos_lineas_de_acciones". Poner 1 (borra) o 0 (no borra)
             <br>
             <span>
-                <input id="borrar" name="borrar" value="1">
+                <select id="borrar" name="borrar" >
+                    <option value="0" selected>NO Borra</option>
+                    <option value="1">Borrar (hace truncate de "fondos")</option>
+                </select>
             </span>
         </p>
         <input type="submit" value="RUN MIGRATOR!">
@@ -235,9 +242,14 @@ echo $javascript->link('scriptaculous-js-1.8.3/src/scriptaculous');
         function runMigrator(){
             //window.location = "http://www.google.com/";
             var url = '<?= $html->url('/ZFondoWorks/migrator'); ?>';
-            var urlCompleta =  url +'/'+$F('validar')+"/"+$F('cantFondosExcel')+"/"+$F('limit')+"/"+$F('borrar')
 
-            //console.debug(urlCompleta);
+            var validar = $F('validar');
+            var cantFondosExcel = $F('cantFondosExcel');
+            var limit = $F('limit');
+            var borrar = $F('borrar');
+            
+            var urlCompleta =  url +'/'+validar+"/"+cantFondosExcel+"/"+limit+"/"+borrar;
+
             window.location = urlCompleta;
             return false;
         };

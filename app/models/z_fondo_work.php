@@ -39,6 +39,12 @@ class ZFondoWork extends AppModel {
          * @return integer cant de registros migrados
          */
         function migrar($cosasMigrar = 'ij', $registrosATraer = 0, $borrarDatosFondo = false) {
+            // marco los jurisdiccionales como CUE checked = 1
+            if (!$this->updateAll(array('cue_checked'=>1), array('tipo'=>'j'))){
+                debug("no se pudo pone los jurisdiccionales como cue_checked = 1");
+            }
+
+
             
             /**
              * @var Fondo
@@ -66,11 +72,10 @@ class ZFondoWork extends AppModel {
 
             
             if (count($temps) == 0){
-                $this->migrationStatus[] = 'No hay registros en la tabla z_fondo_work!!! se detuvo la migración.';
+                $this->migrationStatus[] = 'No hay más registros en la tabla z_fondo_work!!! se detuvo la migración.';
                 return -2;
             }
             
-
             if ($borrarDatosFondo == true) {
                 $this->query('truncate fondos');
                 $this->query('truncate fondos_lineas_de_acciones');
@@ -92,7 +97,6 @@ class ZFondoWork extends AppModel {
             $consoleText .= "Convirtiendo lineas y temps en algo lindo para guardar.....<br />";
             $data = $this->__convertirLineasYTempsEnAlgoLindoParaGuardar($temps, $lineasFiltradas);
            
-
             $consoleText .= "Guardando fondos.....<br />";
 
             $cantFondos = 0;
@@ -100,6 +104,7 @@ class ZFondoWork extends AppModel {
             foreach ($data as $f) {
                 $this->Fondo->create();
                 if ($this->Fondo->save($f['Fondo'])) { // guardar el fondo
+                    $this->delete($f['Fondo']['z_fondo_work_id'], false);
                     if (!empty($f['Fondo']['FondosLineasDeAccion'])){
                         foreach ($f['Fondo']['FondosLineasDeAccion'] as $la) {
                             // guardar cada linea de accion del fondo
@@ -193,6 +198,7 @@ class ZFondoWork extends AppModel {
                     'total'              => $vAux['total'],
                     'resolucion'         => "''",
                     'description'        => $vAux['observacion'],
+                    'z_fondo_work_id'        => $vAux['id'],
                     );
                 
                 foreach ($l as $lineaForm=>$monto){                    
@@ -291,7 +297,7 @@ class ZFondoWork extends AppModel {
          *
          * @param integer $registrosATraer es el LIMIT, para utilizar en desarrollo unicamente
          */
-        function temporalesFiltradosX($cosasMigrar = 'ij', $registrosATraer = 0){
+        function temporalesFiltradosX($cosasMigrar = 'ijc', $registrosATraer = 0){
             // me traigo el z_fondo_work con las condiciones:
             // utilizo la variable $cosasMigrar para filtrar
             // ya sea por Instituciones, Jurisdiccionales o Totales
@@ -302,7 +308,7 @@ class ZFondoWork extends AppModel {
             $flag1 = (strlen($cosasMigrar)==2)? true:false;
             // esta variable se usa para mostrar en pantalla que fue lo que se migro
             $this->temporalesFiltradosX = array();
-
+            
             $conditions = array(
                 'tipo' => array(),
                 'cue_checked' => array(),
@@ -328,7 +334,7 @@ class ZFondoWork extends AppModel {
                     $conditions["totales_checked"][] = 2;
                 }
             }
-
+            
             if (count($conditions['tipo']) == 0) {
                 unset ($conditions['tipo']);
             }
