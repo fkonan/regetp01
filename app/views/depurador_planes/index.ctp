@@ -142,7 +142,7 @@ echo $html->css(array('jquery.loadmask'));
                 <br />
 
                 <br />
-                <?php echo $form->input('estructura_id', 
+                <?php echo $form->input('estructura_id_'.$plan['id'],
                         array(  'options'=>$estructuras,
                                 'label'=>'',
                                 'empty'=>' -Seleccione- ',

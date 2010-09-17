@@ -32,15 +32,41 @@ class JurisdiccionesEstructuraPlan extends AppModel {
          *                                                  'list'
          * @return array del model 'EstructuraPlan' encontradas
          */
-        function getEstructurasDeJurisdiccion($jurisdiccion_id, $find_type = 'all') {
-             $trayecto_anios = $this->find('all', array(
+        function getEstructurasDeJurisdiccion($jurisdiccion_id, $find_type = 'all', $order='Etapa.orden') {
+             /*$trayecto_anios = $this->find('all', array(
                 'fields' => array('EstructuraPlan.name'),
                 'contain' => array(
                     'EstructuraPlan.EstructuraPlanesAnio',
+                    'EstructuraPlan.Etapa'
                 ),
                 'conditions'=> array(
                     'JurisdiccionesEstructuraPlan.jurisdiccion_id' => $jurisdiccion_id,
-                )));
+                ),
+                ));*/
+             $this->recursive = -1;
+             $trayecto_anios = $this->find('all', array(
+                'fields' => array('EstructuraPlan.id','EstructuraPlan.name'),
+                'joins' => array(
+                    array('table' => 'estructura_planes',
+                          'alias' => 'EstructuraPlan',
+                          'type' => 'inner',
+                          'conditions' => array(
+                            'EstructuraPlan.id = JurisdiccionesEstructuraPlan.estructura_plan_id'
+                          )
+                    ),
+                    array('table' => 'etapas',
+                          'alias' => 'Etapa',
+                          'type' => 'inner',
+                          'conditions' => array(
+                            'EstructuraPlan.etapa_id = Etapa.id'
+                          )
+                    ),
+                ),
+                'conditions' => array(
+                    'jurisdiccion_id' => $jurisdiccion_id
+                ),
+                'order' => array($order),
+                ));
 
              // si es del tipo list convierto el resultado a ese formato
              if ($find_type == 'list') {
