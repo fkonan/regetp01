@@ -40,7 +40,7 @@ class ZFondoWork extends AppModel {
          */
         function migrar($cosasMigrar = 'ij', $registrosATraer = 0, $borrarDatosFondo = false) {
             // marco los jurisdiccionales como CUE checked = 1
-            if (!$this->updateAll(array('cue_checked'=>1), array('tipo'=>'j'))){
+            if (!$this->updateAll(array('ZFondoWork.cue_checked'=>1), array('ZFondoWork.tipo'=>"'j'"))){
                 debug("no se pudo pone los jurisdiccionales como cue_checked = 1");
             }
 
