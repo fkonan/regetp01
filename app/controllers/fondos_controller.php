@@ -104,7 +104,7 @@ class FondosController extends AppController {
 	}*/
 
 	function add() {
-                $this->redirect(array('action' => 'index'));
+                //$this->redirect(array('action' => 'index'));
 		if (!empty($this->data)) {
 			$this->Fondo->create();
 			if ($this->Fondo->save($this->data)) {
@@ -114,10 +114,13 @@ class FondosController extends AppController {
 				$this->Session->setFlash(__('The Fondo could not be saved. Please, try again.', true));
 			}
 		}
+
+                $jurisdicciones = $this->Fondo->Jurisdiccion->find('list', array('order'=>'name'));
+                $this->set('jurisdicciones', $jurisdicciones);
 	}
 
 	function edit($id = null) {
-                $this->redirect(array('action' => 'index'));
+                //$this->redirect(array('action' => 'index'));
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid Fondo', true));
 			$this->redirect(array('action' => 'index'));
