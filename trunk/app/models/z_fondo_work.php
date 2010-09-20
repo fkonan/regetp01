@@ -40,7 +40,7 @@ class ZFondoWork extends AppModel {
          */
         function migrar($cosasMigrar = 'ij', $registrosATraer = 0, $borrarDatosFondo = false) {
             // marco los jurisdiccionales como CUE checked = 1
-            if (!$this->updateAll(array('ZFondoWork.cue_checked'=>1), array('ZFondoWork.tipo'=>"'j'"))){
+            if (!$this->updateAll(array('ZFondoWork.cue_checked'=>1), array('ZFondoWork.tipo'=>'j'))){
                 debug("no se pudo pone los jurisdiccionales como cue_checked = 1");
             }
 
@@ -77,9 +77,10 @@ class ZFondoWork extends AppModel {
             }
             
             if ($borrarDatosFondo == true) {
-                $this->query('truncate fondos');
-                $this->query('truncate fondos_lineas_de_acciones');
-                $consoleText .= "Borre todo lo que habia en fondo.<br />";
+                // PELIGRO!!! (commented by Pablo)
+                //$this->query('truncate fondos');
+                //$this->query('truncate fondos_lineas_de_acciones');
+                //$consoleText .= "Borre todo lo que habia en fondo.<br />";
             }
 
             $consoleText = "Chequeando que existan las lineas de accion.....<br />";
@@ -310,39 +311,39 @@ class ZFondoWork extends AppModel {
             $this->temporalesFiltradosX = array();
             
             $conditions = array(
-                'tipo' => array(),
-                'cue_checked' => array(),
-                'totales_checked' => array(),
+                'ZFondoWork.tipo' => array(),
+                'ZFondoWork.cue_checked' => array(),
+                'ZFondoWork.totales_checked' => array(),
             );
 
             if ($cosasMigrar){
                 if (strpos($cosasMigrar,'i') !== false) {
-                    $conditions['tipo'][] = 'i';
+                    $conditions['ZFondoWork.tipo'][] = 'i';
                 }
                 if (strpos($cosasMigrar,'j') !== false) {
-                    $conditions['tipo'][] = 'j';
+                    $conditions['ZFondoWork.tipo'][] = 'j';
                 }
                 if (strpos($cosasMigrar,'t') !== false) {
-                    $conditions['tipo'][] = 't';
+                    $conditions['ZFondoWork.tipo'][] = 't';
                 }
                 if (strpos($cosasMigrar,'c') !== false) {
-                    $conditions['cue_checked'][] = 1;
-                    $conditions["totales_checked"][] = 1;
+                    $conditions['ZFondoWork.cue_checked'][] = 1;
+                    $conditions["ZFondoWork.totales_checked"][] = 1;
                 }
                 if (strpos($cosasMigrar,'d') !== false) {
-                    $conditions['cue_checked'][] = 2;
-                    $conditions["totales_checked"][] = 2;
+                    $conditions['ZFondoWork.cue_checked'][] = 2;
+                    $conditions["ZFondoWork.totales_checked"][] = 2;
                 }
             }
             
-            if (count($conditions['tipo']) == 0) {
-                unset ($conditions['tipo']);
+            if (count($conditions['ZFondoWork.tipo']) == 0) {
+                unset ($conditions['ZFondoWork.tipo']);
             }
-            if (count($conditions['cue_checked']) == 0) {
-                unset ($conditions['cue_checked']);
+            if (count($conditions['ZFondoWork.cue_checked']) == 0) {
+                unset ($conditions['ZFondoWork.cue_checked']);
             }
-            if (count($conditions['totales_checked']) == 0) {
-                unset ($conditions['totales_checked']);
+            if (count($conditions['ZFondoWork.totales_checked']) == 0) {
+                unset ($conditions['ZFondoWork.totales_checked']);
             }
             
             // en $temps van todas las filas del excel filtradas segun las condiciones de arriba
