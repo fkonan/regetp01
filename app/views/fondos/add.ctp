@@ -111,11 +111,92 @@ echo $html->css('jquery.autocomplete.css');
 		
             echo $form->input('description');
 	?>
-    </fieldset>
+	</fieldset>
     <?php echo $form->end('Guardar');?>
+
+    <h2>Lineas de Accion</h2>
+    <div title="Lineas de Accion" class="lista_lineas">
+        <dl class="item_lineas" style="cursor:pointer;padding:0px !important">
+            <div id="detalle">
+            <dt onmouseout="jQuery(this).toggleClass('item_fondos_seleccionado')" onmouseover="jQuery(this).toggleClass('item_fondos_seleccionado')" class="" >
+                <span>
+                    <?php echo $html->image('/img/modify.png', array('alt' => 'Modificar'))?>
+                    <?php echo $html->image('/img/delete.png', array('alt' => 'Borrar'))?>
+                </span>
+                <span>
+                    F05 - Equipamiento de talleres, laboratorios y espacios productivos
+                </span>
+            </dt>
+            <dd>$ 84.025,00</dd>
+            <dt onmouseout="jQuery(this).toggleClass('item_fondos_seleccionado')" onmouseover="jQuery(this).toggleClass('item_fondos_seleccionado')" class="" >
+                <span>
+                    <?php echo $html->image('/img/modify.png', array('alt' => 'Modificar'))?>
+                    <?php echo $html->image('/img/delete.png', array('alt' => 'Borrar'))?>
+                </span>
+                <span>
+                    F05 - Equipamiento de talleres, laboratorios y espacios productivos
+                </span>
+            </dt>
+            <dd>$ 84.025,00</dd>
+            <dt onmouseout="jQuery(this).toggleClass('item_fondos_seleccionado')" onmouseover="jQuery(this).toggleClass('item_fondos_seleccionado')" class="" >
+                <span>
+                    <?php echo $html->image('/img/modify.png', array('alt' => 'Modificar'))?>
+                    <?php echo $html->image('/img/delete.png', array('alt' => 'Borrar'))?>
+                </span>
+                <span>
+                    F05 - Equipamiento de talleres, laboratorios y espacios productivos
+                </span>
+            </dt>
+            <dd>$ 84.025,00</dd>
+            </div>
+            <div id="totales">
+            <dt onmouseout="jQuery(this).toggleClass('item_fondos_seleccionado')" onmouseover="jQuery(this).toggleClass('item_fondos_seleccionado')" class="" >
+                <span style="padding-left:15px">
+                    >><strong> Total</strong>
+                </span>
+            </dt>
+            <dd><strong>$ 184.025,00</strong></dd>
+            </div>
+        </dl>
+        
+    </div>
+    <span style="float:right">
+        <?php echo $html->image('/img/add.gif', array('id'=>'agregar_nueva_linea','alt' => 'Agregar'))?>
+    </span>
 </div>
 <div class="actions">
 	<ul>
 		<li><?php echo $html->link(__('Volver a Fondos', true), array('action' => 'index'));?></li>
 	</ul>
 </div>
+
+<span class="nueva_linea" style="display:none">
+<dt  onmouseout="jQuery(this).toggleClass('item_fondos_seleccionado')" onmouseover="jQuery(this).toggleClass('item_fondos_seleccionado')" class="" style="height: 30px;">
+    <span>
+        <?php echo $html->image('/img/check.gif', array('alt' => 'Confirmar'))?>
+        <?php echo $html->image('/img/delete.png', array('alt' => 'Borrar'))?>
+    </span>
+    <span>
+        <select>
+            <option> F01 - Equipamiento de talleres, laboratorios y espacios productivos </option>
+            <option> F02 - Equipamiento de talleres, laboratorios y espacios productivos </option>
+            <option> F03 - Equipamiento de talleres, laboratorios y espacios productivos </option>
+            <option> F04 - Equipamiento de talleres, laboratorios y espacios productivos </option>
+            <option> F05 - Equipamiento de talleres, laboratorios y espacios productivos </option>
+            <option> F06 - Equipamiento de talleres, laboratorios y espacios productivos </option>
+        </select>
+    </span>
+</dt>
+<dd><input style="margin-top:-14px;width:100px"type="text"/></dd>
+</span>
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        jQuery("#agregar_nueva_linea").click(function(){
+            jQuery(".lista_lineas dl #detalle").append(jQuery(".nueva_linea").html());
+            jQuery(".lista_lineas .nueva_linea").show();
+        });
+
+    });
+
+</script>
