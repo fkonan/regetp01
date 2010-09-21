@@ -15,7 +15,7 @@ echo $html->css('jquery.autocomplete.css');
 
         jQuery(document).ajaxStop(jQuery.unblockUI);
 
-        jQuery("#FondoTemporalPosibleInstit").autocomplete("<?echo $html->url(array('controller'=>'fondo_temporales','action'=>'search_instits'));?>", {
+        jQuery("#FondoPosibleInstit").autocomplete("<?echo $html->url(array('controller'=>'fondo_temporales','action'=>'search_instits'));?>", {
 		dataType: "json",
 		parse: function(data) {
 			return jQuery.map(data, function(instit) {
@@ -31,10 +31,8 @@ echo $html->css('jquery.autocomplete.css');
 		}
 	}).result(function(e, item) {
                 jQuery("#hiddenInstitId").remove();
-                jQuery("#FondoTemporalEditForm fieldset #institCueInfo").remove();
-                jQuery("#FondoTemporalEditForm fieldset .institCueInfo").remove();
-
-                jQuery("#FondoTemporalEditForm").append("<input id='hiddenInstitId' name='data[FondoTemporal][instit_id]' type='hidden' value='" + item.id + "' />");
+                jQuery("#FondoEditForm fieldset #institCueInfo").remove();
+                jQuery("#FondoEditForm fieldset .institCueInfo").remove();
 
                 var div = "<div id='institCueInfo' class='institCueInfo'>" +
                               "<h4> Informacion sobre la Institucion </h4>" +
@@ -50,7 +48,9 @@ echo $html->css('jquery.autocomplete.css');
                               "<div><strong>CUE anterior: </strong>" + item.cue_anterior + "</div>" +
                           "</div>";
 
-                jQuery("#FondoTemporalEditForm fieldset").append(div);
+                jQuery("#FondoEditForm fieldset").append(div);
+
+                jQuery("#FondoInstitId").val(item.id);
 
         });
 
@@ -73,48 +73,49 @@ echo $html->css('jquery.autocomplete.css');
 </script>
 <div class="fondos form">
 
-    <?php echo $form->create('FondoTemporal');?>
+    <?php echo $form->create('Fondo');?>
     <fieldset>
-    <?php
-        echo $form->input("Tipo de fondo: ", array(
-                                            'id' => 'tipoFondo',
-                                            'options' => array('i'=>'Institucional','j'=>'Jurisdiccional'),
-                                            'default' => array('i'),
-                                            'onchange'=> 'CambiaTipoFondo();'
-             ));
-    ?>
+        <?php
+            echo $form->input("Tipo de fondo: ", array(
+                                                'id' => 'tipoFondo',
+                                                'options' => array('i'=>'Institucional','j'=>'Jurisdiccional'),
+                                                'default' => array('i'),
+                                                'onchange'=> 'CambiaTipoFondo();'
+                 ));
+        ?>
 
-    <div id="buscador_instit">
-    <?php
-        echo $form->input('posible_instit', array('label'=>'Posible nombre o CUE de la institucion','value'=>($this->data['Instit']['cue'] * 100 + $this->data['Instit']['anexo'])));
-    ?>
-    </div>
-    <div id="jurisdiccional">
-    <?php
-        echo $form->input('jurisdiccion_id', array('label'=>'Jurisdiccion','options'=>$jurisdicciones));
-    ?>
-    </div> 
-    </fieldset>
-    
+        <div id="buscador_instit">
+        <?php
+            echo $form->input('posible_instit', array('label'=>'Posible nombre o CUE de la institucion','value'=>($this->data['Instit']['cue'] * 100 + $this->data['Instit']['anexo'])));
+            echo $form->input('instit_id', array('type'=>'hidden'));
+        ?>
+        </div>
+        <div id="jurisdiccional">
+        <?php
+            echo $form->input('jurisdiccion_id', array('label'=>'Jurisdiccion','options'=>$jurisdicciones));
+        ?>
+        </div>
+        <br />
+        <label style="display:inline; width:100px; text-align: right;">Año:</label>
+        <?=$form->input('anio', array('options'=>$anios, 'default'=>date('Y'), 'style'=>'width: 70px; display:inline;', 'div' => false, 'label' => false))?>
+        <label style="display:inline; width:100px; text-align: right;">Trimestre:</label>
+        <?=$form->input('trimestre', array('options'=>array('1'=>'1','2'=>'2','3'=>'3','4'=>'4'), 'default'=>$trimestre, 'style'=>'width: 40px; display:inline;', 'div' => false, 'label' => false))?>
+        <label style="display:inline; width:100px; text-align: right;">Memo:</label>
+        <?=$form->input('memo', array('maxlength'=>30, 'size'=>10, 'style'=>'width: 40px; display:inline;', 'div' => false, 'label' => false))?>
+        <label style="display:inline; width:100px; text-align: right;">Resolución:</label>
+        <?=$form->input('resolucion', array('maxlength'=>30, 'size'=>10, 'style'=>'width: 70px; display:inline;', 'div' => false, 'label' => false))?>
 
-<?php echo $form->create('Fondo');?>
-	<fieldset>
- 		<legend><?php __('Add Fondo');?></legend>
+	<legend><?php __('Detalle');?></legend>
 	<?php
-		echo $form->input('instit_id');
-		echo $form->input('jurisdiccion_id');
-		echo $form->input('total');
-		echo $form->input('anio');
-		echo $form->input('trimestre');
-		echo $form->input('memo');
-		echo $form->input('resolucion');
-		echo $form->input('description');
+            echo $form->input('total');
+		
+            echo $form->input('description');
 	?>
-	</fieldset>
-<?php echo $form->end('Submit');?>
+    </fieldset>
+    <?php echo $form->end('Guardar');?>
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $html->link(__('List Fondos', true), array('action' => 'index'));?></li>
+		<li><?php echo $html->link(__('Volver a Fondos', true), array('action' => 'index'));?></li>
 	</ul>
 </div>
