@@ -116,6 +116,7 @@ class FondosController extends AppController {
 		}
 
                 $jurisdicciones = $this->Fondo->Jurisdiccion->find('list', array('order'=>'name'));
+                $lineasDeAccion = $this->Fondo->LineasDeAccion->find('list', array('fields' => array('LineasDeAccion.id','LineasDeAccion.description'), 'order'=> array('orden','name')));
                 
                 for($i=date('Y'); $i >= 2006; $i--) {
                     $anios[$i] = $i;
@@ -134,6 +135,7 @@ class FondosController extends AppController {
                 $this->set('jurisdicciones', $jurisdicciones);
                 $this->set('anios', $anios);
                 $this->set('trimestre', $trimestre);
+                $this->set('lineasDeAccion', $lineasDeAccion);
 	}
 
 	function edit($id = null) {

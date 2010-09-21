@@ -105,64 +105,63 @@ echo $html->css('jquery.autocomplete.css');
         <label style="display:inline; width:100px; text-align: right;">Resolución:</label>
         <?=$form->input('resolucion', array('maxlength'=>30, 'size'=>10, 'style'=>'width: 70px; display:inline;', 'div' => false, 'label' => false))?>
 
-	<legend><?php __('Detalle');?></legend>
 	<?php
             echo $form->input('total');
 		
             echo $form->input('description');
 	?>
-	</fieldset>
-    <?php echo $form->end('Guardar');?>
 
-    <h2>Lineas de Accion</h2>
-    <div title="Lineas de Accion" class="lista_lineas">
-        <dl class="item_lineas" style="cursor:pointer;padding:0px !important">
-            <div id="detalle">
-            <dt onmouseout="jQuery(this).toggleClass('item_fondos_seleccionado')" onmouseover="jQuery(this).toggleClass('item_fondos_seleccionado')" class="" >
-                <span>
-                    <?php echo $html->image('/img/modify.png', array('alt' => 'Modificar'))?>
-                    <?php echo $html->image('/img/delete.png', array('alt' => 'Borrar'))?>
-                </span>
-                <span>
-                    F05 - Equipamiento de talleres, laboratorios y espacios productivos
-                </span>
-            </dt>
-            <dd>$ 84.025,00</dd>
-            <dt onmouseout="jQuery(this).toggleClass('item_fondos_seleccionado')" onmouseover="jQuery(this).toggleClass('item_fondos_seleccionado')" class="" >
-                <span>
-                    <?php echo $html->image('/img/modify.png', array('alt' => 'Modificar'))?>
-                    <?php echo $html->image('/img/delete.png', array('alt' => 'Borrar'))?>
-                </span>
-                <span>
-                    F05 - Equipamiento de talleres, laboratorios y espacios productivos
-                </span>
-            </dt>
-            <dd>$ 84.025,00</dd>
-            <dt onmouseout="jQuery(this).toggleClass('item_fondos_seleccionado')" onmouseover="jQuery(this).toggleClass('item_fondos_seleccionado')" class="" >
-                <span>
-                    <?php echo $html->image('/img/modify.png', array('alt' => 'Modificar'))?>
-                    <?php echo $html->image('/img/delete.png', array('alt' => 'Borrar'))?>
-                </span>
-                <span>
-                    F05 - Equipamiento de talleres, laboratorios y espacios productivos
-                </span>
-            </dt>
-            <dd>$ 84.025,00</dd>
-            </div>
-            <div id="totales">
-            <dt onmouseout="jQuery(this).toggleClass('item_fondos_seleccionado')" onmouseover="jQuery(this).toggleClass('item_fondos_seleccionado')" class="" >
-                <span style="padding-left:15px">
-                    >><strong> Total</strong>
-                </span>
-            </dt>
-            <dd><strong>$ 184.025,00</strong></dd>
-            </div>
-        </dl>
-        
-    </div>
-    <span style="float:right">
-        <?php echo $html->image('/img/add.gif', array('id'=>'agregar_nueva_linea','alt' => 'Agregar'))?>
-    </span>
+        <h2>Lineas de Accion</h2>
+        <div title="Lineas de Accion" class="lista_lineas">
+            <dl class="item_lineas" style="cursor:pointer;padding:0px !important">
+                <div id="detalle">
+                <dt onmouseout="jQuery(this).toggleClass('item_fondos_seleccionado')" onmouseover="jQuery(this).toggleClass('item_fondos_seleccionado')" class="" >
+                    <span>
+                        <?php echo $html->image('/img/modify.png', array('alt' => 'Modificar'))?>
+                        <?php echo $html->image('/img/delete.png', array('alt' => 'Borrar'))?>
+                    </span>
+                    <span>
+                        F05 - Equipamiento de talleres, laboratorios y espacios productivos
+                    </span>
+                </dt>
+                <dd>$ 84.025,00</dd>
+                <dt onmouseout="jQuery(this).toggleClass('item_fondos_seleccionado')" onmouseover="jQuery(this).toggleClass('item_fondos_seleccionado')" class="" >
+                    <span>
+                        <?php echo $html->image('/img/modify.png', array('alt' => 'Modificar'))?>
+                        <?php echo $html->image('/img/delete.png', array('alt' => 'Borrar'))?>
+                    </span>
+                    <span>
+                        F05 - Equipamiento de talleres, laboratorios y espacios productivos
+                    </span>
+                </dt>
+                <dd>$ 84.025,00</dd>
+                <dt onmouseout="jQuery(this).toggleClass('item_fondos_seleccionado')" onmouseover="jQuery(this).toggleClass('item_fondos_seleccionado')" class="" >
+                    <span>
+                        <?php echo $html->image('/img/modify.png', array('alt' => 'Modificar'))?>
+                        <?php echo $html->image('/img/delete.png', array('alt' => 'Borrar'))?>
+                    </span>
+                    <span>
+                        F05 - Equipamiento de talleres, laboratorios y espacios productivos
+                    </span>
+                </dt>
+                <dd>$ 84.025,00</dd>
+                </div>
+                <div id="totales">
+                <dt onmouseout="jQuery(this).toggleClass('item_fondos_seleccionado')" onmouseover="jQuery(this).toggleClass('item_fondos_seleccionado')" class="" >
+                    <span style="padding-left:15px">
+                        >><strong> Total</strong>
+                    </span>
+                </dt>
+                <dd><strong>$ 184.025,00</strong></dd>
+                </div>
+            </dl>
+
+        </div>
+        <span style="float:right">
+            <?php echo $html->image('/img/add.gif', array('id'=>'agregar_nueva_linea','alt' => 'Agregar'))?>
+        </span>
+    </fieldset>
+    <?php echo $form->end('Guardar');?>
 </div>
 <div class="actions">
 	<ul>
@@ -178,12 +177,13 @@ echo $html->css('jquery.autocomplete.css');
     </span>
     <span>
         <select>
-            <option> F01 - Equipamiento de talleres, laboratorios y espacios productivos </option>
-            <option> F02 - Equipamiento de talleres, laboratorios y espacios productivos </option>
-            <option> F03 - Equipamiento de talleres, laboratorios y espacios productivos </option>
-            <option> F04 - Equipamiento de talleres, laboratorios y espacios productivos </option>
-            <option> F05 - Equipamiento de talleres, laboratorios y espacios productivos </option>
-            <option> F06 - Equipamiento de talleres, laboratorios y espacios productivos </option>
+            <?
+            foreach ($lineasDeAccion as $key=>$value) {
+            ?>
+            <option value="<?=$key?>"><?=$value?></option>
+            <?
+            }
+            ?>
         </select>
     </span>
 </dt>
