@@ -2004,9 +2004,88 @@ div.content{
 
 
 .slide-out-div {
-              padding: 20px;
-              width: 250px;
-              background: #F0F7FC;
-              border: 1px solid #29216d;
-              color: black;
-          }
+      padding: 20px;
+      width: 250px;
+      background: #F0F7FC;
+      border: 1px solid #29216d;
+      color: black;
+}
+
+/* Alta de fondos*/
+
+/*Lista de Fondos*/
+
+.lista_lineas{
+    list-style-type: none;
+    padding: 0px;
+    width:100%;
+}
+
+.lista_lineas H2{
+    margin-left: 0em;
+    margin-right: 0em;
+    margin-top: 0.5em;
+    margin-bottom: 0.3em;
+}
+
+.lista_lineas .item_lineas{
+    border-top: thin solid #6F7BA3;
+    border-bottom: thin solid #6F7BA3;
+    margin-top: 10px;
+    margin-left:  0px;
+    margin-right: 0px;
+    /*background-color: #E8F2FB;*/
+    margin-bottom: 2px;
+    border: 1px solid #6F7BA3;
+}
+
+.lista_lineas .item_lineas .header{
+    -moz-background-clip:border;
+    -moz-background-inline-policy:continuous;
+    -moz-background-origin:padding;
+    background:#5C9CCC url(../img/fondo_panel_collapsible.png) repeat-x scroll 50% 50%;
+    color:#FFFFFF;
+    font-weight:bold;
+}
+
+.lista_lineas .item_lineas .header dt{
+    text-align: left;
+}
+
+.lista_lineas .item_lineas dd{
+    float: right;
+    padding-right: 10px;
+    font-size: 9pt;
+}
+
+.item_lineas_seleccionado{
+    background-color: #F0F7FC;
+}
+
+
+.lista_lineas .item_lineas dt{
+    border-bottom:1px dotted #CCCCCC;
+    font-size: 9pt;
+}
+
+.item_lineas dt{
+    font-weight: normal;
+}
+
+
+.lista_lineas .item_lineas .total dd,dt{
+    padding-top: 2px;
+    padding-left:0px;
+}
+
+
+
+.lista_lineas dl{
+    line-height: 11pt;
+
+}
+
+.lista_lineas dd{
+    margin-top: -17px;
+
+}
