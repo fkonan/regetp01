@@ -7,6 +7,10 @@ echo $html->css('jquery.autocomplete.css');
 <script type="text/javascript">
     jQuery(document).ready(function() {
 
+        <?php if (empty($data['Fondo']['instit_id'])) {?>
+            jQuery('#FondoTipo').val('j');
+        <? }?>
+
         CambiaTipoFondo();
 
         jQuery(document).ajaxStart(function() {
@@ -61,7 +65,7 @@ echo $html->css('jquery.autocomplete.css');
     }
 
     function CambiaTipoFondo() {
-        if (jQuery('#tipoFondo :selected').val() == 'i') {
+        if (jQuery('#FondoTipo :selected').val() == 'i') {
             jQuery('#buscador_instit').show();
             jQuery('#jurisdiccional').hide();
         }
@@ -76,8 +80,8 @@ echo $html->css('jquery.autocomplete.css');
     <?php echo $form->create('Fondo');?>
     <fieldset>
         <?php
-            echo $form->input("Tipo de fondo: ", array(
-                                                'id' => 'tipoFondo',
+            echo $form->input("tipo", array(
+                                                'label' => 'Tipo de Fondo',
                                                 'options' => array('i'=>'Institucional','j'=>'Jurisdiccional'),
                                                 'default' => array('i'),
                                                 'onchange'=> 'CambiaTipoFondo();'
@@ -108,7 +112,7 @@ echo $html->css('jquery.autocomplete.css');
 	<?php
             echo $form->input('total');
 		
-            echo $form->input('description');
+            echo $form->input('description', array('label'=>'Descripción'));
 	?>
 
         <h2>Lineas de Accion</h2>
