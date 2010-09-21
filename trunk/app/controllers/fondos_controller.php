@@ -103,39 +103,51 @@ class FondosController extends AppController {
 		$this->set('fondo', $this->Fondo->read(null, $id));
 	}*/
 
-	function add() {
-                //$this->redirect(array('action' => 'index'));
-		if (!empty($this->data)) {
-			$this->Fondo->create();
-			if ($this->Fondo->save($this->data)) {
-				$this->Session->setFlash(__('The Fondo has been saved', true));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The Fondo could not be saved. Please, try again.', true));
-			}
-		}
+	function add($id=null) {
+            if (!empty($this->data)) {
+                $this->Fondo->create();
+                if ($this->Fondo->save($this->data)) {
+                    // guardar las lineas de accion
+                    if (!empty($this->data['Fondo']['FondosLineasDeAccion'])) {
+                        foreach ($this->data['Fondo']['FondosLineasDeAccion'] as &$linea) {
+                            $linea['fondo_id'] = $this->data['Fondo']['id'];
+                        }
 
-                $jurisdicciones = $this->Fondo->Jurisdiccion->find('list', array('order'=>'name'));
-                $lineasDeAccion = $this->Fondo->LineasDeAccion->find('list', array('fields' => array('LineasDeAccion.id','LineasDeAccion.description'), 'order'=> array('orden','name')));
-                
-                for($i=date('Y'); $i >= 2006; $i--) {
-                    $anios[$i] = $i;
+                        $this->Fondo->LineasDeAccion->saveAll($this->data['Fondo']['FondosLineasDeAccion']);
+                    }
+
+                    $this->Session->setFlash(__('Se ha guardado el Fondo', true));
+                    $this->redirect(array('action' => 'index'));
                 }
+                else {
+                    $this->Session->setFlash(__('The Fondo could not be saved. Please, try again.', true));
+                }
+            }
+            elseif ($id != null) {
+                $this->data = $this->Fondo->read(null, $id);
+            }
 
-                $mes = date('n');
-                if ($mes < 4)
-                    $trimestre = 1;
-                elseif ($mes < 7)
-                    $trimestre = 2;
-                elseif ($mes < 10)
-                    $trimestre = 3;
-                else
-                    $trimestre = 4;
+            $jurisdicciones = $this->Fondo->Jurisdiccion->find('list', array('order'=>'name'));
+            $lineasDeAccion = $this->Fondo->LineasDeAccion->find('list', array('fields' => array('LineasDeAccion.id','LineasDeAccion.description'), 'order'=> array('orden','name')));
 
-                $this->set('jurisdicciones', $jurisdicciones);
-                $this->set('anios', $anios);
-                $this->set('trimestre', $trimestre);
-                $this->set('lineasDeAccion', $lineasDeAccion);
+            for($i=date('Y'); $i >= 2006; $i--) {
+                $anios[$i] = $i;
+            }
+
+            $mes = date('n');
+            if ($mes < 4)
+                $trimestre = 1;
+            elseif ($mes < 7)
+                $trimestre = 2;
+            elseif ($mes < 10)
+                $trimestre = 3;
+            else
+                $trimestre = 4;
+
+            $this->set('jurisdicciones', $jurisdicciones);
+            $this->set('anios', $anios);
+            $this->set('trimestre', $trimestre);
+            $this->set('lineasDeAccion', $lineasDeAccion);
 	}
 
 	function edit($id = null) {
