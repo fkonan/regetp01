@@ -116,7 +116,24 @@ class FondosController extends AppController {
 		}
 
                 $jurisdicciones = $this->Fondo->Jurisdiccion->find('list', array('order'=>'name'));
+                
+                for($i=date('Y'); $i >= 2006; $i--) {
+                    $anios[$i] = $i;
+                }
+
+                $mes = date('n');
+                if ($mes < 4)
+                    $trimestre = 1;
+                elseif ($mes < 7)
+                    $trimestre = 2;
+                elseif ($mes < 10)
+                    $trimestre = 3;
+                else
+                    $trimestre = 4;
+
                 $this->set('jurisdicciones', $jurisdicciones);
+                $this->set('anios', $anios);
+                $this->set('trimestre', $trimestre);
 	}
 
 	function edit($id = null) {
