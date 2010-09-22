@@ -106,6 +106,12 @@ class FondosController extends AppController {
 	function add($id=null) {
             if (!empty($this->data)) {
                 $this->Fondo->create();
+
+                if ($id != null) {
+                    // incluye id para editar
+                    $this->data['Fondo']['id'] = $id;
+                }
+
                 if ($this->Fondo->save($this->data)) {
                     // guardar las lineas de accion
                     if (!empty($this->data['Fondo']['FondosLineasDeAccion'])) {
