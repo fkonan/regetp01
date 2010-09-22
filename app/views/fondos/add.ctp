@@ -152,11 +152,17 @@ echo $html->css('jquery.autocomplete.css');
     
     jQuery(document).ready(function() {
         jQuery("#agregar_nueva_linea").click(function(){
+
+            nueva_linea = jQuery(".lista_lineas dl #detalle .nueva_linea").first().parent();
+            if(nueva_linea.length != 0){
+                agregarLinea(nueva_linea);
+            }
+
             html = "<span class='nueva_linea' style='display:none'>" +
                         "<span class='nueva_linea_in'>" +
                             "<dt onmouseout='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' onmouseover='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' class='' style='height: 30px;'>" +
                                 "<span>" +
-                                    '<?php echo $html->image('/img/check.gif', array('id'=>'check_linea','alt' => 'Confirmar', 'onclick'=>'agregarLinea(this);'))?>' +
+                                    '<?php echo $html->image('/img/check.gif', array('id'=>'check_linea','alt' => 'Confirmar', 'onclick'=>'agregarLinea(jQuery(this).parent().parent().parent().parent().parent());'))?>' +
                                     '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().remove();'))?>' +
                                 "</span>" +
                                 "<span>" +
@@ -171,17 +177,26 @@ echo $html->css('jquery.autocomplete.css');
                                     "</select>" +
                                 "</span>" +
                             "</dt>" +
-                            "<dd><input class='monto' style='margin-top:-14px;width:100px' type='text'/></dd>" +
+                            "<dd><input class='monto' style='margin-top:-14px;width:100px' type='text' onkeypress ='agregarLineaConEnter(this,event);'/></dd>" +
                         "</span>" +
                     "</span>";
             jQuery(".lista_lineas dl #detalle").append(html);
             jQuery(".lista_lineas .nueva_linea").show();
         });
+
+        jQuery(document).keypress(function(e) {
+            if (e.keyCode == 10 || e.keyCode == 13){
+                return false;
+            }
+            if ((e.charCode == 43 || e.charCode == 107)){
+                jQuery("#agregar_nueva_linea").click();
+            }
+        });
     });
 
     function agregarLinea(element){
 
-        uniqid = jQuery(element).parent().parent().parent().parent().parent().attr("order");
+        uniqid = jQuery(element).attr("order");
 
         if(uniqid == undefined){
             uniqid = new Date().getTime();
@@ -202,17 +217,17 @@ echo $html->css('jquery.autocomplete.css');
                     '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().remove();'))?>' +
                 "</span>" +
                 "<span class='linea_nombre'>" +
-                jQuery(element).parent().parent().parent().find(".linea_de_accion_id option:selected").text() +
+                jQuery(element).find(".linea_de_accion_id option:selected").text() +
                 "</span>" +
                 "</dt>" +
                 "<dd>" +
-                jQuery(element).parent().parent().parent().find(".monto").val() +
+                jQuery(element).find(".monto").val() +
                 "</dd>" +
                 "<input class='linea_id' type='hidden' name='data[Fondo][FondosLineasDeAccion]["+i+"][lineas_de_accion_id]' value='"+ jQuery(element).parent().parent().parent().find(".linea_de_accion_id option:selected").val() +"'>" +
                 "<input class='monto' type='hidden' name='data[Fondo][FondosLineasDeAccion]["+i+"][monto]' value='" + jQuery(element).parent().parent().parent().find(".monto").val() + "'>" +
                 post;
 
-        jQuery(".lista_lineas dl .nueva_linea_in").remove();
+        jQuery(".lista_lineas dl .nueva_linea").remove();
         
         jQuery(".lista_lineas dl #detalle" + selector).append(html);
         i++;
@@ -228,7 +243,7 @@ echo $html->css('jquery.autocomplete.css');
                         "<span class='nueva_linea_in'>" +
                             "<dt onmouseout='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' onmouseover='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' class='' style='height: 30px;'>" +
                                 "<span>" +
-                                    '<?php echo $html->image('/img/check.gif', array('id'=>'check_linea','alt' => 'Confirmar', 'onclick'=>'agregarLinea(this);'))?>' +
+                                    '<?php echo $html->image('/img/check.gif', array('id'=>'check_linea','alt' => 'Confirmar', 'onclick'=>'agregarLinea(jQuery(this).parent().parent().parent().parent().parent());'))?>' +
                                     '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().remove();'))?>' +
                                 "</span>" +
                                 "<span>" +
@@ -243,7 +258,7 @@ echo $html->css('jquery.autocomplete.css');
                                     "</select>" +
                                 "</span>" +
                             "</dt>" +
-                            "<dd><input class='monto' style='margin-top:-14px;width:100px' type='text' value='"+ monto +"'/></dd>" +
+                            "<dd><input class='monto' style='margin-top:-14px;width:100px' type='text' value='"+ monto +"' onkeypress ='agregarLineaConEnter(this,event);'/></dd>" +
                             "<input class='linea_id' type='hidden' name='data[Fondo][FondosLineasDeAccion][][lineas_de_accion_id]' value='"+ linea_id +"'>" +
                             "<input class='monto' type='hidden' name='data[Fondo][FondosLineasDeAccion][][monto]' value='" + monto + "'>" +
                         "</span>" +
@@ -252,6 +267,12 @@ echo $html->css('jquery.autocomplete.css');
         jQuery(".lista_lineas dl #detalle .linea_confirmada[order=" + uniqid + "]").html('');
         jQuery(".lista_lineas dl #detalle .linea_confirmada[order=" + uniqid + "]").append(html);
         jQuery(".lista_lineas dl #detalle .linea_confirmada[order=" + uniqid + "] .linea_de_accion_id").val(linea_id);
+    }
+
+    function agregarLineaConEnter(element,event){
+        if ((event.keyCode == 10 || event.keyCode == 13)){
+            agregarLinea(jQuery(element).parent().parent());
+        }
     }
 </script>
 
