@@ -203,7 +203,7 @@ echo $html->css('jquery.autocomplete.css');
                 jQuery(element).parent().parent().parent().find(".linea_de_accion_id option:selected").text() +
                 "</span>" +
                 "</dt>" +
-                "<dd class='monto'>" +
+                "<dd>" +
                 jQuery(element).parent().parent().parent().find(".monto").val() +
                 "</dd>" +
                 "<input class='linea_id' type='hidden' name='data[Fondo][FondosLineasDeAccion][][lineas_de_accion_id]' value='"+ jQuery(element).parent().parent().parent().find(".linea_de_accion_id option:selected").val() +"'>" +
@@ -213,11 +213,14 @@ echo $html->css('jquery.autocomplete.css');
         jQuery(".lista_lineas dl .nueva_linea_in").remove();
         
         jQuery(".lista_lineas dl #detalle" + selector).append(html);
-
     }
 
     function modificarLinea(element){
         uniqid = jQuery(element).parent().parent().parent().attr("order");
+        
+        linea_id = jQuery(element).parent().parent().parent().find(".linea_id").val();
+        monto = jQuery(element).parent().parent().parent().find(".monto").val();
+
         html = "<span class='nueva_linea'>" +
                         "<span class='nueva_linea_in'>" +
                             "<dt onmouseout='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' onmouseover='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' class='' style='height: 30px;'>" +
@@ -237,14 +240,13 @@ echo $html->css('jquery.autocomplete.css');
                                     "</select>" +
                                 "</span>" +
                             "</dt>" +
-                            "<dd><input class='monto' style='margin-top:-14px;width:100px' type='text'/></dd>" +
+                            "<dd><input class='monto' style='margin-top:-14px;width:100px' type='text' value='"+ monto +"'/></dd>" +
                         "</span>" +
                     "</span>";
 
         jQuery(".lista_lineas dl #detalle .linea_confirmada[order=" + uniqid + "]").html('');
         jQuery(".lista_lineas dl #detalle .linea_confirmada[order=" + uniqid + "]").append(html);
-
-
+        jQuery(".lista_lineas dl #detalle .linea_confirmada[order=" + uniqid + "] .linea_de_accion_id").val(linea_id);
     }
 </script>
 
