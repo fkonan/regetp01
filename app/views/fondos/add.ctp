@@ -116,47 +116,20 @@ echo $html->css('jquery.autocomplete.css');
 	?>
 
         <h2>Lineas de Accion</h2>
-        <div title="Lineas de Accion" class="lista_lineas">
+        <div class="lista_lineas">
             <dl class="item_lineas" style="cursor:pointer;padding:0px !important">
                 <div id="detalle">
-                <dt onmouseout="jQuery(this).toggleClass('item_fondos_seleccionado')" onmouseover="jQuery(this).toggleClass('item_fondos_seleccionado')" class="" >
-                    <span>
-                        <?php echo $html->image('/img/modify.png', array('alt' => 'Modificar'))?>
-                        <?php echo $html->image('/img/delete.png', array('alt' => 'Borrar'))?>
-                    </span>
-                    <span>
-                        F05 - Equipamiento de talleres, laboratorios y espacios productivos
-                    </span>
-                </dt>
-                <dd>$ 84.025,00</dd>
-                <dt onmouseout="jQuery(this).toggleClass('item_fondos_seleccionado')" onmouseover="jQuery(this).toggleClass('item_fondos_seleccionado')" class="" >
-                    <span>
-                        <?php echo $html->image('/img/modify.png', array('alt' => 'Modificar'))?>
-                        <?php echo $html->image('/img/delete.png', array('alt' => 'Borrar'))?>
-                    </span>
-                    <span>
-                        F05 - Equipamiento de talleres, laboratorios y espacios productivos
-                    </span>
-                </dt>
-                <dd>$ 84.025,00</dd>
-                <dt onmouseout="jQuery(this).toggleClass('item_fondos_seleccionado')" onmouseover="jQuery(this).toggleClass('item_fondos_seleccionado')" class="" >
-                    <span>
-                        <?php echo $html->image('/img/modify.png', array('alt' => 'Modificar'))?>
-                        <?php echo $html->image('/img/delete.png', array('alt' => 'Borrar'))?>
-                    </span>
-                    <span>
-                        F05 - Equipamiento de talleres, laboratorios y espacios productivos
-                    </span>
-                </dt>
-                <dd>$ 84.025,00</dd>
+
+                    
+                    
                 </div>
                 <div id="totales">
-                <dt onmouseout="jQuery(this).toggleClass('item_fondos_seleccionado')" onmouseover="jQuery(this).toggleClass('item_fondos_seleccionado')" class="" >
-                    <span style="padding-left:15px">
-                        >><strong> Total</strong>
-                    </span>
-                </dt>
-                <dd><strong>$ 184.025,00</strong></dd>
+                    <dt onmouseout="jQuery(this).toggleClass('item_fondos_seleccionado')" onmouseover="jQuery(this).toggleClass('item_fondos_seleccionado')" class="" >
+                        <span style="padding-left:15px">
+                            >><strong> Total</strong>
+                        </span>
+                    </dt>
+                    <dd><strong>$ 184.025,00</strong></dd>
                 </div>
             </dl>
 
@@ -173,34 +146,105 @@ echo $html->css('jquery.autocomplete.css');
 	</ul>
 </div>
 
-<span class="nueva_linea" style="display:none">
-<dt  onmouseout="jQuery(this).toggleClass('item_fondos_seleccionado')" onmouseover="jQuery(this).toggleClass('item_fondos_seleccionado')" class="" style="height: 30px;">
-    <span>
-        <?php echo $html->image('/img/check.gif', array('alt' => 'Confirmar'))?>
-        <?php echo $html->image('/img/delete.png', array('alt' => 'Borrar'))?>
-    </span>
-    <span>
-        <select>
-            <?
-            foreach ($lineasDeAccion as $key=>$value) {
-            ?>
-            <option value="<?=$key?>"><?=$value?></option>
-            <?
-            }
-            ?>
-        </select>
-    </span>
-</dt>
-<dd><input style="margin-top:-14px;width:100px"type="text"/></dd>
-</span>
-
 <script type="text/javascript">
+    
     jQuery(document).ready(function() {
         jQuery("#agregar_nueva_linea").click(function(){
-            jQuery(".lista_lineas dl #detalle").append(jQuery(".nueva_linea").html());
+            html = "<span class='nueva_linea' style='display:none'>" +
+                        "<span class='nueva_linea_in'>" +
+                            "<dt onmouseout='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' onmouseover='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' class='' style='height: 30px;'>" +
+                                "<span>" +
+                                    '<?php echo $html->image('/img/check.gif', array('id'=>'check_linea','alt' => 'Confirmar', 'onclick'=>'agregarLinea(this);'))?>' +
+                                    '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().remove();'))?>' +
+                                "</span>" +
+                                "<span>" +
+                                    "<select class='linea_de_accion_id' style='width:400px'>" +
+                                        <?
+                                        foreach ($lineasDeAccion as $key=>$value) {
+                                        ?>
+                                        '<option value="<?=$key?>"><?=$value?></option>' +
+                                        <?
+                                        }
+                                        ?>
+                                    "</select>" +
+                                "</span>" +
+                            "</dt>" +
+                            "<dd><input class='monto' style='margin-top:-14px;width:100px' type='text'/></dd>" +
+                        "</span>" +
+                    "</span>";
+            jQuery(".lista_lineas dl #detalle").append(html);
             jQuery(".lista_lineas .nueva_linea").show();
         });
-
     });
 
+    function agregarLinea(element){
+
+        uniqid = jQuery(element).parent().parent().parent().parent().parent().attr("order");
+
+        if(uniqid == undefined){
+            uniqid = new Date().getTime();
+            pre = "<div class='linea_confirmada' order='"+ uniqid  + "'>";
+            post = "</div>";
+            selector = "";
+        }else{
+            pre = '';
+            post = '';
+            selector = " .linea_confirmada[order="+uniqid+"]";
+        }
+        
+
+        html = pre +
+               "<dt onmouseout='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' onmouseover='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' class='' >" +
+               "<span>" +
+                    '<?php echo $html->image('/img/modify.png', array('alt' => 'Modificar', 'onclick'=>'modificarLinea(this)'))?>' +
+                    '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().remove();'))?>' +
+                "</span>" +
+                "<span class='linea_nombre'>" +
+                jQuery(element).parent().parent().parent().find(".linea_de_accion_id option:selected").text() +
+                "</span>" +
+                "</dt>" +
+                "<dd class='monto'>" +
+                jQuery(element).parent().parent().parent().find(".monto").val() +
+                "</dd>" +
+                "<input class='linea_id' type='hidden' name='data[Fondo][FondosLineasDeAccion][][lineas_de_accion_id]' value='"+ jQuery(element).parent().parent().parent().find(".linea_de_accion_id option:selected").val() +"'>" +
+                "<input class='monto' type='hidden' name='data[Fondo][FondosLineasDeAccion][][monto]' value='" + jQuery(element).parent().parent().parent().find(".monto").val() + "'>" +
+                post;
+
+        jQuery(".lista_lineas dl .nueva_linea_in").remove();
+        
+        jQuery(".lista_lineas dl #detalle" + selector).append(html);
+
+    }
+
+    function modificarLinea(element){
+        uniqid = jQuery(element).parent().parent().parent().attr("order");
+        html = "<span class='nueva_linea'>" +
+                        "<span class='nueva_linea_in'>" +
+                            "<dt onmouseout='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' onmouseover='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' class='' style='height: 30px;'>" +
+                                "<span>" +
+                                    '<?php echo $html->image('/img/check.gif', array('id'=>'check_linea','alt' => 'Confirmar', 'onclick'=>'agregarLinea(this);'))?>' +
+                                    '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().remove();'))?>' +
+                                "</span>" +
+                                "<span>" +
+                                    "<select class='linea_de_accion_id' style='width:400px'>" +
+                                        <?
+                                        foreach ($lineasDeAccion as $key=>$value) {
+                                        ?>
+                                        '<option value="<?=$key?>"><?=$value?></option>' +
+                                        <?
+                                        }
+                                        ?>
+                                    "</select>" +
+                                "</span>" +
+                            "</dt>" +
+                            "<dd><input class='monto' style='margin-top:-14px;width:100px' type='text'/></dd>" +
+                        "</span>" +
+                    "</span>";
+
+        jQuery(".lista_lineas dl #detalle .linea_confirmada[order=" + uniqid + "]").html('');
+        jQuery(".lista_lineas dl #detalle .linea_confirmada[order=" + uniqid + "]").append(html);
+
+
+    }
 </script>
+
