@@ -153,7 +153,7 @@ echo $html->css('jquery.autocomplete.css');
     jQuery(document).ready(function() {
         jQuery("#agregar_nueva_linea").click(function(){
 
-            nueva_linea = jQuery(".lista_lineas dl #detalle .nueva_linea").first().parent();
+            nueva_linea = jQuery(".lista_lineas dl #detalle .nueva_linea").first();
             if(nueva_linea.length != 0){
                 agregarLinea(nueva_linea);
             }
@@ -163,7 +163,7 @@ echo $html->css('jquery.autocomplete.css');
                             "<dt onmouseout='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' onmouseover='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' class='' style='height: 30px;'>" +
                                 "<span>" +
                                     '<?php echo $html->image('/img/check.gif', array('id'=>'check_linea','alt' => 'Confirmar', 'onclick'=>'agregarLinea(jQuery(this).parent().parent().parent().parent().parent());'))?>' +
-                                    '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().remove();'))?>' +
+                                    '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().parent().remove();'))?>' +
                                 "</span>" +
                                 "<span>" +
                                     "<select class='linea_de_accion_id' style='width:400px'>" +
@@ -196,7 +196,7 @@ echo $html->css('jquery.autocomplete.css');
 
     function agregarLinea(element){
 
-        uniqid = jQuery(element).attr("order");
+        uniqid = jQuery(element).parent('.linea_confirmada').attr("order");
 
         if(uniqid == undefined){
             uniqid = new Date().getTime();
@@ -223,8 +223,8 @@ echo $html->css('jquery.autocomplete.css');
                 "<dd>" +
                 jQuery(element).find(".monto").val() +
                 "</dd>" +
-                "<input class='linea_id' type='hidden' name='data[Fondo][FondosLineasDeAccion]["+i+"][lineas_de_accion_id]' value='"+ jQuery(element).parent().parent().parent().find(".linea_de_accion_id option:selected").val() +"'>" +
-                "<input class='monto' type='hidden' name='data[Fondo][FondosLineasDeAccion]["+i+"][monto]' value='" + jQuery(element).parent().parent().parent().find(".monto").val() + "'>" +
+                "<input class='linea_id' type='hidden' name='data[Fondo][FondosLineasDeAccion]["+i+"][lineas_de_accion_id]' value='"+ jQuery(element).find(".linea_de_accion_id option:selected").val() +"'>" +
+                "<input class='monto' type='hidden' name='data[Fondo][FondosLineasDeAccion]["+i+"][monto]' value='" + jQuery(element).find(".monto").val() + "'>" +
                 post;
 
         jQuery(".lista_lineas dl .nueva_linea").remove();
@@ -244,7 +244,7 @@ echo $html->css('jquery.autocomplete.css');
                             "<dt onmouseout='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' onmouseover='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' class='' style='height: 30px;'>" +
                                 "<span>" +
                                     '<?php echo $html->image('/img/check.gif', array('id'=>'check_linea','alt' => 'Confirmar', 'onclick'=>'agregarLinea(jQuery(this).parent().parent().parent().parent().parent());'))?>' +
-                                    '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().remove();'))?>' +
+                                    '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().parent().parent().remove();'))?>' +
                                 "</span>" +
                                 "<span>" +
                                     "<select class='linea_de_accion_id' style='width:400px'>" +
@@ -271,7 +271,7 @@ echo $html->css('jquery.autocomplete.css');
 
     function agregarLineaConEnter(element,event){
         if ((event.keyCode == 10 || event.keyCode == 13)){
-            agregarLinea(jQuery(element).parent().parent());
+            agregarLinea(jQuery(element).parent().parent().parent());
         }
     }
 </script>
