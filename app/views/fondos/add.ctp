@@ -7,7 +7,7 @@ echo $html->css('jquery.autocomplete.css');
 <script type="text/javascript">
     jQuery(document).ready(function() {
 
-        <?php if (empty($data['Fondo']['instit_id'])) {?>
+        <?php if (empty($this->data['Fondo']['instit_id'])) {?>
             jQuery('#FondoTipo').val('j');
         <? }?>
 
