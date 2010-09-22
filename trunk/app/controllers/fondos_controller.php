@@ -105,6 +105,7 @@ class FondosController extends AppController {
 
 	function add($id=null) {
             if (!empty($this->data)) {
+                //debug($this->data); die();
                 $this->Fondo->create();
 
                 if ($id != null) {
@@ -116,10 +117,10 @@ class FondosController extends AppController {
                     // guardar las lineas de accion
                     if (!empty($this->data['Fondo']['FondosLineasDeAccion'])) {
                         foreach ($this->data['Fondo']['FondosLineasDeAccion'] as &$linea) {
-                            $linea['fondo_id'] = $this->data['Fondo']['id'];
+                            $linea['fondo_id'] = $this->Fondo->id;
                         }
 
-                        $this->Fondo->LineasDeAccion->saveAll($this->data['Fondo']['FondosLineasDeAccion']);
+                        $this->Fondo->FondosLineasDeAccion->saveAll($this->data['Fondo']['FondosLineasDeAccion']);
                     }
 
                     $this->Session->setFlash(__('Se ha guardado el Fondo', true));

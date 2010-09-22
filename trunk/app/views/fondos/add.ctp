@@ -7,7 +7,7 @@ echo $html->css('jquery.autocomplete.css');
 <script type="text/javascript">
     jQuery(document).ready(function() {
 
-        <?php if (empty($this->data['Fondo']['instit_id'])) {?>
+        <?php if (!empty($this->data['Fondo']) && empty($this->data['Fondo']['instit_id'])) {?>
             jQuery('#FondoTipo').val('j');
         <? }?>
 
@@ -147,6 +147,7 @@ echo $html->css('jquery.autocomplete.css');
 </div>
 
 <script type="text/javascript">
+    var i = 0;
     
     jQuery(document).ready(function() {
         jQuery("#agregar_nueva_linea").click(function(){
@@ -206,13 +207,14 @@ echo $html->css('jquery.autocomplete.css');
                 "<dd>" +
                 jQuery(element).parent().parent().parent().find(".monto").val() +
                 "</dd>" +
-                "<input class='linea_id' type='hidden' name='data[Fondo][FondosLineasDeAccion][][lineas_de_accion_id]' value='"+ jQuery(element).parent().parent().parent().find(".linea_de_accion_id option:selected").val() +"'>" +
-                "<input class='monto' type='hidden' name='data[Fondo][FondosLineasDeAccion][][monto]' value='" + jQuery(element).parent().parent().parent().find(".monto").val() + "'>" +
+                "<input class='linea_id' type='hidden' name='data[Fondo][FondosLineasDeAccion]["+i+"][lineas_de_accion_id]' value='"+ jQuery(element).parent().parent().parent().find(".linea_de_accion_id option:selected").val() +"'>" +
+                "<input class='monto' type='hidden' name='data[Fondo][FondosLineasDeAccion]["+i+"][monto]' value='" + jQuery(element).parent().parent().parent().find(".monto").val() + "'>" +
                 post;
 
         jQuery(".lista_lineas dl .nueva_linea_in").remove();
         
         jQuery(".lista_lineas dl #detalle" + selector).append(html);
+        i++;
     }
 
     function modificarLinea(element){
