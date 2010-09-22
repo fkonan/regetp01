@@ -241,6 +241,8 @@ echo $html->css('jquery.autocomplete.css');
                                 "</span>" +
                             "</dt>" +
                             "<dd><input class='monto' style='margin-top:-14px;width:100px' type='text' value='"+ monto +"'/></dd>" +
+                            "<input class='linea_id' type='hidden' name='data[Fondo][FondosLineasDeAccion][][lineas_de_accion_id]' value='"+ linea_id +"'>" +
+                            "<input class='monto' type='hidden' name='data[Fondo][FondosLineasDeAccion][][monto]' value='" + monto + "'>" +
                         "</span>" +
                     "</span>";
 
