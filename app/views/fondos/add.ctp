@@ -75,10 +75,29 @@ echo $html->css('jquery.autocomplete.css');
             jQuery('#buscador_instit').hide();
         }
     }
+
+    function SumarLinasDeAccionMontos() {
+        var total = 0;
+        jQuery.each(jQuery('.monto'), function(key, value) {
+            total += parseInt(jQuery(value).val());
+        });
+
+        return total;
+    }
+
+    function AsignarTotal() {
+        jQuery('#FondoTotal').val(SumarLinasDeAccionMontos());
+        return true;
+    }
+
+    function ActualizarTotal() {
+        jQuery('#total').html(SumarLinasDeAccionMontos());
+        return true;
+    }
 </script>
 <div class="fondos form">
 
-    <?php echo $form->create('Fondo');?>
+    <?php echo $form->create('Fondo', array('onsubmit'=>'return AsignarTotal();'));?>
     <fieldset>
         <?php
             echo $form->input("tipo", array(
@@ -130,7 +149,7 @@ echo $html->css('jquery.autocomplete.css');
                             >><strong> Total</strong>
                         </span>
                     </dt>
-                    <dd><strong>$ 184.025,00</strong></dd>
+                    <dd><strong>$ <span id="total">0</span></strong></dd>
                 </div>
             </dl>
 
@@ -163,7 +182,7 @@ echo $html->css('jquery.autocomplete.css');
                             "<dt onmouseout='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' onmouseover='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' class='' style='height: 30px;'>" +
                                 "<span>" +
                                     '<?php echo $html->image('/img/check.gif', array('id'=>'check_linea','alt' => 'Confirmar', 'onclick'=>'agregarLinea(jQuery(this).parent().parent().parent().parent().parent());'))?>' +
-                                    '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().parent().remove();'))?>' +
+                                    '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().parent().remove(); ActualizarTotal();'))?>' +
                                 "</span>" +
                                 "<span>" +
                                     "<select class='linea_de_accion_id' style='width:400px'>" +
@@ -214,7 +233,7 @@ echo $html->css('jquery.autocomplete.css');
                "<dt onmouseout='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' onmouseover='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' class='' >" +
                "<span>" +
                     '<?php echo $html->image('/img/modify.png', array('alt' => 'Modificar', 'onclick'=>'modificarLinea(this)'))?>' +
-                    '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().remove();'))?>' +
+                    '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().remove(); ActualizarTotal();'))?>' +
                 "</span>" +
                 "<span class='linea_nombre'>" +
                 jQuery(element).find(".linea_de_accion_id option:selected").text() +
@@ -231,6 +250,9 @@ echo $html->css('jquery.autocomplete.css');
         
         jQuery(".lista_lineas dl #detalle" + selector).append(html);
         i++;
+
+        // actualizar total
+        ActualizarTotal();
     }
 
     function modificarLinea(element){
@@ -267,6 +289,9 @@ echo $html->css('jquery.autocomplete.css');
         jQuery(".lista_lineas dl #detalle .linea_confirmada[order=" + uniqid + "]").html('');
         jQuery(".lista_lineas dl #detalle .linea_confirmada[order=" + uniqid + "]").append(html);
         jQuery(".lista_lineas dl #detalle .linea_confirmada[order=" + uniqid + "] .linea_de_accion_id").val(linea_id);
+
+        // actualizar total
+        ActualizarTotal();
     }
 
     function agregarLineaConEnter(element,event){
