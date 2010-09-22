@@ -457,6 +457,7 @@ class FondoTemporalesController extends AppController {
                         "cp" => utf8_encode($item['Instit']['cp']),
                         "tipo" => utf8_encode($item['Tipoinstit']['name']),
                         "jurisdiccion" => utf8_encode($item['Jurisdiccion']['name']),
+                        "jurisdiccion_id" => utf8_encode($item['Jurisdiccion']['id']),
                         "cue_anterior" => utf8_encode($item['HistorialCue'][0]['cue'])
                 ));
             }

@@ -108,6 +108,10 @@ class FondosController extends AppController {
                 //debug($this->data); die();
                 $this->Fondo->create();
 
+                if ($this->data['Fondo']['tipo'] == 'j') {
+                    $this->data['Fondo']['instit_id'] = 0;
+                }
+
                 if ($id != null) {
                     // incluye id para editar
                     $this->data['Fondo']['id'] = $id;
@@ -127,7 +131,7 @@ class FondosController extends AppController {
                     $this->redirect(array('action' => 'index'));
                 }
                 else {
-                    $this->Session->setFlash(__('The Fondo could not be saved. Please, try again.', true));
+                    $this->Session->setFlash(__('El Fondo no pudo guardarse. Por favor, intente nuevamente.', true));
                 }
             }
             elseif ($id != null) {
