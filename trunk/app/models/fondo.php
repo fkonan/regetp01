@@ -7,8 +7,8 @@ class Fondo extends AppModel {
 		'jurisdiccion_id' => array('numeric'),
 		'anio' => array('numeric'),
 		'trimestre' => array('numeric'),
-		'memo' => array('notempty'),
-		'resolucion' => array('notempty')
+		//'memo' => array('notempty'),
+		//'resolucion' => array('notempty')
 	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed

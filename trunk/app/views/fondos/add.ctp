@@ -55,6 +55,7 @@ echo $html->css('jquery.autocomplete.css');
                 jQuery("#FondoEditForm fieldset").append(div);
 
                 jQuery("#FondoInstitId").val(item.id);
+                jQuery("#FondoJurisdiccionId").val(item.jurisdiccion_id);
 
         });
 
@@ -110,7 +111,7 @@ echo $html->css('jquery.autocomplete.css');
         <?=$form->input('resolucion', array('maxlength'=>30, 'size'=>10, 'style'=>'width: 70px; display:inline;', 'div' => false, 'label' => false))?>
 
 	<?php
-            echo $form->input('total');
+            echo $form->input('total', array('type'=>'hidden'));
 		
             echo $form->input('description', array('label'=>'Descripción'));
 	?>
