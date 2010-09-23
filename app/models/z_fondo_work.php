@@ -26,8 +26,6 @@ class ZFondoWork extends AppModel {
 
 
 
-
-
          /**
          *
          * Me ejecuta la migracion de todos ls campos de z_fondo_work

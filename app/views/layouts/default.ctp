@@ -35,7 +35,8 @@
         echo $html->meta('icon');
         echo $html->css('regetp','stylesheet', array('media'=>'screen'));
 
-        $cssForUserRole = 'regetp_for_'.$session->read('User.group_alias');
+        // Inserta el CSS (si existe) de acuerdo al grupo del usuario
+        $cssForUserRole = 'acl/regetp_for_'.$session->read('User.group_alias');
         if (is_file(APP.WEBROOT_DIR.DS."css".DS.$cssForUserRole.".css")) {
             echo $html->css($cssForUserRole,'stylesheet', array('media'=>'screen'));
         }
@@ -66,15 +67,23 @@
                 ?>
             });
         </script>
+
+        
+        <!--        Permisos ACL segun el grupo del usuario         -->
+        <style type="text/css">
+            .acl-<?php echo $session->read('User.group_alias')?>{
+                display: block !important;
+            }
+        </style>        
     </head>
 
 
     <body>
-        <cake:nocache>
-            <? if ($_SERVER['HTTP_HOST']=='localhost') {?>
-            <div style="background-color: red; height: 20px; text-align: center">MODO LOCALHOST</div>
-                <? }?>
-        </cake:nocache>
+        
+        <? if ($_SERVER['HTTP_HOST']=='localhost') {?>
+        <div style="background-color: red; height: 20px; text-align: center">MODO LOCALHOST</div>
+        <? }?>
+
 
         <div id="container">
 
@@ -94,71 +103,28 @@
 
             
             <div id="content">
-
                 
                 <div id="menu">
-                    <? $group_alias = $session->read('User.group_alias'); ?>
-                    <cake:nocache>
-                        <?  echo $this->renderElement('boxSaludo'); ?>
-                    </cake:nocache>
-                    <?
-                    if ($group_alias == strtolower(Configure::read('grupo_desarrolladores'))) {
-                        echo $this->renderElement('boxDesarrollo');
-                    } ?>
-                    <?  echo $this->renderElement('boxInstituciones'); ?>
-                    <?  echo $this->renderElement('boxJurisdicciones'); ?>
-                    <?  echo $this->renderElement('boxCuadros'); ?>
-                    <?
-                    if ($group_alias == strtolower(Configure::read('grupo_desarrolladores')) ||
-                            $group_alias == strtolower(Configure::read('grupo_administradores')) ||
-                            $group_alias == strtolower(Configure::read('grupo_editores'))) {
-                        echo $this->renderElement('boxInformacion');
-                    } ?>
-                    <?
-                    if ($group_alias == strtolower(Configure::read('grupo_desarrolladores')) ||
-                            $group_alias == strtolower(Configure::read('grupo_administradores')) ||
-                            $group_alias == strtolower(Configure::read('grupo_editores'))) {
-                        echo $this->renderElement('boxDepurador');
-                    } ?>
-                    <cake:nocache>
-                        <?
-                        if ($group_alias == strtolower(Configure::read('grupo_desarrolladores')) ||
-                                $group_alias == strtolower(Configure::read('grupo_administradores')) ||
-                                $group_alias == strtolower(Configure::read('grupo_editores'))) {
-                            echo $this->renderElement('boxTickets');
-                        } ?>
-                    </cake:nocache>
-
-                    <?
-                    if ($group_alias == strtolower(Configure::read('grupo_desarrolladores')) ||
-                            $group_alias == strtolower(Configure::read('grupo_administradores'))) {
-                        echo $this->renderElement('boxAdmin');
-                    } ?>
-                    <?  echo $this->renderElement('boxLogin'); ?>
-
-
-                    <h1><?= __('Soporte Técnico')?></h1>
-                    <ul>
-                        <li><?= $html->link('Contacto','/pages/contacto'); ?></li>
-                    </ul>
-                    <ul>
-                        <li><?= $html->link('Sugerencias','/sugerencias/add'); ?></li>
-                    </ul>
+                <?
+                    echo $this->renderElement('boxSaludo');
+                    echo $this->renderElement('boxDesarrollo');
+                    echo $this->renderElement('boxInstituciones');
+                    echo $this->renderElement('boxJurisdicciones');
+                    echo $this->renderElement('boxCuadros');
+                    echo $this->renderElement('boxInformacion');
+                    echo $this->renderElement('boxDepurador');
+                    echo $this->renderElement('boxTickets');
+                    echo $this->renderElement('boxAdmin');
+                    echo $this->renderElement('boxLogin');
+                    echo $this->renderElement('boxSoporteTecnico');
+                ?>                    
                 </div>
-
-                <script type="text/javascript">openMenues();</script>
-
 
                 <div id="cuerpo">
                     <div id="cuerpo_top">
                         <div id="cuerpo_top_left">
                             <?  echo $this->renderElement('rutaUrl', array("ruta" => $rutaUrl_for_layout)); ?>
                         </div>
-                        <!--<div id="cuerpo_top_right">
-                        <?php echo $html->link('<img src="editprofile.png" /> Mis datos','/users/self_user_edit/'.$session->read('Auth.User.id'), array('class'=>'userlinks')); ?> ·
-                        <?php echo $html->link('Cambiar contraseña','/users/cambiar_password/'.$session->read('Auth.User.id'), array('class'=>'userlinks')); ?> ·
-                        <?php echo $html->link('Salir','/users/logout', array('class'=>'userlinks')); ?>
-                        </div>-->
                     </div>
                     <div id="main-content">
                         <?php $session->flash(); ?>
@@ -166,10 +132,12 @@
                         <?php echo $content_for_layout; ?>
                     </div>
                 </div>
-            </div>
+                
+            </div> <!-- FIN div #content -->
 
 
-        </div>
+        </div> <!-- FIN div #container -->
+        
         <div id="footer">
             <p style="float:left;color:#003d5c;font-size:8pt;padding-left:250px; padding-top:10px; vertical-align: middle;font-weight: bold" >Instituto Nacional de Educación Tecnológica</p>
             <?php echo $html->link(

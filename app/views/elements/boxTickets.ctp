@@ -28,7 +28,7 @@
     });*/
 </script>
 
-<div id="boxTickets">
+<div id="boxTickets" class="acl-editores" style="display: none">
 	<h1 id="boxTickets" class="menu_head">Pendientes de Actualización</h1>
 	<ul class="menu_body">
             <form id="pendientes" method="post">
