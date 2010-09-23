@@ -137,6 +137,22 @@ class FondosController extends AppController {
             elseif ($id != null) {
                 $this->data = $this->Fondo->read(null, $id);
             }
+            elseif (!empty($this->passedArgs['instit_id']) && is_numeric($this->passedArgs['instit_id'])) {
+                $this->Fondo->Instit->recursive = 0;
+                $instit = $this->Fondo->Instit->find('first', array('conditions'=>array('Instit.id'=>$this->passedArgs['instit_id'])));
+
+                $this->data['Fondo']['instit_id'] = $this->passedArgs['instit_id'];
+                $this->data['Fondo']['tipo'] = 'i';
+                $this->data['Fondo']['jurisdiccion_id'] = $instit['Instit']['jurisdiccion_id'];
+                $this->data['Instit'] = $instit['Instit'];
+
+                $this->set('instit', $instit);
+            }
+            elseif (!empty($this->passedArgs['jurisdiccion_id']) && is_numeric($this->passedArgs['jurisdiccion_id'])) {
+                $this->data['Fondo']['instit_id'] = 0;
+                $this->data['Fondo']['tipo'] = 'j';
+                $this->data['Fondo']['jurisdiccion_id'] = $this->passedArgs['jurisdiccion_id'];
+            }
 
             $jurisdicciones = $this->Fondo->Jurisdiccion->find('list', array('order'=>'name'));
             $lineasDeAccion = $this->Fondo->LineasDeAccion->find('list', array('fields' => array('LineasDeAccion.id','LineasDeAccion.description'), 'order'=> array('orden','name')));
