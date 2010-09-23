@@ -20,7 +20,7 @@ Requerimientos mínimos para utilizar el <b>Sistema Gestión de Registro</b>:<br /
 
 <br />
 
-<h2>¡Nueva Versión 1.6!</h2>
+<h2>¡Nueva Versión 1.6.1!</h2>
 
 <p>
 Desde su puesta en funcionamiento en junio de 2009 el sistema RFIETP se encuentra
@@ -32,7 +32,7 @@ sistema.
 <p>
 La nueva versión presenta varias mejoras, entre las que se destacan:
 </p>
-<ul>
+<ul><li>Se ha incorporado el primer semestre del 2010 a los planes de mejoras. Ahora contamos con información comprendida entre el 2006 y el 30 de Junio del presente año.</li>
     <li>Se han estructurado, en la base de datos, a todas las Ofertas Educativas de acuerdo a su ciclo o etapa (Ciclo Básico, Ciclo Superior, EGB3, Polimodal, etc) según su jurisdicción.</li>
     <li>Se ha desarrollado una página especial donde la <i>Unidad de Información</i>
         realizará un trabajo de depuración y reordenamiento de datos.</li>
