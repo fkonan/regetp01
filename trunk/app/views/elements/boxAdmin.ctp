@@ -1,4 +1,4 @@
-		<div id="boxAdmin">
+<div id="boxAdmin" class="acl-administradores acl-desarrolladores" style="display: none">
 			<h1 id="boxAdmin" class="menu_head">Administración</h1>
                         <ul class="menu_body">
 				<li><? echo $html->link("Listar Usuarios","/Users/listadoUsuarios") ?></li>
