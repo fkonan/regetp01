@@ -85,7 +85,7 @@ echo $html->css('jquery.autocomplete.css');
                             "<dt onmouseout='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' onmouseover='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' class='' style='height: 30px;'>" +
                                 "<span>" +
                                     '<?php echo $html->image('/img/check.gif', array('id'=>'check_linea','alt' => 'Confirmar', 'onclick'=>'agregarLinea(jQuery(this).parent().parent().parent().parent().parent());'))?>' +
-                                    '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().parent().remove(); ActualizarTotal(); ActualizarComboLineasDeAccion();'))?>' +
+                                    '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().parent().remove(); ActualizarTotal(); actualizarComboLineasDeAccion();'))?>' +
                                 "</span>" +
                                 "<span>" +
                                     "<select class='linea_de_accion_id' style='width:400px'>";
@@ -153,7 +153,7 @@ echo $html->css('jquery.autocomplete.css');
         }
     }
 
-     function ActualizarComboLineasDeAccion(idAdic) {
+     function actualizarComboLineasDeAccion(idAdic) {
         var lineasDeAccionAux = new Array();
         var aEliminar = new Array();
         var idAdicional = '';
@@ -293,6 +293,7 @@ echo $html->css('jquery.autocomplete.css');
     function agregarLinea(element){
 
         uniqid = jQuery(element).parent('.linea_confirmada').attr("order");
+        linea_id = '';
 
         if(uniqid == undefined){
             uniqid = new Date().getTime();
@@ -309,8 +310,8 @@ echo $html->css('jquery.autocomplete.css');
         html = pre +
                "<dt onmouseout='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' onmouseover='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' class='' >" +
                "<span>" +
-                    '<?php echo $html->image('/img/modify.png', array('alt' => 'Modificar', 'onclick'=>'modificarLinea(this); ActualizarComboLineasDeAccion(linea_id);'))?>' +
-                    '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().remove(); ActualizarTotal(); ActualizarComboLineasDeAccion();'))?>' +
+                    '<?php echo $html->image('/img/modify.png', array('alt' => 'Modificar', 'onclick'=>'modificarLinea(this);'))?>' +
+                    '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().remove(); ActualizarTotal(); actualizarComboLineasDeAccion();'))?>' +
                 "</span>" +
                 "<span class='linea_nombre' id='"+jQuery(element).find(".linea_de_accion_id option:selected").val()+"'>" +
                 jQuery(element).find(".linea_de_accion_id option:selected").text() +
@@ -330,7 +331,7 @@ echo $html->css('jquery.autocomplete.css');
 
         // actualizar total
         ActualizarTotal();
-        ActualizarComboLineasDeAccion();
+        actualizarComboLineasDeAccion();
     }
 
     function modificarLinea(element){
@@ -339,12 +340,14 @@ echo $html->css('jquery.autocomplete.css');
         linea_id = jQuery(element).parent().parent().parent().find(".linea_id").val();
         monto = jQuery(element).parent().parent().parent().find(".monto").val();
 
+        actualizarComboLineasDeAccion(linea_id);
+        
         html = "<span class='nueva_linea'>" +
                         "<span class='nueva_linea_in'>" +
                             "<dt onmouseout='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' onmouseover='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' class='' style='height: 30px;'>" +
                                 "<span>" +
-                                    '<?php echo $html->image('/img/check.gif', array('id'=>'check_linea','alt' => 'Confirmar', 'onclick'=>'agregarLinea(jQuery(this).parent().parent().parent().parent().parent()); ActualizarComboLineasDeAccion(linea_id);'))?>' +
-                                    '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().parent().parent().remove(); ActualizarComboLineasDeAccion()'))?>' +
+                                    '<?php echo $html->image('/img/check.gif', array('id'=>'check_linea','alt' => 'Confirmar', 'onclick'=>'agregarLinea(jQuery(this).parent().parent().parent().parent().parent()); actualizarComboLineasDeAccion();'))?>' +
+                                    '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().parent().parent().remove(); actualizarComboLineasDeAccion();'))?>' +
                                 "</span>" +
                                 "<span>" +
                                     "<select class='linea_de_accion_id' style='width:400px'>";
@@ -369,7 +372,6 @@ echo $html->css('jquery.autocomplete.css');
 
         // actualizar total
         ActualizarTotal();
-        ActualizarComboLineasDeAccion();
     }
 
     function agregarLineaConEnter(element,event){
