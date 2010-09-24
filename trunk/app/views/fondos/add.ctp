@@ -15,6 +15,8 @@ echo $html->css('jquery.autocomplete.css');
     }
     ?>
 
+    var lineasDeAccionOriginales = lineasDeAccion;
+
 
     jQuery(document).ready(function() {
 
@@ -88,7 +90,9 @@ echo $html->css('jquery.autocomplete.css');
                                 "<span>" +
                                     "<select class='linea_de_accion_id' style='width:400px'>";
             jQuery.each(jQuery(lineasDeAccion), function(key, value) {
-                html += '<option value="'+key+'">'+value+'</option>';
+                if (value) {
+                    html += '<option value="'+key+'">'+value+'</option>';
+                }
             });
             html +=                "</select>" +
                                 "</span>" +
@@ -149,23 +153,24 @@ echo $html->css('jquery.autocomplete.css');
         }
     }
 
-     function ActualizarComboLineasDeAccion() {
+     function ActualizarComboLineasDeAccion(idAdic) {
         var lineasDeAccionAux = new Array();
         var aEliminar = new Array();
+        var idAdicional = '';
 
+        if (arguments.length > 0) {
+            idAdicional = arguments[0];
+        }
+
+        // recorre las ya utilizadas
         jQuery.each(jQuery('.linea_nombre'), function(key, value) {
             aEliminar[aEliminar.length] = jQuery(value).attr('id');
         });
 
-        var j = 1;
-        // el -- seleccione --
-        //lineasDeAccionAux[0] = lineasDeAccion[0];
-
-        jQuery.each(jQuery(lineasDeAccion), function(keyLinea, valueLinea) {
-            // falta esto!
-            if (jQuery.inArray(valueLinea, aEliminar) == -1) {
-                lineasDeAccionAux[j] = valueLinea;
-                j++;
+        // elimina las ya utilizadas
+        jQuery.each(jQuery(lineasDeAccionOriginales), function(keyLinea, valueLinea) {
+            if (jQuery.inArray(keyLinea.toString(), aEliminar) == -1 || keyLinea == idAdicional) {
+                lineasDeAccionAux[keyLinea] = valueLinea;
             }
         });
 
@@ -174,14 +179,6 @@ echo $html->css('jquery.autocomplete.css');
         return;
     }
 
-    Array.prototype.in_array=function(){
-        for(var j in this){
-            if(this[j]==arguments[0]){
-                return true;
-            }
-        }
-        return false;
-    }
 </script>
 <div class="fondos form">
 
@@ -312,7 +309,7 @@ echo $html->css('jquery.autocomplete.css');
         html = pre +
                "<dt onmouseout='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' onmouseover='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' class='' >" +
                "<span>" +
-                    '<?php echo $html->image('/img/modify.png', array('alt' => 'Modificar', 'onclick'=>'modificarLinea(this)'))?>' +
+                    '<?php echo $html->image('/img/modify.png', array('alt' => 'Modificar', 'onclick'=>'modificarLinea(this); ActualizarComboLineasDeAccion(linea_id);'))?>' +
                     '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().remove(); ActualizarTotal(); ActualizarComboLineasDeAccion();'))?>' +
                 "</span>" +
                 "<span class='linea_nombre' id='"+jQuery(element).find(".linea_de_accion_id option:selected").val()+"'>" +
@@ -346,19 +343,18 @@ echo $html->css('jquery.autocomplete.css');
                         "<span class='nueva_linea_in'>" +
                             "<dt onmouseout='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' onmouseover='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' class='' style='height: 30px;'>" +
                                 "<span>" +
-                                    '<?php echo $html->image('/img/check.gif', array('id'=>'check_linea','alt' => 'Confirmar', 'onclick'=>'agregarLinea(jQuery(this).parent().parent().parent().parent().parent());'))?>' +
-                                    '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().parent().parent().remove();'))?>' +
+                                    '<?php echo $html->image('/img/check.gif', array('id'=>'check_linea','alt' => 'Confirmar', 'onclick'=>'agregarLinea(jQuery(this).parent().parent().parent().parent().parent()); ActualizarComboLineasDeAccion(linea_id);'))?>' +
+                                    '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().parent().parent().remove(); ActualizarComboLineasDeAccion()'))?>' +
                                 "</span>" +
                                 "<span>" +
-                                    "<select class='linea_de_accion_id' style='width:400px'>" +
-                                        <?
-                                        foreach ($lineasDeAccion as $key=>$value) {
-                                        ?>
-                                        '<option value="<?=$key?>"><?=$value?></option>' +
-                                        <?
-                                        }
-                                        ?>
-                                    "</select>" +
+                                    "<select class='linea_de_accion_id' style='width:400px'>";
+                                jQuery.each(jQuery(lineasDeAccion), function(key, value) {
+                                    if (value) {
+                                        html += '<option value="'+key+'">'+value+'</option>';
+                                    }
+                                });
+                                       
+                        html +=   "</select>" +
                                 "</span>" +
                             "</dt>" +
                             "<dd><input class='monto' style='margin-top:-14px;width:100px' type='text' value='"+ monto +"' onkeypress ='agregarLineaConEnter(this,event);'/></dd>" +
