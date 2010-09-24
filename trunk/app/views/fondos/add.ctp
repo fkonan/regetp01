@@ -58,24 +58,23 @@ echo $html->css('jquery.autocomplete.css');
 		}
 	}).result(function(e, item) {
                 jQuery("#hiddenInstitId").remove();
-                jQuery("#FondoEditForm fieldset #institCueInfo").remove();
-                jQuery("#FondoEditForm fieldset .institCueInfo").remove();
+                jQuery("#FondoEditForm #institCueInfo").remove();
+                jQuery("#FondoEditForm .institCueInfo").remove();
 
-                var div = "<div id='institCueInfo' class='institCueInfo'>" +
-                              "<h4> Informacion sobre la Institucion </h4>" +
-                              "<div><strong>CUE: </strong>" + item.cue + "</div>" +
-                              "<div><strong>Nro.Instit: </strong>" + item.nroinstit + "</div>" +
-                              "<div><strong>Tipo de Institucion: </strong>" + item.tipo + "</div>" +
-                              "<div><strong>Año de Creacion: </strong>" + item.anio_creacion + "</div>" +
-                              "<div><strong>Direccion: </strong>" + item.direccion + "</div>" +
-                              "<div><strong>Departamento: </strong>" + item.depto + "</div>" +
-                              "<div><strong>Localidad: </strong>" + item.localidad + "</div>" +
-                              "<div><strong>Jurisdiccion: </strong>" + item.jurisdiccion + "</div>" +
-                              "<div><strong>Codigo Postal: </strong>" + item.cp + "</div>" +
-                              "<div><strong>CUE anterior: </strong>" + item.cue_anterior + "</div>" +
-                          "</div>";
+                var div =   "<div style='border: 1px solid #F0F7FC' id='institCueInfo'>" +
+                            "<div class='instit_name'><b> [" + item.cue + "] " + item.nombre + "</b></div>" +
+                            "<div class='instit_atributte'><b>Domicilio: " + item.direccion + "</b> </div>" +
+                            "<br />" +
+                            "<div class='instit_atributte'><b>Gestión:" + + "</b></div>" +
+                            "<div class='instit_atributte'><b>Jurisdicción:"+ item.jurisdiccion +" </b> </div>" +
+                            "<br />" +
+                            "<div class='instit_atributte'><b>Departamento:" + item.depto + "</b></div>" +
+                            "<div class='instit_atributte'><b>Localidad:" + item.localidad + "</b></div>" +
+                            "</div>";
 
-                jQuery("#FondoEditForm fieldset").append(div);
+                    
+
+                jQuery("#FondoAddForm #datos_institucion").append(div);
 
                 jQuery("#FondoInstitId").val(item.id);
                 jQuery("#FondoJurisdiccionId").val(item.jurisdiccion_id);
@@ -277,6 +276,9 @@ echo $html->css('jquery.autocomplete.css');
         }
         ?>
         <br />
+        <div id="datos_institucion">
+
+        </div>
         <div>
             <label style="display:inline; width:100px; text-align: right;">Año:</label>
             <?=$form->input('anio', array('options'=>$anios, 'default'=>date('Y'), 'style'=>'width: 70px; display:inline;', 'div' => false, 'label' => false))?>
