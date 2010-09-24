@@ -208,7 +208,7 @@ echo $html->css('jquery.autocomplete.css');
 <div class="fondos form">
     <h1><?php echo $Title; ?></h1>
 
-    <?php echo $form->create('Fondo', array('onsubmit'=>'return AsignarTotal();'));?>
+    <?php echo $form->create('Fondo', array('action'=>'add', 'onsubmit'=>'return AsignarTotal();'));?>
     <fieldset>
         <legend>Datos de Fondo</legend>
         <?php

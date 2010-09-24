@@ -108,8 +108,10 @@ class FondosController extends AppController {
 	function add($id=null) {
             $this->rutaUrl_for_layout[0] =array('name'=> 'Listado de Fondos','link'=>'/fondos' );
             $instit = '';
+            
             if (!empty($this->data)) {
-                //debug($this->data); die();
+                debug($this->data);
+                die();
                 $this->Fondo->create();
 
                 if ($this->data['Fondo']['tipo'] == 'j') {
@@ -167,7 +169,7 @@ class FondosController extends AppController {
                 $Title = "Crear Fondo para Jurisdicción";
             }
 
-            if (!strlen($Title)) {
+            if (empty($Title)) {
                 $Title = "Crear Fondo";
             }
 
@@ -204,7 +206,7 @@ class FondosController extends AppController {
 		}
 		if (!empty($this->data)) {
 			if ($this->Fondo->save($this->data)) {
-				$this->Session->setFlash(__('The Fondo has been saved', true));
+				$this->Session->setFlash(__('Se ha guardado el Fondo', true));
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The Fondo could not be saved. Please, try again.', true));
