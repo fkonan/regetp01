@@ -209,9 +209,12 @@ echo $html->css('jquery.autocomplete.css');
 
     <?php echo $form->create('Fondo', array('onsubmit'=>'return AsignarTotal();'));?>
     <fieldset>
+        <legend>Datos de Fondo</legend>
         <?php
         if (empty($instit) && empty($this->passedArgs['jurisdiccion_id'])) {
             echo $form->input("tipo", array(
+                                                'div'=>array('style'=>'width:140px; float: left; clear: none'),
+                                                'style'=> 'width:130px; float: left',
                                                 'label' => 'Tipo de Fondo',
                                                 'options' => array('i'=>'Institucional','j'=>'Jurisdiccional'),
                                                 'default' => array('i'),
@@ -219,16 +222,23 @@ echo $html->css('jquery.autocomplete.css');
                  ));
         ?>
 
-            <div id="buscador_instit">
+            <span id="buscador_instit">
             <?php
-                echo $form->input('posible_instit', array('label'=>'Posible nombre o CUE de la institucion','value'=>($this->data['Instit']['cue'] * 100 + $this->data['Instit']['anexo'])));
+                echo $form->input('posible_instit', array(
+                    'div'=>array('style'=>'width:420px; float: left; clear: none'),
+                    'style'=> 'width:400px; float: left',
+                    'label'=>'Posible nombre o CUE de la institucion',
+                    'value'=>($this->data['Instit']['cue'] * 100 + $this->data['Instit']['anexo'])));
             ?>
-            </div>
-            <div id="jurisdiccional">
+            </span>
+            <span id="jurisdiccional">
             <?php
-                echo $form->input('jurisdiccion_id', array('label'=>'Jurisdiccion','options'=>$jurisdicciones));
+                echo $form->input('jurisdiccion_id', array(
+                    'div'=>array('style'=>'width:420px; float: left; clear: none'),
+                    'style'=> 'width:400px; float: left',
+                    'label'=>'Jurisdiccion','options'=>$jurisdicciones));
             ?>
-            </div>
+            </span>
         <?php
         }
         else {
@@ -265,16 +275,19 @@ echo $html->css('jquery.autocomplete.css');
         }
         ?>
         <br />
-        <label style="display:inline; width:100px; text-align: right;">Año:</label>
-        <?=$form->input('anio', array('options'=>$anios, 'default'=>date('Y'), 'style'=>'width: 70px; display:inline;', 'div' => false, 'label' => false))?>
-        <label style="display:inline; width:100px; text-align: right;">Trimestre:</label>
-        <?=$form->input('trimestre', array('options'=>array('1'=>'1°','2'=>'2°','3'=>'3°','4'=>'4°'), 'default'=>$trimestre, 'style'=>'width: 45px; display:inline;', 'div' => false, 'label' => false))?>
-        <label style="display:inline; width:100px; text-align: right;">Memo:</label>
-        <?=$form->input('memo', array('maxlength'=>30, 'size'=>10, 'style'=>'width: 40px; display:inline;', 'div' => false, 'label' => false))?>
-        <label style="display:inline; width:100px; text-align: right;">Resolución:</label>
-        <?=$form->input('resolucion', array('maxlength'=>30, 'size'=>10, 'style'=>'width: 70px; display:inline;', 'div' => false, 'label' => false))?>
-
-        <h2>Lineas de Accion</h2>
+        <div>
+            <label style="display:inline; width:100px; text-align: right;">Año:</label>
+            <?=$form->input('anio', array('options'=>$anios, 'default'=>date('Y'), 'style'=>'width: 70px; display:inline;', 'div' => false, 'label' => false))?>
+            <label style="display:inline; width:100px; text-align: right;">Trimestre:</label>
+            <?=$form->input('trimestre', array('options'=>array('1'=>'1º','2'=>'2º','3'=>'3º','4'=>'4º'), 'default'=>$trimestre, 'style'=>'width: 50px; display:inline;', 'div' => false, 'label' => false))?>
+            <label style="display:inline; width:100px; text-align: right;">Memo:</label>
+            <?=$form->input('memo', array('maxlength'=>30, 'size'=>10, 'style'=>'width: 40px; display:inline;', 'div' => false, 'label' => false))?>
+            <label style="display:inline; width:100px; text-align: right;">Resolución:</label>
+            <?=$form->input('resolucion', array('maxlength'=>30, 'size'=>10, 'style'=>'width: 70px; display:inline;', 'div' => false, 'label' => false))?>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Lineas de Accion</legend>
         <div class="lista_lineas">
             <dl class="item_lineas" style="cursor:pointer;padding:0px !important">
                 <div id="detalle">
@@ -293,8 +306,8 @@ echo $html->css('jquery.autocomplete.css');
             </dl>
 
         </div>
-        <span style="float:right">
-            <?php echo $html->image('/img/add.gif', array('id'=>'agregar_nueva_linea','alt' => 'Agregar'))?>
+        <span style="font-size:8pt;font-weight:bold;float:right">
+            Agregar Nueva Linea de Acción <?php echo $html->image('/img/add.gif', array('id'=>'agregar_nueva_linea','alt' => 'Agregar'))?>
         </span>
 
         <?php
@@ -303,7 +316,7 @@ echo $html->css('jquery.autocomplete.css');
 
             echo $form->input('description', array('label'=>'Descripción'));
 	?>
-    </fieldset>
+        </fieldset>
     <?php echo $form->end('Guardar');?>
 </div>
 <div class="actions">
