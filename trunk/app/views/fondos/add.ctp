@@ -105,7 +105,7 @@ echo $html->css('jquery.autocomplete.css');
            jQuery(".lista_lineas .nueva_linea").show();
            jQuery(".lista_lineas dl #detalle .nueva_linea .linea_de_accion_id").focus();
 
-           jQuery(".lista_lineas dl #detalle .nueva_linea .monto").setMask("decimal");
+           jQuery(".lista_lineas dl #detalle .nueva_linea .monto").setMask("integer");
         });
 
         jQuery(document).keypress(function(e) {
@@ -138,8 +138,7 @@ echo $html->css('jquery.autocomplete.css');
         var total = 0;
         var valor_procesado = 0;
         jQuery.each(jQuery('.monto'), function(key, value) {
-            valor_procesado = jQuery(value).val().replace(".","");
-            valor_procesado = valor_procesado.replace(",",".");
+            valor_procesado = replaceAll(jQuery(value).val(),".","");
             total += parseFloat(valor_procesado);
         });
 
@@ -153,7 +152,7 @@ echo $html->css('jquery.autocomplete.css');
 
     function ActualizarTotal() {
         if (!isNaN(SumarLinasDeAccionMontos())) {
-            jQuery('#total').html(jQuery.mask.string(SumarLinasDeAccionMontos(),"decimal"));
+            jQuery('#total').html(jQuery.mask.string(SumarLinasDeAccionMontos(),"integer"));
         }
         else {
             jQuery('#total').html('<span style="color:red;">Error! Debe ingresar montos numéricos</span>');
@@ -185,6 +184,13 @@ echo $html->css('jquery.autocomplete.css');
 
         return;
     }
+
+    function replaceAll( text, busca, reemplaza ){
+      while (text.toString().indexOf(busca) != -1)
+          text = text.toString().replace(busca,reemplaza);
+      return text;
+    }
+
 
 </script>
 <div class="fondos form">
@@ -376,7 +382,7 @@ echo $html->css('jquery.autocomplete.css');
         jQuery(".lista_lineas dl #detalle .linea_confirmada[order=" + uniqid + "]").html('');
         jQuery(".lista_lineas dl #detalle .linea_confirmada[order=" + uniqid + "]").append(html);
         jQuery(".lista_lineas dl #detalle .linea_confirmada[order=" + uniqid + "] .linea_de_accion_id").val(linea_id);
-        jQuery(".lista_lineas dl #detalle .linea_confirmada[order=" + uniqid + "] .monto").setMask("decimal");
+        jQuery(".lista_lineas dl #detalle .linea_confirmada[order=" + uniqid + "] .monto").setMask("integer");
         // actualizar total
         ActualizarTotal();
     }
