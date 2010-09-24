@@ -2,6 +2,7 @@
 //echo $javascript->link('jquery-1.4.2.min');
 echo $javascript->link('jquery.autocomplete');
 echo $javascript->link('jquery.blockUI');
+echo $javascript->link('jquery.meio.mask');
 echo $html->css('jquery.autocomplete.css');
 ?>
 <script type="text/javascript">
@@ -97,11 +98,14 @@ echo $html->css('jquery.autocomplete.css');
             html +=                "</select>" +
                                 "</span>" +
                             "</dt>" +
-                            "<dd><input class='monto' style='margin-top:-14px;width:100px' type='text' onkeypress ='agregarLineaConEnter(this,event);'/></dd>" +
+                            "<dd><input class='monto' alt='decimal' style='margin-top:-14px;width:100px' type='text' onkeypress ='agregarLineaConEnter(this,event);'/></dd>" +
                         "</span>" +
                     "</span>";
            jQuery(".lista_lineas dl #detalle").append(html);
            jQuery(".lista_lineas .nueva_linea").show();
+           jQuery(".lista_lineas dl #detalle .nueva_linea .linea_de_accion_id").focus();
+
+           jQuery(".lista_lineas dl #detalle .nueva_linea .monto").setMask("decimal");
         });
 
         jQuery(document).keypress(function(e) {
@@ -132,8 +136,11 @@ echo $html->css('jquery.autocomplete.css');
 
     function SumarLinasDeAccionMontos() {
         var total = 0;
+        var valor_procesado = 0;
         jQuery.each(jQuery('.monto'), function(key, value) {
-            total += parseFloat(jQuery(value).val());
+            valor_procesado = jQuery(value).val().replace(".","");
+            valor_procesado = valor_procesado.replace(",",".");
+            total += parseFloat(valor_procesado);
         });
 
         return total;
@@ -146,7 +153,7 @@ echo $html->css('jquery.autocomplete.css');
 
     function ActualizarTotal() {
         if (!isNaN(SumarLinasDeAccionMontos())) {
-            jQuery('#total').html(SumarLinasDeAccionMontos());
+            jQuery('#total').html(jQuery.mask.string(SumarLinasDeAccionMontos(),"decimal"));
         }
         else {
             jQuery('#total').html('<span style="color:red;">Error! Debe ingresar montos numéricos</span>');
@@ -369,7 +376,7 @@ echo $html->css('jquery.autocomplete.css');
         jQuery(".lista_lineas dl #detalle .linea_confirmada[order=" + uniqid + "]").html('');
         jQuery(".lista_lineas dl #detalle .linea_confirmada[order=" + uniqid + "]").append(html);
         jQuery(".lista_lineas dl #detalle .linea_confirmada[order=" + uniqid + "] .linea_de_accion_id").val(linea_id);
-
+        jQuery(".lista_lineas dl #detalle .linea_confirmada[order=" + uniqid + "] .monto").setMask("decimal");
         // actualizar total
         ActualizarTotal();
     }
