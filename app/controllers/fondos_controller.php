@@ -84,8 +84,10 @@ class FondosController extends AppController {
             
             $jurisdicciones = $this->Fondo->Jurisdiccion->find('list', array('order'=>'name'));
             $jurisdicciones = $todos + $jurisdicciones;
-
-            $anios = $this->Fondo->Instit->Plan->Anio->Ciclo->find('list');//, array('fields'=>array('anio','anio')));
+            
+            for($i=date('Y'); $i >= 2006; $i--) {
+                $anios[$i] = $i;
+            }
             $anios = $todos + $anios;
 
             
@@ -104,6 +106,7 @@ class FondosController extends AppController {
 	}*/
 
 	function add($id=null) {
+            $instit = '';
             if (!empty($this->data)) {
                 //debug($this->data); die();
                 $this->Fondo->create();
@@ -136,6 +139,10 @@ class FondosController extends AppController {
             }
             elseif ($id != null) {
                 $this->data = $this->Fondo->read(null, $id);
+                if (!empty($this->data['Fondo']['instit_id'])) {
+                    $this->Fondo->Instit->recursive = 0;
+                    $instit = $this->Fondo->Instit->find('first', array('conditions'=>array('Instit.id'=>$this->data['Fondo']['instit_id'])));
+                }
             }
             elseif (!empty($this->passedArgs['instit_id']) && is_numeric($this->passedArgs['instit_id'])) {
                 $this->Fondo->Instit->recursive = 0;
@@ -145,8 +152,6 @@ class FondosController extends AppController {
                 $this->data['Fondo']['tipo'] = 'i';
                 $this->data['Fondo']['jurisdiccion_id'] = $instit['Instit']['jurisdiccion_id'];
                 $this->data['Instit'] = $instit['Instit'];
-
-                $this->set('instit', $instit);
             }
             elseif (!empty($this->passedArgs['jurisdiccion_id']) && is_numeric($this->passedArgs['jurisdiccion_id'])) {
                 $this->data['Fondo']['instit_id'] = 0;
@@ -175,6 +180,7 @@ class FondosController extends AppController {
             $this->set('anios', $anios);
             $this->set('trimestre', $trimestre);
             $this->set('lineasDeAccion', $lineasDeAccion);
+            $this->set('instit', $instit);
 	}
 
 	function edit($id = null) {

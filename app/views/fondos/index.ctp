@@ -16,12 +16,12 @@ $trimestres=array(''=>'Todos','1'=>'1º','2'=>'2º','3'=>'3º','4'=>'4º');
         <span><?php echo $form->input('trimestre', array('label'=>false,'options'=>$trimestres, 'style'=>'width:100px','div'=>false)) ?></span>
         <span><?php echo $form->input('jurisdiccion_id',array('label'=>false,'div'=>false)) ?></span>
         <span><?php echo $form->input('instit_id',array('label'=>false,'div'=>false, 'options'=>array('0'=>'Jurisdiccional'),'empty'=>'Seleccione')) ?></span>
-    <?php echo $form->end('Search',array('style'=>'float:right')); ?>
+    <?php echo $form->end('Buscar',array('style'=>'float:right')); ?>
 </div>
 <p>
 <?php
 echo $paginator->counter(array(
-'format' => __('Page %page% of %pages%, showing %current% records out of <b>%count%</b> total', true)
+'format' => __('Página %page% de %pages%, mostrando %current% fondos de <b>%count%</b>', true)
 ));
 ?></p>
 
@@ -48,7 +48,13 @@ foreach ($fondos as $fondo):
 ?>
 	<tr<?php echo $class;?>>
 		<td>
-			<?php echo $fondo['Instit']['nombre']; ?>
+			<?php
+                        if (!empty($fondo['Instit']['nombre'])) {
+                            echo $fondo['Instit']['nombre'];
+                        } else {
+                        ?>
+                            <i>Jurisdiccional</i>
+                        <?php }?>
 		</td>
 		<td>
 			<?php echo $fondo['Jurisdiccion']['name']; ?>
@@ -67,7 +73,7 @@ foreach ($fondos as $fondo):
                         $<?=number_format($fondo['Fondo']['total'],2,",",".");?>
 		</td>
 		<td class="actions">
-			<?php echo $html->link(__('ver', true), array('action' => 'index_x_instit', $fondo['Instit']['id'])); ?>
+			<?php echo $html->link(__('Editar', true), array('action' => 'add', $fondo['Fondo']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

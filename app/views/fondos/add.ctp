@@ -27,6 +27,14 @@ echo $html->css('jquery.autocomplete.css');
 
         CambiaTipoFondo();
 
+        <?php
+        if (!empty($this->data['Fondo']['FondosLineasDeAccion']))
+        { ?>
+            jQuery("#agregar_nueva_linea").click();
+        <?php
+        }
+        ?>
+
         jQuery(document).ajaxStart(function() {
             jQuery.blockUI({ message: '<h1>Buscando...</h1>',overlayCSS: { backgroundColor: '#00f' }, showOverlay: true });
         });
@@ -74,18 +82,33 @@ echo $html->css('jquery.autocomplete.css');
         });
 
         /** ** funciones de lineas de accion ** **/
-        jQuery("#agregar_nueva_linea").click(function(){
+        jQuery("#agregar_nueva_linea").click(agregarNuevaLinea);
 
+        jQuery(document).keypress(function(e) {
+            if (e.keyCode == 10 || e.keyCode == 13){
+                return false;
+            }
+            if ((e.charCode == 43 || e.charCode == 107)){
+                jQuery("#agregar_nueva_linea").click();
+            }
+        });
+
+    });
+
+
+
+    function agregarNuevaLinea()
+    {
             nueva_linea = jQuery(".lista_lineas dl #detalle .nueva_linea").first();
             if(nueva_linea.length != 0){
-                agregarLinea(nueva_linea);
+                confirmarLinea(nueva_linea);
             }
 
             html = "<span class='nueva_linea' style='display:none'>" +
                         "<span class='nueva_linea_in'>" +
                             "<dt onmouseout='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' onmouseover='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' class='' style='height: 30px;'>" +
                                 "<span>" +
-                                    '<?php echo $html->image('/img/check.gif', array('id'=>'check_linea','alt' => 'Confirmar', 'onclick'=>'agregarLinea(jQuery(this).parent().parent().parent().parent().parent());'))?>' +
+                                    '<?php echo $html->image('/img/check.gif', array('id'=>'check_linea','alt' => 'Confirmar', 'onclick'=>'confirmarLinea(jQuery(this).parent().parent().parent().parent().parent());'))?>' +
                                     '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().parent().remove(); ActualizarTotal(); actualizarComboLineasDeAccion();'))?>' +
                                 "</span>" +
                                 "<span>" +
@@ -98,7 +121,7 @@ echo $html->css('jquery.autocomplete.css');
             html +=                "</select>" +
                                 "</span>" +
                             "</dt>" +
-                            "<dd><input class='monto' alt='decimal' style='margin-top:-14px;width:100px' type='text' onkeypress ='agregarLineaConEnter(this,event);'/></dd>" +
+                            "<dd><input class='monto' alt='decimal' style='margin-top:-14px;width:100px' type='text' onkeypress ='confirmarLineaConEnter(this,event);'/></dd>" +
                         "</span>" +
                     "</span>";
            jQuery(".lista_lineas dl #detalle").append(html);
@@ -106,18 +129,7 @@ echo $html->css('jquery.autocomplete.css');
            jQuery(".lista_lineas dl #detalle .nueva_linea .linea_de_accion_id").focus();
 
            jQuery(".lista_lineas dl #detalle .nueva_linea .monto").setMask("integer");
-        });
-
-        jQuery(document).keypress(function(e) {
-            if (e.keyCode == 10 || e.keyCode == 13){
-                return false;
-            }
-            if ((e.charCode == 43 || e.charCode == 107)){
-                jQuery("#agregar_nueva_linea").click();
-            }
-        });
-
-    });
+        }
 
     function format(instit) {
                 return instit.nombre + " [" + instit.cue + "]";
@@ -198,7 +210,7 @@ echo $html->css('jquery.autocomplete.css');
     <?php echo $form->create('Fondo', array('onsubmit'=>'return AsignarTotal();'));?>
     <fieldset>
         <?php
-        if (empty($this->passedArgs['instit_id']) && empty($this->passedArgs['jurisdiccion_id'])) {
+        if (empty($instit) && empty($this->passedArgs['jurisdiccion_id'])) {
             echo $form->input("tipo", array(
                                                 'label' => 'Tipo de Fondo',
                                                 'options' => array('i'=>'Institucional','j'=>'Jurisdiccional'),
@@ -223,7 +235,7 @@ echo $html->css('jquery.autocomplete.css');
             echo $form->input('jurisdiccion_id', array('type'=>'hidden'));
             echo $form->input('tipo', array('type'=>'hidden'));
 
-            if (!empty($this->passedArgs['instit_id'])) {
+            if (!empty($instit)) {
             ?>
                 <div id="datos_instit">
                     <?
@@ -256,7 +268,7 @@ echo $html->css('jquery.autocomplete.css');
         <label style="display:inline; width:100px; text-align: right;">Año:</label>
         <?=$form->input('anio', array('options'=>$anios, 'default'=>date('Y'), 'style'=>'width: 70px; display:inline;', 'div' => false, 'label' => false))?>
         <label style="display:inline; width:100px; text-align: right;">Trimestre:</label>
-        <?=$form->input('trimestre', array('options'=>array('1'=>'1','2'=>'2','3'=>'3','4'=>'4'), 'default'=>$trimestre, 'style'=>'width: 40px; display:inline;', 'div' => false, 'label' => false))?>
+        <?=$form->input('trimestre', array('options'=>array('1'=>'1°','2'=>'2°','3'=>'3°','4'=>'4°'), 'default'=>$trimestre, 'style'=>'width: 45px; display:inline;', 'div' => false, 'label' => false))?>
         <label style="display:inline; width:100px; text-align: right;">Memo:</label>
         <?=$form->input('memo', array('maxlength'=>30, 'size'=>10, 'style'=>'width: 40px; display:inline;', 'div' => false, 'label' => false))?>
         <label style="display:inline; width:100px; text-align: right;">Resolución:</label>
@@ -303,7 +315,7 @@ echo $html->css('jquery.autocomplete.css');
 <script type="text/javascript">
     var i = 0;
     
-    function agregarLinea(element){
+    function confirmarLinea(element){
 
         uniqid = jQuery(element).parent('.linea_confirmada').attr("order");
         linea_id = '';
@@ -323,7 +335,7 @@ echo $html->css('jquery.autocomplete.css');
         html = pre +
                "<dt onmouseout='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' onmouseover='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' class='' >" +
                "<span>" +
-                    '<?php echo $html->image('/img/modify.png', array('alt' => 'Modificar', 'onclick'=>'modificarLinea(this);'))?>' +
+                    '<?php echo $html->image('/img/modify.png', array('alt' => 'Modificar', 'onclick'=>'editarLinea(this);'))?>' +
                     '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().remove(); ActualizarTotal(); actualizarComboLineasDeAccion();'))?>' +
                 "</span>" +
                 "<span class='linea_nombre' id='"+jQuery(element).find(".linea_de_accion_id option:selected").val()+"'>" +
@@ -347,7 +359,7 @@ echo $html->css('jquery.autocomplete.css');
         actualizarComboLineasDeAccion();
     }
 
-    function modificarLinea(element){
+    function editarLinea(element){
         uniqid = jQuery(element).parent().parent().parent().attr("order");
         
         linea_id = jQuery(element).parent().parent().parent().find(".linea_id").val();
@@ -359,7 +371,7 @@ echo $html->css('jquery.autocomplete.css');
                         "<span class='nueva_linea_in'>" +
                             "<dt onmouseout='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' onmouseover='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' class='' style='height: 30px;'>" +
                                 "<span>" +
-                                    '<?php echo $html->image('/img/check.gif', array('id'=>'check_linea','alt' => 'Confirmar', 'onclick'=>'agregarLinea(jQuery(this).parent().parent().parent().parent().parent()); actualizarComboLineasDeAccion();'))?>' +
+                                    '<?php echo $html->image('/img/check.gif', array('id'=>'check_linea','alt' => 'Confirmar', 'onclick'=>'confirmarLinea(jQuery(this).parent().parent().parent().parent().parent()); actualizarComboLineasDeAccion();'))?>' +
                                     '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().parent().parent().remove(); actualizarComboLineasDeAccion();'))?>' +
                                 "</span>" +
                                 "<span>" +
@@ -373,7 +385,7 @@ echo $html->css('jquery.autocomplete.css');
                         html +=   "</select>" +
                                 "</span>" +
                             "</dt>" +
-                            "<dd><input class='monto' style='margin-top:-14px;width:100px' type='text' value='"+ monto +"' onkeypress ='agregarLineaConEnter(this,event);'/></dd>" +
+                            "<dd><input class='monto' style='margin-top:-14px;width:100px' type='text' value='"+ monto +"' onkeypress ='confirmarLineaConEnter(this,event);'/></dd>" +
                             "<input class='linea_id' type='hidden' name='data[Fondo][FondosLineasDeAccion][][lineas_de_accion_id]' value='"+ linea_id +"'>" +
                             "<input class='monto' type='hidden' name='data[Fondo][FondosLineasDeAccion][][monto]' value='" + monto + "'>" +
                         "</span>" +
@@ -387,9 +399,9 @@ echo $html->css('jquery.autocomplete.css');
         ActualizarTotal();
     }
 
-    function agregarLineaConEnter(element,event){
+    function confirmarLineaConEnter(element,event){
         if ((event.keyCode == 10 || event.keyCode == 13)){
-            agregarLinea(jQuery(element).parent().parent().parent());
+            confirmarLinea(jQuery(element).parent().parent().parent());
         }
     }
 </script>
