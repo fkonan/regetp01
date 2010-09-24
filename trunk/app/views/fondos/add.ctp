@@ -28,10 +28,11 @@ echo $html->css('jquery.autocomplete.css');
         CambiaTipoFondo();
 
         <?php
-        if (!empty($this->data['Fondo']['FondosLineasDeAccion']))
-        { ?>
-            jQuery("#agregar_nueva_linea").click();
-        <?php
+        if (!empty($this->data['LineasDeAccion'])) {
+            foreach ($this->data['LineasDeAccion'] as $linea) {
+            ?>
+                confirmarLinea('', <?=$linea['id']?>, '<?=$linea['description']?>', jQuery.mask.string('<?=$linea['FondosLineasDeAccion']['monto']?>', "integer"));
+            <?php }
         }
         ?>
 
@@ -97,7 +98,7 @@ echo $html->css('jquery.autocomplete.css');
 
 
 
-    function agregarNuevaLinea()
+    function agregarNuevaLinea(linea_id, monto)
     {
             nueva_linea = jQuery(".lista_lineas dl #detalle .nueva_linea").first();
             if(nueva_linea.length != 0){
@@ -206,6 +207,7 @@ echo $html->css('jquery.autocomplete.css');
 
 </script>
 <div class="fondos form">
+    <h1><?php echo $Title; ?></h1>
 
     <?php echo $form->create('Fondo', array('onsubmit'=>'return AsignarTotal();'));?>
     <fieldset>
@@ -328,10 +330,31 @@ echo $html->css('jquery.autocomplete.css');
 <script type="text/javascript">
     var i = 0;
     
-    function confirmarLinea(element){
+    function confirmarLinea(element, linea_de_accion_id, linea_de_accion, monto){
 
         uniqid = jQuery(element).parent('.linea_confirmada').attr("order");
         linea_id = '';
+
+        if (linea_de_accion_id) {
+            lineaAccionId = linea_de_accion_id;
+        }
+        else {
+            lineaAccionId = jQuery(element).find(".linea_de_accion_id option:selected").val();
+        }
+
+        if (linea_de_accion) {
+            lineaAccion = linea_de_accion;
+        }
+        else {
+            lineaAccion = jQuery(element).find(".linea_de_accion_id option:selected").text();
+        }
+
+        if (monto) {
+            lineaMonto = monto;
+        }
+        else {
+            lineaMonto = jQuery(element).find(".monto").val();
+        }
 
         if(uniqid == undefined){
             uniqid = new Date().getTime();
@@ -351,15 +374,15 @@ echo $html->css('jquery.autocomplete.css');
                     '<?php echo $html->image('/img/modify.png', array('alt' => 'Modificar', 'onclick'=>'editarLinea(this);'))?>' +
                     '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().remove(); ActualizarTotal(); actualizarComboLineasDeAccion();'))?>' +
                 "</span>" +
-                "<span class='linea_nombre' id='"+jQuery(element).find(".linea_de_accion_id option:selected").val()+"'>" +
-                jQuery(element).find(".linea_de_accion_id option:selected").text() +
+                "<span class='linea_nombre' id='"+lineaAccionId+"'>" +
+                lineaAccion +
                 "</span>" +
                 "</dt>" +
                 "<dd>" +
-                jQuery(element).find(".monto").val() +
+                lineaMonto +
                 "</dd>" +
-                "<input class='linea_id' type='hidden' name='data[Fondo][FondosLineasDeAccion]["+i+"][lineas_de_accion_id]' value='"+ jQuery(element).find(".linea_de_accion_id option:selected").val() +"'>" +
-                "<input class='monto' type='hidden' name='data[Fondo][FondosLineasDeAccion]["+i+"][monto]' value='" + jQuery(element).find(".monto").val() + "'>" +
+                "<input class='linea_id' type='hidden' name='data[Fondo][FondosLineasDeAccion]["+i+"][lineas_de_accion_id]' value='"+ lineaAccionId +"'>" +
+                "<input class='monto' type='hidden' name='data[Fondo][FondosLineasDeAccion]["+i+"][monto]' value='" + lineaMonto + "'>" +
                 post;
 
         jQuery(".lista_lineas dl .nueva_linea").remove();
