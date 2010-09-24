@@ -295,9 +295,6 @@ echo $html->css('jquery.autocomplete.css');
         <div class="lista_lineas">
             <dl class="item_lineas" style="cursor:pointer;padding:0px !important">
                 <div id="detalle">
-
-                    
-                    
                 </div>
                 <div id="totales">
                     <dt onmouseout="jQuery(this).toggleClass('item_fondos_seleccionado')" onmouseover="jQuery(this).toggleClass('item_fondos_seleccionado')" class="" >
@@ -310,7 +307,7 @@ echo $html->css('jquery.autocomplete.css');
             </dl>
 
         </div>
-        <span style="font-size:8pt;font-weight:bold;float:right">
+        <span style="cursor:pointer;font-size:8pt;font-weight:bold;float:right">
             Agregar Nueva Linea de Acción <?php echo $html->image('/img/add.gif', array('id'=>'agregar_nueva_linea','alt' => 'Agregar'))?>
         </span>
 
