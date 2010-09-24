@@ -2029,14 +2029,12 @@ div.content{
 }
 
 .lista_lineas .item_lineas{
-    border-top: thin solid #6F7BA3;
-    border-bottom: thin solid #6F7BA3;
     margin-top: 10px;
     margin-left:  0px;
     margin-right: 0px;
     /*background-color: #E8F2FB;*/
     margin-bottom: 2px;
-    border: 1px solid #6F7BA3;
+    border: 1px solid #F0F7FC;
 }
 
 .lista_lineas .item_lineas .header{
