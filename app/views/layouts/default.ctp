@@ -114,6 +114,7 @@
                     echo $this->renderElement('boxInformacion');
                     echo $this->renderElement('boxDepurador');
                     echo $this->renderElement('boxTickets');
+                    echo $this->renderElement('boxFondo');
                     echo $this->renderElement('boxAdmin');
                     echo $this->renderElement('boxLogin');
                     echo $this->renderElement('boxSoporteTecnico');

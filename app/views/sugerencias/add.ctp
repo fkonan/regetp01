@@ -13,7 +13,7 @@
     
     <p>
     Habilitamos el presente formulario para que Ud. pueda hacernos llegar sugerencias y opiniones sobre la aplicación Registro Federal de Instituciones de ETP (RFIETP). Puede solicitar nuevas características, o proponer modificaciones y ampliaciones de funcionalidad existente. Cualquier sugerencia será bienvenida.
-    Las propuestas serán tomadas en cuenta para mejorar el programa en función de las necesidades de los usuarios.
+    Las propuestas serán tomadas en cuenta para mejorar el programa.
     </p>
 
     

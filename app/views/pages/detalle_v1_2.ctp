@@ -3,11 +3,13 @@
 <ul>
     <li><b>Oferta Educativa de Instituciones</b>
         <ul type="circle">
+            <li>Se ha publicado la información correspondinete a los Planes de Mejora aprobados durante el primer semestre de 2010.</li>
             <li>Se definieron las Estructuras de Ofertas Educativas posibles para cada Jurisdicción.</li>
             <li>Se implementó la carga de dichas Estructuras y la asociación de las mismas con cada Jurisdicción.</li>
             <li>Se asoció una y solo una Estructura a cada Oferta Educativa, conformada por una etapa (EGB 3, POLIMODAL, etc.).</li>
             <li>A su vez, los Años de la Oferta contienen un conjunto de variables asociadas como el Número de Año, Año de Escolaridad, Edad Teórica y Alias.</li>
             <li>Se realizó el Depurador de todas las Ofertas de Secundaria Tecnica existentes en el Registro.</li>
+            <li>Se agregó un formulario para que los usuarios puedan hacer sugerencias y solicitar mejora de la aplicación.</li>
         </ul>
     </li>
     <br>
