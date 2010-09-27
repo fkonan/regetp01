@@ -78,17 +78,18 @@ class FondosController extends AppController {
         {
             $this->Fondo->recursive = 0;
             $this->Fondo->order = array('Fondo.anio DESC', 'Fondo.trimestre','Fondo.jurisdiccion_id ASC');
+            $condition = '';
             if ($this->data['Fondo']['tipo'] == 'i') {
-                $this->Fondo->conditions = array('Fondo.instit_id >' => 0);
+                $condition = array('Fondo.instit_id >' => 0);
             }
             elseif ($this->data['Fondo']['tipo'] == 'j') {
-                $this->Fondo->conditions = array('Fondo.instit_id' => 0);
+                $condition = array('Fondo.instit_id' => 0);
             }
 
             $this->data['Fondo']['tipo'] = '';
 
-
             $filter = $this->Filter->process($this);
+            $filter = $filter + $condition;
 
             $todos = array('' => 'Todos');
             
