@@ -89,7 +89,8 @@ class FondosController extends AppController {
             $this->data['Fondo']['tipo'] = '';
 
             $filter = $this->Filter->process($this);
-            $filter = $filter + $condition;
+            if (is_array($condition))
+                $filter = $filter + $condition;
 
             $todos = array('' => 'Todos');
             
