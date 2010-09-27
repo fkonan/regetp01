@@ -108,7 +108,7 @@ echo $html->css('jquery.autocomplete.css');
                         "<span class='nueva_linea_in'>" +
                             "<dt onmouseout='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' onmouseover='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' class='' style='height: 30px;'>" +
                                 "<span>" +
-                                    '<?php echo $html->image('/img/check.gif', array('id'=>'check_linea','alt' => 'Confirmar', 'onclick'=>'confirmarLinea(jQuery(this).parent().parent().parent().parent().parent());'))?>' +
+                                    '<?php echo $html->image('/img/check.gif', array('id'=>'check_linea','alt' => 'Confirmar', 'onclick'=>'confirmarLinea(jQuery(this).parent().parent().parent().parent());'))?>' +
                                     '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().parent().remove(); ActualizarTotal(); actualizarComboLineasDeAccion();'))?>' +
                                 "</span>" +
                                 "<span>" +
@@ -355,43 +355,55 @@ echo $html->css('jquery.autocomplete.css');
             lineaMonto = jQuery(element).find(".monto").val();
         }
 
-        if(uniqid == undefined){
-            uniqid = new Date().getTime();
-            pre = "<div class='linea_confirmada' order='"+ uniqid  + "'>";
-            post = "</div>";
-            selector = "";
-        }else{
-            pre = '';
-            post = '';
-            selector = " .linea_confirmada[order="+uniqid+"]";
+        if(lineaAccionId != 0 && lineaMonto != ""){
+            if(uniqid == undefined){
+                uniqid = new Date().getTime();
+                pre = "<div class='linea_confirmada' order='"+ uniqid  + "'>";
+                post = "</div>";
+                selector = "";
+            }else{
+                pre = '';
+                post = '';
+                selector = " .linea_confirmada[order="+uniqid+"]";
+            }
+
+
+            html = pre +
+                   "<dt onmouseout='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' onmouseover='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' class='' >" +
+                   "<span>" +
+                        '<?php echo $html->image('/img/modify.png', array('alt' => 'Modificar', 'onclick'=>'editarLinea(this);'))?>' +
+                        '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().remove(); ActualizarTotal(); actualizarComboLineasDeAccion();'))?>' +
+                    "</span>" +
+                    "<span class='linea_nombre' id='"+lineaAccionId+"'>" +
+                    lineaAccion +
+                    "</span>" +
+                    "</dt>" +
+                    "<dd>" +
+                    lineaMonto +
+                    "</dd>" +
+                    "<input class='linea_id' type='hidden' name='data[Fondo][FondosLineasDeAccion]["+i+"][lineas_de_accion_id]' value='"+ lineaAccionId +"'>" +
+                    "<input class='monto' type='hidden' name='data[Fondo][FondosLineasDeAccion]["+i+"][monto]' value='" + lineaMonto + "'>" +
+                    post;
+
+            jQuery(".lista_lineas dl .nueva_linea").remove();
+
+            jQuery(".lista_lineas dl #detalle" + selector).append(html);
+            i++;
+
+            // actualizar total
+            ActualizarTotal();
+            actualizarComboLineasDeAccion();
         }
-        
+        else{
+            
+            if(lineaAccionId == 0 ){
+                jQuery(element).find(".linea_de_accion_id").css("border-color", "#FF0000");
+            }
 
-        html = pre +
-               "<dt onmouseout='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' onmouseover='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' class='' >" +
-               "<span>" +
-                    '<?php echo $html->image('/img/modify.png', array('alt' => 'Modificar', 'onclick'=>'editarLinea(this);'))?>' +
-                    '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().remove(); ActualizarTotal(); actualizarComboLineasDeAccion();'))?>' +
-                "</span>" +
-                "<span class='linea_nombre' id='"+lineaAccionId+"'>" +
-                lineaAccion +
-                "</span>" +
-                "</dt>" +
-                "<dd>" +
-                lineaMonto +
-                "</dd>" +
-                "<input class='linea_id' type='hidden' name='data[Fondo][FondosLineasDeAccion]["+i+"][lineas_de_accion_id]' value='"+ lineaAccionId +"'>" +
-                "<input class='monto' type='hidden' name='data[Fondo][FondosLineasDeAccion]["+i+"][monto]' value='" + lineaMonto + "'>" +
-                post;
-
-        jQuery(".lista_lineas dl .nueva_linea").remove();
-        
-        jQuery(".lista_lineas dl #detalle" + selector).append(html);
-        i++;
-
-        // actualizar total
-        ActualizarTotal();
-        actualizarComboLineasDeAccion();
+            if(lineaMonto == ""){
+                jQuery(element).find(".monto").css("border-color", "#FF0000");
+            }
+        }
     }
 
     function editarLinea(element){
@@ -406,7 +418,7 @@ echo $html->css('jquery.autocomplete.css');
                         "<span class='nueva_linea_in'>" +
                             "<dt onmouseout='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' onmouseover='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' class='' style='height: 30px;'>" +
                                 "<span>" +
-                                    '<?php echo $html->image('/img/check.gif', array('id'=>'check_linea','alt' => 'Confirmar', 'onclick'=>'confirmarLinea(jQuery(this).parent().parent().parent().parent().parent()); actualizarComboLineasDeAccion();'))?>' +
+                                    '<?php echo $html->image('/img/check.gif', array('id'=>'check_linea','alt' => 'Confirmar', 'onclick'=>'confirmarLinea(jQuery(this).parent().parent().parent().parent()); actualizarComboLineasDeAccion();'))?>' +
                                     '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().parent().parent().remove(); actualizarComboLineasDeAccion();'))?>' +
                                 "</span>" +
                                 "<span>" +
