@@ -10,12 +10,12 @@ $trimestres=array(''=>'Todos','1'=>'1º','2'=>'2º','3'=>'3º','4'=>'4º');
             <span>Año</span>
             <span style="padding-left:30px">Trimestre</span>
             <span style="padding-left:50px">Jurisdicción</span>
-            <span style="padding-left:80px">Jurisdiccional</span>
+            <span style="padding-left:80px">Tipo</span>
         </div>
         <span><?php echo $form->input('anio',array('label'=>false,'options'=>$anios, 'div'=>false)) ?></span>
         <span><?php echo $form->input('trimestre', array('label'=>false,'options'=>$trimestres, 'style'=>'width:100px','div'=>false)) ?></span>
         <span><?php echo $form->input('jurisdiccion_id',array('label'=>false,'div'=>false)) ?></span>
-        <span><?php echo $form->input('instit_id',array('label'=>false,'div'=>false, 'options'=>array('0'=>'Jurisdiccional'),'empty'=>'Seleccione')) ?></span>
+        <span><?php echo $form->input('tipo',array('label'=>false,'div'=>false, 'options'=>array('i'=>'Institucional','j'=>'Jurisdiccional'),'empty'=>'Seleccione')) ?></span>
     <?php echo $form->end('Buscar',array('style'=>'float:right')); ?>
 </div>
 <p>
