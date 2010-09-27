@@ -102,6 +102,11 @@
                      </li>
                 <?php endforeach; ?>
                 </ul>
+                <div class="actions acl-desarrolladores-actions">
+                    <ul>
+                        <li><?php echo $html->link(__('Agregar Plan de Mejora', true), array('action'=>'add', 'instit_id'=>$instit['Instit']['id'])); ?> </li>
+                    </ul>
+                </div>
                 <?php
                 if(!empty($fondos)){
                 ?>
