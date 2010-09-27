@@ -2087,3 +2087,11 @@ div.content{
     margin-top: -17px;
 
 }
+
+
+/*
+* por default NO mostrar los elementos ACL
+*/
+[class|="acl"]{
+    display: none;
+}

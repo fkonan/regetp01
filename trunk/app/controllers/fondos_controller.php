@@ -76,6 +76,9 @@ class FondosController extends AppController {
 
         function index()
         {
+            // guardo para despues tener los mismos datos seleccionados
+            $dataTemp = $this->data;
+            
             $this->Fondo->recursive = 0;
             $this->Fondo->order = array('Fondo.anio DESC', 'Fondo.trimestre','Fondo.jurisdiccion_id ASC');
             $condition = '';
@@ -102,10 +105,11 @@ class FondosController extends AppController {
             }
             $anios = $todos + $anios;
 
-            
+            $this->data = $dataTemp;
             $this->set(compact('jurisdicciones','anios'));
             $this->set('url',$this->Filter->url);
             $this->set('fondos', $this->paginate(null,$filter));
+            $this->set('total', number_format($this->Fondo->FondosLineasDeAccion->find('sum',array('conditions'=>$filter)),2,",","."));
             
 	}
 

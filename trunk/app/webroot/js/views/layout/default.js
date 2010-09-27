@@ -2,7 +2,8 @@ jQuery.noConflict();
 jQuery(document).ready(function () {
     // abrir los menues segun las cookies dejando abiertos los que ya estaban
     openMenues();
-    
+
+    // cuando hay error de permisos en Ajax mostrar un alert
     jQuery(document).ajaxError(function(e, xhr, settings, exception) {
         jQuery.unblockUI;
         if (xhr.status == 401){
@@ -63,19 +64,15 @@ jQuery(document).ready(function () {
 
 
 function openMenues() {
-    var arrayOfDivs = document.getElementsByTagName('div');
-    var howMany = arrayOfDivs.length;
-
-    for (var i=0; i < howMany; i++) {
-        var thisDiv = arrayOfDivs[i];
-        var styleClassName = thisDiv.className.value;
-
-        if (Get_Cookie( 'opened_tag' ) != null && Get_Cookie( 'opened_tag' ).toString() == thisDiv.id) {
-            //document.getElementById(thisDiv.id).className.value = 'menu_head_open';
-            jQuery('#' + thisDiv.id + ' h1').removeClass('menu_head').addClass('menu_head_open');
-            jQuery('#' + thisDiv.id + ' ul.menu_body').slideToggle('medium');
+    // para cada DIV del menu
+    jQuery('#menu > DIV').each(function(k,e){
+        if (Get_Cookie( 'opened_tag' ) != null && Get_Cookie( 'opened_tag' ).toString() == e.id) {
+            // al H1 le cambio la clase para que aparezca la flechita para arriba            
+            jQuery(e.id+' > h1').removeClass('menu_head').addClass('menu_head_open');
+            // al UL lo muestro u oculto segun la ocasion
+            jQuery(e.id+' > ul').slideToggle('medium');
         }
-    }
+    });
 }
 
 function borrarCookies() {
