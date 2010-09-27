@@ -5,23 +5,40 @@ $trimestres=array(''=>'Todos','1'=>'1º','2'=>'2º','3'=>'3º','4'=>'4º');
 ?>
 
 <div style="margin-bottom: 20px">
-    <?php echo $form->create('Fondo',array('url'=>array('action'=>'index'))) ?>
-        <div>
-            <span>Año</span>
-            <span style="padding-left:30px">Trimestre</span>
-            <span style="padding-left:50px">Jurisdicción</span>
-            <span style="padding-left:80px">Tipo</span>
-        </div>
-        <span><?php echo $form->input('anio',array('label'=>false,'options'=>$anios, 'div'=>false)) ?></span>
-        <span><?php echo $form->input('trimestre', array('label'=>false,'options'=>$trimestres, 'style'=>'width:100px','div'=>false)) ?></span>
-        <span><?php echo $form->input('jurisdiccion_id',array('label'=>false,'div'=>false)) ?></span>
-        <span><?php echo $form->input('tipo',array('label'=>false,'div'=>false, 'options'=>array('i'=>'Institucional','j'=>'Jurisdiccional'),'empty'=>'Seleccione')) ?></span>
-    <?php echo $form->end('Buscar',array('style'=>'float:right')); ?>
+    <?php
+    echo $form->create('Fondo',array('url'=>array('action'=>'index')));
+
+    echo $form->input('tipo',array(
+        'label'=>'Tipo',
+        'div'=> array('style'=>'float:left; clear: none'),
+        'options'=>array('i'=>'Institucional','j'=>'Jurisdiccional'),
+        'empty'=>'Seleccione'
+        )
+            );
+
+    echo $form->input('jurisdiccion_id',array(
+        'label'=>'Jurisdicción',
+        'div'=> array('style'=>'float:left; clear: none'),
+    ));
+
+    echo $form->input('anio',array(
+        'label'=>'Año',
+        'div'=> array('style'=>'float:left; clear: none'),
+        'options'=>$anios));
+    
+    echo $form->input('trimestre', array(
+        'label'=>'Trimestre',
+        'div'=> array('style'=>'float:left; clear: none'),
+        'options'=>$trimestres, 'style'=>'width:100px'
+        ));
+    
+    echo $form->end('Buscar',array('style'=>'float:right'));
+    ?>
 </div>
 <p>
 <?php
 echo $paginator->counter(array(
-'format' => __('Página %page% de %pages%, mostrando %current% fondos de <b>%count%</b>', true)
+'format' => __('<b>%count%</b> fondos encontrados, los cuales suman <b>$'.$total.'</b>.<br>Página %page% de %pages%, mostrando %current% fondos. ', true)
 ));
 ?></p>
 
@@ -30,9 +47,9 @@ if (count($fondos)) {
 ?>
 <table cellpadding="0" cellspacing="0">
 <tr>
-	<th><?php echo $paginator->sort('instit_id');?></th>
+	<th><?php echo $paginator->sort('Institución','instit_id');?></th>
 	<th><?php echo $paginator->sort('jurisdiccion_id');?></th>
-	<th><?php echo $paginator->sort('anio');?></th>
+	<th><?php echo $paginator->sort('Año', 'anio');?></th>
 	<th><?php echo $paginator->sort('trimestre');?></th>
 	<th><?php echo $paginator->sort('memo');?></th>
 	<th><?php echo $paginator->sort('total');?></th>

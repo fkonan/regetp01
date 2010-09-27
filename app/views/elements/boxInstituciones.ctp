@@ -1,5 +1,5 @@
 <div id="boxInstituciones">
-    <h1 id="boxInstituciones" class="menu_head">Instituciones</h1>
+    <h1  id="boxInstituciones" class="menu_head">Instituciones</h1>
 
     <ul class="menu_body">
             <li><?php echo $html->link(__('Buscador', true), '/instits/old_search_form'); ?></li>

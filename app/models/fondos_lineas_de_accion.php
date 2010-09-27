@@ -78,6 +78,7 @@ class FondosLineasDeAccion extends AppModel {
                     return parent::find($conditions, $fields, $order, $recursive);
                 }
                 $trajo = parent::find('all', $fields, $order, $recursive);
+                
                 if (count($trajo)> 1)
                     return $trajo;
                 else
