@@ -139,13 +139,20 @@ class FondosController extends AppController {
                     if (!empty($this->data['Fondo']['FondosLineasDeAccion'])) {
                         foreach ($this->data['Fondo']['FondosLineasDeAccion'] as &$linea) {
                             $linea['fondo_id'] = $this->Fondo->id;
+                            //$linea['monto'] = str_replace('.', '', $linea['monto']);
                         }
 
                         $this->Fondo->FondosLineasDeAccion->saveAll($this->data['Fondo']['FondosLineasDeAccion']);
                     }
 
                     $this->Session->setFlash(__('Se ha guardado el Fondo', true));
-                    $this->redirect(array('action' => 'index'));
+
+                    if (!empty($this->data['Fondo']['redirect'])) {
+                        $this->redirect($this->data['Fondo']['redirect']);
+                    }
+                    else {
+                        $this->redirect(array('action' => 'index'));
+                    }
                 }
                 else {
                     $this->Session->setFlash(__('El Fondo no pudo guardarse. Por favor, intente nuevamente.', true));

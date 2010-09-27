@@ -150,8 +150,8 @@ echo $html->css('jquery.autocomplete.css');
         var total = 0;
         var valor_procesado = 0;
         jQuery.each(jQuery('.monto'), function(key, value) {
-            valor_procesado = replaceAll(jQuery(value).val(),".","");
-            total += parseFloat(valor_procesado);
+            jQuery(value).val(replaceAll(jQuery(value).val(),".",""));
+            total += parseFloat(jQuery(value).val());
         });
 
         return total;
@@ -316,6 +316,13 @@ echo $html->css('jquery.autocomplete.css');
             echo $form->input('instit_id', array('type'=>'hidden'));
 
             echo $form->input('description', array('label'=>'Descripción'));
+
+            if (@$this->passedArgs['instit_id']) {
+                echo $form->input('redirect', array('type'=>'hidden', 'value'=>'index_x_instit/'.$this->passedArgs['instit_id']));
+            }
+            elseif (@$this->passedArgs['jurisdiccion_id']) {
+                echo $form->input('redirect', array('type'=>'hidden', 'value'=>'index_x_jurisdiccion/'.$this->passedArgs['jurisdiccion_id']));
+            }
 	?>
         </fieldset>
     <?php echo $form->end('Guardar');?>
