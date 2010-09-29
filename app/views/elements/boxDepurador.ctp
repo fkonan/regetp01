@@ -1,4 +1,4 @@
-<div id="boxDepurador" class="acl-editores acl-administradores acl-desarrolladores" style="display: none">
+<div id="boxDepurador" class="acl acl-editores acl-administradores acl-desarrolladores">
     <h1 id="boxDepurador" class="menu_head">Depurador</h1>
     <ul class="menu_body">
         <li><? echo $html->link("Depurar Estructuras","/depuradorPlanes/listado") ?></li>

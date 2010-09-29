@@ -128,7 +128,8 @@ $cue_instit = $instit['cue'].$anexo;
 
 	</dl>
 </div>
-<div class="actions acl-editores-actions">
+
+<div class="acl actions acl-editores acl-administradores acl-desarrolladores">
 	<ul>
 		<li><?php echo $html->link(__('Editar Oferta', true), array('action'=>'edit', $plan['Plan']['id'])); ?> </li>
 		<li><?php echo $html->link(__('Eliminar Oferta', true), array('controller'=> 'planes', 'action'=>'delete', $plan['Plan']['id']), null, sprintf(__('Seguro que desea eliminar el Plan "%s"?', true), $plan['Plan']['nombre'])); ?></li>
@@ -148,7 +149,7 @@ $cue_instit = $instit['cue'].$anexo;
 <div id="nueva-data" style="display:none"></div>
 
 
-<div class="actions acl-editores-actions">
+<div class="acl actions acl-editores acl-desarrolladores">
     <ul>
 <?php //echo $html->link(__('Agregar Nuevo Año', true), array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id']));?>
         <li>

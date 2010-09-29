@@ -12,7 +12,7 @@
             ?>
     <h2>
             <?php echo "Ciclo $key" ?>
-    <span class="actions acl-editores-actions">
+    <span class="acl actions acl-editores acl-administradores acl-desarrolladores">
     <?php if($tiene_estructura){
             echo $html->link(
                     $html->image("modify.png", array("alt" => "Editar")), 
@@ -67,7 +67,7 @@
             <td><?php echo empty($anio['secciones'])?'-':$anio['secciones'];
             $tot_secciones += $anio['secciones'];?></td>
             <td><?php echo empty($anio['hs_taller'])?'-':$anio['hs_taller'];?></td>
-            <td class="actions acl-editores-actions">
+            <td class="acl actions acl-editores acl-administradores acl-desarrolladores">
                 <?if(!$tiene_estructura){?>
                 <a href="<?= $html->url(array('controller'=> 'anios', 'action'=>'edit/'.$anio['id']))?>"
                    class="ajax-link">Editar</a>

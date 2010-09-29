@@ -35,11 +35,7 @@
         echo $html->meta('icon');
         echo $html->css('regetp','stylesheet', array('media'=>'screen'));
 
-        // Inserta el CSS (si existe) de acuerdo al grupo del usuario
-        $cssForUserRole = 'acl/regetp_for_'.$session->read('User.group_alias');
-        if (is_file(APP.WEBROOT_DIR.DS."css".DS.$cssForUserRole.".css")) {
-            echo $html->css($cssForUserRole,'stylesheet', array('media'=>'screen'));
-        }
+        
 
         echo $html->css('printer','stylesheet', array('media'=>'print'));
 

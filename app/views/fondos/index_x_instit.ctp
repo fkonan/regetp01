@@ -102,11 +102,15 @@
                      </li>
                 <?php endforeach; ?>
                 </ul>
-                <div class="actions acl-desarrolladores-actions">
+                <div class="acl actions acl-desarrolladores">
                     <ul>
                         <li><?php echo $html->link(__('Agregar Plan de Mejora', true), array('action'=>'add', 'instit_id'=>$instit['Instit']['id'])); ?> </li>
                     </ul>
                 </div>
+                    
+                <div class="clear"></div>
+
+
                 <?php
                 if(!empty($fondos)){
                 ?>
@@ -135,15 +139,7 @@
                 ?>
            </div>
     </div>
-    <?php
-        if($paginator->numbers()){
-    ?>
-            <div style="float:left" class="paging">
-                    <?php echo $paginator->prev('<< '.__('anterior', true), array(), null, array('class'=>'disabled'));?>
-             | 	<?php echo $paginator->numbers();?>
-                    <?php echo $paginator->next(__('siguiente', true).' >>', array(), null, array('class'=>'disabled'));?>
-            </div>
-    <?php  }?>
+
 </div>
 
 

@@ -94,15 +94,34 @@
                      </li>
                 <?php endforeach; ?>
                 </ul>
-                <div class="actions acl-desarrolladores-actions">
+
+
+                 <?php
+                    $paginator->options(array('url' => $this->passedArgs));
+
+                    if($paginator->numbers()){
+                    ?>
+                            <div style="float:left" class="paging">
+                                    <?php echo $paginator->prev('<< '.__('anterior', true), array(), null, array('class'=>'disabled'));?>
+                             | 	<?php echo $paginator->numbers();?>
+                                    <?php echo $paginator->next(__('siguiente', true).' >>', array(), null, array('class'=>'disabled'));?>
+                            </div>
+                 <?php  }?>
+
+
+
+                <div class="acl actions acl-desarrolladores">
                     <ul>
                         <li><?php echo $html->link(__('Agregar Plan de Mejora', true), array('action'=>'add', 'jurisdiccion_id'=>$fondo['Fondo']['jurisdiccion_id'])); ?> </li>
                     </ul>
                 </div>
+
+                <div class="clear"></div>
+                
                 <?php
                 if(!empty($fondos)){
                 ?>
-                    <div id="notas" style="font-size:8pt; font-style: italic; padding-top: 30px; margin-bottom: 30px">
+                    <div id="notas" style="font-size:8pt; font-style: italic; margin-bottom: 30px">
                         <h3>Notas Metodológicas</h3>
                         <ul>
                             <li>
@@ -127,15 +146,5 @@
                 ?>
            </div>
     </div>
-    <?php
-    $paginator->options(array('url' => $this->passedArgs));
-
-    if($paginator->numbers()){
-    ?>
-            <div style="float:left" class="paging">
-                    <?php echo $paginator->prev('<< '.__('anterior', true), array(), null, array('class'=>'disabled'));?>
-             | 	<?php echo $paginator->numbers();?>
-                    <?php echo $paginator->next(__('siguiente', true).' >>', array(), null, array('class'=>'disabled'));?>
-            </div>
-    <?php  }?>
+   
 </div>

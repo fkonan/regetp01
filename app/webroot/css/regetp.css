@@ -2089,9 +2089,14 @@ div.content{
 }
 
 
+.clear{
+    display: block;
+    clear: both;
+}
+
 /*
 * por default NO mostrar los elementos ACL
 */
-[class|="acl"]{
+.acl, [class|="acl"]{
     display: none;
 }
