@@ -470,7 +470,7 @@ class DepuradorPlanesController extends AppController {
 
 
         $selectSQL = "
-                         select
+                 select
                     i.id as \"Instit__id\" ,
                     i.nombre as \"Instit__nombre\" ,
                     i.cue as \"Instit__cue\" ,
@@ -478,15 +478,28 @@ class DepuradorPlanesController extends AppController {
                     i.nroinstit as \"Instit__nro\" ,
                     t.name as \"Instit__tipoinstit\" ,
                     count(*) as \"Instit__errores\"
-                        from instits i
-                        left join tipoinstits t on (t.id = i.tipoinstit_id)
-                        left join planes p on (p.instit_id = i.id)
-                        left join anios a on (a.plan_id = p.id)
-                        where
+                 from instits i
+                 left join tipoinstits t on (t.id = i.tipoinstit_id)
+                 left join planes p on (p.instit_id = i.id)
+                 left join estructura_planes ep on (ep.id = p.estructura_plan_id)
+                 left join anios a on (a.plan_id = p.id)
+                 where
                  (
-                        p.estructura_plan_id = 0
-                        or
-                        a.estructura_planes_anio_id = 0
+                    p.estructura_plan_id = 0
+                 or
+                    a.estructura_planes_anio_id = 0
+                 or
+                    (
+                        p.estructura_plan_id <> 0
+                        and
+                        a.estructura_planes_anio_id <> 0
+                        and
+                        a.estructura_planes_anio_id NOT IN (
+                            select epa.id from
+                            estructura_planes_anios epa
+                            where epa.estructura_plan_id = ep.id
+                        )
+                    )
                  )
                  and
                      p.oferta_id = 3
