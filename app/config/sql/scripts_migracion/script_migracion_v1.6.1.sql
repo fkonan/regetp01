@@ -49,3 +49,26 @@ UPDATE Anios SET estructura_planes_anio_id=242 WHERE estructura_planes_anio_id=1
 UPDATE Anios SET estructura_planes_anio_id=243 WHERE estructura_planes_anio_id=125;
 UPDATE Anios SET estructura_planes_anio_id=215 WHERE estructura_planes_anio_id=148;
 UPDATE Anios SET estructura_planes_anio_id=216 WHERE estructura_planes_anio_id=149;
+
+-- quedan 143 filas para actualizar
+-- otra actualizacion que se hizo backup del 20/09/10
+UPDATE Anios SET estructura_planes_anio_id=224 WHERE estructura_planes_anio_id=154;
+UPDATE Anios SET estructura_planes_anio_id=225 WHERE estructura_planes_anio_id=155;
+UPDATE Anios SET estructura_planes_anio_id=226 WHERE estructura_planes_anio_id=156;
+
+UPDATE Anios SET estructura_planes_anio_id=227 WHERE estructura_planes_anio_id=157;
+UPDATE Anios SET estructura_planes_anio_id=228 WHERE estructura_planes_anio_id=158;
+UPDATE Anios SET estructura_planes_anio_id=229 WHERE estructura_planes_anio_id=159;
+
+UPDATE Anios SET estructura_planes_anio_id=238 WHERE estructura_planes_anio_id=168;
+UPDATE Anios SET estructura_planes_anio_id=239 WHERE estructura_planes_anio_id=169;
+UPDATE Anios SET estructura_planes_anio_id=240 WHERE estructura_planes_anio_id=170;
+
+UPDATE Anios SET estructura_planes_anio_id=241 WHERE estructura_planes_anio_id=171;
+UPDATE Anios SET estructura_planes_anio_id=242 WHERE estructura_planes_anio_id=172;
+UPDATE Anios SET estructura_planes_anio_id=243 WHERE estructura_planes_anio_id=173;
+
+UPDATE Anios SET estructura_planes_anio_id=244 WHERE estructura_planes_anio_id=174;
+UPDATE Anios SET estructura_planes_anio_id=245 WHERE estructura_planes_anio_id=175;
+UPDATE Anios SET estructura_planes_anio_id=246 WHERE estructura_planes_anio_id=176;
+UPDATE Anios SET estructura_planes_anio_id=247 WHERE estructura_planes_anio_id=177;
