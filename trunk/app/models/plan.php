@@ -805,18 +805,36 @@ class Plan extends AppModel {
                     // busco si hay anios que tengan otra estructura
                     $cant = $this->Anio->find('all', array(
                         'conditions' => array(
-                                'Anio.plan_id' => $plan_id,
+                            'Anio.plan_id' => $plan_id,
                             'OR' => array (
                                 'EstructuraPlanesAnio.estructura_plan_id <>' => $ep['EstructuraPlan']['id'],
                                 'Anio.estructura_planes_anio_id' => 0,
                                 )
                         ),
                         'contain' => array(
-                            'EstructuraPlanesAnio',
+                            'EstructuraPlanesAnio.EstructuraPlan',
                         ),
                         'order' => array('Anio.ciclo_id', 'EstructuraPlanesAnio.edad_teorica'),
                     ));
                     
+                    // verifico que tenga estructura el año
+                     $cant2 = $this->Anio->find('all', array(
+                        'conditions' => array(
+                            'Anio.plan_id' => $plan_id,
+                        ),
+                        'contain' => array('EstructuraPlanesAnio'),
+                        'order' => array('Anio.ciclo_id', 'EstructuraPlanesAnio.edad_teorica'),
+                    ));
+                    $newVec = array();
+                    foreach ($cant2 as $cc){
+                        if (empty($cc['EstructuraPlanesAnio']['id'])){
+                            $newVec[] = $cc;
+                        }
+                    }
+                    if (count($newVec)>0){
+                        $cant += $newVec;
+                    }
+
                     return (count($cant) > 0)  ?    $cant   :    true;
             }
             return true;

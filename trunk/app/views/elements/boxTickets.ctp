@@ -15,20 +15,9 @@
     function showList(){
          jQuery('#tickets').toggle();
     }
-
-    /*jQuery(document).ready(function () {
-        jQuery('#boxTickets').click(function () {
-            if (apretado == false) {
-                jQuery('#pendientes').ajaxSubmit(options);
-                apretado = true;
-            }
-            
-            return false;
-        });
-    });*/
 </script>
 
-<div id="boxTickets" class="acl-editores" style="display: none">
+<div id="boxTickets" class="acl acl-editores acl-desarrolladores">
 	<h1 id="boxTickets" class="menu_head">Pendientes de Actualización</h1>
 	<ul class="menu_body">
             <form id="pendientes" method="post">

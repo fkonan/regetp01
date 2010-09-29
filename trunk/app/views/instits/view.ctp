@@ -396,7 +396,7 @@
                     </dl>
                     <br />
 
-                    <div class="actions acl-editores-actions">
+                    <div class="acl actions acl-editores acl-administradores acl-desarrolladores">
                         <ul>
                             <li><?php echo $html->link(__('Editar Institución', true), array('action'=>'edit', $instit['Instit']['id'])); ?> </li>
                 <?php if($session->read('Auth.User.role') == 'desarrollo') {?>

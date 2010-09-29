@@ -1,4 +1,4 @@
-<div id="boxDesarrollo" class="acl-desarrolladores" style="display: none">
+<div id="boxDesarrollo" class="acl acl-desarrolladores">
     <h1 id="boxDesarrollo" class="menu_head">Desarrollo</h1>
     <ul class="menu_body">
         <li><? echo $html->link("Fondos","/fondos/index") ?></li>
