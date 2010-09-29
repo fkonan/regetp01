@@ -31,7 +31,7 @@ echo $html->css('jquery.autocomplete.css');
         if (!empty($this->data['LineasDeAccion'])) {
             foreach ($this->data['LineasDeAccion'] as $linea) {
             ?>
-                confirmarLinea('', <?=$linea['id']?>, '<?=$linea['description']?>', jQuery.mask.string('<?=$linea['FondosLineasDeAccion']['monto']?>', "integer"));
+                confirmarLinea('', <?=$linea['id']?>, '<?=$linea['description']?>', jQuery.mask.string('<?=$linea['FondosLineasDeAccion']['monto']?>', "integer"),<?=$linea['FondosLineasDeAccion']['id']?>);
             <?php }
         }
         ?>
@@ -343,7 +343,7 @@ echo $html->css('jquery.autocomplete.css');
 <script type="text/javascript">
     var i = 0;
     
-    function confirmarLinea(element, linea_de_accion_id, linea_de_accion, monto){
+    function confirmarLinea(element, linea_de_accion_id, linea_de_accion, monto,id){
         var confirmado = false;
         
         uniqid = jQuery(element).parent('.linea_confirmada').attr("order");
@@ -368,6 +368,10 @@ echo $html->css('jquery.autocomplete.css');
         }
         else {
             lineaMonto = jQuery(element).find(".monto").val();
+        }
+
+        if (!id) {
+            id = 0;
         }
 
         if(lineaAccionId != 0 && lineaMonto != ""){
@@ -398,8 +402,9 @@ echo $html->css('jquery.autocomplete.css');
                     "<dd>" +
                     lineaMonto +
                     "</dd>" +
-                    "<input class='linea_id' type='hidden' name='data[Fondo][FondosLineasDeAccion]["+i+"][lineas_de_accion_id]' value='"+ lineaAccionId +"'>" +
-                    "<input class='monto' type='hidden' name='data[Fondo][FondosLineasDeAccion]["+i+"][monto]' value='" + lineaMonto + "'>" +
+                    "<input class='linea_id' type='hidden' name='data[FondosLineasDeAccion]["+i+"][id]' value='"+ id +"'>" +
+                    "<input class='linea_id' type='hidden' name='data[FondosLineasDeAccion]["+i+"][lineas_de_accion_id]' value='"+ lineaAccionId +"'>" +
+                    "<input class='monto' type='hidden' name='data[FondosLineasDeAccion]["+i+"][monto]' value='" + lineaMonto + "'>" +
                     post;
 
             jQuery(".lista_lineas dl .nueva_linea").remove();
@@ -451,8 +456,8 @@ echo $html->css('jquery.autocomplete.css');
                                 "</span>" +
                             "</dt>" +
                             "<dd><input class='monto' style='margin-top:-14px;width:100px' type='text' value='"+ monto +"' onkeypress ='confirmarLineaConEnter(this,event);'/></dd>" +
-                            "<input class='linea_id' type='hidden' name='data[Fondo][FondosLineasDeAccion][][lineas_de_accion_id]' value='"+ linea_id +"'>" +
-                            "<input class='monto' type='hidden' name='data[Fondo][FondosLineasDeAccion][][monto]' value='" + monto + "'>" +
+                            "<input class='linea_id' type='hidden' name='data[FondosLineasDeAccion][][lineas_de_accion_id]' value='"+ linea_id +"'>" +
+                            "<input class='monto' type='hidden' name='data[FondosLineasDeAccion][][monto]' value='" + monto + "'>" +
                         "</span>" +
                     "</span>";
 
