@@ -99,37 +99,44 @@ echo $html->css('jquery.autocomplete.css');
 
     function agregarNuevaLinea(linea_id, monto)
     {
+            var confirmado = false;
+
             nueva_linea = jQuery(".lista_lineas dl #detalle .nueva_linea").first();
             if(nueva_linea.length != 0){
-                confirmarLinea(nueva_linea);
+                confirmado = confirmarLinea(nueva_linea);
+            }
+            else{
+                confirmado = true;
             }
 
-            html = "<span class='nueva_linea' style='display:none'>" +
-                        "<span class='nueva_linea_in'>" +
-                            "<dt onmouseout='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' onmouseover='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' class='' style='height: 30px;'>" +
-                                "<span>" +
-                                    '<?php echo $html->image('/img/check.gif', array('id'=>'check_linea','alt' => 'Confirmar', 'onclick'=>'confirmarLinea(jQuery(this).parent().parent().parent().parent());'))?>' +
-                                    '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().parent().remove(); ActualizarTotal(); actualizarComboLineasDeAccion();'))?>' +
-                                "</span>" +
-                                "<span>" +
-                                    "<select class='linea_de_accion_id' style='width:400px'>";
-            jQuery.each(jQuery(lineasDeAccion), function(key, value) {
-                if (value) {
-                    html += '<option value="'+key+'">'+value+'</option>';
-                }
-            });
-            html +=                "</select>" +
-                                "</span>" +
-                            "</dt>" +
-                            "<dd><input class='monto' alt='decimal' style='margin-top:-14px;width:100px' type='text' onkeypress ='confirmarLineaConEnter(this,event);'/></dd>" +
-                        "</span>" +
-                    "</span>";
-           jQuery(".lista_lineas dl #detalle").append(html);
-           jQuery(".lista_lineas .nueva_linea").show();
-           jQuery(".lista_lineas dl #detalle .nueva_linea .linea_de_accion_id").focus();
+            if(confirmado){
+                html = "<span class='nueva_linea' style='display:none'>" +
+                            "<span class='nueva_linea_in'>" +
+                                "<dt onmouseout='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' onmouseover='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' class='' style='height: 30px;'>" +
+                                    "<span>" +
+                                        '<?php echo $html->image('/img/check.gif', array('id'=>'check_linea','alt' => 'Confirmar', 'onclick'=>'confirmarLinea(jQuery(this).parent().parent().parent().parent());'))?>' +
+                                        '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().parent().remove(); ActualizarTotal(); actualizarComboLineasDeAccion();'))?>' +
+                                    "</span>" +
+                                    "<span>" +
+                                        "<select class='linea_de_accion_id' style='width:400px'>";
+                jQuery.each(jQuery(lineasDeAccion), function(key, value) {
+                    if (value) {
+                        html += '<option value="'+key+'">'+value+'</option>';
+                    }
+                });
+                html +=                "</select>" +
+                                    "</span>" +
+                                "</dt>" +
+                                "<dd><input class='monto' alt='decimal' style='margin-top:-14px;width:100px' type='text' onkeypress ='confirmarLineaConEnter(this,event);'/></dd>" +
+                            "</span>" +
+                        "</span>";
+               jQuery(".lista_lineas dl #detalle").append(html);
+               jQuery(".lista_lineas .nueva_linea").show();
+               jQuery(".lista_lineas dl #detalle .nueva_linea .linea_de_accion_id").focus();
 
-           jQuery(".lista_lineas dl #detalle .nueva_linea .monto").setMask("integer");
-        }
+               jQuery(".lista_lineas dl #detalle .nueva_linea .monto").setMask("integer");
+           }
+    }
 
     function format(instit) {
                 return instit.nombre + " [" + instit.cue + "]";
@@ -337,7 +344,8 @@ echo $html->css('jquery.autocomplete.css');
     var i = 0;
     
     function confirmarLinea(element, linea_de_accion_id, linea_de_accion, monto){
-
+        var confirmado = false;
+        
         uniqid = jQuery(element).parent('.linea_confirmada').attr("order");
         linea_id = '';
 
@@ -363,6 +371,8 @@ echo $html->css('jquery.autocomplete.css');
         }
 
         if(lineaAccionId != 0 && lineaMonto != ""){
+            confirmado = true;
+            
             if(uniqid == undefined){
                 uniqid = new Date().getTime();
                 pre = "<div class='linea_confirmada' order='"+ uniqid  + "'>";
@@ -400,6 +410,7 @@ echo $html->css('jquery.autocomplete.css');
             // actualizar total
             ActualizarTotal();
             actualizarComboLineasDeAccion();
+
         }
         else{
             
