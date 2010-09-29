@@ -57,7 +57,7 @@
 
     function unblockResultConsole(responseText, statusText, xhr, $form)  {
         var redirigiendo = false;
-        if (jQuery('.listado li').size() == 1){
+        if (jQuery('.listado li').size() == 1 && !isNaN(jQuery('#InstitCue').val())){
             redirigiendo = true;
             jQuery('#consoleResultWrapper').mask('Encontrada');
             jQuery('.listado li A').click();
