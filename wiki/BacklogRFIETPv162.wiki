@@ -1,0 +1,30 @@
+*BACKLOG – RFIETP – Versión en producción: 1.6.1*
+
+*ACTIVIDADES – Versión 1.6.2*
+
+Revisar permisos de usuarios de consulta (actualmente pueden consultar planes de mejora!!). Bloquear urgente.
+
+Bug en depuración. Para la jurisdicción Santiago del Estero no está funcionando la edición de matricula de planes de estudio (/Planes/view/…). El sistema muestra bien la información, pero cuando se edita (con el pequeño lapiz) muestra todo en cero. Ejemplo: 860111700. Pasa con toda la jurisdicción. Bloquear actualización para evitar perdida de información.
+
+Inconsistencia en presentación de información (/Planes/view/…). Si en un plan se modifica (mediante /Planes/edit/…) el campo Estructura Plan (por ejemplo, por error de depuración), los datos de los ciclos existentes quedan con la Etapa cargada anteriormente. Los nuevos ciclos se cargan con las etapas correspondientes a la nueva estructura. Esto produce inconsistencia en la presentación actual de la información. 
+Ejemplo: Se depuró plan con datos como EGB3. Luego se modificó Estructura Plan a CICLO BASICO. Se cargó nuevo ciclo lectivo. Quedan los viejos datos con la etapa EGB3 los nuevos datos con etapa CICLO BASICO. Ver caso con Julieta.
+
+Analizar una muestra de depuraciones realizadas en distintas jurisdicciones para ver si está funcionando todo bien. Evaluar si las imputaciones realizadas son correctas.
+
+Documentación de base de datos. Seleccionar nuevo software para DER y documentación. Probar. Volver a documentar la base de datos en nuevo software. Publicar en repositorio.
+
+Revisar descripción de estructura en estructura_planes.name. Consultar con editores para ver si la denominación se puede hacer más intuitiva. Ordenar presentación de estructuras en los combos de edición de planes. Consultar con editores si conviene orden vinculado a edad teórica ú orden según bloques normativos (EGB3 – Polimodal / CB – CS / PC – SC).
+
+Enviar BBDD de producción a Román.
+
+Fondo. Interfaz de carga de información de planes de mejora. Desarrollar. Testear. Analizar caso de uso: carga de trimestre (configuración de trimestre activo, etc.).
+
+Fondo. Preparar descargas. Ver modelos propuestos por MR.
+
+Repensar presentación de datos de oferta secundaria técnica (/Planes/index/…). Pensar nuevo diseño. Evaluar alternativas. Ver como se combina con el resto de las ofertas (FP, SUP, etc.).
+
+Buscador
+  * Búsqueda por abreviaturas (Ej. EET = E.E.T.). No funciona para EPET, CEPT, IES, etc. Incorporar conversiones para tipos no incluidos (revisar tipoinstits para ver cuales incorporar).
+  * Mejorar buscador beta. Ver documento con especificaciones.
+  * Log de búsquedas. Preparar log de búsqueda avanzada en buscador beta.
+  * Cambiar “Buscador beta” al lugar de “Buscador”. Pasar Buscador actual a 2do lugar, con denominación “Buscador anterior”.
