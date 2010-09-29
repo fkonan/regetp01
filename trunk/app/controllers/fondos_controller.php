@@ -126,7 +126,6 @@ class FondosController extends AppController {
             $instit = '';
             
             if (!empty($this->data)) {
-                //debug($this->data); die();
                 $this->Fondo->create();
 
                 if ($this->data['Fondo']['tipo'] == 'j') {
@@ -139,9 +138,7 @@ class FondosController extends AppController {
 
                     //Borrar los registros borrados
                     $fondo_antes_actualizar = $this->Fondo->read(null, $id);
-                    //debug($fondo_antes_actualizar);
-                    //debug($this->data['Fondo']['FondosLineasDeAccion']);
-
+                    
                     foreach ($fondo_antes_actualizar['FondosLineasDeAccion'] as $linea_anterior) {
                         $existe = false;
                         foreach ($this->data['FondosLineasDeAccion'] as $linea_actual) {
