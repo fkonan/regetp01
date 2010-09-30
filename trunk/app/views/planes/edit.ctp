@@ -1,15 +1,5 @@
+<? echo $javascript->link('views/planes/add'); ?>
 <script type="text/javascript">
-     function toggleTitulos(){
-         if (jQuery('#PlanOfertaId').val() != '') {
-            jQuery('#divPlanTituloId').show();
-        }
-        else {
-             jQuery('#divPlanTituloId').hide();
-        }
-
-        toggleEstructuraPlan();
-    }
-
     jQuery(document).ready(function () {
         toggleTitulos();
         toggleEstructuraPlan();
@@ -21,15 +11,6 @@
 
         jQuery("#PlanEstructuraPlanId").change();
     });
-
-    function toggleEstructuraPlan() {
-        if (jQuery('#PlanOfertaId :selected').val() != 2 && jQuery('#PlanOfertaId :selected').val() != 3) {
-            jQuery('#PlanEstructura').hide();
-        }
-        else {
-            jQuery('#PlanEstructura').show();
-        }
-    }
 </script>
 
 <h1>Editar Plan</h1>
@@ -46,58 +27,66 @@ $cue_instit = $instit['cue'].$anexo;
         <?php
         echo $form->input('id');
         echo $form->input('instit_id',array('type'=>'hidden'));
-        
-        echo $form->input('oferta_id',array('empty'=>'Seleccione','onchange'=>'toggleTitulos();'));
+
+        if (empty($this->data['Anio'])) 
+        {
+            echo $form->input('oferta_id',array('empty'=>'Seleccione','onchange'=>'toggleTitulos();'));
         ?>
+            <div id="PlanEstructura">
+                <span id="selectEstructura" style="float:left">
+                    <?php
+                            echo $form->input('estructura_plan_id',array('empty'=>'Seleccione'));
+                    ?>
+                </span>
+                <span id="graficosEstructura">
+                    <?php if(sizeof($estructuraPlanesGrafico)  > 0){ ?>
+                    <?
+                            foreach($estructuraPlanesGrafico as $estructura){
+                    ?>
 
-        <div id="PlanEstructura">
-            <span id="selectEstructura" style="float:left">
-                <?php
-                        echo $form->input('estructura_plan_id',array('empty'=>'Seleccione'));
-                ?>
-            </span>
-            <span id="graficosEstructura">
-                <?php if(sizeof($estructuraPlanesGrafico)  > 0){ ?>
-                <?
-                        foreach($estructuraPlanesGrafico as $estructura){
-                ?>
-
-                <div id="timelineLimiterMini" estructura_plan_id="<?php echo $estructura['EstructuraPlan']['id']?>" class="clickeable" style="display:none">
-                    <div id="timelineScroll" style="margin-left: 0px;">
-                        <div>
-                            <div class="event">
-                                <div class="eventHeading blue"><?php echo $estructura['EstructuraPlan']['Etapa']['name']?></div>
-                                    <ul class="eventList">
-                            <?php
-                            $j = 0;
-                            foreach($estructura['EstructuraPlan']['EstructuraPlanesAnio'] as $anio ):
-                            ?>
-                                <li><?php echo $anio['nro_anio'];?>º</li>
-                            <?php
-                            endforeach;
-                            ?>
-                                    </ul>
+                    <div id="timelineLimiterMini" estructura_plan_id="<?php echo $estructura['EstructuraPlan']['id']?>" class="clickeable" style="display:none">
+                        <div id="timelineScroll" style="margin-left: 0px;">
+                            <div>
+                                <div class="event">
+                                    <div class="eventHeading blue"><?php echo $estructura['EstructuraPlan']['Etapa']['name']?></div>
+                                        <ul class="eventList">
+                                <?php
+                                $j = 0;
+                                foreach($estructura['EstructuraPlan']['EstructuraPlanesAnio'] as $anio ):
+                                ?>
+                                    <li><?php echo $anio['nro_anio'];?>º</li>
+                                <?php
+                                endforeach;
+                                ?>
+                                        </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            <?php
+                <?php
+                        }
                     }
-                }
-                else{
-            ?>
-                <div class="message">No existen estructuras asignadas a la jurisdicción</div>
-            <?php }?>
-            </span>
-        </div>
-
+                    else{
+                ?>
+                    <div class="message">No existen estructuras asignadas a la jurisdicción</div>
+                <?php }?>
+                </span>
+            </div>
         <?php
+        }
+        else {
+            echo $form->input('oferta_id_aux',array('type'=>'select', 'empty'=>$this->data['Oferta']['name'], 'label'=>'Oferta', 'disabled'=>true));
+            echo $form->input('oferta_id',array('type'=>'hidden'));
+
+            echo $form->input('estructura_plan_id',array('disabled'=>true));
+        }
         
         $meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
         echo $form->input(
                 'titulo_id',
                 array(
                     'empty'=>'Seleccione',
+                    'style'=>'max-width: 550px;',
                     'label'=> 'Título de Referencia',
                     'after'=> $meter.'<br /><cite>Seleccione primero una oferta.</cite>',
                     'div'=>array('id'=>'divPlanTituloId')));
