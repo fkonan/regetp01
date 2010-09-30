@@ -44,17 +44,6 @@ if (empty($this->data['Anio']['estructura_planes_anio_id'])) {
  */
 $trayectosDisponibles;
 
-// verificar que estè estructurado el dato
-// caso contrario mando a seleccionar estructura
-if (empty($trayectosDisponibles)) {
-    ?>
-    <p class="msg-atencion" style="padding: 30px 20px;">
-        La estructura de la oferta no es válida.<br>
-        Debe indicarla antes de agregar nuevos datos haciendo <?php echo $html->link('click aquì','/planes/edit/'.$plan_id);?>.
-    </p>
-    <?php
-    return 1;
-}
 
 if (!empty($anios)  && empty($anios[0]['EstructuraPlanesAnio']['id'])){
     echo "<p class='error'>Mal Depurada la estructura, ejecute nuevamente el depurador</p>";
@@ -75,6 +64,20 @@ $trayectosData = array(
         ),
         'ciclos' => array($ciclo_seleccionado=>$anios), // relacionado con los "datos"
 );
+
+
+// verificar que estè estructurado el dato
+// caso contrario mando a seleccionar estructura
+if (empty($trayectosDisponibles) || empty($trayectosData)) {
+    ?>
+    <p class="msg-atencion" style="padding: 30px 20px;">
+        La estructura de la oferta no es válida.<br>
+        Debe indicarla antes de agregar nuevos datos haciendo <?php echo $html->link('click aquì','/planes/edit/'.$plan_id);?>.
+    </p>
+    <?php
+    return 1;
+}
+
 
 echo $this->element('planes_view_tabla_st', array('trayectosData'=>$trayectosData));
 

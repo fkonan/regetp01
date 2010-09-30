@@ -233,6 +233,7 @@ class PlanesController extends AppController {
                             } else {
                                $planes_view_tabla['element'] = 'planes_view_tabla_normal';
                             }
+                            $this->set('plan_tiene_estructura_valida', $this->Plan->estructuraValida($id));
                             break;
             endswitch;
 

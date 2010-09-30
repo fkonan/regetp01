@@ -250,6 +250,7 @@ class AniosController extends AppController {
                     'conditions'=>array('Anio.plan_id'=>$plan_id,
                                         'Anio.ciclo_id'=>$ciclo_id
                                        ),
+                    'contain' => array('EstructuraPlanesAnio.EstructuraPlan'),
                     'order' => 'Anio.anio',
                     ));
                 $this->data = $aPlan;
@@ -260,7 +261,8 @@ class AniosController extends AppController {
             $trayectosDisponibles = $this->Anio->EstructuraPlanesAnio->EstructuraPlan->find('first', array(
                 'contain'=> array(
                     'EstructuraPlanesAnio'=>array(
-                        'order'=>array('EstructuraPlanesAnio.edad_teorica'))),
+                        'order'=>array('EstructuraPlanesAnio.edad_teorica')
+                        )),
                 'conditions'=> array(
                     'EstructuraPlan.id'=>$estructuraPlanId),
             ));
@@ -270,7 +272,8 @@ class AniosController extends AppController {
              * para los años que son de una oferta FP
              */
             $this->Anio->Plan->recursive = -1;
-            $plan   = $this->Anio->Plan->find('all',array('conditions'=>array('Plan.id'=>$plan_id)));
+            $plan   = $this->Anio->Plan->find('all',array(
+                'conditions'=>array('Plan.id'=>$plan_id)));
             switch ($plan[0]['Plan']['oferta_id']):
                 case 1://es un FP, asique mostrar la vista de años para FP
                 case 7://es CL, asique mostrar la vista de años para FP
@@ -292,6 +295,7 @@ class AniosController extends AppController {
                     break;
             endswitch;
 
+            
             $this->set('ciclo_seleccionado', $aPlan['Anio']['ciclo_id']);
             $this->set('trayectosDisponibles',$trayectosDisponibles);
             $this->set('plan_id',$plan_id);
