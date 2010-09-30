@@ -9,12 +9,16 @@ echo $javascript->link(array(
 echo $html->css(array('jquery.loadmask'));
 ?>
 
-<h1><?= __('Búsqueda Rápida de Instituciones')?></h1>
+<h1><? __('Búsqueda de Instituciones')?></h1>
 
-<?php echo $html->link('realizar una búsqueda avanzada...','advanced_search_form',array(
+<?php
+echo $html->link('realizar una búsqueda avanzada...','advanced_search_form',array(
     'class'=>'link_right small',
     'style'=>'margin-bottom: -18px; padding:0px; margin-right: 4px;'
-    ));?>
+    ));
+?>
+
+
 <div>
     <?php
     echo $form->create('Instit', array(
@@ -30,7 +34,6 @@ echo $html->css(array('jquery.loadmask'));
             ));      
     echo $form->end();
     ?>
-
 
     <!-- Aca se muestran los resultados de la busqueda-->
     <div id='consoleResultWrapper'  style="margin-top: 20px;">
