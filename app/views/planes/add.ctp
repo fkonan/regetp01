@@ -77,6 +77,7 @@ $cue_instit = $instit['cue'].$anexo;
                 array(
                     'empty'=>'Seleccione',
                     'label'=> 'Título de Referencia',
+                    'style'=>'max-width: 550px;',
                     'after'=> $meter.'<br /><cite>Seleccione primero una oferta.</cite>',
                     'div'=>array('id'=>'divPlanTituloId')));
                 echo $ajax->observeField(
