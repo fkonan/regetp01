@@ -463,7 +463,7 @@ class InstitsController extends AppController {
          *      NOMBRE COMPLETO
          */
         if(!empty($this->data['Instit']['nombre_completo'])) {
-             $this->passedArgs['nombre_completo'] = $this->data['Instit']['nombre_completo'];
+             $this->passedArgs['nombre_completo'] = utf8_encode($this->data['Instit']['nombre_completo']);
         }
         if(!empty($this->passedArgs['nombre_completo'])) {
             $this->paginate['conditions'][
@@ -518,7 +518,7 @@ class InstitsController extends AppController {
          *          NOMBRE
          */
         if(!empty($this->data['Instit']['nombre'])) {
-            $this->passedArgs['nombre'] = $this->data['Instit']['nombre'];
+            $this->passedArgs['nombre'] = utf8_encode($this->data['Instit']['nombre']);
         }
         if(!empty($this->passedArgs['nombre'])) {
                 $this->paginate['conditions']['to_ascii(lower(Instit.nombre)) SIMILAR TO ?'] = array($this->Instit->convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['nombre'])));
@@ -531,7 +531,7 @@ class InstitsController extends AppController {
          *          DIRECCION
          */
         if(!empty($this->data['Instit']['direccion'])) {
-            $this->passedArgs['direccion'] = $this->data['Instit']['direccion'];
+            $this->passedArgs['direccion'] = utf8_encode($this->data['Instit']['direccion']);
         }
         if(!empty($this->passedArgs['direccion'])) {
             $this->paginate['conditions']['lower(to_ascii(Instit.direccion)) SIMILAR TO ?'] = array($this->Instit->convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['direccion'])));
@@ -704,7 +704,7 @@ class InstitsController extends AppController {
          *          NORMA
          */
         if(!empty($this->data['Plan']['norma'])) {
-            $this->passedArgs['Plan.norma'] = $this->data['Plan']['norma'];
+            $this->passedArgs['Plan.norma'] = utf8_encode($this->data['Plan']['norma']);
         }
         if(!empty($this->passedArgs['Plan.norma'])) {
                 $this->Instit->asociarPlan = true;
