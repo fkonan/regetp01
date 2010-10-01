@@ -12,7 +12,7 @@
      *  Indica el ID del elemento <form id="">
      * @var string
      */
-    var formId = 'InstitAjaxSearchForm';
+    var formId = 'InstitSearchForm';
 
     /**
      *  es el elemento del formulario, se inicializa en en document.ready()
