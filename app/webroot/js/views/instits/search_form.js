@@ -100,6 +100,8 @@
             }
         });
 
+        jQuery("#InstitJurisdiccionId").change(autoSubmit);
+
         jQuery(document).bind('paste', autoSubmit);
 
         iniciarTooltip();
