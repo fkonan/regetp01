@@ -155,7 +155,6 @@ echo $html->css('jquery.autocomplete.css');
 
     function SumarLinasDeAccionMontos() {
         var total = 0;
-        var valor_procesado = 0;
         jQuery.each(jQuery('.monto'), function(key, value) {
             jQuery(value).val(replaceAll(jQuery(value).val(),".",""));
             total += parseFloat(jQuery(value).val());
@@ -402,7 +401,7 @@ echo $html->css('jquery.autocomplete.css');
                     "<dd>" +
                     lineaMonto +
                     "</dd>" +
-                    "<input class='linea_id' type='hidden' name='data[FondosLineasDeAccion]["+i+"][id]' value='"+ id +"'>" +
+                    //"<input class='linea_id' type='hidden' name='data[FondosLineasDeAccion]["+i+"][id]' value='"+ id +"'>" +
                     "<input class='linea_id' type='hidden' name='data[FondosLineasDeAccion]["+i+"][lineas_de_accion_id]' value='"+ lineaAccionId +"'>" +
                     "<input class='monto' type='hidden' name='data[FondosLineasDeAccion]["+i+"][monto]' value='" + lineaMonto + "'>" +
                     post;

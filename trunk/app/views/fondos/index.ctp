@@ -66,8 +66,10 @@ foreach ($fondos as $fondo):
 	<tr<?php echo $class;?>>
 		<td>
 			<?php
-                        if (!empty($fondo['Instit']['nombre'])) {
-                            echo $fondo['Instit']['nombre'];
+                        $armar_anexo = ($fondo['Instit']['anexo']<10)?'0'.$fondo['Instit']['anexo']:$fondo['Instit']['anexo'];
+                        $nombreInstit = "".($fondo['Instit']['cue']*100)+$fondo['Instit']['anexo']." - ". $fondo['Instit']['nombre'];
+                        if (@$fondo['Fondo']['instit_id'] > 0) {
+                            echo $nombreInstit;
                         } else {
                         ?>
                             <i>Jurisdiccional</i>
