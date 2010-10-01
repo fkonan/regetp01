@@ -2100,3 +2100,29 @@ div.content{
 .acl, [class|="acl"]{
     display: none;
 }
+
+/*AYUDA BUSCADOR*/
+
+.help_head{
+    width:98%;
+    height: 18px;
+    background-color: #EFEFEF !important;
+    border:2px solid #DFDFDF;
+    color: #7B7B7B;
+}
+
+.help_body{
+    width:90%;
+    background-color: transparent !important;
+    font-size: 8pt;
+    color: #BFBFBF;
+    border:2px solid #DFDFDF;
+    width:98%;
+    margin:0px;
+    padding:3px;
+}
+
+.help_body table{
+    width:90%;
+    color: #BFBFBF;
+}
