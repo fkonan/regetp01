@@ -1138,5 +1138,53 @@ class Instit extends AppModel {
 
             return empty($ins['Plan'])?false:$ins;
         }
+
+
+
+        /***************************
+         *
+         * LOG DE LAS BUSQUEDAS REALIZADAS
+         */
+        function searchLog($data, $user, $group){
+            if (!empty($data)) {
+                $posi  = strrpos($_SERVER['HTTP_REFERER'], "/");
+                $nombre_form = substr($_SERVER['HTTP_REFERER'],$posi+1);
+
+                $logTxt = $headTxt = '';
+                $logTxt .= '|'. @$nombre_form; $headTxt .= '|'.'Formulario';
+                $logTxt .= '|'. $user; $headTxt .= '|'.'Usuario';
+                $logTxt .= '|'. $group; $headTxt .= '|'.'Rol';
+                $logTxt .= '|'. @$data['Instit']['cue']; $headTxt .= '|'.'CUE';
+                $logTxt .= '|'. @utf8_decode($data['Instit']['busqueda_libre']); $headTxt .= '|'.'Nombre Libre(solo buscador rapido)';
+                $logTxt .= '|'. @utf8_decode($data['Instit']['nombre_completo']); $headTxt .= '|'.'Nombre Completo';
+                $logTxt .= '|'. @$data['Instit']['nroinstit']; $headTxt .= '|'.'Nro Instit';
+                $logTxt .= '|'. @$data['Instit']['jurisdiccion_id']; $headTxt .= '|'.'Jurisdiccion ID';
+                $logTxt .= '|'. @$data['Instit']['tipoinstit_id']; $headTxt .= '|'.'Tipo Instit ID';
+                $logTxt .= '|'. @utf8_decode($data['Instit']['nombre']); $headTxt .= '|'.'Nombre Instit';
+                $logTxt .= '|'. @utf8_decode($data['Instit']['direccion']); $headTxt .= '|'.'Direccion';
+                $logTxt .= '|'. @$data['Departamento']['id']; $headTxt .= '|'.'Departamento ID';
+                $logTxt .= '|'. @$data['Localidad']['id']; $headTxt .= '|'.'Localidad ID';
+                $logTxt .= '|'. @$data['Instit']['gestion_id']; $headTxt .= '|'.'Gestion ID';
+                $logTxt .= '|'. @$data['Instit']['dependencia_id']; $headTxt .= '|'.'Dependencia ID';
+                $logTxt .= '|'. @$data['Instit']['activo']; $headTxt .= '|'.'Activo';
+                $logTxt .= '|'. @$data['Plan']['oferta_id']; $headTxt .= '|'.'Plan Oferta ID';
+                $logTxt .= '|'. @$data['Plan']['sector_id']; $headTxt .= '|'.'Plan Sector ID';
+                $logTxt .= '|'. @$data['Plan']['subsector_id']; $headTxt .= '|'.'Plan Sub-Sector ID';
+                $logTxt .= '|'. @$data['Plan']['titulo_id']; $headTxt .= '|'.'Plan Titulo ID';
+                $logTxt .= '|'. @$data['Instit']['orientacion_id']; $headTxt .= '|'.'Orientacion ID';
+                $logTxt .= '|'. @utf8_decode($data['Plan']['norma']); $headTxt .= '|'.'Plan Norma';
+                $logTxt .= '|'. @$data['Instit']['claseinstit_id']; $headTxt .= '|'.'Clase Instit ID';
+                $logTxt .= '|'. @$data['Instit']['etp_estado_id']; $headTxt .= '|'.'ETP Estado ID';
+
+                $log_file_name = 'i_search';
+                $archivo = APP . 'tmp' . DS . 'logs' . DS . $log_file_name.'.log';
+                if (!file_exists($archivo)){
+                     // armo el encabezado del CSV
+                     $this->log($headTxt,$log_file_name);
+                }
+                //meto la data en el log
+                $this->log($logTxt,$log_file_name);
+            }
+        }
 }
 ?>

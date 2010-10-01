@@ -201,7 +201,6 @@ class InstitsController extends AppController {
      *
      */
     function old_search_form() {
-        $this->cacheAction = '1 day';
 
         if (!empty($this->data)) {
             $this->redirect('search');
@@ -262,10 +261,6 @@ class InstitsController extends AppController {
     }
 
     function search_form() {
-        if (!empty($this->data)) {
-            $this->redirect('search');
-        }
-
         $this->set('jurisdicciones', $this->Instit->Jurisdiccion->find('list'));
     }
     
@@ -288,9 +283,6 @@ class InstitsController extends AppController {
         $this->Instit->Dependencia->recursive = -1;
         $this->Instit->Dependencia->order ='Dependencia.name';
         $dependencias = $this->Instit->Dependencia->find('list');
-
-        //$tipoinstits = $this->Instit->Tipoinstit->find('list');
-
 
         $this->Instit->Jurisdiccion->recursive = -1;
         $this->Instit->Jurisdiccion->order = 'Jurisdiccion.name';
@@ -349,59 +341,18 @@ class InstitsController extends AppController {
      *
      */
     function search() {        
-        /***************************
-         *
-         * LOG DE LAS BUSQUEDAS REALIZADAS
-         */
-        if (!empty($this->data)) {
-            $logTxt = $headTxt = '';
-            $logTxt .= '|'.@$this->data['Instit']['form_name']; $headTxt .= '|'.'Formulario';
-            $logTxt .= '|'.$this->Auth->user('nombre').' '.$this->Auth->user('apellido').' ('.$this->Auth->user('username').')'; $headTxt .= '|'.'Usuario';
-            $logTxt .= '|'. $this->Session->read('User.group_alias'); $headTxt .= '|'.'Rol';
-            $logTxt .= '|'. @$this->data['Instit']['cue']; $headTxt .= '|'.'CUE';
-            $logTxt .= '|'. @$this->data['Instit']['nombre_completo']; $headTxt .= '|'.'Nombre Libre';
-            $logTxt .= '|'. @$this->data['Instit']['nroinstit']; $headTxt .= '|'.'Nro Instit';
-            $logTxt .= '|'. @$this->data['Instit']['jurisdiccion_id']; $headTxt .= '|'.'Jurisdiccion ID';
-            $logTxt .= '|'. @$this->data['Instit']['tipoinstit_id']; $headTxt .= '|'.'Tipo Instit ID';
-            $logTxt .= '|'. @$this->data['Instit']['nombre']; $headTxt .= '|'.'Nombre Instit';
-            $logTxt .= '|'. @$this->data['Instit']['direccion']; $headTxt .= '|'.'Direccion';
-            $logTxt .= '|'. @$this->data['Departamento']['id']; $headTxt .= '|'.'Departamento ID';
-            $logTxt .= '|'. @$this->data['Localidad']['id']; $headTxt .= '|'.'Localidad ID';
-            $logTxt .= '|'. @$this->data['Instit']['gestion_id']; $headTxt .= '|'.'Gestion ID';
-            $logTxt .= '|'. @$this->data['Instit']['dependencia_id']; $headTxt .= '|'.'Dependencia ID';
-            $logTxt .= '|'. @$this->data['Instit']['activo']; $headTxt .= '|'.'Activo';
-            $logTxt .= '|'. @$this->data['Plan']['oferta_id']; $headTxt .= '|'.'Plan Oferta ID';
-            $logTxt .= '|'. @$this->data['Plan']['sector_id']; $headTxt .= '|'.'Plan Sector ID';
-            $logTxt .= '|'. @$this->data['Plan']['subsector_id']; $headTxt .= '|'.'Plan Sub-Sector ID';
-            $logTxt .= '|'. @$this->data['Plan']['titulo_id']; $headTxt .= '|'.'Plan Titulo ID';
-            $logTxt .= '|'. @$this->data['Instit']['orientacion_id']; $headTxt .= '|'.'Orientacion ID';
-            $logTxt .= '|'. @$this->data['Plan']['norma']; $headTxt .= '|'.'Plan Norma';
-            $logTxt .= '|'. @$this->data['Instit']['claseinstit_id']; $headTxt .= '|'.'Clase Instit ID';
-            $logTxt .= '|'. @$this->data['Instit']['etp_estado_id']; $headTxt .= '|'.'ETP Estado ID';
-           
-            $this->log($headTxt,'i_search');
-            $this->log($logTxt,'i_search');
-        }
-        
+
+        // dejo un log de la busqueda realizada
+        $username = $this->Auth->user('nombre').' '.$this->Auth->user('apellido').' ('.$this->Auth->user('username').')';
+        $grupo = $this->Session->read('User.group_alias');
+        $this->Instit->searchLog($this->data, $username, $grupo);
+
         //para mostrar en vista los patrones de busqueda seleccionados
         $array_condiciones = array();
 
         // para el paginator que pueda armar la url
         $url_conditions = array();
-
-
-        // si no vinieron datos GET, asumo que se envió el formulario desde search_form
-        // sino es porque vino del paginador
-        if(isset($this->passedArgs)):
-            if(sizeof($this->passedArgs) == 0):
-                $vino_formulario = 1;
-            else:
-                $vino_formulario = 0;
-            endif;
-        else:
-            $vino_formulario = 1;
-        endif;
-
+        
 
         /*******************************************************************
          *    INICIALIZACION DE FILTROS
@@ -744,6 +695,7 @@ class InstitsController extends AppController {
         /*********************************************************************/
         /*          FIN -*-CONDITIONS-*- de busqueda                         */
         /*********************************************************************/
+        
 
         $this->Instit->recursive = 1;//para alivianar la carga del server
         //
@@ -760,6 +712,18 @@ class InstitsController extends AppController {
 
         // si se encontro solo 1 institucion, ir directamente a la vista de esa institucion
         if (!$this->RequestHandler->isAjax()) {
+            // si no vinieron datos GET, asumo que se envió el formulario desde search_form
+            // sino es porque vino del paginador
+            if(!empty($this->passedArgs)):
+                if(sizeof($this->passedArgs) == 0):
+                    $vino_formulario = 1;
+                else:
+                    $vino_formulario = 0;
+                endif;
+            else:
+                $vino_formulario = 1;
+            endif;
+
             if(sizeof($pagin) == 1 && $vino_formulario) {
                 // si el resultado me trajo 1, y eestoy buscando por CUE, entonces ir directamente a la vista d esas institucion
                 if(!empty($this->data['Instit']['cue'])) {
@@ -774,67 +738,7 @@ class InstitsController extends AppController {
         }
     }
 
-    function ajax_search(){
-        $items = null;
-        
-        if($this->Requesthandler->isAjax()){
-            $this->autoLayout = false;
-            $this->layout = '';
-        }
-
-        if(!empty($this->data['Instit']['cue'])) {
-            $this->passedArgs = array('cue' => $this->data['Instit']['cue']);
-        }
-
-        if(!empty($this->passedArgs['cue'])) {
-            $q = utf8_decode(strtolower($this->passedArgs['cue']));
-            
-            if(is_numeric($q)){
-                $q = (int) $q;
-                
-                $this->paginate= array(
-                    'limit'=> 10,
-                    'contain'=> array(
-                        'Tipoinstit', 'Jurisdiccion', 'HistorialCue', 'Gestion', 'Departamento', 'Localidad'
-                    ),
-                    'conditions'=> array(
-                        "to_char(cue*100+anexo, 'FM999999999FM') SIMILAR TO ?" => "%". $q ."%"
-
-                    )
-                );
-            }
-            else{
-                $this->paginate = array(
-                    'limit'=> 10,
-                    'contain'=> array(
-                        'Tipoinstit', 'Jurisdiccion', 'Gestion', 'Departamento', 'Localidad', 'HistorialCue'=>array('order'=>'created DESC')
-                    ),
-                    'conditions'=> array(
-                        "(to_ascii(lower(Tipoinstit.name)) || ' n ' || to_ascii(lower(Instit.nroinstit)) || ' ' || to_ascii(lower(Instit.nombre))) SIMILAR TO ?" => $this->Instit->convertir_para_busqueda_avanzada($q)
-                    )
-                );
-            }
-        }
-
-        $intitsResult = $this->paginate();
-        /***************************
-         *
-         * LOG DE LAS BUSQUEDAS REALIZADAS
-         */
-        if (!empty($q)) {
-            $logTxt = $headTxt = '';
-            $logTxt .= '|'.$this->Auth->user('nombre').' '.$this->Auth->user('apellido') ; $headTxt .= '|'.'Usuario';
-            $logTxt .= '|' . $this->Session->read('User.group_alias'); $headTxt .= '|'.'Rol';
-            $logTxt .= '|'. @$q; $headTxt .= '|'.'CUE o Nombre';
-            $logTxt .= (@sizeof($intitsResult) > 0)?'|Si': '|No'; $headTxt .= '|'.'Trajo Resultados';
-            $this->log($headTxt,'i_search_beta');
-            $this->log($logTxt,'i_search_beta');
-        }
-
-        $this->set('instits', $intitsResult);
-        
-    }
-    
+   
     /**
      * Action para mostrar los planes relacionados
      *
