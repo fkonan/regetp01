@@ -378,7 +378,8 @@ class InstitsController extends AppController {
                 $this->paginate['conditions'] = array("to_char(cue*100+anexo, 'FM999999999FM') SIMILAR TO ?" => "%". $q ."%");
             }
             else{
-                $this->paginate['conditions'] = array("(to_ascii(lower(Tipoinstit.name)) || ' n ' || to_ascii(lower(Instit.nroinstit)) || ' ' || to_ascii(lower(Instit.nombre))) SIMILAR TO ?" => $this->Instit->convertir_para_busqueda_avanzada($q));
+                //debug(convertir_para_busqueda_avanzada($q)); die();
+                $this->paginate['conditions'] = array("(to_ascii(lower(Tipoinstit.name)) || ' n ' || to_ascii(lower(Instit.nroinstit)) || ' ' || to_ascii(lower(Instit.nombre))) SIMILAR TO ?" => convertir_para_busqueda_avanzada($q));
             }
         }
 
@@ -420,7 +421,7 @@ class InstitsController extends AppController {
             $this->paginate['conditions'][
                             "to_ascii(lower(Tipoinstit.name))||' n '||".
                             "to_ascii(lower(Instit.nroinstit))||' '||".
-                            "to_ascii(lower(Instit.nombre)) SIMILAR TO ?"] = array($this->Instit->convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['nombre_completo'])));
+                            "to_ascii(lower(Instit.nombre)) SIMILAR TO ?"] = array(convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['nombre_completo'])));
             $array_condiciones['Nombre'] = utf8_decode($this->passedArgs['nombre_completo']);
             $url_conditions['nombre_completo'] = utf8_decode($this->passedArgs['nombre_completo']);
         }
@@ -432,7 +433,7 @@ class InstitsController extends AppController {
             $this->passedArgs['nroinstit'] = $this->data['Instit']['nroinstit'];
         }
         if(!empty($this->passedArgs['nroinstit'])) {
-                $this->paginate['conditions']['lower(Instit.nroinstit) SIMILAR TO ?'] = array($this->Instit->convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['nroinstit'])));
+                $this->paginate['conditions']['lower(Instit.nroinstit) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['nroinstit'])));
                 $array_condiciones['N° de Institución'] = utf8_decode($this->passedArgs['nroinstit']);
                 $url_conditions['nroinstit'] = utf8_decode($this->passedArgs['nroinstit']);
         }
@@ -472,7 +473,7 @@ class InstitsController extends AppController {
             $this->passedArgs['nombre'] = utf8_encode($this->data['Instit']['nombre']);
         }
         if(!empty($this->passedArgs['nombre'])) {
-                $this->paginate['conditions']['to_ascii(lower(Instit.nombre)) SIMILAR TO ?'] = array($this->Instit->convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['nombre'])));
+                $this->paginate['conditions']['to_ascii(lower(Instit.nombre)) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['nombre'])));
                 $nombre_del_campo = (empty($array_condiciones['Nombre']))?'Nombre':'Nombre del Estab.';
                 $array_condiciones[$nombre_del_campo] = utf8_decode($this->passedArgs['nombre']);
                 $url_conditions['nombre'] = utf8_decode($this->passedArgs['nombre']);
@@ -485,7 +486,7 @@ class InstitsController extends AppController {
             $this->passedArgs['direccion'] = utf8_encode($this->data['Instit']['direccion']);
         }
         if(!empty($this->passedArgs['direccion'])) {
-            $this->paginate['conditions']['lower(to_ascii(Instit.direccion)) SIMILAR TO ?'] = array($this->Instit->convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['direccion'])));
+            $this->paginate['conditions']['lower(to_ascii(Instit.direccion)) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['direccion'])));
             $array_condiciones['Domicilio'] = utf8_decode($this->passedArgs['direccion']);
             $url_conditions['direccion'] = utf8_decode($this->passedArgs['direccion']);
         }
@@ -659,7 +660,7 @@ class InstitsController extends AppController {
         }
         if(!empty($this->passedArgs['Plan.norma'])) {
                 $this->Instit->asociarPlan = true;
-                $this->paginate['conditions']['to_ascii(lower(Plan.norma)) SIMILAR TO ?'] = array($this->Instit->convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['Plan.norma'])));
+                $this->paginate['conditions']['to_ascii(lower(Plan.norma)) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['Plan.norma'])));
                 $array_condiciones['Norma'] = utf8_decode($this->passedArgs['Plan.norma']);
                 $url_conditions['Plan.norma'] = utf8_decode($this->passedArgs['Plan.norma']);
         }
@@ -804,7 +805,7 @@ class InstitsController extends AppController {
     function prueba() {
         $this->autoRender = false; // para uqe no muestre la vista
 
-        die($this->Instit->convertir_para_busqueda_avanzada("pepino"));
+        die(convertir_para_busqueda_avanzada("pepino"));
     }
 }
 ?>

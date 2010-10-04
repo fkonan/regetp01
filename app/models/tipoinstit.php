@@ -93,6 +93,36 @@ class Tipoinstit extends AppModel {
    		}
    		return $tipoins;
    }
+
+   /**
+     *
+     * devuelve array con todos los tipo instits que tienen abreviaturas
+     *
+     */
+    function getAbreviados()
+    {
+        $this->recursive = -1;
+        $tipos = $this->find('all', array('conditions' => array('name LIKE' => '%(%')));
+
+        $abrevstr = '';
+        foreach ($tipos as $tipo) {
+            $abrevstr = '';
+            $tipo = $tipo['Tipoinstit']['name'];
+            $pos_ini = strpos($tipo, '(');
+            $pos_fin = strpos($tipo, ')');
+            if ($pos_ini !== false && $pos_fin !== false && $pos_fin > $pos_ini) {
+                $abrevstr = strtolower(substr($tipo, $pos_ini+1, $pos_fin-$pos_ini-2));
+                if ($abrevstr !== false) {
+                    $abrevs[str_replace('.','',$abrevstr)] = $abrevstr;
+                }
+            }
+        }
+
+        return $abrevs;
+    }
 	
 }
+
+
+
 ?>

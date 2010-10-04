@@ -1,4 +1,5 @@
 <div class="fondos index">
+<br />
 <h2><?php __('Fondos');?></h2>
 <?php
 $trimestres=array(''=>'Todos','1'=>'1º','2'=>'2º','3'=>'3º','4'=>'4º');
@@ -35,6 +36,8 @@ $trimestres=array(''=>'Todos','1'=>'1º','2'=>'2º','3'=>'3º','4'=>'4º');
     echo $form->end('Buscar',array('style'=>'float:right'));
     ?>
 </div>
+<div><?php echo $html->link('Agregar nuevo Fondo', array('action' => 'add')); ?></div>
+<br />
 <p>
 <?php
 echo $paginator->counter(array(
