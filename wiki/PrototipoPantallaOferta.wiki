@@ -2,7 +2,7 @@
 
 = Introducción =
 
-Pantalla Prototipo para la visualización de Ofertas
+Pantalla Prototipo para la visualización de Ofertas. Se utilizo http://www.balsamiq.com/ para realizarla
 
 
 = Detalles =
