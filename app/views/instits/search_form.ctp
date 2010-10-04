@@ -11,7 +11,6 @@ echo $html->css(array('jquery.loadmask'));
 
 <h1><? __('Búsqueda de Instituciones')?></h1>
 
-
 <div>
     <?php
     echo $form->create('Instit', array(
@@ -35,12 +34,19 @@ echo $html->css(array('jquery.loadmask'));
             'label'=> 'CUE ó Nombre de la Institución',
             'title'=> 'Ingrese CUE ó Nombre de la institución en forma completa ó parcial. Ej: 600118, 5000216 ó Manuel Belgrano.',
             ));
-    ?>
     
+    echo $html->link('realizar una búsqueda avanzada...','advanced_search_form',array(
+        'class'=>'link_right small',
+        'style'=>'margin-bottom: -18px; padding:0px; margin-right: 4px;'
+    ));
+    echo $form->end('Buscar');
+    ?>
+
+    <br />
     <div id="boxAyuda" style="display:block;clear:both">
         <div id="boxAyuda" class="menu_head help_head">
-            <p style="float:left;margin-right:10px;font-style: italic">Ayuda</p>
-            <?php echo $html->image('help.png', array('alt' => 'Ayuda','style'=>'float:left;display:inline'))?>
+            <?php echo $html->image('help.png', array('alt' => 'Ayuda','style'=>'float:left;display:inline; margin: 0px 10px;'))?>
+            <span>Ayuda</span>
         </div>
         <ul class="menu_body help_body">
                 <br/>
@@ -192,14 +198,6 @@ echo $html->css(array('jquery.loadmask'));
                 
         </ul>
     </div>
-    
-    <?
-    echo $html->link('realizar una búsqueda avanzada...','advanced_search_form',array(
-        'class'=>'link_right small',
-        'style'=>'margin-bottom: -18px; padding:0px; margin-right: 4px;'
-    ));
-    echo $form->end('Buscar');
-    ?>
     
     <!-- Aca se muestran los resultados de la busqueda-->
     <div id='consoleResultWrapper'  style="margin-top: 20px;">

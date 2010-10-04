@@ -46,6 +46,7 @@
         return true;
     }
 
+// es el que envia el formulario de busqueda ajax
     function autoSubmit(){
         if(jQuery("#InstitCue").val().length > 1){
               clearTimeout(timerid);
