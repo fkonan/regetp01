@@ -63,4 +63,99 @@ function limpiar_nombre($string) {
 }
 
 
+/**
+ *
+ * Lo que hace es convertir una cadena en una expresion regular para
+ * buscar el texto sin tener en cuenta los acentos y la eñe
+ *
+ * @param $text
+ */
+function convertir_para_busqueda_avanzada($text){
+    $text = strtolower($text);
+
+        // reemplado las palabras abreviadas por su version con puntos
+        //  EJ: a EET quedaria: E.E.T, es para mejorar la busqueda
+        /*$tipoInstitsAbreviadas = array(
+            'ipem'  => 'i.p.e.m',
+            'cfp'   => 'c.f.p',
+            'eet'   => 'e.e.t',
+            'cent'  => 'c.e.n.t',
+            'cea'   => 'c.e.a',
+            'eea'   => 'e.e.a',
+            'cfr'   => 'c.f.r',
+        );*/
+        $tipoInstit =& ClassRegistry::init('Tipoinstit');
+        $tipoInstitsAbreviadas = $tipoInstit->getAbreviados();
+        
+        if (!empty($tipoInstitsAbreviadas))
+            $text = str_replace(array_keys($tipoInstitsAbreviadas), array_values($tipoInstitsAbreviadas), $text);
+
+        $posiblesA = '(á|a|A|Á)';
+        $posiblesE = '(é|e|E|É)';
+        $posiblesI = '(í|i|I|Í)';
+        $posiblesO = '(ó|o|O|Ó)';
+        $posiblesU = '(ú|u|ü|Ú|U|Ü)';
+
+        $text = trim($text);
+        $text = "%$text%";
+        $patron = array (
+                // Espacios, puntos y comas por guion
+                '/.,/' => '\.',
+
+                // Vocales
+                '/a/' => $posiblesA,
+                '/e/' => $posiblesE,
+                '/i/' => $posiblesI,
+                '/o/' => $posiblesO,
+                '/u/' => $posiblesU,
+
+                '/Ü/' => $posiblesU,
+                '/ü/' => $posiblesU,
+
+                '/A/' => $posiblesA,
+                '/E/' => $posiblesE,
+                '/I/' => $posiblesI,
+                '/O/' => $posiblesO,
+                '/U/' => $posiblesU,
+
+                '/Á/' => $posiblesA,
+                '/É/' => $posiblesE,
+                '/Í/' => $posiblesI,
+                '/Ó/' => $posiblesO,
+                '/Ú/' => $posiblesU,
+
+                '/á/' => $posiblesA,
+                '/é/' => $posiblesE,
+                '/í/' => $posiblesI,
+                '/ó/' => $posiblesO,
+                '/ú/' => $posiblesU,
+
+                '/n/' => '(ñ)',
+                '/ñ/' => '(n|ñ)',
+
+                '/s/' => '(z|s|c)',
+                '/c/' => '(z|s|c)',
+                '/z/' => '(z|s|c)',
+
+                // Agregar aqui mas caracteres si es necesario
+                '/°/' => '',
+                '/º/' => '',
+                '/n°/' => '%',
+                '/nº/' => '%',
+                '/ /' => '%',
+
+        );
+        // caracteres especiales de expresiones regulares
+        //$text = preg_quote($text);
+
+        $text_aux = '';
+        for($i=0; $i<strlen($text); $i++){
+                $caracter =  $text[$i];
+                $text_aux .= preg_replace(array_keys($patron),array_values($patron),$caracter,1);
+        }
+
+        return $text_aux;
+}
+
+
 ?>
