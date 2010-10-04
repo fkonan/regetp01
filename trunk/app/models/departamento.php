@@ -6,7 +6,8 @@ class Departamento extends AppModel {
 	var $validate = array(
 		'name' => array('notempty')
 	);
-        
+
+        var $order = array('Jurisdiccion.name');
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array('Jurisdiccion');

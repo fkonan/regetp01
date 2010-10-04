@@ -7,6 +7,8 @@ class Localidad extends AppModel {
 		'name' => array('notempty')
 	);
 
+        var $order = array('Jurisdiccion.name');
+
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array(
                 'Departamento' => array('className' => 'Departamento',
