@@ -137,7 +137,7 @@ $cue_instit = $instit['cue'].$anexo;
 </div>
 
 <h2>Datos Históricos de Matrícula</h2>
-	<?
+	<?  if(isset($plan_tiene_estructura_valida))
             echo ($plan_tiene_estructura_valida !== true)?'<p class="acl acl-editores acl-administradores acl-desarrolladores error">La estructura del Plan es inválida, ejecute el depurador'.$html->link(' haciendo click aquí.','/depuradorPlanes/index/'.$plan['Plan']['instit_id']).'</p>':'';
 
             /**
