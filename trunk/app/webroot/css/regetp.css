@@ -2104,18 +2104,19 @@ div.content{
 /*AYUDA BUSCADOR*/
 
 .help_head{
-    width:98%;
     height: 18px;
     background-color: #EFEFEF !important;
     border:2px solid #DFDFDF;
-    color: #7B7B7B;
+    color:#40679D;
+    font-weight:bolder;
+    font-size: 9pt;
+    font-family: helvetica, sans-serif;
 }
 
 .help_body{
     width:90%;
-    background-color: transparent !important;
+    background-color: #EFEFEF !important;
     font-size: 8pt;
-    color: #BFBFBF;
     border:2px solid #DFDFDF;
     width:98%;
     margin:0px;
@@ -2124,5 +2125,4 @@ div.content{
 
 .help_body table{
     width:90%;
-    color: #BFBFBF;
 }
