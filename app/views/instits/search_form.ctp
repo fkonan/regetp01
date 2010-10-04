@@ -44,7 +44,7 @@ echo $html->css(array('jquery.loadmask'));
 
     <br />
     <div id="boxAyuda" style="display:block;clear:both">
-        <div id="boxAyuda" class="menu_head help_head">
+        <div id="boxAyuda" class="menu_head_open help_head">
             <?php echo $html->image('help.png', array('alt' => 'Ayuda','style'=>'float:left;display:inline; margin: 0px 10px;'))?>
             <span>Ayuda</span>
         </div>

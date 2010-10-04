@@ -49,6 +49,7 @@
 // es el que envia el formulario de busqueda ajax
     function autoSubmit(){
         if(jQuery("#InstitCue").val().length > 1){
+              jQuery('.help_body').hide();
               clearTimeout(timerid);
               timerid = setTimeout(function() {
                   formElement.submit();
@@ -106,5 +107,7 @@
         jQuery(document).bind('paste', autoSubmit);
 
         iniciarTooltip();
+
+        jQuery('.help_body').show();
     });
 
