@@ -1,15 +1,14 @@
 #summary One-sentence summary of this page.
 
-= Introduction =
+= Introducción =
 
-Add your content here.
+Pantalla Prototipo para la visualización de Ofertas
 
 
-= Details =
+= Detalles =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+La pantalla permitirá ver:
+* Planes por año
+* Planes para todos los años
 
 <img src="http://regetp01.googlecode.com/files/mockup1_v1.6.2.png" />
