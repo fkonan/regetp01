@@ -1,20 +1,21 @@
 <div class="estructuraPlanesAnios form">
 <?php echo $form->create('EstructuraPlanesAnio');?>
 	<fieldset>
- 		<legend><?php __('Edit EstructuraPlanesAnio');?></legend>
+ 		<legend><?php __('Editar Año de Estructura');?></legend>
+                <b><?=$this->data['EstructuraPlan']['name']?></b>
 	<?php
 		echo $form->input('id');
-		echo $form->input('estructura_planes_anio_id');
+		echo $form->input('estructura_plan_id', array('type'=>'hidden'));
 		echo $form->input('edad_teorica');
-		echo $form->input('anio');
+		echo $form->input('nro_anio');
 		echo $form->input('anio_escolaridad');
+                echo $form->input('alias');
 	?>
 	</fieldset>
-<?php echo $form->end('Submit');?>
+<?php echo $form->end('Guardar');?>
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $html->link(__('Delete', true), array('action'=>'delete', $form->value('EstructuraPlanesAnio.id')), null, sprintf(__('Are you sure you want to delete # %s?', true), $form->value('EstructuraPlanesAnio.id'))); ?></li>
-		<li><?php echo $html->link(__('List estructuraPlanesAnios', true), array('action'=>'index'));?></li>
+		<li><?php echo $html->link(__('Volver al listado de Estructuras', true), array('controller'=>'EstructuraPlanes', 'action'=>'index'));?></li>
 	</ul>
 </div>
