@@ -1,0 +1,20 @@
+*BACKLOG – RFIETP – Versión en producción: 1.6.1*
+
+*ACTIVIDADES – Versión 1.6.2*
+
+Rediseñar presentación de oferta educativa: presentación especial para oferta SEC TEC. Presentación tradicional para resto de ofertas. Diseño según lo charlado en la reunión (agregar al modelo subido en el Wiki las observaciones de Román).
+Verificar ABM de oferta SEC TEC.
+Verificar que ABM de otras ofertas (FP, SUP, IT) sigan funcionado correctamente.
+
+Analizar una muestra de depuraciones realizadas en distintas jurisdicciones para ver si está funcionando todo bien. Evaluar si las imputaciones realizadas son correctas.
+
+Buscador
+  * Mejorar buscador beta. Ver documento con especificaciones.
+  * Hacer cambios estéticos solicitados por Román.
+  * Log de búsquedas. Automatizar cambio de archivo de log cada año+mes.
+
+ACL. Generar informe resumen de permisos por grupo y por usuario, para obtener una vista panorámica de permisos asignados.
+
+Documentación de base de datos. Seleccionar nuevo software para DER y documentación. Probar. Volver a documentar la base de datos en nuevo software. Publicar en repositorio.
+
+Fondo. Preparar descargas. Ver modelos propuestos por MR.
