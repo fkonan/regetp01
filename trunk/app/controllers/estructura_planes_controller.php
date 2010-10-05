@@ -60,11 +60,14 @@ class EstructuraPlanesController extends AppController {
                         
 			if ($this->EstructuraPlan->save($this->data)) {
                             // elimina las etapas actuales
-                            $this->EstructuraPlan->EstructuraPlanesAnio->deleteAll(array('EstructuraPlanesAnio.estructura_plan_id' => $id));
+                            //$this->EstructuraPlan->EstructuraPlanesAnio->deleteAll(array('EstructuraPlanesAnio.estructura_plan_id' => $id));
                             // guarda el estructura_plan_id a cada etapa
+
+                            // faltaria que borre las que se eliminaron en el form
                             if ($aEtapas) {
                                 $i = 0;
                                 foreach ($aEtapas as $etapa) {
+                                    $etapas_aux[$i]['id'] = $etapa['id'];
                                     $etapas_aux[$i]['estructura_plan_id'] = $this->EstructuraPlan->id;
                                     $etapas_aux[$i]['edad_teorica'] = $etapa['edad_teorica'];
                                     $etapas_aux[$i]['nro_anio'] = $etapa['nro_anio'];
@@ -92,6 +95,7 @@ class EstructuraPlanesController extends AppController {
                         $i = 0;
                         if (count($this->data['EstructuraPlanesAnio'])) {
                             foreach ($this->data['EstructuraPlanesAnio'] as $etapa) {
+                                $etapas_to_serialize[$i]['id'] = $etapa['id'];
                                 $etapas_to_serialize[$i]['estructura_plan_id'] = $etapa['estructura_plan_id'];
                                 $etapas_to_serialize[$i]['edad_teorica'] = $etapa['edad_teorica'];
                                 $etapas_to_serialize[$i]['nro_anio'] = $etapa['nro_anio'];
