@@ -25,8 +25,7 @@ $menuOptions = array(
                 'nombre'=> 'Planes de Mejora',
                 'link'=> array('controller'=>'Fondos','action'=>'index_x_instit', $instit_id),
                 'options'=> array(
-                    'class'=>'acl-directores acl-administradores acl-desarrolladores',
-                    'style' => 'display: none;',
+                    'class'=>'acl acl-directores acl-administradores acl-desarrolladores',
                     ),
         ),
 );
