@@ -59,8 +59,8 @@ class AniosController extends AppController {
                         $this->redirect('/planes/view/'.$plan_id);
 
                     } else {
-                        debug($this->Anio->validationErrors);
-                        $this->Session->setFlash(__('Intente de nuevo. No se pudo guardar el dato.', true));
+                        $txt = '<br>'.$this->Anio->listarErroresDeValidacionEnHtml();
+                        $this->Session->setFlash(__('Intente de nuevo. No se pudo guardar el dato.'.$txt, true));
                         $this->redirect('/planes/view/'.$plan_id);
                     }
             }
@@ -81,8 +81,8 @@ class AniosController extends AppController {
                         $this->redirect('/planes/view/'.$this->data['Anio']['plan_id']);
 
                     } else {
-                        debug($this->Anio->validationErrors);
-                        $this->Session->setFlash(__('Intente de nuevo. No se pudo guardar el dato.', true));
+                        $txt = $this->Anio->listarErroresDeValidacionEnHtml();
+                        $this->Session->setFlash(__('Intente de nuevo. No se pudo guardar el dato.'. '<br>'.$txt, true));
                         $this->redirect('/planes/view/'.$this->data['Anio']['plan_id']);
                     }
             }
@@ -117,11 +117,14 @@ class AniosController extends AppController {
 
             // solo los que aun no haya agregado informacion
             $ciclosUsados = $this->Anio->ciclosUsados($plan_id);
-            
+            if (count($ciclosUsados) == 1) {
+                $cond = array("Ciclo.id <>" => array_pop($ciclosUsados));
+            } else {
+                $cond = array("Ciclo.id NOT" => $ciclosUsados);
+            }
             $ciclos = $this->Anio->Ciclo->find('list', array(
-                'conditions'=>array(
-                    'Ciclo.id NOT' => $ciclosUsados,
-                )));
+                'conditions'=>$cond
+                ));
 
             $etapas = $this->Anio->Etapa->find('list');
             $this->set(compact('planes', 'ciclos', 'etapas'));

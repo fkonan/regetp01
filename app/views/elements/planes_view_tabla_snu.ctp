@@ -31,7 +31,7 @@
 				<td><?php echo $anio['matricula'];$tot_matricula += $anio['matricula']; ?></td>
 				<td><?php echo $anio['secciones'];$tot_secciones += $anio['secciones'];?></td>
 				<td><?php echo $anio['hs_taller'];?></td>
-				<td class="acl actions acl-editores acl-administradores acl-deasrrolladores">
+				<td class="acl actions acl-editores acl-administradores acl-desarrolladores">
 					<a class="ajax-link" href="<?= $html->url(array('controller'=> 'anios', 'action'=>'edit/'.$anio['id']))?>">Editar</a>
 					<?php echo $html->link(__('Borrar', true), array('controller'=> 'anios', 'action'=>'delete', $anio['id']), null, sprintf(__('Seguro que desea eliminar el año # %s? del ciclo # %s', true), $anio['anio'], $anio['ciclo_id'])); ?>
 				</td>
@@ -39,7 +39,6 @@
 			<?php endforeach; //el que recorre los anios del ciclo	?>
 			<tr <?php echo $class;?> >				
 				<td style="border-top: 1px silver solid;"><b><?php echo 'Totales';?></b></td>
-				
 				<td style="border-top: 1px silver solid;"><b><?php echo $tot_matricula;?></b></td>
 				<td style="border-top: 1px silver solid;"><b><?php echo $tot_secciones;?></b></td>
 				<td style="border-top: 1px silver solid;"><?php echo '';?></td>
