@@ -63,8 +63,8 @@ echo $html->css(array('jquery.loadmask'));
                         <COL >
                         <TR VALIGN=TOP>
                                 <TD >
-                                        <FONT SIZE=2><B>Si
-                                        ingresa</B></FONT>
+                                        <B>Si
+                                        ingresa</B>
                                 </TD>
                                 <TD >
                                         <FONT FACE="Arial, sans-serif"><FONT SIZE=2><B>Busca
@@ -110,8 +110,8 @@ echo $html->css(array('jquery.loadmask'));
                         <COL >
                         <TR VALIGN=TOP>
                                 <TD >
-                                        <FONT FACE="Arial, sans-serif"><FONT SIZE=2><B>Si
-                                        ingresa</B></FONT></FONT>
+                                        <B>Si
+                                        ingresa</B>
                                 </TD>
                                 <TD >
                                         <FONT FACE="Arial, sans-serif"><FONT SIZE=2><B>Busca
