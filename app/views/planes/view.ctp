@@ -151,7 +151,7 @@ $cue_instit = $instit['cue'].$anexo;
 <div id="nueva-data" style="display:none"></div>
 
 
-<div class="acl actions acl-editores acl-desarrolladores">
+<div class="acl actions acl-editores acl-desarrolladores acl-administradores">
     <ul>
 <?php //echo $html->link(__('Agregar Nuevo Año', true), array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id']));?>
         <li>
