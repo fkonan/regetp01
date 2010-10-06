@@ -161,6 +161,8 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 	<!--	No hubo resutados, entonces muestro un link que permita agregar uinstituciones -->
 	<h2>No se obtuvieron resultados</h2>
 	<? 
-	echo $html->link('¿Desea agregar una Nueva Institución?',array('controller'=>'Instits', 'action'=>'add'));
+	echo $html->link('¿Desea agregar una Nueva Institución?',array(
+            'controller'=>'Instits',
+            'action'=>'add'), array('class'=>'acl acl-editores acl-administradores acl-desarrolladores'));
 }
 ?>
