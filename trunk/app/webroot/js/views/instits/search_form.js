@@ -49,6 +49,11 @@
 
 // es el que envia el formulario de busqueda ajax
     function autoSubmit(forzar){
+        
+        if ( typeof forzar != 'boolean' ) {
+            forzar = false;
+        }
+
         if(jQuery("#InstitCue").val().length > 1 || forzar){
               clearTimeout(timerid);
               timerid = setTimeout(function() {
