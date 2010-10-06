@@ -345,7 +345,6 @@ class InstitsController extends AppController {
         // dejo un log de la busqueda realizada
         $username = $this->Auth->user('nombre').' '.$this->Auth->user('apellido').' ('.$this->Auth->user('username').')';
         $grupo = $this->Session->read('User.group_alias');
-        $this->Instit->searchLog($this->data, $username, $grupo);
 
         //para mostrar en vista los patrones de busqueda seleccionados
         $array_condiciones = array();
@@ -709,7 +708,8 @@ class InstitsController extends AppController {
         $this->set('url_conditions', $url_conditions);
         //devuelve un array para mostrar los criterios de busqueda
         $this->set('conditions', $array_condiciones);
-        
+
+        $this->Instit->searchLog($this->data, $username, $grupo, $this->params['paging']['Instit']['count']);
 
         // si se encontro solo 1 institucion, ir directamente a la vista de esa institucion
         if (!$this->RequestHandler->isAjax()) {

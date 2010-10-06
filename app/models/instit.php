@@ -1145,7 +1145,7 @@ class Instit extends AppModel {
          *
          * LOG DE LAS BUSQUEDAS REALIZADAS
          */
-        function searchLog($data, $user, $group){
+        function searchLog($data, $user, $group, $cantEncontradas){
             if (!empty($data)) {
                 $posi  = strrpos($_SERVER['HTTP_REFERER'], "/");
                 $nombre_form = substr($_SERVER['HTTP_REFERER'],$posi+1);
@@ -1154,6 +1154,7 @@ class Instit extends AppModel {
                 $logTxt .= '|'. @$nombre_form; $headTxt .= '|'.'Formulario';
                 $logTxt .= '|'. $user; $headTxt .= '|'.'Usuario';
                 $logTxt .= '|'. $group; $headTxt .= '|'.'Rol';
+                $logTxt .= '|'. $cantEncontradas; $headTxt .= '|'.'Cant. Encontradas';
                 $logTxt .= '|'. @$data['Instit']['cue']; $headTxt .= '|'.'CUE';
                 $logTxt .= '|'. @utf8_decode($data['Instit']['busqueda_libre']); $headTxt .= '|'.'Nombre Libre(solo buscador rapido)';
                 $logTxt .= '|'. @utf8_decode($data['Instit']['nombre_completo']); $headTxt .= '|'.'Nombre Completo';
@@ -1176,7 +1177,7 @@ class Instit extends AppModel {
                 $logTxt .= '|'. @$data['Instit']['claseinstit_id']; $headTxt .= '|'.'Clase Instit ID';
                 $logTxt .= '|'. @$data['Instit']['etp_estado_id']; $headTxt .= '|'.'ETP Estado ID';
 
-                $log_file_name = 'i_search';
+                $log_file_name = 'search_'.date('m_Y',strtotime('now'));
                 $archivo = APP . 'tmp' . DS . 'logs' . DS . $log_file_name.'.log';
                 if (!file_exists($archivo)){
                      // armo el encabezado del CSV

@@ -7,7 +7,7 @@ class Departamento extends AppModel {
 		'name' => array('notempty')
 	);
 
-        var $order = array('Jurisdiccion.name');
+        var $order = array('Departamento.name');
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array('Jurisdiccion');
