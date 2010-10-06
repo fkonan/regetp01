@@ -115,7 +115,6 @@ class AniosController extends AppController {
             $this->set('plan_id',$plan_id);
             $this->set('duracion_hs',$duracion_hs);
 
-            $ciclosTodos = $this->Anio->Ciclo->find('list');
             // solo los que aun no haya agregado informacion
             $ciclosUsados = $this->Anio->find('all',array(
                     'fields'=>array('Anio.ciclo_id'),
@@ -315,7 +314,7 @@ class AniosController extends AppController {
                     break;
                 case 3: //MT
                 case 5: //SEC NO TECNICO
-                    $viewToRender = '/anios/edit_estructurados';
+                    $viewToRender = '/anios/edit_sectec';
                     break;
                 case 6: //SUP NO TECNICO
                 case 4: //SNU

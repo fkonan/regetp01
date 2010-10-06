@@ -156,8 +156,8 @@ echo $form->create('Anio', array('action'=>$form_action));
 echo $form->hidden('Info.estructura_plan_id', array('value'=>$estructura_plan_id));
 echo $form->hidden('Info.plan_id', array('value'=>$plan_id));
 ?>
+<span><?php echo $trayectosData['estructura'][0]['title']?></span>
 <table border="2" cellpadding="2" cellspacing="0">
-    <thead><?php echo $trayectosData['estructura'][0]['title']?></thead>
     <tr>
         <th>
             <?php
