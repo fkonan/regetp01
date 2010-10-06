@@ -89,6 +89,60 @@ class AniosController extends AppController {
         }
 
 
+        function addSecTec($plan_id = null,$duracion_hs = null) {
+            if (!empty($this->data['Info']['plan_id'])) {
+                    $plan_id = $this->data['Info']['plan_id'];
+            }
+
+            $estructuraPlanId = $this->Anio->Plan->getEstructuraSugerida($plan_id);
+
+            $trayectosDisponibles = $this->Anio->EstructuraPlanesAnio->EstructuraPlan->find('first', array(
+                'contain'=> array('EstructuraPlanesAnio'=>array('order'=>array('EstructuraPlanesAnio.edad_teorica'))),
+                'conditions'=> array(
+                    'EstructuraPlan.id'=>$estructuraPlanId),
+            ));
+
+            /**
+             * esto es para generar una vista distinta
+             * para los años que son de una oferta FP
+             */
+            $this->Anio->Plan->recursive = -1;
+            $plan   = $this->Anio->Plan->find('all',array(
+                'conditions' => array('Plan.id'=>$plan_id))
+                    );
+
+            $this->set('trayectosDisponibles',$trayectosDisponibles);
+            $this->set('plan_id',$plan_id);
+            $this->set('duracion_hs',$duracion_hs);
+
+            $ciclosTodos = $this->Anio->Ciclo->find('list');
+            // solo los que aun no haya agregado informacion
+            $ciclosUsados = $this->Anio->find('all',array(
+                    'fields'=>array('Anio.ciclo_id'),
+                    'conditions'=>array(
+                        //'Anio.ciclo_id NOT'=>$ciclosTodos,
+                        'Anio.plan_id'=>$plan_id),
+                    'group'=>array('Anio.ciclo_id', 'Anio.plan_id'),
+                    'order'=>array('Anio.ciclo_id'),
+                        ));
+            $ciclosTmp = array();
+            foreach ($ciclosUsados as $c) {
+                $ciclosTmp[] = $c['Anio']['ciclo_id'];
+            }
+
+            if(!empty($ciclosTmp)){
+                $ciclos = $this->Anio->Ciclo->find('list', array(
+                    'conditions'=>array(array('NOT'=>array('Ciclo.id'=>$ciclosTmp)))));
+            }
+            else{
+                $ciclos = $this->Anio->Ciclo->find('list');
+            }
+
+            $etapas = $this->Anio->Etapa->find('list');
+            $this->set(compact('planes', 'ciclos', 'etapas'));
+        }
+
+
 	function add($plan_id = null,$duracion_hs = null) {
             if (!empty($this->data['Info']['plan_id'])) {
                     $plan_id = $this->data['Info']['plan_id'];
@@ -117,15 +171,13 @@ class AniosController extends AppController {
                 case 5: //SEC NO TECNICO
                     $viewToRender = '/anios/add_it';
                     break;
-                case 3: //MT
-                    $viewToRender = '/anios/add';
-                    break;
                 case 6: //SUP NO TECNICO
                 case 4: //SNU
                     $viewToRender = '/anios/add_snu';
                     break;
-                default: // si no va con ninguno mostrar el de MT
-                    $viewToRender = '/anios/add';
+                default: // si no va con ninguno mostrar error
+                    $this->Session->setFlash('Oferta no válida');
+                    $this->redirect('/');
                     break;
             endswitch;
 
@@ -133,28 +185,7 @@ class AniosController extends AppController {
             $this->set('plan_id',$plan_id);
             $this->set('duracion_hs',$duracion_hs);
 
-            $ciclosTodos = $this->Anio->Ciclo->find('list');
-            // solo los que aun no haya agregado informacion
-            $ciclosUsados = $this->Anio->find('all',array(
-                    'fields'=>array('Anio.ciclo_id'),
-                    'conditions'=>array(
-                        //'Anio.ciclo_id NOT'=>$ciclosTodos,
-                        'Anio.plan_id'=>$plan_id),
-                    'group'=>array('Anio.ciclo_id', 'Anio.plan_id'),
-                    'order'=>array('Anio.ciclo_id'),
-                        ));
-            $ciclosTmp = array();
-            foreach ($ciclosUsados as $c) {
-                $ciclosTmp[] = $c['Anio']['ciclo_id'];
-            }
-
-            if(!empty($ciclosTmp)){
-                $ciclos = $this->Anio->Ciclo->find('list', array(
-                    'conditions'=>array(array('NOT'=>array('Ciclo.id'=>$ciclosTmp)))));
-            }
-            else{
-                $ciclos = $this->Anio->Ciclo->find('list');
-            }
+            $ciclos = $this->Anio->Ciclo->find('list');
             
             $etapas = $this->Anio->Etapa->find('list');
             $this->set(compact('planes', 'ciclos', 'etapas'));

@@ -1,6 +1,6 @@
 <?php echo $html->css('/acl/css/acl'); ?>
 <h2>Access Control List Management</h2>
-<ul class="acl">
+<ul class="acl" style="display: block;">
   <li><?php print $html->image('/acl/img/tango/32x32/apps/system-users.png') ?><?php print $html->link('Manage Usuarios', '/admin/acl/aros') ?></li>
   <li><?php print $html->image('/acl/img/tango/32x32/apps/preferences-system-windows.png') ?><?php print $html->link('Manage Controladores', '/admin/acl/acos') ?></li>
   <li><?php print $html->image('/acl/img/tango/32x32/emblems/emblem-readonly.png') ?><?php print $html->link('Manage Permisos', '/admin/acl/permissions') ?></li>
