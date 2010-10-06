@@ -194,8 +194,11 @@ echo $html->css(array('jquery.loadmask'));
                 necesita definir </SPAN></FONT></FONT><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">m&aacute;s
                 criterios (departamento, localidad, tipo de oferta del
                 establecimiento, etc.) realice una </SPAN></FONT></FONT><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">
-                            <U>b&uacute;squeda
-                avanzada</U></SPAN></FONT></FONT><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">.</SPAN></FONT></FONT></P>
+                <?php
+                            echo $html->link('Búsqueda avanzada','advanced_search_form',array(
+                                             'div'=>false));
+                ?>
+                        </SPAN></FONT></FONT><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">.</SPAN></FONT></FONT></P>
                 
         </ul>
     </div>
