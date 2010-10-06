@@ -201,6 +201,23 @@ class Anio extends AppModel {
                 return false;
 
         }
+
+
+        /**
+         *  Listado de ciclos_id utilizados por ese plan para los anios
+         * @param integer $plan_id
+         * @return array find list
+         */
+        function ciclosUsados($plan_id) {
+             $ciclosUsados = $this->find('list',array(
+                    'fields'=>array('Anio.ciclo_id','Anio.ciclo_id'),
+                    'conditions'=>array(
+                        'Anio.plan_id'=>$plan_id),
+                    'group'=>array('Anio.ciclo_id', 'Anio.plan_id'),
+                    'order'=>array('Anio.ciclo_id'),
+                        ));
+             return $ciclosUsados;
+        }
         
 	
 }

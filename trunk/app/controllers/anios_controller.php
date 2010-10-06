@@ -116,26 +116,12 @@ class AniosController extends AppController {
             $this->set('duracion_hs',$duracion_hs);
 
             // solo los que aun no haya agregado informacion
-            $ciclosUsados = $this->Anio->find('all',array(
-                    'fields'=>array('Anio.ciclo_id'),
-                    'conditions'=>array(
-                        //'Anio.ciclo_id NOT'=>$ciclosTodos,
-                        'Anio.plan_id'=>$plan_id),
-                    'group'=>array('Anio.ciclo_id', 'Anio.plan_id'),
-                    'order'=>array('Anio.ciclo_id'),
-                        ));
-            $ciclosTmp = array();
-            foreach ($ciclosUsados as $c) {
-                $ciclosTmp[] = $c['Anio']['ciclo_id'];
-            }
-
-            if(!empty($ciclosTmp)){
-                $ciclos = $this->Anio->Ciclo->find('list', array(
-                    'conditions'=>array(array('NOT'=>array('Ciclo.id'=>$ciclosTmp)))));
-            }
-            else{
-                $ciclos = $this->Anio->Ciclo->find('list');
-            }
+            $ciclosUsados = $this->Anio->ciclosUsados($plan_id);
+            
+            $ciclos = $this->Anio->Ciclo->find('list', array(
+                'conditions'=>array(
+                    'Ciclo.id NOT' => $ciclosUsados,
+                )));
 
             $etapas = $this->Anio->Etapa->find('list');
             $this->set(compact('planes', 'ciclos', 'etapas'));
@@ -145,15 +131,7 @@ class AniosController extends AppController {
 	function add($plan_id = null,$duracion_hs = null) {
             if (!empty($this->data['Info']['plan_id'])) {
                     $plan_id = $this->data['Info']['plan_id'];
-            }
-            
-            $estructuraPlanId = $this->Anio->Plan->getEstructuraSugerida($plan_id);
-            
-            $trayectosDisponibles = $this->Anio->EstructuraPlanesAnio->EstructuraPlan->find('first', array(
-                'contain'=> array('EstructuraPlanesAnio'=>array('order'=>array('EstructuraPlanesAnio.edad_teorica'))),
-                'conditions'=> array(
-                    'EstructuraPlan.id'=>$estructuraPlanId),
-            ));            
+            }         
 		
             /**
              * esto es para generar una vista distinta
@@ -179,14 +157,12 @@ class AniosController extends AppController {
                     $this->redirect('/');
                     break;
             endswitch;
-
-            $this->set('trayectosDisponibles',$trayectosDisponibles);
             $this->set('plan_id',$plan_id);
             $this->set('duracion_hs',$duracion_hs);
 
-            $ciclos = $this->Anio->Ciclo->find('list');
-            
+            $ciclos = $this->Anio->Ciclo->find('list');            
             $etapas = $this->Anio->Etapa->find('list');
+
             $this->set(compact('planes', 'ciclos', 'etapas'));
             $this->render($viewToRender);
 	}

@@ -138,13 +138,18 @@ foreach($trayectosData['ciclos'] as $ciclo=>$anios) {
     }
 }
 
-if (in_array($ciclo_seleccionado, $ciclos_erroneos)) {
-    ?>
-    <p class="msg-atencion" style="padding: 30px 20px;">
-        La estructura "<?php echo $trayectosData['estructura'][0]['title']?>" para este ciclo no es válida.
-    </p>
-    <?php
-    return;
+// cuando estoy dando de alta nuevos anios el ciclo no esta seleccionado por lo tanto hay que hacer esta verificacion
+if (!empty($ciclo_seleccionado)) {
+    // solo valido cuando se esta editando, quiero saber cual es el ciclo em el que estoy
+    // y al mismo tiempo validar la estructura, (verificar que coincida con lo indicado en el plan)
+    if (in_array($ciclo_seleccionado, $ciclos_erroneos)) {
+        ?>
+        <p class="msg-atencion" style="padding: 30px 20px;">
+            La estructura "<?php echo $trayectosData['estructura'][0]['title']?>" para este ciclo no es válida.
+        </p>
+        <?php
+        return;
+    }
 }
 /**********************************************************************/
 
@@ -198,8 +203,12 @@ echo $form->hidden('Info.plan_id', array('value'=>$plan_id));
                         echo $form->hidden($j.'.estructura_planes_anio_id',array(
                         'value'=>$anioDato['Anio']['estructura_planes_anio_id']));
 
-                        echo $form->hidden($j.'.id',array('label'=>false,
-                        'value'=> $anioDato['Anio']['id']));
+                        // ver si es un ADD o un EDIT
+                        if (!empty($anioDato['Anio']['id'])) {
+                            echo $form->hidden($j.'.id',array(
+                                'label'=>false,
+                                'value'=> $anioDato['Anio']['id']));
+                        }
 
                         echo '<td>'.$form->input($j.'.matricula',array(
                                 'label'=>false,
