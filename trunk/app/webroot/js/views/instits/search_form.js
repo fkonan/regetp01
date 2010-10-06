@@ -44,6 +44,12 @@
     function blockResultConsole(formData, jqForm, options) {
         jQuery('#consoleResultWrapper').mask('Buscando');
         jQuery('.help_body').hide();
+        
+        if(jQuery('.help_head').hasClass('menu_head')){
+            jQuery('.help_head').removeClass('menu_head').addClass('menu_head_open');
+        }else if(jQuery('.help_head').hasClass('menu_head_open')){
+            jQuery('.help_head').removeClass('menu_head_open').addClass('menu_head');
+        }
         return true;
     }
 
