@@ -2124,6 +2124,7 @@ div.content{
 
 .help_body table{
     width:90%;
+    margin: 10px auto;
 }
 
 .help_body table tr td{

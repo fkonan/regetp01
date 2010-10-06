@@ -25,6 +25,7 @@ echo $html->css(array('jquery.loadmask'));
     echo $form->input('jurisdiccion_id',array(
             'label'=>'Jurisdicción',
             'empty'=>'TODAS',
+            'style'=> 'border:1px solid #BBBBBB; width:50%;font-size: 16px; height: 25px; color: rgb(117, 117, 117);',
             'after' => '<br><cite style="color:#757575">Filtro opcional. Si no selecciona una Jurisdicción se realizará una búsqueda en todo el Registro.</cite>'
             ));
 
