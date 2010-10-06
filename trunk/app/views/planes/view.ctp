@@ -156,7 +156,7 @@ $cue_instit = $instit['cue'].$anexo;
 <?php //echo $html->link(__('Agregar Nuevo Año', true), array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id']));?>
         <li>
             <?php
-            $action = $plan['Plan']['oferta_id'] == 3 ? 'addSecTec' : 'add';
+            $action = ($plan['Plan']['oferta_id'] == SEC_TEC_ID) ? 'addSecTec' : 'add';
             echo $html->link(
                         'Agregar Datos',
                         "/anios/$action/".$plan['Plan']['id'].'/'.$plan['Plan']['duracion_anios'],
