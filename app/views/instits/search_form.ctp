@@ -31,11 +31,11 @@ echo $html->css(array('jquery.loadmask'));
     echo $form->input('busqueda_libre', array(
             'id'=>'InstitCue',
             'style'=>'border:1px solid #BBBBBB; width: 99%; font-size: 22px; height: 29px; color: rgb(117, 117, 117);',
-            'label'=> 'CUE ó Nombre de la Institución',
+            'label'=> 'Criterios de Búsqueda',
             'title'=> 'Ingrese CUE ó Nombre de la institución en forma completa ó parcial. Ej: 600118, 5000216 ó Manuel Belgrano.',
             ));
     
-    echo $html->link('realizar una búsqueda avanzada...','advanced_search_form',array(
+    echo $html->link('Búsqueda avanzada...','advanced_search_form',array(
         'class'=>'link_right small',
         'style'=>'margin-bottom: -18px; padding:0px; margin-right: 4px;'
     ));
@@ -58,44 +58,44 @@ echo $html->css(array('jquery.loadmask'));
                 <P LANG="es-ES" CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">Ej</SPAN></FONT></FONT><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">emplos:
                 </SPAN></FONT></FONT>
                 </P>
-                <TABLE BORDER=1 BORDERCOLOR="#BFBFBF" CELLPADDING=7 CELLSPACING=0>
+                <TABLE style="background-color: transparent;">
                         <COL >
                         <COL >
                         <TR VALIGN=TOP>
                                 <TD >
-                                        <P LANG="es-ES" CLASS="western"><FONT FACE="Arial, sans-serif"><FONT SIZE=2><B>Si
-                                        ingresa</B></FONT></FONT></P>
+                                        <FONT SIZE=2><B>Si
+                                        ingresa</B></FONT>
                                 </TD>
                                 <TD >
-                                        <P LANG="es-ES" CLASS="western"><FONT FACE="Arial, sans-serif"><FONT SIZE=2><B>Busca
-                                        por</B></FONT></FONT></P>
+                                        <FONT FACE="Arial, sans-serif"><FONT SIZE=2><B>Busca
+                                        por</B></FONT></FONT>
                                 </TD>
                         </TR>
                         <TR VALIGN=TOP>
                                 <TD>
-                                        <P LANG="es-ES" CLASS="western"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>282</FONT></FONT></P>
+                                        <FONT FACE="Arial, sans-serif"><FONT SIZE=2>282</FONT></FONT>
                                 </TD>
                                 <TD>
-                                        <P LANG="es-ES" CLASS="western"><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">P</SPAN></FONT></FONT><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">arte
-                                        del CUE</SPAN></FONT></FONT></P>
-                                </TD>
-                        </TR>
-                        <TR VALIGN=TOP>
-                                <TD>
-                                        <P LANG="es-ES" CLASS="western"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>3000282</FONT></FONT></P>
-                                </TD>
-                                <TD>
-                                        <P LANG="es-ES" CLASS="western"><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">CUE
-                                        completo sin considerar n&uacute;mero de anexo</SPAN></FONT></FONT></P>
+                                        <FONT SIZE=2><SPAN LANG="es-ES">P</SPAN></FONT><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">arte
+                                        del CUE</SPAN></FONT></FONT>
                                 </TD>
                         </TR>
                         <TR VALIGN=TOP>
                                 <TD>
-                                        <P LANG="es-ES" CLASS="western"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>300028200</FONT></FONT></P>
+                                        <FONT SIZE=2>3000282</FONT>
                                 </TD>
                                 <TD>
-                                        <P LANG="es-ES" CLASS="western"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>CUE
-                                        con n&uacute;mero de anexo</FONT></FONT></P>
+                                        <FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">CUE
+                                        completo sin considerar n&uacute;mero de anexo</SPAN></FONT></FONT>
+                                </TD>
+                        </TR>
+                        <TR VALIGN=TOP>
+                                <TD>
+                                        <FONT FACE="Arial, sans-serif"><FONT SIZE=2>300028200</FONT></FONT>
+                                </TD>
+                                <TD>
+                                        <FONT FACE="Arial, sans-serif"><FONT SIZE=2>CUE
+                                        con n&uacute;mero de anexo</FONT></FONT>
                                 </TD>
                         </TR>
                 </TABLE>
@@ -105,84 +105,84 @@ echo $html->css(array('jquery.loadmask'));
                 El buscador ignora may&uacute;sculas / min&uacute;sculas y letras
                 acentuadas para mejorar los resultados.</SPAN></FONT></FONT></P>
                 <P LANG="es-ES" CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">Ej</SPAN></FONT></FONT><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">emplos:</SPAN></FONT></FONT></P>
-                <TABLE BORDER=1 BORDERCOLOR="#BFBFBF" CELLPADDING=7 CELLSPACING=0>
+                <TABLE style="background-color: transparent;">
                         <COL >
                         <COL >
                         <TR VALIGN=TOP>
                                 <TD >
-                                        <P LANG="es-ES" CLASS="western"><FONT FACE="Arial, sans-serif"><FONT SIZE=2><B>Si
-                                        ingresa</B></FONT></FONT></P>
+                                        <FONT FACE="Arial, sans-serif"><FONT SIZE=2><B>Si
+                                        ingresa</B></FONT></FONT>
                                 </TD>
                                 <TD >
-                                        <P LANG="es-ES" CLASS="western"><FONT FACE="Arial, sans-serif"><FONT SIZE=2><B>Busca
-                                        por</B></FONT></FONT></P>
+                                        <FONT FACE="Arial, sans-serif"><FONT SIZE=2><B>Busca
+                                        por</B></FONT></FONT>
                                 </TD>
                         </TR>
                         <TR VALIGN=TOP>
                                 <TD>
-                                        <P LANG="es-ES" CLASS="western"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>escuela
-                                        t&eacute;cnica</FONT></FONT></P>
+                                        <FONT FACE="Arial, sans-serif"><FONT SIZE=2>escuela
+                                        t&eacute;cnica</FONT></FONT>
                                 </TD>
                                 <TD>
-                                        <P LANG="es-ES" CLASS="western"><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">T</SPAN></FONT></FONT><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">ipo
-                                        de instituci&oacute;n</SPAN></FONT></FONT></P>
-                                </TD>
-                        </TR>
-                        <TR VALIGN=TOP>
-                                <TD>
-                                        <P LANG="es-ES" CLASS="western"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>E.E.T.</FONT></FONT></P>
-                                </TD>
-                                <TD>
-                                        <P LANG="es-ES" CLASS="western"><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">T</SPAN></FONT></FONT><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">ipo
-                                        de instituci&oacute;n en formato abreviado</SPAN></FONT></FONT></P>
+                                        <FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">T</SPAN></FONT></FONT><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">ipo
+                                        de instituci&oacute;n</SPAN></FONT></FONT>
                                 </TD>
                         </TR>
                         <TR VALIGN=TOP>
                                 <TD>
-                                        <P LANG="es-ES" CLASS="western"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>EET</FONT></FONT></P>
+                                        <FONT FACE="Arial, sans-serif"><FONT SIZE=2>E.E.T.</FONT></FONT>
                                 </TD>
                                 <TD>
-                                        <P LANG="es-ES" CLASS="western"><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">T</SPAN></FONT></FONT><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">ipo
-                                        de instituci&oacute;n en formato abreviado sin puntos</SPAN></FONT></FONT></P>
-                                </TD>
-                        </TR>
-                        <TR VALIGN=TOP>
-                                <TD>
-                                        <P LANG="es-ES" CLASS="western"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>tecnica
-                                        18</FONT></FONT></P>
-                                </TD>
-                                <TD>
-                                        <P LANG="es-ES" CLASS="western"><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">T</SPAN></FONT></FONT><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">ipo
-                                        y n&uacute;mero de instituci&oacute;n</SPAN></FONT></FONT></P>
+                                        <FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">T</SPAN></FONT></FONT><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">ipo
+                                        de instituci&oacute;n en formato abreviado</SPAN></FONT></FONT>
                                 </TD>
                         </TR>
                         <TR VALIGN=TOP>
                                 <TD>
-                                        <P LANG="es-ES" CLASS="western"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>savio</FONT></FONT></P>
+                                        <FONT FACE="Arial, sans-serif"><FONT SIZE=2>EET</FONT></FONT>
                                 </TD>
                                 <TD>
-                                        <P LANG="es-ES" CLASS="western"><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">P</SPAN></FONT></FONT><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">arte
-                                        del nombre de la instituci&oacute;n</SPAN></FONT></FONT></P>
-                                </TD>
-                        </TR>
-                        <TR VALIGN=TOP>
-                                <TD>
-                                        <P LANG="es-ES" CLASS="western"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>T&eacute;cnica
-                                        Savio</FONT></FONT></P>
-                                </TD>
-                                <TD>
-                                        <P LANG="es-ES" CLASS="western"><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">T</SPAN></FONT></FONT><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">ipo
-                                        de instituci&oacute;n y parte del nombre</SPAN></FONT></FONT></P>
+                                        <FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">T</SPAN></FONT></FONT><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">ipo
+                                        de instituci&oacute;n en formato abreviado sin puntos</SPAN></FONT></FONT>
                                 </TD>
                         </TR>
                         <TR VALIGN=TOP>
                                 <TD>
-                                        <P LANG="es-ES" CLASS="western"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>escuela
-                                        tecnica general savio</FONT></FONT></P>
+                                        <FONT FACE="Arial, sans-serif"><FONT SIZE=2>tecnica
+                                        18</FONT></FONT>
                                 </TD>
                                 <TD>
-                                        <P LANG="es-ES" CLASS="western"><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">T</SPAN></FONT></FONT><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">ipo
-                                        de instituci&oacute;n y parte del nombre</SPAN></FONT></FONT></P>
+                                        <FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">T</SPAN></FONT></FONT><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">ipo
+                                        y n&uacute;mero de instituci&oacute;n</SPAN></FONT></FONT>
+                                </TD>
+                        </TR>
+                        <TR VALIGN=TOP>
+                                <TD>
+                                        <FONT FACE="Arial, sans-serif"><FONT SIZE=2>savio</FONT></FONT>
+                                </TD>
+                                <TD>
+                                        <FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">P</SPAN></FONT></FONT><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">arte
+                                        del nombre de la instituci&oacute;n</SPAN></FONT></FONT>
+                                </TD>
+                        </TR>
+                        <TR VALIGN=TOP>
+                                <TD>
+                                        <FONT FACE="Arial, sans-serif"><FONT SIZE=2>T&eacute;cnica
+                                        Savio</FONT></FONT>
+                                </TD>
+                                <TD>
+                                        <FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">T</SPAN></FONT></FONT><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">ipo
+                                        de instituci&oacute;n y parte del nombre</SPAN></FONT></FONT>
+                                </TD>
+                        </TR>
+                        <TR VALIGN=TOP>
+                                <TD>
+                                        <FONT FACE="Arial, sans-serif"><FONT SIZE=2>escuela
+                                        tecnica general savio</FONT></FONT>
+                                </TD>
+                                <TD>
+                                        <FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">T</SPAN></FONT></FONT><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">ipo
+                                        de instituci&oacute;n y parte del nombre</SPAN></FONT></FONT>
                                 </TD>
                         </TR>
                 </TABLE>
@@ -193,7 +193,8 @@ echo $html->css(array('jquery.loadmask'));
                 <P LANG="es-ES" CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">Si
                 necesita definir </SPAN></FONT></FONT><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">m&aacute;s
                 criterios (departamento, localidad, tipo de oferta del
-                establecimiento, etc.) realice una </SPAN></FONT></FONT><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES"><U>b&uacute;squeda
+                establecimiento, etc.) realice una </SPAN></FONT></FONT><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">
+                            <U>b&uacute;squeda
                 avanzada</U></SPAN></FONT></FONT><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="es-ES">.</SPAN></FONT></FONT></P>
                 
         </ul>

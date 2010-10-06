@@ -2105,8 +2105,8 @@ div.content{
 
 .help_head{
     height: 18px;
-    background-color: #EFEFEF !important;
-    border:2px solid #DFDFDF;
+    background-color: #DBEBF6 !important;
+    padding:2px;
     color:#40679D;
     font-weight:bolder;
     font-size: 9pt;
@@ -2115,14 +2115,18 @@ div.content{
 
 .help_body{
     width:90%;
-    background-color: #EFEFEF !important;
+    background-color: #F0F7FC !important;
     font-size: 8pt;
-    border:2px solid #DFDFDF;
     width:98%;
     margin:0px;
-    padding:3px;
+    padding:6px;
 }
 
 .help_body table{
     width:90%;
+}
+
+.help_body table tr td{
+    background-color: #DBEBF6;
+    color: #40679D;
 }

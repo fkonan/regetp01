@@ -106,7 +106,7 @@
 
         jQuery(document).bind('paste', autoSubmit);
 
-        iniciarTooltip();
+        //iniciarTooltip();
 
         jQuery('.help_body').show();
     });
