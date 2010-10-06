@@ -43,13 +43,13 @@
 
     function blockResultConsole(formData, jqForm, options) {
         jQuery('#consoleResultWrapper').mask('Buscando');
+        jQuery('.help_body').hide();
         return true;
     }
 
 // es el que envia el formulario de busqueda ajax
     function autoSubmit(){
         if(jQuery("#InstitCue").val().length > 1){
-              jQuery('.help_body').hide();
               clearTimeout(timerid);
               timerid = setTimeout(function() {
                   formElement.submit();
