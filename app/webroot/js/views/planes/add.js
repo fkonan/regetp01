@@ -10,7 +10,7 @@ function toggleTitulos(){
 }
 
 function toggleEstructuraPlan() {
-    if (jQuery('#PlanOfertaId :selected').val() != 2 && jQuery('#PlanOfertaId :selected').val() != 3) {
+    if (jQuery('#PlanOfertaId :selected').val() != 3 && jQuery('#PlanOfertaId').val() != 3) {
         jQuery('#PlanEstructura').hide();
     }
     else {

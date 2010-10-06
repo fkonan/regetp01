@@ -28,7 +28,7 @@ $cue_instit = $instit['cue'].$anexo;
         echo $form->input('id');
         echo $form->input('instit_id',array('type'=>'hidden'));
 
-        if (empty($this->data['Anio'])) 
+        if (empty($this->data['Anio']))
         {
             echo $form->input('oferta_id',array('empty'=>'Seleccione','onchange'=>'toggleTitulos();'));
         ?>
@@ -77,8 +77,13 @@ $cue_instit = $instit['cue'].$anexo;
         else {
             echo $form->input('oferta_id_aux',array('type'=>'select', 'empty'=>$this->data['Oferta']['name'], 'label'=>'Oferta', 'disabled'=>true));
             echo $form->input('oferta_id',array('type'=>'hidden'));
-
-            echo $form->input('estructura_plan_id',array('disabled'=>true));
+            ?>
+            <div id="PlanEstructura">
+            <?php
+                echo $form->input('estructura_plan_id',array('disabled'=>true));
+            ?>
+            </div>
+            <?php
         }
         
         $meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
