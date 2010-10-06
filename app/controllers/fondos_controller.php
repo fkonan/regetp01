@@ -126,6 +126,7 @@ class FondosController extends AppController {
             $instit = '';
             
             if (!empty($this->data)) {
+                //debug($this->data); die();
                 $this->Fondo->create();
 
                 if ($this->data['Fondo']['tipo'] == 'j') {
@@ -135,26 +136,19 @@ class FondosController extends AppController {
                 if ($id != null) {
                     // incluye id para editar
                     $this->data['Fondo']['id'] = $id;
-
-                    //Borrar los registros borrados
-                    $fondo_antes_actualizar = $this->Fondo->read(null, $id);
-                    
-                    foreach ($fondo_antes_actualizar['FondosLineasDeAccion'] as $linea_anterior) {
-                        $existe = false;
-                        foreach ($this->data['FondosLineasDeAccion'] as $linea_actual) {
-                            if($linea_anterior["lineas_de_accion_id"] == $linea_actual["lineas_de_accion_id"]){
-                                $existe = true;
-                            }
-                        }
-                        if(!$existe){
-                            $this->Fondo->FondosLineasDeAccion->Delete($linea_anterior["id"]);
-                        }
-                    }
                 }
 
-               
-                 
-                if ($this->Fondo->saveAll($this->data)) {
+                if ($this->Fondo->save($this->data)) {
+                    // guardar las lineas de accion
+                    if (!empty($this->data['Fondo']['FondosLineasDeAccion'])) {
+                        foreach ($this->data['Fondo']['FondosLineasDeAccion'] as &$linea) {
+                            $linea['fondo_id'] = $this->Fondo->id;
+                            //$linea['monto'] = str_replace('.', '', $linea['monto']);
+                        }
+
+                        $this->Fondo->FondosLineasDeAccion->saveAll($this->data['Fondo']['FondosLineasDeAccion']);
+                    }
+
                     $this->Session->setFlash(__('Se ha guardado el Fondo', true));
 
                     if (!empty($this->data['Fondo']['redirect'])) {

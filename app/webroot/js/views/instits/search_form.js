@@ -12,7 +12,7 @@
      *  Indica el ID del elemento <form id="">
      * @var string
      */
-    var formId = 'InstitSearchForm';
+    var formId = 'InstitAjaxSearchForm';
 
     /**
      *  es el elemento del formulario, se inicializa en en document.ready()
@@ -46,10 +46,8 @@
         return true;
     }
 
-// es el que envia el formulario de busqueda ajax
     function autoSubmit(){
         if(jQuery("#InstitCue").val().length > 1){
-              jQuery('.help_body').hide();
               clearTimeout(timerid);
               timerid = setTimeout(function() {
                   formElement.submit();
@@ -59,7 +57,7 @@
 
     function unblockResultConsole(responseText, statusText, xhr, $form)  {
         var redirigiendo = false;
-        if (jQuery('.listado li').size() == 1 && !isNaN(jQuery('#InstitCue').val())){
+        if (jQuery('.listado li').size() == 1){
             redirigiendo = true;
             jQuery('#consoleResultWrapper').mask('Encontrada');
             jQuery('.listado li A').click();
@@ -102,12 +100,8 @@
             }
         });
 
-        jQuery("#InstitJurisdiccionId").change(autoSubmit);
-
         jQuery(document).bind('paste', autoSubmit);
 
         iniciarTooltip();
-
-        jQuery('.help_body').show();
     });
 

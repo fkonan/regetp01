@@ -1,5 +1,4 @@
 <div class="fondos index">
-<br />
 <h2><?php __('Fondos');?></h2>
 <?php
 $trimestres=array(''=>'Todos','1'=>'1º','2'=>'2º','3'=>'3º','4'=>'4º');
@@ -36,8 +35,6 @@ $trimestres=array(''=>'Todos','1'=>'1º','2'=>'2º','3'=>'3º','4'=>'4º');
     echo $form->end('Buscar',array('style'=>'float:right'));
     ?>
 </div>
-<div><?php echo $html->link('Agregar nuevo Fondo', array('action' => 'add')); ?></div>
-<br />
 <p>
 <?php
 echo $paginator->counter(array(
@@ -69,10 +66,8 @@ foreach ($fondos as $fondo):
 	<tr<?php echo $class;?>>
 		<td>
 			<?php
-                        $armar_anexo = ($fondo['Instit']['anexo']<10)?'0'.$fondo['Instit']['anexo']:$fondo['Instit']['anexo'];
-                        $nombreInstit = "".($fondo['Instit']['cue']*100)+$fondo['Instit']['anexo']." - ". $fondo['Instit']['nombre'];
-                        if (@$fondo['Fondo']['instit_id'] > 0) {
-                            echo $nombreInstit;
+                        if (!empty($fondo['Instit']['nombre'])) {
+                            echo $fondo['Instit']['nombre'];
                         } else {
                         ?>
                             <i>Jurisdiccional</i>

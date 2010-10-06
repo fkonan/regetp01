@@ -801,12 +801,6 @@ class Plan extends AppModel {
                             ),
                         'contain' => array('EstructuraPlan'),
                     ));
-
-                    // Si el plan no es Secundario Tecnico
-                    // devolver siempre que la estructura es valida
-                    if ($ep['Plan']['oferta_id'] != 3) {
-                        return true;
-                    }
                     
                     // busco si hay anios que tengan otra estructura
                     $cant = $this->Anio->find('all', array(

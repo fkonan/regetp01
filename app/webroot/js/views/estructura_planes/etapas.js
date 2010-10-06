@@ -3,8 +3,7 @@ var etapas = new Array();
 function EtapaAdd() {
     var i = etapas.length;
     
-    etapa = { id: jQuery("#estructura_plan_anio_id").val(),
-              etapa_id: jQuery("#etapa_id").val(),
+    etapa = { etapa_id: jQuery("#etapa_id").val(),
               etapa_nombre: urlencode(jQuery('#etapa_id :selected').text()),
               edad_teorica: jQuery("#edad_teorica").val(),
               alias: urlencode(jQuery("#alias").val()),
@@ -41,8 +40,7 @@ function EtapaAdd() {
 function EtapaAddObject(etapa) {
     var i = etapas.length;
 
-    etapa = { id: etapa.id,
-              etapa_id: etapa.etapa_id,
+    etapa = { etapa_id: etapa.etapa_id,
               etapa_nombre: etapa.etapa_nombre,
               edad_teorica: etapa.edad_teorica,
               nro_anio: etapa.nro_anio,
@@ -75,7 +73,6 @@ function EtapaDel(id) {
 }
 
 function EtapaEdit(id) {
-    jQuery("#estructura_plan_anio_id").val(etapas[id]['id']);
     jQuery("#edad_teorica").val(etapas[id]['edad_teorica']);
     jQuery("#nro_anio").val(etapas[id]['nro_anio']);
     jQuery("#anio_escolaridad").val(etapas[id]['anio_escolaridad']);
@@ -88,8 +85,8 @@ function EtapaEdit(id) {
 
 function EtapaExists(etapa) {
     for (var j=0; j < etapas.length; j++) {
-        if ((etapas[j]['edad_teorica'] == etapa['edad_teorica'] ||
-            etapas[j]['nro_anio'] == etapa['nro_anio']) && etapas[j]['id'] != etapa['id']) {
+        if (etapas[j]['edad_teorica'] == etapa['edad_teorica'] ||
+            etapas[j]['nro_anio'] == etapa['nro_anio']) {
                 return 1;
         }
     }
@@ -101,15 +98,12 @@ function RefreshEtapasTree() {
     // refresca el arbol de etapas
     jQuery("#etapas-tree").html("");
     jQuery.each(etapas, function(key, value) {
-        jQuery("#etapas-tree").append("<li>"+urldecode(value['etapa_nombre'])+" "+value['nro_anio']+" [<a style='cursor:pointer;' onclick='javascript: EtapaEdit("+key+")'>editar</a>]</li>");
+        jQuery("#etapas-tree").append("<li>"+urldecode(value['etapa_nombre'])+" "+value['nro_anio']+" [<a style='cursor:pointer;' onclick='javascript: EtapaDel("+key+")'>-</a>] [<a style='cursor:pointer;' onclick='javascript: EtapaEdit("+key+")'>editar</a>]</li>");
     });
-    // eliminado:
-    // [<a style='cursor:pointer;' onclick='javascript: EtapaDel("+key+")'>-</a>]
 }
 
 function ResetForm() {
     // resetea el form
-    jQuery("#estructura_plan_anio_id").val('');
     jQuery("#edad_teorica").val('');
     jQuery("#nro_anio").val('');
     jQuery("#anio_escolaridad").val('');

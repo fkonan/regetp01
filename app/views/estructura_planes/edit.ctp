@@ -21,7 +21,6 @@
             echo $form->input('alias', array('id'=>'alias'));
 
             echo $form->input('anio_id', array('id'=>'anio_id', 'type'=>'hidden'));
-            echo $form->input('estructura_plan_anio_id', array('id'=>'estructura_plan_anio_id', 'type'=>'hidden'));
 
             echo $form->button('Agregar año', array('id'=>'add', 'onclick'=>'Javascript: EtapaAdd();'));
 	?>
@@ -30,10 +29,6 @@
     <ul id="etapas-tree">
     </ul>
 <br />
-<?php
-echo $form->input('etapas', array('id'=>'etapas', 'type'=>'hidden'));
-echo $form->end('Guardar');
-?>
 <br />
 <h2>Jurisdicciones con la estructura</h2>
 <ul>
@@ -47,6 +42,10 @@ foreach($jurisdicciones as $jurisdiccion){
 </ul>
 <br />
 <br />
+<?php
+echo $form->input('etapas', array('id'=>'etapas', 'type'=>'hidden'));
+echo $form->end('Guardar');
+?>
 </div>
 <div class="actions">
 	<ul>

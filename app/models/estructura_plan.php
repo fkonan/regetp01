@@ -19,7 +19,8 @@ class EstructuraPlan extends AppModel {
 			'Etapa' => array('className' => 'Etapa',
 								'foreignKey' => 'etapa_id',
 								'conditions' => '',
-								'fields' => ''
+								'fields' => '',
+								'order' => 'Etapa.orden'
 			)
 	);
 

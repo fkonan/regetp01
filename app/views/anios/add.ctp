@@ -17,20 +17,6 @@ if (empty($trayectosDisponibles)) {
     return 1;
 }
 
-$aniosData = array();
-$cont = 0;
-foreach($trayectosDisponibles['EstructuraPlanesAnio'] as $epa) {
-    $aniosData[$cont] = array(
-        'Anio' => array(
-            'matricula' => 0,
-            'secciones' => 0,
-            'hs_taller' => 0,
-            'estructura_planes_anio_id' => $epa['id'],
-        ),
-        'EstructuraPlanesAnio' => $epa,
-    );
-    $cont++;
-}
 
 // me armo el array de opciones para el elemento que renderiza el recuadro de estructura
 $trayectosData = array(
@@ -43,9 +29,6 @@ $trayectosData = array(
                         'anios' => $trayectosDisponibles['EstructuraPlanesAnio'],
                 )
         ),
-        'ciclos' => array(
-            0 => $aniosData,
-        )
 );
 
 echo $this->element('planes_view_tabla_st', array('trayectosData'=>$trayectosData));

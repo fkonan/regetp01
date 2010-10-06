@@ -31,7 +31,7 @@ echo $html->css('jquery.autocomplete.css');
         if (!empty($this->data['LineasDeAccion'])) {
             foreach ($this->data['LineasDeAccion'] as $linea) {
             ?>
-                confirmarLinea('', <?=$linea['id']?>, '<?=$linea['description']?>', jQuery.mask.string('<?=$linea['FondosLineasDeAccion']['monto']?>', "integer"),<?=$linea['FondosLineasDeAccion']['id']?>);
+                confirmarLinea('', <?=$linea['id']?>, '<?=$linea['description']?>', jQuery.mask.string('<?=$linea['FondosLineasDeAccion']['monto']?>', "integer"));
             <?php }
         }
         ?>
@@ -99,44 +99,37 @@ echo $html->css('jquery.autocomplete.css');
 
     function agregarNuevaLinea(linea_id, monto)
     {
-            var confirmado = false;
-
             nueva_linea = jQuery(".lista_lineas dl #detalle .nueva_linea").first();
             if(nueva_linea.length != 0){
-                confirmado = confirmarLinea(nueva_linea);
-            }
-            else{
-                confirmado = true;
+                confirmarLinea(nueva_linea);
             }
 
-            if(confirmado){
-                html = "<span class='nueva_linea' style='display:none'>" +
-                            "<span class='nueva_linea_in'>" +
-                                "<dt onmouseout='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' onmouseover='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' class='' style='height: 30px;'>" +
-                                    "<span>" +
-                                        '<?php echo $html->image('/img/check.gif', array('id'=>'check_linea','alt' => 'Confirmar', 'onclick'=>'confirmarLinea(jQuery(this).parent().parent().parent().parent());'))?>' +
-                                        '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().parent().remove(); ActualizarTotal(); actualizarComboLineasDeAccion();'))?>' +
-                                    "</span>" +
-                                    "<span>" +
-                                        "<select class='linea_de_accion_id' style='width:400px'>";
-                jQuery.each(jQuery(lineasDeAccion), function(key, value) {
-                    if (value) {
-                        html += '<option value="'+key+'">'+value+'</option>';
-                    }
-                });
-                html +=                "</select>" +
-                                    "</span>" +
-                                "</dt>" +
-                                "<dd><input class='monto' alt='decimal' style='margin-top:-14px;width:100px' type='text' onkeypress ='confirmarLineaConEnter(this,event);'/></dd>" +
-                            "</span>" +
-                        "</span>";
-               jQuery(".lista_lineas dl #detalle").append(html);
-               jQuery(".lista_lineas .nueva_linea").show();
-               jQuery(".lista_lineas dl #detalle .nueva_linea .linea_de_accion_id").focus();
+            html = "<span class='nueva_linea' style='display:none'>" +
+                        "<span class='nueva_linea_in'>" +
+                            "<dt onmouseout='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' onmouseover='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' class='' style='height: 30px;'>" +
+                                "<span>" +
+                                    '<?php echo $html->image('/img/check.gif', array('id'=>'check_linea','alt' => 'Confirmar', 'onclick'=>'confirmarLinea(jQuery(this).parent().parent().parent().parent());'))?>' +
+                                    '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().parent().remove(); ActualizarTotal(); actualizarComboLineasDeAccion();'))?>' +
+                                "</span>" +
+                                "<span>" +
+                                    "<select class='linea_de_accion_id' style='width:400px'>";
+            jQuery.each(jQuery(lineasDeAccion), function(key, value) {
+                if (value) {
+                    html += '<option value="'+key+'">'+value+'</option>';
+                }
+            });
+            html +=                "</select>" +
+                                "</span>" +
+                            "</dt>" +
+                            "<dd><input class='monto' alt='decimal' style='margin-top:-14px;width:100px' type='text' onkeypress ='confirmarLineaConEnter(this,event);'/></dd>" +
+                        "</span>" +
+                    "</span>";
+           jQuery(".lista_lineas dl #detalle").append(html);
+           jQuery(".lista_lineas .nueva_linea").show();
+           jQuery(".lista_lineas dl #detalle .nueva_linea .linea_de_accion_id").focus();
 
-               jQuery(".lista_lineas dl #detalle .nueva_linea .monto").setMask("integer");
-           }
-    }
+           jQuery(".lista_lineas dl #detalle .nueva_linea .monto").setMask("integer");
+        }
 
     function format(instit) {
                 return instit.nombre + " [" + instit.cue + "]";
@@ -155,6 +148,7 @@ echo $html->css('jquery.autocomplete.css');
 
     function SumarLinasDeAccionMontos() {
         var total = 0;
+        var valor_procesado = 0;
         jQuery.each(jQuery('.monto'), function(key, value) {
             jQuery(value).val(replaceAll(jQuery(value).val(),".",""));
             total += parseFloat(jQuery(value).val());
@@ -342,9 +336,8 @@ echo $html->css('jquery.autocomplete.css');
 <script type="text/javascript">
     var i = 0;
     
-    function confirmarLinea(element, linea_de_accion_id, linea_de_accion, monto,id){
-        var confirmado = false;
-        
+    function confirmarLinea(element, linea_de_accion_id, linea_de_accion, monto){
+
         uniqid = jQuery(element).parent('.linea_confirmada').attr("order");
         linea_id = '';
 
@@ -369,13 +362,7 @@ echo $html->css('jquery.autocomplete.css');
             lineaMonto = jQuery(element).find(".monto").val();
         }
 
-        if (!id) {
-            id = 0;
-        }
-
         if(lineaAccionId != 0 && lineaMonto != ""){
-            confirmado = true;
-            
             if(uniqid == undefined){
                 uniqid = new Date().getTime();
                 pre = "<div class='linea_confirmada' order='"+ uniqid  + "'>";
@@ -401,9 +388,8 @@ echo $html->css('jquery.autocomplete.css');
                     "<dd>" +
                     lineaMonto +
                     "</dd>" +
-                    //"<input class='linea_id' type='hidden' name='data[FondosLineasDeAccion]["+i+"][id]' value='"+ id +"'>" +
-                    "<input class='linea_id' type='hidden' name='data[FondosLineasDeAccion]["+i+"][lineas_de_accion_id]' value='"+ lineaAccionId +"'>" +
-                    "<input class='monto' type='hidden' name='data[FondosLineasDeAccion]["+i+"][monto]' value='" + lineaMonto + "'>" +
+                    "<input class='linea_id' type='hidden' name='data[Fondo][FondosLineasDeAccion]["+i+"][lineas_de_accion_id]' value='"+ lineaAccionId +"'>" +
+                    "<input class='monto' type='hidden' name='data[Fondo][FondosLineasDeAccion]["+i+"][monto]' value='" + lineaMonto + "'>" +
                     post;
 
             jQuery(".lista_lineas dl .nueva_linea").remove();
@@ -414,7 +400,6 @@ echo $html->css('jquery.autocomplete.css');
             // actualizar total
             ActualizarTotal();
             actualizarComboLineasDeAccion();
-
         }
         else{
             
@@ -455,8 +440,8 @@ echo $html->css('jquery.autocomplete.css');
                                 "</span>" +
                             "</dt>" +
                             "<dd><input class='monto' style='margin-top:-14px;width:100px' type='text' value='"+ monto +"' onkeypress ='confirmarLineaConEnter(this,event);'/></dd>" +
-                            "<input class='linea_id' type='hidden' name='data[FondosLineasDeAccion][][lineas_de_accion_id]' value='"+ linea_id +"'>" +
-                            "<input class='monto' type='hidden' name='data[FondosLineasDeAccion][][monto]' value='" + monto + "'>" +
+                            "<input class='linea_id' type='hidden' name='data[Fondo][FondosLineasDeAccion][][lineas_de_accion_id]' value='"+ linea_id +"'>" +
+                            "<input class='monto' type='hidden' name='data[Fondo][FondosLineasDeAccion][][monto]' value='" + monto + "'>" +
                         "</span>" +
                     "</span>";
 

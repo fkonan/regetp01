@@ -82,6 +82,7 @@
 ////////////////////////////////////////////////////////////
 
 
+
 $esEditable = false;
 if (!empty($trayectosData['editable'])) {
     if ($trayectosData['editable']) {
@@ -92,12 +93,6 @@ if (!empty($trayectosData['editable'])) {
 // Inicio del HTML a mostrar
 echo $html->css('element_sectec_trayectos','stylesheet', array('media'=>'screen'));
 
-
-
-/*****************************************
- *
- * CARGO LOS DEFAULTS
- */
 if (empty($trayectosData)) {
     debug("la variable trayectosData es necesaria para generar la maqueta de la estructura de éste elemento.");
 }
@@ -107,11 +102,6 @@ if (!empty($trayectosData['form_action'])) {
 } else {
     $form_action = 'add';
 }
-
-/*****************************************/
-
-
-
 
 // lo inicializo con el ciclo actual pero sin años dato
 $ciclosData = array(date('Y',strtotime('now'))=>array());
@@ -124,45 +114,13 @@ $estructura_plan_id = $trayectosData['estructura'][0]['estructura_plan_id'];
 $anios = $trayectosData['estructura'][0]['anios'];
 
 
-
-/**********************************************************************/
-// VALIDACION DE ESTRUCTURA PARA EL CICLO
-// 
-// ciclos que tienen anios que no corresponden a la estructura del Plan
-$ciclos_erroneos = array();
-foreach($trayectosData['ciclos'] as $ciclo=>$anios) {
-    foreach($anios as $anio) {
-        if ($estructura_plan_id !=  $anio['EstructuraPlanesAnio']['estructura_plan_id']) {
-            $ciclos_erroneos[] = $ciclo;
-        }
-    }
-}
-
-// cuando estoy dando de alta nuevos anios el ciclo no esta seleccionado por lo tanto hay que hacer esta verificacion
-if (!empty($ciclo_seleccionado)) {
-    // solo valido cuando se esta editando, quiero saber cual es el ciclo em el que estoy
-    // y al mismo tiempo validar la estructura, (verificar que coincida con lo indicado en el plan)
-    if (in_array($ciclo_seleccionado, $ciclos_erroneos)) {
-        ?>
-        <p class="msg-atencion" style="padding: 30px 20px;">
-            La estructura "<?php echo $trayectosData['estructura'][0]['title']?>" para este ciclo no es válida.
-        </p>
-        <?php
-        return;
-    }
-}
-/**********************************************************************/
-
-
-
-
 echo $form->create('Anio', array('action'=>$form_action));
 
 echo $form->hidden('Info.estructura_plan_id', array('value'=>$estructura_plan_id));
 echo $form->hidden('Info.plan_id', array('value'=>$plan_id));
 ?>
-<span><?php echo $trayectosData['estructura'][0]['title']?></span>
 <table border="2" cellpadding="2" cellspacing="0">
+    <thead><?php echo $trayectosData['estructura'][0]['title']?></thead>
     <tr>
         <th>
             <?php
@@ -194,21 +152,17 @@ echo $form->hidden('Info.plan_id', array('value'=>$plan_id));
             // busco el año dato que tenga esta estructura
             foreach ($cicloLectivoAnios as $anioDato) {
                 // muestro los datos para esa estructura que estoy recorriendo
-                if ($a['EstructuraPlanesAnio']['id'] == $anioDato['Anio']['estructura_planes_anio_id']) {
+                if ($a['id'] == $anioDato['Anio']['estructura_planes_anio_id']) {
                     $encontrado = true;
                     ?>
     <tr>
-        <td><?php echo $a['EstructuraPlanesAnio']["nro_anio"].'º'?></td>
+        <td><?php echo $a["nro_anio"].'º'?></td>
                         <?php
                         echo $form->hidden($j.'.estructura_planes_anio_id',array(
                         'value'=>$anioDato['Anio']['estructura_planes_anio_id']));
 
-                        // ver si es un ADD o un EDIT
-                        if (!empty($anioDato['Anio']['id'])) {
-                            echo $form->hidden($j.'.id',array(
-                                'label'=>false,
-                                'value'=> $anioDato['Anio']['id']));
-                        }
+                        echo $form->hidden($j.'.id',array('label'=>false,
+                        'value'=> $anioDato['Anio']['id']));
 
                         echo '<td>'.$form->input($j.'.matricula',array(
                                 'label'=>false,
@@ -233,9 +187,9 @@ echo $form->hidden('Info.plan_id', array('value'=>$plan_id));
             if (!$encontrado) {
                 ?>
      <tr>
-        <td><?php echo $a['EstructuraPlanesAnio']["nro_anio"].'º'?></td>
+        <td><?php echo $a["nro_anio"].'º'?></td>
         <?php
-                echo $form->hidden($j.'.estructura_planes_anio_id',array('value'=>$a['EstructuraPlanesAnio']['id']));
+                echo $form->hidden($j.'.estructura_planes_anio_id',array('value'=>$a['id']));
                 echo '<td>'.$form->input($j.'.matricula',array('label'=>false, 'value'=>0)).'</td>';
                 echo '<td>'.$form->input($j.'.secciones',array('label'=>false, 'value'=>0)).'</td>';
                 echo '<td>'.$form->input($j.'.hs_taller',array('label'=>false, 'value'=>0)).'</td>';

@@ -89,49 +89,18 @@ class AniosController extends AppController {
         }
 
 
-        function addSecTec($plan_id = null,$duracion_hs = null) {
+	function add($plan_id = null,$duracion_hs = null) {
             if (!empty($this->data['Info']['plan_id'])) {
                     $plan_id = $this->data['Info']['plan_id'];
             }
-
+            
             $estructuraPlanId = $this->Anio->Plan->getEstructuraSugerida($plan_id);
-
+            
             $trayectosDisponibles = $this->Anio->EstructuraPlanesAnio->EstructuraPlan->find('first', array(
                 'contain'=> array('EstructuraPlanesAnio'=>array('order'=>array('EstructuraPlanesAnio.edad_teorica'))),
                 'conditions'=> array(
                     'EstructuraPlan.id'=>$estructuraPlanId),
-            ));
-
-            /**
-             * esto es para generar una vista distinta
-             * para los años que son de una oferta FP
-             */
-            $this->Anio->Plan->recursive = -1;
-            $plan   = $this->Anio->Plan->find('all',array(
-                'conditions' => array('Plan.id'=>$plan_id))
-                    );
-
-            $this->set('trayectosDisponibles',$trayectosDisponibles);
-            $this->set('plan_id',$plan_id);
-            $this->set('duracion_hs',$duracion_hs);
-
-            // solo los que aun no haya agregado informacion
-            $ciclosUsados = $this->Anio->ciclosUsados($plan_id);
-            
-            $ciclos = $this->Anio->Ciclo->find('list', array(
-                'conditions'=>array(
-                    'Ciclo.id NOT' => $ciclosUsados,
-                )));
-
-            $etapas = $this->Anio->Etapa->find('list');
-            $this->set(compact('planes', 'ciclos', 'etapas'));
-        }
-
-
-	function add($plan_id = null,$duracion_hs = null) {
-            if (!empty($this->data['Info']['plan_id'])) {
-                    $plan_id = $this->data['Info']['plan_id'];
-            }         
+            ));            
 		
             /**
              * esto es para generar una vista distinta
@@ -148,21 +117,46 @@ class AniosController extends AppController {
                 case 5: //SEC NO TECNICO
                     $viewToRender = '/anios/add_it';
                     break;
+                case 3: //MT
+                    $viewToRender = '/anios/add';
+                    break;
                 case 6: //SUP NO TECNICO
                 case 4: //SNU
                     $viewToRender = '/anios/add_snu';
                     break;
-                default: // si no va con ninguno mostrar error
-                    $this->Session->setFlash('Oferta no válida');
-                    $this->redirect('/');
+                default: // si no va con ninguno mostrar el de MT
+                    $viewToRender = '/anios/add';
                     break;
             endswitch;
+
+            $this->set('trayectosDisponibles',$trayectosDisponibles);
             $this->set('plan_id',$plan_id);
             $this->set('duracion_hs',$duracion_hs);
 
-            $ciclos = $this->Anio->Ciclo->find('list');            
-            $etapas = $this->Anio->Etapa->find('list');
+            $ciclosTodos = $this->Anio->Ciclo->find('list');
+            // solo los que aun no haya agregado informacion
+            $ciclosUsados = $this->Anio->find('all',array(
+                    'fields'=>array('Anio.ciclo_id'),
+                    'conditions'=>array(
+                        //'Anio.ciclo_id NOT'=>$ciclosTodos,
+                        'Anio.plan_id'=>$plan_id),
+                    'group'=>array('Anio.ciclo_id', 'Anio.plan_id'),
+                    'order'=>array('Anio.ciclo_id'),
+                        ));
+            $ciclosTmp = array();
+            foreach ($ciclosUsados as $c) {
+                $ciclosTmp[] = $c['Anio']['ciclo_id'];
+            }
 
+            if(!empty($ciclosTmp)){
+                $ciclos = $this->Anio->Ciclo->find('list', array(
+                    'conditions'=>array(array('NOT'=>array('Ciclo.id'=>$ciclosTmp)))));
+            }
+            else{
+                $ciclos = $this->Anio->Ciclo->find('list');
+            }
+            
+            $etapas = $this->Anio->Etapa->find('list');
             $this->set(compact('planes', 'ciclos', 'etapas'));
             $this->render($viewToRender);
 	}
@@ -256,7 +250,6 @@ class AniosController extends AppController {
                     'conditions'=>array('Anio.plan_id'=>$plan_id,
                                         'Anio.ciclo_id'=>$ciclo_id
                                        ),
-                    'contain' => array('EstructuraPlanesAnio.EstructuraPlan'),
                     'order' => 'Anio.anio',
                     ));
                 $this->data = $aPlan;
@@ -267,8 +260,7 @@ class AniosController extends AppController {
             $trayectosDisponibles = $this->Anio->EstructuraPlanesAnio->EstructuraPlan->find('first', array(
                 'contain'=> array(
                     'EstructuraPlanesAnio'=>array(
-                        'order'=>array('EstructuraPlanesAnio.edad_teorica')
-                        )),
+                        'order'=>array('EstructuraPlanesAnio.edad_teorica'))),
                 'conditions'=> array(
                     'EstructuraPlan.id'=>$estructuraPlanId),
             ));
@@ -278,8 +270,7 @@ class AniosController extends AppController {
              * para los años que son de una oferta FP
              */
             $this->Anio->Plan->recursive = -1;
-            $plan   = $this->Anio->Plan->find('all',array(
-                'conditions'=>array('Plan.id'=>$plan_id)));
+            $plan   = $this->Anio->Plan->find('all',array('conditions'=>array('Plan.id'=>$plan_id)));
             switch ($plan[0]['Plan']['oferta_id']):
                 case 1://es un FP, asique mostrar la vista de años para FP
                 case 7://es CL, asique mostrar la vista de años para FP
@@ -290,7 +281,7 @@ class AniosController extends AppController {
                     break;
                 case 3: //MT
                 case 5: //SEC NO TECNICO
-                    $viewToRender = '/anios/edit_sectec';
+                    $viewToRender = '/anios/edit_estructurados';
                     break;
                 case 6: //SUP NO TECNICO
                 case 4: //SNU
@@ -301,7 +292,6 @@ class AniosController extends AppController {
                     break;
             endswitch;
 
-            
             $this->set('ciclo_seleccionado', $aPlan['Anio']['ciclo_id']);
             $this->set('trayectosDisponibles',$trayectosDisponibles);
             $this->set('plan_id',$plan_id);

@@ -80,7 +80,7 @@
  *
  */
 
-debug($trayectosData);
+
 
 ///////////////////////////////////////////////////////////////
 //  Definicion de algunas funciones utilizadas

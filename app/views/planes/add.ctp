@@ -1,6 +1,16 @@
 <?echo $javascript->link('jquery.loadmask.min');?>
-<?echo $javascript->link('views/planes/add');?>
-<script type="text/javascript">   
+<script type="text/javascript">
+    function toggleTitulos(){
+         if (jQuery('#PlanOfertaId').val() != '') {
+            jQuery('#divPlanTituloId').show();
+        }
+        else {
+             jQuery('#divPlanTituloId').hide();
+        }
+
+        toggleEstructuraPlan();
+    }
+    
     jQuery(document).ready(function () {
         toggleTitulos();
         toggleEstructuraPlan();
@@ -10,6 +20,15 @@
             jQuery("div[estructura_plan_id=" + jQuery(this).val() + "]").show();
         });
     });
+
+    function toggleEstructuraPlan() {
+        if (jQuery('#PlanOfertaId :selected').val() != 2 && jQuery('#PlanOfertaId :selected').val() != 3) {
+            jQuery('#PlanEstructura').hide();
+        }
+        else {
+            jQuery('#PlanEstructura').show();
+        }
+    }
 </script>
 
 <h1>Nueva Oferta Educativa</h1>
@@ -77,7 +96,6 @@ $cue_instit = $instit['cue'].$anexo;
                 array(
                     'empty'=>'Seleccione',
                     'label'=> 'Título de Referencia',
-                    'style'=>'max-width: 550px;',
                     'after'=> $meter.'<br /><cite>Seleccione primero una oferta.</cite>',
                     'div'=>array('id'=>'divPlanTituloId')));
                 echo $ajax->observeField(

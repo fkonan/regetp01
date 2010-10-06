@@ -137,9 +137,7 @@ $cue_instit = $instit['cue'].$anexo;
 </div>
 
 <h2>Datos Históricos de Matrícula</h2>
-	<?  if(isset($plan_tiene_estructura_valida))
-            echo ($plan_tiene_estructura_valida !== true)?'<p class="acl acl-editores acl-administradores acl-desarrolladores error">La estructura del Plan es inválida, ejecute el depurador'.$html->link(' haciendo click aquí.','/depuradorPlanes/index/'.$plan['Plan']['instit_id']).'</p>':'';
-
+	<?        
             /**
              *  Esto renderiza el Element de acuerdo a lo que el controlador diga.
              *  SI el plan es FP, va agenerar una tabla para mostrar FP
@@ -156,10 +154,9 @@ $cue_instit = $instit['cue'].$anexo;
 <?php //echo $html->link(__('Agregar Nuevo Año', true), array('controller'=> 'anios', 'action'=>'add/'.$plan['Plan']['id']));?>
         <li>
             <?php
-            $action = $plan['Plan']['oferta_id'] == 3 ? 'addSecTec' : 'add';
             echo $html->link(
                         'Agregar Datos',
-                        "/anios/$action/".$plan['Plan']['id'].'/'.$plan['Plan']['duracion_anios'],
+                        '/anios/add/'.$plan['Plan']['id'].'/'.$plan['Plan']['duracion_anios'],
                         array('class'=>'ajax-link')
                     );
             ?>
