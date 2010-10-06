@@ -48,8 +48,8 @@
     }
 
 // es el que envia el formulario de busqueda ajax
-    function autoSubmit(){
-        if(jQuery("#InstitCue").val().length > 1){
+    function autoSubmit(forzar){
+        if(jQuery("#InstitCue").val().length > 1 || forzar){
               clearTimeout(timerid);
               timerid = setTimeout(function() {
                   formElement.submit();
@@ -104,7 +104,7 @@
 
         jQuery("#InstitJurisdiccionId").change(autoSubmit);
 
-        jQuery(document).bind('paste', autoSubmit);
+        jQuery("#InstitCue").bind('paste', function(e){autoSubmit(true)});
 
         //iniciarTooltip();
 
