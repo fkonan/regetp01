@@ -121,7 +121,7 @@ if (!empty($trayectosData['ciclos'])) {
 
 
 $estructura_plan_id = $trayectosData['estructura'][0]['estructura_plan_id'];
-$anios = $trayectosData['estructura'][0]['anios'];
+$anios_estr = $trayectosData['estructura'][0]['anios'];
 
 
 
@@ -185,20 +185,22 @@ echo $form->hidden('Info.plan_id', array('value'=>$plan_id));
     $i = 0;
     $j = 0;
 
+    //debug($ciclosData);
+    //debug($anios_estr);
 
     // recorro los ciclos lectivos, por lo general va a haber 1 solo, sobre todo si estoy editando
     foreach ($ciclosData as $ciclo_seleccionado=>$cicloLectivoAnios) {
         // recorro la estruictura estructura_planes_anio para mostrar cada año
-        foreach($anios as $a) {
+        foreach($anios_estr as $a) {
             $encontrado = false;
             // busco el año dato que tenga esta estructura
             foreach ($cicloLectivoAnios as $anioDato) {
                 // muestro los datos para esa estructura que estoy recorriendo
-                if ($a['EstructuraPlanesAnio']['id'] == $anioDato['Anio']['estructura_planes_anio_id']) {
+                if ($a['id'] == $anioDato['Anio']['estructura_planes_anio_id']) {
                     $encontrado = true;
                     ?>
     <tr>
-        <td><?php echo $a['EstructuraPlanesAnio']["nro_anio"].'º'?></td>
+        <td><?php echo $a["nro_anio"].'º'?></td>
                         <?php
                         echo $form->hidden($j.'.estructura_planes_anio_id',array(
                         'value'=>$anioDato['Anio']['estructura_planes_anio_id']));
@@ -233,9 +235,9 @@ echo $form->hidden('Info.plan_id', array('value'=>$plan_id));
             if (!$encontrado) {
                 ?>
      <tr>
-        <td><?php echo $a['EstructuraPlanesAnio']["nro_anio"].'º'?></td>
+        <td><?php echo $a["nro_anio"].'º'?></td>
         <?php
-                echo $form->hidden($j.'.estructura_planes_anio_id',array('value'=>$a['EstructuraPlanesAnio']['id']));
+                echo $form->hidden($j.'.estructura_planes_anio_id',array('value'=>$a['id']));
                 echo '<td>'.$form->input($j.'.matricula',array('label'=>false, 'value'=>0)).'</td>';
                 echo '<td>'.$form->input($j.'.secciones',array('label'=>false, 'value'=>0)).'</td>';
                 echo '<td>'.$form->input($j.'.hs_taller',array('label'=>false, 'value'=>0)).'</td>';
