@@ -850,7 +850,7 @@ class Instit extends AppModel {
   		) { 
 			
 			$conditions = array("localidad_id" => $this->data['Instit']['localidad_id'], 
-								"lower(direccion)  SIMILAR TO ?" => $this->convertir_para_busqueda_avanzada($this->data['Instit']['direccion']));
+								"lower(direccion)  SIMILAR TO ?" => convertir_para_busqueda_avanzada($this->data['Instit']['direccion']));
 			
 			$txtError = 'Hay una institución con la misma dirección en ésta localidad';
 			if ( !empty($this->data['Instit']['jurisdiccion_id'])) {
@@ -884,7 +884,7 @@ class Instit extends AppModel {
   		if( !empty($this->data['Instit']['nombre']) && 
   			!empty($this->data['Instit']['localidad_id']))
 		{
-			$nombre = $this->convertir_para_busqueda_avanzada($this->data['Instit']['nombre']);
+			$nombre = convertir_para_busqueda_avanzada($this->data['Instit']['nombre']);
 		
 			$conditions = array("lower(nombre)  SIMILAR TO ?" => $nombre,
 								"localidad_id" => $this->data['Instit']['localidad_id']);
@@ -916,9 +916,9 @@ class Instit extends AppModel {
 			!empty($this->data['Instit']['nroinstit']) &&
 			!empty($this->data['Instit']['tipoinstit_id'])
 			){
-			$nombre = $this->convertir_para_busqueda_avanzada($this->data['Instit']['nombre']);
+			$nombre = convertir_para_busqueda_avanzada($this->data['Instit']['nombre']);
 			$conditions = array("lower(nombre)  SIMILAR TO ?" => $nombre,
-								"lower(nroinstit)  SIMILAR TO ?" => $this->convertir_para_busqueda_avanzada($this->data['Instit']['nroinstit']),
+								"lower(nroinstit)  SIMILAR TO ?" => convertir_para_busqueda_avanzada($this->data['Instit']['nroinstit']),
 								"tipoinstit_id" => $this->data['Instit']['tipoinstit_id']);
 			
 			if (!empty($this->data['Instit']['id'])) {
@@ -949,7 +949,7 @@ class Instit extends AppModel {
 			!empty($this->data['Instit']['tipoinstit_id']))
 		{
 			$conditions = array("Instit.localidad_id" => $this->data['Instit']['localidad_id'],
-								"lower(nroinstit)  SIMILAR TO ?" => $this->convertir_para_busqueda_avanzada($this->data['Instit']['nroinstit']),
+								"lower(nroinstit)  SIMILAR TO ?" => convertir_para_busqueda_avanzada($this->data['Instit']['nroinstit']),
 								"tipoinstit_id" => $this->data['Instit']['tipoinstit_id']);
 			
 			if (!empty($this->data['Instit']['id'])){

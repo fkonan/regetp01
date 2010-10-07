@@ -63,13 +63,12 @@ class InstitsController extends AppController {
         if (!empty($this->data)) {
             // si ingrese el formulario por primera vez, y la esta variable no esta setteada
             // que me busque los similares
-            if(!isset($this->data['Instit']['force_save']) || $this->data['Instit']['force_save'] == 0) {
+            if(empty($this->data['Instit']['force_save'])) {
                 $similares = $this->Instit->getSimilars($this->data);
             }
 
             if(count($similares) == 0) {
                 $this->Instit->create();
-
                 if ($this->Instit->save($this->data)) {
                     $this->Session->setFlash(__('Se ha guardado la Institución correctamente', true));
                     $this->redirect(array('action'=>'view/'.$this->Instit->id));
@@ -86,7 +85,7 @@ class InstitsController extends AppController {
         $dependencias = $this->Instit->Dependencia->find('list');
 
         $v_condiciones = array();
-        if($this->data['Instit']['jurisdiccion_id'] != '' || $this->data['Instit']['jurisdiccion_id'] != 0) {
+        if(!empty($this->data['Instit']['jurisdiccion_id'])) {
             $v_condiciones = array('jurisdiccion_id'=>$this->data['Instit']['jurisdiccion_id']);
         }
 
@@ -96,7 +95,7 @@ class InstitsController extends AppController {
         $jurisdicciones = $this->Instit->Jurisdiccion->find('list',array('order'=>'name'));
 
         $v_condiciones = array();
-        if(($this->data['Instit']['departamento_id'] != '') || ($this->data['Instit']['departamento_id'] != 0)) {
+        if(!empty($this->data['Instit']['departamento_id'])) {
             $v_condiciones = array('departamento_id'=>$this->data['Instit']['departamento_id']);
         }
 
