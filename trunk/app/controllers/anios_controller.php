@@ -226,7 +226,8 @@ class AniosController extends AppController {
                 'conditions'=>array(
                     'Anio.plan_id'=>$plan_id,
                     'Anio.ciclo_id'=>$aPlan['Anio']['ciclo_id']
-                    )
+                    ),
+                'order' => array('EstructuraPlanesAnio.anio_escolaridad')
                 ));
 
 
