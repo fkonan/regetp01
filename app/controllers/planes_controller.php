@@ -225,17 +225,17 @@ class PlanesController extends AppController {
                              break;
                     case 2: //IT
                     case 5: //SNU
+                           $planes_view_tabla['element'] = 'planes_view_tabla_normal';
+                           break;
                     case 3: //MT, SEC
-                    default:
-                            $trayectosData = $this->Plan->getEstructuraOfertaYDatos();
-                            if (!empty($trayectosData)){
-                               $planes_view_tabla['element'] = 'planes_view_tabla_sectec_trayectos';
-                               $planes_view_tabla['options'] = array('trayectosData'=>$this->Plan->getEstructuraOfertaYDatos());
-                            } else {
-                               $planes_view_tabla['element'] = 'planes_view_tabla_normal';
-                            }
+                        // 'planes_view_tabla_st_old' es una solucion temporal,
+                        // vamos atener que usar el elemento $planes_view_tabla['element'] = 'planes_view_tabla_st' en un futuro
+                            $planes_view_tabla['element'] = 'planes_view_tabla_st_old';
                             $this->set('plan_tiene_estructura_valida', $this->Plan->estructuraValida($id));
                             break;
+                    default:
+                        $this->Session->setFlash('ID inválido para la oferta_id del Plan');
+                        $this->redirect('/');
             endswitch;
 
             $this->set('planes_view_tabla',$planes_view_tabla);

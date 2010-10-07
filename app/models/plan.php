@@ -738,8 +738,7 @@ class Plan extends AppModel {
                             ),
                         )),
                 );
-                //return $trayectosData;
-                return null;
+                return $trayectosData;
         }
 
 
