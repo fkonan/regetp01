@@ -52,6 +52,7 @@
                 <?php
                 $tot_matricula = 0;
                 $tot_secciones = 0;
+                
                 foreach ($ciclo as $anio):
                     $class = null;
                     if ($i++ % 2 == 0) {
@@ -60,7 +61,7 @@
                     ?>
 
         <tr id="fila_plan_<?= $anio['ciclo_id'].'_'.$anio['anio']?>" <?php echo $class;?>>
-            <td><?php echo $anio['anio']."º";?></td>
+            <td><?php echo $anio['EstructuraPlanesAnio']['nro_anio']."º";?></td>
             <td><?php echo $this->requestAction('/Etapas/dame_nombre/'.$anio['etapa_id']);?></td>
             <td><?php echo  empty($anio['matricula'])?'-':$anio['matricula'];
             $tot_matricula += $anio['matricula']; ?></td>

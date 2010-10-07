@@ -189,7 +189,8 @@ class PlanesController extends AppController {
 			$this->Session->setFlash(__('El Plan no es correcto.', true));
 			$this->redirect(array('action'=>'index'));
 		}
-                
+
+                $this->Plan->recursive = 2;
 		$plan = $this->Plan->read(null, $id);
 		
 		//ordenos los años para ue puedan ser mostrados en la vista
