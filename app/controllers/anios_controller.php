@@ -222,7 +222,7 @@ class AniosController extends AppController {
             $this->set('plan_id',$plan_id);
             //$this->set('duracion_hs',$duracion_hs);
             $anios = $this->Anio->find('all', array(
-                'recursive'=>-1,
+                'recursive'=>1,
                 'conditions'=>array(
                     'Anio.plan_id'=>$plan_id,
                     'Anio.ciclo_id'=>$aPlan['Anio']['ciclo_id']
