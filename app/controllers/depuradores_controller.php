@@ -302,7 +302,7 @@ class DepuradoresController extends AppController {
             
             if($sec_id!=0) $conditions['Plan.sector_id'] =  $sec_id;
             if($subsec_id!=0) $conditions['Plan.subsector_id'] = $subsec_id;
-            if($plan_nombre!='') $conditions["to_ascii(lower(Plan.nombre)) SIMILAR TO ?"] =  array($this->Instit->convertir_para_busqueda_avanzada($plan_nombre));
+            if($plan_nombre!='') $conditions["to_ascii(lower(Plan.nombre)) SIMILAR TO ?"] =  array(convertir_para_busqueda_avanzada($plan_nombre));
 
             $this->Plan->recursive = 1;
             $this->data =$this->Plan->find('first',array('conditions'=>$conditions));
@@ -584,12 +584,12 @@ class DepuradoresController extends AppController {
          */
         
   	  if(!empty($this->data['FPlan']['plan_nombre'])) {
-	      $this->paginate['Plan']['conditions']["to_ascii(lower(Plan.nombre)) SIMILAR TO ?"] = array($this->Instit->convertir_para_busqueda_avanzada($this->data['FPlan']['plan_nombre']));
+	      $this->paginate['Plan']['conditions']["to_ascii(lower(Plan.nombre)) SIMILAR TO ?"] = array(convertir_para_busqueda_avanzada($this->data['FPlan']['plan_nombre']));
           $array_condiciones['Nombre del Plan'] = $this->data['FPlan']['plan_nombre'];
           $url_conditions['Plan.plan_nombre'] = $this->data['FPlan']['plan_nombre'];
           }
 	  if(!empty($this->passedArgs['Plan.plan_nombre'])) {
-          $this->paginate['Plan']['conditions']["to_ascii(lower(Plan.nombre)) SIMILAR TO ?"] = array($this->Instit->convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['Plan.plan_nombre'])));
+          $this->paginate['Plan']['conditions']["to_ascii(lower(Plan.nombre)) SIMILAR TO ?"] = array(convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['Plan.plan_nombre'])));
           $array_condiciones['Nombre del Plan'] = utf8_decode($this->passedArgs['Plan.plan_nombre']);
           $url_conditions['Plan.plan_nombre'] = utf8_decode($this->passedArgs['Plan.plan_nombre']);
 

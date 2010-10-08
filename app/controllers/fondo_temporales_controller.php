@@ -435,7 +435,7 @@ class FondoTemporalesController extends AppController {
                         'Tipoinstit', 'Jurisdiccion', 'HistorialCue'
                     ),
                     'conditions'=> array(
-                        "(lower(Tipoinstit.name) || lower(Instit.nombre)) SIMILAR TO ?" => $this->FondoTemporal->Instit->convertir_para_busqueda_avanzada($q)
+                        "(lower(Tipoinstit.name) || lower(Instit.nombre)) SIMILAR TO ?" => convertir_para_busqueda_avanzada($q)
                     )
                 ));
             }
