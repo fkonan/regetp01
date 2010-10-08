@@ -141,11 +141,15 @@ class AniosController extends AppController {
              * para los años que son de una oferta FP
              */
             $this->Anio->Plan->recursive = -1;
-            $plan   = $this->Anio->Plan->find('all',array('conditions'=>array('Plan.id'=>$plan_id)));
-            switch ($plan[0]['Plan']['oferta_id']):
+            $plan   = $this->Anio->Plan->read(null,$plan_id);
+            switch ($plan['Plan']['oferta_id']):
                 case 1://es un FP, asique mostrar la vista de años para FP
                 case 7://es CL, asique mostrar la vista de años para FP
+                    //$this->data['Anio']['hs_taller'] = $plan['Plan']['duracion_hs'];
                     $viewToRender = '/anios/add_fp';
+                    if (empty($duracion_hs)) {
+                        $duracion_hs = $plan['Plan']['duracion_hs'];
+                    }
                     break;
                 case 2: // IT
                 case 5: //SEC NO TECNICO
