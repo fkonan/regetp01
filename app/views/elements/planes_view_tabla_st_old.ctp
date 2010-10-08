@@ -11,14 +11,14 @@
             }
             ?>
     <h2>
-            <?php echo "Ciclo $key" ?>
+    <span style="float:left"><?php echo "Ciclo $key" ?></span>
     <span class="acl actions acl-editores acl-administradores acl-desarrolladores">
     <?php if($tiene_estructura){
             echo $html->link(
                     $html->image("modify.png", array("alt" => "Editar")),
                     array('controller'=> 'anios', 'action'=>'editCiclo', $plan_id, $key),
                     array(
-                        'style'=> 'margin-left: 20px;',
+                        'style'=> 'margin-left: 10px;',
                         'class'=>'ajax-link'),null,false);
 
             echo $html->link(
