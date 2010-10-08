@@ -2097,8 +2097,8 @@ div.content{
 /*
 * por default NO mostrar los elementos ACL
 */
-.acl, [class|="acl"]{
-    display: none;
+.acl{
+    display: none !important;
 }
 
 /*AYUDA BUSCADOR*/
