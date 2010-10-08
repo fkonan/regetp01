@@ -25,7 +25,7 @@
     define("DESCRIPCION_SINGULAR", $descripcionSingular);
 ?>
 <div class="fondos index">
-   <br />
+   <br /><br />
    <h2><?= $jurisdiccion['Jurisdiccion']['name']?>
    </h2>
 
