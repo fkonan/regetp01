@@ -97,11 +97,11 @@ class PlanesController extends AppController {
         }
 
 		if(isset($this->data['Plan']['nombre']) && $this->data['Plan']['nombre'] != ""){
-			$this->paginate['conditions']['to_ascii(lower(Plan.nombre)) SIMILAR TO ?'] = array($this->Plan->convertir_para_busqueda_avanzada($this->data['Plan']['nombre']));
+			$this->paginate['conditions']['to_ascii(lower(Plan.nombre)) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada($this->data['Plan']['nombre']));
 			$url_conditions['Plan.nombre'] = $this->data['Plan']['nombre'];					
         }
 		if(isset($this->passedArgs['Plan.nombre']) && $this->passedArgs['Plan.nombre'] != ""){
-			$this->paginate['conditions']['to_ascii(lower(Plan.nombre)) SIMILAR TO ?'] = array($this->Plan->convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['Plan.nombre'])));
+			$this->paginate['conditions']['to_ascii(lower(Plan.nombre)) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['Plan.nombre'])));
 			$url_conditions['Plan.nombre'] = utf8_decode($this->passedArgs['Plan.nombre']);					
         }
         

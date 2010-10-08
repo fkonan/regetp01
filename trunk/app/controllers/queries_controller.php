@@ -78,8 +78,8 @@ class QueriesController extends AppController {
 			$conditions['categoria']=$categoria;
 		}
 		if(isset($this->data['Query']['description']) && $this->data['Query']['description']!="") {
-			$conditions['OR']['lower(to_ascii(Query.description)) SIMILAR TO ?'] = array($this->Query->convertir_para_busqueda_avanzada(utf8_decode($this->data['Query']['description'])));
-			$conditions['OR']['lower(to_ascii(Query.name)) SIMILAR TO ?'] = array($this->Query->convertir_para_busqueda_avanzada(utf8_decode($this->data['Query']['description'])));
+			$conditions['OR']['lower(to_ascii(Query.description)) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada(utf8_decode($this->data['Query']['description'])));
+			$conditions['OR']['lower(to_ascii(Query.name)) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada(utf8_decode($this->data['Query']['description'])));
 		}
 		
 		$queries=$this->Query->find('all',array('order'=>'modified DESC', 'conditions'=>$conditions));
