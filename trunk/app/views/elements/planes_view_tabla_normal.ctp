@@ -45,7 +45,7 @@
             <td><?php echo $anio['secciones'];
             $tot_secciones += $anio['secciones'];?></td>
             <td><?php echo $anio['hs_taller'];?></td>
-            <td class="actions">
+            <td class="actions acl actions acl-editores acl-administradores acl-desarrolladores">
                 <?if(!$tiene_estructura){?>
                 <a href="<?= $html->url(array('controller'=> 'anios', 'action'=>'edit/'.$anio['id']))?>"
                    class="ajax-link">Editar</a>
