@@ -1,5 +1,5 @@
 <div class="instits view">
-    <br />
+    <br /><br />
     <h2>
          <?= $jurisdiccion['Jurisdiccion']['name']?>
     </h2>
