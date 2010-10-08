@@ -69,20 +69,6 @@ if(isset($this->data['Plan']['id'])) {
 }
 ?> 
 
-<script type="text/javascript">
-<!--
-
-$('sector_id').activate();
-
-Event.observe(window, "keypress", function(e){ 
-		var cKeyCode = e.keyCode || e.which; 
-		if (cKeyCode == Event.KEY_RETURN){ 
-			$('PlanDepurarForm').submit();
-		} 
-	});
--->
-</script>
-
 <?php if(isset($this->data['Instit']['cue'])) {?>
 	<h2>Establecimiento</h2>
 	<dl>
