@@ -117,9 +117,10 @@ class AniosController extends AppController {
 
             // solo los que aun no haya agregado informacion
             $ciclosUsados = $this->Anio->ciclosUsados($plan_id);
+            $cond = array();
             if (count($ciclosUsados) == 1) {
                 $cond = array("Ciclo.id <>" => array_pop($ciclosUsados));
-            } else {
+            } elseif(count($ciclosUsados) > 1) {
                 $cond = array("Ciclo.id NOT" => $ciclosUsados);
             }
             $ciclos = $this->Anio->Ciclo->find('list', array(
