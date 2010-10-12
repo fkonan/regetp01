@@ -19,9 +19,6 @@
      * @var Dom Object
      */
     var formElement = null;
-
-
-
     
 
 
@@ -55,7 +52,6 @@
 
 // es el que envia el formulario de busqueda ajax
     function autoSubmit(forzar){
-        
         if ( typeof forzar != 'boolean' ) {
             forzar = false;
         }
