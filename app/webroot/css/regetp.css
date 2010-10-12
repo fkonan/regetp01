@@ -663,6 +663,7 @@ input, textarea {
     font-size: 10pt;
     font-family: Arial, Helvetica, sans-serif;
     padding: 2px;
+    width: 92%;
 }
 select {
     clear: both;
@@ -2131,6 +2132,8 @@ div.content{
     background-color: #DBEBF6;
     color: #40679D;
 }
+
+
 
 #AnioSaveAllForm input{
     width: 100px;
