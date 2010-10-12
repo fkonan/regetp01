@@ -1,5 +1,11 @@
 
 <?
+/* @var $form FormHelper */
+
+/* @var $javascript JavascriptHelper */
+$javascript;
+
+
 echo $javascript->link(array(
     'jquery.autocomplete',
     'jquery.loadmask.min',
@@ -39,7 +45,14 @@ echo $html->css(array('jquery.loadmask'));
         'class'=>'link_right small',
         'style'=>'margin-bottom: -18px; padding:0px; margin-right: 4px;'
     ));
-    echo $form->end('Buscar');
+
+    
+    echo $form->button('Buscar', array(
+                'class' => 'boton-buscar',
+                'onclick' => 'autoSubmit()',
+         ));
+
+    echo $form->end();
     ?>
 
     <br />

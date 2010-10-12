@@ -2138,3 +2138,9 @@ div.content{
 #AnioSaveAllForm input{
     width: 100px;
 }
+
+
+.boton-buscar {
+    margin-bottom:10px;
+    width:200px;
+}
