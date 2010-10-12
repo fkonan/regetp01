@@ -2118,7 +2118,8 @@ div.content{
     font-size: 8pt;
     width:98%;
     margin:0px;
-    padding:6px;
+    padding:5px;
+    border:1px solid #DBEBF6;
 }
 
 .help_body table{
