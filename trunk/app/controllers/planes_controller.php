@@ -187,6 +187,7 @@ class PlanesController extends AppController {
 	 * Listado de planes para una determinada institucion
 	 * @param $id ID de institucion
 	 */
+
 	function index_clasico($id = null){
 
 		$v_plan_matricula = array();
@@ -353,7 +354,11 @@ class PlanesController extends AppController {
 		$this->set('planesRelacionados', $data);
 		$this->set('url_conditions', $url_conditions);
 	}
-	
+
+        function test(){
+            
+        }
+        
 	function view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('El Plan no es correcto.', true));
