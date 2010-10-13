@@ -4,12 +4,12 @@
     <li><b>Oferta Educativa de Instituciones</b>
         <ul type="circle">
            <li>Se finalizó con la depuración de Estructuras de Ofertas Educativas</li>
-           <li>Se realizaron nuevas interfaces de carga y modificación de datos de acuerdo a las nuevas estructuraraciones.</li>
+           <li>Se realizaron nuevas interfaces de carga y modificación de datos de acuerdo a las nuevas estructuraciones.</li>
         </ul>
     </li>
     <li><b>Buscador de Instituciones</b>
         <ul>
-        <li>Se ha establecido el nuevo buscador como predeterminado. Si aún necesita utilizar el viejo sistema de búsquedas puede hacerlo haciendo click en "Buscador Clásico"</li>
+        <li>Se ha establecido el nuevo buscador como predeterminado. Si aún necesita utilizar el viejo sistema de búsquedas puede hacer click en "Buscador Clásico"</li>
         </ul>
     </li>
     <br>
