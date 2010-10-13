@@ -1,7 +1,9 @@
 <?php
     echo $javascript->link('zeroclipboard/ZeroClipboard.js');
+    echo $javascript->link('jquery-ui-1.8.5.custom.min.js');
+    echo $html->css('ajaxtabs.css');
+    echo $html->css('smoothness/jquery-ui-1.8.5.custom.css');
 ?>
-<?php echo $html->css('ajaxtabs.css');?>
 <?php
 	$link = "";
 	if($ticket_id != 0)
@@ -104,117 +106,90 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                             <?php endif ?>
                             <div >
                                     <h2>Listado de Ofertas</h2>
-                                    <div class="shadetabs">
-                                            <?php
-                                                    $current_ciclo = $url_conditions['Anio.ciclo_id'];
-                                                    foreach ($ciclos as $c):?>
-                                                            <?php
-                                                            $instit_id = $planes['Instit']['id'];
-
-                                                            $clase = ($current_ciclo == $c)?'selected':'';
-                                            ?>
-                                            <span class="<?= $clase;?>"><?php echo $html->link($c,"/planes/index/$instit_id/Anio.ciclo_id:$c", array('class'=>$clase));?></span>
-                                            <?php endforeach;?>
-
-                                                    <?php $clase = ($current_ciclo == 0)?'selected':'';?>
-                                                    <span class="<?= $clase;?>"><?php echo $html->link('Ver Todos',"/planes/index/$instit_id/Anio.ciclo_id:0", array('class'=>$clase));?></span>
-                                    </div>
-
-                                    <div style="border-top:1px solid #6F7FA8;margin-bottom: 1em; padding: 10px">
-                                            <table cellpadding="0" cellspacing="0" class="tabla-con-bordes-celeste">
-
-                                                    <tr>
-                                                            <th>
-                                                            <div style="display: none;">
-                                                                    <?php
-                                                                    echo $form->create('Plan',array('action' =>'index'));
-                                                            echo $form->hidden('Instit.id',array('value' => $url_conditions['Instit.id']));
-                                                            echo $form->hidden('Anio.ciclo_id',array('value' => $url_conditions['Anio.ciclo_id']));
-                                                          ?></div>
-                                                          <?php
-                                                                    echo $form->input('oferta_id',array('options'=> $ofertas,'label'=>'','empty'=> array('0'=>'Todas'),'selected' => isset($url_conditions['Plan.oferta_id']) ? $url_conditions['Plan.oferta_id'] : '0'));?></th>
-                                                            <th><?php echo $form->input('nombre', array('label'=>'','value' => isset($url_conditions['Plan.nombre']) ? $url_conditions['Plan.nombre'] : ''));?></th>
-                                                            <th><?php echo $form->input('sector_id',array('options'=> $sectores,'label'=>'','empty'=> array('0'=>'Todas'),'selected' => isset($url_conditions['Plan.sector_id']) ? $url_conditions['Plan.sector_id'] : '0'));?></th>
-                                                            <th colspan=2><?php echo $form->end('Buscar');?></th>
-                                                    </tr>
-
-                                            <tr>
-                                                <th><?php echo $paginator->sort('Oferta','Oferta.abrev');?></th>
-                                                <th><?php echo $paginator->sort('Nombre del Título/Certificación','nombre');?></th>
-                                                <th><?php echo $paginator->sort('Sector','Sector.name');?></th>
-                                                <th><?php echo 'Mat.';?></th>
-                                                <th><?php echo '&nbsp';?></th>
-
-                                            </tr>
-                                            <?php
-                                            $i = 0;
-                                            if ((isset($planesRelacionados)) && (count($planesRelacionados) > 0)){
-                                                    foreach ($planesRelacionados as $plan):
-                                                            $class = null;
-                                                            if ($i++ % 2 == 0) {
-                                                                    $class = ' class="altrow"';
-                                                            }
-                                                    ?>
-                                                            <tr id="fila_plan_<?= $plan['Plan']['id'];?>" <?php echo $class;?>
-                                                                            onclick="window.location='<?= $html->url(array('controller'=> 'Planes', 'action'=>'view/'.$plan['Plan']['id']))?>'"
-                                                                            onmouseout="jQuery('#fila_plan_<?= $plan['Plan']['id'];?>').removeClass('fila_marcada')"
-                                                                            onmouseover="jQuery('#fila_plan_<?= $plan['Plan']['id'];?>').addClass('fila_marcada')"
-                                                            >
-
-                                                                    <td>
-                                                                            <?php echo $plan['Oferta']['abrev']; ?>
-                                                                    </td>
-                                                                    <td>
-                                                                            <?php echo $plan['Plan']['nombre']; ?>
-                                                                    </td>
-                                                                    <td>
-                                                                            <?php echo $plan['Sector']['name']; ?>
-                                                                    </td>
-                                                                    <td>
-                                                                            <?php
-                                                                            $ciclo_actualizacion = '';
-                                                                            if($url_conditions['Anio.ciclo_id'] ==0){
-                                                                                    $ciclo_actualizacion = " (".$plan['Anio']['ciclo_id'].")";
-                                                                            }
-                                                                            if ($plan['calculado']['sum_matricula'] > 0){
-                                                                                    echo $plan['calculado']['sum_matricula'].$ciclo_actualizacion;
-                                                                            } else {
-                                                                                    echo "0";
-                                                                            }
-                                                                            ?>
-                                                                    </td>
-                                                                    <td>
-                                                                            <?php echo $html->link(__('Ver', true), array('action'=>'view', $plan['Plan']['id'])); ?>
-                                                                    </td>
-                                                            </tr>
-                                            <?php endforeach;
-                                            } else {
-                                            ?>
-                                                    <tr>
-                                                            <td colspan=4>
-                                                                    &nbsp;
-                                                            </td>
-                                                    </tr>
-                                                    <tr>
-                                                            <td colspan=4>
-                                                                    <?php $año_actual = date('Y',strtotime('now'));?>
-                                                                    <?php if($datoUltimoCiclo['max_ciclo'] != $año_actual && $current_ciclo == $año_actual):?>
-                                                                            <p class='msg-atencion'>La Instituci&oacute;n no presenta actualizaciones para este año</p>
-                                                                    <?php else:?>
-                                                                            <p class='msg-atencion'>No se obtuvieron resultados</p>
-                                                                    <?php endif;?>
-                                                            </td>
-                                                    </tr>
-                                            <?php
-                                            } ?>
-                                            </table>
-                                            <div id="paginator_prev_next_links">
-                                            <?php if($paginator->numbers()){
-                                                    echo $paginator->prev('« Anterior ',null, null, array('class' => 'disabled'));
-                                                    echo " | ".$paginator->numbers(array('modulus'=>'9'))." | ";
-                                                    echo $paginator->next(' Siguiente »', null, null, array('class' => 'disabled'));
-                                            }?>
+                                    <div id="horizontal-tabs">
+                                        <ul>
+                                            <li><a href="#fragment-1"><span>Sec.Tec.</span></a></li>
+                                            <li><a href="#fragment-2"><span>Itinerario</span></a></li>
+                                            <li><a href="#fragment-3"><span>FP</span></a></li>
+                                        </ul>
+                                        <div id="fragment-1" class="fragment">
+                                            <div class="vertical-tabs">
+                                                <ul>
+                                                        <li><a href="#tabs-1">2006</a></li>
+                                                        <li><a href="#tabs-2">2007</a></li>
+                                                        <li><a href="#tabs-3">2008</a></li>
+                                                        <li><a href="#tabs-4">2009</a></li>
+                                                        <li><a href="#tabs-5">2010</a></li>
+                                                </ul>
+                                                <div id="tabs-1">
+                                                        <h2>Sec. Tec. - 2006</h2>
+                                                        <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
+                                                </div>
+                                                <div id="tabs-2">
+                                                        <h2>Sec. Tec. - 2007</h2>
+                                                        <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
+                                                </div>
+                                                <div id="tabs-3">
+                                                        <h2>Sec. Tec. - 2008</h2>
+                                                        <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+                                                        <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+                                                </div>
+                                                <div id="tabs-4">
+                                                        <h2>Sec. Tec. - 2009</h2>
+                                                        <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+                                                        <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+                                                </div>
+                                                <div id="tabs-5">
+                                                        <h2>Sec. Tec. - 2010</h2>
+                                                        <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+                                                        <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+                                                </div>
                                             </div>
+                                        </div>
+                                        <div id="fragment-2" class="fragment">
+                                            <div class="vertical-tabs">
+                                                <ul>
+                                                        <li><a href="#tabs-6">2006</a></li>
+                                                        <li><a href="#tabs-7">2009</a></li>
+                                                        <li><a href="#tabs-8">2010</a></li>
+                                                </ul>
+                                                <div id="tabs-6">
+                                                        <h2>Itinerario - 2006</h2>
+                                                        <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
+                                                </div>
+                                                <div id="tabs-7">
+                                                        <h2>Itinerario - 2009</h2>
+                                                        <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
+                                                </div>
+                                                <div id="tabs-8">
+                                                        <h2>Itinerario - 2010</h2>
+                                                        <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+                                                        <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="fragment-3" class="fragment">
+                                            <div class="vertical-tabs">
+                                                <ul>
+                                                        <li><a href="#tabs-9">2008</a></li>
+                                                        <li><a href="#tabs-10">2009</a></li>
+                                                        <li><a href="#tabs-11">2010</a></li>
+                                                </ul>
+                                                <div id="tabs-9">
+                                                        <h2>FP - 2008</h2>
+                                                        <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
+                                                </div>
+                                                <div id="tabs-10">
+                                                        <h2>FP - 2009</h2>
+                                                        <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
+                                                </div>
+                                                <div id="tabs-11">
+                                                        <h2>FP - 2010</h2>
+                                                        <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+                                                        <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                             </div>
                             
@@ -256,6 +231,13 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
         } );
 
         clip.glue( 'd_clip_button' );
-    })
+
+        jQuery("#horizontal-tabs").tabs();
+    });
+
+    jQuery(function() {
+        jQuery(".vertical-tabs").tabs().addClass('ui-tabs-vertical ui-helper-clearfix');
+        jQuery(".vertical-tabs li").removeClass('ui-corner-top').addClass('ui-corner-left');
+    });
 </script>
 
