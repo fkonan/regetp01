@@ -1,3 +1,22 @@
+<h1>RFIETP - Novedades de la versión 1.6.2</h1>
+<br>
+<ul>
+    <li><b>Oferta Educativa de Instituciones</b>
+        <ul type="circle">
+           <li>Se finalizó con la depuración de Estructuras de Ofertas Educativas</li>
+           <li>Se realizaron nuevas interfaces de carga y modificación de datos de acuerdo a las nuevas estructuraraciones.</li>
+        </ul>
+    </li>
+    <li><b>Buscador de Instituciones</b>
+        <ul>
+        <li>Se ha establecido el nuevo buscador como predeterminado. Si aún necesita utilizar el viejo sistema de búsquedas puede hacerlo haciendo click en "Buscador Clásico"</li>
+        </ul>
+    </li>
+    <br>
+</ul>
+<br>
+
+
 <h1>RFIETP - Novedades de la versión 1.6</h1>
 <br>
 <ul>
