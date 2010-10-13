@@ -12,7 +12,7 @@
 <Domains/>
 <Tables>
 <Table id="3d52e0fe-fa32-417a-a95d-6f92558738a3" name="acos" schema="">
-<Property name="LOCATION" value="933:939"/>
+<Property name="LOCATION" value="964:946"/>
 <Comment/>
 <Attribute datatype="serial" defaultvalue="nextval('acos_id_seq'::regclass)" extra="" fraction="0" id="25e489e1-a8ec-4eb9-b0fc-0b95a4d11025" name="id" nullable="false" scale="10" size="10">
 <Comment/>
@@ -87,7 +87,7 @@
 </Index>
 </Table>
 <Table id="b0311ba8-182b-41b2-923d-53d9213cd22e" name="aros" schema="">
-<Property name="LOCATION" value="930:1140"/>
+<Property name="LOCATION" value="968:1097"/>
 <Comment/>
 <Attribute datatype="serial" defaultvalue="nextval('aros_id_seq'::regclass)" extra="" fraction="0" id="5bfb3480-99ee-4fe8-99c6-fb326c29fedb" name="id" nullable="false" scale="10" size="10">
 <Comment/>
@@ -115,7 +115,7 @@
 </Index>
 </Table>
 <Table id="465f3768-c1bc-4722-8427-b0defe4b4f63" name="aros_acos" schema="">
-<Property name="LOCATION" value="1190:910"/>
+<Property name="LOCATION" value="1187:986"/>
 <Comment/>
 <Attribute datatype="serial" defaultvalue="nextval('aros_acos_id_seq'::regclass)" extra="" fraction="0" id="246d5b4b-edd9-4a4a-af96-de2be15c78d8" name="id" nullable="false" scale="10" size="10">
 <Comment/>
@@ -277,7 +277,7 @@
 </Index>
 </Table>
 <Table id="6e6feb9c-7829-4be0-85bf-e055fbd757ba" name="fondos" schema="">
-<Property name="LOCATION" value="675:954"/>
+<Property name="LOCATION" value="606:1122"/>
 <Comment/>
 <Attribute datatype="serial" defaultvalue="nextval('fondos_id_seq'::regclass)" extra="" fraction="0" id="6d905d27-4c27-4de5-8a75-01c4987bec16" name="id" nullable="false" scale="10" size="10">
 <Comment/>
@@ -317,7 +317,7 @@
 </Index>
 </Table>
 <Table id="c443cce8-e651-4bf2-a72b-b9be4473102c" name="fondos_lineas_de_acciones" schema="">
-<Property name="LOCATION" value="680:1200"/>
+<Property name="LOCATION" value="604:1380"/>
 <Comment/>
 <Attribute datatype="serial" defaultvalue="nextval('fondos_lineas_de_acciones_id_seq'::regclass)" extra="" fraction="0" id="1dfc3357-0dfe-4db1-959b-90f90c2eeed7" name="id" nullable="false" scale="10" size="10">
 <Comment/>
@@ -562,7 +562,7 @@
 </Index>
 </Table>
 <Table id="810ea621-c7e0-4320-8c46-be0b72ba6f7e" name="jurisdicciones_estructura_planes" schema="">
-<Property name="LOCATION" value="350:950"/>
+<Property name="LOCATION" value="337:1046"/>
 <Comment/>
 <Attribute datatype="serial" defaultvalue="nextval('jurisdicciones_estructura_planes_id_seq'::regclass)" extra="" fraction="0" id="17e5f65c-6ecd-4f25-beef-fac725bfb57a" name="id" nullable="false" scale="10" size="10">
 <Comment/>
@@ -584,7 +584,7 @@
 </Index>
 </Table>
 <Table id="e96ceb02-71fe-4a68-a56e-120d0fe8f235" name="lineas_de_acciones" schema="">
-<Property name="LOCATION" value="680:1350"/>
+<Property name="LOCATION" value="605:1598"/>
 <Comment/>
 <Attribute datatype="serial" defaultvalue="nextval('lineas_de_acciones_id_seq'::regclass)" extra="" fraction="0" id="71221722-d248-4b5b-abfd-a259efc770c4" name="id" nullable="false" scale="10" size="10">
 <Comment/>
@@ -631,7 +631,7 @@
 </Index>
 </Table>
 <Table id="8c62c7b6-b883-410f-a8bb-d83ba58a00fd" name="logs" schema="">
-<Property name="LOCATION" value="675:1512"/>
+<Property name="LOCATION" value="1182:1380"/>
 <Comment/>
 <Attribute datatype="serial" defaultvalue="nextval('logs_id_seq'::regclass)" extra="" fraction="0" id="ace2c9f0-42e6-4d69-9675-040e363920d5" name="id" nullable="false" scale="10" size="10">
 <Comment/>
@@ -760,7 +760,7 @@
 </Index>
 </Table>
 <Table id="9f75ae78-6859-4fea-8e64-80ae8457250a" name="queries" schema="">
-<Property name="LOCATION" value="927:1317"/>
+<Property name="LOCATION" value="901:1528"/>
 <Comment/>
 <Attribute datatype="serial" defaultvalue="nextval('queries_id_seq'::regclass)" extra="" fraction="0" id="c3f8a1b9-8a2a-44eb-a045-09a78dd421fd" name="id" nullable="false" scale="10" size="10">
 <Comment/>
@@ -851,7 +851,7 @@
 </Index>
 </Table>
 <Table id="dbdf4381-2649-4c8f-8b4d-87b024a42161" name="sugerencias" schema="">
-<Property name="LOCATION" value="1170:1480"/>
+<Property name="LOCATION" value="1180:1537"/>
 <Comment/>
 <Attribute datatype="serial" defaultvalue="nextval('sugerencias_id_seq'::regclass)" extra="" fraction="0" id="7c56290b-f163-4572-a00a-e29278ed1018" name="id" nullable="false" scale="10" size="10">
 <Comment/>
@@ -958,7 +958,7 @@
 </Index>
 </Table>
 <Table id="d5e4b62c-85d5-42cf-b73d-12d51d096293" name="user_logins" schema="">
-<Property name="LOCATION" value="1180:1100"/>
+<Property name="LOCATION" value="1181:1276"/>
 <Comment/>
 <Attribute datatype="serial" defaultvalue="nextval('user_logins_id_seq'::regclass)" extra="" fraction="0" id="896babc8-0102-4ac1-9e84-aa4e26138d05" name="id" nullable="false" scale="10" size="10">
 <Comment/>
@@ -974,7 +974,7 @@
 </Index>
 </Table>
 <Table id="e6dcc638-463e-4ba3-8e29-69a8bca0a38e" name="users" schema="">
-<Property name="LOCATION" value="1160:1220"/>
+<Property name="LOCATION" value="901:1299"/>
 <Comment/>
 <Attribute datatype="serial" defaultvalue="nextval('users_id_seq'::regclass)" extra="" fraction="0" id="8cc0ae3e-782c-42a4-844a-1b92f9cdd245" name="id" nullable="false" scale="10" size="10">
 <Comment/>
@@ -1017,7 +1017,7 @@
 </Index>
 </Table>
 <Table id="0bd36ec7-15ff-45b4-8bf1-b47e96b527a9" name="z_fondo_original" schema="">
-<Property name="LOCATION" value="345:1065"/>
+<Property name="LOCATION" value="325:1172"/>
 <Comment/>
 <Attribute datatype="serial" defaultvalue="nextval('z_fondo_original_id_seq'::regclass)" extra="" fraction="0" id="2b19c314-cfe6-40c3-b21d-43b4fb237b1c" name="id" nullable="false" scale="10" size="10">
 <Comment/>
@@ -1123,7 +1123,7 @@
 </Index>
 </Table>
 <Table id="1823cd13-e1d0-4181-ab27-053f085feb3d" name="z_fondo_work" schema="">
-<Property name="LOCATION" value="50:920"/>
+<Property name="LOCATION" value="50:1002"/>
 <Comment/>
 <Attribute datatype="serial" defaultvalue="nextval('z_fondo_work_id_seq'::regclass)" extra="" fraction="0" id="651239d2-5a71-403a-b6b9-8c8042fdcc77" name="id" nullable="false" scale="10" size="10">
 <Comment/>
@@ -1273,8 +1273,9 @@
 <Mapping exportingexpressionrefid="43da22a7-e7f3-4d23-ae37-0c44e82a493b" importingattributerefid="c0495fbd-83af-485f-a5bf-6ee9b0b9e492"/>
 </Relation>
 <Relation exportingtablerefid="fe600093-997b-4335-82cd-2e867f7c9171" id="f5d7465a-93c8-48a4-b8a7-f29a72c5f9e6" importingtablerefid="810ea621-c7e0-4320-8c46-be0b72ba6f7e" name="Jurisdiccion_estructura_planes" ondelete="nothing" onupdate="nothing">
-<Property name="labelposition" value="500:0"/>
-<Property name="points" value="462:995,486:783"/>
+<Property name="labelposition" value="678:-113"/>
+<Property name="points" value="454:1046,470:916"/>
+<Property name="textoffset" value="0:0"/>
 <Comment/>
 <Mapping exportingexpressionrefid="43da22a7-e7f3-4d23-ae37-0c44e82a493b" importingattributerefid="b00b59e1-37d4-4118-8fba-622f8a1174b7"/>
 </Relation>
@@ -1442,15 +1443,10 @@
 <Comment/>
 <Mapping exportingexpressionrefid="83b3eb57-5832-46f7-87f7-119e4e2c7d29" importingattributerefid="0f3e14b9-4ae7-47ba-bb4b-45f6231bcd3b"/>
 </Relation>
-<Relation exportingtablerefid="fe600093-997b-4335-82cd-2e867f7c9171" id="bd2c2948-de12-4760-81c3-05df83101033" importingtablerefid="6e6feb9c-7829-4be0-85bf-e055fbd757ba" name="jurisdicciones_id" ondelete="nothing" onupdate="nothing">
-<Property name="labelposition" value="500:0"/>
-<Property name="points" value="785:1061,486:783"/>
-<Comment/>
-<Mapping exportingexpressionrefid="43da22a7-e7f3-4d23-ae37-0c44e82a493b" importingattributerefid="45fc7eef-3e09-47be-b514-6a979dc1a6c6"/>
-</Relation>
 <Relation exportingtablerefid="1c4004eb-0353-4e4b-b347-786d89133400" id="507c6248-8893-4916-8129-9df6ed8f42b6" importingtablerefid="6e6feb9c-7829-4be0-85bf-e055fbd757ba" name="fondos_instits" ondelete="nothing" onupdate="nothing">
-<Property name="labelposition" value="500:0"/>
-<Property name="points" value="785:1061,1010:492"/>
+<Property name="labelposition" value="640:0"/>
+<Property name="points" value="757:1122,870:841"/>
+<Property name="textoffset" value="0:0"/>
 <Comment/>
 <Mapping exportingexpressionrefid="66799cc8-5226-4c14-83b1-b96378135898" importingattributerefid="19381be8-da2d-4944-bf88-2de691781505"/>
 </Relation>
@@ -1478,8 +1474,28 @@
 <Comment/>
 <Mapping exportingexpressionrefid="06ba5c2b-c82d-4aad-988a-7d525c944ed4" importingattributerefid="311cf7ac-c2ae-4e7d-9831-e9c5bc7d329b"/>
 </Relation>
+<Relation exportingtablerefid="fe600093-997b-4335-82cd-2e867f7c9171" id="79a47532-3603-44ba-ad38-1b5eb6c057df" importingtablerefid="6e6feb9c-7829-4be0-85bf-e055fbd757ba" name="jurisdicciones" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="707:71"/>
+<Property name="points" value="659:1122,550:916"/>
+<Comment/>
+<Mapping exportingexpressionrefid="43da22a7-e7f3-4d23-ae37-0c44e82a493b" importingattributerefid="45fc7eef-3e09-47be-b514-6a979dc1a6c6"/>
+</Relation>
 </Relations>
 <Views/>
-<Subjectareas/>
+<Subjectareas>
+<Subjectarea color="-7026951" id="0d2efc06-b24f-4204-978e-b8d213c7972e" name="ACL" visible="true">
+<Item tablerefid="465f3768-c1bc-4722-8427-b0defe4b4f63"/>
+<Item tablerefid="3d52e0fe-fa32-417a-a95d-6f92558738a3"/>
+<Item tablerefid="b0311ba8-182b-41b2-923d-53d9213cd22e"/>
+</Subjectarea>
+<Subjectarea color="-7471700" id="07e9ef2f-8a83-4e08-bc73-d74f67fb6715" name="Fondos" visible="true">
+<Item tablerefid="1823cd13-e1d0-4181-ab27-053f085feb3d"/>
+<Item tablerefid="0bd36ec7-15ff-45b4-8bf1-b47e96b527a9"/>
+<Item tablerefid="810ea621-c7e0-4320-8c46-be0b72ba6f7e"/>
+<Item tablerefid="6e6feb9c-7829-4be0-85bf-e055fbd757ba"/>
+<Item tablerefid="c443cce8-e651-4bf2-a72b-b9be4473102c"/>
+<Item tablerefid="e96ceb02-71fe-4a68-a56e-120d0fe8f235"/>
+</Subjectarea>
+</Subjectareas>
 <Comments/>
 </Model>
