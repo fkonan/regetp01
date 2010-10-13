@@ -1,8 +1,10 @@
 <?php
     echo $javascript->link('zeroclipboard/ZeroClipboard.js');
     echo $javascript->link('jquery-ui-1.8.5.custom.min.js');
+    echo $javascript->link('jquery.loadmask.min');
     echo $html->css('ajaxtabs.css');
     echo $html->css('smoothness/jquery-ui-1.8.5.custom.css');
+    echo $html->css(array('jquery.loadmask'));
 ?>
 <?php
 	$link = "";
@@ -115,16 +117,12 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                                         <div id="fragment-1" class="fragment">
                                             <div class="vertical-tabs">
                                                 <ul>
-                                                        <li><a href="#tabs-1">2006</a></li>
-                                                        <li><a href="#tabs-2">2007</a></li>
-                                                        <li><a href="#tabs-3">2008</a></li>
-                                                        <li><a href="#tabs-4">2009</a></li>
-                                                        <li><a href="#tabs-5">2010</a></li>
+                                                        <li><a href="<?php echo $html->url(array('controller'=>'planes','action'=>'test'));?>"><span>2006</span></a></li>
+                                                        <li><a href="#tabs-2"><span>2007</span></a></li>
+                                                        <li><a href="#tabs-3"><span>2008</span></a></li>
+                                                        <li><a href="#tabs-4"><span>2009</span></a></li>
+                                                        <li><a href="#tabs-5"><span>2010</span></a></li>
                                                 </ul>
-                                                <div id="tabs-1">
-                                                        <h2>Sec. Tec. - 2006</h2>
-                                                        <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
-                                                </div>
                                                 <div id="tabs-2">
                                                         <h2>Sec. Tec. - 2007</h2>
                                                         <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
@@ -233,11 +231,15 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
         clip.glue( 'd_clip_button' );
 
         jQuery("#horizontal-tabs").tabs();
+
+        
+        
     });
 
     jQuery(function() {
-        jQuery(".vertical-tabs").tabs().addClass('ui-tabs-vertical ui-helper-clearfix');
+        jQuery(".vertical-tabs").tabs({ spinner: '<?php echo $html->image('loading.gif') ?>' }).addClass('ui-tabs-vertical ui-helper-clearfix');
         jQuery(".vertical-tabs li").removeClass('ui-corner-top').addClass('ui-corner-left');
     });
+
 </script>
 
