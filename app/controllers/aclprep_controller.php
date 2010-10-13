@@ -491,6 +491,19 @@ class AclprepController extends AppController {
         die('done 1.6');
     }
 
+    function assignPermissions1Dot6Dot2() {
+
+        // Administradores
+        echo 'administradores => Anios/addSecTec<br />';
+        $this->Acl->allow('administradores', 'Anios/addSecTec');
+
+        // Editores
+        echo 'editores => Anios/addSecTec<br />';
+        $this->Acl->allow('editores', 'Anios/addSecTec');
+
+        die('done 1.6.2');
+    }
+
     function checkPermissions() {
         //These all return true:
         echo $this->Acl->check('administrators', 'Settings');
