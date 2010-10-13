@@ -356,7 +356,7 @@ class DepuradorPlanesController extends AppController {
         $jurisdiccionSql = ' > 0';
         $jurisdiccion_id = 0;
 
-        $orientacionSql = ' > 0';
+        $orientacionSql = ' > -1';
         $orientacion_id = 0;
 
         $cueSql = ' > 0';
