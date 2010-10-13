@@ -35,15 +35,14 @@
         echo $html->css('depurador_planes','stylesheet', array('media'=>'screen'));
 
         // plugin jquery UI
-        //echo $html->css('trontastic/jquery-ui-1.8.4.custom','stylesheet', array('media'=>'screen'));
-        echo $html->css('smoothness/jquery-ui-1.8.4.custom','stylesheet', array('media'=>'screen'));
+        echo $html->css('smoothness/jquery-ui-1.8.5.custom','stylesheet', array('media'=>'screen'));
 
 
         echo $javascript->link( array(
                 'jquery-1.4.2.min.js',
                 'jquery.form.js',
                 'jquery.blockUI',
-                'jquery-ui-1.8.4.custom.min'
+                'jquery-ui-1.8.5.custom.min'
             ));
 
         echo $scripts_for_layout;
