@@ -20,19 +20,20 @@ Requerimientos mínimos para utilizar el <b>Sistema Gestión de Registro</b>:<br /
 
 <br />
 
-<h2>¡Nueva Versión 1.6.1!</h2>
+<h2>¡Nueva Versión <?php echo Configure::read('regetpVersion');?>!</h2>
 
 <p>
 Desde su puesta en funcionamiento en junio de 2009 el sistema RFIETP se encuentra
 en permanente actualización y mejoramiento, tanto del contenido de información de
 la base de datos como de la aplicación que permite su gestión. En esa línea de
-trabajo a partir del 27 de Septiembre del 2010 se ha instalado la versión <?php echo Configure::read('regetpVersion');?> del
+trabajo a partir del 13 de Octubre del 2010 se ha instalado la versión <?php echo Configure::read('regetpVersion');?> del
 sistema.
 </p>
 <p>
 La nueva versión presenta varias mejoras, entre las que se destacan:
 </p>
 <ul>
+    <li>Se ha establecido el nuevo buscador como predeterminado. Si aún necesita utilizar el viejo sistema de búsquedas puede hacerlo haciendo click en "Buscador Clásico"</li>
     <li>Se han desarrollado módulos que permiten la validación y depuración de la información disponible sobre estructura y trayectos formativos de la oferta secundaria técnica (EGB3 - Polimodal, Ciclo básico - Ciclo Superior, Primer Ciclo - Segundo Ciclo, etc.). Utilizando estas herramientas la Unidad de Información se encuentra realizando un trabajo de reordenamiento de datos que permitirá disponer de información consistente sobre trayectos formativos y vincular cada sección o división con la edad teórica y el año de escolaridad de los alumnos.</li>
     <li>Se ha agregado un formulario para que los usuarios puedan hacer sugerencias y solicitar mejoras de la aplicación.</li>
     <li>Se ha publicado la información correspondiente a los Planes de Mejora aprobados durante el primer semestre de 2010.</li>
