@@ -69,16 +69,17 @@ class PlanesController extends AppController {
 			$this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$id );
 		}	
 
-		$ciclos = $this->Plan->dame_ciclos_por_instits($id);
+		$ciclos = $this->Plan->dame_ciclos_por_oferta_instits($id);
 
-		if (!empty($ciclos)){
+                
+		/*if (!empty($ciclos)){
 			if (!(in_array(date("Y"),$ciclos))){
 				$ciclos = array_merge($ciclos,array(date('Y') => date('Y')));
 				sort($ciclos);
 			}			
 		} else {
 			$ciclos = array(date('Y') => date('Y'));
-		}
+		}*/
 
 		/* ************************************ */
 		/* * Filtros de la búsqueda de Planes * */
@@ -357,6 +358,9 @@ class PlanesController extends AppController {
 
         function test(){
             
+            $this->set('instit_id', $this->passedArgs['instit_id']);
+            $this->set('oferta_id', $this->passedArgs['oferta_id']);
+            $this->set('ciclo', $this->passedArgs['ciclo']);
         }
         
 	function view($id = null) {

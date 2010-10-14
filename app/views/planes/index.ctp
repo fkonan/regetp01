@@ -106,92 +106,37 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                                         </div>
                                 </div>
                             <?php endif ?>
-                            <div >
-                                    <h2>Listado de Ofertas</h2>
-                                    <div id="horizontal-tabs">
-                                        <ul>
-                                            <li><a href="#fragment-1"><span>Sec.Tec.</span></a></li>
-                                            <li><a href="#fragment-2"><span>Itinerario</span></a></li>
-                                            <li><a href="#fragment-3"><span>FP</span></a></li>
-                                        </ul>
-                                        <div id="fragment-1" class="fragment">
-                                            <div class="vertical-tabs">
-                                                <ul>
-                                                        <li><a href="<?php echo $html->url(array('controller'=>'planes','action'=>'test'));?>"><span>2006</span></a></li>
-                                                        <li><a href="#tabs-2"><span>2007</span></a></li>
-                                                        <li><a href="#tabs-3"><span>2008</span></a></li>
-                                                        <li><a href="#tabs-4"><span>2009</span></a></li>
-                                                        <li><a href="#tabs-5"><span>2010</span></a></li>
-                                                </ul>
-                                                <div id="tabs-2">
-                                                        <h2>Sec. Tec. - 2007</h2>
-                                                        <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
-                                                </div>
-                                                <div id="tabs-3">
-                                                        <h2>Sec. Tec. - 2008</h2>
-                                                        <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
-                                                        <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
-                                                </div>
-                                                <div id="tabs-4">
-                                                        <h2>Sec. Tec. - 2009</h2>
-                                                        <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
-                                                        <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
-                                                </div>
-                                                <div id="tabs-5">
-                                                        <h2>Sec. Tec. - 2010</h2>
-                                                        <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
-                                                        <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="fragment-2" class="fragment">
-                                            <div class="vertical-tabs">
-                                                <ul>
-                                                        <li><a href="#tabs-6">2006</a></li>
-                                                        <li><a href="#tabs-7">2009</a></li>
-                                                        <li><a href="#tabs-8">2010</a></li>
-                                                </ul>
-                                                <div id="tabs-6">
-                                                        <h2>Itinerario - 2006</h2>
-                                                        <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
-                                                </div>
-                                                <div id="tabs-7">
-                                                        <h2>Itinerario - 2009</h2>
-                                                        <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
-                                                </div>
-                                                <div id="tabs-8">
-                                                        <h2>Itinerario - 2010</h2>
-                                                        <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
-                                                        <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="fragment-3" class="fragment">
-                                            <div class="vertical-tabs">
-                                                <ul>
-                                                        <li><a href="#tabs-9">2008</a></li>
-                                                        <li><a href="#tabs-10">2009</a></li>
-                                                        <li><a href="#tabs-11">2010</a></li>
-                                                </ul>
-                                                <div id="tabs-9">
-                                                        <h2>FP - 2008</h2>
-                                                        <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
-                                                </div>
-                                                <div id="tabs-10">
-                                                        <h2>FP - 2009</h2>
-                                                        <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
-                                                </div>
-                                                <div id="tabs-11">
-                                                        <h2>FP - 2010</h2>
-                                                        <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
-                                                        <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
-                                                </div>
-                                            </div>
+                            <div>
+                                <h2>Listado de Ofertas</h2>
+                                <div id="horizontal-tabs">
+                                    <ul>
+                                        <?php
+                                        foreach($ciclos as $oferta=>$ciclo){
+                                        ?>
+                                            <li><a href="#fragment-<?php echo $oferta?>"><span><?php echo $ciclo['name']?></span></a></li>
+                                        <?php
+                                        }
+                                        ?>
+                                    </ul>
+                                    <?php
+                                    foreach($ciclos as $oferta=>$ciclo){
+                                    ?>
+                                    <div id="fragment-<?php echo $oferta?>" class="fragment">
+                                        <div class="vertical-tabs">
+                                            <ul>
+                                                    <?php foreach($ciclo['ciclo'] as $anio){?>
+                                                    <li><a href="<?php echo $html->url(array('controller'=>'planes','action'=>'test','instit_id'=>$planes['Instit']['id'],'oferta_id'=>$oferta,'ciclo'=>$anio));?>"><span><?php echo $anio?></span></a></li>
+                                                    <?php } ?>
+                                            </ul>
                                         </div>
                                     </div>
+                                    <?php
+                                    }
+                                    ?>
+                                </div>
                             </div>
-                            
-                </div>
+                                    
+
                 <?php endif;?>
 
                 <div class="acl actions acl-editores acl-desarrolladores acl-administradores">
@@ -215,6 +160,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                         </ul>
                 </div>
             </div>
+    </div>
 </div>
 <script language="JavaScript"  type="text/javascript" defer="defer">
     jQuery(document).ready(function(){
@@ -230,10 +176,8 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
 
         clip.glue( 'd_clip_button' );
 
-        jQuery("#horizontal-tabs").tabs();
+        jQuery("#horizontal-tabs").tabs({ selected: 0 });
 
-        
-        
     });
 
     jQuery(function() {
