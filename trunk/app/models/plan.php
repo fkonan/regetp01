@@ -403,6 +403,28 @@ class Plan extends AppModel {
 
 		return $vec;
   	}
+
+        function dame_ciclos_por_oferta_instits($instit_id){
+
+		$vec = array();
+
+		$sql  = " SELECT distinct oferta_id,o.abrev, ciclo_id";
+                $sql  .= " FROM planes p";
+                $sql  .= " INNER JOIN anios a ON a.plan_id = p.id";
+                $sql  .= " INNER JOIN ofertas o ON o.id = p.oferta_id";
+                $sql  .= " WHERE p.instit_id = " . $instit_id ;
+                $sql  .= " GROUP by oferta_id, o.abrev, ciclo_id";
+                $sql  .= " ORDER by oferta_id, o.abrev,ciclo_id DESC";
+
+		$data = $this->query($sql);
+
+                foreach ($data as $line){
+			$vec[$line[0]['oferta_id']]['ciclo'][] = $line[0]['ciclo_id'];
+                        $vec[$line[0]['oferta_id']]['name'] = $line[0]['abrev'];
+                }
+		                
+		return $vec;
+  	}
   	
   	
   	
