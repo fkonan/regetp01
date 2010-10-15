@@ -16,8 +16,16 @@ class PlanesController extends AppController {
 	 * Listado de planes para una determinada institucion
 	 * @param $id ID de institucion
 	 */
-	function index($id = null){
-		
+	function index($id = null) {
+
+                // posibles controllers de ofertas
+                $ofertasControllers[1] = 'view_fp';
+                $ofertasControllers[2] = 'view_it';
+                $ofertasControllers[3] = 'view_sectec';
+                $ofertasControllers[4] = 'view_suptec';
+                $ofertasControllers[5] = 'view_secnotec';
+                $ofertasControllers[6] = 'view_supnotec';
+
 		$v_plan_matricula = array();
 		
 		if (isset($this->passedArgs['Instit.id']))
@@ -155,10 +163,8 @@ class PlanesController extends AppController {
 		$ofertas  = $this->Plan->dameOfertaPorInstitucion($id,isset($url_conditions['Anio.ciclo_id'])?$url_conditions['Anio.ciclo_id']:'');
 		$sectores = $this->Plan->dameSectoresPorInstitucion($id,isset($url_conditions['Anio.ciclo_id'])?$url_conditions['Anio.ciclo_id']:'');
 		$this->set(compact('ofertas','ciclos','sectores'));
-		
-		
-		
-		/* ********************************* */
+
+                /* ********************************* */
         /* * Paginador 					   * */
 
 		if (!isset($this->passedArgs['sort'])){
@@ -170,18 +176,19 @@ class PlanesController extends AppController {
 		}
 
 		$this->Plan->setAsociarAnio(true);
-        $this->paginate['conditions']['Instit.id'] = $id;
-        $url_conditions['Instit.id'] = $id; // para que no pierda el id de instit en los ordenamientos y la paginacion
+                $this->paginate['conditions']['Instit.id'] = $id;
+                $url_conditions['Instit.id'] = $id; // para que no pierda el id de instit en los ordenamientos y la paginacion
 		$data = $this->paginate();
 		for($i=0; $i< count($data); $i++):
 			$mat = $this->Plan->dameMatriculaDeCiclo($data[$i]['Plan']['id'],$data[$i]['Anio']['ciclo_id']);
 			$data[$i]['calculado']['sum_matricula'] = $mat;
 		endfor;
-		
+			
 
 		$this->set('datoUltimoCiclo', $this->Plan->dameMatriculaUltimoCiclo($id));
 		$this->set('planesRelacionados', $data);
 		$this->set('url_conditions', $url_conditions);
+                $this->set('ofertasControllers', $ofertasControllers);
 	}
 
         /**
@@ -531,5 +538,28 @@ class PlanesController extends AppController {
 		}
 	}
 	
+        function view_fp($ciclo=2010) {
+
+        }
+
+        function view_it($ciclo=2010) {
+
+        }
+
+        function view_sectec($ciclo=2010) {
+
+        }
+
+        function view_suptec($ciclo=2010) {
+
+        }
+
+        function view_secnotec($ciclo=2010) {
+
+        }
+
+        function view_supnotec($ciclo=2010) {
+
+        }
 }
 ?>
