@@ -1,19 +1,33 @@
 <div id="tabs-1">
-        <h2>Sec. Tec. (Ajax)</h2>
-        Info:
-        <ul>
-            <li>Instit: <?php echo $instit_id?></li>
-            <li>Oferta: <?php echo $oferta_id?></li>
-            <li>Ciclo: <?php echo $ciclo?></li>
-        </ul>
-        Planes:
-        <ul>
+        
         <?php
         foreach($planes as $plan){
         ?>
-            <li><?php echo $plan['Plan']['nombre']?> - <?php echo $plan['EstructuraPlan']['Etapa']['name']?></li>
-        <?
+        <h1><?php echo $plan['EstructuraPlan']['Etapa']['name']?> - <?php echo $plan['Plan']['nombre']?></h1>
+        
+        
+
+        <table border="2" cellpadding="2" cellspacing="0">
+            <tr>
+                <th>Año</th>
+                <th>Matrícula</th>
+                <th>Secciones</th>
+                <th>Horas Taller</th>
+            </tr>
+            <?php
+            foreach($plan['Anio'] as $anio){
+            ?>
+            <tr>
+                <td><?php echo $anio['EstructuraPlanesAnio']['nro_anio']?></td>
+                <td><?php echo $anio['matricula']?></td>
+                <td><?php echo $anio['secciones']?></td>
+                <td><?php echo $anio['hs_taller']?></td>
+            </tr>
+            <?php
+            }?>
+         </table>
+        <?php
         }
         ?>
-        </ul>
+        
 </div>
