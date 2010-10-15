@@ -556,7 +556,7 @@ class PlanesController extends AppController {
                                     ),
                       'contain'=>array(
                                     'EstructuraPlan'=>array('Etapa'),
-                                    'Anio'=> array('conditions'=>array('ciclo_id'=>$ciclo))
+                                    'Anio'=> array('EstructuraPlanesAnio','conditions'=>array('ciclo_id'=>$ciclo))
                                     )
 
                       ));
