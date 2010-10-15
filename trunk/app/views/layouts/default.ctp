@@ -35,7 +35,7 @@
         echo $html->meta('icon');
         echo $html->css('regetp','stylesheet', array('media'=>'screen'));
 
-        
+
 
         echo $html->css('printer','stylesheet', array('media'=>'print'));
 
@@ -64,18 +64,18 @@
             });
         </script>
 
-        
+
         <!--        Permisos ACL segun el grupo del usuario         -->
         <style type="text/css">
             .acl-<?php echo $session->read('User.group_alias')?>{
                 display: block !important;
             }
-        </style>        
+        </style>
     </head>
 
 
     <body>
-        
+
         <? if ($_SERVER['HTTP_HOST']=='localhost') {?>
         <div style="background-color: red; height: 20px; text-align: center">MODO LOCALHOST</div>
         <? }?>
@@ -97,9 +97,9 @@
                 <?     } ?>
             </div>
 
-            
+
             <div id="content">
-                
+
                 <div id="menu">
                 <?
                     echo $this->renderElement('boxSaludo');
@@ -114,7 +114,7 @@
                     echo $this->renderElement('boxAdmin');
                     echo $this->renderElement('boxLogin');
                     echo $this->renderElement('boxSoporteTecnico');
-                ?>                    
+                ?>
                 </div>
 
                 <div id="cuerpo">
@@ -129,12 +129,12 @@
                         <?php echo $content_for_layout; ?>
                     </div>
                 </div>
-                
+
             </div> <!-- FIN div #content -->
 
 
         </div> <!-- FIN div #container -->
-        
+
         <div id="footer">
             <p style="float:left;color:#003d5c;font-size:8pt;padding-left:250px; padding-top:10px; vertical-align: middle;font-weight: bold" >Instituto Nacional de Educación Tecnológica</p>
             <?php echo $html->link(
@@ -151,7 +151,7 @@
                 );
             ?>
         </div>
-        
+
         <?php echo $html->link(
                 $html->image('cake.power.gif', array('alt'=> __("CakePHP: the rapid development php framework", true), 'border'=>"0", 'style'=>'float:right;margin-right:130px')),
                 'http://www.cakephp.org/',
@@ -161,8 +161,8 @@
                 null,
                 false
         ); ?>
-        
+
         <?php echo $cakeDebug; ?>
     </body>
-    
+
 </html>

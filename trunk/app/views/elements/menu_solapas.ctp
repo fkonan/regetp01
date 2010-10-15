@@ -19,7 +19,7 @@ if (empty($elementos)) {
 
 ?>
 
-<div class="tabs-list">
+<div class="tabs-list no-imprimir">
     <?php
     foreach ($elementos as $e) {
         // marco la pestaña activa segun la pagina donde estoy ahora

@@ -9,29 +9,37 @@ echo $javascript->link('scriptaculous-js-1.8.3/src/scriptaculous');
 
 <?php echo $form->create('Plan',array(	'url'=>"/depuradores/sectores_por_sectores/$sec_id/$subsec_id/$plan_nombre",
 										'id'=>'FormSectorPorSector'));?>
+
+
 <?php		
-		echo $form->input('sector_id_filtro', array(
-                                                     'empty' => 'Todos',
-                                                     'type'=>'select',
-                                                     'label'=>'Selecciones un Sector',
-                                                     'value'=>$sec_id,
-                                                     'options'=>$sectores,
-                                                     'id'=>'sector_id_filtro',
-                                                     'onChange'=>'$("FormSectorPorSector").submit();'
-                                                     ));
+        $ops = array('Ambas', 'Sólo Activas');
+        echo $form->input('instit_activa', array(
+                    'label'=>'Buscar en instituciones activas, inactivas o en ambas',
+                    'options'=>$ops,
+            )
+        );
+        echo $form->input('sector_id_filtro', array(
+                     'empty' => 'Todos',
+                     'type'=>'select',
+                     'label'=>'Selecciones un Sector',
+                     'value'=>$sec_id,
+                     'options'=>$sectores,
+                     'id'=>'sector_id_filtro',
+                     'onChange'=>'$("FormSectorPorSector").submit();'
+                     ));
 
-                echo $form->input('subsector_id_filtro', array('empty' => 'Todos',
-                                                     'type'=>'select',
-                                                     'label'=>'Selecciones un Subsector',
-                                                     'value'=>$subsec_id,
-                                                     'options'=>$subsectoreslist,
-                                                     'id'=>'subsector_id_filtro',
-                                                     'onChange'=>'$("FormSectorPorSector").submit();'
-                                                     ));
+        echo $form->input('subsector_id_filtro', array('empty' => 'Todos',
+                     'type'=>'select',
+                     'label'=>'Selecciones un Subsector',
+                     'value'=>$subsec_id,
+                     'options'=>$subsectoreslist,
+                     'id'=>'subsector_id_filtro',
+                     'onChange'=>'$("FormSectorPorSector").submit();'
+                     ));
 
-                echo $form->input('plan_nombre', array('value'=>$plan_nombre, 'label'=>'Nombre del Plan', 'after'=> '<cite>Realiza una búsqueda por parte del nombre del plan.<br>Ej: SOLDADURA</cite>'));
-                
-		echo $form->end('Buscar');
+        echo $form->input('plan_nombre', array('value'=>$plan_nombre, 'label'=>'Nombre del Plan', 'after'=> '<cite>Realiza una búsqueda por parte del nombre del plan.<br>Ej: SOLDADURA</cite>'));
+
+        echo $form->end('Buscar');
 ?> 
 
 <h1>Plan ID: <?php if(isset($this->data['Plan']['id'])) echo $this->data['Plan']['id'];	?>
