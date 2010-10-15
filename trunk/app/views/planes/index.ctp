@@ -2,9 +2,11 @@
     echo $javascript->link('zeroclipboard/ZeroClipboard.js');
     echo $javascript->link('jquery-ui-1.8.5.custom.min.js');
     echo $javascript->link('jquery.loadmask.min');
+    echo $javascript->link('jquery.blockUI');
     echo $html->css('ajaxtabs.css');
     echo $html->css('smoothness/jquery-ui-1.8.5.custom.css');
     echo $html->css(array('jquery.loadmask'));
+    
 ?>
 <?php
 	$link = "";
@@ -161,6 +163,9 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                 </div>
             </div>
     </div>
+    <div id="nueva-data" style="display:none">
+
+    </div>
 </div>
 <script language="JavaScript"  type="text/javascript" defer="defer">
     jQuery(document).ready(function(){
@@ -184,6 +189,35 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
         jQuery(".vertical-tabs").tabs({ spinner: '<?php echo $html->image('loading.gif') ?>' }).addClass('ui-tabs-vertical ui-helper-clearfix');
         jQuery(".vertical-tabs li").removeClass('ui-corner-top').addClass('ui-corner-left');
     });
+
+    function agregar_datos_anios(handler){
+        if(handler != undefined){
+            urlEnvio = jQuery(handler).attr('href');
+        }
+        else{
+            urlEnvio = jQuery(this).attr('href');
+        }
+        
+        jQuery('#nueva-data').load(urlEnvio, function() {
+          jQuery.blockUI({
+                message: "<div style='height:18px;background-color:#87AEC5'><img style='cursor:pointer;float:right' src='<?php echo $html->url('/img/close.png')?>' class='cerrar'/></div>" + jQuery('#nueva-data').html(),
+                css: {
+                    width:          'auto',
+                    top:            '10%',
+                    left:           '25%',
+                    right:          '25%',
+                    textAlign:      'left',
+                    cursor:         'auto'
+                }
+            });
+
+            jQuery('.blockOverlay').attr('title','Cerrar').click(jQuery.unblockUI);
+            jQuery('.cerrar').attr('title','Cerrar').click(jQuery.unblockUI);
+        });
+
+
+        return false;
+    }
 
 </script>
 
