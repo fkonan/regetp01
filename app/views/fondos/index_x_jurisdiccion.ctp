@@ -26,8 +26,7 @@
 ?>
 <div class="fondos index">
    <br /><br />
-   <h2><?= $jurisdiccion['Jurisdiccion']['name']?>
-   </h2>
+   <h1><?= $jurisdiccion['Jurisdiccion']['name']?></h1>
 
     <div class="tabs">
             <?php echo $this->element('menu_solapas_para_jurisdicciones', array('jurisdiccion_id' => $jurisdiccion['Jurisdiccion']['id'])); ?>
