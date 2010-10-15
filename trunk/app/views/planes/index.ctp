@@ -125,7 +125,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                                         <div class="vertical-tabs">
                                             <ul>
                                                     <?php foreach($ciclo['ciclo'] as $anio){?>
-                                                    <li><a href="<?php echo $html->url(array('controller'=>'planes', 'action'=>$ofertasControllers[$oferta], 'instit_id'=>$planes['Instit']['id'], 'oferta_id'=>$oferta, 'ciclo'=>$anio));?>"><span><?php echo $anio?></span></a></li>
+                                                    <li><a href="<?php echo $html->url(array('controller'=>'planes', 'action'=>$ofertasControllers[$oferta], $planes['Instit']['id'], $oferta, $anio));?>"><span><?php echo $anio?></span></a></li>
                                                     <?php } ?>
                                             </ul>
                                         </div>

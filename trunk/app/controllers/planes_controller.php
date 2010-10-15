@@ -538,27 +538,72 @@ class PlanesController extends AppController {
 		}
 	}
 	
-        function view_fp($ciclo=2010) {
+        function view_fp($instit_id,$oferta_id,$ciclo=2010) {
+
 
         }
 
-        function view_it($ciclo=2010) {
+        function view_it($instit_id,$oferta_id,$ciclo=2010) {
 
         }
 
-        function view_sectec($ciclo=2010) {
+        function view_sectec($instit_id,$oferta_id,$ciclo=2010) {
+
+
+
+            $planes = $this->Plan->find("all",array(
+                      'conditions'=>array(
+                                    'instit_id'=>$instit_id,
+                                    'oferta_id'=>$oferta_id
+                                    ),
+                      'contain'=>array(
+                                    'Anio'=> array('conditions'=>array(''))
+                                    )
+
+                      ));
+
+
+
+
+            $this->Plan->recursive = 2;
+            $plan = $this->Plan->read(null, $id);
+
+            $anios = array();
+
+            foreach($plan['Anio'] as $p){
+                    $anios[$p['ciclo_id']][]= $p;
+            }
+
+            $this->set('anios',$anios);
+            $this->set('plan',$plan);
+
+            $this->Plan->Instit->recursive = 1;
+            $instit = $this->Plan->Instit->read(null, $plan['Plan']['instit_id']);
+
+            $this->set('instit',$instit['Instit']);
+            $this->set('matricula', $this->Plan->Anio->matricula_del_plan($id));
+
+            $this->rutaUrl_for_layout[] = array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$instit['Instit']['id'] );
+            $this->rutaUrl_for_layout[] = array('name'=> 'Oferta Educativa','link'=>'/Planes/index/'.$instit['Instit']['id'] );
+
+            $planes_view_tabla['element'] = 'planes_view_tabla_normal';
+            $planes_view_tabla['options'] = array();
+
+            $this->set('instit_id', $instit_id);
+            $this->set('oferta_id', $oferta_id);
+            $this->set('ciclo', $ciclo);
 
         }
 
-        function view_suptec($ciclo=2010) {
+        function view_suptec($instit_id,$oferta_id,$ciclo=2010) {
 
         }
 
-        function view_secnotec($ciclo=2010) {
+        function view_secnotec($instit_id,$oferta_id,$ciclo=2010) {
 
         }
 
-        function view_supnotec($ciclo=2010) {
+        function view_supnotec($instit_id,$oferta_id,$ciclo=2010) {
 
         }
 }
