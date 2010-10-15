@@ -154,5 +154,107 @@ dd {
 }
 
 .actions{
-    display: none;
+    display: none !important;
+}
+
+.acl{
+    display: none !important;
+}
+
+
+/*Lista de Fondos*/
+
+.lista_fondos{
+    list-style-type: none;
+    padding: 0px;
+    width:580px;
+}
+
+.lista_fondos H2{
+    margin-left: 0em;
+    margin-right: 0em;
+    margin-top: 0.5em;
+    margin-bottom: 0.3em;
+}
+
+.lista_fondos .item_fondos{
+    border-top: thin solid #6F7BA3;
+    border-bottom: thin solid #6F7BA3;
+    margin-top: 10px;
+    margin-left:  0px;
+    margin-right: 0px;
+    /*background-color: #E8F2FB;*/
+    margin-bottom: 37px;
+    border: 1px solid #6F7BA3;
+}
+
+.lista_fondos .item_fondos .header{
+    -moz-background-clip:border;
+    -moz-background-inline-policy:continuous;
+    -moz-background-origin:padding;
+    background:#5C9CCC url(../img/fondo_panel_collapsible.png) repeat-x scroll 50% 50%;
+    color:#FFFFFF;
+    font-weight:bold;
+}
+
+.lista_fondos .item_fondos .header dt{
+    text-align: left;
+    padding-left: 15px;
+}
+
+.lista_fondos .item_fondos dd{
+    float: right;
+    padding-right: 10px;
+    font-size: 9pt;
+}
+
+.item_fondos_seleccionado{
+    background-color: #F0F7FC;
+}
+
+.total {
+    padding: 1px 10px;
+    margin-right: -1px;
+    -moz-border-radius-bottomleft:14px;
+    -moz-border-radius-bottomright:14px;
+    -webkit-border-bottom-left-radius: 14px;
+    -webkit-border-bottom-right-radius: 14px;
+    float: right;
+    background-color: white;
+    border-bottom:1px solid #6F7BA3;
+    border-right: 1px solid #6F7BA3;
+    border-left: 1px solid #6F7BA3;
+
+    font-weight:bold;
+    color: black;
+    font-size:9pt;
+    margin-top:0;
+    padding: 3px 10px;
+}
+
+.lista_fondos .item_fondos dt{
+    border-bottom:1px dotted #CCCCCC;
+    font-size: 9pt;
+}
+
+.item_fondos dt{
+    font-weight: normal;
+}
+
+
+.lista_fondos .item_fondos .total dd,dt{
+    padding-top: 2px;
+    padding-left:15px;
+}
+
+
+
+.lista_fondos dl{
+    line-height: 11pt;
+
+}
+
+.lista_fondos dd{
+    margin-top: -17px;
+
 }
