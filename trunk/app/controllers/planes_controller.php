@@ -539,8 +539,23 @@ class PlanesController extends AppController {
 	}
 	
         function view_fp($instit_id,$oferta_id,$ciclo=2010) {
+            $planes = $this->Plan->find("all",array(
+                      'conditions'=>array(
+                                    'instit_id'=>$instit_id,
+                                    'oferta_id'=>$oferta_id
+                                    ),
+                      'contain'=>array(
+                                    'Sector',
+                                    'EstructuraPlan'=>array('Etapa'),
+                                    'Anio'=> array('EstructuraPlanesAnio','conditions'=>array('ciclo_id'=>$ciclo))
+                                    )
 
+                      ));
 
+            $this->set('planes', $planes);
+            $this->set('instit_id', $instit_id);
+            $this->set('oferta_id', $oferta_id);
+            $this->set('ciclo', $ciclo);
         }
 
         function view_it($instit_id,$oferta_id,$ciclo=2010) {
