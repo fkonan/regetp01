@@ -2145,28 +2145,45 @@ div.content{
     width:200px;
 }
 
-    /* Horizontal Tabs */
+/* Horizontal Tabs */
 
-    #horizontal-tabs {
-        border:0px;
-    }
+#horizontal-tabs {
+    border:0px;
+}
 
-    #horizontal-tabs > .ui-tabs-nav {
-        margin-left:97px !important;
-        margin-right:-7px !important;
-    }
-    #horizontal-tabs > .ui-tabs-nav li {
-        width:120px !important;
-    }
-    
-    /* Vertical Tabs */
+#horizontal-tabs > .ui-tabs-nav {
+    margin-left:97px !important;
+    margin-right:-7px !important;
+}
+#horizontal-tabs > .ui-tabs-nav li {
+    width:120px !important;
+}
 
-    #horizontal-tabs .fragment {
-        padding:0px 0px !important;
-    }
-    .ui-tabs-vertical { width: 100%; }
-    .ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left;}
-    .ui-tabs-vertical .ui-tabs-nav li { clear: left; width:70px; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px 0 0; }
-    .ui-tabs-vertical .ui-tabs-nav li a { display:block; }
-    .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-selected { padding-bottom: 0; padding-right: 0; border-right-width: 1px; border-right-width: 1px; }
-    .ui-tabs-vertical .ui-tabs-panel { padding: .1em; float: right; width: 33em;}
+/* Vertical Tabs */
+
+#horizontal-tabs .fragment {
+    padding:0px 0px !important;
+}
+.ui-tabs-vertical { width: 100%; }
+.ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left;}
+.ui-tabs-vertical .ui-tabs-nav li { clear: left; width:70px; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px 0 0; }
+.ui-tabs-vertical .ui-tabs-nav li a { display:block; }
+.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-selected { padding-bottom: 0; padding-right: 0; border-right-width: 1px; border-right-width: 1px; }
+.ui-tabs-vertical .ui-tabs-panel { padding: .1em; float: right; width: 33em;}
+
+.plan_item{
+    border:1px solid #E0EAEF;
+    margin-bottom:15px;
+    padding:5px;
+    cursor: pointer;
+
+}
+
+.plan_item a{
+    text-decoration: none;
+}
+
+.plan_item:hover{
+    background-color: #F4F9FC;
+    text-decoration: none;
+}
