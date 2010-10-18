@@ -1,24 +1,32 @@
+<?php
+    echo $javascript->link('jquery.biggerlink.min.js');
+?>
 <div id="tabs-1">
         
         <?php
         foreach($planes as $plan){
         ?>
-        <div style="border:1px solid #E0EAEF;margin-bottom:15px;padding:5px">
-        <h2>
-            <?php echo $plan['EstructuraPlan']['Etapa']['name']?> - <?php echo $plan['Plan']['nombre']?>
-        </h2>
-        <?php echo $html->link(
-                    $html->image("modify.png", array("alt" => "Editar")),
-                    array('controller'=> 'anios', 'action'=>'editCiclo', $plan['Plan']['id'], $ciclo),
-                    array(
-                        'style'=> 'margin-left: 10px;',
-                        'onclick'=>'agregar_datos_anios(this);return false;',
-                        'class'=>'ajax-link'),null,false);
-        ?>
         <?php
          if(count($plan['Anio'])){
         ?>
-        <table border="2" cellpadding="2" cellspacing="0">
+        <div class="plan_item">
+        <h2 style="float:left">
+            <?php echo $html->link(
+                    $plan['EstructuraPlan']['Etapa']['name'] . " - " . $plan['Plan']['nombre'],
+                    array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']),
+                    null,null,false);
+            ?>
+            
+        </h2>
+        <!--<?php echo $html->link(
+                    $html->image("modify.png", array("alt" => "Editar")),
+                    array('controller'=> 'anios', 'action'=>'editCiclo', $plan['Plan']['id'], $ciclo),
+                    array(
+                        'style'=> 'float:right;margin-left: 10px;',
+                        'onclick'=>'agregar_datos_anios(this);return false;',
+                        'class'=>'ajax-link'),null,false);
+        ?>-->
+            <table width="100%"border="2" cellpadding="2" cellspacing="0">
             <tr>
                 <th>Año</th>
                 <th>Matrícula</th>
@@ -37,16 +45,12 @@
             <?php
             }?>
          </table>
+         </div>
         <?php
-        }
-        else{
-        ?>
-        <cite>No se ingresaron años para el Plan</cite>
-        <?php
-        }?>
-        </div>
-        <?
+            }
         }
         ?>
-        
 </div>
+<script type="text/javascript">
+    jQuery('#tabs-1 .plan_item').biggerlink();
+</script>
