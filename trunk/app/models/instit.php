@@ -1243,21 +1243,29 @@ class Instit extends AppModel {
                                     )
                       ));
 
-            $i = -1;
+            $i = 0;
             $planes_usados = $planes_armados = array();
-            foreach ($anios as $anio) {
-                if (!in_array($anio['Plan']['id'], $planes_usados)) {
-                    $i++;
-                    $planes_armados[$i]['Plan'] = $anio['Plan'];
-                    $planes_usados[] = $anio['Plan']['id'];
+            foreach ($in_planes as $plan) {
+                
+                foreach ($anios as $anio) {
+                    if ($plan == $anio['Plan']['id']) {
 
-                    $j = 0; // para años
+                        if (!in_array($anio['Plan']['id'], $planes_usados)) {
+                            $planes_armados[$i]['Plan'] = $anio['Plan'];
+                            $planes_usados[] = $anio['Plan']['id'];
+
+                            $j = 0; // para años
+                        }
+
+                        $anio['Anio'] =
+                        $planes_armados[$i]['Anio'][$j] = $anio['Anio'];
+                        $planes_armados[$i]['Anio'][$j]['EstructuraPlanesAnio'] = $anio['EstructuraPlanesAnio'];
+                        $j++;
+                    }
                 }
 
-                $anio['Anio'] =
-                $planes_armados[$i]['Anio'][$j] = $anio['Anio'];
-                $planes_armados[$i]['Anio'][$j]['EstructuraPlanesAnio'] = $anio['EstructuraPlanesAnio'];
-                $j++;
+                $i++;
+
             }
             
             return $planes_armados;
