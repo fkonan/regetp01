@@ -39,7 +39,6 @@
          </table>
          </div>
         <?php
-            }
         }
         ?>
 </div>
