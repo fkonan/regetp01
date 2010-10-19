@@ -30,7 +30,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
             ?>
             <div id="d_clip_button" class="my_clip_button2"></div>
             <input id="infoToCopy" type="hidden" value="<?= ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'] . ' - ' .$planes['Instit']['nombre_completo'] . ' - ' . $planes['Instit']['direccion'] . ' - ' . $planes['Departamento']['name'] . ' - ' . $planes['Localidad']['name'] ?> "/>
-            
+
             <div class="tabs-content">
                 <div class="related">
 
@@ -139,7 +139,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                                     ?>
                                 </div>
                             </div>
-                                    
+
 
                 <?php endif;?>
 

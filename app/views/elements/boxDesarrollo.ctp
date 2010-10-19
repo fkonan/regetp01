@@ -9,5 +9,7 @@
         <li><? echo $html->link("Usuarios y permisos","/admin/acl") ?></li>
 
         <li><? echo $html->link("Estructura Planes","/estructura_planes") ?></li>
+
+        <li><? echo $html->link("Descargas SQL","/pquery/queries") ?></li>
     </ul>
 </div>

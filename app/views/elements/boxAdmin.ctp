@@ -23,7 +23,7 @@
 				<li><? echo $html->link("Estados ETP","/EtpEstados") ?></li>
 				<li><? echo $html->link("Clases Instits","/Claseinstits") ?></li>
 				
-				<li><? echo $html->link("Descargas SQL","/Queries") ?></li>
+				
 				
 				<li><? echo $html->link("Estadísticas","http://rfietp.inet.edu.ar/awstats/awstats.pl?config=rfietp") ?></li>
 

@@ -286,6 +286,33 @@ class AjaxHelper extends AppHelper {
 	}
 
 
+
+        function autoComplete($field, $source) {
+            $inputId = intval(mt_rand());
+
+            $output = $this->Form->input($field, array('id' => $inputId));
+
+            $script = '';
+            
+            if (is_array($source)) {
+                $script = 'var availableTags = '.$source;
+            } else {
+                $url = $this->Html->url($source);
+                $script = "var availableTags = '$url'";
+            }
+
+            $script .= '
+                jQuery(function() {
+                    jQuery( "#'.$inputId.'" ).autocomplete({
+                            source: availableTags
+                    });
+                });
+            ';
+
+
+            return $output.$this->Javascript->codeBlock($script);
+        }
+
 /**
  * Creates an Ajax-updateable DIV element
  *
