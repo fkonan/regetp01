@@ -6,17 +6,9 @@
         <?php
         foreach($planes as $plan){
         ?>
-        <?php
-         if(count($plan['Anio'])){
-        ?>
-        <div class="plan_item">
-        <h2 style="float:left">
-            <?php echo $html->link(
-                    $plan['EstructuraPlan']['Etapa']['name'] . " - " . $plan['Plan']['nombre'],
-                    array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']),
-                    null,null,false);
-            ?>
-            
+        <div style="border:1px solid #E0EAEF;margin-bottom:15px;padding:5px">
+        <h2>
+            <?php echo $plan['Plan']['EstructuraPlan']['Etapa']['name']?> - <?php echo $plan['Plan']['nombre']?>
         </h2>
         <!--<?php echo $html->link(
                     $html->image("modify.png", array("alt" => "Editar")),

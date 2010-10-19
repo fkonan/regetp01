@@ -563,8 +563,8 @@ class PlanesController extends AppController {
         }
 
         function view_sectec($instit_id,$oferta_id,$ciclo=2010) {
-
-            $planes = $this->Plan->find("all",array(
+            $planes = $this->Plan->Instit->getPlanes($instit_id, $ciclo, $oferta_id);
+            /*$planes = $this->Plan->find("all",array(
                       'conditions'=>array(
                                     'instit_id'=>$instit_id,
                                     'oferta_id'=>$oferta_id
@@ -575,7 +575,8 @@ class PlanesController extends AppController {
                                     )
 
                       ));
-
+            */
+            
             $this->set('planes', $planes);
             $this->set('instit_id', $instit_id);
             $this->set('oferta_id', $oferta_id);
