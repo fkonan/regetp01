@@ -14,13 +14,13 @@
                                         <?php echo $html->link(__('Ver', true), array('action'=>'view', $plan['Plan']['id'])); ?>
                                 </span>
                                 <div>
-                                    <p >Nombre:</p> <?php echo $plan['Plan']['nombre']; ?>
+                                    Nombre:<?php echo $plan['Plan']['nombre']; ?>
                                 </div>
                                 <div>
-                                    <p>Sector:</p> <?php echo $plan['Sector']['name']; ?>
+                                    Sector: <?php echo $plan['Sector']['name']; ?>
                                 </div>
                                 <div>
-                                    <p>Matricula:</p> <?php echo $plan['Anio'][0]['matricula']; ?>
+                                    Matricula: <?php echo $plan['Anio'][0]['matricula']; ?>
                                 </div>
                                 
                         </div>
