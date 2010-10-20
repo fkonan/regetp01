@@ -596,7 +596,6 @@ class PlanesController extends AppController {
                       'contain'=>array(
                                     'Anio'=> array('Etapa','conditions'=>array('ciclo_id'=>$ciclo))
                                     )
-
                       ));
 
             $this->set('planes', $planes);
