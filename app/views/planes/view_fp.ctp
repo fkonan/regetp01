@@ -1,7 +1,7 @@
 <?php
     echo $javascript->link('jquery.biggerlink.min.js');
 ?>
-<div id="tabs-1" style="margin-bottom: 1em; padding: 10px">
+<div id="tabs-oferta" style="margin-bottom: 1em; padding: 10px">
     <?php
     $i = 0;
     if ((isset($planes)) && (count($planes) > 0)){
