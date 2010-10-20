@@ -8,6 +8,9 @@ BODY{
  display: none;
 }
 
+.info{
+    color: black;
+}
 
 #menu{
 	display: none;
@@ -33,18 +36,17 @@ BODY{
 }
 
 H1{
-	font-size: 18pt;
+	font-size: 100%;
+        text-align: center;
 }
 
 H2{
-	font-size: small;
+	font-size: 90%;
 }
 
 A, A:VISITED{
 	color: #003d4c;
-	text-decoration: underline;
-	font-weight: bold;
-	text-decoration: underline;
+	text-decoration: none;
 	font-weight: bold;
 }
 

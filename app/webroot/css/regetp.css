@@ -30,7 +30,7 @@
 
 /* General Style Info */
 body {
-    color: #fff;
+    color: #000;
     font-family: Verdana, Geneva, sans-serif;
     font-size:10pt;
     margin: 0;
@@ -759,6 +759,14 @@ p.error em {
     padding: 0.8em;
     margin: 1em 0;
 }
+.info {
+    background-color: silver;
+    color: maroon;
+    font-family: Courier, monospace;
+    font-size: 10pt;
+    padding: 10px;
+}
+
 .success {
     background: green;
     color: #fff;

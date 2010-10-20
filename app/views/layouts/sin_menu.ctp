@@ -33,32 +33,23 @@
 	</title>
 	<?php
 		echo $html->meta('icon');
-		echo $html->css('printer');
+		echo $html->css('regetp');
 		echo $html->css('printer','stylesheet', array('media'=>'print'));
 		
-		echo $javascript->link('prototype');
-		echo $javascript->link('mensaje.class');
-		echo $javascript->link('ejecutar_en_head');
-		//echo $javascript->link('form_regetp_ria');
 		echo $scripts_for_layout;
 	?>
-	
 </head>
-<body style="">
-	<script type="text/javascript">		
-		var mensajero = new Mensaje('mensajero');
-	</script>
+<body>
 	
 	<? if ($_SERVER['HTTP_HOST']=='localhost'){?>
 		<div style="background-color: red; height: 20px; text-align: center">MODO LOCALHOST</div>
 	<? }?>
 	
-	<div>	
+        <div id="container">
 		<!-- DIV del mensajero, aca se van a mostrar mensajes AJAX, JS, etc -->
 		<div id="mensajero" style="display: none"></div>
-	
-		
-		<div style="background-color: #F0F7FC; height: 60px; padding-top: 20px; text-align: center; border-bottom: 3px solid #DBEBF6">
+
+		<div>
 			<h1>
 				<?php echo $html->link(__('Registro Federal de Instituciones de Educación Técnico Profesional (RFIETP)', true), '/pages/home'); ?>
 			</h1>	
@@ -70,7 +61,7 @@
 				<?php echo $content_for_layout;?>
 			</div>
 		</div>
-		<div id="footer">
+                <div id="footer" class="no-imprimir">
 			<?php echo $html->link(
 					$html->image('cake.power.gif', array('alt'=> __("CakePHP: the rapid development php framework", true), 'border'=>"0")),
 					'http://www.cakephp.org/',

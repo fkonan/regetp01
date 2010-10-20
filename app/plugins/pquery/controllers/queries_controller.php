@@ -168,6 +168,7 @@ class QueriesController extends PqueryAppController {
             $url_conditions['query.id'] = $id;
             $this->set('queries', $data);
             $this->set('url_conditions', $url_conditions);
+            $this->set('name', $res['Query']['name']);
             $this->set('descripcion', $res['Query']['description']);
             $this->set('viewAll', $viewAll);
 
