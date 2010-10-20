@@ -52,7 +52,6 @@ echo $html->css('jquery.autocomplete.css');
             dataType: "json",
             delay: 200,
             max:30,
-            minChars: 3,
             cacheLength:1,
             extraParams: {
                 jur: function() { return jQuery('#jurisdiccion_id').val(); }

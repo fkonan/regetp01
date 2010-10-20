@@ -3,6 +3,13 @@ echo $javascript->link('jquery-ui-1.8.5.custom.min', false);
 echo $html->css('smoothness/jquery-ui-1.8.5.custom',null, false);
 ?>
 
+<script type="text/javascript">
+        $(function(){
+            jQUery('.editable').editable();
+        })
+</script>
+
+
 <div class="queries form">
 <?php echo $form->create('Query');?>
 	<fieldset>
