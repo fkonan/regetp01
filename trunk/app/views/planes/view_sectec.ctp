@@ -1,7 +1,7 @@
 <?php
     echo $javascript->link('jquery.biggerlink.min.js');
 ?>
-<div id="tabs-1">  
+<div id="tab_oferta">
         <?php
         foreach($planes as $plan){
         ?>
