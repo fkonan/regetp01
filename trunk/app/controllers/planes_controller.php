@@ -20,11 +20,11 @@ class PlanesController extends AppController {
 
                 // posibles controllers de ofertas
                 $ofertasControllers[1] = 'view_fp';
-                $ofertasControllers[2] = 'view_it';
+                $ofertasControllers[2] = 'view_it_sec';
                 $ofertasControllers[3] = 'view_sectec';
-                $ofertasControllers[4] = 'view_suptec';
-                $ofertasControllers[5] = 'view_secnotec';
-                $ofertasControllers[6] = 'view_supnotec';
+                $ofertasControllers[4] = 'view_sup';
+                $ofertasControllers[5] = 'view_it_sec';
+                $ofertasControllers[6] = 'view_sup';
 
 		$v_plan_matricula = array();
 		
@@ -558,24 +558,26 @@ class PlanesController extends AppController {
             $this->set('ciclo', $ciclo);
         }
 
-        function view_it($instit_id,$oferta_id,$ciclo=2010) {
-
-        }
-
-        function view_sectec($instit_id,$oferta_id,$ciclo=2010) {
-            $planes = $this->Plan->Instit->getPlanes($instit_id, $ciclo, $oferta_id);
-            /*$planes = $this->Plan->find("all",array(
+        function view_it_sec($instit_id,$oferta_id,$ciclo=2010) {
+            $planes = $this->Plan->find("all",array(
                       'conditions'=>array(
                                     'instit_id'=>$instit_id,
                                     'oferta_id'=>$oferta_id
                                     ),
                       'contain'=>array(
-                                    'EstructuraPlan'=>array('Etapa'),
-                                    'Anio'=> array('EstructuraPlanesAnio','conditions'=>array('ciclo_id'=>$ciclo))
+                                    'Anio'=> array('Etapa','conditions'=>array('ciclo_id'=>$ciclo))
                                     )
 
                       ));
-            */
+
+            $this->set('planes', $planes);
+            $this->set('instit_id', $instit_id);
+            $this->set('oferta_id', $oferta_id);
+            $this->set('ciclo', $ciclo);
+        }
+
+        function view_sectec($instit_id,$oferta_id,$ciclo=2010) {
+            $planes = $this->Plan->Instit->getPlanes($instit_id, $ciclo, $oferta_id);
             
             $this->set('planes', $planes);
             $this->set('instit_id', $instit_id);
@@ -584,16 +586,23 @@ class PlanesController extends AppController {
 
         }
 
-        function view_suptec($instit_id,$oferta_id,$ciclo=2010) {
 
-        }
+        function view_sup($instit_id,$oferta_id,$ciclo=2010) {
+            $planes = $this->Plan->find("all",array(
+                      'conditions'=>array(
+                                    'instit_id'=>$instit_id,
+                                    'oferta_id'=>$oferta_id
+                                    ),
+                      'contain'=>array(
+                                    'Anio'=> array('Etapa','conditions'=>array('ciclo_id'=>$ciclo))
+                                    )
 
-        function view_secnotec($instit_id,$oferta_id,$ciclo=2010) {
+                      ));
 
-        }
-
-        function view_supnotec($instit_id,$oferta_id,$ciclo=2010) {
-
+            $this->set('planes', $planes);
+            $this->set('instit_id', $instit_id);
+            $this->set('oferta_id', $oferta_id);
+            $this->set('ciclo', $ciclo);
         }
 }
 ?>
