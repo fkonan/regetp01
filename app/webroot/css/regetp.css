@@ -2200,7 +2200,6 @@ div.content{
     text-decoration: none;
     color: #233E87;
     font-size:8pt;
-    float:left;
     margin-bottom: 4px;
 }
 
@@ -2221,5 +2220,9 @@ div.content{
     border: 0px solid #E5E5E5;
     padding: 1px;
     background-color: transparent;
+}
+
+.tabla_plan caption {
+    text-align: left;
 }
 
