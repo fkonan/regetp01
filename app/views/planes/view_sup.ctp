@@ -8,14 +8,14 @@
             {
             ?>
             <div class="plan_item">
-                <h2 style="float:left">
-                    <?php echo $html->link(
-                            $plan['Plan']['nombre'],
-                            array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']),
-                            null,null,false);
-                    ?>
-                </h2>
-                <table width="100%"border="2" cellpadding="2" cellspacing="0">
+                <table class="tabla_plan" width="100%"border="2" cellpadding="2" cellspacing="0">
+                    <caption>
+                        <?php echo $html->link(
+                                $plan['Plan']['nombre'],
+                                array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']),
+                                null,null,false);
+                        ?>
+                    </caption>
                 <tr>
                     <th>Año</th>
                     <th>Matrícula</th>

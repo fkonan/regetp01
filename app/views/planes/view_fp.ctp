@@ -2,6 +2,7 @@
     echo $javascript->link('jquery.biggerlink.min.js');
 ?>
 <div id="tabs-oferta" style="margin-bottom: 1em; padding: 10px">
+    <span>Buscar: </span><input id="buscador" type="text"/>
     <?php
     $i = 0;
     if ((isset($planes)) && (count($planes) > 0)){

@@ -6,20 +6,23 @@
         foreach($planes as $plan){
         ?>
         <div class="plan_item">
-            <h2 style="float:left">
-                <?php echo $html->link(
+            
+            <table class="tabla_plan" width="100%"border="2" cellpadding="2" cellspacing="0">
+                <caption>
+                    <?php echo $html->link(
                         $plan['Plan']['EstructuraPlan']['Etapa']['name'] . " - " . $plan['Plan']['nombre'],
                         array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']),
                         null,null,false);
-                ?>
-            </h2>
-            <table width="100%"border="2" cellpadding="2" cellspacing="0">
-            <tr>
-                <th>Año</th>
-                <th>Matrícula</th>
-                <th>Secciones</th>
-                <th>Horas Taller</th>
-            </tr>
+                    ?>
+                </caption>
+                <thead>
+                    <tr>
+                        <th>Año</th>
+                        <th>Matrícula</th>
+                        <th>Secciones</th>
+                        <th>Horas Taller</th>
+                    </tr>
+                </thead>
             <?php
             foreach($plan['Anio'] as $anio){
             ?>
