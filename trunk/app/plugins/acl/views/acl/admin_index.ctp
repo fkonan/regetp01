@@ -4,6 +4,7 @@
   <li><?php print $html->image('/acl/img/tango/32x32/apps/system-users.png') ?><?php print $html->link('Manage Usuarios', '/admin/acl/aros') ?></li>
   <li><?php print $html->image('/acl/img/tango/32x32/apps/preferences-system-windows.png') ?><?php print $html->link('Manage Controladores', '/admin/acl/acos') ?></li>
   <li><?php print $html->image('/acl/img/tango/32x32/emblems/emblem-readonly.png') ?><?php print $html->link('Manage Permisos', '/admin/acl/permissions') ?></li>
+  <li><?php print $html->image('/acl/img/tree.png') ?><?php print $html->link('Arbol de Permisos', '/admin/acl/tree') ?></li>
   <li><?php print $html->image('/acl/img/tango/32x32/apps/preferences-system-windows.png') ?><?php print $html->link('Actualizar Controladores', '/aclprep/buildAcos',array('target'=>'_blank')) ?></li>
 </ul>
 <br />

@@ -19,9 +19,8 @@
 </div>
 
 <div id="treecontrol">
-        <a title="Collapse the entire tree below" href="#"><img src="../images/minus.gif" /> Collapse All</a>
-        <a title="Expand the entire tree below" href="#"><img src="../images/plus.gif" /> Expand All</a>
-        <a title="Toggle the tree below, opening closed branches, closing open branches" href="#">Toggle All</a>
+        <a title="Collapse the entire tree below" href="#"><?php print $html->image('/acl/js/jquery-treeview/images/minus.gif', array('align' => 'absmiddle')) ?> Collapse All</a>
+        <a title="Expand the entire tree below" href="#"><?php print $html->image('/acl/js/jquery-treeview/images/plus.gif', array('align' => 'absmiddle')) ?> Expand All</a>
 </div>
 
 <ul class="treeview-black treeview" id="black">
