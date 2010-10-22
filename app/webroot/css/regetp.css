@@ -2188,9 +2188,28 @@ div.content{
 
 .plan_item a{
     text-decoration: none;
+    color: #233E87;
+    font-size:8pt;
+    float:left;
+    margin-bottom: 4px;
 }
 
 .plan_item:hover{
     background-color: #F4F9FC;
     text-decoration: none;
 }
+
+/* TABLAS PLAN */
+
+.tabla_plan{
+    border: 0px solid #E5E5E5;
+    margin-bottom: 0px;
+    margin-top: 2px;
+}
+
+.tabla_plan tr td {
+    border: 0px solid #E5E5E5;
+    padding: 1px;
+    background-color: transparent;
+}
+
