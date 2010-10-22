@@ -2,7 +2,9 @@
     echo $javascript->link('jquery.biggerlink.min.js');
 ?>
 <div id="tabs-oferta" style="margin-bottom: 1em; padding: 10px">
-    <span>Buscar: </span><input id="buscador" type="text"/>
+    <div style="margin-bottom:20px">
+        <span>Buscar: </span><input id="buscador" type="text"/>
+    </div>
     <?php
     $i = 0;
     if ((isset($planes)) && (count($planes) > 0)){
@@ -15,11 +17,11 @@
         ?>
             <!--<div style="border:1px solid #E0EAEF;margin-bottom:15px;padding:5px;cursor:pointer">-->
             <div class="plan_item">
-                <div>
+                <div class="plan_title">
                     <?php echo $html->link($plan['Plan']['nombre'], array('action'=>'view', $plan['Plan']['id'])); ?>
                 </div>
                 <div>
-                    Sector: <?php echo $plan['Sector']['name']; ?>
+                    Sector: <span class="plan_name"><?php echo $plan['Sector']['name']; ?></span>
                 </div>
                 <div>
                     Matricula: <?php echo $plan['Anio'][0]['matricula']; ?>
@@ -41,4 +43,5 @@
 </div>
 <script type="text/javascript">
     jQuery('#tabs-1 .plan_item').biggerlink();
+
 </script>
