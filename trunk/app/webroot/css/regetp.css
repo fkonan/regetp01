@@ -2167,6 +2167,16 @@ div.content{
     width:120px !important;
 }
 
+.ui-state-default > a{
+    display: block;
+    width: 100%;
+}
+
+.ui-state-default > A > SPAN{
+    float: none;
+    display: inline;
+}
+
 /* Vertical Tabs */
 
 #horizontal-tabs .fragment {
