@@ -8,34 +8,36 @@
             {
             ?>
             <div class="plan_item">
-                <h2 style="float:left">
-                    <?php echo $html->link(
-                            $plan['Plan']['nombre'],
-                            array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']),
-                            null,null,false);
+                <table class="tabla_plan" width="100%" border="2" cellpadding="2" cellspacing="0">
+                    <caption>
+                        <?php echo $html->link(
+                        $plan['Plan']['nombre'],
+                        array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']),
+                        null,null,false);
+                        ?>
+                    </caption>
+                    <thead>
+                        <tr>
+                            <th>Año</th>
+                            <th>Etapa</th>
+                            <th>Matrícula</th>
+                            <th>Secciones</th>
+                            <th>Horas Taller</th>
+                        </tr>
+                    </thead>
+                    <?php
+                    foreach($plan['Anio'] as $anio){
                     ?>
-                </h2>
-                <table width="100%"border="2" cellpadding="2" cellspacing="0">
-                <tr>
-                    <th>Año</th>
-                    <th>Etapa</th>
-                    <th>Matrícula</th>
-                    <th>Secciones</th>
-                    <th>Horas Taller</th>
-                </tr>
-                <?php
-                foreach($plan['Anio'] as $anio){
-                ?>
-                <tr>
-                    <td><?php echo $anio['anio']?>º</td>
-                    <td><?php echo $anio['Etapa']['name']?></td>
-                    <td><?php echo $anio['matricula']?></td>
-                    <td><?php echo $anio['secciones']?></td>
-                    <td><?php echo $anio['hs_taller']?></td>
-                </tr>
+                    <tr>
+                        <td><?php echo $anio['anio']?>º</td>
+                        <td><?php echo $anio['Etapa']['name']?></td>
+                        <td><?php echo $anio['matricula']?></td>
+                        <td><?php echo $anio['secciones']?></td>
+                        <td><?php echo $anio['hs_taller']?></td>
+                    </tr>
                 <?php
                 }?>
-             </table>
+                </table>
              </div>
             <?php
             }
