@@ -552,6 +552,20 @@ class PlanesController extends AppController {
 
                       ));
 
+            $sectores = $this->Plan->find("all",array(
+                      'fields'=>array(
+                                        'DISTINCT Sector.id', 'Sector.name'
+                                     ),
+                      'conditions'=>array(
+                                    'instit_id'=>$instit_id,
+                                    'oferta_id'=>$oferta_id
+                                    ),
+                      'contain'=>array(
+                                    'Sector'
+                                    )
+                      ));
+
+            $this->set('sectores', $sectores);
             $this->set('planes', $planes);
             $this->set('instit_id', $instit_id);
             $this->set('oferta_id', $oferta_id);
