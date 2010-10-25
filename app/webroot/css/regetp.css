@@ -2226,3 +2226,7 @@ div.content{
     text-align: left;
 }
 
+.tabla_plan caption span a {
+     font-size: 9pt !important;
+}
+

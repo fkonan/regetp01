@@ -19,6 +19,10 @@
             <div class="plan_item">
                 <div class="plan_title">
                     <?php echo $html->link($plan['Plan']['nombre'], array('action'=>'view', $plan['Plan']['id'])); ?>
+                    <span style="float:right;"><?php echo $html->link("ver más",
+                        array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']),
+                        null,null,false);
+                    ?></span>
                 </div>
                 <div>
                     Sector: <span class="plan_name"><?php echo $plan['Sector']['name']; ?></span>
@@ -46,7 +50,7 @@
 
     jQuery('#buscador').live('keyup', function() {
         jQuery('.plan_item .plan_title a').each(function () {
-            if(jQuery(this).html().toLowerCase().replace(/^\s+|\s+$/g,"").indexOf(jQuery('#buscador').val().replace(/^\s+|\s+$/g,"").toLowerCase()) >= 0 ){
+            if(limpiarCadena(jQuery(this).html()).indexOf(limpiarCadena(jQuery('#buscador').val())) >= 0 ){
                 jQuery(this).parent().parent().show();
             }
             else{
@@ -54,4 +58,19 @@
             }
         });
     });
+    
+    
+    function limpiarCadena(string) {
+        string = string.toUpperCase();
+        string=string.replace(/^\s+|\s+$/g,""); // trim
+        string=string.replace(/(À|Á|Â|Ã|Ä|Å|Æ)/gi,'A'); // cambio las "A"s exoticas por "A"s sencillas mediante expresiones regulares
+        string=string.replace(/(È|É|Ê|Ë)/gi,'E'); //lo mismo con las "E" y resto de vocales y la "Ñ"
+        string=string.replace(/(Ì|Í|Î|Ï)/gi,'I');
+        string=string.replace(/(Ò|Ó|Ô|Ö)/gi,'O');
+        string=string.replace(/(Ù|Ú|Û|Ü)/gi,'U');
+        string = string.toLowerCase();
+        
+        return string;
+    }
+
 </script>
