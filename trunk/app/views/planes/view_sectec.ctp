@@ -14,6 +14,10 @@
                         array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']),
                         null,null,false);
                     ?>
+                    <span style="float:right;"><?php echo $html->link("ver más",
+                        array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']),
+                        null,null,false);
+                    ?></span>
                 </caption>
                 <thead>
                     <tr>
