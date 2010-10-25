@@ -44,4 +44,14 @@
 <script type="text/javascript">
     jQuery('#tabs-1 .plan_item').biggerlink();
 
+    jQuery('#buscador').live('keyup', function() {
+        jQuery('.plan_item .plan_title a').each(function () {
+            if(jQuery(this).html().toLowerCase().replace(/^\s+|\s+$/g,"").indexOf(jQuery('#buscador').val().replace(/^\s+|\s+$/g,"").toLowerCase()) >= 0 ){
+                jQuery(this).parent().parent().show();
+            }
+            else{
+                jQuery(this).parent().parent().hide();
+            }
+        });
+    });
 </script>
