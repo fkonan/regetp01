@@ -113,11 +113,11 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
 
                                                             $clase = ($current_ciclo == $c)?'selected':'';
                                             ?>
-                                            <span class="<?= $clase;?>"><?php echo $html->link($c,"/planes/index/$instit_id/Anio.ciclo_id:$c", array('class'=>$clase));?></span>
+                                            <span class="<?= $clase;?>"><?php echo $html->link($c,"/planes/index_clasico/$instit_id/Anio.ciclo_id:$c", array('class'=>$clase));?></span>
                                             <?php endforeach;?>
 
                                                     <?php $clase = ($current_ciclo == 0)?'selected':'';?>
-                                                    <span class="<?= $clase;?>"><?php echo $html->link('Ver Todos',"/planes/index/$instit_id/Anio.ciclo_id:0", array('class'=>$clase));?></span>
+                                                    <span class="<?= $clase;?>"><?php echo $html->link('Ver Todos',"/planes/index_clasico/$instit_id/Anio.ciclo_id:0", array('class'=>$clase));?></span>
                                     </div>
 
                                     <div style="border-top:1px solid #6F7FA8;margin-bottom: 1em; padding: 10px">

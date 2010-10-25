@@ -56,7 +56,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
         if(empty($planes['Plan'])){
         ?>
             <div class="tabs-content">
-               <h2>Listado de Ofertas</h2>
+                <h2>Listado de Ofertas <span style="float:right;font-size:9pt"><?php echo $html->link(__('Ver vista clásica', true), array('controller'=> 'planes', 'action'=>'index_clasico/'. $planes['Instit']['id']))?></span></h2>
                    <ul class="lista_fondos" style="padding-top: 20px;">
                    <p class='msg-atencion'>La Institución no presentó ofertas</p>
                </ul>
@@ -108,7 +108,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                             <?php endif ?>
                     </div>
                     <div>
-                        <h2>Listado de Ofertas</h2>
+                        <h2>Listado de Ofertas <span style="float:right;font-size:9pt"><?php echo $html->link(__('Ver vista clásica', true), array('controller'=> 'planes', 'action'=>'index_clasico/'. $planes['Instit']['id']))?></span></h2>
                         <div id="horizontal-tabs">
                             <ul>
                                 <?php
@@ -128,6 +128,12 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                                             <?php foreach($ciclo['ciclo'] as $anio){?>
                                             <li><a href="<?php echo $html->url(array('controller'=>'planes', 'action'=>$ofertasControllers[$oferta], $planes['Instit']['id'], $oferta, $anio));?>"><span><?php echo $anio?></span></a></li>
                                             <?php } ?>
+                                            <?php
+                                            if($oferta == 1){?>
+                                                <li><a href="<?php echo $html->url(array('controller'=>'planes', 'action'=>$ofertasControllers[$oferta], $planes['Instit']['id'], $oferta, 0));?>"><span>Todos</span></a></li>
+                                            <?php
+                                            }
+                                            ?>
                                     </ul>
                                 </div>
                             </div>
