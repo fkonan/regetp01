@@ -2,8 +2,22 @@
     echo $javascript->link('jquery.biggerlink.min.js');
 ?>
 <div id="tabs-oferta" style="margin-bottom: 1em; padding: 10px">
+    <span>Buscar: </span>
+    <span style="margin-left:195px;">Sector: </span>
     <div style="margin-bottom:20px">
-        <span>Buscar: </span><input id="buscador" type="text"/>
+        <input id="buscador" type="text" style="width:230px; float:left"/>
+        <span style="display:inline; vertical-align: bottom">
+            <select id="sectores" style="width:200px;margin-left:20px">
+                <option value="0">Todos</option>
+            <?php
+            foreach ($sectores as $sector){
+            ?>
+                <option value="<?php echo $sector['Sector']['id']?>"><?php echo $sector['Sector']['name']?></option>
+            <?
+            }
+            ?>
+            </select>
+        </span>
     </div>
     <?php
     $i = 0;
@@ -15,14 +29,18 @@
                     $class = ' class="altrow"';
             }
         ?>
-            <!--<div style="border:1px solid #E0EAEF;margin-bottom:15px;padding:5px;cursor:pointer">-->
             <div class="plan_item">
                 <div class="plan_title">
-                    <?php echo $html->link($plan['Plan']['nombre'], array('action'=>'view', $plan['Plan']['id'])); ?>
-                    <span style="float:right;"><?php echo $html->link("ver más",
-                        array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']),
-                        null,null,false);
-                    ?></span>
+                    <?php
+                        echo $html->link($plan['Plan']['nombre'],
+                                         array('action'=>'view', $plan['Plan']['id']),array('class'=>'title'));
+                    ?>
+                    <span style="float:right;">
+                        <?php
+                            echo $html->link("ver más",array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']),
+                            null,null,false);
+                        ?>
+                    </span>
                 </div>
                 <div>
                     Sector: <span class="plan_name"><?php echo $plan['Sector']['name']; ?></span>
@@ -30,6 +48,7 @@
                 <div>
                     Matricula: <?php echo $plan['Anio'][0]['matricula']; ?>
                 </div>
+                <input class="plan_sector" type="hidden" value="<?php echo $plan['Sector']['id']?>"/>
             </div>
     <?php }
     endforeach;
@@ -49,17 +68,39 @@
     jQuery('#tabs-1 .plan_item').biggerlink();
 
     jQuery('#buscador').live('keyup', function() {
-        jQuery('.plan_item .plan_title a').each(function () {
-            if(limpiarCadena(jQuery(this).html()).indexOf(limpiarCadena(jQuery('#buscador').val())) >= 0 ){
-                jQuery(this).parent().parent().show();
+        jQuery('.plan_item .plan_title > .title').each(function () {
+            if(limpiarCadena(jQuery(this).html()).indexOf(limpiarCadena(jQuery('#buscador').val())) >= 0)
+            {
+                if((jQuery(this).parent().parent().find(".plan_sector").val() == jQuery('#sectores').val()) || jQuery('#sectores').val() == 0){
+                    jQuery(this).parent().parent().show();
+                }
+                else{
+                    jQuery(this).parent().parent().hide();
+                }
             }
             else{
                 jQuery(this).parent().parent().hide();
             }
         });
     });
-    
-    
+
+    jQuery('#sectores').live('change', function() {
+        jQuery('.plan_item .plan_sector').each(function () {
+            if(jQuery(this).val() == jQuery('#sectores').val() || jQuery('#sectores').val() == 0){
+                if(limpiarCadena(jQuery(this).parent().find(".plan_title > .title").html()).indexOf(limpiarCadena(jQuery('#buscador').val())) >= 0)
+                {
+                    jQuery(this).parent().show();
+                }
+                else{
+                    jQuery(this).parent().hide();
+                }
+            }
+            else{
+                jQuery(this).parent().hide();
+            }
+        });
+    });
+
     function limpiarCadena(string) {
         string = string.toUpperCase();
         string=string.replace(/^\s+|\s+$/g,""); // trim
@@ -69,8 +110,7 @@
         string=string.replace(/(Ò|Ó|Ô|Ö)/gi,'O');
         string=string.replace(/(Ù|Ú|Û|Ü)/gi,'U');
         string = string.toLowerCase();
-        
+
         return string;
     }
-
 </script>
