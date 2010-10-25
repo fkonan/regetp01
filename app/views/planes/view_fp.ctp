@@ -2,8 +2,8 @@
     echo $javascript->link('jquery.biggerlink.min.js');
 ?>
 <div id="tabs-oferta" style="margin-bottom: 1em; padding: 10px">
-    <span>Buscar: </span>
-    <span style="margin-left:195px;">Sector: </span>
+    <span>Título: </span>
+    <span style="margin-left:205px;">Sector: </span>
     <div style="margin-bottom:20px">
         <input id="buscador" type="text" style="width:230px; float:left"/>
         <span style="display:inline; vertical-align: bottom">

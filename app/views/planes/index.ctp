@@ -46,9 +46,6 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                 }
         ?>
         <?=$link?>
-        <?
-        $paginator->options(array('url' => $url_conditions));
-        ?>
 
         <?
         //si el anexo tiene 1 solo digito le coloco un cero adelante
