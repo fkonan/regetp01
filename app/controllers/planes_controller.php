@@ -420,7 +420,13 @@ class PlanesController extends AppController {
 		}
 	}
 	
-        function view_fp($instit_id,$oferta_id,$ciclo=2010) {
+        function view_fp($instit_id,$oferta_id,$ciclo) {
+            $conditionsAnio = array();
+            
+            if($ciclo != 0){
+                $conditionsAnio = array('ciclo_id'=>$ciclo);
+            }
+
             $planes = $this->Plan->find("all",array(
                       'conditions'=>array(
                                     'instit_id'=>$instit_id,
@@ -429,7 +435,7 @@ class PlanesController extends AppController {
                       'contain'=>array(
                                     'Sector',
                                     'EstructuraPlan'=>array('Etapa'),
-                                    'Anio'=> array('EstructuraPlanesAnio','conditions'=>array('ciclo_id'=>$ciclo))
+                                    'Anio'=> array('EstructuraPlanesAnio','conditions'=>$conditionsAnio)
                                     )
 
                       ));
