@@ -53,7 +53,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                 if(empty($planes['Plan'])){
                 ?>
                     <div class="tabs-content">
-                       <h2>Listado de Ofertas</h2>
+                       <h2>Listado de Ofertas<span style="float:right;font-size:9pt"><?php echo $html->link(__('Ver vista por solapas', true), array('controller'=> 'planes', 'action'=>'index/'. $planes['Instit']['id']))?></span></h2>
                            <ul class="lista_fondos" style="padding-top: 20px;">
                            <p class='msg-atencion'>La Institución no presentó ofertas</p>
                        </ul>
@@ -103,7 +103,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                                 </div>
                             <?php endif ?>
                             <div >
-                                    <h2>Listado de Ofertas</h2>
+                                    <h2>Listado de Ofertas<span style="float:right;font-size:9pt"><?php echo $html->link(__('Ver vista por solapas', true), array('controller'=> 'planes', 'action'=>'index/'. $planes['Instit']['id']))?></span></h2>
                                     <div class="shadetabs">
                                             <?php
                                                     $current_ciclo = $url_conditions['Anio.ciclo_id'];
