@@ -5,9 +5,9 @@ echo $javascript->link('jquery.biggerlink.min.js');
     <span>Título: </span>
     <span style="margin-left:205px;">Sector: </span>
     <div style="margin-bottom:20px">
-        <input id="buscador" type="text" style="width:230px; float:left"/>
+        <input id="buscador" type="text" style="width:30%; float:left"/>
         <span style="display:inline; vertical-align: bottom">
-            <select id="sectores" style="width:200px;margin-left:20px">
+            <select id="sectores" style="width:30%;margin-left:20px">
                 <option value="0">Todos</option>
                 <?php
                 foreach ($sectores as $sector) {
@@ -16,6 +16,18 @@ echo $javascript->link('jquery.biggerlink.min.js');
                     <?
                 }
                 ?>
+            </select>
+        </span>
+        <span style="display:inline; vertical-align: bottom">
+            <select id="ciclos" style="width:20%;margin-left:20px">
+                <option value="0">Todos</option>
+            <?php
+            foreach($ciclos_anios as $ciclos_anio){
+            ?>
+                <option value="<?php echo $ciclos_anio;?>"><?php echo $ciclos_anio;?></option>
+            <?
+            }
+            ?>
             </select>
         </span>
     </div>
@@ -49,6 +61,7 @@ echo $javascript->link('jquery.biggerlink.min.js');
             </span>
         </div>
         <input class="plan_sector" type="hidden" value="<?php echo $plan['Sector']['id']?>"/>
+        <input class="plan_ciclo" type="hidden" value="<?php echo $plan['Anio'][0]['ciclo_id']?>"/>
     </div>
                 <?php }
         endforeach;
@@ -67,50 +80,5 @@ echo $javascript->link('jquery.biggerlink.min.js');
 <script type="text/javascript">
     jQuery('#tabs-1 .plan_item').biggerlink();
 
-    jQuery('#buscador').live('keyup', function() {
-        jQuery('.plan_item .plan_title > .title').each(function () {
-            if(limpiarCadena(jQuery(this).html()).indexOf(limpiarCadena(jQuery('#buscador').val())) >= 0)
-            {
-                if((jQuery(this).parent().parent().find(".plan_sector").val() == jQuery('#sectores').val()) || jQuery('#sectores').val() == 0){
-                    jQuery(this).parent().parent().show();
-                }
-                else{
-                    jQuery(this).parent().parent().hide();
-                }
-            }
-            else{
-                jQuery(this).parent().parent().hide();
-            }
-        });
-    });
-
-    jQuery('#sectores').live('change', function() {
-        jQuery('.plan_item .plan_sector').each(function () {
-            if(jQuery(this).val() == jQuery('#sectores').val() || jQuery('#sectores').val() == 0){
-                if(limpiarCadena(jQuery(this).parent().find(".plan_title > .title").html()).indexOf(limpiarCadena(jQuery('#buscador').val())) >= 0)
-                {
-                    jQuery(this).parent().show();
-                }
-                else{
-                    jQuery(this).parent().hide();
-                }
-            }
-            else{
-                jQuery(this).parent().hide();
-            }
-        });
-    });
-
-    function limpiarCadena(string) {
-        string = string.toUpperCase();
-        string=string.replace(/^\s+|\s+$/g,""); // trim
-        string=string.replace(/(À|Á|Â|Ã|Ä|Å|Æ)/gi,'A'); // cambio las "A"s exoticas por "A"s sencillas mediante expresiones regulares
-        string=string.replace(/(È|É|Ê|Ë)/gi,'E'); //lo mismo con las "E" y resto de vocales y la "Ñ"
-        string=string.replace(/(Ì|Í|Î|Ï)/gi,'I');
-        string=string.replace(/(Ò|Ó|Ô|Ö)/gi,'O');
-        string=string.replace(/(Ù|Ú|Û|Ü)/gi,'U');
-        string = string.toLowerCase();
-
-        return string;
-    }
+    
 </script>

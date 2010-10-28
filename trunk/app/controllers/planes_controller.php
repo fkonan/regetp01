@@ -453,11 +453,14 @@ class PlanesController extends AppController {
                                     )
                       ));
 
+            $ciclos_anios = $this->Plan->Anio->Ciclo->find("list");
+
             $this->set('sectores', $sectores);
             $this->set('planes', $planes);
             $this->set('instit_id', $instit_id);
             $this->set('oferta_id', $oferta_id);
             $this->set('ciclo', $ciclo);
+            $this->set('ciclos_anios', $ciclos_anios);
         }
 
         function view_it_sec($instit_id,$oferta_id,$ciclo=2010) {
@@ -479,6 +482,13 @@ class PlanesController extends AppController {
         }
 
         function view_sectec($instit_id,$oferta_id,$ciclo=2010) {
+
+            $conditionsAnio = array();
+
+            if($ciclo == 0){
+                $this->Plan->setTraerUltimaAct(true);
+            }
+            
             $planes = $this->Plan->Instit->getPlanes($instit_id, $ciclo, $oferta_id);
             
             $this->set('planes', $planes);
