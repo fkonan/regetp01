@@ -1,23 +1,27 @@
 <?php
-    echo $javascript->link('jquery.biggerlink.min.js');
+    echo $javascript->link('jquery.biggerlink.min.js', false);
 ?>
 <div id="tab_oferta">
         <?php
         foreach($planes as $plan){
         ?>
-        <div class="plan_item">
-            
-            <table class="tabla_plan" width="100%"border="2" cellpadding="2" cellspacing="0">
-                <caption>
-                    <?php echo $html->link(
-                        $plan['Plan']['EstructuraPlan']['Etapa']['name'] . " - " . $plan['Plan']['nombre'],
+    <div class="plan_item" title="Haciendo click verá más información de éste plan">
+             <span  class="plan_etapa_name">
+                    <?php echo $plan['Plan']['EstructuraPlan']['Etapa']['name']?>
+             </span>
+             <span style="float:right;">
+                    <?php echo $html->link("ver más",
                         array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']),
                         null,null,false);
                     ?>
-                    <span style="float:right;"><?php echo $html->link("ver más",
+             </span>
+
+            <table class="tabla_plan" cellpadding="2px" cellspacing="0px">
+                <caption class="plan_title">
+                     <?php echo $html->link($plan['Plan']['nombre'],
                         array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']),
                         null,null,false);
-                    ?></span>
+                    ?>
                 </caption>
                 <thead>
                     <tr>
@@ -40,6 +44,7 @@
             }?>
          </table>
          </div>
+    <div class="clear"></div><br />
         <?php
         }
         ?>
