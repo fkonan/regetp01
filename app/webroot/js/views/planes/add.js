@@ -1,9 +1,9 @@
 function toggleTitulos(){
      if (jQuery('#PlanOfertaId').val() != '') {
-        jQuery('#divPlanTituloId').show();
+        jQuery('#divPlanTituloName').show();
     }
     else {
-         jQuery('#divPlanTituloId').hide();
+         jQuery('#divPlanTituloName').hide();
     }
 
     toggleEstructuraPlan();
@@ -16,4 +16,9 @@ function toggleEstructuraPlan() {
     else {
         jQuery('#PlanEstructura').show();
     }
+}
+
+
+function formatResult(titulo) {
+        return titulo.name;
 }

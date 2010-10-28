@@ -110,5 +110,66 @@ class TitulosController extends AppController {
 		}
 	}
 
+
+        function ajax_search($q = null){
+            $this->autoRender = false;
+            $result = array();
+            $jur= 0;
+
+            if (!empty($this->params['url']['oferta_id'])) {
+                $oferta_id = utf8_decode(strtolower($this->params['url']['oferta_id']));
+            }
+
+            if(empty($q)) {
+                if (!empty($this->params['url']['q'])) {
+                    $q = utf8_decode(strtolower($this->params['url']['q']));
+                } else {
+                    return utf8_encode("parámetro vacio");
+                }
+            }
+
+            if ( $this->RequestHandler->isAjax() ) {
+                Configure::write ( 'debug', 0 );
+            }
+
+            $response = '';
+
+            if(@$oferta_id > 0){
+                $conditions = array(
+                                "to_ascii(lower(Titulo.name)) SIMILAR TO ?" => "%". $q ."%",
+                                "Titulo.oferta_id" => $oferta_id
+                              );
+            }else{
+                $conditions = array(
+                                "to_ascii(lower(Titulo.name)) SIMILAR TO ?" => "%". $q ."%"
+                              );
+            }
+
+            $this->Titulo->recursive = -1;
+            $titulos = $this->Titulo->find("all", array(
+                            'conditions'=> $conditions,
+                            'order' => array('Titulo.name')
+                            )
+                    );
+
+            foreach ($titulos as $item) {
+                array_push($result, array(
+                        "id" => $item['Titulo']['id'],
+                        "type" => "Titulo",
+                        "name" => utf8_encode($item['Titulo']['name'])
+                ));
+            }
+
+            if(sizeof($result) == 0){
+                array_push($result, array(
+                            "id" => '',
+                            "type" => "Vacio",
+                            "name" => 'No se encontraron resultados'
+                ));
+            }
+
+            echo json_encode($result);
+        }
+
 }
 ?>
