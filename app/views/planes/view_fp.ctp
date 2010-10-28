@@ -1,5 +1,5 @@
 <?php
-    echo $javascript->link('jquery.biggerlink.min.js');
+echo $javascript->link('jquery.biggerlink.min.js');
 ?>
 <div id="tabs-oferta" style="margin-bottom: 1em; padding: 10px">
     <span>Título: </span>
@@ -9,60 +9,60 @@
         <span style="display:inline; vertical-align: bottom">
             <select id="sectores" style="width:200px;margin-left:20px">
                 <option value="0">Todos</option>
-            <?php
-            foreach ($sectores as $sector){
-            ?>
+                <?php
+                foreach ($sectores as $sector) {
+                    ?>
                 <option value="<?php echo $sector['Sector']['id']?>"><?php echo $sector['Sector']['name']?></option>
-            <?
-            }
-            ?>
+                    <?
+                }
+                ?>
             </select>
         </span>
     </div>
     <?php
     $i = 0;
-    if ((isset($planes)) && (count($planes) > 0)){
+    if ((isset($planes)) && (count($planes) > 0)) {
         foreach ($planes as $plan):
-            if(count($plan['Anio']) > 0){
-            $class = null;
-            if ($i++ % 2 == 0) {
-                    $class = ' class="altrow"';
-            }
-        ?>
-            <div class="plan_item">
-                <div class="plan_title">
-                    <?php
-                        echo $html->link($plan['Plan']['nombre'],
-                                         array('action'=>'view', $plan['Plan']['id']),array('class'=>'title'));
-                    ?>
-                    <span style="float:right;">
+            if(count($plan['Anio']) > 0) {
+                $class = null;
+                if ($i++ % 2 == 0) {
+                    $class = 'altrow';
+                }
+                ?>
+    <div class="plan_item <?php echo $class?>">
+        <span class="plan_title">
                         <?php
-                            echo $html->link("ver más",array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']),
-                            null,null,false);
+                        echo $html->link($plan['Plan']['nombre'],
+                        array('action'=>'view', $plan['Plan']['id']),array('class'=>'title'));
                         ?>
-                    </span>
-                </div>
-                <div>
-                    Sector: <span class="plan_name"><?php echo $plan['Sector']['name']; ?></span>
-                </div>
-                <div>
-                    Matricula: <?php echo $plan['Anio'][0]['matricula']; ?>
-                </div>
-                <input class="plan_sector" type="hidden" value="<?php echo $plan['Sector']['id']?>"/>
-            </div>
-    <?php }
-    endforeach;
+        </span>
+        <span style="float:right;">
+                        <?php
+                        echo $html->link("más info",array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']),
+                        null,null,false);
+                        ?>
+        </span>
+        <div>
+           Matrícula: <?php echo $plan['Anio'][0]['matricula']; ?>
+            <span style="float:right;">
+                 Sector: <span class="plan_name"><?php echo $plan['Sector']['name']; ?></span>
+            </span>
+        </div>
+        <input class="plan_sector" type="hidden" value="<?php echo $plan['Sector']['id']?>"/>
+    </div>
+                <?php }
+        endforeach;
     } else {
-    ?>
-            <div>
-                <?php $año_actual = date('Y',strtotime('now'));?>
-                <?php if($datoUltimoCiclo['max_ciclo'] != $año_actual && $current_ciclo == $año_actual):?>
-                        <p class='msg-atencion'>La Instituci&oacute;n no presenta actualizaciones para este año</p>
-                <?php else:?>
-                        <p class='msg-atencion'>No se obtuvieron resultados</p>
-                <?php endif;?>
-            </div>
-    <?} ?>
+        ?>
+    <div>
+            <?php $año_actual = date('Y',strtotime('now'));?>
+            <?php if($datoUltimoCiclo['max_ciclo'] != $año_actual && $current_ciclo == $año_actual):?>
+        <p class='msg-atencion'>La Instituci&oacute;n no presenta actualizaciones para este año</p>
+            <?php else:?>
+        <p class='msg-atencion'>No se obtuvieron resultados</p>
+            <?php endif;?>
+    </div>
+        <?} ?>
 </div>
 <script type="text/javascript">
     jQuery('#tabs-1 .plan_item').biggerlink();

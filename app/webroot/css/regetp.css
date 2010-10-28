@@ -55,6 +55,10 @@ a img {
     border:none;
 }
 
+.altrow{
+    background-color: #F7FAFE;
+}
+
 .aPend{
     border:3px solid #DF7D7D;
     background-color: #FF9F9F;
@@ -102,14 +106,13 @@ a img {
 
 h1, h2, h3, h4 {
     font-weight: normal;
-    font-family: Garamond, serif;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 h1 {
     color: #045FB4;
     font-size: 12pt;
     font-weight: bold;
-    font-family:Arial, Helvetica, sans-serif;
     padding-top: 0.4em;
     margin-top: 0.3em;
     margin-right: 0;
@@ -122,7 +125,6 @@ h1 {
 h2 {
     color: #045FB4;
     font-weight: bold;
-    font-family:Arial, Helvetica, sans-serif;
     font-size: 11pt;
     margin-top: 0.9em;
     margin-bottom: 1em;
@@ -142,6 +144,13 @@ h3 {
     margin-top: 1.1em;
     font-size: 12pt;
 }
+
+h4 {
+    color: black;
+    font-size: 10pt;
+}
+
+
 ul, li {
     margin: 0 12px;
 }
@@ -488,11 +497,10 @@ CAPTION{
 
 th {
     background: #F0F7FC;
-    border: 1px solid #bbb;
-    border-top: 1px solid #f0f7fc;
-    border-left: 1px solid #f0f7fc;
+    border: none;
     text-align: center;
-    color: #003D4C;
+    color: #045fB4;
+    font-weight: normal;
 }
 th a {
     background:#f2f2f2;
@@ -2001,7 +2009,7 @@ div.content{
 }
 
 .mover{
-       padding-left: 62px;
+       margin-left: 50px;
 }
 
 /* depurador de planes */
@@ -2160,7 +2168,7 @@ div.content{
 }
 
 #horizontal-tabs > .ui-tabs-nav {
-    margin-left:79px !important;
+    margin-left:76px !important;
     margin-right:-4px !important;
 }
 #horizontal-tabs > .ui-tabs-nav li {
@@ -2192,47 +2200,71 @@ div.content{
 .ui-tabs-vertical .ui-tabs-nav li a { display:block; font-size:9.5pt; font-weight:normal; padding:0.5em 1em !important;}
 .ui-tabs-vertical .ui-tabs-nav li .ui-tabs-selected { margin-bottom:2px !important; }
 .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-selected { padding-bottom: 0; border-right-width: 1px; border-right-width: 1px; }
-.ui-tabs-vertical .ui-tabs-panel { padding: .1em; float: right; width: 33.6em; border: 1px solid #CCCCCC ;-moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;}
+.ui-tabs-vertical .ui-tabs-panel { padding: .1em; float: right; width: 498px; border: 1px solid #CCCCCC ;-moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;}
 
 
 .plan_item{
-    border:1px solid #E0EAEF;
-    margin-bottom:15px;
+    margin-bottom:-1px;
     padding:5px;
     cursor: pointer;
+    font-size: 8pt;
+    font-weight: normal;
+    text-align: left;
+
+}
+.plan_etapa_name{
+    font-size: 8pt;
+    color: #045FB4;
+}
+
+.plan_item TABLE{
+    margin: 0px auto;
+    text-align: left;
+    font-size: 9pt;
+    background-color: transparent;
+    border:1px outset #B6BABD;
+}
+
+.plan_item CAPTION{
+    color: black;
+}
+
+.plan_item TH{
+    font-weight: normal;
 }
 
 .plan_item a{
     text-decoration: none;
-    color: #233E87;
-    font-size:8pt;
     margin-bottom: 4px;
+}
+.plan_item a:HOVER{
+    text-decoration: underline;
 }
 
 .plan_item:hover{
-    background-color: #F4F9FC;
-    text-decoration: none;
+    background-color: #fff9f2;
+}
+
+.plan_title, .plan_title A{
+    color: black;
 }
 
 /* TABLAS PLAN */
 
 .tabla_plan{
-    border: 0px solid #E5E5E5;
+}
+
+.plan_item TABLE{
     margin-bottom: 0px;
-    margin-top: 2px;
 }
 
 .tabla_plan tr td {
     border: 0px solid #E5E5E5;
     padding: 1px;
-    background-color: transparent;
 }
 
 .tabla_plan caption {
     text-align: left;
 }
 
-.tabla_plan caption span a {
-     font-size: 9pt !important;
-}
 
