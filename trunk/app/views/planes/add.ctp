@@ -1,5 +1,7 @@
-<?echo $javascript->link('jquery.loadmask.min');?>
-<?echo $javascript->link('views/planes/add');?>
+<?
+echo $javascript->link(array('jquery.autocomplete', 'jquery.blockUI', 'jquery.loadmask.min', 'views/planes/add'));
+echo $html->css('jquery.autocomplete.css');
+?>
 <script type="text/javascript">   
     jQuery(document).ready(function () {
         toggleTitulos();
@@ -9,7 +11,44 @@
             jQuery("div[estructura_plan_id]").hide();
             jQuery("div[estructura_plan_id=" + jQuery(this).val() + "]").show();
         });
+
+
+        jQuery("#PlanTituloName").autocomplete("<?echo $html->url(array('controller'=>'titulos','action'=>'ajax_search'));?>", {
+            dataType: "json",
+            delay: 200,
+            max:30,
+            cacheLength:1,
+            extraParams: {
+                oferta_id: function() { return jQuery('#PlanOfertaId').val(); }
+            } ,
+            parse: function(data) {
+                return jQuery.map(data, function(titulo) {
+                    return {
+                        data: titulo,
+                        value: titulo.id,
+                        result: formatResult(titulo)
+                    }
+                });
+            },
+            formatItem: function(item) {
+                return formatResult(item);
+            }
+        }).result(function(e, item) {
+            if(item.type == 'Vacio'){
+                jQuery("#PlanTituloName").val('');
+                jQuery("#PlanTituloId").val('');
+            }
+            else{
+                jQuery("#PlanTituloId").val(item.id);
+            }
+        });
+
+        jQuery("#PlanTituloName").attr('autocomplete','off');
+        
     });
+
+
+
 </script>
 
 <h1>Nueva Oferta Educativa</h1>
@@ -71,22 +110,14 @@ $cue_instit = $instit['cue'].$anexo;
         <?php
                 //echo $form->input('estructura_plan_id',array('id'=>'PlanEstructuraPlanId', 'empty'=>'Seleccione'));
 
-                $meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
-                echo $form->input(
-                'titulo_id',
-                array(
-                    'empty'=>'Seleccione',
-                    'label'=> 'Título de Referencia',
-                    'style'=>'max-width: 550px;',
-                    'after'=> $meter.'<br /><cite>Seleccione primero una oferta.</cite>',
-                    'div'=>array('id'=>'divPlanTituloId')));
+                
                 echo $ajax->observeField(
                 'PlanOfertaId',
                 array(
-                    'update'=> 'PlanTituloId',
+                    'update'=> 'PlanTituloName',
                     'url'=>'/titulos/list_por_oferta_id',
-                    'loading'=>'jQuery("#ajax_indicator").show();jQuery("#PlanTituloId").attr("disabled","disabled")',
-                    'complete'=>'jQuery("#ajax_indicator").hide();jQuery("#PlanTituloId").removeAttr("disabled")',
+                    'loading'=>'jQuery("#ajax_indicator").show();jQuery("#PlanTituloName").attr("disabled","disabled")',
+                    'complete'=>'jQuery("#ajax_indicator").hide();jQuery("#PlanTituloName").removeAttr("disabled")',
                     'onChange'=>true)
                      );
         
@@ -107,6 +138,17 @@ $cue_instit = $instit['cue'].$anexo;
 		                                   	'complete'=>'jQuery("#ajax_indicator2").hide();jQuery("#PlanSubsectorId").removeAttr("disabled")',
 		                                   	'onChange'=>true
                                    ));
+
+                $meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
+                echo $form->input(
+                'tituloName',
+                array(
+                    'label'=> 'Título de Referencia',
+                    'id' => 'PlanTituloName',
+                    'style'=>'max-width: 550px;',
+                    'after'=> $meter.'<cite>Seleccione primero una oferta.</cite>',
+                    'div'=>array('id'=>'divPlanTituloName')));
+                echo $form->input('titulo_id',array('type'=>'hidden'));
                                    
 		echo "<br>Duración:";
 		echo $form->input('duracion_hs',array('label'=>'- Horas','maxlength'=>9));
