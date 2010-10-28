@@ -129,7 +129,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                                             <li><a href="<?php echo $html->url(array('controller'=>'planes', 'action'=>$ofertasControllers[$oferta], $planes['Instit']['id'], $oferta, $anio));?>"><span><?php echo $anio?></span></a></li>
                                             <?php } ?>
                                             <?php
-                                            if($oferta == 1){?>
+                                            if($oferta == 1 || $oferta == 3){?>
                                                 <li><a href="<?php echo $html->url(array('controller'=>'planes', 'action'=>$ofertasControllers[$oferta], $planes['Instit']['id'], $oferta, 0));?>"><span>Todos</span></a></li>
                                             <?php
                                             }
@@ -222,6 +222,66 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
 
 
         return false;
+    }
+
+    jQuery('#buscador').live('keyup', function() {
+        togglePlanes('.plan_item');
+    });
+
+    jQuery('#sectores').live('change', function() {
+        togglePlanes('.plan_item');
+    });
+
+    jQuery('#ciclos').live('change', function() {
+        togglePlanes('.plan_item');
+    });
+
+
+
+    function limpiarCadena(string) {
+        if(string == null) return "";
+        
+        string = string.toUpperCase();
+        string=string.replace(/^\s+|\s+$/g,""); // trim
+        string=string.replace(/(À|Á|Â|Ã|Ä|Å|Æ)/gi,'A'); // cambio las "A"s exoticas por "A"s sencillas mediante expresiones regulares
+        string=string.replace(/(È|É|Ê|Ë)/gi,'E'); //lo mismo con las "E" y resto de vocales y la "Ñ"
+        string=string.replace(/(Ì|Í|Î|Ï)/gi,'I');
+        string=string.replace(/(Ò|Ó|Ô|Ö)/gi,'O');
+        string=string.replace(/(Ù|Ú|Û|Ü)/gi,'U');
+        string = string.toLowerCase();
+
+        return string;
+    }
+
+    function togglePlanes(selector){
+        jQuery(selector).each(function () {
+            togglePlane(this);
+        });
+    }
+    function togglePlane(plan){
+        var resultado;
+        var mostrar = true;
+        var plan_item = jQuery(plan).closest('.plan_item');
+
+        //TITULO
+        resultado = (limpiarCadena(jQuery(plan).find(".plan_title > .title").html()).indexOf(limpiarCadena(jQuery('#buscador').val())) >= 0);
+        mostrar = (mostrar && resultado);
+
+        //SECTOR
+        resultado = (plan_item.find(".plan_sector").val() == jQuery('#sectores').val()) || jQuery('#sectores').val() == 0 ;
+        mostrar = (mostrar && resultado);
+
+        //CICLO
+        resultado = (plan_item.find(".plan_ciclo").val() == jQuery('#ciclos').val()) || jQuery('#ciclos').val() == 0 ;
+        mostrar = (mostrar && resultado);
+
+
+        if(mostrar){
+            jQuery(plan_item).show();
+        }
+        else{
+            jQuery(plan_item).hide();
+        }
     }
 
     
