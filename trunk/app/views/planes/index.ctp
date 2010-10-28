@@ -1,11 +1,11 @@
 <?php
-    echo $javascript->link('zeroclipboard/ZeroClipboard.js');
-    echo $javascript->link('jquery-ui-1.8.5.custom.min.js');
-    echo $javascript->link('jquery.loadmask.min');
-    echo $javascript->link('jquery.blockUI');
-    echo $html->css('ajaxtabs.css');
-    echo $html->css('smoothness/jquery-ui-1.8.5.custom.css');
-    echo $html->css(array('jquery.loadmask'));
+    echo $javascript->link('zeroclipboard/ZeroClipboard.js',false);
+    echo $javascript->link('jquery-ui-1.8.5.custom.min.js',false);
+    echo $javascript->link('jquery.loadmask.min',false);
+    echo $javascript->link('jquery.blockUI',false);
+    echo $html->css('ajaxtabs.css',null, false);
+    echo $html->css('smoothness/jquery-ui-1.8.5.custom.css',null, false);
+    echo $html->css(array('jquery.loadmask'),null, false);
     
 ?>
 <?php
@@ -15,7 +15,7 @@
 		$link = "<a class='aPend' href=\"";
 		$link .= $html->url(array('controller'=> 'tickets', 'action'=>$action.'/'.$ticket_id));
 		$link .= "\" onClick=\"window.open('".$html->url(array('controller'=> 'tickets', 'action'=>$action.'/'.$ticket_id));
-		$link .= "','_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=310,height=390');";
+		$link .= "','_blank' , 'toolbar=0,scro  llbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=310,height=390');";
 		$link .= " return false;\">Pendiente de Actualización</a>";
 	}
 ?>
