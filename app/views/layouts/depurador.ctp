@@ -35,7 +35,7 @@
         echo $html->css('depurador_planes','stylesheet', array('media'=>'screen'));
 
         // plugin jquery UI
-        echo $html->css('smoothness/jquery-ui-1.8.5.custom','stylesheet', array('media'=>'screen'));
+        //echo $html->css('smoothness/jquery-ui-1.8.5.custom','stylesheet', array('media'=>'screen'));
 
 
         echo $javascript->link( array(
