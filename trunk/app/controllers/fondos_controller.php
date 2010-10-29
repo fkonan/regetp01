@@ -21,10 +21,14 @@ class FondosController extends AppController {
                         $this->Session->setFlash(__($this->Auth->planesMejoraError, true));
                         $this->redirect(array('controller'=>'Instits', 'action'=>'view', $id));
                     }
+
+                    // solo ve dependencias provinciales (desde v1.6.3)
+                    $this->paginate['conditions']['Instit.dependencia_id'] = DEPENDENCIA_PROVINCIAL;
                 }
                 // fin de chequeo
 
-                $this->paginate = array('conditions'=>array('Fondo.instit_id'=>$id),'order' => array('Fondo.anio DESC','Fondo.trimestre DESC','Fondo.jurisdiccion_id DESC'));
+                $this->paginate['conditions']['Fondo.instit_id'] = $id;
+                $this->paginate['order'] = array('Fondo.anio DESC','Fondo.trimestre DESC','Fondo.jurisdiccion_id DESC');
             }
             else {
                 $this->Session->setFlash(__('No especifica institución', true));
@@ -35,9 +39,9 @@ class FondosController extends AppController {
             $this->Fondo->recursive = 1;
             //$this->set('sumalineas',  $this->Fondo->FondosLineasDeAccion->find('sum',array('conditions'=>array('Fondo.instit_id'=>$id) ) ) );
             
-            $condicion = array('Fondo.instit_id'=>$id);
+            $condicion['Fondo.instit_id'] = $id;
 
-            $this->set('sumalineas',  $this->Fondo->FondosLineasDeAccion->find('sum', array('conditions'=>$condicion)) );
+            $this->set('sumalineas', $this->Fondo->FondosLineasDeAccion->find('sum', array('conditions'=>$condicion)) );
 
             $this->set('instit', $instit);
             $this->set('fondos', $this->paginate());

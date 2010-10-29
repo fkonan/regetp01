@@ -515,5 +515,34 @@ class PlanesController extends AppController {
             $this->set('oferta_id', $oferta_id);
             $this->set('ciclo', $ciclo);
         }
+
+        function edicionMasiva1Dot6Dot3() {
+            set_time_limit(30000000);
+            $this->Plan->recursive = 0;
+            $planes = $this->Plan->find("all",array(
+                      'conditions'=>array(
+                                    'EstructuraPlan.etapa_id' => 102
+                                    )
+                      ));   
+    
+            foreach ($planes as &$plan) {
+                $nombre = $plan['Plan']['nombre'];
+                $pos=strpos($nombre, '(');
+                if ($pos !== false) {
+                    $plan['Plan']['nombre'] = "PRIMER CICLO ".substr($nombre, $pos);
+                }
+                else {
+                    $plan['Plan']['nombre'] = "PRIMER CICLO";
+                }
+                $plan['Plan']['titulo_id'] = 997;
+
+                $planes_to_save['Plan'][] = $plan['Plan'];
+            }
+
+            $this->Plan->saveAll($planes_to_save['Plan']);
+
+            die('done');
+        }
+
 }
 ?>

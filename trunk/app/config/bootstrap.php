@@ -62,6 +62,13 @@ define('ETAPA_CB',4);
 define('ETAPA_EGB3',1);
 define('ETAPA_PC',102);
 
+/**
+ * ID`s de DEPENDENCIAS
+ */
+define('DEPENDENCIA_PROVINCIAL', 1);
+define('DEPENDENCIA_NACIONAL', 2);
+define('DEPENDENCIA_OTROS', 9);
+
 
 
 function limpiar_nombre($string) {
