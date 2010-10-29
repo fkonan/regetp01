@@ -271,13 +271,22 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
         resultado = (limpiarCadena(jQuery(plan).find(".plan_title > .title").html()).indexOf(limpiarCadena(jQuery('#buscador').val())) >= 0);
         mostrar = (mostrar && resultado);
 
+        // guarda en cookie para recordar
+        Set_Cookie( 'planes_buscadorfp_titulo', limpiarCadena(jQuery('#buscador').val()), '', '/', '', '' );
+
         //SECTOR
         resultado = (plan_item.find(".plan_sector").val() == jQuery('#sectores').val()) || jQuery('#sectores').val() == 0 ;
         mostrar = (mostrar && resultado);
 
+        // guarda en cookie para recordar
+        Set_Cookie( 'planes_buscadorfp_sector', jQuery('#sectores').val(), '', '/', '', '' );
+
         //CICLO
         resultado = (plan_item.find(".plan_ciclo").val() == jQuery('#ciclos').val()) || jQuery('#ciclos').val() == 0 ;
         mostrar = (mostrar && resultado);
+
+        // guarda en cookie para recordar
+        Set_Cookie( 'planes_buscadorfp_ciclo', jQuery('#ciclos').val(), '', '/', '', '' );
 
 
         if(mostrar){
