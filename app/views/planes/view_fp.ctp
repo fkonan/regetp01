@@ -1,6 +1,27 @@
 <?php
 echo $javascript->link('jquery.biggerlink.min.js');
 ?>
+<script language="JavaScript"  type="text/javascript" defer="defer">
+    jQuery(document).ready(function() {
+        setearBuscador();
+    });
+
+    function setearBuscador() {
+        if ( Get_Cookie( 'planes_buscadorfp_titulo' )) {
+            jQuery('#buscador').val(Get_Cookie( 'planes_buscadorfp_titulo' ));
+        }
+
+        if ( Get_Cookie( 'planes_buscadorfp_sector' )) {
+            jQuery('#sectores').val(Get_Cookie( 'planes_buscadorfp_sector' ));
+        }
+
+        if ( Get_Cookie( 'planes_buscadorfp_ciclo' )) {
+            jQuery('#ciclos').val(Get_Cookie( 'planes_buscadorfp_ciclo' ));
+        }
+
+        togglePlanes('.plan_item');
+    }
+</script>
 <div id="tabs-oferta" style="margin-bottom: 1em; padding: 10px">
     <span>Título: </span>
     <span style="margin-left:205px;">Sector: </span>

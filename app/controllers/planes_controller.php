@@ -427,6 +427,10 @@ class PlanesController extends AppController {
                 $conditionsAnio = array('ciclo_id'=>$ciclo);
             }
 
+            // guarda en session la solapa
+            $this->Session->write('Plan.View.Oferta', 'view_fp');
+
+
             $planes = $this->Plan->find("all",array(
                       'conditions'=>array(
                                     'instit_id'=>$instit_id,
@@ -464,6 +468,9 @@ class PlanesController extends AppController {
         }
 
         function view_it_sec($instit_id,$oferta_id,$ciclo=2010) {
+            // guarda en session la solapa
+            $this->Session->write('Plan.View.Oferta', 'view_it_sec');
+
             $planes = $this->Plan->find("all",array(
                       'conditions'=>array(
                                     'instit_id'=>$instit_id,
@@ -483,6 +490,9 @@ class PlanesController extends AppController {
 
         function view_sectec($instit_id,$oferta_id,$ciclo=2010) {
 
+            // guarda en session la solapa
+            $this->Session->write('Plan.View.Oferta', 'view_sectec');
+
             $conditionsAnio = array();
 
             if($ciclo == 0){
@@ -500,6 +510,10 @@ class PlanesController extends AppController {
 
 
         function view_sup($instit_id,$oferta_id,$ciclo=2010) {
+
+            // guarda en session la solapa
+            $this->Session->write('Plan.View.Oferta', 'view_sup');
+
             $planes = $this->Plan->find("all",array(
                       'conditions'=>array(
                                     'instit_id'=>$instit_id,
