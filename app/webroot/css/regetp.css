@@ -1886,14 +1886,7 @@ Trayectos
 	color:#548DA5;
 }
 
-li span{
-	/* The event icon */
-	display:block;
-	float:left;
-	height:16px;
-	margin-right:5px;
-	width:16px;
-}
+
 
 /* Individual background images for each type of event: */
 
@@ -2168,22 +2161,15 @@ div.content{
 }
 
 #horizontal-tabs > .ui-tabs-nav {
-    margin-left:76px !important;
+    margin-left:114px !important;
     margin-right:-4px !important;
 }
 #horizontal-tabs > .ui-tabs-nav li {
     width:120px !important;
+    z-index: 5;
+    margin-bottom:0px;
 }
 
-.ui-state-default > a{
-    display: block;
-    width: 100%;
-}
-
-.ui-state-default > A > SPAN{
-    float: none;
-    display: inline;
-}
 
 /* Vertical Tabs */
 
@@ -2191,26 +2177,46 @@ div.content{
     padding:0px 0px !important;
 }
 
-#horizontal-tabs .ui-tabs-nav li a { padding: 0.2em 1em; font-weight: normal }
+#horizontal-tabs .ui-tabs-nav li a {    font-weight: normal }
 
+#horizontal-tabs .ui-tabs-nav li{
+     
+     margin:0 0.2em 0 0;
+}
+
+#horizontal-tabs .ui-state-active{
+    border-bottom-color: white !important;
+}
+
+.ui-tabs-vertical .ui-tabs-nav .ui-state-active{
+    border-right-color: white !important;
+    padding:4px 0px !important;
+}
+/*
+border-right-color: white !important;
+border-bottom-color: white !important;
+*/
+#tabs-oferta{
+    padding: 0em 4em;
+}
 
 .ui-tabs-vertical { width: 100%; }
-.ui-tabs-vertical .ui-tabs-nav { padding: 0 0 0 0 !important; border:0px; float: left;}
-.ui-tabs-vertical .ui-tabs-nav li { clear: left; width:70px; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px 0 0; }
-.ui-tabs-vertical .ui-tabs-nav li a { display:block; font-size:9.5pt; font-weight:normal; padding:0.5em 1em !important;}
+.ui-tabs-vertical .ui-tabs-nav { float: left; margin-top: 29px}
+.ui-tabs-vertical .ui-tabs-nav li { clear: left; width:70px;}
+.ui-tabs-vertical .ui-tabs-nav li a { display:block; font-weight:normal; padding: 0.3em 0em;}
 .ui-tabs-vertical .ui-tabs-nav li .ui-tabs-selected { margin-bottom:2px !important; }
-.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-selected { padding-bottom: 0; border-right-width: 1px; border-right-width: 1px; }
-.ui-tabs-vertical .ui-tabs-panel { padding: .1em; float: right; width: 498px; border: 1px solid #CCCCCC ;-moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;}
+.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-selected { padding-bottom: 0; }
+.ui-tabs-vertical .ui-tabs-panel { background: url(images/fondo_plan_item.jpg) repeat-y; float: right; padding: 30px 30px; min-height: 200px;  width: 480px; border: 1px solid #CCCCCC ;-moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;}
 
 
 .plan_item{
     margin-bottom:-1px;
-    padding:5px;
+    padding:5px 5px 5px 15px;
     cursor: pointer;
     font-size: 8pt;
     font-weight: normal;
     text-align: left;
-
+    border-left: 4px solid #efefef;
 }
 .plan_etapa_name{
     font-size: 8pt;
@@ -2231,6 +2237,9 @@ div.content{
 
 .plan_item TH{
     font-weight: normal;
+    background-color: white;
+    border: none;
+    border-bottom: 1px solid #f2f2fc;
 }
 
 .plan_item a{
@@ -2242,7 +2251,8 @@ div.content{
 }
 
 .plan_item:hover{
-    background-color: #fff9f2;
+    background-color: #efefef;
+    border-left: 4px solid #045fb4;
 }
 
 .plan_title, .plan_title A{

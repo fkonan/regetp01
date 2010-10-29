@@ -1,5 +1,5 @@
 <?php
-    echo $javascript->link('jquery.biggerlink.min.js');
+    echo $javascript->link('jquery.biggerlink.min.js',false);
 ?>
 <div id="tabs-1">  
         <?php
@@ -8,17 +8,18 @@
             {
             ?>
             <div class="plan_item">
+                <span style="float:right;"><?php echo $html->link("ver más",
+                            array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']),
+                            null,null,false);
+                      ?>
+                </span>
                 <table class="tabla_plan" width="100%"border="2" cellpadding="2" cellspacing="0">
-                    <caption>
+                    <caption class="plan_title">
                         <?php echo $html->link(
                                 $plan['Plan']['nombre'],
                                 array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']),
                                 null,null,false);
                         ?>
-                        <span style="float:right;"><?php echo $html->link("ver más",
-                            array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']),
-                            null,null,false);
-                        ?></span>
                     </caption>
                 <tr>
                     <th>Año</th>
@@ -39,6 +40,7 @@
                 }?>
              </table>
              </div>
+            <br />
             <?php
             }
         }
