@@ -45,7 +45,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                         $link .= " return false;\">Pendiente de Actualización</a></div>";
                 }
         ?>
-        <?=$link?>
+        <?= $link?>
 
         <?
         //si el anexo tiene 1 solo digito le coloco un cero adelante
@@ -66,7 +66,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
         ?>
         <?php
                 //if(isset($sumatoria_matriculas['array_de_ciclos'])>0 && isset($sumatoria_matriculas['array_de_ofertas'])>0):
-                if(isset($planes['Plan'])  && count($planes['Plan'])>0):?>
+                if(!empty($planes['Plan'])):?>
                     <!-- TABS DE CICLOS ULT. ACTUALIZACIONES  -->
                     <div>
                         <div>
@@ -107,7 +107,10 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                                 </div>
                             <?php endif ?>
                     </div>
-                    <div>
+                    <!-- EOF Tabla resumen de total de matriculas -->
+
+
+                    <div class="megatabs">
                         <h2>Listado de Ofertas <span style="float:right;font-size:9pt"><?php echo $html->link(__('Ver vista clásica', true), array('controller'=> 'planes', 'action'=>'index_clasico/'. $planes['Instit']['id']))?></span></h2>
                         <div id="horizontal-tabs">
                             <ul>
@@ -119,15 +122,17 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                                 }
                                 ?>
                             </ul>
+                        </div>
+                        <div>
                             <?php
                             foreach($ciclos as $oferta=>$ciclo){
                             ?>
-                            <div id="fragment-<?php echo $oferta?>" class="fragment">
-                                <div class="vertical-tabs">
-                                    <ul>
+                            <div id="fragment-<?php echo $oferta?>" class="fragment vertical-tabs">
+                                <ul class="ul-tabs-vertical">
                                             <?php foreach($ciclo['ciclo'] as $anio){?>
                                             <li><a href="<?php echo $html->url(array('controller'=>'planes', 'action'=>$ofertasControllers[$oferta], $planes['Instit']['id'], $oferta, $anio));?>"><span><?php echo $anio?></span></a></li>
                                             <?php } ?>
+                                            
                                             <?php
                                             if($oferta == 1 || $oferta == 3){?>
                                                 <li><a href="<?php echo $html->url(array('controller'=>'planes', 'action'=>$ofertasControllers[$oferta], $planes['Instit']['id'], $oferta, 0));?>"><span>Todos</span></a></li>
@@ -135,7 +140,6 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                                             }
                                             ?>
                                     </ul>
-                                </div>
                             </div>
                             <?php
                             }
@@ -186,7 +190,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
 
         clip.glue( 'd_clip_button' );
 
-        jQuery("#horizontal-tabs").tabs({ selected: 0 });
+        jQuery('.megatabs').tabs({ selected: 0 });
 
     });
 
