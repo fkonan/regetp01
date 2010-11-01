@@ -18,6 +18,120 @@
 		$link .= " return false;\">Pendiente de Actualización</a>";
 	}
 ?>
+<script language="JavaScript" type="text/javascript" defer="defer">
+    jQuery(document).ready(function(){
+        var clip = new ZeroClipboard.Client();
+
+        ZeroClipboard.setMoviePath('<?php echo $html->url("/js/zeroclipboard/ZeroClipboard10.swf"); ?>');
+
+        clip.setText( '' ); // will be set later on mouseDown
+        clip.setHandCursor( true );
+        clip.addEventListener( 'mouseDown', function(client) {
+           client.setText(jQuery("#infoToCopy").val());
+        } );
+
+        clip.glue( 'd_clip_button' );
+
+
+        jQuery('.megatabs').tabs({ selected: 0 });
+
+        jQuery(".vertical-tabs").tabs({ spinner: '<?php echo $html->image('ajax-loader.gif') ?>' }).addClass('ui-tabs-vertical ui-helper-clearfix');
+        jQuery(".vertical-tabs li").removeClass('ui-corner-top').addClass('ui-corner-left');
+
+        selectTabsInSession();
+
+    });
+
+    jQuery('#buscador').live('keyup', function() {
+        togglePlanes('.plan_item');
+    });
+
+    jQuery('#sectores').live('change', function() {
+        togglePlanes('.plan_item');
+    });
+
+    jQuery('#ciclos').live('change', function() {
+        togglePlanes('.plan_item');
+    });
+
+    function selectTabsInSession () {
+        <?php
+        if (@$session->read('Plan.View.Ciclo')) {
+        ?>
+            jQuery("#vtab-"+<?=$session->read('Plan.View.Ciclo')?>).click();
+        <?
+        }
+        ?>
+        /* en este orden, sino no carga */
+        <?php
+        if (@$session->read('Plan.View.Oferta')) {
+        ?>
+            jQuery("#htab-"+<?=$session->read('Plan.View.Oferta')?>).click();
+        <?
+        }
+        ?>
+    }
+
+
+
+    function limpiarCadena(string) {
+        if(string == null) return "";
+
+        string = string.toUpperCase();
+        string=string.replace(/^\s+|\s+$/g,""); // trim
+        string=string.replace(/(À|Á|Â|Ã|Ä|Å|Æ)/gi,'A'); // cambio las "A"s exoticas por "A"s sencillas mediante expresiones regulares
+        string=string.replace(/(È|É|Ê|Ë)/gi,'E'); //lo mismo con las "E" y resto de vocales y la "Ñ"
+        string=string.replace(/(Ì|Í|Î|Ï)/gi,'I');
+        string=string.replace(/(Ò|Ó|Ô|Ö)/gi,'O');
+        string=string.replace(/(Ù|Ú|Û|Ü)/gi,'U');
+        string = string.toLowerCase();
+
+        return string;
+    }
+
+    function togglePlanes(selector){
+        jQuery(selector).each(function () {
+            togglePlane(this);
+        });
+    }
+    function togglePlane(plan){
+        var resultado;
+        var mostrar = true;
+        var plan_item = jQuery(plan).closest('.plan_item');
+
+        //TITULO
+        resultado = (limpiarCadena(jQuery(plan).find(".plan_title > .title").html()).indexOf(limpiarCadena(jQuery('#buscador').val())) >= 0);
+        mostrar = (mostrar && resultado);
+
+        // guarda en cookie para recordar
+        Set_Cookie( 'planes_buscadorfp_titulo', limpiarCadena(jQuery('#buscador').val()), '', '/', '', '' );
+
+        //SECTOR
+        resultado = (plan_item.find(".plan_sector").val() == jQuery('#sectores').val()) || jQuery('#sectores').val() == 0 ;
+        mostrar = (mostrar && resultado);
+
+        // guarda en cookie para recordar
+        Set_Cookie( 'planes_buscadorfp_sector', jQuery('#sectores').val(), '', '/', '', '' );
+
+        //CICLO
+        resultado = (plan_item.find(".plan_ciclo").val() == jQuery('#ciclos').val()) || jQuery('#ciclos').val() == 0 ;
+        mostrar = (mostrar && resultado);
+
+        // guarda en cookie para recordar
+        Set_Cookie( 'planes_buscadorfp_ciclo', jQuery('#ciclos').val(), '', '/', '', '' );
+
+
+        if(mostrar){
+            jQuery(plan_item).show();
+        }
+        else{
+            jQuery(plan_item).hide();
+        }
+    }
+
+
+
+</script>
 <div id="escuela_estado" class="<? echo $planes['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $planes['Instit']['activo']? 'Institución Ingresada al RFIETP':'Institución NO Ingresada al RFIETP';?></div>
 <?
 $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
@@ -32,7 +146,6 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
 
     <div class="tabs-content">
         <div class="related">
-
         <?php
                 $link = "";
                 if($ticket_id != 0)
@@ -108,16 +221,17 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                     </div>
                     <!-- EOF Tabla resumen de total de matriculas -->
 
-
                     <div class="megatabs">
                         <h2>Listado de Ofertas <span style="float:right;font-size:9pt"><?php echo $html->link(__('Ver vista clásica', true), array('controller'=> 'planes', 'action'=>'index_clasico/'. $planes['Instit']['id']))?></span></h2>
                         <div id="horizontal-tabs">
                             <ul>
                                 <?php
+                                $tabsindex = 0;
                                 foreach($ofertas as $ofertaId=>$ofertaName){
                                  ?>
-                                    <li><a href="#fragment-<?php echo $ofertaId?>"><span><?php echo $ofertaName?></span></a></li>
+                                    <li><a id="htab-<?php echo $ofertaId; ?>" href="#fragment-<?php echo $ofertaId; ?>"><span><?php echo $ofertaName?></span></a></li>
                                 <?php 
+                                    $tabsindex++;
                                 }
                                 ?>
                             </ul>
@@ -125,6 +239,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                         <div>
                             <?php
                             foreach ($ofertas as $ofertaId => $ofertaCiclo) {
+
                             ?>
                             <div id="fragment-<?php echo $ofertaId?>" class="fragment vertical-tabs">
                                 <ul class="ul-tabs-vertical">
@@ -138,7 +253,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                                             'controller'=>'planes',
                                             'action'=>$ofertasControllers[$ofertaId],
                                             $planes['Instit']['id']."/".$ofertaId."/".$anio,
-                                            ));
+                                            ), array('id'=>'vtab-'.$anio));
                                         ?>
                                     </li>
                                     <?php
@@ -152,7 +267,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                                             'controller'=>'planes',
                                             'action'=>$ofertasControllers[$ofertaId],
                                             $planes['Instit']['id']."/".$ofertaId."/0",
-                                            ));
+                                            ), array('id'=>'vtab-'.$anio));
                                         ?>
                                     </li>
                                 </ul>
@@ -192,128 +307,3 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
 
     </div>
 </div>
-<script language="JavaScript"  type="text/javascript" defer="defer">
-    jQuery(document).ready(function(){
-        var clip = new ZeroClipboard.Client();
-
-        ZeroClipboard.setMoviePath('<?php echo $html->url("/js/zeroclipboard/ZeroClipboard10.swf"); ?>');
-
-        clip.setText( '' ); // will be set later on mouseDown
-        clip.setHandCursor( true );
-        clip.addEventListener( 'mouseDown', function(client) {
-           client.setText(jQuery("#infoToCopy").val());
-        } );
-
-        clip.glue( 'd_clip_button' );
-
-        jQuery('.megatabs').tabs({ selected: 0 });
-
-    });
-
-    jQuery(function() {
-        jQuery(".vertical-tabs").tabs({ spinner: '<?php echo $html->image('loading.gif') ?>' }).addClass('ui-tabs-vertical ui-helper-clearfix');
-        jQuery(".vertical-tabs li").removeClass('ui-corner-top').addClass('ui-corner-left');
-    });
-
-    function agregar_datos_anios(handler){
-        if(handler != undefined){
-            urlEnvio = jQuery(handler).attr('href');
-        }
-        else{
-            urlEnvio = jQuery(this).attr('href');
-        }
-        
-        jQuery('#nueva-data').load(urlEnvio, function() {
-          jQuery.blockUI({
-                message: "<div style='height:18px;background-color:#87AEC5'><img style='cursor:pointer;float:right' src='<?php echo $html->url('/img/close.png')?>' class='cerrar'/></div>" + jQuery('#nueva-data').html(),
-                css: {
-                    width:          'auto',
-                    top:            '10%',
-                    left:           '25%',
-                    right:          '25%',
-                    textAlign:      'left',
-                    cursor:         'auto'
-                }
-            });
-
-            jQuery('.blockOverlay').attr('title','Cerrar').click(jQuery.unblockUI);
-            jQuery('.cerrar').attr('title','Cerrar').click(jQuery.unblockUI);
-        });
-
-
-        return false;
-    }
-
-    jQuery('#buscador').live('keyup', function() {
-        togglePlanes('.plan_item');
-    });
-
-    jQuery('#sectores').live('change', function() {
-        togglePlanes('.plan_item');
-    });
-
-    jQuery('#ciclos').live('change', function() {
-        togglePlanes('.plan_item');
-    });
-
-
-
-    function limpiarCadena(string) {
-        if(string == null) return "";
-        
-        string = string.toUpperCase();
-        string=string.replace(/^\s+|\s+$/g,""); // trim
-        string=string.replace(/(À|Á|Â|Ã|Ä|Å|Æ)/gi,'A'); // cambio las "A"s exoticas por "A"s sencillas mediante expresiones regulares
-        string=string.replace(/(È|É|Ê|Ë)/gi,'E'); //lo mismo con las "E" y resto de vocales y la "Ñ"
-        string=string.replace(/(Ì|Í|Î|Ï)/gi,'I');
-        string=string.replace(/(Ò|Ó|Ô|Ö)/gi,'O');
-        string=string.replace(/(Ù|Ú|Û|Ü)/gi,'U');
-        string = string.toLowerCase();
-
-        return string;
-    }
-
-    function togglePlanes(selector){
-        jQuery(selector).each(function () {
-            togglePlane(this);
-        });
-    }
-    function togglePlane(plan){
-        var resultado;
-        var mostrar = true;
-        var plan_item = jQuery(plan).closest('.plan_item');
-
-        //TITULO
-        resultado = (limpiarCadena(jQuery(plan).find(".plan_title > .title").html()).indexOf(limpiarCadena(jQuery('#buscador').val())) >= 0);
-        mostrar = (mostrar && resultado);
-
-        // guarda en cookie para recordar
-        Set_Cookie( 'planes_buscadorfp_titulo', limpiarCadena(jQuery('#buscador').val()), '', '/', '', '' );
-
-        //SECTOR
-        resultado = (plan_item.find(".plan_sector").val() == jQuery('#sectores').val()) || jQuery('#sectores').val() == 0 ;
-        mostrar = (mostrar && resultado);
-
-        // guarda en cookie para recordar
-        Set_Cookie( 'planes_buscadorfp_sector', jQuery('#sectores').val(), '', '/', '', '' );
-
-        //CICLO
-        resultado = (plan_item.find(".plan_ciclo").val() == jQuery('#ciclos').val()) || jQuery('#ciclos').val() == 0 ;
-        mostrar = (mostrar && resultado);
-
-        // guarda en cookie para recordar
-        Set_Cookie( 'planes_buscadorfp_ciclo', jQuery('#ciclos').val(), '', '/', '', '' );
-
-
-        if(mostrar){
-            jQuery(plan_item).show();
-        }
-        else{
-            jQuery(plan_item).hide();
-        }
-    }
-
-    
-
-</script>
-
