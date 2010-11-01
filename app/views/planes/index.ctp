@@ -56,17 +56,15 @@
 
     function selectTabsInSession () {
         <?php
-        if (@$session->read('Plan.View.Ciclo')) {
-        ?>
-            jQuery("#vtab-"+<?=$session->read('Plan.View.Ciclo')?>).click();
-        <?
-        }
-        ?>
-        /* en este orden, sino no carga */
-        <?php
         if (@$session->read('Plan.View.Oferta')) {
         ?>
             jQuery("#htab-"+<?=$session->read('Plan.View.Oferta')?>).click();
+        <?
+        }
+        
+        if (@$session->read('Plan.View.Ciclo')) {
+        ?>
+            jQuery("#vtab-"+<?=$session->read('Plan.View.Ciclo')?>).click();
         <?
         }
         ?>
