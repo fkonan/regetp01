@@ -256,7 +256,7 @@ class Plan extends AppModel {
         
     function paginate($conditions = null, $fields = null, $order = null, $limit = null, $page = 1, $recursive = null, $tieneHasMany = false) {
             if ($this->asociarAnio) {
-                $this->unBindModel(array('hasMany'=>array('Anio')));
+                //$this->unBindModel(array('hasMany'=>array('Anio')));
                 $this->bindModel(array('hasOne' => array('Anio')));
                 $field = $this->getPagFields();
                 
