@@ -1236,11 +1236,20 @@ class Instit extends AppModel {
 
             if (!empty($in_planes))
             {
+               if ($ciclo > 0) {
+                   $conditions = array(
+                                        'Anio.plan_id' => $in_planes,
+                                        'Anio.ciclo_id' => $ciclo
+                                     );
+               }
+               else {
+                   $conditions = array(
+                                        'Anio.plan_id' => $in_planes
+                                     );
+               }
+
                $anios = $this->Plan->Anio->find("all",array(
-                          'conditions'=> array(
-                                            'Anio.plan_id' => $in_planes,
-                                            'Anio.ciclo_id' => $ciclo
-                                         ),
+                          'conditions'=> $conditions,
                           'contain'=>array(
                                         'EstructuraPlanesAnio',
                                         'Plan' => array('EstructuraPlan'=>array('Etapa')),
