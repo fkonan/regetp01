@@ -421,7 +421,7 @@ class PlanesController extends AppController {
 		}
 	}
 	
-        function view_fp($instit_id, $oferta_id, $ciclo) {
+        function view_fp($instit_id, $oferta_id, $ciclo=0) {
             $conditionsAnio = array();
             
             if(!empty($ciclo)){
@@ -429,13 +429,15 @@ class PlanesController extends AppController {
             }
 
             // guarda en session la solapa
-            $this->Session->write('Plan.View.Oferta', 'view_fp');
+            $this->Session->write('Plan.View.Oferta', $oferta_id);
+            $this->Session->write('Plan.View.Ciclo', $ciclo);
+
             
-         $this->Plan->setAsociarAnio(true);
-         $this->paginate['conditions']['Plan.oferta_id'] = $oferta_id;
-        $this->paginate['conditions']['Instit.id'] = $instit_id;
-        $planes = $this->paginate();
-                
+            $this->Plan->setAsociarAnio(true);
+            $this->paginate['conditions']['Plan.oferta_id'] = $oferta_id;
+            $this->paginate['conditions']['Instit.id'] = $instit_id;
+            $planes = $this->paginate();
+
             $sectores = $this->Plan->find("all",array(
                       'fields'=>array(
                                     'DISTINCT Sector.id', 'Sector.name'
@@ -459,9 +461,10 @@ class PlanesController extends AppController {
             $this->set('ciclos_anios', $ciclos_anios);
         }
 
-        function view_it_sec($instit_id,$oferta_id,$ciclo=2010) {
+        function view_it_sec($instit_id,$oferta_id,$ciclo=0) {
             // guarda en session la solapa
             $this->Session->write('Plan.View.Oferta', 'view_it_sec');
+            $this->Session->write('Plan.View.Ciclo', $ciclo);
 
             $planes = $this->Plan->find("all",array(
                       'conditions'=>array(
@@ -480,10 +483,11 @@ class PlanesController extends AppController {
             $this->set('ciclo', $ciclo);
         }
 
-        function view_sectec($instit_id,$oferta_id,$ciclo=2010) {
+        function view_sectec($instit_id,$oferta_id,$ciclo=0) {
 
             // guarda en session la solapa
-            $this->Session->write('Plan.View.Oferta', 'view_sectec');
+            $this->Session->write('Plan.View.Oferta', $oferta_id);
+            $this->Session->write('Plan.View.Ciclo', $ciclo);
 
             $conditionsAnio = array();
 
@@ -501,10 +505,10 @@ class PlanesController extends AppController {
         }
 
 
-        function view_sup($instit_id,$oferta_id,$ciclo=2010) {
-
+        function view_sup($instit_id,$oferta_id,$ciclo=0) {
             // guarda en session la solapa
-            $this->Session->write('Plan.View.Oferta', 'view_sup');
+            $this->Session->write('Plan.View.Oferta', $oferta_id);
+            $this->Session->write('Plan.View.Ciclo', $ciclo);
 
             $planes = $this->Plan->find("all",array(
                       'conditions'=>array(
