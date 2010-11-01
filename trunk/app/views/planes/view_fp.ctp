@@ -76,13 +76,13 @@ echo $javascript->link('jquery.biggerlink.min.js');
                         ?>
         </span>
         <div>
-           Matrícula: <?php echo $plan['Anio'][0]['matricula']; ?>
+           Matrícula: <?php echo empty($plan['Anio'][0]['matricula'])?0:$plan['Anio'][0]['matricula']; ?>
             <span style="float:right;">
                  Sector: <span class="plan_name"><?php echo $plan['Sector']['name']; ?></span>
             </span>
         </div>
         <input class="plan_sector" type="hidden" value="<?php echo $plan['Sector']['id']?>"/>
-        <input class="plan_ciclo" type="hidden" value="<?php echo $plan['Anio'][0]['ciclo_id']?>"/>
+        <input class="plan_ciclo" type="hidden" value="<?php echo empty($plan['Anio'][0]['ciclo_id'])?0:$plan['Anio'][0]['ciclo_id'] ?>"/>
     </div>
                 <?php }
         endforeach;
