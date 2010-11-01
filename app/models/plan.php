@@ -200,8 +200,9 @@ class Plan extends AppModel {
   	{
 		if ($this->asociarAnio)
 		{
-			$this->bindModel(array('hasOne' => array('Anio' => array('className'  => 'Anio','foreignKey' => 'plan_id',),),));
-	        $field        = $this->getPagFields();
+                        $this->unBindModel(array('hasMany'=>array('Anio')));
+			$this->bindModel(array('hasOne' => array('Anio')));
+                        $field = $this->getPagFields();
 	        
 			if ($this->traerUltimaAct){
 				$selectFields = array_merge($field,array("max(\"Anio\".\"ciclo_id\") AS Calculado__max_ciclo"));
@@ -216,7 +217,17 @@ class Plan extends AppModel {
 	        	$groupFields = array_merge($groupFields ,array('1" HAVING max("Anio"."ciclo_id") = ' . $this->maxCiclo));
 	        }	
 	        
-	        $extra           = array('group' => $groupFields,'fields' => $selectFields);  	                    
+                $extra = array(
+                    'group' => $groupFields,
+                    'fields' => $selectFields,
+                    'contain'=>array(
+                        'Instit', 'Oferta',
+                        'Sector', 'Subsector', 'Titulo',
+                        'EstructuraPlan'=>array('Etapa'),
+                        'Anio'=> array('EstructuraPlanesAnio')
+                        ),
+                    );
+                
         	$parameters      = compact('conditions');
         	$this->recursive = 0;
 
@@ -243,49 +254,54 @@ class Plan extends AppModel {
   	 * @return cantidad de registros
   	 */
         
-    function paginate($conditions = null, $fields = null, $order = null, $limit = null, $page = 1, $recursive = null, $tieneHasMany = false)
-	{
-		if ($this->asociarAnio)
-		{
-			$this->bindModel(array('hasOne' => array('Anio' => array('className'  => 'Anio','foreignKey' => 'plan_id',),),));
-	        $field = $this->getPagFields();
+    function paginate($conditions = null, $fields = null, $order = null, $limit = null, $page = 1, $recursive = null, $tieneHasMany = false) {
+            if ($this->asociarAnio) {
+                $this->unBindModel(array('hasMany'=>array('Anio')));
+                $this->bindModel(array('hasOne' => array('Anio')));
+                $field = $this->getPagFields();
+                
+                if ($this->traerUltimaAct) {
+                    $selectFields = array_merge($field,array('max("Anio"."ciclo_id") AS "Anio__ciclo_id"'));
+                    $groupFields  = $field;
+                } else {
+                    $selectFields = array_merge($field, array('Anio.ciclo_id'));
+                    $groupFields = $selectFields;
+                }
 
-			if ($this->traerUltimaAct){
-				$selectFields = array_merge($field,array("max(\"Anio\".\"ciclo_id\") AS \"Anio__ciclo_id\""));
-	        	$groupFields  = $field;
-			} else {
-				$selectFields = array_merge($field, array('Anio.ciclo_id'));
-				$groupFields = $selectFields;
-			}				
-	        
-	        if ($this->maxCiclo != "" ){
-	        	$groupFields = array_merge($groupFields ,array('1" HAVING max("Anio"."ciclo_id") = ' . $this->maxCiclo));
-	        }	
-	        
-	        $extra      = array('group' => $groupFields,'fields' => $selectFields);
-			$parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
+                if ($this->maxCiclo != "" ) {
+                    $groupFields = array_merge($groupFields ,array('1" HAVING max("Anio"."ciclo_id") = ' . $this->maxCiclo));
+                }
 
-			if ($recursive != $this->recursive)
-			{
-				$parameters['recursive'] = $recursive;
-    	    }
+                $extra = array(
+                    'group' => $groupFields,
+                    'fields' => $selectFields,
+                    'contain'=>array(
+                        'Instit', 'Oferta',
+                        'Sector', 'Subsector', 'Titulo',
+                        'EstructuraPlan'=>array('Etapa'),
+                        'Anio'=> array('EstructuraPlanesAnio')
+                        ),
+                    );
+                $parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
 
-			return $this->find('all', array_merge($parameters, $extra));
-		}
-		else
-		{
-			$parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
+                if ($recursive != $this->recursive) {
+                    $parameters['recursive'] = $recursive;
+                }
 
-			if ($recursive != $this->recursive)
-			{
-				$parameters['recursive'] = $recursive;
-			}
+                return $this->find('all', array_merge($parameters, $extra));
+            }
+            else {
+                $parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
 
-			$extra = array();
+                if ($recursive != $this->recursive) {
+                    $parameters['recursive'] = $recursive;
+                }
 
-			return $this->find('all', array_merge($parameters, $extra));
-		}
-	}    	
+                $extra = array();
+
+                return $this->find('all', array_merge($parameters, $extra));
+            }
+        }    	
    
 	function setAsociarAnio($asociar){
 		$this->asociarAnio = $asociar;	
