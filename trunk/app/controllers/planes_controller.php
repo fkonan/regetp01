@@ -19,12 +19,12 @@ class PlanesController extends AppController {
 	function index($id = null) {
 
                 // posibles controllers de ofertas
-                $ofertasControllers[1] = 'view_fp';
-                $ofertasControllers[2] = 'view_it_sec';
-                $ofertasControllers[3] = 'view_sectec';
-                $ofertasControllers[4] = 'view_sup';
-                $ofertasControllers[5] = 'view_it_sec';
-                $ofertasControllers[6] = 'view_sup';
+                $ofertasControllers[FP_ID] = 'view_fp';
+                $ofertasControllers[ITINERARIO_ID] = 'view_it_sec';
+                $ofertasControllers[SEC_TEC_ID] = 'view_sectec';
+                $ofertasControllers[SUP_TEC_ID] = 'view_sup';
+                $ofertasControllers[SEC_ID] = 'view_it_sec';
+                $ofertasControllers[SUP_ID] = 'view_sup';
 
 		$v_plan_matricula = array();
 		
@@ -67,7 +67,8 @@ class PlanesController extends AppController {
 		}	
 
 		$ciclos = $this->Plan->dame_ciclos_por_oferta_instits($id);
-                $ofertas  = $this->Plan->dameOfertaPorInstitucion($id,isset($url_conditions['Anio.ciclo_id'])?$url_conditions['Anio.ciclo_id']:'');
+
+                $ofertas  = $this->Plan->dameOfertaPorInstitucion($id,'');
 		$sectores = $this->Plan->dameSectoresPorInstitucion($id,isset($url_conditions['Anio.ciclo_id'])?$url_conditions['Anio.ciclo_id']:'');
 		$this->set(compact('ofertas','ciclos','sectores'));
                 $this->set('ofertasControllers', $ofertasControllers);
@@ -420,37 +421,28 @@ class PlanesController extends AppController {
 		}
 	}
 	
-        function view_fp($instit_id,$oferta_id,$ciclo) {
+        function view_fp($instit_id, $oferta_id, $ciclo) {
             $conditionsAnio = array();
             
-            if($ciclo != 0){
-                $conditionsAnio = array('ciclo_id'=>$ciclo);
+            if(!empty($ciclo)){
+                $this->paginate['conditions']['Anio.ciclo_id'] = $ciclo;
             }
 
             // guarda en session la solapa
             $this->Session->write('Plan.View.Oferta', 'view_fp');
-
-
-            $planes = $this->Plan->find("all",array(
-                      'conditions'=>array(
-                                    'instit_id'=>$instit_id,
-                                    'oferta_id'=>$oferta_id
-                                    ),
-                      'contain'=>array(
-                                    'Sector',
-                                    'EstructuraPlan'=>array('Etapa'),
-                                    'Anio'=> array('EstructuraPlanesAnio','conditions'=>$conditionsAnio)
-                                    )
-
-                      ));
-
+            
+         $this->Plan->setAsociarAnio(true);
+         $this->paginate['conditions']['Plan.oferta_id'] = $oferta_id;
+        $this->paginate['conditions']['Instit.id'] = $instit_id;
+        $planes = $this->paginate();
+                
             $sectores = $this->Plan->find("all",array(
                       'fields'=>array(
-                                        'DISTINCT Sector.id', 'Sector.name'
+                                    'DISTINCT Sector.id', 'Sector.name'
                                      ),
                       'conditions'=>array(
-                                    'instit_id'=>$instit_id,
-                                    'oferta_id'=>$oferta_id
+                                    'Plan.instit_id'=>$instit_id,
+                                    'Plan.oferta_id'=>$oferta_id
                                     ),
                       'contain'=>array(
                                     'Sector'

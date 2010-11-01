@@ -6,7 +6,6 @@
     echo $html->css('ajaxtabs.css',null, false);
     echo $html->css('smoothness/jquery-ui-1.8.5.custom.css',null, false);
     echo $html->css(array('jquery.loadmask'),null, false);
-    
 ?>
 <?php
 	$link = "";
@@ -115,31 +114,48 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                         <div id="horizontal-tabs">
                             <ul>
                                 <?php
-                                foreach($ciclos as $oferta=>$ciclo){
-                                ?>
-                                    <li><a href="#fragment-<?php echo $oferta?>"><span><?php echo $ciclo['name']?></span></a></li>
-                                <?php
+                                foreach($ofertas as $ofertaId=>$ofertaName){
+                                 ?>
+                                    <li><a href="#fragment-<?php echo $ofertaId?>"><span><?php echo $ofertaName?></span></a></li>
+                                <?php 
                                 }
                                 ?>
                             </ul>
                         </div>
                         <div>
                             <?php
-                            foreach($ciclos as $oferta=>$ciclo){
+                            foreach ($ofertas as $ofertaId => $ofertaCiclo) {
                             ?>
-                            <div id="fragment-<?php echo $oferta?>" class="fragment vertical-tabs">
+                            <div id="fragment-<?php echo $ofertaId?>" class="fragment vertical-tabs">
                                 <ul class="ul-tabs-vertical">
-                                            <?php foreach($ciclo['ciclo'] as $anio){?>
-                                            <li><a href="<?php echo $html->url(array('controller'=>'planes', 'action'=>$ofertasControllers[$oferta], $planes['Instit']['id'], $oferta, $anio));?>"><span><?php echo $anio?></span></a></li>
-                                            <?php } ?>
-                                            
-                                            <?php
-                                            if($oferta == 1 || $oferta == 3){?>
-                                                <li><a href="<?php echo $html->url(array('controller'=>'planes', 'action'=>$ofertasControllers[$oferta], $planes['Instit']['id'], $oferta, 0));?>"><span>Todos</span></a></li>
-                                            <?php
-                                            }
-                                            ?>
-                                    </ul>
+                                    <?php
+                                    if (!empty($ciclos[$ofertaId]['ciclo'])) {
+                                        foreach ($ciclos[$ofertaId]['ciclo'] as $anio) {
+                                    ?>
+                                    <li>
+                                        <?php 
+                                        echo $html->link($anio,array(
+                                            'controller'=>'planes',
+                                            'action'=>$ofertasControllers[$ofertaId],
+                                            $planes['Instit']['id']."/".$ofertaId."/".$anio,
+                                            ));
+                                        ?>
+                                    </li>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
+
+                                    <li>
+                                    <?php
+                                        echo $html->link('Todos',array(
+                                            'controller'=>'planes',
+                                            'action'=>$ofertasControllers[$ofertaId],
+                                            $planes['Instit']['id']."/".$ofertaId."/0",
+                                            ));
+                                        ?>
+                                    </li>
+                                </ul>
                             </div>
                             <?php
                             }

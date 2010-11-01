@@ -54,6 +54,7 @@ echo $javascript->link('jquery.biggerlink.min.js');
     </div>
     <?php
     $i = 0;
+    debug($planes);
     if ((isset($planes)) && (count($planes) > 0)) {
         foreach ($planes as $plan):
             if(count($plan['Anio']) > 0) {
