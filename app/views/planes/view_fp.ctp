@@ -24,7 +24,8 @@ echo $javascript->link('jquery.biggerlink.min.js');
 </script>
 <div id="tabs-oferta" style="margin-bottom: 1em; padding: 10px">
     <span>Título: </span>
-    <span style="margin-left:205px;">Sector: </span>
+    <span style="margin-left:130px;">Sector: </span>
+    <span style="margin-left:125px;<?php echo ($ciclo != 0)?'display:none':''?>">Ciclo: </span>
     <div style="margin-bottom:20px">
         <input id="buscador" type="text" style="width:30%; float:left"/>
         <span style="display:inline; vertical-align: bottom">
@@ -39,9 +40,9 @@ echo $javascript->link('jquery.biggerlink.min.js');
                 ?>
             </select>
         </span>
-        <span style="display:inline; vertical-align: bottom">
-            <select id="ciclos" style="width:20%;margin-left:20px">
-                <option value="0">Todos</option>
+        <span style="vertical-align: bottom; <?php echo ($ciclo != 0)?'display:none':'display:inline'?>">
+            <select id="ciclos_filter" style="width:20%;margin-left:20px">
+                <option value="0" selected >Todos</option>
             <?php
             foreach($ciclos_anios as $ciclos_anio){
             ?>
@@ -100,6 +101,4 @@ echo $javascript->link('jquery.biggerlink.min.js');
 </div>
 <script type="text/javascript">
     jQuery('#tabs-1 .plan_item').biggerlink();
-
-    
 </script>

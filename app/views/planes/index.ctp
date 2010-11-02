@@ -40,20 +40,21 @@
 
         selectTabsInSession();
 
+        jQuery('#buscador').live('keyup', function() {
+            togglePlanes('.plan_item');
+        });
+
+        jQuery('#sectores').live('change', function() {
+            togglePlanes('.plan_item');
+        });
+
+        jQuery('#ciclos_filter').live('change', function() {
+            togglePlanes('.plan_item');
+        });
+
     });
 
-    jQuery('#buscador').live('keyup', function() {
-        togglePlanes('.plan_item');
-    });
-
-    jQuery('#sectores').live('change', function() {
-        togglePlanes('.plan_item');
-    });
-
-    jQuery('#ciclos').live('change', function() {
-        togglePlanes('.plan_item');
-    });
-
+    
     function selectTabsInSession () {
         <?php
         if (@$session->read('Plan.View.Oferta')) {
@@ -95,29 +96,31 @@
     function togglePlane(plan){
         var resultado;
         var mostrar = true;
+        
         var plan_item = jQuery(plan).closest('.plan_item');
+        var titulo = jQuery(plan).closest('#tabs-oferta').find("#buscador").val();
+        var sector = jQuery(plan).closest('#tabs-oferta').find("#sectores").val();
+        var ciclo = jQuery(plan).closest('#tabs-oferta').find("#ciclos_filter").val();
 
         //TITULO
-        resultado = (limpiarCadena(jQuery(plan).find(".plan_title > .title").html()).indexOf(limpiarCadena(jQuery('#buscador').val())) >= 0);
+        resultado = (limpiarCadena(jQuery(plan).find(".plan_title > .title").html()).indexOf(limpiarCadena(titulo)) >= 0);
         mostrar = (mostrar && resultado);
 
         // guarda en cookie para recordar
-        Set_Cookie( 'planes_buscadorfp_titulo', limpiarCadena(jQuery('#buscador').val()), '', '/', '', '' );
+        Set_Cookie( 'planes_buscadorfp_titulo', limpiarCadena(titulo), '', '/', '', '' );
 
         //SECTOR
-        resultado = (plan_item.find(".plan_sector").val() == jQuery('#sectores').val()) || jQuery('#sectores').val() == 0 ;
+        resultado = (plan_item.find(".plan_sector").val() == sector) || sector == 0 ;
         mostrar = (mostrar && resultado);
 
         // guarda en cookie para recordar
-        Set_Cookie( 'planes_buscadorfp_sector', jQuery('#sectores').val(), '', '/', '', '' );
+        Set_Cookie( 'planes_buscadorfp_sector', sector, '', '/', '', '' );
 
-        //CICLO
-        resultado = (plan_item.find(".plan_ciclo").val() == jQuery('#ciclos').val()) || jQuery('#ciclos').val() == 0 ;
+        resultado = (plan_item.find(".plan_ciclo").val() == ciclo) || ciclo == 0 ;
         mostrar = (mostrar && resultado);
 
         // guarda en cookie para recordar
-        Set_Cookie( 'planes_buscadorfp_ciclo', jQuery('#ciclos').val(), '', '/', '', '' );
-
+        Set_Cookie( 'planes_buscadorfp_ciclo', ciclo, '', '/', '', '' );
 
         if(mostrar){
             jQuery(plan_item).show();
@@ -126,9 +129,6 @@
             jQuery(plan_item).hide();
         }
     }
-
-
-
 </script>
 <div id="escuela_estado" class="<? echo $planes['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $planes['Instit']['activo']? 'Institución Ingresada al RFIETP':'Institución NO Ingresada al RFIETP';?></div>
 <?

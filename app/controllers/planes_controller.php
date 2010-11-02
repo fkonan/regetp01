@@ -436,6 +436,8 @@ class PlanesController extends AppController {
             $this->Plan->setAsociarAnio(true);
             $this->paginate['conditions']['Plan.oferta_id'] = $oferta_id;
             $this->paginate['conditions']['Instit.id'] = $instit_id;
+            $this->paginate['order'] = array("Plan.oferta_id", "Anio.ciclo_id");
+            
             $planes = $this->paginate();
 
             $sectores = $this->Plan->find("all",array(
@@ -495,7 +497,7 @@ class PlanesController extends AppController {
                 $this->Plan->setTraerUltimaAct(true);
             }
             
-            $planes = $this->Plan->Instit->getPlanes($instit_id, $ciclo, $oferta_id);
+            $planes = $this->Plan->Instit->getUltimosPlanes($instit_id, $ciclo, $oferta_id);
             
             $this->set('planes', $planes);
             $this->set('instit_id', $instit_id);

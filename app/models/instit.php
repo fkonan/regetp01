@@ -1250,6 +1250,7 @@ class Instit extends AppModel {
 
                $anios = $this->Plan->Anio->find("all",array(
                           'conditions'=> $conditions,
+                          'order' => array('Anio.plan_id','Anio.ciclo_id', 'EstructuraPlanesAnio.nro_anio'),
                           'contain'=>array(
                                         'EstructuraPlanesAnio',
                                         'Plan' => array('EstructuraPlan'=>array('Etapa')),
@@ -1269,8 +1270,7 @@ class Instit extends AppModel {
                                 $j = 0; // para años
                             }
 
-                            $anio['Anio'] =
-                            $planes_armados[$i]['Anio'][$j] = $anio['Anio'];
+                            $anio['Anio'] = $planes_armados[$i]['Anio'][$j] = $anio['Anio'];
                             $planes_armados[$i]['Anio'][$j]['EstructuraPlanesAnio'] = $anio['EstructuraPlanesAnio'];
                             $j++;
                         }
@@ -1281,6 +1281,102 @@ class Instit extends AppModel {
                 }
             }
             
+            return $planes_armados;
+        }
+
+        /*
+         * Devuelve todos los planes estructurados y solo estructurados del instit
+         */
+        function getUltimosPlanes($instit_id=0, $ciclo=2010, $oferta_id=3, $order='Etapa.orden') {
+            if(!empty($this->id)) {
+                $instit_id = $this->id;
+            }
+
+            $this->recursive = -1;
+            $planes = $this->find('all', array(
+                'fields' => array('Plan.id'),
+                'joins' => array(
+                    array('table' => 'planes',
+                          'alias' => 'Plan',
+                          'type' => 'inner',
+                          'conditions' => array(
+                            'Plan.instit_id = Instit.id'
+                          )
+                    ),
+                    array('table' => 'estructura_planes',
+                          'alias' => 'EstructuraPlan',
+                          'type' => 'inner',
+                          'conditions' => array(
+                            'EstructuraPlan.id = Plan.estructura_plan_id'
+                          )
+                    ),
+                    array('table' => 'etapas',
+                          'alias' => 'Etapa',
+                          'type' => 'inner',
+                          'conditions' => array(
+                            'EstructuraPlan.etapa_id = Etapa.id'
+                          )
+                    ),
+                ),
+                'conditions' => array(
+                    'Plan.instit_id'=>$instit_id,
+                    'Plan.oferta_id'=>$oferta_id
+                ),
+                'order' => array($order),
+             ));
+
+            $in_planes = $planes_armados = array();
+            foreach ($planes as $plan) {
+                $in_planes[] = $plan['Plan']['id'];
+            }
+
+            if (!empty($in_planes))
+            {
+               if ($ciclo > 0) {
+                   $conditions = array(
+                                        'Anio.plan_id' => $in_planes,
+                                        'Anio.ciclo_id' => $ciclo
+                                     );
+               }
+               else {
+                   $conditions = array(
+                                        'Anio.plan_id' => $in_planes
+                                     );
+               }
+
+               $anios = $this->Plan->Anio->find("all",array(
+                          'conditions'=> $conditions,
+                          'order' => array('Anio.plan_id','Anio.ciclo_id', 'EstructuraPlanesAnio.nro_anio'),
+                          'contain'=>array(
+                                        'EstructuraPlanesAnio',
+                                        'Plan' => array('EstructuraPlan'=>array('Etapa')),
+                                        )
+                          ));
+
+                $i = 0;
+                $planes_usados = array();
+                foreach ($in_planes as $plan) {
+                    foreach ($anios as $anio) {
+                        if ($plan == $anio['Plan']['id']) {
+
+                            if (!in_array($anio['Plan']['id'], $planes_usados)) {
+                                $planes_armados[$i]['Plan'] = $anio['Plan'];
+                                $planes_usados[] = $anio['Plan']['id'];
+
+                                $j = 0; // para años
+                            }
+                           
+                            $planes_armados[$i]['Anio'][$anio['EstructuraPlanesAnio']['nro_anio']] = $anio['Anio'];
+                            $planes_armados[$i]['Anio'][$anio['EstructuraPlanesAnio']['nro_anio']]['EstructuraPlanesAnio'] = $anio['EstructuraPlanesAnio'];
+                            $j++;
+                        }
+                    }
+
+                    $i++;
+
+                }
+            }
+
             return $planes_armados;
         }
 
