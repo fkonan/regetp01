@@ -2,7 +2,6 @@
     echo $javascript->link('zeroclipboard/ZeroClipboard.js',false);
     echo $javascript->link('jquery-ui-1.8.5.custom.min.js',false);
     echo $javascript->link('jquery.loadmask.min',false);
-    echo $javascript->link('jquery.blockUI',false);
     echo $html->css('ajaxtabs.css',null, false);
     echo $html->css('smoothness/jquery-ui-1.8.5.custom.css',null, false);
     echo $html->css(array('jquery.loadmask'),null, false);
