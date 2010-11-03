@@ -1285,9 +1285,9 @@ class Instit extends AppModel {
         }
 
         /*
-         * Devuelve todos los planes estructurados y solo estructurados del instit
+         * Devuelve todos los planes, estructurados y solo estructurados, del instit
          */
-        function getUltimosPlanes($instit_id=0, $ciclo=2010, $oferta_id=3, $order='Etapa.orden') {
+        function getUltimosPlanes($instit_id=0, $ciclo=0, $oferta_id=3, $order='Etapa.orden') {
             if(!empty($this->id)) {
                 $instit_id = $this->id;
             }
@@ -1379,6 +1379,7 @@ class Instit extends AppModel {
 
             return $planes_armados;
         }
+
 
 }
 ?>
