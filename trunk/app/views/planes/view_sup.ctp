@@ -20,6 +20,13 @@
                                 array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']),
                                 null,null,false);
                         ?>
+
+                        <?php
+                        if($ciclo == 0){
+                            $primer_anio = current($plan['Anio']);
+                            echo " (" . $primer_anio['ciclo_id'] . ")";
+                        }
+                     ?>
                     </caption>
                 <tr>
                     <th>Año</th>

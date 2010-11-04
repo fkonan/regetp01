@@ -51,15 +51,16 @@
     
     function selectTabsInSession () {
         <?php
-        if (@$session->read('Plan.View.Oferta')) {
+        if (@$session->read('Plan.View.Oferta') >= 0) {
         ?>
             jQuery("#htab-"+<?=$session->read('Plan.View.Oferta')?>).click();
         <?
         }
         
-        if (@$session->read('Plan.View.Ciclo')) {
+        if (@$session->read('Plan.View.Ciclo') >= 0) {
         ?>
-            jQuery("#vtab-"+<?=$session->read('Plan.View.Ciclo')?>).click();
+            //alert(<?=$session->read('Plan.View.Ciclo')?>);
+            jQuery('#vtab-'+<?=$session->read('Plan.View.Ciclo')?>).click();
         <?
         }
         ?>
@@ -245,31 +246,29 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                             <?php
                                 if (!empty($ciclos[$ofertaId]['ciclo'])) {
                                     foreach ($ciclos[$ofertaId]['ciclo'] as $anio) {
-
-                                        echo "<li>";
+                                    ?>
+                                        <li>
+                                    <?php
                                         echo $html->link($anio,array(
                                             'controller'=>'planes',
                                             'action'=>$ofertasControllers[$ofertaId],
                                             $planes['Instit']['id']."/".$ofertaId."/".$anio,
-                                            ), array(
-                                                'id'=>'vtab-'.$anio,
-                                               // 'title'=>'p1',
-                                                ));
-                                        echo "</li>";
+                                            ), array('id'=>'vtab-'.$anio));
+                                     ?>
+                                        </li>
+                                     <?php
                                     }
                                 }
-
-                                echo "<li>";
-                                echo $html->link('Todos',array(
-                                    'controller'=>'planes',
-                                    'action'=>$ofertasControllers[$ofertaId],
-                                    $planes['Instit']['id']."/".$ofertaId."/0",
-                                    ), array(
-                                        'id'=>'vtab-'.$anio,
-                                        //'title'=>'p1',
-                                        ));
-                                echo "</li>";
-                            ?>
+                                ?>
+                                <li>
+                                <?php
+                                    echo $html->link('Todos',array(
+                                        'controller'=>'planes',
+                                        'action'=>$ofertasControllers[$ofertaId],
+                                        $planes['Instit']['id']."/".$ofertaId."/0",
+                                        ), array('id'=>'vtab-0'));
+                                    ?>
+                                </li>
                             </ul>
                         </div>
                         <?php
