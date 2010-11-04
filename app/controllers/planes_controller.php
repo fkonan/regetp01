@@ -609,7 +609,7 @@ class PlanesController extends AppController {
                     )
             ));
         }
-
+//debug($planes);
 
         $this->set('planes', $planes);
         $this->set('instit_id', $instit_id);
