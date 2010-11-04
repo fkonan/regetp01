@@ -445,9 +445,15 @@ class PlanesController extends AppController {
                 )
         ));
 
+        $sectores_aux = array();
+
+        foreach($sectores as $s){
+            $sectores_aux[$s['Sector']['id']] = $s['Sector']['name'];
+        }
+
         $ciclos_anios = $this->Plan->Anio->Ciclo->find("list");
 
-        $this->set('sectores', $sectores);
+        $this->set('sectores', $sectores_aux);
         $this->set('planes', $planes);
         $this->set('instit_id', $instit_id);
         $this->set('oferta_id', $oferta_id);

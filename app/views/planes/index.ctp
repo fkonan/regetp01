@@ -34,16 +34,16 @@
 
         selectTabsInSession();
 
-        jQuery('#buscador').live('keyup', function() {
-            togglePlanes('.plan_item');
+        jQuery('#PlanNombre').live('keyup', function() {
+            togglePlanes('#tabs-oferta-fp .plan_item');
         });
 
-        jQuery('#sectores').live('change', function() {
-            togglePlanes('.plan_item');
+        jQuery('#SectorId').live('change', function() {
+            togglePlanes('#tabs-oferta-fp .plan_item');
         });
 
-        jQuery('#ciclos_filter').live('change', function() {
-            togglePlanes('.plan_item');
+        jQuery('#PlanCicloId').live('change', function() {
+            togglePlanes('#tabs-oferta-fp .plan_item');
         });
 
     });
@@ -84,18 +84,20 @@
     }
 
     function togglePlanes(selector){
-//        jQuery(selector).each(function () {
-//            togglePlane(this);
-//        });
+        jQuery(selector).each(function () {
+            togglePlane(this);
+        });
     }
+    
     function togglePlane(plan){
         var resultado;
         var mostrar = true;
         
         var plan_item = jQuery(plan).closest('.plan_item');
-        var titulo = jQuery(plan).closest('#tabs-oferta').find("#buscador").val();
-        var sector = jQuery(plan).closest('#tabs-oferta').find("#sectores").val();
-        var ciclo = jQuery(plan).closest('#tabs-oferta').find("#ciclos_filter").val();
+        
+        var titulo = jQuery(plan).closest('.oferta-contanier').find("#PlanNombre").val();
+        var sector = jQuery(plan).closest('.oferta-contanier').find("#SectorId option:selected").val();
+        var ciclo = (jQuery(plan).closest('.oferta-contanier').find("#PlanCicloId").length > 0)?jQuery(plan).closest('.oferta-contanier').find("#PlanCicloId").val():0;
 
         //TITULO
         resultado = (limpiarCadena(jQuery(plan).find(".plan_title > .title").html()).indexOf(limpiarCadena(titulo)) >= 0);

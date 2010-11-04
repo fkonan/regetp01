@@ -1,25 +1,3 @@
-
-<script language="JavaScript"  type="text/javascript" defer="defer">
-    jQuery(document).ready(function() {
-        setearBuscador();
-    });
-
-    function setearBuscador() {
-        if ( Get_Cookie( 'planes_buscadorfp_titulo' )) {
-            jQuery('#buscador').val(Get_Cookie( 'planes_buscadorfp_titulo' ));
-        }
-
-        if ( Get_Cookie( 'planes_buscadorfp_sector' )) {
-            jQuery('#sectores').val(Get_Cookie( 'planes_buscadorfp_sector' ));
-        }
-
-        if ( Get_Cookie( 'planes_buscadorfp_ciclo' )) {
-            jQuery('#ciclos').val(Get_Cookie( 'planes_buscadorfp_ciclo' ));
-        }
-
-        togglePlanes('.plan_item');
-    }
-</script>
 <div id="tabs-oferta-fp" class="oferta-contanier">
 
     <?php
@@ -31,8 +9,10 @@
     
     echo $ajax->form('planes/view_fp','post', array('id'=>'formPlanesViewFp'));
     echo $form->input('Plan.nombre', array('label'=>'Título'));
-    echo $form->input('Sector.id', array('label'=>'Sector',  'options'=> $sectores));
-    echo $form->input('Plan.ciclo_id', array('label'=>'Ciclo', 'options'=>$ciclos_anios));
+    echo $form->input('Sector.id', array('label'=>'Sector',  'options'=> $sectores, 'empty'=>'Todos'));
+    if($ciclo == 0){
+        echo $form->input('Plan.ciclo_id', array('label'=>'Ciclo', 'options'=>$ciclos_anios, 'empty'=>'Todos'));
+    }
     echo $form->end();
     
     $i = 0;
@@ -59,7 +39,7 @@
         </span>
         <div>
            Matrícula: <?php echo empty($plan['Anio'][0]['matricula'])?0:$plan['Anio'][0]['matricula']; ?>
-            <span class="plan_sector">
+            <span class="plan_sector_info">
                  Sector: <span class="plan_sector_name"><?php echo $plan['Sector']['name']; ?></span>
             </span>
         </div>
@@ -80,4 +60,24 @@
     </div>
         <?} ?>
 </div>
+
+
+<script language="JavaScript"  type="text/javascript" defer="defer">
+
+    function setearBuscador() {
+        if ( Get_Cookie( 'planes_buscadorfp_titulo' )) {
+            jQuery('#PlanNombre').val(Get_Cookie( 'planes_buscadorfp_titulo' ));
+        }
+
+        if ( Get_Cookie( 'planes_buscadorfp_sector' )) {
+            jQuery('#SectorId').val(Get_Cookie( 'planes_buscadorfp_sector' ));
+        }
+
+        if ( Get_Cookie( 'planes_buscadorfp_ciclo' )) {
+            jQuery('#PlanCicloId').val(Get_Cookie( 'planes_buscadorfp_ciclo' ));
+        }
+
+        togglePlanes('#tabs-oferta-fp .plan_item');
+    }
+</script>
 
