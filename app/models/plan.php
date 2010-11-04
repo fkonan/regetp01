@@ -271,6 +271,7 @@ class Plan extends AppModel {
                 if ($this->maxCiclo != "" ) {
                     $groupFields = array_merge($groupFields ,array('1" HAVING max("Anio"."ciclo_id") = ' . $this->maxCiclo));
                 }
+                $groupFields = array_merge($groupFields,array('Anio.anio'));
 
                 $extra = array(
                     'group' => $groupFields,
@@ -279,8 +280,9 @@ class Plan extends AppModel {
                         'Instit', 'Oferta',
                         'Sector', 'Subsector', 'Titulo',
                         'EstructuraPlan'=>array('Etapa'),
-                        'Anio'=> array('EstructuraPlanesAnio')
+                        'Anio.Etapa'
                         ),
+                    'order'=>'Anio.anio'
                     );
                 $parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
 
@@ -301,8 +303,26 @@ class Plan extends AppModel {
 
                 return $this->find('all', array_merge($parameters, $extra));
             }
-        }    	
-   
+        }
+
+        public function findXCiclo($instit_id, $oferta_id, $ciclo_id){
+            $condi = array();
+            if (!empty($ciclo_id)) $condi = array('Anio.ciclo_id'=>$ciclo_id);
+            
+            return $this->find("all",array(
+                      'conditions'=>array(
+                                    'instit_id'=>$instit_id,
+                                    'oferta_id'=>$oferta_id
+                                    ),
+                      'contain'=>array(
+                                    'Sector','Subsector','EstructuraPlan','Instit',
+                                    'Anio'=> array('Etapa','conditions'=>$condi)
+                                    )
+
+                      ));
+        }
+       
+
 	function setAsociarAnio($asociar){
 		$this->asociarAnio = $asociar;	
 	}   
