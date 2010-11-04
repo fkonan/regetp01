@@ -13,6 +13,10 @@
 
 .oferta-contanier{
     width: 547px;
+    w\idth:507px; /* WEBKIT PRESTO */
+    \width:507px; /* MOZILLA */
+    padding:20px;
+
     float: right;
     border: 1px solid #778;
 
@@ -27,7 +31,6 @@
 .planes-ofertas{
     margin-left: 100px;
     float: left;
-    margin-top:-3px;
 }
 
 .ui-state-active{
@@ -36,20 +39,23 @@
 
 .ui-state-active A{
     background-color: white;
+    background-image: none;
+    color: #233E87;
 }
 
 .horizontal-shadetabs .ui-state-active A{
-    border-bottom: white;
+    border-bottom: 1px solid white;
 }
 
 .vertical-shadetabs .ui-state-active A{
-    border-right: white;
+    border-right: 1px solid white;
 }
 
 
 .planes-container .ui-tabs-panel{
     clear: both;
     z-index: 1;
+    margin-top:-1px;
 }
 
 .ui-tabs-panel .ui-tabs-panel{
