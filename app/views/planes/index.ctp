@@ -1,12 +1,9 @@
 <?php
     echo $javascript->link('zeroclipboard/ZeroClipboard.js',false);
     echo $javascript->link('jquery-ui-1.8.5.custom.min.js',false);
-<<<<<<< .mine
-    //echo $javascript->link('jquery.loadmask.min',false);
-    //echo $javascript->link('jquery.blockUI',false);
-=======
+
     echo $javascript->link('jquery.loadmask.min',false);
->>>>>>> .r986
+
     echo $html->css('ajaxtabs.css',null, false);
     echo $html->css('planes/ui_tabs.css',null, false);
     //echo $html->css('smoothness/jquery-ui-1.8.5.custom.css',null, false);
