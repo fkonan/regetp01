@@ -1,0 +1,47 @@
+.ui-tabs-panel{
+
+}
+
+.ui-tabs-hide{
+    display: none;
+}
+
+
+.plan_mas_info{
+    float: right;
+}
+
+.oferta-contanier{
+    width: 547px;
+    float: right;
+    border: 1px solid #778;
+
+    -webkit-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border-radius: 4px;
+}
+
+.planes-ofertas{
+    margin-left: 100px;
+    float: left;
+    margin-top:-2px;
+}
+
+.ui-state-active{
+    
+}
+
+.ui-state-active A{
+    background-color: white;
+}
+
+.horizontal-shadetabs .ui-state-active A{
+    border-bottom: white;
+}
+
+.vertical-shadetabs .ui-state-active A{
+    border-right: white;
+}

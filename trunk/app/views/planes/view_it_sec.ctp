@@ -1,7 +1,5 @@
-<?php
-    echo $javascript->link('jquery.biggerlink.min.js');
-?>
-<div id="tabs-1">  
+
+<div id="tabs-oferta-it-sec" class="oferta-contanier">
         <?php
         foreach($planes as $plan) {
             if (count($plan['Anio']))
@@ -34,7 +32,7 @@
                     ?>
                     <tr>
                         <td><?php echo $anio['anio']?>º</td>
-                        <td><?php echo $anio['Etapa']['name']?></td>
+                        <td><?php echo "";?></td>
                         <td><?php echo $anio['matricula']?></td>
                         <td><?php echo $anio['secciones']?></td>
                         <td><?php echo $anio['hs_taller']?></td>
@@ -48,6 +46,3 @@
         }
         ?>
 </div>
-<script type="text/javascript">
-    jQuery('#tabs-1 .plan_item').biggerlink();
-</script>

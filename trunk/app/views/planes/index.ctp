@@ -1,10 +1,16 @@
 <?php
     echo $javascript->link('zeroclipboard/ZeroClipboard.js',false);
     echo $javascript->link('jquery-ui-1.8.5.custom.min.js',false);
+<<<<<<< .mine
+    //echo $javascript->link('jquery.loadmask.min',false);
+    //echo $javascript->link('jquery.blockUI',false);
+=======
     echo $javascript->link('jquery.loadmask.min',false);
+>>>>>>> .r986
     echo $html->css('ajaxtabs.css',null, false);
-    echo $html->css('smoothness/jquery-ui-1.8.5.custom.css',null, false);
-    echo $html->css(array('jquery.loadmask'),null, false);
+    echo $html->css('planes/ui_tabs.css',null, false);
+    //echo $html->css('smoothness/jquery-ui-1.8.5.custom.css',null, false);
+    //echo $html->css(array('jquery.loadmask'),null, false);
 ?>
 <?php
 	$link = "";
@@ -19,23 +25,15 @@
 ?>
 <script language="JavaScript" type="text/javascript" defer="defer">
     jQuery(document).ready(function(){
-        var clip = new ZeroClipboard.Client();
+        
+        // introduce la logic que hacen funcionar al copy paste
+        meterCopyPasteDelNombre('<?php echo $html->url("/js/zeroclipboard/ZeroClipboard10.swf"); ?>');
+        
 
-        ZeroClipboard.setMoviePath('<?php echo $html->url("/js/zeroclipboard/ZeroClipboard10.swf"); ?>');
+        jQuery('.tabs').tabs({ spinner: 'Cargando información...' });
 
-        clip.setText( '' ); // will be set later on mouseDown
-        clip.setHandCursor( true );
-        clip.addEventListener( 'mouseDown', function(client) {
-           client.setText(jQuery("#infoToCopy").val());
-        } );
-
-        clip.glue( 'd_clip_button' );
-
-
-        jQuery('.megatabs').tabs({ selected: 0 });
-
-        jQuery(".vertical-tabs").tabs({ spinner: '<?php echo $html->image('ajax-loader.gif') ?>' }).addClass('ui-tabs-vertical ui-helper-clearfix');
-        jQuery(".vertical-tabs li").removeClass('ui-corner-top').addClass('ui-corner-left');
+//        jQuery(".vertical-tabs").tabs({ spinner: '<?php echo $html->image('ajax-loader.gif') ?>' }).addClass('ui-tabs-vertical ui-helper-clearfix');
+//        jQuery(".vertical-tabs li").removeClass('ui-corner-top').addClass('ui-corner-left');
 
         selectTabsInSession();
 
@@ -88,9 +86,9 @@
     }
 
     function togglePlanes(selector){
-        jQuery(selector).each(function () {
-            togglePlane(this);
-        });
+//        jQuery(selector).each(function () {
+//            togglePlane(this);
+//        });
     }
     function togglePlane(plan){
         var resultado;
@@ -129,12 +127,15 @@
         }
     }
 </script>
+
 <div id="escuela_estado" class="<? echo $planes['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $planes['Instit']['activo']? 'Institución Ingresada al RFIETP':'Institución NO Ingresada al RFIETP';?></div>
 <?
 $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
 ?>
 <h2><?= $cue_instit ?> - <?= $planes['Instit']['nombre_completo']?></h2>
-<div class="tabs">
+
+<br>
+<div>
     <?php
         echo $this->element('menu_solapas_para_instit',array('instit_id' => $planes['Instit']['id']));
     ?>
@@ -218,64 +219,68 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                     </div>
                     <!-- EOF Tabla resumen de total de matriculas -->
 
-                    <div class="megatabs">
-                        <h2>Listado de Ofertas <span style="float:right;font-size:9pt"><?php echo $html->link(__('Ver vista clásica', true), array('controller'=> 'planes', 'action'=>'index_clasico/'. $planes['Instit']['id']))?></span></h2>
-                        <div id="horizontal-tabs">
-                            <ul>
+                    <h2>Listado de Ofertas </h2>
+                    <span style="float:right;font-size:9pt"><?php echo $html->link(__('Ver vista clásica', true), array('controller'=> 'planes', 'action'=>'index_clasico/'. $planes['Instit']['id']))?></span>
+
+
+                    <div class="tabs planes-container">
+                        <ul class="planes-ofertas horizontal-shadetabs">
                                 <?php
                                 $tabsindex = 0;
                                 foreach($ofertas as $ofertaId=>$ofertaName){
                                  ?>
-                                    <li><a id="htab-<?php echo $ofertaId; ?>" href="#fragment-<?php echo $ofertaId; ?>"><span><?php echo $ofertaName?></span></a></li>
+                                    <li>
+                                        <a id="htab-<?php echo $ofertaId; ?>"
+                                           href="#ver-oferta-<?php echo $ofertaId; ?>">
+                                            <?php echo $ofertaName?>
+                                        </a>
+                                    </li>
                                 <?php 
                                     $tabsindex++;
                                 }
                                 ?>
-                            </ul>
-                        </div>
-                        <div>
-                            <?php
-                            foreach ($ofertas as $ofertaId => $ofertaCiclo) {
+                        </ul>
 
-                            ?>
-                            <div id="fragment-<?php echo $ofertaId?>" class="fragment vertical-tabs">
-                                <ul class="ul-tabs-vertical">
-                                    <?php
-                                    if (!empty($ciclos[$ofertaId]['ciclo'])) {
-                                        foreach ($ciclos[$ofertaId]['ciclo'] as $anio) {
-                                    ?>
-                                    <li>
-                                        <?php 
+                        <?php
+                        foreach ($ofertas as $ofertaId => $ofertaCiclo) {
+                        ?>
+                        <div id="ver-oferta-<?php echo $ofertaId?>" class="tabs">
+                            <ul class="vertical-tabs vertical-shadetabs">
+                            <?php
+                                if (!empty($ciclos[$ofertaId]['ciclo'])) {
+                                    foreach ($ciclos[$ofertaId]['ciclo'] as $anio) {
+
+                                        echo "<li>";
                                         echo $html->link($anio,array(
                                             'controller'=>'planes',
                                             'action'=>$ofertasControllers[$ofertaId],
                                             $planes['Instit']['id']."/".$ofertaId."/".$anio,
-                                            ), array('id'=>'vtab-'.$anio));
-                                        ?>
-                                    </li>
-                                    <?php
-                                        }
+                                            ), array(
+                                                'id'=>'vtab-'.$anio,
+                                               // 'title'=>'p1',
+                                                ));
+                                        echo "</li>";
                                     }
-                                    ?>
+                                }
 
-                                    <li>
-                                    <?php
-                                        echo $html->link('Todos',array(
-                                            'controller'=>'planes',
-                                            'action'=>$ofertasControllers[$ofertaId],
-                                            $planes['Instit']['id']."/".$ofertaId."/0",
-                                            ), array('id'=>'vtab-'.$anio));
-                                        ?>
-                                    </li>
-                                </ul>
-                            </div>
-                            <?php
-                            }
+                                echo "<li>";
+                                echo $html->link('Todos',array(
+                                    'controller'=>'planes',
+                                    'action'=>$ofertasControllers[$ofertaId],
+                                    $planes['Instit']['id']."/".$ofertaId."/0",
+                                    ), array(
+                                        'id'=>'vtab-'.$anio,
+                                        //'title'=>'p1',
+                                        ));
+                                echo "</li>";
                             ?>
+                            </ul>
+                           
                         </div>
+                        <?php
+                        }
+                        ?>
                     </div>
-
-
         <?php endif;?>
 
         <div class="acl actions acl-editores acl-desarrolladores acl-administradores">

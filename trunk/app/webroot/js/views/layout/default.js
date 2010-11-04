@@ -130,3 +130,19 @@ function Delete_Cookie( name, path, domain ) {
         ( ( domain ) ? ";domain=" + domain : "" ) +
         ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
 }
+
+
+
+function meterCopyPasteDelNombre(urlToFlash){
+        var clip = new ZeroClipboard.Client();
+
+        ZeroClipboard.setMoviePath(urlToFlash);
+
+        clip.setText( '' ); // will be set later on mouseDown
+        clip.setHandCursor( true );
+        clip.addEventListener( 'mouseDown', function(client) {
+           client.setText(jQuery("#infoToCopy").val());
+        } );
+
+        clip.glue( 'd_clip_button' );
+}

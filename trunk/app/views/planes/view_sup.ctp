@@ -1,7 +1,7 @@
 <?php
     echo $javascript->link('jquery.biggerlink.min.js',false);
 ?>
-<div id="tabs-1">  
+<div id="tabs-oferta-sup" class="oferta-contanier">
         <?php
         foreach($planes as $plan) {
             if (count($plan['Anio']))
