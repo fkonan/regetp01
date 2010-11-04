@@ -31,6 +31,7 @@
 .planes-ofertas{
     margin-left: 100px;
     float: left;
+    margin-left:100px;
 }
 
 .ui-state-active{
@@ -55,7 +56,7 @@
 .planes-container .ui-tabs-panel{
     clear: both;
     z-index: 1;
-    margin-top:-1px;
+    margin-top:-4px;
 }
 
 .ui-tabs-panel .ui-tabs-panel{

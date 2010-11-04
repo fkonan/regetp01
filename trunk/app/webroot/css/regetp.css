@@ -56,7 +56,6 @@ a img {
 }
 
 .altrow{
-    background-color: #F7FAFE;
 }
 
 .aPend{
@@ -1405,7 +1404,6 @@ li.selected    {
 ************---------------------------------------------------------------------*/
 
 .tabs{
-    padding-top: 20px;
     width: 614px;
 }
 
@@ -2276,4 +2274,30 @@ border-bottom-color: white !important;
     text-align: left;
 }
 
+.plan_sector{
+    margin-right: 30px;
+}
 
+
+#formPlanesViewFp{
+    float: none;
+    clear: both;
+    display: block;
+    padding:0px 0px 15px 37px;
+    background: 7px 18px url(images/search.png) no-repeat;
+    height: 40px;
+}
+
+
+#formPlanesViewFp .input{
+    clear:none;
+    float:left;
+    width:142px;
+}
+
+#formPlanesViewFp input, #formPlanesViewFp select{
+    background-color: #fff;
+    border: 1px gray groove;
+    font-size: 8pt;
+    max-width: 142px;
+}

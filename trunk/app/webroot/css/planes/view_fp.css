@@ -4,5 +4,11 @@
 }
 
 .plan_sector{
-    float:right;
+    margin-left: 65px;
+}
+
+
+.oferta-contanier .altrow{
+    background-color: #F0F7FC;
+    border-bottom: 1px solid silver;
 }
