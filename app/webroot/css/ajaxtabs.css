@@ -110,7 +110,6 @@ padding: 0;
 background: transparent;
 voice-family: "\"}\"";
 voice-family: inherit;
-height:4px;
 }
 
 .horizontal-shadetabs ul{
@@ -131,6 +130,8 @@ min-width: 40px;
 }
 
 .horizontal-shadetabs a{
+    font-size:8pt;
+    width:80px;
 display: block;
 min-width: 40px;
 text-decoration: none;
@@ -139,7 +140,6 @@ position: relative;
 z-index: 1;
 padding: 3px 7px;
 border: 1px solid #778;
-
 color: white;
 
 background: #F0F7FC url(images/shade2.gif) top left repeat-x;
@@ -165,7 +165,7 @@ padding: 0;
 background: transparent;
 voice-family: "\"}\"";
 voice-family: inherit;
-margin:0;
+margin:26px 0 0;
 padding: 0;
 list-style: none;
 font-size: 9pt;
