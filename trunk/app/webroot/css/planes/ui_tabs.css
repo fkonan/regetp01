@@ -45,3 +45,12 @@
 .vertical-shadetabs .ui-state-active A{
     border-right: white;
 }
+
+
+.planes-container .ui-tabs-panel{
+    clear: both;
+}
+
+.ui-tabs-panel .ui-tabs-panel{
+    clear: none;
+}
