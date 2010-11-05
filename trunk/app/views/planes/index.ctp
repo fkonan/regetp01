@@ -171,8 +171,8 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
             <div class="tabs-content">
                 <h2>Listado de Ofertas <span style="float:right;font-size:9pt"><?php echo $html->link(__('Ver vista clásica', true), array('controller'=> 'planes', 'action'=>'index_clasico/'. $planes['Instit']['id']))?></span></h2>
                    <ul class="lista_fondos" style="padding-top: 20px;">
-                   <p class='msg-atencion'>La Institución no presentó ofertas</p>
-               </ul>
+                        <p class='msg-atencion'>La Institución no presentó ofertas</p>
+                   </ul>
             </div>
         <?php
         }

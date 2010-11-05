@@ -541,7 +541,7 @@ class Plan extends AppModel {
   	 */
   	function dameOfertaPorInstitucion($instit_id,$ciclo_id = 0){
   		$sql = "  		
-  					SELECT o.id AS id , o.abrev AS abrev
+  					SELECT o.id AS id , o.name AS abrev
 					FROM   planes   p
 					LEFT JOIN ofertas o ON (o.id = p.oferta_id)
 					LEFT JOIN anios    a ON (a.plan_id = p.id)
@@ -554,8 +554,8 @@ class Plan extends AppModel {
 		}					
 
 		$sql .= " 		
-  					GROUP BY o.id, o.abrev 
-					ORDER BY o.abrev ASC
+  					GROUP BY o.id, o.name
+					ORDER BY o.name ASC
 				";
 
 	
