@@ -51,15 +51,14 @@
     
     function selectTabsInSession () {
         <?php
-        if (@$session->read('Plan.View.Oferta') >= 0) {
+        if (@$session->read('Plan.View.Oferta') && $session->read('Plan.View.Oferta') >= 0) {
         ?>
             jQuery("#htab-"+<?=$session->read('Plan.View.Oferta')?>).click();
         <?
         }
         
-        if (@$session->read('Plan.View.Ciclo') >= 0) {
+        if (@$session->read('Plan.View.Ciclo') && $session->read('Plan.View.Ciclo') >= 0) {
         ?>
-            //alert(<?=$session->read('Plan.View.Ciclo')?>);
             jQuery('#vtab-'+<?=$session->read('Plan.View.Ciclo')?>).click();
         <?
         }
