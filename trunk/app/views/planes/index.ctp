@@ -54,6 +54,7 @@
         $oferta = $session->read('Plan.View.Oferta');
         $ciclo = $session->read('Plan.View.Ciclo');
         
+        
         if (isset($oferta) && $oferta >= 0) {
         ?>
             jQuery("#htab-"+<?=$oferta?>).click();
