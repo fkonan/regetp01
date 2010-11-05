@@ -66,6 +66,7 @@ height:30px;
 .modernbricksmenu2 ul{
 margin:0;
 margin-left: 10px; /*margin between first menu item and left browser edge*/
+
 padding: 0;
 list-style: none;
 }
@@ -169,7 +170,7 @@ padding: 0;
 background: transparent;
 voice-family: "\"}\"";
 voice-family: inherit;
-margin:26px 0 0;
+margin:16px 0 0 -86px;
 padding: 0;
 list-style: none;
 font-size: 9pt;
