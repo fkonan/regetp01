@@ -30,7 +30,7 @@
         jQuery('.js-tabs-ofertas').tabs();
 
         jQuery('.js-tabs-ciclos').tabs({
-            spinner: '<?php echo $html->image('loading.gif') ?>'
+            spinner: '<?php echo $html->image('loadercircle16x16.gif') ?>'
         });
 
        // jQuery('#tabs-loading-div').tabs({});

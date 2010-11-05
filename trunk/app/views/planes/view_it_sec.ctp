@@ -39,7 +39,7 @@
                     ?>
                     <tr>
                         <td><?php echo $anio['anio']?>º</td>
-                        <td><?php echo "";?></td>
+                        <td><?php echo $anio['Etapa']['name'];?></td>
                         <td><?php echo $anio['matricula']?></td>
                         <td><?php echo $anio['secciones']?></td>
                         <td><?php echo $anio['hs_taller']?></td>
