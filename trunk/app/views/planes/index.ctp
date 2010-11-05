@@ -261,6 +261,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                                      <?php
                                     }
                                 }
+
                                 ?>
                                 <li>
                                 <?php
@@ -271,6 +272,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                                         ), array('id'=>'vtab-0'));
                                     ?>
                                 </li>
+
                             </ul>
                         </div>
                         <?php
