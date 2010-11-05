@@ -1,12 +1,40 @@
-<div id="tabs-oferta-fp" class="oferta-contanier">
 
-    <?php
-
+<?php
     /* @var $ajax AjaxHelper */
     $ajax;
     /* @var $form FormHelper */
     $form;
+    /* @var $html HtmlHelper */
+    $html;
     
+echo $html->css('planes/view_fp');
+?>
+
+<script language="JavaScript"  type="text/javascript" defer="defer">
+    jQuery(document).ready(function() {
+        setearBuscador();
+    });
+
+    function setearBuscador() {
+        if ( Get_Cookie( 'planes_buscadorfp_titulo' )) {
+            jQuery('#buscador').val(Get_Cookie( 'planes_buscadorfp_titulo' ));
+        }
+
+        if ( Get_Cookie( 'planes_buscadorfp_sector' )) {
+            jQuery('#sectores').val(Get_Cookie( 'planes_buscadorfp_sector' ));
+        }
+
+        if ( Get_Cookie( 'planes_buscadorfp_ciclo' )) {
+            jQuery('#ciclos').val(Get_Cookie( 'planes_buscadorfp_ciclo' ));
+        }
+
+        togglePlanes('.plan_item');
+    }
+</script>
+
+<div id="tabs-oferta-fp" class="oferta-contanier">
+
+    <?php
     echo $ajax->form('planes/view_fp','post', array('id'=>'formPlanesViewFp'));
     echo $form->input('Plan.nombre', array('label'=>'Título'));
     echo $form->input('Sector.id', array('label'=>'Sector',  'options'=> $sectores, 'empty'=>'Todos'));
@@ -14,7 +42,11 @@
         echo $form->input('Plan.ciclo_id', array('label'=>'Ciclo', 'options'=>$ciclos_anios, 'empty'=>'Todos'));
     }
     echo $form->end();
-    
+    ?>
+
+     <div class="clear"></div>
+     <br>
+     <?php
     $i = 0;
     if ((isset($planes)) && (count($planes) > 0)) {
         foreach ($planes as $plan):
@@ -24,6 +56,9 @@
                     $class = 'altrow';
                 }
                 ?>
+    
+
+
     <div class="plan_item <?php echo $class?>">
         <span class="plan_title">
                         <?php
