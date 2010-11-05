@@ -2236,8 +2236,6 @@ border-bottom-color: white !important;
 .plan_item TH{
     font-weight: normal;
     background-color: white;
-    border: none;
-    border-bottom: 1px solid #f2f2fc;
 }
 
 .plan_item a{
