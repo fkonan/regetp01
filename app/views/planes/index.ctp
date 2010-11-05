@@ -27,12 +27,16 @@
         meterCopyPasteDelNombre('<?php echo $html->url("/js/zeroclipboard/ZeroClipboard10.swf"); ?>');
         
 
-        jQuery('.tabs').tabs({ spinner: 'Cargando información...' });
+        jQuery('.js-tabs-ofertas').tabs();
 
-//        jQuery(".vertical-tabs").tabs({ spinner: '<?php echo $html->image('ajax-loader.gif') ?>' }).addClass('ui-tabs-vertical ui-helper-clearfix');
-//        jQuery(".vertical-tabs li").removeClass('ui-corner-top').addClass('ui-corner-left');
+        jQuery('.js-tabs-ciclos').tabs({
+            spinner: '<?php echo $html->image('loading.gif') ?>'
+        });
 
-        selectTabsInSession();
+       // jQuery('#tabs-loading-div').tabs({});
+
+
+       // selectTabsInSession();
 
         jQuery('#PlanNombre').live('keyup', function() {
             togglePlanes('#tabs-oferta-fp .plan_item');
@@ -225,7 +229,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                     <h2>Listado de Ofertas </h2>
                     <span style="float:right;font-size:9pt"><?php echo $html->link(__('Ver vista clásica', true), array('controller'=> 'planes', 'action'=>'index_clasico/'. $planes['Instit']['id']))?></span>
 
-                    <div class="tabs planes-container">
+                    <div class="js-tabs-ofertas tabs planes-container">
                         <ul class="planes-ofertas horizontal-shadetabs">
                                 <?php
                                 $tabsindex = 0;
@@ -246,21 +250,24 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                         <?php
                         foreach ($ofertas as $ofertaId => $ofertaCiclo) {
                         ?>
-                        <div id="ver-oferta-<?php echo $ofertaId?>" class="tabs">
+                        <div id="ver-oferta-<?php echo $ofertaId?>" class="js-tabs-ciclos tabs ciclos-container">
                             <ul class="vertical-tabs vertical-shadetabs">
                             <?php
                                 if (!empty($ciclos[$ofertaId]['ciclo'])) {
                                     foreach ($ciclos[$ofertaId]['ciclo'] as $anio) {
                                     ?>
-                                        <li>
+                                <li>
                                     <?php
-                                        echo $html->link($anio,array(
+                                        echo $html->link('<span>'.$anio.'</span>',array(
                                             'controller'=>'planes',
                                             'action'=>$ofertasControllers[$ofertaId],
                                             $planes['Instit']['id']."/".$ofertaId."/".$anio,
-                                            ), array('id'=>'vtab-'.$anio));
+                                            ), array(
+                                                'id'=>'vtab-'.$anio,
+                                                'escape' => false,
+                                                ));
                                      ?>
-                                        </li>
+                                </li>
                                      <?php
                                     }
                                 }
@@ -268,15 +275,15 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                                 ?>
                                 <li>
                                 <?php
-                                    echo $html->link('Todos',array(
+                                    echo $html->link('<span>Todos</span>',array(
                                         'controller'=>'planes',
                                         'action'=>$ofertasControllers[$ofertaId],
                                         $planes['Instit']['id']."/".$ofertaId."/0",
-                                        ), array('id'=>'vtab-0'));
+                                        ), array('id'=>'vtab-0', 'escape' => false,));
                                     ?>
                                 </li>
 
-                            </ul>
+                            </ul>                            
                         </div>
                         <?php
                         }
@@ -305,8 +312,5 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                 </ul>
         </div>
     </div>
-    </div>
-    <div id="nueva-data" style="display:none">
-
     </div>
 </div>

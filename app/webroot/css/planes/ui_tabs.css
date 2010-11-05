@@ -11,7 +11,7 @@
     float: right;
 }
 
-.oferta-contanier{
+.ciclos-container{
     width: 547px;
     w\idth:507px; /* WEBKIT PRESTO */
     \width:507px; /* MOZILLA */
@@ -30,7 +30,7 @@
     border-radius: 4px;
 }
 
-.oferta-contanier:HOVER{
+.ciclos-container:HOVER{
     border-bottom:1px solid silver;
 }
 
@@ -63,7 +63,6 @@
 .planes-container .ui-tabs-panel{
     clear: both;
     z-index: 1;
-    margin-top:-4px;
 }
 
 .ui-tabs-panel .ui-tabs-panel{
