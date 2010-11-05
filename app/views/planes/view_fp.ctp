@@ -9,29 +9,6 @@
     
 echo $html->css('planes/view_fp');
 ?>
-
-<script language="JavaScript"  type="text/javascript" defer="defer">
-    jQuery(document).ready(function() {
-        setearBuscador();
-    });
-
-    function setearBuscador() {
-        if ( Get_Cookie( 'planes_buscadorfp_titulo' )) {
-            jQuery('#buscador').val(Get_Cookie( 'planes_buscadorfp_titulo' ));
-        }
-
-        if ( Get_Cookie( 'planes_buscadorfp_sector' )) {
-            jQuery('#sectores').val(Get_Cookie( 'planes_buscadorfp_sector' ));
-        }
-
-        if ( Get_Cookie( 'planes_buscadorfp_ciclo' )) {
-            jQuery('#ciclos').val(Get_Cookie( 'planes_buscadorfp_ciclo' ));
-        }
-
-        togglePlanes('.plan_item');
-    }
-</script>
-
 <div id="tabs-oferta-fp" class="oferta-contanier">
 
     <?php
@@ -98,7 +75,8 @@ echo $html->css('planes/view_fp');
 
 
 <script language="JavaScript"  type="text/javascript" defer="defer">
-
+    setearBuscador();
+    
     function setearBuscador() {
         if ( Get_Cookie( 'planes_buscadorfp_titulo' )) {
             jQuery('#PlanNombre').val(Get_Cookie( 'planes_buscadorfp_titulo' ));
