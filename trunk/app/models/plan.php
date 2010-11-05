@@ -260,6 +260,7 @@ class Plan extends AppModel {
                 $this->bindModel(array('hasOne' => array('Anio')));
                 $field = $this->getPagFields();
                 
+                
                 if ($this->traerUltimaAct) {
                     $selectFields = array_merge($field,array('max("Anio"."ciclo_id") AS "Anio__ciclo_id"'));
                     $groupFields  = $field;
@@ -271,7 +272,8 @@ class Plan extends AppModel {
                 if ($this->maxCiclo != "" ) {
                     $groupFields = array_merge($groupFields ,array('1" HAVING max("Anio"."ciclo_id") = ' . $this->maxCiclo));
                 }
-                $groupFields = array_merge($groupFields,array('Anio.anio'));
+                //$groupFields = array_merge($groupFields,array('Anio.anio'));
+                //rompe vista TODOS en solapas de Oferta Educativa
 
                 $extra = array(
                     'group' => $groupFields,
@@ -282,7 +284,7 @@ class Plan extends AppModel {
                         'EstructuraPlan'=>array('Etapa'),
                         'Anio.Etapa'
                         ),
-                    'order'=>'Anio.anio'
+                    //'order'=>'Anio.anio'  rompe vista TODOS en solapas de Oferta Educativa
                     );
                 $parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
 

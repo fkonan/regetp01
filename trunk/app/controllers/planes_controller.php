@@ -548,7 +548,6 @@ class PlanesController extends AppController {
         $this->set('instit_id', $instit_id);
         $this->set('oferta_id', $oferta_id);
         $this->set('ciclo', $ciclo);
-
     }
 
 
@@ -556,7 +555,7 @@ class PlanesController extends AppController {
         // guarda en session la solapa
         $this->Session->write('Plan.View.Oferta', $oferta_id);
         $this->Session->write('Plan.View.Ciclo', $ciclo);
-    //Configure::write('debug', 2);
+        //Configure::write('debug', 2);
         $condition = '';
         if($ciclo == 0) {
             // el ultimo ciclo de cada plan
@@ -564,12 +563,13 @@ class PlanesController extends AppController {
             $this->Plan->setTraerUltimaAct(true);
             $this->Plan->setAsociarAnio(true);
             $this->Plan->recursive = 0;
-            //$this->paginate['fields'] = array('DISTINCT Plan.id');
             $this->paginate['conditions']['Plan.oferta_id'] = $oferta_id;
             $this->paginate['conditions']['Instit.id'] = $instit_id;
             $this->paginate['order'] = array('Anio__ciclo_id desc');
 
             $planes_encabezado = $this->paginate();
+
+            //$planes = $this->Plan->Instit->getUltimosPlanes($instit_id, $ciclo, $oferta_id);
 
             $i = 0;
             if (!empty($planes_encabezado)) {

@@ -50,14 +50,31 @@
             togglePlanes('#tabs-oferta-fp .plan_item');
         });
 
+
+        PreparaTabsParaSession();
+
     });
+
+    function PreparaTabsParaSession() {
+        jQuery('#ofertas-tabs a').each(function () {
+            jQuery(this).live('click', function() {
+                SaveTabInSession(this.id);
+            });
+        });
+
+    }
+
+    function SaveTabInSession(tab) {
+        // guarda en cookie para recordar
+        Set_Cookie( 'tab_oferta', tab, '', '/', '', '' );
+    }
+
 
     
     function selectTabsInSession () {
         <?php
         $oferta = $session->read('Plan.View.Oferta');
-        $ciclo = $session->read('Plan.View.Ciclo');
-        
+        $ciclo = $session->read('Plan.View.Ciclo');        
         
         if (isset($oferta) && $oferta >= 0) {
         ?>
@@ -230,7 +247,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                     <span style="float:right;font-size:9pt"><?php echo $html->link(__('Ver vista clásica', true), array('controller'=> 'planes', 'action'=>'index_clasico/'. $planes['Instit']['id']))?></span>
 
                     <div class="js-tabs-ofertas tabs planes-container">
-                        <ul class="planes-ofertas horizontal-shadetabs">
+                        <ul id="ofertas-tabs" class="planes-ofertas horizontal-shadetabs">
                                 <?php
                                 $tabsindex = 0;
                                 foreach($ofertas as $ofertaId=>$ofertaName){
