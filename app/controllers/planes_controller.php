@@ -531,14 +531,17 @@ class PlanesController extends AppController {
             $this->Plan->setTraerUltimaAct(true);
         }
 
-        $planes = $this->Plan->Instit->getUltimosPlanes($instit_id, $ciclo, $oferta_id);
+        $planes = $this->Plan->Instit->getPlanes($instit_id, $oferta_id,$ciclo);
+        
+        foreach($planes['Plan'] as &$plan){
+            
+            $plan['matricula'] = 0;
 
-        foreach($planes as &$plan){
-            $plan['Plan']['matricula'] = 0;
             foreach($plan['Anio'] as $anio){
-                $plan['Plan']['matricula'] += $anio['matricula'];
+                $plan['matricula'] += $anio['Anio']['matricula'];
             }
         }
+
 
         $this->set('planes', $planes);
         $this->set('instit_id', $instit_id);

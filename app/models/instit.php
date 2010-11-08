@@ -1191,7 +1191,7 @@ class Instit extends AppModel {
         /*
          * Devuelve todos los planes de la institucion
          */
-        function getPlanes($instit_id=0, $oferta_id = 0, $ciclo=0 , $order='Etapa.orden') {
+        function getPlanes($instit_id, $oferta_id = 0, $ciclo=0 , $order='Etapa.orden') {
             if(!empty($this->id)) {
                 $instit_id = $this->id;
             }
@@ -1205,37 +1205,33 @@ class Instit extends AppModel {
 
             //debug($this->find('all'));
             //debug($condsInstit);
-            $this->recursive = 1;
+            //$this->recursive = 1;
             $planes = $this->find('all', array(
                 'contain' => array(
                     'Plan' => array(
                         'conditions' => $condsPlan,
-                        'EstructuraPlan.Etapa',
-                        'Anio' => array(
-                            'conditions' => $condsAnio,
-                        )
+                        'Sector',
+                        'EstructuraPlan.Etapa'
                     )
                 ),
                 'conditions' => $condsInstit,
             ));
-
-           foreach ($planes as &$i) {
-               
-               if (!empty($ciclo_id)) {
-                   $condsAnio = array('Anio.ciclo_id'=>$ciclo_id);
+            
+           foreach ($planes[0]['Plan'] as &$i) {
+               if (!empty($ciclo)) {
+                   $condsAnio = array('Anio.plan_id'=> $i['id'],'Anio.ciclo_id'=>$ciclo);
                } else {
                    //buscar el ultimo ciclo lectivo (max)
-                   $condsAnio = array('Anio.ciclo_id'=>$this->Plan->getUltimoCiclo($i['Plan']['id']));
+                   $condsAnio = array('Anio.plan_id'=> $i['id'],'Anio.ciclo_id'=>$this->Plan->getUltimoCiclo($i['id']));
                }
                
                $aniosPlan = $this->Plan->Anio->find('all', array(
                     'conditions' => $condsAnio,
                ));
                // le meto los años al array de planes
-               $i['Plan']['Anio'] = $aniosPlan;
+               $i['Anio'] = $aniosPlan;
            }
-            
-            return $planes;
+            return $planes[0];
         }
 
 
