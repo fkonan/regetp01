@@ -420,15 +420,10 @@ class PlanesController extends AppController {
             $this->paginate['conditions']['Anio.ciclo_id'] = $ciclo;
         }
 
-        // guarda en session la solapa
-        $this->Session->write('Plan.View.Oferta', $oferta_id);
-        $this->Session->write('Plan.View.Ciclo', $ciclo);
-
-
         $this->Plan->setAsociarAnio(true);
         $this->paginate['conditions']['Plan.oferta_id'] = $oferta_id;
         $this->paginate['conditions']['Instit.id'] = $instit_id;
-        $this->paginate['order'] = array("Plan.oferta_id", "Anio.ciclo_id");
+        $this->paginate['order'] = array("Anio.ciclo_id");
 
         $planes = $this->paginate();
 
@@ -462,10 +457,6 @@ class PlanesController extends AppController {
     }
 
     function view_it_sec($instit_id,$oferta_id,$ciclo=0) {
-        // guarda en session la solapa
-        $this->Session->write('Plan.View.Oferta', $oferta_id);
-        $this->Session->write('Plan.View.Ciclo', $ciclo);
-
         if($ciclo == 0) {
             // el ultimo ciclo de cada plan
 
@@ -532,10 +523,6 @@ class PlanesController extends AppController {
 
     function view_sectec($instit_id,$oferta_id,$ciclo=0) {
 
-        // guarda en session la solapa
-        $this->Session->write('Plan.View.Oferta', $oferta_id);
-        $this->Session->write('Plan.View.Ciclo', $ciclo);
-
         $conditionsAnio = array();
 
         if ($ciclo == 0) {
@@ -543,13 +530,6 @@ class PlanesController extends AppController {
         }
 
         $planes = $this->Plan->Instit->getUltimosPlanes($instit_id, $ciclo, $oferta_id);
-
-        foreach($planes as &$plan){
-            $plan['Plan']['matricula'] = 0;
-            foreach($plan['Anio'] as $anio){
-                $plan['Plan']['matricula'] += $anio['matricula'];
-            }
-        }
 
         $this->set('planes', $planes);
         $this->set('instit_id', $instit_id);
@@ -559,9 +539,6 @@ class PlanesController extends AppController {
 
 
     function view_sup($instit_id,$oferta_id,$ciclo=0) {
-        // guarda en session la solapa
-        $this->Session->write('Plan.View.Oferta', $oferta_id);
-        $this->Session->write('Plan.View.Ciclo', $ciclo);
         //Configure::write('debug', 2);
         $condition = '';
         if($ciclo == 0) {

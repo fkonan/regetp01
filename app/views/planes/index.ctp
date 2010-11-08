@@ -47,44 +47,34 @@
             togglePlanes('#tabs-oferta-fp .plan_item');
         });
 
-
         PreparaTabsParaSession();
 
     });
 
+
     function PreparaTabsParaSession() {
-        jQuery('#ofertas-tabs a').each(function () {
-            jQuery(this).live('click', function() {
-                SaveTabInSession(this.id);
+        jQuery('#ofertas-tabs a').each(function(index, value) {
+            jQuery(value).click(function() {
+                Set_Cookie( 'tab_oferta', value.id, '', '/', '', '' );
             });
         });
 
+        jQuery('#ciclos-tabs a').each(function(index, value) {
+            jQuery(value).click(function() {
+                Set_Cookie( 'tab_ciclo', value.id, '', '/', '', '' );
+            });
+        });
     }
 
-    function SaveTabInSession(tab) {
-        // guarda en cookie para recordar
-        Set_Cookie( 'tab_oferta', tab, '', '/', '', '' );
-    }
-
-
-    
+      
     function selectTabsInSession () {
-        <?php
-        $oferta = $session->read('Plan.View.Oferta');
-        $ciclo = $session->read('Plan.View.Ciclo');        
-        
-        if (isset($oferta) && $oferta >= 0) {
-        ?>
-            jQuery("#htab-"+<?=$oferta?>).click();
-        <?
+        if (Get_Cookie('tab_oferta')) {
+            jQuery('#'+Get_Cookie('tab_oferta')).click();
         }
-        
-        if (isset($ciclo) && $ciclo >= 0) {
-        ?>
-            jQuery('#vtab-'+<?=$ciclo?>).click();
-        <?
+
+        if (Get_Cookie('tab_ciclo')) {
+            jQuery('#'+Get_Cookie('tab_ciclo')).click();
         }
-        ?>
     }
 
 
@@ -261,6 +251,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                                 ?>
                         </ul>
 
+                        <div id="ciclos-tabs">
                         <?php
                         foreach ($ofertas as $ofertaId => $ofertaCiclo) {
                         ?>
@@ -273,13 +264,13 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                                 <li>
                                     <?php
                                         echo $html->link('<span>'.$anio.'</span>',array(
-                                            'controller'=>'planes',
-                                            'action'=>$ofertasControllers[$ofertaId],
-                                            $planes['Instit']['id']."/".$ofertaId."/".$anio,
-                                            ), array(
-                                                'id'=>'vtab-'.$anio,
-                                                'escape' => false,
-                                                ));
+                                                            'controller'=>'planes',
+                                                            'action'=>$ofertasControllers[$ofertaId],
+                                                            $planes['Instit']['id']."/".$ofertaId."/".$anio,
+                                                            ), array(
+                                                                'id'=>'vtab-'.$ofertaId.'-'.$anio,
+                                                                'escape' => false
+                                             ));
                                      ?>
                                 </li>
                                      <?php
@@ -290,10 +281,13 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                                 <li>
                                 <?php
                                     echo $html->link('<span>Todos</span>',array(
-                                        'controller'=>'planes',
-                                        'action'=>$ofertasControllers[$ofertaId],
-                                        $planes['Instit']['id']."/".$ofertaId."/0",
-                                        ), array('id'=>'vtab-0', 'escape' => false,));
+                                                        'controller'=>'planes',
+                                                        'action'=>$ofertasControllers[$ofertaId],
+                                                        $planes['Instit']['id']."/".$ofertaId."/0",
+                                                        ), array(
+                                                            'id'=>'vtab-'.$ofertaId.'-0',
+                                                            'escape' => false
+                                          ));
                                     ?>
                                 </li>
 
@@ -302,6 +296,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                         <?php
                         }
                         ?>
+                        </div>
                     </div>
         <?php endif;?>
 
