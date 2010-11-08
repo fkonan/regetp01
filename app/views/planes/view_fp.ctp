@@ -50,7 +50,7 @@ echo $html->css('planes/view_fp');
                         ?>
         </span>
         <div>
-           Matrícula: <?php echo empty($plan['Anio'][0]['matricula'])?0:$plan['Anio'][0]['matricula']; ?>
+           Matrícula: <?php echo empty($plan['Anio'][0]['matricula'])?"<span style='color:red'>0</span>":$plan['Anio'][0]['matricula']; ?>
             <span class="plan_sector_info">
                  Sector: <span class="plan_sector_name"><?php echo $plan['Sector']['name']; ?></span>
             </span>
