@@ -1348,18 +1348,19 @@ class Instit extends AppModel {
                                          );
                    }
 
-               $anios = $this->Plan->Anio->find("all",array(
+                    $anios = $this->Plan->Anio->find("all",array(
                           'conditions'=> $conditions,
                           'order' => array('Anio.plan_id','Anio.ciclo_id', 'EstructuraPlanesAnio.nro_anio'),
                           'contain'=>array(
                                         'EstructuraPlanesAnio',
                                         'Plan' => array('Sector','EstructuraPlan'=>array('Etapa')),
                                         )
-                          ));
+                    ));
 
                     $i = 0;
                     $planes_usados = array();
                     foreach ($in_planes as $plan) {
+
                         foreach ($anios as $anio) {
                             if ($plan == $anio['Plan']['id']) {
 
