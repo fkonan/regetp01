@@ -38,7 +38,14 @@ echo $html->css('planes/view_fp');
 
     <div class="plan_item <?php echo $class?>">
         <span class="plan_title">
+                        <?php if($ciclo == 0){ ?>
+                        <b>
+                        <?php  $primer_anio = current($plan['Anio']);
+                            echo (isset($primer_anio)?" (" .$primer_anio. ") - ":"") ;
+                        ?>
+                        </b>
                         <?php
+                        }
                         echo $html->link($plan['Plan']['nombre'],
                         array('action'=>'view', $plan['Plan']['id']),array('class'=>'title'));
                         ?>
