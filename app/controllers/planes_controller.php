@@ -457,7 +457,7 @@ class PlanesController extends AppController {
     }
 
     function view_it_sec($instit_id,$oferta_id,$ciclo=0) {
-        if($ciclo == 0) {
+        if ($ciclo == 0) {
             // el ultimo ciclo de cada plan
 
             $this->Plan->setTraerUltimaAct(true);
@@ -475,6 +475,7 @@ class PlanesController extends AppController {
                 foreach ($planes_encabezado as $plan) {
                     //debug($plan);
                     $planes[$i]['Plan'] = $plan['Plan'];
+                    $planes[$i]['Plan']['matricula'] = 0;
                     $planes[$i]['Sector'] = $plan['Sector'];
 
                     $anios = $this->Plan->Anio->find("all",array(
@@ -487,11 +488,13 @@ class PlanesController extends AppController {
                             )
                         ));
 
+
                     if (!empty($anios)) {
                         $j = 0;
                         foreach ($anios as $anio) {
                             $planes[$i]['Anio'][$j] = $anio['Anio'];
                             $planes[$i]['Anio'][$j]['Etapa'] = $anio['Etapa'];
+                             $planes[$i]['Plan']['matricula'] += $anio['matricula'];
 
                             $j++;
                         }
@@ -501,8 +504,6 @@ class PlanesController extends AppController {
                     $i++;
                 }
             }
-
-
         }
         else {
             $planes = $this->Plan->find("all",array(
@@ -531,6 +532,13 @@ class PlanesController extends AppController {
         }
 
         $planes = $this->Plan->Instit->getUltimosPlanes($instit_id, $ciclo, $oferta_id);
+
+        foreach($planes as &$plan){
+            $plan['Plan']['matricula'] = 0;
+            foreach($plan['Anio'] as $anio){
+                $plan['Plan']['matricula'] += $anio['matricula'];
+            }
+        }
 
         $this->set('planes', $planes);
         $this->set('instit_id', $instit_id);
@@ -561,6 +569,7 @@ class PlanesController extends AppController {
                 foreach ($planes_encabezado as $plan) {
                     //debug($plan);
                     $planes[$i]['Plan'] = $plan['Plan'];
+                    $planes[$i]['Plan']['matricula'] = 0;
                     $planes[$i]['Sector'] = $plan['Sector'];
 
                     $anios = $this->Plan->Anio->find("all",array(
@@ -578,6 +587,7 @@ class PlanesController extends AppController {
                         foreach ($anios as $anio) {
                             $planes[$i]['Anio'][$j] = $anio['Anio'];
                             $planes[$i]['Anio'][$j]['Etapa'] = $anio['Etapa'];
+                            $planes[$i]['Plan']['matricula'] += $anio['matricula'];
 
                             $j++;
                         }
