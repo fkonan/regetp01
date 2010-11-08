@@ -33,10 +33,7 @@
             spinner: '<?php echo $html->image('loadercircle16x16.gif') ?>'
         });
 
-       // jQuery('#tabs-loading-div').tabs({});
-
-
-       // selectTabsInSession();
+        selectTabsInSession();
 
         jQuery('#PlanNombre').live('keyup', function() {
             togglePlanes('#tabs-oferta-fp .plan_item');

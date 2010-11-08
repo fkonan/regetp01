@@ -39,6 +39,7 @@
     margin-left: 100px;
     /*float: left; pablo*/
     margin-left:100px;
+    clear:both;
 }
 
 .ui-state-active{
