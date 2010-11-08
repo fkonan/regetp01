@@ -475,6 +475,7 @@ class PlanesController extends AppController {
                 foreach ($planes_encabezado as $plan) {
                     //debug($plan);
                     $planes[$i]['Plan'] = $plan['Plan'];
+                    $planes[$i]['Sector'] = $plan['Sector'];
 
                     $anios = $this->Plan->Anio->find("all",array(
                             'conditions'=>array(
@@ -560,6 +561,7 @@ class PlanesController extends AppController {
                 foreach ($planes_encabezado as $plan) {
                     //debug($plan);
                     $planes[$i]['Plan'] = $plan['Plan'];
+                    $planes[$i]['Sector'] = $plan['Sector'];
 
                     $anios = $this->Plan->Anio->find("all",array(
                             'conditions'=>array(
