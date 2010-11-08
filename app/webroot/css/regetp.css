@@ -1405,6 +1405,7 @@ li.selected    {
 
 .tabs{
     width: 614px;
+    margin-top:40px;
 }
 
 .tabs-list{

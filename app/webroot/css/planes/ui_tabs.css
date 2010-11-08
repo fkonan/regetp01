@@ -21,7 +21,7 @@
     border: 1px solid #778;
 
     margin-top:-1px;
-
+    min-height: 200px;
     -webkit-border-radius: 4px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -37,9 +37,6 @@
 
 .planes-ofertas{
     margin-left: 100px;
-    /*float: left; pablo*/
-    margin-left:100px;
-    clear:both;
 }
 
 .ui-state-active{
@@ -62,10 +59,8 @@
 
 
 .planes-container .ui-tabs-panel{
-    clear: both;
     z-index: 1;
 }
 
 .ui-tabs-panel .ui-tabs-panel{
-    clear: none;
 }
