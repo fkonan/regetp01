@@ -544,6 +544,13 @@ class PlanesController extends AppController {
 
         $planes = $this->Plan->Instit->getUltimosPlanes($instit_id, $ciclo, $oferta_id);
 
+        foreach($planes as &$plan){
+            $plan['Plan']['matricula'] = 0;
+            foreach($plan['Anio'] as $anio){
+                $plan['Plan']['matricula'] += $anio['matricula'];
+            }
+        }
+
         $this->set('planes', $planes);
         $this->set('instit_id', $instit_id);
         $this->set('oferta_id', $oferta_id);

@@ -2216,6 +2216,19 @@ border-bottom-color: white !important;
     text-align: left;
     background: url(images/fondo_plan_item.jpg) 0px 50% no-repeat;
 }
+
+.plan_item .mas_info{
+    float:right;
+}
+
+.plan_sector{
+    margin-left: 65px;
+}
+
+.ciclos-container .altrow{
+    background-color: #F0F7FC;
+}
+
 .plan_etapa_name{
     font-size: 8pt;
     color: #045FB4;
