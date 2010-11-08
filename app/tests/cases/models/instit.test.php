@@ -4,10 +4,6 @@
 App::import('Model', 'Instit');
 
 
-class InstitTest extends Instit {
-    var $useDbConfig = 'test';
-}
-
 class InstitTestCase extends CakeTestCase {
 
 	//var $autoFixtures = false;
@@ -22,15 +18,27 @@ class InstitTestCase extends CakeTestCase {
             'app.user_login', 'app.fondo', 'app.estructura_plan', 'app.estructura_planes_anio',
             'app.jurisdicciones_estructura_plan'
     );
+
+    var $Instit = null;
 	 
-    function start() {
-        parent::start();
+    function startTest() {
+        //parent::start();
         $this->Instit =& ClassRegistry::init('Instit');
     }
 
 
+//    function startTest() {
+//        $this->Instit =& ClassRegistry::init('Instit');
+//
+//    }
+
+    function testPlanInstance() {
+        $this->assertTrue(is_a($this->Instit, 'Instit'));
+    }
+
+
     function testInstitSinPlanGetOrientacionSegunSusPlanes() {
-        $this->loadFixtures('Instit', 'Plan', 'Sector', 'Subsector', 'Orientacion');
+        //$this->loadFixtures('Instit', 'Plan', 'Sector', 'Subsector', 'Orientacion');
 
         $instit_id = 1;
         $conditions = array('Plan.instit_id'=>$instit_id);
@@ -57,7 +65,7 @@ class InstitTestCase extends CakeTestCase {
     }
 
     function testGetOrientacionMixtaSegunSusPlanes() {
-        $this->loadFixtures('Instit', 'Plan', 'Sector', 'Subsector', 'Orientacion');
+       // $this->loadFixtures('Instit', 'Plan', 'Sector', 'Subsector', 'Orientacion');
 
         /*************** Para la Instit ID= 1 ****************************/
         $plan['Plan'] = array(
@@ -119,7 +127,7 @@ class InstitTestCase extends CakeTestCase {
 
 
     function testGetOrientacionSegunSusPlanes() {
-        $this->loadFixtures('Instit', 'Plan', 'Sector', 'Subsector', 'Orientacion');
+       // $this->loadFixtures('Instit', 'Plan', 'Sector', 'Subsector', 'Orientacion');
 
         /*************** Para la Instit ID= 1 ****************************/
         $orientacion = $this->Instit->getOrientacionSegunSusPlanes(1);
@@ -164,23 +172,34 @@ class InstitTestCase extends CakeTestCase {
 
 
     function testEstructuraPlanes(){
-        $this->assertFalse($this->Instit->estructuraPlanes('depurados', 1));
+      //  $this->assertFalse($this->Instit->estructuraPlanes('depurados', 1,0));
 
-        $ie = $this->Instit->estructuraPlanes('no-depurados', 2);
+        $ie = $this->Instit->estructuraPlanes('no-depurados', 2,0);
         $canti = count($ie['Plan']);
         $this->assertTrue(1 == $canti);
 
-        $ie = $this->Instit->estructuraPlanes('depurados', 2);
+        $ie = $this->Instit->estructuraPlanes('depurados', 2,0);
         $canti = count($ie['Plan']);
         $this->assertTrue(1 == $canti);
 
-        $ie = $this->Instit->estructuraPlanes('depurados', 4);
+        $ie = $this->Instit->estructuraPlanes('depurados', 4,0);
         $canti = count($ie['Plan']);
-        $this->assertTrue(0 == $canti);
+        $this->assertEqual(1 ,$canti);
 
-        $ie = $this->Instit->estructuraPlanes('no-depurados', 4);
+        $ie = $this->Instit->estructuraPlanes('no-depurados', 4,0);
         $canti = count($ie['Plan']);
         $this->assertTrue(2 == $canti);
+    }
+
+
+    function testGetPlanesUltimos(){
+        $ie = $this->Instit->getPlanes($instit_id=2, $oferta_id = 0, $ciclo_id = 2009);
+       // debug($ie);
+
+         $ie = $this->Instit->getPlanes($instit_id=4);
+
+    
+        $this->assertTrue(false);
     }
 
 }

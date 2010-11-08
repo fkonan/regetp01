@@ -905,6 +905,13 @@ class Plan extends AppModel {
             return true;
         }
 
+        /**
+         * devuelve el ultimo ciclo lectivo del plan
+         */
+        function getUltimoCiclo($plan_id){
+            //TODO hay que hacer que devuelva el ultimo ciclo lectivo de este plan
+            return 2010;
+        }
 
         
 }
