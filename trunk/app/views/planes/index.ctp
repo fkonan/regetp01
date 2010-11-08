@@ -94,10 +94,17 @@
         return string;
     }
 
+    function alternateColors(selector){
+        jQuery(selector).removeClass("altrow");
+        jQuery(selector + ":not(:hidden):even").addClass("altrow");
+    }
+
     function togglePlanes(selector){
         jQuery(selector).each(function () {
             togglePlane(this);
         });
+
+        alternateColors(selector);
     }
     
     function togglePlane(plan){
