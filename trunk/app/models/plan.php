@@ -909,8 +909,19 @@ class Plan extends AppModel {
          * devuelve el ultimo ciclo lectivo del plan
          */
         function getUltimoCiclo($plan_id){
-            //TODO hay que hacer que devuelva el ultimo ciclo lectivo de este plan
-            return 2008;
+            $sql = ' SELECT max("Anio"."ciclo_id") AS "Anio__ciclo_id"
+                       FROM planes p
+                      INNER JOIN anios AS "Anio" ON "Anio".plan_id = p.id
+                      WHERE p.id = ' . $plan_id;
+
+            $data = $this->query($sql);
+
+            $max_ciclo = 0;
+            foreach ($data as $line){
+                    $max_ciclo = $line['Anio']['ciclo_id'];
+            }
+
+            return $max_ciclo;
         }
 
         
