@@ -4,7 +4,7 @@
 <div id="tabs-oferta-sup" class="oferta-contanier">
         <?php
         foreach($planes as $plan) {
-            if (count($plan['Anio']))
+            if (!empty($plan['Anio']))
             {
             ?>
             <div class="plan_item">
