@@ -48,7 +48,12 @@ class Anio extends AppModel {
 				'allowEmpty' => false,
 				//'on' => 'create', // or: 'update'
 				'message' => 'Debe ingresar un número de año entre 1 y 7.'
-			)
+			),
+                        'existeCicloEnPlan'=> array(
+				'rule' => 'existeCicloEnPlan',
+				'message' => 'El ciclo ya existe en el Plan.'
+			),
+
 		),
 		'etapa_id'=>array(
 			'notEmpty'=> array(
@@ -217,6 +222,18 @@ class Anio extends AppModel {
                     'order'=>array('Anio.ciclo_id'),
                         ));
              return $ciclosUsados;
+        }
+
+        function existeCicloEnPlan() {
+            $anios = $this->find('first', array(
+                'conditions' => array(
+                    'ciclo_id' => $this->data['Anio']['ciclo_id'],
+                    'plan_id' => $this->data['Anio']['plan_id'],
+
+                )
+            ));
+
+            return (empty($anios));
         }
         
 	

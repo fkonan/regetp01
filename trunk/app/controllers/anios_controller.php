@@ -144,7 +144,7 @@ class AniosController extends AppController {
             $this->Anio->Plan->recursive = -1;
             $plan   = $this->Anio->Plan->read(null,$plan_id);
             switch ($plan['Plan']['oferta_id']):
-                case 1://es un FP, asique mostrar la vista de años para FP
+                case FP_ID://es un FP, asique mostrar la vista de años para FP
                 case 7://es CL, asique mostrar la vista de años para FP
                     //$this->data['Anio']['hs_taller'] = $plan['Plan']['duracion_hs'];
                     $viewToRender = '/anios/add_fp';
@@ -152,12 +152,12 @@ class AniosController extends AppController {
                         $duracion_hs = $plan['Plan']['duracion_hs'];
                     }
                     break;
-                case 2: // IT
-                case 5: //SEC NO TECNICO
+                case ITINERARIO_ID: // IT
+                case SEC_ID: //SEC NO TECNICO
                     $viewToRender = '/anios/add_it';
                     break;
-                case 6: //SUP NO TECNICO
-                case 4: //SNU
+                case SUP_ID: //SUP NO TECNICO
+                case SUP_TEC_ID: //SNU
                     $viewToRender = '/anios/add_snu';
                     break;
                 default: // si no va con ninguno mostrar error
@@ -168,7 +168,14 @@ class AniosController extends AppController {
             $this->set('plan_id',$plan_id);
             $this->set('duracion_hs',$duracion_hs);
 
-            $ciclos = $this->Anio->Ciclo->find('list');            
+            $ciclosUsados = $this->Anio->find('list', array(
+                                'fields' => array('Anio.ciclo_id'),
+                                'conditions' => array('Anio.plan_id' => $plan_id)
+                ));
+
+            $ciclos = $this->Anio->Ciclo->find('list', array('conditions' => array(
+                                'not' => array('id' => array_values($ciclosUsados)))
+                ));
             $etapas = $this->Anio->Etapa->find('list');
 
             $this->set(compact('planes', 'ciclos', 'etapas'));
@@ -204,17 +211,17 @@ class AniosController extends AppController {
             $this->Anio->Plan->recursive = -1;
             $plan   = $this->Anio->Plan->find('all',array('conditions'=>array('Plan.id'=>$plan_id)));
             switch ($plan[0]['Plan']['oferta_id']):
-                case 1://es un FP, asique mostrar la vista de años para FP
+                case FP_ID://es un FP, asique mostrar la vista de años para FP
                 case 7://es CL, asique mostrar la vista de años para FP
                     $viewToRender = '/anios/edit_fp';
                     break;
-                case 2: // IT
-                case 3: //MT
-                case 5: //SEC NO TECNICO
+                case ITINERARIO_ID: // IT
+                case SEC_TEC_ID: //MT
+                case SEC_ID: //SEC NO TECNICO
                     $viewToRender = '/anios/edit';
                     break;
-                case 6: //SUP NO TECNICO
-                case 4: //SNU
+                case SUP_ID: //SUP NO TECNICO
+                case SUP_TEC_ID: //SNU
                     $viewToRender = '/anios/edit_snu';
                     break;
                 default: // si no va con ninguno mostrar el de MT
@@ -290,19 +297,19 @@ class AniosController extends AppController {
             $plan   = $this->Anio->Plan->find('all',array(
                 'conditions'=>array('Plan.id'=>$plan_id)));
             switch ($plan[0]['Plan']['oferta_id']):
-                case 1://es un FP, asique mostrar la vista de años para FP
+                case FP_ID://es un FP, asique mostrar la vista de años para FP
                 case 7://es CL, asique mostrar la vista de años para FP
                     $viewToRender = '/anios/edit_fp';
                     break;
-                case 2: // IT
+                case ITINERARIO_ID: // IT
                     $viewToRender = '/anios/edit';
                     break;
-                case 3: //MT
-                case 5: //SEC NO TECNICO
+                case SEC_TEC_ID: //MT
+                case SEC_ID: //SEC NO TECNICO
                     $viewToRender = '/anios/edit_sectec';
                     break;
-                case 6: //SUP NO TECNICO
-                case 4: //SNU
+                case SUP_ID: //SUP NO TECNICO
+                case SUP_TEC_ID: //SNU
                     $viewToRender = '/anios/edit_snu';
                     break;
                 default: // si no va con ninguno mostrar el de MT
