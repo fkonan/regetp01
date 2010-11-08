@@ -7,7 +7,8 @@
     foreach($planes['Plan'] as $plan){
     
     ?>
-    <?php if($ciclo > 0){ ?>
+    <?php if($ciclo > 0){ 
+        if(!empty($plan['Anio'])){?>
     <div class="plan_item" title="Haciendo click verá más información de éste plan">
              <span  class="plan_etapa_name">
                     <?php echo $plan['EstructuraPlan']['Etapa']['name']?>
@@ -56,6 +57,7 @@
          </div>
          <div class="clear"></div><br />
         <?php
+            }
         }
         else{
             $class = null;
