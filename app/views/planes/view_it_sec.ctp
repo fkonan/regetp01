@@ -52,43 +52,16 @@
                 <?php
                 }
             }
-            else {
+            else { //mostrar todos
                 $class = null;
                 if ($i++ % 2 == 0)
                     $class = 'altrow';
-            ?>
-                <div class="plan_item <?php echo $class?>">
-                    <span class="plan_title">
-                                    <?php
-                                    if (@current($plan['Anio'])) {
-                                        $primer_anio = current($plan['Anio']);
-                                        echo " (" . $primer_anio['ciclo_id'] . ")";
-
-                                        ?>
-                                        -
-                                    <?php
-                                    }
-                                    echo $html->link($plan['Plan']['nombre'],
-                                    array('action'=>'view', $plan['Plan']['id']),array('class'=>'title'));
-                                    ?>
-                    </span>
-                    <span class="plan_mas_info">
-                                    <?php
-                                    echo $html->link("más info",array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']),
-                                    null,null,false);
-                                    ?>
-                    </span>
-                    <div>
-                        Matrícula: <?php echo empty($plan['Plan']['matricula'])?0:$plan['Plan']['matricula']; ?>
-                        <span class="plan_sector_info">
-                             Sector: <span class="plan_sector_name"><?php echo $plan['Sector']['name']; ?></span>
-                        </span>
-                    </div>
-                    <input class="plan_sector" type="hidden" value="<?php echo $plan['Sector']['id']?>"/>
-                    <input class="plan_ciclo" type="hidden" value="<?php echo empty($plan['Anio'][0]['ciclo_id'])?0:$plan['Anio'][0]['ciclo_id'] ?>"/>
-                </div>
-                <?php
-                }
+                echo $this->element('planes/plan_resumen_para_listado', array(
+                    'class' => $class,
+                    'plan'  => $plan,
+                    'ciclo' => $ciclo,
+                ));               
             }
+        }
         ?>
 </div>

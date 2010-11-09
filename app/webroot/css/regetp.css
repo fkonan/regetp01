@@ -2312,3 +2312,11 @@ border-bottom-color: white !important;
     font-size: 8pt;
     max-width: 142px;
 }
+
+
+.plan_anio{
+    color:grey;
+    font-size:8pt;
+    margin-right:5px;
+    font-weight:bolder;
+}
