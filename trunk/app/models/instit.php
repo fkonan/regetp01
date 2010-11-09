@@ -1210,6 +1210,7 @@ class Instit extends AppModel {
                 'contain' => array(
                     'Plan' => array(
                         'conditions' => $condsPlan,
+
                         'Sector',
                         'EstructuraPlan.Etapa'
                     )

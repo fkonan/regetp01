@@ -32,40 +32,13 @@ echo $html->css('planes/view_fp');
                 if ($i++ % 2 == 0) {
                     $class = 'altrow';
                 }
-                ?>
-    
-
-
-    <div class="plan_item <?php echo $class?>">
-        <span class="plan_title">
-                        <?php if($ciclo == 0){ ?>
-                        <b>
-                        <?php  $primer_anio = current($plan['Anio']);
-                            echo (isset($primer_anio)?" (" .$primer_anio. ") - ":"") ;
-                        ?>
-                        </b>
-                        <?php
-                        }
-                        echo $html->link($plan['Plan']['nombre'],
-                        array('action'=>'view', $plan['Plan']['id']),array('class'=>'title'));
-                        ?>
-        </span>
-        <span class="plan_mas_info">
-                        <?php
-                        echo $html->link("más info",array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']),
-                        null,null,false);
-                        ?>
-        </span>
-        <div>
-           Matrícula: <?php echo empty($plan['Anio'][0]['matricula'])?"<span style='color:red'>0</span>":$plan['Anio'][0]['matricula']; ?>
-            <span class="plan_sector_info">
-                 Sector: <span class="plan_sector_name"><?php echo $plan['Sector']['name']; ?></span>
-            </span>
-        </div>
-        <input class="plan_sector" type="hidden" value="<?php echo $plan['Sector']['id']?>"/>
-        <input class="plan_ciclo" type="hidden" value="<?php echo empty($plan['Anio'][0]['ciclo_id'])?0:$plan['Anio'][0]['ciclo_id'] ?>"/>
-    </div>
-                <?php }
+                //debug($plan);
+                echo $this->element('planes/plan_resumen_para_listado', array(
+                    'class' => $class,
+                    'plan'  => $plan,
+                    'ciclo' => $ciclo,
+                ));
+            }
         endforeach;
     } else {
         ?>
