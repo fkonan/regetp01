@@ -28,15 +28,22 @@ echo $html->css('planes/view_fp');
     if ((isset($planes)) && (count($planes) > 0)) {
         foreach ($planes as $plan):
             if(count($plan['Anio']) > 0) {
-                $class = null;
+                $class = '';
                 if ($i++ % 2 == 0) {
                     $class = 'altrow';
                 }
-                //debug($plan);
+                
+                $ciclo_plan = '';
+
+                if (!empty($plan['Anio']['ciclo_id']) && empty($ciclo)) {
+                    // si quiero ver todos
+                    $ciclo_plan = $plan['Anio']['ciclo_id'];
+                }
+
                 echo $this->element('planes/plan_resumen_para_listado', array(
                     'class' => $class,
                     'plan'  => $plan,
-                    'ciclo' => $ciclo,
+                    'ciclo' => $ciclo_plan,
                 ));
             }
         endforeach;

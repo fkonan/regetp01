@@ -2214,7 +2214,11 @@ border-bottom-color: white !important;
     font-size: 8pt;
     font-weight: normal;
     text-align: left;
-    background: url(images/fondo_plan_item.jpg) 0px 50% no-repeat;
+    background: url(images/fondo_plan_item_byn.png) 0px 50% no-repeat;
+}
+
+.plan_item:HOVER{
+    background: url(images/fondo_plan_item_color.png) 0px 50% no-repeat;
 }
 
 .plan_item .mas_info{
@@ -2248,7 +2252,7 @@ border-bottom-color: white !important;
 
 .plan_item TH{
     font-weight: normal;
-    background-color: white;
+    background-color: #F0F7FC;
 }
 
 .plan_item a{
@@ -2260,7 +2264,6 @@ border-bottom-color: white !important;
 }
 
 .plan_item:hover{
-    background: url(images/fondo_plan_item_colored.jpg) 0px 50% no-repeat;
 }
 
 .plan_title, .plan_title A{
@@ -2294,7 +2297,7 @@ border-bottom-color: white !important;
     float: none;
     clear: both;
     display: block;
-    padding:0px 0px 15px 37px;
+    padding:0px 0px 0px 37px;
     background: 7px 18px url(images/search.png) no-repeat;
     height: 40px;
 }
@@ -2315,8 +2318,6 @@ border-bottom-color: white !important;
 
 
 .plan_anio{
-    color:grey;
-    font-size:8pt;
+    color: grey;
     margin-right:5px;
-    font-weight:bolder;
 }

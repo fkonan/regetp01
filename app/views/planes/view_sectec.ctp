@@ -64,10 +64,13 @@
             if ($i++ % 2 == 0)
                 $class = 'altrow';
 
+            $primer_anio = current($plan['Anio']);
+            $ciclo_plan =  (!empty($primer_anio['Anio']['ciclo_id'])? $primer_anio['Anio']['ciclo_id']:"") ;
+
             echo $this->element('planes/plan_resumen_para_listado', array(
                 'class' => $class,
                 'plan'  => $plan,
-                'ciclo' => $ciclo,
+                'ciclo' => $ciclo_plan,
             ));
         }
     }

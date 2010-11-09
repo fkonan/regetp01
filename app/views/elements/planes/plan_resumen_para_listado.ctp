@@ -13,14 +13,7 @@ if (!empty($plan['Plan'])) {
 
 <div class="plan_item <?php echo $class?>">
     <span class="plan_title">
-        <?php if($ciclo == 0) { ?>
-        <span class="plan_anio">
-                <?php  $primer_anio = current($plan['Anio']);
-                echo (!empty($primer_anio['Anio']['ciclo_id'])? $primer_anio['Anio']['ciclo_id']:"") ;
-                ?>
-        </span>
-            <?php
-        }
+        <?php
         echo $html->link($plan['nombre'],
         array('action'=>'view', $plan['id']),array('class'=>'title'));
         ?>
@@ -35,6 +28,15 @@ if (!empty($plan['Plan'])) {
         <span class="plan_matricula_info">
             Matrícula: <?php echo empty($plan['matricula'])?"<span style='color:red'>0</span>":$plan['matricula']; ?>
         </span>
+        <?php if(!empty($ciclo)) { ?>
+        <span class="plan_anio">
+                <?php 
+                echo (!empty($ciclo)? "(".$ciclo.")":"") ;
+                ?>
+        </span>
+            <?php
+        }
+        ?>
         <span class="plan_sector_info">
             Sector: <span class="plan_sector_name"><?php echo $plan['Sector']['name']; ?></span>
         </span>
