@@ -51,7 +51,7 @@ class Anio extends AppModel {
 			),
                         'existeCicloEnPlan'=> array(
 				'rule' => 'existeCicloEnPlan',
-				'message' => 'El ciclo ya existe en el Plan.'
+				'message' => 'El ciclo y Año ya existe en el Plan.'
 			),
 
 		),
@@ -228,8 +228,9 @@ class Anio extends AppModel {
             $anios = $this->find('first', array(
                 'conditions' => array(
                     'ciclo_id' => $this->data['Anio']['ciclo_id'],
+                    'anio' => $this->data['Anio']['anio'],
                     'plan_id' => $this->data['Anio']['plan_id'],
-
+                    //'oferta_id' => FP_ID
                 )
             ));
 

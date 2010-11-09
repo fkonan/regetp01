@@ -141,6 +141,7 @@ class AniosController extends AppController {
              * esto es para generar una vista distinta
              * para los años que son de una oferta FP
              */
+            $ciclosUsados = array();
             $this->Anio->Plan->recursive = -1;
             $plan   = $this->Anio->Plan->read(null,$plan_id);
             switch ($plan['Plan']['oferta_id']):
@@ -148,9 +149,15 @@ class AniosController extends AppController {
                 case 7://es CL, asique mostrar la vista de años para FP
                     //$this->data['Anio']['hs_taller'] = $plan['Plan']['duracion_hs'];
                     $viewToRender = '/anios/add_fp';
+            
                     if (empty($duracion_hs)) {
                         $duracion_hs = $plan['Plan']['duracion_hs'];
                     }
+
+                    $ciclosUsados = $this->Anio->find('list', array(
+                                    'fields' => array('Anio.ciclo_id'),
+                                    'conditions' => array('Anio.plan_id' => $plan_id)
+                    ));
                     break;
                 case ITINERARIO_ID: // IT
                 case SEC_ID: //SEC NO TECNICO
@@ -168,14 +175,19 @@ class AniosController extends AppController {
             $this->set('plan_id',$plan_id);
             $this->set('duracion_hs',$duracion_hs);
 
-            $ciclosUsados = $this->Anio->find('list', array(
-                                'fields' => array('Anio.ciclo_id'),
-                                'conditions' => array('Anio.plan_id' => $plan_id)
-                ));
+            if (!empty($ciclosUsados)) {
+                $ciclosUsados = $this->Anio->find('list', array(
+                                    'fields' => array('Anio.ciclo_id'),
+                                    'conditions' => array('Anio.plan_id' => $plan_id)
+                    ));
 
-            $ciclos = $this->Anio->Ciclo->find('list', array('conditions' => array(
-                                'not' => array('id' => array_values($ciclosUsados)))
-                ));
+                $ciclos = $this->Anio->Ciclo->find('list', array('conditions' => array(
+                                    'not' => array('id' => array_values($ciclosUsados)))
+                    ));
+            }
+            else {
+                $ciclos = $this->Anio->Ciclo->find('list');
+            }
             $etapas = $this->Anio->Etapa->find('list');
 
             $this->set(compact('planes', 'ciclos', 'etapas'));
