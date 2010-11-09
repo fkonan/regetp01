@@ -20,11 +20,11 @@ class PlanesController extends AppController {
 
         // posibles controllers de ofertas
         $ofertasControllers[FP_ID] = 'view_fp';
-        $ofertasControllers[ITINERARIO_ID] = 'view_it_sec';
+        $ofertasControllers[ITINERARIO_ID] = 'view_it_sec_sup';
         $ofertasControllers[SEC_TEC_ID] = 'view_sectec';
-        $ofertasControllers[SUP_TEC_ID] = 'view_sup';
-        $ofertasControllers[SEC_ID] = 'view_it_sec';
-        $ofertasControllers[SUP_ID] = 'view_sup';
+        $ofertasControllers[SUP_TEC_ID] = 'view_it_sec_sup';
+        $ofertasControllers[SEC_ID] = 'view_it_sec_sup';
+        $ofertasControllers[SUP_ID] = 'view_it_sec_sup';
 
         $v_plan_matricula = array();
 
@@ -456,14 +456,12 @@ class PlanesController extends AppController {
         $this->set('ciclos_anios', $ciclos_anios);
     }
 
-    function view_it_sec($instit_id,$oferta_id,$ciclo=0) {
+    function view_it_sec_sup($instit_id,$oferta_id,$ciclo=0) {
         if ($ciclo == 0) {
             // el ultimo ciclo de cada plan
-
             $this->Plan->setTraerUltimaAct(true);
             $this->Plan->setAsociarAnio(true);
             $this->Plan->recursive = 0;
-            //$this->paginate['fields'] = array('DISTINCT Plan.id');
             $this->paginate['conditions']['Plan.oferta_id'] = $oferta_id;
             $this->paginate['conditions']['Instit.id'] = $instit_id;
             $this->paginate['order'] = array('Anio__ciclo_id desc');
@@ -473,28 +471,26 @@ class PlanesController extends AppController {
             $i = 0;
             if (!empty($planes_encabezado)) {
                 foreach ($planes_encabezado as $plan) {
-                    //debug($plan);
                     $planes[$i]['Plan'] = $plan['Plan'];
                     $planes[$i]['Plan']['matricula'] = 0;
                     $planes[$i]['Sector'] = $plan['Sector'];
 
-                    $anios = $this->Plan->Anio->find("all",array(
-                            'conditions'=>array(
-                                    'ciclo_id' => $plan['Anio']['ciclo_id'],
-                                    'plan_id' => $plan['Plan']['id']
-                            ),
-                            'contain'=>array(
-                                    'Etapa'
-                            )
-                        ));
-
-
-                    if (!empty($anios)) {
+                    if (!empty($plan['Anio']['ciclo_id'])) {
+                        $anios = $this->Plan->Anio->find("all",array(
+                                'conditions'=>array(
+                                        'ciclo_id' => $plan['Anio']['ciclo_id'],
+                                        'plan_id' => $plan['Plan']['id']
+                                ),
+                                'contain'=>array(
+                                        'Etapa'
+                                )
+                            ));
+                    
                         $j = 0;
                         foreach ($anios as $anio) {
                             $planes[$i]['Anio'][$j] = $anio['Anio'];
                             $planes[$i]['Anio'][$j]['Etapa'] = $anio['Etapa'];
-                             $planes[$i]['Plan']['matricula'] += $anio['matricula'];
+                            $planes[$i]['Plan']['matricula'] += $anio['Anio']['matricula'];
 
                             $j++;
                         }
@@ -521,6 +517,14 @@ class PlanesController extends AppController {
         $this->set('instit_id', $instit_id);
         $this->set('oferta_id', $oferta_id);
         $this->set('ciclo', $ciclo);
+
+        
+        if ($oferta_id == ITINERARIO_ID || $oferta_id == SEC_ID) {
+            $this->render('view_it_sec');
+        }
+        elseif ($oferta_id == SUP_ID || $oferta_id == SUP_TEC_ID) {
+            $this->render('view_sup');
+        }
     }
 
     function view_sectec($instit_id,$oferta_id,$ciclo=0) {
@@ -548,79 +552,7 @@ class PlanesController extends AppController {
         $this->set('oferta_id', $oferta_id);
         $this->set('ciclo', $ciclo);
     }
-
-
-    function view_sup($instit_id,$oferta_id,$ciclo=0) {
-        //Configure::write('debug', 2);
-        $condition = '';
-        if($ciclo == 0) {
-            // el ultimo ciclo de cada plan
-            
-            $this->Plan->setTraerUltimaAct(true);
-            $this->Plan->setAsociarAnio(true);
-            $this->Plan->recursive = 0;
-            $this->paginate['conditions']['Plan.oferta_id'] = $oferta_id;
-            $this->paginate['conditions']['Instit.id'] = $instit_id;
-            $this->paginate['order'] = array('Anio__ciclo_id desc');
-
-            $planes_encabezado = $this->paginate();
-
-            //$planes = $this->Plan->Instit->getUltimosPlanes($instit_id, $ciclo, $oferta_id);
-
-            $i = 0;
-            if (!empty($planes_encabezado)) {
-                foreach ($planes_encabezado as $plan) {
-                    //debug($plan);
-                    $planes[$i]['Plan'] = $plan['Plan'];
-                    $planes[$i]['Plan']['matricula'] = 0;
-                    $planes[$i]['Sector'] = $plan['Sector'];
-
-                    $anios = $this->Plan->Anio->find("all",array(
-                            'conditions'=>array(
-                                    'ciclo_id' => $plan['Anio']['ciclo_id'],
-                                    'plan_id' => $plan['Plan']['id']
-                            ),
-                            'contain'=>array(
-                                    'Etapa'
-                            )
-                        ));
-
-                    if (!empty($anios)) {
-                        $j = 0;
-                        foreach ($anios as $anio) {
-                            $planes[$i]['Anio'][$j] = $anio['Anio'];
-                            $planes[$i]['Anio'][$j]['Etapa'] = $anio['Etapa'];
-                            $planes[$i]['Plan']['matricula'] += $anio['matricula'];
-
-                            $j++;
-                        }
-                    }
-
-
-                    $i++;
-                }
-            }
-            
-
-        }
-        else {
-            $planes = $this->Plan->find("all",array(
-                    'conditions'=>array(
-                            'instit_id'=>$instit_id,
-                            'oferta_id'=>$oferta_id
-                    ),
-                    'contain'=>array(
-                            'Anio' => array('Etapa', 'conditions' => array('ciclo_id' => $ciclo))
-                    )
-            ));
-        }
-//debug($planes);
-
-        $this->set('planes', $planes);
-        $this->set('instit_id', $instit_id);
-        $this->set('oferta_id', $oferta_id);
-        $this->set('ciclo', $ciclo);
-    }
+    
 
     function edicionMasiva1Dot6Dot3() {
         set_time_limit(30000000);

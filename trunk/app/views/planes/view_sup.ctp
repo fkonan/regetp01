@@ -60,14 +60,12 @@
         ?>
             <div class="plan_item <?php echo $class?>">
                 <span class="plan_title">
-                                <b>
                                 <?php
                                 if (@current($plan['Anio'])) {
                                     $primer_anio = current($plan['Anio']);
                                     echo " (" . $primer_anio['ciclo_id'] . ")";
 
                                     ?>
-                                    </b>
                                     -
                                 <?php
                                 }
