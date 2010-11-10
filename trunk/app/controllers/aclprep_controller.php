@@ -509,6 +509,7 @@ class AclprepController extends AppController {
         $this->Acl->allow('usuarios', 'Planes/view_fp');
         $this->Acl->allow('usuarios', 'Planes/view_it_sec_sup');
         $this->Acl->allow('usuarios', 'Planes/view_sectec');
+        $this->Acl->allow('usuarios', 'Planes/index_clasico');
 
         die('done 1.6.3');
     }
