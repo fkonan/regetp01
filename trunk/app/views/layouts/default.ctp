@@ -61,7 +61,16 @@
                 ?>
             });
         </script>
-        
+        <!--> hack horrible para el ie, pero no se me ocurrio algo mejor -->
+        <!--[if IE]>
+        <style type="text/css">
+            .horizontal-shadetabs a {
+                display: block;
+                height: 28px;
+            }
+        </style>
+        <![endif]-->
+}
         <!--[if IE 6]>
         <?php echo $html->css('ie6fix');?>
         <![endif]-->
