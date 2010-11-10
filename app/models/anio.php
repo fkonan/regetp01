@@ -51,6 +51,7 @@ class Anio extends AppModel {
 			),
                         'existeCicloEnPlan'=> array(
 				'rule' => 'existeCicloEnPlan',
+                                'on' => 'create',
 				'message' => 'El ciclo y Año ya existe en el Plan.'
 			),
 

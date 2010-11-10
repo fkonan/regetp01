@@ -60,7 +60,6 @@ echo $html->css('planes/view_fp');
         <?} ?>
 </div>
 
-
 <script language="JavaScript"  type="text/javascript" defer="defer">
     setearBuscador();
     
