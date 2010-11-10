@@ -23,12 +23,12 @@ if (empty($elementos)) {
     <?php
     foreach ($elementos as $e) {
         // marco la pestaña activa segun la pagina donde estoy ahora
-        $claseActiva = 'tab-grande-activa';
+        $claseActiva = 'tab-grande-inactiva';
         if (strtolower($e['link']['controller']) == strtolower($this->params['controller'])
                 &&
             strtolower($e['link']['action']) == strtolower($this->params['action'])
             ){
-            $claseActiva = 'tab-grande-inactiva';
+            $claseActiva = 'tab-grande-activa';
         }
 
         $options = array();
