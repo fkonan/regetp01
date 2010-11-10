@@ -10,3 +10,9 @@ margin: 0px;
 .vertical-shadetabs li a{
 margin: 0px;
 }
+
+
+.horizontal-shadetabs a {
+    display: block;
+    height: 28px;
+}

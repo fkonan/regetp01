@@ -34,11 +34,9 @@
         <?php
         echo $html->meta('icon');
         echo $html->css('regetp','stylesheet', array('media'=>'screen'));
-
-
-
         echo $html->css('printer','stylesheet', array('media'=>'print'));
 
+        echo $html->css('acl/'.$session->read('Auth.User.role'),'stylesheet', array('media'=>'screen'));
 
         echo $javascript->link(array(
         'jquery-1.4.2.min.js',
