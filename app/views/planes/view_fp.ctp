@@ -55,6 +55,7 @@ echo $javascript->link('jquery.pajinate.js',false);
             }
         endforeach;
     ?>
+    <div class="navigation"></div>
     <?php
     } 
     else {

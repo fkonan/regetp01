@@ -107,7 +107,7 @@
         i = 0;
         j= 0;
 
-        jQuery(selector + ":not(:hidden)").each(function () {
+        jQuery(selector).filter(":not(:hidden)").each(function () {
             i++;
             if(i > 5){
                 j++;
@@ -120,22 +120,21 @@
         jQuery('#js-vermenos').remove();
 
         if(j > 5){
-            jQuery("#tabs-oferta-fp").append("<div><a id='js-vermas' style='cursor:pointer;margin-top:20px'>ver mas ...</a></div>");
-            jQuery("#tabs-oferta-fp").append("<div><a id='js-vermenos' style='cursor:pointer;margin-top:20px;display:none'>ver menos ...</a></div>");
+            jQuery(".navigation").append("<div><a id='js-vermas' style='cursor:pointer;margin-top:20px'>ver mas ...</a><a id='js-vermenos' style='cursor:pointer;margin-top:20px;display:none'>ver menos ...</a></div>");
         }
         
     }
 
     jQuery('#js-vermas').live('click', function() {
         jQuery('.muchos').show();
-        jQuery('#js-vermas').hide();
-        jQuery('#js-vermenos').show();
+        jQuery(this).hide();
+        jQuery(this).parent().find('#js-vermenos').show();
     });
 
     jQuery('#js-vermenos').live('click', function() {
         jQuery('.muchos').hide();
-        jQuery('#js-vermenos').hide();
-        jQuery('#js-vermas').show();
+        jQuery(this).hide();
+        jQuery(this).parent().find('#js-vermas').show();
     });
 
     function togglePlanes(selector){
