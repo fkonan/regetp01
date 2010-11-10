@@ -420,13 +420,16 @@ class PlanesController extends AppController {
             $this->paginate['conditions']['Anio.ciclo_id'] = $ciclo;
         }
 
+        $this->Plan->recursive = 0;
         $this->Plan->setAsociarAnio(true);
+        $this->paginate['limit'] = 500;
         $this->paginate['conditions']['Plan.oferta_id'] = $oferta_id;
         $this->paginate['conditions']['Instit.id'] = $instit_id;
         $this->paginate['order'] = array("Anio.ciclo_id");
 
         $planes = $this->paginate();
 
+        //$this->Plan->recursive = -1;
         $sectores = $this->Plan->find("all",array(
                 'fields'=>array(
                         'DISTINCT Sector.id', 'Sector.name'
@@ -446,6 +449,7 @@ class PlanesController extends AppController {
             $sectores_aux[$s['Sector']['id']] = $s['Sector']['name'];
         }
 
+        $this->Plan->Anio->Ciclo->recursive = -1;
         $ciclos_anios = $this->Plan->Anio->Ciclo->find("list");
 
         $this->set('sectores', $sectores_aux);

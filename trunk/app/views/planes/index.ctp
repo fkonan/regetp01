@@ -27,10 +27,13 @@
         meterCopyPasteDelNombre('<?php echo $html->url("/js/zeroclipboard/ZeroClipboard10.swf"); ?>');
         
 
-        jQuery('.js-tabs-ofertas').tabs();
+        jQuery('.js-tabs-ofertas').tabs({
+            //ajaxOptions: { contentType: 'application/x-www-form-urlencoded; charset=utf-8' }
+        });
 
         jQuery('.js-tabs-ciclos').tabs({
             spinner: '<?php echo $html->image('loadercircle16x16.gif') ?>'
+            //ajaxOptions: { contentType: 'application/x-www-form-urlencoded; charset=utf-8' }
         });
 
         selectTabsInSession();
