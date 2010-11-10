@@ -154,8 +154,7 @@ border-top-left-radius: 7px;
 }
 
 .horizontal-shadetabs a:hover, .vertical-shadetabs a:hover{
-    color: #045FB4;
-    background: #efefef;
+   background: #6373A0;
 }
 
 .horizontal-shadetabs a.selected{ 
