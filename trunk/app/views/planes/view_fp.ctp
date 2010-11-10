@@ -8,6 +8,7 @@
     $html;
     
 echo $html->css('planes/view_fp');
+echo $javascript->link('jquery.pajinate.js',false);
 ?>
 <div id="tabs-oferta-fp" class="oferta-contanier">
 
@@ -21,13 +22,17 @@ echo $html->css('planes/view_fp');
     echo $form->end();
     ?>
 
-     <div class="clear"></div>
-     <br>
-     <?php
+    <div class="clear"></div>
+    <br>
+    <?php
     $i = 0;
     if ((isset($planes)) && (count($planes) > 0)) {
+    ?>
+    <?php
         foreach ($planes as $plan):
             if(count($plan['Anio']) > 0) {
+        ?>
+        <?php
                 $class = '';
                 if ($i++ % 2 == 0) {
                     $class = 'altrow';
@@ -45,10 +50,15 @@ echo $html->css('planes/view_fp');
                     'plan'  => $plan,
                     'ciclo' => $ciclo_plan,
                 ));
+                ?>
+            <?php
             }
         endforeach;
-    } else {
-        ?>
+    ?>
+    <?php
+    } 
+    else {
+    ?>
     <div>
             <?php $año_actual = date('Y',strtotime('now'));?>
             <?php if($datoUltimoCiclo['max_ciclo'] != $año_actual && $current_ciclo == $año_actual):?>
@@ -78,5 +88,7 @@ echo $html->css('planes/view_fp');
 
         togglePlanes('#tabs-oferta-fp .plan_item');
     }
+
+    
 </script>
 
