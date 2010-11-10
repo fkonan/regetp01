@@ -98,9 +98,45 @@
     }
 
     function alternateColors(selector){
+        
         jQuery(selector).removeClass("altrow");
+        jQuery(selector).removeClass("muchos");
+
         jQuery(selector + ":not(:hidden):even").addClass("altrow");
+        
+        i = 0;
+        j= 0;
+
+        jQuery(selector + ":not(:hidden)").each(function () {
+            i++;
+            if(i > 5){
+                j++;
+                jQuery(this).addClass("muchos");
+            }
+        });
+
+        jQuery('.muchos').hide();
+        jQuery('#js-vermas').remove();
+        jQuery('#js-vermenos').remove();
+
+        if(j > 5){
+            jQuery("#tabs-oferta-fp").append("<div><a id='js-vermas' style='cursor:pointer;margin-top:20px'>ver mas ...</a></div>");
+            jQuery("#tabs-oferta-fp").append("<div><a id='js-vermenos' style='cursor:pointer;margin-top:20px;display:none'>ver menos ...</a></div>");
+        }
+        
     }
+
+    jQuery('#js-vermas').live('click', function() {
+        jQuery('.muchos').show();
+        jQuery('#js-vermas').hide();
+        jQuery('#js-vermenos').show();
+    });
+
+    jQuery('#js-vermenos').live('click', function() {
+        jQuery('.muchos').hide();
+        jQuery('#js-vermenos').hide();
+        jQuery('#js-vermas').show();
+    });
 
     function togglePlanes(selector){
         jQuery(selector).each(function () {
