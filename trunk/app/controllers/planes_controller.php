@@ -428,7 +428,6 @@ class PlanesController extends AppController {
 //        $this->paginate['order'] = array("Anio.ciclo_id");
 //
 //        $planes = $this->paginate();
-
         $planes = $this->Plan->Instit->getPlanes($instit_id, $oferta_id, $ciclo);
         //debug($planes);die;
 

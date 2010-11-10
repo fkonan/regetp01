@@ -35,19 +35,27 @@ echo $javascript->link('jquery.pajinate.js',false);
                 $class = 'altrow';
             }
             $ciclo_plan = '';
-            if(count($plan['Anio']) > 0) {
-                
+            if($ciclo == 0){
                 if (!empty($plan['Anio'][0]['Anio']['ciclo_id']) && $ciclo==0) {
                     $primer_anio = current($plan['Anio'][0]);
                     $ciclo_plan =  (!empty($primer_anio['ciclo_id'])? $primer_anio['ciclo_id']:"") ;
 
                 }
+                echo $this->element('planes/plan_resumen_para_listado', array(
+                    'class' => $class,
+                    'plan'  => $plan,
+                    'ciclo' => $ciclo_plan,
+                ));
             }
-            echo $this->element('planes/plan_resumen_para_listado', array(
-                'class' => $class,
-                'plan'  => $plan,
-                'ciclo' => $ciclo_plan,
-            ));
+            else if(count($plan['Anio']) > 0) {
+                echo $this->element('planes/plan_resumen_para_listado', array(
+                    'class' => $class,
+                    'plan'  => $plan,
+                    'ciclo' => $ciclo_plan,
+                ));
+            }
+
+            
          endforeach;
     ?>
     <div class="navigation"></div>
