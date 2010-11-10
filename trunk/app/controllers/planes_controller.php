@@ -415,19 +415,22 @@ class PlanesController extends AppController {
 
     function view_fp($instit_id, $oferta_id, $ciclo=0) {
         $conditionsAnio = array();
-
+        
         if(!empty($ciclo)) {
             $this->paginate['conditions']['Anio.ciclo_id'] = $ciclo;
         }
+//
+//        $plan->recursive = 0;
+//        $plan->setAsociarAnio(true);
+//        $this->paginate['limit'] = 500;
+//        $this->paginate['conditions']['Plan.oferta_id'] = $oferta_id;
+//        $this->paginate['conditions']['Instit.id'] = $instit_id;
+//        $this->paginate['order'] = array("Anio.ciclo_id");
+//
+//        $planes = $this->paginate();
 
-        $this->Plan->recursive = 0;
-        $this->Plan->setAsociarAnio(true);
-        $this->paginate['limit'] = 500;
-        $this->paginate['conditions']['Plan.oferta_id'] = $oferta_id;
-        $this->paginate['conditions']['Instit.id'] = $instit_id;
-        $this->paginate['order'] = array("Anio.ciclo_id");
-
-        $planes = $this->paginate();
+        $planes = $this->Plan->Instit->getPlanes($instit_id, $oferta_id, $ciclo);
+        //debug($planes);die;
 
         //$this->Plan->recursive = -1;
         $sectores = $this->Plan->find("all",array(
