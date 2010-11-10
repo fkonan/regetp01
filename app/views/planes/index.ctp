@@ -109,7 +109,7 @@
 
         jQuery(selector).filter(":not(:hidden)").each(function () {
             i++;
-            if(i > 5){
+            if(i > 30){
                 j++;
                 jQuery(this).addClass("muchos");
             }
@@ -119,7 +119,7 @@
         jQuery('#js-vermas').remove();
         jQuery('#js-vermenos').remove();
 
-        if(j > 5){
+        if(j > 30){
             jQuery(".navigation").append("<div><a id='js-vermas' style='cursor:pointer;margin-top:20px'>ver mas ...</a><a id='js-vermenos' style='cursor:pointer;margin-top:20px;display:none'>ver menos ...</a></div>");
         }
         
