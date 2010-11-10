@@ -18,15 +18,14 @@ if (!empty($plan['Plan'])) {
         array('action'=>'view', $plan['id']),array('class'=>'title'));
         ?>
     </span>
-    <span class="plan_mas_info">
+    <span class="plan_mas_info btn-ir">
         <?php
-        echo $html->link("más info",array('controller'=> 'planes', 'action'=>'view', $plan['id']),
-        null,null,false);
+        echo $html->link("más info",array('controller'=> 'planes', 'action'=>'view', $plan['id']), array('title'=>'Ver mas información del plan'));
         ?>
     </span>
     <div>
         <span class="plan_matricula_info">
-            Matrícula: <?php echo empty($plan['matricula'])?"<span style='color:red'>0</span>":$plan['matricula']; ?>
+            Matrícula: <?php echo empty($plan['matricula'])?"<span>0</span>":$plan['matricula']; ?>
         </span>
         <?php if(!empty($ciclo)) { ?>
         <span class="plan_anio">

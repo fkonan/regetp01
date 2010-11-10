@@ -153,8 +153,7 @@ border-top-right-radius: 7px;
 border-top-left-radius: 7px;
 }
 
-.horizontal-shadetabs a:hover{
-    font-weight: normal;
+.horizontal-shadetabs a:hover, .vertical-shadetabs a:hover{
     color: #045FB4;
     background: #efefef;
 }
@@ -195,11 +194,6 @@ border-bottom-left-radius: 10px;
 
 }
 
-.vertical-shadetabs a:hover{
-font-weight: normal;
-color: #045FB4;
-background: #efefef;
-}
 
 .vertical-shadetabs a.selected{
 }

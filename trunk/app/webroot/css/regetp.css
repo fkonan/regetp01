@@ -2210,15 +2210,14 @@ border-bottom-color: white !important;
 
 .plan_item{
     margin-bottom:-1px;
-    padding:5px 5px 5px 40px;
+    padding:5px 0px 5px 18px;
     font-size: 8pt;
     font-weight: normal;
     text-align: left;
-    background: url(images/fondo_plan_item_byn.png) 0px 50% no-repeat;
 }
 
-.plan_item:HOVER{
-    background: url(images/fondo_plan_item_color.png) 0px 50% no-repeat;
+.plan_item A:HOVER{
+    color: #045FB8;
 }
 
 .plan_item .mas_info{
@@ -2261,9 +2260,6 @@ border-bottom-color: white !important;
 }
 .plan_item a:HOVER{
     text-decoration: underline;
-}
-
-.plan_item:hover{
 }
 
 .plan_title, .plan_title A{
@@ -2320,4 +2316,11 @@ border-bottom-color: white !important;
 .plan_anio{
     color: grey;
     margin-right:5px;
+}
+
+.btn-ir A{
+    background: transparent url(images/ir.png) 0 50% no-repeat;
+    display: block;
+    width: 17px;
+    text-indent: -1000px;
 }

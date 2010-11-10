@@ -21,10 +21,11 @@
                                 echo " (" . $primer_anio['ciclo_id'] . ")";
                             }
                             ?>
-                            <span style="float:right;"><?php echo $html->link("ver más",
-                                array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']),
-                                null,null,false);
-                            ?></span>
+                            <span class="plan_mas_info btn-ir">
+                            <?php echo $html->link("ver más",
+                                array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']), array('title'=>'Ver mas información del plan'));
+                            ?>
+                            </span>
                         </caption>
                         <thead>
                             <tr>

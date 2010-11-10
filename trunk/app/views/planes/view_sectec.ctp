@@ -13,10 +13,10 @@
              <span  class="plan_etapa_name">
                     <?php echo $plan['EstructuraPlan']['Etapa']['name']?>
              </span>
-             <span style="float:right;">
+
+             <span class="plan_mas_info btn-ir">
                     <?php echo $html->link("ver más",
-                        array('controller'=> 'planes', 'action'=>'view', $plan['id']),
-                        null,null,false);
+                        array('controller'=> 'planes', 'action'=>'view', $plan['id']), array('title'=>'Ver mas información del plan'));
                     ?>
              </span>
 
