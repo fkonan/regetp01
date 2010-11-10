@@ -431,6 +431,15 @@ class PlanesController extends AppController {
         $planes = $this->Plan->Instit->getPlanes($instit_id, $oferta_id, $ciclo);
         //debug($planes);die;
 
+        foreach($planes['Plan'] as &$plan){
+
+            $plan['matricula'] = 0;
+
+            foreach($plan['Anio'] as $anio){
+                $plan['matricula'] += $anio['Anio']['matricula'];
+            }
+        }
+        
         //$this->Plan->recursive = -1;
         $sectores = $this->Plan->find("all",array(
                 'fields'=>array(
@@ -444,6 +453,7 @@ class PlanesController extends AppController {
                         'Sector'
                 )
         ));
+
 
         $sectores_aux = array();
 
