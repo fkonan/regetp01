@@ -1210,7 +1210,6 @@ class Instit extends AppModel {
                 'contain' => array(
                     'Plan' => array(
                         'conditions' => $condsPlan,
-
                         'Sector',
                         'EstructuraPlan.Etapa'
                     )
@@ -1228,6 +1227,7 @@ class Instit extends AppModel {
                
                $aniosPlan = $this->Plan->Anio->find('all', array(
                     'conditions' => $condsAnio,
+                    'order' => 'Anio.anio'
                ));
                // le meto los años al array de planes
                $i['Anio'] = $aniosPlan;

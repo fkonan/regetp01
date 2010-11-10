@@ -63,7 +63,10 @@
                 ?>
             });
         </script>
-
+        
+        <!--[if IE 6]>
+        <?php echo $html->css('ie6fix');?>
+        <![endif]-->
 
         <!--        Permisos ACL segun el grupo del usuario         -->
         <style type="text/css">

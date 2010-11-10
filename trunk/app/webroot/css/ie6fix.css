@@ -1,0 +1,12 @@
+.horizontal-shadetabs{
+    position: static !important;
+    background-color: pink;
+}
+
+.vertical-shadetabs li{
+margin: 0px;
+}
+
+.vertical-shadetabs li a{
+margin: 0px;
+}

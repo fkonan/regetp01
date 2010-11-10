@@ -36,17 +36,19 @@
 
 
 .planes-ofertas{
-    margin-left: 92px;
+    margin-left: 86px;
 }
 
 .ui-state-active{
     
 }
 
-.ui-state-active A{
+.ui-state-active A, .ui-state-active A:HOVER{
     background-color: white;
     background-image: none;
     color: #233E87;
+    cursor: default;
+    font-weight: bolder;
 }
 
 .horizontal-shadetabs .ui-state-active A{

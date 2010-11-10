@@ -58,7 +58,9 @@
                     $class = 'altrow';
 
                 $ciclo_plan = '';
-                $ciclo_id = $plan['Anio'][0]['ciclo_id'];
+                $ciclo_id = 0;
+                if (!empty($plan['Anio'][0]['ciclo_id']))
+                    $ciclo_id = $plan['Anio'][0]['ciclo_id'];
                 $ciclo_plan =  (!empty($ciclo_id)? $ciclo_id:"") ;
                 
                 echo $this->element('planes/plan_resumen_para_listado', array(
