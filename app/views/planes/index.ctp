@@ -298,7 +298,10 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                                     ?>
                                 </li>
 
-                            </ul>                            
+                            </ul>
+                            <!--[if IE 6]>
+                            <br><br><br>
+                            <![endif]-->
                         </div>
                         <?php
                         }

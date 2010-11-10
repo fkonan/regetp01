@@ -108,6 +108,7 @@ border-color: #D25A0B; /*Brown color theme*/
 .horizontal-shadetabs{
 padding: 0;
 margin: 0;
+position: relative;
 }
 
 .horizontal-shadetabs ul{
@@ -153,7 +154,9 @@ border-top-left-radius: 7px;
 }
 
 .horizontal-shadetabs a:hover{
-color: #DBEBF6;
+    font-weight: normal;
+    color: #045FB4;
+    background: #efefef;
 }
 
 .horizontal-shadetabs a.selected{ 
@@ -170,9 +173,8 @@ width:65px;
 
 
 .vertical-shadetabs li{
-margin: 0px 0px 3px 0px;
+margin: 0px 0px 2px 0px;
 padding: 0;
-
 }
 
 .vertical-shadetabs a{
@@ -194,7 +196,9 @@ border-bottom-left-radius: 10px;
 }
 
 .vertical-shadetabs a:hover{
-color: #DBEBF6;
+font-weight: normal;
+color: #045FB4;
+background: #efefef;
 }
 
 .vertical-shadetabs a.selected{

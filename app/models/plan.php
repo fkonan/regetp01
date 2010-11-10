@@ -19,18 +19,7 @@ class Plan extends AppModel {
             );
 
 	var $hasMany = array(
-			'Anio' => array('className' => 'Anio',
-								'foreignKey' => 'plan_id',
-								'dependent' => true,
-								'conditions' => '',
-								'fields' => '',
-								'order' => array('ciclo_id DESC','etapa_id ASC, anio ASC'),
-								'limit' => '',
-								'offset' => '',
-								'exclusive' => '',
-								'finderQuery' => '',
-								'counterQuery' => ''
-			)
+            'Anio' => array('order'=>'Anio.anio'),
 	);
 	
 	var $validate = array(
