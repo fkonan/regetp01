@@ -30,31 +30,25 @@ echo $javascript->link('jquery.pajinate.js',false);
     ?>
     <?php
         foreach ($planes['Plan'] as $plan):
+            $class = '';
+            if ($i++ % 2 == 0) {
+                $class = 'altrow';
+            }
+            $ciclo_plan = '';
             if(count($plan['Anio']) > 0) {
-        ?>
-        <?php
-                $class = '';
-                if ($i++ % 2 == 0) {
-                    $class = 'altrow';
-                }
                 
-                $ciclo_plan = '';
-
                 if (!empty($plan['Anio'][0]['Anio']['ciclo_id']) && $ciclo==0) {
                     $primer_anio = current($plan['Anio'][0]);
                     $ciclo_plan =  (!empty($primer_anio['ciclo_id'])? $primer_anio['ciclo_id']:"") ;
 
                 }
-
-                echo $this->element('planes/plan_resumen_para_listado', array(
-                    'class' => $class,
-                    'plan'  => $plan,
-                    'ciclo' => $ciclo_plan,
-                ));
-                ?>
-            <?php
             }
-        endforeach;
+            echo $this->element('planes/plan_resumen_para_listado', array(
+                'class' => $class,
+                'plan'  => $plan,
+                'ciclo' => $ciclo_plan,
+            ));
+         endforeach;
     ?>
     <div class="navigation"></div>
     <?php
