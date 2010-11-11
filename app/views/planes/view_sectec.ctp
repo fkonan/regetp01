@@ -1,4 +1,10 @@
-
+<?php
+if (empty($planes['Plan'])) {
+    ?>
+<p class="msg-atencion"><br /><br />La Institución no presenta actualizaciones para este año</p>
+<?
+}
+?>
 <div id="tab_oferta">
     <?php
     $i = 0;

@@ -127,12 +127,19 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                                                             <th>
                                                             <div style="display: none;">
                                                                     <?php
-                                                                    echo $form->create('Plan',array('action' =>'index'));
+                                                                    echo $form->create('Plan',array('action' =>'index_clasico'));
                                                             echo $form->hidden('Instit.id',array('value' => $url_conditions['Instit.id']));
                                                             echo $form->hidden('Anio.ciclo_id',array('value' => $url_conditions['Anio.ciclo_id']));
                                                           ?></div>
                                                           <?php
-                                                                    echo $form->input('oferta_id',array('options'=> $ofertas,'label'=>'','empty'=> array('0'=>'Todas'),'selected' => isset($url_conditions['Plan.oferta_id']) ? $url_conditions['Plan.oferta_id'] : '0'));?></th>
+                                                                 echo $form->input('oferta_id',array(
+                                                                     'options'=> $ofertas,
+                                                                     'label'=>''  ,
+                                                                     'style' => 'width: 100px;',
+                                                                     'empty'=> array('0'=>'Todas'),
+                                                                     'selected' => isset($url_conditions['Plan.oferta_id']) ? $url_conditions['Plan.oferta_id'] : '0'));
+                                                                 ?>
+                                                            </th>
                                                             <th><?php echo $form->input('nombre', array('label'=>'','value' => isset($url_conditions['Plan.nombre']) ? $url_conditions['Plan.nombre'] : ''));?></th>
                                                             <th><?php echo $form->input('sector_id',array('options'=> $sectores,'label'=>'','empty'=> array('0'=>'Todas'),'selected' => isset($url_conditions['Plan.sector_id']) ? $url_conditions['Plan.sector_id'] : '0'));?></th>
                                                             <th colspan=2><?php echo $form->end('Buscar');?></th>

@@ -1217,8 +1217,9 @@ class Instit extends AppModel {
            if ($oferta_id == SEC_TEC_ID) {
                ordenarPlanesPorEtapaOrden(&$planes);
            }
-            
-           foreach ($planes['Plan'] as &$i) {
+
+           // Agrega los Anios al Plan
+           foreach ($planes['Plan'] as $key=>&$i) {
                if (!empty($ciclo)) {
                    $condsAnio = array('Anio.plan_id'=> $i['id'],'Anio.ciclo_id'=>$ciclo);
                } else {
@@ -1233,8 +1234,36 @@ class Instit extends AppModel {
                ));
                // le meto los años al array de planes
                $i['Anio'] = $aniosPlan;
+
+               if (empty($aniosPlan) && $ciclo != 0) {
+                   unset($planes['Plan'][$key]);
+               }
            }
             return $planes;
+        }
+
+
+        function listSectoresConOferta($instit_id, $oferta_id){
+            $sectores = $this->Plan->find("all",array(
+                'fields'=>array(
+                        'DISTINCT Sector.id', 'Sector.name'
+                ),
+                'conditions'=>array(
+                        'Plan.instit_id'=>$instit_id,
+                        'Plan.oferta_id'=>$oferta_id
+                ),
+                'contain'=>array(
+                        'Sector'
+                )
+            ));
+
+
+            $sectores_aux = array();
+
+            foreach($sectores as $s){
+                $sectores_aux[$s['Sector']['id']] = $s['Sector']['name'];
+            }
+            return $sectores_aux;
         }
 }
 ?>
