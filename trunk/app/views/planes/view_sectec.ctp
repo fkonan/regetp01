@@ -1,6 +1,4 @@
-<?php
-    echo $javascript->link('jquery.biggerlink.min.js', false);
-?>
+
 <div id="tab_oferta">
     <?php
     $i = 0;
