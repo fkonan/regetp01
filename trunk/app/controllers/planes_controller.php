@@ -65,7 +65,7 @@ class PlanesController extends AppController {
         }
 
         $ciclos = $this->Plan->dame_ciclos_por_oferta_instits($id);
-
+        
         $ofertas  = $this->Plan->dameOfertaPorInstitucion($id,'');
         $sectores = $this->Plan->dameSectoresPorInstitucion($id,isset($url_conditions['Anio.ciclo_id'])?$url_conditions['Anio.ciclo_id']:'');
         $this->set(compact('ofertas','ciclos','sectores'));
@@ -256,9 +256,10 @@ class PlanesController extends AppController {
 
         //ordenos los años para ue puedan ser mostrados en la vista
         $anios = array();
-
-        foreach($plan['Anio'] as $p) {
-            $anios[$p['ciclo_id']][]= $p;
+        if(!empty($plan['Anio'])) {
+            foreach($plan['Anio'] as $p) {
+                $anios[$p['ciclo_id']][]= $p;
+            }
         }
 
         $this->set('anios',$anios);
@@ -419,52 +420,21 @@ class PlanesController extends AppController {
         if(!empty($ciclo)) {
             $this->paginate['conditions']['Anio.ciclo_id'] = $ciclo;
         }
-//
-//        $plan->recursive = 0;
-//        $plan->setAsociarAnio(true);
-//        $this->paginate['limit'] = 500;
-//        $this->paginate['conditions']['Plan.oferta_id'] = $oferta_id;
-//        $this->paginate['conditions']['Instit.id'] = $instit_id;
-//        $this->paginate['order'] = array("Anio.ciclo_id");
-//
-//        $planes = $this->paginate();
+        
         $planes = $this->Plan->Instit->getPlanes($instit_id, $oferta_id, $ciclo);
-        //debug($planes);die;
 
+        // agrego el index "matricula" directamente que dependa de "Plan"
         foreach($planes['Plan'] as &$plan){
-
             $plan['matricula'] = 0;
-
             foreach($plan['Anio'] as $anio){
                 $plan['matricula'] += $anio['Anio']['matricula'];
             }
         }
         
-        //$this->Plan->recursive = -1;
-        $sectores = $this->Plan->find("all",array(
-                'fields'=>array(
-                        'DISTINCT Sector.id', 'Sector.name'
-                ),
-                'conditions'=>array(
-                        'Plan.instit_id'=>$instit_id,
-                        'Plan.oferta_id'=>$oferta_id
-                ),
-                'contain'=>array(
-                        'Sector'
-                )
-        ));
-
-
-        $sectores_aux = array();
-
-        foreach($sectores as $s){
-            $sectores_aux[$s['Sector']['id']] = $s['Sector']['name'];
-        }
-
-        $this->Plan->Anio->Ciclo->recursive = -1;
+        $sectores = $this->Plan->Instit->listSectoresConOferta($instit_id, $oferta_id);
         $ciclos_anios = $this->Plan->Anio->Ciclo->find("list");
 
-        $this->set('sectores', $sectores_aux);
+        $this->set('sectores', $sectores);
         $this->set('planes', $planes);
         $this->set('instit_id', $instit_id);
         $this->set('oferta_id', $oferta_id);
@@ -473,60 +443,20 @@ class PlanesController extends AppController {
     }
 
     function view_it_sec_sup($instit_id,$oferta_id,$ciclo=0) {
-        if ($ciclo == 0) {
-            // el ultimo ciclo de cada plan
-            $this->Plan->setTraerUltimaAct(true);
-            $this->Plan->setAsociarAnio(true);
-            $this->Plan->recursive = 0;
-            $this->paginate['conditions']['Plan.oferta_id'] = $oferta_id;
-            $this->paginate['conditions']['Instit.id'] = $instit_id;
-            $this->paginate['order'] = array('Anio__ciclo_id desc');
+        $conditionsAnio = array();
 
-            $planes_encabezado = $this->paginate();
-
-            $i = 0;
-            if (!empty($planes_encabezado)) {
-                foreach ($planes_encabezado as $plan) {
-                    $planes[$i]['Plan'] = $plan['Plan'];
-                    $planes[$i]['Plan']['matricula'] = 0;
-                    $planes[$i]['Sector'] = $plan['Sector'];
-
-                    if (!empty($plan['Anio']['ciclo_id'])) {
-                        $anios = $this->Plan->Anio->find("all",array(
-                                'conditions'=>array(
-                                        'ciclo_id' => $plan['Anio']['ciclo_id'],
-                                        'plan_id' => $plan['Plan']['id']
-                                ),
-                                'contain'=>array(
-                                        'Etapa'
-                                )
-                            ));
-                    
-                        $j = 0;
-                        foreach ($anios as $anio) {
-                            $planes[$i]['Anio'][$j] = $anio['Anio'];
-                            $planes[$i]['Anio'][$j]['Etapa'] = $anio['Etapa'];
-                            $planes[$i]['Plan']['matricula'] += $anio['Anio']['matricula'];
-
-                            $j++;
-                        }
-                    }
-
-
-                    $i++;
-                }
-            }
+        if(!empty($ciclo)) {
+            $this->paginate['conditions']['Anio.ciclo_id'] = $ciclo;
         }
-        else {
-            $planes = $this->Plan->find("all",array(
-                    'conditions'=>array(
-                            'instit_id'=>$instit_id,
-                            'oferta_id'=>$oferta_id
-                    ),
-                    'contain'=>array(
-                            'Anio' => array('Etapa', 'conditions' => array('ciclo_id' => $ciclo))
-                    )
-            ));
+
+        $planes = $this->Plan->Instit->getPlanes($instit_id, $oferta_id, $ciclo);
+
+        // agrego el index "matricula" directamente que dependa de "Plan"
+        foreach($planes['Plan'] as &$plan){
+            $plan['matricula'] = 0;
+            foreach($plan['Anio'] as $anio){
+                $plan['matricula'] += $anio['Anio']['matricula'];
+            }
         }
 
         $this->set('planes', $planes);
@@ -553,15 +483,12 @@ class PlanesController extends AppController {
 
         $planes = $this->Plan->Instit->getPlanes($instit_id, $oferta_id,$ciclo);
         
-        foreach($planes['Plan'] as &$plan){
-            
+        foreach($planes['Plan'] as &$plan){            
             $plan['matricula'] = 0;
-
             foreach($plan['Anio'] as $anio){
                 $plan['matricula'] += $anio['Anio']['matricula'];
             }
         }
-
 
         $this->set('planes', $planes);
         $this->set('instit_id', $instit_id);

@@ -431,11 +431,19 @@ class Plan extends AppModel {
 		return $vec;
   	}
 
-        function dame_ciclos_por_oferta_instits($instit_id){
+        function dame_ciclos_por_oferta_instits($instit_id, $agregar_anio_actual = true) {
 
 		$vec = array();
 
-		$sql  = " SELECT distinct oferta_id,o.abrev, ciclo_id";
+                $oferta = $this->dameOfertaPorInstitucion($instit_id);
+                foreach ($oferta as &$o) {
+                    $o = array(
+                        'ciclo' => array(),
+                        'name' => '',
+                        );
+                }
+
+		$sql   = " SELECT distinct oferta_id,o.abrev, ciclo_id";
                 $sql  .= " FROM planes p";
                 $sql  .= " INNER JOIN anios a ON a.plan_id = p.id";
                 $sql  .= " INNER JOIN ofertas o ON o.id = p.oferta_id";
@@ -446,11 +454,30 @@ class Plan extends AppModel {
 		$data = $this->query($sql);
 
                 foreach ($data as $line){
-			$vec[$line[0]['oferta_id']]['ciclo'][] = $line[0]['ciclo_id'];
-                        $vec[$line[0]['oferta_id']]['name'] = $line[0]['abrev'];
+			$oferta[$line[0]['oferta_id']]['ciclo'][] = $line[0]['ciclo_id'];
+                        $oferta[$line[0]['oferta_id']]['name'] = $line[0]['abrev'];
                 }
-		                
-		return $vec;
+
+                $ciclos = $oferta;
+                if ($agregar_anio_actual) {
+                    // agregarle el año actual si no existe
+                    $existe = false;
+                    foreach ($ciclos as &$c) {
+                        // le agrego solo si no existe
+                        foreach ($c['ciclo'] as $cc) {
+                            if (date('Y') == $cc )  {
+                                $existe = true;
+                                break;
+                            }
+                        }
+                        if (!$existe) {
+                             array_unshift(&$c['ciclo'],date('Y'));
+                        }
+                        $existe = false;
+                    }
+                }
+
+		return $ciclos;
   	}
   	
   	
@@ -912,6 +939,9 @@ class Plan extends AppModel {
 
             return $max_ciclo;
         }
+
+
+        
 
         
 }

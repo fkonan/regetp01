@@ -1,24 +1,20 @@
 <?php
-    echo $javascript->link('zeroclipboard/ZeroClipboard.js',false);
-    echo $javascript->link('jquery-ui-1.8.5.custom.min.js',false);
+echo $javascript->link('zeroclipboard/ZeroClipboard.js',false);
+echo $javascript->link('jquery-ui-1.8.5.custom.min.js',false);
 
-    echo $javascript->link('jquery.loadmask.min',false);
+echo $javascript->link('jquery.loadmask.min',false);
 
-    echo $html->css('ajaxtabs.css',null, false);
-    echo $html->css('planes/ui_tabs.css',null, false);
-    //echo $html->css('smoothness/jquery-ui-1.8.5.custom.css',null, false);
-    //echo $html->css(array('jquery.loadmask'),null, false);
-?>
-<?php
-	$link = "";
-	if($ticket_id != 0)
-	{
-		$link = "<a class='aPend' href=\"";
-		$link .= $html->url(array('controller'=> 'tickets', 'action'=>$action.'/'.$ticket_id));
-		$link .= "\" onClick=\"window.open('".$html->url(array('controller'=> 'tickets', 'action'=>$action.'/'.$ticket_id));
-		$link .= "','_blank' , 'toolbar=0,scro  llbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=310,height=390');";
-		$link .= " return false;\">Pendiente de Actualización</a>";
-	}
+echo $html->css('ajaxtabs.css',null, false);
+echo $html->css('planes/ui_tabs.css',null, false);
+
+$link = "";
+if($ticket_id != 0) {
+    $link = "<a class='aPend' href=\"";
+    $link .= $html->url(array('controller'=> 'tickets', 'action'=>$action.'/'.$ticket_id));
+    $link .= "\" onClick=\"window.open('".$html->url(array('controller'=> 'tickets', 'action'=>$action.'/'.$ticket_id));
+    $link .= "','_blank' , 'toolbar=0,scro  llbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=310,height=390');";
+    $link .= " return false;\">Pendiente de Actualización</a>";
+}
 ?>
 <script language="JavaScript" type="text/javascript" defer="defer">
     jQuery(document).ready(function(){

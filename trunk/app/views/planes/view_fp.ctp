@@ -9,7 +9,17 @@
     
 echo $html->css('planes/view_fp', null, null, false);
 echo $javascript->link('jquery.pajinate.js',false);
+
+
+if (empty($planes['Plan'])) {
+    ?>
+<p class="msg-atencion"><br /><br />La Institución no presenta actualizaciones para este año</p>
+<?
+exit ();
+}
 ?>
+
+
 <div id="tabs-oferta-fp" class="oferta-contanier">
 
     <?php

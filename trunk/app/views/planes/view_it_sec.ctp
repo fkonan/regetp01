@@ -1,3 +1,11 @@
+<?php
+if (empty($planes['Plan'])) {
+    ?>
+<p class="msg-atencion"><br /><br />La Institución no presenta actualizaciones para este año</p>
+<?
+}
+?>
+
 <div id="tabs-oferta-it-sec" class="oferta-contanier">
         <?php
         $i = 0;
@@ -57,12 +65,19 @@
                 $class = null;
                 if ($i++ % 2 == 0) $class = 'altrow';
                
-                if (!empty($plan['Anio'][0]['ciclo_id']))
-                    $ciclo_id = $plan['Anio'][0]['ciclo_id'];
-                else
-                    $ciclo_id = 0;
-                
-                $ciclo_plan =  (!empty($ciclo_id)) ? $ciclo_id : "" ;
+                $ciclo_plan = '';
+                if($ciclo == 0){
+                    if (!empty($plan['Anio'][0]['Anio']['ciclo_id']) && $ciclo==0) {
+                        $primer_anio = current($plan['Anio'][0]);
+                        $ciclo_plan =  (!empty($primer_anio['ciclo_id'])? $primer_anio['ciclo_id']:"") ;
+
+                    }
+                    echo $this->element('planes/plan_resumen_para_listado', array(
+                        'class' => $class,
+                        'plan'  => $plan,
+                        'ciclo' => $ciclo_plan,
+                    ));
+                }
                 
                 echo $this->element('planes/plan_resumen_para_listado', array(
                     'class' => $class,
