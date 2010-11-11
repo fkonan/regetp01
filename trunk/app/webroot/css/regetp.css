@@ -2320,6 +2320,13 @@ border-bottom-color: white !important;
 .btn-ir A{
     background: transparent url(images/ir.png) 0 50% no-repeat;
     display: block;
-    width: 17px;
+    width: 47px;
+    height: 20px;
     text-indent: -1000px;
+    margin:0;
+    padding:0;
+}
+
+.btn-ir A:HOVER{
+   
 }
