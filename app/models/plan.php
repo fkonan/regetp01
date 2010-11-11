@@ -940,6 +940,9 @@ class Plan extends AppModel {
             return $max_ciclo;
         }
 
+        function filtrar_planes($planes,$filtro_titulo,$filtro_sector,$filtro_ciclo){
+            return $planes;
+        }
 
         
 
