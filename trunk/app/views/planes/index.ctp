@@ -3,6 +3,7 @@ echo $javascript->link('zeroclipboard/ZeroClipboard.js',false);
 echo $javascript->link('jquery-ui-1.8.5.custom.min.js',false);
 
 echo $javascript->link('jquery.loadmask.min',false);
+    echo $javascript->link('async.js',false);
 
 echo $html->css('ajaxtabs.css',null, false);
 echo $html->css('planes/ui_tabs.css',null, false);
@@ -36,14 +37,17 @@ if($ticket_id != 0) {
 
         jQuery('#PlanNombre').live('keyup', function() {
             togglePlanes('#tabs-oferta-fp .plan_item');
+            return false;
         });
 
         jQuery('#SectorId').live('change', function() {
             togglePlanes('#tabs-oferta-fp .plan_item');
+            return false;
         });
 
         jQuery('#PlanCicloId').live('change', function() {
             togglePlanes('#tabs-oferta-fp .plan_item');
+            return false;
         });
 
         PreparaTabsParaSession();
@@ -134,11 +138,13 @@ if($ticket_id != 0) {
     });
 
     function togglePlanes(selector){
+        jQuery("#tabs-oferta-fp").mask();
         jQuery(selector).each(function () {
             togglePlane(this);
         });
 
         alternateColors(selector);
+        jQuery("#tabs-oferta-fp").unmask();
     }
     
     function togglePlane(plan){

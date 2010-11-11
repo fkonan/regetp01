@@ -1228,7 +1228,7 @@ class Instit extends AppModel {
                }
 
                $aniosPlan = $this->Plan->Anio->find('all', array(
-                    'contain' => array('EstructuraPlanesAnio'),
+                    'contain' => array('EstructuraPlanesAnio','Etapa'),
                     'conditions' => $condsAnio,
                     'order' => 'Anio.anio'
                ));

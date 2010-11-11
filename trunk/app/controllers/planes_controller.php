@@ -415,6 +415,8 @@ class PlanesController extends AppController {
     }
 
     function view_fp($instit_id, $oferta_id, $ciclo=0) {
+
+        
         $conditionsAnio = array();
         
         if(!empty($ciclo)) {
@@ -425,6 +427,11 @@ class PlanesController extends AppController {
 
         // agrego el index "matricula" directamente que dependa de "Plan"
         foreach($planes['Plan'] as &$plan){
+            $this->Plan->filtrar_planes($planes,$filtro_titulo,$filtro_sector,$filtro_ciclo);
+        }
+       
+        
+        foreach($planes['Plan'] as $key=>&$plan){
             $plan['matricula'] = 0;
             foreach($plan['Anio'] as $anio){
                 $plan['matricula'] += $anio['Anio']['matricula'];
@@ -441,6 +448,7 @@ class PlanesController extends AppController {
         $this->set('ciclo', $ciclo);
         $this->set('ciclos_anios', $ciclos_anios);
     }
+    
 
     function view_it_sec_sup($instit_id,$oferta_id,$ciclo=0) {
         $conditionsAnio = array();
