@@ -7,7 +7,7 @@
     /* @var $html HtmlHelper */
     $html;
     
-echo $html->css('planes/view_fp');
+echo $html->css('planes/view_fp', null, null, false);
 echo $javascript->link('jquery.pajinate.js',false);
 ?>
 <div id="tabs-oferta-fp" class="oferta-contanier">
