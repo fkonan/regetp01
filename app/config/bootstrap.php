@@ -186,4 +186,29 @@ function convertir_para_busqueda_avanzada($text){
 }
 
 
+
+function ordenarPlanesPorEtapaOrden($planes)
+{
+    $arrayOrdenKeys = array();
+    $planetes = array('Plan'=> array());
+
+    // agrupo los Planes por Orden de la etapa
+    foreach ( $planes['Plan'] as $p ) {
+        $ordenPlan = $p['EstructuraPlan']['Etapa']['orden'];
+        $arrayOrdenKeys[$ordenPlan][] = $p;
+    }
+
+    // ordeno por Orden
+    ksort(&$arrayOrdenKeys);
+
+    // armo el array de Planes para devolver, desagrupandolos del arrayOrden
+    foreach ($arrayOrdenKeys as $ops) {
+        foreach ($ops as $p) {
+            $planetes['Plan'][] = $p;
+        }
+    }
+    $planes = $planetes;
+    return $planetes;
+}
+
 ?>

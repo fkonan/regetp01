@@ -1203,10 +1203,7 @@ class Instit extends AppModel {
                 $condsPlan = array('Plan.oferta_id'=>$oferta_id);
             }
 
-            //debug($this->find('all'));
-            //debug($condsInstit);
-            //$this->recursive = 1;
-            $planes = $this->find('all', array(
+            $planes = $this->find('first', array(
                 'contain' => array(
                     'Plan' => array(
                         'conditions' => $condsPlan,
@@ -1216,26 +1213,28 @@ class Instit extends AppModel {
                 ),
                 'conditions' => $condsInstit,
             ));
+
+           if ($oferta_id == SEC_TEC_ID) {
+               ordenarPlanesPorEtapaOrden(&$planes);
+           }
             
-           foreach ($planes[0]['Plan'] as &$i) {
+           foreach ($planes['Plan'] as &$i) {
                if (!empty($ciclo)) {
                    $condsAnio = array('Anio.plan_id'=> $i['id'],'Anio.ciclo_id'=>$ciclo);
                } else {
                    //buscar el ultimo ciclo lectivo (max)
                    $condsAnio = array('Anio.plan_id'=> $i['id'],'Anio.ciclo_id'=>$this->Plan->getUltimoCiclo($i['id']));
                }
-               
+
                $aniosPlan = $this->Plan->Anio->find('all', array(
+                    'contain' => array('EstructuraPlanesAnio'),
                     'conditions' => $condsAnio,
                     'order' => 'Anio.anio'
                ));
                // le meto los años al array de planes
                $i['Anio'] = $aniosPlan;
            }
-            return $planes[0];
+            return $planes;
         }
-
-
-
 }
 ?>
