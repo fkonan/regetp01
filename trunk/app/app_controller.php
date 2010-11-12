@@ -68,7 +68,7 @@ class AppController extends Controller {
 		 *  REGETP VERSION
 		 * 
 		 */
-		Configure::write('regetpVersion', '1.6.2');
+		Configure::write('regetpVersion', '1.6.3');
                 /*
 		$this->Auth->autoRedirect = false;
 		$this->Auth->loginError ='Usuario o Contraseña Incorrectos';
