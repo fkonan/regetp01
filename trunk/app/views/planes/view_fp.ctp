@@ -49,12 +49,14 @@ $paginator->options(array(
                $sort = $this->passedArgs['sort'];
        }
        ?>
-    
+
+    <!--
     <h2>Ordenar Por:</h2>
     <ul class="lista_horizontal">
         <li class="<? echo ($sort == 'Plan.nombre')?'marcada':'';?>"><?php echo $paginator->sort('Nombre','Plan.nombre');?></li>
         <li class="<? echo ($sort == 'Sector.name')?'marcada':'';?>"><?php echo $paginator->sort('Sector','Sector.name');?></li>
     </ul>
+    -->
 
     <?php
     if (empty($planes) && $es_una_busqueda) {
