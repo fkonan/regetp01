@@ -460,7 +460,13 @@ class PlanesController extends AppController {
         $newVecPlanes = array();
         $i = 0;
         foreach($planes as &$plan){
-            $plan['matricula'] = $this->Plan->dameMatriculaDeCiclo($plan['Plan']['id'],$ciclo);
+            if($ciclo == 0){
+                $ultimo_ciclo = $this->Plan->getUltimoCiclo($plan['Plan']['id']);
+                $plan['matricula'] = $this->Plan->dameMatriculaDeCiclo($plan['Plan']['id'],$ultimo_ciclo);
+            }
+            else{
+                $plan['matricula'] = $this->Plan->dameMatriculaDeCiclo($plan['Plan']['id'],$ciclo);
+            }
         }
         
         $sectores = $this->Plan->Instit->listSectoresConOferta($instit_id, $oferta_id);
