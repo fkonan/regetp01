@@ -2297,18 +2297,37 @@ border-bottom-color: white !important;
     height: 40px;
 }
 
+#formPlanesViewFp label {
+    font-size: 8pt;
+}
 
 #formPlanesViewFp .input{
     clear:none;
     float:left;
-    width:142px;
 }
 
 #formPlanesViewFp input, #formPlanesViewFp select{
     background-color: #fff;
     border: 1px gray groove;
-    font-size: 8pt;
-    max-width: 142px;
+    font-size: 9pt;
+    width: 175px;
+}
+
+#formPlanesViewFp .submit{
+    clear: none;
+    float: left;
+}
+
+#formPlanesViewFp .submit input{
+    clear: none;
+    float: left;
+    width: 60px;
+    margin-top: 8px;
+    margin-left: 3px;
+    cursor: pointer;
+    background: #F4F4F4;
+    border: 1px solid #333333;
+    font-weight: bold;
 }
 
 
