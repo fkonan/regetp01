@@ -10,7 +10,6 @@
 echo $html->css('planes/view_fp', null, null, false);
 echo $javascript->link('jquery.pajinate.js',false);
 
-
 $paginator->options(array('url' => $url_conditions, 'update'=>'tabs-oferta-fp'));
 
 
@@ -36,15 +35,26 @@ $paginator->options(array('url' => $url_conditions, 'update'=>'tabs-oferta-fp'))
                 'update' => 'tabs-oferta-fp',
                 )
             );
-    echo $form->input('Plan.nombre', array('label'=>'Título'));
+    echo $form->input('Plan.nombre', array('label'=>'Nombre'));
     echo $form->input('Sector.id', array('label'=>'Sector',  'options'=> $sectores, 'empty'=>'Todos'));
     if($ciclo == 0){
         //echo $form->input('Plan.ciclo_id', array('label'=>'Ciclo', 'options'=>$ciclos_anios, 'empty'=>'Todos'));
     }
     echo $form->end('Buscar');
 
+        $sort = '';
+       if(isset($this->passedArgs['sort'])){
+               $sort = $this->passedArgs['sort'];
+       }
+       ?>
+    
+    <h2>Ordenar Por:</h2>
+    <ul class="lista_horizontal">
+        <li class="<? echo ($sort == 'Plan.nombre')?'marcada':'';?>"><?php echo $paginator->sort('Nombre','Plan.nombre');?></li>
+        <li class="<? echo ($sort == 'Sector.name')?'marcada':'';?>"><?php echo $paginator->sort('Sector','Sector.name');?></li>
+    </ul>
 
-
+    <?php
     if (empty($planes) && $es_una_busqueda) {
     ?>
     <p class="msg-atencion"><br /><br />Búsqueda sin resultados</p>
