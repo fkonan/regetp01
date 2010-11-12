@@ -415,18 +415,44 @@ class PlanesController extends AppController {
     }
 
     function view_fp($instit_id, $oferta_id, $ciclo=0) {
+
+        $planNombre = null;
+        if (!empty($this->data['Plan']['nombre'])) {
+            $planNombre = $this->data['Plan']['nombre'];
+        }
+        if (!empty($this->passedArgs['Plan.nombre'])) {
+            $planNombre = $this->passedArgs['Plan.nombre'];
+        }
+        if (!empty($planNombre)) {
+            $this->paginate['conditions']['Plan.nombre'] = $planNombre;
+            $url_conditions['Plan.nombre'] = $planNombre;
+        }
         
-        if(!empty($ciclo)) {
-            $this->paginate['conditions']['Anio.ciclo_id'] = $ciclo;
+
+        $sectorId = null;
+        if (!empty($this->data['Sector']['id'])) {
+            $sectorId = $this->data['Plan']['id'];
+        }
+        if (!empty($this->passedArgs['Sector.id'])) {
+            $sectorId = $this->passedArgs['Sector.id'];
+        }
+        if (!empty($sectorId)) {
+            $this->paginate['conditions']['Sector.id'] = $sectorId;
+            $url_conditions['Sector.id'] = $sectorId;
         }
 
+        if(!empty($ciclo)) {
+            $this->paginate['conditions']['Anio.ciclo_id'] = $ciclo;
+        } else {
+            $this->Plan->setTraerUltimaAct(true);
+        }
         $this->Plan->setAsociarAnio(true);
+        
         $this->paginate['conditions']['Plan.oferta_id'] = $oferta_id;
         $this->paginate['conditions']['Instit.id'] = $instit_id;
-        $this->paginate['order'] = array("Anio.ciclo_id");
+        //$this->paginate['order'] = array("Anio.ciclo_id");
 
         $planes = $this->paginate();
-       // debug($planes);
 
         //$planes = $this->Plan->Instit->getPlanes($instit_id, $oferta_id, $ciclo);
        
