@@ -138,6 +138,7 @@ if($ticket_id != 0) {
     });
 
     function togglePlanes(selector){
+        return 1;
         jQuery("#tabs-oferta-fp").mask();
         jQuery(selector).each(function () {
             togglePlane(this);

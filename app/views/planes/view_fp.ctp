@@ -12,10 +12,10 @@ echo $javascript->link('jquery.pajinate.js',false);
 
 
 if (empty($planes['Plan'])) {
-    ?>
+?>
 <p class="msg-atencion"><br /><br />La Institución no presenta actualizaciones para este año</p>
 <?
-exit ();
+    exit ();
 }
 ?>
 
@@ -23,13 +23,21 @@ exit ();
 <div id="tabs-oferta-fp" class="oferta-contanier">
 
     <?php
-    echo $ajax->form('planes/view_fp','post', array('id'=>'formPlanesViewFp'));
+    echo $ajax->form(
+            '/planes/view_fp/',
+            'post',
+            array(
+                'id'=>'formPlanesViewFp',
+                'url' => '/planes/view_fp/'.$instit_id.'/'.$oferta_id.'/'.$ciclo,
+                'update' => 'tabs-oferta-fp',
+                )
+            );
     echo $form->input('Plan.nombre', array('label'=>'Título'));
     echo $form->input('Sector.id', array('label'=>'Sector',  'options'=> $sectores, 'empty'=>'Todos'));
     if($ciclo == 0){
         echo $form->input('Plan.ciclo_id', array('label'=>'Ciclo', 'options'=>$ciclos_anios, 'empty'=>'Todos'));
     }
-    echo $form->end();
+    echo $form->end('Buscar');
     ?>
 
     <div class="clear"></div>
@@ -51,21 +59,13 @@ exit ();
                     $ciclo_plan =  (!empty($primer_anio['ciclo_id'])? $primer_anio['ciclo_id']:"") ;
 
                 }
-                echo $this->element('planes/plan_resumen_para_listado', array(
-                    'class' => $class,
-                    'plan'  => $plan,
-                    'ciclo' => $ciclo_plan,
-                ));
-            }
-            else if(count($plan['Anio']) > 0) {
-                echo $this->element('planes/plan_resumen_para_listado', array(
-                    'class' => $class,
-                    'plan'  => $plan,
-                    'ciclo' => $ciclo_plan,
-                ));
             }
 
-            
+            echo $this->element('planes/plan_resumen_para_listado', array(
+                'class' => $class,
+                'plan'  => $plan,
+                'ciclo' => $ciclo_plan,
+            ));            
          endforeach;
     ?>
     <div class="navigation"></div>

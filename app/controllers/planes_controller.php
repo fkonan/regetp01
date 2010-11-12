@@ -419,20 +419,21 @@ class PlanesController extends AppController {
         if(!empty($ciclo)) {
             $this->paginate['conditions']['Anio.ciclo_id'] = $ciclo;
         }
-        
-        $planes = $this->Plan->Instit->getPlanes($instit_id, $oferta_id, $ciclo);
 
-        // agrego el index "matricula" directamente que dependa de "Plan"
-        foreach($planes['Plan'] as &$plan){
-            $this->Plan->filtrar_planes($planes,$filtro_titulo,$filtro_sector,$filtro_ciclo);
-        }
+        $this->Plan->setAsociarAnio(true);
+        $this->paginate['conditions']['Plan.oferta_id'] = $oferta_id;
+        $this->paginate['conditions']['Instit.id'] = $instit_id;
+        $this->paginate['order'] = array("Anio.ciclo_id");
+
+        $planes = $this->paginate();
+       // debug($planes);
+
+        //$planes = $this->Plan->Instit->getPlanes($instit_id, $oferta_id, $ciclo);
        
-        
-        foreach($planes['Plan'] as $key=>&$plan){
-            $plan['matricula'] = 0;
-            foreach($plan['Anio'] as $anio){
-                $plan['matricula'] += $anio['Anio']['matricula'];
-            }
+        $newVecPlanes = array();
+        $i = 0;
+        foreach($planes as &$plan){
+            $plan['matricula'] = $this->Plan->dameMatriculaDeCiclo($plan['Plan']['id'],$ciclo);
         }
         
         $sectores = $this->Plan->Instit->listSectoresConOferta($instit_id, $oferta_id);
