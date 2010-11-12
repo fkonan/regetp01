@@ -22,9 +22,9 @@ $paginator->options(array(
     if (empty($planes) && !$es_una_busqueda) {
     ?>
     <p class="msg-atencion"><br /><br />La Institución no presenta actualizaciones para este año</p>
-    <?
-        exit ();
+    <? 
     }
+    else{
 
     echo $form->create(
             'Plan',
@@ -61,8 +61,8 @@ $paginator->options(array(
     ?>
     <p class="msg-atencion"><br /><br />Búsqueda sin resultados</p>
     <?
-        exit();
     }
+    else{
     ?>
     
     <div class="clear"></div>
@@ -108,6 +108,10 @@ $paginator->options(array(
             }
             ?>
     </div>
+    <?php
+    }
+    }
+    ?>
 
 </div>
 
