@@ -430,9 +430,6 @@ class PlanesController extends AppController {
             $url_conditions['Plan.nombre'] = $planNombre;
         }
 
-        debug(date('H:i:s'));
-        debug($url_conditions);
-
         $sectorId = null;
         if (!empty($this->data['Sector']['id'])) {
             $sectorId = $this->data['Sector']['id'];
