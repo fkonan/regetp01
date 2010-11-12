@@ -61,7 +61,7 @@
                 ?>
             });
         </script>
-        <!--> hack horrible para el ie, pero no se me ocurrio algo mejor -->
+        <!-- hack horrible para el ie, pero no se me ocurrio algo mejor -->
         <!--[if IE]>
         <style type="text/css">
             .horizontal-shadetabs a {
