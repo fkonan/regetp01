@@ -10,6 +10,10 @@
 echo $html->css('planes/view_fp', null, null, false);
 echo $javascript->link('jquery.pajinate.js',false);
 
+
+$paginator->options(array('url' => $url_conditions, 'update'=>'tabs-oferta-fp'));
+
+
 ?>
 
 
@@ -54,9 +58,8 @@ echo $javascript->link('jquery.pajinate.js',false);
     <div id="listado_de_planes">
     <?php
     $i = 0;
-    if ((isset($planes)) && (count($planes) > 0)) {
-    ?>
-    <?php
+    if (!empty($planes)) {
+        
         foreach ($planes as $plan):
             //debug($plan);
             $class = '';
@@ -80,19 +83,20 @@ echo $javascript->link('jquery.pajinate.js',false);
     ?>
     <div class="navigation"></div>
     <?php
-    } 
-    else {
+    }
     ?>
-    <div>
-            <?php $año_actual = date('Y',strtotime('now'));?>
-            <?php if($datoUltimoCiclo['max_ciclo'] != $año_actual && $current_ciclo == $año_actual):?>
-        <p class='msg-atencion'>La Instituci&oacute;n no presenta actualizaciones para este año</p>
-            <?php else:?>
-        <p class='msg-atencion'>No se obtuvieron resultados</p>
-            <?php endif;?>
     </div>
-        <?} ?>
+
+    <div id="paginator_prev_next_links">
+            <?php
+            if($paginator->numbers()){
+                    echo $paginator->prev('« Anterior ',null, null, array('class' => 'disabled'));
+                    echo " | ".$paginator->numbers(array('modulus'=>'9'))." | ";
+                    echo $paginator->next(' Siguiente »', null, null, array('class' => 'disabled'));
+            }
+            ?>
     </div>
+
 </div>
 
 <script language="JavaScript"  type="text/javascript" defer="defer">
