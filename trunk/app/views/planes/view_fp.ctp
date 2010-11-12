@@ -10,19 +10,19 @@
 echo $html->css('planes/view_fp', null, null, false);
 echo $javascript->link('jquery.pajinate.js',false);
 
-
-if (empty($planes)) {
-?>
-<p class="msg-atencion"><br /><br />La Institución no presenta actualizaciones para este año</p>
-<?
-    exit ();
-}
 ?>
 
 
 <div id="tabs-oferta-fp" class="oferta-contanier">
 
     <?php
+    if (empty($planes) && !$es_una_busqueda) {
+    ?>
+    <p class="msg-atencion"><br /><br />La Institución no presenta actualizaciones para este año</p>
+    <?
+        exit ();
+    }
+
     echo $ajax->form(
             '/planes/view_fp/',
             'post',
@@ -35,12 +35,23 @@ if (empty($planes)) {
     echo $form->input('Plan.nombre', array('label'=>'Título'));
     echo $form->input('Sector.id', array('label'=>'Sector',  'options'=> $sectores, 'empty'=>'Todos'));
     if($ciclo == 0){
-        echo $form->input('Plan.ciclo_id', array('label'=>'Ciclo', 'options'=>$ciclos_anios, 'empty'=>'Todos'));
+        //echo $form->input('Plan.ciclo_id', array('label'=>'Ciclo', 'options'=>$ciclos_anios, 'empty'=>'Todos'));
     }
     echo $form->end('Buscar');
+
+
+
+    if (empty($planes) && $es_una_busqueda) {
     ?>
+    <p class="msg-atencion"><br /><br />Búsqueda sin resultados</p>
+    <?
+        exit();
+    }
+    ?>
+    
     <div class="clear"></div>
     <br>
+    <div id="listado_de_planes">
     <?php
     $i = 0;
     if ((isset($planes)) && (count($planes) > 0)) {
@@ -81,6 +92,7 @@ if (empty($planes)) {
             <?php endif;?>
     </div>
         <?} ?>
+    </div>
 </div>
 
 <script language="JavaScript"  type="text/javascript" defer="defer">

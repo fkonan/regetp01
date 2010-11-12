@@ -415,7 +415,8 @@ class PlanesController extends AppController {
     }
 
     function view_fp($instit_id, $oferta_id, $ciclo=0) {
-
+        $es_una_busqueda = empty($this->data) ? false : true;
+        
         $planNombre = null;
         if (!empty($this->data['Plan']['nombre'])) {
             $planNombre = $this->data['Plan']['nombre'];
@@ -424,7 +425,7 @@ class PlanesController extends AppController {
             $planNombre = $this->passedArgs['Plan.nombre'];
         }
         if (!empty($planNombre)) {
-            $this->paginate['conditions']['Plan.nombre'] = $planNombre;
+            $this->paginate['conditions']['to_ascii(lower(Plan.nombre)) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada($planNombre));
             $url_conditions['Plan.nombre'] = $planNombre;
         }
         
@@ -466,6 +467,7 @@ class PlanesController extends AppController {
         $ciclos_anios = $this->Plan->dame_ciclos_por_oferta_instits($instit_id, $agregar_anio_actual = false);
         $ciclos_anios = $ciclos_anios[FP_ID]['ciclo'];
 
+        $this->set('es_una_busqueda',$es_una_busqueda);
         $this->set('sectores', $sectores);
         $this->set('planes', $planes);
         $this->set('instit_id', $instit_id);
