@@ -431,7 +431,7 @@ class PlanesController extends AppController {
 
         $sectorId = null;
         if (!empty($this->data['Sector']['id'])) {
-            $sectorId = $this->data['Plan']['id'];
+            $sectorId = $this->data['Sector']['id'];
         }
         if (!empty($this->passedArgs['Sector.id'])) {
             $sectorId = $this->passedArgs['Sector.id'];
@@ -463,7 +463,8 @@ class PlanesController extends AppController {
         }
         
         $sectores = $this->Plan->Instit->listSectoresConOferta($instit_id, $oferta_id);
-        $ciclos_anios = $this->Plan->Anio->Ciclo->find("list");
+        $ciclos_anios = $this->Plan->dame_ciclos_por_oferta_instits($instit_id, $agregar_anio_actual = false);
+        $ciclos_anios = $ciclos_anios[FP_ID]['ciclo'];
 
         $this->set('sectores', $sectores);
         $this->set('planes', $planes);
