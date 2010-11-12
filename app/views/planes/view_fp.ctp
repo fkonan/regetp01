@@ -8,6 +8,8 @@
     $html;
     
 echo $html->css('planes/view_fp', null, null, false);
+echo $html->css(array('jquery.loadmask'));
+echo $javascript->link(array('jquery.loadmask.min'));
 
 $paginator->options(array(
     'url' => $url_conditions,
@@ -122,8 +124,8 @@ $paginator->options(array(
 
     var options = {
         target:        '.oferta-contanier',   // target element(s) to be updated with server response
-        //beforeSubmit:  blockResultConsole,  // pre-submit callback
-        //success:       unblockResultConsole,  // post-submit callback
+        beforeSubmit:  blockResultConsole,  // pre-submit callback
+        success:       unblockResultConsole,  // post-submit callback
         url:  formElement.attr('action')     // override for form's 'action' attribute
     };
 
@@ -132,6 +134,14 @@ $paginator->options(array(
     // bind form using 'ajaxForm'
     formElement.ajaxForm(options);
 
+
+    function blockResultConsole(formData, jqForm, options) {
+        jQuery('.oferta-contanier').mask('Buscando');
+    }
+
+    function unblockResultConsole(responseText, statusText, xhr, $form)  {
+        jQuery('.oferta-contanier').unmask();
+    }
     
 </script>
 
