@@ -35,21 +35,6 @@ if($ticket_id != 0) {
 
         selectTabsInSession();
 
-        jQuery('#PlanNombre').live('keyup', function() {
-            togglePlanes('#tabs-oferta-fp .plan_item');
-            return false;
-        });
-
-        jQuery('#SectorId').live('change', function() {
-            togglePlanes('#tabs-oferta-fp .plan_item');
-            return false;
-        });
-
-        jQuery('#PlanCicloId').live('change', function() {
-            togglePlanes('#tabs-oferta-fp .plan_item');
-            return false;
-        });
-
         PreparaTabsParaSession();
 
     });
@@ -69,7 +54,6 @@ if($ticket_id != 0) {
         });
     }
 
-      
     function selectTabsInSession () {
         if (Get_Cookie('tab_oferta')) {
             jQuery('#'+Get_Cookie('tab_oferta')).click();
@@ -77,112 +61,6 @@ if($ticket_id != 0) {
 
         if (Get_Cookie('tab_ciclo')) {
             jQuery('#'+Get_Cookie('tab_ciclo')).click();
-        }
-    }
-
-
-
-    function limpiarCadena(string) {
-        if(string == null) return "";
-
-        string = string.toUpperCase();
-        string=string.replace(/^\s+|\s+$/g,""); // trim
-        string=string.replace(/(À|Á|Â|Ã|Ä|Å|Æ)/gi,'A'); // cambio las "A"s exoticas por "A"s sencillas mediante expresiones regulares
-        string=string.replace(/(È|É|Ê|Ë)/gi,'E'); //lo mismo con las "E" y resto de vocales y la "Ñ"
-        string=string.replace(/(Ì|Í|Î|Ï)/gi,'I');
-        string=string.replace(/(Ò|Ó|Ô|Ö)/gi,'O');
-        string=string.replace(/(Ù|Ú|Û|Ü)/gi,'U');
-        string = string.toLowerCase();
-
-        return string;
-    }
-
-    function alternateColors(selector){
-        
-        jQuery(selector).removeClass("altrow");
-        jQuery(selector).removeClass("muchos");
-
-        jQuery(selector + ":not(:hidden):even").addClass("altrow");
-        
-        i = 0;
-        j= 0;
-
-        jQuery(selector).filter(":not(:hidden)").each(function () {
-            i++;
-            if(i > 30){
-                j++;
-                jQuery(this).addClass("muchos");
-            }
-        });
-
-        jQuery('.muchos').hide();
-        jQuery('#js-vermas').remove();
-        jQuery('#js-vermenos').remove();
-
-        if(j > 30){
-            jQuery(".navigation").append("<div><a id='js-vermas' style='cursor:pointer;margin-top:20px'>ver mas ...</a><a id='js-vermenos' style='cursor:pointer;margin-top:20px;display:none'>ver menos ...</a></div>");
-        }
-        
-    }
-
-    jQuery('#js-vermas').live('click', function() {
-        jQuery('.muchos').show();
-        jQuery(this).hide();
-        jQuery(this).parent().find('#js-vermenos').show();
-    });
-
-    jQuery('#js-vermenos').live('click', function() {
-        jQuery('.muchos').hide();
-        jQuery(this).hide();
-        jQuery(this).parent().find('#js-vermas').show();
-    });
-
-    function togglePlanes(selector){
-        return 1;
-        jQuery("#tabs-oferta-fp").mask();
-        jQuery(selector).each(function () {
-            togglePlane(this);
-        });
-
-        alternateColors(selector);
-        jQuery("#tabs-oferta-fp").unmask();
-    }
-    
-    function togglePlane(plan){
-        var resultado;
-        var mostrar = true;
-        
-        var plan_item = jQuery(plan).closest('.plan_item');
-        
-        var titulo = jQuery(plan).closest('.oferta-contanier').find("#PlanNombre").val();
-        var sector = jQuery(plan).closest('.oferta-contanier').find("#SectorId option:selected").val();
-        var ciclo = (jQuery(plan).closest('.oferta-contanier').find("#PlanCicloId").length > 0)?jQuery(plan).closest('.oferta-contanier').find("#PlanCicloId").val():0;
-
-        //TITULO
-        resultado = (limpiarCadena(jQuery(plan).find(".plan_title > .title").html()).indexOf(limpiarCadena(titulo)) >= 0);
-        mostrar = (mostrar && resultado);
-
-        // guarda en cookie para recordar
-        Set_Cookie( 'planes_buscadorfp_titulo', limpiarCadena(titulo), '', '/', '', '' );
-
-        //SECTOR
-        resultado = (plan_item.find(".plan_sector").val() == sector) || sector == 0 ;
-        mostrar = (mostrar && resultado);
-
-        // guarda en cookie para recordar
-        Set_Cookie( 'planes_buscadorfp_sector', sector, '', '/', '', '' );
-
-        resultado = (plan_item.find(".plan_ciclo").val() == ciclo) || ciclo == 0 ;
-        mostrar = (mostrar && resultado);
-
-        // guarda en cookie para recordar
-        Set_Cookie( 'planes_buscadorfp_ciclo', ciclo, '', '/', '', '' );
-
-        if(mostrar){
-            jQuery(plan_item).show();
-        }
-        else{
-            jQuery(plan_item).hide();
         }
     }
 </script>
