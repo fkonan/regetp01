@@ -11,7 +11,7 @@ echo $html->css('planes/view_fp', null, null, false);
 echo $javascript->link('jquery.pajinate.js',false);
 
 
-if (empty($planes['Plan'])) {
+if (empty($planes)) {
 ?>
 <p class="msg-atencion"><br /><br />La Institución no presenta actualizaciones para este año</p>
 <?
@@ -39,7 +39,6 @@ if (empty($planes['Plan'])) {
     }
     echo $form->end('Buscar');
     ?>
-
     <div class="clear"></div>
     <br>
     <?php
@@ -47,17 +46,17 @@ if (empty($planes['Plan'])) {
     if ((isset($planes)) && (count($planes) > 0)) {
     ?>
     <?php
-        foreach ($planes['Plan'] as $plan):
+        foreach ($planes as $plan):
+            //debug($plan);
             $class = '';
             if ($i++ % 2 == 0) {
                 $class = 'altrow';
             }
             $ciclo_plan = '';
             if($ciclo == 0){
-                if (!empty($plan['Anio'][0]['Anio']['ciclo_id']) && $ciclo==0) {
-                    $primer_anio = current($plan['Anio'][0]);
-                    $ciclo_plan =  (!empty($primer_anio['ciclo_id'])? $primer_anio['ciclo_id']:"") ;
-
+                if (!empty($plan['Anio'][0]['ciclo_id']) && $ciclo==0) {
+                    $primer_anio = current($plan['Anio']);
+                    $ciclo_plan =  (!empty($primer_anio)? $primer_anio:"") ;
                 }
             }
 

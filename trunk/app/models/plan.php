@@ -342,11 +342,21 @@ class Plan extends AppModel {
   	 */
 		
 	function dameMatriculaDeCiclo($plan_id,$ciclo){
-		$tot = $this->Anio->find('all',array(
-			'fields'=>'sum("Anio"."matricula") AS "Anio__matricula"',
-			'conditions'=> array('plan_id'=>$plan_id,'ciclo_id'=>$ciclo),
-			'limit'=> 1
-		));
+                $conditions = array();
+
+                if($ciclo == 0){
+                    $conditions = array('plan_id'=>$plan_id);
+                }
+                else{
+                    $conditions = array('plan_id'=>$plan_id,'ciclo_id'=>$ciclo);
+                }
+
+                $tot = $this->Anio->find('all',array(
+                        'fields'=>'sum("Anio"."matricula") AS "Anio__matricula"',
+                        'conditions'=> $conditions,
+                        'limit'=> 1
+                ));
+                
 		return $tot[0]['Anio']['matricula'];
 	}
 	
