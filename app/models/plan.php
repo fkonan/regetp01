@@ -245,11 +245,27 @@ class Plan extends AppModel {
         
     function paginate($conditions = null, $fields = null, $order = null, $limit = null, $page = 1, $recursive = null, $tieneHasMany = false) {
             if ($this->asociarAnio) {
-                //$this->unBindModel(array('hasMany'=>array('Anio')));
+                return $this->findPlanesEspecial($conditions, $fields, $order, $recursive);
+            }
+            else {
+                $parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
+
+                if ($recursive != $this->recursive) {
+                    $parameters['recursive'] = $recursive;
+                }
+
+                $extra = array();
+
+                return $this->find('all', array_merge($parameters, $extra));
+            }
+        }
+
+
+        public function findPlanesEspecial($conditions, $fields, $order = null, $recursive = null) {
+            
                 $this->bindModel(array('hasOne' => array('Anio')));
                 $field = $this->getPagFields();
-                
-                
+
                 if ($this->traerUltimaAct) {
                     $selectFields = array_merge($field,array('max("Anio"."ciclo_id") AS "Anio__ciclo_id"'));
                     $groupFields  = $field;
@@ -282,18 +298,6 @@ class Plan extends AppModel {
                 }
 
                 return $this->find('all', array_merge($parameters, $extra));
-            }
-            else {
-                $parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
-
-                if ($recursive != $this->recursive) {
-                    $parameters['recursive'] = $recursive;
-                }
-
-                $extra = array();
-
-                return $this->find('all', array_merge($parameters, $extra));
-            }
         }
 
         public function findXCiclo($instit_id, $oferta_id, $ciclo_id){
