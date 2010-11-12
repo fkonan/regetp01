@@ -1,3 +1,29 @@
+<h1>RFIETP - Novedades de la versión 1.6.3</h1>
+<br>
+<ul>
+    <li><b>Rediseño de la presentación de la Oferta Educativa de Instituciones</b>
+        <ul type="circle">
+           <li>Se reemplazó la antigua presentación de esta sección por una vista nueva que permite obtener un plano general de la Oferta Educativa de la Institución</li>
+           <li>Se utilizaron pestañas para diferenciar las Ofertas Educativas, y a su vez, los ciclos lectivos de las mismas</li>
+           <li>Se recuerdan tanto las últimas Oferta y Ciclo seleccionadas, como así también, los filtros de búsqueda, para una navegación más práctica y eficiente</li>
+           <li>La antigua vista se conserva ingresando al link "Ver vista clásica"</li>
+        </ul>
+    </li>
+    <li><b>Seguridad (ACL)</b>
+        <ul>
+            <li>Se crearon árboles de usuarios y permisos, obteniendo una visión general de la actual configuración de seguridad de accesos</li>
+        </ul>
+    </li>
+    <li><b>E-mail de aviso de nueva versión</b>
+        <ul>
+            <li>Se creó una nueva casilla para RFIETP: rfietp@inet.edu.ar</li>
+            <li>Se confeccionó un e-mail de aviso de nueva versión para todos los usuarios del RFIETP</li>
+        </ul>
+    </li>
+    <br>
+</ul>
+<br>
+
 <h1>RFIETP - Novedades de la versión 1.6.2</h1>
 <br>
 <ul>
