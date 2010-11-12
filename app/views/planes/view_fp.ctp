@@ -16,8 +16,6 @@ $paginator->options(array(
 
 
 ?>
-
-
 <div id="tabs-oferta-fp" class="oferta-contanier">
 
     <?php
@@ -114,23 +112,21 @@ $paginator->options(array(
 </div>
 
 <script language="JavaScript"  type="text/javascript" defer="defer">
-    setearBuscador();
+
+   
+    formElement = jQuery('#formPlanesViewFp');
+
+    var options = {
+        target:        '.oferta-contanier',   // target element(s) to be updated with server response
+        //beforeSubmit:  blockResultConsole,  // pre-submit callback
+        //success:       unblockResultConsole,  // post-submit callback
+        url:  formElement.attr('action')     // override for form's 'action' attribute
+    };
+
     
-    function setearBuscador() {
-        if ( Get_Cookie( 'planes_buscadorfp_titulo' )) {
-            jQuery('#PlanNombre').val(Get_Cookie( 'planes_buscadorfp_titulo' ));
-        }
 
-        if ( Get_Cookie( 'planes_buscadorfp_sector' )) {
-            jQuery('#SectorId').val(Get_Cookie( 'planes_buscadorfp_sector' ));
-        }
-
-        if ( Get_Cookie( 'planes_buscadorfp_ciclo' )) {
-            jQuery('#PlanCicloId').val(Get_Cookie( 'planes_buscadorfp_ciclo' ));
-        }
-
-        togglePlanes('#tabs-oferta-fp .plan_item');
-    }
+    // bind form using 'ajaxForm'
+    formElement.ajaxForm(options);
 
     
 </script>
