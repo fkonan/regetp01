@@ -28,9 +28,8 @@ $paginator->options(array(
         exit ();
     }
 
-    echo $ajax->form(
-            '/planes/view_fp/',
-            'post',
+    echo $form->create(
+            'Plan',
             array(
                 'id'=>'formPlanesViewFp',
                 'url' => '/planes/view_fp/'.$instit_id.'/'.$oferta_id.'/'.$ciclo,
@@ -42,7 +41,7 @@ $paginator->options(array(
     if($ciclo == 0){
         //echo $form->input('Plan.ciclo_id', array('label'=>'Ciclo', 'options'=>$ciclos_anios, 'empty'=>'Todos'));
     }
-    echo $form->end('Buscar');
+    echo $ajax->submit('Buscar');
 
         $sort = '';
        if(isset($this->passedArgs['sort'])){
