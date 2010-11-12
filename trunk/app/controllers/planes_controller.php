@@ -416,6 +416,7 @@ class PlanesController extends AppController {
 
     function view_fp($instit_id, $oferta_id, $ciclo=0) {
         $es_una_busqueda = empty($this->data) ? false : true;
+        $url_conditions = array();
         
         $planNombre = null;
         if (!empty($this->data['Plan']['nombre'])) {
@@ -480,6 +481,7 @@ class PlanesController extends AppController {
         $this->set('oferta_id', $oferta_id);
         $this->set('ciclo', $ciclo);
         $this->set('ciclos_anios', $ciclos_anios);
+        $this->set('url_conditions', $url_conditions);
     }
     
 
