@@ -8,9 +8,11 @@
     $html;
     
 echo $html->css('planes/view_fp', null, null, false);
-echo $javascript->link('jquery.pajinate.js',false);
 
-$paginator->options(array('url' => $url_conditions, 'update'=>'tabs-oferta-fp'));
+$paginator->options(array(
+    'url' => $url_conditions,
+    'update'=>'tabs-oferta-fp',
+    ));
 
 
 ?>

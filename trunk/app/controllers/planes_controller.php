@@ -429,7 +429,9 @@ class PlanesController extends AppController {
             $this->paginate['conditions']['to_ascii(lower(Plan.nombre)) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada($planNombre));
             $url_conditions['Plan.nombre'] = $planNombre;
         }
-        
+
+        debug(date('H:i:s'));
+        debug($url_conditions);
 
         $sectorId = null;
         if (!empty($this->data['Sector']['id'])) {
@@ -455,7 +457,6 @@ class PlanesController extends AppController {
         //$this->paginate['order'] = array("Anio.ciclo_id");
 
         $planes = $this->paginate();
-
         //$planes = $this->Plan->Instit->getPlanes($instit_id, $oferta_id, $ciclo);
        
         $newVecPlanes = array();
