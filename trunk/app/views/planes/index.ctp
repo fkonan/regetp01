@@ -23,7 +23,6 @@ if($ticket_id != 0) {
         // introduce la logic que hacen funcionar al copy paste
         meterCopyPasteDelNombre('<?php echo $html->url("/js/zeroclipboard/ZeroClipboard10.swf"); ?>');
         
-
         jQuery('.js-tabs-ofertas').tabs({
             //ajaxOptions: { contentType: 'application/x-www-form-urlencoded; charset=utf-8' }
         });
@@ -38,6 +37,7 @@ if($ticket_id != 0) {
         PreparaTabsParaSession();
 
     });
+
 
 
     function PreparaTabsParaSession() {
