@@ -415,7 +415,10 @@ class PlanesController extends AppController {
     }
 
     function view_fp($instit_id, $oferta_id, $ciclo=0) {
-        $es_una_busqueda = empty($this->data) ? false : true;
+        $es_una_busqueda = 0;
+        if (@$this->data['es_una_busqueda']) {
+            $es_una_busqueda = $this->data['es_una_busqueda'];
+        }
         $url_conditions = $this->passedArgs;
         
         $planNombre = null;
