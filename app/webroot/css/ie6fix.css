@@ -16,3 +16,15 @@ margin: 0px;
     display: block;
     height: 28px;
 }
+
+.ciclos-container{
+    height: 350px;
+}
+
+#formPlanesViewFp .input {
+    width: 130px !important;
+}
+
+#formPlanesViewFp select {
+    width:130px !important;
+}

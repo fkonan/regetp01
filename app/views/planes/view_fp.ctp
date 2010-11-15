@@ -9,14 +9,15 @@
     
 echo $html->css('planes/view_fp', null, null, false);
 echo $html->css(array('jquery.loadmask'));
-echo $javascript->link(array('jquery.loadmask.min'));
+
+$divOfertaFP = 'tabs-oferta-fp-'.$ciclo;
 
 $paginator->options(array(
     'url' => $url_conditions,
-    'update'=>'tabs-oferta-fp',
+    'update'=> $divOfertaFP,
     ));
 ?>
-<div id="tabs-oferta-fp" class="oferta-contanier">
+<div id="<?php echo $divOfertaFP; ?>" class="oferta-contanier">
     <?php
     if (empty($planes) && !$es_una_busqueda) {
     ?>
@@ -35,10 +36,6 @@ $paginator->options(array(
                 );
         echo $form->input('Plan.nombre', array('label'=>'Nombre'));
         echo $form->input('Sector.id', array('label'=>'Sector',  'options'=> $sectores, 'empty'=>'Todos'));
-        if($ciclo == 0){
-            //echo $form->input('Plan.ciclo_id', array('label'=>'Ciclo', 'options'=>$ciclos_anios, 'empty'=>'Todos'));
-        }
-        //echo $ajax->submit('Buscar', array('update'=> 'tabs-oferta-fp'));
         echo $form->end('Buscar');
 
         $sort = '';
@@ -66,7 +63,7 @@ $paginator->options(array(
     
     <div class="clear"></div>
     <br>
-    <div id="listado_de_planes">
+    <div>
     <?php
     $i = 0;
     if (!empty($planes)) {
