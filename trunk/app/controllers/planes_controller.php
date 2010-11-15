@@ -416,6 +416,7 @@ class PlanesController extends AppController {
 
     function view_fp($instit_id, $oferta_id, $ciclo=0) {
         $es_una_busqueda = false;
+        
         if (!empty($this->data)) {
             $es_una_busqueda = true;
             $this->Session->write('Instit.id',$instit_id);
@@ -438,6 +439,12 @@ class PlanesController extends AppController {
         }
 
         $url_conditions = $this->passedArgs;
+        if (!empty($this->passedArgs['page'])) {
+            $this->Session->write('page', $this->passedArgs['page']);
+        }
+        elseif ($this->Session->read('page')) {
+            $this->paginate['page'] = $this->Session->read('page');
+        }
 
         $planNombre = null;
         if (!empty($this->data['Plan']['nombre'])) {
