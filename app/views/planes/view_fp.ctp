@@ -32,8 +32,7 @@ $paginator->options(array(
             'Plan',
             array(
                 'id'=>'formPlanesViewFp',
-                'url' => '/planes/view_fp/'.$instit_id.'/'.$oferta_id.'/'.$ciclo,
-                'update' => 'tabs-oferta-fp',
+                'url' => '/planes/view_fp/'.$instit_id.'/'.$oferta_id.'/'.$ciclo
                 )
             );
     echo $form->input('Plan.nombre', array('label'=>'Nombre'));
@@ -162,10 +161,6 @@ $paginator->options(array(
         <?php
         }
         ?>
-
-        if (buscar) {
-            jQuery('#formPlanesViewFp').submit();
-        }
     }
     
 </script>
