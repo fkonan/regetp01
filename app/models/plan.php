@@ -53,7 +53,7 @@ class Plan extends AppModel {
 				'rule' => VALID_NOT_EMPTY,
 				'required' => true,
 				'allowEmpty' => false,
-				'message' => 'Debe ingresar un sector.'	
+				'message' => 'Debe ingresar un sector.',
 			)
 		),
 		'subsector_id' => array(

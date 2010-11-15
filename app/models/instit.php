@@ -1254,7 +1254,8 @@ class Instit extends AppModel {
                 ),
                 'contain'=>array(
                         'Sector'
-                )
+                ),
+                'order' => array('Sector.name'),
             ));
 
 

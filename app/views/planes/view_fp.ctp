@@ -103,7 +103,13 @@ $paginator->options(array(
             }
             ?>
     </div>
-    <div id="<?php $divSpinnerId?>" style="display: none">CARGANDO</div>
+
+    <div id="<?php echo $divSpinnerId ?>" style="display: none; text-align: center; margin-top:10px;">
+    <?php
+    echo $html->image('loadercircle16x16.gif')
+    ?>
+    </div>
+    
     <?php
             }
     ?>
