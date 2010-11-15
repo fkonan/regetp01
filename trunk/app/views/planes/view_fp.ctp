@@ -17,7 +17,6 @@ $paginator->options(array(
     ));
 ?>
 <div id="tabs-oferta-fp" class="oferta-contanier">
-
     <?php
     if (empty($planes) && !$es_una_busqueda) {
     ?>
@@ -59,7 +58,7 @@ $paginator->options(array(
     <?php
     if (empty($planes) && $es_una_busqueda) {
     ?>
-    <p class="msg-atencion"><br /><br />Búsqueda sin resultados</p>
+    <p class="msg-atencion" style="height: 200px"><br /><br />Búsqueda sin resultados</p>
     <?
     }
     else{
@@ -130,11 +129,11 @@ $paginator->options(array(
     }
     
     function blockResultConsole(formData, jqForm, options) {
-        jQuery('.oferta-contanier').mask('Buscando');
+        jQuery(jqForm).closest('.maskeable').mask('Buscando');
     }
 
     function unblockResultConsole(responseText, statusText, xhr, $form)  {
-        jQuery('.oferta-contanier').unmask();
+        jQuery(jqForm).closest('.maskeable').unmask();
     }
     
 </script>
