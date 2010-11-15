@@ -74,7 +74,7 @@
             }
         </style>
         <![endif]-->
-}
+
         <!--[if IE 6]>
         <?php echo $html->css('ie6fix');?>
         <![endif]-->

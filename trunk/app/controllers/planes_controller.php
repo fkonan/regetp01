@@ -418,18 +418,22 @@ class PlanesController extends AppController {
         $es_una_busqueda = false;
         if (!empty($this->data)) {
             $es_una_busqueda = true;
-            Configure::write('Instit.id',$instit_id);
+            $this->Session->write('Instit.id',$instit_id);
+            $this->Session->write('Plan.nombre', $this->data['Plan']['nombre']);
+            $this->Session->write('Sector.id', $this->data['Sector']['id']);
         }
         else {
             // busqueda en Session
-            if (Configure::read('Instit.id') == $instit_id) {
-                if (Configure::read('Plan.nombre')) {
-                    $this->data['Plan']['nombre'] = Configure::read('Plan.nombre');
+            if ($this->Session->read('Instit.id') == $instit_id) {
+                if ($this->Session->read('Plan.nombre')) {
+                    $this->data['Plan']['nombre'] = $this->Session->read('Plan.nombre');
                 }
 
-                if (Configure::read('Sector.id')) {
-                    $this->data['Sector']['id'] = Configure::read('Sector.id');
+                if ($this->Session->read('Sector.id')) {
+                    $this->data['Sector']['id'] = $this->Session->read('Sector.id');
                 }
+
+                $es_una_busqueda = true;
             }
         }
 
@@ -438,21 +442,18 @@ class PlanesController extends AppController {
         $planNombre = null;
         if (!empty($this->data['Plan']['nombre'])) {
             $planNombre = $this->data['Plan']['nombre'];
-            Configure::write('Plan.nombre', $planNombre);
-            debug(Configure::read('Plan.nombre'));
         }
         if (!empty($this->passedArgs['Plan.nombre'])) {
             $planNombre = $this->passedArgs['Plan.nombre'];
         }
         if (!empty($planNombre)) {
             $this->paginate['conditions']['to_ascii(lower(Plan.nombre)) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada($planNombre));
-            $url_conditions['Plan.nombre'] = $planNombre; 
+            $url_conditions['Plan.nombre'] = $planNombre;
         }
 
         $sectorId = null;
         if (!empty($this->data['Sector']['id'])) {
             $sectorId = $this->data['Sector']['id'];
-            Configure::write('Sector.id', $sectorId);
         }
         if (!empty($this->passedArgs['Sector.id'])) {
             $sectorId = $this->passedArgs['Sector.id'];
