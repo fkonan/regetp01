@@ -415,35 +415,53 @@ class PlanesController extends AppController {
     }
 
     function view_fp($instit_id, $oferta_id, $ciclo=0) {
-        $es_una_busqueda = 0;
-        if (@$this->data['es_una_busqueda']) {
-            $es_una_busqueda = $this->data['es_una_busqueda'];
+        $es_una_busqueda = false;
+        if (!empty($this->data)) {
+            $es_una_busqueda = true;
+            Configure::write('Instit.id',$instit_id);
         }
+        else {
+            // busqueda en Session
+            if (Configure::read('Instit.id') == $instit_id) {
+                if (Configure::read('Plan.nombre')) {
+                    $this->data['Plan']['nombre'] = Configure::read('Plan.nombre');
+                }
+
+                if (Configure::read('Sector.id')) {
+                    $this->data['Sector']['id'] = Configure::read('Sector.id');
+                }
+            }
+        }
+
         $url_conditions = $this->passedArgs;
-        
+
         $planNombre = null;
         if (!empty($this->data['Plan']['nombre'])) {
             $planNombre = $this->data['Plan']['nombre'];
+            Configure::write('Plan.nombre', $planNombre);
+            debug(Configure::read('Plan.nombre'));
         }
         if (!empty($this->passedArgs['Plan.nombre'])) {
             $planNombre = $this->passedArgs['Plan.nombre'];
         }
         if (!empty($planNombre)) {
             $this->paginate['conditions']['to_ascii(lower(Plan.nombre)) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada($planNombre));
-            $url_conditions['Plan.nombre'] = $_SESSION['Plan.nombre'] = $planNombre;
+            $url_conditions['Plan.nombre'] = $planNombre; 
         }
 
         $sectorId = null;
         if (!empty($this->data['Sector']['id'])) {
             $sectorId = $this->data['Sector']['id'];
+            Configure::write('Sector.id', $sectorId);
         }
         if (!empty($this->passedArgs['Sector.id'])) {
             $sectorId = $this->passedArgs['Sector.id'];
         }
         if (!empty($sectorId)) {
             $this->paginate['conditions']['Sector.id'] = $sectorId;
-            $url_conditions['Sector.id'] = $_SESSION['Sector.id'] = $sectorId;
+            $url_conditions['Sector.id'] = $sectorId;
         }
+
 
         if(!empty($ciclo)) {
             $this->paginate['conditions']['Anio.ciclo_id'] = $ciclo;

@@ -15,8 +15,6 @@ $paginator->options(array(
     'url' => $url_conditions,
     'update'=>'tabs-oferta-fp',
     ));
-
-
 ?>
 <div id="tabs-oferta-fp" class="oferta-contanier">
 
@@ -139,27 +137,6 @@ $paginator->options(array(
 
     function unblockResultConsole(responseText, statusText, xhr, $form)  {
         jQuery('.oferta-contanier').unmask();
-    }
-
-    setearBuscador();
-
-    function setearBuscador() {
-        var buscar = false;
-        <?php
-        if (isset($_SESSION['Plan.nombre'])) {
-        ?>
-            jQuery('#PlanNombre').val('<?=$_SESSION['Plan.nombre']?>');
-            buscar = true;
-        <?php
-        }
-
-        if (isset($_SESSION['Sector.id'])) {
-        ?>
-            jQuery('#SectorId').val('<?=$_SESSION['Sector.id']?>');
-            buscar = true;
-        <?php
-        }
-        ?>
     }
     
 </script>
