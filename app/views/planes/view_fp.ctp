@@ -128,7 +128,7 @@ $paginator->options(array(
         return false;        
     }
     
-    function blockResultConsole(formData, jqForm, options) {
+    function blockResultConsole(formData, options) {
         jQuery('.oferta-contanier').mask('Buscando');
     }
 
