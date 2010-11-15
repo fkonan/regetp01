@@ -95,11 +95,6 @@ $paginator->options(array(
          endforeach;
     ?>
     <div class="navigation"></div>
-    <?php
-    }
-    ?>
-    </div>
-
     <div id="paginator_prev_next_links">
             <?php
             if($paginator->numbers()){
@@ -110,7 +105,11 @@ $paginator->options(array(
             ?>
     </div>
     <?php
-    }
+            }
+    ?>
+    </div>
+    <?php
+        }
     }
     ?>
 
