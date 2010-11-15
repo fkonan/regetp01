@@ -35,8 +35,11 @@
         echo $html->meta('icon');
         echo $html->css('regetp','stylesheet', array('media'=>'screen'));
         echo $html->css('printer','stylesheet', array('media'=>'print'));
-
-        echo $html->css('acl/'.$session->read('Auth.User.role'),'stylesheet', array('media'=>'screen'));
+        
+        $cssRole = WWW_ROOT.'css'.DS.'role'.DS.$session->read('Auth.User.role').'.css';
+        if (file_exists($cssRole)) {
+            echo $html->css('role/'.$session->read('Auth.User.role'),'stylesheet', array('media'=>'screen'));
+        }
 
         echo $javascript->link(array(
         'jquery-1.4.2.min.js',
@@ -61,8 +64,9 @@
                 ?>
             });
         </script>
-        <!-- hack horrible para el ie, pero no se me ocurrio algo mejor -->
-        <!--[if IE]>
+
+        
+        <!--[if IE 7]>
         <style type="text/css">
             .horizontal-shadetabs a {
                 display: block;
