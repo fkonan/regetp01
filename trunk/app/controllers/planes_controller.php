@@ -430,7 +430,7 @@ class PlanesController extends AppController {
         }
         if (!empty($planNombre)) {
             $this->paginate['conditions']['to_ascii(lower(Plan.nombre)) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada($planNombre));
-            $url_conditions['Plan.nombre'] = $planNombre;
+            $url_conditions['Plan.nombre'] = $_SESSION['Plan.nombre'] = $planNombre;
         }
 
         $sectorId = null;
@@ -442,7 +442,7 @@ class PlanesController extends AppController {
         }
         if (!empty($sectorId)) {
             $this->paginate['conditions']['Sector.id'] = $sectorId;
-            $url_conditions['Sector.id'] = $sectorId;
+            $url_conditions['Sector.id'] = $_SESSION['Sector.id'] = $sectorId;
         }
 
         if(!empty($ciclo)) {

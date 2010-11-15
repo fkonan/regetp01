@@ -143,42 +143,29 @@ $paginator->options(array(
         jQuery('.oferta-contanier').unmask();
     }
 
-
-    <?php
-    if ($es_una_busqueda) {
-
-        if (isset($url_conditions['Plan.nombre'])) {
-        ?>
-            Set_Cookie( 'planes_buscadorfp_titulo', '<?=$url_conditions['Plan.nombre']?>', '', '/', '', '' );
-        <?
-        }
-        if (isset($url_conditions['Sector.id'])) {
-        ?>
-            Set_Cookie( 'planes_buscadorfp_sector', '<?=$url_conditions['Sector.id']?>', '', '/', '', '' );
-        <?
-        }
-        ?>
-<?php
-    }
-?>
-
     setearBuscador();
 
     function setearBuscador() {
-        if ( Get_Cookie( 'planes_buscadorfp_titulo' )) {
-            jQuery('#PlanNombre').val(Get_Cookie( 'planes_buscadorfp_titulo' ));
+        var buscar = false;
+        <?php
+        if (isset($_SESSION['Plan.nombre'])) {
+        ?>
+            jQuery('#PlanNombre').val('<?=$_SESSION['Plan.nombre']?>');
+            buscar = true;
+        <?php
         }
 
-        if ( Get_Cookie( 'planes_buscadorfp_sector' )) {
-            jQuery('#SectorId').val(Get_Cookie( 'planes_buscadorfp_sector' ));
+        if (isset($_SESSION['Sector.id'])) {
+        ?>
+            jQuery('#SectorId').val('<?=$_SESSION['Sector.id']?>');
+            buscar = true;
+        <?php
         }
+        ?>
 
-        /*if ( Get_Cookie( 'planes_buscadorfp_ciclo' )) {
-            jQuery('#PlanCicloId').val(Get_Cookie( 'planes_buscadorfp_ciclo' ));
-        }*/
-
-        //togglePlanes('#tabs-oferta-fp .plan_item');
-        jQuery('#formPlanesViewFp').submit();
+        if (buscar) {
+            jQuery('#formPlanesViewFp').submit();
+        }
     }
     
 </script>
