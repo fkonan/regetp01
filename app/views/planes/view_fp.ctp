@@ -28,20 +28,20 @@ $paginator->options(array(
     }
     else{
 
-    echo $form->create(
-            'Plan',
-            array(
-                'id'=>'formPlanesViewFp',
-                'url' => '/planes/view_fp/'.$instit_id.'/'.$oferta_id.'/'.$ciclo
-                )
-            );
-    echo $form->input('Plan.nombre', array('label'=>'Nombre'));
-    echo $form->input('Sector.id', array('label'=>'Sector',  'options'=> $sectores, 'empty'=>'Todos'));
-    if($ciclo == 0){
-        //echo $form->input('Plan.ciclo_id', array('label'=>'Ciclo', 'options'=>$ciclos_anios, 'empty'=>'Todos'));
-    }
-    //echo $ajax->submit('Buscar', array('update'=> 'tabs-oferta-fp'));
-    echo $form->end('Buscar');
+        echo $form->create(
+                'Plan',
+                array(
+                    'id'=>'formPlanesViewFp',
+                    'url' => '/planes/view_fp/'.$instit_id.'/'.$oferta_id.'/'.$ciclo
+                    )
+                );
+        echo $form->input('Plan.nombre', array('label'=>'Nombre'));
+        echo $form->input('Sector.id', array('label'=>'Sector',  'options'=> $sectores, 'empty'=>'Todos'));
+        if($ciclo == 0){
+            //echo $form->input('Plan.ciclo_id', array('label'=>'Ciclo', 'options'=>$ciclos_anios, 'empty'=>'Todos'));
+        }
+        //echo $ajax->submit('Buscar', array('update'=> 'tabs-oferta-fp'));
+        echo $form->end('Buscar');
 
         $sort = '';
        if(isset($this->passedArgs['sort'])){
