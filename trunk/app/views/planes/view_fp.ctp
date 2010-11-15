@@ -30,7 +30,8 @@ $paginator->options(array(
                 'Plan',
                 array(
                     'id'=>'formPlanesViewFp',
-                    'url' => '/planes/view_fp/'.$instit_id.'/'.$oferta_id.'/'.$ciclo
+                    'url' => '/planes/view_fp/'.$instit_id.'/'.$oferta_id.'/'.$ciclo,
+                    'onsubmit' => 'return buscarPlanes(this);'
                     )
                 );
         echo $form->input('Plan.nombre', array('label'=>'Nombre'));
@@ -110,27 +111,24 @@ $paginator->options(array(
         }
     }
     ?>
-
 </div>
 
 <script language="JavaScript"  type="text/javascript" defer="defer">
 
-   
-    formElement = jQuery('#formPlanesViewFp');
+    function buscarPlanes(formElement){
+        
+        var options = {
+            target:        '.oferta-contanier',   // target element(s) to be updated with server response
+            beforeSubmit:  blockResultConsole,  // pre-submit callback
+            success:       unblockResultConsole,  // post-submit callback
+            url:  formElement.action     // override for form's 'action' attribute
+        };
 
-    var options = {
-        target:        '.oferta-contanier',   // target element(s) to be updated with server response
-        beforeSubmit:  blockResultConsole,  // pre-submit callback
-        success:       unblockResultConsole,  // post-submit callback
-        url:  formElement.attr('action')     // override for form's 'action' attribute
-    };
+        jQuery(formElement).ajaxSubmit(options);
 
+        return false;        
+    }
     
-
-    // bind form using 'ajaxForm'
-    formElement.ajaxForm(options);
-
-
     function blockResultConsole(formData, jqForm, options) {
         jQuery('.oferta-contanier').mask('Buscando');
     }
