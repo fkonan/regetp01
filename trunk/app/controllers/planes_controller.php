@@ -68,6 +68,7 @@ class PlanesController extends AppController {
         
         $ofertas  = $this->Plan->dameOfertaPorInstitucion($id,'');
         $sectores = $this->Plan->dameSectoresPorInstitucion($id,isset($url_conditions['Anio.ciclo_id'])?$url_conditions['Anio.ciclo_id']:'');
+
         $this->set(compact('ofertas','ciclos','sectores'));
         $this->set('ofertasControllers', $ofertasControllers);
     }
