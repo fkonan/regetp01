@@ -129,11 +129,11 @@ $paginator->options(array(
     }
     
     function blockResultConsole(formData, jqForm, options) {
-        jQuery(jqForm).closest('.maskeable').mask('Buscando');
+        jQuery('.oferta-contanier').mask('Buscando');
     }
 
     function unblockResultConsole(responseText, statusText, xhr, $form)  {
-        jQuery(jqForm).closest('.maskeable').unmask();
+        jQuery('.oferta-contanier').unmask();
     }
     
 </script>
