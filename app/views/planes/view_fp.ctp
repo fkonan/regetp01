@@ -12,9 +12,12 @@ echo $html->css(array('jquery.loadmask'));
 
 $divOfertaFP = 'tabs-oferta-fp-'.$ciclo;
 
+$divSpinnerId = "spinner-fp-$ciclo";
+
 $paginator->options(array(
-    'url' => $url_conditions,
-    'update'=> $divOfertaFP,
+    'url'     => $url_conditions,
+    'update'  => $divOfertaFP,
+    'indicator' => $divSpinnerId,
     ));
 ?>
 <div id="<?php echo $divOfertaFP; ?>" class="oferta-contanier">
@@ -31,7 +34,7 @@ $paginator->options(array(
                 array(
                     'id'=>'formPlanesViewFp',
                     'url' => '/planes/view_fp/'.$instit_id.'/'.$oferta_id.'/'.$ciclo,
-                    'onsubmit' => 'return buscarPlanes(this);'
+                    'onsubmit' => 'return buscarPlanes(this);',
                     )
                 );
         echo $form->input('Plan.nombre', array('label'=>'Nombre'));
@@ -90,6 +93,7 @@ $paginator->options(array(
          endforeach;
     ?>
     <div class="navigation"></div>
+
     <div id="paginator_prev_next_links">
             <?php
             if($paginator->numbers()){
@@ -99,6 +103,7 @@ $paginator->options(array(
             }
             ?>
     </div>
+    <div id="<?php $divSpinnerId?>" style="display: none">CARGANDO</div>
     <?php
             }
     ?>
@@ -109,8 +114,8 @@ $paginator->options(array(
     ?>
 </div>
 
-<script language="JavaScript"  type="text/javascript" defer="defer">
 
+<script language="JavaScript"  type="text/javascript" defer="defer">
     function buscarPlanes(formElement){
         
         var options = {
