@@ -2283,6 +2283,7 @@ border-bottom-color: white !important;
 
 .tabla_plan caption {
     text-align: left;
+    height: 19px;
 }
 
 .plan_sector{
