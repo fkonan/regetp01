@@ -41,6 +41,12 @@
             echo $html->css('role/'.$session->read('Auth.User.role'),'stylesheet', array('media'=>'screen'));
         }
 
+        $jsPoner = 'views'.DS.Inflector::underscore($this->name).DS.$this->action;
+        $jsView = WWW_ROOT.'js'.DS.$jsPoner;
+        if (file_exists($jsView.'.js')) {
+             echo $javascript->link($jsPoner);
+        }
+
         echo $javascript->link(array(
         'jquery-1.4.2.min.js',
         'jquery.form.js',

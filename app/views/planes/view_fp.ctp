@@ -1,4 +1,3 @@
-
 <?php
     /* @var $ajax AjaxHelper */
     $ajax;
@@ -7,11 +6,10 @@
     /* @var $html HtmlHelper */
     $html;
     
-echo $html->css('planes/view_fp', null, null, false);
-echo $html->css(array('jquery.loadmask'));
+echo $html->css('planes/view_fp');
+echo $html->css('jquery.loadmask');
 
 $divOfertaFP = 'tabs-oferta-fp-'.$ciclo;
-
 $divSpinnerId = "spinner-fp-$ciclo";
 
 $paginator->options(array(
@@ -28,7 +26,6 @@ $paginator->options(array(
     <? 
     }
     else{
-
         echo $form->create(
                 'Plan',
                 array(
@@ -120,29 +117,4 @@ $paginator->options(array(
     ?>
 </div>
 
-
-<script language="JavaScript"  type="text/javascript" defer="defer">
-    function buscarPlanes(formElement){
-        
-        var options = {
-            target:        '.oferta-contanier',   // target element(s) to be updated with server response
-            beforeSubmit:  blockResultConsole,  // pre-submit callback
-            success:       unblockResultConsole,  // post-submit callback
-            url:  formElement.action     // override for form's 'action' attribute
-        };
-
-        jQuery(formElement).ajaxSubmit(options);
-
-        return false;        
-    }
-    
-    function blockResultConsole(formData, options) {
-        jQuery('.oferta-contanier').mask('Buscando');
-    }
-
-    function unblockResultConsole(responseText, statusText, xhr, $form)  {
-        jQuery('.oferta-contanier').unmask();
-    }
-    
-</script>
 

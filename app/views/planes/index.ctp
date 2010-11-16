@@ -3,7 +3,7 @@ echo $javascript->link('zeroclipboard/ZeroClipboard.js',false);
 echo $javascript->link('jquery-ui-1.8.5.custom.min.js',false);
 
 echo $javascript->link('jquery.loadmask.min',false);
-    echo $javascript->link('async.js',false);
+echo $javascript->link('async.js',false);
 
 echo $html->css('ajaxtabs.css',null, false);
 echo $html->css('planes/ui_tabs.css',null, false);
@@ -22,47 +22,13 @@ if($ticket_id != 0) {
         
         // introduce la logic que hacen funcionar al copy paste
         meterCopyPasteDelNombre('<?php echo $html->url("/js/zeroclipboard/ZeroClipboard10.swf"); ?>');
-        
-        jQuery('.js-tabs-ofertas').tabs({
-            //ajaxOptions: { contentType: 'application/x-www-form-urlencoded; charset=utf-8' }
+
+        inicializarTabs({
+            spinnerImg: '<?php echo $html->image('loadercircle16x16.gif') ?>'
         });
 
-        jQuery('.js-tabs-ciclos').tabs({
-            spinner: '<?php echo $html->image('loadercircle16x16.gif') ?>'
-            //ajaxOptions: { contentType: 'application/x-www-form-urlencoded; charset=utf-8' }
-        });
-
-        selectTabsInSession();
-
-        PreparaTabsParaSession();
-
-    });
-
-
-
-    function PreparaTabsParaSession() {
-        jQuery('#ofertas-tabs a').each(function(index, value) {
-            jQuery(value).click(function() {
-                Set_Cookie( 'tab_oferta', value.id, '', '/', '', '' );
-            });
-        });
-
-        jQuery('#ciclos-tabs a').each(function(index, value) {
-            jQuery(value).click(function() {
-                Set_Cookie( 'tab_ciclo', value.id, '', '/', '', '' );
-            });
-        });
-    }
-
-    function selectTabsInSession () {
-        if (Get_Cookie('tab_oferta')) {
-            jQuery('#'+Get_Cookie('tab_oferta')).click();
-        }
-
-        if (Get_Cookie('tab_ciclo')) {
-            jQuery('#'+Get_Cookie('tab_ciclo')).click();
-        }
-    }
+        agregarTabsAUserSession();
+    });   
 </script>
 
 <div id="escuela_estado" class="<? echo $planes['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $planes['Instit']['activo']? 'Institución Ingresada al RFIETP':'Institución NO Ingresada al RFIETP';?></div>
