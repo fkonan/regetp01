@@ -98,7 +98,7 @@
     <body>
         <? if ($_SERVER['HTTP_HOST']=='localhost' || strpos($_SERVER['HTTP_HOST'],'168.83.2') !== false) {?>
         <div style="background-color: red; height: 20px; text-align: center">MODO LOCALHOST</div>
-        <script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>
+        
         <? }?>
 
 
