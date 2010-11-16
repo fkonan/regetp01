@@ -32,7 +32,7 @@ sistema.
 <p>
 La nueva versión presenta varias mejoras, entre las que se destacan:
 </p>
-<ul class="actualizaciones">
+<ul>
     <li>Se rediseñó la presentación de la Oferta Educativa de Instituciones, reemplazando la antigua presentación por una vista nueva que permite obtener un plano general y completo.</li>
     <li>Se ha creado una casilla de E-mail para el RFIETP (rfietp@inet.edu.ar).</li>
 </ul>

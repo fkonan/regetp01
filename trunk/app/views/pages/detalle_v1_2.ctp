@@ -1,6 +1,6 @@
 <h1>RFIETP - Novedades de la versión 1.6.3</h1>
 <br>
-<ul class="actualizaciones">
+<ul>
     <li><b>Rediseño de la presentación de la Oferta Educativa de Instituciones</b>
         <ul type="circle">
            <li>Se reemplazó la antigua presentación de esta sección por una vista nueva que permite obtener un plano general de la Oferta Educativa de la Institución</li>
@@ -10,12 +10,12 @@
         </ul>
     </li>
     <li><b>Seguridad (ACL)</b>
-        <ul class="actualizaciones">
+        <ul>
             <li>Se crearon árboles de usuarios y permisos, obteniendo una visión general de la actual configuración de seguridad de accesos</li>
         </ul>
     </li>
     <li><b>E-mail de aviso de nueva versión</b>
-        <ul class="actualizaciones">
+        <ul>
             <li>Se creó una nueva casilla para RFIETP: rfietp@inet.edu.ar</li>
             <li>Se confeccionó un e-mail de aviso de nueva versión para todos los usuarios del RFIETP</li>
         </ul>
@@ -26,7 +26,7 @@
 
 <h1>RFIETP - Novedades de la versión 1.6.2</h1>
 <br>
-<ul class="actualizaciones">
+<ul>
     <li><b>Oferta Educativa de Instituciones</b>
         <ul type="circle">
            <li>Se finalizó con la depuración de Estructuras de Ofertas Educativas</li>
@@ -34,7 +34,7 @@
         </ul>
     </li>
     <li><b>Buscador de Instituciones</b>
-        <ul class="actualizaciones">
+        <ul>
         <li>Se ha establecido el nuevo buscador como predeterminado. Si aún necesita utilizar el viejo sistema de búsquedas puede hacer click en "Buscador Clásico"</li>
         </ul>
     </li>
@@ -45,7 +45,7 @@
 
 <h1>RFIETP - Novedades de la versión 1.6</h1>
 <br>
-<ul class="actualizaciones">
+<ul>
     <li><b>Oferta Educativa de Instituciones</b>
         <ul type="circle">
             <li>Se ha publicado la información correspondinete a los Planes de Mejora aprobados durante el primer semestre de 2010.</li>
@@ -63,7 +63,7 @@
 
 <h1>RFIETP - Novedades de la versión 1.5</h1>
 <br>
-<ul class="actualizaciones">
+<ul>
     <li><b>Planes de Mejora</b>
         <ul type="circle">
             <li>Se migraron los Planes de Mejora institucionales y jurisdiccionales aprobados desde el 2006 hasta el 4to trimestre del 2009.</li>
@@ -107,7 +107,7 @@
 
 <h1>RFIETP - Novedades de la versión 1.4.1</h1>
 <br>
-<ul class="actualizaciones">
+<ul>
     <li><b>Estética</b>
         <ul type="circle">
             <li>Se mejoró el diseño de la interfaz gráfica.</li>
@@ -121,7 +121,7 @@
 
 <h1>RFIETP - Novedades de la versión 1.4</h1>
 <br>
-<ul class="actualizaciones">
+<ul>
     <li><b>Orientación de la Institución</b></li>
     <ul type="circle">
         <li>Se agregó una "Orientación" a cada Institución ingresada.</li>
@@ -148,7 +148,7 @@
 
 <br>
 
-<ul class="actualizaciones">
+<ul>
 
     <li>
         <b>Diseño</b>
