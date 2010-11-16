@@ -15,7 +15,14 @@ function inicializarTabs(options)
     jQuery('.js-tabs-ofertas').tabs();
 
     jQuery('.js-tabs-ciclos').tabs({
-        spinner: imgUrl
+        spinner: imgUrl//,
+        //selected: function(){
+        //    jQuery("#ciclos-tabs ul li a").each(function(index, value) {
+        //        if(jQuery(value).attr("id") == jQuery('#'+Get_Cookie('tab_ciclo')).attr("id")){
+        //            return index;
+        //        }
+        //    });
+        //}
     });
 }
 
