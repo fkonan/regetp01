@@ -417,6 +417,8 @@ class PlanesController extends AppController {
 
     function view_fp($instit_id, $oferta_id, $ciclo=0) {
         $es_una_busqueda = false;
+
+        //debug($this->Session->read('Ciclo.id') . "-". $ciclo);
         
         if (!empty($this->data)) {
             $es_una_busqueda = true;
@@ -438,12 +440,13 @@ class PlanesController extends AppController {
                 $es_una_busqueda = true;
             }
         }
-
+        
         $url_conditions = $this->passedArgs;
+        
         if (!empty($this->passedArgs['page'])) {
             $this->Session->write('page', $this->passedArgs['page']);
         }
-        elseif ($this->Session->read('page')) {
+        elseif ($this->Session->read('page') && $this->Session->read('Ciclo.id') == $ciclo) {
             $this->paginate['page'] = $this->Session->read('page');
         }
 
@@ -477,6 +480,10 @@ class PlanesController extends AppController {
         } else {
             $this->Plan->setTraerUltimaAct(true);
         }
+
+        if($ciclo != 2010)
+            $this->Session->write('Ciclo.id', $ciclo);
+        
         $this->Plan->setAsociarAnio(true);
         
         $this->paginate['conditions']['Plan.oferta_id'] = $oferta_id;
