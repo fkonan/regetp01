@@ -70,6 +70,7 @@
                 ?>
             });
         </script>
+        
 
         
         <!--[if IE 7]>
@@ -98,6 +99,7 @@
 
         <? if ($_SERVER['HTTP_HOST']=='localhost') {?>
         <div style="background-color: red; height: 20px; text-align: center">MODO LOCALHOST</div>
+        <script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>
         <? }?>
 
 
