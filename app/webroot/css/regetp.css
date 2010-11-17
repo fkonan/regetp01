@@ -1137,11 +1137,13 @@ div.code-coverage-results span.result-good {
 *
 *
 */
-#paginator_prev_next_links{
+#paginator_prev_next_links, .paginator_prev_next_links{
     width: 100%;
     margin-top: 1.5em;
     text-align: center;
 }
+
+
 
 .current{
     font-size: 19px;

@@ -22,6 +22,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
 
+
 header("Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0"); // // HTTP/1.1
 header("Pragma: no-cache");
 header("Expires: Mon, 17 Dec 2007 00:00:00 GMT"); // Date in the past
@@ -47,18 +48,18 @@ header("Expires: Mon, 17 Dec 2007 00:00:00 GMT"); // Date in the past
             echo $html->css('role/'.$session->read('Auth.User.role'),'stylesheet', array('media'=>'screen'));
         }
 
-        $jsPoner = 'views'.DS.Inflector::underscore($this->name).DS.$this->action;
-        $jsView = WWW_ROOT.'js'.DS.$jsPoner;
-        if (file_exists($jsView.'.js')) {
-             echo $javascript->link($jsPoner);
-        }
-
         echo $javascript->link(array(
         'jquery-1.4.2.min.js',
         'jquery.form.js',
         'jquery.tools.min.js',
         'views/layout/default',
         ));
+
+        $jsPoner = 'views'.DS.Inflector::underscore($this->name).DS.$this->action;
+        $jsView = WWW_ROOT.'js'.DS.$jsPoner;
+        if (file_exists($jsView.'.js')) {
+             echo $javascript->link($jsPoner);
+        }
 
 
         echo $scripts_for_layout;

@@ -91,7 +91,7 @@ $paginator->options(array(
     ?>
     <div class="navigation"></div>
 
-    <div id="paginator_prev_next_links">
+    <div class="paginator_prev_next_links">
             <?php
             if($paginator->numbers()){
                     echo $paginator->prev('« Anterior ',null, null, array('class' => 'disabled'));

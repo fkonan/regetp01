@@ -18,7 +18,7 @@ if (!empty($plan['Plan'])) {
         <?php
         echo $html->link("más info",array('controller'=> 'planes', 'action'=>'view', $plan['id']), array(
             'title'=>'Ver mas información del plan',
-            'class'=>''
+            'class'=>'',
             ));
         ?>
         </span>
