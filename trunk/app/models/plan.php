@@ -19,7 +19,7 @@ class Plan extends AppModel {
             );
 
 	var $hasMany = array(
-            'Anio' => array('order'=>'Anio.anio'),
+            'Anio' => array('order'=> array('Anio.plan_id', 'Anio.ciclo_id DESC', 'Anio.anio ASC'))
 	);
 	
 	var $validate = array(
