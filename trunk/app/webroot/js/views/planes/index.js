@@ -12,24 +12,43 @@ function inicializarTabs(options)
 {
     imgUrl = options.spinnerImg;
 
-    jQuery('.js-tabs-ofertas').tabs();
+    jQuery('.js-tabs-ofertas').tabs({
+        selected: getSelectedOfertaTabIndex()
+    });
 
     jQuery('.js-tabs-ciclos').tabs({
-        spinner: imgUrl//,
-        //selected: function(){
-        //    jQuery("#ciclos-tabs ul li a").each(function(index, value) {
-        //        if(jQuery(value).attr("id") == jQuery('#'+Get_Cookie('tab_ciclo')).attr("id")){
-        //            return index;
-        //        }
-        //    });
-        //}
+        spinner: imgUrl,
+        selected: getSelectedCicloTabIndex()
     });
 }
+
+function getSelectedCicloTabIndex() {
+    var i = 0;
+    if (!Get_Cookie('tab_ciclo')) return 0;
+    jQuery("#ciclos-tabs ul li a").not(":hidden").each(function(index, value) {
+        if(jQuery(value).attr("id") == Get_Cookie('tab_ciclo')){
+            i = index;
+        }
+    });
+    return i;
+}
+
+function getSelectedOfertaTabIndex() {
+    var i = 0;
+    if (!Get_Cookie('tab_oferta')) return 0;
+    jQuery("#ofertas-tabs li a").not(":hidden").each(function(index, value) {
+        if(jQuery(value).attr("id") == Get_Cookie('tab_oferta')){
+            i = index;
+        }
+    });
+    return i;
+}
+
 
 
 function agregarTabsAUserSession()
 {
-    selectTabsInSession();
+    //selectTabsInSession(); --deprecated
     PreparaTabsParaSession();
 }
 
@@ -53,7 +72,6 @@ function selectTabsInSession () {
     if (Get_Cookie('tab_oferta')) {
         jQuery('#'+Get_Cookie('tab_oferta')).click();
     }
-
     if (Get_Cookie('tab_ciclo')) {
         jQuery('#'+Get_Cookie('tab_ciclo')).click();
     }

@@ -26,9 +26,9 @@ if($ticket_id != 0) {
         inicializarTabs({
             spinnerImg: '<?php echo $html->image('loadercircle16x16.gif') ?>'
         });
-
+        
         agregarTabsAUserSession();
-    });   
+    });
 </script>
 
 <div id="escuela_estado" class="<? echo $planes['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $planes['Instit']['activo']? 'Institución Ingresada al RFIETP':'Institución NO Ingresada al RFIETP';?></div>
