@@ -29,18 +29,20 @@ la base de datos como de la aplicación que permite su gestión. En esa línea de
 trabajo a partir del 17 de Noviembre del 2010 se ha instalado la versión <?php echo Configure::read('regetpVersion');?> del
 sistema.
 </p>
+
 <p>
-La nueva versión presenta varias mejoras, entre las que se destacan:
+La nueva versión ofrece un completo rediseño en la presentación de ofertas educativas de las Instituciones, lo que permite:
 </p>
 <ul>
-    <li>
-        <b>Rediseño de la Oferta Educativa de Instituciones</b>
-        <ul>
-            <li>Se diseñó una nueva vista que permite obtener información rápidamente.</li>
-            <li>Se desarrolló un nuevo buscador para las ofertas del tipo Formación Profesional.</li>
-        </ul>        
-    <li>Se ha creado una casilla de E-mail para el RFIETP (rfietp@inet.edu.ar).</li>
+    <li>Obtener una mejor visión general de la oferta educativa durante un ciclo lectivo</li>
+    <li>Obtener una presentación mas ordenada y concisa de la oferta total para una institución</li>
+    <li>Navegar mediante pestañas entre distintas ofertas y ciclos lectivos de un modo más práctico y eficiente</li>
+    <li>Recordar las selecciones realizadas al visualizar una oferta educativa (útil para tareas de edición y consultas temáticas reiteradas)</li>
 </ul>
+
+
+
+
 <br/>
 <br/>
 <p>

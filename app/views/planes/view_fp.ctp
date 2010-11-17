@@ -58,7 +58,6 @@ $paginator->options(array(
     <p class="msg-atencion" style="height: 200px"><br /><br />Búsqueda sin resultados</p>
     <?
     }
-    else{
     ?>
     
     <div class="clear"></div>
@@ -112,7 +111,6 @@ $paginator->options(array(
     ?>
     </div>
     <?php
-        }
     }
     ?>
 </div>
