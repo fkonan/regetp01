@@ -480,9 +480,6 @@ class PlanesController extends AppController {
         } else {
             $this->Plan->setTraerUltimaAct(true);
         }
-
-        if($ciclo != 2010)
-            $this->Session->write('Ciclo.id', $ciclo);
         
         $this->Plan->setAsociarAnio(true);
         
