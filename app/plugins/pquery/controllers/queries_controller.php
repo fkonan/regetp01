@@ -102,6 +102,11 @@ class QueriesController extends PqueryAppController {
 
 		$precols = array_keys($consulta_ejecutada[0]);
 
+                $quitar_columnas = $consulta_ejecutada[0][0];
+		while(list($key,$value) = each($quitar_columnas)):
+			$columnas[] = $key;
+		endwhile;
+
 		$this->set('nombre',$res['Query']['name']);
 		$this->set('columnas',$columnas);
 		$this->set('filas',$consulta_ejecutada);
