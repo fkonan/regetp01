@@ -6,6 +6,5 @@ $jsView = WWW_ROOT.'js'.DS.$jsPoner;
 if (file_exists($jsView.'.js')) {
     echo $javascript->link($jsPoner);
 }
-
 echo $content_for_layout;
 ?>

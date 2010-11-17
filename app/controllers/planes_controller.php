@@ -253,6 +253,9 @@ class PlanesController extends AppController {
         }
 
         $this->Plan->recursive = 2;
+        $this->hasMany = array(
+            'Anio' => array('order'=> array('Anio.plan_id', 'Anio.ciclo_id DESC', 'Anio.nro_anio DESC')),
+	);
         $plan = $this->Plan->read(null, $id);
 
         //ordenos los años para ue puedan ser mostrados en la vista
@@ -416,28 +419,37 @@ class PlanesController extends AppController {
     }
 
     function view_fp($instit_id, $oferta_id, $ciclo=0) {
+        // solucion temporal para el paginador que no anda
+        // $this->paginate['limit'] = 200;
+
+
         $es_una_busqueda = false;
 
         //debug($this->Session->read('Ciclo.id') . "-". $ciclo);
-        
+        $sesNames = array(
+            'instit' => 'Instit.id'.$instit_id.$oferta_id.$ciclo,
+            'plan'   => 'Plan.nombre'.$instit_id.$oferta_id.$ciclo,
+            'sector' => 'Sector.id'.$instit_id.$oferta_id,
+            'page' => 'page'.$instit_id.$oferta_id.$ciclo,
+        );
+
         if (!empty($this->data)) {
             $es_una_busqueda = true;
-            $this->Session->write('Instit.id',$instit_id);
-            $this->Session->write('Plan.nombre', $this->data['Plan']['nombre']);
-            $this->Session->write('Sector.id', $this->data['Sector']['id']);
+            $this->Session->write($sesNames['instit'],$instit_id);
+            $this->Session->write($sesNames['plan'], $this->data['Plan']['nombre']);
+            $this->Session->write($sesNames['sector'], $this->data['Sector']['id']);
             $this->Session->write('page', '');
         }
         else {
             // busqueda en Session
-            if ($this->Session->read('Instit.id') == $instit_id) {
-                if ($this->Session->read('Plan.nombre')) {
-                    $this->data['Plan']['nombre'] = $this->Session->read('Plan.nombre');
+            if ($this->Session->read($sesNames['instit']) == $instit_id) {
+                if ($this->Session->read($sesNames['plan'])) {
+                    $this->data['Plan']['nombre'] = $this->Session->read($sesNames['plan']);
                 }
 
-                if ($this->Session->read('Sector.id')) {
-                    $this->data['Sector']['id'] = $this->Session->read('Sector.id');
+                if ($this->Session->read($sesNames['sector'])) {
+                    $this->data['Sector']['id'] = $this->Session->read($sesNames['sector']);
                 }
-
                 $es_una_busqueda = true;
             }
         }
@@ -445,10 +457,10 @@ class PlanesController extends AppController {
         $url_conditions = $this->passedArgs;
         
         if (!empty($this->passedArgs['page'])) {
-            $this->Session->write('page', $this->passedArgs['page']);
+            $this->Session->write($sesNames['page'], $this->passedArgs['page']);
         }
-        elseif ($this->Session->read('page') && $this->Session->read('Ciclo.id') == $ciclo) {
-            $this->paginate['page'] = $this->Session->read('page');
+        elseif ($this->Session->read($sesNames['page'])) {
+            $this->paginate['page'] = $this->Session->read($sesNames['page']);
         }
 
         $planNombre = null;

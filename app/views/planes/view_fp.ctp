@@ -11,6 +11,7 @@ echo $html->css('jquery.loadmask');
 
 $divOfertaFP = 'tabs-oferta-fp-'.$ciclo;
 $divSpinnerId = "spinner-fp-$ciclo";
+$divOfertaContainer = 'oferta-contanier-'.$ciclo;
 
 $paginator->options(array(
     'url'     => $url_conditions,
@@ -31,7 +32,8 @@ $paginator->options(array(
                 array(
                     'id'=>'formPlanesViewFp',
                     'url' => '/planes/view_fp/'.$instit_id.'/'.$oferta_id.'/'.$ciclo,
-                    'onsubmit' => 'return buscarPlanes(this);',
+                    'onsubmit' => "return buscarPlanes(this, '$divOfertaFP');",
+                    'update' => $divOfertaFP,
                     )
                 );
         echo $form->input('Plan.nombre', array('label'=>'Nombre'));
@@ -62,7 +64,7 @@ $paginator->options(array(
     
     <div class="clear"></div>
     <br>
-    <div>
+    <div class="buscador-result">
     <?php
     $i = 0;
     if (!empty($planes)) {
