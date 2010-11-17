@@ -425,6 +425,7 @@ class PlanesController extends AppController {
             $this->Session->write('Instit.id',$instit_id);
             $this->Session->write('Plan.nombre', $this->data['Plan']['nombre']);
             $this->Session->write('Sector.id', $this->data['Sector']['id']);
+            $this->Session->write('page', '');
         }
         else {
             // busqueda en Session
