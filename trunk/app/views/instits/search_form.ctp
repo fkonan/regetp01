@@ -49,7 +49,7 @@ echo $html->css(array('jquery.loadmask'));
     
     echo $form->button('Buscar', array(
                 'class' => 'boton-buscar',
-                'onclick' => 'autoSubmit()',
+                'onclick' => 'autoSubmit(true)',
          ));
 
     echo $form->end();
