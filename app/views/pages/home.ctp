@@ -26,14 +26,19 @@ Requerimientos mínimos para utilizar el <b>Sistema Gestión de Registro</b>:<br /
 Desde su puesta en funcionamiento en junio de 2009 el sistema RFIETP se encuentra
 en permanente actualización y mejoramiento, tanto del contenido de información de
 la base de datos como de la aplicación que permite su gestión. En esa línea de
-trabajo a partir del 15 de Noviembre del 2010 se ha instalado la versión <?php echo Configure::read('regetpVersion');?> del
+trabajo a partir del 17 de Noviembre del 2010 se ha instalado la versión <?php echo Configure::read('regetpVersion');?> del
 sistema.
 </p>
 <p>
 La nueva versión presenta varias mejoras, entre las que se destacan:
 </p>
 <ul>
-    <li>Se rediseñó la presentación de la Oferta Educativa de Instituciones, reemplazando la antigua presentación por una vista nueva que permite obtener un plano general y completo.</li>
+    <li>
+        <b>Rediseño de la Oferta Educativa de Instituciones</b>
+        <ul>
+            <li>Se diseñó una nueva vista que permite obtener información rápidamente.</li>
+            <li>Se desarrolló un nuevo buscador para las ofertas del tipo Formación Profesional.</li>
+        </ul>        
     <li>Se ha creado una casilla de E-mail para el RFIETP (rfietp@inet.edu.ar).</li>
 </ul>
 <br/>

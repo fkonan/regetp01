@@ -2219,6 +2219,7 @@ border-bottom-color: white !important;
 
 .plan_item A:HOVER{
     color: #045FB8;
+    text-decoration: underline;
 }
 
 .plan_item .mas_info{
@@ -2259,13 +2260,12 @@ border-bottom-color: white !important;
     text-decoration: none;
     margin-bottom: 4px;
 }
-.plan_item a:HOVER{
-    text-decoration: underline;
-}
+
 
 .plan_title, .plan_title A{
     color: black;
 }
+
 
 /* TABLAS PLAN */
 
@@ -2283,7 +2283,7 @@ border-bottom-color: white !important;
 
 .tabla_plan caption {
     text-align: left;
-    height: 19px;
+    min-height: 19px;
 }
 
 .plan_sector{

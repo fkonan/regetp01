@@ -18,6 +18,12 @@ if (empty($planes['Plan'])) {
                 
                 <table class="tabla_plan" width="100%"border="2" cellpadding="2" cellspacing="0">
                     <caption class="plan_title">
+                        <span class="plan_mas_info btn-ir">
+                        <?php echo $html->link("ver más",
+                            array('controller'=> 'planes', 'action'=>'view', $plan['id']), array('title'=>'Ver mas información del plan'));
+                        ?>
+                        </span>
+                        
                         <?php echo $html->link(
                                 $plan['nombre'],
                                 array('controller'=> 'planes', 'action'=>'view', $plan['id']),
@@ -30,11 +36,7 @@ if (empty($planes['Plan'])) {
                             echo " (" . $primer_anio['Anio']['ciclo_id'] . ")";
                         }
                         ?>
-                        <span class="plan_mas_info btn-ir">
-                        <?php echo $html->link("ver más",
-                            array('controller'=> 'planes', 'action'=>'view', $plan['id']), array('title'=>'Ver mas información del plan'));
-                        ?>
-                        </span>
+                        
                     </caption>
                 <tr>
                     <th>Año</th>
