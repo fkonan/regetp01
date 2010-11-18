@@ -427,7 +427,7 @@ class PlanesController extends AppController {
 
         //debug($this->Session->read('Ciclo.id') . "-". $ciclo);
         $sesNames = array(
-            'instit' => 'Instit.id'.$instit_id.$oferta_id.$ciclo,
+            'instit' => 'Instit.id',
             'plan'   => 'Plan.nombre'.$instit_id.$oferta_id.$ciclo,
             'sector' => 'Sector.id'.$instit_id.$oferta_id,
             'page' => 'page'.$instit_id.$oferta_id.$ciclo,
