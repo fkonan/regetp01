@@ -164,7 +164,14 @@ header("Expires: Mon, 17 Dec 2007 00:00:00 GMT"); // Date in the past
         </div> <!-- FIN div #container -->
 
         <div id="footer">
-            <p style="float:left;color:#003d5c;font-size:8pt;padding-left:250px; padding-top:10px; vertical-align: middle;font-weight: bold" >Instituto Nacional de Educación Tecnológica</p>
+            <?php echo $html->image('ministerioeduc_logo.png', array(
+                                'style'=>'vertical-align:middle;margin-left:5px; float:left;',
+                                'alt'=> __("Ministerio de Educación de la Nación", true),
+                                'border'=>"0",
+                                )
+                  );
+            ?>
+            <p style="float:left;color:#003d5c;font-size:8pt;padding-left:110px; padding-top:10px; vertical-align: middle;font-weight: bold" >Instituto Nacional de Educación Tecnológica</p>
             <?php echo $html->link(
                         $html->image('logoinet1.gif', array(
                                 'style'=>'vertical-align:middle;width:70px;margin-right:10px',

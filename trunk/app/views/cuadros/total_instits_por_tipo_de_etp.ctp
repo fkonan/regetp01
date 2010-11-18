@@ -88,8 +88,8 @@
 					style="
 						border-style: solid; 
 						border-width: 1px; 
-						border-color: #DBEBF6; 
-						border-top: none; font-size: 9pt;">
+						border-color: #666666;
+						font-size: 9pt;">
 			
 				<thead>					
 					<tr>
