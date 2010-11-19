@@ -50,7 +50,7 @@ if (empty($planes['Plan'])) {
             foreach($plan['Anio'] as $anio){
             ?>
             <tr>
-                <td><?php echo $anio['EstructuraPlanesAnio']['nro_anio']?>º</td>
+                <td><?php echo $anio['EstructuraPlanesAnio']['alias']?></td>
                 <td><?php echo $anio['Anio']['matricula']?></td>
                 <td><?php echo $anio['Anio']['secciones']?></td>
                 <td><?php echo $anio['Anio']['hs_taller']?></td>
@@ -80,6 +80,3 @@ if (empty($planes['Plan'])) {
     }
     ?>
 </div>
-<script type="text/javascript">
-    jQuery('#tabs-1 .plan_item').biggerlink();
-</script>
