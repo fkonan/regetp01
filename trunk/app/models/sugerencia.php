@@ -10,5 +10,14 @@ class Sugerencia extends AppModel {
                     'message' => 'Introduzca algún mensaje'
                 )),
 	);
+
+        var $belongsTo = array(
+			'User' => array('className' => 'User',
+                                        'foreignKey' => 'user_id',
+                                        'conditions' => '',
+                                        'fields' => '',
+                                        'order' => ''
+			)
+	);
 }
 ?>

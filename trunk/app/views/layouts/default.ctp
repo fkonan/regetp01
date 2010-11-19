@@ -130,18 +130,18 @@ header("Expires: Mon, 17 Dec 2007 00:00:00 GMT"); // Date in the past
 
                 <div id="menu">
                 <?
-                    echo $this->renderElement('boxSaludo');
-                    echo $this->renderElement('boxDesarrollo');
-                    echo $this->renderElement('boxInstituciones');
-                    echo $this->renderElement('boxJurisdicciones');
-                    echo $this->renderElement('boxCuadros');
-                    echo $this->renderElement('boxInformacion');
-                    echo $this->renderElement('boxDepurador');
-                    echo $this->renderElement('boxTickets');
-                    echo $this->renderElement('boxFondo');
-                    echo $this->renderElement('boxAdmin');
-                    echo $this->renderElement('boxLogin');
-                    echo $this->renderElement('boxSoporteTecnico');
+                    echo $this->renderElement('menu/boxSaludo');
+                    echo $this->renderElement('menu/boxDesarrollo');
+                    echo $this->renderElement('menu/boxInstituciones');
+                    echo $this->renderElement('menu/boxJurisdicciones');
+                    echo $this->renderElement('menu/boxCuadros');
+                    echo $this->renderElement('menu/boxInformacion');
+                    echo $this->renderElement('menu/boxDepurador');
+                    echo $this->renderElement('menu/boxTickets');
+                    echo $this->renderElement('menu/boxFondo');
+                    echo $this->renderElement('menu/boxAdmin');
+                    echo $this->renderElement('menu/boxLogin');
+                    echo $this->renderElement('menu/boxSoporteTecnico');
                 ?>
                 </div>
 
