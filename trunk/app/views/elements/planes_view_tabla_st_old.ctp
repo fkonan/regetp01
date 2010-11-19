@@ -61,7 +61,7 @@
                     ?>
 
         <tr id="fila_plan_<?= $anio['ciclo_id'].'_'.$anio['anio']?>" <?php echo $class;?>>
-            <td><?php echo @$anio['EstructuraPlanesAnio']['nro_anio']."º";?></td>
+            <td><?php echo @$anio['EstructuraPlanesAnio']['alias'];?></td>
             <td><?php echo $this->requestAction('/Etapas/dame_nombre/'.$anio['etapa_id']);?></td>
             <td><?php echo  empty($anio['matricula'])?'-':$anio['matricula'];
             $tot_matricula += $anio['matricula']; ?></td>
