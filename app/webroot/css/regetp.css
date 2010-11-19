@@ -351,6 +351,11 @@ ul, li {
 .menu_body li.alt{
 }
 
+.menu_body .separador {
+    border: 1px solid #DBEBF6;
+    height: 0px;
+}
+
 
 /**
 * BOX LOGIN

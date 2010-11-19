@@ -2,7 +2,7 @@
 class SugerenciasController extends AppController {
 
 	var $name = 'Sugerencias';
-	var $helpers = array('Html', 'Form');
+	var $helpers = array('Html', 'Form', 'Text', 'Time');
 
 	function index() {
 		$this->Sugerencia->recursive = 0;
