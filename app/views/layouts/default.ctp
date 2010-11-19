@@ -103,9 +103,21 @@ header("Expires: Mon, 17 Dec 2007 00:00:00 GMT"); // Date in the past
 
 
     <body>
-        <? if ($_SERVER['HTTP_HOST']=='localhost') {?>
+        <?
+        if ($_SERVER['HTTP_HOST']=='localhost') {
+
+            include_once(APP_DIR . "/config/frases.php");
+                $keyoftheday = (date('j') * date('n')) % (count($frasesValle)-1);
+        ?>
         <div style="background-color: red; height: 20px; text-align: center">MODO LOCALHOST</div>
-        
+        <div style="background-color: #DBEBF6; border:1px solid white; font-size:9pt; height: 20px; text-align: center">Frase Valle del día
+                <?=$html->image('quote.png', array(
+                                'style'=>'vertical-align:middle;',
+                                'alt'=> 'Frases Valle del día',
+                                'border'=>"0",
+                                ))?>
+            <?=$frasesValle[$keyoftheday]?>
+        </div>
         <? }?>
 
 
