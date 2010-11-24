@@ -179,7 +179,7 @@ class DepuradoresController extends AppController {
 		$instit = $this->Plan->Instit->find('first',array('conditions'=>array('Instit.id'=>$this->data['Instit']['id'])));
 		$this->data['Instit']['nombre'] = $instit['Instit']['nombre_completo'];
 
-		$sectores = $this->Plan->Sector->find('list',array('order'=>'Sector.name'));
+		$sectores = $this->Plan->Titulo->Sector->find('list',array('order'=>'Sector.name'));
 		$sectores[0]="SIN DATOS";
 		$this->set('sectores',$sectores);
 
@@ -192,11 +192,11 @@ class DepuradoresController extends AppController {
 		/***********************************/
 		/*           Sugerencia            */
 		/***********************************/
-		$sector_sug = $this->Plan->Sector->find('first',array('conditions'=>array('name'=>$this->data['Plan']['sector'])));
+		$sector_sug = $this->Plan->Titulo->Sector->find('first',array('conditions'=>array('name'=>$this->data['Plan']['sector'])));
 		$sector_sug = ($sector_sug['Sector']['id']!="")?$sector_sug['Sector']['id']:'0';
 		$this->set('sector_sug',$sector_sug);
 			
-		$subsectores = $this->Plan->Subsector->con_sector('list',$sector_sug);
+		$subsectores = $this->Plan->Titulo->Subsector->con_sector('list',$sector_sug);
 		$this->set('subsectores',$subsectores);
 	}
 	
@@ -316,11 +316,11 @@ class DepuradoresController extends AppController {
             $instit = $this->Plan->Instit->find('first',array('conditions'=>array('Instit.id'=>$this->data['Instit']['id'])));
             $this->data['Instit']['nombre'] = $instit['Instit']['nombre_completo'];
 
-            $sectores = $this->Plan->Sector->find('list',array('order'=>'Sector.name'));
+            $sectores = $this->Plan->Titulo->Sector->find('list',array('order'=>'Sector.name'));
 
             $condicion_sec = array();
             
-            $subsectoreslist = $this->Plan->Subsector->con_sector('list',$sec_id);
+            $subsectoreslist = $this->Plan->Titulo->Subsector->con_sector('list',$sec_id);
 
             $this->set(compact('sectores','subsectoreslist'));
             $this->set('falta_depurar',$total);
@@ -335,8 +335,8 @@ class DepuradoresController extends AppController {
             $sector_sug['Sector']['id'] = "";
             $subsector_sug['Subsector']['id'] = "";
             if(isset($this->data['Plan'])) {
-                $sector_sug = $this->Plan->Sector->find('first',array('conditions'=>array('Sector.id'=>$this->data['Plan']['sector_id'])));
-                $subsector_sug = $this->Plan->Subsector->find('first',array('conditions'=>array('Subsector.id'=>$this->data['Plan']['subsector_id'])));
+                $sector_sug = $this->Plan->Titulo->Sector->find('first',array('conditions'=>array('Sector.id'=>$this->data['Plan']['sector_id'])));
+                $subsector_sug = $this->Plan->Titulo->Subsector->find('first',array('conditions'=>array('Subsector.id'=>$this->data['Plan']['subsector_id'])));
             }
 
             $this->data['Plan']['instit_activa'] = $instit_activa;
@@ -347,7 +347,7 @@ class DepuradoresController extends AppController {
             $subsector_sug = ($subsector_sug['Subsector']['id']!="")?$subsector_sug['Subsector']['id']:'0';
             $this->set('subsector_sug',$subsector_sug);
 
-            $subsectores = $this->Plan->Subsector->con_sector('list',$sector_sug);
+            $subsectores = $this->Plan->Titulo->Subsector->con_sector('list',$sector_sug);
             $this->set('subsectores',$subsectores);
         }
 
@@ -431,7 +431,7 @@ class DepuradoresController extends AppController {
         )));
 
 
-        $orientaciones = $this->Instit->Plan->Sector->Orientacion->find('list');
+        $orientaciones = $this->Instit->Plan->Titulo->Sector->Orientacion->find('list');
 
 
         $jurisdicciones = $this->Instit->Jurisdiccion->find('list');

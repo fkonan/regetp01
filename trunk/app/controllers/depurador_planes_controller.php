@@ -562,8 +562,8 @@ class DepuradorPlanesController extends AppController {
         $this->set('instit',$instit['Instit']);
 
         $titulos = $this->Plan->Titulo->find('list',array('conditions'=> array('Titulo.oferta_id'=>3)));
-        $sectores = $this->Plan->Sector->find('list',array('order'=>'Sector.name'));
-        //$subsectores = $this->Plan->Subsector->con_sector('list',array('conditions'=> array('Subsector.sector_id'=>5)));
+        $sectores = $this->Plan->Titulo->Sector->find('list',array('order'=>'Sector.name'));
+        //$subsectores = $this->Plan->Titulo->Subsector->con_sector('list',array('conditions'=> array('Subsector.sector_id'=>5)));
         $ciclos = $this->Plan->Anio->Ciclo->find('list');
 
 

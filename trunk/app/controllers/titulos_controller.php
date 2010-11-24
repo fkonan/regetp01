@@ -378,15 +378,15 @@ class TitulosController extends AppController {
 
             $ofertas = $this->Plan->Oferta->find('list');
 
-            $this->Plan->Sector->order ='Sector.name';
-            $sectores = $this->Plan->Sector->find('list');
+            $this->Plan->Titulo->Sector->order ='Sector.name';
+            $sectores = $this->Plan->Titulo->Sector->find('list');
 
             $subsecConditions = array();
             if (!empty($this->data['FPlan']['sector_id'])) {
                 $subsecConditions = array('Subsector.sector_id'=>$this->data['FPlan']['sector_id']);
             }
-            $this->Plan->Subsector->order ='Subsector.name';
-            $subsectores = $this->Plan->Subsector->find('list', array('conditions'=>$subsecConditions));
+            $this->Plan->Titulo->Subsector->order ='Subsector.name';
+            $subsectores = $this->Plan->Titulo->Subsector->find('list', array('conditions'=>$subsecConditions));
 
             $this->Instit->Jurisdiccion->order = 'Jurisdiccion.name';
             $jurisdicciones = $this->Instit->Jurisdiccion->find('list');
