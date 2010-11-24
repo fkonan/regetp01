@@ -234,12 +234,12 @@ class InstitsController extends AppController {
         $this->Instit->Plan->Oferta->recursive = -1;
         $ofertas = $this->Instit->Plan->Oferta->find('list');
 
-        $this->Instit->Plan->Sector->recursive = -1;
-        $this->Instit->Plan->Sector->order ='Sector.name';
-        $sectores = $this->Instit->Plan->Sector->find('list');
+        $this->Instit->Plan->Titulo->Sector->recursive = -1;
+        $this->Instit->Plan->Titulo->Sector->order ='Sector.name';
+        $sectores = $this->Instit->Plan->Titulo->Sector->find('list');
 
-        $this->Instit->Plan->Subsector->order ='Subsector.name';
-        $subsectores = $this->Instit->Plan->Subsector->find('list');
+        $this->Instit->Plan->Titulo->Subsector->order ='Subsector.name';
+        $subsectores = $this->Instit->Plan->Titulo->Subsector->find('list');
 
         $this->Instit->Claseinstit->recursive = -1;
         $this->Instit->Claseinstit->order = 'Claseinstit.name';
@@ -597,8 +597,8 @@ class InstitsController extends AppController {
         if(!empty($this->passedArgs['Plan.sector_id'])) {
             $this->Instit->asociarPlan = true;
             $this->paginate['conditions']['Plan.sector_id'] = $this->passedArgs['Plan.sector_id'];
-            $this->Instit->Plan->Sector->recursive = -1;
-            $sector = $this->Instit->Plan->Sector->findById($this->passedArgs['Plan.sector_id']);
+            $this->Instit->Plan->Titulo->Sector->recursive = -1;
+            $sector = $this->Instit->Plan->Titulo->Sector->findById($this->passedArgs['Plan.sector_id']);
             $array_condiciones['Sector'] = $sector['Sector']['name'];
             $url_conditions['Plan.sector_id'] = $this->passedArgs['Plan.sector_id'];
         }
@@ -612,8 +612,8 @@ class InstitsController extends AppController {
         if(!empty($this->passedArgs['Plan.subsector_id'])) {
             $this->Instit->asociarPlan = true;
             $this->paginate['conditions']['Plan.subsector_id'] = $this->passedArgs['Plan.subsector_id'];
-            $this->Instit->Plan->Subsector->recursive = -1;
-            $sector = $this->Instit->Plan->Subsector->findById($this->passedArgs['Plan.subsector_id']);
+            $this->Instit->Plan->Titulo->Subsector->recursive = -1;
+            $sector = $this->Instit->Plan->Titulo->Subsector->findById($this->passedArgs['Plan.subsector_id']);
             $array_condiciones['Subsector'] = $sector['Subsector']['name'];
             $url_conditions['Plan.subsector_id'] = $this->passedArgs['Plan.subsector_id'];
         }

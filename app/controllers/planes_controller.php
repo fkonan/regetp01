@@ -331,8 +331,8 @@ class PlanesController extends AppController {
         $this->set(compact('ofertas'));
 
         $titulos = $this->Plan->Titulo->find('list');
-        $sectores = $this->Plan->Sector->find('list',array('order'=>'Sector.name'));
-        $subsectores = $this->Plan->Subsector->con_sector('list');
+        $sectores = $this->Plan->Titulo->Sector->find('list',array('order'=>'Sector.name'));
+        $subsectores = $this->Plan->Titulo->Subsector->con_sector('list');
         $ciclos = $this->Plan->Anio->Ciclo->find('list');
 
 
@@ -377,12 +377,12 @@ class PlanesController extends AppController {
         $titulos = $this->Plan->Titulo->find('list', array('conditions'=>array('oferta_id'=>$this->data['Plan']['oferta_id'])));
         $ofertas = $this->Plan->Oferta->find('list');
 
-        $sectores = $this->Plan->Sector->find('list',array('order'=>'Sector.name'));
+        $sectores = $this->Plan->Titulo->Sector->find('list',array('order'=>'Sector.name'));
 
         if(!isset($this->data['Plan']['sector_id'])) {
             $this->data['Plan']['sector_id'] = 0;
         }
-        $subsectores = $this->Plan->Subsector->con_sector('list',$this->data['Plan']['sector_id']);
+        $subsectores = $this->Plan->Titulo->Subsector->con_sector('list',$this->data['Plan']['sector_id']);
         $ciclos = $this->Plan->Anio->Ciclo->find('list');
 
         $estructuraPlanesGrafico = $this->Plan->EstructuraPlan->JurisdiccionesEstructuraPlan->find('all',array(
