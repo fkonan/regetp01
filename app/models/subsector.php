@@ -18,6 +18,7 @@ class Subsector extends AppModel {
 	);
 
 	var $hasMany = array(
+                        'Sectores_titulo',
 			'Plan' => array('className' => 'Plan',
 								'foreignKey' => 'subsector_id',
 								'dependent' => false,
@@ -31,6 +32,25 @@ class Subsector extends AppModel {
 								'counterQuery' => ''
 			)
 	);
+
+
+        var $hasAndBelongsToMany = array(
+            'Titulo' =>
+                array('className'             => 'Titulo',
+                     'joinTable'              => 'subsectores_titulos',
+                     'foreignKey'             => 'subsector_id',
+                     'associationForeignKey'  => 'titulo_id',
+                     'with'                   => '',
+                     'conditions'             => '',
+                     'order'                  => '',
+                     'limit'                  => '',
+                     'unique'                 => false,
+                     'finderQuery'            => '',
+                     'deleteQuery'            => '',
+                     'insertQuery'            => ''
+                ),
+             );
+
 	
 	
 	/**

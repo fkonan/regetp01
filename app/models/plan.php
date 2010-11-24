@@ -12,8 +12,8 @@ class Plan extends AppModel {
 	var $belongsTo = array( 
 			'Instit' ,
 			'Oferta',
-			'Sector',
-			'Subsector',
+//			'Sector',
+//			'Subsector',
 			'Titulo',
                         'EstructuraPlan'
             );
