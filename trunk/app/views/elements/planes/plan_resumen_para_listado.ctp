@@ -12,7 +12,6 @@ if (!empty($plan['Plan'])) {
 ?>
 
 <div class="plan_item <?php echo $class?>">
-    
     <div class="plan_title">
         <span class="plan_mas_info btn-ir">
         <?php

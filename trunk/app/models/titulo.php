@@ -21,7 +21,38 @@ class Titulo extends AppModel {
 	);
 	
 	
-	var $hasMany = array('Plan');
+	var $hasMany = array('Plan', 'Sectores_titulo');
+
+        var $hasAndBelongsToMany = array(
+            'Sector' =>
+                array('className'             => 'Sector',
+                     'joinTable'              => 'sectores_titulos',
+                     'foreignKey'             => 'titulo_id',
+                     'associationForeignKey'  => 'sector_id',
+                     'with'                   => '',
+                     'conditions'             => '',
+                     'order'                  => '',
+                     'limit'                  => '',
+                     'unique'                 => false,
+                     'finderQuery'            => '',
+                     'deleteQuery'            => '',
+                     'insertQuery'            => ''
+                ),
+            'Subsector' =>
+                array('className'             => 'Subsector',
+                     'joinTable'              => 'ectores_titulos',
+                     'foreignKey'             => 'titulo_id',
+                     'associationForeignKey'  => 'subsector_id',
+                     'with'                   => '',
+                     'conditions'             => '',
+                     'order'                  => '',
+                     'limit'                  => '',
+                     'unique'                 => false,
+                     'finderQuery'            => '',
+                     'deleteQuery'            => '',
+                     'insertQuery'            => ''
+                )
+        );
 
 }
 ?>
