@@ -6,7 +6,8 @@ class TitulosController extends AppController {
         var $components = array('RequestHandler');
 
 	function index() {
-		$this->Titulo->recursive = 0;
+		$this->Titulo->recursive = 1;
+                debug($this->paginate());
 		$this->set('titulos', $this->paginate());
 	}
 
