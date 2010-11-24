@@ -6,13 +6,12 @@ class TitulosController extends AppController {
         var $components = array('RequestHandler');
 
 	function index() {
-		$this->Titulo->recursive = 1;
-                debug($this->paginate());
+		$this->Titulo->recursive = 0;
 		$this->set('titulos', $this->paginate());
 	}
 
 
-        function list_por_oferta_id($oferta_id = 0){
+        function list_por_oferta_id($oferta_id = 0) {
             $conditions = array();
             if (!empty($oferta_id)) {
                 $conditions = array('Titulo.oferta_id'=>$oferta_id);

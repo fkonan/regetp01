@@ -301,12 +301,12 @@ class InstitsController extends AppController {
         $this->Instit->Plan->Oferta->recursive = -1;
         $ofertas = $this->Instit->Plan->Oferta->find('list');
 
-        $this->Instit->Plan->Sector->recursive = -1;
-        $this->Instit->Plan->Sector->order ='Sector.name';
-        $sectores = $this->Instit->Plan->Sector->find('list');
+        $this->Instit->Plan->Titulo->Sector->recursive = -1;
+        $this->Instit->Plan->Titulo->Sector->order ='Sector.name';
+        $sectores = $this->Instit->Plan->Titulo->Sector->find('list');
 
-        $this->Instit->Plan->Subsector->order ='Subsector.name';
-        $subsectores = $this->Instit->Plan->Subsector->find('list');
+        $this->Instit->Plan->Titulo->Subsector->order ='Subsector.name';
+        $subsectores = $this->Instit->Plan->Titulo->Subsector->find('list');
 
         $this->Instit->Claseinstit->recursive = -1;
         $this->Instit->Claseinstit->order = 'Claseinstit.name';
