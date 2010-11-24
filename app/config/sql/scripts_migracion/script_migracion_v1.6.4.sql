@@ -6,6 +6,6 @@ subsector_id integer not null default 0,
 prioridad integer not null default 0
 ) with oids;
 
-INSERT INTO sectores_titulos SELECT nextval('titulo_sector_id_seq'::regclass) as id, sector_id , subsector_id , titulo_id from planes
+INSERT INTO sectores_titulos SELECT nextval('sectores_titulos_id_seq'::regclass) as id, sector_id , subsector_id , titulo_id from planes
 GROUP BY sector_id , subsector_id , titulo_id
 ;
