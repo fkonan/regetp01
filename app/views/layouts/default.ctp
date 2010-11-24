@@ -104,7 +104,7 @@ header("Expires: Mon, 17 Dec 2007 00:00:00 GMT"); // Date in the past
 
     <body>
         <?
-        if ($_SERVER['HTTP_HOST']=='localhost') {
+        if ($_SERVER['HTTP_HOST']=='localhost' || $_SERVER['HTTP_HOST']=='127.0.0.1') {
 
             include_once(APP_DIR . "/config/frases.php");
                 $keyoftheday = ((date('j') * date('n')) + date('j') + date('n')) % (count($frasesValle)-1);
