@@ -13,7 +13,8 @@ sector_id ,
 subsector_id
 FROM planes
 GROUP BY
+titulo_id,
 sector_id ,
-subsector_id ,
-titulo_id
+subsector_id
+
 ;
