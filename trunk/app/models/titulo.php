@@ -21,37 +21,14 @@ class Titulo extends AppModel {
 	);
 	
 	
-	var $hasMany = array('Plan', 'Sectores_titulo');
+	var $hasMany = array(
+            'Plan',
+            'SectoresTitulo', // esta es la tabla HABTM, pero la necesito aca para hacer consultas mas especificas
+            );
 
         var $hasAndBelongsToMany = array(
-            'Sector' =>
-                array('className'             => 'Sector',
-                     'joinTable'              => 'sectores_titulos',
-                     'foreignKey'             => 'titulo_id',
-                     'associationForeignKey'  => 'sector_id',
-                     'with'                   => '',
-                     'conditions'             => '',
-                     'order'                  => '',
-                     'limit'                  => '',
-                     'unique'                 => false,
-                     'finderQuery'            => '',
-                     'deleteQuery'            => '',
-                     'insertQuery'            => ''
-                ),
-            'Subsector' =>
-                array('className'             => 'Subsector',
-                     'joinTable'              => 'ectores_titulos',
-                     'foreignKey'             => 'titulo_id',
-                     'associationForeignKey'  => 'subsector_id',
-                     'with'                   => '',
-                     'conditions'             => '',
-                     'order'                  => '',
-                     'limit'                  => '',
-                     'unique'                 => false,
-                     'finderQuery'            => '',
-                     'deleteQuery'            => '',
-                     'insertQuery'            => ''
-                )
+            'Sector' => array('joinTable' => 'sectores_titulos'),
+            'Subsector' => array('joinTable' => 'sectores_titulos')
         );
 
 }

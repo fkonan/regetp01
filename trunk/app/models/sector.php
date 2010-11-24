@@ -27,22 +27,9 @@ class Sector extends AppModel {
 	var $belongsTo = array('Orientacion');
 
 
-         var $hasAndBelongsToMany = array(
-            'Titulo' =>
-                array('className'             => 'Titulo',
-                     'joinTable'              => 'sectores_titulos',
-                     'foreignKey'             => 'sector_id',
-                     'associationForeignKey'  => 'titulo_id',
-                     'with'                   => '',
-                     'conditions'             => '',
-                     'order'                  => '',
-                     'limit'                  => '',
-                     'unique'                 => false,
-                     'finderQuery'            => '',
-                     'deleteQuery'            => '',
-                     'insertQuery'            => ''
-                ),
-             );
+        var $hasAndBelongsToMany = array(
+            'Titulo' => array('joinTable' => 'sectores_titulos'),
+        );
 
 }
 ?>

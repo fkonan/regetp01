@@ -35,20 +35,7 @@ class Subsector extends AppModel {
 
 
         var $hasAndBelongsToMany = array(
-            'Titulo' =>
-                array('className'             => 'Titulo',
-                     'joinTable'              => 'subsectores_titulos',
-                     'foreignKey'             => 'subsector_id',
-                     'associationForeignKey'  => 'titulo_id',
-                     'with'                   => '',
-                     'conditions'             => '',
-                     'order'                  => '',
-                     'limit'                  => '',
-                     'unique'                 => false,
-                     'finderQuery'            => '',
-                     'deleteQuery'            => '',
-                     'insertQuery'            => ''
-                ),
+            'Titulo' => array('joinTable' => 'sectores_titulos'),
              );
 
 	
