@@ -1084,7 +1084,7 @@ class Instit extends AppModel {
 
             $planes = $this->Plan->find('all', array(
                     'conditions'=>array('Plan.instit_id'=>$instit_id),
-                    'contain'=>array('Sector')));
+                    'contain'=>array('Titulo.Sector')));
             $cantPlanes = count($planes);
 
             $ant = -1;
@@ -1207,7 +1207,7 @@ class Instit extends AppModel {
                 'contain' => array(
                     'Plan' => array(
                         'conditions' => $condsPlan,
-                        'Sector',
+                        'Titulo.Sector',
                         'EstructuraPlan.Etapa'
                     )
                 ),
