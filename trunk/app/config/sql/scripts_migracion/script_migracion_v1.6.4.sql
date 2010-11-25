@@ -7,14 +7,17 @@ prioridad integer not null default 0
 ) with oids;
 
 INSERT INTO sectores_titulos
-SELECT nextval('sectores_titulos_id_seq'::regclass) as id,
+(titulo_id, sector_id, subsector_id, prioridad)
+SELECT
 titulo_id ,
 sector_id ,
-subsector_id
+subsector_id,
+0 prioridad
 FROM planes
+Where titulo_id != 0
 GROUP BY
 titulo_id,
 sector_id ,
 subsector_id
-
+order by titulo_id
 ;
