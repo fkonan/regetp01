@@ -250,7 +250,7 @@ echo $html->css('jquery.autocomplete.css');
         ));
 
 
-        echo $form->input('Plan.sector_id',array(
+        echo $form->input('Sector.id',array(
         'label'=>'Sector',
         'div'=>array('style'=>'float: left;  clear: left'),
         'style'=> 'display:inline;width:277px;vertical-align:bottom',
@@ -258,18 +258,19 @@ echo $html->css('jquery.autocomplete.css');
         'empty'=>'Seleccione'
         ));
 
-        echo $form->input('Plan.subsector_id',array(
+        echo $form->input('Subsector.id',array(
+            'type' => 'select',
         'label'=>'Subsector',
         'div'=>array('style'=>'float: left;  clear: none'),
         'style'=> 'display:inline;width:267px;vertical-align:bottom',
         'empty'=>'Seleccione',
         ));
 
-        echo $ajax->observeField('PlanSectorId',
+        echo $ajax->observeField('SectorId',
         array('url' => '/subsectores/ajax_select_subsector_form_por_sector',
-        'update'=>'PlanSubsectorId',
-        'loading'=>'jQuery("#PlanSubsectorId").attr("disabled","disabled");',
-        'complete'=>'jQuery("#PlanSubsectorId").removeAttr("disabled");',
+        'update'=>'SubsectorId',
+        'loading'=>'jQuery("#SubsectorId").attr("disabled","disabled");',
+        'complete'=>'jQuery("#SubsectorId").removeAttr("disabled");',
         'onChange'=>true
         ));
 

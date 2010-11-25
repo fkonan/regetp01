@@ -717,58 +717,101 @@ class Instit extends AppModel {
 	
 	function paginateCount($conditions = null, $recursive = 0){
   	
- 		if ($this->asociarPlan){
-  			$this->getPagFields();
-	  		$this->bindModel(array('hasOne' => array(
-        	                      'Plan' => array(
-                                     'className'  => 'Plan',
-                                     'foreignKey' => 'instit_id',
-                                                 ),
-                                               ),
-                              )
-   	                    );
-	        $selectFields = $this->getPagFields();
-        	$extra = array('group' => $selectFields,'fields' => $selectFields);  	                    
-        	$parameters = compact('conditions');
-        	$this->recursive = 0;
-        	return count($this->find('all', array_merge($parameters, $extra)));
-  		} else {
-            $parameters = compact('conditions');
-			if ($recursive != $this->recursive) {
-				$parameters['recursive'] = $recursive;
-			}
-			$extra = array();
-			return $this->find('count', array_merge($parameters, $extra));
-  		}        	
+            if ($this->asociarPlan){
+                
+                $parameters = $this->__asociarPlanParamsSetup(compact('conditions', 'fields', 'order', 'limit', 'page'));
+
+                if ($recursive != $this->recursive) {
+                    $parameters['recursive'] = $recursive;
+                }
+                
+        	return $this->find('count', $parameters);
+            } else {
+                return $this->find('count', $conditions);
+            }
     }
 
-    
-	function paginate($conditions = null, $fields = null, $order = null, $limit = null, $page = 1, $recursive = null, $tieneHasMany = false) {
-	
-		if ($this->asociarPlan){
-			$this->bindModel(array('hasOne' => array('Plan' => array('className'  => 'Plan',
-                                                                 'foreignKey' => 'instit_id',
-                                                                ),),));
 
-	        $selectFields = $this->getPagFields();
-    	    $extra = array('group' => $selectFields,'fields' => $selectFields);
-			$parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
+	function paginate($conditions = null, $fields = null, $order = null, $limit = null, $page = 1, $recursive = null, $extra = array())
+        {
+            if ($this->asociarPlan) {
+                $parametersAux = array_merge(compact('conditions', 'fields', 'order', 'limit', 'page'), $extra);
+                $parameters = $this->__asociarPlanParamsSetup($parametersAux);
 
-			if ($recursive != $this->recursive){
-				$parameters['recursive'] = $recursive;
-    	    }
+                if ($recursive != $this->recursive) {
+                    $parameters['recursive'] = $recursive;
+                }
 
-			return $this->find('all', array_merge($parameters, $extra));
+        	return $this->find('all', $parameters);
 
-		} else {
-			$parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
-			if ($recursive != $this->recursive) {
-				$parameters['recursive'] = $recursive;
-			}
-			$extra = array();
-			return $this->find('all', array_merge($parameters, $extra));
-		}
-	}    	
+            } else {
+                $parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
+
+                if ($recursive != $this->recursive) {
+                    $parameters['recursive'] = $recursive;
+                }
+                return $this->find('all', array_merge($parameters, $extra));
+            }
+        }
+
+        /**
+         * Esta funcion simplemente inicializa los arrays para luego
+         * hacer la busqueda cuando seteo asociarPlan en true
+         * @return array
+         */
+        function __asociarPlanParamsSetup($parameters = array()) {
+//                $order = array();
+//                if (!empty($parameters['order'])) {
+//                    $order = $parameters['order'];
+//                }
+//
+                //$parameters['fields'] = array('DISTINCT Instit.id');
+                
+                $parameters['contains'] = array(
+                    'Plan' => array(
+                        'Titulo' => array(
+                            'Sector', 'Subsector'
+                        ),
+                        'Oferta',
+                    )
+                );
+                $parameters['joins'] = array(
+                    array(
+                        'table' => 'planes',
+                        'type' => 'left',
+                        'alias' => 'Plan',
+                        'conditions' => array('Plan.instit_id = Instit.id'),
+                    ),
+                    array(
+                        'table' => 'titulos',
+                        'type' => 'left',
+                        'alias' => 'Titulo',
+                        'conditions' => array('Titulo.id = Plan.titulo_id'),
+                    ),
+                    array(
+                        'table' => 'sectores_titulos',
+                        'alias' => 'SectoresTitulo',
+                        'type' => 'left',
+                        'conditions' => array('Titulo.id = SectoresTitulo.titulo_id')
+                    ),
+                    array(
+                        'table' => 'subsectores',
+                        'alias' => 'Subsector',
+                        'type' => 'left',
+                        'conditions' => array('SectoresTitulo.subsector_id = Subsector.id')
+                    ),
+                    array(
+                        'table' => 'sectores',
+                        'alias' => 'Sector',
+                        'type' => 'left',
+                        'conditions' => array('SectoresTitulo.sector_id = Sector.id')
+                    ),
+
+                );
+                
+                
+            return $parameters;
+        }
   	
 
    /**
