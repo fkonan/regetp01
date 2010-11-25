@@ -17,6 +17,7 @@
 		echo $form->input('oferta_id');
 	?>
         <h2>Sectores/Subsectores</h2>
+        <cite>Agregue los Sectores/Subsectores correspondientes y seleccione el prioritario</cite>
         <div id="sectores">
             <?php
             foreach($this->data['SectoresTitulo'] as $sector_subsector){
