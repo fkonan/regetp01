@@ -3,7 +3,7 @@ class InstitsController extends AppController {
 
     var $name = 'Instits';
     var $helpers = array('Html','Form','Ajax','Cache');
-    var $paginate = array('order'=>array('Instit.cue' => 'asc'),'limit'=>'10');
+    //var $paginate = array('order'=>array('Instit.cue' => 'asc'),'limit'=>'10');
     var $components = array('RequestHandler');
 
 
@@ -373,11 +373,11 @@ class InstitsController extends AppController {
             $q = utf8_decode(strtolower($this->passedArgs['busqueda_libre']));
             if(is_numeric($q)){
                 $q = (int) $q;
-                $this->paginate['conditions'] = array("to_char(cue*100+anexo, 'FM999999999FM') SIMILAR TO ?" => "%". $q ."%");
+                $this->paginate['Instit']['conditions'] = array("to_char(cue*100+anexo, 'FM999999999FM') SIMILAR TO ?" => "%". $q ."%");
             }
             else{
                 //debug(convertir_para_busqueda_avanzada($q)); die();
-                $this->paginate['conditions'] = array("(to_ascii(lower(Tipoinstit.name)) || ' n ' || to_ascii(lower(Instit.nroinstit)) || ' ' || to_ascii(lower(Instit.nombre))) SIMILAR TO ?" => convertir_para_busqueda_avanzada($q));
+                $this->paginate['Instit']['conditions'] = array("(to_ascii(lower(Tipoinstit.name)) || ' n ' || to_ascii(lower(Instit.nroinstit)) || ' ' || to_ascii(lower(Instit.nombre))) SIMILAR TO ?" => convertir_para_busqueda_avanzada($q));
             }
         }
 
@@ -416,7 +416,7 @@ class InstitsController extends AppController {
              $this->passedArgs['nombre_completo'] = utf8_encode($this->data['Instit']['nombre_completo']);
         }
         if(!empty($this->passedArgs['nombre_completo'])) {
-            $this->paginate['conditions'][
+            $this->paginate['Instit']['conditions'][
                             "to_ascii(lower(Tipoinstit.name))||' n '||".
                             "to_ascii(lower(Instit.nroinstit))||' '||".
                             "to_ascii(lower(Instit.nombre)) SIMILAR TO ?"] = array(convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['nombre_completo'])));
@@ -431,7 +431,7 @@ class InstitsController extends AppController {
             $this->passedArgs['nroinstit'] = $this->data['Instit']['nroinstit'];
         }
         if(!empty($this->passedArgs['nroinstit'])) {
-                $this->paginate['conditions']['lower(Instit.nroinstit) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['nroinstit'])));
+                $this->paginate['Instit']['conditions']['lower(Instit.nroinstit) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['nroinstit'])));
                 $array_condiciones['N° de Institución'] = utf8_decode($this->passedArgs['nroinstit']);
                 $url_conditions['nroinstit'] = utf8_decode($this->passedArgs['nroinstit']);
         }
@@ -443,7 +443,7 @@ class InstitsController extends AppController {
             $this->passedArgs['jurisdiccion_id'] = $this->data['Instit']['jurisdiccion_id'];
         }
         if(!empty($this->passedArgs['jurisdiccion_id'])) {
-            $this->paginate['conditions']['Instit.jurisdiccion_id'] = $this->passedArgs['jurisdiccion_id'];
+            $this->paginate['Instit']['conditions']['Instit.jurisdiccion_id'] = $this->passedArgs['jurisdiccion_id'];
             $this->Instit->Jurisdiccion->recursive = -1;
             $aux = $this->Instit->Jurisdiccion->findById($this->passedArgs['jurisdiccion_id']);
             $array_condiciones['Jurisdicción'] = $aux['Jurisdiccion']['name'];
@@ -457,7 +457,7 @@ class InstitsController extends AppController {
             $this->passedArgs['tipoinstit_id'] = $this->data['Instit']['tipoinstit_id'];
         }
         if(!empty($this->passedArgs['tipoinstit_id'])) {
-            $this->paginate['conditions']['Instit.tipoinstit_id'] = $this->passedArgs['tipoinstit_id'];
+            $this->paginate['Instit']['conditions']['Instit.tipoinstit_id'] = $this->passedArgs['tipoinstit_id'];
             $this->Instit->Tipoinstit->recursive = -1;
             $aux = $this->Instit->Tipoinstit->findById($this->passedArgs['tipoinstit_id']);
             $array_condiciones['Tipo Institución'] = $aux['Tipoinstit']['name'];
@@ -471,7 +471,7 @@ class InstitsController extends AppController {
             $this->passedArgs['nombre'] = utf8_encode($this->data['Instit']['nombre']);
         }
         if(!empty($this->passedArgs['nombre'])) {
-                $this->paginate['conditions']['to_ascii(lower(Instit.nombre)) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['nombre'])));
+                $this->paginate['Instit']['conditions']['to_ascii(lower(Instit.nombre)) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['nombre'])));
                 $nombre_del_campo = (empty($array_condiciones['Nombre']))?'Nombre':'Nombre del Estab.';
                 $array_condiciones[$nombre_del_campo] = utf8_decode($this->passedArgs['nombre']);
                 $url_conditions['nombre'] = utf8_decode($this->passedArgs['nombre']);
@@ -484,7 +484,7 @@ class InstitsController extends AppController {
             $this->passedArgs['direccion'] = utf8_encode($this->data['Instit']['direccion']);
         }
         if(!empty($this->passedArgs['direccion'])) {
-            $this->paginate['conditions']['lower(to_ascii(Instit.direccion)) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['direccion'])));
+            $this->paginate['Instit']['conditions']['lower(to_ascii(Instit.direccion)) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['direccion'])));
             $array_condiciones['Domicilio'] = utf8_decode($this->passedArgs['direccion']);
             $url_conditions['direccion'] = utf8_decode($this->passedArgs['direccion']);
         }
@@ -496,7 +496,7 @@ class InstitsController extends AppController {
             $this->passedArgs['Departamento.id'] = $this->data['Departamento']['id'];
         }
         if(!empty($this->passedArgs['Departamento.id'])) {
-            $this->paginate['conditions']['Departamento.id'] = array($this->passedArgs['Departamento.id']);
+            $this->paginate['Instit']['conditions']['Departamento.id'] = array($this->passedArgs['Departamento.id']);
             $this->Instit->Departamento->recursive = -1;
             $instit = $this->Instit->Departamento->findById($this->passedArgs['Departamento.id']);
             $array_condiciones['Departamento'] = $instit['Departamento']['name'];
@@ -510,7 +510,7 @@ class InstitsController extends AppController {
             $this->passedArgs['Localidad.id'] = $this->data['Localidad']['id'];
         }
         if(!empty($this->passedArgs['Localidad.id'])) {
-            $this->paginate['conditions']['Localidad.id'] = array($this->passedArgs['Localidad.id']);
+            $this->paginate['Instit']['conditions']['Localidad.id'] = array($this->passedArgs['Localidad.id']);
             $this->Instit->Localidad->recursive = -1;
             $instit = $this->Instit->Localidad->findById($this->passedArgs['Localidad.id']);
             $array_condiciones['Localidad'] = $instit['Localidad']['name'];
@@ -524,7 +524,7 @@ class InstitsController extends AppController {
             $this->passedArgs['gestion_id'] = $this->data['Instit']['gestion_id'];
         }
         if(!empty($this->passedArgs['gestion_id'])) {
-            $this->paginate['conditions']['Instit.gestion_id'] = $this->passedArgs['gestion_id'];
+            $this->paginate['Instit']['conditions']['Instit.gestion_id'] = $this->passedArgs['gestion_id'];
             $this->Instit->Gestion->recursive = -1;
             $aux = $this->Instit->Gestion->findById($this->passedArgs['gestion_id']);
             $array_condiciones['Ámbito de Gestión'] = $aux['Gestion']['name'];
@@ -538,7 +538,7 @@ class InstitsController extends AppController {
             $this->passedArgs['dependencia_id'] = $this->data['Instit']['dependencia_id'];
         }
         if(isset($this->passedArgs['dependencia_id'])) {
-                $this->paginate['conditions']['Instit.dependencia_id'] = $this->passedArgs['dependencia_id'];
+                $this->paginate['Instit']['conditions']['Instit.dependencia_id'] = $this->passedArgs['dependencia_id'];
                 $this->Instit->Dependencia->recursive = -1;
                 $aux = $this->Instit->Dependencia->findById($this->passedArgs['dependencia_id']);
                 $array_condiciones['Dependencia'] = $aux['Dependencia']['name'];
@@ -562,7 +562,7 @@ class InstitsController extends AppController {
                     break; // es el valor empty. O sea, buscar por todos
                 case 0: //inactivas
                 case 1: //activas
-                    $this->paginate['conditions']['Instit.activo'] = $this->passedArgs['activo'];
+                    $this->paginate['Instit']['conditions']['Instit.activo'] = $this->passedArgs['activo'];
                     $aux = $this->passedArgs['activo']? 'Si':'No';
                     $array_condiciones['Ingresada al RFIETP'] = $aux;
                     $url_conditions['activo'] = $this->passedArgs['activo'];
@@ -581,7 +581,7 @@ class InstitsController extends AppController {
         }
         if(!empty($this->passedArgs['Plan.oferta_id'])) {
             $this->Instit->asociarPlan = true;
-            $this->paginate['conditions']['Plan.oferta_id'] = $this->passedArgs['Plan.oferta_id'];
+            $this->paginate['Instit']['conditions']['Plan.oferta_id'] = $this->passedArgs['Plan.oferta_id'];
             $this->Instit->Plan->Oferta->recursive = -1;
             $oferta = $this->Instit->Plan->Oferta->findById($this->passedArgs['Plan.oferta_id']);
             $array_condiciones['Con Oferta'] = $oferta['Oferta']['name'];
@@ -591,31 +591,31 @@ class InstitsController extends AppController {
         /**
          *          SECTOR
          */
-        if(!empty($this->data['Plan']['sector_id'])) {
-            $this->passedArgs['Plan.sector_id'] = $this->data['Plan']['sector_id'];
+        if(!empty($this->data['Sector']['id'])) {
+            $this->passedArgs['Sector.id'] = $this->data['Sector']['id'];
         }
-        if(!empty($this->passedArgs['Plan.sector_id'])) {
+        if(!empty($this->passedArgs['Sector.id'])) {
             $this->Instit->asociarPlan = true;
-            $this->paginate['conditions']['Plan.sector_id'] = $this->passedArgs['Plan.sector_id'];
+            $this->paginate['Instit']['conditions']['Sector.id'] = $this->passedArgs['Sector.id'];
             $this->Instit->Plan->Titulo->Sector->recursive = -1;
-            $sector = $this->Instit->Plan->Titulo->Sector->findById($this->passedArgs['Plan.sector_id']);
+            $sector = $this->Instit->Plan->Titulo->Sector->findById($this->passedArgs['Sector.id']);
             $array_condiciones['Sector'] = $sector['Sector']['name'];
-            $url_conditions['Plan.sector_id'] = $this->passedArgs['Plan.sector_id'];
+            $url_conditions['Sector.id'] = $this->passedArgs['Sector.id'];
         }
 
         /**
          *          SUBSECTOR
          */
-        if(!empty($this->data['Plan']['subsector_id'])) {
-            $this->passedArgs['Plan.subsector_id'] = $this->data['Plan']['subsector_id'];
+        if(!empty($this->data['Subsector']['id'])) {
+            $this->passedArgs['Subsector.id'] = $this->data['Subsector']['id'];
         }
-        if(!empty($this->passedArgs['Plan.subsector_id'])) {
+        if(!empty($this->passedArgs['Subsector.id'])) {
             $this->Instit->asociarPlan = true;
-            $this->paginate['conditions']['Plan.subsector_id'] = $this->passedArgs['Plan.subsector_id'];
+            $this->paginate['Instit']['conditions']['Subsector.id'] = $this->passedArgs['Subsector.id'];
             $this->Instit->Plan->Titulo->Subsector->recursive = -1;
-            $sector = $this->Instit->Plan->Titulo->Subsector->findById($this->passedArgs['Plan.subsector_id']);
+            $sector = $this->Instit->Plan->Titulo->Subsector->findById($this->passedArgs['Subsector.id']);
             $array_condiciones['Subsector'] = $sector['Subsector']['name'];
-            $url_conditions['Plan.subsector_id'] = $this->passedArgs['Plan.subsector_id'];
+            $url_conditions['Subsector.id'] = $this->passedArgs['Subsector.id'];
         }
 
         /**
@@ -626,7 +626,7 @@ class InstitsController extends AppController {
         }
         if(!empty($this->passedArgs['Plan.titulo_id'])) {
             $this->Instit->asociarPlan = true;
-            $this->paginate['conditions']['Plan.titulo_id'] = $this->passedArgs['Plan.titulo_id'];
+            $this->paginate['Instit']['conditions']['Plan.titulo_id'] = $this->passedArgs['Plan.titulo_id'];
 
             $this->Instit->Plan->Titulo->recursive = -1;
             $titulo = $this->Instit->Plan->Titulo->findById($this->passedArgs['Plan.titulo_id']);
@@ -642,7 +642,7 @@ class InstitsController extends AppController {
         }
         if(!empty($this->passedArgs['Instit.orientacion_id'])) {
             if($this->passedArgs['Instit.orientacion_id'] != '') {
-                $this->paginate['conditions']['Instit.orientacion_id'] = $this->passedArgs['Instit.orientacion_id'];
+                $this->paginate['Instit']['conditions']['Instit.orientacion_id'] = $this->passedArgs['Instit.orientacion_id'];
                 $this->Instit->Orientacion->recursive = -1;
                 $orientacion = $this->Instit->Orientacion->findById( $this->passedArgs['Instit.orientacion_id']);
                 $array_condiciones['Orientación'] = $orientacion['Orientacion']['name'];
@@ -658,7 +658,7 @@ class InstitsController extends AppController {
         }
         if(!empty($this->passedArgs['Plan.norma'])) {
                 $this->Instit->asociarPlan = true;
-                $this->paginate['conditions']['to_ascii(lower(Plan.norma)) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['Plan.norma'])));
+                $this->paginate['Instit']['conditions']['to_ascii(lower(Plan.norma)) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['Plan.norma'])));
                 $array_condiciones['Norma'] = utf8_decode($this->passedArgs['Plan.norma']);
                 $url_conditions['Plan.norma'] = utf8_decode($this->passedArgs['Plan.norma']);
         }
@@ -671,7 +671,7 @@ class InstitsController extends AppController {
         }
 
         if(!empty($this->passedArgs['claseinstit_id'])) {
-            $this->paginate['conditions']['Instit.claseinstit_id'] = $this->passedArgs['claseinstit_id'];
+            $this->paginate['Instit']['conditions']['Instit.claseinstit_id'] = $this->passedArgs['claseinstit_id'];
             $this->Instit->Claseinstit->id = $this->passedArgs['claseinstit_id'];
             $array_condiciones['Tipo de Institución de ETP'] = $this->Instit->Claseinstit->field('name');
             $url_conditions['claseinstit_id'] = $this->passedArgs['claseinstit_id'];
@@ -685,7 +685,7 @@ class InstitsController extends AppController {
         }
 
         if(!empty($this->passedArgs['etp_estado_id']) && $this->passedArgs['etp_estado_id'] != '') {
-            $this->paginate['conditions']['Instit.etp_estado_id'] = $this->passedArgs['etp_estado_id'];
+            $this->paginate['Instit']['conditions']['Instit.etp_estado_id'] = $this->passedArgs['etp_estado_id'];
             $this->Instit->EtpEstado->id = $this->passedArgs['etp_estado_id'];
             $array_condiciones['Relación con ETP'] = $this->Instit->EtpEstado->field('name');
             $url_conditions['etp_estado_id'] = $this->passedArgs['etp_estado_id'];
@@ -699,8 +699,14 @@ class InstitsController extends AppController {
         $this->Instit->recursive = 1;//para alivianar la carga del server
         //
         //datos de paginacion
-        $this->paginate['order'] = array('Instit.cue ASC, Instit.anexo ASC');
-        $pagin = $this->paginate();
+        
+        $this->paginate['Instit']['order'] = array('Instit.cue', 'Instit.anexo');
+     
+ 
+        $this->Instit->asociarPlan = true;
+        
+         $pagin = $this->paginate('Instit');
+
 
 
         $this->set('instits', $pagin);

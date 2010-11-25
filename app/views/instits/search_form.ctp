@@ -10,7 +10,7 @@ echo $javascript->link(array(
     'jquery.autocomplete',
     'jquery.loadmask.min',
     'views/instits/search_form',
-        ));
+        ), false);
 
 echo $html->css(array('jquery.loadmask'));
 ?>
