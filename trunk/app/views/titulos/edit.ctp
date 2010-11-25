@@ -24,7 +24,7 @@
             ?>
             <div class="js-sector">
                 <span>
-                    <select style="width:50%" class="js-sector-id" name="data[Titulo][SectoresTitulos][sector_id][]">
+                    <select style="width:45%" class="js-sector-id" name="data[Titulo][SectoresTitulos][sector_id][]">
                         <?php
                         foreach($sectores as $sector){
                             if($sector['Sector']['id'] == $sector_subsector['sector_id']){
@@ -48,6 +48,10 @@
                     <?php
                     echo $html->image('loadercircle16x16.gif')
                     ?>
+                    </span>
+                    <span>
+                        <input class="js-prioridad" type="radio" name="prioridades" <?php echo ($sector_subsector['prioridad'] != 0 )?"checked":""?>/>
+                        <input class="js-prioridad-hd" type="hidden" name="data[Titulo][SectoresTitulos][prioridad][]" value="<?php echo $sector_subsector['prioridad']?>"/>
                     </span>
                 </span>
                 <span>
@@ -73,5 +77,12 @@
             spinner = jQuery(this).parent().find('.spinner');
             PopularCombo(jQuery(this).parent().find('.js-subsector-id'),"<?= $html->url(array('controller'=> 'subsectores', 'action'=>'getSubSectoresBySector'))?>",{'sector' : jQuery(this).val()},true, spinner);
         });
+        
+        jQuery('.js-prioridad').live('change', function() {
+            jQuery('#sectores input:checkbox').not(this).attr('checked', false);
+            jQuery('#sectores input:hidden').val("0");
+            jQuery(this).parent().find('.js-prioridad-hd').val("1");
+        });
+
     });
 </script>

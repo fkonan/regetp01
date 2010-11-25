@@ -63,12 +63,14 @@ class TitulosController extends AppController {
 
                         $sectores = $this->data['Titulo']['SectoresTitulos']['sector_id'];
                         $subsectores = $this->data['Titulo']['SectoresTitulos']['subsector_id'];
+                        $prioridades = $this->data['Titulo']['SectoresTitulos']['prioridad'];
 
                         $this->data['Sector'] = array();
 
                         foreach($sectores as $key=>$sector){
                             $this->data['Sector'][$key]['sector_id'] = $sector ;
                             $this->data['Sector'][$key]['subsector_id'] = $subsectores[$key] ;
+                            $this->data['Sector'][$key]['prioridad'] = $prioridades[$key] ;
                         }
 
 			if ($this->Titulo->save($this->data)) {
@@ -92,12 +94,14 @@ class TitulosController extends AppController {
 
                         $sectores = $this->data['Titulo']['SectoresTitulos']['sector_id'];
                         $subsectores = $this->data['Titulo']['SectoresTitulos']['subsector_id'];
+                        $prioridades = $this->data['Titulo']['SectoresTitulos']['prioridad'];
 
                         $this->data['Sector'] = array();
 
                         foreach($sectores as $key=>$sector){
                             $this->data['Sector'][$key]['sector_id'] = $sector ;
                             $this->data['Sector'][$key]['subsector_id'] = $subsectores[$key] ;
+                            $this->data['Sector'][$key]['prioridad'] = $prioridades[$key] ;
                         }
                         
                         if ($this->Titulo->save($this->data)) {
