@@ -3,6 +3,7 @@ class SubsectoresController extends AppController {
 
 	var $name = 'Subsectores';
 	var $helpers = array('Html', 'Form');
+        var $components = array('RequestHandler');
 
 	function index() {
 		$this->Subsector->recursive = 0;
@@ -97,5 +98,30 @@ class SubsectoresController extends AppController {
 	     $this->render('ajax_select_subsector_form_por_sector','ajax');
 	}
 
+        function getSubSectoresBySector(){
+            $this->autoRender = false;
+
+            if ( $this->RequestHandler->isAjax() ) {
+              Configure::write ( 'debug', 0 );
+            }
+            
+            $sector = $this->params['url']['sector'];
+            $items = $this->Subsector->find("all", 
+                                            array('conditions'=> array("sector_id" => $sector))
+                    );
+
+            $result = array();
+
+
+            foreach ($items as $item) {
+
+                array_push($result, array(
+                        "id" => $item['Subsector']['id'],
+                        "name" => utf8_encode($item['Subsector']['name'])
+                ));
+            }
+
+            return json_encode($result);
+        }
 }
 ?>

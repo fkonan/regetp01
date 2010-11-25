@@ -59,7 +59,18 @@ class TitulosController extends AppController {
 
 	function add() {
 		if (!empty($this->data)) {
-			$this->Titulo->create();
+                        $this->Titulo->create();
+
+                        $sectores = $this->data['Titulo']['SectoresTitulos']['sector_id'];
+                        $subsectores = $this->data['Titulo']['SectoresTitulos']['subsector_id'];
+
+                        $this->data['Sector'] = array();
+
+                        foreach($sectores as $key=>$sector){
+                            $this->data['Sector'][$key]['sector_id'] = $sector ;
+                            $this->data['Sector'][$key]['subsector_id'] = $subsectores[$key] ;
+                        }
+
 			if ($this->Titulo->save($this->data)) {
 				$this->Session->setFlash(__('Titulo guardado.', true));
 				$this->redirect(array('action'=>'index'));
@@ -68,7 +79,8 @@ class TitulosController extends AppController {
 			}
 		}
 		$ofertas = $this->Titulo->Oferta->find('list');
-		$this->set(compact('ofertas'));
+                $sectores = $this->Titulo->Sector->find('list');
+		$this->set(compact('ofertas','sectores'));
 	}
 
 	function edit($id = null) {
@@ -76,29 +88,34 @@ class TitulosController extends AppController {
 			$this->flash(__('Invalid Titulo', true), array('action'=>'index'));
 		}
 		if (!empty($this->data)) {
-			if ($this->Titulo->save($this->data)) {
-				
-				if($this->data['Titulo']['old_oferta_id'] != $this->data['Titulo']['oferta_id']) {
-					$sql = "UPDATE planes SET oferta_id=".$this->data['Titulo']['oferta_id']. 
-						   " WHERE oferta_id=".$this->data['Titulo']['old_oferta_id']." AND titulo_id=".$this->data['Titulo']['id'];
+                        $this->Titulo->SectoresTitulo->deleteAll(array('SectoresTitulo.sector_id' => $id));
 
-					$this->Titulo->query($sql);
-				}
-				
-				
-				//$this->flash(__('The Titulo has been saved.', true), array('action'=>'index'));
+                        $sectores = $this->data['Titulo']['SectoresTitulos']['sector_id'];
+                        $subsectores = $this->data['Titulo']['SectoresTitulos']['subsector_id'];
+
+                        $this->data['Sector'] = array();
+
+                        foreach($sectores as $key=>$sector){
+                            $this->data['Sector'][$key]['sector_id'] = $sector ;
+                            $this->data['Sector'][$key]['subsector_id'] = $subsectores[$key] ;
+                        }
+                        
+                        if ($this->Titulo->save($this->data)) {
 				$this->Session->setFlash(__('Titulo guardado.', true));
 				$this->redirect(array('action'=>'index'));
-			} else {
-			}
+                        }
 		}
 		if (empty($this->data)) {
 			$this->data = $this->Titulo->read(null, $id);
 		}
-				
-		$this->data['Titulo']['old_oferta_id'] = $this->data['Titulo']['oferta_id'];
+                
+                
+
 		$ofertas = $this->Titulo->Oferta->find('list');
-		$this->set(compact('ofertas'));
+                $sectores = $this->Titulo->Sector->find('all', array(
+                                                        'contain'=>array('Subsector')));
+
+		$this->set(compact('ofertas','sectores'));
 	}
 
 	function delete($id = null) {
