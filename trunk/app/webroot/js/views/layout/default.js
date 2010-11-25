@@ -1,4 +1,7 @@
 jQuery.noConflict();
+jQuery.fn.outer = function() {
+    return jQuery( jQuery('<div></div>').html(this.clone()) ).html();
+}
 jQuery(document).ready(function () {
     // abrir los menues segun las cookies dejando abiertos los que ya estaban
     openMenues();
@@ -46,6 +49,8 @@ jQuery(document).ready(function () {
             }
         }
         jQuery('#' + this.id + ' ul.menu_body').slideToggle('medium');
+
+
     });
 
 /*jQuery('.slide-out-div').tabSlideOut({
@@ -145,4 +150,29 @@ function meterCopyPasteDelNombre(urlToFlash){
         } );
 
         clip.glue( 'd_clip_button' );
+}
+
+function PopularCombo(comboSelector, actionJson,parameters, agregarEmpty, spinner){
+    var options = [];
+    if(spinner){
+        spinner.show();
+    }
+    comboSelector.html('<option value="0">Cargando...</option>');
+    comboSelector.attr('disabled', 'disabled');
+    jQuery.getJSON(actionJson, parameters, function(result) {
+        if(agregarEmpty){
+            options.push('<option value="0">Ninguno</option>');
+        }
+        for (var i = 0; i < result.length; i++) {
+            options.push('<option value="',
+              result[i].id, '">',
+              result[i].name, '</option>');
+        }
+        comboSelector.html(options.join(''));
+        if(spinner){
+            spinner.hide();
+        }
+
+        comboSelector.removeAttr('disabled');
+    });
 }

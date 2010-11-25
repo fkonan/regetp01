@@ -21,8 +21,22 @@ class Sector extends AppModel {
 								'exclusive' => '',
 								'finderQuery' => '',
 								'counterQuery' => ''
+			),
+                        'Subsector' => array('className' => 'Subsector',
+								'foreignKey' => 'sector_id',
+								'dependent' => false,
+								'conditions' => '',
+								'fields' => '',
+								'order' => '',
+								'limit' => '',
+								'offset' => '',
+								'exclusive' => '',
+								'finderQuery' => '',
+								'counterQuery' => ''
 			)
 	);
+
+        
 	
 	var $belongsTo = array('Orientacion');
 
