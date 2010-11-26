@@ -22,7 +22,8 @@ $frasesValle[] = '"Yo soy un tipo de persona que soy un imán de los hongos" (5-O
 $frasesValle[] = '"Che Ale, venía pensando estos días que hoy es el Día D <<clima tenso>>... voy a ir al chino a comprar" (20-Oct-2010 9:39)';
 $frasesValle[] = '"Todas las semanas me desaparece una planta" (20-Oct-2010 12:49)';
 $frasesValle[] = '"Yo soy muy bueno con la sierra, soy una máquina" (25-Oct-2010 9:58)';
-$frasesValle[] = '<<Pa-Panamericano! "Yo me hice re fanático de ese tema" (15-Nov-2010 11:37)';
+$frasesValle[] = '<<Pa-Panamericano>> "Yo me hice re fanático de ese tema" (15-Nov-2010 11:37)';
 $frasesValle[] = '"Los chabones judíos tienen los dedos chiquitos" (17-Nov-2010 13:34)';
+$frasesValle[] = '"Bueno, como moraleja, es increíble el espacio que se necesita para sembrar lo que nosotros comemos por día" (24-Nov-2010 12:47)';
 
 ?>
