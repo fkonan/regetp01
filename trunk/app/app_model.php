@@ -47,7 +47,6 @@ class AppModel extends Model {
 	 */	
 	 function getPagFields(){
               $fields = array();
-
               // me pone los campos del mismo modelo que llma  a getPagFields
               foreach ($this->_schema as $name => $options){
                  $fields[] = $this->name . "." . $name;
@@ -55,14 +54,30 @@ class AppModel extends Model {
 
               // busco los belongs to y sus atributos
               foreach ($this->belongsTo as $bName => $bOptions){
+               //   debug($bName);
                  foreach ($this->$bName->_schema as $name => $options){
                     $fields[] = $bName . "." . $name;
+//debug($name);
                  }
               }
 
               return $fields;
            }
 
+
+           /**
+            * Me devuelve un array con el listado de modelos BelongsTo relacionados
+            * al modelo $this que lo invoque
+            * @return array
+            */
+           function getBelongsTos()
+           {
+               $vRet = array();
+               foreach ($this->belongsTo as $bName => $bOptions){
+                 $vRet[] = $bName;
+               }
+               return $vRet;
+           }
 
 
            /**

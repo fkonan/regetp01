@@ -56,7 +56,7 @@ class Instit extends AppModel {
 								'fields' => '',
 								'order' => ''
 			),
-            'Orientacion',
+                        'Orientacion',
 			'Gestion' => array('className' => 'Gestion',
 								'foreignKey' => 'gestion_id',
 								'conditions' => '',
@@ -713,37 +713,33 @@ class Instit extends AppModel {
 		
 		return 1;
 	}
-	
-	
-	function paginateCount($conditions = null, $recursive = 0){
-  	
-            if ($this->asociarPlan){
-                
-                $parameters = $this->__asociarPlanParamsSetup(compact('conditions', 'fields', 'order', 'limit', 'page'));
 
+	
+	function paginateCount ($conditions = null, $recursive = 0)
+        {
+            $conditions = array('conditions'=>$conditions);
+            if ($this->asociarPlan){
                 if ($recursive != $this->recursive) {
-                    $parameters['recursive'] = $recursive;
+                    $conditions['recursive'] = $recursive;
                 }
-                
-        	return $this->find('count', $parameters);
+                return $this->__asociarPlanParamsSetup($conditions, 'solocontar');
             } else {
+                if ($recursive != $this->recursive) {
+                    $conditions['recursive'] = $recursive;
+                }
                 return $this->find('count', $conditions);
             }
-    }
-
+        }
 
 	function paginate($conditions = null, $fields = null, $order = null, $limit = null, $page = 1, $recursive = null, $extra = array())
         {
             if ($this->asociarPlan) {
-                $parametersAux = array_merge(compact('conditions', 'fields', 'order', 'limit', 'page'), $extra);
-                $parameters = $this->__asociarPlanParamsSetup($parametersAux);
-
+                $pp = compact('conditions', 'fields', 'order', 'limit', 'page');
+                $parametersAux = array_merge($pp, $extra);
                 if ($recursive != $this->recursive) {
-                    $parameters['recursive'] = $recursive;
+                    $parametersAux['recursive'] = $recursive;
                 }
-
-        	return $this->find('all', $parameters);
-
+                return $this->__asociarPlanParamsSetup($parametersAux);
             } else {
                 $parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
 
@@ -754,27 +750,18 @@ class Instit extends AppModel {
             }
         }
 
+        
         /**
          * Esta funcion simplemente inicializa los arrays para luego
          * hacer la busqueda cuando seteo asociarPlan en true
+         * @param array $parameters
+         * @param string $buscaroSoloContar
+         *                          admite los strings: 'buscar' o 'solocontar'
          * @return array
          */
-        function __asociarPlanParamsSetup($parameters = array()) {
-//                $order = array();
-//                if (!empty($parameters['order'])) {
-//                    $order = $parameters['order'];
-//                }
-//
-                //$parameters['fields'] = array('DISTINCT Instit.id');
-                
-                $parameters['contains'] = array(
-                    'Plan' => array(
-                        'Titulo' => array(
-                            'Sector', 'Subsector'
-                        ),
-                        'Oferta',
-                    )
-                );
+        private function __asociarPlanParamsSetup($parameters = array(), $buscaroSoloContar = 'buscar') {
+          //  debug($parameters);
+            $parameters['group'] = 'Instit.id';
                 $parameters['joins'] = array(
                     array(
                         'table' => 'planes',
@@ -806,11 +793,48 @@ class Instit extends AppModel {
                         'type' => 'left',
                         'conditions' => array('SectoresTitulo.sector_id = Sector.id')
                     ),
+                );                
 
-                );
+                if ($buscaroSoloContar == 'solocontar') {
+                    // si solo es para obtener el total no necesito seguir...
+                    $cant = count($this->find('list', $parameters));
+//                    debug($parameters);
+//                    debug($cant);
+                    return  $cant;
+                }
+
+                $parameters['fields']= 'Instit.id';
                 
+                // @var $order es para almacenar temporal mente este valor
+                // para que se ejecute la busqueda 'list' sin problemas no debe tener un orden
+                $order = null;
+                if (!empty($parameters['order'])) {
+                    $order = $parameters['order'];
+                    unset($parameters['order']);
+                }
+
+                // recojo todas las instituciones que cumplan con los criterios de busqueda
+                $institsIds = $this->find('list', $parameters);
+                if (empty($institsIds) ) {
+                    // no hay instituciones que cumplan con esos criterios de busqueda
+                    return array();
+                }
+                $parameters['conditions'] = array('Instit.id' => $institsIds);
                 
-            return $parameters;
+                // recupero el order, previamente eliminado para
+                $parameters['order'] = $order;
+//                $parameters['limit'] = null;
+//                $parameters['page'] = null;
+
+                unset($parameters['limit']);
+                unset($parameters['page']);
+                unset($parameters['joins']);
+                unset($parameters['group']);
+                unset($parameters['fields']);
+
+                $instits = $this->find('all', $parameters);
+                
+                return $instits;
         }
   	
 
