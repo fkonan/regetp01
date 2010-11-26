@@ -2359,3 +2359,17 @@ border-bottom-color: white !important;
 .btn-ir A:HOVER{
    
 }
+
+#sectores .js-sector-id{
+    width:45%;
+}
+
+#sectores .js-subsector-id{
+    width:40%;
+}
+
+#sectores .spinner{
+    display: none;
+    margin-left:3px;
+}
+

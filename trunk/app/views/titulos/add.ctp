@@ -18,17 +18,17 @@
         <div id="sectores">
             <div class="js-sector">
                 <span>
-                    <select style="width:45%" class="js-sector-id" name="data[Titulo][SectoresTitulos][sector_id][]">
+                    <select class="js-sector-id" name="data[Titulo][SectoresTitulos][sector_id][]">
                         <?php foreach($sectores as $key=>$sector){?>
                             <option value="<?php echo $key?>"><?php echo $sector?></option>
                         <?php
                         }
                         ?>
                     </select>
-                    <select style="width:40%" class="js-subsector-id" name="data[Titulo][SectoresTitulos][subsector_id][]">
+                    <select class="js-subsector-id" name="data[Titulo][SectoresTitulos][subsector_id][]">
                         <option value="0">Ninguno</option>
                     </select>
-                    <span class="spinner" style="display: none; margin-left:3px;">
+                    <span class="spinner">
                     <?php
                     echo $html->image('loadercircle16x16.gif')
                     ?>

@@ -25,7 +25,7 @@
             ?>
             <div class="js-sector">
                 <span>
-                    <select style="width:45%" class="js-sector-id" name="data[Titulo][SectoresTitulos][sector_id][]">
+                    <select class="js-sector-id" name="data[Titulo][SectoresTitulos][sector_id][]">
                         <?php
                         foreach($sectores as $sector){
                             if($sector['Sector']['id'] == $sector_subsector['sector_id']){
@@ -37,7 +37,7 @@
                         }
                         ?>
                     </select>
-                    <select style="width:40%" class="js-subsector-id" name="data[Titulo][SectoresTitulos][subsector_id][]">
+                    <select class="js-subsector-id" name="data[Titulo][SectoresTitulos][subsector_id][]">
                         <option value="0">Ninguno</option>
                         <?php foreach($subsectores as $subsector){?>
                             <option value="<?php echo $subsector['id']?>" <?php echo ($subsector['id'] == $sector_subsector['subsector_id'])? "selected":"" ?>><?php echo $subsector['name']?></option>
@@ -45,7 +45,7 @@
                         }
                         ?>
                     </select>
-                    <span class="spinner" style="display: none; margin-left:3px;">
+                    <span class="spinner">
                     <?php
                     echo $html->image('loadercircle16x16.gif')
                     ?>
