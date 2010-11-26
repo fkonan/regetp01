@@ -10,6 +10,8 @@ echo $html->css('jquery.autocomplete.css');
         jQuery("#PlanEstructuraPlanId").change(function(){
             jQuery("div[estructura_plan_id]").hide();
             jQuery("div[estructura_plan_id=" + jQuery(this).val() + "]").show();
+            jQuery("#PlanTituloName").val('');
+            jQuery("#PlanTituloId").val('');
         });
 
         jQuery("#PlanEstructuraPlanId").change();
@@ -19,9 +21,11 @@ echo $html->css('jquery.autocomplete.css');
             dataType: "json",
             delay: 200,
             max:30,
-            cacheLength:1,
+            cacheLength:0,
             extraParams: {
-                oferta_id: function() { return jQuery('#PlanOfertaId').val(); }
+                oferta_id: function() { return jQuery('#PlanOfertaId').val(); },
+                sector_id: function() { return jQuery('#sector_id').val(); },
+                subsector_id: function() { return jQuery('#PlanSubsectorId').val(); }
             } ,
             parse: function(data) {
                 return jQuery.map(data, function(titulo) {
@@ -46,6 +50,16 @@ echo $html->css('jquery.autocomplete.css');
         });
 
         jQuery("#PlanTituloName").attr('autocomplete','off');
+
+        jQuery("#sector_id").change(function(){
+            jQuery("#PlanTituloName").val('');
+            jQuery("#PlanTituloId").val('');
+        });
+
+        jQuery("#PlanSubsectorId").change(function(){
+            jQuery("#PlanTituloName").val('');
+            jQuery("#PlanTituloId").val('');
+        });
     });
 </script>
 
