@@ -143,6 +143,12 @@ class TitulosController extends AppController {
             if (!empty($this->params['url']['oferta_id'])) {
                 $oferta_id = utf8_decode(strtolower($this->params['url']['oferta_id']));
             }
+            if (!empty($this->params['url']['sector_id'])) {
+                $sector_id = utf8_decode(strtolower($this->params['url']['sector_id']));
+            }
+            if (!empty($this->params['url']['subsector_id'])) {
+                $subsector_id = utf8_decode(strtolower($this->params['url']['subsector_id']));
+            }
 
             if(empty($q)) {
                 if (!empty($this->params['url']['q'])) {
@@ -158,23 +164,38 @@ class TitulosController extends AppController {
 
             $response = '';
 
+            $conditions = array();
+            $subconditions = array();
+            
+            $conditions["to_ascii(lower(Titulo.name)) SIMILAR TO ?"] = "%". $q ."%";
+            $subconditions = array('Titulo.id = SectoresTitulos.titulo_id');
+            
             if(@$oferta_id > 0){
-                $conditions = array(
-                                "to_ascii(lower(Titulo.name)) SIMILAR TO ?" => "%". $q ."%",
-                                "Titulo.oferta_id" => $oferta_id
-                              );
-            }else{
-                $conditions = array(
-                                "to_ascii(lower(Titulo.name)) SIMILAR TO ?" => "%". $q ."%"
-                              );
+                $conditions["Titulo.oferta_id"] = $oferta_id;
+            }
+
+            if(@$sector_id > 0){
+                $subconditions["SectoresTitulos.sector_id ="] = $sector_id;
+            }
+
+            if(@$subsector_id > 0){
+                $subconditions["SectoresTitulos.subsector_id ="] = $subsector_id;
             }
 
             $this->Titulo->recursive = -1;
             $titulos = $this->Titulo->find("all", array(
                             'conditions'=> $conditions,
-                            'order' => array('Titulo.name')
+                            'order' => array('Titulo.name'),
+                            'joins'=>array(
+                                array('table' => 'sectores_titulos',
+                                      'alias' => 'SectoresTitulos',
+                                      'type' => 'INNER',
+                                      'conditions' => $subconditions
+                                )
                             )
+                       )
                     );
+
 
             foreach ($titulos as $item) {
                 array_push($result, array(
