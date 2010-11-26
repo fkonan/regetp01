@@ -6,8 +6,11 @@ class TitulosController extends AppController {
         var $components = array('RequestHandler');
 
 	function index() {
+                $ofertas = $this->Titulo->Oferta->find('list');
+
 		$this->Titulo->recursive = 0;
 		$this->set('titulos', $this->paginate());
+                $this->set(compact('ofertas'));
 	}
 
 
@@ -192,6 +195,110 @@ class TitulosController extends AppController {
             echo json_encode($result);
         }
 
+
+        /**
+     * Esta accion es el procesamiento del formulario de busqueda
+     * maneja las condiciones de la busqueda y el paginador
+     *
+     */
+    function search() {        
+
+        //para mostrar en vista los patrones de busqueda seleccionados
+        $array_condiciones = array();
+
+        // para el paginator que pueda armar la url
+        $url_conditions = array();
+
+
+        /*******************************************************************
+         *    INICIALIZACION DE FILTROS
+         *
+         *   Los filtros pueden provenir del formulario o de las variables de paginacion.
+         *
+         * 	Para el primer caso se esta leyendo informacion de $this->data
+         * 	en el segundo caso de this->passedArgs
+         *
+         *
+         */
+
+        /*
+         *          BUSQUEDA LIBRE
+         */
+        if(!empty($this->data['Titulo']['tituloName'])) {
+            $this->passedArgs = array('tituloName' => $this->data['Titulo']['tituloName']);
+        }
+        if(!empty($this->passedArgs['tituloName'])) {
+            $q = utf8_decode(strtolower($this->passedArgs['tituloName']));
+            $this->paginate['conditions']['to_ascii(lower(Titulo.name)) SIMILAR TO ?'] = convertir_texto_plano($q);
+        }
+
+        // caso de parametros para filtrar
+        if(!empty($this->data['Titulo']['oferta_id'])) {
+            $this->passedArgs['ofertaId'] = $this->data['Titulo']['oferta_id'];
+        }
+        if(!empty($this->passedArgs['ofertaId'])) {
+            $q = utf8_decode($this->passedArgs['ofertaId']);
+            $this->paginate['conditions']['Titulo.oferta_id'] = $q;
+        }
+
+        /*********************************************************************/
+        /*          FIN -*-CONDITIONS-*- de busqueda                         */
+        /*********************************************************************/
+
+
+        $this->Titulo->recursive = 0;//para alivianar la carga del server
+        //
+        //datos de paginacion
+        $this->paginate['order'] = array('Titulo.name ASC, Titulo.oferta_id ASC');
+        $titulos = $this->paginate();
+
+
+        $this->set('titulos', $titulos);
+        $this->set('url_conditions', $url_conditions);
+        //devuelve un array para mostrar los criterios de busqueda
+        $this->set('conditions', $array_condiciones);
+
+        $this->render('ajax_search');
+    }
+
+
+    function fusionar() {
+        if (empty($this->passedArgs) && empty($this->data['Titulo'])) {
+            $this->Session->setFlash(__('No es posible fusionar', true));
+            $this->redirect('/titulos/index');
+        }
+
+        if (!empty($this->data['Titulo'])) 
+        {
+            $titulos = explode(',', $this->data['Titulo']['titulos']);
+            $titulos_a_tratar = array();
+            foreach($titulos as $titulo) {
+                if ($titulo != $this->data['Titulo']['titulo_definitivo'])
+                    $titulos_a_tratar[] = $titulo;
+            }
+
+            // asigna el titulo definitivo a los planes de los otros titulos que se fusionan
+            $this->Titulo->Plan->updateAll(
+                array('Plan.titulo_id' => $this->data['Titulo']['titulo_definitivo']),
+                array('Plan.titulo_id' => $titulos_a_tratar)
+            );
+            
+            // se eliminan los titulos que no se fusionaron
+            $this->Titulo->deleteAll(array('Titulo.id' => $titulos_a_tratar), false);
+            
+            $this->Session->setFlash(__('Los Títulos se han fusionado correctamente', true));
+            $this->redirect('/titulos/index');
+        }
+
+        if (!empty($this->passedArgs)) {
+            $this->Titulo->recursive = -1;
+            $titulos = $this->Titulo->find('list', array(
+                        'conditions' => array('Titulo.id' => $this->passedArgs)
+                ));
+
+            $this->set('titulos', $titulos);
+        }
+    }
 
 
 
@@ -421,10 +528,7 @@ class TitulosController extends AppController {
             $this->set(compact('planes','titulos','ofertas',
                     'sectores','subsectores','jurisdicciones'));
 
-            $this->set('titulo_id',$titulo_id);
+            $this->set('titulo_id', $titulo_id);
         }
-
-    
-
 }
 ?>

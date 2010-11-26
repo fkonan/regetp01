@@ -538,6 +538,10 @@ table tr.altrow2 th {
 table tr.altrow td {
 }
 
+table tr.alt2row td {
+   background-color:#F1F8FC;
+}
+
 table tr.fila_marcada td {
     background-color: #F0F7FC;
     cursor: pointer;
