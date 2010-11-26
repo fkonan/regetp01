@@ -56,7 +56,7 @@
                     </span>
                 </span>
                 <span>
-                    <a style="cursor:pointer" onclick="if(jQuery('.js-sector').size() > 1)jQuery(this).closest('.js-sector').remove()">X</a>
+                    <?php echo $html->image('close.png',array('onclick'=>"if(jQuery('.js-sector').size() > 1)jQuery(this).closest('.js-sector').remove()")) ?>
                 </span>
             </div>
             <?php
