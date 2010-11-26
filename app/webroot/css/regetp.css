@@ -2373,3 +2373,7 @@ border-bottom-color: white !important;
     margin-left:3px;
 }
 
+#sectores img{
+    cursor: pointer;
+}
+
