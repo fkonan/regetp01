@@ -1,7 +1,7 @@
 <div class="titulos form">
 <?php echo $form->create('Titulo');?>
 	<fieldset>
- 		<legend><?php __('Nuevo Título');?></legend>
+ 		<legend><?php __('Modificar Título');?></legend>
                 <h2>Datos</h2>
 	<?php
                 echo $form->input('id');
