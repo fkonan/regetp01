@@ -340,7 +340,6 @@ class InstitsController extends AppController {
      *
      */
     function search() {        
-
         // dejo un log de la busqueda realizada
         $username = $this->Auth->user('nombre').' '.$this->Auth->user('apellido').' ('.$this->Auth->user('username').')';
         $grupo = $this->Session->read('User.group_alias');
@@ -700,12 +699,10 @@ class InstitsController extends AppController {
         //
         //datos de paginacion
         
-        $this->paginate['Instit']['order'] = array('Instit.cue', 'Instit.anexo');
-     
- 
-        $this->Instit->asociarPlan = true;
+        $this->paginate['Instit']['order'] = array('Instit.cue', 'Instit.anexo'); 
+       // $this->Instit->asociarPlan = true;
         
-         $pagin = $this->paginate('Instit');
+        $pagin = $this->paginate('Instit');
 
 
 
