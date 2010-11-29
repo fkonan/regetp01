@@ -9,14 +9,14 @@ echo $javascript->link(array(
         ));
 echo $html->css(array('jquery.loadmask', 'smoothness/jquery-ui-1.8.5.custom'));
 ?>
-<p>
-<?php echo $form->create('Titulo', array(
-        'action' => 'search',
-        'name'=>'TituloSearchForm',
-        'id' =>'TituloSearchForm',
-        )
-    ); ?>
-<?php
+<?php 
+        echo $form->create('Titulo', array(
+            'action' => 'search',
+            'name'=>'TituloSearchForm',
+            'id' =>'TituloSearchForm',
+            )
+        );
+
         echo $form->input(
         'oferta_id',
         array(
@@ -32,14 +32,6 @@ echo $html->css(array('jquery.loadmask', 'smoothness/jquery-ui-1.8.5.custom'));
             'id' => 'TituloName',
             'style'=>'width: 450px; clear:none; float:left;',
             ));
-
-
-?>
-<?php   /*echo $form->button('Buscar', array(
-                'class' => 'boton-buscar',
-                'style' => 'clear:none; float:left; margin-top:0;',
-                'onclick' => 'autoSubmit(true)',
-         ));*/
 
         echo $form->button('Limpiar búsqueda', array(
                 'class' => 'boton-buscar',
@@ -58,7 +50,6 @@ echo $html->css(array('jquery.loadmask', 'smoothness/jquery-ui-1.8.5.custom'));
 
         echo $form->end();
 ?>
-</p>
 
 <!-- Aca se muestran los resultados de la busqueda-->
 <div id='consoleResultWrapper'  style="clear:both; margin-top: 20px;">

@@ -25,5 +25,6 @@ $frasesValle[] = '"Yo soy muy bueno con la sierra, soy una máquina" (25-Oct-2010
 $frasesValle[] = '<<Pa-Panamericano>> "Yo me hice re fanático de ese tema" (15-Nov-2010 11:37)';
 $frasesValle[] = '"Los chabones judíos tienen los dedos chiquitos" (17-Nov-2010 13:34)';
 $frasesValle[] = '"Bueno, como moraleja, es increíble el espacio que se necesita para sembrar lo que nosotros comemos por día" (24-Nov-2010 12:47)';
+$frasesValle[] = '"Los sanguches de la costa son más ricos que aca, son más dulces" (29-Nov-2010 12:11)';
 
 ?>

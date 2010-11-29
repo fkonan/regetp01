@@ -22,10 +22,10 @@ class SubsectoresController extends AppController {
 		if (!empty($this->data)) {
 			$this->Subsector->create();
 			if ($this->Subsector->save($this->data)) {
-				$this->Session->setFlash(__('The Subsector has been saved', true));
+				$this->Session->setFlash(__('El Subsector ha sido creado', true));
 				$this->redirect(array('action'=>'index'));
 			} else {
-				$this->Session->setFlash(__('The Subsector could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('El Subsector no puede guardarse. Por favor, intente nuevamente.', true));
 			}
 		}
 		$sectores = $this->Subsector->Sector->find('list');
@@ -48,10 +48,10 @@ class SubsectoresController extends AppController {
 					$this->Subsector->query($sql);
 				}			
 				
-				$this->Session->setFlash(__('The Subsector has been saved', true));
+				$this->Session->setFlash(__('El Subsector ha sido guardado', true));
 				$this->redirect(array('action'=>'index'));
 			} else {
-				$this->Session->setFlash(__('The Subsector could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('El Subsector no puede guardarse. Por favor, intente nuevamente.', true));
 			}
 		}
 		if (empty($this->data)) {
@@ -69,10 +69,24 @@ class SubsectoresController extends AppController {
 			$this->Session->setFlash(__('Invalid id for Subsector', true));
 			$this->redirect(array('action'=>'index'));
 		}
-		if ($this->Subsector->del($id)) {
-			$this->Session->setFlash(__('Subsector deleted', true));
-			$this->redirect(array('action'=>'index'));
-		}
+                else {
+                    /*** validaciones ***/
+                    // Si el Subsector esta asociado a algun título no debe eliminar
+                    $this->Subsector->SectoresTitulo->recursive = -1;
+                    $titulo = $this->Subsector->SectoresTitulo->find('first', array(
+                        'conditions' => array('SectoresTitulo.subsector_id' => $id),
+                    ));
+
+                    if (!empty($titulo)) {
+                        $this->Session->setFlash(__('El Subsector no puede eliminarse debido a que está asociado a uno o más Títulos de Referencia', true));
+                        $this->redirect(array('action'=>'index'));
+                    }
+
+                    if ($this->Subsector->del($id)) {
+                            $this->Session->setFlash(__('Subsector eliminado', true));
+                            $this->redirect(array('action'=>'index'));
+                    }
+                }
 	}
 	
 	function ajax_select_subsector_form_por_sector(){
