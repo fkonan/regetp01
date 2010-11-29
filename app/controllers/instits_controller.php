@@ -339,17 +339,17 @@ class InstitsController extends AppController {
      * maneja las condiciones de la busqueda y el paginador
      *
      */
-    function search() {        
+    function search() {
+        //para mostrar en vista los patrones de busqueda seleccionados
+        $this->paginate['viewConditions'] = array();
+
+        // primero seteo si vino formulario o fue el paginador quien llego a este action"
+        $vino_formulario = (!empty($this->data)) ? true : false;
+        
         // dejo un log de la busqueda realizada
         $username = $this->Auth->user('nombre').' '.$this->Auth->user('apellido').' ('.$this->Auth->user('username').')';
         $grupo = $this->Session->read('User.group_alias');
 
-        //para mostrar en vista los patrones de busqueda seleccionados
-        $array_condiciones = array();
-
-        // para el paginator que pueda armar la url
-        $url_conditions = array();
-        
 
         /*******************************************************************
          *    INICIALIZACION DE FILTROS
@@ -365,6 +365,7 @@ class InstitsController extends AppController {
         /*
          *          BUSQUEDA LIBRE
          */
+
         if(!empty($this->data['Instit']['busqueda_libre'])) {
             $this->passedArgs = array('busqueda_libre' => $this->data['Instit']['busqueda_libre']);
         }
@@ -408,143 +409,8 @@ class InstitsController extends AppController {
             $url_conditions['cue'] = $this->passedArgs['cue'];
         }
 
-        /**
-         *      NOMBRE COMPLETO
-         */
-        if(!empty($this->data['Instit']['nombre_completo'])) {
-             $this->passedArgs['nombre_completo'] = utf8_encode($this->data['Instit']['nombre_completo']);
-        }
-        if(!empty($this->passedArgs['nombre_completo'])) {
-            $this->paginate['Instit']['conditions'][
-                            "to_ascii(lower(Tipoinstit.name))||' n '||".
-                            "to_ascii(lower(Instit.nroinstit))||' '||".
-                            "to_ascii(lower(Instit.nombre)) SIMILAR TO ?"] = array(convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['nombre_completo'])));
-            $array_condiciones['Nombre'] = utf8_decode($this->passedArgs['nombre_completo']);
-            $url_conditions['nombre_completo'] = utf8_decode($this->passedArgs['nombre_completo']);
-        }
 
-        /**
-         *      Nro Institucion
-         */
-        if(!empty($this->data['Instit']['nroinstit'])) {
-            $this->passedArgs['nroinstit'] = $this->data['Instit']['nroinstit'];
-        }
-        if(!empty($this->passedArgs['nroinstit'])) {
-                $this->paginate['Instit']['conditions']['lower(Instit.nroinstit) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['nroinstit'])));
-                $array_condiciones['N° de Institución'] = utf8_decode($this->passedArgs['nroinstit']);
-                $url_conditions['nroinstit'] = utf8_decode($this->passedArgs['nroinstit']);
-        }
-
-        /**
-         *          JURISDICCION
-         */
-        if(!empty($this->data['Instit']['jurisdiccion_id'])) {
-            $this->passedArgs['jurisdiccion_id'] = $this->data['Instit']['jurisdiccion_id'];
-        }
-        if(!empty($this->passedArgs['jurisdiccion_id'])) {
-            $this->paginate['Instit']['conditions']['Instit.jurisdiccion_id'] = $this->passedArgs['jurisdiccion_id'];
-            $this->Instit->Jurisdiccion->recursive = -1;
-            $aux = $this->Instit->Jurisdiccion->findById($this->passedArgs['jurisdiccion_id']);
-            $array_condiciones['Jurisdicción'] = $aux['Jurisdiccion']['name'];
-            $url_conditions['jurisdiccion_id'] = $this->passedArgs['jurisdiccion_id'];
-        }
-
-        /**
-         *          TIPO INSTIT
-         */
-        if(!empty($this->data['Instit']['tipoinstit_id'])) {
-            $this->passedArgs['tipoinstit_id'] = $this->data['Instit']['tipoinstit_id'];
-        }
-        if(!empty($this->passedArgs['tipoinstit_id'])) {
-            $this->paginate['Instit']['conditions']['Instit.tipoinstit_id'] = $this->passedArgs['tipoinstit_id'];
-            $this->Instit->Tipoinstit->recursive = -1;
-            $aux = $this->Instit->Tipoinstit->findById($this->passedArgs['tipoinstit_id']);
-            $array_condiciones['Tipo Institución'] = $aux['Tipoinstit']['name'];
-            $url_conditions['tipoinstit_id'] = $this->passedArgs['tipoinstit_id'];
-        }
-
-        /**
-         *          NOMBRE
-         */
-        if(!empty($this->data['Instit']['nombre'])) {
-            $this->passedArgs['nombre'] = utf8_encode($this->data['Instit']['nombre']);
-        }
-        if(!empty($this->passedArgs['nombre'])) {
-                $this->paginate['Instit']['conditions']['to_ascii(lower(Instit.nombre)) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['nombre'])));
-                $nombre_del_campo = (empty($array_condiciones['Nombre']))?'Nombre':'Nombre del Estab.';
-                $array_condiciones[$nombre_del_campo] = utf8_decode($this->passedArgs['nombre']);
-                $url_conditions['nombre'] = utf8_decode($this->passedArgs['nombre']);
-        }
-        
-        /**
-         *          DIRECCION
-         */
-        if(!empty($this->data['Instit']['direccion'])) {
-            $this->passedArgs['direccion'] = utf8_encode($this->data['Instit']['direccion']);
-        }
-        if(!empty($this->passedArgs['direccion'])) {
-            $this->paginate['Instit']['conditions']['lower(to_ascii(Instit.direccion)) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['direccion'])));
-            $array_condiciones['Domicilio'] = utf8_decode($this->passedArgs['direccion']);
-            $url_conditions['direccion'] = utf8_decode($this->passedArgs['direccion']);
-        }
-
-        /**
-         *          DEPARTAMENTO
-        */
-        if(!empty($this->data['Departamento']['id'])) {
-            $this->passedArgs['Departamento.id'] = $this->data['Departamento']['id'];
-        }
-        if(!empty($this->passedArgs['Departamento.id'])) {
-            $this->paginate['Instit']['conditions']['Departamento.id'] = array($this->passedArgs['Departamento.id']);
-            $this->Instit->Departamento->recursive = -1;
-            $instit = $this->Instit->Departamento->findById($this->passedArgs['Departamento.id']);
-            $array_condiciones['Departamento'] = $instit['Departamento']['name'];
-            $url_conditions['Departamento.id'] = $this->passedArgs['Departamento.id'];
-        }
-
-        /**
-         *          LOCALIDAD
-        */
-        if(!empty($this->data['Localidad']['id'])) {
-            $this->passedArgs['Localidad.id'] = $this->data['Localidad']['id'];
-        }
-        if(!empty($this->passedArgs['Localidad.id'])) {
-            $this->paginate['Instit']['conditions']['Localidad.id'] = array($this->passedArgs['Localidad.id']);
-            $this->Instit->Localidad->recursive = -1;
-            $instit = $this->Instit->Localidad->findById($this->passedArgs['Localidad.id']);
-            $array_condiciones['Localidad'] = $instit['Localidad']['name'];
-            $url_conditions['Localidad.id'] = $this->passedArgs['Localidad.id'];
-        }
-
-        /**
-         *          GESTION
-         */
-        if(!empty($this->data['Instit']['gestion_id'])) {
-            $this->passedArgs['gestion_id'] = $this->data['Instit']['gestion_id'];
-        }
-        if(!empty($this->passedArgs['gestion_id'])) {
-            $this->paginate['Instit']['conditions']['Instit.gestion_id'] = $this->passedArgs['gestion_id'];
-            $this->Instit->Gestion->recursive = -1;
-            $aux = $this->Instit->Gestion->findById($this->passedArgs['gestion_id']);
-            $array_condiciones['Ámbito de Gestión'] = $aux['Gestion']['name'];
-            $url_conditions['gestion_id'] = $this->passedArgs['gestion_id'];
-        }       
-
-        /**
-         *          DEPENDENCIA
-         */
-        if(!empty($this->data['Instit']['dependencia_id'])) {
-            $this->passedArgs['dependencia_id'] = $this->data['Instit']['dependencia_id'];
-        }
-        if(isset($this->passedArgs['dependencia_id'])) {
-                $this->paginate['Instit']['conditions']['Instit.dependencia_id'] = $this->passedArgs['dependencia_id'];
-                $this->Instit->Dependencia->recursive = -1;
-                $aux = $this->Instit->Dependencia->findById($this->passedArgs['dependencia_id']);
-                $array_condiciones['Dependencia'] = $aux['Dependencia']['name'];
-                $url_conditions['dependencia_id'] = $this->passedArgs['dependencia_id'];
-        }       
-
-        /**
+         /**
          *          ACTIVO
          */
         if(isset($this->data['Instit']['activo'])) {
@@ -569,172 +435,146 @@ class InstitsController extends AppController {
                 endswitch;
         }
 
-        /***********************************************
-         *   PLANES POR OFERTA
-         */
-        /**
-         *              OFERTA
-         */
-        if(!empty($this->data['Plan']['oferta_id'])) {
-            $this->passedArgs['Plan.oferta_id'] = $this->data['Plan']['oferta_id'];
-        }
-        if(!empty($this->passedArgs['Plan.oferta_id'])) {
-            $this->Instit->asociarPlan = true;
-            $this->paginate['Instit']['conditions']['Plan.oferta_id'] = $this->passedArgs['Plan.oferta_id'];
-            $this->Instit->Plan->Oferta->recursive = -1;
-            $oferta = $this->Instit->Plan->Oferta->findById($this->passedArgs['Plan.oferta_id']);
-            $array_condiciones['Con Oferta'] = $oferta['Oferta']['name'];
-            $url_conditions['Plan.oferta_id'] = $this->passedArgs['Plan.oferta_id'];
-        }
+        //////////////// Automagiccccs filter
+        
+        //      NOMBRE COMPLETO         
+        $ops[] = array(
+            'model' => 'Instit',
+            'field' => 'nombre_completo',
+            'friendlyName' => 'Nombre');
 
-        /**
-         *          SECTOR
-         */
-        if(!empty($this->data['Sector']['id'])) {
-            $this->passedArgs['Sector.id'] = $this->data['Sector']['id'];
-        }
-        if(!empty($this->passedArgs['Sector.id'])) {
-            $this->Instit->asociarPlan = true;
-            $this->paginate['Instit']['conditions']['Sector.id'] = $this->passedArgs['Sector.id'];
-            $this->Instit->Plan->Titulo->Sector->recursive = -1;
-            $sector = $this->Instit->Plan->Titulo->Sector->findById($this->passedArgs['Sector.id']);
-            $array_condiciones['Sector'] = $sector['Sector']['name'];
-            $url_conditions['Sector.id'] = $this->passedArgs['Sector.id'];
-        }
+        //     Nro Institucion
+         $ops[] = array(
+            'model' => 'Instit',
+            'field' => 'nroinstit',
+            'friendlyName' => 'Nº de Institución');    
 
-        /**
-         *          SUBSECTOR
-         */
-        if(!empty($this->data['Subsector']['id'])) {
-            $this->passedArgs['Subsector.id'] = $this->data['Subsector']['id'];
-        }
-        if(!empty($this->passedArgs['Subsector.id'])) {
-            $this->Instit->asociarPlan = true;
-            $this->paginate['Instit']['conditions']['Subsector.id'] = $this->passedArgs['Subsector.id'];
-            $this->Instit->Plan->Titulo->Subsector->recursive = -1;
-            $sector = $this->Instit->Plan->Titulo->Subsector->findById($this->passedArgs['Subsector.id']);
-            $array_condiciones['Subsector'] = $sector['Subsector']['name'];
-            $url_conditions['Subsector.id'] = $this->passedArgs['Subsector.id'];
-        }
+         //     Jurisdiccion
+         $ops[] = array(
+            'model' => 'Instit',
+            'field' => 'jurisdiccion_id',
+            'friendlyName' => 'Jurisdicción');
+        
+         //      TIPO INSTIT
+         $ops[] = array(
+            'model' => 'Instit',
+            'field' => 'tipoinstit_id',
+            'friendlyName' => 'Tipo Institución');
 
-        /**
-         *          TITULOS REFERENCIALES
-         */
-        if(!empty($this->data['Plan']['titulo_id'])) {
-            $this->passedArgs['Plan.titulo_id'] = $this->data['Plan']['titulo_id'];
-        }
-        if(!empty($this->passedArgs['Plan.titulo_id'])) {
-            $this->Instit->asociarPlan = true;
-            $this->paginate['Instit']['conditions']['Plan.titulo_id'] = $this->passedArgs['Plan.titulo_id'];
+          //      Nombre
+         $ops[] = array(
+            'model' => 'Instit',
+            'field' => 'nombre',
+            'friendlyName' => 'Nombre');
 
-            $this->Instit->Plan->Titulo->recursive = -1;
-            $titulo = $this->Instit->Plan->Titulo->findById($this->passedArgs['Plan.titulo_id']);
-            $array_condiciones['Con Título de Referencia'] = $titulo['Titulo']['name'];
-            $url_conditions['Plan.titulo_id'] = $this->passedArgs['Plan.titulo_id'];
-        }
+         //      Direccion
+         $ops[] = array(
+            'model' => 'Instit',
+            'field' => 'direccion',
+            'friendlyName' => 'Domicilio');
 
-        /**
-         *          ORIENTACION
-         */
-        if(!empty($this->data['Instit']['orientacion_id'])) {
-            $this->passedArgs['Instit.orientacion_id'] = $this->data['Instit']['orientacion_id'];
-        }
-        if(!empty($this->passedArgs['Instit.orientacion_id'])) {
-            if($this->passedArgs['Instit.orientacion_id'] != '') {
-                $this->paginate['Instit']['conditions']['Instit.orientacion_id'] = $this->passedArgs['Instit.orientacion_id'];
-                $this->Instit->Orientacion->recursive = -1;
-                $orientacion = $this->Instit->Orientacion->findById( $this->passedArgs['Instit.orientacion_id']);
-                $array_condiciones['Orientación'] = $orientacion['Orientacion']['name'];
-                $url_conditions['Instit.orientacion_id'] = $this->passedArgs['Instit.orientacion_id'];
-            }
-        }
+         //      Departamento
+         $ops[] = array(
+            'model' => 'Instit',
+            'field' => 'departamento_id',
+            'friendlyName' => 'Departamento');
 
-        /**
-         *          NORMA
-         */
-        if(!empty($this->data['Plan']['norma'])) {
-            $this->passedArgs['Plan.norma'] = utf8_encode($this->data['Plan']['norma']);
-        }
-        if(!empty($this->passedArgs['Plan.norma'])) {
-                $this->Instit->asociarPlan = true;
-                $this->paginate['Instit']['conditions']['to_ascii(lower(Plan.norma)) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['Plan.norma'])));
-                $array_condiciones['Norma'] = utf8_decode($this->passedArgs['Plan.norma']);
-                $url_conditions['Plan.norma'] = utf8_decode($this->passedArgs['Plan.norma']);
-        }
+         //      Localidad
+         $ops[] = array(
+            'model' => 'Instit',
+            'field' => 'localidad_id',
+            'friendlyName' => 'Localidad');
+        
+         //      GESTION
+         $ops[] = array(
+            'model' => 'Instit',
+            'field' => 'gestion_id',
+            'friendlyName' => 'Ámbito de Gestión');
 
-        /**
-         *          Tipo Instit
-         */
-        if(!empty($this->data['Instit']['claseinstit_id'])) {
-            $this->passedArgs['claseinstit_id'] = $this->data['Instit']['claseinstit_id'];
-        }
+         //      DEPENDENCIA
+         $ops[] = array(
+            'model' => 'Instit',
+            'field' => 'dependencia_id',
+            'friendlyName' => 'Dependencia');         
 
-        if(!empty($this->passedArgs['claseinstit_id'])) {
-            $this->paginate['Instit']['conditions']['Instit.claseinstit_id'] = $this->passedArgs['claseinstit_id'];
-            $this->Instit->Claseinstit->id = $this->passedArgs['claseinstit_id'];
-            $array_condiciones['Tipo de Institución de ETP'] = $this->Instit->Claseinstit->field('name');
-            $url_conditions['claseinstit_id'] = $this->passedArgs['claseinstit_id'];
-        }
+         //      OFERTA
+         $ops[] = array(
+            'model' => 'Plan',
+            'field' => 'oferta_id',
+            'friendlyName' => 'Con Oferta');
+      
 
-        /**
-         *          Relacion de ETP
-         */
-        if(!empty($this->data['Instit']['etp_estado_id'])) {
-            $this->passedArgs['etp_estado_id'] = $this->data['Instit']['etp_estado_id'];
-        }
+         //      SECTOR
+         $ops[] = array(
+            'model' => 'SectoresTitulo',
+            'field' => 'sector_id',
+            'friendlyName' => 'Sector',
+            'asociarPlan' => true);
 
-        if(!empty($this->passedArgs['etp_estado_id']) && $this->passedArgs['etp_estado_id'] != '') {
-            $this->paginate['Instit']['conditions']['Instit.etp_estado_id'] = $this->passedArgs['etp_estado_id'];
-            $this->Instit->EtpEstado->id = $this->passedArgs['etp_estado_id'];
-            $array_condiciones['Relación con ETP'] = $this->Instit->EtpEstado->field('name');
-            $url_conditions['etp_estado_id'] = $this->passedArgs['etp_estado_id'];
-        }
+         //      Subsector
+         $ops[] = array(
+            'model' => 'SectoresTitulo',
+            'field' => 'subsector_id',
+            'friendlyName' => 'Subsector',
+             'asociarPlan' => true);
+
+         //      TITULOS REFERENCIALES
+         $ops[] = array(
+            'model' => 'Plan',
+            'field' => 'titulo_id',
+            'friendlyName' => 'Con Título de Referencia');
+
+         //      ORIENTACION
+         $ops[] = array(
+            'model' => 'Instit',
+            'field' => 'orientacion_id',
+            'friendlyName' => 'Orientación');
+
+         //      NORMA
+         $ops[] = array(
+            'model' => 'Plan',
+            'field' => 'norma',
+            'friendlyName' => 'Norma');
+
+         //      Tipo Instit
+         $ops[] = array(
+            'model' => 'Instit',
+            'field' => 'claseinstit_id',
+            'friendlyName' => 'Tipo de Institución de ETP');
+
+         //      Tipo Instit
+         $ops[] = array(
+            'model' => 'Instit',
+            'field' => 'etp_estado_id',
+            'friendlyName' => 'Relación con ETP');
+         
+         foreach ($ops as $o) {
+             $this->__aplicarCriteriosDeBusqueda($o);
+         }
 
         /*********************************************************************/
         /*          FIN -*-CONDITIONS-*- de busqueda                         */
         /*********************************************************************/
-        
+
 
         $this->Instit->recursive = 1;//para alivianar la carga del server
-        //
-        //datos de paginacion
-        
-        $this->paginate['Instit']['order'] = array('Instit.cue', 'Instit.anexo'); 
-       // $this->Instit->asociarPlan = true;
-        
         $pagin = $this->paginate('Instit');
 
-
-
         $this->set('instits', $pagin);
-        $this->set('url_conditions', $url_conditions);
-        //devuelve un array para mostrar los criterios de busqueda
-        $this->set('conditions', $array_condiciones);
+        $this->set('url_conditions', $this->passedArgs);      
+        $this->set('conditions', $this->paginate['viewConditions']);
 
+        // genero un log sobre las busquedas realizadas
         $this->Instit->searchLog($this->data, $username, $grupo, $this->params['paging']['Instit']['count']);
-
-        // si se encontro solo 1 institucion, ir directamente a la vista de esa institucion
-        if (!$this->RequestHandler->isAjax()) {
-            // si no vinieron datos GET, asumo que se envió el formulario desde search_form
-            // sino es porque vino del paginador
-            if(!empty($this->passedArgs)):
-                if(sizeof($this->passedArgs) == 0):
-                    $vino_formulario = 1;
-                else:
-                    $vino_formulario = 0;
-                endif;
-            else:
-                $vino_formulario = 1;
-            endif;
-
-            if(sizeof($pagin) == 1 && $vino_formulario) {
-                // si el resultado me trajo 1, y eestoy buscando por CUE, entonces ir directamente a la vista d esas institucion
-                if(!empty($this->data['Instit']['cue'])) {
+        
+        if (!$this->RequestHandler->isAjax()) {         
+            // si se encontro solo 1 institucion, ir directamente a la vista de esa institucion
+            // si el resultado me trajo 1, y eestoy buscando por CUE, entonces ir directamente a la vista d esas institucion
+            if(sizeof($pagin) == 1 && $vino_formulario)
+                if(!empty($this->data['Instit']['cue'])) 
                     if(($pagin[0]['Instit']['cue'] == $this->data['Instit']['cue']) || (($pagin[0]['Instit']['cue']*100+$pagin[0]['Instit']['anexo'] == $this->data['Instit']['cue']))) {
                         $this->redirect('view/'.$pagin[0]['Instit']['id']);
                     }
-                }
-            }
         } else {
             // si es ajax renderizo otra vista
             $this->render('ajax_search');
@@ -808,6 +648,74 @@ class InstitsController extends AppController {
         $this->autoRender = false; // para uqe no muestre la vista
 
         die(convertir_para_busqueda_avanzada("pepino"));
+    }
+
+
+    /**
+     *
+     * @param array $o -- Options array
+     * Opciones psibles son:
+     *      string model => nombre del modelo
+     *      string field => nombre del campo que quiero buscar
+     *      string friendlyName => es el nombre que aparecerá en la pàgina de resultados de la búsqueda. Por ejemplo "Nombre de la Institución"
+     *      boolean forceText => hace que el valor buscado sea un texto si o si. Aunque venga un número como filtro de bñusqueda.
+     *      boolean asociarPlan => para realizar busquedas avanzadas en el sector del titulo por ejemplo
+     *      
+     */
+    private function __aplicarCriteriosDeBusqueda($o) {
+        // inicializo array de opciones
+        $model = $o['model'];
+        $field = $o['field'];
+        $friendlyName = empty($o['friendlyName']) ? $field : $o['friendlyName'];
+        $forceText = empty($o['forceText']) ? false : true;
+        $asociarPlan = empty($o['asociarPlan']) ? false : true;
+                
+        $modelField = $model.'.'.$field;
+
+        // lista de modelos que se van a consultar en la query
+        $this->paginate['modelosInvolucrados'] = array();
+
+        if ($asociarPlan) {
+            $this->Instit->asociarPlan = true;
+        }
+        
+        // paso al vector del paginador para unificar la busqueda
+        if(!empty($this->data[$model][$field])) {
+            $valor = $this->data[$model][$field];
+        }
+
+        if( !empty($this->passedArgs[$modelField]) ) {
+            $valor = $this->passedArgs[$modelField];
+        }
+
+        if( !empty($valor) ) {
+            $this->paginate['modelosInvolucrados'][] = $model;
+
+            $friendlyName = empty($friendlyName) ?  $field : $friendlyName;
+            $this->paginate['viewConditions'][$friendlyName] = $friendlyName;
+
+            if ( (!is_numeric($valor) && !is_array($valor)) && is_string($valor) || $forceText === true) {
+                // es texto
+                $this->paginate[$this->modelClass]['conditions'][$modelField]
+                    = convertir_para_busqueda_avanzada(utf8_decode($valor));
+                $array_condiciones[$modelField] = utf8_decode($valor);
+                $url_conditions[$field] = utf8_decode($valor);
+            } else {
+                if (substr($field,-3) == '_id') {
+                    // es FK, por lo tanto me traigo el nombre
+                    // para mostrar en el resutado de busquedas (para mostrar en la vista el camp "name" del Modelo
+                    $miniModel = substr($field, 0, strlen($field)-3);
+                    $model  = Inflector::camelize($miniModel);
+                    $rModel =& ClassRegistry::init($miniModel);
+
+                    $rModel->id = $valor;
+                    $this->paginate['viewConditions'][$friendlyName] = $rModel->field('name');
+                }
+
+                // es un numero, como por ejemplo una FK
+                $this->paginate[$this->modelClass]['conditions'][$modelField] = $valor;
+            }
+        }
     }
 }
 ?>

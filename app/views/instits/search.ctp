@@ -60,6 +60,7 @@ $paginator->options(array('url' => $url_conditions));
  * 	Instits/add
  * 
  */
+
 if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 	
 	<h2>Resultados (<? echo $paginator->counter(array('format' => __('Mostrando %current% Instituciones de %count% encontradas', true)
@@ -67,9 +68,7 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 	<ul class="listado">
 	<?php  
 	foreach($instits as $instit){
-	?>
-	
-	<? 
+            
 		//esto es porque ramiro quiere tratar a las escuelas que pertenecen a un ciclo por iguak
 		// por ahora el criterio es hasta Julio (fecha_hasta)
 		// lo que quiere decir que los formularios recibidos hasta julio, entran

@@ -250,7 +250,7 @@ echo $html->css('jquery.autocomplete.css');
         ));
 
 
-        echo $form->input('Sector.id',array(
+        echo $form->input('SectoresTitulo.sector_id',array(
         'label'=>'Sector',
         'div'=>array('style'=>'float: left;  clear: left'),
         'style'=> 'display:inline;width:277px;vertical-align:bottom',
@@ -258,7 +258,7 @@ echo $html->css('jquery.autocomplete.css');
         'empty'=>'Seleccione'
         ));
 
-        echo $form->input('Subsector.id',array(
+        echo $form->input('SectoresTitulo.subsector_id',array(
             'type' => 'select',
         'label'=>'Subsector',
         'div'=>array('style'=>'float: left;  clear: none'),
