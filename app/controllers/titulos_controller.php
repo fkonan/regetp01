@@ -184,6 +184,7 @@ class TitulosController extends AppController {
 
             $this->Titulo->recursive = -1;
             $titulos = $this->Titulo->find("all", array(
+                            'fields' =>array('DISTINCT Titulo.id','Titulo.name'),
                             'conditions'=> $conditions,
                             'order' => array('Titulo.name'),
                             'joins'=>array(

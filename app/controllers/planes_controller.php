@@ -252,10 +252,17 @@ class PlanesController extends AppController {
             $this->redirect(array('action'=>'index'));
         }
 
-        $this->Plan->recursive = 2;
         $this->hasMany = array(
             'Anio' => array('order'=> array('Anio.plan_id', 'Anio.ciclo_id DESC', 'Anio.nro_anio DESC')),
 	);
+        $this->Plan->contain(array(
+            'Oferta',
+            'Titulo'=>array(
+                'SectoresTitulo' => array('Sector','Subsector','order'=>array('SectoresTitulo.prioridad DESC'))
+                )
+            )
+        );
+
         $plan = $this->Plan->read(null, $id);
 
         //ordenos los años para ue puedan ser mostrados en la vista
@@ -274,6 +281,12 @@ class PlanesController extends AppController {
 
         $this->set('instit',$instit['Instit']);
         $this->set('matricula', $this->Plan->Anio->matricula_del_plan($id));
+
+        /*$sectores = $this->Plan->Titulo->find('all', array(
+                        'conditions'=>array('Titulo.id'=> $plan['Plan']['titulo_id']),
+                        'contain'=>array('Sector','Subsector')
+                    ));
+        $this->set('sectores', $sectores);*/
 
         $this->rutaUrl_for_layout[] = array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$instit['Instit']['id'] );
         $this->rutaUrl_for_layout[] = array('name'=> 'Oferta Educativa','link'=>'/Planes/index/'.$instit['Instit']['id'] );

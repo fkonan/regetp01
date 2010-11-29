@@ -48,20 +48,6 @@ class Plan extends AppModel {
 				'message' => 'Debe ingresar formato de año, con 4 dígitos.'	
 			)
 		),
-		'sector_id' => array(
-			'notEmpty'=> array(
-				'rule' => VALID_NOT_EMPTY,
-				'required' => true,
-				'allowEmpty' => false,
-				'message' => 'Debe ingresar un sector.',
-			)
-		),
-		'subsector_id' => array(
-			'correcto_subsector' => array(
-				'rule' => array('controlar_coincidencia_sector_subsector'),
-				'message'=> 'El subsector no corresponde al sector.'	
-			)
-		),
 		'duracion_hs' => array(
 			'number' => array(
 				'rule' => VALID_NUMBER,

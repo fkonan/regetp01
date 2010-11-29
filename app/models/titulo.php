@@ -7,7 +7,21 @@ class Titulo extends AppModel {
 	var $validate = array(
 		'name' => array('notempty'),
 		'marco_ref' => array('boolean'),
-		'oferta_id' => array('numeric')
+		'oferta_id' => array('numeric'),
+		/*'sector_id' => array(
+			'notEmpty'=> array(
+				'rule' => VALID_NOT_EMPTY,
+				'required' => true,
+				'allowEmpty' => false,
+				'message' => 'Debe ingresar un sector.',
+			)
+		),
+		'subsector_id' => array(
+			'correcto_subsector' => array(
+				'rule' => array('controlar_coincidencia_sector_subsector'),
+				'message'=> 'El subsector no corresponde al sector.'
+			)
+		)*/
 	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed

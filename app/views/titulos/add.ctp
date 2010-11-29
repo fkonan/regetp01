@@ -63,5 +63,9 @@
             jQuery('#sectores input:hidden').val("0");
             jQuery(this).parent().find('.js-prioridad-hd').val("1");
         });
+
+        jQuery('#sectores .js-prioridad').first().attr("checked","checked");
+
+        jQuery('.js-sector-id').change();
     });
 </script>
