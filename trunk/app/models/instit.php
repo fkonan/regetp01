@@ -2,6 +2,8 @@
 class Instit extends AppModel {
 
 	var $name = 'Instit';
+
+        //var $order = array('Instit.cue', 'Instit.anexo');
 	
 	/**
 	 * Esto es para el paginador customizado
@@ -12,8 +14,7 @@ class Instit extends AppModel {
 	var $actsAs = array('Containable');
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
-	var $belongsTo = array(
-			
+	var $belongsTo = array(			
 			'Dependencia' => array('className' => 'Dependencia',
 								'foreignKey' => 'dependencia_id',
 								'conditions' => '',
@@ -105,7 +106,7 @@ class Instit extends AppModel {
 	);
 
 	var $validate = array(
-      	'cue' => array(
+            'cue' => array(
 			/**
 			 * Aca se verifica que los numeros iniciales del  CUE sean
 			 * macheados con la jurisdiccion para comprobar la validez del CUE.
@@ -428,10 +429,8 @@ class Instit extends AppModel {
   		
   		return $instituciones_data;
   	}
-  	 	
-  	
-  	
-  	
+
+        
   	
   
   	/**
@@ -724,10 +723,12 @@ class Instit extends AppModel {
                 }
                 return $this->__asociarPlanParamsSetup($conditions, 'solocontar');
             } else {
+                $parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
                 if ($recursive != $this->recursive) {
-                    $conditions['recursive'] = $recursive;
+                        $parameters['recursive'] = $recursive;
                 }
-                return $this->find('count', $conditions);
+                $extra = array();
+                return $this->find('count', array_merge($parameters, $extra));
             }
         }
 
@@ -739,16 +740,20 @@ class Instit extends AppModel {
                 if ($recursive != $this->recursive) {
                     $parametersAux['recursive'] = $recursive;
                 }
+                
                 return $this->__asociarPlanParamsSetup($parametersAux);
             } else {
                 $parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
-
                 if ($recursive != $this->recursive) {
-                    $parameters['recursive'] = $recursive;
+                        $parameters['recursive'] = $recursive;
                 }
+                $extra = array();
                 return $this->find('all', array_merge($parameters, $extra));
             }
         }
+
+
+        
 
         
         /**
@@ -760,7 +765,6 @@ class Instit extends AppModel {
          * @return array
          */
         private function __asociarPlanParamsSetup($parameters = array(), $buscaroSoloContar = 'buscar') {
-          //  debug($parameters);
             $parameters['group'] = 'Instit.id';
                 $parameters['joins'] = array(
                     array(
@@ -795,23 +799,26 @@ class Instit extends AppModel {
                     ),
                 );                
 
-                if ($buscaroSoloContar == 'solocontar') {
-                    // si solo es para obtener el total no necesito seguir...
-                    $cant = count($this->find('list', $parameters));
-//                    debug($parameters);
-//                    debug($cant);
-                    return  $cant;
-                }
-
-                $parameters['fields']= 'Instit.id';
-                
                 // @var $order es para almacenar temporal mente este valor
                 // para que se ejecute la busqueda 'list' sin problemas no debe tener un orden
                 $order = null;
                 if (!empty($parameters['order'])) {
                     $order = $parameters['order'];
                     unset($parameters['order']);
+
+                    $ordenDelModelo = $this->order;
+                    $this->order = array();
                 }
+                
+                if ($buscaroSoloContar == 'solocontar') {
+                    // si solo es para obtener el total no necesito seguir...
+                    $cant = count($this->find('list', $parameters));
+                    return  $cant;
+                }
+
+                $parameters['fields']= 'Instit.id';
+                
+                
 
                 // recojo todas las instituciones que cumplan con los criterios de busqueda
                 $institsIds = $this->find('list', $parameters);
@@ -823,8 +830,7 @@ class Instit extends AppModel {
                 
                 // recupero el order, previamente eliminado para
                 $parameters['order'] = $order;
-//                $parameters['limit'] = null;
-//                $parameters['page'] = null;
+                //$this->order = $ordenDelModelo;
 
                 unset($parameters['limit']);
                 unset($parameters['page']);
