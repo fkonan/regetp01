@@ -18,7 +18,7 @@ class Subsector extends AppModel {
 	);
 
 	var $hasMany = array(
-                        'Sectores_titulo',
+                        'SectoresTitulo',
 			'Plan' => array('className' => 'Plan',
 								'foreignKey' => 'subsector_id',
 								'dependent' => false,
