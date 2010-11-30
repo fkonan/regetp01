@@ -3,7 +3,7 @@ class Instit extends AppModel {
 
 	var $name = 'Instit';
 
-        //var $order = array('Instit.cue', 'Instit.anexo');
+        var $order = array('Instit.cue', 'Instit.anexo');
 	
 	/**
 	 * Esto es para el paginador customizado
@@ -687,7 +687,6 @@ class Instit extends AppModel {
 		//este valida que no se hayan ingresado letras, ni puntos ni nada raro
 		if(!preg_match('/^[0-9]{3,9}$/', $cue)) return -1;
 		
-		
 		switch(strlen($cue)){
 			case 6:
 				// si son de buenos aires o ciudad
@@ -708,8 +707,7 @@ class Instit extends AppModel {
 			default: 
 				return 2;
 				break;
-		}
-		
+		}		
 		return 1;
 	}
 
@@ -723,7 +721,12 @@ class Instit extends AppModel {
                 }
                 return $this->__asociarPlanParamsSetup($conditions, 'solocontar');
             } else {
-                $parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
+                if ( !empty($conditions['conditions']) ) {
+                    $parameters = $conditions['conditions'];
+                } else {
+                    $parameters = $conditions;
+                }
+                $parameters['conditions'] = $parameters;
                 if ($recursive != $this->recursive) {
                         $parameters['recursive'] = $recursive;
                 }
@@ -744,10 +747,12 @@ class Instit extends AppModel {
                 return $this->__asociarPlanParamsSetup($parametersAux);
             } else {
                 $parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
+                
                 if ($recursive != $this->recursive) {
                         $parameters['recursive'] = $recursive;
                 }
                 $extra = array();
+
                 return $this->find('all', array_merge($parameters, $extra));
             }
         }
@@ -801,13 +806,13 @@ class Instit extends AppModel {
 
                 // @var $order es para almacenar temporal mente este valor
                 // para que se ejecute la busqueda 'list' sin problemas no debe tener un orden
+                $oldThisOrder = $this->order;
+                $this->order = array();
                 $order = null;
-                if (!empty($parameters['order'])) {
+                if ( !empty($parameters['order']) ) {
                     $order = $parameters['order'];
                     unset($parameters['order']);
-
                     $ordenDelModelo = $this->order;
-                    $this->order = array();
                 }
                 
                 if ($buscaroSoloContar == 'solocontar') {
@@ -830,6 +835,7 @@ class Instit extends AppModel {
                 
                 // recupero el order, previamente eliminado para
                 $parameters['order'] = $order;
+                $this->order = $oldThisOrder;
                 //$this->order = $ordenDelModelo;
 
                 unset($parameters['limit']);

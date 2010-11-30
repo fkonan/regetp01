@@ -501,15 +501,17 @@ class InstitsController extends AppController {
          $ops[] = array(
             'model' => 'Plan',
             'field' => 'oferta_id',
-            'friendlyName' => 'Con Oferta');
-      
+            'friendlyName' => 'Con Oferta',
+            'asociarPlan' => true,
+             );
 
          //      SECTOR
          $ops[] = array(
             'model' => 'SectoresTitulo',
             'field' => 'sector_id',
             'friendlyName' => 'Sector',
-            'asociarPlan' => true);
+            'asociarPlan' => true,
+             );
 
          //      Subsector
          $ops[] = array(
@@ -522,7 +524,9 @@ class InstitsController extends AppController {
          $ops[] = array(
             'model' => 'Plan',
             'field' => 'titulo_id',
-            'friendlyName' => 'Con Título de Referencia');
+            'friendlyName' => 'Con Título de Referencia',
+            'asociarPlan' => true,
+             );
 
          //      ORIENTACION
          $ops[] = array(
@@ -534,7 +538,9 @@ class InstitsController extends AppController {
          $ops[] = array(
             'model' => 'Plan',
             'field' => 'norma',
-            'friendlyName' => 'Norma');
+            'friendlyName' => 'Norma',
+            'asociarPlan' => true,
+             );
 
          //      Tipo Instit
          $ops[] = array(
@@ -668,16 +674,16 @@ class InstitsController extends AppController {
         $field = $o['field'];
         $friendlyName = empty($o['friendlyName']) ? $field : $o['friendlyName'];
         $forceText = empty($o['forceText']) ? false : true;
+        $valor = null;
         $asociarPlan = empty($o['asociarPlan']) ? false : true;
-                
+               
+
         $modelField = $model.'.'.$field;
 
         // lista de modelos que se van a consultar en la query
         $this->paginate['modelosInvolucrados'] = array();
 
-        if ($asociarPlan) {
-            $this->Instit->asociarPlan = true;
-        }
+       
         
         // paso al vector del paginador para unificar la busqueda
         if(!empty($this->data[$model][$field])) {
@@ -687,8 +693,16 @@ class InstitsController extends AppController {
         if( !empty($this->passedArgs[$modelField]) ) {
             $valor = $this->passedArgs[$modelField];
         }
+        $this->passedArgs[$modelField] = $valor;
+         
 
         if( !empty($valor) ) {
+
+            if ($asociarPlan) {
+                $this->Instit->asociarPlan = true;
+            }
+
+            
             $this->paginate['modelosInvolucrados'][] = $model;
 
             $friendlyName = empty($friendlyName) ?  $field : $friendlyName;
