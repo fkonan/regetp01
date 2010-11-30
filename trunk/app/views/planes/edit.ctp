@@ -14,7 +14,7 @@ echo $html->css('jquery.autocomplete.css');
             jQuery("#PlanTituloId").val('');
         });
 
-        jQuery("#PlanEstructuraPlanId").change();
+        //jQuery("#PlanEstructuraPlanId").change();
 
 
         jQuery("#PlanTituloName").autocomplete("<?echo $html->url(array('controller'=>'titulos','action'=>'ajax_search'));?>", {
@@ -178,15 +178,15 @@ $cue_instit = $instit['cue'].$anexo;
                 'complete'=>'jQuery("#ajax_indicator2").hide();jQuery("#PlanSubsectorId").removeAttr("disabled")',
                 'onChange'=>true
         ));
-
         $meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
         echo $form->input(
                 'tituloName',
                 array(
                     'label'=> 'Título de Referencia',
                     'id' => 'PlanTituloName',
+                    'name' => 'data[Titulo][name]',
                     'style'=>'max-width: 550px;',
-                    'value'=> @$this->data['Titulo']['name'],
+                    'value'=> $this->data['Titulo']['name'],
                     'after'=> $meter.'<cite>Seleccione primero una oferta.</cite>',
                     'div'=>array('id'=>'divPlanTituloName')));
         echo $form->input('titulo_id',array('type'=>'hidden'));
