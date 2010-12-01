@@ -65,36 +65,25 @@ class TitulosController extends AppController {
         $force_save = false;
 
         if (!empty($this->data)) {
-            // chequea si existen Titulos similares
-            if(empty($this->data['Instit']['force_save'])) {
-                $similares = $this->Titulo->getSimilars($this->data);
+            $this->Titulo->create();
+
+            $sectores = $this->data['Titulo']['SectoresTitulos']['sector_id'];
+            $subsectores = $this->data['Titulo']['SectoresTitulos']['subsector_id'];
+            $prioridades = $this->data['Titulo']['SectoresTitulos']['prioridad'];
+
+            $this->data['Sector'] = array();
+
+            foreach($sectores as $key=>$sector) {
+                $this->data['Sector'][$key]['sector_id'] = $sector ;
+                $this->data['Sector'][$key]['subsector_id'] = $subsectores[$key] ;
+                $this->data['Sector'][$key]['prioridad'] = $prioridades[$key] ;
             }
-            if(empty($similares))
-            {
-                $this->Titulo->create();
 
-                $sectores = $this->data['Titulo']['SectoresTitulos']['sector_id'];
-                $subsectores = $this->data['Titulo']['SectoresTitulos']['subsector_id'];
-                $prioridades = $this->data['Titulo']['SectoresTitulos']['prioridad'];
-
-                $this->data['Sector'] = array();
-
-                foreach($sectores as $key=>$sector) {
-                    $this->data['Sector'][$key]['sector_id'] = $sector ;
-                    $this->data['Sector'][$key]['subsector_id'] = $subsectores[$key] ;
-                    $this->data['Sector'][$key]['prioridad'] = $prioridades[$key] ;
-                }
-
-                if ($this->Titulo->save($this->data)) {
-                    $this->Session->setFlash(__('Titulo guardado.', true));
-                    $this->redirect(array('action'=>'index'));
-                } else {
-                    $this->Session->setFlash(__('El Titulo no se pudo guardar. Por favor, intente de nuevo.', true));
-                }
-            }
-            else {
-                $this->Session->setFlash(__('Hay Títulos similares.', true));
-                $force_save = true;
+            if ($this->Titulo->save($this->data)) {
+                $this->Session->setFlash(__('Titulo guardado.', true));
+                $this->redirect(array('action'=>'index'));
+            } else {
+                $this->Session->setFlash(__('El Titulo no se pudo guardar. Por favor, intente de nuevo.', true));
             }
         }
         $ofertas = $this->Titulo->Oferta->find('list');
@@ -111,35 +100,23 @@ class TitulosController extends AppController {
             $this->flash(__('Invalid Titulo', true), array('action'=>'index'));
         }
         if (!empty($this->data)) {
-            // chequea si existen Titulos similares
-            $similares = array();
-            if(empty($this->data['Instit']['force_save'])) {
-                $similares = $this->Titulo->getSimilars($this->data);
+            $this->Titulo->SectoresTitulo->deleteAll(array('SectoresTitulo.sector_id' => $id));
+
+            $sectores = $this->data['Titulo']['SectoresTitulos']['sector_id'];
+            $subsectores = $this->data['Titulo']['SectoresTitulos']['subsector_id'];
+            $prioridades = $this->data['Titulo']['SectoresTitulos']['prioridad'];
+
+            $this->data['Sector'] = array();
+
+            foreach($sectores as $key=>$sector) {
+                $this->data['Sector'][$key]['sector_id'] = $sector ;
+                $this->data['Sector'][$key]['subsector_id'] = $subsectores[$key] ;
+                $this->data['Sector'][$key]['prioridad'] = $prioridades[$key] ;
             }
-            if(empty($similares))
-            {
-                $this->Titulo->SectoresTitulo->deleteAll(array('SectoresTitulo.sector_id' => $id));
 
-                $sectores = $this->data['Titulo']['SectoresTitulos']['sector_id'];
-                $subsectores = $this->data['Titulo']['SectoresTitulos']['subsector_id'];
-                $prioridades = $this->data['Titulo']['SectoresTitulos']['prioridad'];
-
-                $this->data['Sector'] = array();
-
-                foreach($sectores as $key=>$sector) {
-                    $this->data['Sector'][$key]['sector_id'] = $sector ;
-                    $this->data['Sector'][$key]['subsector_id'] = $subsectores[$key] ;
-                    $this->data['Sector'][$key]['prioridad'] = $prioridades[$key] ;
-                }
-
-                if ($this->Titulo->save($this->data)) {
-                    $this->Session->setFlash(__('Titulo guardado.', true));
-                    $this->redirect(array('action'=>'index'));
-                }
-            }
-            else {
-                $this->Session->setFlash(__('Hay Títulos similares.', true));
-                $force_save = true;
+            if ($this->Titulo->save($this->data)) {
+                $this->Session->setFlash(__('Titulo guardado.', true));
+                $this->redirect(array('action'=>'index'));
             }
         }
         if (empty($this->data)) {

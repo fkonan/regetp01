@@ -18,3 +18,13 @@ function SearchSimilars(url, name, id) {
        }
     });
 }
+
+function Validate() {
+   if (jQuery('.js-prioridad').is(':checked')) {
+        return true;
+    }
+    else {
+        alert('Debe especificar un Sector/Subsector prioritario');
+        return false;
+    }
+}
