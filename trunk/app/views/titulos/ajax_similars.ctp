@@ -1,3 +1,6 @@
+<?php
+if (!empty($similars)) {
+?>
 <b><?php echo $html->image('attention_icon.gif', array('align:absmiddle')); ?> Existen Títulos con nombre similar:</b>
 <div>
     <?php
@@ -30,3 +33,11 @@
     }
     ?>
 </div>
+<?php
+}
+else {
+?>
+<div><b><?php echo $html->image('check.gif', array('v-align:absmiddle')); ?> No existen Títulos con nombre similar</b></div>
+<?php
+}
+?>

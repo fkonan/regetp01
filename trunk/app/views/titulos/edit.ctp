@@ -7,7 +7,7 @@ echo $javascript->link(array(
 echo $html->css(array('jquery.loadmask'));
 ?>
 <div class="titulos form">
-<?php echo $form->create('Titulo');?>
+<?php echo $form->create('Titulo', array('onsubmit'=>'return Validate()'));?>
 	<fieldset>
  		<legend><?php __('Modificar Título');?></legend>
                 <h2>Datos</h2>
@@ -19,10 +19,8 @@ echo $html->css(array('jquery.loadmask'));
         ?>
                 <div id="similars" class="attention"></div>
         <?php
-		echo $form->input('marco_ref', array(//'label'=>'',
+		echo $form->input('marco_ref', array(
                                                     'legend'=>'Marco de Referencia',
-                                                    //'div'=>'',
-                                                   // 'style' => 'float: left',
                                                     'type'=>'radio',
                                                     'options'=>array(1=>'Con Marco de Referencia', 0=>'Sin marco de Referencia'))
 		);
@@ -78,7 +76,8 @@ echo $html->css(array('jquery.loadmask'));
         </div>
         <a style="cursor:pointer" onclick="jQuery('#sectores').append(jQuery('#sectores .js-sector').first().outer())">Agregar</a>
 	</fieldset>
-<?php echo $form->end('guardar');?>
+    <br />
+<?php echo $form->end('Guardar');?>
 </div>
 <div class="actions">
 	<ul>
