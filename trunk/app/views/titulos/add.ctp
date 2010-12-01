@@ -1,9 +1,26 @@
+<?php
+echo $javascript->link(array(
+    'jquery.loadmask.min',
+    'views/titulos/addedit'
+    ));
+
+echo $html->css(array('jquery.loadmask'));
+
+?>
+<script type="text/javascript">
+    
+</script>
 <div class="titulos form"> 
 <?php echo $form->create('Titulo');?>
 	<fieldset>
  		<legend><?php __('Nuevo Título');?></legend>
 	<?php
-		echo $form->input('name', array('label'=>'Nombre del Título'));
+		echo $form->input('name', array('label'=>'Nombre del Título', 
+                                        'onblur'=>'SearchSimilars("'.$html->url('/titulos/ajax_similars/').'", this.value)',
+                                        'div'=>'divTituloName'));
+        ?>
+                <div id="similars" class="attention"></div>
+        <?php
 		echo $form->input('marco_ref', array(//'label'=>'',
                                                     'legend'=>'Marco de Referencia',
                                                     //'div'=>'',

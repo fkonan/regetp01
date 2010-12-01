@@ -2381,3 +2381,8 @@ border-bottom-color: white !important;
     cursor: pointer;
 }
 
+.attention {
+    border: 2px solid orange;
+    font-size: 9pt;
+    display: none;
+}
