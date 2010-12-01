@@ -12,8 +12,6 @@ class Plan extends AppModel {
 	var $belongsTo = array( 
 			'Instit' ,
 			'Oferta',
-//			'Sector',
-//			'Subsector',
 			'Titulo',
                         'EstructuraPlan'
             );
@@ -510,12 +508,15 @@ class Plan extends AppModel {
 		
 		
 		$sql = "
-						SELECT s.id   AS id  , s.name AS name
-						FROM   planes   p 
-						LEFT JOIN sectores s ON (p.sector_id = s.id)
-						LEFT JOIN anios a ON (a.plan_id = p.id)
-						WHERE
-						p.instit_id = $instit_id";
+                        SELECT s.id   AS id  , s.name AS name
+                        FROM   planes   p
+                        LEFT JOIN titulos t ON (t.id = p.titulo_id)
+                        LEFT JOIN sectores_titulos st ON (st.titulo_id = t.id)
+                        LEFT JOIN sectores s ON (st.sector_id = s.id)
+                        LEFT JOIN anios a ON (a.plan_id = p.id)
+                        WHERE
+                        p.instit_id = $instit_id
+                ";
 		
   		if ((int)$ciclo_id > 0){
 			$sql .= " 	AND a.ciclo_id = $ciclo_id";
@@ -525,7 +526,6 @@ class Plan extends AppModel {
 						GROUP BY s.id, s.name 
 						ORDER BY s.name ASC
 		";
-		
 		
 		$data = $this->query($sql);
 
@@ -598,8 +598,8 @@ class Plan extends AppModel {
   		}
   		$vec = $this->Anio->find('all',array(
   					'contain'=>array('Plan'=>array('Oferta(abrev)')), 
-  					'group'=>'"Plan"."id", "Plan"."instit_id", "Plan"."oferta_id", "Plan"."old_item", "Plan"."norma", "Plan"."nombre", "Plan"."perfil", "Plan"."sector", "Plan"."duracion_hs", "Plan"."duracion_semanas", "Plan"."duracion_anios", "Plan"."matricula", "Plan"."observacion", "Plan"."ciclo_alta", "Plan"."ciclo_mod", "Plan"."created", "Plan"."modified", "Plan"."sector_id", "Plan"."subsector_id"',
-  					'fields'=>'"Plan"."id" AS "Plan__id", "Plan"."instit_id" AS "Plan__instit_id", "Plan"."oferta_id" AS "Plan__oferta_id", "Plan"."old_item" AS "Plan__old_item", "Plan"."norma" AS "Plan__norma", "Plan"."nombre" AS "Plan__nombre", "Plan"."perfil" AS "Plan__perfil", "Plan"."sector" AS "Plan__sector", "Plan"."duracion_hs" AS "Plan__duracion_hs", "Plan"."duracion_semanas" AS "Plan__duracion_semanas", "Plan"."duracion_anios" AS "Plan__duracion_anios", "Plan"."matricula" AS "Plan__matricula", "Plan"."observacion" AS "Plan__observacion", "Plan"."ciclo_alta" AS "Plan__ciclo_alta", "Plan"."ciclo_mod" AS "Plan__ciclo_mod", "Plan"."created" AS "Plan__created", "Plan"."modified" AS "Plan__modified", "Plan"."sector_id" AS "Plan__sector_id", "Plan"."subsector_id" AS "Plan__subsector_id"',
+  					'group'=>'"Plan"."id", "Plan"."instit_id", "Plan"."oferta_id", "Plan"."old_item", "Plan"."norma", "Plan"."nombre", "Plan"."perfil", "Plan"."sector", "Plan"."duracion_hs", "Plan"."duracion_semanas", "Plan"."duracion_anios", "Plan"."matricula", "Plan"."observacion", "Plan"."ciclo_alta", "Plan"."ciclo_mod", "Plan"."created", "Plan"."modified", "Plan"."titulo_id"',
+  					'fields'=>'"Plan"."id" AS "Plan__id", "Plan"."instit_id" AS "Plan__instit_id", "Plan"."oferta_id" AS "Plan__oferta_id", "Plan"."old_item" AS "Plan__old_item", "Plan"."norma" AS "Plan__norma", "Plan"."nombre" AS "Plan__nombre", "Plan"."perfil" AS "Plan__perfil", "Plan"."sector" AS "Plan__sector", "Plan"."duracion_hs" AS "Plan__duracion_hs", "Plan"."duracion_semanas" AS "Plan__duracion_semanas", "Plan"."duracion_anios" AS "Plan__duracion_anios", "Plan"."matricula" AS "Plan__matricula", "Plan"."observacion" AS "Plan__observacion", "Plan"."ciclo_alta" AS "Plan__ciclo_alta", "Plan"."ciclo_mod" AS "Plan__ciclo_mod", "Plan"."created" AS "Plan__created", "Plan"."modified" AS "Plan__modified", "Plan"."titulo_id" AS "Plan__titulo_id"',
   					'conditions'=>$condiciones));
   		
 		return $vec;
