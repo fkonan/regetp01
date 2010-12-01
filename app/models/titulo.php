@@ -45,5 +45,38 @@ class Titulo extends AppModel {
             'Subsector' => array('joinTable' => 'sectores_titulos')
         );
 
+
+        function getSimilars($name=null, $titulo_id=null) {
+            $similars = array();
+
+            if (!empty($name)) {
+                $nombre = $name;
+            }
+            elseif (!empty($this->data['Titulo']['name'])) {
+                $nombre = $this->data['Titulo']['name'];
+            }
+
+            if (!empty($titulo_id)) {
+                $id = $titulo_id;
+            }
+            elseif (!empty($this->data['Titulo']['id'])) {
+                $id = $this->data['Titulo']['id'];
+            }
+
+            if(!empty($nombre)) {
+                $conditions = array("lower(Titulo.name)  SIMILAR TO ?" => convertir_texto_plano($nombre));
+
+                if (!empty($id)) {
+                    // si esta editando, que no sea el mismo
+                    $conditions['Titulo.id <>'] = $id;
+                }
+
+                $similars = $this->find('all', array(
+                                'conditions' => $conditions));
+            }
+
+            return $similars;
+        }
+
 }
 ?>
