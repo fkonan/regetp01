@@ -1,9 +1,15 @@
 <b><?php echo $html->image('attention_icon.gif', array('align:absmiddle')); ?> Existen Títulos con nombre similar:</b>
 <div>
     <?php
-    $abrio = false;
+    $abrio = $identicos = false;
     foreach ($similars as $k=>$titulo) {
-        $pos = strstr($titulo['Titulo']['name'], $name);
+        if ($titulo['Titulo']['name'] == $name) {
+            $identicos = true;
+        }
+        else {
+            $identicos = false;
+        }
+
         if ($k > 5 && !$abrio) {
     ?>
         <a href="#" id="linkmas" onclick="jQuery('#vermas').attr('style', 'display:block'); jQuery(this).hide(); jQuery('#linkmenos').show();">ver más...</a>
@@ -13,7 +19,7 @@
             $abrio = true;
         }
     ?>
-        &bull; <?=$titulo['Titulo']['name']?><br />
+            &bull; <?php if ($identicos) {?><span style="color:red;"><? }?><?=$titulo['Titulo']['name']?><?php if ($identicos) {?></span><? }?><br />
     <?php
     }
 
