@@ -377,7 +377,7 @@ class InstitsController extends AppController {
             }
             else{
                 //debug(convertir_para_busqueda_avanzada($q)); die();
-                $this->paginate['Instit']['conditions'] = array("(to_ascii(lower(Tipoinstit.name)) || ' n ' || to_ascii(lower(Instit.nroinstit)) || ' ' || to_ascii(lower(Instit.nombre))) SIMILAR TO ?" => convertir_para_busqueda_avanzada($q));
+                $this->paginate['Instit']['conditions'] = array("(to_ascii(lower('Tipoinstit'.'name')) || ' n ' || to_ascii(lower('Instit'.'nroinstit')) || ' ' || to_ascii(lower('Instit'.'nombre'))) SIMILAR TO ?" => convertir_para_busqueda_avanzada($q));
             }
         }
 
@@ -402,15 +402,14 @@ class InstitsController extends AppController {
         if(!empty($this->passedArgs['cue'])) {
             // set the conditions
             $arr_cond1 = array('CAST(((Instit.cue*100)+Instit.anexo) as character(60)) SIMILAR TO ?' => '%'.$this->passedArgs['cue'].'%');
-            $this->paginate['conditions'] = $arr_cond1;
+            $this->paginate['Instit']['conditions'] = $arr_cond1;
 
             // set the Search data, so the form remembers the option
-            $array_condiciones['CUE'] = $this->passedArgs['cue'];
-            $url_conditions['cue'] = $this->passedArgs['cue'];
+            $this->paginate['viewConditions']['CUE'] = $this->passedArgs['cue'];
         }
+        
 
-
-         /**
+        /**
          *          ACTIVO
          */
         if(isset($this->data['Instit']['activo'])) {
@@ -429,19 +428,30 @@ class InstitsController extends AppController {
                 case 1: //activas
                     $this->paginate['Instit']['conditions']['Instit.activo'] = $this->passedArgs['activo'];
                     $aux = $this->passedArgs['activo']? 'Si':'No';
-                    $array_condiciones['Ingresada al RFIETP'] = $aux;
-                    $url_conditions['activo'] = $this->passedArgs['activo'];
+                    $this->paginate['viewConditions']['Ingresada al RFIETP'] = $aux;
                     break;
                 endswitch;
         }
 
+
+
+        /**
+         *      NOMBRE COMPLETO
+         */
+        if(!empty($this->data['Instit']['nombre_completo'])) {
+             $this->passedArgs['nombre_completo'] = utf8_encode($this->data['Instit']['nombre_completo']);
+        }
+        if(!empty($this->passedArgs['nombre_completo'])) {
+            $this->paginate['Instit']['conditions'][
+                            "to_ascii(lower(Tipoinstit.name))||' n '||".
+                            "to_ascii(lower(Instit.nroinstit))||' '||".
+                            "to_ascii(lower(Instit.nombre)) SIMILAR TO ?"] = array(convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['nombre_completo'])));
+
+            $this->paginate['viewConditions']['Nombre'] = utf8_decode($this->passedArgs['nombre_completo']);
+        }
+
+
         //////////////// Automagiccccs filter
-        
-        //      NOMBRE COMPLETO         
-        $ops[] = array(
-            'model' => 'Instit',
-            'field' => 'nombre_completo',
-            'friendlyName' => 'Nombre');
 
         //     Nro Institucion
          $ops[] = array(
@@ -561,7 +571,6 @@ class InstitsController extends AppController {
         /*********************************************************************/
         /*          FIN -*-CONDITIONS-*- de busqueda                         */
         /*********************************************************************/
-
 
         $this->Instit->recursive = 1;//para alivianar la carga del server
         $pagin = $this->paginate('Instit');
