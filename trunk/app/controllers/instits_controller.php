@@ -377,7 +377,7 @@ class InstitsController extends AppController {
             }
             else{
                 //debug(convertir_para_busqueda_avanzada($q)); die();
-                $this->paginate['Instit']['conditions'] = array("(to_ascii(lower('Tipoinstit'.'name')) || ' n ' || to_ascii(lower('Instit'.'nroinstit')) || ' ' || to_ascii(lower('Instit'.'nombre'))) SIMILAR TO ?" => convertir_para_busqueda_avanzada($q));
+                $this->paginate['Instit']['conditions'] = array("(to_ascii(lower(Tipoinstit.name)) || ' n ' || to_ascii(lower(Instit.nroinstit)) || ' ' || to_ascii(lower(Instit.nombre))) SIMILAR TO ?" => convertir_para_busqueda_avanzada($q));
             }
         }
 

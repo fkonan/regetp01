@@ -721,11 +721,16 @@ class Instit extends AppModel {
                 }
                 return $this->__asociarPlanParamsSetup($conditions, 'solocontar');
             } else {
-                if ( !empty($conditions['conditions']) ) {
+                // TODO: Hay que ver por que necesito hacer esto para que funcione
+                // pareciera que se pasan distintos arrays de "conditions" anidados
+                if ( isset($conditions['conditions']['conditions']) && is_array($conditions['conditions']['conditions'])) {
+                    $parameters = $conditions['conditions']['conditions'];
+                } elseif( isset($conditions['conditions']) && is_array($conditions['conditions']) ) {
                     $parameters = $conditions['conditions'];
-                } else {
+                }elseif ( !empty($conditions) ) {
                     $parameters = $conditions;
                 }
+
                 $parameters['conditions'] = $parameters;
                 if ($recursive != $this->recursive) {
                         $parameters['recursive'] = $recursive;
