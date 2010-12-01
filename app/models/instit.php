@@ -541,13 +541,13 @@ class Instit extends AppModel {
   				$oferta_abrev = $o[0]['abrev'];
   				
   				$sql_suma_matriculas = "SELECT sum(a.matricula)
-										FROM anios as a
-										LEFT JOIN planes as p ON (p.id = a.plan_id)
-										LEFT JOIN ofertas as o ON (o.id = p.oferta_id)
-										LEFT JOIN instits as i ON (i.id = p.instit_id)
-										WHERE i.id = $id
-										AND a.ciclo_id = $ciclo
-										AND o.id = $oferta";
+                                                        FROM anios as a
+                                                        LEFT JOIN planes as p ON (p.id = a.plan_id)
+                                                        LEFT JOIN ofertas as o ON (o.id = p.oferta_id)
+                                                        LEFT JOIN instits as i ON (i.id = p.instit_id)
+                                                        WHERE i.id = $id
+                                                        AND a.ciclo_id = $ciclo
+                                                        AND o.id = $oferta";
   				 $aux = $this->query($sql_suma_matriculas);
   				 if(isset($aux[0][0]['sum'])):
   				 	$matriz_rtado['totales'][$ciclo][$oferta_abrev]['total_matricula'] = (int)$aux[0][0]['sum'];
@@ -619,17 +619,17 @@ class Instit extends AppModel {
   	 * @param $institData es el $this->data del formulario
   	 * @return array son los datos de la Institucion
   	 */
-  	function cambioCue($institData){
-  		$this->id = $institData['Instit']['id'];
-  		$instit = $this->read(array('id','cue','anexo'));
-  		
-  		if(isset($institData['Instit']['cue']) && isset($institData['Instit']['anexo']) && isset($institData['Instit']['id'])){
-  			if (($this->data['Instit']['cue']*100+$this->data['Instit']['anexo']) != ($institData['Instit']['cue']*100+$institData['Instit']['anexo'])){
-  				return $instit;
-  			}
-  			return null;
-  		}
-  		//else debug('vino vacio el cue, anexo o id de institucion y no se puede comprobar si hubo cambio de cue');
+  	function cambioCue($institData) {
+            $this->id = $institData['Instit']['id'];
+            $instit = $this->read(array('id','cue','anexo'));
+
+            if(isset($institData['Instit']['cue']) && isset($institData['Instit']['anexo']) && isset($institData['Instit']['id'])){
+                    if (($this->data['Instit']['cue']*100+$this->data['Instit']['anexo']) != ($institData['Instit']['cue']*100+$institData['Instit']['anexo'])){
+                            return $instit;
+                    }
+                    return null;
+            }
+            //else debug('vino vacio el cue, anexo o id de institucion y no se puede comprobar si hubo cambio de cue');
   	}
   	
   	
@@ -773,33 +773,39 @@ class Instit extends AppModel {
             $parameters['group'] = 'Instit.id';
                 $parameters['joins'] = array(
                     array(
+                        'table' => 'tipoinstits',
+                        'type' => 'LEFT',
+                        'alias' => 'Tipoinstit',
+                        'conditions' => array('Tipoinstit.id = Instit.tipoinstit_id'),
+                    ),
+                    array(
                         'table' => 'planes',
-                        'type' => 'left',
+                        'type' => 'LEFT',
                         'alias' => 'Plan',
                         'conditions' => array('Plan.instit_id = Instit.id'),
                     ),
                     array(
                         'table' => 'titulos',
-                        'type' => 'left',
+                        'type' => 'LEFT',
                         'alias' => 'Titulo',
                         'conditions' => array('Titulo.id = Plan.titulo_id'),
                     ),
                     array(
                         'table' => 'sectores_titulos',
                         'alias' => 'SectoresTitulo',
-                        'type' => 'left',
+                        'type' => 'LEFT',
                         'conditions' => array('Titulo.id = SectoresTitulo.titulo_id')
                     ),
                     array(
                         'table' => 'subsectores',
                         'alias' => 'Subsector',
-                        'type' => 'left',
+                        'type' => 'LEFT',
                         'conditions' => array('SectoresTitulo.subsector_id = Subsector.id')
                     ),
                     array(
                         'table' => 'sectores',
                         'alias' => 'Sector',
-                        'type' => 'left',
+                        'type' => 'LEFT',
                         'conditions' => array('SectoresTitulo.sector_id = Sector.id')
                     ),
                 );                
