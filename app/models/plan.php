@@ -201,8 +201,10 @@ class Plan extends AppModel {
                 if ($recursive != $this->recursive) {
                     $parameters['recursive'] = $recursive;
                 }
+                
+                return $this->Instit->getPlanes($conditions['Instit.id'], $conditions['Plan.oferta_id'], (isset($conditions['Anio.ciclo_id'])?$conditions['Anio.ciclo_id']:0));
 
-                return $this->find('conAnios', array_merge($parameters, $extra));
+                //return $this->find('conAnios', array_merge($parameters, $extra));
             }
             else {
                 $parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
@@ -213,8 +215,11 @@ class Plan extends AppModel {
 
                 $extra = array();
 
-                return $this->find('all', array_merge($parameters, $extra));
+                //return $this->find('all', array_merge($parameters, $extra));
+                return $this->Instit->getPlanes($conditions['Instit.id'], $conditions['Plan.oferta_id'], $conditions['Anio.ciclo_id']);
             }
+
+        
         }
         
 
@@ -234,9 +239,15 @@ class Plan extends AppModel {
 
 
         function __findConLeftJoinAnios($parameters) {
-            debug($parameters);
+            
                 $parameters['group'] = 'Plan.id';
                 $parameters['joins'] = array(
+                    array(
+                        'table' => 'instits',
+                        'type' => 'LEFT',
+                        'alias' => 'Instit',
+                        'conditions' => array('Instit.id = Plan.instit_id'),
+                    ),
                     array(
                         'table' => 'anios',
                         'type' => 'LEFT',
