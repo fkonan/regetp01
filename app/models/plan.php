@@ -171,52 +171,18 @@ class Plan extends AppModel {
   	
   	function paginateCount($conditions = null, $recursive = 0)
   	{
-		if ($this->asociarAnio)
-		{
-                        $this->unBindModel(array('hasMany'=>array('Anio')));
-			$this->bindModel(array('hasOne' => array('Anio')));
-                        $field = $this->getPagFields();
-	        
-			if ($this->traerUltimaAct){
-				$selectFields = array_merge($field,array("max(\"Anio\".\"ciclo_id\") AS Calculado__max_ciclo"));
-	        	$groupFields  = $field;
-			} else {
-				$selectFields = array_merge($field, array('Anio.ciclo_id'));
-				$groupFields = $selectFields;
-			}				
+		if ($this->asociarAnio){
+                    $parameters = compact('conditions');
+                    return count($this->find('conAnios', $parameters));
+  		} else {
+                    $parameters = compact('conditions');
 
-	        if ($this->maxCiclo != "" ){
-	        	// le concateno al ultimo detalle del group el HAVING
-	        	$groupFields = array_merge($groupFields ,array('1" HAVING max("Anio"."ciclo_id") = ' . $this->maxCiclo));
-	        }	
-	        
-                $extra = array(
-                    'group' => $groupFields,
-                    'fields' => $selectFields,
-                    'contain'=>array(
-                        'Instit', 'Oferta',
-                        'Sector', 'Subsector', 'Titulo',
-                        'EstructuraPlan'=>array('Etapa'),
-                        'Anio'=> array('EstructuraPlanesAnio')
-                        ),
-                    );
-                
-        	$parameters      = compact('conditions');
-        	$this->recursive = 0;
+                    if ($recursive != $this->recursive){
+                            $parameters['recursive'] = $recursive;
+                    }
+                    $extra = array();
 
-        	return count($this->find('all', array_merge($parameters, $extra)));
-  		}
-  		else
-  		{
-			$parameters = compact('conditions');
-
-			if ($recursive != $this->recursive){
-				$parameters['recursive'] = $recursive;
-			}
-
-			$extra = array();
-
-			return $this->find('count', array_merge($parameters, $extra));
+                    return $this->find('count', array_merge($parameters, $extra));
   		}        	
     }
 
@@ -226,44 +192,17 @@ class Plan extends AppModel {
   	 * 
   	 * @return cantidad de registros
   	 */
-        
-    function paginate($conditions = null, $fields = null, $order = null, $limit = null, $page = 1, $recursive = null, $tieneHasMany = false) {
+
+    
+    function paginate($conditions = null, $fields = null, $order = null, $limit = null, $page = 1, $recursive = null, $extra = null) {
             if ($this->asociarAnio) {
-                $this->bindModel(array('hasOne' => array('Anio')));
-                $field = $this->getPagFields();
-
-                if ($this->traerUltimaAct) {
-                    $selectFields = array_merge($field,array('max("Anio"."ciclo_id") AS "Anio__ciclo_id"'));
-                    $groupFields  = $field;
-                } else {
-                    $selectFields = array_merge($field, array('Anio.ciclo_id'));
-                    $groupFields = $selectFields;
-                }
-
-                if ($this->maxCiclo != "" ) {
-                    $groupFields = array_merge($groupFields ,array('1" HAVING max("Anio"."ciclo_id") = ' . $this->maxCiclo));
-                }
-                //$groupFields = array_merge($groupFields,array('Anio.anio'));
-                //rompe vista TODOS en solapas de Oferta Educativa
-
-                $extra = array(
-                    'group' => $groupFields,
-                    'fields' => $selectFields,
-                    'contain'=>array(
-                        'Instit', 'Oferta',
-                        'Sector', 'Subsector', 'Titulo',
-                        'EstructuraPlan'=>array('Etapa'),
-                        'Anio.Etapa'
-                        ),
-                    //'order'=>'Anio.anio'  rompe vista TODOS en solapas de Oferta Educativa
-                    );
                 $parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
 
                 if ($recursive != $this->recursive) {
                     $parameters['recursive'] = $recursive;
                 }
 
-                return $this->find('all', array_merge($parameters, $extra));
+                return $this->find('conAnios', array_merge($parameters, $extra));
             }
             else {
                 $parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
@@ -276,6 +215,77 @@ class Plan extends AppModel {
 
                 return $this->find('all', array_merge($parameters, $extra));
             }
+        }
+        
+
+        public function find($conditions = null, $fields = null, $order = null, $recursive = null) {
+            /* @var $ret Array */
+            $ret = array();
+            switch ($conditions) {
+               case 'conAnios':
+                   $ret = $this->__findConLeftJoinAnios($fields);
+                   break;
+               default:
+                   $ret = parent::find($conditions, $fields, $order, $recursive);
+                   break;
+            }
+            return $ret;
+        }
+
+
+
+        function __findConLeftJoinAnios($parameters) {
+                $parameters['group'] = 'Plan.id';
+                $parameters['joins'] = array(
+                    array(
+                        'table' => 'anios',
+                        'type' => 'LEFT',
+                        'alias' => 'Anio',
+                        'conditions' => array('Plan.id = Anio.plan_id'),
+                    ),
+                    array(
+                        'table' => 'estructura_planes_anios',
+                        'type' => 'LEFT',
+                        'alias' => 'EstructuraPlanesAnio',
+                        'conditions' => array('EstructuraPlanesAnio.id = Anio.estructura_planes_anio_id'),
+                    ),
+             );
+                    
+            // @var $order es para almacenar temporal mente este valor
+                // para que se ejecute la busqueda 'list' sin problemas no debe tener un orden
+                $oldThisOrder = $this->order;
+                $this->order = array();
+                $order = null;
+                if ( !empty($parameters['order']) ) {
+                    $order = $parameters['order'];
+                    unset($parameters['order']);
+                    $ordenDelModelo = $this->order;
+                }
+
+                $parameters['fields']= 'Plan.id';
+                // recojo todas las instituciones que cumplan con los criterios de busqueda
+                $planesIds = $this->find('list', $parameters);
+                
+                if (empty($planesIds) ) {
+                    // no hay instituciones que cumplan con esos criterios de busqueda
+                    return array();
+                }
+                $parameters['conditions'] = array('Plan.id' => $planesIds);
+
+                // recupero el order, previamente eliminado para
+                $parameters['order'] = $order;
+                $this->order = $oldThisOrder;
+                //$this->order = $ordenDelModelo;
+
+                unset( $parameters['limit'] );
+                unset( $parameters['page'] );
+                unset( $parameters['joins'] );
+                unset( $parameters['group'] );
+                unset( $parameters['fields'] );
+                
+                $planes = $this->find('all', $parameters);
+
+                return $planes;
         }
 
         public function findXCiclo($instit_id, $oferta_id, $ciclo_id){
