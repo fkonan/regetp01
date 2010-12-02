@@ -513,17 +513,18 @@ class PlanesController extends AppController {
         //$this->paginate['order'] = array("Anio.ciclo_id");
 
         $planes = $this->paginate();
+        $planes = $planes['Plan'];
         //$planes = $this->Plan->Instit->getPlanes($instit_id, $oferta_id, $ciclo);
        
         $newVecPlanes = array();
         $i = 0;
         foreach($planes as &$plan){
             if($ciclo == 0){
-                $ultimo_ciclo = $this->Plan->getUltimoCiclo($plan['Plan']['id']);
-                $plan['matricula'] = $this->Plan->dameMatriculaDeCiclo($plan['Plan']['id'],$ultimo_ciclo);
+                $ultimo_ciclo = $this->Plan->getUltimoCiclo($plan['id']);
+                $plan['matricula'] = $this->Plan->dameMatriculaDeCiclo($plan['id'],$ultimo_ciclo);
             }
             else{
-                $plan['matricula'] = $this->Plan->dameMatriculaDeCiclo($plan['Plan']['id'],$ciclo);
+                $plan['matricula'] = $this->Plan->dameMatriculaDeCiclo($plan['id'],$ciclo);
             }
         }
         
