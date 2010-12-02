@@ -22,7 +22,7 @@ if (!empty($similars)) {
             $abrio = true;
         }
     ?>
-            &bull; <?php if ($identicos) {?><span style="color:red;"><? }?><?=$titulo['Titulo']['name']?><?php if ($identicos) {?></span><? }?><br />
+            &bull; <?php if ($identicos) {?><span style="color:red;"><? }?><?=$titulo['Titulo']['name']?> (<?=$titulo['Oferta']['name']?>)<?php if ($identicos) {?></span><? }?><br />
     <?php
     }
 

@@ -252,10 +252,9 @@ class PlanesController extends AppController {
             $this->redirect(array('action'=>'index'));
         }
 
-        $this->hasMany = array(
-            'Anio' => array('order'=> array('Anio.plan_id', 'Anio.ciclo_id DESC', 'Anio.nro_anio DESC')),
-	);
+        
         $this->Plan->contain(array(
+            'Anio',
             'Oferta',
             'Titulo'=>array(
                 'SectoresTitulo' => array('Sector','Subsector','order'=>array('SectoresTitulo.prioridad DESC'))
