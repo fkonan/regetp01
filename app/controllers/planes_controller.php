@@ -254,9 +254,9 @@ class PlanesController extends AppController {
 
         
         $this->Plan->contain(array(
-            'Anio',
+            'Anio' => array('EstructuraPlanesAnio'),
             'Oferta',
-            'Titulo'=>array(
+            'Titulo' => array(
                 'SectoresTitulo' => array('Sector','Subsector','order'=>array('SectoresTitulo.prioridad DESC'))
                 )
             )
