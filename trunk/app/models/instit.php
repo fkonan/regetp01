@@ -1166,23 +1166,30 @@ class Instit extends AppModel {
 	 * @param  integer $instit_id
 	 * @return integer $orientacion_id
 	 */
-	function getOrientacionSegunSusPlanes($instit_id=0) {
-
+	function getOrientacionSegunSusPlanes($instit_id=0)
+        {
             if(!empty($this->id)) {
                 $instit_id = $this->id;
             }
 
             $planes = $this->Plan->find('all', array(
                     'conditions'=>array('Plan.instit_id'=>$instit_id),
-                    'contain'=>array('Titulo.Sector')));
+                    'contain'=>array(
+                        'Titulo' => array('Subsector.Sector')
+                        )
+                )
+                    );
             $cantPlanes = count($planes);
-
+            
             $ant = -1;
             foreach ($planes as $p) {
-                if( $ant != -1 && $p['Sector']['orientacion_id']!= $ant ) {
-                    return 0;
+                if (empty($p['Titulo']['Subsector'])) continue;
+                foreach ( $p['Titulo']['Subsector'] as $s ) {
+                    if( $ant != -1 && $s['Sector']['orientacion_id']!= $ant ) {
+                        return 0;
+                    }
+                    $ant = $s['Sector']['orientacion_id'];
                 }
-                $ant = $p['Sector']['orientacion_id'];
             }
 
             return $ant;

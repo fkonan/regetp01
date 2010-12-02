@@ -30,7 +30,7 @@ Event.observe(window, "keypress", function(e){
 					'id'=>'FormOrientacion'));
 
 
-        echo $form->input('jurisdiccion_id', array('value'=>$this->data['Instit']['jurisdiccion_id']));
+        echo $form->input('jurisdiccion_id', array('value'=>$this->data['Instit']['jurisdiccion_id'], 'empty'=>'Todos'));
 		
 	echo $form->input('Form.claseinstit_id', array(
 										 'empty' => 'Todos',
@@ -52,8 +52,20 @@ Event.observe(window, "keypress", function(e){
 <?php foreach ($planes as $p):?>
 <?php $div_id = "plan-id-".$p['Plan']['id']; ?>
 	<dl style="font-size: 12px;">
-		<dt>Nombre:</dt>				<dd style="margin-left: 10em;"><?php echo $html->link($p['Plan']['nombre'],'/Planes/view/'.$p['Plan']['id'])?>&nbsp;</dd>
-		<dt>Sector:</dt>				<dd style="color: OrangeRed; font-size: 12px;"><?php echo $p['Sector']['name']?> &nbsp;( Orientación: <?php echo (!empty($p['Sector']['Orientacion']['name']))?$p['Sector']['Orientacion']['name']:"";?> )&nbsp;</dd>
+		<dt>Nombre:</dt>
+                <dd style="margin-left: 10em;"><?php echo $html->link($p['Plan']['nombre'],'/Planes/view/'.$p['Plan']['id'])?>&nbsp;</dd>
+		<dt>Titulo:</dt>                
+                <dd><?php echo $p['Titulo']['name']?></dd>
+                <?php if (empty($p['Titulo']['Subsector'])) continue; ?>
+                <?php foreach ( $p['Titulo']['Subsector'] as $s) { ?>
+                <dt>Sectores</dt>
+                <dd style="color: OrangeRed; font-size: 12px;">
+                    <?php echo $s['Sector']['name'].' :: '. $s['name']?>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;( Orientación: <?php echo (!empty($s['Sector']['Orientacion']['name']))?$s['Sector']['Orientacion']['name']:"";?> )&nbsp;
+                </dd>
+                <?php } ?>
+                
 	</dl>
 	<a style="font-size: 10px;" href="javascript:" onclick="$('<? echo $div_id?>').toggle(); return false;">Más info del Plan</a>
 	<div style="display: none; background-color: beige;" id="<? echo $div_id?>">
