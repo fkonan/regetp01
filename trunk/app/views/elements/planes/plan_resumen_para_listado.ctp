@@ -47,22 +47,28 @@ if (!empty($plan['Plan'])) {
             Sector:
             <span class="plan_sector_name">
                 <?php
-                $sectores = "";
-                $sectores_id = "";
+                $sectores = array();
+                $sectores_id = array();
 
-                foreach($plan['Titulo']['Sector'] as $sector){
-                    $sectores = $sectores . $sector['name'] . "/";
-                    $sectores_id = $sectores_id . $sector['id'] . ",";
-                }
-
-                $sectores = substr($sectores, 0, strlen($sectores) - 1);
-                $sectores_id = substr($sectores_id, 0, strlen($sectores_id) - 1);
+                $sectores_s = "";
+                $sectores_ids_s = "";
                 
+                if(isset($plan['Titulo']['Sector'])){
+                    foreach($plan['Titulo']['Sector'] as $sector){
+                        if(!in_array($sector['id'], $sectores_id)){
+                            $sectores[] = $sector['name'];
+                            $sectores_id[] = $sector['id'];
+                        }
+                    }
+
+                    $sectores_s = implode("/", $sectores);
+                    $sectores_ids_s = implode(",", $sectores_id);
+                }
                 ?>
-                <?php echo $sectores;?>
+                <?php echo (empty($sectores_s))?" - ":$sectores_s;?>
             </span>
         </span>
     </div>
-    <input class="plan_sector" type="hidden" value="<?php echo $sectores_id;?>"/>
+    <input class="plan_sector" type="hidden" value="<?php echo $sectores_ids_s;?>"/>
     <input class="plan_ciclo" type="hidden" value="<?php echo empty($plan['Anio'][0]['ciclo_id'])?0:$plan['Anio'][0]['ciclo_id'] ?>"/>
 </div>

@@ -68,13 +68,20 @@ $cue_instit = $instit['cue'].$anexo;
                     <ul>
                     <?php
                         $i = 0;
-                        foreach($plan['Titulo']['SectoresTitulo'] as $sector){
+                        if(isset($plan['Titulo']['SectoresTitulo'])){
+                            foreach($plan['Titulo']['SectoresTitulo'] as $sector){
                     ?>
                         <li style="<?php echo ($i == 0)? 'font-weight:bold':''?>"><?php echo (($sector['Sector']['name']) . (($sector['Subsector'])?(" / " . $sector['Subsector']['name']   ):""))?></li>
                     <?php
-                        $i++;
-                    }
+                            $i++;
+                            }
+                        }
+                        else{
                     ?>
+                        -
+                        <?php
+                        }
+                        ?>
                     </ul>
 		</dd>
 				
