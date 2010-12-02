@@ -233,8 +233,8 @@ class Plan extends AppModel {
         }
 
 
-
         function __findConLeftJoinAnios($parameters) {
+            debug($parameters);
                 $parameters['group'] = 'Plan.id';
                 $parameters['joins'] = array(
                     array(
