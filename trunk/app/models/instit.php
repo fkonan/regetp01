@@ -761,8 +761,6 @@ class Instit extends AppModel {
                 return $this->find('all', array_merge($parameters, $extra));
             }
         }
-
-
         
 
         
@@ -1350,9 +1348,11 @@ class Instit extends AppModel {
                         'Plan.oferta_id'=>$oferta_id
                 ),
                 'contain'=>array(
-                        'Sector'
-                ),
-                'order' => array('Sector.name'),
+                        'Titulo' => array(
+                            'Sector',
+                            'order' => array('Sector.name'),
+                            ),
+                ),                
             ));
 
 
