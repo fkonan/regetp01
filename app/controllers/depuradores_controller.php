@@ -426,8 +426,8 @@ class DepuradoresController extends AppController {
 
         $planes = $this->Instit->Plan->find('all',array('conditions'=>array('Plan.instit_id'=>$this->data['Instit']['id']),
                 'contain'=>array(
-                        'Sector'=>array('Orientacion'),
-                        'Anio' => array('Ciclo'),
+                    'Titulo'=> array( 'Subsector' =>array('Sector.Orientacion')),
+                    'Anio' => array('Ciclo'),
         )));
 
 
