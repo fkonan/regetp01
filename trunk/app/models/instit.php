@@ -1339,22 +1339,38 @@ class Instit extends AppModel {
 
 
         function listSectoresConOferta($instit_id, $oferta_id){
+
             $sectores = $this->Plan->find("all",array(
                 'fields'=>array(
                         'DISTINCT Sector.id', 'Sector.name'
                 ),
+                'joins'=>array(
+                   array(
+                          'table' => 'sectores_titulos',
+                          'alias' => 'SectoresTitulo',
+                          'type' => 'INNER',
+                          'conditions' => array('SectoresTitulo.titulo_id = Plan.titulo_id')
+                    ),
+                    array(
+                          'table' => 'sectores',
+                          'alias' => 'Sector',
+                          'type' => 'INNER',
+                          'conditions' => array('Sector.id = SectoresTitulo.sector_id')
+                    )
+                ),
                 'conditions'=>array(
-                        'Plan.instit_id'=>$instit_id,
-                        'Plan.oferta_id'=>$oferta_id
+                                    'Plan.instit_id'=>$instit_id,
+                                    'Titulo.oferta_id'=>$oferta_id
+
                 ),
                 'contain'=>array(
                         'Titulo' => array(
                             'Sector',
                             'order' => array('Sector.name'),
                             ),
-                ),                
-            ));
-
+                ),
+                )
+            );
 
             $sectores_aux = array();
 
