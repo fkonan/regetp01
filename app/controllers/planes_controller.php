@@ -545,14 +545,16 @@ class PlanesController extends AppController {
 
     function view_it_sec_sup($instit_id,$oferta_id,$ciclo=0) {
 
-        $planes = $this->Plan->Instit->getPlanes($instit_id, $oferta_id, $ciclo);
+        $this->Plan->asociarAnio = true;
+        $planes = $this->paginate('Plan', array('instit_id'=> $instit_id, 'oferta_id' => $oferta_id, 'ciclo_id'=>$ciclo));
+        //$planes = $this->Plan->Instit->getPlanes($instit_id, $oferta_id, $ciclo);
         // agrego el index "matricula" directamente que dependa de "Plan"
         foreach($planes as &$plan){
             if ( !empty($plan['Plan']) ) {
                 $plan['Plan']['matricula'] = 0;
         
                 foreach($plan['Anio'] as $anio){
-                    $plan['Plan']['matricula'] += $anio['matricula'];
+                    $plan['Plan']['matricula'] += $anio['Anio']['matricula'];
                 }
             }
         }
