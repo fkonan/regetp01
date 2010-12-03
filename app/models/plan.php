@@ -204,9 +204,7 @@ class Plan extends AppModel {
                     $parameters['recursive'] = $recursive;
                 }
                 
-                return $this->Instit->getPlanes($conditions['Instit.id'], $conditions['Plan.oferta_id'], (isset($conditions['Anio.ciclo_id'])?$conditions['Anio.ciclo_id']:0), $limit, $page);
-
-                //return $this->find('conAnios', array_merge($parameters, $extra));
+                return $this->Instit->getPlanes($conditions['Instit.id'], $conditions['Plan.oferta_id'], (isset($conditions['Anio.ciclo_id'])?$conditions['Anio.ciclo_id']:0),$order, $limit, $page);
             }
             else {
                 $parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
