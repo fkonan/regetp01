@@ -8,6 +8,8 @@ class Plan extends AppModel {
 	
 	var $actsAs = array('Containable');
 
+        var $order = array();
+
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array( 
 			'Instit' ,
@@ -202,7 +204,7 @@ class Plan extends AppModel {
                     $parameters['recursive'] = $recursive;
                 }
                 
-                return $this->Instit->getPlanes($conditions['Instit.id'], $conditions['Plan.oferta_id'], (isset($conditions['Anio.ciclo_id'])?$conditions['Anio.ciclo_id']:0));
+                return $this->Instit->getPlanes($conditions['Instit.id'], $conditions['Plan.oferta_id'], (isset($conditions['Anio.ciclo_id'])?$conditions['Anio.ciclo_id']:0), $limit, $page);
 
                 //return $this->find('conAnios', array_merge($parameters, $extra));
             }
@@ -228,7 +230,7 @@ class Plan extends AppModel {
             $ret = array();
             switch ($conditions) {
                case 'conAnios':
-                   $ret = $this->__findConLeftJoinAnios($fields);
+                   $ret = $this->__findConAnios($fields);
                    break;
                default:
                    $ret = parent::find($conditions, $fields, $order, $recursive);
@@ -238,8 +240,8 @@ class Plan extends AppModel {
         }
 
 
-        function __findConLeftJoinAnios($parameters) {
-            
+        function __findConAnios($parameters) {
+                //$this->order = array_merge($this->order, array('Etapa.orden ASC'));
                 $parameters['group'] = 'Plan.id';
                 $parameters['joins'] = array(
                     array(
@@ -247,6 +249,18 @@ class Plan extends AppModel {
                         'type' => 'LEFT',
                         'alias' => 'Instit',
                         'conditions' => array('Instit.id = Plan.instit_id'),
+                    ),
+                    array(
+                        'table' => 'estructura_planes',
+                        'type' => 'LEFT',
+                        'alias' => 'EstructuraPlan',
+                        'conditions' => array('EstructuraPlan.id = Plan.estructura_plan_id'),
+                    ),
+                    array(
+                        'table' => 'etapas',
+                        'type' => 'LEFT',
+                        'alias' => 'Etapa',
+                        'conditions' => array('EstructuraPlan.etapa_id = Etapa.orden'),
                     ),
                     array(
                         'table' => 'anios',
@@ -276,7 +290,7 @@ class Plan extends AppModel {
                 $parameters['fields']= 'Plan.id';
                 // recojo todas las instituciones que cumplan con los criterios de busqueda
                 $planesIds = $this->find('list', $parameters);
-                
+
                 if (empty($planesIds) ) {
                     // no hay instituciones que cumplan con esos criterios de busqueda
                     return array();
