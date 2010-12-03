@@ -1291,27 +1291,32 @@ class Instit extends AppModel {
     function getPlanes($conditions, $order = array(), $limit = null, $page = null) {
   
             $ciclo=0;         
-            if(!empty($conditions['ciclo_id'])) {
+            if(isset($conditions['ciclo_id'])) {
                 $ciclo = $conditions['ciclo_id'];
+                unset($conditions['ciclo_id']);
             }
-            if(!empty($conditions['Anio.ciclo_id'])) {
+            if(isset($conditions['Anio.ciclo_id'])) {
                 $ciclo = $conditions['Anio.ciclo_id'];
+                unset($conditions['Anio.ciclo_id']);
             }
-            if(!empty($conditions['Ciclo.id'])) {
+            if(isset($conditions['Ciclo.id'])) {
                 $ciclo = $conditions['Ciclo.id'];
-            }
-            $condsPlan = array();
-            if (!empty($oferta_id)) {
-                if ( empty($ciclo )) {
-                    $anioXciclo = "(select MAX(a.ciclo_id) as ciclo_id from anios a where \"Plan\".id = a.plan_id)";
-                } else {
-                    $anioXciclo = $ciclo;
-                }
                 unset($conditions['Ciclo.id']);
-                $condsPlan += array(
-                    "Anio.ciclo_id = $anioXciclo",
-                    );
             }
+            
+            $condsPlan = array();
+
+            if ( empty($ciclo )) {
+                $anioXciclo = "(select MAX(a.ciclo_id) as ciclo_id from anios a where \"Plan\".id = a.plan_id)";
+            } else {
+                $anioXciclo = $ciclo;
+            }
+            unset($conditions['Ciclo.id']);
+
+            $condsPlan += array(
+                "Anio.ciclo_id = $anioXciclo",
+            );
+            
 
             $this->recursive = -1;
             $instit = $this->read(null, $this->id);
