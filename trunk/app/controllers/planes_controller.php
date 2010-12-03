@@ -546,7 +546,7 @@ class PlanesController extends AppController {
     function view_it_sec_sup($instit_id,$oferta_id,$ciclo=0) {
 
         $this->Plan->asociarAnio = true;
-        $planes = $this->paginate('Plan', array('instit_id'=> $instit_id, 'oferta_id' => $oferta_id, 'ciclo_id'=>$ciclo));
+        $planes = $this->paginate('Plan', array('Plan.instit_id'=> $instit_id, 'Plan.oferta_id' => $oferta_id, 'Anio.ciclo_id'=>$ciclo));
         //$planes = $this->Plan->Instit->getPlanes($instit_id, $oferta_id, $ciclo);
         // agrego el index "matricula" directamente que dependa de "Plan"
         foreach($planes as &$plan){
