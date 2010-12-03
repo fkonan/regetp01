@@ -77,11 +77,12 @@ $paginator->options(array(
             }
             $ciclo_plan = '';
             if($ciclo == 0){
-                if (!empty($plan['Anio'][0]['ciclo_id']) && $ciclo==0) {
+                if (!empty($plan['Anio'][0]['Anio']['ciclo_id']) && $ciclo==0) {
                     $primer_anio = current($plan['Anio']);
-                    $ciclo_plan =  (!empty($primer_anio['ciclo_id'])? $primer_anio['ciclo_id']:"") ;
+                    $ciclo_plan =  (!empty($primer_anio['Anio']['ciclo_id'])? $primer_anio['Anio']['ciclo_id']:"") ;
                 }
             }
+
 
             echo $this->element('planes/plan_resumen_para_listado', array(
                 'class' => $class,

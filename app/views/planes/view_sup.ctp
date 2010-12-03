@@ -65,13 +65,12 @@ if (empty($planes)) {
             $class = null;
             if ($i++ % 2 == 0) $class = 'altrow';
         
-            if (!empty($plan['Anio'][0]['ciclo_id']))
-                $ciclo_id = $plan['Anio'][0]['ciclo_id'];
+            if (!empty($plan['Anio'][0]['Anio']['ciclo_id']))
+                $ciclo_id = $plan['Anio'][0]['Anio']['ciclo_id'];
             else
                 $ciclo_id = 0;
                 
             $ciclo_plan =  (!empty($ciclo_id)) ? $ciclo_id : "" ;
-                
             echo $this->element('planes/plan_resumen_para_listado', array(
                     'class' => $class,
                     'plan'  => $plan,
