@@ -239,6 +239,13 @@ class Plan extends AppModel {
 
 
         function __findConAnios($parameters) {
+                $ciclo_id = 0;
+                
+                if ( !empty($parameters['conditions']['Anio.ciclo_id'])) {
+                    $ciclo_id = $parameters['conditions']['Anio.ciclo_id'];
+                }
+
+                    
                 //$this->order = array_merge($this->order, array('Etapa.orden ASC'));
                 $parameters['group'] = 'Plan.id';
                 
@@ -317,7 +324,7 @@ class Plan extends AppModel {
                 $planes = $this->find('all', $parameters);
 
                 foreach ( $planes as $key=>&$p) {
-                    $p['Anio'] = $this->Anio->getAniosDePlanPorCiclo($p['Plan']['id'], $this->getUltimoCiclo($p['Plan']['id']) );
+                    $p['Anio'] = $this->Anio->getAniosDePlanPorCiclo($p['Plan']['id'],$ciclo_id);
                 }
                 
                 return $planes;

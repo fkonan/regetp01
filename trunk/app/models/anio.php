@@ -250,6 +250,7 @@ class Anio extends AppModel {
          * @return array del find all de Anios
          */
         function getAniosDePlanPorCiclo($plan_id, $ciclo_id = 0) {
+            
             if ( empty($ciclo_id) ) {
                 $ciclo_id = $this->Plan->getUltimoCiclo($plan_id);
             }

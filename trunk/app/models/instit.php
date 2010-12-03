@@ -1308,14 +1308,16 @@ class Instit extends AppModel {
 
             if ( empty($ciclo )) {
                 $anioXciclo = "(select MAX(a.ciclo_id) as ciclo_id from anios a where \"Plan\".id = a.plan_id)";
+                $condsPlan += array(
+                    "Anio.ciclo_id = $anioXciclo",
+                );
             } else {
                 $anioXciclo = $ciclo;
+                $condsPlan['Anio.ciclo_id'] = $ciclo;
             }
             unset($conditions['Ciclo.id']);
 
-            $condsPlan += array(
-                "Anio.ciclo_id = $anioXciclo",
-            );
+            
             
 
             $this->recursive = -1;
