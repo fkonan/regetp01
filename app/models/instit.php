@@ -1288,7 +1288,7 @@ class Instit extends AppModel {
         /*
          * Devuelve todos los planes de la institucion
          */
-    function getPlanes($instit_id = null, $oferta_id = 0, $ciclo=0 , $order = array('Etapa.orden', 'Plan.name'), $limit = null, $page = null) {
+    function getPlanes($instit_id = null, $oferta_id = 0, $ciclo=0 , $order = array(), $limit = null, $page = null) {
             if(!empty($instit_id)) {
                 $this->id = $instit_id;
             }
