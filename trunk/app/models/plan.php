@@ -307,7 +307,7 @@ class Plan extends AppModel {
                 unset( $parameters['fields'] );
                 
                 $planes = $this->find('all', $parameters);
-
+                
                 return $planes;
         }
 

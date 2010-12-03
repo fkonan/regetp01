@@ -546,14 +546,13 @@ class PlanesController extends AppController {
     function view_it_sec_sup($instit_id,$oferta_id,$ciclo=0) {
 
         $planes = $this->Plan->Instit->getPlanes($instit_id, $oferta_id, $ciclo);
-        debug($plan);
         // agrego el index "matricula" directamente que dependa de "Plan"
         foreach($planes as &$plan){
             if ( !empty($plan['Plan']) ) {
                 $plan['Plan']['matricula'] = 0;
         
                 foreach($plan['Anio'] as $anio){
-                    $plan['Plan']['matricula'] += $anio['Anio']['matricula'];
+                    $plan['Plan']['matricula'] += $anio['matricula'];
                 }
             }
         }

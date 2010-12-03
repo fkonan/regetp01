@@ -1313,7 +1313,8 @@ class Instit extends AppModel {
             $planes = $this->Plan->find('conAnios', array(
                 'contain' => array(
                         'Titulo' => array('Sector','Subsector.Sector'),
-                        'EstructuraPlan.Etapa'
+                        'EstructuraPlan.Etapa',
+                        'Anio',
                 ),
                 'order' => $order,
                 'limit' => $limit,
