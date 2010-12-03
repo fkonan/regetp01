@@ -242,7 +242,7 @@ class TitulosController extends AppController {
      * maneja las condiciones de la busqueda y el paginador
      *
      */
-    function search() {
+    function ajax_index_search() {
 
         //para mostrar en vista los patrones de busqueda seleccionados
         $array_condiciones = array();
@@ -299,7 +299,7 @@ class TitulosController extends AppController {
         //devuelve un array para mostrar los criterios de busqueda
         $this->set('conditions', $array_condiciones);
 
-        $this->render('ajax_search');
+        $this->render('ajax_index_search');
     }
 
 
@@ -368,7 +368,7 @@ class TitulosController extends AppController {
             }
 
             if(count($planesGuardar)>0) {
-                if ($this->Plan->saveAll(
+                if ($this->Titulo->Plan->saveAll(
                 $planesGuardar,
                 array('fieldList'=>array('titulo_id'), 'validate'=>false)
                 )) {
@@ -401,174 +401,178 @@ class TitulosController extends AppController {
         $url_conditions = array();
 
         /**
-         *    PLANES POR OFERTA
-         */
-        /**
          *     OFERTA
          */
+        $oferta_id = '';
         if(!empty($this->data['FPlan']['oferta_id'])) {
-            $this->paginate['Plan']['conditions']['Plan.oferta_id'] = $this->data['FPlan']['oferta_id'];
-
-            $this->Plan->Oferta->recursive = -1;
-            $oferta = $this->Plan->Oferta->findById($this->data['FPlan']['oferta_id']);
-            $url_conditions['Plan.oferta_id'] = $this->data['FPlan']['oferta_id'];
+            $oferta_id = $this->data['FPlan']['oferta_id'];
         }
-        if(!empty($this->passedArgs['Plan.oferta_id'])) {
-            $this->paginate['Plan']['conditions']['Plan.oferta_id'] = $this->passedArgs['Plan.oferta_id'];
+        elseif(!empty($this->passedArgs['Plan.oferta_id'])) {
+            $oferta_id = $this->passedArgs['Plan.oferta_id'];
+            $this->data['FPlan']['oferta_id'] = $oferta_id;
+        }
 
-            $this->Plan->Oferta->recursive = -1;
-            $oferta = $this->Plan->Oferta->findById($this->passedArgs['Plan.oferta_id']);
-            $url_conditions['Plan.oferta_id'] = $this->passedArgs['Plan.oferta_id'];
-
-            $this->data['FPlan']['oferta_id'] = $this->passedArgs['Plan.oferta_id'];
+        if (!empty($oferta_id)) {
+            $this->paginate['conditions']['Plan.oferta_id'] = $oferta_id;
+            $url_conditions['Plan.oferta_id'] = $oferta_id;
         }
 
         /**
          *     SECTOR
          */
+        $sector_id = '';
         if(!empty($this->data['FPlan']['sector_id'])) {
-            $this->paginate['Plan']['conditions']['Titulo.sector_id'] = $this->data['FPlan']['sector_id'];
-            $this->Plan->Titulo->Sector->recursive = -1;
-            $sector = $this->Plan->Titulo->Sector->findById( $this->data['FPlan']['sector_id']);
-            $url_conditions['Titulo.sector_id'] = $this->data['FPlan']['sector_id'];
+            $sector_id = $this->data['FPlan']['sector_id'];
         }
-        if(!empty($this->passedArgs['Titulo.sector_id'])) {
-            $this->paginate['Plan']['conditions']['Titulo.sector_id'] = $this->passedArgs['Titulo.sector_id'];
-            $this->Plan->Titulo->Sector->recursive = -1;
-            $sector = $this->Plan->Titulo->Sector->findById($this->passedArgs['Titulo.sector_id']);
-            $url_conditions['Titulo.sector_id'] = $this->passedArgs['Titulo.sector_id'];
-
-            $this->data['FPlan']['sector_id'] = $this->passedArgs['Titulo.sector_id'];
+        elseif(!empty($this->passedArgs['Titulo.sector_id'])) {
+            $sector_id = $this->passedArgs['Titulo.sector_id'];
+            $this->data['FPlan']['sector_id'] = $sector_id;
         }
 
+        if(!empty($sector_id)) {
+            $subconditions = array('Titulo.id = SectoresTitulo.titulo_id');
+            $subconditions['SectoresTitulo.sector_id'] = $sector_id;
+            
+            $this->paginate['joins'] = array(
+                        array('table' => 'sectores_titulos',
+                                'alias' => 'SectoresTitulo',
+                                'type' => 'inner',
+                                'conditions' => $subconditions
+                        )
+                    );
+            $url_conditions['Titulo.sector_id'] = $sector_id;
+        }
 
         /**
          *     SUBSECTOR
          */
+        $subsector_id = '';
         if(!empty($this->data['FPlan']['subsector_id'])) {
-            $this->paginate['Plan']['conditions']['Titulo.subsector_id'] = $this->data['FPlan']['subsector_id'];
-            $this->Plan->Titulo->Subsector->recursive = -1;
-            $subsector = $this->Plan->Titulo->Subsector->findById( $this->data['FPlan']['subsector_id']);
-            $url_conditions['Titulo.subsector_id'] = $this->data['FPlan']['subsector_id'];
+            $subsector_id = $this->data['FPlan']['subsector_id'];
         }
-        if(!empty($this->passedArgs['Titulo.subsector_id'])) {
-            $this->paginate['Plan']['conditions']['Titulo.subsector_id'] = $this->passedArgs['Titulo.subsector_id'];
-            $this->Plan->Titulo->Subsector->recursive = -1;
-            $sector = $this->Plan->Titulo->Subsector->findById($this->passedArgs['Titulo.subsector_id']);
-            $url_conditions['Titulo.subsector_id'] = $this->passedArgs['Titulo.subsector_id'];
+        elseif(!empty($this->passedArgs['Titulo.subsector_id'])) {
+            $subsector_id = $this->passedArgs['Titulo.subsector_id'];
+            $this->data['FPlan']['subsector_id'] = $subsector_id;
+        }
 
-            $this->data['FPlan']['subsector_id'] = $this->passedArgs['Titulo.subsector_id'];
+        if(!empty($subsector_id)) {
+            $this->paginate['joins'][0]['conditions']['SectoresTitulo.subsector_id'] = $subsector_id;
+            $url_conditions['Titulo.sector_id'] = $subsector_id;
         }
 
         /**
          *     JURISDICCION
          */
+        $jurisdiccion_id = '';
         if(!empty($this->data['FPlan']['jurisdiccion_id'])) {
-            $this->paginate['Plan']['conditions']['Instit.jurisdiccion_id'] = $this->data['FPlan']['jurisdiccion_id'];
-            $this->Plan->Instit->Jurisdiccion->recursive = -1;
-            $jur =  $this->Plan->Instit->Jurisdiccion->findById( $this->data['FPlan']['jurisdiccion_id']);
-            $url_conditions['Instit.jurisdiccion_id'] = $this->data['FPlan']['jurisdiccion_id'];
+            $jurisdiccion_id = $this->data['FPlan']['jurisdiccion_id'];
         }
-        if(!empty($this->passedArgs['Instit.jurisdiccion_id'])) {
-            $this->paginate['Plan']['conditions']['Instit.jurisdiccion_id'] = $this->passedArgs['Instit.jurisdiccion_id'];
-            $this->Plan->Instit->Jurisdiccion->recursive = -1;
-            $jur =  $this->Plan->Instit->Jurisdiccion->findById( $this->data['FPlan']['jurisdiccion_id']);
-            $url_conditions['Instit.jurisdiccion_id'] = $this->passedArgs['Instit.jurisdiccion_id'];
+        elseif(!empty($this->passedArgs['Instit.jurisdiccion_id'])) {
+            $jurisdiccion_id = $this->passedArgs['Instit.jurisdiccion_id'];
+            $this->data['FPlan']['jurisdiccion_id'] = $subsector_id;
+        }
 
-            $this->data['FPlan']['jurisdiccion_id'] = $this->passedArgs['Instit.jurisdiccion_id'];
+        if(!empty($jurisdiccion_id)) {
+            $this->paginate['conditions']['Instit.jurisdiccion_id'] = $jurisdiccion_id;
+            $url_conditions['Instit.jurisdiccion_id'] = $jurisdiccion_id;
         }
 
         /**
          *  Por Plan
          */
 
+        $plan_nombre = '';
         if(!empty($this->data['FPlan']['plan_nombre'])) {
-            $this->paginate['Plan']['conditions']["to_ascii(lower(Plan.nombre)) SIMILAR TO ?"] = array(convertir_para_busqueda_avanzada($this->data['FPlan']['plan_nombre']));
-            $array_condiciones['Nombre del Plan'] = $this->data['FPlan']['plan_nombre'];
-            $url_conditions['Plan.plan_nombre'] = $this->data['FPlan']['plan_nombre'];
+            $plan_nombre = $this->data['FPlan']['plan_nombre'];
         }
-        if(!empty($this->passedArgs['Plan.plan_nombre'])) {
-            $this->paginate['Plan']['conditions']["to_ascii(lower(Plan.nombre)) SIMILAR TO ?"] = array(convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['Plan.plan_nombre'])));
-            $array_condiciones['Nombre del Plan'] = utf8_decode($this->passedArgs['Plan.plan_nombre']);
-            $url_conditions['Plan.plan_nombre'] = utf8_decode($this->passedArgs['Plan.plan_nombre']);
+        elseif(!empty($this->passedArgs['Plan.plan_nombre'])) {
+            $plan_nombre = $this->passedArgs['Plan.plan_nombre'];
+            $this->data['FPlan']['plan_nombre'] = $plan_nombre;
+        }
 
-            $this->data['FPlan']['plan_nombre'] = $this->passedArgs['Plan.plan_nombre'];
-
-
-
+        if(!empty($plan_nombre)) {
+            $this->paginate['conditions']["to_ascii(lower(Plan.nombre)) SIMILAR TO ?"] = array(convertir_para_busqueda_avanzada($plan_nombre));
+            $array_condiciones['Nombre del Plan'] = $plan_nombre;
+            $url_conditions['Plan.plan_nombre'] = $plan_nombre;
         }
 
         /***********************************************************************/
         /*                               Busqueda                              */
         /***********************************************************************/
 
-        $this->Plan->recursive = 1;//para alivianar la carga del server
-        $this->Plan->order = array('Plan.nombre ASC');
+        $this->Titulo->Plan->recursive = 1;//para alivianar la carga del server
+        $this->Titulo->Plan->order = array('Plan.nombre ASC');
 
         //datos de paginacion
         //$this->paginate['order'] = array('Plan.nombre ASC');
-
         if(!empty($this->data['FPlan']['last_page'])) {
-            $this->paginate['Plan']['page'] = $this->data['FPlan']['last_page'];
+            $this->paginate['page'] = $this->data['FPlan']['last_page'];
         }
 
-        $this->paginate['Plan']['limit'] = 10;
+        // limit
+        $this->paginate['limit'] = 10;
         if(!empty($this->data['FPlan']['limit'])) {
-            $url_conditions['FPlan.limit'] = $this->data['FPlan']['limit'];
-            $this->paginate['Plan']['limit'] = $this->data['FPlan']['limit'];
+            $limit = $this->data['FPlan']['limit'];
         }
-        if(!empty($this->passedArgs['FPlan.limit'])) {
-            $url_conditions['FPlan.limit'] = $this->passedArgs['FPlan.limit'];
-            $this->data['FPlan']['limit'] = $this->passedArgs['FPlan.limit'];
-            $this->paginate['Plan']['limit'] = $this->data['FPlan']['limit'];
+        elseif(!empty($this->passedArgs['FPlan.limit'])) {
+            $limit = $this->passedArgs['FPlan.limit'];
+            $this->data['FPlan']['limit'] = $limit;
+        }
+
+        if(!empty($limit)) {
+            $url_conditions['FPlan.limit'] = $limit;
+            $this->paginate['limit'] = $limit;
         }
 
         // Condicion necesaria
         $titulo_id=0;
         if(!empty($this->data['Plan']['titulo_id'])) {
             $url_conditions['Plan.titulo_id'] = $this->data['Plan']['titulo_id'];
-            $titulo_id=$this->data['Plan']['titulo_id'];
+            $titulo_id = $this->data['Plan']['titulo_id'];
         }
 
         if(!empty($this->passedArgs['Plan.titulo_id'])) {
             $url_conditions['Plan.titulo_id'] = $this->passedArgs['Plan.titulo_id'];
-            $titulo_id=$this->passedArgs['Plan.titulo_id'];
-            ;
-
+            $titulo_id = $this->passedArgs['Plan.titulo_id'];
         }
 
-        $this->paginate['Plan']['conditions']['Plan.titulo_id'] = 0;
-        $this->paginate['Plan']['conditions']['Instit.activo'] = 1;
+        //$this->paginate['conditions']['Plan.titulo_id'] = 0;
+        $this->paginate['conditions']['Instit.activo'] = 1;
+debug($this->paginate);
 
+        $this->Titulo->recursive = 0;
         $planes = $this->paginate('Plan');
 
         $this->set('url_conditions', $url_conditions);
 
-        $ofertas = $this->Plan->Oferta->find('list');
+        $this->Titulo->Oferta->recursive = -1;
+        $ofertas = $this->Titulo->Oferta->find('list');
 
-        $this->Plan->Titulo->Sector->order ='Sector.name';
-        $sectores = $this->Plan->Titulo->Sector->find('list');
+        $this->Titulo->SectoresTitulo->Sector->recursive = -1;
+        $this->Titulo->SectoresTitulo->Sector->order ='Sector.name';
+        $sectores = $this->Titulo->SectoresTitulo->Sector->find('list');
 
         $subsecConditions = array();
         if (!empty($this->data['FPlan']['sector_id'])) {
             $subsecConditions = array('Subsector.sector_id'=>$this->data['FPlan']['sector_id']);
         }
-        $this->Plan->Titulo->Subsector->order ='Subsector.name';
-        $subsectores = $this->Plan->Titulo->Subsector->find('list', array('conditions'=>$subsecConditions));
+        $this->Titulo->SectoresTitulo->Subsector->recursive = -1;
+        $this->Titulo->SectoresTitulo->Subsector->order ='Subsector.name';
+        $subsectores = $this->Titulo->SectoresTitulo->Subsector->find('list', array('conditions'=>$subsecConditions));
 
-        $this->Instit->Jurisdiccion->order = 'Jurisdiccion.name';
-        $jurisdicciones = $this->Instit->Jurisdiccion->find('list');
+        $this->Titulo->Plan->Instit->Jurisdiccion->recursive = -1;
+        $this->Titulo->Plan->Instit->Jurisdiccion->order = 'Jurisdiccion.name';
+        $jurisdicciones = $this->Titulo->Plan->Instit->Jurisdiccion->find('list');
 
         $condicion = array();
         if(!empty($this->data['FPlan']['oferta_id']))
             $condicion['conditions']['oferta_id'] = $this->data['FPlan']['oferta_id'];
-
-        $titulos = $this->Plan->Titulo->find('list', $condicion);
-
-        $this->set(compact('planes','titulos','ofertas',
-                'sectores','subsectores','jurisdicciones'));
+        $this->Titulo->recursive = -1;
+        $titulos = $this->Titulo->find('list', $condicion);
 
         $this->set('titulo_id', $titulo_id);
+        $this->set(compact('planes','titulos','ofertas',
+                'sectores','subsectores','jurisdicciones'));
     }
 }
 ?>

@@ -215,8 +215,8 @@ class Plan extends AppModel {
 
                 $extra = array();
 
-                //return $this->find('all', array_merge($parameters, $extra));
-                return $this->Instit->getPlanes($conditions['Instit.id'], $conditions['Plan.oferta_id'], $conditions['Anio.ciclo_id']);
+                return $this->find('all', array_merge($parameters, $extra));
+                //return $this->Instit->getPlanes($conditions['Instit.id'], $conditions['Plan.oferta_id'], $conditions['Anio.ciclo_id']);
             }
 
         
