@@ -1,88 +1,166 @@
 <?php
+echo $javascript->link(array(
+            'jquery.autocomplete',
+            'jquery.blockUI'
+        ));
 
-echo $javascript->link('prototype');
-echo $javascript->link('scriptaculous-js-1.8.3/src/scriptaculous');
-
-
+echo $html->css(array('jquery.autocomplete'));
 ?>
+<script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery.each(jQuery('#formPlanes input:checkbox'), function(key, value) {
+                jQuery(value).attr("checked", false);
+            });
+
+            jQuery('#formPlanes').change(function() {
+                jQuery.each(jQuery('#formPlanes'), function(key, value) {
+                    if (jQuery(value).is(':checked')) {
+                        jQuery('#plan-linea-'+jQuery(value).attr('numero')).attr('style', 'background:#EFFBEF');
+                    }
+                    else {
+                        jQuery('#plan-linea-'+jQuery(value).attr('numero')).attr('style', 'background:white');
+                    }
+                });
+            });
+
+            jQuery('#titulo_id').change(seleccionarTitulosEnMasa);
+            actualizarSelects();
+
+
+            /*******/
+            
+
+            jQuery("#TituloName").autocomplete("<?echo $html->url(array('controller'=>'titulos','action'=>'ajax_search'));?>", {
+                dataType: "json",
+                delay: 200,
+                max:30,
+                cacheLength:0,
+                extraParams: {
+                    oferta_id: function() { return jQuery('#FPlanOfertaId').val(); },
+                    sector_id: function() { return jQuery('#FPlanSectorId').val(); },
+                    subsector_id: function() { return jQuery('#FPlanSubsectorId').val(); }
+                } ,
+                parse: function(data) {
+                    return jQuery.map(data, function(titulo) {
+                        return {
+                            data: titulo,
+                            value: titulo.id,
+                            result: formatResult(titulo)
+                        }
+                    });
+                },
+                formatItem: function(item) {
+                    return formatResult(item);
+                }
+            }).result(function(e, item) {
+                if(item.type == 'Vacio'){
+                    jQuery("#TituloName").val('');
+                    jQuery("#titulo_id").val('');
+                }
+                else{
+                    jQuery("#titulo_id").val(item.id);
+                }
+            });
+
+            jQuery("#TituloName").attr('autocomplete','off');
+        });
+
+
+        function formatResult(titulo) {
+            return titulo.name;
+        }
+
+
+	function checkAll(){
+            jQuery.each(jQuery('#formPlanes input:checkbox'), function(key, value) {
+                jQuery(value).attr("checked", true);
+                jQuery('#plan-linea-'+jQuery(value).attr('numero')).attr('style', 'background:#EFFBEF');
+            });
+	}
+
+
+	function unCheckAll(){
+            jQuery.each(jQuery('#formPlanes input:checkbox'), function(key, value) {
+                jQuery(value).attr("checked", false);
+                jQuery('#plan-linea-'+jQuery(value).attr('numero')).attr('style', 'background:white');
+            });
+	}
+
+
+	function cambiarTitulos(element){
+            jQuery(element).select(jQuery('#titulo_id').val());
+	}
+
+
+        function seleccionarTitulosEnMasa() {
+            jQuery.each(jQuery('.titulo'), function(key, value) {
+                jQuery(value).val(jQuery('#titulo_id').val());
+            });
+        }
+
+
+        function actualizarSelects() {
+            var selectedText = jQuery('#titulo_id option:selected').text();
+
+            jQuery.each(jQuery('.titulo'), function(key, value) {
+                jQuery(value).val(jQuery('#titulo_id').val());
+                jQuery(value).append(jQuery("<option></option>").attr("value",jQuery('#titulo_id').val()).text(selectedText));
+            });
+        }
+</script>
 <?
 $paginator->options(array('url' => $url_conditions));
 ?>
-
 <h1> ¡¡ vamos que faltan solo <?php echo $paginator->counter(array(
 			'format' => '%count%'));?>!!</h1>
 
-
-
-
 <!-- 	BUSQUEDA POR SU OFERTA  	-->
 
-<div id="search-planes"><?php echo $form->create('Form',array('url'=>'/depuradores/depurar_titulos','id'=>'Form'));?>
+<div id="search-planes" style="font-size:9pt;">
+    <?php echo $form->create('Form',array('url'=>'/titulos/corrector_de_planes','id'=>'Form'));?>
+    <?
+    echo $form->input('FPlan.oferta_id',array(
+                        'options'=>$ofertas,
+                        'empty'=>'Seleccione',
+                        'label'=>'Oferta'));
 
-    <table align="left">
-        <tr>
-            <td width="308">
-                <?
-                echo $form->input('FPlan.limit',array(
-                        'label'=>'Cantidad de planes por página',
-                        'options'=>array('10'=>10,'20'=>20,'40'=>40,'60'=>60)
-                     ));
-                ?>
-            </td>               
-            <td width="308">
-                 <? //  JURISDICCION
-                $meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
-                echo $form->input('FPlan.jurisdiccion_id', array(
-                                    'empty' => array('0'=>'Todas'),
-                                    'id'=>'jurisdiccion_id',
-                                    'label'=>'Jurisdicción',
-                                    'after'=>$meter,
-                                    'options'=>$jurisdicciones,
+    $meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
+    echo $form->input('FPlan.jurisdiccion_id', array(
+                        'empty' => array('0'=>'Todas'),
+                        'id'=>'jurisdiccion_id',
+                        'label'=>'Jurisdicción',
+                        'after'=>$meter,
+                        'options'=>$jurisdicciones,
 
-                ));
-                ?>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <?
-                echo $form->input('FPlan.oferta_id',array(
-                                    'options'=>$ofertas,
-                                    'empty'=>'Seleccione',
-                                    'label'=>'Con Oferta'));
-                ?>
-            </td>
-            <td>
-                <?
-                echo $form->input('FPlan.sector_id',array(
-                                    'label'=>'Sector',
-                                    'options'=>$sectores,
-                                    'empty'=>'Seleccione'
-                ));
-                ?>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <?
-                echo $form->input('FPlan.subsector_id', array(
-                                    'label'=>'Subsector',
-                                    'empty'=>'Seleccione',
-                        ));
-                ?>
-            </td>
-        </tr>
-    </table>
+    ));
+    ?>
+    <?php
+    echo $form->input('FPlan.sector_id',array(
+                        'label'=>'Sector',
+                        'options'=>$sectores,
+                        'empty'=>'Seleccione'
+    ));
 
-<?php echo $form->input('FPlan.plan_nombre', array('label'=>'Nombre del Plan', 'after'=> '<cite>Realiza una búsqueda por parte del nombre del plan.<br>Ej: SOLDADURA</cite>'));?>
+    echo $form->input('FPlan.subsector_id', array(
+                        'label'=>'Subsector',
+                        'empty'=>'Seleccione',
+            ));
+    ?>
+    <?php
+    echo $form->input('FPlan.limit',array(
+            'label'=>'Cantidad de planes por página',
+            'options'=>array('10'=>10,'20'=>20,'40'=>40,'60'=>60)
+         ));
+
+    echo $form->input('FPlan.plan_nombre', array('label'=>'Nombre del Plan', 'after'=> '<cite>Realiza una búsqueda por parte del nombre del plan.<br>Ej: SOLDADURA</cite>'));?>
 
 <?php
     echo $ajax->observeField(
             'FPlanSectorId', array(
                 'url' => '/subsectores/ajax_select_subsector_form_por_sector',
                 'update'=>'FPlanSubsectorId',
-                'loading'=>'$("FPlanSubsectorId").disable();',
-                'complete'=>'$("FPlanSubsectorId").enable();',
+                'loading'=>'jQuery("#FPlanSubsectorId").attr("disabled", true);',
+                'complete'=>'jQuery("#FPlanSubsectorId").attr("disabled", false);',
                 'onChange'=>true
     ));
 
@@ -106,86 +184,9 @@ $paginator->options(array('url' => $url_conditions));
 
 <hr>
 
-
-
-<script type="text/javascript">
-<!--
-        Event.observe(window,'load',function(){
-            checkboxes = $('formPlanes').getInputs('checkbox');
-            checkboxes.each(function(e){ e.checked = 0 });
-
-            $('formPlanes').observe('change',function(){
-                //plan-linea-
-                checkboxes = $('formPlanes').getInputs('checkbox');
-                checkboxes.each(function(e){
-                    if(e.checked == 1){
-                        $('plan-linea-'+e.readAttribute('numero')).setStyle({backgroundColor:'#EFFBEF'});
-                        //alert(e.numero);
-                    } else {
-                        $('plan-linea-'+e.readAttribute('numero')).setStyle({backgroundColor:'white'});
-                    }
-                });
-            });
-
-        });
-
-
-	function checkAll(){
-		checkboxes = $('formPlanes').getInputs('checkbox');
-		checkboxes.each(function(e){
-                    e.checked = 1;
-                    $('plan-linea-'+e.readAttribute('numero')).setStyle({backgroundColor:'#EFFBEF'});
-                });
-	}
-
-
-	function unCheckAll(){
-		checkboxes = $('formPlanes').getInputs('checkbox');
-		checkboxes.each(function(e){
-                    e.checked = 0
-                    $('plan-linea-'+e.readAttribute('numero')).setStyle({backgroundColor:'white'});
-            });
-	}
-
-
-	function cambiarTitulos(e){
-		e.select($F('titulo_id'));
-
-	}
-
-
-        function seleccionarTitulosEnMasa() {
-            $$('.titulo').each(function(e){
-                e.value = $F('titulo_id');
-            });
-        }
-
-	Event.observe(window, 'load', function(){
-            $('titulo_id').observe('change', seleccionarTitulosEnMasa);
-            actualizarSelects();
-	});
-
-
-
-        function actualizarSelects() {
-              selectedText = $('titulo_id').options[$('titulo_id').selectedIndex].text;
-
-              $$('.titulo').each(function(e){
-                  var option = new Element('option', {value: $F('titulo_id')});
-                  option.update(selectedText);
-                  e.appendChild(option);
-                  e.value = $F('titulo_id');
-            });
-            
-        }
--->
-</script>
-
-
-
 <?php
 echo $form->create('Plan', array(
-			'url'=>'/depuradores/depurar_titulos',
+			'url'=>'/titulos/corrector_de_planes',
 			//'onsubmit'=>'activarCambios(); return false;',
 			'id'=>'formPlanes'
 ));
@@ -217,10 +218,10 @@ foreach ($planes as $p) {
                         'default'=>'seleccione',
                         'empty'=>'seleccione',
                         'style'=>'clear: none;',
-                        'onchange'=> '$("checkbox-'.$i.'").setValue(1);',
+                        'onchange'=> 'jQuery("#checkbox-'.$i.'").attr("checked", true)',
                     ));
                 ?>
-		<a style="font-size: 10px;" href="javascript:" onclick="$('<? echo $div_id?>').toggle(); return false;"><?= $p['Plan']['nombre']?></a>
+		<a style="font-size: 10px;" href="javascript:" onclick="jQuery('#<? echo $div_id?>').toggle(); return false;"><?= $p['Plan']['nombre']?></a>
 	</div>
 	<div style="display: none; background-color: beige;" id="<? echo $div_id?>">
 
@@ -259,15 +260,17 @@ foreach ($planes as $p) {
 	$i++;
 }
 
-
-
-echo $form->input('titulo_id', array(
-    'options'=>$titulos,
-    'label'=>'Asignar título en masa',
-    'div'=>array('id'=>'divTituloGral'),
+echo $form->input(
+'tituloName',
+array(
+    'label'=> 'Asignar Título en masa',
+    'id' => 'TituloName',
+    'after'=> '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>',
+    'style'=>'max-width: 550px;',
+    'div'=>array('id'=>'divTituloName')));
+ echo $form->input('titulo_id', array(
+    'type'=>'hidden',
     'id'=>'titulo_id',
-    'default'=>'Seleccione',
-    'empty'=>'Seleccione',
     'value'=>$titulo_id
     ));
 
@@ -309,7 +312,7 @@ echo $form->end('Guardar Cambios');
 
 ?>
 <br>
-<a href="javascript:" onclick="$('formularioNuevoTitulo').toggle()" style="background-color: gray; color: white; text-decoration: none">Agregar Nuevo Título de Referencia</a>
+<a href="javascript:" onclick="jQuery('#formularioNuevoTitulo').toggle()" style="background-color: gray; color: white; text-decoration: none">Agregar Nuevo Título de Referencia</a>
 <div id="formularioNuevoTitulo" style="display: none; background-color: gray">
 <?
 echo $ajax->form(array('type' => 'post',
@@ -320,7 +323,7 @@ echo $ajax->form(array('type' => 'post',
             'action' => 'add_and_give_me_select_options'
         ),
         'id'=> "formAltaTitulo",
-        'complete'=>'$("formAltaTitulo").reset(); actualizarSelects();',
+        'complete'=>'jQuery("#formAltaTitulo").reset(); actualizarSelects();',
         'update'=> 'divTituloGral',
     )
 ));

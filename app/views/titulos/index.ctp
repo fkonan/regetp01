@@ -11,7 +11,7 @@ echo $html->css(array('jquery.loadmask', 'smoothness/jquery-ui-1.8.5.custom'));
 ?>
 <?php 
         echo $form->create('Titulo', array(
-            'action' => 'search',
+            'action' => 'ajax_index_search',
             'name'=>'TituloSearchForm',
             'id' =>'TituloSearchForm',
             )
