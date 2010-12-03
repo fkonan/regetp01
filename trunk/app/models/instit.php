@@ -1295,9 +1295,15 @@ class Instit extends AppModel {
 
             $condsPlan = array();
             if (!empty($oferta_id)) {
+                if ( empty($ciclo )) {
+                    $anioXciclo = "(select MAX(a.ciclo_id) as ciclo_id from anios a where \"Plan\".id = a.plan_id)";
+                } else {
+                    $anioXciclo = $ciclo;
+                }
                 $condsPlan += array(
                     'Plan.instit_id' => $this->id,
                     'Plan.oferta_id' => $oferta_id,
+                    "Anio.ciclo_id = $anioXciclo",
                     );
             }
 
@@ -1313,18 +1319,6 @@ class Instit extends AppModel {
                 'page'  => $page,
                 'conditions' => $condsPlan,
             )); 
-           // Agrega los Anios al Plan
-           foreach ($planes as $key=>&$i) {
-               // le meto los años al array de planes
-               $i['Anio'] = $this->Plan->Anio->getAniosDePlanPorCiclo($i['Plan']['id'], $ciclo);
-
-               // si el plan no presentò actualizacion para $ciclo_id entonces
-               // lo elimino  del array para simplificar el foreach de la vista
-               if (empty($aniosPlan) && $ciclo != 0) {
-                   unset($planes[$key]);
-               }
-           }
-           
            return $planes;
         }
 
