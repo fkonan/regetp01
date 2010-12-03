@@ -1288,9 +1288,21 @@ class Instit extends AppModel {
         /*
          * Devuelve todos los planes de la institucion
          */
-    function getPlanes($instit_id = null, $oferta_id = 0, $ciclo=0 , $order = array(), $limit = null, $page = null) {
-            if(!empty($instit_id)) {
-                $this->id = $instit_id;
+    function getPlanes($conditions, $order = array(), $limit = null, $page = null) {
+            $instit_id = null;
+            $oferta_id = 0;
+            $ciclo=0;
+
+            if(!empty($conditions['instit_id'])) {
+                $this->id = $conditions['instit_id'];
+            }
+
+            if(!empty($conditions['oferta_id'])) {
+                $oferta_id = $conditions['oferta_id'];
+            }
+
+            if(!empty($conditions['ciclo_id'])) {
+                $ciclo = $conditions['ciclo_id'];
             }
 
             $condsPlan = array();
@@ -1309,9 +1321,10 @@ class Instit extends AppModel {
 
             $this->recursive = -1;
             $instit = $this->read(null, $this->id);
-
+            
             $planes = $this->Plan->find('conAnios', array(
                 'contain' => array(
+                        //'Instit',
                         'Titulo' => array('Sector','Subsector.Sector'),
                         'EstructuraPlan.Etapa',
                         'Anio',

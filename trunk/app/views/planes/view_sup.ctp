@@ -48,10 +48,10 @@ if (empty($planes)) {
                 foreach($plan['Anio'] as $anio){
                 ?>
                 <tr>
-                    <td><?php echo $anio['anio']?>º</td>
-                    <td><?php echo $anio['matricula']?></td>
-                    <td><?php echo $anio['secciones']?></td>
-                    <td><?php echo $anio['hs_taller']?></td>
+                    <td><?php echo $anio['Anio']['anio']?>º</td>
+                    <td><?php echo $anio['Anio']['matricula']?></td>
+                    <td><?php echo $anio['Anio']['secciones']?></td>
+                    <td><?php echo $anio['Anio']['hs_taller']?></td>
                 </tr>
                 <?php
                 }?>

@@ -204,7 +204,7 @@ class Plan extends AppModel {
                     $parameters['recursive'] = $recursive;
                 }
                 
-                return $this->Instit->getPlanes($conditions['Instit.id'], $conditions['Plan.oferta_id'], (isset($conditions['Anio.ciclo_id'])?$conditions['Anio.ciclo_id']:0),$order, $limit, $page);
+                return $this->Instit->getPlanes($conditions,$order, $limit, $page);
             }
             else {
                 $parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
@@ -241,6 +241,7 @@ class Plan extends AppModel {
         function __findConAnios($parameters) {
                 //$this->order = array_merge($this->order, array('Etapa.orden ASC'));
                 $parameters['group'] = 'Plan.id';
+                
                 $parameters['joins'] = array(
                     array(
                         'table' => 'instits',
@@ -288,7 +289,7 @@ class Plan extends AppModel {
                 $parameters['fields']= 'Plan.id';
                 // recojo todas las instituciones que cumplan con los criterios de busqueda
                 $planesIds = $this->find('list', $parameters);
-
+                
                 if (empty($planesIds) ) {
                     // no hay instituciones que cumplan con esos criterios de busqueda
                     return array();
@@ -305,8 +306,13 @@ class Plan extends AppModel {
                 unset( $parameters['joins'] );
                 unset( $parameters['group'] );
                 unset( $parameters['fields'] );
-                
+
+
                 $planes = $this->find('all', $parameters);
+
+                foreach ( $planes as $key=>&$p) {
+                    $p['Anio'] = $this->Anio->getAniosDePlanPorCiclo($p['Plan']['id'], $this->getUltimoCiclo($p['Plan']['id']) );
+                }
                 
                 return $planes;
         }
