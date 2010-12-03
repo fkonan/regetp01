@@ -543,7 +543,7 @@ class PlanesController extends AppController {
     }
     
 
-    function view_it_sec_sup($instit_id,$oferta_id,$ciclo=0) {
+    function view_it_sec_sup($instit_id,$oferta_id,$ciclo=null) {
 
         $this->Plan->asociarAnio = true;
         $planes = $this->paginate('Plan', array('Plan.instit_id'=> $instit_id, 'Plan.oferta_id' => $oferta_id, 'Anio.ciclo_id'=>$ciclo));
