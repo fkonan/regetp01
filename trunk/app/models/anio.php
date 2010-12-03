@@ -238,6 +238,31 @@ class Anio extends AppModel {
             return (empty($anios));
         }
         
-	
+
+
+        /**
+         * Trae todos los anios de un determinado plan
+         * si el ciclo_id es CERO trae la informacion del ULTIMO ciclo lectuvo
+         * que el Plan cuenta informacion
+         *
+         * @param integer $plan_id
+         * @param integer $ciclo_id
+         * @return array del find all de Anios
+         */
+        function getAniosDePlanPorCiclo($plan_id, $ciclo_id = 0) {
+            if ( empty($ciclo_id) ) {
+                $ciclo_id = $this->Plan->getUltimoCiclo($plan_id);
+            }
+
+            $aniosPlan = $this->find('all', array(
+                    'contain' => array('EstructuraPlanesAnio','Etapa'),
+                    'order' => 'Anio.anio',
+                    'conditions' => array(
+                        'Anio.plan_id'=> $plan_id,
+                        'Anio.ciclo_id'=>$ciclo_id,
+                        ),                    
+            ));
+            return $aniosPlan;
+        }
 }
 ?>

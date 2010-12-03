@@ -1288,55 +1288,44 @@ class Instit extends AppModel {
         /*
          * Devuelve todos los planes de la institucion
          */
-        function getPlanes($instit_id, $oferta_id = 0, $ciclo=0 , $order='Etapa.orden') {
-            if(!empty($this->id)) {
-                $instit_id = $this->id;
+        function getPlanes($instit_id = null, $oferta_id = 0, $ciclo=0 , $order='Etapa.orden', $limit = null, $page = null) {
+            if(!empty($instit_id)) {
+                $this->id = $instit_id;
             }
-
-            $condsInstit = array('Instit.id'=>$instit_id);
 
             $condsPlan = array();
             if (!empty($oferta_id)) {
-                $condsPlan = array('Plan.oferta_id'=>$oferta_id);
+                $condsPlan += array(
+                    'Plan.instit_id' => $this->id,
+                    'Plan.oferta_id' => $oferta_id,
+                    );
             }
 
-            $planes = $this->find('first', array(
+            $this->recursive = -1;
+            $instit = $this->read(null, $this->id);
+
+            $planes = $this->Plan->find('conAnios', array(
                 'contain' => array(
-                    'Plan' => array(
-                        'conditions' => $condsPlan,
-                        'Titulo.Sector',
+                        'Titulo' => array('Sector','Subsector.Sector'),
                         'EstructuraPlan.Etapa'
-                    )
                 ),
-                'conditions' => $condsInstit,
-            ));
-
-           if ($oferta_id == SEC_TEC_ID) {
-               ordenarPlanesPorEtapaOrden(&$planes);
-           }
-
+                'limit' => $limit,
+                'page'  => $page,
+                'conditions' => $condsPlan,
+            )); 
            // Agrega los Anios al Plan
-           foreach ($planes['Plan'] as $key=>&$i) {
-               if (!empty($ciclo)) {
-                   $condsAnio = array('Anio.plan_id'=> $i['id'],'Anio.ciclo_id'=>$ciclo);
-               } else {
-                   //buscar el ultimo ciclo lectivo (max)
-                   $condsAnio = array('Anio.plan_id'=> $i['id'],'Anio.ciclo_id'=>$this->Plan->getUltimoCiclo($i['id']));
-               }
-
-               $aniosPlan = $this->Plan->Anio->find('all', array(
-                    'contain' => array('EstructuraPlanesAnio','Etapa'),
-                    'conditions' => $condsAnio,
-                    'order' => 'Anio.anio'
-               ));
+           foreach ($planes as $key=>&$i) {
                // le meto los años al array de planes
-               $i['Anio'] = $aniosPlan;
+               $i['Anio'] = $this->Plan->Anio->getAniosDePlanPorCiclo($i['Plan']['id'], $ciclo);
 
+               // si el plan no presentò actualizacion para $ciclo_id entonces
+               // lo elimino  del array para simplificar el foreach de la vista
                if (empty($aniosPlan) && $ciclo != 0) {
-                   unset($planes['Plan'][$key]);
+                   unset($planes[$key]);
                }
            }
-            return $planes;
+           
+           return $planes;
         }
 
 

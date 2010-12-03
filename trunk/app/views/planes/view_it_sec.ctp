@@ -1,5 +1,5 @@
 <?php
-if (empty($planes['Plan'])) {
+if (empty($planes)) {
     ?>
 <p class="msg-atencion"><br /><br />La Institución no presenta actualizaciones para este año</p>
 <?
@@ -9,7 +9,7 @@ if (empty($planes['Plan'])) {
 <div id="tabs-oferta-it-sec" class="oferta-contanier">
         <?php
         $i = 0;
-        foreach($planes['Plan'] as $plan) {
+        foreach($planes as $plan) {
             if ($ciclo > 0)
             {
                 if (!empty($plan['Anio'])) {
@@ -19,15 +19,15 @@ if (empty($planes['Plan'])) {
                         <caption>
                             <span class="plan_mas_info btn-ir">
                             <?php echo $html->link("ver más",
-                                array('controller'=> 'planes', 'action'=>'view', $plan['id']), array(
+                                array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']), array(
                                     'title'=>'Ver mas información del plan',
                                     ));
                             ?>
                             </span>
                             
                             <?php echo $html->link(
-                            $plan['nombre'],
-                            array('controller'=> 'planes', 'action'=>'view', $plan['id']),
+                            $plan['Plan']['nombre'],
+                            array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']),
                             null,null,false);
                             ?>
 

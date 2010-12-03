@@ -513,18 +513,18 @@ class PlanesController extends AppController {
         //$this->paginate['order'] = array("Anio.ciclo_id");
 
         $planes = $this->paginate();
-        $planes = $planes['Plan'];
+        $planes = $planes;
         //$planes = $this->Plan->Instit->getPlanes($instit_id, $oferta_id, $ciclo);
        
         $newVecPlanes = array();
         $i = 0;
         foreach($planes as &$plan){
             if($ciclo == 0){
-                $ultimo_ciclo = $this->Plan->getUltimoCiclo($plan['id']);
-                $plan['matricula'] = $this->Plan->dameMatriculaDeCiclo($plan['id'],$ultimo_ciclo);
+                $ultimo_ciclo = $this->Plan->getUltimoCiclo($plan['Plan']['id']);
+                $plan['Plan']['matricula'] = $this->Plan->dameMatriculaDeCiclo($plan['Plan']['id'],$ultimo_ciclo);
             }
             else{
-                $plan['matricula'] = $this->Plan->dameMatriculaDeCiclo($plan['id'],$ciclo);
+                $plan['Plan']['matricula'] = $this->Plan->dameMatriculaDeCiclo($plan['Plan']['id'],$ciclo);
             }
         }
         
@@ -548,10 +548,12 @@ class PlanesController extends AppController {
         $planes = $this->Plan->Instit->getPlanes($instit_id, $oferta_id, $ciclo);
 
         // agrego el index "matricula" directamente que dependa de "Plan"
-        foreach($planes['Plan'] as &$plan){
-            $plan['matricula'] = 0;
-            foreach($plan['Anio'] as $anio){
-                $plan['matricula'] += $anio['Anio']['matricula'];
+        foreach($planes as &$plan){
+            if ( !empty($plan['Plan']) ) {
+                $plan['Plan']['matricula'] = 0;
+                foreach($plan['Anio'] as $anio){
+                    $plan['Plan']['matricula'] += $anio['Anio']['matricula'];
+                }
             }
         }
 
