@@ -268,10 +268,16 @@ class Plan extends AppModel {
                         'conditions' => array('Plan.id = Anio.plan_id'),
                     ),
                     array(
-                        'table' => 'estructura_planes_anios',
-                        'type' => 'LEFT',
-                        'alias' => 'EstructuraPlanesAnio',
-                        'conditions' => array('EstructuraPlanesAnio.id = Anio.estructura_planes_anio_id'),
+                        'table' => 'titulos',
+                        'type' => 'INNER',
+                        'alias' => 'Titulo',
+                        'conditions' => array('Titulo.id = Plan.titulo_id'),
+                    ),
+                    array(
+                        'table' => 'sectores_titulos',
+                        'type' => 'INNER',
+                        'alias' => 'SectoresTitulo',
+                        'conditions' => array('SectoresTitulo.titulo_id = Titulo.id'),
                     ),
              );
                 

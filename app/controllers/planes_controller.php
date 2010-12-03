@@ -495,7 +495,7 @@ class PlanesController extends AppController {
             $sectorId = $this->passedArgs['Sector.id'];
         }
         if (!empty($sectorId)) {
-            $this->paginate['conditions']['Sector.id'] = $sectorId;
+            $this->paginate['conditions']['SectoresTitulo.sector_id'] = $sectorId;
             $url_conditions['Sector.id'] = $sectorId;
         }
 

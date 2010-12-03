@@ -79,7 +79,7 @@ $paginator->options(array(
             if($ciclo == 0){
                 if (!empty($plan['Anio'][0]['ciclo_id']) && $ciclo==0) {
                     $primer_anio = current($plan['Anio']);
-                    $ciclo_plan =  (!empty($primer_anio)? $primer_anio:"") ;
+                    $ciclo_plan =  (!empty($primer_anio['ciclo_id'])? $primer_anio['ciclo_id']:"") ;
                 }
             }
 
