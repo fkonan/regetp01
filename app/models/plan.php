@@ -274,7 +274,7 @@ class Plan extends AppModel {
                         'conditions' => array('EstructuraPlanesAnio.id = Anio.estructura_planes_anio_id'),
                     ),
              );
-                    
+                
             // @var $order es para almacenar temporal mente este valor
                 // para que se ejecute la busqueda 'list' sin problemas no debe tener un orden
                 $oldThisOrder = $this->order;

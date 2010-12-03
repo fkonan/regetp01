@@ -1296,13 +1296,31 @@ class Instit extends AppModel {
             if(!empty($conditions['instit_id'])) {
                 $this->id = $conditions['instit_id'];
             }
+            if(!empty($conditions['Instit.id'])) {
+                $this->id = $conditions['Instit.id'];
+            }
+            if(!empty($conditions['Plan.instit_id'])) {
+                $this->id = $conditions['Plan.instit_id'];
+            }
 
             if(!empty($conditions['oferta_id'])) {
                 $oferta_id = $conditions['oferta_id'];
             }
+            if(!empty($conditions['Oferta.id'])) {
+                $oferta_id = $conditions['Oferta.id'];
+            }
+            if(!empty($conditions['Plan.oferta_id'])) {
+                $oferta_id = $conditions['Plan.oferta_id'];
+            }
 
             if(!empty($conditions['ciclo_id'])) {
                 $ciclo = $conditions['ciclo_id'];
+            }
+            if(!empty($conditions['Anio.ciclo_id'])) {
+                $ciclo = $conditions['Anio.ciclo_id'];
+            }
+            if(!empty($conditions['Ciclo.id'])) {
+                $ciclo = $conditions['Ciclo.id'];
             }
 
             $condsPlan = array();
