@@ -73,7 +73,7 @@
                         </dl>
 
                          <h2 style="padding-left: 15px">Líneas de Acción</h2>
-                        <div class="collapsibleContainer" title="Lineas de Accion">
+                        <div class="collapsibleContainer">
                             <dl>
                             <?php
                                 foreach ($fondo['LineasDeAccion'] as $linea):
