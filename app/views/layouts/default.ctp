@@ -53,7 +53,7 @@ header("Expires: Mon, 17 Dec 2007 00:00:00 GMT"); // Date in the past
         'jquery.form',
         'jquery.tools.min',
         'views/layout/default',
-        'jquery-ui-1.8.5.custom.min'
+        'jquery-ui-1.8.5.custom.min',
         ));
 
         $jsPoner = 'views'.DS.Inflector::underscore($this->name).DS.$this->action;

@@ -12,11 +12,11 @@ echo $javascript->link(array(
     'views/instits/search_form',
         ), false);
 
-echo $html->css(array('jquery.loadmask'));
+echo $html->css(array('jquery.loadmask', 'smoothness/jquery-ui-1.8.6.custom'));
 ?>
 
 <h1><? __('Búsqueda de Instituciones')?></h1>
-
+<br>
 <div>
     <?php
     echo $form->create('Instit', array(
@@ -39,7 +39,7 @@ echo $html->css(array('jquery.loadmask'));
             'id'=>'InstitCue',
             'div' => array('style' => 'width:50%; float:left; clear: none'),
          //   'style'=>'border:1px solid #BBBBBB; width: 99%; font-size: 22px; height: 29px; color: rgb(117, 117, 117);',
-            'label'=> 'Criterios de Búsqueda'
+            'label'=> 'Ingrese CUE, Tipo y Número o Nombre'
             ));
     
 //    echo $html->link('Búsqueda avanzada','advanced_search_form',array(
@@ -59,45 +59,42 @@ echo $html->css(array('jquery.loadmask'));
     <?php
     
     $img =  $html->image('help.png', array(
-        'alt' => 'Ayuda',
+        'alt' => 'Ayuda: ¿Cómo utilizar el buscador?',
         'id' => 'littleHelpers',
         'style'=>'float:left; margin: 20px 10px;',
         ));
 
-    echo $html->link($img, 'javascript: abrirVentanaAyuda()', array('escape'=>false));
+    echo $html->link($img, 'javascript: abrirVentanaAyuda()', array(
+        'escape'=>false,
+        'title' => 'Ayuda: ¿Cómo utilizar el buscador?',
+        ));
     ?>
     
-    <div id="boxdeAyuda" style="display:none; position: absolute; height: 200px; width: 200px; overflow: auto;">
-        
-        <ul class="menu_body help_body">
-                <br/>
-                <P LANG="es-ES" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="es-ES">Puede
-                buscar por CUE</SPAN><SPAN LANG="es-ES">
-                (con &oacute; sin n&uacute;mero de anexo) &oacute; por parte del CUE.
-                </SPAN>
+    <div id="boxdeAyuda" style=" overflow: auto; font-size: 8pt !important;">
+        <ul style="height: 300px;">
+                <P LANG="es-ES" CLASS="western" STYLE="margin-bottom: 0cm">
+                    <SPAN LANG="es-ES">Puede buscar por CUE</SPAN>
+                    <SPAN LANG="es-ES">(con &oacute; sin n&uacute;mero de anexo) &oacute; por parte del CUE.</SPAN>
                 </P>
-                <P LANG="es-ES" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="es-ES">Ej</SPAN><SPAN LANG="es-ES">emplos:
-                </SPAN>
+                <P LANG="es-ES" CLASS="western" STYLE="margin-bottom: 0cm">
+                    <SPAN LANG="es-ES">Ejemplos: </SPAN>
                 </P>
                 <TABLE style="background-color: transparent;">
                         <COL >
                         <COL >
                         <TR VALIGN=TOP>
                                 <TD >
-                                        <B>Si
-                                        ingresa</B>
+                                        <B>Si ingresa</B>
                                 </TD>
                                 <TD >
-                                        <B>Busca
-                                        por</B>
+                                        <B>Busca por</B>
                                 </TD>
                         </TR>
                         <TR VALIGN=TOP>
                                 <TD>
                                         282
                                 <TD>
-                                        <SPAN LANG="es-ES">P</SPAN><SPAN LANG="es-ES">arte
-                                        del CUE</SPAN>
+                                        <SPAN LANG="es-ES">Parte del CUE</SPAN>
                                 </TD>
                         </TR>
                         <TR VALIGN=TOP>
@@ -105,8 +102,7 @@ echo $html->css(array('jquery.loadmask'));
                                         3000282
                                 </TD>
                                 <TD>
-                                        <SPAN LANG="es-ES">CUE
-                                        completo sin considerar n&uacute;mero de anexo</SPAN>
+                                        <SPAN LANG="es-ES">CUE completo sin considerar n&uacute;mero de anexo</SPAN>
                                 </TD>
                         </TR>
                         <TR VALIGN=TOP>
@@ -114,38 +110,39 @@ echo $html->css(array('jquery.loadmask'));
                                         300028200
                                 </TD>
                                 <TD>
-                                        CUE
-                                        con n&uacute;mero de anexo
+                                        CUE con n&uacute;mero de anexo
                                 </TD>
                         </TR>
                 </TABLE>
-                <P LANG="es-ES" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="es-ES">Tambi&eacute;n
+                <P LANG="es-ES" CLASS="western" STYLE="margin-bottom: 0cm">
+                    <SPAN LANG="es-ES">
+                        Tambi&eacute;n
                 puede buscar por tipo de establecimiento, n&uacute;mero y nombre
-                propio de la instituci&oacute;n</SPAN><SPAN LANG="es-ES">.
+                propio de la instituci&oacute;n.
                 El buscador ignora may&uacute;sculas / min&uacute;sculas y letras
-                acentuadas para mejorar los resultados.</SPAN></P>
-                <P LANG="es-ES" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="es-ES">Ej</SPAN><SPAN LANG="es-ES">emplos:</SPAN></P>
+                acentuadas para mejorar los resultados.
+                    </SPAN>
+                </P>
+                <P LANG="es-ES" CLASS="western" STYLE="margin-bottom: 0cm">
+                    <SPAN LANG="es-ES">Ejemplos:</SPAN>
+                </P>
                 <TABLE style="background-color: transparent;">
                         <COL >
                         <COL >
                         <TR VALIGN=TOP>
                                 <TD >
-                                        <B>Si
-                                        ingresa</B>
+                                        <B>Si ingresa</B>
                                 </TD>
                                 <TD >
-                                        <B>Busca
-                                        por</B>
+                                        <B>Busca por</B>
                                 </TD>
                         </TR>
                         <TR VALIGN=TOP>
                                 <TD>
-                                        escuela
-                                        t&eacute;cnica
+                                        escuela t&eacute;cnica
                                 </TD>
                                 <TD>
-                                        <SPAN LANG="es-ES">T</SPAN><SPAN LANG="es-ES">ipo
-                                        de instituci&oacute;n</SPAN>
+                                        <SPAN LANG="es-ES">Tipo de instituci&oacute;n</SPAN>
                                 </TD>
                         </TR>
                         <TR VALIGN=TOP>
@@ -153,8 +150,7 @@ echo $html->css(array('jquery.loadmask'));
                                         E.E.T.
                                 </TD>
                                 <TD>
-                                        <SPAN LANG="es-ES">T</SPAN><SPAN LANG="es-ES">ipo
-                                        de instituci&oacute;n en formato abreviado</SPAN>
+                                        <SPAN LANG="es-ES">Tipo de instituci&oacute;n en formato abreviado</SPAN>
                                 </TD>
                         </TR>
                         <TR VALIGN=TOP>
@@ -162,18 +158,15 @@ echo $html->css(array('jquery.loadmask'));
                                         EET
                                 </TD>
                                 <TD>
-                                        <SPAN LANG="es-ES">T</SPAN><SPAN LANG="es-ES">ipo
-                                        de instituci&oacute;n en formato abreviado sin puntos</SPAN>
+                                        <SPAN LANG="es-ES">Tipo de instituci&oacute;n en formato abreviado sin puntos</SPAN>
                                 </TD>
                         </TR>
                         <TR VALIGN=TOP>
                                 <TD>
-                                        tecnica
-                                        18
+                                        tecnica 18
                                 </TD>
                                 <TD>
-                                        <SPAN LANG="es-ES">T</SPAN><SPAN LANG="es-ES">ipo
-                                        y n&uacute;mero de instituci&oacute;n</SPAN>
+                                        <SPAN LANG="es-ES">Tipo y n&uacute;mero de instituci&oacute;n</SPAN>
                                 </TD>
                         </TR>
                         <TR VALIGN=TOP>
@@ -181,8 +174,7 @@ echo $html->css(array('jquery.loadmask'));
                                         savio
                                 </TD>
                                 <TD>
-                                        <SPAN LANG="es-ES">P</SPAN><SPAN LANG="es-ES">arte
-                                        del nombre de la instituci&oacute;n</SPAN>
+                                        <SPAN LANG="es-ES">Parte del nombre de la instituci&oacute;n</SPAN>
                                 </TD>
                         </TR>
                         <TR VALIGN=TOP>
@@ -191,34 +183,36 @@ echo $html->css(array('jquery.loadmask'));
                                         Savio
                                 </TD>
                                 <TD>
-                                        <SPAN LANG="es-ES">T</SPAN><SPAN LANG="es-ES">ipo
-                                        de instituci&oacute;n y parte del nombre</SPAN>
+                                        <SPAN LANG="es-ES">Tipo de instituci&oacute;n y parte del nombre</SPAN>
                                 </TD>
                         </TR>
                         <TR VALIGN=TOP>
                                 <TD>
-                                        escuela
-                                        tecnica general savio
+                                        escuela tecnica general savio
                                 </TD>
                                 <TD>
-                                        <SPAN LANG="es-ES">T</SPAN><SPAN LANG="es-ES">ipo
-                                        de instituci&oacute;n y parte del nombre</SPAN>
+                                        <SPAN LANG="es-ES">Tipo de instituci&oacute;n y parte del nombre</SPAN>
                                 </TD>
                         </TR>
                 </TABLE>
-                <P LANG="es-ES" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="es-ES">Puede
-                utilizar las combinaciones que prefiera.</SPAN><SPAN LANG="es-ES">
+                <P LANG="es-ES" CLASS="western" STYLE="margin-bottom: 0cm">
+                    <SPAN LANG="es-ES">Puede
+                utilizar las combinaciones que prefiera.
                 Pruebe comenzando con criterios m&iacute;nimos y vaya refinando la
-                b&uacute;squeda si obtiene demasiados resultados.</SPAN></P>
-                <P LANG="es-ES" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="es-ES">Si
-                necesita definir </SPAN><SPAN LANG="es-ES">m&aacute;s
-                criterios (departamento, localidad, tipo de oferta del
-                establecimiento, etc.) realice una </SPAN><SPAN LANG="es-ES">
+                b&uacute;squeda si obtiene demasiados resultados.
+                    </SPAN>
+                </P>
+                <P LANG="es-ES" CLASS="western" STYLE="margin-bottom: 0cm">
+                    <SPAN LANG="es-ES">
+                        Si necesita definir m&aacute;s criterios (departamento, localidad, tipo de oferta del
+                establecimiento, etc.) realice una
+                    </SPAN><SPAN LANG="es-ES">
                 <?php
                             echo $html->link('Búsqueda avanzada','advanced_search_form',array(
                                              'div'=>false));
                 ?>
-                        </SPAN><SPAN LANG="es-ES">.</SPAN></P>
+                        </SPAN>.
+                </P>
                 
         </ul>
     </div>
