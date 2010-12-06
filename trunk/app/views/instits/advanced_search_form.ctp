@@ -42,7 +42,7 @@ echo $html->css('jquery.autocomplete.css', false);
         'class'=> 'display: block; clear: both;',
         'empty' => array('0'=>'Todas'),
         'id'=>'jurisdiccion_id'));
-        echo '<span class="ajax_update" id="ajax_indicator" style="display:none; position:absolute; float: left; clear: none">'.$html->image('ajax-loader.gif').'</span>';
+        echo '<span class="ajax_update" id="ajax_indicator" style="display:none; margin-top: -32px; float: right; clear: none">'.$html->image('ajax-loader.gif').'</span>';
         ?>
     </fieldset>
 

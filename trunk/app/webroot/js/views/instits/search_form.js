@@ -113,14 +113,16 @@
 
         jQuery("#InstitCue").bind('paste', function(e){autoSubmit(true)});
 
-
-       // jQuery('.help_body').show();
+        jQuery( "#boxdeAyuda" ).dialog({
+            autoOpen: false,
+            width: '600px',
+            title: '¿Cómo utilizar el buscador?',
+            modal: true
+        });
     });
 
 
+
 function abrirVentanaAyuda() {
-    jQuery( "#boxdeAyuda" ).dialog();
-
-     //   jQuery('#boxdeAyuda').toggle();
-
+    jQuery( "#boxdeAyuda" ).dialog('open');
 }
