@@ -31,36 +31,44 @@ echo $html->css(array('jquery.loadmask'));
     echo $form->input('jurisdiccion_id',array(
             'label'=>'Jurisdicción',
             'empty'=>'Todas',
-            'style'=> 'background-color: white; border:1px solid #BBBBBB; width:50%;font-size: 18px; height: 25px; color: rgb(117, 117, 117);',
-            'after' => '<br><cite>Filtro opcional. Si no selecciona una Jurisdicción se realizará una búsqueda en todo el Registro.</cite>'
+            'div' => array('style' => 'width:30%; float:left; clear: none;'),
+            //'after' => '<cite>Filtro opcional. Si no selecciona una Jurisdicción se realizará una búsqueda en todo el Registro.</cite>'
             ));
 
     echo $form->input('busqueda_libre', array(
             'id'=>'InstitCue',
-            'style'=>'border:1px solid #BBBBBB; width: 99%; font-size: 22px; height: 29px; color: rgb(117, 117, 117);',
+            'div' => array('style' => 'width:50%; float:left; clear: none'),
+         //   'style'=>'border:1px solid #BBBBBB; width: 99%; font-size: 22px; height: 29px; color: rgb(117, 117, 117);',
             'label'=> 'Criterios de Búsqueda'
             ));
     
-    echo $html->link('Búsqueda avanzada','advanced_search_form',array(
-        'class'=>'link_right small',
-        'style'=>'margin-bottom: -18px; padding:0px; margin-right: 4px;'
-    ));
-
+//    echo $html->link('Búsqueda avanzada','advanced_search_form',array(
+//        'class'=>'link_right small',
+//        'style'=>'margin-bottom: -18px; padding:0px; margin-right: 4px;'
+//    ));
     
     echo $form->button('Buscar', array(
                 'class' => 'boton-buscar',
+                'style' => 'float: left; clear: none; margin-top: 20px; width: 10%',
                 'onclick' => 'autoSubmit(true)',
          ));
 
     echo $form->end();
     ?>
+    
+    <?php
+    
+    $img =  $html->image('help.png', array(
+        'alt' => 'Ayuda',
+        'id' => 'littleHelpers',
+        'style'=>'float:left; margin: 20px 10px;',
+        ));
 
-    <br />
-    <div id="boxAyuda" style="display:block;clear:both">
-        <div id="boxAyuda" class="menu_head_open help_head">
-            <?php echo $html->image('help.png', array('alt' => 'Ayuda','style'=>'float:left;display:inline; margin: 0px 10px;'))?>
-            <span>Ayuda</span>
-        </div>
+    echo $html->link($img, 'javascript: abrirVentanaAyuda()', array('escape'=>false));
+    ?>
+    
+    <div id="boxdeAyuda" style="display:none; position: absolute; height: 200px; width: 200px; overflow: auto;">
+        
         <ul class="menu_body help_body">
                 <br/>
                 <P LANG="es-ES" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="es-ES">Puede
@@ -214,6 +222,8 @@ echo $html->css(array('jquery.loadmask'));
                 
         </ul>
     </div>
+
+    <div class="clear"></div>
     
     <!-- Aca se muestran los resultados de la busqueda-->
     <div id='consoleResultWrapper'  style="margin-top: 20px;">

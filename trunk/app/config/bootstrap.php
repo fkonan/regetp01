@@ -103,7 +103,8 @@ function convertir_para_busqueda_avanzada($text){
 
         // reemplado las palabras abreviadas por su version con puntos
         //  EJ: a EET quedaria: E.E.T, es para mejorar la busqueda
-        /*$tipoInstitsAbreviadas = array(
+        /*
+         * $tipoInstitsAbreviadas = array(
             'ipem'  => 'i.p.e.m',
             'cfp'   => 'c.f.p',
             'eet'   => 'e.e.t',
@@ -112,6 +113,7 @@ function convertir_para_busqueda_avanzada($text){
             'eea'   => 'e.e.a',
             'cfr'   => 'c.f.r',
         );*/
+        /* @var $tipoInstit Tipoinstit */
         $tipoInstit =& ClassRegistry::init('Tipoinstit');
         $tipoInstitsAbreviadas = $tipoInstit->getAbreviados();
         
@@ -128,49 +130,50 @@ function convertir_para_busqueda_avanzada($text){
         $text = "%$text%";
         $patron = array (
                 // Espacios, puntos y comas por guion
-                '/.,/' => '\.',
+                ',' => '\.',
+                '.' => '\.',
 
                 // Vocales
-                '/a/' => $posiblesA,
-                '/e/' => $posiblesE,
-                '/i/' => $posiblesI,
-                '/o/' => $posiblesO,
-                '/u/' => $posiblesU,
+                'a' => $posiblesA,
+                'e' => $posiblesE,
+                'i' => $posiblesI,
+                'o' => $posiblesO,
+                'u' => $posiblesU,
 
-                '/Ü/' => $posiblesU,
-                '/ü/' => $posiblesU,
+                'Ü' => $posiblesU,
+                'ü' => $posiblesU,
 
-                '/A/' => $posiblesA,
-                '/E/' => $posiblesE,
-                '/I/' => $posiblesI,
-                '/O/' => $posiblesO,
-                '/U/' => $posiblesU,
+                'A' => $posiblesA,
+                'E' => $posiblesE,
+                'I' => $posiblesI,
+                'O' => $posiblesO,
+                'U' => $posiblesU,
 
-                '/Á/' => $posiblesA,
-                '/É/' => $posiblesE,
-                '/Í/' => $posiblesI,
-                '/Ó/' => $posiblesO,
-                '/Ú/' => $posiblesU,
+                'Á' => $posiblesA,
+                'É' => $posiblesE,
+                'Í' => $posiblesI,
+                'Ó' => $posiblesO,
+                'Ú' => $posiblesU,
 
-                '/á/' => $posiblesA,
-                '/é/' => $posiblesE,
-                '/í/' => $posiblesI,
-                '/ó/' => $posiblesO,
-                '/ú/' => $posiblesU,
+                'á' => $posiblesA,
+                'é' => $posiblesE,
+                'í' => $posiblesI,
+                'ó' => $posiblesO,
+                'ú' => $posiblesU,
 
-                '/n/' => '(ñ)',
-                '/ñ/' => '(n|ñ)',
+                'n' => '(n|ñ)',
+                'ñ' => '(n|ñ)',
 
-                '/s/' => '(z|s|c)',
-                '/c/' => '(z|s|c)',
-                '/z/' => '(z|s|c)',
+                's' => '(z|s|c)',
+                'c' => '(z|s|c)',
+                'z' => '(z|s|c)',
 
                 // Agregar aqui mas caracteres si es necesario
-                '/°/' => '',
-                '/º/' => '',
-                '/n°/' => '%',
-                '/nº/' => '%',
-                '/ /' => '%',
+                '°'  => '',
+                'º'  => '',
+                'n°' => '%',
+                'nº' => '%',
+                ' '  => '%',
 
         );
         // caracteres especiales de expresiones regulares
@@ -178,8 +181,13 @@ function convertir_para_busqueda_avanzada($text){
 
         $text_aux = '';
         for($i=0; $i<strlen($text); $i++){
-                $caracter =  $text[$i];
-                $text_aux .= preg_replace(array_keys($patron),array_values($patron),$caracter,1);
+                $caracter =  low($text[$i]);
+
+                if ( key_exists($caracter, $patron) ) {
+                    $text_aux .= $patron[$caracter];
+                } else {
+                    $text_aux .= $caracter;
+                }
         }
 
         return $text_aux;

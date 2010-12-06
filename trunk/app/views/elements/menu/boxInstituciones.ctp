@@ -9,7 +9,7 @@
                     echo $html->link(__('Buscador', true), '/instits/search_form');
                 ?>
             </li>
-            <li><?php echo $html->link(__('Buscador Clásico', true), '/instits/old_search_form'); ?></li>
+            <li><?php echo $html->link(__('Buscador Avanzado', true), '/instits/advanced_search_form'); ?></li>
             <li><?php echo $html->link(__('Histórico de CUE', true), '/historialCues/search_form'); ?></li>
     </ul>
 </div>
