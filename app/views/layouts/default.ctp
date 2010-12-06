@@ -49,10 +49,11 @@ header("Expires: Mon, 17 Dec 2007 00:00:00 GMT"); // Date in the past
         }
 
         echo $javascript->link(array(
-        'jquery-1.4.2.min.js',
-        'jquery.form.js',
-        'jquery.tools.min.js',
+        'jquery-1.4.2.min',
+        'jquery.form',
+        'jquery.tools.min',
         'views/layout/default',
+        'jquery-ui-1.8.5.custom.min'
         ));
 
         $jsPoner = 'views'.DS.Inflector::underscore($this->name).DS.$this->action;

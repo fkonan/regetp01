@@ -35,7 +35,7 @@
         jQuery.tools.tooltip.conf.events.input = 'focus,blur';
         jQuery.tools.tooltip.conf.events.tooltip = '';
         jQuery.tools.tooltip.conf.events.widget = 'focus, blur';
-        jQuery("#"+formId+" :input[title]").tooltip({ effect: 'slide', offset:[22,0]});
+        jQuery("#"+formId+" :input[title]").tooltip({effect: 'slide', offset:[22,0]});
     }
 
     function blockResultConsole(formData, jqForm, options) {
@@ -113,8 +113,14 @@
 
         jQuery("#InstitCue").bind('paste', function(e){autoSubmit(true)});
 
-        //iniciarTooltip();
 
-        jQuery('.help_body').show();
+       // jQuery('.help_body').show();
     });
 
+
+function abrirVentanaAyuda() {
+    jQuery( "#boxdeAyuda" ).dialog();
+
+     //   jQuery('#boxdeAyuda').toggle();
+
+}

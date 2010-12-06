@@ -244,7 +244,6 @@ class Plan extends AppModel {
                 if ( !empty($parameters['conditions']['Anio.ciclo_id'])) {
                     $ciclo_id = $parameters['conditions']['Anio.ciclo_id'];
                 }
-
                     
                 //$this->order = array_merge($this->order, array('Etapa.orden ASC'));
                 $parameters['group'] = 'Plan.id';

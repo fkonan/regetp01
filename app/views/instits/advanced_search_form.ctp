@@ -1,150 +1,21 @@
 <?
 echo $javascript->link(array(
 'jquery.autocomplete',
-//'jquery.tooltip.min',
-
 'jquery.blockUI',
 ));
 
-echo $html->css('jquery.autocomplete.css');
+echo $html->css('jquery.autocomplete.css', false);
 ?>
 
 
-<style>
-    INPUT, TEXTAREA, SELECT, option{
-        font-size: 10pt;
 
-        letter-spacing: normal;
-        line-height: normal;
-        margin: 0em;
-        text-indent: 0px;
-        text-shadow: none;
-        text-transform: none;
-        word-spacing: normal;
-    }
-
-
-    input[type="text"], input.text, input.title, textarea, select{
-        background-color: white;
-        border: 1px solid #BBB;
-    }
-
-    label{
-        font-size: 8pt;
-    }
-
-</style>
-
-<script language="javascript">
-
-    function iniciarTooltip(){
-        jQuery.tools.tooltip.conf.events.input = 'focus,blur';
-        jQuery.tools.tooltip.conf.events.tooltip = '';
-        jQuery.tools.tooltip.conf.events.widget = 'focus, blur';
-        jQuery("#InstitSearchForm :input[title]").tooltip({ effect: 'slide', offset:[22,0]});
-        
-    }
-
-    jQuery(document).ready(function() {
-        iniciarTooltip();
-
-        jQuery("#InstitJurDepLoc").autocomplete("<?echo $html->url(array('controller'=>'localidades','action'=>'ajax_search_localidades'));?>", {
-            dataType: "json",
-            delay: 200,
-            max:30,
-            cacheLength:1,
-            extraParams: {
-                jur: function() { return jQuery('#jurisdiccion_id').val(); }
-            } ,
-            parse: function(data) {
-                return jQuery.map(data, function(loc_dep) {
-                    return {
-                        data: loc_dep,
-                        value: loc_dep.id,
-                        result: formatResult(loc_dep)
-                    }
-                });
-            },
-            formatItem: function(item) {
-                return formatResult(item);
-            }
-        }).result(function(e, item) {
-            jQuery("#hiddenLocDepId").remove();
-            if(item.type == 'Vacio'){
-                jQuery("#InstitJurDepLoc").val('');
-            }
-            else{
-                jQuery("#InstitSearchForm #search-ubicacion").append("<input id='hiddenLocDepId' name='data[" + item.type + "][id]' type='hidden' value='" + item.id + "' />");
-            }
-        });
-
-        jQuery("#InstitJurDepLoc").attr('autocomplete','off');
-
-    });
-
-    function formatResult(loc_dep) {
-        if(loc_dep.type == 'Localidad'){
-            return loc_dep.localidad + ', ' + loc_dep.departamento + ' (' + loc_dep.jurisdiccion + ')';
-        }
-        else if(loc_dep.type == 'Departamento'){
-            return loc_dep.departamento + ' (' + loc_dep.jurisdiccion + ')';
-        }
-        else{
-            return loc_dep.localidad;
-        }
-
-    }
-
-    function enviar()
-    {
-        //jQuery('#InstitSearchForm input[type=button]').attr('disabled', 'disabled');
-        jQuery('#InstitSearchForm').submit();
-        jQuery("#hiddenLocDepId").remove();
-    }
-
-    function borrarDatos(nombreElemento){
-     jQuery(nombreElemento).css({backgroundColor:"#FFFFE0"}).animate(
-                   {width:'544px'},
-                    200,
-                    'linear',
-                    function(){
-                        jQuery(nombreElemento).delay(100).animate(
-                            {width:'544px'},
-                            200,
-                            function(){
-                                jQuery(nombreElemento).css({background:"#FFF"});
-                        });
-                    });
-}
-
-
-    function onSeleccionDeJurisdiccionDo(){
-        
-        jQuery("#ajax_indicator").hide();
-        jQuery("#InstitTipoinstitId").removeAttr("disabled");
-
-//console.debug(jQuery('#InstitJurDepLoc').css);
-
-       borrarDatos('#InstitJurDepLoc');
-       borrarDatos('#InstitTipoinstitId');
-
-       //jQuery('#InstitJurDepLoc').delay(1900).css({borderColor:"black"});
-
-
-//    jQuery("#InstitJurDepLoc").css({borderColor:"#000000",borderWidth:'6px'});
-//    jQuery("#InstitJurDepLoc").delay("99999900").css({borderColor:"#BBBBBB",borderWidth:'1px'});
-
-        jQuery("#hiddenLocDepId").remove();
-        jQuery("#InstitJurDepLoc").val("");
-        jQuery("#label-tipoinstit").html('Mostrando Tipo de Instituciones de '+jQuery('#jurisdiccion_id :selected').text());
-    }
-
+<script type="text/javascript" language="javascript">
+    init__AdvancedSearchFormJs("<?echo $html->url(array('controller'=>'localidades','action'=>'ajax_search_localidades'));?>");
 </script>
-<h1><? __('Búsqueda Avanzada de Instituciones')?></h1>
-<style>
-    .label {color:#444444;}
 
-</style>
+<h1><? __('Búsqueda Avanzada de Instituciones')?></h1>
+
+
 <div>
     <?= $form->create('Instit',array('action' => 'search','name'=>'InstitSearchForm'));?>
 
@@ -167,11 +38,11 @@ echo $html->css('jquery.autocomplete.css');
 
         echo $form->input('jurisdiccion_id', array(
         'label'=>'Jurisdicción',
-        'div'=>array('style'=>'float: left;  clear: none'),
+        'div'=>array('style'=>'float: left;  clear: none; width: 190px;'),
         'class'=> 'display: block; clear: both;',
-        'empty' => array('0'=>'Todas las Jurisdicciones'),
+        'empty' => array('0'=>'Todas'),
         'id'=>'jurisdiccion_id'));
-        echo '<span class="ajax_update" id="ajax_indicator" style="display:none; float: left; clear: none">'.$html->image('ajax-loader.gif').'</span>';
+        echo '<span class="ajax_update" id="ajax_indicator" style="display:none; position:absolute; float: left; clear: none">'.$html->image('ajax-loader.gif').'</span>';
         ?>
     </fieldset>
 
