@@ -297,7 +297,7 @@ echo $html->css('jquery.autocomplete.css');
         </div>
     </fieldset>
     <fieldset>
-        <legend>Lineas de Accion</legend>
+        <legend>Líneas de Acción</legend>
         <div class="lista_lineas">
             <dl class="item_lineas" style="cursor:pointer;padding:0px !important">
                 <div id="detalle">

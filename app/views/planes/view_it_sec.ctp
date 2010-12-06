@@ -20,7 +20,7 @@ if (empty($planes)) {
                             <span class="plan_mas_info btn-ir">
                             <?php echo $html->link("ver más",
                                 array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']), array(
-                                    'title'=>'Ver mas información del plan',
+                                    'title'=>'Ver más información del plan',
                                     ));
                             ?>
                             </span>

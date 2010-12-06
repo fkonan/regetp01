@@ -144,7 +144,7 @@
                 <? } ?>
                 <? if ($fondo['FondoTemporal']['total']) { ?>
                 <tr>
-                    <td style="text-align:left;"><b>Suma Lineas de Accion</b></td>
+                    <td style="text-align:left;"><b>Suma Líneas de Acción</b></td>
                     <td style="text-align:right;"><?=number_format($fondo['FondoTemporal']['suma_lineas'],2,",",".")?></td>
                 </tr>
                 <tr>
