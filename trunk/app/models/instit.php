@@ -1326,7 +1326,7 @@ class Instit extends AppModel {
             $this->recursive = -1;
             $instit = $this->read(null, $this->id);
             
-            $planes = $this->Plan->find('conAnios', array(
+            $planes = $this->Plan->find('completo', array(
                 'contain' => array(
                         'Instit',
                         'Oferta',

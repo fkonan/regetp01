@@ -23,8 +23,25 @@ echo $html->css(array('jquery.autocomplete'));
                 });
             });
 
-            jQuery('#titulo_id').change(seleccionarTitulosEnMasa);
-            actualizarSelects();
+
+             jQuery('#FPlanConTitulo').change(function() {
+                 if (jQuery('#FPlanConTitulo').val() != 'sin') {
+                     jQuery('#FPlanSectorId').removeAttr('disabled');
+                     jQuery('#FPlanSubsectorId').removeAttr('disabled');
+                     jQuery('#DivFPlanSectorId').show();
+                     jQuery('#DivFPlanSubsectorId').show();
+
+                 }
+                 else {
+                     jQuery('#FPlanSectorId').attr('disabled', 'true');
+                     jQuery('#FPlanSubsectorId').attr('disabled', 'true');
+                     jQuery('#DivFPlanSectorId').hide();
+                     jQuery('#DivFPlanSubsectorId').hide();
+                 }
+             });
+
+            //jQuery('#titulo_id').change(seleccionarTitulosEnMasa);
+            //actualizarSelects();
 
 
             /*******/
@@ -108,11 +125,11 @@ echo $html->css(array('jquery.autocomplete'));
             });
         }
 </script>
+<h1>Corrector de Títulos de Planes</h1>
+
 <?
 $paginator->options(array('url' => $url_conditions));
 ?>
-<h1> ¡¡ vamos que faltan solo <?php echo $paginator->counter(array(
-			'format' => '%count%'));?>!!</h1>
 
 <!-- 	BUSQUEDA POR SU OFERTA  	-->
 
@@ -121,8 +138,13 @@ $paginator->options(array('url' => $url_conditions));
     <?
     echo $form->input('FPlan.oferta_id',array(
                         'options'=>$ofertas,
-                        'empty'=>'Seleccione',
+                        'empty'=>'Todas',
                         'label'=>'Oferta'));
+
+    echo $form->input('FPlan.con_titulo',array(
+                        'options'=> array('con' => 'Con Título de Referencia', 'sin' => 'Sin Título de Referencia'),
+                        'empty'=>'Todos',
+                        'label'=>'Planes'));
 
     $meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
     echo $form->input('FPlan.jurisdiccion_id', array(
@@ -138,12 +160,14 @@ $paginator->options(array('url' => $url_conditions));
     echo $form->input('FPlan.sector_id',array(
                         'label'=>'Sector',
                         'options'=>$sectores,
-                        'empty'=>'Seleccione'
+                        'empty'=>'Todos',
+                        'div' => array('id' => 'DivFPlanSectorId')
     ));
 
     echo $form->input('FPlan.subsector_id', array(
                         'label'=>'Subsector',
-                        'empty'=>'Seleccione',
+                        'empty'=>'Todos',
+                        'div' => array('id' => 'DivFPlanSubsectorId')
             ));
     ?>
     <?php
@@ -184,164 +208,130 @@ $paginator->options(array('url' => $url_conditions));
 
 <hr>
 
-<?php
-echo $form->create('Plan', array(
-			'url'=>'/titulos/corrector_de_planes',
-			//'onsubmit'=>'activarCambios(); return false;',
-			'id'=>'formPlanes'
-));
-
-
-echo $form->button('Seleccionar Todos', array('onclick'=>'checkAll()', 'style'=>'clear:none;float:left;width:144px;'));
-echo $form->button('Deseleccionar Todos', array('onclick'=>'unCheckAll()', 'style'=>'clear:none;float:left;width:144px;'));
-
-$i = 0;
-foreach ($planes as $p) {
-
-	$div_id = "plan-id-".$p['Plan']['id'];
-	?>
-
-
-	<div style="font-size: 12px;" id="plan-linea-<?= $i?>">
-		<?php echo $form->input("Plan.$i.id",array('value' =>$p['Plan']['id']));?>
-
-                <?php echo $form->checkbox("Plan.$i.selected", array(
-                            'id'=>"checkbox-$i",
-                            'numero'=>$i,
-                    ));
-                ?>
-
-                <?php echo $form->input("Plan.$i.titulo_id", array(
-                        'class'=>'titulo dep_titulo',
-                        'div'=>false,
-                        'label'=>false,
-                        'default'=>'seleccione',
-                        'empty'=>'seleccione',
-                        'style'=>'clear: none;',
-                        'onchange'=> 'jQuery("#checkbox-'.$i.'").attr("checked", true)',
-                    ));
-                ?>
-		<a style="font-size: 10px;" href="javascript:" onclick="jQuery('#<? echo $div_id?>').toggle(); return false;"><?= $p['Plan']['nombre']?></a>
-	</div>
-	<div style="display: none; background-color: beige;" id="<? echo $div_id?>">
-
-		<?php echo $html->link('ir al plan','/Planes/view/'.$p['Plan']['id'],array('style'=> 'float: right;'))?>
-		<dl>
-			<?php $nombre = (empty($p['Instit']['nombre']))? 'SIN NOMBRE':$p['Instit']['nombre'];?>
-			<dt>Institución:</dt>			<dd><?php echo $html->link($nombre,'/instits/view/'.$p['Instit']['id']);?>&nbsp;</dd>
-			<dt>Oferta:</dt>				<dd><?php echo $p['Oferta']['name']?>&nbsp;</dd>
-			<dt>Sector:</dt>				<dd><?php echo $p['Sector']['name']?>&nbsp;</dd>
-			<dt>Subsector:</dt>				<dd><?php echo $p['Subsector']['name']?>&nbsp;</dd>
-			<dt>Duracion:</dt>				<dd><?php echo " - ";?>&nbsp;</dd>
-			<dt>&nbsp;&nbsp;-- Horas:</dt>	<dd><?php echo $p['Plan']['duracion_hs'];?>&nbsp;</dd>
-			<dt>&nbsp;&nbsp;-- Semanas:</dt><dd><?php echo $p['Plan']['duracion_semanas'];?>&nbsp;</dd>
-			<dt>&nbsp;&nbsp;-- Años:</dt>	<dd><?php echo $p['Plan']['duracion_anios'];?>&nbsp;</dd>
-			<dt>matricula:</dt>				<dd><?php echo $p['Plan']['matricula']?>&nbsp;</dd>
-			<dt>Observación:</dt>			<dd><?php echo $p['Plan']['observacion']?>&nbsp;</dd>
-			<dt>Alta:</dt>					<dd><?php echo date('d/m/Y',strtotime($p['Plan']['created']))?>&nbsp;</dd>
-			<dt>Modificación:</dt>			<dd><?php echo date('d/m/Y',strtotime($p['Plan']['modified']))?>&nbsp;</dd>
-
-			<?php
-				foreach ($p['Anio'] as $anio):
-					$ciclos[$anio['ciclo_id']] = $anio['ciclo_id'];
-				endforeach;
-
-				$texto = '';
-				foreach ($ciclos as $c):
-					$texto .= " - ".$c;
-				endforeach;
-			?>
-			<dt>Ciclos con información</dt><dd><?php echo $texto?>&nbsp;</dd>
-
-		</dl>
-	</div>
+<h1><?php echo $paginator->counter(array(
+			'format' => '%count%'));?> planes encontrados</h1>
 
 <?php
-	$i++;
-}
-
-echo $form->input(
-'tituloName',
-array(
-    'label'=> 'Asignar Título en masa',
-    'id' => 'TituloName',
-    'after'=> '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>',
-    'style'=>'max-width: 550px;',
-    'div'=>array('id'=>'divTituloName')));
- echo $form->input('titulo_id', array(
-    'type'=>'hidden',
-    'id'=>'titulo_id',
-    'value'=>$titulo_id
+if (!empty($planes))
+{
+    echo $form->create('Plan', array(
+                            'url'=>'/titulos/corrector_de_planes',
+                            //'onsubmit'=>'activarCambios(); return false;',
+                            'id'=>'formPlanes'
     ));
 
 
+    echo $form->button('Seleccionar Todos', array('onclick'=>'checkAll()', 'style'=>'clear:none;float:left;width:144px;'));
+    echo $form->button('Deseleccionar Todos', array('onclick'=>'unCheckAll()', 'style'=>'clear:none;float:left;width:144px;'));
 
-//echo $form->button('Seleccionar Todos', array('onclick'=>'checkAll()', 'style'=>'clear:none;float:left;width:144px;'));
-//echo $form->button('Deseleccionar Todos', array('onclick'=>'unCheckAll()', 'style'=>'clear:none;float:left;width:144px;'));
+    $i = 0;
+    foreach ($planes as $p) {
 
+            $div_id = "plan-id-".$p['Plan']['id'];
+            ?>
+
+
+            <div style="font-size: 9pt;" id="plan-linea-<?= $i?>">
+                    <?php echo $form->input("Plan.$i.id",array('value' =>$p['Plan']['id']));?>
+
+                    <?php echo $form->checkbox("Plan.$i.selected", array(
+                                'id'=>"checkbox-$i",
+                                'numero'=>$i,
+                        ));
+                    ?>
+                    <a style="font-size: 10px;" href="javascript:" onclick="jQuery('#<? echo $div_id?>').toggle(); return false;"><?= $p['Plan']['nombre']?></a>
+            </div>
+            <div style="display: none; background-color: beige; font-size: 9pt;" id="<? echo $div_id?>">
+
+                    <?php echo $html->link('ir al plan', '/Planes/view/'.$p['Plan']['id'], array('style'=> 'float: right;', 'target'=>'_blank'))?>
+                    <dl>
+                            <?php $nombre = (empty($p['Instit']['nombre']))? 'SIN NOMBRE':$p['Instit']['nombre'];?>
+                            <dt>Institución:</dt>			<dd><?php echo $html->link($nombre,'/instits/view/'.$p['Instit']['id'], array('target'=>'_blank'));?>&nbsp;</dd>
+                            <dt>Oferta:</dt>				<dd><?php echo $p['Oferta']['name']?>&nbsp;</dd>
+                            <dt>Sector:</dt>				<dd><?php echo @$p['Sector']['name']?>&nbsp;</dd>
+                            <dt>Subsector:</dt>				<dd><?php echo @$p['Subsector']['name']?>&nbsp;</dd>
+                            <dt>Duracion:</dt>				<dd><?php echo " - ";?>&nbsp;</dd>
+                            <dt>&nbsp;&nbsp;-- Horas:</dt>	<dd><?php echo $p['Plan']['duracion_hs'];?>&nbsp;</dd>
+                            <dt>&nbsp;&nbsp;-- Semanas:</dt><dd><?php echo $p['Plan']['duracion_semanas'];?>&nbsp;</dd>
+                            <dt>&nbsp;&nbsp;-- Años:</dt>	<dd><?php echo $p['Plan']['duracion_anios'];?>&nbsp;</dd>
+                            <dt>matricula:</dt>				<dd><?php echo $p['Plan']['matricula']?>&nbsp;</dd>
+                            <dt>Observación:</dt>			<dd><?php echo $p['Plan']['observacion']?>&nbsp;</dd>
+                            <dt>Alta:</dt>					<dd><?php echo date('d/m/Y',strtotime($p['Plan']['created']))?>&nbsp;</dd>
+                            <dt>Modificación:</dt>			<dd><?php echo date('d/m/Y',strtotime($p['Plan']['modified']))?>&nbsp;</dd>
+
+                            <?php
+                                $ciclos = array();
+                                foreach ($p['Anio'] as $anio):
+                                    if (!empty($anio['Anio']['ciclo_id']))
+                                        $ciclos[$anio['Anio']['ciclo_id']] = $anio['Anio']['ciclo_id'];
+                                endforeach;
+
+                                $texto = '';
+                                foreach ($ciclos as $c):
+                                        $texto .= " - ".$c;
+                                endforeach;
+                            ?>
+                            <dt>Ciclos con información</dt><dd><?php echo $texto?>&nbsp;</dd>
+
+                    </dl>
+            </div>
+
+    <?php
+            $i++;
+    }
+
+    echo $form->input(
+    'tituloName',
+    array(
+        'label'=> 'Asignar Título',
+        'id' => 'TituloName',
+        'after'=> '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>',
+        'style'=>'max-width: 550px;',
+        'div'=>array('id'=>'divTituloName')));
+     echo $form->input('titulo_id', array(
+        'type'=>'hidden',
+        'id'=>'titulo_id',
+        'value'=>$titulo_id
+        ));
+
+
+
+    //echo $form->button('Seleccionar Todos', array('onclick'=>'checkAll()', 'style'=>'clear:none;float:left;width:144px;'));
+    //echo $form->button('Deseleccionar Todos', array('onclick'=>'unCheckAll()', 'style'=>'clear:none;float:left;width:144px;'));
+
+    ?>
+
+    <div>
+    <?php
+    echo $paginator->prev('<< '.__('Anterior', true), array(), null, array('class'=>'disabled'));
+    echo $paginator->numbers(array('modulus'=>13));
+    echo $paginator->next(__('Siguiente', true).' >>', array('style'=>'float:right;'), null, array('class'=>'disabled'));
+    ?>
+    </div>
+
+
+    <?php
+
+    echo $form->button('Seleccionar Todos', array('onclick'=>'checkAll()', 'style'=>'clear:none;float:left;width:144px;'));
+    echo $form->button('Deseleccionar Todos', array('onclick'=>'unCheckAll()', 'style'=>'clear:none;float:left;width:144px;'));
+
+
+
+    echo $form->hidden('FPlan.limit');
+    echo $form->hidden('FPlan.oferta_id');
+    echo $form->hidden('FPlan.sector_id');
+    echo $form->hidden('FPlan.subsector_id');
+    echo $form->hidden('FPlan.jurisdiccion_id');
+    echo $form->hidden('FPlan.plan_nombre');
+
+    if (strlen($paginator->counter(array('format' => '%page%'))))
+        echo $form->hidden('FPlan.last_page', array('value' => $paginator->counter(array('format' => '%page%'))));
+
+    echo $form->end('Guardar Cambios');
+
+}
 ?>
 
-<div>
-<?php
-echo $paginator->prev('<< '.__('Anterior', true), array(), null, array('class'=>'disabled'));
-echo $paginator->numbers(array('modulus'=>13));
-echo $paginator->next(__('Siguiente', true).' >>', array('style'=>'float:right;'), null, array('class'=>'disabled'));
-?>
-</div>
-
-
-<?php
-
-echo $form->button('Seleccionar Todos', array('onclick'=>'checkAll()', 'style'=>'clear:none;float:left;width:144px;'));
-echo $form->button('Deseleccionar Todos', array('onclick'=>'unCheckAll()', 'style'=>'clear:none;float:left;width:144px;'));
-
-
-
-echo $form->hidden('FPlan.limit');
-echo $form->hidden('FPlan.oferta_id');
-echo $form->hidden('FPlan.sector_id');
-echo $form->hidden('FPlan.subsector_id');
-echo $form->hidden('FPlan.jurisdiccion_id');
-echo $form->hidden('FPlan.plan_nombre');
-
-if (strlen($paginator->counter(array('format' => '%page%'))))
-    echo $form->hidden('FPlan.last_page', array('value' => $paginator->counter(array('format' => '%page%'))));
-
-echo $form->end('Guardar Cambios');
-
-
-?>
-<br>
-<a href="javascript:" onclick="jQuery('#formularioNuevoTitulo').toggle()" style="background-color: gray; color: white; text-decoration: none">Agregar Nuevo Título de Referencia</a>
-<div id="formularioNuevoTitulo" style="display: none; background-color: gray">
-<?
-echo $ajax->form(array('type' => 'post',
-    'options' => array(
-        'model'=>'Titulo',
-        'url' => array(
-            'controller' => 'titulos',
-            'action' => 'add_and_give_me_select_options'
-        ),
-        'id'=> "formAltaTitulo",
-        'complete'=>'jQuery("#formAltaTitulo").reset(); actualizarSelects();',
-        'update'=> 'divTituloGral',
-    )
-));
-echo $form->hidden('marco_ref', array('value'=>0));
-echo $form->input(
-        'oferta_id',
-        array(
-            'options'=>$ofertas,
-            'label'=>false,
-            'empty' => 'Seleccione',
-            'default' => $this->data['FPlan']['oferta_id'],
-        )
-     );
-echo $form->input('name', array('style'=>'clear:none;'));
-echo $form->end('Guardar Título');
-?>
-</div>
-
-<br>
-
-
+<br />
+<?php echo  $html->link('Agregar Nuevo Título de Referencia', array('controller'=>'titulos','action'=>'add'), array('target'=>'_blank')); ?>
+<br />
