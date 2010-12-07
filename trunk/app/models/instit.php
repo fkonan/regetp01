@@ -723,6 +723,7 @@ class Instit extends AppModel {
             } else {
                 // TODO: Hay que ver por que necesito hacer esto para que funcione
                 // pareciera que se pasan distintos arrays de "conditions" anidados
+                $parameters = '';
                 if ( isset($conditions['conditions']['conditions']) && is_array($conditions['conditions']['conditions'])) {
                     $parameters = $conditions['conditions']['conditions'];
                 } elseif( isset($conditions['conditions']) && is_array($conditions['conditions']) ) {
@@ -731,7 +732,9 @@ class Instit extends AppModel {
                     $parameters = $conditions;
                 }
 
-                $parameters['conditions'] = $parameters;
+                if (!empty($parameters['conditions']))
+                    $parameters['conditions'] = $parameters;
+
                 if ($recursive != $this->recursive) {
                         $parameters['recursive'] = $recursive;
                 }
