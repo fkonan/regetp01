@@ -29,15 +29,16 @@ echo $html->css(array('jquery.loadmask', 'smoothness/jquery-ui-1.8.6.custom'));
     echo $form->hidden('form_name',array('value'=>'buscador rapido'));
 
     echo $form->input('jurisdiccion_id',array(
-            'label'=>'Jurisdicción',
-            'empty'=>'Todas',
-            'div' => array('style' => 'width:30%; float:left; clear: none;'),
-            //'after' => '<cite>Filtro opcional. Si no selecciona una Jurisdicción se realizará una búsqueda en todo el Registro.</cite>'
+            'label'=> 'Jurisdicción',
+            'empty'=> 'Todas',
+            'style' => 'width: 375px;',
+            'div'  => array('style' => 'float:left; clear: none;'),
+            'after' => '<cite>Filtro opcional. Si no selecciona una Jurisdicción se realizará una búsqueda en todo el Registro.</cite>'
             ));
 
     echo $form->input('busqueda_libre', array(
             'id'=>'InstitCue',
-            'div' => array('style' => 'width:50%; float:left; clear: none'),
+            'div' => array('style' => 'width:400px; float:left;'),
          //   'style'=>'border:1px solid #BBBBBB; width: 99%; font-size: 22px; height: 29px; color: rgb(117, 117, 117);',
             'label'=> 'Ingrese CUE, Tipo, Número o Nombre'
             ));
@@ -49,7 +50,7 @@ echo $html->css(array('jquery.loadmask', 'smoothness/jquery-ui-1.8.6.custom'));
     
     echo $form->button('Buscar', array(
                 'class' => 'boton-buscar',
-                'style' => 'float: left; clear: none; margin-top: 20px; width: 10%',
+                'style' => 'float: left; clear: none; margin-top: 18px; width: 10%',
                 'onclick' => 'autoSubmit(true)',
          ));
 
@@ -61,14 +62,21 @@ echo $html->css(array('jquery.loadmask', 'smoothness/jquery-ui-1.8.6.custom'));
     $img =  $html->image('help.png', array(
         'alt' => 'Ayuda: ¿Cómo utilizar el buscador?',
         'id' => 'littleHelpers',
-        'style'=>'float:left; margin: 24px 10px;',
+        'style'=>'float:left;',
         ));
 
-    echo $html->link($img, 'javascript: abrirVentanaAyuda()', array(
-        'escape'=>false,
-        'title' => 'Ejemplos sobre cómo utilizar el buscador',
-        ));
+    ?>
+    <a href="javascript: abrirVentanaAyuda()" style="float:left; margin: 22px;" title="Ayuda sobre el buscador">
 
+    <?php
+    echo $img;
+    
+    ?>
+       <span style="margin-left: 0px;">Ayuda</span>
+    </a>
+    
+
+    <?php
 
     echo $this->element('boxBuscadorAyuda');
     ?>
