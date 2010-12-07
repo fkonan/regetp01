@@ -49,6 +49,7 @@ if (empty($planes)) {
                             </tr>
                         </thead>
                         <?php
+                        $sumMatricula = $sumSecciones = 0;
                         foreach($plan['Anio'] as $anio){
                         ?>
                         <tr>
@@ -59,7 +60,18 @@ if (empty($planes)) {
                             <td><?php echo $anio['Anio']['hs_taller']?></td>
                         </tr>
                     <?php
+                        $sumMatricula +=$anio['Anio']['matricula'];
+                        $sumSecciones +=$anio['Anio']['secciones'];
                     }?>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td>Total</td>
+                                <td><?php echo $sumMatricula ?></td>
+                                <td><?php echo $sumSecciones ?></td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </tfoot>
                     </table>
                  </div>
                 <?php

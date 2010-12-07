@@ -116,8 +116,9 @@
         jQuery( "#boxdeAyuda" ).dialog({
             autoOpen: false,
             width: '600px',
-            title: '¿Cómo utilizar el buscador?',
-            modal: true
+            title: 'Ejemplos sobre cómo utilizar el buscador',
+            modal: true,
+            closeText: 'Cerrar'
         });
     });
 

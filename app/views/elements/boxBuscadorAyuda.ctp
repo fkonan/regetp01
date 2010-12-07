@@ -1,12 +1,5 @@
 <div id="boxdeAyuda" style=" overflow: auto; font-size: 8pt !important;">
-        <ul style="height: 300px;">
-                <P LANG="es-ES" CLASS="western" STYLE="margin-bottom: 0cm">
-                    <SPAN LANG="es-ES">Puede buscar por CUE</SPAN>
-                    <SPAN LANG="es-ES">(con &oacute; sin n&uacute;mero de anexo) &oacute; por parte del CUE.</SPAN>
-                </P>
-                <P LANG="es-ES" CLASS="western" STYLE="margin-bottom: 0cm">
-                    <SPAN LANG="es-ES">Ejemplos: </SPAN>
-                </P>
+        <ul>
                 <TABLE style="background-color: transparent;">
                         <COL >
                         <COL >
@@ -41,30 +34,7 @@
                                         CUE con n&uacute;mero de anexo
                                 </TD>
                         </TR>
-                </TABLE>
-                <P LANG="es-ES" CLASS="western" STYLE="margin-bottom: 0cm">
-                    <SPAN LANG="es-ES">
-                        Tambi&eacute;n
-                puede buscar por tipo de establecimiento, n&uacute;mero y nombre
-                propio de la instituci&oacute;n.
-                El buscador ignora may&uacute;sculas / min&uacute;sculas y letras
-                acentuadas para mejorar los resultados.
-                    </SPAN>
-                </P>
-                <P LANG="es-ES" CLASS="western" STYLE="margin-bottom: 0cm">
-                    <SPAN LANG="es-ES">Ejemplos:</SPAN>
-                </P>
-                <TABLE style="background-color: transparent;">
-                        <COL >
-                        <COL >
-                        <TR VALIGN=TOP>
-                                <TD >
-                                        <B>Si ingresa</B>
-                                </TD>
-                                <TD >
-                                        <B>Busca por</B>
-                                </TD>
-                        </TR>
+
                         <TR VALIGN=TOP>
                                 <TD>
                                         escuela t&eacute;cnica

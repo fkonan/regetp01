@@ -66,7 +66,7 @@ echo $html->css(array('jquery.loadmask', 'smoothness/jquery-ui-1.8.6.custom'));
 
     echo $html->link($img, 'javascript: abrirVentanaAyuda()', array(
         'escape'=>false,
-        'title' => 'Ayuda: ¿Cómo utilizar el buscador?',
+        'title' => 'Ejemplos sobre cómo utilizar el buscador',
         ));
 
 
@@ -78,7 +78,7 @@ echo $html->css(array('jquery.loadmask', 'smoothness/jquery-ui-1.8.6.custom'));
     <div class="clear"></div>
     
     <!-- Aca se muestran los resultados de la busqueda-->
-    <div id='consoleResultWrapper'>
+    <div id='consoleResultWrapper' style="border-top: 1px solid #CEE3F6;">
         <div id='consoleResult' style="min-height: 200px; margin-bottom: 20px;"></div>
     </div>
     
