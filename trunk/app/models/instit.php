@@ -714,33 +714,7 @@ class Instit extends AppModel {
 	
 	function paginateCount ($conditions = null, $recursive = 0)
         {
-            $conditions = array('conditions'=>$conditions);
-            if ($this->asociarPlan){
-                if ($recursive != $this->recursive) {
-                    $conditions['recursive'] = $recursive;
-                }
-                return $this->__asociarPlanParamsSetup($conditions, 'solocontar');
-            } else {
-                // TODO: Hay que ver por que necesito hacer esto para que funcione
-                // pareciera que se pasan distintos arrays de "conditions" anidados
-                $parameters = '';
-                if ( isset($conditions['conditions']['conditions']) && is_array($conditions['conditions']['conditions'])) {
-                    $parameters = $conditions['conditions']['conditions'];
-                } elseif( isset($conditions['conditions']) && is_array($conditions['conditions']) ) {
-                    $parameters = $conditions['conditions'];
-                }elseif ( !empty($conditions) ) {
-                    $parameters = $conditions;
-                }
-
-                if (!empty($parameters['conditions']))
-                    $parameters['conditions'] = $parameters;
-
-                if ($recursive != $this->recursive) {
-                        $parameters['recursive'] = $recursive;
-                }
-                $extra = array();
-                return $this->find('count', array_merge($parameters, $extra));
-            }
+            return count($this->paginate($conditions));
         }
 
 	function paginate($conditions = null, $fields = null, $order = null, $limit = null, $page = 1, $recursive = null, $extra = array())
