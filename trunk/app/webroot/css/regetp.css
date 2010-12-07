@@ -31,17 +31,17 @@
 /* General Style Info */
 body {
     color: #000;
-    font-family: Verdana, Geneva, sans-serif;
+    font-family: Arial, Verdana, Geneva, sans-serif;
     font-size:10pt;
     margin: 0;
-    background-color:#87AEC5;
-    background-image:url(images/fondo_blue.gif);
+    background-color: #87AEC5;
+    background-image: url(images/fondo_blue.gif);
     background-repeat:repeat-x;
 }
 p {
     padding-bottom: 0.8em;
 }
-a, a:visited, a:active {
+a, a:visited, a:active, a:focus {
     color: #003d4c;
     text-decoration: underline;
     font-weight: bold;
