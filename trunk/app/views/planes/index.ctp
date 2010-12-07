@@ -123,8 +123,10 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                     <!-- EOF Tabla resumen de total de matriculas -->
 
                     <h2>Listado de Ofertas </h2>
+                    <!--
                     <span style="float:right;font-size:9pt"><?php echo $html->link(__('Ver vista clásica', true), array('controller'=> 'planes', 'action'=>'index_clasico/'. $planes['Instit']['id']))?></span>
-
+                    -->
+                    
                     <div class="js-tabs-ofertas tabs planes-container">
                         <ul id="ofertas-tabs" class="planes-ofertas horizontal-shadetabs">
                                 <?php

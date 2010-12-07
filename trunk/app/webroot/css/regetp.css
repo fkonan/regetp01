@@ -719,15 +719,7 @@ input[type=radio] {
 div.radio label {
     margin: 0 0 6px 20px;
 }
-input[type=submit] {
-    display: inline;
-    font-size: 100%;
-    padding: 2px 5px;
-    width: auto;
-    vertical-align: bottom;
-}
-
-input[type=button] {
+input[type=submit], input[type=button] {
     display: block;
     width: 100px;
     vertical-align: bottom;
@@ -739,6 +731,7 @@ input[type=button] {
     color: #045FB4;
     font-weight: bold;
 }
+
 
 input[type=button]:HOVER {
     background-color: #CEE3F6;
@@ -1408,7 +1401,7 @@ div.auto_complete    {
     background-color :white;
     border           :1px solid #888;
     padding          :0px;
-    margin			  :0px;
+    margin           :0px;
 }
 
 li.selected    { 
@@ -1428,7 +1421,7 @@ li.selected    {
 
 .tabs{
     width: 614px;
-    margin-top:40px;
+    margin-top:22px;
 }
 
 .tabs-list{

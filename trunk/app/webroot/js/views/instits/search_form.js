@@ -113,17 +113,10 @@
 
         jQuery("#InstitCue").bind('paste', function(e){autoSubmit(true)});
 
-        jQuery( "#boxdeAyuda" ).dialog({
-            autoOpen: false,
-            width: '600px',
-            title: 'Ejemplos sobre cómo utilizar el buscador',
-            modal: true,
-            closeText: 'Cerrar'
-        });
     });
 
 
 
 function abrirVentanaAyuda() {
-    jQuery( "#boxdeAyuda" ).dialog('open');
+    jQuery('.menu_body').slideToggle();
 }
