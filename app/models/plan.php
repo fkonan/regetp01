@@ -175,7 +175,7 @@ class Plan extends AppModel {
   	{
 		if ($this->asociarAnio){
                     $parameters = compact('conditions');
-                    return count($this->find('conAnios', $parameters));
+                    return count($this->find('completo', $parameters));
   		} else {
                     $parameters = compact('conditions');
 
@@ -216,7 +216,6 @@ class Plan extends AppModel {
                 $extra = array();
 
                 return $this->find('all', array_merge($parameters, $extra));
-                //return $this->Instit->getPlanes($conditions['Instit.id'], $conditions['Plan.oferta_id'], $conditions['Anio.ciclo_id']);
             }
 
         
@@ -227,8 +226,8 @@ class Plan extends AppModel {
             /* @var $ret Array */
             $ret = array();
             switch ($conditions) {
-               case 'conAnios':
-                   $ret = $this->__findConAnios($fields);
+               case 'completo':
+                   $ret = $this->__findCompleto($fields);
                    break;
                default:
                    $ret = parent::find($conditions, $fields, $order, $recursive);
@@ -238,7 +237,7 @@ class Plan extends AppModel {
         }
 
 
-        function __findConAnios($parameters) {
+        function __findCompleto($parameters) {
                 $ciclo_id = 0;
                 
                 if ( !empty($parameters['conditions']['Anio.ciclo_id'])) {

@@ -413,7 +413,7 @@ class TitulosController extends AppController {
         }
 
         if (!empty($oferta_id)) {
-            $this->paginate['conditions']['Plan.oferta_id'] = $oferta_id;
+            $this->paginate['Plan']['conditions']['Plan.oferta_id'] = $oferta_id;
             $url_conditions['Plan.oferta_id'] = $oferta_id;
         }
 
@@ -430,16 +430,8 @@ class TitulosController extends AppController {
         }
 
         if(!empty($sector_id)) {
-            $subconditions = array('Titulo.id = SectoresTitulo.titulo_id');
-            $subconditions['SectoresTitulo.sector_id'] = $sector_id;
-            
-            $this->paginate['joins'] = array(
-                        array('table' => 'sectores_titulos',
-                                'alias' => 'SectoresTitulo',
-                                'type' => 'inner',
-                                'conditions' => $subconditions
-                        )
-                    );
+            $this->paginate['Plan']['conditions']['SectoresTitulo.sector_id'] = $sector_id;
+
             $url_conditions['Titulo.sector_id'] = $sector_id;
         }
 
@@ -456,7 +448,7 @@ class TitulosController extends AppController {
         }
 
         if(!empty($subsector_id)) {
-            $this->paginate['joins'][0]['conditions']['SectoresTitulo.subsector_id'] = $subsector_id;
+            $this->paginate['Plan']['conditions']['SectoresTitulo.subsector_id'] = $subsector_id;
             $url_conditions['Titulo.sector_id'] = $subsector_id;
         }
 
@@ -473,7 +465,7 @@ class TitulosController extends AppController {
         }
 
         if(!empty($jurisdiccion_id)) {
-            $this->paginate['conditions']['Instit.jurisdiccion_id'] = $jurisdiccion_id;
+            $this->paginate['Plan']['conditions']['Instit.jurisdiccion_id'] = $jurisdiccion_id;
             $url_conditions['Instit.jurisdiccion_id'] = $jurisdiccion_id;
         }
 
@@ -491,7 +483,7 @@ class TitulosController extends AppController {
         }
 
         if(!empty($plan_nombre)) {
-            $this->paginate['conditions']["to_ascii(lower(Plan.nombre)) SIMILAR TO ?"] = array(convertir_para_busqueda_avanzada($plan_nombre));
+            $this->paginate['Plan']['conditions']["to_ascii(lower(Plan.nombre)) SIMILAR TO ?"] = array(convertir_para_busqueda_avanzada($plan_nombre));
             $array_condiciones['Nombre del Plan'] = $plan_nombre;
             $url_conditions['Plan.plan_nombre'] = $plan_nombre;
         }
@@ -504,13 +496,13 @@ class TitulosController extends AppController {
         $this->Titulo->Plan->order = array('Plan.nombre ASC');
 
         //datos de paginacion
-        //$this->paginate['order'] = array('Plan.nombre ASC');
+        //$this->paginate['Plan']['order'] = array('Plan.nombre ASC');
         if(!empty($this->data['FPlan']['last_page'])) {
-            $this->paginate['page'] = $this->data['FPlan']['last_page'];
+            $this->paginate['Plan']['page'] = $this->data['FPlan']['last_page'];
         }
 
         // limit
-        $this->paginate['limit'] = 10;
+        $this->paginate['Plan']['limit'] = 10;
         if(!empty($this->data['FPlan']['limit'])) {
             $limit = $this->data['FPlan']['limit'];
         }
@@ -521,7 +513,7 @@ class TitulosController extends AppController {
 
         if(!empty($limit)) {
             $url_conditions['FPlan.limit'] = $limit;
-            $this->paginate['limit'] = $limit;
+            $this->paginate['Plan']['limit'] = $limit;
         }
 
         // Condicion necesaria
@@ -536,11 +528,22 @@ class TitulosController extends AppController {
             $titulo_id = $this->passedArgs['Plan.titulo_id'];
         }
 
-        //$this->paginate['conditions']['Plan.titulo_id'] = 0;
-        $this->paginate['conditions']['Instit.activo'] = 1;
-debug($this->paginate);
+        if (!empty($this->data['FPlan']['con_titulo'])) {
+            if ($this->data['FPlan']['con_titulo'] == 'con') {
+                $this->paginate['Plan']['conditions']['Plan.titulo_id >'] = 0;
+            }
+            else {
+                $this->paginate['Plan']['conditions']['Plan.titulo_id ='] = 0;
+            }
+        } else {
+            $this->paginate['Plan']['conditions']['Plan.titulo_id ='] = 0;
+        }
+        
+        $this->paginate['Plan']['conditions']['Instit.activo'] = 1;
 
-        $this->Titulo->recursive = 0;
+        
+    //debug($this->paginate['Plan']);
+        //$this->Titulo->Plan->SetAsociarAnio(true);
         $planes = $this->paginate('Plan');
 
         $this->set('url_conditions', $url_conditions);

@@ -27,5 +27,6 @@ $frasesValle[] = '"Los chabones judíos tienen los dedos chiquitos" (17-Nov-2010 
 $frasesValle[] = '"Bueno, como moraleja, es increíble el espacio que se necesita para sembrar lo que nosotros comemos por día" (24-Nov-2010 12:47)';
 $frasesValle[] = '"Los sanguches de la costa son más ricos que aca, son más dulces" (29-Nov-2010 12:11)';
 $frasesValle[] = '"Yo no soporto el calor, soy una especie de panda" (1-Dic-2010 10:49)';
+$frasesValle[] = '"Igual te digo que este es el mes de los Guns N\' Roses... y, porque es muy así..." (7-Dic-2010 10:27)';
 
 ?>
