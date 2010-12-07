@@ -275,13 +275,13 @@ class Plan extends AppModel {
                     ),
                     array(
                         'table' => 'titulos',
-                        'type' => 'INNER',
+                        'type' => 'LEFT',
                         'alias' => 'Titulo',
                         'conditions' => array('Titulo.id = Plan.titulo_id'),
                     ),
                     array(
                         'table' => 'sectores_titulos',
-                        'type' => 'INNER',
+                        'type' => 'LEFT',
                         'alias' => 'SectoresTitulo',
                         'conditions' => array('SectoresTitulo.titulo_id = Titulo.id'),
                     ),
@@ -318,7 +318,6 @@ class Plan extends AppModel {
                 unset( $parameters['joins'] );
                 unset( $parameters['group'] );
                 unset( $parameters['fields'] );
-
 
                 $planes = $this->find('all', $parameters);
 
