@@ -64,10 +64,10 @@ if (empty($planes)) {
 
             <tfoot>
                     <tr>
-                        <th>Totales</th>
-                        <th><?php echo $sumMatricula ?></th>
-                        <th><?php echo $sumSecciones ?></th>
-                        <th>&nbsp;</th>
+                        <td>Total</td>
+                        <td><?php echo $sumMatricula ?></td>
+                        <td><?php echo $sumSecciones ?></td>
+                        <td>&nbsp;</td>
                     </tr>
             </tfoot>
          </table>

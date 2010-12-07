@@ -498,6 +498,11 @@ table {
     width: 100%;
 }
 
+tfoot {
+    background-color: white;
+    color: #8B0000;
+}
+
 CAPTION{
     color: #045FB4;
 }
