@@ -2,7 +2,8 @@
 class Plan extends AppModel {
 
 	var $name = 'Plan';
-	var $asociarAnio = false; // Se utiliza en el paginador
+	var $asociarAnio = false; // Se utiliza en el paginador (asocia ultimo anio y todos los models relacionados por joins)
+        var $asociarCompleto = false; // Se utiliza en el paginador (todos los models relacionados por joins)
 	var $maxCiclo = "";
 	var $traerUltimaAct = false; // se utiliza en el paginador.
 	
@@ -197,28 +198,23 @@ class Plan extends AppModel {
 
     
     function paginate($conditions = null, $fields = null, $order = null, $limit = null, $page = 1, $recursive = null, $extra = null) {
-            if ($this->asociarAnio) {
-                $parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
+            $parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
 
-                if ($recursive != $this->recursive) {
-                    $parameters['recursive'] = $recursive;
-                }
-                
+            if ($recursive != $this->recursive) {
+                $parameters['recursive'] = $recursive;
+            }
+
+            if ($this->asociarAnio) {
                 return $this->Instit->getPlanes($conditions,$order, $limit, $page);
             }
-            else {
-                $parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
-
-                if ($recursive != $this->recursive) {
-                    $parameters['recursive'] = $recursive;
-                }
-
+            elseif ($this->asociarCompleto) {
                 $extra = array();
-
-                return $this->find('all', array_merge($parameters, $extra));
+                return $this->find('completo', array_merge($parameters, $extra));
             }
-
-        
+            else {
+                $extra = array();
+                return $this->find('all', array_merge($parameters, $extra));
+            }        
         }
         
 
@@ -347,7 +343,11 @@ class Plan extends AppModel {
 
 	function setAsociarAnio($asociar){
 		$this->asociarAnio = $asociar;	
-	}   
+	}
+
+        function setAsociarCompleto($asociar){
+		$this->asociarCompleto = $asociar;
+	}
 
 	function setMaxCiclo($ciclo){
 		$this->maxCiclo = $ciclo;	

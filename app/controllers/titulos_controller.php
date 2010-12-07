@@ -541,9 +541,7 @@ class TitulosController extends AppController {
         
         $this->paginate['Plan']['conditions']['Instit.activo'] = 1;
 
-        
-    //debug($this->paginate['Plan']);
-        //$this->Titulo->Plan->SetAsociarAnio(true);
+        $this->Titulo->Plan->setAsociarCompleto(true);
         $planes = $this->paginate('Plan');
 
         $this->set('url_conditions', $url_conditions);

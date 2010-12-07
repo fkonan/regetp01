@@ -304,7 +304,7 @@ if (!empty($planes))
     <div>
     <?php
     echo $paginator->prev('<< '.__('Anterior', true), array(), null, array('class'=>'disabled'));
-    echo $paginator->numbers(array('modulus'=>13));
+    echo ' '.$paginator->numbers(array('modulus'=>13));
     echo $paginator->next(__('Siguiente', true).' >>', array('style'=>'float:right;'), null, array('class'=>'disabled'));
     ?>
     </div>
