@@ -712,6 +712,15 @@ class Instit extends AppModel {
 	}
 
 	
+	function paginateCount ($conditions = null, $recursive = 0)
+        {
+                $parametersAux = compact('conditions', 'fields', 'order', 'limit', 'page');
+                if ($recursive != $this->recursive) {
+                    $parametersAux['recursive'] = $recursive;
+                }
+
+                return $this->__asociarPlanParamsSetup($parametersAux,'solocontar');
+        }
 
 	function paginate($conditions = null, $fields = null, $order = null, $limit = null, $page = 1, $recursive = null, $extra = array())
         {
