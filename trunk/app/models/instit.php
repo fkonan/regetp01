@@ -757,7 +757,7 @@ class Instit extends AppModel {
          * @return array
          */
         private function __asociarPlanParamsSetup($parameters = array(), $buscaroSoloContar = 'buscar') {
-            $parameters['group'] = 'Instit.id';
+            
                 $parameters['joins'] = array(
                     array(
                         'table' => 'tipoinstits',
@@ -797,16 +797,26 @@ class Instit extends AppModel {
                     ),
                 );                
 
-                // @var $order es para almacenar temporal mente este valor
-                // para que se ejecute la busqueda 'list' sin problemas no debe tener un orden
-                $oldThisOrder = $this->order;
-                $this->order = array();
-                $order = null;
-                if ( !empty($parameters['order']) ) {
-                    $order = $parameters['order'];
-                    unset($parameters['order']);
-                    $ordenDelModelo = $this->order;
+                
+                // le pongo en el Group lo que quiero ordenar, porque
+                /// sino me tira error
+                $groupsVars = array();
+                if (!empty($parameters['order'])) {
+                    if (is_string($parameters['order'])) {
+                        $parameters['order'] = explode(',', $parameters['order']);
+                    }
+                    $parameters['order'] = array_merge($parameters['order'], $this->order);
+                    
+                    foreach ( $parameters['order'] as $or) {
+                        $letrasBorrar = array('ASC', 'asc', 'DESC', 'desc');
+                        $campo = str_replace($letrasBorrar, '', $or);
+                        if ( !empty($campo)) $groupsVars[] = $campo;
+                    }
+
+                } else {
+                    $groupsVars = $this->order;
                 }
+                $parameters['group'] = array_merge(array('Instit.id'),$groupsVars);
                 
                 if ($buscaroSoloContar == 'solocontar') {
                     // si solo es para obtener el total no necesito seguir...
@@ -826,10 +836,6 @@ class Instit extends AppModel {
                 }
                 $parameters['conditions'] = array('Instit.id' => $institsIds);
                 
-                // recupero el order, previamente eliminado para
-                $parameters['order'] = $order;
-                $this->order = $oldThisOrder;
-                //$this->order = $ordenDelModelo;
 
                 unset($parameters['limit']);
                 unset($parameters['page']);
