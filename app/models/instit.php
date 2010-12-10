@@ -10,7 +10,7 @@ class Instit extends AppModel {
 	 * @var boolean
 	 */
 	var $asociarPlan = false;
-	
+        
 	var $actsAs = array('Containable');
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -712,10 +712,6 @@ class Instit extends AppModel {
 	}
 
 	
-	function paginateCount ($conditions = null, $recursive = 0)
-        {
-            return count($this->paginate($conditions));
-        }
 
 	function paginate($conditions = null, $fields = null, $order = null, $limit = null, $page = 1, $recursive = null, $extra = array())
         {
