@@ -684,11 +684,9 @@ class InstitsController extends AppController {
         $friendlyName = empty($o['friendlyName']) ? $field : $o['friendlyName'];
         $forceText = empty($o['forceText']) ? false : true;
         $valor = null;
-        $asociarPlan = empty($o['asociarPlan']) ? false : true;
-               
+        $asociarPlan = empty($o['asociarPlan']) ? false : true;               
 
         $modelField = $model.'.'.$field;
-        
 
         // lista de modelos que se van a consultar en la query
         $this->paginate['modelosInvolucrados'] = array();
@@ -726,11 +724,12 @@ class InstitsController extends AppController {
                 $url_conditions[$field] = utf8_decode($valor);
             } else {
                 if (substr($field,-3) == '_id') {
+
                     // es FK, por lo tanto me traigo el nombre
                     // para mostrar en el resutado de busquedas (para mostrar en la vista el camp "name" del Modelo
                     $miniModel = substr($field, 0, strlen($field)-3);
                     $model  = Inflector::camelize($miniModel);
-                    $rModel =& ClassRegistry::init($miniModel);
+                    $rModel =& ClassRegistry::init($model);
 
                     $rModel->id = $valor;
                     $this->paginate['viewConditions'][$friendlyName] = $rModel->field('name');
