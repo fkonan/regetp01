@@ -345,55 +345,33 @@ class TitulosController extends AppController {
     function corrector_de_planes() {
         /********************** GUARDADO DE LOS PLANES SELECCIONADOS *******/
         if (!empty($this->data['Plan'])) {
-            //$this->Plan->save();
             $planesGuardar = array();
 
-            //@var $planes_sin_titulo   me indica si fueron seleccionado titulos para
-            //guardar alos cuales no le introdujeron QUE titulo era
-            $planes_sin_titulo = false;
-
-            foreach ($this->data['Plan'] as $p=>$a) {
-                // para evitar que se guarde cuando solo fue
-                // seleccionado el select que era para indicar el titulo generico, pero no tenia fines de guardado
-                if ( "$p" != 'titulo_id') {
-                    if ($a['selected']) {
-                        if (!empty($a['titulo_id'])) {
-                            unset($a['selected']);
-                            $planesGuardar[] = $a;
-                        } else {
-                            $planes_sin_titulo = true;
-                        }
-                    }
+            foreach ($this->data['Plan'] as $checkbox) {
+                if ($checkbox['selected'] == 1) {
+                    $planesGuardar[] = $checkbox['id'];
                 }
             }
 
-            if(count($planesGuardar)>0) {
-                if ($this->Titulo->Plan->saveAll(
-                $planesGuardar,
-                array('fieldList'=>array('titulo_id'), 'validate'=>false)
-                )) {
-                    $text = '';
-                    if ($planes_sin_titulo) {
-                        $text = 'Algunos planes seleccionados no tenían indicado el título';
-                    }
-                    $this->Session->setFlash(__( $text.'<br>Se han guardado '.count($planesGuardar).' planes', true));
-                } else {
-                    $this->Session->setFlash('Fallo el guardado');
-                }
+            if (empty($this->data['Plan']['titulo_id'])) {
+                $this->Session->setFlash(__('Debe seleccionar un Título'));
             }
-            else {
-                $text = '';
-                if ($planes_sin_titulo) {
-                    $text = 'Los planes seleccionados no tenían indicado el título';
-                }
-                $this->Session->setFlash(__($text, true));
+            if (empty($planesGuardar)) {
+                $this->Session->setFlash(__('Debe seleccionar uno o más Planes'));
             }
+
+            if (!empty($planesGuardar) && $this->data['Plan']['titulo_id'] > 0) {
+                $this->Titulo->Plan->updateAll(
+                        array('Plan.titulo_id' => $this->data['Plan']['titulo_id']),
+                        array('Plan.id' => $planesGuardar)
+                );
+                
+                $this->Session->setFlash(__('Se ha asignado el Título '.$this->data['Plan']['tituloName'].' a '.count($planesGuardar).' Planes', true));
+            }
+
             $url_conditions['Plan.titulo_id'] = $this->data['Plan']['titulo_id'];
         }
         /***************************** FIN GUARDADO DE LOS PLANES ***************/
-
-
-
 
         /********************** BUSCADOR DE PLANES *******/
 
@@ -535,13 +513,20 @@ class TitulosController extends AppController {
             else {
                 $this->paginate['Plan']['conditions']['Plan.titulo_id ='] = 0;
             }
-        } else {
-            $this->paginate['Plan']['conditions']['Plan.titulo_id ='] = 0;
         }
         
         $this->paginate['Plan']['conditions']['Instit.activo'] = 1;
 
         $this->Titulo->Plan->setAsociarCompleto(true);
+        
+        $this->paginate['Plan']['contain'] = array(
+                'Instit',
+                'Oferta',
+                'Titulo' => array('SectoresTitulo' => array('Sector','Subsector.Sector')),
+                'EstructuraPlan.Etapa',
+                'Anio'
+        );
+        
         $planes = $this->paginate('Plan');
 
         $this->set('url_conditions', $url_conditions);

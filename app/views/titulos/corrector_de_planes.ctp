@@ -239,7 +239,7 @@ if (!empty($planes))
                                 'numero'=>$i,
                         ));
                     ?>
-                    <a style="font-size: 10px;" href="javascript:" onclick="jQuery('#<? echo $div_id?>').toggle(); return false;"><?= $p['Plan']['nombre']?></a>
+                <a style="font-size: 10px;" href="javascript:" onclick="jQuery('#<? echo $div_id?>').toggle(); return false;"><?= $p['Plan']['nombre']?></a> <i><?=($p['Plan']['titulo_id'] > 0 ? '(tiene Título)':'')?></i>
             </div>
             <div style="display: none; background-color: beige; font-size: 9pt;" id="<? echo $div_id?>">
 
@@ -248,30 +248,36 @@ if (!empty($planes))
                             <?php $nombre = (empty($p['Instit']['nombre']))? 'SIN NOMBRE':$p['Instit']['nombre'];?>
                             <dt>Institución:</dt>			<dd><?php echo $html->link($nombre,'/instits/view/'.$p['Instit']['id'], array('target'=>'_blank'));?>&nbsp;</dd>
                             <dt>Oferta:</dt>				<dd><?php echo $p['Oferta']['name']?>&nbsp;</dd>
-                            <dt>Sector:</dt>				<dd><?php echo @$p['Sector']['name']?>&nbsp;</dd>
-                            <dt>Subsector:</dt>				<dd><?php echo @$p['Subsector']['name']?>&nbsp;</dd>
+                            <dt>Título:</dt>				<dd><b><?php echo @$p['Titulo']['name']?></b>&nbsp;</dd>
+                            <?php
+                                $sectores = $subsectores = array();
+                                foreach ($p['Titulo']['SectoresTitulo'] as $sector) {
+                                    if (!empty($sector['Sector']['name']))
+                                        $sectores[] = $sector['Sector']['name'];
+                                    
+                                    if (!empty($sector['Subsector']['name']))
+                                        $subsectores[] = $sector['Subsector']['name'];
+                                }
+                            ?>
+                            <dt>Sectores:</dt>				<dd><?php echo implode(', ', $sectores); ?>&nbsp;</dd>
+                            <dt>Subsectores:</dt>				<dd><?php echo implode(', ', $subsectores); ?>&nbsp;</dd>
                             <dt>Duracion:</dt>				<dd><?php echo " - ";?>&nbsp;</dd>
                             <dt>&nbsp;&nbsp;-- Horas:</dt>	<dd><?php echo $p['Plan']['duracion_hs'];?>&nbsp;</dd>
                             <dt>&nbsp;&nbsp;-- Semanas:</dt><dd><?php echo $p['Plan']['duracion_semanas'];?>&nbsp;</dd>
                             <dt>&nbsp;&nbsp;-- Años:</dt>	<dd><?php echo $p['Plan']['duracion_anios'];?>&nbsp;</dd>
-                            <dt>matricula:</dt>				<dd><?php echo $p['Plan']['matricula']?>&nbsp;</dd>
+                            <dt>Matricula:</dt>				<dd><?php echo $p['Plan']['matricula']?>&nbsp;</dd>
                             <dt>Observación:</dt>			<dd><?php echo $p['Plan']['observacion']?>&nbsp;</dd>
                             <dt>Alta:</dt>					<dd><?php echo date('d/m/Y',strtotime($p['Plan']['created']))?>&nbsp;</dd>
                             <dt>Modificación:</dt>			<dd><?php echo date('d/m/Y',strtotime($p['Plan']['modified']))?>&nbsp;</dd>
 
                             <?php
                                 $ciclos = array();
-                                foreach ($p['Anio'] as $anio):
-                                    if (!empty($anio['Anio']['ciclo_id']))
-                                        $ciclos[$anio['Anio']['ciclo_id']] = $anio['Anio']['ciclo_id'];
-                                endforeach;
-
-                                $texto = '';
-                                foreach ($ciclos as $c):
-                                        $texto .= " - ".$c;
-                                endforeach;
+                                foreach ($p['Anio'] as $anio) {
+                                    if (!empty($anio['ciclo_id']))
+                                        $ciclos[] = $anio['ciclo_id'];
+                                }
                             ?>
-                            <dt>Ciclos con información</dt><dd><?php echo $texto?>&nbsp;</dd>
+                            <dt>Ciclos con información</dt><dd><?php echo implode(' - ', $ciclos); ?>&nbsp;</dd>
 
                     </dl>
             </div>
