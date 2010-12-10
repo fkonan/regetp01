@@ -688,6 +688,7 @@ class InstitsController extends AppController {
                
 
         $modelField = $model.'.'.$field;
+        
 
         // lista de modelos que se van a consultar en la query
         $this->paginate['modelosInvolucrados'] = array();

@@ -795,6 +795,24 @@ class Instit extends AppModel {
                         'type' => 'LEFT',
                         'conditions' => array('SectoresTitulo.sector_id = Sector.id')
                     ),
+                    array(
+                        'table' => 'jurisdicciones',
+                        'type' => 'LEFT',
+                        'alias' => 'Jurisdiccion',
+                        'conditions' => array('Jurisdiccion.id = Instit.jurisdiccion_id'),
+                    ),
+                    array(
+                        'table' => 'localidades',
+                        'type' => 'LEFT',
+                        'alias' => 'Localidad',
+                        'conditions' => array('Localidad.id = Instit.localidad_id'),
+                    ),
+                    array(
+                        'table' => 'departamentos',
+                        'type' => 'LEFT',
+                        'alias' => 'Departamento',
+                        'conditions' => array('Departamento.id = Instit.departamento_id'),
+                    ),
                 );                
 
                 
@@ -807,10 +825,14 @@ class Instit extends AppModel {
                     }
                     $parameters['order'] = array_merge($parameters['order'], $this->order);
                     
-                    foreach ( $parameters['order'] as $or) {
-                        $letrasBorrar = array('ASC', 'asc', 'DESC', 'desc');
-                        $campo = str_replace($letrasBorrar, '', $or);
-                        if ( !empty($campo)) $groupsVars[] = $campo;
+                    foreach ( $parameters['order'] as $k=>$or) {
+                        if (is_string($k) ) {
+                            $groupsVars[] = $k;
+                        } else {
+                            $letrasBorrar = array(' ASC', ' asc', ' DESC', ' desc');
+                            $campo = str_replace($letrasBorrar, '', $or);
+                            if ( !empty($campo)) $groupsVars[] = $campo;
+                        }                        
                     }
 
                 } else {
