@@ -200,12 +200,15 @@ class Plan extends AppModel {
     function paginate($conditions = null, $fields = null, $order = null, $limit = null, $page = 1, $recursive = null, $extra = null) {
             $parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
 
-            if ($recursive != $this->recursive) {
+            if (!empty($extra['contain'])) {
+                $parameters['contain'] = $extra['contain'];
+            }
+            if (is_numeric($recursive) && $recursive != $this->recursive) {
                 $parameters['recursive'] = $recursive;
             }
 
             if ($this->asociarAnio) {
-                return $this->Instit->getPlanes($conditions,$order, $limit, $page);
+                return $this->Instit->getPlanes($conditions, $order, $limit, $page);
             }
             elseif ($this->asociarCompleto) {
                 $extra = array();
@@ -242,6 +245,11 @@ class Plan extends AppModel {
                     
                 //$this->order = array_merge($this->order, array('Etapa.orden ASC'));
                 $parameters['group'] = 'Plan.id';
+
+                if (!empty($parameters['contain'])) {
+                    $contain = $parameters['contain'];
+                    unset($parameters['contain']);
+                }
                 
                 $parameters['joins'] = array(
                     array(
@@ -314,10 +322,16 @@ class Plan extends AppModel {
                 unset( $parameters['group'] );
                 unset( $parameters['fields'] );
 
+                if (!empty($contain)) {
+                    $parameters['contain'] = $contain;
+                }
+
                 $planes = $this->find('all', $parameters);
 
-                foreach ( $planes as $key=>&$p) {
-                    $p['Anio'] = $this->Anio->getAniosDePlanPorCiclo($p['Plan']['id'],$ciclo_id);
+                if ($this->asociarAnio) {
+                    foreach ( $planes as $key=>&$p) {
+                        $p['Anio'] = $this->Anio->getAniosDePlanPorCiclo($p['Plan']['id'],$ciclo_id);
+                    }
                 }
                 
                 return $planes;
