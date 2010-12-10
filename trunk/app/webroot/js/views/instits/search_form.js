@@ -118,5 +118,5 @@
 
 
 function abrirVentanaAyuda() {
-    jQuery('.menu_body').slideToggle();
+    jQuery('#boxAyuda .menu_body').slideToggle();
 }
