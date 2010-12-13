@@ -64,15 +64,21 @@ $cue_instit = $instit['cue'].$anexo;
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Sector/Subsector'); ?></dt>
-                <dd
-                    <ul>
+                <dd>
                     <?php
                         $i = 0;
+                        $size = count($plan['Titulo']['SectoresTitulo']);
                         if(isset($plan['Titulo']['SectoresTitulo'])){
                             foreach($plan['Titulo']['SectoresTitulo'] as $sector){
+                                if($size == 1){
                     ?>
-                        <li style="<?php echo ($i == 0)? 'font-weight:bold':''?>"><?php echo (($sector['Sector']['name']) . (($sector['Subsector'])?(" / " . $sector['Subsector']['name']   ):""))?></li>
+                        <?php echo (($sector['Sector']['name']) . (($sector['Subsector'])?(" / " . $sector['Subsector']['name']   ):""))?>
                     <?php
+                                }
+                                else{
+                    ?>
+                        <div style="<?php echo ($i == 0)? 'font-weight:bold':''?>"><?php echo (($sector['Sector']['name']) . (($sector['Subsector'])?(" / " . $sector['Subsector']['name']   ):""))?></div>
+                    <?php       }
                             $i++;
                             }
                         }
@@ -82,7 +88,7 @@ $cue_instit = $instit['cue'].$anexo;
                         <?php
                         }
                         ?>
-                    </ul>
+                    &nbsp;
 		</dd>
 				
 		<? if((($plan['Plan']['duracion_hs']+$plan['Plan']['duracion_semanas']+$plan['Plan']['duracion_anios'])>0)){ ?>
