@@ -88,7 +88,7 @@ class BuscableComponent extends Object {
 
             if ( (!is_numeric($valor) && !is_array($valor)) && is_string($valor) || $forceText === true) {
                 // es texto
-                $this->controller->paginate[$this->controller->modelClass]['conditions'][$modelField]
+                $this->controller->paginate[$this->controller->modelClass]['conditions']['to_ascii(lower('.$modelField.')) SIMILAR TO ?']
                     = convertir_para_busqueda_avanzada(utf8_decode($valor));
                 $array_condiciones[$modelField] = utf8_decode($valor);
                 $url_conditions[$field] = utf8_decode($valor);
