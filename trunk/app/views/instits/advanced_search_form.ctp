@@ -116,25 +116,6 @@ echo $html->css('jquery.autocomplete.css', false);
         'div'=>array('style'=>'float: left; width: 265px;  clear: none'),
         'style'=> 'display:inline;vertical-align:bottom;  width: 265px;',
         ));
-        
-//        echo $ajax->observeField(
-//            'PlanOfertaId',
-//            array(
-//                'update'=> 'PlanTituloId',
-//                'url'=>'/titulos/list_por_oferta_id',
-//                'loading'=>'jQuery("#PlanTituloId").attr("disabled","disabled")',
-//                'complete'=>'jQuery("#PlanTituloId").removeAttr("disabled")',
-//                'onChange'=>true)
-//        );
-
-//        echo $form->input('Plan.titulo_id',array(
-//        'label'=> 'Título de Referencia',
-//        'div'=>array('style'=>'float: left;  clear: right'),
-//        'style'=> 'display:inline;width:267px;vertical-align:bottom',
-//        'options'=>$titulos,
-//        'empty'=>'Seleccione',
-//        ));
-
 
         echo $form->input('SectoresTitulo.sector_id',array(
             'label'=>'Sector',
@@ -168,7 +149,7 @@ echo $html->css('jquery.autocomplete.css', false);
             'label'=> 'Título de Referencia',
             'id' => 'PlanTituloName',
             'style'=>'max-width: 550px;',
-            'after'=> '<cite>Seleccione primero una oferta.</cite>',
+            //'after'=> '<cite>Seleccione primero una oferta.</cite>',
             'div'=>array('id'=>'divPlanTituloName')));
         
         echo $form->input('Plan.titulo_id',array('id'=>'PlanTituloId','type'=>'hidden'));
