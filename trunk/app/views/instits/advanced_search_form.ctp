@@ -122,19 +122,21 @@ echo $html->css('jquery.autocomplete.css', false);
 
 
         echo $form->input('SectoresTitulo.sector_id',array(
-        'label'=>'Sector',
-        'div'=>array('style'=>'float: left;  clear: left'),
-        'style'=> 'display:inline;width:247px;vertical-align:bottom',
-        'options'=>$sectores,
-        'empty'=>'Seleccione'
+            'label'=>'Sector',
+            'id'=>'SectorId',
+            'div'=>array('style'=>'float: left;  clear: left'),
+            'style'=> 'display:inline;width:247px;vertical-align:bottom',
+            'options'=>$sectores,
+            'empty'=>'Seleccione'
         ));
 
         echo $form->input('SectoresTitulo.subsector_id',array(
             'type' => 'select',
-        'label'=>'Subsector',
-        'div'=>array('style'=>'float: left;  clear: none'),
-        'style'=> 'display:inline;width:267px;vertical-align:bottom',
-        'empty'=>'Seleccione',
+            'id'=>'SubsectorId',
+            'label'=>'Subsector',
+            'div'=>array('style'=>'float: left;  clear: none'),
+            'style'=> 'display:inline;width:267px;vertical-align:bottom',
+            'empty'=>'Seleccione',
         ));
 
         echo $ajax->observeField('SectorId',
