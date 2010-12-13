@@ -14,13 +14,23 @@ sector_id ,
 subsector_id,
 0 prioridad
 FROM planes
-Where titulo_id != 0
+-- Where titulo_id != 0
 GROUP BY
 titulo_id,
 sector_id ,
 subsector_id
 order by titulo_id
 ;
+
+UPDATE planes SET
+titulo_id =
+(SELECT id
+FROM sectores_titulos
+WHERE
+titulo_id = planes.titulo_id AND
+sector_id = planes.sector_id AND
+subsector_id = planes.subsector_id
+);
 
 ALTER TABLE planes DROP COLUMN sector_id ;
 ALTER TABLE planes DROP COLUMN subsector_id ;
