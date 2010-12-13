@@ -58,7 +58,7 @@ class BuscableComponent extends Object {
         $field = $o['field'];
         $friendlyName = empty($o['friendlyName']) ? $field : $o['friendlyName'];
         $forceText = empty($o['forceText']) ? false : true;
-        $valor = null; // es el valor DATO del campo que busqué
+        $valor = null; // es el valor DATO del campo que voy a buscar
         $asociarPlan = empty($o['asociarPlan']) ? false : true;
         $modelField = $model.'.'.$field;
 
