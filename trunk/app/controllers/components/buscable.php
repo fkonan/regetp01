@@ -53,21 +53,17 @@ class BuscableComponent extends Object {
         
         if (empty($o)) return -1; // no hay nada que buscar
 
-        // inicializo array de opciones
-
+        // inicializo variables del array de opciones
         $model = empty($o['model'])?$this->controller->modelClass:$o['model'] ;
         $field = $o['field'];
         $friendlyName = empty($o['friendlyName']) ? $field : $o['friendlyName'];
         $forceText = empty($o['forceText']) ? false : true;
-        $valor = null;
+        $valor = null; // es el valor DATO del campo que busqué
         $asociarPlan = empty($o['asociarPlan']) ? false : true;
-
         $modelField = $model.'.'.$field;
 
         // lista de modelos que se van a consultar en la query
         $this->controller->paginate['modelosInvolucrados'] = array();
-
-
 
         // paso al vector del paginador para unificar la busqueda
         if(!empty($this->controller->data[$model][$field])) {
@@ -79,18 +75,16 @@ class BuscableComponent extends Object {
         }
         $this->controller->passedArgs[$modelField] = $valor;
 
-
         if( !empty($valor) ) {
 
             if ($asociarPlan) {
                 $this->controller->Instit->asociarPlan = true;
             }
 
-
             $this->controller->paginate['modelosInvolucrados'][] = $model;
 
             $friendlyName = empty($friendlyName) ?  $field : $friendlyName;
-            $this->controller->paginate['viewConditions'][$friendlyName] = $friendlyName;
+            $this->controller->paginate['viewConditions'][$friendlyName] = $valor;
 
             if ( (!is_numeric($valor) && !is_array($valor)) && is_string($valor) || $forceText === true) {
                 // es texto
