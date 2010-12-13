@@ -564,9 +564,7 @@ class InstitsController extends AppController {
             'field' => 'etp_estado_id',
             'friendlyName' => 'Relación con ETP');
          
-         foreach ($ops as $o) {
-             $this->Buscable->aplicarCriteriosDeBusqueda($o);
-         }
+         $this->Buscable->aplicarCriteriosDeBusqueda($ops);         
 
         /*********************************************************************/
         /*          FIN -*-CONDITIONS-*- de busqueda                         */

@@ -32,13 +32,13 @@ echo $html->css('jquery.autocomplete.css', false);
 
         echo $form->input('nombre_completo', array(
         'label'=>'Nombre',
-        'div'=>array('style'=>'width:270px; float: left; clear: none'),
-        //'style'=> 'width:260px',
+        'div'=>array('style'=>'width:260px; float: left; clear: none'),
+        'style'=> 'width:250px',
         'title'=> 'Realiza una búsqueda por tipo de establecimiento, número y nombre propio de la institución.<br>Ej: Escuela 3 San Martín'));
 
         echo $form->input('jurisdiccion_id', array(
         'label'=>'Jurisdicción',
-        'div'=>array('style'=>'float: left;  clear: none; width: 190px;'),
+        'div'=>array('style'=>'float: left;  clear: none; width: 175px;'),
         'class'=> 'display: block; clear: both;',
         'empty' => array('0'=>'Todas'),
         'id'=>'jurisdiccion_id'));
@@ -66,7 +66,7 @@ echo $html->css('jquery.autocomplete.css', false);
         echo $form->input('tipoinstit_id', array(
         'label'=>array('text'=>'Tipo','id'=>'label-tipoinstit'),
         //'div'=>false,
-        'style'=> 'display:inline;width:550px;vertical-align:bottom',
+        'style'=> 'display:inline;vertical-align:bottom',
         'empty' => 'Todos',
         'type'=>'select',
         'title'=> 'Para activar este campo, seleccione primero una jurisdicción'));
@@ -91,7 +91,7 @@ echo $html->css('jquery.autocomplete.css', false);
         <?php
         echo $form->input('nombre', array(
         'label'=>'Nombre',
-        'style'=> 'width:441px; float: left',
+        'style'=> 'width:420px; float: left',
         'div'=>array('style'=>'float: left;  clear: none'),
         'title'=> 'Ej: "Sarmiento" o "Gral. Belgrano". No confundir el nombre con el tipo de establecimiento'));
         ?>
@@ -107,7 +107,7 @@ echo $html->css('jquery.autocomplete.css', false);
         echo $form->input('Plan.oferta_id',array(
         'options'=>$ofertas,
         'div'=>array('style'=>'float: left;  clear: none'),
-        'style'=> 'display:inline;width:181px;vertical-align:bottom',
+        'style'=> 'display:inline;width:247px;vertical-align:bottom',
         'empty'=>'Seleccione',
         'label'=>'Con Oferta'));
 
@@ -115,7 +115,7 @@ echo $html->css('jquery.autocomplete.css', false);
         echo $form->input('Plan.titulo_id',array(
         'label'=> 'Título de Referencia',
         'div'=>array('style'=>'float: left;  clear: right'),
-        'style'=> 'display:inline;width:181px;vertical-align:bottom',
+        'style'=> 'display:inline;width:267px;vertical-align:bottom',
         'options'=>$titulos,
         'empty'=>'Seleccione',
         ));
@@ -124,7 +124,7 @@ echo $html->css('jquery.autocomplete.css', false);
         echo $form->input('SectoresTitulo.sector_id',array(
         'label'=>'Sector',
         'div'=>array('style'=>'float: left;  clear: left'),
-        'style'=> 'display:inline;width:277px;vertical-align:bottom',
+        'style'=> 'display:inline;width:247px;vertical-align:bottom',
         'options'=>$sectores,
         'empty'=>'Seleccione'
         ));
@@ -149,8 +149,8 @@ echo $html->css('jquery.autocomplete.css', false);
 
         echo $form->input('Plan.norma',array(
         'label'=>'Normativa',
-        'div'=>array('style'=>'float: left;  clear: left'),
-        'style'=> 'display:inline;width:544px;vertical-align:bottom',
+        'div'=>array('style'=>'float: left; width: 519px;  clear: left'),
+        'style'=> 'display:inline;vertical-align:bottom;  width: 519px;',
         ));
         ?>
 
@@ -167,7 +167,7 @@ echo $html->css('jquery.autocomplete.css', false);
         echo $form->input('Instit.orientacion_id',array(
         'label'=> 'Orientación',
         'div'=>array('style'=>'float: left;  clear: none'),
-        'style'=> 'display:inline;width:272px;vertical-align:bottom',
+        'style'=> 'display:inline;width:247px;vertical-align:bottom',
         'empty'=>'Seleccione',
         ));
 
@@ -183,7 +183,7 @@ echo $html->css('jquery.autocomplete.css', false);
         'empty' => 'Todas',
         'label'=>'Relación con ETP',
         'div'=>array('style'=>'float: left;  clear: left'),
-        'style'=> 'display:inline;width:272px;vertical-align:bottom',
+        'style'=> 'display:inline;width:247px;vertical-align:bottom',
         ));
 
         echo $form->input('Instit.gestion_id', array(
@@ -198,7 +198,7 @@ echo $html->css('jquery.autocomplete.css', false);
         'empty' => 'Todas',
         'label'=> 'Tipo de Dependencia',
         'div'=>array('style'=>'float: left;  clear: left'),
-        'style'=> 'display:inline;width:272px;vertical-align:bottom',));
+        'style'=> 'display:inline;width:247px;vertical-align:bottom',));
 
 
         // no hay busqueda por anexo

@@ -1262,6 +1262,7 @@ div.code-coverage-results span.result-good {
     border-left-color: #CEE3F6;
     border-left-width: 1px;
     margin-bottom: 10px;
+    padding-left: 34px;
 }
 
 #InstitSearchForm H2{
