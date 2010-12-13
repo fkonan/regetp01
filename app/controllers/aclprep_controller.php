@@ -513,6 +513,18 @@ class AclprepController extends AppController {
         die('done 1.6.3');
     }
 
+    function assignPermissions1Dot6Dot4() {
+        // Administradores
+        $this->Acl->allow('administradores', 'Titulos/corrector_de_planes');
+        $this->Acl->allow('administradores', 'Titulos/fusionar');
+        // Usuarios
+        $this->Acl->allow('usuarios', 'Subsectores/getSubSectoresBySector');
+        $this->Acl->allow('usuarios', 'Titulos/ajax_index_search');
+        $this->Acl->allow('usuarios', 'Titulos/ajax_similars');
+
+        die('done 1.6.4');
+    }
+
     function checkPermissions() {
         //These all return true:
         echo $this->Acl->check('administrators', 'Settings');
