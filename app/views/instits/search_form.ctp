@@ -31,7 +31,7 @@ echo $html->css(array('jquery.loadmask', 'smoothness/jquery-ui-1.8.6.custom'));
     echo $form->input('jurisdiccion_id',array(
             'label'=> 'Jurisdicción',
             'empty'=> 'Todas',
-            'style' => 'width: 375px;',
+            'style' => 'width: 371px; height: 21px;',
             'div'  => array('style' => 'float:left; clear: none;'),
             'after' => '<cite>Filtro opcional. Si no selecciona una Jurisdicción se realizará una búsqueda en todo el Registro.</cite>'
             ));
