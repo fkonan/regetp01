@@ -116,5 +116,6 @@ echo $html->css(array('jquery.loadmask', 'smoothness/jquery-ui-1.8.5.custom'));
 <div class="actions">
 	<ul>
 		<li><?php echo $html->link(__('Nuevo Título', true), array('action'=>'add')); ?></li>
+                <li><?php echo $html->link(__('Corrector de Títulos de Planes', true), array('action'=>'corrector_de_planes')); ?></li>
 	</ul>
 </div>
