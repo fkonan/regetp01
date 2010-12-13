@@ -91,17 +91,21 @@ class SubsectoresController extends AppController {
 	
 	function ajax_select_subsector_form_por_sector(){
 		 $this->layout = 'ajax';
-         Configure::write('debug',0);
+                 Configure::write('debug',0);
                  $sector_id = 0;
-                 if (!empty($this->data['Plan']['sector_id'])) :
+                 if (!empty($this->data['Plan']['sector_id'])) {
                         $sector_id = $this->data['Plan']['sector_id'];
-                 else:
+                 }
+                 else if(!empty($this->data['SectoresTitulo']['sector_id'])){
+                        $sector_id = $this->data['SectoresTitulo']['sector_id'];
+                 }
+                 else{
                      if ($sector = current($this->data)):
                             if (isset($sector)):
                                     $sector_id = $sector['sector_id'];
                             endif;
                      endif;
-                 endif;
+                 }
 
                  $subsectores = $this->Subsector->con_sector('all',$sector_id);
 

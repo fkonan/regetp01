@@ -10,7 +10,7 @@ echo $html->css('jquery.autocomplete.css', false);
 
 
 <script type="text/javascript" language="javascript">
-    init__AdvancedSearchFormJs("<?echo $html->url(array('controller'=>'localidades','action'=>'ajax_search_localidades'));?>");
+    init__AdvancedSearchFormJs("<?echo $html->url(array('controller'=>'localidades','action'=>'ajax_search_localidades'));?>","<?echo $html->url(array('controller'=>'titulos','action'=>'ajax_search'));?>");
 </script>
 
 <h1><? __('Búsqueda Avanzada de Instituciones')?></h1>
@@ -111,14 +111,29 @@ echo $html->css('jquery.autocomplete.css', false);
         'empty'=>'Seleccione',
         'label'=>'Con Oferta'));
 
-
-        echo $form->input('Plan.titulo_id',array(
-        'label'=> 'Título de Referencia',
-        'div'=>array('style'=>'float: left;  clear: right'),
-        'style'=> 'display:inline;width:267px;vertical-align:bottom',
-        'options'=>$titulos,
-        'empty'=>'Seleccione',
+        echo $form->input('Plan.norma',array(
+        'label'=>'Normativa',
+        'div'=>array('style'=>'float: left; width: 265px;  clear: none'),
+        'style'=> 'display:inline;vertical-align:bottom;  width: 265px;',
         ));
+        
+//        echo $ajax->observeField(
+//            'PlanOfertaId',
+//            array(
+//                'update'=> 'PlanTituloId',
+//                'url'=>'/titulos/list_por_oferta_id',
+//                'loading'=>'jQuery("#PlanTituloId").attr("disabled","disabled")',
+//                'complete'=>'jQuery("#PlanTituloId").removeAttr("disabled")',
+//                'onChange'=>true)
+//        );
+
+//        echo $form->input('Plan.titulo_id',array(
+//        'label'=> 'Título de Referencia',
+//        'div'=>array('style'=>'float: left;  clear: right'),
+//        'style'=> 'display:inline;width:267px;vertical-align:bottom',
+//        'options'=>$titulos,
+//        'empty'=>'Seleccione',
+//        ));
 
 
         echo $form->input('SectoresTitulo.sector_id',array(
@@ -141,19 +156,23 @@ echo $html->css('jquery.autocomplete.css', false);
 
         echo $ajax->observeField('SectorId',
         array('url' => '/subsectores/ajax_select_subsector_form_por_sector',
-        'update'=>'SubsectorId',
-        'loading'=>'jQuery("#SubsectorId").attr("disabled","disabled");',
-        'complete'=>'jQuery("#SubsectorId").removeAttr("disabled");',
-        'onChange'=>true
+            'update'=>'SubsectorId',
+            'loading'=>'jQuery("#SubsectorId").attr("disabled","disabled");',
+            'complete'=>'jQuery("#SubsectorId").removeAttr("disabled");',
+            'onChange'=>true
         ));
-
-
-
-        echo $form->input('Plan.norma',array(
-        'label'=>'Normativa',
-        'div'=>array('style'=>'float: left; width: 519px;  clear: left'),
-        'style'=> 'display:inline;vertical-align:bottom;  width: 519px;',
-        ));
+        
+        echo $form->input(
+        'tituloName',
+        array(
+            'label'=> 'Título de Referencia',
+            'id' => 'PlanTituloName',
+            'style'=>'max-width: 550px;',
+            'after'=> '<cite>Seleccione primero una oferta.</cite>',
+            'div'=>array('id'=>'divPlanTituloName')));
+        
+        echo $form->input('Plan.titulo_id',array('id'=>'PlanTituloId','type'=>'hidden'));
+        
         ?>
 
     </fieldset>

@@ -1,5 +1,5 @@
 
-function init__AdvancedSearchFormJs(urlLocalidades){
+function init__AdvancedSearchFormJs(urlLocalidades, urlTitulos){
     jQuery(document).ready(function() {
         iniciarTooltip();
 
@@ -35,6 +35,50 @@ function init__AdvancedSearchFormJs(urlLocalidades){
 
         jQuery("#InstitJurDepLoc").attr('autocomplete','off');
 
+        jQuery("#PlanTituloName").autocomplete(urlTitulos, {
+            dataType: "json",
+            delay: 200,
+            max:30,
+            cacheLength:0,
+            extraParams: {
+                oferta_id: function() { return jQuery('#PlanOfertaId').val(); },
+                sector_id: function() { return jQuery('#SectorId').val(); },
+                subsector_id: function() { return jQuery('#SubsectorId').val(); }
+            } ,
+            parse: function(data) {
+                return jQuery.map(data, function(titulo) {
+                    return {
+                        data: titulo,
+                        value: titulo.id,
+                        result: formatResult2(titulo)
+                    }
+                });
+            },
+            formatItem: function(item) {
+                return formatResult2(item);
+            }
+        }).result(function(e, item) {
+            if(item.type == 'Vacio'){
+                jQuery("#PlanTituloName").val('');
+                jQuery("#PlanTituloId").val('');
+            }
+            else{
+                jQuery("#PlanTituloId").val(item.id);
+            }
+        });
+
+        jQuery("#PlanTituloName").attr('autocomplete','off');
+
+
+        jQuery("#SectorId").change(function(){
+            jQuery("#PlanTituloName").val('');
+            jQuery("#PlanTituloId").val('');
+        });
+
+        jQuery("#SubsectorId").change(function(){
+            jQuery("#PlanTituloName").val('');
+            jQuery("#PlanTituloId").val('');
+        });
     });
 }
 
@@ -64,6 +108,10 @@ function formatResult(loc_dep) {
         return loc_dep.localidad;
     }
 
+}
+
+function formatResult2(titulo) {
+        return titulo.name;
 }
 
 function enviar()
