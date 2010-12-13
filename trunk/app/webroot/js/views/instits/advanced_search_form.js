@@ -29,7 +29,7 @@ function init__AdvancedSearchFormJs(urlLocalidades){
                 jQuery("#InstitJurDepLoc").val('');
             }
             else{
-                jQuery("#InstitSearchForm #search-ubicacion").append("<input id='hiddenLocDepId' name='data[" + item.type + "][id]' type='hidden' value='" + item.id + "' />");
+                jQuery("#InstitSearchForm #search-ubicacion").append("<input id='hiddenLocDepId' name='data[Instit][" + item.type.toLowerCase() + "_id]' type='hidden' value='" + item.id + "' />");
             }
         });
 
