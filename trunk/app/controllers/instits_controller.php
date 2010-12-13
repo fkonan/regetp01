@@ -4,7 +4,7 @@ class InstitsController extends AppController {
     var $name = 'Instits';
     var $helpers = array('Html','Form','Ajax','Cache');
     //var $paginate = array('order'=>array('Instit.cue' => 'asc'),'limit'=>'10');
-    var $components = array('RequestHandler');
+    var $components = array('RequestHandler', 'Buscable');
 
 
     function test() {
@@ -447,7 +447,7 @@ class InstitsController extends AppController {
                             "to_ascii(lower(Instit.nroinstit))||' '||".
                             "to_ascii(lower(Instit.nombre)) SIMILAR TO ?"] = array(convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['nombre_completo'])));
 
-            $this->paginate['viewConditions']['Nombre'] = utf8_decode($this->passedArgs['nombre_completo']);
+            $this->paginate['viewConditions']['Tipo, Número o Nombre '] = utf8_decode($this->passedArgs['nombre_completo']);
         }
 
 
@@ -565,7 +565,7 @@ class InstitsController extends AppController {
             'friendlyName' => 'Relación con ETP');
          
          foreach ($ops as $o) {
-             $this->__aplicarCriteriosDeBusqueda($o);
+             $this->Buscable->aplicarCriteriosDeBusqueda($o);
          }
 
         /*********************************************************************/
@@ -666,79 +666,6 @@ class InstitsController extends AppController {
     }
 
 
-    /**
-     *
-     * @param array $o -- Options array
-     * Opciones psibles son:
-     *      string model => nombre del modelo
-     *      string field => nombre del campo que quiero buscar
-     *      string friendlyName => es el nombre que aparecerá en la pàgina de resultados de la búsqueda. Por ejemplo "Nombre de la Institución"
-     *      boolean forceText => hace que el valor buscado sea un texto si o si. Aunque venga un número como filtro de bñusqueda.
-     *      boolean asociarPlan => para realizar busquedas avanzadas en el sector del titulo por ejemplo
-     *      
-     */
-    private function __aplicarCriteriosDeBusqueda($o) {
-        // inicializo array de opciones
-        $model = $o['model'];
-        $field = $o['field'];
-        $friendlyName = empty($o['friendlyName']) ? $field : $o['friendlyName'];
-        $forceText = empty($o['forceText']) ? false : true;
-        $valor = null;
-        $asociarPlan = empty($o['asociarPlan']) ? false : true;               
-
-        $modelField = $model.'.'.$field;
-
-        // lista de modelos que se van a consultar en la query
-        $this->paginate['modelosInvolucrados'] = array();
-
-       
-        
-        // paso al vector del paginador para unificar la busqueda
-        if(!empty($this->data[$model][$field])) {
-            $valor = $this->data[$model][$field];
-        }
-
-        if( !empty($this->passedArgs[$modelField]) ) {
-            $valor = $this->passedArgs[$modelField];
-        }
-        $this->passedArgs[$modelField] = $valor;
-         
-
-        if( !empty($valor) ) {
-
-            if ($asociarPlan) {
-                $this->Instit->asociarPlan = true;
-            }
-
-            
-            $this->paginate['modelosInvolucrados'][] = $model;
-
-            $friendlyName = empty($friendlyName) ?  $field : $friendlyName;
-            $this->paginate['viewConditions'][$friendlyName] = $friendlyName;
-
-            if ( (!is_numeric($valor) && !is_array($valor)) && is_string($valor) || $forceText === true) {
-                // es texto
-                $this->paginate[$this->modelClass]['conditions'][$modelField]
-                    = convertir_para_busqueda_avanzada(utf8_decode($valor));
-                $array_condiciones[$modelField] = utf8_decode($valor);
-                $url_conditions[$field] = utf8_decode($valor);
-            } else {
-                if (substr($field,-3) == '_id') {
-
-                    // es FK, por lo tanto me traigo el nombre
-                    // para mostrar en el resutado de busquedas (para mostrar en la vista el camp "name" del Modelo
-                    $miniModel = substr($field, 0, strlen($field)-3);
-                    $model  = Inflector::camelize($miniModel);
-                    $rModel =& ClassRegistry::init($model);
-
-                    $rModel->id = $valor;
-                    $this->paginate['viewConditions'][$friendlyName] = $rModel->field('name');
-                }
-
-                // es un numero, como por ejemplo una FK
-                $this->paginate[$this->modelClass]['conditions'][$modelField] = $valor;
-            }
-        }
-    }
+    
 }
 ?>
