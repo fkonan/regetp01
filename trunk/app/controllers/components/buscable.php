@@ -25,6 +25,18 @@ class BuscableComponent extends Object {
     function initialize(&$controller, $settings=array()){
         $this->controller = $controller;
     }
+
+
+    function aplicarCriteriosDeBusqueda($ops) {
+        if (empty($ops)) {
+            $ops = $this->searchOptions;
+        }
+        if (count($ops) == 0) return -1; // no hay nada que buscar
+
+        foreach ($ops as $o) {
+                 $this->__aplicarCriterio($o);
+        }
+    }
     
     /**
      *
@@ -37,15 +49,13 @@ class BuscableComponent extends Object {
      *      boolean asociarPlan => para realizar busquedas avanzadas en el sector del titulo por ejemplo
      *
      */
-    function aplicarCriteriosDeBusqueda($o = null) {
-        if (empty($o)) {
-            $o = $this->searchOptions;
-        }
+    private function __aplicarCriterio($o = null) {
         
-        if (count($o) == 0) return -1; // no hay nada que buscar
+        if (empty($o)) return -1; // no hay nada que buscar
 
         // inicializo array de opciones
-        $model = $o['model'];
+
+        $model = empty($o['model'])?$this->controller->modelClass:$o['model'] ;
         $field = $o['field'];
         $friendlyName = empty($o['friendlyName']) ? $field : $o['friendlyName'];
         $forceText = empty($o['forceText']) ? false : true;
