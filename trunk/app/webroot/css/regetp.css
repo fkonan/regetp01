@@ -2379,6 +2379,10 @@ border-bottom-color: white !important;
     width:45%;
 }
 
+#sectores .js-sector select{
+    display:inline;
+}
+
 #sectores .js-subsector-id{
     width:40%;
 }
