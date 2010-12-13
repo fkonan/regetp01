@@ -461,49 +461,41 @@ class InstitsController extends AppController {
 
          //     Jurisdiccion
          $ops[] = array(
-            'model' => 'Instit',
             'field' => 'jurisdiccion_id',
             'friendlyName' => 'Jurisdicción');
         
          //      TIPO INSTIT
          $ops[] = array(
-            'model' => 'Instit',
             'field' => 'tipoinstit_id',
             'friendlyName' => 'Tipo Institución');
 
           //      Nombre
          $ops[] = array(
-            'model' => 'Instit',
             'field' => 'nombre',
             'friendlyName' => 'Nombre');
 
          //      Direccion
          $ops[] = array(
-            'model' => 'Instit',
             'field' => 'direccion',
             'friendlyName' => 'Domicilio');
 
          //      Departamento
          $ops[] = array(
-            'model' => 'Instit',
             'field' => 'departamento_id',
             'friendlyName' => 'Departamento');
 
          //      Localidad
          $ops[] = array(
-            'model' => 'Instit',
             'field' => 'localidad_id',
             'friendlyName' => 'Localidad');
         
          //      GESTION
          $ops[] = array(
-            'model' => 'Instit',
             'field' => 'gestion_id',
             'friendlyName' => 'Ámbito de Gestión');
 
          //      DEPENDENCIA
          $ops[] = array(
-            'model' => 'Instit',
             'field' => 'dependencia_id',
             'friendlyName' => 'Dependencia');         
 
@@ -540,7 +532,6 @@ class InstitsController extends AppController {
 
          //      ORIENTACION
          $ops[] = array(
-            'model' => 'Instit',
             'field' => 'orientacion_id',
             'friendlyName' => 'Orientación');
 
@@ -554,7 +545,6 @@ class InstitsController extends AppController {
 
          //      Tipo Instit
          $ops[] = array(
-            'model' => 'Instit',
             'field' => 'claseinstit_id',
             'friendlyName' => 'Tipo de Institución de ETP');
 
