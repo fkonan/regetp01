@@ -184,14 +184,14 @@ echo $html->css('jquery.autocomplete.css', false);
         echo $form->input('Instit.etp_estado_id', array(
         'empty' => 'Todas',
         'label'=>'Relación con ETP',
-        'div'=>array('style'=>'float: left;  clear: left'),
+        'div'=>array('style'=>'float: left; width:247px; clear: left'),
         'style'=> 'display:inline;width:247px;vertical-align:bottom',
         ));
 
         echo $form->input('Instit.gestion_id', array(
         'empty' => 'Todas',
         'label'=> 'Ámbito de Gestión',
-        'div'=>array('style'=>'float: left;  clear: none'),
+        'div'=>array('style'=>'float: left; clear: none'),
         'style'=> 'display:inline;width: 270px;vertical-align:bottom',
         ));
 
@@ -199,7 +199,7 @@ echo $html->css('jquery.autocomplete.css', false);
         echo $form->input('Instit.dependencia_id', array(
         'empty' => 'Todas',
         'label'=> 'Tipo de Dependencia',
-        'div'=>array('style'=>'float: left;  clear: left'),
+        'div'=>array('style'=>'float: left; width:247px; clear: left'),
         'style'=> 'display:inline;width:247px;vertical-align:bottom',));
 
 
