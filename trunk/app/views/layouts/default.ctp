@@ -105,6 +105,13 @@ header("Expires: Mon, 17 Dec 2007 00:00:00 GMT"); // Date in the past
 
     <body>
         <?
+            if (strpos($_SERVER['HTTP_HOST'], '168.83.20.') !== false) {
+        ?>
+            <script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>
+        <?
+            }
+        ?>
+        <?
         if ($_SERVER['HTTP_HOST']=='localhost' || $_SERVER['HTTP_HOST']=='127.0.0.1') {
 
             include_once(APP_DIR . "/config/frases.php");
