@@ -174,10 +174,11 @@ class Plan extends AppModel {
   	
   	function paginateCount($conditions = null, $recursive = 0)
   	{
-		if ($this->asociarAnio){
+		if ($this->asociarAnio || $this->asociarCompleto){
                     $parameters = compact('conditions');
                     return count($this->find('completo', $parameters));
-  		} else {
+  		} 
+                else {
                     $parameters = compact('conditions');
 
                     if ($recursive != $this->recursive){
