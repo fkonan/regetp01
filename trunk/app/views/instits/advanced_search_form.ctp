@@ -52,8 +52,8 @@ echo $html->css('jquery.autocomplete.css', false);
 		-->
     <fieldset id="search-ubicacion" class="search-div" >
         <legend>Por Ubicación</legend>
-        <?php echo $form->input('jur_dep_loc', array('label'=>'Departamento/Localidad','title'=>'Ingrese al menos 3 letras para que comience la busqueda de Departamentos y Localidades.')); ?>
-        <?php echo $form->input('direccion', array('label'=>'Domicilio')); ?>
+        <?php echo $form->input('jur_dep_loc', array('label'=>'Departamento/Localidad', 'style'=>'width:92%;','title'=>'Ingrese al menos 3 letras para que comience la busqueda de Departamentos y Localidades.')); ?>
+        <?php echo $form->input('direccion', array('label'=>'Domicilio', 'style'=>'width:92%;')); ?>
     </fieldset>
 
 
@@ -66,7 +66,7 @@ echo $html->css('jquery.autocomplete.css', false);
         echo $form->input('tipoinstit_id', array(
         'label'=>array('text'=>'Tipo','id'=>'label-tipoinstit'),
         //'div'=>false,
-        'style'=> 'display:inline;vertical-align:bottom',
+        'style'=> 'display:inline; width:92%; vertical-align:bottom',
         'empty' => 'Todos',
         'type'=>'select',
         'title'=> 'Para activar este campo, seleccione primero una jurisdicción'));
