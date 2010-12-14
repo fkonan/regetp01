@@ -2,6 +2,7 @@
 echo $javascript->link(array(
 'jquery.autocomplete',
 'jquery.blockUI',
+'jquery.bgiframe'
 ));
 
 echo $html->css('jquery.autocomplete.css', false);
