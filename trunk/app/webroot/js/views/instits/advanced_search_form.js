@@ -65,6 +65,8 @@ function init__AdvancedSearchFormJs(urlLocalidades, urlTitulos){
             else{
                 jQuery("#PlanTituloId").val(item.id);
             }
+            
+            jQuery('.ac_results').bgiframe();
         });
 
         jQuery("#PlanTituloName").attr('autocomplete','off');
