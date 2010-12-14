@@ -67,7 +67,7 @@ echo $html->css('jquery.autocomplete.css', false);
         echo $form->input('tipoinstit_id', array(
         'label'=>array('text'=>'Tipo','id'=>'label-tipoinstit'),
         //'div'=>false,
-        'style'=> 'display:inline; width:92%; vertical-align:bottom',
+        'style'=> 'display:inline; width:92%;vertical-align:bottom',
         'empty' => 'Todos',
         'type'=>'select',
         'title'=> 'Para activar este campo, seleccione primero una jurisdicción'));
@@ -150,7 +150,7 @@ echo $html->css('jquery.autocomplete.css', false);
         array(
             'label'=> 'Título de Referencia',
             'id' => 'PlanTituloName',
-            'style'=>'max-width: 550px;',
+            'style'=>'max-width: 550px; width:92%;',
             //'after'=> '<cite>Seleccione primero una oferta.</cite>',
             'div'=>array('id'=>'divPlanTituloName')));
         
