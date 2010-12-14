@@ -520,6 +520,7 @@ class AclprepController extends AppController {
         // Usuarios
         $this->Acl->allow('usuarios', 'Subsectores/getSubSectoresBySector');
         $this->Acl->allow('usuarios', 'Titulos/ajax_index_search');
+        $this->Acl->allow('usuarios', 'Titulos/ajax_search');
         $this->Acl->allow('usuarios', 'Titulos/ajax_similars');
 
         die('done 1.6.4');
