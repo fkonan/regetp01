@@ -26,21 +26,13 @@ Requerimientos mínimos para utilizar el <b>Sistema Gestión de Registro</b>:<br /
 Desde su puesta en funcionamiento en junio de 2009 el sistema RFIETP se encuentra
 en permanente actualización y mejoramiento, tanto del contenido de información de
 la base de datos como de la aplicación que permite su gestión. En esa línea de
-trabajo a partir del 17 de Noviembre del 2010 se ha instalado la versión <?php echo Configure::read('regetpVersion');?> del
+trabajo a partir del 17 de Diciembre del 2010 se ha instalado la versión <?php echo Configure::read('regetpVersion');?> del
 sistema.
 </p>
 
 <p>
-La nueva versión ofrece un completo rediseño en la presentación de ofertas educativas de las Instituciones, lo que permite:
+La nueva versión incorpora una relación directa entre Titulos de Referencia y Sectores/Subsectores.
 </p>
-<ul>
-    <li>Obtener una mejor visión general de la oferta educativa durante un ciclo lectivo</li>
-    <li>Obtener una presentación mas ordenada y concisa de la oferta total para una institución</li>
-    <li>Navegar mediante pestañas entre distintas ofertas y ciclos lectivos de un modo más práctico y eficiente</li>
-    <li>Recordar las selecciones realizadas al visualizar una oferta educativa (útil para tareas de edición y consultas temáticas reiteradas)</li>
-</ul>
-
-
 
 
 <br/>
