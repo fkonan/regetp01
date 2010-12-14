@@ -106,6 +106,7 @@ echo $html->css('jquery.autocomplete.css', false);
         <?php
         echo $form->input('Plan.oferta_id',array(
         'options'=>$ofertas,
+        'id'=>'OfertaId',
         'div'=>array('style'=>'float: left;  clear: none'),
         'style'=> 'display:inline;width:247px;vertical-align:bottom',
         'empty'=>'Seleccione',

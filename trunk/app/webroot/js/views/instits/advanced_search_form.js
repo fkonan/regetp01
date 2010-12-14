@@ -41,7 +41,7 @@ function init__AdvancedSearchFormJs(urlLocalidades, urlTitulos){
             max:30,
             cacheLength:0,
             extraParams: {
-                oferta_id: function() { return jQuery('#PlanOfertaId').val(); },
+                oferta_id: function() { return jQuery('#OfertaId').val(); },
                 sector_id: function() { return jQuery('#SectorId').val(); },
                 subsector_id: function() { return jQuery('#SubsectorId').val(); }
             } ,
@@ -69,6 +69,11 @@ function init__AdvancedSearchFormJs(urlLocalidades, urlTitulos){
 
         jQuery("#PlanTituloName").attr('autocomplete','off');
 
+
+        jQuery("#OfertaId").change(function(){
+            jQuery("#PlanTituloName").val('');
+            jQuery("#PlanTituloId").val('');
+        });
 
         jQuery("#SectorId").change(function(){
             jQuery("#PlanTituloName").val('');
