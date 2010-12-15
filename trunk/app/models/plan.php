@@ -174,10 +174,13 @@ class Plan extends AppModel {
   	
   	function paginateCount($conditions = null, $recursive = 0)
   	{
-		if ($this->asociarAnio || $this->asociarCompleto){
+		if ($this->asociarAnio){
                     $parameters = compact('conditions');
-                    return count($this->find('completo', $parameters));
-  		} 
+                    return $this->find('completo', $parameters);
+  		}
+                else if ($this->asociarCompleto) {
+                    return $this->__findCompleto($conditions, 'count');
+                }
                 else {
                     $parameters = compact('conditions');
 
@@ -237,7 +240,7 @@ class Plan extends AppModel {
         }
 
 
-        function __findCompleto($parameters) {
+        function __findCompleto($parameters, $buscaroSoloContar = 'buscar') {
                 $ciclo_id = 0;
                 
                 if ( !empty($parameters['conditions']['Anio.ciclo_id'])) {
@@ -311,6 +314,12 @@ class Plan extends AppModel {
                     return array();
                 }
                 $parameters['conditions'] = array('Plan.id' => $planesIds);
+
+                if ($buscaroSoloContar == 'count') {
+                    // si solo es para obtener el total no necesito seguir...
+                    $cant = count($this->find('list', $parameters));
+                    return  $cant;
+                }
 
                 // recupero el order, previamente eliminado para
                 $parameters['order'] = $order;

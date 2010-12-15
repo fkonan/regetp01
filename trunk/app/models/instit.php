@@ -719,7 +719,7 @@ class Instit extends AppModel {
                     $parametersAux['recursive'] = $recursive;
                 }
 
-                return $this->__asociarPlanParamsSetup($parametersAux,'solocontar');
+                return $this->__asociarPlanParamsSetup($parametersAux,'count');
         }
 
 	function paginate($conditions = null, $fields = null, $order = null, $limit = null, $page = 1, $recursive = null, $extra = array())
@@ -753,7 +753,7 @@ class Instit extends AppModel {
          * hacer la busqueda cuando seteo asociarPlan en true
          * @param array $parameters
          * @param string $buscaroSoloContar
-         *                          admite los strings: 'buscar' o 'solocontar'
+         *                          admite los strings: 'buscar' o 'count'
          * @return array
          */
         private function __asociarPlanParamsSetup($parameters = array(), $buscaroSoloContar = 'buscar') {
@@ -840,7 +840,7 @@ class Instit extends AppModel {
                 }
                 $parameters['group'] = array_merge(array('Instit.id'),$groupsVars);
                 
-                if ($buscaroSoloContar == 'solocontar') {
+                if ($buscaroSoloContar == 'count') {
                     // si solo es para obtener el total no necesito seguir...
                     $cant = count($this->find('list', $parameters));
                     return  $cant;
