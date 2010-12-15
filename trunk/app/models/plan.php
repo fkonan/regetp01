@@ -176,7 +176,7 @@ class Plan extends AppModel {
   	{
 		if ($this->asociarAnio){
                     $parameters = compact('conditions');
-                    return $this->find('completo', $parameters);
+                    return count($this->find('completo', $parameters));
   		}
                 else if ($this->asociarCompleto) {
                     return $this->__findCompleto($conditions, 'count');
