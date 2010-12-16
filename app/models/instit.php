@@ -842,8 +842,7 @@ class Instit extends AppModel {
                 
                 if ($buscaroSoloContar == 'count') {
                     // si solo es para obtener el total no necesito seguir...
-                    $cant = count($this->find('list', $parameters));
-                    return  $cant;
+                    return count($this->find('list', $parameters));
                 }
 
                 $parameters['fields']= 'Instit.id';
