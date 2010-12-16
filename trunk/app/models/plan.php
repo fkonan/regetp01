@@ -174,23 +174,22 @@ class Plan extends AppModel {
   	
   	function paginateCount($conditions = null, $recursive = 0)
   	{
-		if ($this->asociarAnio){
-                    $parameters = compact('conditions');
-                    return count($this->find('completo', $parameters));
-  		}
-                else if ($this->asociarCompleto) {
-                    return $this->__findCompleto($conditions, 'count');
+            $parameters = compact('conditions');
+            if ($this->asociarAnio){
+
+                return count($this->find('completo', $parameters));
+            }
+            else if ($this->asociarCompleto) {
+                return $this->__findCompleto($parameters, 'count');
+            }
+            else {
+                if ($recursive != $this->recursive){
+                        $parameters['recursive'] = $recursive;
                 }
-                else {
-                    $parameters = compact('conditions');
+                $extra = array();
 
-                    if ($recursive != $this->recursive){
-                            $parameters['recursive'] = $recursive;
-                    }
-                    $extra = array();
-
-                    return $this->find('count', array_merge($parameters, $extra));
-  		}        	
+                return $this->find('count', array_merge($parameters, $extra));
+            }
     }
 
   	/**
@@ -306,20 +305,21 @@ class Plan extends AppModel {
                 }
 
                 $parameters['fields']= 'Plan.id';
+            
+                if ($buscaroSoloContar == 'count') {
+                    // si solo es para obtener el total no necesito seguir...
+                    return count($this->find('list', $parameters));
+                }
+                
                 // recojo todas las instituciones que cumplan con los criterios de busqueda
                 $planesIds = $this->find('list', $parameters);
-                
+
                 if (empty($planesIds) ) {
                     // no hay instituciones que cumplan con esos criterios de busqueda
                     return array();
                 }
-                $parameters['conditions'] = array('Plan.id' => $planesIds);
 
-                if ($buscaroSoloContar == 'count') {
-                    // si solo es para obtener el total no necesito seguir...
-                    $cant = count($this->find('list', $parameters));
-                    return  $cant;
-                }
+                $parameters['conditions'] = array('Plan.id' => $planesIds);
 
                 // recupero el order, previamente eliminado para
                 $parameters['order'] = $order;
