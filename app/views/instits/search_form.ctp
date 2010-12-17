@@ -40,7 +40,7 @@ echo $html->css(array('jquery.loadmask', 'smoothness/jquery-ui-1.8.6.custom'));
             'id'=>'InstitCue',
             'div' => array('style' => 'width:400px; float:left;'),
          //   'style'=>'border:1px solid #BBBBBB; width: 99%; font-size: 22px; height: 29px; color: rgb(117, 117, 117);',
-            'label'=> 'Ingrese CUE, Tipo, Número o Nombre'
+            'label'=> 'Criterios de Búsqueda'
             ));
     
 //    echo $html->link('Búsqueda avanzada','advanced_search_form',array(
