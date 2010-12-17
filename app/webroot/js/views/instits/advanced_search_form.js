@@ -33,6 +33,8 @@ function init__AdvancedSearchFormJs(urlLocalidades, urlTitulos){
             }
         });
 
+        jQuery("#InstitJurDepLoc").bind('paste', function(e){jQuery("#InstitJurDepLoc").change()});
+
         jQuery("#InstitJurDepLoc").attr('autocomplete','off');
 
         jQuery("#PlanTituloName").autocomplete(urlTitulos, {
@@ -71,6 +73,7 @@ function init__AdvancedSearchFormJs(urlLocalidades, urlTitulos){
 
         jQuery("#PlanTituloName").attr('autocomplete','off');
 
+        jQuery("#PlanTituloName").bind('paste', function(e){jQuery("#PlanTituloName").change()});
 
         jQuery("#OfertaId").change(function(){
             jQuery("#PlanTituloName").val('');
