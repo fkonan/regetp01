@@ -149,7 +149,7 @@
             }
         });
 
-        jQuery("#ofertaId").change(function() { formElement.submit(); });
+        jQuery(".autosubmit").change(function() { formElement.submit(); });
 
         jQuery("#TituloName").bind('paste', function(e){autoSubmit(true)});
 

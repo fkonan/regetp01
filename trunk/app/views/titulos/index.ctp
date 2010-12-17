@@ -20,10 +20,32 @@ echo $html->css(array('jquery.loadmask', 'smoothness/jquery-ui-1.8.6.custom'));
         echo $form->input(
         'oferta_id',
         array(
+            'div'=>array('style'=>'width:200px;float:left;clear:none;'),
+            'class' => 'autosubmit',
             'label'=> 'Oferta',
             'id' => 'ofertaId',
-            'empty' => 'Todas'
+            'empty' => 'Todas',
             ));
+
+        $meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
+        echo $form->input('sector_id', array(
+            'div'=>array('style'=>'width:200px;float:left;clear:none;'),
+            'class' => 'autosubmit',
+            'type'=>'select','empty'=>'Seleccione','options'=>$sectores,'label'=>'Sector','id'=>'sectorId','after'=>$meter)
+        );
+        echo $form->input('subsector_id', array(
+            'div'=>array('style'=>'width:200px;float:left;clear:none;'),
+            'class' => 'autosubmit',
+            'empty' => 'Seleccione','type'=>'select','label'=>'Subsector', 'id'=>'subsectorId','after'=> $meter)
+        );
+
+        echo $ajax->observeField('sectorId',
+                                   array(  	'url' => '/subsectores/ajax_select_subsector_form_por_sector',
+		                                   	'update'=>'subsectorId',
+		                                   	'loading'=>'jQuery("#ajax_indicator").show();jQuery("#subsectorId").attr("disabled","disabled")',
+		                                   	'complete'=>'jQuery("#ajax_indicator").hide();jQuery("#subsectorId").removeAttr("disabled")',
+		                                   	'onChange'=>true
+                                   ));
 
         echo $form->input(
         'tituloName',
