@@ -7,10 +7,12 @@ class TitulosController extends AppController {
 
     function index() {
         $ofertas = $this->Titulo->Oferta->find('list');
+        $sectores = $this->Titulo->Sector->find('list',array('order'=>'Sector.name'));
+        $subsectores = $this->Titulo->Subsector->con_sector('list');
 
         $this->Titulo->recursive = 0;
         $this->set('titulos', $this->paginate());
-        $this->set(compact('ofertas'));
+        $this->set(compact('ofertas', 'sectores', 'subsectores'));
     }
 
 
@@ -280,6 +282,22 @@ class TitulosController extends AppController {
         if(!empty($this->passedArgs['ofertaId'])) {
             $q = utf8_decode($this->passedArgs['ofertaId']);
             $this->paginate['conditions']['Titulo.oferta_id'] = $q;
+        }
+
+        if(!empty($this->data['Titulo']['sector_id'])) {
+            $this->passedArgs['sectorId'] = $this->data['Titulo']['sector_id'];
+        }
+        if(!empty($this->passedArgs['sectorId'])) {
+            $q = utf8_decode($this->passedArgs['sectorId']);
+            $this->paginate['conditions']['Sector.id'] = $q;
+        }
+
+        if(!empty($this->data['Titulo']['subsector_id'])) {
+            $this->passedArgs['subsectorId'] = $this->data['Titulo']['subsector_id'];
+        }
+        if(!empty($this->passedArgs['subsectorId'])) {
+            $q = utf8_decode($this->passedArgs['subsectorId']);
+            $this->paginate['conditions']['Subsector.id'] = $q;
         }
 
         /*********************************************************************/
