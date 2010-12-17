@@ -20,7 +20,7 @@ Requerimientos mínimos para utilizar el <b>Sistema Gestión de Registro</b>:<br /
 
 <br />
 
-<h2>¡Nueva Versión <?php echo Configure::read('regetpVersion');?>!</h2>
+<h2>Nueva Versión <?php echo Configure::read('regetpVersion');?></h2>
 
 <p>
 Desde su puesta en funcionamiento en junio de 2009 el sistema RFIETP se encuentra
@@ -31,12 +31,9 @@ sistema.
 </p>
 
 <p>
-La nueva versión incorpora una relación directa entre Titulos de Referencia y Sectores/Subsectores.
+La nueva versión incorpora una importante mejora de la Oferta Educativa, Títulos de Referencia y sus Sectores/Subsectores a los cuales pertenece.
 </p>
 
-
-<br/>
-<br/>
 <p>
 Un listado completo de las modificaciones realizadas en esta última versión, puede encontrarlas haciendo click
 <? echo $html->link('aquí','/pages/detalle_v1_2')?>.
