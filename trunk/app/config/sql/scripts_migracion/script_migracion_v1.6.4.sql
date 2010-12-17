@@ -22,6 +22,8 @@ subsector_id
 order by titulo_id
 ;
 
+/*
 ALTER TABLE planes DROP COLUMN sector_id ;
 ALTER TABLE planes DROP COLUMN subsector_id ;
 ALTER TABLE planes DROP COLUMN sector ;
+*/

@@ -1,3 +1,7 @@
+<script type="text/javascript">
+    init("<?php echo $html->url('/img/close.png')?>");
+</script>
+
 <? echo $javascript->link('jquery.blockUI');?>
 <h1><?php  __('Oferta Educativa');?></h1>
 
