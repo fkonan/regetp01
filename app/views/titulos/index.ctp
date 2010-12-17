@@ -7,7 +7,7 @@ echo $javascript->link(array(
             'jquery-ui-1.8.5.custom.min',
             'views/titulos/search_form'
         ));
-echo $html->css(array('jquery.loadmask', 'smoothness/jquery-ui-1.8.5.custom'));
+echo $html->css(array('jquery.loadmask', 'smoothness/jquery-ui-1.8.6.custom'));
 ?>
 <?php 
         echo $form->create('Titulo', array(

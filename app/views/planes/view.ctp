@@ -67,7 +67,10 @@ $cue_instit = $instit['cue'].$anexo;
                 <dd>
                     <?php
                         $i = 0;
-                        $size = count($plan['Titulo']['SectoresTitulo']);
+                        if (!empty($plan['Titulo']['SectoresTitulo'])) {
+                            $size = count($plan['Titulo']['SectoresTitulo']);
+                        }
+                        
                         if(isset($plan['Titulo']['SectoresTitulo'])){
                             foreach($plan['Titulo']['SectoresTitulo'] as $sector){
                                 if($size == 1){
