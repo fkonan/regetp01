@@ -252,7 +252,6 @@ class TitulosController extends AppController {
         // para el paginator que pueda armar la url
         $url_conditions = array();
 
-
         /*******************************************************************
          *    INICIALIZACION DE FILTROS
          *
@@ -272,7 +271,7 @@ class TitulosController extends AppController {
         }
         if(!empty($this->passedArgs['tituloName'])) {
             $q = utf8_decode(strtolower($this->passedArgs['tituloName']));
-            $this->paginate['SectoresTitulo']['conditions']['to_ascii(lower(Titulo.name)) SIMILAR TO ?'] = convertir_texto_plano($q);
+            $this->paginate['conditions']['to_ascii(lower(Titulo.name)) SIMILAR TO ?'] = convertir_texto_plano($q);
         }
 
         // caso de parametros para filtrar
@@ -281,23 +280,36 @@ class TitulosController extends AppController {
         }
         if(!empty($this->passedArgs['ofertaId'])) {
             $q = utf8_decode($this->passedArgs['ofertaId']);
-            $this->paginate['SectoresTitulo']['conditions']['Titulo.oferta_id'] = $q;
+            $this->paginate['conditions']['Titulo.oferta_id'] = $q;
         }
 
         if(!empty($this->data['Titulo']['sector_id'])) {
             $this->passedArgs['sectorId'] = $this->data['Titulo']['sector_id'];
         }
-        if(!empty($this->passedArgs['sectorId'])) {
-            $q = utf8_decode($this->passedArgs['sectorId']);
-            $this->paginate['SectoresTitulo']['conditions']['Sector.id'] = $q;
-        }
 
         if(!empty($this->data['Titulo']['subsector_id'])) {
             $this->passedArgs['subsectorId'] = $this->data['Titulo']['subsector_id'];
         }
-        if(!empty($this->passedArgs['subsectorId'])) {
-            $q = utf8_decode($this->passedArgs['subsectorId']);
-            $this->paginate['SectoresTitulo']['conditions']['Subsector.id'] = $q;
+        
+        if(!empty($this->passedArgs['sectorId']) || !empty($this->passedArgs['subsectorId']) ) {
+            
+            $conditions_sector = array();
+            if(!empty($this->passedArgs['sectorId'])){
+                $q = utf8_decode($this->passedArgs['sectorId']);
+                $conditions_sector['SectoresTitulo.sector_id'] = $q;
+            }
+            if(!empty($this->passedArgs['subsectorId'])){
+                $q = utf8_decode($this->passedArgs['subsectorId']);
+                $conditions_sector['SectoresTitulo.subsector_id'] = $q;
+            }
+
+            $this->paginate['joins'] = array(
+                array('table'=>'sectores_titulos',
+                      'type' => 'inner',
+                      'alias' => 'SectoresTitulo',
+                      'conditions'=>$conditions_sector
+                    )
+                );
         }
 
         /*********************************************************************/
@@ -308,11 +320,11 @@ class TitulosController extends AppController {
         $this->Titulo->recursive = 0;//para alivianar la carga del server
         //
         //datos de paginacion
-        $this->paginate['SectoresTitulo']['fields'] = $this->Titulo->getPagFields();
-        $this->paginate['SectoresTitulo']['group'] = $this->paginate['SectoresTitulo']['fields'];
-        $this->paginate['SectoresTitulo']['order'] = array('Titulo.name ASC, Titulo.oferta_id ASC');
-        $titulos = $this->paginate('SectoresTitulo');
-
+        $this->paginate['fields'] = array('DISTINCT ("Titulo"."id")', 'Titulo.name','Titulo.marco_ref', 'Titulo.oferta_id');
+        $this->paginate['group'] = array('Titulo.id', 'Titulo.name','Titulo.marco_ref', 'Titulo.oferta_id');;
+        $this->paginate['order'] = array('Titulo.name ASC, Titulo.oferta_id ASC');
+        
+        $titulos = $this->paginate();
 
         $this->set('titulos', $titulos);
         $this->set('url_conditions', $url_conditions);
