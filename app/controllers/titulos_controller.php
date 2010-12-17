@@ -272,7 +272,7 @@ class TitulosController extends AppController {
         }
         if(!empty($this->passedArgs['tituloName'])) {
             $q = utf8_decode(strtolower($this->passedArgs['tituloName']));
-            $this->paginate['conditions']['to_ascii(lower(Titulo.name)) SIMILAR TO ?'] = convertir_texto_plano($q);
+            $this->paginate['SectoresTitulo']['conditions']['to_ascii(lower(Titulo.name)) SIMILAR TO ?'] = convertir_texto_plano($q);
         }
 
         // caso de parametros para filtrar
@@ -281,7 +281,7 @@ class TitulosController extends AppController {
         }
         if(!empty($this->passedArgs['ofertaId'])) {
             $q = utf8_decode($this->passedArgs['ofertaId']);
-            $this->paginate['conditions']['Titulo.oferta_id'] = $q;
+            $this->paginate['SectoresTitulo']['conditions']['Titulo.oferta_id'] = $q;
         }
 
         if(!empty($this->data['Titulo']['sector_id'])) {
@@ -289,7 +289,7 @@ class TitulosController extends AppController {
         }
         if(!empty($this->passedArgs['sectorId'])) {
             $q = utf8_decode($this->passedArgs['sectorId']);
-            $this->paginate['conditions']['Sector.id'] = $q;
+            $this->paginate['SectoresTitulo']['conditions']['Sector.id'] = $q;
         }
 
         if(!empty($this->data['Titulo']['subsector_id'])) {
@@ -297,7 +297,7 @@ class TitulosController extends AppController {
         }
         if(!empty($this->passedArgs['subsectorId'])) {
             $q = utf8_decode($this->passedArgs['subsectorId']);
-            $this->paginate['conditions']['Subsector.id'] = $q;
+            $this->paginate['SectoresTitulo']['conditions']['Subsector.id'] = $q;
         }
 
         /*********************************************************************/
@@ -308,8 +308,10 @@ class TitulosController extends AppController {
         $this->Titulo->recursive = 0;//para alivianar la carga del server
         //
         //datos de paginacion
-        $this->paginate['order'] = array('Titulo.name ASC, Titulo.oferta_id ASC');
-        $titulos = $this->paginate();
+        $this->paginate['SectoresTitulo']['fields'] = $this->Titulo->getPagFields();
+        $this->paginate['SectoresTitulo']['group'] = $this->paginate['SectoresTitulo']['fields'];
+        $this->paginate['SectoresTitulo']['order'] = array('Titulo.name ASC, Titulo.oferta_id ASC');
+        $titulos = $this->paginate('SectoresTitulo');
 
 
         $this->set('titulos', $titulos);
