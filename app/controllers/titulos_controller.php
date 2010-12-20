@@ -296,18 +296,18 @@ class TitulosController extends AppController {
             $conditions_sector = array();
             if(!empty($this->passedArgs['sectorId'])){
                 $q = utf8_decode($this->passedArgs['sectorId']);
-                $conditions_sector['SectoresTitulo.sector_id'] = $q;
+                $this->paginate['conditions']['SectoresTitulo.sector_id'] = $q;
             }
             if(!empty($this->passedArgs['subsectorId'])){
                 $q = utf8_decode($this->passedArgs['subsectorId']);
-                $conditions_sector['SectoresTitulo.subsector_id'] = $q;
+                $this->paginate['conditions']['SectoresTitulo.subsector_id'] = $q;
             }
 
             $this->paginate['joins'] = array(
                 array('table'=>'sectores_titulos',
-                      'type' => 'inner',
+                      'type' => 'LEFT',
                       'alias' => 'SectoresTitulo',
-                      'conditions'=>$conditions_sector
+                      'conditions'=> array('SectoresTitulo.titulo_id = Titulo.id')
                     )
                 );
         }
@@ -317,13 +317,13 @@ class TitulosController extends AppController {
         /*********************************************************************/
 
 
-        $this->Titulo->recursive = 0;//para alivianar la carga del server
+        //$this->Titulo->recursive = 0;//para alivianar la carga del server
         //
         //datos de paginacion
         $this->paginate['fields'] = array('DISTINCT ("Titulo"."id")', 'Titulo.name','Titulo.marco_ref', 'Titulo.oferta_id');
-        $this->paginate['group'] = array('Titulo.id', 'Titulo.name','Titulo.marco_ref', 'Titulo.oferta_id');;
+        //$this->paginate['group'] = array('Titulo.id', 'Titulo.name','Titulo.marco_ref', 'Titulo.oferta_id');;
         $this->paginate['order'] = array('Titulo.name ASC, Titulo.oferta_id ASC');
-        
+
         $titulos = $this->paginate();
 
         $this->set('titulos', $titulos);
