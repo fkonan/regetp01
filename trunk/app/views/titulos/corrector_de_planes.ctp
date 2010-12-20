@@ -172,12 +172,14 @@ $paginator->options(array('url' => $url_conditions));
     <?
     echo $form->input('FPlan.oferta_id',array(
                         'options'=>$ofertas,
+                        'div'=>array('style'=>'width:200px;float:left;clear:none;'),
                         'empty'=>'Todas',
                         'label'=>'Oferta'));
 
     echo $form->input('FPlan.con_titulo',array(
                         'options'=> array('con' => 'Con Título de Referencia', 'sin' => 'Sin Título de Referencia'),
                         'empty'=>'Todos',
+                        'div'=>array('style'=>'width:200px;float:left;clear:none;'),
                         'label'=>'Planes'));
 
     $meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
@@ -185,6 +187,7 @@ $paginator->options(array('url' => $url_conditions));
                         'empty' => array('0'=>'Todas'),
                         'id'=>'jurisdiccion_id',
                         'label'=>'Jurisdicción',
+                        'div'=>array('style'=>'width:200px;float:left;clear:none;'),
                         'after'=>$meter,
                         'options'=>$jurisdicciones,
 
@@ -194,25 +197,32 @@ $paginator->options(array('url' => $url_conditions));
     echo $form->input('FPlan.sector_id',array(
                         'label'=>'Sector',
                         'options'=>$sectores,
+                        'div'=>array('style'=>'width:200px;float:left;clear:none;', 'id' => 'DivFPlanSectorId'),
                         'empty'=>'Todos',
-                        'div' => array('id' => 'DivFPlanSectorId')
     ));
 
     echo $form->input('FPlan.subsector_id', array(
                         'label'=>'Subsector',
                         'empty'=>'Todos',
-                        'div' => array('id' => 'DivFPlanSubsectorId')
+        'div'=>array('style'=>'width:200px;float:left;clear:none;', 'id' => 'DivFPlanSubsectorId'),
             ));
     ?>
     <?php
     echo $form->input('FPlan.limit',array(
             'label'=>'Cantidad de planes por página',
+            'div'=>array('style'=>'width:200px;float:left;clear:none;',),
             'options'=>array('10'=>10,'20'=>20,'40'=>40,'60'=>60)
          ));
 
-    echo $form->input('FPlan.plan_nombre', array('label'=>'Nombre del Plan', 'after'=> '<cite>Realiza una búsqueda por parte del nombre del plan.<br>Ej: Soldadura</cite>'));
+    echo $form->input('FPlan.plan_nombre', array(
+        'label'=>'Nombre del Plan',
+        'div'=>array('style'=>'width:50%;float:left;clear:none;',),
+        'after'=> '<cite>Realiza una búsqueda por parte del nombre del plan.<br>Ej: Soldadura</cite>'));
 
-    echo $form->input('FPlan.TituloName', array('label'=>'Nombre del Titulo', 'after'=> '<cite>Realiza una búsqueda por parte del nombre del título.<br>Ej: Técnico</cite>'));
+    echo $form->input('FPlan.TituloName', array(
+        'label'=>'Nombre del Titulo',
+        'div'=>array('style'=>'width:48%;float:left;clear:none;',),
+        'after'=> '<cite>Busca por parte del nombre del título.<br>Ej: Técnico</cite>'));
 
     echo $form->input('FPlan.titulo_id', array(
         'type'=>'hidden',
