@@ -459,7 +459,7 @@ class TitulosController extends AppController {
 
         if(!empty($subsector_id)) {
             $this->paginate['Plan']['conditions']['SectoresTitulo.subsector_id'] = $subsector_id;
-            $url_conditions['Titulo.sector_id'] = $subsector_id;
+            $url_conditions['Titulo.subsector_id'] = $subsector_id;
         }
 
         /**
