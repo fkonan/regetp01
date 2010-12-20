@@ -80,6 +80,40 @@ echo $html->css(array('jquery.autocomplete'));
             });
 
             jQuery("#TituloName").attr('autocomplete','off');
+
+            jQuery("#FPlanTituloName").autocomplete("<?echo $html->url(array('controller'=>'titulos','action'=>'ajax_search'));?>", {
+                dataType: "json",
+                delay: 200,
+                max:30,
+                cacheLength:0,
+                extraParams: {
+                    oferta_id: function() { return jQuery('#FPlanOfertaId').val(); },
+                    sector_id: function() { return jQuery('#FPlanSectorId').val(); },
+                    subsector_id: function() { return jQuery('#FPlanSubsectorId').val(); }
+                } ,
+                parse: function(data) {
+                    return jQuery.map(data, function(titulo) {
+                        return {
+                            data: titulo,
+                            value: titulo.id,
+                            result: formatResult(titulo)
+                        }
+                    });
+                },
+                formatItem: function(item) {
+                    return formatResult(item);
+                }
+            }).result(function(e, item) {
+                if(item.type == 'Vacio'){
+                    jQuery("#FPlanTituloName").val('');
+                    jQuery("#fp_titulo_id").val('');
+                }
+                else{
+                    jQuery("#fp_titulo_id").val(item.id);
+                }
+            });
+
+            jQuery("#FPlanTituloName").attr('autocomplete','off');
         });
 
 
@@ -176,9 +210,15 @@ $paginator->options(array('url' => $url_conditions));
             'options'=>array('10'=>10,'20'=>20,'40'=>40,'60'=>60)
          ));
 
-    echo $form->input('FPlan.plan_nombre', array('label'=>'Nombre del Plan', 'after'=> '<cite>Realiza una búsqueda por parte del nombre del plan.<br>Ej: SOLDADURA</cite>'));?>
+    echo $form->input('FPlan.plan_nombre', array('label'=>'Nombre del Plan', 'after'=> '<cite>Realiza una búsqueda por parte del nombre del plan.<br>Ej: Soldadura</cite>'));
 
-<?php
+    echo $form->input('FPlan.TituloName', array('label'=>'Nombre del Titulo', 'after'=> '<cite>Realiza una búsqueda por parte del nombre del título.<br>Ej: Técnico</cite>'));
+
+    echo $form->input('FPlan.titulo_id', array(
+        'type'=>'hidden',
+        'id'=>'fp_titulo_id'
+    ));
+
     echo $ajax->observeField(
             'FPlanSectorId', array(
                 'url' => '/subsectores/ajax_select_subsector_form_por_sector',
@@ -239,7 +279,7 @@ if (!empty($planes))
                                 'numero'=>$i,
                         ));
                     ?>
-                <a style="font-size: 10px;" href="javascript:" onclick="jQuery('#<? echo $div_id?>').toggle(); return false;"><?= $p['Plan']['nombre']?></a> <i><?=($p['Plan']['titulo_id'] > 0 ? '(tiene Título)':'')?></i>
+                <a style="font-size: 10px;" href="javascript:" onclick="jQuery('#<? echo $div_id?>').toggle(); return false;"><?= $p['Plan']['nombre']?></a> <i><?=($p['Plan']['titulo_id'] > 0 ? '(' . $p['Titulo']['name'] . ')':'(No tiene Título)')?></i>
             </div>
             <div style="display: none; background-color: beige; font-size: 9pt;" id="<? echo $div_id?>">
 
