@@ -514,7 +514,7 @@ class TitulosController extends AppController {
 
         if(!empty($titulo_id)) {
             $this->paginate['Plan']['conditions']["Plan.titulo_id"] = $titulo_id;
-            $url_conditions['FPlan.titulo_id'] = $titulo_id;
+            $url_conditions['Plan.titulo_id'] = $titulo_id;
         }
 
         /***********************************************************************/
