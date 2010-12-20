@@ -25,7 +25,13 @@
                             <input type="checkbox" id="<?php echo $titulo['Titulo']['id']; ?>" onclick="habilitarFusion();">
                 </td>
                 <td style="text-align:left; font-size: 9pt;">
-                            <?php echo $titulo['Titulo']['name']; ?>
+                            <?php
+                            $linkTitulo = $html->link(
+                                    " (".count($titulo['Plan'])." planes)",
+                                    '/titulos/corrector_de_planes/Plan.titulo_id:'.$titulo['Titulo']['id'],
+                                    array('target'=>'_blank')
+                                    );
+                            echo $titulo['Titulo']['name'].$linkTitulo; ?>
                 </td>
                 <td>
                         <?php
