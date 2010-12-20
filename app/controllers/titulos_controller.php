@@ -498,6 +498,25 @@ class TitulosController extends AppController {
             $url_conditions['Plan.plan_nombre'] = $plan_nombre;
         }
 
+        /*
+         *  Por Título
+         *
+         */
+
+        $titulo_id = '';
+        if(!empty($this->data['FPlan']['titulo_id'])) {
+            $titulo_id = $this->data['FPlan']['titulo_id'];
+        }
+        elseif(!empty($this->passedArgs['Plan.titulo_id'])) {
+            $titulo_id = $this->passedArgs['Plan.titulo_id'];
+            $this->data['FPlan']['titulo_id'] = $titulo_id;
+        }
+
+        if(!empty($titulo_id)) {
+            $this->paginate['Plan']['conditions']["Plan.titulo_id"] = $titulo_id;
+            $url_conditions['FPlan.titulo_id'] = $titulo_id;
+        }
+
         /***********************************************************************/
         /*                               Busqueda                              */
         /***********************************************************************/
