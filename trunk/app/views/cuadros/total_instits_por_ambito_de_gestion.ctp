@@ -20,7 +20,7 @@
 
 <div align="center">
 <table width="80%" cellpadding = "0" cellspacing = "0" summary="" 
-	style="border-left: 1px solid silver; border-top: 1px solid silver; border-color: gray; font-size: 9pt;">
+	style="border-left: 1px solid silver; border-top: 1px solid silver; font-size: 9pt;">
 
 <tr>
 	<th class="head_select" rowspan="2">División político-territorial</th>
