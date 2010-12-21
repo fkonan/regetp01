@@ -102,7 +102,7 @@ class TitulosController extends AppController {
             $this->flash(__('Invalid Titulo', true), array('action'=>'index'));
         }
         if (!empty($this->data)) {
-            $this->Titulo->SectoresTitulo->deleteAll(array('SectoresTitulo.sector_id' => $id));
+            $this->Titulo->SectoresTitulo->deleteAll(array('SectoresTitulo.titulo_id' => $id));
 
             $sectores = $this->data['Titulo']['SectoresTitulos']['sector_id'];
             $subsectores = $this->data['Titulo']['SectoresTitulos']['subsector_id'];
