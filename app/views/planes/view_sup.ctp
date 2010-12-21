@@ -93,5 +93,5 @@ if (empty($planes)) {
         ?>
 </div>
 <script type="text/javascript">
-    jQuery('#tabs-1 .plan_item').biggerlink();
+    // jQuery('#tabs-1.plan_item').biggerlink();
 </script>
