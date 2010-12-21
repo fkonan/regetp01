@@ -267,7 +267,7 @@
     /**
      *    OBSERVACION
      */
-    echo $form->input('observacion');
+    echo $form->input('observacion', array('label'=>'Observación'));
     //agrego esto para que no se puedan imprimir mas de 100 caracteres en el textarea
     ?>
 
