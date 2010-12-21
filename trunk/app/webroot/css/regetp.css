@@ -470,7 +470,8 @@ ul, li {
 
 
 .head_select{
-    color: #333;
+    color: #045FB4;
+    font-size: 9pt;
     border-bottom: 1px solid silver;
     border-right:  1px solid silver;
 }
