@@ -31,6 +31,6 @@
         // echo $form->input('leido');
         ?>
     </fieldset>
-    <?php echo $form->end('Enviar Sugerencia');?>
+    <?php echo $form->end('Enviar');?>
 </div>
 

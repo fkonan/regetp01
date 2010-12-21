@@ -470,10 +470,9 @@ ul, li {
 
 
 .head_select{
-    background-color: #F0F7FC;
     color: #333;
-    border-style: solid;
-    border-width: 1px;
+    border-bottom: 1px solid silver;
+    border-right:  1px solid silver;
 }
 
 .head_select a{
