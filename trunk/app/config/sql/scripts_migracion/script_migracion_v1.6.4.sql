@@ -4,7 +4,7 @@ titulo_id integer not null default 0,
 sector_id integer not null default 0,
 subsector_id integer not null default 0,
 prioridad integer not null default 0
-) with oids;
+) without oids;
 
 INSERT INTO sectores_titulos
 (titulo_id, sector_id, subsector_id, prioridad)
