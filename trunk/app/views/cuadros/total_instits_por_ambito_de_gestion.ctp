@@ -20,18 +20,18 @@
 
 <div align="center">
 <table width="80%" cellpadding = "0" cellspacing = "0" summary="" 
-	style="border-style: solid; border-width: 1px; border-color: gray; font-size: 9pt;">
+	style="border-left: 1px solid silver; border-top: 1px solid silver; border-color: gray; font-size: 9pt;">
 
 <tr>
-	<th rowspan="2">División político-territorial</th>
-	<th rowspan="1" colspan="2">
+	<th class="head_select" rowspan="2">División político-territorial</th>
+	<th class="head_select" rowspan="1" colspan="2" style="">
 	 	Ámbito de Gestión
 	</th>
-	<th  rowspan="2">Total</th>
+	<th class="head_select" rowspan="2">Total</th>
 </tr>
 <tr>
-	<th>Estatal</th>
-	<th>Privada</th>
+	<th class="head_select">Estatal</th>
+	<th class="head_select">Privada</th>
 </tr>
 
 <!-- 
