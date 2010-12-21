@@ -682,7 +682,7 @@ label {
     display: inline;
 
 }
-input, textarea, input[type="text"], input.text, input.title, textarea, select{
+input, input[type="text"], input.text, input.title, textarea, select{
     background-color: white;
     clear: both;
     display: block;
@@ -691,6 +691,9 @@ input, textarea, input[type="text"], input.text, input.title, textarea, select{
     width: 92%;
     height: 19px;
     border: 1px solid #BBB;
+}
+textarea{
+    height: auto;
 }
 select {
     clear: both;
