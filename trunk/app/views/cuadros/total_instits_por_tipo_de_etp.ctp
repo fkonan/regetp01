@@ -93,16 +93,16 @@
         </tr>
 
         <tr>
-            <th rowspan="2" class="head_select" align="center">División <br />político-territorial</th>
-            <th colspan="4" class="head_select" align="center">Tipo de Institución</th>
-            <th rowspan="2" class="head_select" width="60px" align="center">Total</th>
+            <th rowspan="2" class="head_select" width="30%" align="center">División <br />político-territorial</th>
+            <th colspan="4" class="head_select" width="60%" align="center">Tipo de Institución</th>
+            <th rowspan="2" class="head_select" width="10%" align="center">Total</th>
         </tr>
 
         <tr>
-            <th width="40" class="head_select" align="center">Secundario</th>
-            <th width="40" class="head_select" align="center">Superior</th>
-            <th width="40" class="head_select" align="center">Formación Profesional</th>
-            <th class="head_select" align="center">Inst. con<br />Programa<br />de ETP</th>
+            <th width="10%" class="head_select" align="center">Secundario</th>
+            <th width="10%" class="head_select" align="center">Superior</th>
+            <th width="10%" class="head_select" align="center">Formación Profesional</th>
+            <th width="10%" class="head_select" align="center">Inst. con<br />Programa<br />de ETP</th>
         </tr>
     </thead>
 
