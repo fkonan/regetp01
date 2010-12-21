@@ -31,12 +31,45 @@ echo $html->css(array('jquery.loadmask'));
         <cite>Agregue los Sectores/Subsectores correspondientes y seleccione el prioritario</cite>
         <div id="sectores">
             <?php
+            if(count($this->data['SectoresTitulo']) == 0){?>
+                <div class="js-sector">
+                <span>
+                    <select class="js-sector-id" name="data[Titulo][SectoresTitulos][sector_id][]">
+                        <option value="">Ninguno</option>
+                        <?php foreach($sectores as $sector){?>
+                            <option value="<?php echo $sector['Sector']['id']?>"><?php echo $sector['Sector']['name']?></option>
+                        <?php
+                        }
+                        ?>
+                    </select>
+                    <select class="js-subsector-id" name="data[Titulo][SectoresTitulos][subsector_id][]">
+                        <option value="0">Ninguno</option>
+                    </select>
+                    <span class="spinner">
+                    <?php
+                    echo $html->image('loadercircle16x16.gif')
+                    ?>
+                    </span>
+                    <span>
+                        <input class="js-prioridad" type="radio" name="prioridades"/>
+                        <input class="js-prioridad-hd" type="hidden" name="data[Titulo][SectoresTitulos][prioridad][]" value="0"/>
+                    </span>
+                </span>
+                <span>
+                    <?php echo $html->image('close.png',array('onclick'=>"if(jQuery('.js-sector').size() > 1)jQuery(this).closest('.js-sector').remove()")) ?>
+                </span>
+            </div>
+            <?php
+            }
+            ?>
+            <?php
             foreach($this->data['SectoresTitulo'] as $sector_subsector){
                 $subsectores = array();
             ?>
             <div class="js-sector">
                 <span>
                     <select class="js-sector-id" name="data[Titulo][SectoresTitulos][sector_id][]">
+                        <option value="">Ninguno</option>
                         <?php
                         foreach($sectores as $sector){
                             if($sector['Sector']['id'] == $sector_subsector['sector_id']){
