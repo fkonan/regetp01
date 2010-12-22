@@ -266,7 +266,7 @@ class TitulosController extends AppController {
 
         /*
          *          BUSQUEDA LIBRE
-        */
+         */
         if(!empty($this->data['Titulo']['tituloName'])) {
             $this->passedArgs = array('tituloName' => $this->data['Titulo']['tituloName']);
         }
@@ -567,7 +567,7 @@ class TitulosController extends AppController {
             }
         }
         
-        $this->paginate['Plan']['conditions']['Instit.activo'] = 1;
+        //$this->paginate['Plan']['conditions']['Instit.activo'] = 1;
 
         $this->Titulo->Plan->setAsociarCompleto(true);
         
