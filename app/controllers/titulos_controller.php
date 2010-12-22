@@ -111,11 +111,12 @@ class TitulosController extends AppController {
             $this->data['Sector'] = array();
 
             foreach($sectores as $key=>$sector) {
+                $this->data['Sector'][$key]['titulo_id'] = $this->data['Titulo']['id'] ;
                 $this->data['Sector'][$key]['sector_id'] = $sector ;
                 $this->data['Sector'][$key]['subsector_id'] = $subsectores[$key] ;
                 $this->data['Sector'][$key]['prioridad'] = $prioridades[$key] ;
             }
-
+            
             if ($this->Titulo->save($this->data)) {
                 $this->Session->setFlash(__('Titulo guardado.', true));
                 $this->redirect(array('action'=>'index'));
