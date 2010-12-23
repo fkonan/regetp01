@@ -1,0 +1,69 @@
+.ui-tabs-panel{
+
+}
+
+.ui-tabs-hide{
+    display: none;
+}
+
+
+.plan_mas_info{
+    float: right;
+}
+
+.ciclos-container{
+    width: 547px;
+    w\idth:507px; /* WEBKIT PRESTO */
+    \width:507px; /* MOZILLA */
+    padding:20px;
+
+    float: right;
+    border: 1px solid #778;
+
+    margin-top:-1px;
+    min-height: 200px;
+    -webkit-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border-radius: 4px;
+}
+
+.ciclos-container:HOVER{
+    border-bottom:1px solid silver;
+}
+
+
+.planes-ofertas{
+    margin-left: 86px;
+}
+
+.ui-state-active{
+    
+}
+
+.ui-state-active A, .ui-state-active A:HOVER{
+    background-color: white;
+    background-image: none;
+    color: #233E87;
+    cursor: default;
+    font-weight: bolder;
+}
+
+.horizontal-shadetabs .ui-state-active A{
+    border-bottom: 1px solid white;
+}
+
+.vertical-shadetabs .ui-state-active A{
+    border-right: 1px solid white;
+}
+
+
+.planes-container .ui-tabs-panel{
+    z-index: 1;
+    margin-bottom: 30px;
+}
+
+.ui-tabs-panel .ui-tabs-panel{
+}
