@@ -150,7 +150,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                         foreach ($ofertas as $ofertaId => $ofertaCiclo) {
                         ?>
                         <div id="ver-oferta-<?php echo $ofertaId?>" class="js-tabs-ciclos tabs ciclos-container">
-                            <ul class="vertical-tabs vertical-shadetabs">
+                            <ul id="vertical-tabs" class="vertical-tabs vertical-shadetabs">
                             <?php
                                 if (!empty($ciclos[$ofertaId]['ciclo'])) {
                                     foreach ($ciclos[$ofertaId]['ciclo'] as $anio) {

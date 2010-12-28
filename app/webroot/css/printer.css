@@ -1,7 +1,8 @@
 @CHARSET "ISO-8859-1";
 
 BODY{
-	font-size: 12pt;
+	font-size: 11pt;
+        font-family: Arial, Verdana, Geneva, sans-serif;
 }
 
 #rutaUrl{
@@ -77,6 +78,7 @@ table {
 	background-color: #fff;
 	color: #333;
 	margin-bottom: 10px;
+        width: 100%;
 }
 
 CAPTION{
@@ -259,4 +261,22 @@ dd {
 .lista_fondos dd{
     margin-top: -17px;
 
+}
+
+
+
+#ciclos-tabs {
+    float:left;
+}
+
+#vertical-tabs {
+    padding-left: 0px;
+}
+
+.tabs {
+    margin-top: 22px;
+    width: 614px;
+    padding-left: 90px;
+    float: left;
+    clear: both;
 }
