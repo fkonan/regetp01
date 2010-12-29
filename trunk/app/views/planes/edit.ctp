@@ -103,9 +103,9 @@ $cue_instit = $instit['cue'].$anexo;
             </div>
             <div id="filtros_contenido">
                 <?php
-                echo $form->input('sector_id',array('type'=>'select','div'=>array('style'=>'width:250px;float:left;clear:none;'),'empty'=>'Seleccione','options'=>$sectores,'label'=>'Sector','id'=>'sector_id','default'=>0));
+                echo $form->input('sector_id',array('type'=>'select','div'=>array('style'=>'width:250px;float:left;clear:none;'),'empty'=>'Seleccione','options'=>$sectores,'label'=>'Sector','id'=>'sector_id','value'=>0));
 
-                echo $form->input('subsector_id', array('empty' => 'Seleccione','div'=>array('style'=>'width:250px;float:left;clear:none;'),'type'=>'select','label'=>'Subsector','default'=>0));
+                echo $form->input('subsector_id', array('empty' => 'Seleccione','div'=>array('style'=>'width:250px;float:left;clear:none;'),'type'=>'select','label'=>'Subsector','value'=>0));
                 echo $ajax->observeField('sector_id',
                                    array(  	'url' => '/subsectores/ajax_select_subsector_form_por_sector',
                                                         'update'=>'PlanSubsectorId',
