@@ -88,6 +88,7 @@ $paginator->options(array(
                 'class' => $class,
                 'plan'  => $plan,
                 'ciclo' => $ciclo_plan,
+                'hstaller' => true,
             ));            
          endforeach;
     ?>
