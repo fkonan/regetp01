@@ -80,31 +80,39 @@ $cue_instit = $instit['cue'].$anexo;
 		
                 echo $form->input('nombre');
 		echo $form->input('perfil');
-		
-		
-		$meter = '<span class="ajax_update" id="ajax_indicator2" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
-		echo $form->input('sector_id',array('type'=>'select','empty'=>'Seleccione','options'=>$sectores,'label'=>'Sector','id'=>'sector_id','after'=>$meter));
+		?>
+                <div id="divPlanTituloName">
+                    <div id="filtros_titulo" onclick="jQuery('#filtros_contenido').toggle();">
+                        Haga click para filtrar el titulo de referencia
+                    </div>
+                    <div id="filtros_contenido">
+                        <?php
+                        echo $form->input('sector_id',array('type'=>'select','div'=>array('style'=>'width:250px;float:left;clear:none;'),'empty'=>'Seleccione','options'=>$sectores,'label'=>'Sector','id'=>'sector_id'));
 
-		echo $form->input('subsector_id', array('empty' => 'Seleccione','type'=>'select','label'=>'Subsector','after'=> $meter.'<br /><cite>Seleccione primero un sector.</cite>'));
-		echo $ajax->observeField('sector_id',
-                                   array(  	'url' => '/subsectores/ajax_select_subsector_form_por_sector',
-		                                   	'update'=>'PlanSubsectorId',
-		                                   	'loading'=>'jQuery("#ajax_indicator2").show();jQuery("#PlanSubsectorId").attr("disabled","disabled")',
-		                                   	'complete'=>'jQuery("#ajax_indicator2").hide();jQuery("#PlanSubsectorId").removeAttr("disabled")',
-		                                   	'onChange'=>true
-                                   ));
-
-                $meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
-                echo $form->input(
-                'tituloName',
-                array(
-                    'label'=> 'Título de Referencia',
-                    'id' => 'PlanTituloName',
-                    'style'=>'max-width: 550px;',
-                    'after'=> $meter.'<cite>Seleccione primero una oferta.</cite>',
-                    'div'=>array('id'=>'divPlanTituloName')));
-                echo $form->input('titulo_id',array('type'=>'hidden'));
-                                   
+                        echo $form->input('subsector_id', array('empty' => 'Seleccione','div'=>array('style'=>'width:250px;float:left;clear:none;'),'type'=>'select','label'=>'Subsector'));
+                        echo $ajax->observeField('sector_id',
+                                           array(  	'url' => '/subsectores/ajax_select_subsector_form_por_sector',
+                                                                'update'=>'PlanSubsectorId',
+                                                                'loading'=>'jQuery("#ajax_indicator2").show();jQuery("#PlanSubsectorId").attr("disabled","disabled")',
+                                                                'complete'=>'jQuery("#ajax_indicator2").hide();jQuery("#PlanSubsectorId").removeAttr("disabled")',
+                                                                'onChange'=>true
+                                           ));
+                        ?>
+                    </div>
+                    <?php
+                    $meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
+                    echo $form->input(
+                    'tituloName',
+                    array(
+                        'label'=> 'Título de Referencia',
+                        'id' => 'PlanTituloName',
+                        'style'=>'max-width: 550px;',
+                        'after'=> $meter.'<cite>Seleccione primero una oferta.</cite>',
+                        'div'=>array('id'=>'divPlanTituloName')));
+                    echo $form->input('titulo_id',array('type'=>'hidden'));
+                    ?>
+                </div>
+                <?php
 		echo "<br>Duración:";
 		echo $form->input('duracion_hs',array('label'=>'- Horas','maxlength'=>9));
 		//echo $form->input('duracion_semanas',array('label'=>'- Semanas','maxlength'=>9));
