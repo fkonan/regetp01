@@ -2406,4 +2406,18 @@ border-bottom-color: white !important;
     margin-bottom: 10px;
 }
 
+#divPlanTituloName #filtros_titulo{
+    cursor:pointer;
+    background-color: #d6e5ef;
+    width:544px;
+    font-style: italic
+}
+
+#divPlanTituloName #filtros_contenido{
+    background-color: #F0F7FC;
+    display:none;
+    width:542px;
+    border:1px solid #d6e5ef;
+    height:50px
+}
 
