@@ -119,7 +119,6 @@ if (!empty($trayectosData['ciclos'])) {
     $ciclosData = $trayectosData['ciclos'];
 }
 
-
 $estructura_plan_id = $trayectosData['estructura'][0]['estructura_plan_id'];
 $anios_estr = $trayectosData['estructura'][0]['anios'];
 
@@ -172,7 +171,8 @@ echo $form->hidden('Info.plan_id', array('value'=>$plan_id));
                 echo $form->hidden('Info.ciclo_id', array('value'=>$ciclo_seleccionado));
             } else {
                 $attrs = array();
-                $defaultVal = date('Y',strtotime('now'));
+                //$defaultVal = date('Y',strtotime('now'));
+                $defaultVal = max(array_keys($trayectosData['ciclos_disponibles']));
             }
             echo $form->select('Info.ciclo_id',$ciclos, $defaultVal, $attrs,false);
             ?>

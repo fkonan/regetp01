@@ -282,9 +282,9 @@ if (!empty($planes))
 
 
             <div style="font-size: 9pt;" id="plan-linea-<?= $i?>">
-                    <?php echo $form->input("Plan.$i.id",array('value' =>$p['Plan']['id']));?>
+                    <?php echo $form->input("Plan.planes.$i.id",array('value' =>$p['Plan']['id'], 'type'=>'hidden'));?>
 
-                    <?php echo $form->checkbox("Plan.$i.selected", array(
+                    <?php echo $form->checkbox("Plan.planes.$i.selected", array(
                                 'id'=>"checkbox-$i",
                                 'numero'=>$i,
                         ));

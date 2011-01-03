@@ -380,7 +380,7 @@ class TitulosController extends AppController {
         if (!empty($this->data['Plan'])) {
             $planesGuardar = array();
 
-            foreach ($this->data['Plan'] as $checkbox) {
+            foreach ($this->data['Plan']['planes'] as $checkbox) {
                 if ($checkbox['selected'] == 1) {
                     $planesGuardar[] = $checkbox['id'];
                 }

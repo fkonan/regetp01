@@ -17,7 +17,8 @@ if(isset($script)){
 		$anios = array('1'=>1,'2'=>2,'3'=>3,'4'=>4,'5'=>5,'6'=>6,'7'=>7,'8'=>8,'9'=>9);
 		echo $form->input('anio',array( 'options'=>$anios ,'label'=>'Año'));
 		echo $form->input('etapa_id');
-		echo $form->input('ciclo_id',array('selected'=> date('Y')));
+		//echo $form->input('ciclo_id',array('selected'=> date('Y')));
+                echo $form->input('ciclo_id',array('selected'=> max(array_keys($ciclos))));
 
 
 

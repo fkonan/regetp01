@@ -523,6 +523,8 @@ class Plan extends AppModel {
                         $oferta[$line[0]['oferta_id']]['name'] = $line[0]['abrev'];
                 }
 
+                $ciclos_disponibles = $this->Anio->Ciclo->find('list');
+
                 $ciclos = $oferta;
                 if ($agregar_anio_actual) {
                     // agregarle el año actual si no existe
@@ -530,13 +532,13 @@ class Plan extends AppModel {
                     foreach ($ciclos as &$c) {
                         // le agrego solo si no existe
                         foreach ($c['ciclo'] as $cc) {
-                            if (date('Y') == $cc )  {
+                            if (max(array_keys($ciclos_disponibles)) == $cc )  {
                                 $existe = true;
                                 break;
                             }
                         }
                         if (!$existe) {
-                             array_unshift(&$c['ciclo'],date('Y'));
+                             array_unshift(&$c['ciclo'], max(array_keys($ciclos_disponibles)));
                         }
                         $existe = false;
                     }
