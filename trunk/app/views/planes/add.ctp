@@ -133,7 +133,7 @@ $cue_instit = $instit['cue'].$anexo;
                           "type" => "select",
                           "options" => $ciclos,
                           'label'=>'Alta',
-                          "selected" => date('Y')
+                          "selected" => max(array_keys($ciclos))
 		));
 	?>
 	</fieldset>

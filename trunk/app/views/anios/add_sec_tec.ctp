@@ -35,6 +35,7 @@ foreach($trayectosDisponibles['EstructuraPlanesAnio'] as $epa) {
 // me armo el array de opciones para el elemento que renderiza el recuadro de estructura
 $trayectosData = array(
         'editable' => true,
+        'ciclos_disponibles' => $ciclos,
         'form_action' => 'saveAll',
         'estructura' => array( // relacionado con la estructura para el encabezado
                 array(
