@@ -518,6 +518,30 @@ class TitulosController extends AppController {
             $url_conditions['Plan.titulo_id'] = $titulo_id;
         }
 
+        /*
+         *  Todos/Con/Sin Título
+         *
+         */
+        $con_titulo = '';
+        if (!empty($this->data['FPlan']['con_titulo'])) {
+            $con_titulo = $this->data['FPlan']['con_titulo'];
+        }
+        elseif(!empty($this->passedArgs['Plan.con_titulo'])) {
+            $con_titulo = $this->passedArgs['Plan.con_titulo'];
+            $this->data['FPlan']['con_titulo'] = $con_titulo;
+        }
+
+        if (!empty($con_titulo)) {
+            if ($con_titulo == 'con') {
+                $this->paginate['Plan']['conditions']['Plan.titulo_id >'] = 0;
+            }
+            else {
+                $this->paginate['Plan']['conditions']['Plan.titulo_id ='] = 0;
+            }
+
+            $url_conditions['Plan.con_titulo'] = $this->data['FPlan']['con_titulo'];
+        }
+
         /***********************************************************************/
         /*                               Busqueda                              */
         /***********************************************************************/
@@ -558,14 +582,6 @@ class TitulosController extends AppController {
             $titulo_id = $this->passedArgs['Plan.titulo_id'];
         }
 
-        if (!empty($this->data['FPlan']['con_titulo'])) {
-            if ($this->data['FPlan']['con_titulo'] == 'con') {
-                $this->paginate['Plan']['conditions']['Plan.titulo_id >'] = 0;
-            }
-            else {
-                $this->paginate['Plan']['conditions']['Plan.titulo_id ='] = 0;
-            }
-        }
         
         //$this->paginate['Plan']['conditions']['Instit.activo'] = 1;
 
