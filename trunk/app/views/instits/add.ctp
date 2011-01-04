@@ -344,7 +344,7 @@
      */
     echo $form->input('ciclo_alta', array("type" => "select",
     "options" => $ciclos,'label'=>'Alta',
-    "selected" => date('Y')
+    "selected" => max(array_keys($ciclos))
     ));
 
     if($force_save) {
