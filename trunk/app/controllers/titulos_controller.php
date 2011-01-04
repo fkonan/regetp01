@@ -550,7 +550,7 @@ class TitulosController extends AppController {
         $this->Titulo->Plan->order = array('Plan.nombre ASC');
 
         //datos de paginacion
-        //$this->paginate['Plan']['order'] = array('Plan.nombre ASC');
+        $this->paginate['Plan']['order'] = array('Plan.nombre ASC');
         if(!empty($this->data['FPlan']['last_page'])) {
             $this->paginate['Plan']['page'] = $this->data['FPlan']['last_page'];
         }
