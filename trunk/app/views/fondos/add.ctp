@@ -18,9 +18,27 @@ echo $html->css('jquery.autocomplete.css');
 
     var lineasDeAccionOriginales = lineasDeAccion;
 
+    var trimestres = new Array();
+    <?
+    foreach ($trimestresXAnio as $key=>$value) {
+    ?>
+        trimestres[<?=$key?>] = new Array();
 
+        <?
+        $i = 0;
+        foreach($value as $trimestre){
+        ?>
+            trimestres[<?=$key?>][<?=$i?>] = '<?=$trimestre?>';
+        <?
+            $i++;
+        }
+        ?>
+    <?
+    }
+    ?>
+    
     jQuery(document).ready(function() {
-
+        
         <?php if (!empty($this->data['Fondo']) && empty($this->data['Fondo']['instit_id'])) {?>
             jQuery('#FondoTipo').val('j');
         <? }?>
@@ -36,6 +54,17 @@ echo $html->css('jquery.autocomplete.css');
         }
         ?>
 
+        jQuery("#FondoAnio").change(function(){
+            
+            jQuery('#FondoTrimestre').html('');
+            
+            jQuery.each(trimestres[jQuery(this).val()], function(val, text) {
+                jQuery('#FondoTrimestre').append(
+                    jQuery('<option></option>').val(val).html(text)
+                );
+            });
+        });
+        
         jQuery(document).ajaxStart(function() {
             jQuery.blockUI({ message: '<h1>Buscando...</h1>',overlayCSS: { backgroundColor: '#00f' }, showOverlay: true });
         });
@@ -118,7 +147,7 @@ echo $html->css('jquery.autocomplete.css');
                                         '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().parent().remove(); ActualizarTotal(); actualizarComboLineasDeAccion();'))?>' +
                                     "</span>" +
                                     "<span>" +
-                                        "<select class='linea_de_accion_id' style='width:400px'>";
+                                        "<select class='linea_de_accion_id' style='width:400px;display:inline'>";
                 jQuery.each(jQuery(lineasDeAccion), function(key, value) {
                     if (value) {
                         html += '<option value="'+key+'">'+value+'</option>';
@@ -213,7 +242,6 @@ echo $html->css('jquery.autocomplete.css');
 </script>
 <div class="fondos form">
     <h1><?php echo $Title; ?></h1>
-
     <?php echo $form->create('Fondo', array('action'=>'add', 'onsubmit'=>'return AsignarTotal();'));?>
     <fieldset>
         <legend>Datos de Fondo</legend>
@@ -289,7 +317,7 @@ echo $html->css('jquery.autocomplete.css');
             <label style="display:inline; width:100px; text-align: right;">Año:</label>
             <?=$form->input('anio', array('options'=>$anios, 'default'=>date('Y'), 'style'=>'width: 70px; display:inline;', 'div' => false, 'label' => false))?>
             <label style="display:inline; width:100px; text-align: right;">Trimestre:</label>
-            <?=$form->input('trimestre', array('options'=>array('1'=>'1º','2'=>'2º','3'=>'3º','4'=>'4º'), 'default'=>$trimestre, 'style'=>'width: 50px; display:inline;', 'div' => false, 'label' => false))?>
+            <?=$form->input('trimestre', array('style'=>'width: 50px; display:inline;', 'div' => false, 'label' => false))?>
             <label style="display:inline; width:100px; text-align: right;">Memo:</label>
             <?=$form->input('memo', array('maxlength'=>30, 'size'=>10, 'style'=>'width: 40px; display:inline;', 'div' => false, 'label' => false))?>
             <label style="display:inline; width:100px; text-align: right;">Resolución:</label>
@@ -332,6 +360,7 @@ echo $html->css('jquery.autocomplete.css');
 	?>
         </fieldset>
     <?php echo $form->end('Guardar');?>
+    ?>
 </div>
 <div class="actions">
 	<ul>

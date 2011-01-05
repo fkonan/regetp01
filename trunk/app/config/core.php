@@ -189,6 +189,7 @@
  * Inet Options
  */
         Configure::write('es_dia_patrio', false);
+        Configure::write('trimestre_activo', '1-2010,2-2010,1-2011');
         Configure::write('grupo_desarrolladores', 'desarrolladores');
         Configure::write('grupo_administradores', 'administradores');
         Configure::write('grupo_editores', 'editores');
