@@ -128,6 +128,26 @@ class FondosController extends AppController {
 	function add($id=null) {
             $this->rutaUrl_for_layout[0] =array('name'=> 'Listado de Fondos','link'=>'/fondos' );
             $instit = '';
+
+            if (empty($Title)) {
+                $Title = "Crear Fondo";
+            }
+
+            $jurisdicciones = $this->Fondo->Jurisdiccion->find('list', array('order'=>'name'));
+            $lineasDeAccion = $this->Fondo->LineasDeAccion->find('list', array('fields' => array('LineasDeAccion.id','LineasDeAccion.description'), 'order'=> array('orden','name')));
+
+            /*
+             * Preparar anios y trimestres activos
+             */
+            $trimestres_aux = explode(",", Configure::read('trimestre_activo'));
+
+            foreach($trimestres_aux as $trimestre){
+                $aux = explode("-",$trimestre);
+                $anios[$aux[1]] = $aux[1];
+                $trimestresXAnio[$aux[1]][] =  $aux[0];
+            }
+
+            $trimestres = end($trimestresXAnio);
             
             if (!empty($this->data)) {
                 $this->Fondo->create();
@@ -155,8 +175,7 @@ class FondosController extends AppController {
                         }
                     }
                 }
-
-               
+              
                  
                 if ($this->Fondo->saveAll($this->data)) {
                     $this->Session->setFlash(__('Se ha guardado el Fondo', true));
@@ -181,6 +200,23 @@ class FondosController extends AppController {
                 }
 
                 $Title = "Editar Fondo";
+
+                /*
+                 * Permiso de Actualizacion trimestral
+                 */
+
+                $trimestres_aux = explode(",", Configure::read('trimestre_activo'));
+
+                $trimestreActual = $this->data['Fondo']['trimestre'] . "-" . $this->data['Fondo']['anio'];
+                
+                if (!in_array($trimestreActual, $trimestres_aux)) {
+                     $this->Session->setFlash(__('El fondo no pertenece al Trimestre Activo, por lo tanto no puede ser editado', true));
+                     $this->redirect(array('action' => 'index'));
+                }
+                else{
+                    $trimestres = $trimestresXAnio[$this->data['Fondo']['anio']];
+                }
+
             }
             elseif (!empty($this->passedArgs['instit_id']) && is_numeric($this->passedArgs['instit_id'])) {
                 $this->Fondo->Instit->recursive = 0;
@@ -200,31 +236,11 @@ class FondosController extends AppController {
 
                 $Title = "Crear Fondo para Jurisdicción";
             }
-
-            if (empty($Title)) {
-                $Title = "Crear Fondo";
-            }
-
-            $jurisdicciones = $this->Fondo->Jurisdiccion->find('list', array('order'=>'name'));
-            $lineasDeAccion = $this->Fondo->LineasDeAccion->find('list', array('fields' => array('LineasDeAccion.id','LineasDeAccion.description'), 'order'=> array('orden','name')));
-
-            for($i=date('Y'); $i >= 2006; $i--) {
-                $anios[$i] = $i;
-            }
-
-            $mes = date('n');
-            if ($mes < 4)
-                $trimestre = 1;
-            elseif ($mes < 7)
-                $trimestre = 2;
-            elseif ($mes < 10)
-                $trimestre = 3;
-            else
-                $trimestre = 4;
-
+            
             $this->set('jurisdicciones', $jurisdicciones);
             $this->set('anios', $anios);
-            $this->set('trimestre', $trimestre);
+            $this->set('trimestres', $trimestres);
+            $this->set('trimestresXAnio', $trimestresXAnio);
             $this->set('lineasDeAccion', $lineasDeAccion);
             $this->set('instit', $instit);
             $this->set('Title', $Title);
