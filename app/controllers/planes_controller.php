@@ -510,7 +510,7 @@ class PlanesController extends AppController {
         
         $this->paginate['conditions']['Plan.oferta_id'] = $oferta_id;
         $this->paginate['conditions']['Instit.id'] = $instit_id;
-        //$this->paginate['order'] = array("Anio.ciclo_id");
+        $this->paginate['order'] = array("Plan.nombre");
 
         $planes = $this->paginate();
         $planes = $planes;
@@ -546,6 +546,9 @@ class PlanesController extends AppController {
     function view_it_sec_sup($instit_id,$oferta_id,$ciclo=null) {
 
         $this->Plan->asociarAnio = true;
+        if (!$ciclo) {
+            $this->paginate['order'] = array("Plan.nombre");
+        }
         $planes = $this->paginate('Plan', array('Plan.instit_id'=> $instit_id, 'Plan.oferta_id' => $oferta_id, 'Anio.ciclo_id'=>$ciclo));
         //$planes = $this->Plan->Instit->getPlanes($instit_id, $oferta_id, $ciclo);
         // agrego el index "matricula" directamente que dependa de "Plan"

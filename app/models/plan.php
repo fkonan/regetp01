@@ -245,9 +245,10 @@ class Plan extends AppModel {
                 if ( !empty($parameters['conditions']['Anio.ciclo_id'])) {
                     $ciclo_id = $parameters['conditions']['Anio.ciclo_id'];
                 }
-                    
+
+                //$parameters['order'] = $this->order;
                 //$this->order = array_merge($this->order, array('Etapa.orden ASC'));
-                $parameters['group'] = 'Plan.id';
+                $parameters['group'] = array('Plan.id', 'Plan.nombre');
 
                 if (!empty($parameters['contain'])) {
                     $contain = $parameters['contain'];
@@ -271,7 +272,7 @@ class Plan extends AppModel {
                         'table' => 'etapas',
                         'type' => 'LEFT',
                         'alias' => 'Etapa',
-                        'conditions' => array('EstructuraPlan.etapa_id = Etapa.orden'),
+                        'conditions' => array('EstructuraPlan.etapa_id = Etapa.id'),
                     ),
                     array(
                         'table' => 'anios',
@@ -300,7 +301,7 @@ class Plan extends AppModel {
                 $order = null;
                 if ( !empty($parameters['order']) ) {
                     $order = $parameters['order'];
-                    unset($parameters['order']);
+                    //unset($parameters['order']);
                     $ordenDelModelo = $this->order;
                 }
 
