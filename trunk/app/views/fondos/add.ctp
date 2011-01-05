@@ -360,7 +360,6 @@ echo $html->css('jquery.autocomplete.css');
 	?>
         </fieldset>
     <?php echo $form->end('Guardar');?>
-    ?>
 </div>
 <div class="actions">
 	<ul>
