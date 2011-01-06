@@ -263,7 +263,7 @@ echo $html->css('jquery.autocomplete.css');
                     'div'=>array('style'=>'width:420px; float: left; clear: none'),
                     'style'=> 'width:400px; float: left',
                     'label'=>'Posible nombre o CUE de la institucion',
-                    'value'=>($this->data['Instit']['cue'] * 100 + $this->data['Instit']['anexo'])));
+                    'value'=>((!empty($this->data['Instit']['cue']))?($this->data['Instit']['cue'] * 100 + $this->data['Instit']['anexo']):"")));
             ?>
             </span>
             <span id="jurisdiccional">
