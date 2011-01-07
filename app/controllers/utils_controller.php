@@ -1,0 +1,206 @@
+<?php
+/*
+ * Utils generales para la app
+ *
+*/
+set_time_limit(60*60*0.5); // media hora de ejecucion limite
+
+class UtilsController extends AppController {
+
+    var $name = 'Utils';
+    var $uses = array('Departamento', 'Instit', 'Orientacion', 'Localidad', 'Plan', 'Sector', 'Subsector', 'Tipoinstit', 'Titulo');
+    var $helpers = array('Html','Form','Ajax');
+
+
+    function minus() {
+        setlocale(LC_ALL, 'es_AR');
+        
+        $this->autoRender = false;
+
+        $this->Departamento->recursive = -1;
+        $departamentos = $this->Departamento->find('all', array(
+                                'fields' => array('Departamento.id', 'Departamento.name')
+        ));
+
+        $this->Instit->recursive = -1;
+        $instits = $this->Instit->find('all', array(
+                                'fields' => array('id',
+                                                  'nombre',
+                                                  'direccion',
+                                                  'dir_nombre',
+                                                  'vice_nombre',
+                                    ),
+                                'order' => array('id')
+        ));
+
+        $this->Orientacion->recursive = -1;
+        $orientaciones = $this->Orientacion->find('all', array(
+                                'fields' => array('Orientacion.id', 'Orientacion.name')
+        ));
+
+        $this->Localidad->recursive = -1;
+        $localidades = $this->Localidad->find('all', array(
+                                'fields' => array('Localidad.id', 'Localidad.name')
+        ));
+
+        $this->Plan->recursive = -1;
+        $planes = $this->Plan->find('all', array(
+                                'fields' => array('Plan.id', 'Plan.nombre', 'Plan.perfil')
+        ));
+
+        $this->Sector->recursive = -1;
+        $sectores = $this->Sector->find('all', array(
+                                'fields' => array('Sector.id', 'Sector.name')
+        ));
+
+        $this->Subsector->recursive = -1;
+        $subsectores = $this->Subsector->find('all', array(
+                                'fields' => array('Subsector.id', 'Subsector.name')
+        ));
+
+        $this->Tipoinstit->recursive = -1;
+        $tipoinstits = $this->Tipoinstit->find('all', array(
+                                'fields' => array('Tipoinstit.id', 'Tipoinstit.name'),
+                                'conditions' => array('Tipoinstit.id <>' => 0)
+        ));
+
+        $this->Titulo->recursive = -1;
+        $titulos = $this->Titulo->find('all', array(
+                                'fields' => array('Titulo.id', 'Titulo.name')
+        ));
+        
+        foreach($departamentos as &$departamento) {
+            $departamento['Departamento']['name'] = $this->strToSpecialLower($departamento['Departamento']['name']);
+        }
+        $this->Departamento->saveAll($departamentos);
+
+        foreach($instits as &$instit) {
+            $instit['instit']['nombre'] = $this->strToSpecialLower($instit['instit']['nombre']);
+            $instit['instit']['direccion'] = $this->strToSpecialLower($instit['instit']['direccion']);
+            $instit['instit']['dir_nombre'] = $this->strToSpecialLower($instit['instit']['dir_nombre']);
+            $instit['instit']['vice_nombre'] = $this->strToSpecialLower($instit['instit']['vice_nombre']);
+        }
+        $this->Instit->saveAll($instits, array('validate'=>false));
+
+        foreach($orientaciones as &$orientacion) {
+            $orientacion['Orientacion']['name'] = $this->strToSpecialLower($orientacion['Orientacion']['name']);
+        }
+        $this->Orientacion->saveAll($orientaciones, array('validate'=>false));
+
+        foreach($localidades as &$localidad) {
+            $localidad['Localidad']['name'] = $this->strToSpecialLower($localidad['Localidad']['name']);
+        }
+        $this->Localidad->saveAll($localidades, array('validate'=>false));
+
+        foreach($planes as &$plan) {
+            $plan['Plan']['nombre'] = $this->strToSpecialLower($plan['Plan']['nombre']);
+            $plan['Plan']['perfil'] = $this->strToSpecialLower($plan['Plan']['perfil']);
+        }
+        $this->Plan->saveAll($planes, array('validate'=>false));
+
+        foreach($sectores as &$sector) {
+            $sector['Sector']['name'] = $this->strToSpecialLower($sector['Sector']['name']);
+        }
+        $this->Sector->saveAll($sectores, array('validate'=>false));
+
+        foreach($subsectores as &$subsector) {
+            $subsector['Subsector']['name'] = $this->strToSpecialLower($subsector['Subsector']['name']);
+        }
+        $this->Subsector->saveAll($subsectores, array('validate'=>false));
+
+        foreach($tipoinstits as &$tipoinstit) {
+            $tipoinstit['Tipoinstit']['name'] = $this->strToSpecialLower($tipoinstit['Tipoinstit']['name']);
+        }
+        $this->Tipoinstit->saveAll($tipoinstits, array('validate'=>false));
+
+        foreach($titulos as &$titulo) {
+            $titulo['Titulo']['name'] = $this->strToSpecialLower($titulo['Titulo']['name']);
+        }
+        $this->Titulo->saveAll($titulos, array('validate'=>false));
+
+    }
+
+    /*
+     * Convierte la cadena a minúsculas con mayúsculas en cada primera letra salvo
+     * preposiciones y otros casos
+     */
+    function strToSpecialLower($string) {
+        if (!strlen($string))
+            return '';
+
+        if (is_numeric($string))
+            return $string;
+
+        setlocale(LC_ALL, 'es_AR');
+        $preposiciones = array('a','ante','bajo','cabe','con','contra','de','desde','en','entre','hacia','hasta','para','por','según','sin','so','sobre','tras',/* no es prepo*/'del','al');
+        $articulos = array('el', 'la', 'las', 'los', 'un', 'unos', 'un', 'una', 'unas');
+        $nexos = array('y', 'u', 'o', 'e');
+
+        $string = trim(preg_replace('/\s\s+/', ' ', $string)); // elimina muchos espacios
+        //$string = ucwords(strtolower($string)); // mayuscula la primer letra de cada palabra
+        $palabras = split(' ', $string);
+
+        foreach ($palabras as $key => &$palabra) {
+
+            if (strlen($palabra) <= 4 &&
+                ($palabra == 'II' || $palabra == 'III' || $palabra == 'IV' ||
+                 $palabra == 'VI' || $palabra == 'VII' || $palabra == 'VIII' ||
+                 $palabra == 'IX' || $palabra == 'XI' || $palabra == 'XII' || $palabra == 'XIII')) {
+
+                $palabra = strtoupper($palabra);
+            }
+            elseif ($key == 0 && strpos($palabra, '.') === false && $palabra[0] != '"' && $palabra[0] != '(') {
+                $palabra = ucfirst(strtolower($palabra));
+            }
+            elseif (in_array(strtolower($palabra), $preposiciones)) {
+                // es preposicion
+                $palabra = strtolower($palabra);
+            }
+            elseif (in_array(strtolower($palabra), $nexos)) {
+                // es nexo
+                $palabra = strtolower($palabra);
+            }
+            elseif (in_array(strtolower($palabra), $articulos)) {
+                // es artículo, si contiene antes una preposicion va en minúscula
+                if (in_array(strtolower($palabras[$key-1]), $preposiciones)) {
+                    // Antofagasta de la Sierra
+                    $palabra = strtolower($palabra);
+                }
+                else {
+                    // General Las Heras
+                    $palabra = ucfirst(strtolower($palabra));
+                }
+            }
+            elseif (strpos($palabra, '.') !== false) {
+                // contiene puntos: C.A.B.A / Dr.
+                $palabra = ucfirst(strtolower($palabra));
+
+                $precede_punto = false;
+                for($i=0; $i < strlen($palabra); $i++) {
+                    if ($precede_punto) {
+                        $palabra[$i] = strtoupper($palabra[$i]);
+                        $precede_punto = false;
+                    }
+                    elseif ($palabra[$i] == '.' && $i > 0) {
+                        $precede_punto = true;
+                    }
+                    elseif ($palabra[$i] == '"' || $palabra[$i] == '(') {
+                        $precede_punto = true;
+                    }
+                }
+            }
+            elseif (strlen($palabra) > 1 && ($palabra[0] == '"' || $palabra[0] == '(' || $palabra[0] == '\'')) {
+                // comienza con comillas, parentesis (C.A.B.J) | "Jose de San Martín"
+                $palabra = strtolower($palabra);
+                $palabra[1] = strtoupper($palabra[1]);
+            }
+            elseif (strpos($palabra, '.') === false) {
+                // no es preposicion ni contiene puntos, paréntesis, comillas
+                $palabra = ucfirst(strtolower($palabra));
+            }
+        }
+
+        return $string = implode(' ', $palabras);
+    }
+}
+?>
