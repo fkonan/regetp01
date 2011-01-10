@@ -70,51 +70,51 @@ class UtilsController extends AppController {
         ));
         
         foreach($departamentos as &$departamento) {
-            $departamento['Departamento']['name'] = $this->strToSpecialLower($departamento['Departamento']['name']);
+            $departamento['Departamento']['name'] = $this->__strToSpecialLower($departamento['Departamento']['name']);
         }
         $this->Departamento->saveAll($departamentos);
 
         foreach($instits as &$instit) {
-            $instit['instit']['nombre'] = $this->strToSpecialLower($instit['instit']['nombre']);
-            $instit['instit']['direccion'] = $this->strToSpecialLower($instit['instit']['direccion']);
-            $instit['instit']['dir_nombre'] = $this->strToSpecialLower($instit['instit']['dir_nombre']);
-            $instit['instit']['vice_nombre'] = $this->strToSpecialLower($instit['instit']['vice_nombre']);
+            $instit['instit']['nombre'] = $this->__strToSpecialLower($instit['instit']['nombre']);
+            $instit['instit']['direccion'] = $this->__strToSpecialLower($instit['instit']['direccion']);
+            $instit['instit']['dir_nombre'] = $this->__strToSpecialLower($instit['instit']['dir_nombre']);
+            $instit['instit']['vice_nombre'] = $this->__strToSpecialLower($instit['instit']['vice_nombre']);
         }
         $this->Instit->saveAll($instits, array('validate'=>false));
 
         foreach($orientaciones as &$orientacion) {
-            $orientacion['Orientacion']['name'] = $this->strToSpecialLower($orientacion['Orientacion']['name']);
+            $orientacion['Orientacion']['name'] = $this->__strToSpecialLower($orientacion['Orientacion']['name']);
         }
         $this->Orientacion->saveAll($orientaciones, array('validate'=>false));
 
         foreach($localidades as &$localidad) {
-            $localidad['Localidad']['name'] = $this->strToSpecialLower($localidad['Localidad']['name']);
+            $localidad['Localidad']['name'] = $this->__strToSpecialLower($localidad['Localidad']['name']);
         }
         $this->Localidad->saveAll($localidades, array('validate'=>false));
 
         foreach($planes as &$plan) {
-            $plan['Plan']['nombre'] = $this->strToSpecialLower($plan['Plan']['nombre']);
-            $plan['Plan']['perfil'] = $this->strToSpecialLower($plan['Plan']['perfil']);
+            $plan['Plan']['nombre'] = $this->__strToSpecialLower($plan['Plan']['nombre']);
+            $plan['Plan']['perfil'] = $this->__strToSpecialLower($plan['Plan']['perfil']);
         }
         $this->Plan->saveAll($planes, array('validate'=>false));
 
         foreach($sectores as &$sector) {
-            $sector['Sector']['name'] = $this->strToSpecialLower($sector['Sector']['name']);
+            $sector['Sector']['name'] = $this->__strToSpecialLower($sector['Sector']['name']);
         }
         $this->Sector->saveAll($sectores, array('validate'=>false));
 
         foreach($subsectores as &$subsector) {
-            $subsector['Subsector']['name'] = $this->strToSpecialLower($subsector['Subsector']['name']);
+            $subsector['Subsector']['name'] = $this->__strToSpecialLower($subsector['Subsector']['name']);
         }
         $this->Subsector->saveAll($subsectores, array('validate'=>false));
 
         foreach($tipoinstits as &$tipoinstit) {
-            $tipoinstit['Tipoinstit']['name'] = $this->strToSpecialLower($tipoinstit['Tipoinstit']['name']);
+            $tipoinstit['Tipoinstit']['name'] = $this->__strToSpecialLower($tipoinstit['Tipoinstit']['name']);
         }
         $this->Tipoinstit->saveAll($tipoinstits, array('validate'=>false));
 
         foreach($titulos as &$titulo) {
-            $titulo['Titulo']['name'] = $this->strToSpecialLower($titulo['Titulo']['name']);
+            $titulo['Titulo']['name'] = $this->__strToSpecialLower($titulo['Titulo']['name']);
         }
         $this->Titulo->saveAll($titulos, array('validate'=>false));
 
@@ -124,7 +124,7 @@ class UtilsController extends AppController {
      * Convierte la cadena a minúsculas con mayúsculas en cada primera letra salvo
      * preposiciones y otros casos
      */
-    function strToSpecialLower($string) {
+    function __strToSpecialLower($string) {
         if (!strlen($string))
             return '';
 
