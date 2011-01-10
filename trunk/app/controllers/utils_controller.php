@@ -143,7 +143,8 @@ class UtilsController extends AppController {
         foreach ($palabras as $key => &$palabra) {
 
             if (strlen($palabra) <= 4 &&
-                ($palabra == 'II' || $palabra == 'III' || $palabra == 'IV' ||
+                ($palabra == 'EGB' ||
+                 $palabra == 'II' || $palabra == 'III' || $palabra == 'IV' ||
                  $palabra == 'VI' || $palabra == 'VII' || $palabra == 'VIII' ||
                  $palabra == 'IX' || $palabra == 'XI' || $palabra == 'XII' || $palabra == 'XIII')) {
 
