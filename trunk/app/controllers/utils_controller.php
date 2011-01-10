@@ -12,7 +12,7 @@ class UtilsController extends AppController {
     var $helpers = array('Html','Form','Ajax');
 
 
-    function minus() {
+    function convertTablesToLower() {
         setlocale(LC_ALL, 'es_AR');
         
         $this->autoRender = false;
