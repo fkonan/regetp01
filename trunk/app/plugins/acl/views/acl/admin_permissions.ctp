@@ -123,14 +123,14 @@ revoke.</p>
   </thead>
   <tr>
     <td>
-      <select id="aro_editor_id" class="acl_select" size="10" onChange="acl_aro_permission_refresh()" ondblclick="acl_aro_editor_children(this.value)">
+      <select id="aro_editor_id" class="acl_select" style="height:100%" size="10" onChange="acl_aro_permission_refresh()" ondblclick="acl_aro_editor_children(this.value)">
 		<option>Empty</option>
       </select><br />
     </td>
     <td width="80">
       <?php print $html->image('/acl/img/tango/32x32/actions/edit-redo.png', array('onClick' => 'acl_permission_link()', 'class' => 'acl_button')) ?>
     <td>
-      <select id="aco_editor_id" class="acl_select" size="10" onChange="acl_aco_permission_refresh()" ondblclick="acl_aco_editor_children(this.value)">
+      <select id="aco_editor_id" class="acl_select" style="height:100%" size="10" onChange="acl_aco_permission_refresh()" ondblclick="acl_aco_editor_children(this.value)">
 		<option>Empty</option>
       </select><br />
     </td>
