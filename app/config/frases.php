@@ -29,5 +29,6 @@ $frasesValle[] = '"Los sanguches de la costa son más ricos que aca, son más dulc
 $frasesValle[] = '"Yo no soporto el calor, soy una especie de panda" (1-Dic-2010 10:49)';
 $frasesValle[] = '"Igual te digo que este es el mes de los Guns N\' Roses... y, porque es muy así..." (7-Dic-2010 10:27)';
 $frasesValle[] = '"Con el Baggio se me ponen los ojos con el C++" (6-Ene-2011 11:25)';
+$frasesValle[] = '"La papa es una planta muy heavy" (11-Ene-2011 10:25)';
 
 ?>
