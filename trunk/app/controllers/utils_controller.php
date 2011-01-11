@@ -203,5 +203,20 @@ class UtilsController extends AppController {
 
         return $string = implode(' ', $palabras);
     }
+
+
+    function externRedirect($controller='', $action='', $id='') {
+        if (!empty($this->passedArgs['controller'])) {
+            $controller = $this->passedArgs['controller'];
+        }
+        if (!empty($this->passedArgs['action'])) {
+            $action = $this->passedArgs['action'];
+        }
+        if (!empty($this->passedArgs['id'])) {
+            $id = $this->passedArgs['id'];
+        }
+        
+        $this->redirect(array('controller'=>$controller, 'action'=>$action, $id));
+    }
 }
 ?>
