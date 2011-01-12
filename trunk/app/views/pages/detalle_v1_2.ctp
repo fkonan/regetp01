@@ -1,10 +1,19 @@
+<h1>RFIETP - Novedades de la versión 1.6.5</h1>
+<br>
+<ul>
+    <li>La nueva versión fue procesada con un script de migración del texto en mayúsculas de Instituciones, Ofertas, Títulos de Referencia, Departamentos, Localidades y Orientaciones a minúsculas.</li>
+    <li>Se reorganizó el Alta y Modificación de Ofertas Educativas, incluyendo un buscador de Títulos de Referencia por Sector/Subsector</li>
+    <li>Se agregó el concepto de "Trimestre Activo" para el Alta y Modificación de Planes de Mejora, el cual permite un control de seguridad sobre la carga de los mismos.</li>
+</ul>
+<br>
+
 <h1>RFIETP - Novedades de la versión 1.6.4</h1>
 <br>
 <ul>
-    <li>Nueva relación en base de datos entre Ofertas Educativas y Títulos de Referencia con Sector/Subsector.</li>   
+    <li>Nueva relación en base de datos entre Ofertas Educativas y Títulos de Referencia con Sector/Subsector.</li>
     <li>Se realizó una depuración manual de cada Oferta Educativa aplicándole un Título de Referencia</li>
     <li>Se realizó una migración que permitió actualizar a la nueva versión de los datos.</li>
-    <li>El Título de Referencia puede pertenecer a más de un Sector/Subsector</li>    
+    <li>El Título de Referencia puede pertenecer a más de un Sector/Subsector</li>
     <li>Se mejoraron las pantallas de Alta, Baja y Modificación de Ofertas Educativas</li>
     <li>Se mejoraron las pantallas de Alta, Baja y Modificación de Títulos de Referencia</li>
     <li>Se incorporó un buscador de Títulos de Referencia que facilita la depuración de datos a cargo de la Unidad de Información.</li>
