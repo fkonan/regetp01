@@ -1317,8 +1317,9 @@ class Instit extends AppModel {
 
             if ( empty($ciclo )) {
                 $anioXciclo = "(select MAX(a.ciclo_id) as ciclo_id from anios a where \"Plan\".id = a.plan_id)";
-                $condsPlan += array(
+                $condsPlan += array("OR"=> array(
                     "Anio.ciclo_id = $anioXciclo",
+                    "Anio.ciclo_id is null")
                 );
             } else {
                 $anioXciclo = $ciclo;
