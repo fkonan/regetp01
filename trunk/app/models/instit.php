@@ -405,7 +405,7 @@ class Instit extends AppModel {
 			  		}
 			  		else {
 			  			$aux['Instit']['nombre_completo'] .= ($numero > 0 || $numero != '')?"Nº $numero ":"";
-			  			$aux['Instit']['nombre_completo'] .= ($nombre != '')?$nombre:"";
+			  			$aux['Instit']['nombre_completo'] .= ($nombre != '')?'"'.$nombre.'"':"";
 			  		}
 			  	endfor;
 			 else:	 
@@ -423,7 +423,7 @@ class Instit extends AppModel {
 				if (($nombre_tipoinstit != 'SIN DATOS' ||  $numero > 0)&& $nombre){
 					$aux['Instit']['nombre_completo'] .= " ";
 				}
-				$aux['Instit']['nombre_completo'] .= ($nombre != '')?$nombre:"";
+				$aux['Instit']['nombre_completo'] .= ($nombre != '')?'"'.$nombre.'"':"";
 			endif;
 	  	endif;
   		
