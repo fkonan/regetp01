@@ -373,7 +373,7 @@ class Instit extends AppModel {
 		 * primero calculo laprofundiddad
 		 * o sea, quiero saber cuantos nivles del array tengo que ir para 
 		 * llegar alos datos de Instit
-		 */  		
+		 */  	
 			$array_recorro = $instituciones_data;
 		 
 	  		list($key, $idata) = each($array_recorro);  	
@@ -401,7 +401,7 @@ class Instit extends AppModel {
 	  					if (($nombre_tipoinstit != 'SIN DATOS' ||  $numero > 0)&& $nombre){
 							$aux['Instit']['nombre_completo'] .= " ";
 						}
-					  	$aux['Instit']['nombre_completo'] .= ($nombre != '')?$nombre:"";
+					  	$aux['Instit']['nombre_completo'] .= ($nombre != '')?'"'.$nombre.'"':"";
 			  		}
 			  		else {
 			  			$aux['Instit']['nombre_completo'] .= ($numero > 0 || $numero != '')?"Nº $numero ":"";
