@@ -4,6 +4,7 @@
     <li>La nueva versión fue procesada con un script de migración del texto en mayúsculas de Instituciones, Ofertas, Títulos de Referencia, Departamentos, Localidades y Orientaciones a minúsculas.</li>
     <li>Se reorganizó el Alta y Modificación de Ofertas Educativas, incluyendo un buscador de Títulos de Referencia por Sector/Subsector</li>
     <li>Se agregó el concepto de "Trimestre Activo" para el Alta y Modificación de Planes de Mejora, el cual permite un control de seguridad sobre la carga de los mismos.</li>
+    <li>Se crearon y modificaron Descargas referenciadas a Títulos de Referencia que utiliza la Unidad de Información.</li>
 </ul>
 <br>
 
