@@ -12,7 +12,6 @@ echo $paginator->counter(array(
 	<th><?php echo $paginator->sort('asunto');?></th>
 	<th><?php echo $paginator->sort('mensaje');?></th>
 	<th><?php echo $paginator->sort('Usuario', 'user_id');?></th>
-	<th><?php echo $paginator->sort('IP');?></th>
 	<th><?php echo $paginator->sort('Recibida', 'created');?></th>
 	<th><?php echo $paginator->sort('Leída', 'leido');?></th>
 	<th class="actions"><?php __('Actions');?></th>
@@ -44,13 +43,10 @@ foreach ($sugerencias as $sugerencia):
 			<?php echo $sugerencia['User']['username']; ?>
 		</td>
 		<td>
-			<?php echo $sugerencia['Sugerencia']['IP']; ?>
-		</td>
-		<td>
 			<?php if ($time->isToday($sugerencia['Sugerencia']['created'])) {
                                 echo "<b>Hoy</b> ".$time->format('G:i', $sugerencia['Sugerencia']['created'])." hs.";
                             } else {
-                                $sugerencia['Sugerencia']['created'];
+                                echo $sugerencia['Sugerencia']['created'];
                             } ?>
 		</td>
 		<td>
