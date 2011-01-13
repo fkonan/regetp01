@@ -47,7 +47,7 @@ $cue_instit = $instit['cue'].$anexo;
                                 $j = 0;
                                 foreach($estructura['EstructuraPlan']['EstructuraPlanesAnio'] as $anio ):
                                 ?>
-                                    <li><?php echo $anio['alias'];?>º</li>
+                                    <li><?php echo $anio['alias'];?></li>
                                 <?php
                                 endforeach;
                                 ?>
