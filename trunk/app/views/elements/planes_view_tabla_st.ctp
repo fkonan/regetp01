@@ -200,7 +200,7 @@ echo $form->hidden('Info.plan_id', array('value'=>$plan_id));
                     $encontrado = true;
                     ?>
     <tr>
-        <td><?php echo @$a["nro_anio"].'º'?></td>
+        <td><?php echo @$a["alias"]?></td>
                         <?php
                         echo $form->hidden($j.'.estructura_planes_anio_id',array(
                         'value'=>$anioDato['Anio']['estructura_planes_anio_id']));
