@@ -111,6 +111,8 @@
 
         jQuery("#InstitJurisdiccionId").change(autoSubmit);
 
+        jQuery('#boxAyuda .menu_body').show();
+
         jQuery("#InstitCue").bind('paste', function(e){autoSubmit(true)});
 
     });
