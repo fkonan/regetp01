@@ -371,7 +371,14 @@ if (!empty($planes))
     echo $form->button('Seleccionar Todos', array('onclick'=>'checkAll()', 'style'=>'clear:none;float:left;width:144px;'));
     echo $form->button('Deseleccionar Todos', array('onclick'=>'unCheckAll()', 'style'=>'clear:none;float:left;width:144px;'));
 
-
+    // convierte $url_conditions en string
+    $url = '';
+    foreach ($url_conditions as $k=>$param) {
+        $url .= "/".$k.":".$param;
+    }
+    if (!empty($paginator->params['named']['page'])) {
+        $url .= "/page:".$paginator->params['named']['page'];
+    }
 
     echo $form->hidden('FPlan.limit');
     echo $form->hidden('FPlan.oferta_id');
@@ -379,6 +386,7 @@ if (!empty($planes))
     echo $form->hidden('FPlan.subsector_id');
     echo $form->hidden('FPlan.jurisdiccion_id');
     echo $form->hidden('FPlan.plan_nombre');
+    echo $form->hidden('url_conditions', array('value'=>$url));
 
     if (strlen($paginator->counter(array('format' => '%page%'))))
         echo $form->hidden('FPlan.last_page', array('value' => $paginator->counter(array('format' => '%page%'))));
