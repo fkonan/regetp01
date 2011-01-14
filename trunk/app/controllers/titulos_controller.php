@@ -401,7 +401,8 @@ class TitulosController extends AppController {
                 
                 $this->Session->setFlash(__('Se ha asignado el Título '.$this->data['Plan']['tituloName'].' a '.count($planesGuardar).' Planes', true));
             }
-
+            
+            $this->redirect(array('corrector_de_planes', @$this->data['Plan']['url_conditions']));
             $url_conditions['Plan.titulo_id'] = $this->data['Plan']['titulo_id'];
         }
         /***************************** FIN GUARDADO DE LOS PLANES ***************/
