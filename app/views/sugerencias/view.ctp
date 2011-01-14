@@ -18,7 +18,7 @@
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Remitente'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $sugerencia['Sugerencia']['user_id']; ?>
+			<?php echo $sugerencia['User']['username']; ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('IP'); ?></dt>
@@ -28,7 +28,11 @@
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $sugerencia['Sugerencia']['created']; ?>
+			<?php if ($time->isToday($sugerencia['Sugerencia']['created'])) {
+                                echo "<b>Hoy</b> ".$time->format('G:i', $sugerencia['Sugerencia']['created'])." hs.";
+                            } else {
+                                echo $sugerencia['Sugerencia']['created'];
+                            } ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Leido'); ?></dt>
