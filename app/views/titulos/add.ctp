@@ -81,7 +81,8 @@ echo $html->css(array('jquery.loadmask'));
             jQuery(this).parent().find('.js-prioridad-hd').val("1");
         });
 
-        jQuery('#sectores .js-prioridad').first().attr("checked","checked");
+        
+        jQuery('#sectores .js-prioridad').first().attr("value","1");
 
         jQuery('.js-sector-id').change();
     });
