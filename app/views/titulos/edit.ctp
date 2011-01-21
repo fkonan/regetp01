@@ -95,7 +95,7 @@ echo $html->css(array('jquery.loadmask'));
                     ?>
                     </span>
                     <span>
-                        <input class="js-prioridad" type="radio" name="prioridades" <?php echo ($sector_subsector['prioridad'] != 0 )?"checked":""?>/>
+                        <input class="js-prioridad" type="radio" name="prioridades" <?php echo ($sector_subsector['prioridad'] == 1 )?"checked='checked'":""?>/>
                         <input class="js-prioridad-hd" type="hidden" name="data[Titulo][SectoresTitulos][prioridad][]" value="<?php echo $sector_subsector['prioridad']?>"/>
                     </span>
                 </span>
@@ -107,7 +107,7 @@ echo $html->css(array('jquery.loadmask'));
             }
             ?>
         </div>
-        <a style="cursor:pointer" onclick="jQuery('#sectores').append(jQuery('#sectores .js-sector').first().outer())">Agregar</a>
+        <a style="cursor:pointer" onclick="agregarSectorySubsector();">Agregar</a>
 	</fieldset>
     <br />
 <?php echo $form->end('Guardar');?>
@@ -131,4 +131,19 @@ echo $html->css(array('jquery.loadmask'));
         });
 
     });
+
+
+    function agregarSectorySubsector(){
+        
+        var cloned = jQuery('#sectores .js-sector').first().clone(true);
+
+        cloned.find('.js-prioridad-hd').val("0");
+
+        cloned.find('.js-prioridad').removeAttr("checked");
+
+        cloned.attr('id','cloned');
+
+        jQuery('#sectores').append(cloned.outer());
+
+    }
 </script>
