@@ -381,25 +381,57 @@ class TitulosController extends AppController {
             $planesGuardar = array();
 
             foreach ($this->data['Plan']['planes'] as $checkbox) {
+                //$this->redirect(array('corrector_de_planes', @$this->data['Plan']['url_conditions']));
                 if ($checkbox['selected'] == 1) {
                     $planesGuardar[] = $checkbox['id'];
                 }
             }
 
-            if (empty($this->data['Plan']['titulo_id'])) {
-                $this->Session->setFlash(__('Debe seleccionar un Título'));
-            }
             if (empty($planesGuardar)) {
                 $this->Session->setFlash(__('Debe seleccionar uno o más Planes'));
             }
+            if (empty($this->data['Plan']['titulo_id'])) {
+                $this->Session->setFlash(__('Debe seleccionar un Título'));
+            }
 
-            if (!empty($planesGuardar) && $this->data['Plan']['titulo_id'] > 0) {
-                $this->Titulo->Plan->updateAll(
-                        array('Plan.titulo_id' => $this->data['Plan']['titulo_id']),
-                        array('Plan.id' => $planesGuardar)
-                );
+            if (!empty($planesGuardar) && $this->data['Plan']['titulo_id'] > 0) 
+            {
+                $this->Titulo->Plan->recursive = -1;
+                $PlanesData = $this->Titulo->Plan->find('all', array(
+                            'fields' => array('Plan.id', 'Plan.oferta_id'),
+                            'conditions' => array('Plan.id' => $planesGuardar)));
                 
-                $this->Session->setFlash(__('Se ha asignado el Título '.$this->data['Plan']['tituloName'].' a '.count($planesGuardar).' Planes', true));
+                $this->Titulo->recursive = -1;
+                $tituloData = $this->Titulo->find('first', array(
+                                    'fields' => array('Titulo.id', 'Titulo.oferta_id'),
+                                    'conditions' => array('Titulo.id' => $this->data['Plan']['titulo_id'])));
+
+                // comprobar que no se va a asignar un titulo de una determinada oferta a un
+                // plan que pertenece a una oferta distinta
+                $correctos = $incorrectos = 0;
+                $planesGuardarDefinitivo = array();
+                foreach ($PlanesData as $plan) {
+                    if ($plan['Plan']['oferta_id'] == $tituloData['Titulo']['oferta_id']) {
+                        $planesGuardarDefinitivo[] = $plan['Plan']['id'];
+                        $correctos++;
+                    }
+                    else {
+                        $incorrectos++;
+                    }
+                }
+                if (!empty($planesGuardarDefinitivo)) {
+                    $this->Titulo->Plan->updateAll(
+                            array('Plan.titulo_id' => $this->data['Plan']['titulo_id']),
+                            array('Plan.id' => $planesGuardarDefinitivo)
+                    );
+                }
+
+                if ($incorrectos == 0) {
+                    $this->Session->setFlash(__('Se ha asignado el Título '.$this->data['Plan']['tituloName'].' a '.$correctos.' Planes', true));
+                }
+                else {
+                    $this->Session->setFlash(__('Se ha asignado el Título '.$this->data['Plan']['tituloName'].' a '.$correctos.' Planes. No se ha asignado a '.$incorrectos.' Planes por pertenecer a una oferta distinta a la del Título de Referencia.', true));
+                }
             }
             
             $this->redirect(array('corrector_de_planes', @$this->data['Plan']['url_conditions']));
