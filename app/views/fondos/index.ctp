@@ -3,6 +3,8 @@
 <h2><?php __('Fondos');?></h2>
 <?php
 $trimestres=array(''=>'Todos','1'=>'1º','2'=>'2º','3'=>'3º','4'=>'4º');
+
+$paginator->options(array('url' => $url_conditions));
 ?>
 
 <div style="margin-bottom: 20px">
@@ -13,25 +15,32 @@ $trimestres=array(''=>'Todos','1'=>'1º','2'=>'2º','3'=>'3º','4'=>'4º');
         'label'=>'Tipo',
         'div'=> array('style'=>'float:left; clear: none'),
         'options'=>array('i'=>'Institucional','j'=>'Jurisdiccional'),
-        'empty'=>'Seleccione'
+        'empty'=>'Seleccione',
+        'value' => (isset($this->passedArgs['Fondo.tipo'])?$this->passedArgs['Fondo.tipo']:$this->data['Fondo']['tipo'])
         )
             );
 
     echo $form->input('jurisdiccion_id',array(
         'label'=>'Jurisdicción',
         'div'=> array('style'=>'float:left; clear: none'),
+        'value' => (isset($this->passedArgs['Fondo.jurisdiccion_id'])?$this->passedArgs['Fondo.jurisdiccion_id']:$this->data['Fondo']['jurisdiccion_id'])
     ));
 
     echo $form->input('anio',array(
         'label'=>'Año',
         'div'=> array('style'=>'float:left; clear: none'),
-        'options'=>$anios));
+        'options'=>$anios,
+        'value' => (isset($this->passedArgs['Fondo.anio'])?$this->passedArgs['Fondo.anio']:$this->data['Fondo']['anio'])
+        ));
     
     echo $form->input('trimestre', array(
         'label'=>'Trimestre',
         'div'=> array('style'=>'float:left; clear: none'),
-        'options'=>$trimestres, 'style'=>'width:100px'
+        'options'=>$trimestres, 'style'=>'width:100px',
+        'value' => (isset($this->passedArgs['Fondo.trimestre'])?$this->passedArgs['Fondo.trimestre']:$this->data['Fondo']['trimestre'])
         ));
+
+    echo $form->hidden('url_conditions', array('value'=>$url_conditions));
     
     echo $form->end('Buscar',array('style'=>'float:right'));
     ?>
@@ -102,7 +111,7 @@ foreach ($fondos as $fondo):
 </table>
 </div>
     <?
-    $paginator->options(array('url' => $this->passedArgs));
+    //$paginator->options(array('url' => $this->passedArgs));
 
     if ($paginator->numbers()) {
     ?>

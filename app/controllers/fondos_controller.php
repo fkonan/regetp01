@@ -86,18 +86,47 @@ class FondosController extends AppController {
             $this->Fondo->recursive = 0;
             $this->Fondo->order = array('Fondo.anio DESC', 'Fondo.trimestre','Fondo.jurisdiccion_id ASC');
             $condition = '';
-            if ($this->data['Fondo']['tipo'] == 'i') {
-                $condition = array('Fondo.instit_id >' => 0);
+
+            if(isset($this->passedArgs['Fondo.tipo'])){
+                $this->data['Fondo']['tipo'] = $this->passedArgs['Fondo.tipo'];
             }
-            elseif ($this->data['Fondo']['tipo'] == 'j') {
-                $condition = array('Fondo.instit_id' => 0);
+
+            if(isset($this->passedArgs['Fondo.jurisdiccion_id'])){
+                $this->data['Fondo']['jurisdiccion_id'] = $this->passedArgs['Fondo.jurisdiccion_id'];
             }
+
+            if(isset($this->passedArgs['Fondo.anio'])){
+                $this->data['Fondo']['anio'] = $this->passedArgs['Fondo.anio'];
+            }
+
+            if(isset($this->passedArgs['Fondo.trimestre'])){
+                $this->data['Fondo']['trimestre'] = $this->passedArgs['Fondo.trimestre'];
+            }
+
+
+            if(isset($this->data['Fondo']['tipo'])){
+                if ( $this->data['Fondo']['tipo'] == 'i') {
+                    $condition = array('Fondo.instit_id >' => 0);
+                }
+                elseif ($this->data['Fondo']['tipo'] == 'j') {
+                    $condition = array('Fondo.instit_id' => 0);
+                }
+            }
+
+            $tipo = $this->data['Fondo']['tipo'];
 
             $this->data['Fondo']['tipo'] = '';
-
+            
             $filter = $this->Filter->process($this);
-            if (is_array($condition))
+
+            $urlFilter = $this->Filter->url ;
+
+            if (is_array($condition)){
                 $filter = $filter + $condition;
+                $urlFilter = $urlFilter . "/Fondo.tipo:" . $tipo;
+            }
+
+            unset($filter['Fondo.url_conditions']);
 
             $todos = array('' => 'Todos');
             
@@ -109,9 +138,11 @@ class FondosController extends AppController {
             }
             $anios = $todos + $anios;
 
+            //debug($this->Filter->url);
+
             $this->data = $dataTemp;
             $this->set(compact('jurisdicciones','anios'));
-            $this->set('url',$this->Filter->url);
+            $this->set('url_conditions',$urlFilter);
             $this->set('fondos', $this->paginate(null,$filter));
             $this->set('total', number_format($this->Fondo->FondosLineasDeAccion->find('sum',array('conditions'=>$filter)),2,",","."));
             
