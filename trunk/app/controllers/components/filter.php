@@ -48,8 +48,9 @@ class FilterComponent extends Object {
             foreach($controller->data as $key=>$value){
 
                 //$key = substr($key, 0 ,strlen($key) - 1);
+                unset($value['url_conditions']);
                 
-                if(isset($controller->{$key})){
+                if(isset($controller->{$key} )){
                     $columns = $controller->{$key}->getColumnTypes();
                     foreach($value as $k=>$v){
                         if($v != ''){
