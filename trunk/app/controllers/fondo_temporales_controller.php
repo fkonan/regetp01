@@ -449,6 +449,7 @@ class FondoTemporalesController extends AppController {
                         "id" => $item['Instit']['id'],
                         "cue" => $item['Instit']['cue']*100+$item['Instit']['anexo'],
                         "nombre" => utf8_encode($item['Instit']['nombre']),
+                        "gestion" => utf8_encode($item['Instit']['gestion']),
                         "nroinstit" => utf8_encode($item['Instit']['nroinstit']),
                         "anio_creacion" => utf8_encode($item['Instit']['anio_creacion']),
                         "direccion" => utf8_encode($item['Instit']['direccion']),
