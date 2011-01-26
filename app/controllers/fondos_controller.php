@@ -113,7 +113,7 @@ class FondosController extends AppController {
                 }
             }
 
-            $tipo = $this->data['Fondo']['tipo'];
+            $tipo = @$this->data['Fondo']['tipo'];
 
             $this->data['Fondo']['tipo'] = '';
             
@@ -185,9 +185,6 @@ class FondosController extends AppController {
             if (!empty($this->data)) {
                 $this->Fondo->create();
 
-                debug($this->data);
-                die;
-                
                 if ($this->data['Fondo']['tipo'] == 'j') {
                     $this->data['Fondo']['instit_id'] = 0;
                 }
