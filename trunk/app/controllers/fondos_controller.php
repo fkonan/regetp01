@@ -175,14 +175,19 @@ class FondosController extends AppController {
             foreach($trimestres_aux as $trimestre){
                 $aux = explode("-",$trimestre);
                 $anios[$aux[1]] = $aux[1];
-                $trimestresXAnio[$aux[1]][] =  $aux[0];
+                $trimestresXAnio[$aux[1]][$aux[0]] =  $aux[0];
             }
 
+
             $trimestres = end($trimestresXAnio);
-            
+
+
             if (!empty($this->data)) {
                 $this->Fondo->create();
 
+                debug($this->data);
+                die;
+                
                 if ($this->data['Fondo']['tipo'] == 'j') {
                     $this->data['Fondo']['instit_id'] = 0;
                 }
