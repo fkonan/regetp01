@@ -28,7 +28,7 @@ echo $html->css('jquery.autocomplete.css');
         $i = 0;
         foreach($value as $trimestre){
         ?>
-            trimestres[<?=$key?>][<?=$i?>] = '<?=$trimestre?>';
+            trimestres[<?=$key?>][<?=$trimestre?>] = <?=$trimestre?>;
         <?
             $i++;
         }
@@ -87,14 +87,13 @@ echo $html->css('jquery.autocomplete.css');
 		}
 	}).result(function(e, item) {
                 jQuery("#hiddenInstitId").remove();
-                jQuery("#FondoEditForm #institCueInfo").remove();
-                jQuery("#FondoEditForm .institCueInfo").remove();
+                jQuery("#institCueInfo").remove();
 
                 var div =   "<div style='border: 1px solid #F0F7FC' id='institCueInfo'>" +
                             "<div class='instit_name'><b> [" + item.cue + "] " + item.nombre + "</b></div>" +
                             "<div class='instit_atributte'><b>Domicilio: " + item.direccion + "</b> </div>" +
                             "<br />" +
-                            "<div class='instit_atributte'><b>Gestión:" + + "</b></div>" +
+                            "<div class='instit_atributte'><b>Gestión:" + item.gestion + "</b></div>" +
                             "<div class='instit_atributte'><b>Jurisdicción:"+ item.jurisdiccion +" </b> </div>" +
                             "<br />" +
                             "<div class='instit_atributte'><b>Departamento:" + item.depto + "</b></div>" +
