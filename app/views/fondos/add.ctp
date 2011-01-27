@@ -230,6 +230,8 @@ echo $html->css('jquery.autocomplete.css');
             }
         });
 
+        AsignarTotal();
+        
         return result;
     }
 
