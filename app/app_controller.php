@@ -68,7 +68,7 @@ class AppController extends Controller {
 		 *  REGETP VERSION
 		 * 
 		 */
-		Configure::write('regetpVersion', '1.6.5');
+		Configure::write('regetpVersion', '1.6.6');
                 /*
 		$this->Auth->autoRedirect = false;
 		$this->Auth->loginError ='Usuario o Contraseña Incorrectos';
@@ -81,7 +81,7 @@ class AppController extends Controller {
                 //Configure AuthComponent
                 //$this->Auth->allow('display','login','logout');
                 //$this->Auth->allow('*');
-                $this->Auth->allowedActions = array('display','login','logout','externRedirect');
+                $this->Auth->allowedActions = array('display','login','logout');
                 $this->Auth->loginError ='Usuario o Contraseña Incorrectos';
 		$this->Auth->authError = 'Usted no tiene permisos para acceder a esta página.';
                 $this->Auth->planesMejoraError = 'Usted no tiene acceso a los planes de mejora de otra jurisdicción';
