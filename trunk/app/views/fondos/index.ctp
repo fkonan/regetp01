@@ -105,6 +105,7 @@ foreach ($fondos as $fondo):
 		</td>
 		<td class="actions">
 			<?php echo $html->link(__('Editar', true), array('action' => 'add', $fondo['Fondo']['id'])); ?>
+                        <?php echo $html->link(__('Eliminar', true), array('action' => 'delete', $fondo['Fondo']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
