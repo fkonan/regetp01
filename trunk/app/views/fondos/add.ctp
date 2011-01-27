@@ -207,6 +207,13 @@ echo $html->css('jquery.autocomplete.css');
 
     function ValidarLineasDeAccion() {
         var result = true;
+
+        if (jQuery('.lista_lineas').find('.linea_de_accion_id').length == 0
+                && jQuery('.lista_lineas').find('.nueva_linea').length == 0) {
+            alert("Debe ingresar al menos una línea de acción");
+            return false;
+        }
+
         jQuery.each(jQuery('.nueva_linea'), function(key, value) {
             if (jQuery(value).find('.linea_de_accion_id').val() == 0 || jQuery(value).find('.linea_de_accion_id').val() == '') {
                 alert("Debe confirmar la línea de acción");
