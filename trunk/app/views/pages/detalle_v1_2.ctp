@@ -1,3 +1,17 @@
+<h1>RFIETP - Novedades de la versión 1.6.6</h1>
+<br>
+<ul>
+    <li>Se ha abierto el acceso de los usuarios Referentes Jurisdiccionales.</li>
+    <li>En Oferta Educativa se muestran también las Ofertas sin matrículas cargadas en el listado de "Todos".</li>
+    <li>Se ha incorporado el la información de "alias" para distintas vistas de matrículas de la Unidad de Información.</li>
+    <li>Se han modificado y confeccionado Descargas (reportes) que utiliza la Unidad de Información.</li>
+    <li>En el Buscador la ayuda comienza visible por default.</li>
+    <li>Mejoras estéticas en administración de Sugerencias.</li>
+    <li>Mejoras en depuradores que utiliza la Unidad de Información.</li>
+    <li>El nombre propio de las instituciones es mostrado entre comillas.</li>
+</ul>
+<br>
+
 <h1>RFIETP - Novedades de la versión 1.6.5</h1>
 <br>
 <ul>
