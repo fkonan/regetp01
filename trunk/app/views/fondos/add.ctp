@@ -208,7 +208,7 @@ echo $html->css('jquery.autocomplete.css');
     function ValidarLineasDeAccion() {
         var result = true;
 
-        if (jQuery('.lista_lineas').find('.linea_de_accion_id').length == 0
+        if (jQuery('.lista_lineas').find('.linea_confirmada').length == 0
                 && jQuery('.lista_lineas').find('.nueva_linea').length == 0) {
             alert("Debe ingresar al menos una línea de acción");
             return false;
