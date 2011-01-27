@@ -215,8 +215,7 @@ class UtilsController extends AppController {
         if (!empty($this->passedArgs['id'])) {
             $id = $this->passedArgs['id'];
         }
-        //echo $controller." ".$action." ".$id;
-        
+                
         $this->redirect(array('controller'=>$controller, 'action'=>$action, $id));
     }
 }

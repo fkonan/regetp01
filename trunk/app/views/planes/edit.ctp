@@ -1,6 +1,6 @@
 <?
-echo $javascript->link(array('jquery.autocomplete', 'jquery.blockUI', 'jquery.loadmask.min', 'views/planes/add'));
-echo $html->css('jquery.autocomplete.css');
+echo $javascript->link(array('jquery.autocomplete', 'jquery.blockUI', 'jquery.loadmask.min', 'views/planes/add', 'activespell/cpaint/cpaint2.inc.compressed.js', 'activespell/js/spell_checker'));
+echo $html->css(array('jquery.autocomplete.css', 'spell_checker.css'));
 ?>
 <script type="text/javascript">
     init("<?echo $html->url(array('controller'=>'titulos','action'=>'ajax_search'));?>");
@@ -94,7 +94,11 @@ $cue_instit = $instit['cue'].$anexo;
 
         $meter = '<span class="ajax_update" id="ajax_indicator2" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
         
-        echo $form->input('nombre');
+        echo $form->input('nombre', array('id' => 'spell_checker1',
+                                                  'title' => 'spellcheck_icons',
+                                                  'style' => 'width: 85%; clear: none;',
+                                                  'accesskey' => $html->url('/js/activespell/').'spell_checker.php'));
+        
         echo $form->input('perfil');
         ?>
         <div id="divPlanTituloName">
