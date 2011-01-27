@@ -121,11 +121,6 @@ echo $html->css('jquery.autocomplete.css');
             }
         });
 
-        jQuery('').submit(function(e) {
-            confirmarLinea();
-            AsignarTotal();
-        });
-
     });
 
 
@@ -210,6 +205,27 @@ echo $html->css('jquery.autocomplete.css');
         }
     }
 
+    function ValidarLineasDeAccion() {
+        var result = true;
+        jQuery.each(jQuery('.nueva_linea'), function(key, value) {
+            if (jQuery(value).find('.linea_de_accion_id').val() == 0 || jQuery(value).find('.linea_de_accion_id').val() == '') {
+                alert("Debe confirmar la línea de acción");
+                result = false;
+                return false;
+            }
+            else if (jQuery(value).find('.monto').val() == '') {
+                alert("Debe completar los montos vacíos");
+                result = false;
+                return false;
+            }
+            else {
+                confirmarLinea(jQuery(value));
+            }
+        });
+
+        return result;
+    }
+
      function actualizarComboLineasDeAccion(idAdic) {
         var lineasDeAccionAux = new Array();
         var aEliminar = new Array();
@@ -246,7 +262,7 @@ echo $html->css('jquery.autocomplete.css');
 </script>
 <div class="fondos form">
     <h1><?php echo $Title; ?></h1>
-    <?php echo $form->create('Fondo', array('action'=>'add', 'onsubmit'=>'return AsignarTotal();'));?>
+    <?php echo $form->create('Fondo', array('action'=>'add', 'onsubmit'=>'return ValidarLineasDeAccion()'));?>
     <fieldset>
         <legend>Datos de Fondo</legend>
         <?php
