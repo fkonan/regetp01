@@ -198,13 +198,14 @@ class FondosController extends AppController {
                     
                     foreach ($fondo_antes_actualizar['FondosLineasDeAccion'] as $linea_anterior) {
                         $existe = false;
-                        foreach ($this->data['FondosLineasDeAccion'] as $linea_actual) {
+                        foreach ($this->data['FondosLineasDeAccion'] as &$linea_actual) {
                             if($linea_anterior["lineas_de_accion_id"] == $linea_actual["lineas_de_accion_id"]){
                                 $existe = true;
+                                $linea_actual['id'] = $linea_anterior['id'];
                             }
                         }
                         if(!$existe){
-                            $this->Fondo->FondosLineasDeAccion->Delete($linea_anterior["id"]);
+                            $this->Fondo->FondosLineasDeAccion->delete($linea_anterior["id"]);
                         }
                     }
                 }
@@ -221,7 +222,7 @@ class FondosController extends AppController {
                     }
                 }
                 else {
-                    $this->Session->setFlash(__('El Fondo no pudo guardarse. Por favor, intente nuevamente.', true));
+                    $this->Session->setFlash(__('El Fondo no ha podido ser guardado. Por favor, intente nuevamente.', true));
                 }
             }
             elseif ($id != null) {
@@ -299,7 +300,7 @@ class FondosController extends AppController {
 	}
 
 	function delete($id = null) {
-                $this->redirect(array('action' => 'index'));
+                //$this->redirect(array('action' => 'index'));
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for Fondo', true));
 			$this->redirect(array('action' => 'index'));

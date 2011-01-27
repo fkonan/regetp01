@@ -1,4 +1,4 @@
-<?
++<?
 //echo $javascript->link('jquery-1.4.2.min');
 echo $javascript->link('jquery.autocomplete');
 echo $javascript->link('jquery.blockUI');
@@ -119,6 +119,11 @@ echo $html->css('jquery.autocomplete.css');
             if ((e.charCode == 43 || e.charCode == 107)){
                 jQuery("#agregar_nueva_linea").click();
             }
+        });
+
+        jQuery('').submit(function(e) {
+            confirmarLinea();
+            AsignarTotal();
         });
 
     });
@@ -452,6 +457,8 @@ echo $html->css('jquery.autocomplete.css');
             if(lineaMonto == ""){
                 jQuery(element).find(".monto").css("border-color", "#FF0000");
             }
+
+            return false;
         }
     }
 
