@@ -1,5 +1,6 @@
 <?
 //setlocale(LC_ALL, "es_ES.ISO8859-1");
+// para el corrector ortografico dar permisos a:
 //sudo chmod 646 NetBeansProjects/regetp/app/webroot/js/activespell/personal_dictionary/personal_dictionary.txt
 echo $javascript->link(array('jquery.autocomplete', 'jquery.blockUI', 'jquery.loadmask.min', 'views/planes/add', 'activespell/cpaint/cpaint2.inc.compressed.js', 'activespell/js/spell_checker'));
 echo $html->css(array('jquery.autocomplete.css', 'spell_checker.css'));
