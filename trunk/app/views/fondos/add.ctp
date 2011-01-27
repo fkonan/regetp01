@@ -250,7 +250,7 @@ echo $html->css('jquery.autocomplete.css');
     <fieldset>
         <legend>Datos de Fondo</legend>
         <?php
-        if (empty($instit) && empty($this->passedArgs['jurisdiccion_id'])) {
+        
             echo $form->input("tipo", array(
                                                 'div'=>array('style'=>'width:140px; float: left; clear: none'),
                                                 'style'=> 'width:130px; float: left',
@@ -278,15 +278,12 @@ echo $html->css('jquery.autocomplete.css');
                     'label'=>'Jurisdiccion','options'=>$jurisdicciones));
             ?>
             </span>
-        <?php
-        }
-        else {
-            echo $form->input('jurisdiccion_id', array('type'=>'hidden'));
-            echo $form->input('tipo', array('type'=>'hidden'));
-
-            if (!empty($instit)) {
-            ?>
-                <div id="datos_instit">
+           
+            <div id="datos_institucion">
+                <?
+                if (!empty($instit)) {
+                ?>
+                <div style='border: 1px solid #F0F7FC' id='institCueInfo'>
                     <?
                     //el anexo viene con 1 solo digito por lo general. Pero para leerlo siempre hay que ponerlo
                     // en formato de 2 digitos
@@ -301,22 +298,12 @@ echo $html->css('jquery.autocomplete.css');
                     <br />
                     <div class="instit_atributte"><b>Departamento: </b><?= $instit['Departamento']['name'] ?></div>
                     <div class="instit_atributte"><b>Localidad: </b><?= $instit['Localidad']['name'] ?></div>
-                </div>
-            <?php
-            }
-            else {
+                <?
+                }
                 ?>
-                <div id="datos_instit">
-                    <div class="instit_name"><b><?=$jurisdicciones[$this->passedArgs['jurisdiccion_id']]?></b></div>
                 </div>
-                <?php
-            }
-        }
-        ?>
+            </div>
         <br />
-        <div id="datos_institucion">
-
-        </div>
         <div>
             <label style="display:inline; width:100px; text-align: right;">Año:</label>
             <?=$form->input('anio', array('options'=>$anios, 'default'=>date('Y'), 'style'=>'width: 70px; display:inline;', 'div' => false, 'label' => false))?>
