@@ -183,6 +183,7 @@ class FondosController extends AppController {
 
 
             if (!empty($this->data)) {
+
                 $this->Fondo->create();
 
                 if ($this->data['Fondo']['tipo'] == 'j') {
