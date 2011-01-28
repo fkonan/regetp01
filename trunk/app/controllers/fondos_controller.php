@@ -189,6 +189,15 @@ class FondosController extends AppController {
                 if ($this->data['Fondo']['tipo'] == 'j') {
                     $this->data['Fondo']['instit_id'] = 0;
                 }
+                
+                $trimestres_aux = explode(",", Configure::read('trimestre_activo'));
+
+                $trimestreActual = $this->data['Fondo']['trimestre'] . "-" . $this->data['Fondo']['anio'];
+                
+                if (!in_array($trimestreActual, $trimestres_aux)) {
+                     $this->Session->setFlash(__('El fondo no pertenece al Trimestre Activo', true));
+                     $this->redirect(array('action' => 'index'));
+                }
 
                 if ($id != null) {
                     // incluye id para editar
