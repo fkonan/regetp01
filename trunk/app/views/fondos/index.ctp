@@ -16,6 +16,7 @@ $paginator->options(array('url' => $url_conditions));
         'div'=> array('style'=>'float:left; clear: none'),
         'options'=>array('i'=>'Institucional','j'=>'Jurisdiccional'),
         'empty'=>'Seleccione',
+        'style'=>'width: 110px;',
         'value' => (isset($this->passedArgs['Fondo.tipo'])?$this->passedArgs['Fondo.tipo']:$this->data['Fondo']['tipo'])
         )
             );
@@ -23,6 +24,7 @@ $paginator->options(array('url' => $url_conditions));
     echo $form->input('jurisdiccion_id',array(
         'label'=>'Jurisdicción',
         'div'=> array('style'=>'float:left; clear: none'),
+        'style'=>'width: 130px;',
         'value' => (isset($this->passedArgs['Fondo.jurisdiccion_id'])?$this->passedArgs['Fondo.jurisdiccion_id']:$this->data['Fondo']['jurisdiccion_id'])
     ));
 
@@ -30,6 +32,7 @@ $paginator->options(array('url' => $url_conditions));
         'label'=>'Año',
         'div'=> array('style'=>'float:left; clear: none'),
         'options'=>$anios,
+        'style'=>'width: 70px;',
         'value' => (isset($this->passedArgs['Fondo.anio'])?$this->passedArgs['Fondo.anio']:$this->data['Fondo']['anio'])
         ));
     
@@ -37,6 +40,7 @@ $paginator->options(array('url' => $url_conditions));
         'label'=>'Trimestre',
         'div'=> array('style'=>'float:left; clear: none'),
         'options'=>$trimestres, 'style'=>'width:100px',
+        'style'=>'width: 70px;',
         'value' => (isset($this->passedArgs['Fondo.trimestre'])?$this->passedArgs['Fondo.trimestre']:$this->data['Fondo']['trimestre'])
         ));
 
