@@ -90,6 +90,7 @@ echo $html->css('jquery.autocomplete.css');
                 jQuery("#institCueInfo").remove();
 
                 var div =   "<div style='border: 1px solid #F0F7FC' id='institCueInfo'>" +
+                            "<legend>Institución Seleccionada</legend>" +
                             "<div class='instit_name'><b> [" + item.cue + "] " + item.nombre + "</b></div>" +
                             "<div class='instit_atributte'><b>Domicilio: " + item.direccion + "</b> </div>" +
                             "<br />" +
@@ -291,7 +292,7 @@ echo $html->css('jquery.autocomplete.css');
                 echo $form->input('posible_instit', array(
                     'div'=>array('style'=>'width:420px; float: left; clear: none'),
                     'style'=> 'width:400px; float: left',
-                    'label'=>'Posible nombre o CUE de la institucion',
+                    'label'=>'Busqueda por nombre o CUE de la institucion',
                     'value'=>((!empty($this->data['Instit']['cue']))?($this->data['Instit']['cue'] * 100 + $this->data['Instit']['anexo']):"")));
             ?>
             </span>
@@ -309,6 +310,7 @@ echo $html->css('jquery.autocomplete.css');
                 if (!empty($instit)) {
                 ?>
                 <div style='border: 1px solid #F0F7FC' id='institCueInfo'>
+                    <legend>Institución Seleccionada</legend>
                     <?
                     //el anexo viene con 1 solo digito por lo general. Pero para leerlo siempre hay que ponerlo
                     // en formato de 2 digitos
