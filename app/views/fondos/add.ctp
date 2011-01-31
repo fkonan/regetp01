@@ -90,7 +90,7 @@ echo $html->css('jquery.autocomplete.css');
                 jQuery("#institCueInfo").remove();
 
                 var div =   "<div style='border: 1px solid #F0F7FC' id='institCueInfo'>" +
-                            "<legend>Institución Seleccionada</legend>" +
+                            "<span>Institución Seleccionada</span>" +
                             "<div class='instit_name'><b> [" + item.cue + "] " + item.nombre + "</b></div>" +
                             "<div class='instit_atributte'><b>Domicilio: " + item.direccion + "</b> </div>" +
                             "<br />" +
@@ -175,10 +175,12 @@ echo $html->css('jquery.autocomplete.css');
         if (jQuery('#FondoTipo :selected').val() == 'i') {
             jQuery('#buscador_instit').show();
             jQuery('#jurisdiccional').hide();
+            jQuery('#datos_institucion').show();
         }
         else {
             jQuery('#jurisdiccional').show();
             jQuery('#buscador_instit').hide();
+            jQuery('#datos_institucion').hide();
         }
     }
 
@@ -310,7 +312,7 @@ echo $html->css('jquery.autocomplete.css');
                 if (!empty($instit)) {
                 ?>
                 <div style='border: 1px solid #F0F7FC' id='institCueInfo'>
-                    <legend>Institución Seleccionada</legend>
+                    <span>Institución Seleccionada</span>
                     <?
                     //el anexo viene con 1 solo digito por lo general. Pero para leerlo siempre hay que ponerlo
                     // en formato de 2 digitos
@@ -325,10 +327,10 @@ echo $html->css('jquery.autocomplete.css');
                     <br />
                     <div class="instit_atributte"><b>Departamento: </b><?= $instit['Departamento']['name'] ?></div>
                     <div class="instit_atributte"><b>Localidad: </b><?= $instit['Localidad']['name'] ?></div>
+                </div>
                 <?
                 }
                 ?>
-                </div>
             </div>
         <br />
         <div>
