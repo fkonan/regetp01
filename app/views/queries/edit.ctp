@@ -39,7 +39,7 @@ echo $html->css('jquery.autocomplete.css');
 		echo $form->input('ver_online',array('label'=>'¿Ver Online?','after'=>'si se tilda esta opción se habiiltará la query para ver de forma online como una página normal.'));
 		echo "</div>";
 		
-		echo $form->input('query');
+		echo $form->input('query', array('rows' => '15'));
 	?>
 	</fieldset>
 <?php echo $form->end('Submit');?>

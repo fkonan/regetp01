@@ -28,7 +28,7 @@ $cue_instit = $instit['cue'].$anexo;
         <div id="PlanEstructura">
             <span id="selectEstructura" style="float:left">
                 <?php
-                        echo $form->input('estructura_plan_id',array('empty'=>'Seleccione'));
+                        echo $form->input('estructura_plan_id',array('empty'=>'Seleccione', 'style'=>'width:250px'));
                 ?>
             </span>
             <span id="graficosEstructura">
