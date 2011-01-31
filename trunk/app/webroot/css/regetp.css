@@ -134,6 +134,7 @@ h2 {
     border-bottom-style: dashed;
     border-bottom-color: #CEE3F6;
     border-bottom-width: 1px;
+    clear:both;
 }	
 
 h3 {
