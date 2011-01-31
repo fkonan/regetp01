@@ -24,7 +24,7 @@ $paginator->options(array('url' => $url_conditions));
     echo $form->input('jurisdiccion_id',array(
         'label'=>'Jurisdicción',
         'div'=> array('style'=>'float:left; clear: none'),
-        'style'=>'width: 130px;',
+        'style'=>'width: 150px;',
         'value' => (isset($this->passedArgs['Fondo.jurisdiccion_id'])?$this->passedArgs['Fondo.jurisdiccion_id']:$this->data['Fondo']['jurisdiccion_id'])
     ));
 

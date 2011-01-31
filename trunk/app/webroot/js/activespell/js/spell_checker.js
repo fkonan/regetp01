@@ -215,6 +215,9 @@ function activeSpell(varName, width, height, spellUrl, divId, name, id, title, v
 
         // que chequée ortografia al dejar el campo
         document.getElementById(currObj.config['id']).setAttribute("onBlur", "setCurrentObject(" + currObj.config['varName'] + "); " + currObj.config['varName'] + ".spellCheck();");
+        /*jQuery('#'+currObj.config['id']).focusout(function() {
+            eval("setCurrentObject(" + currObj.config['varName'] + "); " + currObj.config['varName'] + ".spellCheck();");
+        });*/
 
         /*var inputs = document.getElementsByTagName('input');
         for(var i=0; i < inputs.length; i++)	{
