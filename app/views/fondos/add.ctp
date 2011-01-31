@@ -494,7 +494,7 @@ echo $html->css('jquery.autocomplete.css');
                                     '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().parent().parent().remove(); actualizarComboLineasDeAccion();'))?>' +
                                 "</span>" +
                                 "<span>" +
-                                    "<select class='linea_de_accion_id' style='width:400px'>";
+                                    "<select class='linea_de_accion_id' style='width:400px;display:inline'>";
                                 jQuery.each(jQuery(lineasDeAccion), function(key, value) {
                                     if (value) {
                                         html += '<option value="'+key+'">'+value+'</option>';
