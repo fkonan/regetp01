@@ -515,7 +515,7 @@ echo $html->css('jquery.autocomplete.css');
         jQuery(".lista_lineas dl #detalle .linea_confirmada[order=" + uniqid + "] .linea_de_accion_id").val(linea_id);
         jQuery(".lista_lineas dl #detalle .linea_confirmada[order=" + uniqid + "] .monto").setMask("integer");
         // actualizar total
-        ActualizarTotal();
+        //ActualizarTotal();
     }
 
     function confirmarLineaConEnter(element,event){
