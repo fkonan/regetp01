@@ -5,7 +5,7 @@ class DepuradoresController extends AppController {
 	var $name = 'Depuradores';
 	var $helpers = array('Html', 'Form','Ajax');
 	var $uses = array('Instit','Plan','Anio','Sector','Jurisdiccion', 'Tipoinstit',
-                    'EstructuraPlan','JurisdiccionesEstructuraPlan','EstructuraPlanesAnio');
+                    'EstructuraPlan','JurisdiccionesEstructuraPlan','EstructuraPlanesAnio','Titulo');
 	var $db;
 	
 	
@@ -553,6 +553,30 @@ class DepuradoresController extends AppController {
             }
         }
         //debug($casos_mas_de_2);
+    }
+
+
+    function depurar_ortografia () {
+        $conditions = array();
+
+        $this->Tipoinstit->recursive = -1;
+        $this->paginate['recursive'] = -1;
+        $this->paginate['fields'] = array('id', 'name');
+        $tipoinstits = $this->paginate('Tipoinstit');
+
+        /*$this->Titulo->recursive = -1;
+        $titulos = $this->Titulo->find('all', array(
+                'fields' => array('id','name'),
+                'conditions'=>$conditions
+        ));
+
+        $this->Plan->recursive = -1;
+        $planes = $this->Plan->find('all', array(
+                'fields' => array('id','nombre','perfil'),
+                'conditions'=>$conditions
+        ));*/
+
+        $this->set(compact('tipoinstits', 'titulos','planes'));
     }
 
     

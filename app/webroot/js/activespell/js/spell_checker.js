@@ -99,7 +99,7 @@ function setupSpellCheckers()
 
                         // que chequée ortografia si contiene algun value inicial (edit)
                         if (textareas[i].getAttribute("value")) {
-                             eval("setCurrentObject(spellCheckers" + numSpellCheckers + "); spellCheckers" + numSpellCheckers + ".spellCheck();");
+                             eval("setTimeout('setCurrentObject(spellCheckers" + numSpellCheckers + "); spellCheckers" + numSpellCheckers + ".spellCheck();', 1000*"+numSpellCheckers+");");
                         }
 
 			numSpellCheckers++;
@@ -121,7 +121,7 @@ function setupSpellCheckers()
 
                         // que chequée ortografia si contiene algun value inicial (edit)
                         if (textareas[i].getAttribute("value")) {
-                             eval("setCurrentObject(spellCheckers" + numSpellCheckers + "); spellCheckers" + numSpellCheckers + ".spellCheck();");
+                             eval("setTimeout('setCurrentObject(spellCheckers" + numSpellCheckers + "); spellCheckers" + numSpellCheckers + ".spellCheck();', 1000*"+numSpellCheckers+");");
                         }
                         
 			numSpellCheckers++;
