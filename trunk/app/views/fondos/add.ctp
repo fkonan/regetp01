@@ -205,7 +205,9 @@ echo $html->css('jquery.autocomplete.css');
         validacionTotal = (jQuery('#FondoTotal').val() == replaceAll(jQuery('#total').val(),".","")) ;
 
         if(!validacionTotal){
-            alert("El total no coincide con la suma de las lineas de acción");
+            diferencia = parseInt(jQuery('#FondoTotal').val()) - parseInt(replaceAll(jQuery('#total').val(),".",""));
+
+            alert("El total difiere en $" + Math.abs(diferencia) + " con la suma de las lineas de acción.");
         }
 
         return validacionTotal;
