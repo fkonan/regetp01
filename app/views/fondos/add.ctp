@@ -64,6 +64,8 @@ echo $html->css('jquery.autocomplete.css');
                 );
             });
         });
+
+        jQuery("#total").setMask("integer");
         
         jQuery(document).ajaxStart(function() {
             jQuery.blockUI({ message: '<h1>Buscando...</h1>',overlayCSS: { backgroundColor: '#00f' }, showOverlay: true });
@@ -144,7 +146,7 @@ echo $html->css('jquery.autocomplete.css');
                                 "<dt onmouseout='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' onmouseover='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' class='' style='height: 30px;'>" +
                                     "<span>" +
                                         '<?php echo $html->image('/img/check.gif', array('id'=>'check_linea','alt' => 'Confirmar', 'onclick'=>'confirmarLinea(jQuery(this).parent().parent().parent().parent());'))?>' +
-                                        '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().parent().remove(); ActualizarTotal(); actualizarComboLineasDeAccion();'))?>' +
+                                        '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().parent().remove(); actualizarComboLineasDeAccion();'))?>' +
                                     "</span>" +
                                     "<span>" +
                                         "<select class='linea_de_accion_id' style='width:400px;display:inline'>";
@@ -199,14 +201,16 @@ echo $html->css('jquery.autocomplete.css');
         return true;
     }
 
-    function ActualizarTotal() {
-        if (!isNaN(SumarLinasDeAccionMontos())) {
-            jQuery('#total').html(jQuery.mask.string(SumarLinasDeAccionMontos(),"integer"));
+    function ValidarTotal() {
+        validacionTotal = (jQuery('#FondoTotal').val() == replaceAll(jQuery('#total').val(),".","")) ;
+
+        if(!validacionTotal){
+            alert("El total no coincide con la suma de las lineas de acción");
         }
-        else {
-            jQuery('#total').html('<span style="color:red;">Error! Debe ingresar montos numéricos</span>');
-        }
+
+        return validacionTotal;
     }
+
 
     function ValidarLineasDeAccion() {
         var result = true;
@@ -234,7 +238,9 @@ echo $html->css('jquery.autocomplete.css');
         });
 
         AsignarTotal();
-        
+
+        result = result && ValidarTotal();
+
         return result;
     }
 
@@ -350,13 +356,13 @@ echo $html->css('jquery.autocomplete.css');
             <dl class="item_lineas" style="cursor:pointer;padding:0px !important">
                 <div id="detalle">
                 </div>
-                <div id="totales">
-                    <dt onmouseout="jQuery(this).toggleClass('item_fondos_seleccionado')" onmouseover="jQuery(this).toggleClass('item_fondos_seleccionado')" class="" >
+                <div id="totales" style="height: 25px">
+                    <dt onmouseout="jQuery(this).toggleClass('item_fondos_seleccionado')" onmouseover="jQuery(this).toggleClass('item_fondos_seleccionado')" class="" style="border-bottom-width: 0px;">
                         <span style="padding-left:15px">
                             >><strong> Total</strong>
                         </span>
                     </dt>
-                    <dd><strong>$ <span id="total">0</span></strong></dd>
+                    <dd><strong>$ <input id="total" value="0" style="display:inline"/></strong></dd>
                 </div>
             </dl>
 
@@ -440,7 +446,7 @@ echo $html->css('jquery.autocomplete.css');
                    "<dt onmouseout='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' onmouseover='jQuery(this).toggleClass(\"item_fondos_seleccionado\")' class='' >" +
                    "<span>" +
                         '<?php echo $html->image('/img/modify.png', array('alt' => 'Modificar', 'onclick'=>'editarLinea(this);'))?>' +
-                        '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().remove(); ActualizarTotal(); actualizarComboLineasDeAccion();'))?>' +
+                        '<?php echo $html->image('/img/delete.png', array('alt' => 'Borrar','onclick'=>'jQuery(this).parent().parent().parent().remove(); actualizarComboLineasDeAccion();'))?>' +
                     "</span>" +
                     "<span class='linea_nombre' id='"+lineaAccionId+"'>" +
                     lineaAccion +
@@ -459,8 +465,6 @@ echo $html->css('jquery.autocomplete.css');
             jQuery(".lista_lineas dl #detalle" + selector).append(html);
             i++;
 
-            // actualizar total
-            ActualizarTotal();
             actualizarComboLineasDeAccion();
 
         }
