@@ -364,7 +364,7 @@ echo $html->css('jquery.autocomplete.css');
                             >><strong> Total</strong>
                         </span>
                     </dt>
-                    <dd><strong>$ <input id="total" value="0" style="display:inline"/></strong></dd>
+                    <dd><strong>$ <input id="total" value="<?php echo (!empty($this->data['Fondo']['total']))?$this->data['Fondo']['total']:0 ?>" style="display:inline"/></strong></dd>
                 </div>
             </dl>
 
