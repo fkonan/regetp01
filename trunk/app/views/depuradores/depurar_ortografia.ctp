@@ -25,6 +25,7 @@ echo $paginator->counter(array(
                     array(  'value' => $tipoinstit['Tipoinstit']['name'],
                             'label' => false,
                             'title' => 'spellcheck_icons',
+                            'after' => '<a href="'.$html->url('/tipoinstit/edit/'.$tipoinstit['Tipoinstit']['id']).'">editar</a>',
                             'style' => 'width: 85%; clear: none;',
                             'accesskey' => $html->url('/js/activespell/').'spell_checker.php'
                     ));
