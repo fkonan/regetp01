@@ -202,6 +202,12 @@ echo $html->css('jquery.autocomplete.css');
     }
 
     function ValidarTotal() {
+        
+        if(isNaN(replaceAll(jQuery('#total').val(),".",""))){
+            alert("Ingrese en el campo total la suma de las lineas de acción");
+            return false;
+        }
+
         validacionTotal = (jQuery('#FondoTotal').val() == replaceAll(jQuery('#total').val(),".","")) ;
 
         if(!validacionTotal){
