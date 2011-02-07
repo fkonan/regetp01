@@ -201,8 +201,13 @@ echo $html->css('jquery.autocomplete.css');
         return true;
     }
 
-    function ValidarTotal() {
-        
+    function Validar() {
+
+        if(jQuery('#FondoTipo').val() == 'i' && jQuery('#FondoPosibleInstit').val().length == 0){
+            alert("Ingrese la Institución que corresponda");
+            return false;
+        }
+
         if(isNaN(replaceAll(jQuery('#total').val(),".",""))){
             alert("Ingrese en el campo total la suma de las lineas de acción");
             return false;
@@ -247,7 +252,7 @@ echo $html->css('jquery.autocomplete.css');
 
         AsignarTotal();
 
-        result = result && ValidarTotal();
+        result = result && Validar();
 
         return result;
     }
