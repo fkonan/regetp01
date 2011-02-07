@@ -84,7 +84,7 @@ class FondosController extends AppController {
             $dataTemp = $this->data;
             
             $this->Fondo->recursive = 0;
-            $this->Fondo->order = array('Fondo.anio DESC', 'Fondo.trimestre','Fondo.jurisdiccion_id ASC');
+            $this->Fondo->order = array('Fondo.created DESC','Fondo.anio DESC', 'Fondo.trimestre','Fondo.jurisdiccion_id ASC');
             $condition = '';
 
             if(isset($this->passedArgs['Fondo.tipo'])){
@@ -101,6 +101,10 @@ class FondosController extends AppController {
 
             if(isset($this->passedArgs['Fondo.trimestre'])){
                 $this->data['Fondo']['trimestre'] = $this->passedArgs['Fondo.trimestre'];
+            }
+
+            if(isset($this->passedArgs['Fondo.memo'])){
+                $this->data['Fondo']['memo'] = $this->passedArgs['Fondo.memo'];
             }
 
 
@@ -316,10 +320,10 @@ class FondosController extends AppController {
 			$this->redirect(array('action' => 'index'));
 		}
 		if ($this->Fondo->del($id)) {
-			$this->Session->setFlash(__('Fondo deleted', true));
+			$this->Session->setFlash(__('Fondo eliminado', true));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('The Fondo could not be deleted. Please, try again.', true));
+		$this->Session->setFlash(__('El fondo no puede ser eliminado', true));
 		$this->redirect(array('action' => 'index'));
 	}
 
