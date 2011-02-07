@@ -203,6 +203,11 @@ echo $html->css('jquery.autocomplete.css');
 
     function Validar() {
 
+        if(jQuery('#FondoMemo').val().length == 0){
+            alert("Ingrese el número de memo");
+            return false;
+        }
+
         if(jQuery('#FondoTipo').val() == 'i' && jQuery('#FondoPosibleInstit').val().length == 0){
             alert("Ingrese la Institución que corresponda");
             return false;
