@@ -1,3 +1,0 @@
-Para poder utilizar el corrector ortográfico aspell se deben tener instalados en el servidor:
-- comando aspell (/usr/bin/ aspell)
-- diccionario en español (aspell-es)
