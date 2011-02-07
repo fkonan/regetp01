@@ -44,6 +44,13 @@ $paginator->options(array('url' => $url_conditions));
         'value' => (isset($this->passedArgs['Fondo.trimestre'])?$this->passedArgs['Fondo.trimestre']:$this->data['Fondo']['trimestre'])
         ));
 
+    echo $form->input('memo', array(
+        'label'=>'Memo',
+        'div'=> array('style'=>'float:left; clear: none'),
+        'style'=>'width: 70px;',
+        'value' => (isset($this->passedArgs['Fondo.memo'])?$this->passedArgs['Fondo.memo']:$this->data['Fondo']['memo'])
+    ));
+
     echo $form->hidden('url_conditions', array('value'=>$url_conditions));
     
     echo $form->end('Buscar',array('style'=>'float:right'));
@@ -63,11 +70,11 @@ if (count($fondos)) {
 ?>
 <table cellpadding="0" cellspacing="0">
 <tr>
-	<th><?php echo $paginator->sort('Institución','instit_id');?></th>
+	<th><?php echo $paginator->sort('memo');?></th>
+        <th><?php echo $paginator->sort('Institución','instit_id');?></th>
 	<th><?php echo $paginator->sort('jurisdiccion_id');?></th>
 	<th><?php echo $paginator->sort('Año', 'anio');?></th>
 	<th><?php echo $paginator->sort('trimestre');?></th>
-	<th><?php echo $paginator->sort('memo');?></th>
 	<th><?php echo $paginator->sort('total');?></th>
         <th class="actions"><?php __('Actions');?></th>
 </tr>
@@ -80,6 +87,9 @@ foreach ($fondos as $fondo):
 	}
 ?>
 	<tr<?php echo $class;?>>
+		<td>
+                    <strong><?php echo $fondo['Fondo']['memo']; ?></strong>
+		</td>
 		<td>
 			<?php
                         $armar_anexo = ($fondo['Instit']['anexo']<10)?'0'.$fondo['Instit']['anexo']:$fondo['Instit']['anexo'];
@@ -94,15 +104,11 @@ foreach ($fondos as $fondo):
 		<td>
 			<?php echo $fondo['Jurisdiccion']['name']; ?>
 		</td>
-
 		<td>
 			<?php echo $fondo['Fondo']['anio']; ?>
 		</td>
 		<td>
 			<?php echo $fondo['Fondo']['trimestre']; ?>
-		</td>
-		<td>
-			<?php echo $fondo['Fondo']['memo']; ?>
 		</td>
 		<td>
                         $<?=number_format($fondo['Fondo']['total'],2,",",".");?>
