@@ -58,10 +58,17 @@ $paginator->options(array('url' => $url_conditions));
 </div>
 <div><?php echo $html->link('Agregar nuevo Fondo', array('action' => 'add')); ?></div>
 <br />
-<p>
+<!--<p>
 <?php
 echo $paginator->counter(array(
 'format' => __('<b>%count%</b> fondos encontrados, los cuales suman <b>$'.$total.'</b>.<br>Página %page% de %pages%, mostrando %current% fondos. ', true)
+));
+?></p>
+-->
+<p>
+<?php
+echo $paginator->counter(array(
+'format' => __('<b>%count%</b> fondos encontrados. <br>Página %page% de %pages%, mostrando %current% fondos. ', true)
 ));
 ?></p>
 
@@ -76,7 +83,7 @@ if (count($fondos)) {
 	<th><?php echo $paginator->sort('Año', 'anio');?></th>
 	<th><?php echo $paginator->sort('trimestre');?></th>
 	<th><?php echo $paginator->sort('total');?></th>
-        <th class="actions"><?php __('Actions');?></th>
+        <th class="actions"></th>
 </tr>
 <?php
 $i = 0;
