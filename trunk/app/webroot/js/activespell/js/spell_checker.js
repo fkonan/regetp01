@@ -307,7 +307,7 @@ function spellCheck_cb(new_data)
 	{
 		if(currObj.config['useIcons'])
 		{
-			currObj.statusSpan.innerHTML = "<img src=\"" + currObj.config['imagePath'] + "images/accept.png\" width=\"16\" height=\"16\" title=\"Todo correcto\" alt=\"Todo correcto\" border=\"0\" />";
+			currObj.statusSpan.innerHTML = "<img src=\"" + currObj.config['imagePath'] + "images/accept.png\" width=\"16\" height=\"16\" class=\"js-correcto\" title=\"Todo correcto\" alt=\"Todo correcto\" border=\"0\" />";
 		}
 		else
 		{
