@@ -99,9 +99,15 @@ function setupSpellCheckers()
 
                         // que chequée ortografia si contiene algun value inicial (edit)
                         if (textareas[i].getAttribute("value")) {
-                             eval("setTimeout('setCurrentObject(spellCheckers" + numSpellCheckers + "); spellCheckers" + numSpellCheckers + ".spellCheck();', 1000*"+numSpellCheckers+");");
+                             eval("setTimeout('setCurrentObject(spellCheckers" + numSpellCheckers + "); spellCheckers" + numSpellCheckers + ".spellCheck(); " +
+                                  "',1000*"+numSpellCheckers+");");
+                              eval("setTimeout('if(jQuery(\"#spellCheckDiv" + numSpellCheckers +"\").find(\"img\").hasClass(\"js-correcto\")){ " +
+                                  "spellCheckers" + numSpellCheckers  +".resumeEditing();" +
+                                  "}" +
+                                  "',1500*"+numSpellCheckers + 1 +");");
                         }
 
+                        
 			numSpellCheckers++;
 		}
 	}
