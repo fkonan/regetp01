@@ -26,6 +26,7 @@ regiduría
 elayotecnia
 fluídica
 previsional
+previsionales
 nafteros
 microemprendimientos
 bibliotecólogo
@@ -36,7 +37,11 @@ autocad
 planilla
 cosmetología
 permanentaciones
+permanentación
 computarizada
+computarizadas
+computarizados
+computarizado
 cloaquista
 catering
 colocador
@@ -110,3 +115,16 @@ psicomotricidad
 tractorista
 vitrofusión
 zinguero
+tecnicatura
+sanitarista
+frutícola
+inseminador
+fideero
+sismorresistentes
+sismorresistente
+alivianada
+oxiacetilénica
+manutécnicas
+manutécnica
+video
+videos

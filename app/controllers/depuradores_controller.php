@@ -558,24 +558,24 @@ class DepuradoresController extends AppController {
 
     function depurar_ortografia () {
         $conditions = array();
-        
+        /* corregidos
         $this->Tipoinstit->recursive = -1;
         $this->paginate['recursive'] = -1;
         $this->paginate['fields'] = array('id', 'name');
         $tipoinstits = $this->paginate('Tipoinstit');
-        /*
+        * corregidos
         $this->Titulo->recursive = -1;
         $this->paginate['recursive'] = -1;
         $this->paginate['limit'] = 300;
         $this->paginate['fields'] = array('id', 'name');
         $titulos = $this->paginate('Titulo');
-        
+        */
         $this->Plan->recursive = -1;
         $this->paginate['recursive'] = -1;
-        $this->paginate['limit'] = 300;
+        $this->paginate['limit'] = 1000;
         $this->paginate['fields'] = array('id','nombre','perfil');
         $planes = $this->paginate('Plan');
-*/
+
         $this->set(compact('tipoinstits', 'titulos','planes'));
     }
 
