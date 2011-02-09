@@ -1,3 +1,11 @@
+<h1>RFIETP - Novedades de la versión 1.6.7</h1>
+<br>
+<ul>
+    <li>Upgrade a CakePHP v1.2.9</li>
+    <li>Agregados y mejoras de scripts de ortografía.</li>
+</ul>
+<br>
+
 <h1>RFIETP - Novedades de la versión 1.6.6</h1>
 <br>
 <ul>
