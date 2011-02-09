@@ -84,7 +84,7 @@ $cue_instit = $instit['cue'].$anexo;
                 echo $form->input('nombre', array('id' => 'spell_checker1',
                                                   'title' => 'spellcheck_icons',
                                                   'style' => 'width: 85%; clear: none;',
-                                                  'accesskey' => $html->url('/js/activespell/').'spell_checker.php'));
+                                                  ((Configure::read('modo_linux'))? 'accesskey': '') => $html->url('/js/activespell/').'spell_checker.php'));
 		echo $form->input('perfil');
 		?>
                 <div id="divPlanTituloName">
