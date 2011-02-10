@@ -29,6 +29,7 @@ echo $paginator->counter(array(
                 <th><?php echo $paginator->sort('name');?></th>
         </tr>
     <?php
+    sleep(2);
         foreach ($planes as $plan) {
             ?>
         <tr>
