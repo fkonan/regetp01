@@ -8,9 +8,7 @@ echo $paginator->counter(array(
 ?></p>
 <table cellpadding="0" cellspacing="0" style="font-size:9pt;">
 <tr>
-	<th><?php echo $paginator->sort('id');?></th>
 	<th><?php echo $paginator->sort('asunto');?></th>
-	<th><?php echo $paginator->sort('mensaje');?></th>
 	<th><?php echo $paginator->sort('Usuario', 'user_id');?></th>
 	<th><?php echo $paginator->sort('Recibida', 'created');?></th>
 	<th><?php echo $paginator->sort('Leída', 'leido');?></th>
@@ -26,18 +24,7 @@ foreach ($sugerencias as $sugerencia):
 ?>
 	<tr<?php echo $class;?>>
 		<td>
-			<?php echo $sugerencia['Sugerencia']['id']; ?>
-		</td>
-		<td>
 			<?php echo $sugerencia['Sugerencia']['asunto']; ?>
-		</td>
-		<td>
-			<?php echo $text->truncate(
-                                    $sugerencia['Sugerencia']['mensaje'],
-                                    50,
-                                    '...',
-                                    false
-                                ); ?>
 		</td>
 		<td>
 			<?php echo $sugerencia['User']['username']; ?>
@@ -46,11 +33,11 @@ foreach ($sugerencias as $sugerencia):
 			<?php if ($time->isToday($sugerencia['Sugerencia']['created'])) {
                                 echo "<b>Hoy</b> ".$time->format('G:i', $sugerencia['Sugerencia']['created'])." hs.";
                             } else {
-                                echo $sugerencia['Sugerencia']['created'];
+                                echo $time->format('d/m/Y G:i', $sugerencia['Sugerencia']['created']) .' hs.';
                             } ?>
 		</td>
 		<td>
-			<?php echo $sugerencia['Sugerencia']['leido']; ?>
+			<?php echo ($sugerencia['Sugerencia']['leido'] == 1)?"Sí":"No"; ?>
 		</td>
 		<td class="actions">
 			<?php echo $html->link(__('View', true), array('action' => 'view', $sugerencia['Sugerencia']['id'])); ?>
