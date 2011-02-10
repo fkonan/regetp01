@@ -2,6 +2,7 @@
 <br>
 <ul>
     <li>Upgrade a CakePHP v1.2.9</li>
+    <li>Se ha publicado la información correspondinete a los Planes de Mejora aprobados durante el segundo semestre de 2010.</li>
     <li>Agregados y mejoras de scripts de ortografía.</li>
 </ul>
 <br>
