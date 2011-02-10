@@ -6,6 +6,7 @@ class SugerenciasController extends AppController {
 
 	function index() {
 		$this->Sugerencia->recursive = 0;
+                $this->paginate['order'] = array('Sugerencia.created');
 		$this->set('sugerencias', $this->paginate());
 	}
 
@@ -14,7 +15,14 @@ class SugerenciasController extends AppController {
 			$this->Session->setFlash(__('Invalid Sugerencia', true));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->set('sugerencia', $this->Sugerencia->read(null, $id));
+
+                $old = $this->Sugerencia->read(null, $id);
+                
+                $this->data = $this->Sugerencia->read(null, $id);
+                $this->data['Sugerencia']['leido'] = 1;
+                $this->Sugerencia->save($this->data);
+
+		$this->set('sugerencia', $old);
 	}
 
 	function add() {
