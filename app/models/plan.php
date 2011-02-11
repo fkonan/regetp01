@@ -20,7 +20,10 @@ class Plan extends AppModel {
             );
 
 	var $hasMany = array(
-            'Anio' => array('order'=> array('Anio.plan_id', 'Anio.ciclo_id DESC', 'Anio.anio ASC'))
+            'Anio' => array(
+                'order'=> array('Anio.plan_id', 'Anio.ciclo_id DESC', 'Anio.anio ASC'),
+                'dependent'=> true, // borra en cascada
+            )
 	);
 	
 	var $validate = array(
