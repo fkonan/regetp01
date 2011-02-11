@@ -15,7 +15,7 @@ class Departamento extends AppModel {
 	var $hasMany = array(
 			'Localidad' => array('className' => 'Localidad',
 								'foreignKey' => 'departamento_id',
-								'dependent' => true,
+								'dependent'=> true, // borra en cascada
 								'conditions' => '',
 								'fields' => '',
 								'order' => '',

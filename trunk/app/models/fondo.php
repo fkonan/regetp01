@@ -29,7 +29,7 @@ class Fondo extends AppModel {
 		)
 	);
 
-        var $hasMany = array('FondosLineasDeAccion');
+        var $hasMany = array('FondosLineasDeAccion' => array('dependent'=> true));
 
 	var $hasAndBelongsToMany = array(
 		'LineasDeAccion' => array(

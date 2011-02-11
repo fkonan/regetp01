@@ -137,10 +137,18 @@ class TitulosController extends AppController {
 
     function delete($id = null) {
         if (!$id) {
-            $this->flash(__('Invalid Titulo', true), array('action'=>'index'));
+            $this->Session->setFlash(__('Titulo inválido', true));
+            $this->redirect(array('action'=>'index'));
         }
-        if ($this->Titulo->del($id)) {
-            $this->flash(__('Titulo deleted', true), array('action'=>'index'));
+        else {
+            if ($this->Titulo->del($id)) {
+                $this->Session->setFlash(__('Titulo eliminado', true));
+            }
+            else {
+                $this->Session->setFlash(__('No se puede eliminar el Título', true));
+            }
+            
+            $this->redirect(array('action'=>'index'));
         }
     }
 

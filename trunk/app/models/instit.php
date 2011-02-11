@@ -67,42 +67,42 @@ class Instit extends AppModel {
 	);
 
 	var $hasMany = array(
-			'Plan' => array('className' => 'Plan',
-								'foreignKey' => 'instit_id',
-								'dependent' => false,
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'limit' => '',
-								'offset' => '',
-								'exclusive' => '',
-								'finderQuery' => '',
-								'counterQuery' => ''
-			),
-			'HistorialCue' => array('className' => 'HistorialCue',
-								'foreignKey' => 'instit_id',
-								'dependent' => true,
-								'conditions' => '',
-								'fields' => '',
-								'order' => 'HistorialCue.created DESC',
-								'limit' => '',
-								'offset' => '',
-								'exclusive' => '',
-								'finderQuery' => '',
-								'counterQuery' => ''
-			),
-			'Ticket' => array('className' => 'Ticket',
-								'foreignKey' => 'instit_id',
-								'dependent' => false,
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'limit' => '',
-								'offset' => '',
-								'exclusive' => '',
-								'finderQuery' => '',
-								'counterQuery' => ''
-			)
+                        'Plan' => array('className' => 'Plan',
+                                        'foreignKey' => 'instit_id',
+                                        'dependent'=> true, // borra en cascada
+                                        'conditions' => '',
+                                        'fields' => '',
+                                        'order' => '',
+                                        'limit' => '',
+                                        'offset' => '',
+                                        'exclusive' => '',
+                                        'finderQuery' => '',
+                                        'counterQuery' => ''
+                        ),
+                        'HistorialCue' => array('className' => 'HistorialCue',
+                                                'foreignKey' => 'instit_id',
+                                                'dependent'=> true, // borra en cascada
+                                                'conditions' => '',
+                                                'fields' => '',
+                                                'order' => 'HistorialCue.created DESC',
+                                                'limit' => '',
+                                                'offset' => '',
+                                                'exclusive' => '',
+                                                'finderQuery' => '',
+                                                'counterQuery' => ''
+                        ),
+                        'Ticket' => array('className' => 'Ticket',
+                                        'foreignKey' => 'instit_id',
+                                        'dependent' => false,
+                                        'conditions' => '',
+                                        'fields' => '',
+                                        'order' => '',
+                                        'limit' => '',
+                                        'offset' => '',
+                                        'exclusive' => '',
+                                        'finderQuery' => '',
+                                        'counterQuery' => ''
+                        )
 	);
 
 	var $validate = array(

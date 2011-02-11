@@ -37,13 +37,27 @@ class Titulo extends AppModel {
 	
 	var $hasMany = array(
             'Plan',
-            'SectoresTitulo', // esta es la tabla HABTM, pero la necesito aca para hacer consultas mas especificas
+            'SectoresTitulo' => array('dependent'=> true) // borra en cascada // esta es la tabla HABTM, pero la necesito aca para hacer consultas mas especificas
             );
 
         var $hasAndBelongsToMany = array(
             'Sector' => array('joinTable' => 'sectores_titulos'),
             'Subsector' => array('joinTable' => 'sectores_titulos')
         );
+
+
+        function beforeDelete() {
+            // chequea si contiene planes asociados, no permite
+            $count = $this->Plan->find('count', array(
+                            'conditions'=>array('Plan.titulo_id'=>$this->id)
+                        ));
+            if ($count == 0) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
 
 
         function getSimilars($name=null, $titulo_id=null) {
