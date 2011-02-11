@@ -371,13 +371,14 @@ class InstitsController extends AppController {
         }
         if(!empty($this->passedArgs['busqueda_libre'])) {
             $q = utf8_decode(strtolower($this->passedArgs['busqueda_libre']));
+            
             if(is_numeric($q)){
                 $q = (int) $q;
                 $this->paginate['Instit']['conditions'] = array("to_char(cue*100+anexo, 'FM999999999FM') SIMILAR TO ?" => "%". $q ."%");
             }
             else{
                 //debug(convertir_para_busqueda_avanzada($q)); die();
-                $this->paginate['Instit']['conditions'] = array("(to_ascii(lower(Tipoinstit.name)) || ' n ' || to_ascii(lower(Instit.nroinstit)) || ' ' || to_ascii(lower(Instit.nombre))) SIMILAR TO ?" => convertir_para_busqueda_avanzada($q));
+                $this->paginate['Instit']['conditions'] = array("(to_ascii(lower(Tipoinstit.name)) || ' n ' || to_ascii(lower(Instit.nroinstit)) || ' ' || lower(Instit.nombre)) SIMILAR TO ?" => convertir_para_busqueda_avanzada($q));
             }
         }
 

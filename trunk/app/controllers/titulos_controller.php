@@ -280,7 +280,7 @@ class TitulosController extends AppController {
         }
         if(!empty($this->passedArgs['tituloName'])) {
             $q = utf8_decode(strtolower($this->passedArgs['tituloName']));
-            $this->paginate['conditions']['to_ascii(lower(Titulo.name)) SIMILAR TO ?'] = convertir_texto_plano($q);
+            $this->paginate['conditions']['lower(Titulo.name) SIMILAR TO ?'] = convertir_texto_plano($q);
         }
 
         // caso de parametros para filtrar
