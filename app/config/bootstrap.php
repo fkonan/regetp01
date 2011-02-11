@@ -161,9 +161,6 @@ function convertir_para_busqueda_avanzada($text){
                 'ó' => $posiblesO,
                 'ú' => $posiblesU,
 
-                'n' => '(n|ñ)',
-                'ñ' => '(n|ñ)',
-
                 's' => '(z|s|c)',
                 'c' => '(z|s|c)',
                 'z' => '(z|s|c)',
@@ -242,9 +239,6 @@ function convertir_texto_plano($text){
                 '/í/' => $posiblesI,
                 '/ó/' => $posiblesO,
                 '/ú/' => $posiblesU,
-
-                '/n/' => '(ñ)',
-                '/ñ/' => '(n|ñ)',
 
                 '/s/' => '(z|s|c)',
                 '/c/' => '(z|s|c)',
