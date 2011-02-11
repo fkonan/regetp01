@@ -7,7 +7,6 @@ $javascript;
 
 
 echo $javascript->link(array(
-    'jquery.autocomplete',
     'jquery.loadmask.min',
     'views/instits/search_form',
         ), false);
