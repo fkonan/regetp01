@@ -197,7 +197,7 @@ class TitulosController extends AppController {
         $conditions = array();
         $subconditions = array();
 
-        $conditions["to_ascii(lower(Titulo.name)) SIMILAR TO ?"] = "%". $q ."%";
+        $conditions["lower(Titulo.name) SIMILAR TO ?"] = convertir_para_busqueda_avanzada($q);
         $subconditions = array('Titulo.id = SectoresTitulos.titulo_id');
 
         if(@$oferta_id > 0) {

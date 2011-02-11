@@ -200,12 +200,12 @@ class LocalidadesController extends AppController {
 
             if($jur != 0){
                 $conditions = array(
-                                "to_ascii(lower(Departamento.name)) SIMILAR TO ?" => "%". $q ."%",
+                                "lower(Departamento.name) SIMILAR TO ?" => convertir_para_busqueda_avanzada($q),
                                 "Jurisdiccion.id" => $jur
                               );
             }else{
                 $conditions = array(
-                                "to_ascii(lower(Departamento.name)) SIMILAR TO ?" => "%". $q ."%"
+                                "lower(Departamento.name) SIMILAR TO ?" => convertir_para_busqueda_avanzada($q)
                               );
             }
 
@@ -235,8 +235,8 @@ class LocalidadesController extends AppController {
                             ),
                             'conditions'=> array(
                                 "OR"=>array(
-                                    "to_ascii(lower(Localidad.name)) SIMILAR TO ?" => "%". $q ."%",
-                                    "to_ascii(lower(Departamento.name)) SIMILAR TO ?" => "%". $q ."%",
+                                    "to_ascii(lower(Localidad.name)) SIMILAR TO ?" => convertir_para_busqueda_avanzada($q),
+                                    "to_ascii(lower(Departamento.name)) SIMILAR TO ?" => convertir_para_busqueda_avanzada($q),
                                 ),
                              //  "Jurisdiccion.id" => $jur,
                             ),
