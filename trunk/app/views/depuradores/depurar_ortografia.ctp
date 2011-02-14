@@ -35,7 +35,7 @@ echo $paginator->counter(array(
             <td>
             <?php
             echo $form->input('tipoinstit_name_'.$plan['Plan']['id'],
-                    array(  'value' => $plan['Plan']['nombre'],
+                    array(  'value' => $plan['Plan']['perfil'],
                             'label' => false,
                             'title' => 'spellcheck_icons',
                             'after' => '<a href="'.$html->url('/planes/edit/'.$plan['Plan']['id']).'" target="_blank">editar</a>',

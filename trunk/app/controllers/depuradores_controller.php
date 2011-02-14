@@ -573,7 +573,8 @@ class DepuradoresController extends AppController {
         $this->Plan->recursive = -1;
         $this->paginate['recursive'] = -1;
         $this->paginate['limit'] = 1000;
-        $this->paginate['fields'] = array('id','nombre','perfil');
+        $this->paginate['fields'] = array('id','perfil');
+        $this->paginate['conditions'] = array('perfil <>'=>'');
         $planes = $this->paginate('Plan');
 
         $this->set(compact('tipoinstits', 'titulos','planes'));

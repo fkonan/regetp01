@@ -101,10 +101,10 @@ function setupSpellCheckers()
                         if (textareas[i].getAttribute("value")) {
                              eval("setTimeout('setCurrentObject(spellCheckers" + numSpellCheckers + "); spellCheckers" + numSpellCheckers + ".spellCheck(); " +
                                   "',800*"+numSpellCheckers+");");
-                              eval("setTimeout('if(jQuery(\"#spellCheckDiv" + numSpellCheckers +"\").find(\"img\").hasClass(\"js-correcto\")){ " +
+                             /*eval("setTimeout('if(jQuery(\"#spellCheckDiv" + numSpellCheckers +"\").find(\"img\").hasClass(\"js-correcto\")){ " +
                                   "spellCheckers" + numSpellCheckers  +".resumeEditing();" +
                                   "}" +
-                                  "',1500*"+numSpellCheckers + 1 +");");
+                                  "',1500*"+numSpellCheckers + 1 +");");*/
                         }
 
                         
@@ -128,10 +128,10 @@ function setupSpellCheckers()
                         // que chequée ortografia si contiene algun value inicial (edit)
                         if (textareas[i].getAttribute("value")) {
                              eval("setTimeout('setCurrentObject(spellCheckers" + numSpellCheckers + "); spellCheckers" + numSpellCheckers + ".spellCheck();', 800*"+numSpellCheckers+");");
-                             eval("setTimeout('if(jQuery(\"#spellCheckDiv" + numSpellCheckers +"\").find(\"img\").hasClass(\"js-correcto\")){ " +
+                             /*eval("setTimeout('if(jQuery(\"#spellCheckDiv" + numSpellCheckers +"\").find(\"img\").hasClass(\"js-correcto\")){ " +
                                   "spellCheckers" + numSpellCheckers  +".resumeEditing();" +
                                   "}" +
-                                  "',1500*"+numSpellCheckers + 1 +");");
+                                  "',1500*"+numSpellCheckers + 1 +");");*/
                         }
                         
 			numSpellCheckers++;
