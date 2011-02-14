@@ -85,7 +85,13 @@ $cue_instit = $instit['cue'].$anexo;
                                                   'title' => 'spellcheck_icons',
                                                   'style' => 'width: 85%; clear: none;',
                                                   ((Configure::read('modo_linux'))? 'accesskey': '') => $html->url('/js/activespell/').'spell_checker.php'));
-		echo $form->input('perfil');
+		//echo $form->input('perfil');
+                echo $form->input('perfil', array('id' => 'spell_checker2',
+                                                  'title' => 'spellcheck_icons',
+                                                  'style' => 'width: 85%; clear: none;',
+                                                  ((Configure::read('modo_linux'))? 'accesskey': '') => ($html->url('/js/activespell/').'spell_checker.php')
+                                        )
+                         );
 		?>
                 <div id="divPlanTituloName">
                     <div id="filtros_titulo" onclick="jQuery('#filtros_contenido').toggle();">
