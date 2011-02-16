@@ -8,10 +8,10 @@ echo $paginator->counter(array(
 ?></p>
 <table cellpadding="0" cellspacing="0" style="font-size:9pt;">
 <tr>
-	<th><?php echo $paginator->sort('asunto');?></th>
+	<th></th>
+        <th><?php echo $paginator->sort('asunto');?></th>
 	<th><?php echo $paginator->sort('Usuario', 'user_id');?></th>
 	<th><?php echo $paginator->sort('Recibida', 'created');?></th>
-	<th><?php echo $paginator->sort('Leída', 'leido');?></th>
 	<th class="actions"><?php __('Actions');?></th>
 </tr>
 <?php
@@ -22,22 +22,22 @@ foreach ($sugerencias as $sugerencia):
 		$class = ' class="altrow"';
 	}
 ?>
-	<tr<?php echo $class;?>>
+	<tr<?php echo $class; echo ($sugerencia['Sugerencia']['leido'] == 0)?' style="font-weight: bold;"':'' ?>>
 		<td>
+			<?php echo ($sugerencia['Sugerencia']['leido'] == 0) ? $html->image('unread.png', array('valign'=>'absmiddle')) : $html->image('read.png', array('valign'=>'absmiddle')); ?>
+		</td>
+                <td style="text-align:left;">
 			<?php echo $sugerencia['Sugerencia']['asunto']; ?>
 		</td>
-		<td>
+		<td style="text-align:left;">
 			<?php echo $sugerencia['User']['username']; ?>
 		</td>
-		<td>
+		<td style="text-align:left;">
 			<?php if ($time->isToday($sugerencia['Sugerencia']['created'])) {
                                 echo "<b>Hoy</b> ".$time->format('G:i', $sugerencia['Sugerencia']['created'])." hs.";
                             } else {
                                 echo $time->format('d/m/Y G:i', $sugerencia['Sugerencia']['created']) .' hs.';
                             } ?>
-		</td>
-		<td>
-			<?php echo ($sugerencia['Sugerencia']['leido'] == 1)?"Sí":"No"; ?>
 		</td>
 		<td class="actions">
 			<?php echo $html->link(__('View', true), array('action' => 'view', $sugerencia['Sugerencia']['id'])); ?>
