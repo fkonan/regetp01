@@ -1,5 +1,5 @@
 <div class="sugerencias view">
-<h2><?php  __('Sugerencia');?></h2>
+<h2><?php  __('Sugerencia'); ?></h2>
 	<dl><?php $i = 0; $class = ' class="altrow"';?>
                 <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Asunto'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
@@ -36,6 +36,20 @@
 			<?php echo $sugerencia['User']['username']; ?>
 			&nbsp;
 		</dd>
+                <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Rol'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $sugerencia['User']['role']; ?>
+			&nbsp;
+		</dd>
+                <? if (!empty($sugerencia['User']['Jurisdiccion']['name'])) { ?>
+                <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Jurisdicción'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $sugerencia['User']['Jurisdiccion']['name']; ?>
+			&nbsp;
+		</dd>
+                <?php
+                }
+                ?>
                 <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Nombre'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $sugerencia['User']['nombre']; ?>
