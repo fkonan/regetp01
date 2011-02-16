@@ -26,13 +26,14 @@ class UtilsController extends AppController {
         $instits = $this->Instit->find('all', array(
                                 'fields' => array('id',
                                                   'nombre',
+                                                  'lugar',
                                                   'direccion',
                                                   'dir_nombre',
                                                   'vice_nombre',
                                     ),
                                 'order' => array('id')
         ));
-
+/*
         $this->Orientacion->recursive = -1;
         $orientaciones = $this->Orientacion->find('all', array(
                                 'fields' => array('Orientacion.id', 'Orientacion.name')
@@ -68,20 +69,21 @@ class UtilsController extends AppController {
         $titulos = $this->Titulo->find('all', array(
                                 'fields' => array('Titulo.id', 'Titulo.name')
         ));
-        
+ 
         foreach($departamentos as &$departamento) {
             $departamento['Departamento']['name'] = $this->__strToSpecialLower($departamento['Departamento']['name']);
         }
         $this->Departamento->saveAll($departamentos);
-
+*/
         foreach($instits as &$instit) {
-            $instit['instit']['nombre'] = $this->__strToSpecialLower($instit['instit']['nombre']);
+            /*$instit['instit']['nombre'] = $this->__strToSpecialLower($instit['instit']['nombre']);
             $instit['instit']['direccion'] = $this->__strToSpecialLower($instit['instit']['direccion']);
             $instit['instit']['dir_nombre'] = $this->__strToSpecialLower($instit['instit']['dir_nombre']);
-            $instit['instit']['vice_nombre'] = $this->__strToSpecialLower($instit['instit']['vice_nombre']);
+            $instit['instit']['vice_nombre'] = $this->__strToSpecialLower($instit['instit']['vice_nombre']);*/
+            $instit['instit']['lugar'] = $this->__strToSpecialLower($instit['instit']['lugar']);
         }
         $this->Instit->saveAll($instits, array('validate'=>false));
-
+/*
         foreach($orientaciones as &$orientacion) {
             $orientacion['Orientacion']['name'] = $this->__strToSpecialLower($orientacion['Orientacion']['name']);
         }
@@ -117,7 +119,7 @@ class UtilsController extends AppController {
             $titulo['Titulo']['name'] = $this->__strToSpecialLower($titulo['Titulo']['name']);
         }
         $this->Titulo->saveAll($titulos, array('validate'=>false));
-
+*/
     }
 
     /*
