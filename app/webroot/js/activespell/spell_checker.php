@@ -241,7 +241,9 @@ function spellCheck($string, $varName)
 	$string = preg_replace("/<!--<li( [^>]*)?>-->/i", "<li>", $string);
 	$string = preg_replace("/<!--<\/li>-->/i", "</li>", $string);
 	$string = preg_replace("/<!--<img (?:[^>]+ )?src=\"?([^\"]*)\"?[^>]*>-->/i", "<img src=\"\\1\" />", $string);
-		
+        // parche de la Ó
+        $string = str_replace(utf8_encode("oóo"), utf8_encode("Ó"), $string);
+
 	$cp->set_data($string);  //return value - string containing all the markup for the misspelled words.
 
 } // end spellCheck
@@ -416,7 +418,7 @@ function switchText($string)
 {
 	global $allowed_html;
 	global $cp; //the CPAINT object
-	$string = remove_word_junk($string);
+	$string = remove_word_junk($string);        
 	$string = preg_replace("/<!--/", "", $string);
 	$string = preg_replace("/-->/", "", $string);	
 	$string = preg_replace("/\r?\n/", " ", $string);
@@ -424,6 +426,8 @@ function switchText($string)
 	$string = strip_tags($string, $allowed_html);
 	$string = preg_replace('{&lt;/?span.*?&gt;}i', '', $string);
 	$string = html_entity_decode($string);
+        $string = str_replace(utf8_encode("oóo"), utf8_encode("Ó"), $string);
+        //$string = str_replace("ptica", utf8_encode(chr(211)), $string);
 	$cp->set_data($string); //the return value
 	
 } // end switchText
