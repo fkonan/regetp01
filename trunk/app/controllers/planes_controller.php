@@ -513,9 +513,9 @@ class PlanesController extends AppController {
         $this->paginate['order'] = array("Plan.nombre");
 
         $planes = $this->paginate();
-        $planes = $planes;
+
         //$planes = $this->Plan->Instit->getPlanes($instit_id, $oferta_id, $ciclo);
-       
+        
         $newVecPlanes = array();
         $i = 0;
         foreach($planes as &$plan){
@@ -541,7 +541,17 @@ class PlanesController extends AppController {
         $this->set('ciclos_anios', $ciclos_anios);
         $this->set('url_conditions', $url_conditions);
     }
-    
+
+    function comparar_planes_por_orden($a, $b)
+    {
+        $a_order = $a['EstructuraPlan']['Etapa']['orden'];
+        $b_order = $b['EstructuraPlan']['Etapa']['orden'];
+
+        if ($a_order == $b_order) {
+            return 0;
+        }
+        return ($a_order > $b_order) ? +1 : -1;
+    }
 
     function view_it_sec_sup($instit_id,$oferta_id,$ciclo=null) {
 
@@ -552,6 +562,9 @@ class PlanesController extends AppController {
         $planes = $this->paginate('Plan', array('Plan.instit_id'=> $instit_id, 'Plan.oferta_id' => $oferta_id, 'Anio.ciclo_id'=>$ciclo));
         //$planes = $this->Plan->Instit->getPlanes($instit_id, $oferta_id, $ciclo);
         // agrego el index "matricula" directamente que dependa de "Plan"
+
+        usort($planes, array( $this, 'comparar_planes_por_orden' ));
+        
         foreach($planes as &$plan){
             if ( !empty($plan['Plan']) ) {
                 $plan['Plan']['matricula'] = 0;
@@ -582,7 +595,6 @@ class PlanesController extends AppController {
         }
     }
     
-
     function edicionMasiva1Dot6Dot3() {
         set_time_limit(30000000);
         $this->Plan->recursive = 0;
