@@ -365,6 +365,7 @@ function spellCheck() {
 		currObj.statusSpan.innerHTML = "Checking...";
 	}
 	query = currObj.objToCheck.value;
+        
 	query = query.replace(/\r?\n/gi, "<br />");
 	
 	cp.call(currObj.config['spellUrl'], 'spellCheck', spellCheck_cb, query, currObj.config['varName']);
@@ -677,6 +678,7 @@ function switchText()
             text = text.replace(/<br *\/?>/gi, "~~~");
             // Work around a cpaint/safari bug by prefixing an asterisk to the text so that the text is never completely empty
             text = '*' + text;
+            
             cp.call(currObj.config['spellUrl'], 'switchText', switchText_cb, text);
         }
 }; // end switchText
@@ -690,6 +692,7 @@ function switchTextNoResume()
             text = text.replace(/<br *\/?>/gi, "~~~");
             // Work around a cpaint/safari bug by prefixing an asterisk to the text so that the text is never completely empty
             text = '*' + text;
+            
             cp.call(currObj.config['spellUrl'], 'switchText', switchTextNoResume_cb, text);
         }
 }; // end switchTextNoResume
