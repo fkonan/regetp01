@@ -1,3 +1,13 @@
+<h1>RFIETP - Novedades de la versión 1.6.8</h1>
+<br>
+<ul>
+    <li>Se han incorporado reglas de integridad referencial en determinados modelos.</li>
+    <li>Se corrigió la detección de caracteres con acentos y la "ñ" en búsquedas javascript de autocomplete.</li>
+    <li>Mejoras visuales en listados de usuarios y sugerencias.</li>
+    <li>Se creó una activación configurable para el uso del corrector ortográfico.</li>
+</ul>
+<br>
+
 <h1>RFIETP - Novedades de la versión 1.6.7</h1>
 <br>
 <ul>
