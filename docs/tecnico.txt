@@ -372,3 +372,4 @@ maintenance
 protesista
 traumatólogo
 instrumentador
+electronicista
