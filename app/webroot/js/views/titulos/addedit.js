@@ -28,3 +28,13 @@ function Validate() {
         return false;
     }
 }
+
+function agregarSectorySubsector() {
+    var cloned = jQuery('#sectores .js-sector').first().clone(true);
+
+    cloned.find('.js-prioridad-hd').val("0");
+    cloned.find('.js-prioridad').removeAttr("checked");
+    cloned.attr('id','cloned');
+    jQuery('#sectores').append(cloned.outer());
+
+}

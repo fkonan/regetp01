@@ -1,10 +1,11 @@
 <?php
 echo $javascript->link(array(
-    'jquery.loadmask.min',
-    'views/titulos/addedit'
+        'jquery.loadmask.min',
+        'views/titulos/addedit',
+        'activespell/cpaint/cpaint2.inc.compressed.js',
+        'activespell/js/spell_checker'
     ));
-
-echo $html->css(array('jquery.loadmask'));
+echo $html->css(array('jquery.loadmask', 'spell_checker.css'));
 ?>
 <div class="titulos form">
 <?php echo $form->create('Titulo', array('onsubmit'=>'return Validate()'));?>
@@ -13,9 +14,12 @@ echo $html->css(array('jquery.loadmask'));
                 <h2>Datos</h2>
 	<?php
                 echo $form->input('id');
-		echo $form->input('name', array('label'=>'Nombre del Título',
-                                        'onblur'=>'SearchSimilars("'.$html->url('/titulos/ajax_similars/').'", this.value, '.$this->data['Titulo']['id'].')',
-                                        'div'=>'divTituloName'));
+		echo $form->input('name', array(
+                    'label'=>'Nombre del Título',
+                    'title' => 'spellcheck_icons',
+                    'style' => 'width: 85%; clear: none;',
+                    ((Configure::read('modo_linux'))? 'accesskey': '') => $html->url('/js/activespell/').'spell_checker.php',
+                    'div'=>'divTituloName'));
         ?>
                 <div id="similars" class="attention"></div>
         <?php
@@ -130,20 +134,9 @@ echo $html->css(array('jquery.loadmask'));
             jQuery(this).parent().find('.js-prioridad-hd').val("1");
         });
 
+        jQuery("#TituloName").live('blur', function() {
+            SearchSimilars('<?php echo $html->url('/titulos/ajax_similars/');?>', jQuery("#TituloName").val(), <?php echo $this->data['Titulo']['id'];?>);
+        });
+
     });
-
-
-    function agregarSectorySubsector(){
-        
-        var cloned = jQuery('#sectores .js-sector').first().clone(true);
-
-        cloned.find('.js-prioridad-hd').val("0");
-
-        cloned.find('.js-prioridad').removeAttr("checked");
-
-        cloned.attr('id','cloned');
-
-        jQuery('#sectores').append(cloned.outer());
-
-    }
 </script>

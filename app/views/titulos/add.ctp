@@ -1,11 +1,11 @@
 <?php
 echo $javascript->link(array(
-    'jquery.loadmask.min',
-    'views/titulos/addedit'
+        'jquery.loadmask.min',
+        'views/titulos/addedit',
+        'activespell/cpaint/cpaint2.inc.compressed.js',
+        'activespell/js/spell_checker'
     ));
-
-echo $html->css(array('jquery.loadmask'));
-
+echo $html->css(array('jquery.loadmask', 'spell_checker.css'));
 ?>
 <script type="text/javascript">
     
@@ -15,9 +15,12 @@ echo $html->css(array('jquery.loadmask'));
 	<fieldset>
  		<legend><?php __('Nuevo Título');?></legend>
 	<?php
-		echo $form->input('name', array('label'=>'Nombre del Título', 
-                                        'onblur'=>'SearchSimilars("'.$html->url('/titulos/ajax_similars/').'", this.value)',
-                                        'div'=>'divTituloName'));
+		echo $form->input('name', array(
+                    'label'=>'Nombre del Título',
+                    'title' => 'spellcheck_icons',
+                    'style' => 'width: 85%; clear: none;',
+                    ((Configure::read('modo_linux'))? 'accesskey': '') => $html->url('/js/activespell/').'spell_checker.php',
+                    'div'=>'divTituloName'));
         ?>
                 <div id="similars" class="attention"></div>
         <?php
@@ -85,5 +88,9 @@ echo $html->css(array('jquery.loadmask'));
         jQuery('#sectores .js-prioridad').first().attr("value","1");
 
         jQuery('.js-sector-id').change();
+
+        jQuery("#TituloName").live('blur', function() {
+            SearchSimilars('<?php echo $html->url('/titulos/ajax_similars/');?>', jQuery("#TituloName").val());
+        });
     });
 </script>
