@@ -155,7 +155,12 @@ class TitulosController extends AppController {
 
     function ajax_similars($name=null, $id=null) {
         $similars = array();
-        if (strlen($name) && is_numeric($id)) {
+        if (strlen($name)) {
+            $pos = strpos('/', $name);
+            if ($pos !== false) {
+                $name = substr($name, 0, $pos);
+            }
+
             $this->Titulo->recursive = 0;
             $similars = $this->Titulo->getSimilars($name, $id);
         }

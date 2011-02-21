@@ -356,9 +356,11 @@ class PlanesController extends AppController {
         ));
 
         $estructura_planes = array();
-        foreach($estructuraPlanesGrafico as $estructura) {
+        $estructuras_ordenadas = $estructuraPlanesGrafico;
+        usort($estructuras_ordenadas, array( $this, 'comparar_planes_por_orden' ));
+        
+        foreach($estructuras_ordenadas as $estructura) {
             $estructura_planes[$estructura['EstructuraPlan']['id']] = $estructura['EstructuraPlan']['name'];
-
         }
 
         $this->set(compact('subsectores','sectores','titulos', 'ciclos', 'estructura_planes','estructuraPlanesGrafico'));
@@ -404,7 +406,10 @@ class PlanesController extends AppController {
                 'conditions'=>array('jurisdiccion_id'=>$instit['Instit']['jurisdiccion_id'])
         ));
 
-        foreach($estructuraPlanesGrafico as $estructura) {
+        $estructuras_ordenadas = $estructuraPlanesGrafico;
+        usort($estructuras_ordenadas, array( $this, 'comparar_planes_por_orden' ));
+
+        foreach($estructuras_ordenadas as $estructura) {
             $estructura_planes[$estructura['EstructuraPlan']['id']] = $estructura['EstructuraPlan']['name'];
 
         }

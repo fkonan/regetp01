@@ -1,3 +1,10 @@
+<?php
+echo $javascript->link(array(
+        'activespell/cpaint/cpaint2.inc.compressed.js',
+        'activespell/js/spell_checker'
+    ));
+echo $html->css(array('jquery.loadmask', 'spell_checker.css'));
+?>
 <div class="tipoinstits form">
 <?php echo $form->create('Tipoinstit');?>
 	<fieldset>
@@ -5,7 +12,11 @@
 	<?php
 		echo $form->input('id');
 		echo $form->input('jurisdiccion_id');
-		echo $form->input('name');
+		echo $form->input('name', array(
+                            'title' => 'spellcheck_icons',
+                            'style' => 'width: 85%; clear: none;',
+                            ((Configure::read('modo_linux'))? 'accesskey': '') => $html->url('/js/activespell/').'spell_checker.php',
+                ));
 	?>
 	</fieldset>
 <?php echo $form->end('Submit');?>

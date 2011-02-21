@@ -30,5 +30,25 @@ class EstructuraPlan extends AppModel {
                         'JurisdiccionesEstructuraPlan',
 	);
 
+
+    function comparar_planes_por_orden($a, $b)
+    {
+        $a_order = $a['EstructuraPlan']['Etapa']['orden'];
+        $b_order = $b['EstructuraPlan']['Etapa']['orden'];
+
+        if ($a_order == $b_order) {
+            return 0;
+        }
+        return ($a_order > $b_order) ? +1 : -1;
+    }
+
+    function afterFind($results) {
+        if (!empty($results[0]['EstructuraPlan']['Etapa'])) {
+            usort($results, array( $this, 'comparar_planes_por_orden' ));
+        }
+
+        return $results;
+    }
+
 }
 ?>
