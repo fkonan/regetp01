@@ -632,7 +632,7 @@ class Instit extends AppModel {
             //else debug('vino vacio el cue, anexo o id de institucion y no se puede comprobar si hubo cambio de cue');
   	}
   	
-  	/* 
+  	 
   	function beforeSave(){
   		
   		// -----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -670,7 +670,7 @@ class Instit extends AppModel {
 	
   		return true;
   	}
-  	*/
+  	
   	
   	/**
   	 * Verifica si el CUE ingresado es válido 

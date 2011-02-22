@@ -8,7 +8,7 @@ set_time_limit(60*60*0.5); // media hora de ejecucion limite
 class UtilsController extends AppController {
 
     var $name = 'Utils';
-    var $uses = array('Departamento', 'Instit', 'Orientacion', 'Localidad', 'Plan', 'Sector', 'Subsector', 'Tipoinstit', 'Titulo');
+    var $uses = array('Departamento', 'Instit', 'Orientacion', 'Localidad', 'Plan', 'Sector', 'Subsector', 'Tipoinstit', 'Titulo', 'User');
     var $helpers = array('Html','Form','Ajax');
 
 
@@ -207,18 +207,89 @@ class UtilsController extends AppController {
     }
 
 
-    function externRedirect($controller='', $action='', $id='') {
-        if (!empty($this->passedArgs['controller'])) {
-            $controller = $this->passedArgs['controller'];
+    function checkPasswords() {
+        $this->autoRender = false;
+
+        $users = $this->User->find('all', array(
+           'conditions' => array('User.role' => 'referentes')
+        ));
+
+        foreach ($users as $user) {
+            switch ($user['User']['username']) {
+                case "edillon":
+                    echo "<br /><br />[".$user['User']['id']."] edillon: ";
+                    if ($this->Auth->password("xMz23U") != $user['User']['password']) {
+                        echo "cambió password";
+                    } 
+                    else {
+                        echo "<b>no cambió password</b>";
+                    }
+                    break;
+                case "pcassutti":
+                    echo "<br /><br />[".$user['User']['id']."] pcassutti: ";
+                    if ($this->Auth->password("P26cT1") != $user['User']['password']) {
+                        echo "cambió password";
+                    } 
+                    else {
+                        echo "<b>no cambió password</b>";
+                    }
+                    break;
+                case "mrubio":
+                    echo "<br /><br />[".$user['User']['id']."] mrubio: ";
+                    if ($this->Auth->password("rt53xq") != $user['User']['password']) {
+                        echo "cambió password";
+                    } 
+                    else {
+                        echo "<b>no cambió password</b>";
+                    }
+                    break;
+                case "dadicarlo":
+                    echo "<br /><br />[".$user['User']['id']."] dadicarlo: ";
+                    if ($this->Auth->password("Ti44tW") != $user['User']['password']) {
+                        echo "cambió password";
+                    } 
+                    else {
+                        echo "<b>no cambió password</b>";
+                    }
+                    break;
+                case "jaramendi":
+                    echo "<br /><br />[".$user['User']['id']."] jaramendi: ";
+                    if ($this->Auth->password("ajm18x") != $user['User']['password']) {
+                        echo "cambió password";
+                    } 
+                    else {
+                        echo "<b>no cambió password</b>";
+                    }
+                    break;
+                case "cmaggio":
+                    echo "<br /><br />[".$user['User']['id']."] cmaggio: ";
+                    if ($this->Auth->password("c14rma") != $user['User']['password']) {
+                        echo "cambió password";
+                    } 
+                    else {
+                        echo "<b>no cambió password</b>";
+                    }
+                    break;
+                case "cdeluca":
+                    echo "<br /><br />[".$user['User']['id']."] cdeluca: ";
+                    if ($this->Auth->password("wer7df") != $user['User']['password']) {
+                        echo "cambió password";
+                    } 
+                    else {
+                        echo "<b>no cambió password</b>";
+                    }
+                    break;
+                case "jmonteagudo":
+                    echo "<br /><br />[".$user['User']['id']."] jmonteagudo: ";
+                    if ($this->Auth->password("rsj65m") != $user['User']['password']) {
+                        echo "cambió password";
+                    } 
+                    else {
+                        echo "<b>no cambió password</b>";
+                    }
+                    break;
+            }
         }
-        if (!empty($this->passedArgs['action'])) {
-            $action = $this->passedArgs['action'];
-        }
-        if (!empty($this->passedArgs['id'])) {
-            $id = $this->passedArgs['id'];
-        }
-                
-        $this->redirect(array('controller'=>$controller, 'action'=>$action, $id));
     }
 }
 ?>
