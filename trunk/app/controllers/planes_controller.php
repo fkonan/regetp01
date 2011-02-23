@@ -350,7 +350,7 @@ class PlanesController extends AppController {
 
         $estructuraPlanesGrafico = $this->Plan->EstructuraPlan->JurisdiccionesEstructuraPlan->find('all',array(
                 'contain'=>array(
-                        'EstructuraPlan'=>array('Etapa','EstructuraPlanesAnio'=>array('order'=> array('EstructuraPlanesAnio.edad_teorica')))
+                        'EstructuraPlan'=>array('Etapa'=>array('order'=> array('Etapa.orden')),'EstructuraPlanesAnio'=>array('order'=> array('EstructuraPlanesAnio.edad_teorica')))
                 ),
                 'conditions'=>array('jurisdiccion_id'=>$instit['Instit']['jurisdiccion_id'])
         ));
