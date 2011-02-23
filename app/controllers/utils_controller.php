@@ -288,6 +288,15 @@ class UtilsController extends AppController {
                         echo "<b>no cambió password</b>";
                     }
                     break;
+                case "hjose":
+                    echo "<br /><br />[".$user['User']['id']."] hjose: ";
+                    if ($this->Auth->password("yu27bu") != $user['User']['password']) {
+                        echo "cambió password";
+                    }
+                    else {
+                        echo "<b>no cambió password</b>";
+                    }
+                    break;
             }
         }
     }
