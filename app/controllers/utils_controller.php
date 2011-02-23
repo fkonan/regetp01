@@ -210,94 +210,119 @@ class UtilsController extends AppController {
     function checkPasswords() {
         $this->autoRender = false;
 
+        $this->User->recursive = -1;
         $users = $this->User->find('all', array(
-           'conditions' => array('User.role' => 'referentes')
+           'contain' => array('UserLogin' => array(
+                                'order' => 'UserLogin.created DESC',
+                                'limit' => '1'
+           )),
+           'conditions' => array('User.role' => 'referentes'),
+           'order' => array('User.created')
         ));
 
         foreach ($users as $user) {
             switch ($user['User']['username']) {
                 case "edillon":
-                    echo "<br /><br />[".$user['User']['id']."] edillon: ";
+                    echo "[".$user['User']['id']."] edillon: ";
                     if ($this->Auth->password("xMz23U") != $user['User']['password']) {
                         echo "cambió password";
                     } 
                     else {
                         echo "<b>no cambió password</b>";
                     }
+                    echo " (último login: ".date('d/m/Y H:i', strtotime($user['UserLogin'][0]['created'])).")";
                     break;
+
                 case "pcassutti":
-                    echo "<br /><br />[".$user['User']['id']."] pcassutti: ";
+                    echo "[".$user['User']['id']."] pcassutti: ";
                     if ($this->Auth->password("P26cT1") != $user['User']['password']) {
                         echo "cambió password";
                     } 
                     else {
                         echo "<b>no cambió password</b>";
                     }
+                    echo " (último login: ".date('d/m/Y H:i', strtotime($user['UserLogin'][0]['created'])).")";
                     break;
+
                 case "mrubio":
-                    echo "<br /><br />[".$user['User']['id']."] mrubio: ";
+                    echo "[".$user['User']['id']."] mrubio: ";
                     if ($this->Auth->password("rt53xq") != $user['User']['password']) {
                         echo "cambió password";
                     } 
                     else {
                         echo "<b>no cambió password</b>";
                     }
+                    echo " (último login: ".date('d/m/Y H:i', strtotime($user['UserLogin'][0]['created'])).")";
                     break;
+
                 case "dadicarlo":
-                    echo "<br /><br />[".$user['User']['id']."] dadicarlo: ";
+                    echo "[".$user['User']['id']."] dadicarlo: ";
                     if ($this->Auth->password("Ti44tW") != $user['User']['password']) {
                         echo "cambió password";
                     } 
                     else {
                         echo "<b>no cambió password</b>";
                     }
+                    echo " (último login: ".date('d/m/Y H:i', strtotime($user['UserLogin'][0]['created'])).")";
                     break;
+
                 case "jaramendi":
-                    echo "<br /><br />[".$user['User']['id']."] jaramendi: ";
+                    echo "[".$user['User']['id']."] jaramendi: ";
                     if ($this->Auth->password("ajm18x") != $user['User']['password']) {
                         echo "cambió password";
                     } 
                     else {
                         echo "<b>no cambió password</b>";
                     }
+                    echo " (último login: ".date('d/m/Y H:i', strtotime($user['UserLogin'][0]['created'])).")";
                     break;
+
                 case "cmaggio":
-                    echo "<br /><br />[".$user['User']['id']."] cmaggio: ";
+                    echo "[".$user['User']['id']."] cmaggio: ";
                     if ($this->Auth->password("c14rma") != $user['User']['password']) {
                         echo "cambió password";
                     } 
                     else {
                         echo "<b>no cambió password</b>";
                     }
+                    echo " (último login: ".date('d/m/Y H:i', strtotime($user['UserLogin'][0]['created'])).")";
                     break;
+
                 case "cdeluca":
-                    echo "<br /><br />[".$user['User']['id']."] cdeluca: ";
+                    echo "[".$user['User']['id']."] cdeluca: ";
                     if ($this->Auth->password("wer7df") != $user['User']['password']) {
                         echo "cambió password";
                     } 
                     else {
                         echo "<b>no cambió password</b>";
                     }
+                    echo " (último login: ".date('d/m/Y H:i', strtotime($user['UserLogin'][0]['created'])).")";
                     break;
+
                 case "jmonteagudo":
-                    echo "<br /><br />[".$user['User']['id']."] jmonteagudo: ";
+                    echo "[".$user['User']['id']."] jmonteagudo: ";
                     if ($this->Auth->password("rsj65m") != $user['User']['password']) {
                         echo "cambió password";
                     } 
                     else {
                         echo "<b>no cambió password</b>";
                     }
+                    echo " (último login: ".date('d/m/Y H:i', strtotime($user['UserLogin'][0]['created'])).")";
                     break;
+
                 case "hjose":
-                    echo "<br /><br />[".$user['User']['id']."] hjose: ";
+                    echo "[".$user['User']['id']."] hjose: ";
                     if ($this->Auth->password("yu27bu") != $user['User']['password']) {
                         echo "cambió password";
                     }
                     else {
                         echo "<b>no cambió password</b>";
                     }
+                    echo " (último login: ".date('d/m/Y H:i', strtotime($user['UserLogin'][0]['created'])).")";
                     break;
             }
+            
+            echo "<br /><br />";
         }
     }
 }
