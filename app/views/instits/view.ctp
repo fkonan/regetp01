@@ -335,29 +335,7 @@
 
                     <H2>Datos Adicionales</H2>
                     <dl>
-                        <?php
-                            if ($session->check('Auth.User')) {
-                                if($session->read('Auth.User.role') != 'invitado') {
-                        ?>
-                        <dt><?php __('Fecha Mod (<2009)'); ?></dt>
-                        <dd>
-                        <?php echo ($instit['Instit']['fecha_mod']>0)?date("d/m/Y",strtotime($instit['Instit']['fecha_mod'])):'<i>No declarado</i>'; ?>
-                            &nbsp;
-                        </dd>
-                        <?php
-                                }
-                            }
-                        ?>
-                        <dt><?php __('Actualización o Ingreso'); ?></dt>
-                        <dd>
-                        <?php
-                          if(!empty($instit['Instit']['actualizacion'])){ 
-                                echo $instit['Instit']['actualizacion'];
-                            }else {
-                      	        echo "<i>No declarado</i>";
-                            } ?>
-                            &nbsp;
-                        </dd>
+                        
 
                         <?php if(strlen($instit['Instit']['observacion'])){?>
                         <dt><?php __('Observación'); ?></dt>
@@ -378,21 +356,14 @@
                         <?php echo ($instit['Instit']['ciclo_alta']>0)?$instit['Instit']['ciclo_alta']:'<i>No declarado</i>'; ?>
                             &nbsp;
                         </dd>
-                        <?php
-                            if ($session->check('Auth.User')) {
-                                if($session->read('Auth.User.role') != 'invitado') {
-                        ?>
+
                         <dt><?php __('Modificación'); ?></dt>
                         <dd>
                         <?php //echo ($instit['Instit']['modified']>0)?$instit['Instit']['modified']:''; ?>
 
-                        <?php echo ($instit['Instit']['modified']>0)?date("d/m/Y",strtotime($instit['Instit']['modified'])):'<i>No declarado</i>'; ?>
+                        <?php echo ($instit['Instit']['modified']>0)?date("d/m/Y",strtotime($instit['Instit']['modified'])):'<i>Los datos nunca fueron modificados para esta institución</i>'; ?>
                             &nbsp;
                         </dd>
-                        <?php
-                                }
-                            }
-                        ?>
                     </dl>
                     <br />
 
