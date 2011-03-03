@@ -10,11 +10,13 @@ echo $html->css(array('jquery.loadmask', 'spell_checker.css'));
 <script type="text/javascript">
     
 </script>
-<div class="titulos form"> 
+<div class="titulos form">
+<h2><?php __('Nuevo Título de Referencia');?></h2>
 <?php echo $form->create('Titulo', array('onsubmit'=>'return Validate()'));?>
 	<fieldset>
- 		<legend><?php __('Nuevo Título');?></legend>
+                <h2>Datos</h2>
 	<?php
+                echo $form->input('oferta_id');
 		echo $form->input('name', array(
                     'label'=>'Nombre del Título',
                     'title' => 'spellcheck_icons',
@@ -30,7 +32,6 @@ echo $html->css(array('jquery.loadmask', 'spell_checker.css'));
                                                     'checked' => 1,
                                                     'options'=>array(1=>'Con Marco de Referencia', 0=>'Sin marco de Referencia'))
 		);
-		echo $form->input('oferta_id');
 	?>
         <h2>Sectores/Subsectores</h2>
         <cite>Agregue los Sectores/Subsectores correspondientes y seleccione el prioritario</cite>

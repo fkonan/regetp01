@@ -430,6 +430,36 @@ class Instit extends AppModel {
   		return $instituciones_data;
   	}
 
+
+        function getNombreCompleto($nombre, $nroinstit='', $tipoinstit='') {
+            $nombre_completo = "";
+
+            if (!empty($this->data['Instit']['nombre'])) {
+                $nombre = $this->data['Instit']['nombre'];
+            }
+            if (!empty($this->data['Instit']['nroinstit'])) {
+                $nroinstit = $this->data['Instit']['nroinstit'];
+            }
+            if (!empty($tipoinstit) && $tipoinstit == 'SIN DATOS') {
+                $tipoinstit = '';
+            }
+
+            if (!empty($tipoinstit)) {
+                $nombre_completo = $tipoinstit.' ';
+                $nombre_completo .= ($nroinstit > 0 || $nroinstit != '')?"Nº $nroinstit ":"";
+                if (($tipoinstit != 'SIN DATOS' ||  $nroinstit > 0) && $nombre){
+                    $nombre_completo .= " ";
+                }
+                $nombre_completo .= ($nombre != '')?'"'.$nombre.'"':"";
+            }
+            else {
+                $nombre_completo .= ($nroinstit > 0 || $nroinstit != '')?"Nº $nroinstit ":"";
+                $nombre_completo .= ($nombre != '')?'"'.$nombre.'"':"";
+            }
+
+            return $nombre_completo;
+        }
+
         
   	
   
