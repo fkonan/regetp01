@@ -3,7 +3,8 @@
       
             echo $form->input('mostraranios', array('type' => 'checkbox',
                 'onclick' => 'toogleDatosAnios();',
-                'label' => 'Mostrar Año de Formación (A.F.) y Edad Teórica (E.T.).'));
+                'style' => 'cursor:pointer;',
+                'label' => '<span style="cursor:pointer;">Mostrar Año de Formación (A.F.) y Edad Teórica (E.T.).</span>'));
 
         //reccorro por cada ciclo
         while (list($key,$ciclo) = each($anios)) {
