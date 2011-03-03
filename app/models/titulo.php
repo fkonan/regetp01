@@ -26,12 +26,7 @@ class Titulo extends AppModel {
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array(
-			'Oferta' => array('className' => 'Oferta',
-								'foreignKey' => 'oferta_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => ''
-			)
+			'Oferta',
 	);
 	
 	

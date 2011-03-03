@@ -13,29 +13,31 @@ class Departamento extends AppModel {
 	var $belongsTo = array('Jurisdiccion');
 
 	var $hasMany = array(
-			'Localidad' => array('className' => 'Localidad',
-								'foreignKey' => 'departamento_id',
-								'dependent'=> true, // borra en cascada
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'limit' => '',
-								'offset' => '',
-								'exclusive' => '',
-								'finderQuery' => '',
-								'counterQuery' => ''
+			'Localidad' => array(
+                            'className' => 'Localidad',
+                            'foreignKey' => 'departamento_id',
+                            'dependent'=> true, // borra en cascada
+                            'conditions' => '',
+                            'fields' => '',
+                            'order' => '',
+                            'limit' => '',
+                            'offset' => '',
+                            'exclusive' => '',
+                            'finderQuery' => '',
+                            'counterQuery' => ''
 			),
-			'instit' => array('className' => 'instit',
-								'foreignKey' => 'departamento_id',
-								'dependent' => false,
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'limit' => '',
-								'offset' => '',
-								'exclusive' => '',
-								'finderQuery' => '',
-								'counterQuery' => ''
+			'instit' => array(
+                            'className' => 'instit',
+                            'foreignKey' => 'departamento_id',
+                            'dependent' => false,
+                            'conditions' => '',
+                            'fields' => '',
+                            'order' => '',
+                            'limit' => '',
+                            'offset' => '',
+                            'exclusive' => '',
+                            'finderQuery' => '',
+                            'counterQuery' => ''
 			)
 	);
 	

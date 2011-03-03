@@ -16,11 +16,7 @@ class EstructuraPlan extends AppModel {
         );
 
         var $belongsTo = array(
-			'Etapa' => array('className' => 'Etapa',
-								'foreignKey' => 'etapa_id',
-								'conditions' => '',
-								'fields' => ''
-			)
+                        'Etapa',
 	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
