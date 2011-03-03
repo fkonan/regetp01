@@ -27,6 +27,10 @@ class AutoridadesController extends AppController {
 				$this->Session->setFlash(__('The Autoridad could not be saved. Please, try again.', true));
 			}
 		}
+                $jurisdicciones = $this->Autoridad->Jurisdiccion->find('list');
+                $localidades = $this->Autoridad->Localidad->find('list');
+                $departamentos = $this->Autoridad->Departamento->find('list');
+                $this->set(compact('jurisdicciones', 'localidades', 'departamentos'));
 	}
 
 	function edit($id = null) {
@@ -45,6 +49,10 @@ class AutoridadesController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Autoridad->read(null, $id);
 		}
+                $jurisdicciones = $this->Autoridad->Jurisdiccion->find('list');
+                $localidades = $this->Autoridad->Localidad->find('list');
+                $departamentos = $this->Autoridad->Departamento->find('list');
+                $this->set(compact('jurisdicciones', 'localidades', 'departamentos'));
 	}
 
 	function delete($id = null) {
