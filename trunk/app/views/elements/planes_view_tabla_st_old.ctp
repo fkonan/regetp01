@@ -1,5 +1,10 @@
 <div class="related">
-    <?php if (!empty($anios)) {
+  <?php if (!empty($anios)) {
+      
+            echo $form->input('mostraranios', array('type' => 'checkbox',
+                'onclick' => 'toogleDatosAnios();',
+                'label' => 'Mostrar Año de Formación (A.F.) y Edad Teórica (E.T.).'));
+
         //reccorro por cada ciclo
         while (list($key,$ciclo) = each($anios)) {
             $i = 0;
@@ -44,6 +49,8 @@
         <tr>
             <th><?php __('Año'); ?></th>
             <th><?php __('Etapa'); ?></th>
+            <th class="js-opcional"><?php __('A.F'); ?></th>
+            <th class="js-opcional"><?php __('E.T'); ?></th>
             <th><?php __('Matrícula'); ?></th>
             <th><?php __('Secciones'); ?></th>
             <th><?php __('Horas Taller'); ?></th>
@@ -63,6 +70,8 @@
         <tr id="fila_plan_<?= $anio['ciclo_id'].'_'.$anio['anio']?>" <?php echo $class;?>>
             <td><?php echo @$anio['EstructuraPlanesAnio']['alias'];?></td>
             <td><?php echo $this->requestAction('/Etapas/dame_nombre/'.$anio['etapa_id']);?></td>
+            <td class="js-opcional"><?php echo @$anio['EstructuraPlanesAnio']['anio_escolaridad'];?></td>
+            <td class="js-opcional"><?php echo @$anio['EstructuraPlanesAnio']['edad_teorica'];?></td>
             <td><?php echo  empty($anio['matricula'])?'-':$anio['matricula'];
             $tot_matricula += $anio['matricula']; ?></td>
             <td><?php echo empty($anio['secciones'])?'-':$anio['secciones'];
@@ -80,8 +89,10 @@
 
 
         <tr <?php echo $class;?> >
-            <td style="border-top: 1px silver solid;"><?php echo '';?></td>
+            <td style="border-top: 1px silver solid;"></td>
             <td style="border-top: 1px silver solid;"><?php echo '<b>Totales</b>';?></td>
+            <td style="border-top: 1px silver solid;" class="js-opcional"></td>
+            <td style="border-top: 1px silver solid;" class="js-opcional"></td>
             <td style="border-top: 1px silver solid;"><b><?php echo $tot_matricula;?></b></td>
             <td style="border-top: 1px silver solid;"><b><?php echo $tot_secciones;?></b></td>
             <td style="border-top: 1px silver solid;"><?php echo '';?></td>
