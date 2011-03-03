@@ -2,6 +2,7 @@
 class LineasDeAccion extends AppModel {
 
 	var $name = 'LineasDeAccion';
+        
 	var $validate = array(
 		'name' => array('notempty')
 	);

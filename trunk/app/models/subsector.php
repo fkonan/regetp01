@@ -9,28 +9,12 @@ class Subsector extends AppModel {
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array(
-			'Sector' => array('className' => 'Sector',
-								'foreignKey' => 'sector_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => ''
-			)
+			'Sector',
 	);
 
 	var $hasMany = array(
-                        'SectoresTitulo',
-			'Plan' => array('className' => 'Plan',
-								'foreignKey' => 'subsector_id',
-								'dependent' => false,
-								'conditions' => '',
-								'fields' => '',
-								'order' => '',
-								'limit' => '',
-								'offset' => '',
-								'exclusive' => '',
-								'finderQuery' => '',
-								'counterQuery' => ''
-			)
+                        'SectoresTitulo' => array( 'dependent' => true ),
+			'Plan',
 	);
 
 

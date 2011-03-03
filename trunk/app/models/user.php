@@ -5,17 +5,15 @@ class User extends AppModel {
         var $actsAs = array('Acl' => array('type' => 'requester'));
 	
 	
-	var $hasMany = array('UserLogin');
+	var $hasMany = array(
+            'UserLogin',
+            'Ticket',
+            );
 
         //The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $belongsTo = array(
-
-			'Jurisdiccion' => array('className' => 'Jurisdiccion',
-								'foreignKey' => 'jurisdiccion_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => ''
-			));
+			'Jurisdiccion',
+            );
 
         var $validate = array(
             'username' => array(

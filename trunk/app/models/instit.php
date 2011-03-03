@@ -93,7 +93,7 @@ class Instit extends AppModel {
                         ),
                         'Ticket' => array('className' => 'Ticket',
                                         'foreignKey' => 'instit_id',
-                                        'dependent' => false,
+                                        'dependent' => true,
                                         'conditions' => '',
                                         'fields' => '',
                                         'order' => '',

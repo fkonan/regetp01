@@ -5,18 +5,7 @@ class Etapa extends AppModel {
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	var $hasMany = array(
-            'Anio' => array('className' => 'Anio',
-                                                    'foreignKey' => 'etapa_id',
-                                                    'dependent' => false,
-                                                    'conditions' => '',
-                                                    'fields' => '',
-                                                    'order' => '',
-                                                    'limit' => '',
-                                                    'offset' => '',
-                                                    'exclusive' => '',
-                                                    'finderQuery' => '',
-                                                    'counterQuery' => ''
-            ),
+            'Anio' => array('dependent' => false)
 	);
 	
 	var $validate = array(

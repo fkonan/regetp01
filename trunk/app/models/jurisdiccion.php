@@ -9,12 +9,9 @@ class Jurisdiccion extends AppModel {
         var $order = array('Jurisdiccion.name');
 
         var $belongsTo = array(
-			'Localidad' => array('className' => 'Localidad',
-								'foreignKey' => 'ministerio_localidad_id',
-								'conditions' => '',
-								'fields' => '',
-								'order' => ''
-			)
+			'Localidad' => array(
+                            'foreignKey' => 'ministerio_localidad_id',
+			),
         );
 
 	var $validate = array(
