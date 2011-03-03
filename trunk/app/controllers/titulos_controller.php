@@ -40,7 +40,64 @@ class TitulosController extends AppController {
         if (!$id) {
             $this->flash(__('Invalid Titulo', true), array('action'=>'index'));
         }
-        $this->set('titulo', $this->Titulo->read(null, $id));
+
+        $this->Titulo->recursive = -1;
+        $conditions = '';
+        $conditions['conditions'] = array('Titulo.id' => $id);
+        $conditions['contain'] = array(
+                            'Oferta',
+                            'SectoresTitulo' => array('Sector', 'Subsector')
+        );
+        $titulo = $this->Titulo->find('first', $conditions);
+
+        // Planes del Titulo
+        $this->Titulo->Plan->recursive = -1;
+        $this->paginate = array(
+                'limit'    => 20,
+                'page'    => 1,
+                'conditions' => array('Plan.titulo_id' => $id),
+                'contain' => array('Instit' => array('Tipoinstit(name)', 'Jurisdiccion(name)')),
+                'order'    => array('Plan.nombre' => 'asc')
+        );
+        $planes = $this->paginate('Plan');
+
+        // para nombre completo de instit
+        foreach ($planes as &$plan) {
+            $plan['Instit']['nombre_completo'] = $this->Titulo->Plan->Instit->getNombreCompleto($plan['Instit']['nombre'], $plan['Instit']['nroinstit'], $plan['Instit']['Tipoinstit']['name']);
+        }
+        
+        
+        // resumen de planes
+        $this->Titulo->Plan->recursive = -1;
+        $conditions = '';
+        $conditions['conditions'] = array('Plan.titulo_id' => $id);
+        $conditions['fields'] = array('Plan.nombre', 'count(*)');
+        $conditions['group'] = array('Plan.nombre');
+        $conditions['order'] = array('count(*) desc', 'Plan.nombre');
+        $planesResumen = $this->Titulo->Plan->find('all', $conditions);
+
+        $this->set(compact('titulo','planes','planesResumen'));
+    }
+
+
+    function ajax_view_planes_asociados($id) {
+        // Planes del Titulo
+        $this->Titulo->Plan->recursive = -1;
+        $this->paginate = array(
+                'limit'    => 20,
+                'page'    => 1,
+                'conditions' => array('Plan.titulo_id' => $id),
+                'contain' => array('Instit' => array('Tipoinstit(name)', 'Jurisdiccion(name)')),
+                'order'    => array('Plan.nombre' => 'asc')
+        );
+        $planes = $this->paginate('Plan');
+
+        // para nombre completo de instit
+        foreach ($planes as &$plan) {
+            $plan['Instit']['nombre_completo'] = $this->Titulo->Plan->Instit->getNombreCompleto($plan['Instit']['nombre'], $plan['Instit']['nroinstit'], $plan['Instit']['Tipoinstit']['name']);
+        }
+
+        $this->set('planes', $planes);
     }
 
 
@@ -334,7 +391,7 @@ class TitulosController extends AppController {
         //$this->Titulo->recursive = 0;//para alivianar la carga del server
         //
         //datos de paginacion
-        $this->paginate['fields'] = array('DISTINCT ("Titulo"."id")', 'Titulo.name','Titulo.marco_ref', 'Titulo.oferta_id');
+        $this->paginate['fields'] = array('DISTINCT ("Titulo"."id")', 'Titulo.name','Titulo.marco_ref', 'Titulo.oferta_id', 'Oferta.abrev');
         //$this->paginate['group'] = array('Titulo.id', 'Titulo.name','Titulo.marco_ref', 'Titulo.oferta_id');;
         $this->paginate['order'] = array('Titulo.name ASC, Titulo.oferta_id ASC');
 

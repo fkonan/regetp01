@@ -153,6 +153,8 @@
 
         jQuery("#TituloName").bind('paste', function(e){autoSubmit(true)});
 
+        formElement.submit();
+
         //iniciarTooltip();
     });
 
