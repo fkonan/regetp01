@@ -517,14 +517,11 @@ th {
     font-weight: normal;
 }
 th a {
-    background:#f2f2f2;
     display: block;
     padding: 2px 4px;
     text-decoration: none;
 }
 th a:hover {
-    background: #ccc;
-    color: #333;
     text-decoration: none;
 }
 
