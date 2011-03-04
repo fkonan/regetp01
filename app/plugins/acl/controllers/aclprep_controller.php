@@ -9,7 +9,7 @@
  * based on my readings of the book at cakephp.org
  *
 */
-class AclprepController extends AppController {
+class AclprepController extends AclAppController {
 
     var $name = 'Aclprep';
     var $uses =array('User');
@@ -21,7 +21,7 @@ class AclprepController extends AppController {
         //$this->Auth->allow('*');
     }
 
-    function buildAcos() {
+    function admin_buildAcos() {
         if (!Configure::read('debug')) {
             return $this->_stop();
         }
