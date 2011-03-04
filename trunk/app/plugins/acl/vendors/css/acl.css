@@ -15,6 +15,7 @@ div.acl_menu a {
 .acl_select {
   width: 280px;
   font-size: 12px;
+  height: auto;
 }
 .acl_button {
   border: 1px solid #999999;
