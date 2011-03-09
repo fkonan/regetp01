@@ -3,6 +3,23 @@
 /* Instit Test cases generated on: 2009-09-17 10:09:16 : 1253194756*/
 App::import('Model', 'Instit');
 
+
+function arrays_are_similar($a, $b) {
+  // if the indexes don't match, return immediately
+  if (count(array_diff_assoc($a, $b))) {
+    return false;
+  }
+  // we know that the indexes, but maybe not values, match.
+  // compare the values between the two arrays
+  foreach($a as $k => $v) {
+    if ($v !== $b[$k]) {
+      return false;
+    }
+  }
+  // we have identical indexes, and no unequal values
+  return true;
+}
+
 class TestInstit extends Instit {
     var $cacheSources = false;
     var $useDbConfig = 'test_suite';
@@ -61,41 +78,62 @@ class InstitTestCase extends CakeTestCase {
             $this->Instit->recursive = -1;
             $results = $this->Instit->find('first', array('conditions'=> array('id'=>1)));
             $this->assertTrue(!empty($results));
-
-            $expected['Instit'] = array(
-            'id' => 1,
-            'gestion_id'=>1,
-            'dependencia_id'=>1,
-            'nombre_dep'=>"''",
-            'tipoinstit_id' => 33,
-            'jurisdiccion_id' => 2,
-            'cue' => 200192, 'anexo' => 0 , 'esanexo' => 0,
-            'nombre' => "FERNANDO FADER",
-            'nroinstit' => "06",
-            'anio_creacion' => 1934,
-            'direccion' => "SALTA 1226",
-            'cp' => "1137",
-            'telefono' => "4305-1244",
-            'mail' => "''",
-            'web' => "''",
-            'dir_nombre' => "MÓNICA LILIANA UGARTE",
-            'dir_tipodoc_id' => 1,
-            'dir_nrodoc' => 13285880,
-            'dir_telefono' => "''", 'dir_mail' => "''",
-            'vice_nombre' => "ELISA SUSANA BARRERA", 'vice_tipodoc_id' => 1,
-            'vice_nrodoc' => 5940865, 'actualizacion' => "''",
-            'observacion' => "''", 'activo' => 1,
-            'ciclo_alta' => 2007,
-            'created' => '2007-03-18 10:43:23',
-            //'modified' => "'2009-08-13 12:17:33'",
-            'localidad_id' => 1,
-            'departamento_id' => 1,'lugar' => "''",
-            
-            );
-            debug($expected);
-            $this->assertEqual($results, $expected);
     }
 
+
+     function testInstitSave() {
+         $instit_id = rand(100000,95959595)+2;
+            $expected['Instit'] =  array (
+                'id' => $instit_id,
+                'gestion_id'=>1,
+                'dependencia_id'=>1,
+                'nombre_dep'=>"''",
+                'tipoinstit_id' => 33,
+                'jurisdiccion_id' => 2,
+                'cue' => 200192,
+                'anexo' => 0 ,
+                'esanexo' => 0,
+                'nombre' => "FERNANDO FADER",
+                'nroinstit' => "06",
+                'anio_creacion' => 1934,
+                'direccion' => "SALTA 1226",
+                'cp' => "1137",
+                'telefono' => "4305-1244",
+                'mail' => "''",
+                'web' => "''",
+                'dir_nombre' => "MÓNICA LILIANA UGARTE",
+                'dir_tipodoc_id' => 1,
+                'dir_nrodoc' => 13285880,
+                'dir_telefono' => "''", 'dir_mail' => "''",
+                'vice_nombre' => "ELISA SUSANA BARRERA",
+                'vice_tipodoc_id' => 1,
+                'vice_nrodoc' => 5940865,
+                'actualizacion' => "''",
+                'observacion' => "''",
+                'activo' => 1,
+                'ciclo_alta' => 2007,
+                'created' => '2007-03-18 10:43:23',
+                //'modified' => "2009-08-13 12:17:33",
+                'localidad_id' => 1,
+                'departamento_id' => 1,
+                'lugar' => "''",
+                 'mail_alternativo' => '',
+                'telefono_alternativo' => '',
+                'etp_estado_id' => 0,
+                'claseinstit_id' => 0,
+                'orientacion_id' => 0,
+            );
+            
+            //$this->Instit->create();
+            $this->assertTrue($this->Instit->save($expected, false));
+            $expected['Instit']['id'] = $this->Instit->id;
+            //debug($this->Instit);
+            $this->Instit->recursive = -1;
+            $results = $this->Instit->read(null, $instit_id);
+            unset ($results['Instit']['nombre_completo']);
+            unset ($results['Instit']['modified']);
+            $this->assertEqual($results, $expected);
+     }
 
 
     function testInstitSinPlanGetOrientacionSegunSusPlanes() {
@@ -128,46 +166,21 @@ class InstitTestCase extends CakeTestCase {
 
 
     function testGetOrientacionMixtaSegunSusPlanes() {
+        // orientaciones posibles
+        //  -1. Instit Sin planes
+        //   0. Mixta
+        //   1. Agropecuaria
+        //   2. Industrial
+        //   3. Otros
+        
+        $instit_id = 1;
+        $this->Instit->recursive = 1;
 
-        $instit_id = rand(10000,999999999);
-        $instit['Instit'] = array(
-                'id'                => $instit_id,
-        );
-        $this->Instit->create();
-        $this->Instit->save($instit);
-
-        /*************** Para la Instit ID= 1 ****************************/
-        $plan1_id = rand(10000,999999999);
-        $plan['Plan'] = array(
-                'id'                => $plan1_id,
-                'instit_id'         => $instit_id ,
-                'oferta_id'         => 1,
-                'norma'             => "",
-                'nombre'            => "Titulo en nada",
-                'perfil'            => "Algun Perfil",
-                'sector'            => "",
-                'duracion_hs'       => 3,
-                'duracion_semanas'  => 2,
-                'duracion_anios'    => 4,
-                'matricula'         => 100,
-                'observacion'       => "Alguna observacion",
-                'ciclo_alta'        => 2007,
-                //'created' 		=> "2010-01-21 13:54:45",
-                //'modified' 		=> "2010-01-21 13:54:45",
-                'sector_id'         => 3, // Sector = Agropecuaria -> Orientacion = Agropecuaria
-                'subsector_id'      => 1,
-        );
-        $this->Instit->Plan->create();
-        $this->Instit->Plan->save($plan, false);
-        $orientacion = $this->Instit->getOrientacionSegunSusPlanes($instit_id);
-        $this->Instit->id = $instit_id;
-        debug($this->Instit->find('list'));
-        debug($this->Instit->read());
-        $this->assertEqual($orientacion, 1); //orientacion agro
-
+        $orientacion = $this->Instit->getOrientacionSegunSusPlanes($instit_id); // del sector informatica, orientacion "Otros"
+        $this->assertEqual($orientacion, 2); //orientacion agro
 
         /*************** Para la Instit ID= 2 ****************************/
-        $plan2_id = $plan1_id++;
+        $plan2_id = rand(10000,8999999);
         $plan['Plan'] = array(
                 'id'                => $plan2_id,
                 'instit_id'         => $instit_id,
@@ -175,24 +188,22 @@ class InstitTestCase extends CakeTestCase {
                 'norma'             => "",
                 'nombre'            => "Titulo en nada",
                 'perfil'            => "Algun Perfil",
-                'sector'            => "",
                 'duracion_hs'       => 3,
                 'duracion_semanas'  => 2,
                 'duracion_anios'    => 4,
                 'matricula'         => 100,
                 'observacion'       => "Alguna observacion",
                 'ciclo_alta'        => 2007,
-                'sector_id'         => 4, //Sector Automotriz -- Orientacion = Industrial
-                'subsector_id'      => 1,
+                'titulo_id'         => 55, // de orientacion "otros"
         );
         $this->Instit->Plan->create();
-        $this->Instit->Plan->save($plan, false);
+        $this->assertTrue($this->Instit->Plan->save($plan, false),'No se pudo guardar un nuevo plan con id: '.$plan2_id.' o este: '.$this->Instit->Plan->id);
         $orientacion = $this->Instit->getOrientacionSegunSusPlanes($instit_id);
         $this->assertEqual($orientacion, 0); //orientacion mixta
 
-        $this->Instit->Plan->del($plan1_id);
+        $this->Instit->Plan->del(1); // el que era de sector informatica, orientacion otros
         $orientacion = $this->Instit->getOrientacionSegunSusPlanes($instit_id);
-        $this->assertEqual($orientacion, 2); // orientacion industrial
+        $this->assertEqual($orientacion, 3); // orientacion industrial
     }
 
 
@@ -201,17 +212,17 @@ class InstitTestCase extends CakeTestCase {
 
         /*************** Para la Instit ID= 1 ****************************/
         $orientacion = $this->Instit->getOrientacionSegunSusPlanes(1);
-        $this->assertEqual($orientacion, 3); //orientacion otros
+        $this->assertEqual($orientacion, 2);
 
         /* ************** Para la Instit ID= 2 *************************** */
         $orientacion = $this->Instit->getOrientacionSegunSusPlanes(2);
-        $this->assertEqual($orientacion, 3);
+        $this->assertEqual($orientacion, 2);
 
         $orientacion = $this->Instit->getOrientacionSegunSusPlanes(3);
         $this->assertEqual($orientacion, 2);
 
         $orientacion = $this->Instit->getOrientacionSegunSusPlanes(4);
-        $this->assertEqual($orientacion, 1);
+        $this->assertEqual($orientacion, 2);
     }
 
     function testIsCUEValid() {

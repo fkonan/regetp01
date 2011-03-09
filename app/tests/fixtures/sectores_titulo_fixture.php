@@ -12,24 +12,31 @@ class SectoresTituloFixture extends CakeTestFixture {
 	);
 
 	var $records = array(
+                array(
+			'id' => 1,
+			'titulo_id' => 1, // Lorem ipsum dolor sit amet
+			'sector_id' => 8, // Construcción  orientacion 2
+			'subsector_id' => 0,
+			'prioridad' => 1,
+		),
 		array(
 			'id' => 1727,
-			'titulo_id' => 60,
-			'sector_id' => 2,
+			'titulo_id' => 60, // Técnico Superior en Comunicación Multimedial
+			'sector_id' => 2, // aeronautica orientacion 2
 			'subsector_id' => 0,
 			'prioridad' => 1,
 		),
 		array(
 			'id' => 1738,
-			'titulo_id' => 1242,
-			'sector_id' => 8,
+			'titulo_id' => 1242, // 'Cocina Básica'
+			'sector_id' => 8, // Construcción  orientacion 2
 			'subsector_id' => 0,
 			'prioridad' => 1,
 		),
 		array(
 			'id' => 1749,
-			'titulo_id' => 55,
-			'sector_id' => 24,
+			'titulo_id' => 55, // Técnico en Producción Agropecuaria con Especialización en Enología
+			'sector_id' => 24, // seguridad ambiente e higiene, orientacion 3
 			'subsector_id' => 0,
 			'prioridad' => 1,
 		),
