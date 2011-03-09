@@ -88,9 +88,6 @@ if ($paginator->counter(array('format' =>'%count%')) > 0) {?>
 		//inicializo la clase CSS de la institucion
 		// esto sirve para procesar y ver visualmente ciertos estados de la institucion
 		$clase = ''; 	
-		if($instit['Instit']['fecha_mod'] < $fecha_hasta && $instit['Instit']['fecha_mod']< $fecha_desde ){
-			$clase = 'alertar_escuela_no_actualizada';
-		}
 		if($instit['Instit']['activo']){
 			$clase .= ' escuela_activa';
 		}else{

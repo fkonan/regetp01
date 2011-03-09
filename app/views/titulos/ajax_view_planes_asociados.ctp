@@ -8,10 +8,10 @@
     $i = 0;
     if (!empty($planes)) {
     ?>
-    <table>
-        <th>Plan</th>
-        <th>Institución</th>
-        <th>Jurisdicción</th>
+    <table style="font-size: 8pt;">
+        <th><?php echo $paginator->sort('Institución','Plan.instit_id');?></th>
+        <th><?php echo $paginator->sort('Plan','Plan.nombre');?></th>
+        <th><?php echo $paginator->sort('Jurisdicción','Instit.jurisdiccion_id');?></th>
         <?php
         foreach ($planes as $plan) {
             $class = '';
@@ -20,10 +20,11 @@
             }
         ?>
         <tr>
-            <td style="text-align:left;"><?php echo $plan['Plan']['nombre']; ?></td>
-            <td style="text-align:left;"><?php echo $html->link($plan['Instit']['nombre_completo'], array('controller'=>'Instits', 'action'=>'view', $plan['Instit']['id'])); ?></td>
-            <td style="text-align:left;"><?php echo $plan['Instit']['Jurisdiccion']['name']; ?></td>
+            <td style="text-align:left; vertical-align: middle;"><?php echo $html->link($plan['Instit']['nombre_completo'], array('controller'=>'Instits', 'action'=>'view', $plan['Instit']['id'])); ?></td>
+            <td style="text-align:left; vertical-align: middle;"><?php echo $plan['Plan']['nombre']; ?></td>
+            <td style="text-align:left; vertical-align: middle;"><?php echo $plan['Instit']['Jurisdiccion']['name']; ?></td>
         </tr>
+        <tr><td colspan="3"><hr /></td></tr>
         <?php
         }
         ?>

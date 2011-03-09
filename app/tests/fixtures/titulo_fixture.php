@@ -11,6 +11,12 @@ class TituloFixture extends CakeTestFixture {
 	);
 
 	var $records = array(
+                array(
+			'id'  		=> 1,
+			'name'  	=> 'Lorem ipsum dolor sit amet',
+			'marco_ref' => true,
+			'oferta_id' => 1
+			),
 		array(
 			'id' => 60,
 			'name' => 'Técnico Superior en Comunicación Multimedial',

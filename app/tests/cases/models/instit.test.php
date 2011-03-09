@@ -3,38 +3,99 @@
 /* Instit Test cases generated on: 2009-09-17 10:09:16 : 1253194756*/
 App::import('Model', 'Instit');
 
+class TestInstit extends Instit {
+    var $cacheSources = false;
+    var $useDbConfig = 'test_suite';
+}
 
 class InstitTestCase extends CakeTestCase {
 
-	//var $autoFixtures = false;
+    var $autoFixtures = true;
 	 /* @var $fixtures array */
     var $fixtures = array(
-            'app.z_fondo_work', 'app.jurisdiccion', 'app.instit', 'app.claseinstit',
-            'app.orientacion',  'app.sector', 'app.plan', 'app.subsector',
-            'app.lineas_de_accion', 'app.fondos_lineas_de_accion',
-            'app.tipoinstit', 'app.dependencia', 'app.departamento', 'app.localidad',
-            'app.etp_estado', 'app.oferta', 'app.titulo', 'app.anio', 'app.ciclo',
-            'app.etapa', 'app.gestion', 'app.historial_cue', 'app.ticket', 'app.user',
-            'app.user_login', 'app.fondo', 'app.estructura_plan', 'app.estructura_planes_anio',
-            'app.jurisdicciones_estructura_plan'
-    );
+            'app.anio',
+            'app.ciclo',
+            'app.claseinstit',
+            'app.departamento',
+            'app.dependencia',
+            'app.estructura_plan',
+            'app.estructura_planes_anio',
+            'app.etapa',
+            'app.etp_estado',
+            'app.fondo',
+            'app.fondos_lineas_de_accion',
+            'app.gestion',
+            'app.historial_cue',
+            'app.instit',
+            'app.jurisdiccion',
+            'app.jurisdicciones_estructura_plan',
+            'app.lineas_de_accion',
+            'app.localidad',
+            'app.oferta',
+            'app.orientacion',
+            'app.plan',
+            'app.sector',
+            'app.sectores_titulo',
+            'app.subsector',
+            'app.ticket',
+            'app.tipoinstit', 
+            'app.titulo',
+            'app.user',
+            'app.user_login',
+            'app.z_fondo_work',
+        );
 
     var $Instit = null;
 	 
-    function startTest() {
-        //parent::start();
-        $this->Instit =& ClassRegistry::init('Instit');
+    function start() {
+        parent::start();
+	$this->Instit = new TestInstit();
     }
 
-
-//    function startTest() {
-//        $this->Instit =& ClassRegistry::init('Instit');
-//
-//    }
-
-    function testPlanInstance() {
-        $this->assertTrue(is_a($this->Instit, 'Instit'));
+    function testInstitInstance() {
+		$this->assertTrue(is_a($this->Instit, 'Instit'));
     }
+
+    function testInstitFind() {
+            $instit_id = rand(100000,95959595);
+            $this->Instit->recursive = -1;
+            $results = $this->Instit->find('first', array('conditions'=> array('id'=>1)));
+            $this->assertTrue(!empty($results));
+
+            $expected['Instit'] = array(
+            'id' => 1,
+            'gestion_id'=>1,
+            'dependencia_id'=>1,
+            'nombre_dep'=>"''",
+            'tipoinstit_id' => 33,
+            'jurisdiccion_id' => 2,
+            'cue' => 200192, 'anexo' => 0 , 'esanexo' => 0,
+            'nombre' => "FERNANDO FADER",
+            'nroinstit' => "06",
+            'anio_creacion' => 1934,
+            'direccion' => "SALTA 1226",
+            'cp' => "1137",
+            'telefono' => "4305-1244",
+            'mail' => "''",
+            'web' => "''",
+            'dir_nombre' => "MÓNICA LILIANA UGARTE",
+            'dir_tipodoc_id' => 1,
+            'dir_nrodoc' => 13285880,
+            'dir_telefono' => "''", 'dir_mail' => "''",
+            'vice_nombre' => "ELISA SUSANA BARRERA", 'vice_tipodoc_id' => 1,
+            'vice_nrodoc' => 5940865, 'actualizacion' => "''",
+            'observacion' => "''", 'activo' => 1,
+            'ciclo_alta' => 2007,
+            'created' => '2007-03-18 10:43:23',
+            //'modified' => "'2009-08-13 12:17:33'",
+            'localidad_id' => 1,
+            'departamento_id' => 1,'lugar' => "''",
+            
+            );
+            debug($expected);
+            $this->assertEqual($results, $expected);
+    }
+
 
 
     function testInstitSinPlanGetOrientacionSegunSusPlanes() {
@@ -64,15 +125,23 @@ class InstitTestCase extends CakeTestCase {
         $this->assertEqual($orientacion, -1); //sin orientacion
     }
 
+
+
     function testGetOrientacionMixtaSegunSusPlanes() {
-       // $this->loadFixtures('Instit', 'Plan', 'Sector', 'Subsector', 'Orientacion');
+
+        $instit_id = rand(10000,999999999);
+        $instit['Instit'] = array(
+                'id'                => $instit_id,
+        );
+        $this->Instit->create();
+        $this->Instit->save($instit);
 
         /*************** Para la Instit ID= 1 ****************************/
+        $plan1_id = rand(10000,999999999);
         $plan['Plan'] = array(
-                'id'                => 7,
-                'instit_id'         => 1,
+                'id'                => $plan1_id,
+                'instit_id'         => $instit_id ,
                 'oferta_id'         => 1,
-                'old_item'          => 0,
                 'norma'             => "",
                 'nombre'            => "Titulo en nada",
                 'perfil'            => "Algun Perfil",
@@ -83,7 +152,6 @@ class InstitTestCase extends CakeTestCase {
                 'matricula'         => 100,
                 'observacion'       => "Alguna observacion",
                 'ciclo_alta'        => 2007,
-                'ciclo_mod'         => 0,
                 //'created' 		=> "2010-01-21 13:54:45",
                 //'modified' 		=> "2010-01-21 13:54:45",
                 'sector_id'         => 3, // Sector = Agropecuaria -> Orientacion = Agropecuaria
@@ -91,16 +159,19 @@ class InstitTestCase extends CakeTestCase {
         );
         $this->Instit->Plan->create();
         $this->Instit->Plan->save($plan, false);
-        $orientacion = $this->Instit->getOrientacionSegunSusPlanes(1);
-        $this->assertEqual($orientacion, 0); //orientacion mixta
+        $orientacion = $this->Instit->getOrientacionSegunSusPlanes($instit_id);
+        $this->Instit->id = $instit_id;
+        debug($this->Instit->find('list'));
+        debug($this->Instit->read());
+        $this->assertEqual($orientacion, 1); //orientacion agro
 
 
         /*************** Para la Instit ID= 2 ****************************/
+        $plan2_id = $plan1_id++;
         $plan['Plan'] = array(
-                'id'                => 8,
-                'instit_id'         => 2,
+                'id'                => $plan2_id,
+                'instit_id'         => $instit_id,
                 'oferta_id'         => 1,
-                'old_item'          => 0,
                 'norma'             => "",
                 'nombre'            => "Titulo en nada",
                 'perfil'            => "Algun Perfil",
@@ -111,18 +182,17 @@ class InstitTestCase extends CakeTestCase {
                 'matricula'         => 100,
                 'observacion'       => "Alguna observacion",
                 'ciclo_alta'        => 2007,
-                'ciclo_mod'         => 0,
                 'sector_id'         => 4, //Sector Automotriz -- Orientacion = Industrial
                 'subsector_id'      => 1,
         );
         $this->Instit->Plan->create();
         $this->Instit->Plan->save($plan, false);
-        $orientacion = $this->Instit->getOrientacionSegunSusPlanes(2);
+        $orientacion = $this->Instit->getOrientacionSegunSusPlanes($instit_id);
         $this->assertEqual($orientacion, 0); //orientacion mixta
 
-        $this->Instit->Plan->del(8);
-        $orientacion = $this->Instit->getOrientacionSegunSusPlanes(2);
-        $this->assertEqual($orientacion, 3);
+        $this->Instit->Plan->del($plan1_id);
+        $orientacion = $this->Instit->getOrientacionSegunSusPlanes($instit_id);
+        $this->assertEqual($orientacion, 2); // orientacion industrial
     }
 
 
@@ -199,6 +269,12 @@ class InstitTestCase extends CakeTestCase {
          $ie = $this->Instit->getPlanes($instit_id=4);
 
     
+        $this->assertTrue(false);
+    }
+
+
+
+    function testFindConNombreCompleto(){
         $this->assertTrue(false);
     }
 

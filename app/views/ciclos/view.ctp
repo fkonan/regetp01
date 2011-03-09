@@ -53,7 +53,6 @@
 			<td><?php echo $anio['id'];?></td>
 			<td><?php echo $anio['plan_id'];?></td>
 			<td><?php echo $anio['ciclo_id'];?></td>
-			<td><?php echo $anio['old_item'];?></td>
 			<td><?php echo $anio['anio'];?></td>
 			<td><?php echo $anio['etapa_id'];?></td>
 			<td><?php echo $anio['matricula'];?></td>
