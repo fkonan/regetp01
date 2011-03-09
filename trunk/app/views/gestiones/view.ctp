@@ -107,10 +107,8 @@
 			<td><?php echo $instit['vice_nrodoc'];?></td>
 			<td><?php echo $instit['actualizacion'];?></td>
 			<td><?php echo $instit['observacion'];?></td>
-			<td><?php echo $instit['fecha_mod'];?></td>
 			<td><?php echo $instit['activo'];?></td>
 			<td><?php echo $instit['ciclo_alta'];?></td>
-			<td><?php echo $instit['ciclo_mod'];?></td>
 			<td><?php echo $instit['created'];?></td>
 			<td><?php echo $instit['modified'];?></td>
 			<td class="actions">

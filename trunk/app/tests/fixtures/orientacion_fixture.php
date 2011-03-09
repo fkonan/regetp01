@@ -13,17 +13,16 @@ class OrientacionFixture  extends CakeTestFixture {
  	
     var $records = array(
     	array(
-    			'id' 	=> 1,
-				'name'	=> "Agropecuaria",
-    	),
-    
-    	array(
-    			'id' 	=> 2,
-				'name'	=> "Industria",
+    		'id' 	=> 1,
+		'name'	=> "Agropecuaria",
     	),
     	array(
-    			'id' 	=> 3,
-				'name'	=> "Otros",
+    		'id' 	=> 2,
+		'name'	=> "Industria",
+    	),
+    	array(
+    		'id' 	=> 3,
+		'name'	=> "Otros",
     	),
    );
     

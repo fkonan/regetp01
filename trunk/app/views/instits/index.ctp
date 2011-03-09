@@ -38,10 +38,8 @@ echo $paginator->counter(array(
 	<th><?php echo $paginator->sort('vice_nrodoc');?></th>
 	<th><?php echo $paginator->sort('actualizacion');?></th>
 	<th><?php echo $paginator->sort('observacion');?></th>
-	<th><?php echo $paginator->sort('fecha_mod');?></th>
 	<th><?php echo $paginator->sort('activo');?></th>
 	<th><?php echo $paginator->sort('ciclo_alta');?></th>
-	<th><?php echo $paginator->sort('ciclo_mod');?></th>
 	<th><?php echo $paginator->sort('created');?></th>
 	<th><?php echo $paginator->sort('modified');?></th>
 	<th class="actions"><?php __('Actions');?></th>
@@ -146,16 +144,10 @@ foreach ($instits as $instit):
 			<?php echo $instit['Instit']['observacion']; ?>
 		</td>
 		<td>
-			<?php echo $instit['Instit']['fecha_mod']; ?>
-		</td>
-		<td>
 			<?php echo $instit['Instit']['activo']; ?>
 		</td>
 		<td>
 			<?php echo $instit['Instit']['ciclo_alta']; ?>
-		</td>
-		<td>
-			<?php echo $instit['Instit']['ciclo_mod']; ?>
 		</td>
 		<td>
 			<?php echo $instit['Instit']['created']; ?>

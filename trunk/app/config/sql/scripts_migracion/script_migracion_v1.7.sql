@@ -10,6 +10,7 @@ ALTER TABLE instits DROP COLUMN localidad;
 ALTER TABLE instits DROP COLUMN fecha_mod;
 ALTER TABLE instits DROP COLUMN actualizacion;
 ALTER TABLE planes DROP COLUMN old_item;
+ALTER TABLE anios DROP COLUMN old_item;
 ALTER TABLE planes DROP COLUMN ciclo_mod;
 DROP TABLE logs;
 

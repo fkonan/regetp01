@@ -68,7 +68,6 @@
 			<td><?php echo $plan['id'];?></td>
 			<td><?php echo $plan['instit_id'];?></td>
 			<td><?php echo $plan['oferta_id'];?></td>
-			<td><?php echo $plan['old_item'];?></td>
 			<td><?php echo $plan['norma'];?></td>
 			<td><?php echo $plan['nombre'];?></td>
 			<td><?php echo $plan['perfil'];?></td>
@@ -79,7 +78,6 @@
 			<td><?php echo $plan['matricula'];?></td>
 			<td><?php echo $plan['observacion'];?></td>
 			<td><?php echo $plan['ciclo_alta'];?></td>
-			<td><?php echo $plan['ciclo_mod'];?></td>
 			<td><?php echo $plan['created'];?></td>
 			<td><?php echo $plan['modified'];?></td>
 			<td><?php echo $plan['sector_id'];?></td>

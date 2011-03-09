@@ -43,7 +43,7 @@
             </ul>
     </div>
 
-<h2><?php  __('Planes de Estudio asociados');?></h2>
+<h2><?php  __('Instituciones con Planes de Estudio Asociados');?></h2>
     <div id="tituloPlanes">
         <?php echo $this->requestAction('/titulos/ajax_view_planes_asociados/'.$titulo['Titulo']['id'], array('return')); ?>
     </div>
