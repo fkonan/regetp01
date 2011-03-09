@@ -13,17 +13,17 @@ class SectorFixture extends CakeTestFixture {
 		array(
 			'id' => 2,
 			'name' => 'Aeronáutica',
-			'orientacion_id' => 2,
+			'orientacion_id' => 2, // Industrial
 		),
 		array(
 			'id' => 8,
 			'name' => 'Construcción',
-			'orientacion_id' => 2,
+			'orientacion_id' => 2, // Industrial
 		),
 		array(
 			'id' => 24,
 			'name' => 'Seguridad, Ambiente e Higiene',
-			'orientacion_id' => 3,
+			'orientacion_id' => 3, // Otros
 		),
 	);
 }

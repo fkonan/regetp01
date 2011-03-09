@@ -1207,27 +1207,34 @@ class Instit extends AppModel {
 	 */
 	function getOrientacionSegunSusPlanes($instit_id=0)
         {
-            if(!empty($this->id)) {
-                $instit_id = $this->id;
+            if(!empty($instit_id)) {
+                $this->id = $instit_id;
             }
+            $instit_id = $this->id;
 
             $planes = $this->Plan->find('all', array(
                     'conditions'=>array('Plan.instit_id'=>$instit_id),
                     'contain'=>array(
-                        'Titulo' => array('Subsector.Sector')
+                        'Titulo' => array(
+                            'SectoresTitulo'=>array(
+                                'Subsector',
+                                'Sector',
+                                )
+                            )
                         )
                 )
                     );
             $cantPlanes = count($planes);
             
             $ant = -1;
+
             foreach ($planes as $p) {
-                if (empty($p['Titulo']['Subsector'])) continue;
-                foreach ( $p['Titulo']['Subsector'] as $s ) {
-                    if( $ant != -1 && $s['Sector']['orientacion_id']!= $ant ) {
+                if (empty($p['Titulo']['SectoresTitulo'])) continue;
+                foreach ( $p['Titulo']['SectoresTitulo'] as $st ) {
+                    if( $ant != -1 && $st['Sector']['orientacion_id']!= $ant ) {
                         return 0;
                     }
-                    $ant = $s['Sector']['orientacion_id'];
+                    $ant = $st['Sector']['orientacion_id'];
                 }
             }
 
