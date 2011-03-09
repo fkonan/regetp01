@@ -568,7 +568,9 @@ class PlanesController extends AppController {
         //$planes = $this->Plan->Instit->getPlanes($instit_id, $oferta_id, $ciclo);
         // agrego el index "matricula" directamente que dependa de "Plan"
 
-        usort($planes, array( $this, 'comparar_planes_por_orden' ));
+        if ($oferta_id == SEC_TEC_ID) {
+            usort($planes, array( $this, 'comparar_planes_por_orden' ));
+        }
         
         foreach($planes as &$plan){
             if ( !empty($plan['Plan']) ) {
