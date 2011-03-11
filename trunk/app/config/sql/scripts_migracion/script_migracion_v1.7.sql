@@ -15,6 +15,12 @@ ALTER TABLE planes DROP COLUMN ciclo_mod;
 DROP TABLE logs;
 
 /*
+MODIFICACIONES EN DESCARGAS (QUERIES)
+*/
+ALTER TABLE "public"."queries" DROP COLUMN "ver_online";
+ALTER TABLE "public"."queries" ADD COLUMN "vigencia" timestamp without time zone
+
+/*
 AUTORIDADES
 */
 
