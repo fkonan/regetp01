@@ -1,4 +1,8 @@
 <?php
+    echo $paginator->counter(array(
+    'format' => __('Página %page% de %pages% (%count% Planes de Estudio Asociados)', true)
+    ));
+
     $paginator->options(array(
         'url'     => $this->passedArgs,
         'update'  => 'tituloPlanes',
