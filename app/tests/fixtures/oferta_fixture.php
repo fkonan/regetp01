@@ -17,6 +17,11 @@ class OfertaFixture extends CakeTestFixture {
 			'abrev' => 'Lorem ip',
 			'name' => 'Lorem ipsum dolor sit amet'
 		),
+                array(
+			'id' => 2,
+			'abrev' => 'IT',
+			'name' => 'Itinerario'
+		),
 	);
 }
 ?>

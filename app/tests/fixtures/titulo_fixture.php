@@ -17,6 +17,12 @@ class TituloFixture extends CakeTestFixture {
 			'marco_ref' => true,
 			'oferta_id' => 1
 			),
+                array(
+			'id' => 2,
+			'name' => 'Un titulo inventado 1',
+			'marco_ref' => false,
+			'oferta_id' => 1,
+		),
 		array(
 			'id' => 60,
 			'name' => 'Técnico Superior en Comunicación Multimedial',

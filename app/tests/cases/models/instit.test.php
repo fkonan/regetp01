@@ -253,7 +253,7 @@ class InstitTestCase extends CakeTestCase {
 
 
     function testEstructuraPlanes(){
-      //  $this->assertFalse($this->Instit->estructuraPlanes('depurados', 1,0));
+        $this->assertFalse($this->Instit->estructuraPlanes('depurados', 1,0));
 
         $ie = $this->Instit->estructuraPlanes('no-depurados', 2,0);
         $canti = count($ie['Plan']);
@@ -272,21 +272,147 @@ class InstitTestCase extends CakeTestCase {
         $this->assertTrue(2 == $canti);
     }
 
+    
 
     function testGetPlanesUltimos(){
-        $ie = $this->Instit->getPlanes($instit_id=2, $oferta_id = 0, $ciclo_id = 2009);
-       // debug($ie);
+        
+        // busco para el año 2010 que se que hay
+        $anioBusca = 2010;
+        $ie = $this->Instit->getPlanes(array(
+            'Instit.id' => 1,
+            'Plan.oferta_id' => 1,
+            'Ciclo.id'  => $anioBusca,
+        ));
+        $encontrado = false;
+        foreach($ie as $plan){
+            foreach ($plan['Anio'] as $anio){
+                $encontrado = ($anio['ciclo_id'] == $anioBusca)?true:false;
+                if ( $encontrado ) break;
+            }
+            if ( $encontrado ) break;
+        }
+        $this->assertTrue($encontrado);
 
-         $ie = $this->Instit->getPlanes($instit_id=4);
+        // busco para el año 2009 que se que hay
+        $anioBusca = 2009;
+        $ie = $this->Instit->getPlanes(array(
+            'Instit.id' => 1,
+            'Plan.oferta_id' => 1,
+            'Ciclo.id'  => $anioBusca,
+        ));
+        $encontrado = false;
+        foreach($ie as $plan){
+            foreach ($plan['Anio'] as $anio){
+                $encontrado = ($anio['ciclo_id'] == $anioBusca)?true:false;
+                if ( $encontrado ) break;
+            }
+            if ( $encontrado ) break;
+        }
+        $this->assertTrue($encontrado);
 
-    
-        $this->assertTrue(false);
+
+        // busco para el año 2000 que se que NO hay
+        $anioBusca = 2000;
+        $ie = $this->Instit->getPlanes(array(
+            'Instit.id' => 1,
+            'Plan.oferta_id' => 1,
+            'Ciclo.id'  => $anioBusca,
+        ));
+        $encontrado = false;
+        foreach($ie as $plan){
+            foreach ($plan['Anio'] as $anio){
+                $encontrado = ($anio['ciclo_id'] == $anioBusca)?true:false;
+                if ( $encontrado ) break;
+            }
+            if ( $encontrado ) break;
+        }
+        $this->assertFalse($encontrado);
+
+
+        $ie = $this->Instit->getPlanes(array(
+            'Instit.id' => 2,
+        ));
+        $this->assertEqual(count($ie),2); // hay 2 planes
+        $this->assertEqual(count($ie[0]['Anio']),1); // hay el perimer plan tiene 3 años
+        $this->assertEqual(count($ie[1]['Anio']),3); // hay el segundo plan tiene 3 años
+
     }
 
 
 
     function testFindConNombreCompleto(){
-        $this->assertTrue(false);
+        $nombre = 'ESCUELA DE EDUCACIÓN TÉCNICA (E.E.T.) Nº 06  "FERNANDO FADER TEST"';
+        $this->Instit->recursive = 0;
+        $iii = $this->Instit->find('first', array('conditions'=>array('Instit.id'=>1)));
+
+        $this->assertFalse($iii['Instit']['nombre_completo']=='Un nombre cualquiera');
+        $this->assertTrue($iii['Instit']['nombre_completo']);
+        $this->assertTrue($iii['Instit']['nombre_completo']==$nombre);
+
+        $iii = $this->Instit->find('all', array('conditions'=>array('Instit.id'=>1)));
+        $this->assertTrue($iii[0]['Instit']['nombre_completo'] == $nombre);
+    }
+
+
+    function testDameSumatoriaDeMatriculasPorOferta(){
+        $this->Instit->id = 1;
+        $rta = $this->Instit->dameSumatoriaDeMatriculasPorOferta();
+
+        $expected = Array(
+            'array_de_ofertas' => Array(
+                0 => Array(
+                        'id' => 1,
+                        'abrev' => 'Lorem ip'
+                    )
+                ),
+             'array_de_ciclos' => Array(
+                0 => 2010,
+                1 => 2009,
+                 ),
+            'totales' => Array(
+                2010 => Array(
+                    'Lorem ip' => Array(
+                            'total_matricula' => 2
+                        )
+                ),
+                2009 => Array(
+                    'Lorem ip' => Array(
+                            'total_matricula' => 5
+                        )
+                )
+            )
+        );
+
+        $this->assertEqual($rta, $expected);
+    }
+
+    function testListSectoresConOferta(){
+        $res = $this->Instit->listSectoresConOferta(1,1);
+        $expected = array( 8 => 'Construcción');
+        $this->assertEqual($res, $expected);
+        
+        $res = $this->Instit->listSectoresConOferta(5,1);
+        $expected = array( 
+            8 => 'Construcción',
+            2 => 'Aeronáutica',
+            );
+        $this->assertEqual($res, $expected);
+        
+        $res = $this->Instit->listSectoresConOferta(5,3);
+        $expected = array(
+            24 => 'Seguridad, Ambiente e Higiene');
+        $this->assertEqual($res, $expected);
+
+        $res = $this->Instit->listSectoresConOferta(5,2);
+        $this->assertTrue(empty($res));
+
+        $res = $this->Instit->listSectoresConOferta(5);
+        $expected = array(
+            8 => 'Construcción',
+            2 => 'Aeronáutica',
+            24 => 'Seguridad, Ambiente e Higiene',
+            );
+         $this->assertEqual($res, $expected);
     }
 
 }
