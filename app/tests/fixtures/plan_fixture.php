@@ -87,12 +87,12 @@ class PlanFixture  extends CakeTestFixture {
                 'observacion'	=> "Alguna observacion 1",
                 'ciclo_alta'	=> 2007,
                 'titulo_id'	=> 1,
-                'estructura_plan_id'=> 0,
+                'estructura_plan_id'=> 2,
             ),
             array(
                 'id' 			=> 5,
                 'instit_id'		=> 3,
-                'oferta_id'		=> 1,
+                'oferta_id'		=> 3,
                 'norma'			=> "",
                 'nombre'		=> "Titulo 2 de institucion 3",
                 'perfil'		=> "Algun Perfil",
@@ -103,7 +103,7 @@ class PlanFixture  extends CakeTestFixture {
                 'observacion'	=> "Alguna observacion 2",
                 'ciclo_alta'	=> 2007,
                 'titulo_id'	=> 1,
-                'estructura_plan_id'=> 0,
+                'estructura_plan_id'=> 1,
             ),
             array(
                 'id' 			=> 6,
@@ -140,7 +140,7 @@ class PlanFixture  extends CakeTestFixture {
         array(
                 'id' 			=> 8,
                 'instit_id'		=> 4,
-                'oferta_id'		=> 1,
+                'oferta_id'		=> 3,
                 'norma'			=> "",
                 'nombre'		=> "Titulo 1 de institucion 4",
                 'perfil'		=> "Algun Perfil",
@@ -151,7 +151,7 @@ class PlanFixture  extends CakeTestFixture {
                 'observacion'	=> "Alguna observacion 1",
                 'ciclo_alta'	=> 2007,
                 'titulo_id'	=> 1,
-                'estructura_plan_id'=> 1,
+                'estructura_plan_id'=> 3,
             ),
 
 

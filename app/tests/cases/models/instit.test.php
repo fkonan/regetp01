@@ -4,6 +4,8 @@
 App::import('Model', 'Instit');
 
 
+require_once dirname(__FILE__) . DS . 'extra_functions.php';
+
 function arrays_are_similar($a, $b) {
   // if the indexes don't match, return immediately
   if (count(array_diff_assoc($a, $b))) {
@@ -29,40 +31,13 @@ class InstitTestCase extends CakeTestCase {
 
     var $autoFixtures = true;
 	 /* @var $fixtures array */
-    var $fixtures = array(
-            'app.anio',
-            'app.ciclo',
-            'app.claseinstit',
-            'app.departamento',
-            'app.dependencia',
-            'app.estructura_plan',
-            'app.estructura_planes_anio',
-            'app.etapa',
-            'app.etp_estado',
-            'app.fondo',
-            'app.fondos_lineas_de_accion',
-            'app.gestion',
-            'app.historial_cue',
-            'app.instit',
-            'app.jurisdiccion',
-            'app.jurisdicciones_estructura_plan',
-            'app.lineas_de_accion',
-            'app.localidad',
-            'app.oferta',
-            'app.orientacion',
-            'app.plan',
-            'app.sector',
-            'app.sectores_titulo',
-            'app.subsector',
-            'app.ticket',
-            'app.tipoinstit', 
-            'app.titulo',
-            'app.user',
-            'app.user_login',
-            'app.z_fondo_work',
-        );
+    var $fixtures = array();
 
     var $Instit = null;
+
+    function __construct(){
+        $this->fixtures = getAllFixtures();
+    }
 	 
     function start() {
         parent::start();
