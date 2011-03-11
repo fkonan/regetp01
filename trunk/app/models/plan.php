@@ -687,14 +687,16 @@ class Plan extends AppModel {
 
 
         /**
-         *
-         * Me busca entre los anios del Plan para identificar la estructura de su oferta
-         * Si hay varios ciclos lectivos me busca el ultimo
+         * Me devuelve la estructura de un Plan Tecnico (si no es tecnico,
+         * o sea oferta_id = SEC_TEC, devuelve -1).
+         * En el caso que la estructura no haya sido asignada, busca entre los anios
+         * del Plan para identificar la estructura de su oferta
+         * Si hay varios ciclos lectivos busca en el ultimo.
          * Devuelve el ID de la estcuctura del plan
          * 
          * @param integer $plan_id
          * @param bool $busqueda_forzada forza la sugerencia por mas que ya tenga estructura asociada
-         * @return integer  devuelve el ID de estructura_planes
+         * @return integer  devuelve el ID de estructura_planes. Si el plan NO es tecnico, devuelve -1
          */
         function getEstructuraSugerida($plan_id=null, $busqueda_forzada=false){
             if (empty($plan_id)) {
@@ -704,7 +706,7 @@ class Plan extends AppModel {
             $this->recursive = -1;
             $plan = $this->findById($plan_id);
             // si el plan no es tecnico que devuelva -1
-            if ($plan['Plan']['oferta_id'] != 3) {
+            if ($plan['Plan']['oferta_id'] != SEC_TEC_ID) {
                 return -1;
             }
             if (!$busqueda_forzada) {

@@ -64,9 +64,9 @@ class EstructuraPlanesAnioFixture  extends CakeTestFixture {
 
             array(
                 'id'                    => 7,
-                'nro_anio'              => 3,
+                'nro_anio'              => 2,
                 'estructura_plan_id'	=> 3,
-                'edad_teorica'          => 13,
+                'edad_teorica'          => 12,
                 'anio_escolaridad'	=> 1,
             ),
             array(
@@ -74,7 +74,7 @@ class EstructuraPlanesAnioFixture  extends CakeTestFixture {
                 'nro_anio'              => 3,
                 'estructura_plan_id'	=> 3,
                 'edad_teorica'          => 13,
-                'anio_escolaridad'	=> 1,
+                'anio_escolaridad'	=> 2,
             ),
     );
 }
