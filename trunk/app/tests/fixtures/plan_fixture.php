@@ -153,6 +153,60 @@ class PlanFixture  extends CakeTestFixture {
                 'titulo_id'	=> 1,
                 'estructura_plan_id'=> 1,
             ),
+
+
+
+         array(
+                'id' 			=> 9,
+                'instit_id'		=> 5,
+                'oferta_id'		=> 1,
+                'norma'			=> "",
+                'nombre'		=> "Titulo 1 de institucion 5",
+                'perfil'		=> "Algun Perfil",
+                'duracion_hs'	=> 5,
+                'duracion_semanas'=>5,
+                'duracion_anios'=> 5,
+                'matricula'		=> 40,
+                'observacion'	=> "Alguna observacion 1",
+                'ciclo_alta'	=> 2004,
+                'titulo_id'	=> 1,
+                'estructura_plan_id'=> 1,
+            ),
+         array(
+                'id' 			=> 10,
+                'instit_id'		=> 5,
+                'oferta_id'		=> 1,
+                'norma'			=> "una norma",
+                'nombre'		=> "Titulo 2 de institucion 5",
+                'perfil'		=> "Algun Perfil 2",
+                'duracion_hs'           => 4,
+                'duracion_semanas'      => 3,
+                'duracion_anios'        => 5,
+                'matricula'		=> 200,
+                'observacion'           => "Alguna observacion 2",
+                'ciclo_alta'            => 2005,
+                'titulo_id'             => 2,
+                'estructura_plan_id'    => 1,
+            ),
+        array(
+                'id' 			=> 11,
+                'instit_id'		=> 5,
+                'oferta_id'		=> 3,
+                'norma'			=> "",
+                'nombre'		=> "Titulo 3 de institucion 5",
+                'perfil'		=> "Algun Perfil 3",
+                'duracion_hs'           => 3,
+                'duracion_semanas'      => 2,
+                'duracion_anios'        => 4,
+                'matricula'		=> 100,
+                'observacion'           => "Alguna observacion 3",
+                'ciclo_alta'            => 2008,
+                'titulo_id'             => 55,
+                'estructura_plan_id'    => 2,
+            ),
+
+
+        
     );
 }
 ?>

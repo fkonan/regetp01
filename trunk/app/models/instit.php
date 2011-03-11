@@ -4,6 +4,10 @@ class Instit extends AppModel {
 	var $name = 'Instit';
 
         var $order = array('Instit.cue', 'Instit.anexo');
+
+        /* @var $nombreCompleto String */
+        /* es el nombre de la institucion adicionandole el tipoinstit + nº instit + nombre propio */
+        var $nombreCompleto = '';
 	
 	/**
 	 * Esto es para el paginador customizado
@@ -367,97 +371,96 @@ class Instit extends AppModel {
   	 */
   	function find($conditions = null, $fields = array(), $order = null, $recursive = null) {
   		$instituciones_data = parent::find($conditions, $fields, $order, $recursive);
-
-		if (is_array($instituciones_data) && sizeof($instituciones_data)>0 && $conditions != 'list' && $conditions != 'count'):
-		/*
-		 * primero calculo laprofundiddad
-		 * o sea, quiero saber cuantos nivles del array tengo que ir para 
-		 * llegar alos datos de Instit
-		 */  	
-			$array_recorro = $instituciones_data;
-		 
-	  		list($key, $idata) = each($array_recorro);  	
-	  		$aux = "$key";  $instit = "Instit";		
-	  		if($aux == $instit){
-	  			$profundidad = 0;
-	  		}else{
-	  			$profundidad = 1;
-	  		}
-	  		
-	  		$aux = &$instituciones_data;
-	  		if ($profundidad == 1):
-			  	for ($i=0; $i<sizeof($instituciones_data);$i++):	
-			  		$aux = &$instituciones_data[$i]; 		
-			  		$aux['Instit']['nombre_completo'] = "";	
-			  		
-		  			$nombre = (isset($aux['Instit']['nombre']))?$aux['Instit']['nombre']:'';
-			  		$numero = (isset($aux['Instit']['nroinstit']))?$aux['Instit']['nroinstit']:'';
-			  		
-			  		if(isset($aux['Tipoinstit']['name'])){			
-				  		$nombre_tipoinstit = $aux['Tipoinstit']['name'];
-				  		
-					  	$aux['Instit']['nombre_completo'] = ($nombre_tipoinstit=='SIN DATOS')?'':$nombre_tipoinstit.' ';
-					  	$aux['Instit']['nombre_completo'] .= ($numero > 0 || $numero != '')?"Nº $numero ":"";
-	  					if (($nombre_tipoinstit != 'SIN DATOS' ||  $numero > 0)&& $nombre){
-							$aux['Instit']['nombre_completo'] .= " ";
-						}
-					  	$aux['Instit']['nombre_completo'] .= ($nombre != '')?'"'.$nombre.'"':"";
-			  		}
-			  		else {
-			  			$aux['Instit']['nombre_completo'] .= ($numero > 0 || $numero != '')?"Nº $numero ":"";
-			  			$aux['Instit']['nombre_completo'] .= ($nombre != '')?'"'.$nombre.'"':"";
-			  		}
-			  	endfor;
-			 else:	 
-			 	$aux['Instit']['nombre_completo'] = "";	
-			 	$nombre = (isset($aux['Instit']['nombre']))?$aux['Instit']['nombre']:'';
-			  	$numero = (isset($aux['Instit']['nroinstit']))?$aux['Instit']['nroinstit']:'';
-			  	
-			  	$nombre_tipoinstit = 'SIN DATOS';
-			  	if(isset($aux['Tipoinstit']['name'])){
-				  	$nombre_tipoinstit = $aux['Tipoinstit']['name'];
-				 	$aux['Instit']['nombre_completo'] = ($nombre_tipoinstit=='SIN DATOS')?'':$nombre_tipoinstit.' ';
-					$aux['Instit']['nombre_completo'] .= ($numero > 0 || $numero != '')?"Nº $numero ":"";
-			  	}
-			  		
-				if (($nombre_tipoinstit != 'SIN DATOS' ||  $numero > 0)&& $nombre){
-					$aux['Instit']['nombre_completo'] .= " ";
-				}
-				$aux['Instit']['nombre_completo'] .= ($nombre != '')?'"'.$nombre.'"':"";
-			endif;
-	  	endif;
-  		
-  		return $instituciones_data;
+                if (is_array($instituciones_data)
+                    && sizeof($instituciones_data)>0
+                    && $conditions != 'list'
+                    && $conditions != 'count'){
+                        $instituciones_data = $this->__institsConSusRespectivosNombresCompletos($instituciones_data);
+                    }
+                return $instituciones_data;
   	}
 
+        /**
+         * Dado un array, me devuelve el mismo vector, pero con el nombre completo de la
+         * institucion.
+         * @param array $instituciones_data
+         * @return array con 'nombre_completo' como Key
+         */
+       function __institsConSusRespectivosNombresCompletos($instituciones_data) {
+            /*
+                     * primero calculo laprofundiddad
+                     * o sea, quiero saber cuantos nivles del array tengo que ir para
+                     * llegar alos datos de Instit
+            */
+            $array_recorro = $instituciones_data;
 
-        function getNombreCompleto($nombre, $nroinstit='', $tipoinstit='') {
-            $nombre_completo = "";
-
-            if (!empty($this->data['Instit']['nombre'])) {
-                $nombre = $this->data['Instit']['nombre'];
+            list($key, $idata) = each($array_recorro);
+            $aux = "$key";
+            $instit = "Instit";
+            if($aux == $instit) {
+                $profundidad = 0;
+            }else {
+                $profundidad = 1;
             }
-            if (!empty($this->data['Instit']['nroinstit'])) {
-                $nroinstit = $this->data['Instit']['nroinstit'];
+            $aux = &$instituciones_data;
+            if ($profundidad == 1) {
+                for ($i=0; $i<sizeof($instituciones_data); $i++){
+                    $aux = &$instituciones_data[$i];
+                    $nombre_tipoinstit = isset($aux['Tipoinstit']['name']) ? $aux['Tipoinstit']['name'] : '';
+                    $aux['Instit']['nombre_completo'] = $this->getNombreCompleto('','',$nombre_tipoinstit,&$aux);
+                }
+            }else {
+                $nombre_tipoinstit = isset($aux['Tipoinstit']['name']) ? $aux['Tipoinstit']['name'] : '';
+                $aux['Instit']['nombre_completo'] = $this->getNombreCompleto('','',$nombre_tipoinstit,&$aux);
+            }
+            return $instituciones_data;
+        }
+
+
+        /**
+         * Arma el nombre completo con el Tipo instit + Nº + nombre propio
+         * se le pueden pasar los parametros para concatenar el nombre, o bien
+         * pasarle un array al final, si no se le pasa nuingun array, toma el
+         * $this->data para extraer la info
+         * 
+         * @param string $nombre
+         * @param string $nroinstit
+         * @param string $tipoinstit
+         * @param array $arrayParaCompletar si se lo pasa con el puntero de referencia lo modifica directamente ahi mismo
+         * @return string el nombre completo
+         */
+        function getNombreCompleto($nombre, $nroinstit='', $tipoinstit='', $arrayParaCompletar=array()) {
+            $nombreCompleto = "";
+
+            if (empty($arrayParaCompletar)) {
+                $arrayParaCompletar = &$this->data;
+            }
+
+            if (!empty($arrayParaCompletar['Instit']['nombre'])) {
+                $nombre = $arrayParaCompletar['Instit']['nombre'];
+            }
+            if (!empty($arrayParaCompletar['Instit']['nroinstit'])) {
+                $nroinstit = $arrayParaCompletar['Instit']['nroinstit'];
             }
             if (!empty($tipoinstit) && $tipoinstit == 'SIN DATOS') {
                 $tipoinstit = '';
             }
 
             if (!empty($tipoinstit)) {
-                $nombre_completo = $tipoinstit.' ';
-                $nombre_completo .= ($nroinstit > 0 || $nroinstit != '')?"Nº $nroinstit ":"";
+                $nombreCompleto = $tipoinstit.' ';
+                $nombreCompleto .= ($nroinstit > 0 || $nroinstit != '')?"Nº $nroinstit ":"";
                 if (($tipoinstit != 'SIN DATOS' ||  $nroinstit > 0) && $nombre){
-                    $nombre_completo .= " ";
+                    $nombreCompleto .= " ";
                 }
-                $nombre_completo .= ($nombre != '')?'"'.$nombre.'"':"";
+                $nombreCompleto .= ($nombre != '')?'"'.$nombre.'"':"";
             }
             else {
-                $nombre_completo .= ($nroinstit > 0 || $nroinstit != '')?"Nº $nroinstit ":"";
-                $nombre_completo .= ($nombre != '')?'"'.$nombre.'"':"";
+                $nombreCompleto .= ($nroinstit > 0 || $nroinstit != '')?"Nº $nroinstit ":"";
+                $nombreCompleto .= ($nombre != '')?'"'.$nombre.'"':"";
             }
 
-            return $nombre_completo;
+            $arrayParaCompletar['Instit']['nombre_completo'] = $nombreCompleto;
+            return $nombreCompleto;
         }
 
         
@@ -530,64 +533,68 @@ class Instit extends AppModel {
 
 
   	 */
-  	function dameSumatoriaDeMatriculasPorOferta($id){
-  		$matriz_rtado = array();
-  		
-  		$data_cliclos_involucrados = "SELECT a.ciclo_id
-										FROM anios as a
-										LEFT JOIN planes as p on (p.id = a.plan_id)
-										LEFT JOIN instits as i on (i.id = p.instit_id)
-										WHERE 
-										i.id = $id
-										GROUP BY a.ciclo_id
-										ORDER BY a.ciclo_id DESC
-										LIMIT 5";
-  
-  		
-  		$data_ofertas_involucradas = "SELECT o.id, o.abrev
-										FROM ofertas as o
-										LEFT JOIN planes as p on (p.oferta_id = o.id)
-										LEFT JOIN anios as a on (a.plan_id = p.id)
-										LEFT JOIN instits as i on (i.id = p.instit_id)
-										WHERE 
-										i.id = $id
-										GROUP BY o.id, o.abrev
-										ORDER BY o.id, o.abrev";
-  		
-  		
-  		$ciclos  = $this->query($data_cliclos_involucrados);
-  		$ofertas = $this->query($data_ofertas_involucradas);
-  		
-  		foreach ($ofertas as $o):
-  			$matriz_rtado['array_de_ofertas'][] = $o[0];
-  		endforeach;
-  		
-  		
-  		foreach($ciclos as $c):
-  			$ciclo = $c[0]['ciclo_id'];
-  			$matriz_rtado['array_de_ciclos'][] = $ciclo;
-  			foreach($ofertas as $o):
-  				$oferta = $o[0]['id'];
-  				$oferta_abrev = $o[0]['abrev'];
-  				
-  				$sql_suma_matriculas = "SELECT sum(a.matricula)
-                                                        FROM anios as a
-                                                        LEFT JOIN planes as p ON (p.id = a.plan_id)
-                                                        LEFT JOIN ofertas as o ON (o.id = p.oferta_id)
-                                                        LEFT JOIN instits as i ON (i.id = p.instit_id)
-                                                        WHERE i.id = $id
-                                                        AND a.ciclo_id = $ciclo
-                                                        AND o.id = $oferta";
-  				 $aux = $this->query($sql_suma_matriculas);
-  				 if(isset($aux[0][0]['sum'])):
-  				 	$matriz_rtado['totales'][$ciclo][$oferta_abrev]['total_matricula'] = (int)$aux[0][0]['sum'];
-  				 else:
-  				 	$matriz_rtado['totales'][$ciclo][$oferta_abrev]['total_matricula'] = "<cite>Sin Datos</cite>";
-  				 endif;
-  			endforeach;  		
-  		endforeach;
-  		
-  		return $matriz_rtado;
+  	function dameSumatoriaDeMatriculasPorOferta($id = null){
+            if ( empty($id) ){
+                $id = $this->id;
+
+            }
+            $matriz_rtado = array();
+
+            $data_cliclos_involucrados = "SELECT a.ciclo_id
+                                            FROM anios as a
+                                            LEFT JOIN planes as p on (p.id = a.plan_id)
+                                            LEFT JOIN instits as i on (i.id = p.instit_id)
+                                            WHERE
+                                            i.id = $id
+                                            GROUP BY a.ciclo_id
+                                            ORDER BY a.ciclo_id DESC
+                                            LIMIT 5";
+
+
+            $data_ofertas_involucradas = "SELECT o.id, o.abrev
+                                            FROM ofertas as o
+                                            LEFT JOIN planes as p on (p.oferta_id = o.id)
+                                            LEFT JOIN anios as a on (a.plan_id = p.id)
+                                            LEFT JOIN instits as i on (i.id = p.instit_id)
+                                            WHERE
+                                            i.id = $id
+                                            GROUP BY o.id, o.abrev
+                                            ORDER BY o.id, o.abrev";
+
+
+            $ciclos  = $this->query($data_cliclos_involucrados);
+            $ofertas = $this->query($data_ofertas_involucradas);
+
+            foreach ($ofertas as $o):
+                    $matriz_rtado['array_de_ofertas'][] = $o[0];
+            endforeach;
+
+
+            foreach($ciclos as $c):
+                    $ciclo = $c[0]['ciclo_id'];
+                    $matriz_rtado['array_de_ciclos'][] = $ciclo;
+                    foreach($ofertas as $o):
+                            $oferta = $o[0]['id'];
+                            $oferta_abrev = $o[0]['abrev'];
+
+                            $sql_suma_matriculas = "SELECT sum(a.matricula)
+                                                    FROM anios as a
+                                                    LEFT JOIN planes as p ON (p.id = a.plan_id)
+                                                    LEFT JOIN ofertas as o ON (o.id = p.oferta_id)
+                                                    LEFT JOIN instits as i ON (i.id = p.instit_id)
+                                                    WHERE i.id = $id
+                                                    AND a.ciclo_id = $ciclo
+                                                    AND o.id = $oferta";
+                             $aux = $this->query($sql_suma_matriculas);
+                             if(isset($aux[0][0]['sum'])):
+                                    $matriz_rtado['totales'][$ciclo][$oferta_abrev]['total_matricula'] = (int)$aux[0][0]['sum'];
+                             else:
+                                    $matriz_rtado['totales'][$ciclo][$oferta_abrev]['total_matricula'] = "<cite>Sin Datos</cite>";
+                             endif;
+                    endforeach;
+            endforeach;
+
+            return $matriz_rtado;
   	}
   	
   	
@@ -674,30 +681,7 @@ class Instit extends AppModel {
   		if($this->data[$this->name]['anio_creacion']== ''){
   			$this->data[$this->name]['anio_creacion'] = 0;
   		}
-  		  		
-  		$this->data[$this->name]['depto'] = ' ';
-  		$this->data[$this->name]['localidad'] = ' ';
-  		if (isset($this->data[$this->name]['localidad_id'])):
-			$this->Localidad->recursive = -1;
-			if($this->data[$this->name]['localidad_id'] != ""):
-	  			$localidad = $this->Localidad->findById($this->data[$this->name]['localidad_id']);
-	  			if (isset($localidad['Localidad']['name'])):
-	  				$this->data[$this->name]['localidad'] = $localidad['Localidad']['name'];
-	  			endif;
-	  		endif;
-	  	endif;
   		
-	  	if (isset($this->data[$this->name]['departamento_id'])):  			
-  			$this->Departamento->recursive = -1;
-	  		if($this->data[$this->name]['departamento_id'] != ""):
-	  			$departamento = $this->Departamento->findById($this->data[$this->name]['departamento_id']);	  		 			
-	  			if (isset($departamento['Departamento']['name'])):
-	  				$this->data[$this->name]['depto'] = $departamento['Departamento']['name'];
-	  			endif;
-	  		endif;
-  		endif;
-  		// -----------------------------------------------------------------------------------------------------------------------------------------------------------
-	
   		return true;
   	}
   	
@@ -1247,11 +1231,13 @@ class Instit extends AppModel {
         /**
          *  Me trae los planes de una determinada institucion, con sus anios dato
          * 
-         * @param string $depurado posibilidades:
-         *                          'depurados'
-         *                          'no-depurados'
+         * @param string $depurado posibilidades: (referido a Plan.estructura_plan_id)
+         *                          'depurados': Son los que tienen la FK de la estructura
+         *                          'no-depurados': los que no tienen FK hacia la estructura
          * @param integer $id
          * @return false si no encontro nada. o un Array de instit con sus planes
+         *
+         * @deprecated
          */
         function estructuraPlanes($depurado, $id = null){
             $id = (empty($id)) ? $this->id : $id;
@@ -1334,9 +1320,9 @@ class Instit extends AppModel {
         /*
          * Devuelve todos los planes de la institucion
          */
-    function getPlanes($conditions, $order = array(), $limit = null, $page = null) {
+    function getPlanes($conditions = array(), $order = array(), $limit = null, $page = null) {
   
-            $ciclo=0;         
+            $ciclo=0;
             if(isset($conditions['ciclo_id'])) {
                 $ciclo = $conditions['ciclo_id'];
                 unset($conditions['ciclo_id']);
@@ -1349,7 +1335,9 @@ class Instit extends AppModel {
                 $ciclo = $conditions['Ciclo.id'];
                 unset($conditions['Ciclo.id']);
             }
-            
+            if(!empty($conditions['Instit.id'])) {
+                $this->id = $conditions['Instit.id'];
+            }
             $condsPlan = array();
 
             if ( empty($ciclo )) {
@@ -1364,12 +1352,10 @@ class Instit extends AppModel {
             }
             unset($conditions['Ciclo.id']);
 
-            
-            
-
             $this->recursive = -1;
             $instit = $this->read(null, $this->id);
             
+            $mixConditions = array_merge($conditions, $condsPlan);
             $planes = $this->Plan->find('completo', array(
                 'contain' => array(
                         'Instit',
@@ -1381,14 +1367,26 @@ class Instit extends AppModel {
                 'order' => $order,
                 'limit' => $limit,
                 'page'  => $page,
-                'conditions' => array_merge($conditions, $condsPlan),
-            )); 
+                'conditions' => $mixConditions,
+            ));
            return $planes;
         }
 
 
-        function listSectoresConOferta($instit_id, $oferta_id){
-
+        /**
+         * Lista todos los sectores de una determinada institucion para una
+         * determinada oferta.
+         * @param integer $instit_id
+         * @param integer $oferta_id
+         * @return array del find('list') con 'id' => 'nombre del sector'
+         */
+        function listSectoresConOferta($instit_id, $oferta_id = 0){
+            $conditions = array('Plan.instit_id'=>$instit_id);
+            
+            if (!empty($oferta_id)) {
+                $conditions['Titulo.oferta_id'] = $oferta_id;
+            }
+            
             $sectores = $this->Plan->find("all",array(
                 'fields'=>array(
                         'DISTINCT Sector.id', 'Sector.name'
@@ -1407,11 +1405,7 @@ class Instit extends AppModel {
                           'conditions' => array('Sector.id = SectoresTitulo.sector_id')
                     )
                 ),
-                'conditions'=>array(
-                                    'Plan.instit_id'=>$instit_id,
-                                    'Titulo.oferta_id'=>$oferta_id
-
-                ),
+                'conditions'=> $conditions,
                 'contain'=>array(
                         'Titulo' => array(
                             'Sector',
@@ -1420,7 +1414,6 @@ class Instit extends AppModel {
                 ),
                 )
             );
-
             $sectores_aux = array();
 
             foreach($sectores as $s){

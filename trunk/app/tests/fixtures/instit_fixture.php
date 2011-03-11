@@ -57,7 +57,7 @@ class InstitFixture extends CakeTestFixture {
         'tipoinstit_id' => 33,
         'jurisdiccion_id' => 2, 
         'cue' => 200192, 'anexo' => 0 , 'esanexo' => 0,
-        'nombre' => "FERNANDO FADER",
+        'nombre' => "FERNANDO FADER TEST",
         'nroinstit' => "06",
         'anio_creacion' => 1934, 
         'direccion' => "SALTA 1226", 
