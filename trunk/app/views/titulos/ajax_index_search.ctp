@@ -5,6 +5,12 @@
 
     $paginator->options(array('update' => 'consoleResult', 'url' => $this->passedArgs,'indicator'=> 'ajax_indicator'));
 ?>
+<script type="text/javascript">
+    // si hay una búsqueda nueva que no recuerde paginación de session
+    if (jQuery("#TituloBusquedanueva").val() == 1) {
+        jQuery("#TituloBysession").val(0);
+    }
+</script>
 <div style="margin-top: 30px">
         <?
         if (sizeof($titulos) > 0) {?>

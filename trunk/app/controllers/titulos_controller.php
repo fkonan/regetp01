@@ -5,14 +5,56 @@ class TitulosController extends AppController {
     var $helpers = array('Html', 'Form');
     var $components = array('RequestHandler');
 
+    var $sesNames = array(
+            'nombre' => 'Titulo.tituloName',
+            'oferta'   => 'Titulo.oferta_id',
+            'sector' => 'Titulo.sector_id',
+            'subsector' => 'Titulo.subsector_id',
+            'page' => 'Titulo.page',
+        );
+
     function index() {
         $ofertas = $this->Titulo->Oferta->find('list');
         $sectores = $this->Titulo->Sector->find('list',array('order'=>'Sector.name'));
-        $subsectores = $this->Titulo->Subsector->con_sector('list');
+
+        if (!empty($this->passedArgs['limpiar'])) {
+            // limpia session
+            foreach ($this->sesNames as $sesName) {
+                $this->Session->write($sesName, '');
+            }
+        }
+
+        $bySession = false;
+        // si existe búsqueda en Session, realiza búsqueda
+        if ($this->Session->read($this->sesNames['nombre'])) {
+            $this->data['Titulo']['tituloName'] = $this->passedArgs['tituloName'] = $this->Session->read($this->sesNames['nombre']);
+            $bySession = true;
+        }
+        if ($this->Session->read($this->sesNames['oferta'])) {
+            $this->data['Titulo']['oferta_id'] = $this->passedArgs['ofertaId'] = $this->Session->read($this->sesNames['oferta']);
+            $bySession = true;
+        }
+        if ($this->Session->read($this->sesNames['sector'])) {
+            $this->data['Titulo']['sector_id'] = $this->passedArgs['sectorId'] = $this->Session->read($this->sesNames['sector']);
+            $bySession = true;
+
+            $subsectores = $this->Titulo->Subsector->con_sector('list', $this->Session->read($this->sesNames['sector']));
+        }
+        if ($this->Session->read($this->sesNames['subsector'])) {
+            $this->data['Titulo']['subsector_id'] = $this->passedArgs['subsectorId'] = $this->Session->read($this->sesNames['subsector']);
+            $bySession = true;
+        }
+        if ($this->Session->read($this->sesNames['page'])) {
+            $bySession = true;
+        }
+        
+        if (empty($subsectores)) {
+            $subsectores = $this->Titulo->Subsector->con_sector('list');
+        }
 
         $this->Titulo->recursive = 0;
         $this->set('titulos', $this->paginate());
-        $this->set(compact('ofertas', 'sectores', 'subsectores'));
+        $this->set(compact('ofertas', 'sectores', 'subsectores', 'bySession'));
     }
 
 
@@ -322,54 +364,36 @@ class TitulosController extends AppController {
         // para el paginator que pueda armar la url
         $url_conditions = array();
 
-        $sesNames = array(
-            'nombre' => 'Titulo.tituloName',
-            'oferta'   => 'Titulo.oferta_id',
-            'sector' => 'Titulo.sector_id',
-            'subsector' => 'Titulo.subsector_id',
-            'page' => 'page',
-        );
-
         if (!empty($this->data)) {
             // si se realizó una búsqueda se limpia la session
-            foreach ($sesNames as $sesName) {
-                $this->Session->write($sesName, '');
+            foreach ($this->sesNames as $sesName) {
+                if ($sesName != $this->sesNames['page']) {
+                    $this->Session->write($sesName, '');
+                }
+            }
+
+            if (!empty($this->data['Titulo']['busquedanueva']) && !$this->data['Titulo']['bysession']) {
+                $this->Session->write($this->sesNames['page'], '');
             }
 
             if(!empty($this->data['Titulo']['tituloName'])) {
                 $this->passedArgs['tituloName'] = $this->data['Titulo']['tituloName'];
-                $this->Session->write($sesNames['nombre'], $this->data['Titulo']['tituloName']);
+                $this->Session->write($this->sesNames['nombre'], $this->data['Titulo']['tituloName']);
             }
             if(!empty($this->data['Titulo']['oferta_id'])) {
                 $this->passedArgs['ofertaId'] = $this->data['Titulo']['oferta_id'];
-                $this->Session->write($sesNames['oferta'], $this->data['Titulo']['oferta_id']);
+                $this->Session->write($this->sesNames['oferta'], $this->data['Titulo']['oferta_id']);
             }
             if(!empty($this->data['Titulo']['sector_id'])) {
                 $this->passedArgs['sectorId'] = $this->data['Titulo']['sector_id'];
-                $this->Session->write($sesNames['sector'], $this->data['Titulo']['sector_id']);
+                $this->Session->write($this->sesNames['sector'], $this->data['Titulo']['sector_id']);
             }
             if(!empty($this->data['Titulo']['subsector_id'])) {
                 $this->passedArgs['subsectorId'] = $this->data['Titulo']['subsector_id'];
-                $this->Session->write($sesNames['subsector'], $this->data['Titulo']['subsector_id']);
+                $this->Session->write($this->sesNames['subsector'], $this->data['Titulo']['subsector_id']);
             }
         }
-        else {
-            // si existe búsqueda en Session, realiza búsqueda            
-            if ($this->Session->read($sesNames['nombre'])) {
-                $this->data['Titulo']['tituloName'] = $this->Session->read($sesNames['nombre']);
-                $this->passedArgs['tituloName'] = $this->Session->read($sesNames['nombre']);
-            }
-            if ($this->Session->read($sesNames['oferta'])) {
-                $this->data['Titulo']['oferta_id'] = $this->Session->read($sesNames['oferta']);
-            }
-            if ($this->Session->read($sesNames['sector'])) {
-                $this->data['Titulo']['sector_id'] = $this->Session->read($sesNames['sector']);
-            }
-            if ($this->Session->read($sesNames['subsector'])) {
-                $this->data['Titulo']['subsector_id'] = $this->Session->read($sesNames['subsector']);
-            }
-        }  
-        
+              
         if(!empty($this->passedArgs['tituloName'])) {
             $q = utf8_decode(strtolower($this->passedArgs['tituloName']));
             $this->paginate['conditions']['lower(Titulo.name) SIMILAR TO ?'] = convertir_texto_plano($q);
@@ -397,6 +421,14 @@ class TitulosController extends AppController {
                       'conditions'=> array('SectoresTitulo.titulo_id = Titulo.id')
                     )
                 );
+        }
+
+        if (!empty($this->passedArgs['page'])) {
+            //$this->paginate['page'] = $this->passedArgs['page'];
+            $this->Session->write($this->sesNames['page'], $this->passedArgs['page']);
+        }
+        elseif ($this->Session->read($this->sesNames['page'])) {
+            $this->paginate['page'] = $this->Session->read($this->sesNames['page']);
         }
 
         //datos de paginacion

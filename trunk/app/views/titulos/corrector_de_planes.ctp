@@ -81,6 +81,12 @@ echo $html->css(array('jquery.autocomplete'));
 
             jQuery("#TituloName").attr('autocomplete','off');
 
+            jQuery("#FPlanTituloName").focusout(function() {
+                if (jQuery("#FPlanTituloName").val() == '') {
+                    jQuery("#fp_titulo_id").val('');
+                }
+            });
+
             jQuery("#FPlanTituloName").autocomplete("<?echo $html->url(array('controller'=>'titulos','action'=>'ajax_search'));?>", {
                 dataType: "json",
                 delay: 200,
@@ -113,19 +119,65 @@ echo $html->css(array('jquery.autocomplete'));
                 }
             });
 
+
+            jQuery("#FPlanInstitName").autocomplete("<?echo $html->url(array('controller'=>'instits','action'=>'ajax_search'));?>", {
+		dataType: "json",
+		parse: function(data) {
+			return jQuery.map(data, function(instit) {
+				return {
+					data: instit,
+					value: instit.nombre,
+					result: instit.nombre
+				}
+			});
+		},
+		formatItem: function(item) {
+			return formatInstit(item);
+		}
+            }).result(function(e, item) {
+                    jQuery("#fp_instit_id").remove();
+                    jQuery("#institInfo").remove();
+
+                    var div =   "<div style='border: 1px solid #F0F7FC' id='institCueInfo'>" +
+                                "<span>Institución Seleccionada</span>" +
+                                "<div class='instit_name'><b> [" + item.cue + "] " + item.nombre + "</b></div>" +
+                                "<div class='instit_atributte'><b>Domicilio: " + item.direccion + "</b> </div>" +
+                                "<br />" +
+                                "<div class='instit_atributte'><b>Gestión:" + item.gestion + "</b></div>" +
+                                "<div class='instit_atributte'><b>Jurisdicción:"+ item.jurisdiccion +" </b> </div>" +
+                                "<br />" +
+                                "<div class='instit_atributte'><b>Departamento:" + item.depto + "</b></div>" +
+                                "<div class='instit_atributte'><b>Localidad:" + item.localidad + "</b></div>" +
+                                "</div>";
+
+                    if(item.type == 'Vacio'){
+                        jQuery("#FPlanInstitName").val('');
+                        jQuery("#fp_instit_id").val('');
+                    }
+                    else{
+                        jQuery("#fp_instit_id").val(item.id);
+                    }
+            });
+
             jQuery("#FPlanTituloName").attr('autocomplete','off');
         });
+
+        
 
 
         function formatResult(titulo) {
             return titulo.name;
         }
 
+        function formatInstit(instit) {
+                return instit.nombre + " [" + instit.cue + "]";
+    }
+
 
 	function checkAll(){
             jQuery.each(jQuery('#formPlanes input:checkbox'), function(key, value) {
                 jQuery(value).attr("checked", true);
-                jQuery('#plan-linea-'+jQuery(value).attr('numero')).attr('style', 'background:#EFFBEF');
+                //jQuery('#plan-linea-'+jQuery(value).attr('numero')).attr('style', 'background:#EFFBEF');
             });
 	}
 
@@ -133,9 +185,18 @@ echo $html->css(array('jquery.autocomplete'));
 	function unCheckAll(){
             jQuery.each(jQuery('#formPlanes input:checkbox'), function(key, value) {
                 jQuery(value).attr("checked", false);
-                jQuery('#plan-linea-'+jQuery(value).attr('numero')).attr('style', 'background:white');
+                //jQuery('#plan-linea-'+jQuery(value).attr('numero')).attr('style', 'background:white');
             });
 	}
+
+        function onCheck(element) {
+            if (jQuery(element).attr('checked')) {
+                jQuery('#plan-linea-'+jQuery(element).attr('numero')).attr('style', 'background:#EFFBEF');
+            }
+            else {
+                jQuery('#plan-linea-'+jQuery(element).attr('numero')).attr('style', 'background:white');
+            }
+        }
 
 
 	function cambiarTitulos(element){
@@ -166,6 +227,7 @@ $paginator->options(array('url' => $url_conditions));
 ?>
 
 <!-- 	BUSQUEDA POR SU OFERTA  	-->
+<h2>Buscador de Planes</h2>
 
 <div id="search-planes" style="font-size:9pt;">
     <?php echo $form->create('Form',array('url'=>'/titulos/corrector_de_planes','id'=>'Form'));?>
@@ -180,7 +242,7 @@ $paginator->options(array('url' => $url_conditions));
                         'options'=> array('con' => 'Con Título de Referencia', 'sin' => 'Sin Título de Referencia'),
                         'empty'=>'Todos',
                         'div'=>array('style'=>'width:200px;float:left;clear:none;'),
-                        'label'=>'Planes'));
+                        'label'=>'Con/Sin Título'));
 
     $meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
     echo $form->input('FPlan.jurisdiccion_id', array(
@@ -204,7 +266,8 @@ $paginator->options(array('url' => $url_conditions));
     echo $form->input('FPlan.subsector_id', array(
                         'label'=>'Subsector',
                         'empty'=>'Todos',
-        'div'=>array('style'=>'width:200px;float:left;clear:none;', 'id' => 'DivFPlanSubsectorId'),
+                        'type' => 'select',
+                        'div'=>array('style'=>'width:200px;float:left;clear:none;', 'id' => 'DivFPlanSubsectorId'),
             ));
     ?>
     <?php
@@ -217,16 +280,27 @@ $paginator->options(array('url' => $url_conditions));
     echo $form->input('FPlan.plan_nombre', array(
         'label'=>'Nombre del Plan',
         'div'=>array('style'=>'width:50%;float:left;clear:none;',),
-        'after'=> '<cite>Realiza una búsqueda por parte del nombre del plan.<br>Ej: Soldadura</cite>'));
+        'after'=> '<cite>Parte del nombre del plan. Ej: Soldadura</cite>'));
 
     echo $form->input('FPlan.TituloName', array(
         'label'=>'Nombre del Titulo',
         'div'=>array('style'=>'width:48%;float:left;clear:none;',),
-        'after'=> '<cite>Busca por parte del nombre del título.<br>Ej: Técnico</cite>'));
+        'after'=> '<cite>Busca por nombre del Título (autocompletable)</cite>'));
 
     echo $form->input('FPlan.titulo_id', array(
         'type'=>'hidden',
         'id'=>'fp_titulo_id'
+    ));
+
+    echo $form->input('FPlan.InstitName', array(
+                'div'=>array('style'=>'width:420px; float: left; clear: none'),
+                'style'=> 'width:400px; float: left',
+                'label'=>'Nombre o CUE de la institución',
+                'value'=>((!empty($this->data['Instit']['cue']))?($this->data['Instit']['cue'] * 100 + $this->data['Instit']['anexo']):"")));
+
+    echo $form->input('FPlan.instit_id', array(
+        'type'=>'hidden',
+        'id'=>'fp_instit_id'
     ));
 
     echo $ajax->observeField(
@@ -255,24 +329,22 @@ $paginator->options(array('url' => $url_conditions));
  </div>
 
 
-
+<div id="institInfo"></div>
 <hr>
 
-<h1><?php echo $paginator->counter(array(
-			'format' => '%count%'));?> planes encontrados</h1>
+<h2><?php echo $paginator->counter(array('format' => '%count%'));?> planes encontrados</h2>
 
 <?php
 if (!empty($planes))
 {
     echo $form->create('Plan', array(
                             'url'=>'/titulos/corrector_de_planes',
-                            //'onsubmit'=>'activarCambios(); return false;',
                             'id'=>'formPlanes'
     ));
 
 
-    echo $form->button('Seleccionar Todos', array('onclick'=>'checkAll()', 'style'=>'clear:none;float:left;width:144px;'));
-    echo $form->button('Deseleccionar Todos', array('onclick'=>'unCheckAll()', 'style'=>'clear:none;float:left;width:144px;'));
+    //echo $form->button('Seleccionar Todos', array('onclick'=>'checkAll()', 'style'=>'clear:none;float:left;width:144px;'));
+    //echo $form->button('Deseleccionar Todos', array('onclick'=>'unCheckAll()', 'style'=>'clear:none;float:left;width:144px;'));
 
     $i = 0;
     foreach ($planes as $p) {
@@ -287,6 +359,7 @@ if (!empty($planes))
                     <?php echo $form->checkbox("Plan.planes.$i.selected", array(
                                 'id'=>"checkbox-$i",
                                 'numero'=>$i,
+                                'onclick' => 'onCheck(this);'
                         ));
                     ?>
                 <a style="font-size: 10px;" href="javascript:" onclick="jQuery('#<? echo $div_id?>').toggle(); return false;"><?= $p['Plan']['nombre']?></a> <i><?=($p['Plan']['titulo_id'] > 0 ? '(' . $p['Titulo']['name'] . ')':'(No tiene Título)')?></i>
@@ -331,15 +404,22 @@ if (!empty($planes))
 
                     </dl>
             </div>
-
     <?php
             $i++;
     }
-
+    ?>
+    <div style="padding-bottom:20px;">
+    <?php
+    echo $paginator->prev('<< '.__('Anterior', true), array(), null, array('class'=>'disabled'));
+    echo ' '.$paginator->numbers(array('modulus'=>13));
+    echo $paginator->next(__('Siguiente', true).' >>', array('style'=>'float:right;'), null, array('class'=>'disabled'));
+    ?>
+    </div>
+    <?php
     echo $form->input(
     'tituloName',
     array(
-        'label'=> 'Asignar Título',
+        'label'=> 'Asignar Título de Referencia a los Planes seleccionados',
         'id' => 'TituloName',
         'after'=> '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>',
         'style'=>'max-width: 550px;',
@@ -349,28 +429,8 @@ if (!empty($planes))
         'id'=>'titulo_id',
         'value'=>$titulo_id
         ));
-
-
-
-    //echo $form->button('Seleccionar Todos', array('onclick'=>'checkAll()', 'style'=>'clear:none;float:left;width:144px;'));
-    //echo $form->button('Deseleccionar Todos', array('onclick'=>'unCheckAll()', 'style'=>'clear:none;float:left;width:144px;'));
-
-    ?>
-
-    <div>
-    <?php
-    echo $paginator->prev('<< '.__('Anterior', true), array(), null, array('class'=>'disabled'));
-    echo ' '.$paginator->numbers(array('modulus'=>13));
-    echo $paginator->next(__('Siguiente', true).' >>', array('style'=>'float:right;'), null, array('class'=>'disabled'));
-    ?>
-    </div>
-
-
-    <?php
-
-    echo $form->button('Seleccionar Todos', array('onclick'=>'checkAll()', 'style'=>'clear:none;float:left;width:144px;'));
-    echo $form->button('Deseleccionar Todos', array('onclick'=>'unCheckAll()', 'style'=>'clear:none;float:left;width:144px;'));
-
+    
+    
     // convierte $url_conditions en string
     $url = '';
     foreach ($url_conditions as $k=>$param) {
@@ -391,11 +451,12 @@ if (!empty($planes))
     if (strlen($paginator->counter(array('format' => '%page%'))))
         echo $form->hidden('FPlan.last_page', array('value' => $paginator->counter(array('format' => '%page%'))));
 
-    echo $form->end('Guardar Cambios');
+    echo $form->end('Asignar Título');
 
 }
 ?>
 
 <br />
 <?php echo  $html->link('Agregar Nuevo Título de Referencia', array('controller'=>'titulos','action'=>'add'), array('target'=>'_blank')); ?>
+<br />
 <br />
