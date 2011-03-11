@@ -1,6 +1,6 @@
 <?php
     $paginator->options(array(
-        'url'     => $this->passedArgs,//array('controller'=>'titulos', 'action'=>'view', $titulo['Titulo']['id']),
+        'url'     => $this->passedArgs,
         'update'  => 'tituloPlanes',
         'indicator' => 'spinner',
         ));
@@ -9,8 +9,8 @@
     if (!empty($planes)) {
     ?>
     <table style="font-size: 8pt;">
-        <th><?php echo $paginator->sort('Institución','Plan.instit_id');?></th>
         <th><?php echo $paginator->sort('Plan','Plan.nombre');?></th>
+        <th><?php echo $paginator->sort('Institución','Plan.instit_id');?></th>
         <th><?php echo $paginator->sort('Jurisdicción','Instit.jurisdiccion_id');?></th>
         <?php
         foreach ($planes as $plan) {
@@ -20,11 +20,11 @@
             }
         ?>
         <tr>
-            <td style="text-align:left; vertical-align: middle;"><?php echo $html->link($plan['Instit']['nombre_completo'], array('controller'=>'Instits', 'action'=>'view', $plan['Instit']['id'])); ?></td>
             <td style="text-align:left; vertical-align: middle;"><?php echo $plan['Plan']['nombre']; ?></td>
+            <td style="text-align:left; vertical-align: middle;"><?php echo $html->link($plan['Instit']['nombre_completo'], array('controller'=>'Instits', 'action'=>'view', $plan['Instit']['id'])); ?></td>
             <td style="text-align:left; vertical-align: middle;"><?php echo $plan['Instit']['Jurisdiccion']['name']; ?></td>
         </tr>
-        <tr><td colspan="3"><hr /></td></tr>
+        <tr><td colspan="3" style="border-bottom:1px solid #CCCCCC;"></td></tr>
         <?php
         }
         ?>

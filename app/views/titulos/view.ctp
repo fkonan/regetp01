@@ -20,21 +20,16 @@
 	</dl>
 
 <h2><?php  __('Sectores/Subsectores');?></h2>
-
-    <dl><?php $i = 0; $class = ' class="altrow"';?>
-        <?php
-        foreach ($titulo['SectoresTitulo'] as $sector) {
-        ?>
-            <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Sectores'); ?></dt>
-            <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-                    <?php echo $sector['Sector']['name']; ?>
-                    <?php echo (!empty($sector['Subsector']['name']) ? '/ '.$sector['Subsector']['name'] : '' ); ?>
-            </dd>
-        <?php
-        }
-        ?>
-    </dl>
-
+    <?php
+    foreach ($titulo['SectoresTitulo'] as $sector) {
+    ?>
+        <div style="margin-top:6px;">
+            <?php echo $sector['Sector']['name']; ?>
+            <?php echo (!empty($sector['Subsector']['name']) ? '/ '.$sector['Subsector']['name'] : '' ); ?>
+        </div>
+    <?php
+    }
+    ?>
 <br />
     <div class="acl actions acl-editores acl-desarrolladores acl-administradores">
             <ul>

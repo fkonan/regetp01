@@ -334,6 +334,71 @@ class InstitsController extends AppController {
 
     }
 
+    function ajax_search($q = null){
+        $this->autoRender = false;
+
+        if ( $this->RequestHandler->isAjax() ) {
+          Configure::write ( 'debug', 0 );
+        }
+
+        $response = '';
+
+        if(empty($q)) {
+            if (!empty($this->params['url']['q'])) {
+                $q = utf8_decode(strtolower($this->params['url']['q']));
+            } else {
+                return utf8_encode("parámetro vacio");
+            }
+        }
+
+        if(is_numeric($q)){
+            $items = $this->Instit->find("all", array(
+                'contain'=> array(
+                    'Tipoinstit', 'Jurisdiccion', 'HistorialCue'
+                ),
+                'conditions'=> array(
+                    "to_char(cue*100+anexo, 'FM999999999FM') SIMILAR TO ?" => "%". $q ."%"
+
+                )
+            ));
+        }
+        else{
+            $items = $this->Instit->find("all", array(
+                'contain'=> array(
+                    'Tipoinstit', 'Jurisdiccion', 'HistorialCue'
+                ),
+                'conditions'=> array(
+                    "(lower(Tipoinstit.name) || lower(Instit.nombre)) SIMILAR TO ?" => convertir_para_busqueda_avanzada($q)
+                )
+            ));
+        }
+
+        $result = array();
+
+        foreach ($items as $item) {
+            $cuecompleto = $item['Instit']['cue']*100+$item['Instit']['anexo'];
+
+            array_push($result, array(
+                    "id" => $item['Instit']['id'],
+                    "cue" => $item['Instit']['cue']*100+$item['Instit']['anexo'],
+                    "nombre" => utf8_encode($item['Instit']['nombre']),
+                    "gestion" => utf8_encode($item['Gestion']['name']),
+                    "nroinstit" => utf8_encode($item['Instit']['nroinstit']),
+                    "anio_creacion" => utf8_encode($item['Instit']['anio_creacion']),
+                    "direccion" => utf8_encode($item['Instit']['direccion']),
+                    "depto" => utf8_encode($item['Instit']['depto']),
+                    "localidad" => utf8_encode($item['Instit']['localidad']),
+                    "cp" => utf8_encode($item['Instit']['cp']),
+                    "tipo" => utf8_encode($item['Tipoinstit']['name']),
+                    "jurisdiccion" => utf8_encode($item['Jurisdiccion']['name']),
+                    "jurisdiccion_id" => utf8_encode($item['Jurisdiccion']['id']),
+                    "cue_anterior" => utf8_encode($item['HistorialCue'][0]['cue'])
+            ));
+        }
+
+        echo json_encode($result);
+    }
+
     /**
      * Esta accion es el procesamiento del formulario de busqueda
      * maneja las condiciones de la busqueda y el paginador

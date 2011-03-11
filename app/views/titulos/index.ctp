@@ -1,5 +1,5 @@
 <div class="titulos index"> 
-<h2><?php __('Búsqueda de Títulos de Referencia');?></h2>
+<h1><?php __('Búsqueda de Títulos de Referencia');?></h1>
 <?php
 echo $javascript->link(array(
             'jquery.autocomplete',
@@ -58,10 +58,11 @@ echo $html->css(array('jquery.loadmask', 'smoothness/jquery-ui-1.8.6.custom'));
         echo $form->button('Limpiar búsqueda', array(
                 'class' => 'boton-buscar',
                 'style' => 'clear:both; float:left; width:130px;',
-                'onclick' => 'location.href="'.$html->url("index").'"',
+                'onclick' => 'location.href="'.$html->url("index").'/limpiar:1"',
          ));
 
-
+        echo $form->input('bysession', array('type'=>'hidden', 'value'=>$bySession));
+        echo $form->input('busquedanueva', array('type'=>'hidden', 'value'=>'1'));
         /*echo $form->button('Fusionar Títulos', array(
                 'id' => 'fusion',
                 'class' => 'boton-buscar',
@@ -88,3 +89,15 @@ echo $html->css(array('jquery.loadmask', 'smoothness/jquery-ui-1.8.6.custom'));
                 <li><?php echo $html->link(__('Corrector de Títulos de Planes', true), array('action'=>'corrector_de_planes')); ?></li>
 	</ul>
 </div>
+
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    <?php
+    if ($bySession) {
+    ?>
+        jQuery("#TituloSearchForm").submit();
+    <?php
+    }
+    ?>
+});
+</script>
