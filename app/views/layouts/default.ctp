@@ -64,13 +64,13 @@ header("Expires: Mon, 17 Dec 2007 00:00:00 GMT"); // Date in the past
 
 
         echo $scripts_for_layout;
+
         ?>
         <script type="text/javascript">
 
             jQuery(document).ready(function () {
                 <?php
-                $showMenu = !($session->check('Auth.User') && ($session->read('Auth.User.role') != 'invitado'));
-                if($showMenu) {
+                if (!$session->check('Auth.User') || $session->read('User.group_alias') == 'invitados') {
                 ?>
                         jQuery('.menu_body').show();
                 <?php
@@ -159,6 +159,7 @@ header("Expires: Mon, 17 Dec 2007 00:00:00 GMT"); // Date in the past
                     echo $this->renderElement('menu/boxDesarrollo');
                     echo $this->renderElement('menu/boxInstituciones');
                     echo $this->renderElement('menu/boxJurisdicciones');
+                    echo $this->renderElement('menu/boxTitulos');
                     echo $this->renderElement('menu/boxCuadros');
                     echo $this->renderElement('menu/boxInformacion');
                     echo $this->renderElement('menu/boxDepurador');
