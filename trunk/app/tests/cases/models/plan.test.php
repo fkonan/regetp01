@@ -81,5 +81,113 @@ class PlanTestCase extends CakeTestCase {
     }
 
 
+    function testFindCompleto(){
+        $this->Plan->recursive = 1;
+
+        // BUSCO POR INSTIT
+        //
+        // 
+        $institId = 2;
+        $is1 = $this->Plan->find('completo', array(
+                    'conditions'=>array(
+                        'Instit.id' => $institId,
+                        )
+                    )
+                );
+
+        
+        // verifico que todas las condiciones de la busqueda sean cumplidas.
+        // o sea, que la Instit.id retornada sea la misma que la buscada
+        foreach ($is1 as $i){
+            $this->assertEqual($i['Instit']['id'], $institId);
+        }
+
+
+        // BUSCO POR OFERTA
+        //
+        //
+        $ofertaId = 1;
+        $this->Plan->asociarAnio = true;
+        $is2 = $this->Plan->find('completo', array(
+                    'conditions'=>array(
+                        'Instit.id'=> $institId,
+                        'Titulo.oferta_id' => $ofertaId,
+                        )
+                    )
+                );
+        
+        // verifico que todas las condiciones de la busqueda sean cumplidas.
+        // o sea, que la Instit.id y el Titulo.id sean los buscados
+        foreach ($is2 as $i){
+            $this->assertEqual($i['Instit']['id'], $institId);
+            $this->assertEqual($i['Titulo']['oferta_id'], $ofertaId);
+        }
+
+
+
+        // BUSCO POR CICLO
+        //
+        //
+        $ciclo = 2009;
+        $this->Plan->asociarAnio = true;
+        $is2 = $this->Plan->find('completo', array(
+                    'conditions'=>array(
+                        'Instit.id'=> $institId,
+                        'Titulo.oferta_id' => $ofertaId,
+                        'Anio.ciclo_id' => $ciclo,
+                        )
+                    )
+                );
+
+        // verifico que todas las condiciones de la busqueda sean cumplidas.
+        // o sea, que la Instit.id y el Titulo.id Anio.ciclo_id sean los buscados
+        foreach ($is2 as $i){
+            foreach ($i['Anio'] as $a){
+                $this->assertEqual($a['Anio']['ciclo_id'], $ciclo);
+            }
+            
+            $this->assertEqual($i['Instit']['id'], $institId);
+            $this->assertEqual($i['Titulo']['oferta_id'], $ofertaId);
+        }
+
+    }
+
+
+    function testDameMatriculaDeCiclo(){
+        $planId = 1;
+        $matricula = $this->Plan->dameMatriculaDeCiclo( $planId );
+        
+        $plan = $this->Plan->read(null, $planId);
+        $contMatricula = 0;
+        foreach ($plan['Anio'] as $a) {
+            $contMatricula += $a['matricula'];
+        }
+
+        $this->assertEqual( $contMatricula, $matricula );
+
+        $planId = 1;
+        $matricula = $this->Plan->dameMatriculaDeCiclo( $planId , 2010);
+
+        $this->assertEqual( 2, $matricula );
+    }
+
+
+    function testDameCiclosPorOfertaInstits(){
+        $ciclosXOf = $this->Plan->dame_ciclos_por_oferta_instits(3, $agregarAnioActual = false);
+
+        $expected = array(
+            1 => array(
+                'ciclo' => array(2007, 2006),
+                'name'  => 'FP',
+            ),
+            3 => array(
+                'ciclo' => array(),
+                'name' => 'SEC TEC',
+            )
+        );
+
+        $this->assertEqual($ciclosXOf, $expected);
+    }
+
 }
 ?>

@@ -12,8 +12,24 @@ class CicloFixture extends CakeTestFixture {
 
 	var $records = array(
 		array(
-			'id' => 1,
-			'name' => 'Lorem ip'
+			'id' => 2006,
+			'name' => '2006'
+		),
+                array(
+			'id' => 2007,
+			'name' => '2007'
+		),
+            array(
+			'id' => 2008,
+			'name' => '2008'
+		),
+            array(
+			'id' => 2009,
+			'name' => '2009'
+		),
+            array(
+			'id' => 2010,
+			'name' => '2010'
 		),
 	);
 }
