@@ -32,7 +32,9 @@ echo $javascript->link('jquery.jeditable.mini', false);
 </script>
 
 <div class="queries index">
-
+    <?php
+    if(!$preview){
+    ?>
     <br />
 
     <div class="info editable_textarea" style="min-height: 60px;">
@@ -76,13 +78,15 @@ echo $javascript->link('jquery.jeditable.mini', false);
         <?php echo $html->link('Volver','/pquery/Queries/descargar_queries/',array('class'=>'clearTag'));?>
 
     </p>
-
-    <table cellpadding="0" cellspacing="0">
+    <?php
+    }
+    ?>
+    <table cellpadding="0" cellspacing="0" style="font-size: 9pt">
         <caption class="editable"><?php echo $name?></caption>
         <thead>
         <tr>
             <?php foreach ($cols as $col): ?>
-            <th class="editable"><?php echo $col;?></th>
+            <th  class="editable"><?php echo $col;?></th>
             <?php endforeach; ?>
         </tr>
         </thead>
@@ -98,7 +102,8 @@ echo $javascript->link('jquery.jeditable.mini', false);
         <tr<?php echo $class;?>>
                 <?php foreach($query as $line):?>
             <td>
-                        <?php echo $line; ?>
+
+                        <?php echo (strlen($line) > 30)?substr($line, 0, 30) . "...":$line; ?>
             </td>
                 <?php endforeach; ?>
         </tr>
@@ -106,18 +111,18 @@ echo $javascript->link('jquery.jeditable.mini', false);
         </tbody>
     </table>
 </div>
-<div class="paging" style="background-color: #F0F7FC; height: 60px; padding-top: 20px; text-align: center;border-top: 3px solid #DBEBF6">
-    <?php
+<?php
     if (isset($paginator)) {
+?>
+<div class="paging" style="background-color: #F0F7FC; height: 60px; padding-top: 20px; text-align: center;border-top: 3px solid #DBEBF6">
+    
         echo $paginator->prev('<<');
         echo "&nbsp;";
         echo $paginator->numbers();
         echo "&nbsp;";
         echo $paginator->next('>>');
-    }
-    ?>
+   
 </div>
-
-<?
-debug($queries);
+<?php
+     }
 ?>

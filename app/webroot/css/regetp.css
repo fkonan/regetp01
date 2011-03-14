@@ -2257,6 +2257,32 @@ border-bottom-color: white !important;
     background-color: #F0F7FC;
 }
 
+.descargas-container .altrow{
+    background-color: #F0F7FC;
+}
+
+.descarga_item{
+    margin-bottom:-1px;
+    padding:5px 0px 5px 18px;
+    font-size: 10pt;
+    font-weight: normal;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.descarga_item A:HOVER{
+    color: #045FB8;
+    text-decoration: underline;
+}
+
+.descarga_item .mas_info{
+    float:right;
+}
+
+.descarga_sector{
+    margin-left: 65px;
+}
+
 .plan_etapa_name{
     font-size: 8pt;
     color: #045FB4;
@@ -2376,6 +2402,21 @@ border-bottom-color: white !important;
    
 }
 
+.btn-print A{
+    background: transparent url(images/preview.png) 0 0 no-repeat;
+    display: block;
+    width: 30px;
+    height: 35px;
+    text-indent: -1000px;
+    margin:0;
+    padding:0;
+    float:right;
+}
+
+.btn-print A:HOVER{
+
+}
+
 #sectores .js-sector-id{
     width:45%;
 }
@@ -2419,3 +2460,56 @@ border-bottom-color: white !important;
     height:50px
 }
 
+/* Mega Select */
+
+.megaselectlistcolumn {
+        width: 45%;
+        margin: 0 1%;
+        float: left;
+        clear: none;
+}
+
+.megaselectlist .currentitem {
+        padding: 0;
+        border: 0.1em dotted Green;
+        color: Black;
+}
+
+/* Optional styles */
+
+.megaselectlist {
+        background-color:#F0F7FC;
+        border:1px solid #D6E5EF;
+        background:transparent url(images/arrow_down.png) no-repeat scroll right top;
+        width:90%;
+}
+
+.megaselectlistcolumn > h2 {
+        font-size: 1em;
+        background-color: #ECECEC;
+        text-align: center;
+        padding: 2px 0;
+        margin: 0;
+}
+
+.megaselectlist > p {
+        margin: 0.2em;
+        padding-bottom: 0px;
+}
+
+.megaselectlistcolumn > ul {
+        padding-left: 1em;
+        margin: 0;
+        color: Gray;
+}
+
+.megaselectlistcolumn > ul > li {
+        cursor: pointer;
+        padding: 0.1em;
+        font-size: small;
+}
+
+.megaselectlistcolumn > ul > li:hover {
+        background-color: #ECECEC;
+        color: Black;
+}
