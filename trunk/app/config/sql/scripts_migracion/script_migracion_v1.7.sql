@@ -23,6 +23,14 @@ ALTER TABLE "public"."queries" ADD COLUMN "vigencia" timestamp without time zone
 ALTER TABLE "public"."queries" ADD COLUMN "categoria" character varying(1) DEFAULT 't';
 
 /*
+CORRECCIÓN DE ROLES HARCODEADOS
+*/
+update users set role='invitados' where role like 'invitado';
+update users set role='administradores' where role like 'admin';
+update users set role='desarrolladores' where role like 'desarrollo';
+update users set role='editores' where role like 'editor';
+
+/*
 AUTORIDADES
 */
 
