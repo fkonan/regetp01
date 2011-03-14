@@ -6,6 +6,8 @@ class QueriesController extends PqueryAppController {
 	var $name = 'Queries';
 	var $helpers = array('Html', 'Form','Ajax');
 	var $components = array('Auth','RequestHandler');
+
+        var $categorias_descargas = array(1=>"Instits",2=>"Planes",3=>"Titulos",4=>"Temporal");
         
 
 	function index() {
@@ -63,27 +65,17 @@ class QueriesController extends PqueryAppController {
 	}
 	
 	function descargar_queries() {
-		$categoria=(isset($this->data['Query']['categoria']))? $this->data['Query']['categoria'] : "";
-		$this->set('categoria',$categoria);
-
+		
 		$categorias = array();
-		$categorias[''] = 'Todos';
-		$categorias_aux = $this->Query->listarCategorias();
-		foreach($categorias_aux as $c){
-			$categorias[$c['Query']['categoria']] = $c['Query']['categoria'];
-		}
-		$this->set('categorias',$categorias);
+		$this->set('categorias',$this->categorias_descargas);
 
-		$conditions=array();
-		if($categoria!=""){
-			$conditions['categoria']=$categoria;
-		}
-		if(isset($this->data['Query']['description']) && $this->data['Query']['description']!="") {
-			$conditions['OR']['lower(to_ascii(Query.description)) SIMILAR TO ?'] = array($this->Query->convertir_para_busqueda_avanzada(utf8_decode($this->data['Query']['description'])));
-			$conditions['OR']['lower(to_ascii(Query.name)) SIMILAR TO ?'] = array($this->Query->convertir_para_busqueda_avanzada(utf8_decode($this->data['Query']['description'])));
-		}
+                $queries = array();
 
-		$queries=$this->Query->find('all',array('order'=>'modified DESC', 'conditions'=>$conditions));
+                foreach($this->categorias_descargas as $key=>$categoria){
+                    $conditions['categoria']= $key;
+                    $queries[$key]=$this->Query->find('all',array('order'=>'id,modified DESC', 'conditions'=>$conditions));
+                }
+
 		$this->set('queries',$queries);
 	}
 	
@@ -157,10 +149,19 @@ class QueriesController extends PqueryAppController {
 
             $this->CustomQuery->setSql($res['Query']['query']);
 
+            
             if (!empty($this->passedArgs['viewAll'])) {
                 if ($this->passedArgs['viewAll'] == 'true') {
                     $data = $this->CustomQuery->query();
                     $viewAll = false;
+                }
+            }
+            else if (!empty($this->passedArgs['preview'])) {
+                if ($this->passedArgs['preview']) {
+                    $this->layout = null;
+                    $this->CustomQuery->setSql($res['Query']['query']. " LIMIT 5");
+                    $data = $this->CustomQuery->query();
+                    $viewAll = true;
                 }
             } else {
                 $data = $this->paginate($this->CustomQuery);
@@ -176,6 +177,7 @@ class QueriesController extends PqueryAppController {
             $this->set('name', $res['Query']['name']);
             $this->set('descripcion', $res['Query']['description']);
             $this->set('viewAll', $viewAll);
+            $this->set('preview', !empty($this->passedArgs['preview']));
 
 
             if ($this->RequestHandler->ext == 'xls') {
