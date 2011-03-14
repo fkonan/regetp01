@@ -337,7 +337,7 @@ class InstitTestCase extends CakeTestCase {
             'array_de_ofertas' => Array(
                 0 => Array(
                         'id' => 1,
-                        'abrev' => 'Lorem ip'
+                        'abrev' => 'FP'
                     )
                 ),
              'array_de_ciclos' => Array(
@@ -346,12 +346,12 @@ class InstitTestCase extends CakeTestCase {
                  ),
             'totales' => Array(
                 2010 => Array(
-                    'Lorem ip' => Array(
+                    'FP' => Array(
                             'total_matricula' => 2
                         )
                 ),
                 2009 => Array(
-                    'Lorem ip' => Array(
+                    'FP' => Array(
                             'total_matricula' => 5
                         )
                 )
@@ -389,6 +389,68 @@ class InstitTestCase extends CakeTestCase {
             );
          $this->assertEqual($res, $expected);
     }
+
+
+    function testGetCiclosLectivos(){
+        $institId = 1;
+        $ciclos1 = $this->Instit->getCiclosLectivos( $institId );
+
+        $this->Instit->id = $institId;
+        $ciclos2 = $this->Instit->getCiclosLectivos();
+
+        // no deben venir vacios, porque hay ciclos lectivos
+        $this->assertTrue(!empty($ciclos1));
+        $this->assertTrue(!empty($ciclos2));
+
+        // deben traer exactamente lo mismo
+        $this->assertEqual($ciclos1, $ciclos2);
+
+        // busco los ciclos del Plan a mano, para luego hacer un doble checkeo
+        $ps = $this->Instit->Plan->find('first', array(
+            'conditions' => array(
+                'Plan.instit_id' => $institId,
+            ),
+            'contain' => array('Anio'),
+        ));
+
+        // verifico que los planes traidos a mano tengan los ciclos que busque con mi funcion
+        // deben tener los mismos ciclos lectivos y, a su vez, no deberia haber de mas.
+        // son 2 formas de traer los ciclos, chequeadas una contra la otra
+        foreach ( $ps['Anio'] as $a) {
+            $ciclo = $a['ciclo_id'];
+            if (!empty($ciclos1[$ciclo])){
+                unset($ciclo);
+            } else {
+                $this->fail('la función "getCiclosLectivos() me tuvo que haber traido el ciclo: '.$ciclo.' pero no lo hizo.');
+            }
+        }
+        // si esta vacio quiere decir que todos los ciclos fueron encontrados
+        // por ende esta OK
+        $this->assertTrue(empty($ciclo));
+    }
+
+
+
+     function testDameOfertaPorInstitucion(){
+        $expected = array('1'=>'Formacion Profesional');
+        $ofertas = $this->Instit->getOfertas(1);
+        $this->assertEqual($ofertas, $expected);
+
+        $ofertas = $this->Instit->getOfertas(1,2009);
+        $this->assertEqual($ofertas, $expected);
+
+        $ofertas = $this->Instit->getOfertas(1,1999);
+        $this->assertTrue(empty($ofertas));
+
+        $expected = array(
+            '1'=> 'Formacion Profesional',
+            '3'=> 'Secundario Tecnico',
+            );
+        $ofertas = $this->Instit->getOfertas(3);
+        $this->assertEqual($ofertas, $expected);
+    }
+
+    
 
 }
 ?>

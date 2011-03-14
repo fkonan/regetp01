@@ -66,7 +66,7 @@ class PlanesController extends AppController {
 
         $ciclos = $this->Plan->dame_ciclos_por_oferta_instits($id);
         
-        $ofertas  = $this->Plan->dameOfertaPorInstitucion($id,'');
+        $ofertas  = $this->Plan->Instit->getOfertas($id,'');
         $sectores = $this->Plan->dameSectoresPorInstitucion($id,isset($url_conditions['Anio.ciclo_id'])?$url_conditions['Anio.ciclo_id']:'');
 
         $this->set(compact('ofertas','ciclos','sectores'));
@@ -127,7 +127,8 @@ class PlanesController extends AppController {
             $this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$id );
         }
 
-        $ciclos = $this->Plan->dame_ciclos_por_instits($id);
+        // los ciclos lectivos de la Instit cuya id fue setteada arriba
+        $ciclos = $this->Plan->Instit->getCiclosLectivos();
 
         if (!empty($ciclos)) {
             if (!(in_array(date("Y"),$ciclos))) {
@@ -207,7 +208,7 @@ class PlanesController extends AppController {
             }
         }
 
-        $ofertas  = $this->Plan->dameOfertaPorInstitucion($id,isset($url_conditions['Anio.ciclo_id'])?$url_conditions['Anio.ciclo_id']:'');
+        $ofertas  = $this->Plan->Instit->getOfertas($id,isset($url_conditions['Anio.ciclo_id'])?$url_conditions['Anio.ciclo_id']:'');
         $sectores = $this->Plan->dameSectoresPorInstitucion($id,isset($url_conditions['Anio.ciclo_id'])?$url_conditions['Anio.ciclo_id']:'');
         $this->set(compact('ofertas','ciclos','sectores'));
 

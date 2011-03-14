@@ -1421,5 +1421,90 @@ class Instit extends AppModel {
             }
             return $sectores_aux;
         }
+
+
+        /**
+         *  Retorna todos los ciclos lectivos en los cuales esta institucion
+         *  brindó algún Plan
+         * @param integer $instit_id
+         * @return array
+         */
+        function getCiclosLectivos($instit_id = null){
+            if (empty($instit_id)){
+                $instit_id = $this->id;
+            }
+            $vec = array();
+
+            $sql  = " SELECT ciclo_id ";
+            $sql .= " FROM   planes p ";
+            $sql .= "       ,anios  a ";
+            $sql .= " WHERE  p.instit_id = " . $instit_id;
+            $sql .= " AND    a.plan_id   = p.id ";
+            $sql .= " GROUP  BY ciclo_id ";
+            $sql .= " ORDER  BY ciclo_id ASC";
+
+            $data = $this->query($sql);
+
+            foreach ($data as $line){
+                    $vec[$line[0]['ciclo_id']] = $line[0]['ciclo_id'];
+            }
+
+            return $vec;
+        }
+
+
+
+  	/**
+  	 * Me devuelve las ofertas que tiene la institucion pasada como parametro agrupada por oferta.
+  	 * O sea, me indica la variedad de niveles que tiene una escuela.
+  	 * Ej: SEC, SUP, IT .... o .... SEC, SUP
+  	 *
+  	 * @param integer $instit_id ide de la institucion en cuestion
+  	 * @param integer $ciclo_id id del ciclo que estoy buscando(2006, 2007. 2008, ¿2009?)
+         * @param string $fields campos que quiero que me traiga la query, ero en formato string. No tipo Cake.
+  	 * @return array $oferta[id][abrev]
+  	 */
+  	function getOfertas($instit_id = null, $ciclo_id = 0, $nameOrAbrev = 'name'){
+                if ( empty($instit_id) ) {
+                    $instit_id = $this->id;
+                }
+
+                if ($nameOrAbrev == 'name'){
+                    $field = 'o.name AS abrev';
+                    $group = 'o.name';
+                } else {
+                    $field = 'o.abrev AS abrev';
+                    $group = 'o.abrev';
+                }
+
+  		$sql = "
+                        SELECT o.id AS id , $field
+                        FROM   planes   p
+                        LEFT JOIN ofertas o ON (o.id = p.oferta_id)
+                        LEFT JOIN anios    a ON (a.plan_id = p.id)
+                        WHERE
+                        p.instit_id = $instit_id
+                        ";
+
+		if ((int)$ciclo_id > 0){
+			$sql .= " AND a.ciclo_id = " . $ciclo_id;
+		}
+
+		$sql .= "
+                        GROUP BY o.id, $group
+                        ORDER BY $group ASC
+                        ";
+
+
+  		$data = $this->query($sql);
+		$vec = array();
+		foreach ($data as $line){
+			$vec[$line[0]['id']] = $line[0]['abrev'];
+		}
+
+		return $vec;
+  	}
+
+        
 }
 ?>

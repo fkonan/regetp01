@@ -14,13 +14,18 @@ class OfertaFixture extends CakeTestFixture {
 	var $records = array(
 		array(
 			'id' => 1,
-			'abrev' => 'Lorem ip',
-			'name' => 'Lorem ipsum dolor sit amet'
+			'abrev' => 'FP',
+			'name' => 'Formacion Profesional'
 		),
                 array(
 			'id' => 2,
 			'abrev' => 'IT',
 			'name' => 'Itinerario'
+		),
+                array(
+			'id' => 3,
+			'abrev' => 'SEC TEC',
+			'name' => 'Secundario Tecnico'
 		),
 	);
 }

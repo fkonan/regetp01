@@ -138,32 +138,17 @@ class Plan extends AppModel {
 			$this->data['Plan']['sector'] = 'SECTOR SIN DATO';
 		}
 		  		  		
-  		if (isset($this->data['Plan']['duracion_hs'])):
-  			if ($this->data['Plan']['duracion_hs'] == ''): 
-  				$this->data['Plan']['duracion_hs'] = 0;
-  			endif;
-  		else:
-  			$this->data['Plan']['duracion_hs'] = 0;
-  		endif;
+  		if (empty($this->data['Plan']['duracion_hs'])){
+                        $this->data['Plan']['duracion_hs'] = 0;
+                }
   		
+  		if (empty($this->data['Plan']['duracion_semanas'])){
+                    $this->data['Plan']['duracion_semanas'] = 0;
+                }
   		
-  		if (isset($this->data['Plan']['duracion_semanas'])):
-  			if ($this->data['Plan']['duracion_semanas'] == ''): 
-  				$this->data['Plan']['duracion_semanas'] = 0;
-  			endif;
-  		else:
-  			$this->data['Plan']['duracion_semanas'] = 0;
-  		endif;
-  		
-  		
-  		if (isset($this->data['Plan']['duracion_anios'])):
-  			if ($this->data['Plan']['duracion_anios'] == ''): 
-  				$this->data['Plan']['duracion_anios'] = 0;
-  			endif;
-  		else:
-  			$this->data['Plan']['duracion_anios'] = 0;
-  		endif;
-  		
+  		if (empty($this->data['Plan']['duracion_anios'])){
+                    $this->data['Plan']['duracion_anios'] = 0;
+                }
   		
   		return true;
   	}
@@ -174,7 +159,6 @@ class Plan extends AppModel {
   	 * 
   	 * @return cantidad de registros
   	 */
-  	
   	function paginateCount($conditions = null, $recursive = 0)
   	{
             $parameters = compact('conditions');
@@ -242,7 +226,20 @@ class Plan extends AppModel {
         }
 
 
-        function __findCompleto($parameters, $buscaroSoloContar = 'buscar') {
+        /**
+         *  Devuelve un find "all" pero con un monton de JOINS extra.
+         * Ademàs, si se pone $this->asociarAnio en true, trae los años
+         * asociados con la informacion de EstructuraPlanesAnio y Etapa
+         * 
+         * @param array $parameters
+         *                      ['asociarAnio'] = true   ::: trae los años
+                                        asociados con la informacion de
+         *                              EstructuraPlanesAnio y Etapa
+         * @param string $buscaroSoloContar
+         *                      Los valores posibles son: 'buscar' (por default)  o 'count'
+         * @return array
+         */
+        function __findCompleto($parameters = array(), $buscaroSoloContar = 'buscar') {
                 $ciclo_id = 0;
                 
                 if ( !empty($parameters['conditions']['Anio.ciclo_id'])) {
@@ -342,16 +339,24 @@ class Plan extends AppModel {
 
                 $planes = $this->find('all', $parameters);
 
+                if (isset($parameters['asociarAnio'])){
+                    $this->asociarAnio = $parameters['asociarAnio'];
+                }
                 if ($this->asociarAnio) {
                     foreach ( $planes as $key=>&$p) {
-                        $p['Anio'] = $this->Anio->getAniosDePlanPorCiclo($p['Plan']['id'],$ciclo_id);
+                        $p['Anio'] = $this->Anio->getAniosDePlanPorCiclo($p['Plan']['id'], $ciclo_id);
                     }
                 }
                 
                 return $planes;
         }
 
-        public function findXCiclo($instit_id, $oferta_id, $ciclo_id){
+
+        /**
+         * La borré porque no encontre que sea utilizada
+         * @deprecated
+         * 
+        public function findXCiclo($instit_id, $oferta_id, $ciclo_id = null){
             $condi = array();
             if (!empty($ciclo_id)) $condi = array('Anio.ciclo_id'=>$ciclo_id);
             
@@ -367,7 +372,7 @@ class Plan extends AppModel {
 
                       ));
         }
-       
+       */
 
 	function setAsociarAnio($asociar){
 		$this->asociarAnio = $asociar;	
@@ -396,7 +401,10 @@ class Plan extends AppModel {
   	 * @return matricula de determinado plan, ciclo.
   	 */
 		
-	function dameMatriculaDeCiclo($plan_id,$ciclo){
+	function dameMatriculaDeCiclo($plan_id = null,$ciclo = 0){
+                if (!empty($plan_id)){
+                    $this->id = $plan_id;
+                }
                 $conditions = array();
 
                 if($ciclo == 0){
@@ -444,14 +452,16 @@ class Plan extends AppModel {
 	
   	
   	
-  	//TODO refactoring, deberia devolver simplemente el ciclo y no un array
+  	
 	/**
   	 * Esta funcion recibe el id de institucion y 
   	 * devuelve la última actualización (ciclo) que presenten sus planes
   	 *
   	 * @param $instit_id
   	 * @return Array $vec[ciclo_id][ciclo_id]
-  	 */
+         *
+         * @deprecated
+  	 
   	
   	function dame_max_ciclos_por_instits($instit_id){
   		
@@ -478,40 +488,48 @@ class Plan extends AppModel {
 
 		return $vec;
   	}
+         * 
+         */
 
-  	function dame_ciclos_por_instits($instit_id){
-  		
-		$vec = array();
+  	
 
-		$sql  = " SELECT ciclo_id ";
-		$sql .= " FROM   planes p ";
-		$sql .= "       ,anios  a ";
-		$sql .= " WHERE  p.instit_id = " . $instit_id;
-		$sql .= " AND    a.plan_id   = p.id ";
-		$sql .= " GROUP  BY ciclo_id ";
-		$sql .= " ORDER  BY ciclo_id ASC";
-		
-		$data = $this->query($sql);
+        /**
+         *
+         * Retorna un array con todas las ofertas distintas que brinda
+         * la institucion, agrupandole los años lectivos que contiene cada una.
+         * 
+         * @param integer $instit_id
+         * @param boolean $agregar_anio_actual
+         * @return array
+         *  Devuelve algo asi
+         *          Array(
+                        [0] => Array
+                            (
+                                [ciclo] => Array
+                                    (
+                                        [0] => 2010
+                                        [1] => 2009
+                                    )
 
-		foreach ($data as $line){
-			$vec[$line[0]['ciclo_id']] = $line[0]['ciclo_id']; 
-		}
+                                [name] => FP  // Nombre de la Oferta
+                            )
 
-		return $vec;
-  	}
-
+                    )
+         *
+         */
         function dame_ciclos_por_oferta_instits($instit_id, $agregar_anio_actual = true) {
 
-		$vec = array();
+                $ofertaRet = array();
 
-                $oferta = $this->dameOfertaPorInstitucion($instit_id);
-                foreach ($oferta as &$o) {
-                    $o = array(
+                $oferta = $this->Instit->getOfertas($instit_id, $ciclo = 0 , $fields = 'abrev');
+                
+                foreach ($oferta as $o=>$d) {
+                    $ofertaRet[$o] = array(
                         'ciclo' => array(),
-                        'name' => '',
+                        'name' => $d,
                         );
                 }
-
+                
 		$sql   = " SELECT distinct oferta_id,o.abrev, ciclo_id";
                 $sql  .= " FROM planes p";
                 $sql  .= " INNER JOIN anios a ON a.plan_id = p.id";
@@ -523,13 +541,12 @@ class Plan extends AppModel {
 		$data = $this->query($sql);
 
                 foreach ($data as $line){
-			$oferta[$line[0]['oferta_id']]['ciclo'][] = $line[0]['ciclo_id'];
-                        $oferta[$line[0]['oferta_id']]['name'] = $line[0]['abrev'];
+			$ofertaRet[$line[0]['oferta_id']]['ciclo'][] = $line[0]['ciclo_id'];
                 }
 
                 $ciclos_disponibles = $this->Anio->Ciclo->find('list');
 
-                $ciclos = $oferta;
+                $ciclos = $ofertaRet;
                 if ($agregar_anio_actual) {
                     // agregarle el año actual si no existe
                     $existe = false;
@@ -620,44 +637,7 @@ class Plan extends AppModel {
   	}
 
   	
-  	//TODO faltaria hacer el test de esto
-  	/**
-  	 * Me devuelve las ofertas que tiene la institucion pasada como parametro agrupada por oferta.
-  	 * O sea, me indica la variedad de niveles que tiene una escuela.
-  	 * Ej: SEC, SUP, IT .... o .... SEC, SUP
-  	 * 
-  	 * @param integer $instit_id ide de la institucion en cuestion
-  	 * @param integer $ciclo_id id del ciclo que estoy buscando(2006, 2007. 2008, ¿2009?)
-  	 * @return array $oferta[id][abrev]
-  	 */
-  	function dameOfertaPorInstitucion($instit_id,$ciclo_id = 0){
-  		$sql = "  		
-  					SELECT o.id AS id , o.name AS abrev
-					FROM   planes   p
-					LEFT JOIN ofertas o ON (o.id = p.oferta_id)
-					LEFT JOIN anios    a ON (a.plan_id = p.id)
-					WHERE  
-					p.instit_id = $instit_id
-				";
-  		
-		if ((int)$ciclo_id > 0){
-			$sql .= " AND a.ciclo_id = " . $ciclo_id;
-		}					
-
-		$sql .= " 		
-  					GROUP BY o.id, o.name
-					ORDER BY o.name ASC
-				";
-
-	
-  		$data = $this->query($sql);
-		$vec = array();
-		foreach ($data as $line){
-			$vec[$line[0]['id']] = $line[0]['abrev'];
-		}
-		
-		return $vec;
-  	}
+  	
   	
   	
 	//TODO faltaria hacer el test de esto
