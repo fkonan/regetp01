@@ -4,10 +4,10 @@ App::import('Model','Pquery.CustomQUery');
 class QueriesController extends PqueryAppController {
 
 	var $name = 'Queries';
-	var $helpers = array('Html', 'Form','Ajax');
+	var $helpers = array('Html', 'Form', 'Ajax', 'Time');
 	var $components = array('Auth','RequestHandler');
 
-        var $categorias_descargas = array(1=>"Instits",2=>"Planes",3=>"Titulos",4=>"Temporal");
+        var $categorias_descargas = array('h'=>"Habituales", 't'=>"Temporales");
         
 
 	function index() {
@@ -73,6 +73,9 @@ class QueriesController extends PqueryAppController {
 
                 foreach($this->categorias_descargas as $key=>$categoria){
                     $conditions['categoria']= $key;
+                    if ($key == 't') {
+                        $conditions['vigencia']= '< NOW()';
+                    }
                     $queries[$key]=$this->Query->find('all',array('order'=>'id,modified DESC', 'conditions'=>$conditions));
                 }
 

@@ -1,4 +1,4 @@
-<h1>Descargas Excel</h1>
+<h1>Descargas</h1>
 
 <?php
 echo $javascript->link('jquery-ui-1.8.5.custom.min.js',false);
@@ -42,33 +42,25 @@ echo $html->css('smoothness/jquery-ui-1.8.10.custom.css',null, false);
 <div>
     <div class="js-tabs-ofertas tabs">
         <ul id="ofertas-tabs" class="horizontal-shadetabs">
-        <?php
-        foreach($categorias as $key=>$categoria){
-        ?>
             <li>
-                <a id="htab-<?=$key?>"
-                   href="#ver-oferta-<?=$key?>">
-                    <?=$categoria?>
+                <a id="htab-h"
+                   href="#ver-oferta-h">
+                    Habituales
                 </a>
             </li>
-        <?php
-        }
-        ?>
+            <li>
+                <a id="htab-t"
+                   href="#ver-oferta-t">
+                    Temporales
+                </a>
+            </li>
         </ul>
-        <?php
-        foreach($categorias as $key=>$categoria){
-        ?>
-        <div id="ver-oferta-<?=$key?>" class="descargas-container" style="">
+
+        <div id="ver-oferta-h" class="descargas-container" style="">
             <?php
-            if($key == 4){
-            ?>
-            <p>Las siguientes descargas fueron requeridas para casos particulares. Las mismas son temporales y serán eliminadas eventualmente.</p>
-            <?php
-            }?>
-            <?
             $i = 0;
-            foreach ($queries[$key] as $q):?>
-                    <div class="descarga_item  <?= ($i%2 == 0)? 'altrow':''?>">
+            foreach ($queries['h'] as $q):?>
+                    <div class="descarga_item <?php echo ($i%2 == 0)? 'altrow':''; ?>">
                         <div class="plan_title">
                             <span class="descarga_mas_info btn-print">
                                 <? echo $html->link('Preview', array('action'=>'list_view',$q['Query']['id'],'preview:true'));?>
@@ -86,8 +78,30 @@ echo $html->css('smoothness/jquery-ui-1.8.10.custom.css',null, false);
             endforeach;
             ?>
 	</div>
-        <?php
-        }
-        ?>
+
+        <div id="ver-oferta-t" class="descargas-container" style="">
+            <p>Las siguientes descargas fueron requeridas para casos particulares. Las mismas son temporales y serán eliminadas eventualmente.</p>
+            <?php
+            $i = 0;
+            foreach ($queries['t'] as $q):?>
+                    <div class="descarga_item <?php echo ($i%2 == 0)? 'altrow':''; ?>">
+                        <div class="plan_title">
+                            <span class="descarga_mas_info btn-print">
+                                <? echo $html->link('Preview', array('action'=>'list_view',$q['Query']['id'],'preview:true'));?>
+                            </span>
+                            <?= $html->link('Nº' .$q['Query']['id'] . ' - '. $q['Query']['name'],'contruye_excel/'.$q['Query']['id']); ?>
+                        </div>
+                        <div>
+                            <span class="plan_matricula_info">
+                                <p><?php echo strip_tags($q['Query']['description'],'<br />'); ?></p>
+                            </span>
+                        </div>
+                    </div>
+                    <?php
+                    $i++;
+            endforeach;
+            ?>
+	</div>
+
     </div>
 </div>
