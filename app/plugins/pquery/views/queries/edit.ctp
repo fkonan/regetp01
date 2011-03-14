@@ -19,10 +19,10 @@ function toogleVigencia() {
     }
 }
 </script>
+<h2><?php __('Editar Descarga');?></h2>
 <div class="queries form">
 <?php echo $form->create('Query');?>
 	<fieldset>
- 		<legend><?php __('Editar Descarga');?></legend>
 	<?php
 		echo $form->input('id');
 		echo $form->input('name');
