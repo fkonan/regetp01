@@ -81,8 +81,7 @@
 	                            echo $instit['Claseinstit']['name'];
 	                      }else{
 	                	        echo "<i>No declarado</i>";
-	                      } ?>                       
-                            &nbsp;
+	                      } ?>
                         </dd>
                     <?php }?>
 
@@ -95,8 +94,7 @@
 	                            echo $instit['Orientacion']['name'];
 	                      }else{
 	                	        echo "<i>No declarado</i>";
-	                      } ?>                           
-                            &nbsp;
+	                      } ?>
                         </dd>
                         <? } ?>
                         <dt ><?php __('Ámbito de Gestión'); ?></dt>
@@ -106,8 +104,7 @@
 	                            echo $instit['Gestion']['name'];
 	                      }else{
 	                	        echo "<i>No declarado</i>";
-	                      } ?>                   
-                            &nbsp;
+	                      } ?>
                         </dd>
                         <dt><?php __('Tipo de Dependencia'); ?></dt>
                         <dd>
@@ -116,8 +113,7 @@
 	                            echo $instit['Dependencia']['name'];
 	                      }else{
 	                	        echo "<i>No declarado</i>";
-	                      } ?>                   
-                            &nbsp;
+	                      } ?>
                         </dd>
                 <? if($instit['Instit']['nombre_dep']): ?>
                         <dt><?php __('Nombre de la Dependencia'); ?></dt>
@@ -128,7 +124,6 @@
 	                      }else{
 	                	        echo "<i>No declarado</i>";
 	                      } ?>                       
-                            &nbsp;
                         </dd>
                 <? endif; ?>
                         <dt><?php __('Jurisdicción'); ?></dt>
@@ -139,7 +134,6 @@
 	                      }else{
 	                	        echo "<i>No declarado</i>";
 	                      } ?>                   
-                            &nbsp;
                         </dd>
                         <dt><?php __('Departamento'); ?></dt>
                         <dd>
@@ -149,7 +143,6 @@
 	                      }else{
 	                	        echo "<i>No declarado</i>";
 	                      } ?>                   
-                            &nbsp;
                         </dd>
                         <dt><?php __('Localidad'); ?></dt>
                         <dd>
@@ -159,7 +152,6 @@
 	                      }else{
 	                	        echo "<i>No declarado</i>";
 	                      } ?>                   
-                            &nbsp;
                         </dd>
                         <dt><?php __('Barrio/Pueblo/Comuna'); ?></dt>
                         <dd>
@@ -169,7 +161,6 @@
 	                      }else{
 	                	        echo "<i>No declarado</i>";
 	                      } ?>                   
-                            &nbsp;
                         </dd>
                         <dt><?php __('Domicilio'); ?></dt>
                         <dd>
@@ -179,7 +170,6 @@
 	                      }else{
 	                	        echo "<i>No declarado</i>";
 	                      } ?>                   
-                            &nbsp;
                         </dd>
                         <dt><?php __('Código Postal'); ?></dt>
                         <dd>
@@ -189,7 +179,6 @@
 	                      }else{
 	                	        echo "<i>No declarado</i>";
 	                      } ?>                   
-                            &nbsp;
                         </dd>
                 <?php if($instit['Instit']['telefono']): ?>
                         <dt><?php __('Teléfono'); ?></dt>
@@ -200,7 +189,6 @@
 	                      }else{
 	                	        echo "<i>No declarado</i>";
 	                      } ?>                       
-                            &nbsp;
                         </dd>
                 <?php endif;?>
                 <?php if($instit['Instit']['telefono_alternativo']): ?>
@@ -212,8 +200,6 @@
 	                      }else{
 	                	        echo "<i>No declarado</i>";
 	                      } ?>    
-	                                          
-                            &nbsp;
                         </dd>
                 <?php endif;?>
                 <?php if($instit['Instit']['mail']): ?>
@@ -225,7 +211,6 @@
 	                      }else{
 	                	        echo "<i>No declarado</i>";
 	                      } ?>                        
-                        &nbsp;
                         </dd>
                 <?php endif;?>
                 <?php if($instit['Instit']['mail_alternativo']): ?>
@@ -237,8 +222,6 @@
 	                      }else{
 	                	        echo "<i>No declarado</i>";
 	                      } ?>
-
-                            &nbsp;
                         </dd>
                 <?php endif;?>
                 <?php if($instit['Instit']['web']): ?>
@@ -250,13 +233,11 @@
 	                      }else{
 	                	        echo "<i>No declarado</i>";
 	                      } ?>
-                            &nbsp;
                         </dd>
                 <?php endif;?>
                         <dt><?php __('Año de Creación'); ?></dt>
                         <dd>
                 <?php echo ($instit['Instit']['anio_creacion']==0)?'<i>No declarado</i>':$instit['Instit']['anio_creacion']; ?>
-                            &nbsp;
                         </dd>
                     </dl>
                     <H2>Datos Director</H2>
@@ -269,7 +250,6 @@
                           }else{
                 	            echo "<i>No declarado</i>";
                           } ?>
-                            &nbsp;
                         </dd>
                         <dt><?php __('Tipo y Nº de Documento'); ?></dt>
                         <dd>
@@ -280,7 +260,6 @@
                             }else{
                 	            echo "<i>No declarado</i>";
                             } ?>
-                            &nbsp;
                         </dd>
 
                         <dt><?php __('Teléfono'); ?></dt>
@@ -291,7 +270,6 @@
 		                   else{
 		                	    echo "<i>No declarado</i>";
 		                  } ?>
-                            &nbsp;
                         </dd>
 
                         <dt><?php __('E-Mail'); ?></dt>
@@ -302,7 +280,6 @@
                           else{
                 	            echo "<i>No declarado</i>";
                           } ?>
-                            &nbsp;
                         </dd>
 
                     </dl>
@@ -317,7 +294,6 @@
                           else {
                       	        echo "<i>No declarado</i>";
                           } ?>
-                            &nbsp;
                         </dd>
                         <dt><?php __('Tipo y Nº de Documento'); ?></dt>
                         <dd>
@@ -329,7 +305,6 @@
                       	        echo "<i>No declarado</i>";
                             }
                             ?>
-                            &nbsp;
                         </dd>
                     </dl>
 
@@ -346,7 +321,6 @@
                           }else {
                       	        echo "<i>No declarado</i>";
                           } ?>
-                            &nbsp;
                         </dd>
                         <?php
                         }
@@ -354,16 +328,20 @@
                         <dt><?php __('Alta'); ?></dt>
                         <dd>
                         <?php echo ($instit['Instit']['ciclo_alta']>0)?$instit['Instit']['ciclo_alta']:'<i>No declarado</i>'; ?>
-                            &nbsp;
                         </dd>
 
+                        <?php
+                        if ($session->read('User.group_alias') == 'desarrolladores' ||
+                            $session->read('User.group_alias') == 'editores' ||
+                            $session->read('User.group_alias') == 'administradores') {
+                        ?>
                         <dt><?php __('Modificación'); ?></dt>
                         <dd>
-                        <?php //echo ($instit['Instit']['modified']>0)?$instit['Instit']['modified']:''; ?>
-
-                        <?php echo ($instit['Instit']['modified']>0)?date("d/m/Y",strtotime($instit['Instit']['modified'])):'<i>Los datos nunca fueron modificados para esta institución</i>'; ?>
-                            &nbsp;
+                        <?php 
+                            echo ($instit['Instit']['modified']>0)?date("d/m/Y",strtotime($instit['Instit']['modified'])):'<i>Los datos nunca fueron modificados para esta institución</i>';
+                        ?>
                         </dd>
+                        <? } ?>
                     </dl>
                     <br />
 

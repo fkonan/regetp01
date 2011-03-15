@@ -136,17 +136,16 @@ $cue_instit = $instit['cue'].$anexo;
 			&nbsp;
 		</dd>
                 <?php
-                    if ($session->check('Auth.User')) {
-                        if($session->read('Auth.User.role') != 'invitado') {
+                if ($session->read('User.group_alias') == 'desarrolladores' ||
+                    $session->read('User.group_alias') == 'editores' ||
+                    $session->read('User.group_alias') == 'administradores') {
                 ?>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Modificación'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<? echo $plan['Plan']['modified']?date("d/m/Y",strtotime($plan['Plan']['modified'])):''; ?>
-			&nbsp;
 		</dd>
                 <?php
-                        }
-                    }
+                }
                 ?>
 
 	</dl>
