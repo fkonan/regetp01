@@ -2,7 +2,7 @@
 class JurisdiccionesController extends AppController {
 
 	var $name = 'Jurisdicciones';
-	var $helpers = array('Html', 'Form');
+	var $helpers = array('Html', 'Form','Time');
 	var $paginate = array('limit' => 25, 'order'=>array('Jurisdiccion.name'=>'asc'));
 
         function beforeFilter() {
@@ -20,7 +20,11 @@ class JurisdiccionesController extends AppController {
 			$this->Session->setFlash(__('La jurisdicción no existe', true));
 			$this->redirect(array('action'=>'listado'));
 		}
+                
+                $ministro = $this->Jurisdiccion->Autoridad->find('first',array('conditions'=>array('Autoridad.jurisdiccion_id'=>$id),'contain'=>array('Cargo'=>array('conditions'=>array('Cargo.rango'=> 1)))));
+
                 $this->Jurisdiccion->recursive = 0;
+                $this->set('ministro',$ministro);
 		$this->set('jurisdiccion', $this->Jurisdiccion->read(null, $id));
 	}
 

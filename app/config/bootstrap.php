@@ -290,4 +290,9 @@ function ordenarPlanesPorEtapaOrden($planes)
     return $planetes;
 }
 
+function isNull($val,$nullString)
+{    
+    return (strlen($val) == 0)?$nullString:$val;
+}
+
 ?>
