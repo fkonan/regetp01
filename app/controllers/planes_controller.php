@@ -64,181 +64,16 @@ class PlanesController extends AppController {
             $this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$id );
         }
 
-        $ciclos = $this->Plan->dame_ciclos_por_oferta_instits($id);
+        $ciclos = $this->Plan->Instit->getCiclosLectivosXOferta($id);
         
         $ofertas  = $this->Plan->Instit->getOfertas($id,'');
-        $sectores = $this->Plan->dameSectoresPorInstitucion($id,isset($url_conditions['Anio.ciclo_id'])?$url_conditions['Anio.ciclo_id']:'');
+        $sectores = $this->Plan->Instit->getSectores($id,isset($url_conditions['Anio.ciclo_id'])?$url_conditions['Anio.ciclo_id']:'');
 
         $this->set(compact('ofertas','ciclos','sectores'));
         $this->set('ofertasControllers', $ofertasControllers);
     }
 
-    /**
-     * Listado de planes para una determinada institucion
-     * @param $id ID de institucion
-     */
-
-    function index_clasico($id = null) {
-
-        $v_plan_matricula = array();
-
-        if (isset($this->passedArgs['Instit.id'])) {
-            $id = $this->passedArgs['Instit.id'];
-        }
-
-        if (isset($this->data['Instit']['id'])) {
-            $id = $this->data['Instit']['id'];
-        }
-
-        if (empty($id)) {
-            $this->Session->setFlash(__('La institución pasada como parámetro es inválida.', true));
-            $this->redirect('/pages/home');
-        }
-
-
-        /* *************************** */
-        /*  Si tiene ticket pendiente  */
-
-        $data_ticket = $this->Plan->Instit->Ticket->dameTicketPendiente($id);
-        $ticket_id = isset($data_ticket['Ticket']['id'])?$data_ticket['Ticket']['id']:0;
-        $this->set('ticket_id', $ticket_id);
-
-        $action = ($this->Auth->user('role')=='admin' || $this->Auth->user('role')=='editor' || $this->Auth->user('role')=='desarrollo')?'edit':'view';
-        $this->set('action', $action);
-
-        /*  Fin Si tiene ticket pendiente * */
-        /* ******************************** */
-
-        //seteo el ID a la Instit
-        $this->Plan->Instit->id = $id;
-        $this->Plan->Instit->read();
-
-        if(!empty($this->Plan->Instit->data)) {
-            $cont = 0;
-            foreach ($this->Plan->Instit->data['Plan'] as $p):
-                $v_plan_matricula[$cont] = $this->Plan->Anio->matricula_del_plan($p['id']);
-                $v_plan_matricula[$cont]['ciclo'] = $this->Plan->Anio->ciclo_lectivo_matricula_del_plan($p['id']);
-                $cont++;
-            endforeach;
-
-            $this->set('sumatoria_matriculas',$this->Plan->Instit->dameSumatoriaDeMatriculasPorOferta($id));
-            $this->set('planes',$this->Plan->Instit->data);
-            $this->set('v_plan_matricula',$v_plan_matricula);
-            $this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$id );
-        }
-
-        // los ciclos lectivos de la Instit cuya id fue setteada arriba
-        $ciclos = $this->Plan->Instit->getCiclosLectivos();
-
-        if (!empty($ciclos)) {
-            if (!(in_array(date("Y"),$ciclos))) {
-                $ciclos = array_merge($ciclos,array(date('Y') => date('Y')));
-                sort($ciclos);
-            }
-        } else {
-            $ciclos = array(date('Y') => date('Y'));
-        }
-
-        /* ************************************ */
-        /* * Filtros de la búsqueda de Planes * */
-
-        if(isset($this->data['Plan']['oferta_id'])) {
-            if((int)$this->data['Plan']['oferta_id'] != 0) {
-                $this->paginate['conditions']['Plan.oferta_id'] = $this->data['Plan']['oferta_id'];
-                $url_conditions['Plan.oferta_id'] = $this->data['Plan']['oferta_id'];
-            }
-        }
-        if(isset($this->passedArgs['Plan.oferta_id'])) {
-            if((int)$this->passedArgs['Plan.oferta_id'] != 0) {
-                $this->paginate['conditions']['Plan.oferta_id'] = $this->passedArgs['Plan.oferta_id'];
-                $url_conditions['Plan.oferta_id'] = $this->passedArgs['Plan.oferta_id'];
-            }
-        }
-
-        if(isset($this->data['Plan']['nombre']) && $this->data['Plan']['nombre'] != "") {
-            $this->paginate['conditions']['to_ascii(lower(Plan.nombre)) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada($this->data['Plan']['nombre']));
-            $url_conditions['Plan.nombre'] = $this->data['Plan']['nombre'];
-        }
-        if(isset($this->passedArgs['Plan.nombre']) && $this->passedArgs['Plan.nombre'] != "") {
-            $this->paginate['conditions']['to_ascii(lower(Plan.nombre)) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['Plan.nombre'])));
-            $url_conditions['Plan.nombre'] = utf8_decode($this->passedArgs['Plan.nombre']);
-        }
-
-        if(isset($this->data['Plan']['sector_id'])) {
-            if((int)$this->data['Plan']['sector_id'] != 0) {
-                $this->paginate['conditions']['Plan.sector_id'] = $this->data['Plan']['sector_id'];
-                $url_conditions['Plan.sector_id'] = $this->data['Plan']['sector_id'];
-            }
-        }
-        if(isset($this->passedArgs['Plan.sector_id'])) {
-            if((int)$this->passedArgs['Plan.sector_id'] != 0) {
-                $this->paginate['conditions']['Plan.sector_id'] = $this->passedArgs['Plan.sector_id'];
-                $url_conditions['Plan.sector_id'] = $this->passedArgs['Plan.sector_id'];
-            }
-        }
-
-        if(isset($this->data['Anio']['ciclo_id'])) {
-            if((int)$this->data['Anio']['ciclo_id'] != 0) {
-                //$this->Plan->setMaxCiclo($this->data['Anio']['ciclo_id']);
-                $this->paginate['conditions']['Anio.ciclo_id'] = $this->data['Anio']['ciclo_id'];
-            } else {
-                $this->Plan->setTraerUltimaAct(true);
-            }
-            $url_conditions['Anio.ciclo_id'] = $this->data['Anio']['ciclo_id'];
-        }
-        else {
-            if(isset($this->passedArgs['Anio.ciclo_id'])) {
-                if((int)$this->passedArgs['Anio.ciclo_id'] != 0) {
-                    //$this->Plan->setMaxCiclo($this->passedArgs['Anio.ciclo_id']);
-                    $this->paginate['conditions']['Anio.ciclo_id'] = $this->passedArgs['Anio.ciclo_id'];
-                } else {
-                    // si viene por aca es porque clickeo en la solapa Todos.
-                    $this->Plan->setTraerUltimaAct(true);
-                }
-                $url_conditions['Anio.ciclo_id'] = $this->passedArgs['Anio.ciclo_id'];
-            }
-            else {
-                if(isset($ciclos)) {
-                    if((int)end($ciclos) != 0) {
-                        //$this->Plan->setMaxCiclo(date("Y"));
-                        $this->paginate['conditions']['Anio.ciclo_id'] = date("Y");
-                        $url_conditions['Anio.ciclo_id'] = date("Y");
-                    }
-                }
-            }
-        }
-
-        $ofertas  = $this->Plan->Instit->getOfertas($id,isset($url_conditions['Anio.ciclo_id'])?$url_conditions['Anio.ciclo_id']:'');
-        $sectores = $this->Plan->dameSectoresPorInstitucion($id,isset($url_conditions['Anio.ciclo_id'])?$url_conditions['Anio.ciclo_id']:'');
-        $this->set(compact('ofertas','ciclos','sectores'));
-
-
-
-        /* ********************************* */
-        /* * Paginador 					   * */
-
-        if (!isset($this->passedArgs['sort'])) {
-            if ($this->Plan->getTraerUltimaAct()) {
-                $this->passedArgs['order'] = 'Plan.oferta_id desc, Sector.name asc, Anio__ciclo_id desc';
-            } else {
-                $this->passedArgs['order'] = 'Plan.oferta_id desc, Sector.name asc';
-            }
-        }
-
-        $this->Plan->setAsociarAnio(true);
-        $this->paginate['conditions']['Instit.id'] = $id;
-        $url_conditions['Instit.id'] = $id; // para que no pierda el id de instit en los ordenamientos y la paginacion
-        $data = $this->paginate();
-        for($i=0; $i< count($data); $i++):
-            $mat = $this->Plan->dameMatriculaDeCiclo($data[$i]['Plan']['id'],$data[$i]['Anio']['ciclo_id']);
-            $data[$i]['calculado']['sum_matricula'] = $mat;
-        endfor;
-
-
-        $this->set('datoUltimoCiclo', $this->Plan->dameMatriculaUltimoCiclo($id));
-        $this->set('planesRelacionados', $data);
-        $this->set('url_conditions', $url_conditions);
-    }
+   
 
     function test() {
 
@@ -511,8 +346,8 @@ class PlanesController extends AppController {
         } else {
             $this->Plan->setTraerUltimaAct(true);
         }
-        
-        $this->Plan->setAsociarAnio(true);
+
+        $this->paginate['asociarAnio'] = true;
         
         $this->paginate['conditions']['Plan.oferta_id'] = $oferta_id;
         $this->paginate['conditions']['Instit.id'] = $instit_id;
@@ -535,7 +370,7 @@ class PlanesController extends AppController {
         }
         
         $sectores = $this->Plan->Instit->listSectoresConOferta($instit_id, $oferta_id);
-        $ciclos_anios = $this->Plan->dame_ciclos_por_oferta_instits($instit_id, $agregar_anio_actual = false);
+        $ciclos_anios = $this->Plan->Instit->getCiclosLectivosXOferta($instit_id, $agregar_anio_actual = false);
         $ciclos_anios = $ciclos_anios[FP_ID]['ciclo'];
 
         $this->set('es_una_busqueda',$es_una_busqueda);
@@ -561,11 +396,19 @@ class PlanesController extends AppController {
 
     function view_it_sec_sup($instit_id,$oferta_id,$ciclo=null) {
 
-        $this->Plan->asociarAnio = true;
+        $this->paginate['asociarAnio'] = true;
+        
         if (!$ciclo) {
             $this->paginate['order'] = array("Plan.nombre");
         }
-        $planes = $this->paginate('Plan', array('Plan.instit_id'=> $instit_id, 'Plan.oferta_id' => $oferta_id, 'Anio.ciclo_id'=>$ciclo));
+
+        $conds = array(
+            'Plan.instit_id'=> $instit_id,
+            'Plan.oferta_id' => $oferta_id,
+            'Anio.ciclo_id'=>$ciclo
+            );
+        
+        $planes = $this->paginate('Plan', $conds);
         //$planes = $this->Plan->Instit->getPlanes($instit_id, $oferta_id, $ciclo);
         // agrego el index "matricula" directamente que dependa de "Plan"
 

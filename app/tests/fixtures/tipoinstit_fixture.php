@@ -13,7 +13,7 @@ class TipoinstitFixture extends CakeTestFixture {
 		array(
 			'id' => 33,
                         'jurisdiccion_id' => 2,
-                        'name' => 'ESCUELA DE EDUCACIÓN TÉCNICA (E.E.T.)'
+                        'name' => 'ESCUELA DE EDUCACION TECNICA (E.E.T.)'
 		),
                 array(
                         'id' => 9,
@@ -23,7 +23,7 @@ class TipoinstitFixture extends CakeTestFixture {
                 array(
 			'id' => 3,
                         'jurisdiccion_id' => 2,
-                        'name' => 'ESCUELA POLITÉCNICA'
+                        'name' => 'ESCUELA POLITECNICA'
 		),
                 array(
 			'id' => 8,
@@ -33,7 +33,7 @@ class TipoinstitFixture extends CakeTestFixture {
                 array(
 			'id' => 18,
                         'jurisdiccion_id' => 2,
-                        'name' => 'CENTRO DE FORMACIÓN PROFESIONAL (C.F.P.)'
+                        'name' => 'CENTRO DE FORMACION PROFESIONAL (C.F.P.)'
 		),
                 array(
 			'id' => 214,
