@@ -580,6 +580,15 @@ class DepuradoresController extends AppController {
         $this->set(compact('tipoinstits', 'titulos','planes'));
     }
 
+
+    function depurar_planes_sin_titulo() {
+        $this->Plan->recursive = -1;
+        $this->paginate['contain'] = array('Instit'=>'Tipoinstit', 'Oferta' );
+        $this->paginate['conditions'] = array('Plan.titulo_id' => 0);
+
+        $this->set('planes', $this->paginate('Plan'));
+    }
+
     
 }
 
