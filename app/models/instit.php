@@ -369,7 +369,7 @@ class Instit extends AppModel {
   	 * @param $recursive
   	 * @return Array $data
   	 */
-  	function find($conditions = null, $fields = array(), $order = null, $recursive = null) {
+  	/*function find($conditions = null, $fields = array(), $order = null, $recursive = null) {
   		$instituciones_data = parent::find($conditions, $fields, $order, $recursive);
                 if (is_array($instituciones_data)
                     && sizeof($instituciones_data)>0
@@ -379,7 +379,7 @@ class Instit extends AppModel {
                     }
                 return $instituciones_data;
   	}
-
+*/
         /**
          * Dado un array, me devuelve el mismo vector, pero con el nombre completo de la
          * institucion.
@@ -414,6 +414,26 @@ class Instit extends AppModel {
                 $aux['Instit']['nombre_completo'] = $this->getNombreCompleto('','',$nombre_tipoinstit,&$aux);
             }
             return $instituciones_data;
+        }
+
+
+
+        function afterFind($results) {
+            foreach ($results as &$item) {
+                if (isset($item['Instit']['tipoinstit_id'])) {
+                    
+                    $id_tipoinstit = $item['Instit']['tipoinstit_id'];
+                    // tipo instit para armar nombre
+                    $this->Tipoinstit->recursive = -1;
+                    $tipoinstit = $this->Tipoinstit->find('first', array('conditions' => array('Tipoinstit.id' => $id_tipoinstit)));
+                    
+                    $nombre_tipoinstit = isset($tipoinstit['Tipoinstit']['name']) ? $tipoinstit['Tipoinstit']['name'] : '';
+
+                    $item['Instit']['nombre_completo'] = $this->getNombreCompleto($item['Instit']['nombre'], $item['Instit']['nroinstit'], $nombre_tipoinstit);
+                }
+            }
+
+            return $results;
         }
 
 
