@@ -281,7 +281,7 @@ class Plan extends AppModel {
                 if ( !empty($parameters['conditions']['Anio.ciclo_id'])) {
                     $ciclo_id = $parameters['conditions']['Anio.ciclo_id'];
                 }
-
+                
                 //$parameters['order'] = $this->order;
                 //$this->order = array_merge($this->order, array('Etapa.orden ASC'));
                 $parameters['group'] = array('Plan.id', 'Plan.nombre');
@@ -345,7 +345,7 @@ class Plan extends AppModel {
             
                 if ($buscaroSoloContar == 'count') {
                     // si solo es para obtener el total no necesito seguir...
-                    return count($this->find('list', $parameters));
+                    return $this->find('count', $parameters);
                 }
                 
                 // recojo todas las instituciones que cumplan con los criterios de busqueda
@@ -390,7 +390,7 @@ class Plan extends AppModel {
                         
                     }
                 }
-                
+                $this->__asociarAnio = $this->__asociarCompleto = false;
                 return $planes;
         }
 	

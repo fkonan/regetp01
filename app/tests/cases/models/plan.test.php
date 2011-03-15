@@ -142,8 +142,8 @@ class PlanTestCase extends CakeTestCase {
         foreach ($is2 as $i){
             foreach ($i['Anio'] as $a){
                 $this->assertEqual($a['ciclo_id'], $ciclo);
-                $this->assertTrue(!empty($a['Anio']['EstructuraPlanesAnio']));
-                $this->assertTrue(!empty($a['Anio']['Etapa']));
+                $this->assertTrue(!empty($a['EstructuraPlanesAnio']));
+                $this->assertTrue(!empty($a['Etapa']));
             }
             
             $this->assertEqual($i['Instit']['id'], $institId);
@@ -171,6 +171,10 @@ class PlanTestCase extends CakeTestCase {
         foreach ($is2 as $i){
             foreach ($i['Anio'] as $a){
                 $this->assertEqual($a['ciclo_id'], $ciclo);
+                
+                // al no asociar no me deberia traer ni la Estructura ni la Etapa
+                $this->assertTrue(empty($a['EstructuraPlanesAnio']));
+                $this->assertTrue(empty($a['Etapa']));
             }
 
             $this->assertEqual($i['Instit']['id'], $institId);

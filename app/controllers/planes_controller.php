@@ -354,8 +354,6 @@ class PlanesController extends AppController {
         $this->paginate['order'] = array("Plan.nombre");
 
         $planes = $this->paginate();
-
-        //$planes = $this->Plan->Instit->getPlanes($instit_id, $oferta_id, $ciclo);
         
         $newVecPlanes = array();
         $i = 0;
