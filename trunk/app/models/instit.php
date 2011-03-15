@@ -419,9 +419,9 @@ class Instit extends AppModel {
 
 
         function afterFind($results) {
+            
             foreach ($results as &$item) {
                 if (isset($item['Instit']['tipoinstit_id'])) {
-                    
                     $id_tipoinstit = $item['Instit']['tipoinstit_id'];
                     // tipo instit para armar nombre
                     $this->Tipoinstit->recursive = -1;
@@ -465,7 +465,6 @@ class Instit extends AppModel {
             if (!empty($tipoinstit) && $tipoinstit == 'SIN DATOS') {
                 $tipoinstit = '';
             }
-
             if (!empty($tipoinstit)) {
                 $nombreCompleto = $tipoinstit.' ';
                 $nombreCompleto .= ($nroinstit > 0 || $nroinstit != '')?"Nº $nroinstit ":"";
@@ -690,21 +689,6 @@ class Instit extends AppModel {
   	}
   	
   	 
-  	function beforeSave(){
-  		
-  		// -----------------------------------------------------------------------------------------------------------------------------------------------------------
-  		// prevenir el error de NOT NULL en postgres
-  		//
-  		if(empty($this->data[$this->name]['anio_creacion'])){
-  			$this->data[$this->name]['anio_creacion'] = '';
-  		}
-  		if($this->data[$this->name]['anio_creacion']== ''){
-  			$this->data[$this->name]['anio_creacion'] = 0;
-  		}
-  		
-  		return true;
-  	}
-  	
   	
   	/**
   	 * Verifica si el CUE ingresado es válido 
@@ -1360,6 +1344,7 @@ class Instit extends AppModel {
             }
             $condsPlan = array();
 
+            // si no le paso ningun ciclo, busco el ULTIMO
             if ( empty($ciclo )) {
                 $anioXciclo = "(select MAX(a.ciclo_id) as ciclo_id from anios a where \"Plan\".id = a.plan_id)";
                 $condsPlan += array("OR"=> array(
@@ -1382,7 +1367,7 @@ class Instit extends AppModel {
                         'Oferta',
                         'Titulo' => array('Sector','Subsector.Sector'),
                         'EstructuraPlan.Etapa',
-                        'Anio',
+                        'Anio' => array('EstructuraPlanesAnio', 'Etapa'),
                 ),
                 'order' => $order,
                 'limit' => $limit,
@@ -1390,6 +1375,53 @@ class Instit extends AppModel {
                 'conditions' => $mixConditions,
             ));
            return $planes;
+        }
+
+
+        /**
+  	 * Devuelve los sectores que abarca la institucion
+  	 * @param integer $instit_id ID de la institucion
+  	 * @param integer $ciclo_id (ciclo del año 2006, 2007, etc)
+  	 * @return array $sectores[id][abrev]
+  	 */
+        function getSectores($instit_id = null, $ciclo_id = 0)
+        {
+            if (empty ($instit_id)) {
+                $instit_id = $this->id;
+            }
+            $vec = array();
+
+            $sql = "
+                    SELECT s.id   AS id  , s.name AS name
+                    FROM   planes   p
+                    LEFT JOIN titulos t ON (t.id = p.titulo_id)
+                    LEFT JOIN sectores_titulos st ON (st.titulo_id = t.id)
+                    LEFT JOIN sectores s ON (st.sector_id = s.id)
+                    LEFT JOIN anios a ON (a.plan_id = p.id)
+                    WHERE
+                    p.instit_id = $instit_id
+            ";
+
+            if ((int)$ciclo_id > 0){
+                    $sql .= " 	AND a.ciclo_id = $ciclo_id";
+            }
+
+            $sql .= "
+                    GROUP BY s.id, s.name
+                    ORDER BY s.name ASC
+            ";
+
+            $data = $this->query($sql);
+
+            foreach ($data as $line){
+                    if (strlen($line[0]['name']) > 20){
+                            $vec[$line[0]['id']] = substr($line[0]['name'],0,20) . "...";
+                    } else {
+                            $vec[$line[0]['id']] = $line[0]['name'];
+                    }
+            }
+
+            return $vec;
         }
 
 
@@ -1472,6 +1504,81 @@ class Instit extends AppModel {
             return $vec;
         }
 
+
+        /**
+         *
+         * Retorna un array con todas las ofertas distintas que brinda
+         * la institucion, agrupandole los años lectivos que contiene cada una.
+         *
+         * @param integer $instit_id
+         * @param boolean $agregar_anio_actual
+         * @return array
+         *  Devuelve algo asi
+         *          Array(
+                        [0] => Array
+                            (
+                                [ciclo] => Array
+                                    (
+                                        [0] => 2010
+                                        [1] => 2009
+                                    )
+
+                                [name] => FP  // Nombre de la Oferta
+                            )
+
+                    )
+         *
+         */
+        function getCiclosLectivosXOferta($instit_id, $agregar_anio_actual = true) {
+
+                $ofertaRet = array();
+
+                $oferta = $this->getOfertas($instit_id, $ciclo = 0 , $fields = 'abrev');
+
+                foreach ($oferta as $o=>$d) {
+                    $ofertaRet[$o] = array(
+                        'ciclo' => array(),
+                        'name' => $d,
+                        );
+                }
+
+		$sql   = " SELECT distinct oferta_id,o.abrev, ciclo_id";
+                $sql  .= " FROM planes p";
+                $sql  .= " INNER JOIN anios a ON a.plan_id = p.id";
+                $sql  .= " INNER JOIN ofertas o ON o.id = p.oferta_id";
+                $sql  .= " WHERE p.instit_id = " . $instit_id ;
+                $sql  .= " GROUP by oferta_id, o.abrev, ciclo_id";
+                $sql  .= " ORDER by oferta_id, o.abrev,ciclo_id DESC";
+
+		$data = $this->query($sql);
+
+                foreach ($data as $line) {
+			$ofertaRet[$line[0]['oferta_id']]['ciclo'][] = $line[0]['ciclo_id'];
+                }
+
+                $ciclos_disponibles = $this->Plan->Anio->Ciclo->find('list');
+
+                $ciclos = $ofertaRet;
+                if ($agregar_anio_actual) {
+                    // agregarle el año actual si no existe
+                    $existe = false;
+                    foreach ($ciclos as &$c) {
+                        // le agrego solo si no existe
+                        foreach ($c['ciclo'] as $cc) {
+                            if (max(array_keys($ciclos_disponibles)) == $cc )  {
+                                $existe = true;
+                                break;
+                            }
+                        }
+                        if (!$existe) {
+                             array_unshift(&$c['ciclo'], max(array_keys($ciclos_disponibles)));
+                        }
+                        $existe = false;
+                    }
+                }
+
+		return $ciclos;
+  	}
 
 
   	/**

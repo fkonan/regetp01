@@ -7,10 +7,7 @@ class InstitsController extends AppController {
     var $components = array('RequestHandler', 'Buscable');
 
 
-    function test() {
-        debug($this->Instit->Plan->dameListadoOfertasPorInstitucion(1,0));
-    }
-
+   
     function beforeFilter() {
         parent::beforeFilter();
         $this->rutaUrl_for_layout[] =array('name'=> 'Buscador','link'=>'/Instits/search_form' );
@@ -49,9 +46,6 @@ class InstitsController extends AppController {
         }
         $this->set('con_programa_de_etp', $programa_de_etp);
         $this->set('relacion_etp', $instit['EtpEstado']['name']);
-
-        $cantOfertas = $this->Instit->Plan->dameListadoOfertasPorInstitucion($id, date('Y',strtotime('now')));
-        $this->set('cantOfertas',count($cantOfertas));
         $this->set('instit', $instit);
     }
 

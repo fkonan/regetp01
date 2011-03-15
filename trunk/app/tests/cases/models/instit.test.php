@@ -249,7 +249,15 @@ class InstitTestCase extends CakeTestCase {
 
     
 
-    function testGetPlanesUltimos(){
+    function testGetPlanesUltimos()
+    {
+        $ie = $this->Instit->getPlanes(array(
+            'Instit.id' => 1,
+            'Plan.oferta_id' => 1,
+        ));
+        $this->assertEqual($ie[0]['Instit']['nombre'], 'FERNANDO FADER TEST');
+        $this->assertEqual($ie[0]['Plan']['nombre'], 'Titulo en nada');
+        $this->assertEqual(count($ie[0]['Anio']), 7);
         
         // busco para el año 2010 que se que hay
         $anioBusca = 2010;
@@ -316,16 +324,23 @@ class InstitTestCase extends CakeTestCase {
 
 
     function testFindConNombreCompleto(){
-        $nombre = 'ESCUELA DE EDUCACIÓN TÉCNICA (E.E.T.) Nº 06  "FERNANDO FADER TEST"';
+        $nombre = 'ESCUELA DE EDUCACION TECNICA (E.E.T.) Nº 06  "FERNANDO FADER TEST"';
+        
         $this->Instit->recursive = 0;
-        $iii = $this->Instit->find('first', array('conditions'=>array('Instit.id'=>1)));
+        $iii = $this->Instit->find('first', array(
+                                'conditions'=>array(
+                                    'Instit.id' => 1
+                                    )
+                                  ));
 
-        $this->assertFalse($iii['Instit']['nombre_completo']=='Un nombre cualquiera');
-        $this->assertTrue($iii['Instit']['nombre_completo']);
-        $this->assertTrue($iii['Instit']['nombre_completo']==$nombre);
+        $this->assertNotEqual($iii['Instit']['nombre_completo'], '');
+        $this->assertEqual($iii['Instit']['nombre_completo'], $nombre);
 
-        $iii = $this->Instit->find('all', array('conditions'=>array('Instit.id'=>1)));
-        $this->assertTrue($iii[0]['Instit']['nombre_completo'] == $nombre);
+        $iii = $this->Instit->find('all', array(
+                                 'conditions'=>array(
+                                     'Instit.id' => 2
+                                     )));
+        $this->assertEqual($iii[0]['Instit']['nombre_completo'] , $nombre);
     }
 
 
@@ -450,6 +465,35 @@ class InstitTestCase extends CakeTestCase {
         $this->assertEqual($ofertas, $expected);
     }
 
+
+    function testDameCiclosPorOfertaInstits(){
+        $ciclosXOf = $this->Instit->getCiclosLectivosXOferta(3, $agregarAnioActual = false);
+
+        $expected = array(
+            1 => array(
+                'ciclo' => array(2007, 2006),
+                'name'  => 'FP',
+            ),
+            3 => array(
+                'ciclo' => array(),
+                'name' => 'SEC TEC',
+            )
+        );
+
+        $this->assertEqual($ciclosXOf, $expected);
+    }
+
+
+    function testGetSectores(){
+        $s2010 = $this->Instit->getSectores(1, 2010);
+        $s2009 = $this->Instit->getSectores(1, 2009);
+        $s2000 = $this->Instit->getSectores(1, 2000);
+
+        $expected = array(8=>'Construcción');
+        $this->assertEqual($s2010, $expected);
+        $this->assertEqual($s2009, $expected);
+        $this->assertEqual($s2000, array());
+    }
     
 
 }

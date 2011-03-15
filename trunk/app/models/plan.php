@@ -2,8 +2,46 @@
 class Plan extends AppModel {
 
 	var $name = 'Plan';
-	var $asociarAnio = false; // Se utiliza en el paginador (asocia ultimo anio y todos los models relacionados por joins)
-        var $asociarCompleto = false; // Se utiliza en el paginador (todos los models relacionados por joins)
+
+
+
+        
+        /*
+         * $asociarAnio lo que hace es agregar la Estructura y la Etapa a
+         * la cual pertenece el año.
+         * Esto es agregado en el vector de Anios que devuelve el Plan
+         *
+         * O sea, sólo sirve para que el array de Planes me traiga más info
+         * sobre los Anios
+         *
+         * Para poder utilizar esta variable es necesario pasar como parametro
+         * en la busqueda al mismo estilo que se pasa un 'conditions', o 'contain'
+         * seria algo asi $params['asociarAnio'] = true
+         * 
+         * @var $this->asociarAnio boolean
+         */
+	private $__asociarAnio = false; // Se utiliza en el paginador (asocia ultimo anio y todos los models relacionados por joins)
+
+        /*
+         * $__asociarCompleto sirve para realizar busquedas avanzadas
+         *
+         * Si asociarCompleto esta setteado en true, entonces el SELECT
+         * se realizará con infinidad de JOINS para que pueda buscar
+         * Los modelos Joineados son:
+                'Instit'
+                'EstructuraPlan'
+                'Etapa'
+                'Anio'
+                'Titulo'
+                'SectoresTitulo',
+         * 
+         * Para poder utilizar esta variable es necesario pasar como parametro
+         * en la busqueda al mismo estilo que se pasa un 'conditions', o 'contain'
+         * seria algo asi $params['asociarCompleto'] = true
+         */
+        private $__asociarCompleto = false;
+
+        
 	var $maxCiclo = "";
 	var $traerUltimaAct = false; // se utiliza en el paginador.
 	
@@ -131,45 +169,28 @@ class Plan extends AppModel {
         }
         
 	
-	function beforeSave()
-	{  		
-  		//TODO Elimiar esto cuando se elimine el campo sectores de la tabla planes
-		if(empty($this->data['Plan']['sector'])){
-			$this->data['Plan']['sector'] = 'SECTOR SIN DATO';
-		}
-		  		  		
-  		if (empty($this->data['Plan']['duracion_hs'])){
-                        $this->data['Plan']['duracion_hs'] = 0;
-                }
-  		
-  		if (empty($this->data['Plan']['duracion_semanas'])){
-                    $this->data['Plan']['duracion_semanas'] = 0;
-                }
-  		
-  		if (empty($this->data['Plan']['duracion_anios'])){
-                    $this->data['Plan']['duracion_anios'] = 0;
-                }
-  		
-  		return true;
-  	}
 
-  	/**
-  	 * Se tuvo que redefinir esta funcion para poder agregar el ultimo 
-  	 * año que presenta cada plan
-  	 * 
-  	 * @return cantidad de registros
-  	 */
-  	function paginateCount($conditions = null, $recursive = 0)
-  	{
+        /**
+         * Se tuvo que redefinir esta funcion para poder agregar el ultimo
+         * año que presenta cada plan
+         *
+         * @return cantidad de registros
+         */
+        function paginateCount($conditions = null, $recursive = 0)
+        {
             $parameters = compact('conditions');
-            if ($this->asociarAnio){
 
-                return count($this->find('completo', $parameters));
+            if (!empty($extra['asociarAnio'])) {
+               $this->__asociarAnio = true;
             }
-            else if ($this->asociarCompleto) {
-                return $this->__findCompleto($parameters, 'count');
+
+            if (!empty($extra['asociarCompleto'])) {
+               $this->__asociarCompleto = true;
             }
-            else {
+
+            if ($this->__asociarAnio || $this->__asociarCompleto) {
+                return $this->find('completoCount', $parameters);
+            } else {
                 if ($recursive != $this->recursive){
                         $parameters['recursive'] = $recursive;
                 }
@@ -177,7 +198,7 @@ class Plan extends AppModel {
 
                 return $this->find('count', array_merge($parameters, $extra));
             }
-    }
+        }
 
   	/**
   	 * Se tuvo que redefinir esta funcion para poder agregar el ultimo 
@@ -193,18 +214,22 @@ class Plan extends AppModel {
             if (!empty($extra['contain'])) {
                 $parameters['contain'] = $extra['contain'];
             }
+
+            if (!empty($extra['asociarAnio'])) {
+               $this->__asociarAnio = true;
+            }
+
+            if (!empty($extra['asociarCompleto'])) {
+               $this->__asociarCompleto = true;
+            }
+            
             if (is_numeric($recursive) && $recursive != $this->recursive) {
                 $parameters['recursive'] = $recursive;
             }
 
-            if ($this->asociarAnio) {
-                return $this->Instit->getPlanes($conditions, $order, $limit, $page);
-            }
-            elseif ($this->asociarCompleto) {
-                $extra = array();
+            if ($this->__asociarAnio || $this->__asociarCompleto) {
                 return $this->find('completo', array_merge($parameters, $extra));
-            }
-            else {
+            } else {
                 $extra = array();
                 return $this->find('all', array_merge($parameters, $extra));
             }        
@@ -216,7 +241,10 @@ class Plan extends AppModel {
             $ret = array();
             switch ($conditions) {
                case 'completo':
-                   $ret = $this->__findCompleto($fields);
+                   $ret = $this->__findCompleto('buscar',$fields);
+                   break;
+               case 'completoCount':
+                   $ret = $this->__findCompleto('count', $fields);
                    break;
                default:
                    $ret = parent::find($conditions, $fields, $order, $recursive);
@@ -227,8 +255,8 @@ class Plan extends AppModel {
 
 
         /**
-         *  Devuelve un find "all" pero con un monton de JOINS extra.
-         * Ademàs, si se pone $this->asociarAnio en true, trae los años
+         * Devuelve un find "all" pero con un monton de JOINS extra.
+         * Ademàs, si se pone $this->__asociarAnio en true, trae los años
          * asociados con la informacion de EstructuraPlanesAnio y Etapa
          * 
          * @param array $parameters
@@ -239,7 +267,15 @@ class Plan extends AppModel {
          *                      Los valores posibles son: 'buscar' (por default)  o 'count'
          * @return array
          */
-        function __findCompleto($parameters = array(), $buscaroSoloContar = 'buscar') {
+        function __findCompleto($buscaroSoloContar = 'buscar', $parameters = array()) {
+                if (!empty($parameters['asociarAnio'])) {
+                   $this->__asociarAnio = true;
+                }
+
+                if (!empty($parameters['asociarCompleto'])) {
+                   $this->__asociarCompleto = true;
+                }
+
                 $ciclo_id = 0;
                 
                 if ( !empty($parameters['conditions']['Anio.ciclo_id'])) {
@@ -339,48 +375,25 @@ class Plan extends AppModel {
 
                 $planes = $this->find('all', $parameters);
 
-                if (isset($parameters['asociarAnio'])){
-                    $this->asociarAnio = $parameters['asociarAnio'];
-                }
-                if ($this->asociarAnio) {
+                if ($this->__asociarAnio) {
                     foreach ( $planes as $key=>&$p) {
-                        $p['Anio'] = $this->Anio->getAniosDePlanPorCiclo($p['Plan']['id'], $ciclo_id);
+                        $aas = $this->Anio->getAniosDePlanPorCiclo($p['Plan']['id'], $ciclo_id);
+
+                        // hago que tengo una estructura "linda" e igual a
+                        // si no hubiese asociadoAnio, para mayor compatibilidad
+                        unset($p['Anio']);
+                        $p['Anio'] = $aas;
+                        foreach ($p['Anio'] as &$a2){
+                            $a2 = array_merge($a2, $a2['Anio']);
+                            unset($a2['Anio']);
+                        }
+                        
                     }
                 }
                 
                 return $planes;
         }
-
-
-        /**
-         * La borré porque no encontre que sea utilizada
-         * @deprecated
-         * 
-        public function findXCiclo($instit_id, $oferta_id, $ciclo_id = null){
-            $condi = array();
-            if (!empty($ciclo_id)) $condi = array('Anio.ciclo_id'=>$ciclo_id);
-            
-            return $this->find("all",array(
-                      'conditions'=>array(
-                                    'instit_id'=>$instit_id,
-                                    'oferta_id'=>$oferta_id
-                                    ),
-                      'contain'=>array(
-                                    'Sector','Subsector','EstructuraPlan','Instit',
-                                    'Anio'=> array('Etapa','conditions'=>$condi)
-                                    )
-
-                      ));
-        }
-       */
-
-	function setAsociarAnio($asociar){
-		$this->asociarAnio = $asociar;	
-	}
-
-        function setAsociarCompleto($asociar){
-		$this->asociarCompleto = $asociar;
-	}
+	
 
 	function setMaxCiclo($ciclo){
 		$this->maxCiclo = $ciclo;	
@@ -453,218 +466,7 @@ class Plan extends AppModel {
   	
   	
   	
-	/**
-  	 * Esta funcion recibe el id de institucion y 
-  	 * devuelve la última actualización (ciclo) que presenten sus planes
-  	 *
-  	 * @param $instit_id
-  	 * @return Array $vec[ciclo_id][ciclo_id]
-         *
-         * @deprecated
-  	 
   	
-  	function dame_max_ciclos_por_instits($instit_id){
-  		
-		$vec = array();
-
-		$sql  = " SELECT ciclo_id
-					 FROM   planes p,
-					 	(        
-       					SELECT plan_id, max(ciclo_id) AS ciclo_id 
-        				 FROM   anios AS an      
-        					GROUP BY plan_id        
-        				) max_ciclo              
-					WHERE p.id = max_ciclo.plan_id  
-					AND   p.instit_id = $instit_id
-					GROUP BY ciclo_id
-					ORDER BY ciclo_id ASC
-				";
-		
-		$data = $this->query($sql);
-
-		foreach ($data as $line){
-			$vec[$line[0]['ciclo_id']] = $line[0]['ciclo_id']; 
-		}
-
-		return $vec;
-  	}
-         * 
-         */
-
-  	
-
-        /**
-         *
-         * Retorna un array con todas las ofertas distintas que brinda
-         * la institucion, agrupandole los años lectivos que contiene cada una.
-         * 
-         * @param integer $instit_id
-         * @param boolean $agregar_anio_actual
-         * @return array
-         *  Devuelve algo asi
-         *          Array(
-                        [0] => Array
-                            (
-                                [ciclo] => Array
-                                    (
-                                        [0] => 2010
-                                        [1] => 2009
-                                    )
-
-                                [name] => FP  // Nombre de la Oferta
-                            )
-
-                    )
-         *
-         */
-        function dame_ciclos_por_oferta_instits($instit_id, $agregar_anio_actual = true) {
-
-                $ofertaRet = array();
-
-                $oferta = $this->Instit->getOfertas($instit_id, $ciclo = 0 , $fields = 'abrev');
-                
-                foreach ($oferta as $o=>$d) {
-                    $ofertaRet[$o] = array(
-                        'ciclo' => array(),
-                        'name' => $d,
-                        );
-                }
-                
-		$sql   = " SELECT distinct oferta_id,o.abrev, ciclo_id";
-                $sql  .= " FROM planes p";
-                $sql  .= " INNER JOIN anios a ON a.plan_id = p.id";
-                $sql  .= " INNER JOIN ofertas o ON o.id = p.oferta_id";
-                $sql  .= " WHERE p.instit_id = " . $instit_id ;
-                $sql  .= " GROUP by oferta_id, o.abrev, ciclo_id";
-                $sql  .= " ORDER by oferta_id, o.abrev,ciclo_id DESC";
-
-		$data = $this->query($sql);
-
-                foreach ($data as $line){
-			$ofertaRet[$line[0]['oferta_id']]['ciclo'][] = $line[0]['ciclo_id'];
-                }
-
-                $ciclos_disponibles = $this->Anio->Ciclo->find('list');
-
-                $ciclos = $ofertaRet;
-                if ($agregar_anio_actual) {
-                    // agregarle el año actual si no existe
-                    $existe = false;
-                    foreach ($ciclos as &$c) {
-                        // le agrego solo si no existe
-                        foreach ($c['ciclo'] as $cc) {
-                            if (max(array_keys($ciclos_disponibles)) == $cc )  {
-                                $existe = true;
-                                break;
-                            }
-                        }
-                        if (!$existe) {
-                             array_unshift(&$c['ciclo'], max(array_keys($ciclos_disponibles)));
-                        }
-                        $existe = false;
-                    }
-                }
-
-		return $ciclos;
-  	}
-  	
-  	
-  	
-  	/**
-  	 * Me devuelve el ultimo ciclo y la matricula del ultimo ciclo de la institucion
-  	 * @param integer $instit_id
-  	 * @return array $vec[max_ciclo] y 
-  	 * 				 $vec[matricula]
-  	 */
-  	function dameMatriculaUltimoCiclo($instit_id){
-  		$sql = "
-  		SELECT max(a.ciclo_id) as max_ciclo, sum(a.matricula) as matricula
-		FROM   planes p
-		LEFT JOIN anios a ON (a.plan_id = p.id) 
-		WHERE 
-		p.instit_id = $instit_id
-		";
-  		
-  		$data = $this->query($sql);
-  		return $data[0][0];
-  	}
-  	
-  	
-  	
-  	//TODO faltaria hacer el test de esto
-  	/**
-  	 * Me devuelve los sectores que abarca la institucion
-  	 * @param integer $instit_id ID de la institucion
-  	 * @param integer $ciclo_id (ciclo del año 2006, 2007, etc)
-  	 * @return array $sectores[id][abrev]
-  	 */
-  	function dameSectoresPorInstitucion($instit_id,$ciclo_id){
-
-		$vec = array();
-		
-		
-		$sql = "
-                        SELECT s.id   AS id  , s.name AS name
-                        FROM   planes   p
-                        LEFT JOIN titulos t ON (t.id = p.titulo_id)
-                        LEFT JOIN sectores_titulos st ON (st.titulo_id = t.id)
-                        LEFT JOIN sectores s ON (st.sector_id = s.id)
-                        LEFT JOIN anios a ON (a.plan_id = p.id)
-                        WHERE
-                        p.instit_id = $instit_id
-                ";
-		
-  		if ((int)$ciclo_id > 0){
-			$sql .= " 	AND a.ciclo_id = $ciclo_id";
-		}
-		
-		$sql .= "
-						GROUP BY s.id, s.name 
-						ORDER BY s.name ASC
-		";
-		
-		$data = $this->query($sql);
-
-		foreach ($data as $line){
-			if (strlen($line[0]['name']) > 20){
-				$vec[$line[0]['id']] = substr($line[0]['name'],0,20) . "..."; 
-			} else {
-				$vec[$line[0]['id']] = $line[0]['name'];
-			}
-		}
-
-		return $vec;
-  	}
-
-  	
-  	
-  	
-  	
-	//TODO faltaria hacer el test de esto
-  	/**
-  	 * Me devuelve las ofertas que tiene la institucion pasada como parametro.
-  	 * Me devuelve el listadop de ofertas al ciclo que se le pasa como parametro
-  	 * 
-  	 * @param integer $instit_id ide de la institucion en cuestion
-  	 * @param integer $ciclo_id id del ciclo que estoy buscando(2006, 2007. 2008, ¿2009?)
-  	 * @return array $oferta[id][abrev]
-  	 */
-  	function dameListadoOfertasPorInstitucion($instit_id,$ciclo_id = 0){
-  		$condiciones = array();
-  		$condiciones[]['Plan.instit_id'] = $instit_id;
-  		if($ciclo_id){
-  			$condiciones[]['Anio.ciclo_id'] = $ciclo_id;
-  		}
-  		$vec = $this->Anio->find('all',array(
-  					'contain'=>array('Plan'=>array('Oferta(abrev)')), 
-  					'group'=>'"Plan"."id", "Plan"."instit_id", "Plan"."oferta_id","Plan"."norma", "Plan"."nombre", "Plan"."perfil", "Plan"."duracion_hs", "Plan"."duracion_semanas", "Plan"."duracion_anios", "Plan"."matricula", "Plan"."observacion", "Plan"."ciclo_alta", "Plan"."created", "Plan"."modified", "Plan"."titulo_id"',
-  					'fields'=>'"Plan"."id" AS "Plan__id", "Plan"."instit_id" AS "Plan__instit_id", "Plan"."oferta_id" AS "Plan__oferta_id", "Plan"."norma" AS "Plan__norma", "Plan"."nombre" AS "Plan__nombre", "Plan"."perfil" AS "Plan__perfil", "Plan"."duracion_hs" AS "Plan__duracion_hs", "Plan"."duracion_semanas" AS "Plan__duracion_semanas", "Plan"."duracion_anios" AS "Plan__duracion_anios", "Plan"."matricula" AS "Plan__matricula", "Plan"."observacion" AS "Plan__observacion", "Plan"."ciclo_alta" AS "Plan__ciclo_alta", "Plan"."created" AS "Plan__created", "Plan"."modified" AS "Plan__modified", "Plan"."titulo_id" AS "Plan__titulo_id"',
-  					'conditions'=>$condiciones));
-  		
-		return $vec;
-  	}
-
-
 
         /**
          * Me devuelve la estructura de un Plan Tecnico (si no es tecnico,

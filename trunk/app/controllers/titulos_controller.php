@@ -744,10 +744,7 @@ class TitulosController extends AppController {
             $titulo_id = $this->passedArgs['Plan.titulo_id'];
         }
 
-        
-        //$this->paginate['Plan']['conditions']['Instit.activo'] = 1;
-
-        $this->Titulo->Plan->setAsociarCompleto(true);
+        $this->paginate['Plan']['asociarCompleto'] = true;
         
         $this->paginate['Plan']['contain'] = array(
                 'Instit',
