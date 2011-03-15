@@ -36,7 +36,7 @@ foreach ($planes as $plan):
 			<?php echo $plan['Oferta']['name']; ?>
 		</td>
 		<td class="actions">
-			<?php echo $html->link(__('Editar', true), array('action'=>'edit', $plan['Plan']['id'])); ?>
+			<?php echo $html->link(__('Editar', true), array('controller'=>'planes', 'action'=>'edit', $plan['Plan']['id'])); ?>
 			<?php echo $html->link(__('Eliminar', true), array('action'=>'delete', $plan['Plan']['id']), null, sprintf(__('Estas seguro que deseas eliminar el plan: %s?', true), $plan['Plan']['nombre'])); ?>
 		</td>
 	</tr>
