@@ -19,12 +19,20 @@ $menuOptions = array(
                 'link'=> array('controller'=>'Jurisdicciones','action'=>'view', $jurisdiccion_id),
         ),
         array(
+                'nombre'=> 'Referentes',
+                'link'=> array('controller'=>'Autoridades','action'=>'index_x_jurisdiccion', $jurisdiccion_id),
+                'options' => array(
+                    'class'=>'acl acl-directores acl-administradores acl-desarrolladores acl-referentes',
+                    )
+        ),
+        array(
                 'nombre'=> 'Planes de Mejora',
                 'link'=> array('controller'=>'Fondos','action'=>'index_x_jurisdiccion', $jurisdiccion_id),
                 'options' => array(
                     'class'=>'acl acl-directores acl-administradores acl-desarrolladores acl-referentes',
                     )
         ),
+
 );
 
 echo $this->element('menu_solapas',array('elementos' => $menuOptions));

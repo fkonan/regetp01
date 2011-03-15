@@ -1,34 +1,30 @@
 <div class="autoridades view">
 <h2><?php  __('Autoridad');?></h2>
 	<dl><?php $i = 0; $class = ' class="altrow"';?>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Id'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Jurisdiccion'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $autoridad['Autoridad']['id']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Jurisdiccion Id'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $autoridad['Autoridad']['jurisdiccion_id']; ?>
+			<?php echo $autoridad['Jurisdiccion']['name']; ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Nombre'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $autoridad['Autoridad']['nombre']; ?>
+			<?php echo $autoridad['Autoridad']['titulo'] . ' ' . $autoridad['Autoridad']['nombre'] . ' ' . $autoridad['Autoridad']['apellido']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Apellido'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $autoridad['Autoridad']['apellido']; ?>
-			&nbsp;
-		</dd>
+                <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Cargo'); ?></dt>
+                <dd<?php if ($i++ % 2 == 0) echo $class;?>>
+                    <ul<?php if ($i++ % 2 == 0) echo $class;?>>
+                        <?php foreach($autoridad['Cargo'] as $cargo){?>
+                        <li><?php echo $cargo['nombre']?></li>
+                        <?php
+                            }
+                        ?>
+                            &nbsp;
+                    </ul>
+                </dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Fecha Asuncion'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $autoridad['Autoridad']['fecha_asuncion']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Titulo'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $autoridad['Autoridad']['titulo']; ?>
+			<?php echo $time->format('d/m/Y',$autoridad['Autoridad']['fecha_asuncion']); ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Telefono Personal'); ?></dt>
@@ -53,26 +49,22 @@
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Direccion'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $autoridad['Autoridad']['direccion']; ?>
+
+                        <?php if(!empty($autoridad['Autoridad']['localidad_id'])){
+                            echo $autoridad['Autoridad']['direccion'] . ' - ' . $autoridad['Localidad']['name'] . ', ' . $autoridad['Departamento']['name'] . ' ( ' . $autoridad['Jurisdiccion']['name'] . ' )';
+                        }
+                        else{
+                            echo $autoridad['Autoridad']['direccion'] . ' - ' . $autoridad['Departamento']['name'] . ' ( ' . $autoridad['Jurisdiccion']['name'] . ' )';
+                        }
+                        ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Localidad Id'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $autoridad['Autoridad']['localidad_id']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Departamento Id'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $autoridad['Autoridad']['departamento_id']; ?>
-			&nbsp;
-		</dd>
+                
 	</dl>
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $html->link(__('Edit Autoridad', true), array('action' => 'edit', $autoridad['Autoridad']['id'])); ?> </li>
-		<li><?php echo $html->link(__('Delete Autoridad', true), array('action' => 'delete', $autoridad['Autoridad']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $autoridad['Autoridad']['id'])); ?> </li>
-		<li><?php echo $html->link(__('List Autoridades', true), array('action' => 'index')); ?> </li>
-		<li><?php echo $html->link(__('New Autoridad', true), array('action' => 'add')); ?> </li>
+		<li><?php echo $html->link(__('Editar Autoridad', true), array('action' => 'edit', $autoridad['Autoridad']['id'])); ?> </li>
+		<li><?php echo $html->link(__('Eliminar Autoridad', true), array('action' => 'delete', $autoridad['Autoridad']['id']), null, sprintf(__('Seguro que quiere eliminar la autoridad?', true), $autoridad['Autoridad']['id'])); ?> </li>
 	</ul>
 </div>

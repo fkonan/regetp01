@@ -266,5 +266,100 @@ class LocalidadesController extends AppController {
             echo json_encode($result);
         }
 
+        function ajax_search_localidades_y_departamentos($q = null){
+            $this->autoRender = false;
+            $result = array();
+            $jur= 0;
+
+            if (!empty($this->params['url']['jur'])) {
+                $jur = utf8_decode(strtolower($this->params['url']['jur']));
+            }
+
+            if(empty($q)) {
+                if (!empty($this->params['url']['q'])) {
+                    $q = utf8_decode(strtolower($this->params['url']['q']));
+                } else {
+                    return utf8_encode("parámetro vacio");
+                }
+            }
+
+            if ( $this->RequestHandler->isAjax() ) {
+                Configure::write ( 'debug', 0 );
+            }
+
+            $response = '';
+
+            if($jur != 0){
+                $conditions = array(
+                                "lower(Departamento.name) SIMILAR TO ?" => convertir_para_busqueda_avanzada($q),
+                                "Jurisdiccion.id" => $jur
+                              );
+            }else{
+                $conditions = array(
+                                "lower(Departamento.name) SIMILAR TO ?" => convertir_para_busqueda_avanzada($q)
+                              );
+            }
+
+            $deptos = $this->Localidad->Departamento->find("all", array(
+                            'contain'=> array(
+                                    'Jurisdiccion'
+                            ),
+                            'conditions'=> $conditions,
+                            'order' => array('Jurisdiccion.id')
+                            )
+                    );
+
+            foreach ($deptos as $item) {
+
+                array_push($result, array(
+                        "id" => $item['Departamento']['id'],
+                        "type" => "Departamento",
+                        "localidad_id" => '0',
+                        "localidad" => '',
+                        "departamento" => utf8_encode($item['Departamento']['name']),
+                        "departamento_id" => $item['Departamento']['id'],
+                        "jurisdiccion" => utf8_encode($item['Jurisdiccion']['name'])
+                ));
+            }
+
+            $localidades = $this->Localidad->find("all", array(
+                            'contain'=> array(
+                                    'Departamento'=>array('Jurisdiccion')
+                            ),
+                            'conditions'=> array(
+                                "OR"=>array(
+                                    "to_ascii(lower(Localidad.name)) SIMILAR TO ?" => convertir_para_busqueda_avanzada($q),
+                                    "to_ascii(lower(Departamento.name)) SIMILAR TO ?" => convertir_para_busqueda_avanzada($q),
+                                ),
+                             //  "Jurisdiccion.id" => $jur,
+                            ),
+                            'order' => array('Departamento.id')
+                        )
+                    );
+            foreach ($localidades as $item) {
+                if($jur== 0 || $item['Departamento']['jurisdiccion_id'] == $jur){
+                    array_push($result, array(
+                            "id" => $item['Localidad']['id'],
+                            "type" => "Localidad",
+                            "localidad" => utf8_encode($item['Localidad']['name']),
+                            "localidad_id" => $item['Localidad']['id'],
+                            "departamento" => utf8_encode($item['Departamento']['name']),
+                            "departamento_id" => $item['Departamento']['id'],
+                            "jurisdiccion" => utf8_encode($item['Departamento']['Jurisdiccion']['name'])
+                    ));
+               }
+            }
+
+            if(sizeof($result) == 0){
+                array_push($result, array(
+                            "id" => '',
+                            "type" => "Vacio",
+                            "localidad" => 'No se encontraron resultados'
+                ));
+            }
+
+            echo json_encode($result);
+        }
+
 }
 ?>
