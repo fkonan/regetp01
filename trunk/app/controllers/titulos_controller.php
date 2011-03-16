@@ -98,16 +98,10 @@ class TitulosController extends AppController {
                 'limit'    => 20,
                 'page'    => 1,
                 'conditions' => array('Plan.titulo_id' => $id),
-                'contain' => array('Instit' => array('Tipoinstit(name)', 'Jurisdiccion(name)')),
+                'contain' => array('Instit' => array('Tipoinstit', 'Jurisdiccion(name)')),
                 'order'    => array('Plan.nombre' => 'asc')
         );
-        $planes = $this->paginate('Plan');
-
-        // para nombre completo de instit
-        foreach ($planes as &$plan) {
-            $plan['Instit']['nombre_completo'] = $this->Titulo->Plan->Instit->getNombreCompleto($plan['Instit']['nombre'], $plan['Instit']['nroinstit'], $plan['Instit']['Tipoinstit']['name']);
-        }
-        
+        $planes = $this->paginate('Plan');       
         
         // resumen de planes
         $this->Titulo->Plan->recursive = -1;
@@ -129,15 +123,10 @@ class TitulosController extends AppController {
                 'limit'    => 10,
                 'page'    => 1,
                 'conditions' => array('Plan.titulo_id' => $id),
-                'contain' => array('Instit' => array('Tipoinstit(name)', 'Jurisdiccion(name)')),
+                'contain' => array('Instit' => array('Tipoinstit', 'Jurisdiccion(name)')),
                 'order'    => array('Plan.nombre' => 'asc')
         );
         $planes = $this->paginate('Plan');
-
-        // para nombre completo de instit
-        foreach ($planes as &$plan) {
-            $plan['Instit']['nombre_completo'] = $this->Titulo->Plan->Instit->getNombreCompleto($plan['Instit']['nombre'], $plan['Instit']['nroinstit'], $plan['Instit']['Tipoinstit']['name']);
-        }
 
         $this->set('planes', $planes);
     }

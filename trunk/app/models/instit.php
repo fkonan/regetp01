@@ -414,17 +414,19 @@ class Instit extends AppModel {
                         if (!empty($item_aux['Tipoinstit'])) {
                             $nombre_tipoinstit = isset($item_aux['Tipoinstit']['name']) ? $item_aux['Tipoinstit']['name'] : '';
                         }
-                        else {
+                        /*elseif (!empty($item_aux['tipoinstit_id'])) {
                             // si no tiene, tipo instit para armar nombre
                             $this->Tipoinstit->recursive = -1;
                             $tipoinstit = $this->Tipoinstit->find('first', array('conditions' => array('Tipoinstit.id' => $item_aux['tipoinstit_id'])));
                             if (!empty($tipoinstit)) {
                                 $nombre_tipoinstit = isset($tipoinstit['Tipoinstit']['name']) ? $tipoinstit['Tipoinstit']['name'] : '';
                             }
-                        }
-                        
+                        }*/
+
                         $item_aux['nombre_completo'] = $this->getNombreCompleto($item_aux['nombre'], $item_aux['nroinstit'], $nombre_tipoinstit);
                     }
+                    
+                    unset($item_aux);
                 }
             }
             else {
