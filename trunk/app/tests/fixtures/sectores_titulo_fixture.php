@@ -26,6 +26,13 @@ class SectoresTituloFixture extends CakeTestFixture {
 			'subsector_id' => 1,
 			'prioridad' => 1,
 		),
+                array(
+			'id' => 3,
+			'titulo_id' => 2, // Un titulo inventado 1
+			'sector_id' => 3, // aeronautica orientacion 2
+			'subsector_id' => 0,
+			'prioridad' => 0,
+		),
 		array(
 			'id' => 1727,
 			'titulo_id' => 60, // Técnico Superior en Comunicación Multimedial

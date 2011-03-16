@@ -9,6 +9,9 @@
 function getAllFixtures(){
     return array(
             'app.anio',
+            'app.autoridad',
+            'app.autoridades_cargo',
+            'app.cargo',
             'app.ciclo',
             'app.claseinstit',
             'app.departamento',

@@ -17,6 +17,8 @@ class Plan extends AppModel {
          * Para poder utilizar esta variable es necesario pasar como parametro
          * en la busqueda al mismo estilo que se pasa un 'conditions', o 'contain'
          * seria algo asi $params['asociarAnio'] = true
+         *
+         * Esta variable es inicializada en "false" luego de cada find
          * 
          * @var $this->asociarAnio boolean
          */
@@ -38,6 +40,9 @@ class Plan extends AppModel {
          * Para poder utilizar esta variable es necesario pasar como parametro
          * en la busqueda al mismo estilo que se pasa un 'conditions', o 'contain'
          * seria algo asi $params['asociarCompleto'] = true
+         *
+         *
+         * Esta variable es inicializada en "false" luego de cada find
          */
         private $__asociarCompleto = false;
 
@@ -176,80 +181,90 @@ class Plan extends AppModel {
          *
          * @return cantidad de registros
          */
-        function paginateCount($conditions = null, $recursive = 0)
-        {
-            $parameters = compact('conditions');
-
-            if (!empty($extra['asociarAnio'])) {
-               $this->__asociarAnio = true;
-            }
-
-            if (!empty($extra['asociarCompleto'])) {
-               $this->__asociarCompleto = true;
-            }
-
-            if ($this->__asociarAnio || $this->__asociarCompleto) {
-                return $this->find('completoCount', $parameters);
-            } else {
-                if ($recursive != $this->recursive){
-                        $parameters['recursive'] = $recursive;
-                }
-                $extra = array();
-
-                return $this->find('count', array_merge($parameters, $extra));
-            }
-        }
-
-  	/**
-  	 * Se tuvo que redefinir esta funcion para poder agregar el ultimo 
-  	 * año que presenta cada plan
-  	 * 
-  	 * @return cantidad de registros
-  	 */
-
-    
-    function paginate($conditions = null, $fields = null, $order = null, $limit = null, $page = 1, $recursive = null, $extra = null) {
-            $parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
-
-            if (!empty($extra['contain'])) {
-                $parameters['contain'] = $extra['contain'];
-            }
-
-            if (!empty($extra['asociarAnio'])) {
-               $this->__asociarAnio = true;
-            }
-
-            if (!empty($extra['asociarCompleto'])) {
-               $this->__asociarCompleto = true;
-            }
-            
-            if (is_numeric($recursive) && $recursive != $this->recursive) {
-                $parameters['recursive'] = $recursive;
-            }
-
-            if ($this->__asociarAnio || $this->__asociarCompleto) {
-                return $this->find('completo', array_merge($parameters, $extra));
-            } else {
-                $extra = array();
-                return $this->find('all', array_merge($parameters, $extra));
-            }        
-        }
-        
+//        function paginateCount($conditions = null, $recursive = 0, $extra = null)
+//        {
+//            $parameters = compact('conditions');
+//
+//            if (isset ($extra['asociarAnio'])) {
+//               $this->__asociarAnio = $extra['asociarAnio'];
+//            }
+//
+//            if (isset ($extra['asociarCompleto'])) {
+//               $this->__asociarCompleto = $extra['asociarCompleto'];
+//            }
+//
+//            if ($recursive != $this->recursive){
+//               $parameters['recursive'] = $recursive;
+//            }
+//            $parameters = array_merge($parameters, $extra);
+//
+//            if ($this->__asociarAnio || $this->__asociarCompleto) {
+//                debug("paginateCount ca a entrar");
+//                $ret = $this->find('completoCount', $parameters);
+//            } else {
+//                $ret = $this->find('count', $parameters);
+//            }
+//            // luego de cada find vuelvo a inicializar las variables de asociacion
+//            $this->__asociarAnio = $this->__asociarCompleto = false; // las vuelvo a poner en false
+//            return $ret;
+//        }
+//
+//  	/**
+//  	 * Se tuvo que redefinir esta funcion para poder agregar el ultimo
+//  	 * año que presenta cada plan
+//  	 *
+//  	 * @return cantidad de registros
+//  	 */
+//
+//
+//    function paginate($conditions = null, $fields = null, $order = null, $limit = null, $page = 1, $recursive = null, $extra = null) {
+//            $parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
+//
+//            if (!empty($extra['contain'])) {
+//                $parameters['contain'] = $extra['contain'];
+//            }
+//
+//            if (isset ($extra['asociarAnio'])) {
+//               $this->__asociarAnio = $extra['asociarAnio'];
+//               debug($conditions);
+//            }
+//
+//            if (isset ($extra['asociarCompleto'])) {
+//               $this->__asociarCompleto = $extra['asociarCompleto'];
+//            }
+//
+//            if (is_numeric($recursive) && $recursive != $this->recursive) {
+//                $parameters['recursive'] = $recursive;
+//            }
+//
+//            if ($this->__asociarAnio || $this->__asociarCompleto) {
+//                $ret = $this->find('completo', array_merge($parameters, $extra));
+//            } else {
+//                $extra = array();
+//                $ret = $this->find('all', array_merge($parameters, $extra));
+//            }
+//            // luego de cada find vuelvo a inicializar las variables de asociacion
+//            $this->__asociarAnio = $this->__asociarCompleto = false; // las vuelvo a poner en false
+//            return $ret;
+//        }
+//
 
         public function find($conditions = null, $fields = null, $order = null, $recursive = null) {
+            
             /* @var $ret Array */
             $ret = array();
             switch ($conditions) {
                case 'completo':
-                   $ret = $this->__findCompleto('buscar',$fields);
+                   $ret = $this->__findCompleto('buscar',$fields, $order, $recursive);
                    break;
                case 'completoCount':
-                   $ret = $this->__findCompleto('count', $fields);
+                   $ret = $this->__findCompleto('count', $fields, $order, $recursive);
                    break;
                default:
                    $ret = parent::find($conditions, $fields, $order, $recursive);
                    break;
             }
+            
             return $ret;
         }
 
@@ -267,13 +282,24 @@ class Plan extends AppModel {
          *                      Los valores posibles son: 'buscar' (por default)  o 'count'
          * @return array
          */
-        function __findCompleto($buscaroSoloContar = 'buscar', $parameters = array()) {
-                if (!empty($parameters['asociarAnio'])) {
-                   $this->__asociarAnio = true;
+        function __findCompleto($buscaroSoloContar = 'buscar', $parameters = array(), $order = array(), $recursive = null) {
+                if (isset ($parameters['asociarAnio'])) {
+                   $this->__asociarAnio = $parameters['asociarAnio'];
                 }
 
-                if (!empty($parameters['asociarCompleto'])) {
-                   $this->__asociarCompleto = true;
+                if (isset ($parameters['asociarCompleto'])) {
+                   $this->__asociarCompleto = $parameters['asociarCompleto'];
+                }
+
+                if (isset($parameters['order'])) {
+                    $parameters['order'] = array_merge($parameters['order'], $order);
+                } else {
+                    $parameters['order'] = $order;
+                }
+
+
+                if (is_numeric($recursive) && $recursive != $this->recursive) {
+                    $parameters['recursive'] = $recursive;
                 }
 
                 $ciclo_id = 0;
@@ -290,7 +316,7 @@ class Plan extends AppModel {
                     $contain = $parameters['contain'];
                     unset($parameters['contain']);
                 }
-                
+         
                 $parameters['joins'] = array(
                     array(
                         'table' => 'instits',
@@ -328,70 +354,86 @@ class Plan extends AppModel {
                         'alias' => 'SectoresTitulo',
                         'conditions' => array('SectoresTitulo.titulo_id = Titulo.id'),
                     ),
+                    array(
+                        'table' => 'sectores',
+                        'type' => 'LEFT',
+                        'alias' => 'Sector',
+                        'conditions' => array('SectoresTitulo.sector_id = Sector.id'),
+                    ),
+                    array(
+                        'table' => 'orientaciones',
+                        'type' => 'LEFT',
+                        'alias' => 'Orientacion',
+                        'conditions' => array('Orientacion.id = Sector.orientacion_id'),
+                    ),
              );
                 
             // @var $order es para almacenar temporal mente este valor
-                // para que se ejecute la busqueda 'list' sin problemas no debe tener un orden
-                $oldThisOrder = $this->order;
-                $this->order = array();
-                $order = null;
-                if ( !empty($parameters['order']) ) {
-                    $order = $parameters['order'];
-                    //unset($parameters['order']);
-                    $ordenDelModelo = $this->order;
-                }
+            // para que se ejecute la busqueda 'list' sin problemas no debe tener un orden
+            $oldThisOrder = $this->order;
+            $this->order = array();
+            $order = null;
+            if ( !empty($parameters['order']) ) {
+                $order = $parameters['order'];
+                //unset($parameters['order']);
+                $ordenDelModelo = $this->order;
+            }
 
-                $parameters['fields']= 'Plan.id';
-            
-                if ($buscaroSoloContar == 'count') {
-                    // si solo es para obtener el total no necesito seguir...
-                    return $this->find('count', $parameters);
-                }
-                
-                // recojo todas las instituciones que cumplan con los criterios de busqueda
-                $planesIds = $this->find('list', $parameters);
+            $parameters['fields']= 'Plan.id';
 
-                if (empty($planesIds) ) {
-                    // no hay instituciones que cumplan con esos criterios de busqueda
-                    return array();
-                }
+            if ($buscaroSoloContar == 'count') {
+                // si solo es para obtener el total no necesito seguir...
+                debug("CONSTOOOO");
+                return $this->find('count', $parameters);
+            }
 
-                $parameters['conditions'] = array('Plan.id' => $planesIds);
+            // recojo todas las instituciones que cumplan con los criterios de busqueda
+            $planesIds = $this->find('list', $parameters);
 
-                // recupero el order, previamente eliminado para
-                $parameters['order'] = $order;
-                $this->order = $oldThisOrder;
-                //$this->order = $ordenDelModelo;
+            if (empty($planesIds) ) {
+                // no hay instituciones que cumplan con esos criterios de busqueda
+                return array();
+            }
 
-                unset( $parameters['limit'] );
-                unset( $parameters['page'] );
-                unset( $parameters['joins'] );
-                unset( $parameters['group'] );
-                unset( $parameters['fields'] );
+            $parameters['conditions'] = array('Plan.id' => $planesIds);
 
-                if (!empty($contain)) {
-                    $parameters['contain'] = $contain;
-                }
+            // recupero el order, previamente eliminado para
+            $parameters['order'] = $order;
+            $this->order = $oldThisOrder;
+            //$this->order = $ordenDelModelo;
 
-                $planes = $this->find('all', $parameters);
+            unset( $parameters['limit'] );
+            unset( $parameters['page'] );
+            unset( $parameters['joins'] );
+            unset( $parameters['group'] );
+            unset( $parameters['fields'] );
 
-                if ($this->__asociarAnio) {
-                    foreach ( $planes as $key=>&$p) {
-                        $aas = $this->Anio->getAniosDePlanPorCiclo($p['Plan']['id'], $ciclo_id);
+            if (!empty($contain)) {
+                $parameters['contain'] = $contain;
+            }
 
-                        // hago que tengo una estructura "linda" e igual a
-                        // si no hubiese asociadoAnio, para mayor compatibilidad
-                        unset($p['Anio']);
-                        $p['Anio'] = $aas;
-                        foreach ($p['Anio'] as &$a2){
-                            $a2 = array_merge($a2, $a2['Anio']);
-                            unset($a2['Anio']);
-                        }
-                        
+            $planes = $this->find('all', $parameters);
+
+            if ($this->__asociarAnio) {
+                foreach ( $planes as $key=>&$p) {
+                    $aas = $this->Anio->getAniosDePlanPorCiclo($p['Plan']['id'], $ciclo_id);
+
+                    // hago que tengo una estructura "linda" e igual a
+                    // si no hubiese asociadoAnio, para mayor compatibilidad
+                    unset($p['Anio']);
+                    $p['Anio'] = $aas;
+                    foreach ($p['Anio'] as &$a2){
+                        $a2 = array_merge($a2, $a2['Anio']);
+                        unset($a2['Anio']);
                     }
+
                 }
-                $this->__asociarAnio = $this->__asociarCompleto = false;
-                return $planes;
+            }
+
+            // luego de cada find vuelvo a inicializar las variables de asociacion
+            $this->__asociarAnio = $this->__asociarCompleto = false; // las vuelvo a poner en false
+            
+            return $planes;
         }
 	
 

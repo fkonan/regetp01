@@ -13,7 +13,7 @@ class CargoFixture extends CakeTestFixture {
 	);
 	var $records = array(array(
 		'id' => 1,
-		'nombre' => 'Lorem ipsum dolor sit amet',
+		'nombre' => 'Ministro de Educacion',
 		'rango' => 1
 	));
 }

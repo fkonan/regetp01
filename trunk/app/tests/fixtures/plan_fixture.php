@@ -186,7 +186,7 @@ class PlanFixture  extends CakeTestFixture {
                 'observacion'           => "Alguna observacion 2",
                 'ciclo_alta'            => 2005,
                 'titulo_id'             => 2,
-                'estructura_plan_id'    => 1,
+                'estructura_plan_id'    => 3,
             ),
         array(
                 'id' 			=> 11,
