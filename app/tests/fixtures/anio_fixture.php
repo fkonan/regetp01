@@ -305,6 +305,21 @@ class AnioFixture extends CakeTestFixture {
 			'created' => '2010-04-29 09:26:46',
 			'modified' => '2010-04-29 09:26:46'
 		),
+
+            array(
+			'id' => 21,
+			'plan_id' => 10,
+			'ciclo_id' => 2008,
+                        'estructura_planes_anio_id' => 8,
+			'anio' => 1,
+			'etapa_id' => 2,
+			'matricula' => 55,
+			'secciones' => 7,
+			'hs_taller' => 3,
+			'created' => '2010-04-29 09:26:46',
+			'modified' => '2010-04-29 09:26:46'
+		),
+
 	);
 }
 ?>

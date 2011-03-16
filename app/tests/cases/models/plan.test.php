@@ -142,15 +142,14 @@ class PlanTestCase extends CakeTestCase {
         foreach ($is2 as $i){
             foreach ($i['Anio'] as $a){
                 $this->assertEqual($a['ciclo_id'], $ciclo);
-                $this->assertTrue(!empty($a['EstructuraPlanesAnio']));
-                $this->assertTrue(!empty($a['Etapa']));
+                $this->assertTrue(!empty($a['EstructuraPlanesAnio']),'No asoció el modelo EstructuraPlanesAnio');
+                $this->assertTrue(!empty($a['Etapa']),'No asoció el modelo Etapa');
             }
             
             $this->assertEqual($i['Instit']['id'], $institId);
             $this->assertEqual($i['Titulo']['oferta_id'], $ofertaId);
             
         }
-
 
         // BUSCO POR CICLO Y NO ASOCIO AÑOS
         //
@@ -201,6 +200,44 @@ class PlanTestCase extends CakeTestCase {
 
         $this->assertEqual( 2, $matricula );
     }
+
+
+//    function testPaginatorSimple(){
+//        $fields = $order = $limit =  $page = $recursive = $extra = null;
+//        $conditions = array(
+//            'Instit.id' => 1,
+//        );
+//        $limit = 999;
+//
+//        $planes = $this->Plan->paginate($conditions, $fields, $order, $limit, $page, $recursive, $extra);
+//
+//        $planesFind = $this->Plan->find('all',array(
+//            'conditions'=> $conditions,
+//            ));
+//
+//        $this->assertEqual($planes, $planesFind);
+//    }
+//
+//    function testPaginatorAsociaAnio(){
+//        $fields = $order = $limit =  $page = $recursive = null;
+//        $conditions = array(
+//            'Orientacion.id' => 2,
+//        );
+//        $extra = array(
+//            'asociarAnio' => true,
+//            'asociarCompleto' => true,
+//            'contain' => array(
+//                'Titulo' => array('SectoresTitulo' => array('Sector.Orientacion')),
+//            )
+//            );
+//
+//        $cantPlanes = $this->Plan->paginateCount($conditions, $recursive);
+//        $planes = $this->Plan->paginate($conditions, $fields, $order, $limit, $page, $recursive, $extra);
+//
+//        $this->assertEqual($cantPlanes, count($planes));
+//
+//
+//    }
 
 
 }
