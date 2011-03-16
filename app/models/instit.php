@@ -415,7 +415,6 @@ class Instit extends AppModel {
                             $nombre_tipoinstit = isset($item_aux['Tipoinstit']['name']) ? $item_aux['Tipoinstit']['name'] : '';
                         }
                         else {
-                            debug("entra a find tipoinstit!");
                             // si no tiene, tipo instit para armar nombre
                             $this->Tipoinstit->recursive = -1;
                             $tipoinstit = $this->Tipoinstit->find('first', array('conditions' => array('Tipoinstit.id' => $item_aux['tipoinstit_id'])));
