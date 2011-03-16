@@ -380,57 +380,58 @@ class Instit extends AppModel {
                 return $instituciones_data;
   	}
 */
-        /**
-         * Dado un array, me devuelve el mismo vector, pero con el nombre completo de la
-         * institucion.
-         * @param array $instituciones_data
-         * @return array con 'nombre_completo' como Key
-         */
-       function __institsConSusRespectivosNombresCompletos($instituciones_data) {
-            /*
-                     * primero calculo laprofundiddad
-                     * o sea, quiero saber cuantos nivles del array tengo que ir para
-                     * llegar alos datos de Instit
-            */
-            $array_recorro = $instituciones_data;
-
-            list($key, $idata) = each($array_recorro);
-            $aux = "$key";
-            $instit = "Instit";
-            if($aux == $instit) {
-                $profundidad = 0;
-            }else {
-                $profundidad = 1;
-            }
-            $aux = &$instituciones_data;
-            if ($profundidad == 1) {
-                for ($i=0; $i<sizeof($instituciones_data); $i++){
-                    $aux = &$instituciones_data[$i];
-                    $nombre_tipoinstit = isset($aux['Tipoinstit']['name']) ? $aux['Tipoinstit']['name'] : '';
-                    $aux['Instit']['nombre_completo'] = $this->getNombreCompleto('','',$nombre_tipoinstit,&$aux);
-                }
-            }else {
-                $nombre_tipoinstit = isset($aux['Tipoinstit']['name']) ? $aux['Tipoinstit']['name'] : '';
-                $aux['Instit']['nombre_completo'] = $this->getNombreCompleto('','',$nombre_tipoinstit,&$aux);
-            }
-            return $instituciones_data;
-        }
-
-
 
         function afterFind($results) {
-            
-            foreach ($results as &$item) {
-                if (isset($item['Instit']['tipoinstit_id'])) {
-                    $id_tipoinstit = $item['Instit']['tipoinstit_id'];
-                    // tipo instit para armar nombre
-                    $this->Tipoinstit->recursive = -1;
-                    $tipoinstit = $this->Tipoinstit->find('first', array('conditions' => array('Tipoinstit.id' => $id_tipoinstit)));
-                    
-                    $nombre_tipoinstit = isset($tipoinstit['Tipoinstit']['name']) ? $tipoinstit['Tipoinstit']['name'] : '';
-
-                    $item['Instit']['nombre_completo'] = $this->getNombreCompleto($item['Instit']['nombre'], $item['Instit']['nroinstit'], $nombre_tipoinstit);
+            list($key, $idata) = each($results);
+            $aux = "$key";
+            if (is_array($idata)) {
+                if ($aux == "Instit") {
+                    $profundidad = 1;
                 }
+                else {  // data[0]['Instit']
+                    $profundidad = 2;
+                }
+            }
+            else {  // data['id']; data['nombre']; etc
+                $profundidad = 0;
+            }
+
+            if ($profundidad > 0) {
+                foreach ($results as &$item) {
+                    if (isset($item['Instit']['tipoinstit_id']) || isset($item['Instit']['nombre']) || isset($item['Instit']['nroinstit'])) {
+                        $item_aux = &$item['Instit'];
+                    }
+                    elseif (isset($item['tipoinstit_id']) || isset($item['nombre']) || isset($item['nroinstit'])) {
+                        $item_aux = &$item;
+                    }
+
+                    if (isset($item['Tipoinstit'])) {
+                        $item_aux['Tipoinstit'] = &$item['Tipoinstit'];
+                    }
+
+                    $nombre_tipoinstit = '';
+                    if (!empty($item_aux)) {
+                        if (!empty($item_aux['Tipoinstit'])) {
+                            $nombre_tipoinstit = isset($item_aux['Tipoinstit']['name']) ? $item_aux['Tipoinstit']['name'] : '';
+                        }
+                        else {
+                            debug("entra a find tipoinstit!");
+                            // si no tiene, tipo instit para armar nombre
+                            $this->Tipoinstit->recursive = -1;
+                            $tipoinstit = $this->Tipoinstit->find('first', array('conditions' => array('Tipoinstit.id' => $item_aux['tipoinstit_id'])));
+                            if (!empty($tipoinstit)) {
+                                $nombre_tipoinstit = isset($tipoinstit['Tipoinstit']['name']) ? $tipoinstit['Tipoinstit']['name'] : '';
+                            }
+                        }
+                        
+                        $item_aux['nombre_completo'] = $this->getNombreCompleto($item_aux['nombre'], $item_aux['nroinstit'], $nombre_tipoinstit);
+                    }
+                }
+            }
+            else {
+                $nombre_tipoinstit = isset($results['Tipoinstit']['name']) ? $results['Tipoinstit']['name'] : '';
+
+                $results['nombre_completo'] = $this->getNombreCompleto($results['nombre'], $results['nroinstit'], $nombre_tipoinstit);
             }
 
             return $results;
@@ -449,22 +450,13 @@ class Instit extends AppModel {
          * @param array $arrayParaCompletar si se lo pasa con el puntero de referencia lo modifica directamente ahi mismo
          * @return string el nombre completo
          */
-        function getNombreCompleto($nombre, $nroinstit='', $tipoinstit='', $arrayParaCompletar=array()) {
+        function getNombreCompleto($nombre='', $nroinstit='', $tipoinstit='') {
             $nombreCompleto = "";
 
-            if (empty($arrayParaCompletar)) {
-                $arrayParaCompletar = &$this->data;
-            }
-
-            if (!empty($arrayParaCompletar['Instit']['nombre'])) {
-                $nombre = $arrayParaCompletar['Instit']['nombre'];
-            }
-            if (!empty($arrayParaCompletar['Instit']['nroinstit'])) {
-                $nroinstit = $arrayParaCompletar['Instit']['nroinstit'];
-            }
             if (!empty($tipoinstit) && $tipoinstit == 'SIN DATOS') {
                 $tipoinstit = '';
             }
+            
             if (!empty($tipoinstit)) {
                 $nombreCompleto = $tipoinstit.' ';
                 $nombreCompleto .= ($nroinstit > 0 || $nroinstit != '')?"Nº $nroinstit ":"";
@@ -478,7 +470,6 @@ class Instit extends AppModel {
                 $nombreCompleto .= ($nombre != '')?'"'.$nombre.'"':"";
             }
 
-            $arrayParaCompletar['Instit']['nombre_completo'] = $nombreCompleto;
             return $nombreCompleto;
         }
 
