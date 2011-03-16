@@ -324,7 +324,8 @@ class InstitTestCase extends CakeTestCase {
 
 
     function testFindConNombreCompleto(){
-        $nombre = 'ESCUELA DE EDUCACION TECNICA (E.E.T.) Nº 06  "FERNANDO FADER TEST"';
+        $nombre1 = 'ESCUELA DE EDUCACION TECNICA (E.E.T.) Nº 06  "FERNANDO FADER TEST"';
+        $nombre2 = 'ESCUELA DE EDUCACION TECNICA (E.E.T.) Nº 06  "FERNANDO FADER 2"';
         
         $this->Instit->recursive = 0;
         $iii = $this->Instit->find('first', array(
@@ -332,15 +333,16 @@ class InstitTestCase extends CakeTestCase {
                                     'Instit.id' => 1
                                     )
                                   ));
-
+                                  
         $this->assertNotEqual($iii['Instit']['nombre_completo'], '');
-        $this->assertEqual($iii['Instit']['nombre_completo'], $nombre);
+        $this->assertEqual($iii['Instit']['nombre_completo'], $nombre1);
 
-        $iii = $this->Instit->find('all', array(
+        $iii = $this->Instit->find('first', array(
                                  'conditions'=>array(
                                      'Instit.id' => 2
                                      )));
-        $this->assertEqual($iii[0]['Instit']['nombre_completo'] , $nombre);
+        $this->assertNotEqual($iii['Instit']['nombre_completo'] , $nombre1);
+        $this->assertEqual($iii['Instit']['nombre_completo'] , $nombre2);
     }
 
 
