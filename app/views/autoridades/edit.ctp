@@ -1,12 +1,14 @@
 <?
-echo $javascript->link(array(
-'jquery.autocomplete','jquery.megaselectlist.js'
-));
+echo $javascript->link('jquery-ui-1.8.5.custom.min', false);
+echo $javascript->link(array('jquery.autocomplete','jquery.megaselectlist.js'));
 
 echo $html->css('jquery.autocomplete.css', false);
+echo $html->css('smoothness/jquery-ui-1.8.6.custom',null, false);
+
 ?>
 <script type="text/javascript">
     jQuery(document).ready(function(){
+        jQuery("#fechaAsuncionDatePicker").datepicker({ minDate: 1, dateFormat: 'dd/mm/yy' });
         /*
          * Bug fix: borro hidden para que permita el funcionamiento de megaselectlist
          */
@@ -76,18 +78,41 @@ echo $html->css('jquery.autocomplete.css', false);
 	<fieldset>
  		<legend><?php __('Editar Autoridad');?></legend>
 	<?php
-		echo $form->input('id');
-		echo $form->input('jurisdiccion_id');
-		echo $form->input('nombre');
-		echo $form->input('apellido');
-		echo $form->input('fecha_asuncion');
-		echo $form->input('titulo');
-		echo $form->input('telefono_personal');
-		echo $form->input('telefono_institucional');
-		echo $form->input('email_personal');
-		echo $form->input('email_institucional');
+		echo $form->input('jurisdiccion_id',array('value'=>$jurisdiccion_id));
+		echo $form->input('titulo',array(
+                                            'div'=>array('style'=>'width:20%; float: left; clear: none'),
+                                            'style'=> 'float: left'));
+                echo $form->input('nombre',array(
+                                            'div'=>array('style'=>'width:35%; float: left; clear: none'),
+                                            'style'=> 'float: left'));
+		echo $form->input('apellido',array(
+                                            'div'=>array('style'=>'width:36%; float: left; clear: none'),
+                                            'style'=> 'float: left'));
+		echo $form->input('fecha_asuncion',array('id'=>'fechaAsuncionDatePicker',
+                                                         'type'=>'text',
+                                                         'div' =>  array('fechaAsuncionDatePickerDiv',
+                                                                         'style' => 'width:20%; clear:none; float:left;'
+                                                                        ),
+                                                         'style' => 'clear:none; float:left;'));
+		echo $form->input('telefono_personal',array(
+                                            'div'=>array('style'=>'width:35%; float: left; clear: none'),
+                                            'style'=> 'float: left'));
+		echo $form->input('telefono_institucional',array(
+                                            'div'=>array('style'=>'width:36%; float: left; clear: none'),
+                                            'style'=> 'float: left'));
+		echo $form->input('email_personal',array(
+                                            'div'=>array('style'=>'width:47%; float: left; clear: none'),
+                                            'style'=> 'float: left'));
+		echo $form->input('email_institucional',array(
+                                            'div'=>array('style'=>'width:46%; float: left; clear: none'),
+                                            'style'=> 'float: left'));
 		echo $form->input('direccion');
-		echo $form->input('jur_dep_loc', array('label'=>'Departamento/Localidad', 'value'=> (isset($locdep['Localidad']['id']))?$locdep['Localidad']['name'] . ', ' . $locdep['Departamento']['name'] . ' (' . $this->data['Jurisdiccion']['name'] . ')' :$locdep['Departamento']['name'] . ' (' . $this->data['Jurisdiccion']['name'] . ')','title'=>'Ingrese al menos 3 letras para que comience la busqueda de Departamentos y Localidades.'));
+                echo $form->input('jur_dep_loc', 
+                        array('label'=>'Departamento/Localidad',
+                            'value'=> ((!empty($locdep['Localidad']['id']))?$locdep['Localidad']['name'] . ', ':'') . $locdep['Departamento']['name'] . ' (' . $this->data['Jurisdiccion']['name']  . ')',
+                            'style'=>'width:92%;',
+                            'title'=>'Ingrese al menos 3 letras para que comience la busqueda de Departamentos y Localidades.')
+                        );
 	?>
                 <input id='hiddenLocId' name='data[Autoridad][localidad_id]' type='hidden' value='<?php echo $locdep['Localidad']['id'] ?>' />
                 <input id='hiddenLocDepId' name='data[Autoridad][departamento_id]' type='hidden' value='<?php echo $locdep['Departamento']['id'] ?>' />

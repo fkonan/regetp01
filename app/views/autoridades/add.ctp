@@ -1,12 +1,15 @@
 <?
-echo $javascript->link(array(
-'jquery.autocomplete','jquery.megaselectlist.js'
-));
+echo $javascript->link('jquery-ui-1.8.5.custom.min', false);
+echo $javascript->link(array('jquery.autocomplete','jquery.megaselectlist.js'));
 
 echo $html->css('jquery.autocomplete.css', false);
+echo $html->css('smoothness/jquery-ui-1.8.6.custom',null, false);
+
 ?>
 <script type="text/javascript">
     jQuery(document).ready(function(){
+
+       jQuery("#fechaAsuncionDatePicker").datepicker({ minDate: 1, dateFormat: 'dd/mm/yy' });
         /*
          * Bug fix: borro hidden para que permita el funcionamiento de megaselectlist
          */
@@ -76,14 +79,33 @@ echo $html->css('jquery.autocomplete.css', false);
  		<legend><?php __('Agregar Autoridad');?></legend>
 	<?php
 		echo $form->input('jurisdiccion_id',array('value'=>$jurisdiccion_id));
-		echo $form->input('titulo');
-                echo $form->input('nombre');
-		echo $form->input('apellido');
-		echo $form->input('fecha_asuncion');
-		echo $form->input('telefono_personal');
-		echo $form->input('telefono_institucional');
-		echo $form->input('email_personal');
-		echo $form->input('email_institucional');
+		echo $form->input('titulo',array(
+                                            'div'=>array('style'=>'width:20%; float: left; clear: none'),
+                                            'style'=> 'float: left'));
+                echo $form->input('nombre',array(
+                                            'div'=>array('style'=>'width:35%; float: left; clear: none'),
+                                            'style'=> 'float: left'));
+		echo $form->input('apellido',array(
+                                            'div'=>array('style'=>'width:36%; float: left; clear: none'),
+                                            'style'=> 'float: left'));
+		echo $form->input('fecha_asuncion',array('id'=>'fechaAsuncionDatePicker',
+                                                         'type'=>'text',
+                                                         'div' =>  array('fechaAsuncionDatePickerDiv',
+                                                                         'style' => 'width:20%; clear:none; float:left;'
+                                                                        ),
+                                                         'style' => 'clear:none; float:left;'));
+		echo $form->input('telefono_personal',array(
+                                            'div'=>array('style'=>'width:35%; float: left; clear: none'),
+                                            'style'=> 'float: left'));
+		echo $form->input('telefono_institucional',array(
+                                            'div'=>array('style'=>'width:36%; float: left; clear: none'),
+                                            'style'=> 'float: left'));
+		echo $form->input('email_personal',array(
+                                            'div'=>array('style'=>'width:47%; float: left; clear: none'),
+                                            'style'=> 'float: left'));
+		echo $form->input('email_institucional',array(
+                                            'div'=>array('style'=>'width:46%; float: left; clear: none'),
+                                            'style'=> 'float: left'));
 		echo $form->input('direccion');
                 echo $form->input('jur_dep_loc', array('label'=>'Departamento/Localidad', 'style'=>'width:92%;','title'=>'Ingrese al menos 3 letras para que comience la busqueda de Departamentos y Localidades.'));
 	?>
@@ -101,9 +123,4 @@ echo $html->css('jquery.autocomplete.css', false);
         ?>
 	</fieldset>
 <?php echo $form->end('Submit');?>
-</div>
-<div class="actions">
-	<ul>
-		<li><?php echo $html->link(__('Listar Autoridades', true), array('action' => 'index',$jurisdiccion_id));?></li>
-	</ul>
 </div>
