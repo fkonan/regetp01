@@ -4,7 +4,7 @@
 App::import('Model', 'Instit');
 
 
-require_once dirname(__FILE__) . DS . 'extra_functions.php';
+require_once dirname(__FILE__) . DS . '..' . DS . 'extra_functions.php';
 
 function arrays_are_similar($a, $b) {
   // if the indexes don't match, return immediately

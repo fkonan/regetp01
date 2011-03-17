@@ -250,9 +250,26 @@ class Plan extends AppModel {
 //
 
         public function find($conditions = null, $fields = null, $order = null, $recursive = null) {
+
+            if (isset ($fields['asociarAnio'])) {
+               $this->__asociarAnio = $fields['asociarAnio'];
+            }
+
+            if (isset ($fields['asociarCompleto'])) {
+               $this->__asociarCompleto = $fields['asociarCompleto'];
+               $conditions = 'completo';
+            }
+
             
+            if( ($this->__asociarCompleto || $this->__asociarAnio) && $conditions != 'count' && $conditions != 'completo' && $conditions != 'completoCount') {
+               // si viene un 'all' pero quiero que asocie el año, lo tengo que hacer pero con el find 'completo'
+               $conditions = 'completo';
+            } elseif( ($this->__asociarCompleto || $this->__asociarAnio) && $conditions == 'count') {
+               $conditions = 'completoCount';
+            }
             /* @var $ret Array */
             $ret = array();
+            
             switch ($conditions) {
                case 'completo':
                    $ret = $this->__findCompleto('buscar',$fields, $order, $recursive);
@@ -264,7 +281,8 @@ class Plan extends AppModel {
                    $ret = parent::find($conditions, $fields, $order, $recursive);
                    break;
             }
-            
+            // luego de cada find vuelvo a inicializar las variables de asociacion
+            $this->__asociarAnio = $this->__asociarCompleto = false; // las vuelvo a poner en false
             return $ret;
         }
 
@@ -282,7 +300,8 @@ class Plan extends AppModel {
          *                      Los valores posibles son: 'buscar' (por default)  o 'count'
          * @return array
          */
-        function __findCompleto($buscaroSoloContar = 'buscar', $parameters = array(), $order = array(), $recursive = null) {
+        function __findCompleto($buscaroSoloContar = 'buscar', $parameters = array(), $order = null, $recursive = null) {
+                $parameters = array_merge($parameters, compact('conditions', 'fields', 'order', 'recursive'));
                 if (isset ($parameters['asociarAnio'])) {
                    $this->__asociarAnio = $parameters['asociarAnio'];
                 }
@@ -291,21 +310,16 @@ class Plan extends AppModel {
                    $this->__asociarCompleto = $parameters['asociarCompleto'];
                 }
 
-                if (isset($parameters['order'])) {
-                    $parameters['order'] = array_merge($parameters['order'], $order);
-                } else {
-                    $parameters['order'] = $order;
-                }
-
-
                 if (is_numeric($recursive) && $recursive != $this->recursive) {
                     $parameters['recursive'] = $recursive;
                 }
 
-                $ciclo_id = 0;
-                
+                $ciclo_id = 0;                
                 if ( !empty($parameters['conditions']['Anio.ciclo_id'])) {
                     $ciclo_id = $parameters['conditions']['Anio.ciclo_id'];
+                }
+                if ( !empty($parameters['conditions']['Ciclo.id'])) {
+                    $ciclo_id = $parameters['conditions']['Ciclo.id'];
                 }
                 
                 //$parameters['order'] = $this->order;
@@ -383,12 +397,12 @@ class Plan extends AppModel {
 
             if ($buscaroSoloContar == 'count') {
                 // si solo es para obtener el total no necesito seguir...
-                debug("CONSTOOOO");
                 return $this->find('count', $parameters);
             }
-
             // recojo todas las instituciones que cumplan con los criterios de busqueda
-            $planesIds = $this->find('list', $parameters);
+            //$planesIds = $this->find('list', $parameters);
+
+            return $this->find('all', $parameters);
 
             if (empty($planesIds) ) {
                 // no hay instituciones que cumplan con esos criterios de busqueda
