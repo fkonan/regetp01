@@ -3,7 +3,7 @@
 /* Plan Test cases generated on: 2010-04-22 12:01:13 : 1271948473*/
 App::import('Model', 'Plan');
 
-require_once dirname(__FILE__) . DS . 'extra_functions.php';
+require_once dirname(__FILE__) . DS . '..' . DS . 'extra_functions.php';
 
 class PlanTestCase extends CakeTestCase {
     /**
@@ -24,13 +24,47 @@ class PlanTestCase extends CakeTestCase {
     
     
     function startTest() {
+        parent::start();
         $this->Plan =& ClassRegistry::init('Plan');
-
     }
 
     function testPlanInstance() {
         $this->assertTrue(is_a($this->Plan, 'Plan'));
     }
+
+
+    function testFindFPAsociaAnio(){
+        /*
+        'conditions'=>array(
+                        'Instit.id'=> $institId,
+                        'Titulo.oferta_id' => $ofertaId,
+                        'Anio.ciclo_id' => $ciclo,
+                        )
+                    )
+         *
+         */
+
+        $conds = array(
+            'limit' => 20,
+            'page' => 1,
+            'conditions' => array(
+                    //'Anio.ciclo_id' => 2010,
+                    //'Plan.oferta_id' => 1,
+                    'Instit.id' => 1,
+                ),
+            'asociarAnio' => 1,
+            'order' => Array('Plan.nombre'),
+        );
+        $planes = array();
+        //$planes = $this->Plan->find('completo', $conds);
+
+        debug($planes);
+
+        $this->assertTrue(false);
+    }
+
+
+    
 
     function testGetEstructuraSugerida() {
         // plan 1: 2009: mezclado - 2010: 2 de POLI
@@ -78,6 +112,21 @@ class PlanTestCase extends CakeTestCase {
                 $this->fail('No se pudo guardar la estructura sugerida');
         }
         $this->assertTrue($this->Plan->tieneEstructuraDefinida(7));
+    }
+
+    function testFindComun(){
+        $institId = 2;
+        $this->Plan->recursive = 0;
+        $is1 = $this->Plan->find('all', array(
+                    'conditions'=>array(
+                        'Plan.instit_id' => $institId,
+                        )
+                    )
+                );
+        
+        $cantPlanesQueHayEnFixture = 2;
+        $this->assertEqual(count($is1), $cantPlanesQueHayEnFixture, "me tenia que haber traido $cantPlanesQueHayEnFixture planes");
+        $this->assertEqual($is1[0]['Instit']['id'], $institId);
     }
 
 
@@ -200,6 +249,7 @@ class PlanTestCase extends CakeTestCase {
 
         $this->assertEqual( 2, $matricula );
     }
+
 
 
 //    function testPaginatorSimple(){

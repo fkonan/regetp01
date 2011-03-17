@@ -343,8 +343,6 @@ class PlanesController extends AppController {
 
         if(!empty($ciclo)) {
             $this->paginate['conditions']['Anio.ciclo_id'] = $ciclo;
-        } else {
-            $this->Plan->setTraerUltimaAct(true);
         }
 
         $this->paginate['asociarAnio'] = true;
