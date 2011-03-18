@@ -70,7 +70,6 @@ echo $html->css('smoothness/jquery-ui-1.8.6.custom',null, false);
         else{
             return loc_dep.localidad;
         }
-
     }
 </script>
 <div class="autoridades form">
