@@ -63,8 +63,16 @@ CREATE TABLE autoridades_cargos (
 );
 
 /*
+BORRAR CAMPOS DE AUTORIDAD DE JURISDICCION
+*/
+ALTER TABLE "public"."jurisdicciones" DROP COLUMN "autoridad_cargo";
+ALTER TABLE "public"."jurisdicciones" DROP COLUMN "autoridad_nombre";
+ALTER TABLE "public"."jurisdicciones" DROP COLUMN "autoridad_fecha_asuncion";
+
+/*
 CARGOS
 */
+
 INSERT INTO cargos (nombre, rango)
 VALUES ('Ministro de Educación', 1);
 INSERT INTO cargos (nombre, rango)
@@ -97,3 +105,127 @@ INSERT INTO cargos (nombre, rango)
 VALUES ('Referente de Formación Profesional', 4);
 INSERT INTO cargos (nombre, rango)
 VALUES ('Unidad Ejecutora Jurisdiccional', 4);
+
+/*
+AUTORIDADES y AUTORIDADES_CARGOS
+*/
+
+INSERT INTO autoridades ( jurisdiccion_id, titulo, nombre, apellido, fecha_asuncion)
+VALUES (10,'Lic.', 'Mario Alberto', 'Perna', '2010-07-14');
+INSERT INTO autoridades_cargos (autoridad_id, cargo_id)
+VALUES(1,2);
+
+INSERT INTO autoridades ( jurisdiccion_id, titulo, nombre, apellido, fecha_asuncion)
+VALUES(22,'Prof.', 'Neri Francisco Enrique', 'Romero', '2009-10-09');
+INSERT INTO autoridades_cargos (autoridad_id, cargo_id)
+VALUES(2,2);
+
+INSERT INTO autoridades ( jurisdiccion_id, titulo, nombre, apellido, fecha_asuncion)
+VALUES(26,'Prof.', 'Haydee Mirta', 'Romero', '2010-07-14');
+INSERT INTO autoridades_cargos (autoridad_id, cargo_id)
+VALUES(3,1);
+
+INSERT INTO autoridades ( jurisdiccion_id, titulo, nombre, apellido, fecha_asuncion)
+VALUES(2,'Lic.', 'Esteban', 'Bullrich', '2010-07-14');
+INSERT INTO autoridades_cargos (autoridad_id, cargo_id)
+VALUES(4,1);
+
+INSERT INTO autoridades ( jurisdiccion_id, titulo, nombre, apellido, fecha_asuncion)
+VALUES(14,'Prof.', 'Walter', 'Grahovac', '2010-07-14');
+INSERT INTO autoridades_cargos (autoridad_id, cargo_id)
+VALUES(5,1);
+
+INSERT INTO autoridades ( jurisdiccion_id, titulo, nombre, apellido, fecha_asuncion)
+VALUES(18,'Dr.', 'Orlando', 'Macció', '2010-07-14');
+INSERT INTO autoridades_cargos (autoridad_id, cargo_id)
+VALUES(6,6);
+
+INSERT INTO autoridades ( jurisdiccion_id, titulo, nombre, apellido, fecha_asuncion)
+VALUES(30,'Prof.', 'Graciela Yolanda', 'Bar', '2010-07-14');
+INSERT INTO autoridades_cargos (autoridad_id, cargo_id)
+VALUES(7,3);
+
+INSERT INTO autoridades ( jurisdiccion_id, titulo, nombre, apellido, fecha_asuncion)
+VALUES(34,'Lic.', 'Olga Isabel', 'Comello', '2010-07-14');
+INSERT INTO autoridades_cargos (autoridad_id, cargo_id)
+VALUES(8,9);
+
+INSERT INTO autoridades ( jurisdiccion_id, titulo, nombre, apellido, fecha_asuncion)
+VALUES(6,'Prof.', 'Mario N.', 'Oporto', '2007-12-01');
+INSERT INTO autoridades_cargos (autoridad_id, cargo_id)
+VALUES(9,5);
+
+INSERT INTO autoridades ( jurisdiccion_id, titulo, nombre, apellido, fecha_asuncion)
+VALUES(38,'Prof.', 'Liliana Josefina', 'Dominguez', '2010-07-14');
+INSERT INTO autoridades_cargos (autoridad_id, cargo_id)
+VALUES(10,1);
+
+INSERT INTO autoridades ( jurisdiccion_id, titulo, nombre, apellido, fecha_asuncion)
+VALUES(42,'Prof.', 'Néstor Anselmo', 'Torres', '2010-07-14');
+INSERT INTO autoridades_cargos (autoridad_id, cargo_id)
+VALUES(11,9);
+
+INSERT INTO autoridades ( jurisdiccion_id, titulo, nombre, apellido, fecha_asuncion)
+VALUES(46,'Lic.', 'Rafael Walter', 'Flores', '2010-07-14');
+INSERT INTO autoridades_cargos (autoridad_id, cargo_id)
+VALUES(12,1);
+
+INSERT INTO autoridades ( jurisdiccion_id, titulo, nombre, apellido, fecha_asuncion)
+VALUES(50,'Cdor.', 'Carlos Lopez', 'Puelle', '2010-07-14');
+INSERT INTO autoridades_cargos (autoridad_id, cargo_id)
+VALUES(13,8);
+
+INSERT INTO autoridades ( jurisdiccion_id, titulo, nombre, apellido, fecha_asuncion)
+VALUES(54,'Ing.', 'Luis Jacobo', 'Jacobo', '2010-07-14');
+INSERT INTO autoridades_cargos (autoridad_id, cargo_id)
+VALUES(14,9);
+
+INSERT INTO autoridades ( jurisdiccion_id, titulo, nombre, apellido, fecha_asuncion)
+VALUES(58,'Dn.', 'José Ernesto', 'Seguel', '2010-07-14');
+INSERT INTO autoridades_cargos (autoridad_id, cargo_id)
+VALUES(15,4);
+
+INSERT INTO autoridades ( jurisdiccion_id, titulo, nombre, apellido, fecha_asuncion)
+VALUES(62,'Dn.', 'Cesar', 'Barbeito', '2010-07-14');
+INSERT INTO autoridades_cargos (autoridad_id, cargo_id)
+VALUES(16,1);
+
+INSERT INTO autoridades ( jurisdiccion_id, titulo, nombre, apellido, fecha_asuncion)
+VALUES(66,'Lic.', 'Leopoldo', 'Van Cauwlaert', '2010-07-14');
+INSERT INTO autoridades_cargos (autoridad_id, cargo_id)
+VALUES(17,1);
+
+INSERT INTO autoridades ( jurisdiccion_id, titulo, nombre, apellido, fecha_asuncion)
+VALUES(70,'Prof.', 'María Cristina', 'Díaz', '2010-07-14');
+INSERT INTO autoridades_cargos (autoridad_id, cargo_id)
+VALUES(18,1);
+
+INSERT INTO autoridades ( jurisdiccion_id, titulo, nombre, apellido, fecha_asuncion)
+VALUES(74,'Lic.', 'Fernando', 'Salino', '2010-07-14');
+INSERT INTO autoridades_cargos (autoridad_id, cargo_id)
+VALUES(19,1);
+
+INSERT INTO autoridades ( jurisdiccion_id, titulo, nombre, apellido, fecha_asuncion)
+VALUES(78,'Prof.', 'Roberto', 'Borselli', '2010-07-14');
+INSERT INTO autoridades_cargos (autoridad_id, cargo_id)
+VALUES(20,10);
+
+INSERT INTO autoridades ( jurisdiccion_id, titulo, nombre, apellido, fecha_asuncion)
+VALUES(82,'Lic.', 'Elida', 'Rasino', '2010-07-14');
+INSERT INTO autoridades_cargos (autoridad_id, cargo_id)
+VALUES(21,1);
+
+INSERT INTO autoridades ( jurisdiccion_id, titulo, nombre, apellido, fecha_asuncion)
+VALUES(86,'Dra.', 'María Fernanda', 'Gómez Macedo', '2010-07-14');
+INSERT INTO autoridades_cargos (autoridad_id, cargo_id)
+VALUES(22,1);
+
+INSERT INTO autoridades ( jurisdiccion_id, titulo, nombre, apellido, fecha_asuncion)
+VALUES(94,'Prof.', 'Amanda', 'del Corro', '2010-07-14');
+INSERT INTO autoridades_cargos (autoridad_id, cargo_id)
+VALUES(23,7);
+
+INSERT INTO autoridades ( jurisdiccion_id, titulo, nombre, apellido, fecha_asuncion)
+VALUES(90,'Lic.', 'Silvia', 'Rojkés de Temkin', '2010-07-14');
+INSERT INTO autoridades_cargos (autoridad_id, cargo_id)
+VALUES(24,1);
