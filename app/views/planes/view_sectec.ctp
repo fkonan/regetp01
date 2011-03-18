@@ -9,7 +9,6 @@ if (empty($planes)) {
     <?php
     $i = 0;
     foreach($planes as $plan){
-    
     ?>
     <?php if($ciclo > 0){ 
         if(!empty($plan['Anio'])){?>
@@ -53,13 +52,13 @@ if (empty($planes)) {
             ?>
             <tr>
                 <td><?php echo $anio['EstructuraPlanesAnio']['alias']?></td>
-                <td><?php echo $anio['Anio']['matricula']?></td>
-                <td><?php echo $anio['Anio']['secciones']?></td>
-                <td><?php echo $anio['Anio']['hs_taller']?></td>
+                <td><?php echo $anio['matricula']?></td>
+                <td><?php echo $anio['secciones']?></td>
+                <td><?php echo $anio['hs_taller']?></td>
             </tr>
             <?php
-            $sumMatricula += $anio['Anio']['matricula'];
-            $sumSecciones += $anio['Anio']['secciones'];
+            $sumMatricula += $anio['matricula'];
+            $sumSecciones += $anio['secciones'];
             }?>
 
             <tfoot>

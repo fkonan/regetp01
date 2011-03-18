@@ -315,7 +315,6 @@ class Plan extends AppModel {
                 //unset($parameters['order']);
                 $ordenDelModelo = $this->order;
             }
-
             
             // recojo todas las instituciones que cumplan con los criterios de busqueda
             $planesIds = parent::find('list', $parameters);
@@ -340,6 +339,10 @@ class Plan extends AppModel {
 
             if (!empty($contain)) {
                 $parameters['contain'] = $contain;
+            } else {
+                $parameters['contain'] = array(
+                    'Instit', 'EstructuraPlan.Etapa','Oferta', 'Titulo', 'Anio',
+                );
             }
 
             $planes = parent::find('all', $parameters);

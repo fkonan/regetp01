@@ -406,12 +406,13 @@ class PlanesController extends AppController {
 
     function view_it_sec_sup($instit_id,$oferta_id,$ciclo=null) {
 
-        $this->paginate['asociarAnio'] = true;
+        $this->paginate['Plan']['asociarAnio'] = true;
         
         if (!$ciclo) {
-            $this->paginate['order'] = array("Plan.nombre");
+            $this->paginate['Plan']['order'] = array("Plan.nombre",'Etapa.orden');
         }
 
+        
         $conds = array(
             'Plan.instit_id'=> $instit_id,
             'Plan.oferta_id' => $oferta_id,
@@ -422,16 +423,16 @@ class PlanesController extends AppController {
         //$planes = $this->Plan->Instit->getPlanes($instit_id, $oferta_id, $ciclo);
         // agrego el index "matricula" directamente que dependa de "Plan"
 
-        if ($oferta_id == SEC_TEC_ID) {
-            usort($planes, array( $this, 'comparar_planes_por_orden' ));
-        }
+//        if ($oferta_id == SEC_TEC_ID) {
+//            usort($planes, array( $this, 'comparar_planes_por_orden' ));
+//        }
         
         foreach($planes as &$plan){
             if ( !empty($plan['Plan']) ) {
                 $plan['Plan']['matricula'] = 0;
         
                 foreach($plan['Anio'] as $anio){
-                    $plan['Plan']['matricula'] += $anio['Anio']['matricula'];
+                    $plan['Plan']['matricula'] += $anio['matricula'];
                 }
             }
         }
