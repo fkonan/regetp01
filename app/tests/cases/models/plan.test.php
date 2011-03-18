@@ -5,6 +5,12 @@ App::import('Model', 'Plan');
 
 require_once dirname(__FILE__) . DS . '..' . DS . 'extra_functions.php';
 
+
+class TestPlan extends Plan {
+    var $cacheSources = false;
+    var $useDbConfig = 'test_suite';
+}
+
 class PlanTestCase extends CakeTestCase {
     /**
      * @var Plan
@@ -25,11 +31,19 @@ class PlanTestCase extends CakeTestCase {
     
     function startTest() {
         parent::start();
-        $this->Plan =& ClassRegistry::init('Plan');
+        $this->Plan = new TestPlan();
+        //$this->Plan =& ClassRegistry::init('Plan');
     }
 
     function testPlanInstance() {
         $this->assertTrue(is_a($this->Plan, 'Plan'));
+    }
+
+    function testFindReLoco() {
+        //$this->Plan->recursive = -1;
+        $p = $this->Plan->find('count');
+        debug($p);
+        die("trajjo algun plan?");
     }
 
 
@@ -43,23 +57,22 @@ class PlanTestCase extends CakeTestCase {
                     )
          *
          */
-
+debug($this->Plan->find('all'));die;
         $conds = array(
-            'limit' => 20,
-            'page' => 1,
+//            'limit' => 20,
+//            'page' => 1,
             'conditions' => array(
                     //'Anio.ciclo_id' => 2010,
                     //'Plan.oferta_id' => 1,
                     'Instit.id' => 1,
                 ),
-            'asociarAnio' => 1,
+            //'asociarAnio' => 1,
             'order' => Array('Plan.nombre'),
         );
         $planes = array();
-        //$planes = $this->Plan->find('completo', $conds);
-
-        debug($planes);
-
+        $planes = $this->Plan->__findCompleto('buscar', $conds);
+debug($this->Plan->find('all'));
+debug($planes);
         $this->assertTrue(false);
     }
 
