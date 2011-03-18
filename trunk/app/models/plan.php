@@ -3,8 +3,6 @@ class Plan extends AppModel {
 
 	var $name = 'Plan';
 
-
-
         
         /*
          * $asociarAnio lo que hace es agregar la Estructura y la Etapa a
@@ -249,6 +247,7 @@ class Plan extends AppModel {
 //        }
 //
 
+
         public function find($conditions = null, $fields = null, $order = null, $recursive = null) {
 
             if (isset ($fields['asociarAnio'])) {
@@ -257,36 +256,23 @@ class Plan extends AppModel {
 
             if (isset ($fields['asociarCompleto'])) {
                $this->__asociarCompleto = $fields['asociarCompleto'];
-               $conditions = 'completo';
             }
 
-            
-            if( ($this->__asociarCompleto || $this->__asociarAnio) && $conditions != 'count' && $conditions != 'completo' && $conditions != 'completoCount') {
-               // si viene un 'all' pero quiero que asocie el año, lo tengo que hacer pero con el find 'completo'
-               $conditions = 'completo';
-            } elseif( ($this->__asociarCompleto || $this->__asociarAnio) && $conditions == 'count') {
-               $conditions = 'completoCount';
-            }
-            /* @var $ret Array */
-            $ret = array();
-            
-            switch ($conditions) {
-               case 'completo':
-                   $ret = $this->__findCompleto('buscar',$fields, $order, $recursive);
-                   break;
-               case 'completoCount':
-                   $ret = $this->__findCompleto('count', $fields, $order, $recursive);
-                   break;
-               default:
-                   $ret = parent::find($conditions, $fields, $order, $recursive);
-                   break;
+            if ($this->__asociarAnio || $this->__asociarCompleto) {
+                if ($conditions == 'count') {
+                    $ret = $this->__findCompleto('count', $fields, $order, $recursive);
+                } else {
+                    $ret = $this->__findCompleto('buscar',$fields, $order, $recursive);
+                }
+            } else {
+               $ret = parent::find($conditions, $fields, $order, $recursive);
             }
             // luego de cada find vuelvo a inicializar las variables de asociacion
             $this->__asociarAnio = $this->__asociarCompleto = false; // las vuelvo a poner en false
             return $ret;
         }
 
-
+        
         /**
          * Devuelve un find "all" pero con un monton de JOINS extra.
          * Ademàs, si se pone $this->__asociarAnio en true, trae los años
@@ -305,7 +291,7 @@ class Plan extends AppModel {
                 if (isset ($parameters['asociarAnio'])) {
                    $this->__asociarAnio = $parameters['asociarAnio'];
                 }
-
+                
                 if (isset ($parameters['asociarCompleto'])) {
                    $this->__asociarCompleto = $parameters['asociarCompleto'];
                 }
@@ -330,7 +316,7 @@ class Plan extends AppModel {
                     $contain = $parameters['contain'];
                     unset($parameters['contain']);
                 }
-         
+                
                 $parameters['joins'] = array(
                     array(
                         'table' => 'instits',
@@ -381,6 +367,18 @@ class Plan extends AppModel {
                         'conditions' => array('Orientacion.id = Sector.orientacion_id'),
                     ),
              );
+
+            $parameters['fields']= 'Plan.id';
+
+            if ($buscaroSoloContar == 'count') {
+                // si solo es para obtener el total no necesito seguir...
+                //$parameters['fields'] = array('COUNT(*)');
+                unset($parameters['fields']);
+                $query = $this->subquery('count', $parameters,'Plan');
+                return count($this->query($query));
+                //return parent::find('count', $parameters);
+            }
+
                 
             // @var $order es para almacenar temporal mente este valor
             // para que se ejecute la busqueda 'list' sin problemas no debe tener un orden
@@ -393,16 +391,9 @@ class Plan extends AppModel {
                 $ordenDelModelo = $this->order;
             }
 
-            $parameters['fields']= 'Plan.id';
-
-            if ($buscaroSoloContar == 'count') {
-                // si solo es para obtener el total no necesito seguir...
-                return $this->find('count', $parameters);
-            }
+            
             // recojo todas las instituciones que cumplan con los criterios de busqueda
-            //$planesIds = $this->find('list', $parameters);
-
-            return $this->find('all', $parameters);
+            $planesIds = parent::find('list', $parameters);
 
             if (empty($planesIds) ) {
                 // no hay instituciones que cumplan con esos criterios de busqueda
@@ -426,7 +417,7 @@ class Plan extends AppModel {
                 $parameters['contain'] = $contain;
             }
 
-            $planes = $this->find('all', $parameters);
+            $planes = parent::find('all', $parameters);
 
             if ($this->__asociarAnio) {
                 foreach ( $planes as $key=>&$p) {

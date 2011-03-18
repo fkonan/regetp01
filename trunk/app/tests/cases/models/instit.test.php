@@ -41,7 +41,8 @@ class InstitTestCase extends CakeTestCase {
 	 
     function start() {
         parent::start();
-	$this->Instit = new TestInstit();
+	//$this->Instit = new TestInstit();
+        $this->Instit = ClassRegistry::init('Instit');
     }
 
     function testInstitInstance() {

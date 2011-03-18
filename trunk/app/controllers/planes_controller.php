@@ -11,6 +11,20 @@ class PlanesController extends AppController {
 
     }
 
+    function testi(){
+        
+        $c = array(
+            'conditions' => array(
+                'Plan.instit_id' => 1410,
+                ),
+            'asociarAnio' => true,
+            );
+        debug("find comun   : ".$this->Plan->find('count',$c));
+        debug("find completo: ".$this->Plan->__findCompleto('count',$c));
+        debug($this->Plan->__findCompleto('buscar',$c));
+        die('termino');
+    }
+
 
     /**
      * Listado de planes para una determinada institucion
