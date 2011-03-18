@@ -30,7 +30,7 @@
     <?php
     }
     ?>
-<br />
+    <br />
     <div class="acl actions acl-editores acl-desarrolladores acl-administradores">
             <ul>
                     <li><?php echo $html->link(__('Editar Título', true), array('action'=>'edit', $titulo['Titulo']['id'])); ?> </li>
@@ -43,7 +43,8 @@
         <?php echo $this->requestAction('/titulos/ajax_view_planes_asociados/'.$titulo['Titulo']['id'], array('return')); ?>
     </div>
 
-<h2><?php  __('Resumen de Planes de Estudio');?></h2>
+<h2 id="resumenlink" style="cursor:pointer;"><?php  __('Resumen de Planes de Estudio'); ?> <?php echo $html->image('arrow_down.png', array('id'=>'arrowlink','align'=>'absmiddle')); ?></h2>
+    <div id="resumenplanes">
     <?php
     foreach ($planesResumen as $planResumen) {
         $class = '';
@@ -57,6 +58,7 @@
     <?php
     }
     ?>
+    </div>
 </div>
 <br />
 <div class="actions">

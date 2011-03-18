@@ -17,8 +17,8 @@
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th><?php echo $paginator->sort('Nombre','name');?></th>
-                <th style="width:20px;"><?php echo $paginator->sort("Marco de referencia",'marco_ref');?></th>
-                <th><?php echo $paginator->sort("Oferta",'Oferta.name');?></th>
+                <th style="width:20px;"><?php echo $paginator->sort("Marco Ref.",'marco_ref');?></th>
+                <th style="width:67px;"><?php echo $paginator->sort("Oferta",'Oferta.name');?></th>
                 <th class="actions"></th>
             </tr>
         <?php
