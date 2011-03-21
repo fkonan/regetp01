@@ -220,7 +220,9 @@ class Plan extends AppModel {
                 if (!empty($parameters['conditions']['Anio.ciclo_id']))
                     $parameters2['conditions']['Anio.ciclo_id'] = $parameters['conditions']['Anio.ciclo_id'];
 
-                $parameters['conditions'] = $parameters2['conditions'];
+                if (!empty($parameters2)) {
+                    $parameters['conditions'] = $parameters2['conditions'];
+                }
 
                 $parameters = array_merge($parameters, compact('conditions', 'fields', 'order', 'recursive'));
                 if (isset ($parameters['asociarAnio'])) {
