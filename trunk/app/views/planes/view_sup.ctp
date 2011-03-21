@@ -49,14 +49,14 @@ if (empty($planes)) {
                 foreach($plan['Anio'] as $anio){
                 ?>
                 <tr>
-                    <td><?php echo $anio['Anio']['anio']?>º</td>
-                    <td><?php echo $anio['Anio']['matricula']?></td>
-                    <td><?php echo $anio['Anio']['secciones']?></td>
-                    <td><?php echo $anio['Anio']['hs_taller']?></td>
+                    <td><?php echo $anio['anio']?>º</td>
+                    <td><?php echo $anio['matricula']?></td>
+                    <td><?php echo $anio['secciones']?></td>
+                    <td><?php echo $anio['hs_taller']?></td>
                 </tr>
                 <?php
-                    $sumMatricula +=$anio['Anio']['matricula'];
-                    $sumSecciones +=$anio['Anio']['secciones'];
+                    $sumMatricula +=$anio['matricula'];
+                    $sumSecciones +=$anio['secciones'];
                 }?>
                 <tfoot>
                     <tr>
@@ -76,8 +76,8 @@ if (empty($planes)) {
             $class = null;
             if ($i++ % 2 == 0) $class = 'altrow';
         
-            if (!empty($plan['Anio'][0]['Anio']['ciclo_id']))
-                $ciclo_id = $plan['Anio'][0]['Anio']['ciclo_id'];
+            if (!empty($plan['Anio'][0]['ciclo_id']))
+                $ciclo_id = $plan['Anio'][0]['ciclo_id'];
             else
                 $ciclo_id = 0;
                 
