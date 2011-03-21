@@ -81,12 +81,13 @@ if (empty($planes)) {
                 $class = 'altrow';
 
             $primer_anio = current($plan['Anio']);
-            $ciclo_plan =  (!empty($primer_anio['Anio']['ciclo_id'])? $primer_anio['Anio']['ciclo_id']:"") ;
+            $ciclo_plan =  (!empty($primer_anio['ciclo_id'])? $primer_anio['ciclo_id']:"") ;
 
             echo $this->element('planes/plan_resumen_para_listado', array(
                 'class' => $class,
                 'plan'  => $plan,
                 'ciclo' => $ciclo_plan,
+                'hstaller'  => true,
             ));
         }
     }

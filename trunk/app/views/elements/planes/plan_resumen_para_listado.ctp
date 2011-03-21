@@ -48,7 +48,7 @@ if (!empty($plan['Plan'])) {
         if (!empty($hstaller) && $hstaller == true) {
         ?>
         <span class="plan_matricula_info">
-             | Hs Taller: <?php echo empty($plan['Anio']['0']['Anio']['hs_taller'])?"<span>0</span>":$plan['Anio']['0']['Anio']['hs_taller']; ?> |
+            | Hs Taller: <?php echo empty($plan['Anio']['0']['hs_taller'])?"<span>0</span>":$plan['Anio']['0']['hs_taller']; ?> |
         </span>
         <?php
         }
@@ -63,11 +63,11 @@ if (!empty($plan['Plan'])) {
                 $sectores_s = "";
                 $sectores_ids_s = "";
                 
-                if(isset($plan['Titulo']['Sector'])){
-                    foreach($plan['Titulo']['Sector'] as $sector){
-                        if(!in_array($sector['id'], $sectores_id)){
-                            $sectores[] = $sector['name'];
-                            $sectores_id[] = $sector['id'];
+                if(isset($plan['Titulo']['SectoresTitulo'])){
+                    foreach($plan['Titulo']['SectoresTitulo'] as $sector){
+                        if(!in_array($sector['Sector']['id'], $sectores_id)){
+                            $sectores[] = $sector['Sector']['name'];
+                            $sectores_id[] = $sector['Sector']['id'];
                         }
                     }
 
