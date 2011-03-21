@@ -212,6 +212,16 @@ class Plan extends AppModel {
          * @return array
          */
         function __findCompleto($buscaroSoloContar = 'buscar', $parameters = array(), $order = null, $recursive = null) {
+            
+                if (!empty($parameters['conditions']['Plan.instit_id']))
+                    $parameters2['conditions']['Plan.instit_id'] = $parameters['conditions']['Plan.instit_id'];
+                if (!empty($parameters['conditions']['Plan.oferta_id']))
+                    $parameters2['conditions']['Plan.oferta_id'] = $parameters['conditions']['Plan.oferta_id'];
+                if (!empty($parameters['conditions']['Anio.ciclo_id']))
+                    $parameters2['conditions']['Anio.ciclo_id'] = $parameters['conditions']['Anio.ciclo_id'];
+
+                $parameters['conditions'] = $parameters2['conditions'];
+
                 $parameters = array_merge($parameters, compact('conditions', 'fields', 'order', 'recursive'));
                 if (isset ($parameters['asociarAnio'])) {
                    $this->__asociarAnio = $parameters['asociarAnio'];
@@ -268,6 +278,12 @@ class Plan extends AppModel {
                         'conditions' => array('Plan.id = Anio.plan_id'),
                     ),
                     array(
+                        'table' => 'ciclos',
+                        'type' => 'LEFT',
+                        'alias' => 'Ciclo',
+                        'conditions' => array('Ciclo.id = Anio.ciclo_id'),
+                    ),
+                    array(
                         'table' => 'titulos',
                         'type' => 'LEFT',
                         'alias' => 'Titulo',
@@ -304,7 +320,6 @@ class Plan extends AppModel {
                 //return parent::find('count', $parameters);
             }
 
-                
             // @var $order es para almacenar temporal mente este valor
             // para que se ejecute la busqueda 'list' sin problemas no debe tener un orden
             $oldThisOrder = $this->order;
