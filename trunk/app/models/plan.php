@@ -212,7 +212,6 @@ class Plan extends AppModel {
          * @return array
          */
         function __findCompleto($buscaroSoloContar = 'buscar', $parameters = array(), $order = null, $recursive = null) {
-            
                 if (!empty($parameters['conditions']['Plan.instit_id']))
                     $parameters2['conditions']['Plan.instit_id'] = $parameters['conditions']['Plan.instit_id'];
                 if (!empty($parameters['conditions']['Plan.oferta_id']))
@@ -224,11 +223,19 @@ class Plan extends AppModel {
                     $parameters['conditions'] = $parameters2['conditions'];
                 }
 
+                if (!empty($parameters['order'])) {
+                    $orden = $parameters['order'];
+                }
+
                 $parameters = array_merge($parameters, compact('conditions', 'fields', 'order', 'recursive'));
+                
+                if (!empty($orden)) {
+                    $parameters['order'] = $orden;
+                }
                 if (isset ($parameters['asociarAnio'])) {
                    $this->__asociarAnio = $parameters['asociarAnio'];
                 }
-                
+   
                 if (isset ($parameters['asociarCompleto'])) {
                    $this->__asociarCompleto = $parameters['asociarCompleto'];
                 }
@@ -245,9 +252,8 @@ class Plan extends AppModel {
                     $ciclo_id = $parameters['conditions']['Ciclo.id'];
                 }
                 
-                //$parameters['order'] = $this->order;
                 //$this->order = array_merge($this->order, array('Etapa.orden ASC'));
-                $parameters['group'] = array('Plan.id', 'Plan.nombre');
+                $parameters['group'] = array('Plan.id', 'Plan.nombre', 'Etapa.orden');
 
                 if (!empty($parameters['contain'])) {
                     $contain = $parameters['contain'];
@@ -322,16 +328,6 @@ class Plan extends AppModel {
                 //return parent::find('count', $parameters);
             }
 
-            // @var $order es para almacenar temporal mente este valor
-            // para que se ejecute la busqueda 'list' sin problemas no debe tener un orden
-            $oldThisOrder = $this->order;
-            $this->order = array();
-            $order = null;
-            if ( !empty($parameters['order']) ) {
-                $order = $parameters['order'];
-                //unset($parameters['order']);
-                $ordenDelModelo = $this->order;
-            }
             
             // recojo todas las instituciones que cumplan con los criterios de busqueda
             $planesIds = parent::find('list', $parameters);
@@ -343,15 +339,11 @@ class Plan extends AppModel {
 
             $parameters['conditions'] = array('Plan.id' => $planesIds);
 
-            // recupero el order, previamente eliminado para
-            $parameters['order'] = $order;
-            $this->order = $oldThisOrder;
-            //$this->order = $ordenDelModelo;
-
             unset( $parameters['limit'] );
             unset( $parameters['page'] );
             unset( $parameters['joins'] );
             unset( $parameters['group'] );
+            unset( $parameters['order'] );
             unset( $parameters['fields'] );
 
             if (!empty($contain)) {
@@ -359,7 +351,7 @@ class Plan extends AppModel {
             } else {
                 $parameters['contain'] = array(
                     'Instit' => array('Orientacion'), 'EstructuraPlan.Etapa','Oferta',
-                    'Titulo' => array('SectoresTitulo.Sector', 'SectoresTitulo.Subsector'),
+                    'Titulo' => array('SectoresTitulo.Sector' => array('Orientacion'), 'SectoresTitulo.Subsector'),
                     'Anio',
                 );
             }

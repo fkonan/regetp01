@@ -408,9 +408,7 @@ class PlanesController extends AppController {
 
         $this->paginate['Plan']['asociarAnio'] = true;
         
-        if (!$ciclo) {
-            $this->paginate['Plan']['order'] = array("Plan.nombre",'Etapa.orden');
-        }
+        $this->paginate['Plan']['order'] = array("Etapa.orden", "Plan.nombre");
 
         
         $conds = array(
