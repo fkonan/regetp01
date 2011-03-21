@@ -356,7 +356,9 @@ class Plan extends AppModel {
                 $parameters['contain'] = $contain;
             } else {
                 $parameters['contain'] = array(
-                    'Instit', 'EstructuraPlan.Etapa','Oferta', 'Titulo', 'Anio',
+                    'Instit' => array('Orientacion'), 'EstructuraPlan.Etapa','Oferta',
+                    'Titulo' => array('SectoresTitulo.Sector', 'SectoresTitulo.Subsector'),
+                    'Anio',
                 );
             }
 
