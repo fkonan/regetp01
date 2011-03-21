@@ -382,6 +382,11 @@ class Instit extends AppModel {
 */
 
         function afterFind($results) {
+
+            if (empty($results)) {
+                return null;
+            }
+
             list($key, $idata) = each($results);
             $aux = "$key";
             if (is_array($idata)) {
