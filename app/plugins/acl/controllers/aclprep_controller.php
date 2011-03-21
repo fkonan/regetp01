@@ -532,6 +532,16 @@ class AclprepController extends AclAppController {
         $this->Acl->allow('usuarios', 'Titulos/view');
         $this->Acl->allow('usuarios', 'Titulos/index');
 
+        /*Informacion Referentes*/
+
+        $this->Acl->allow('administradores', 'Autoridades/index');
+        $this->Acl->allow('administradores', 'Autoridades/add');
+        $this->Acl->allow('administradores', 'Autoridades/edit');
+        $this->Acl->allow('administradores', 'Autoridades/view');
+        $this->Acl->allow('usuarios', 'Autoridades/index_x_jurisdiccion');
+
+
+
         die('done 1.7');
     }
 

@@ -23,12 +23,12 @@
                                 <dd<?php if ($i++ % 2 == 0) echo $class;?>><?php echo $autoridad['Autoridad']['titulo'] . ' ' . $autoridad['Autoridad']['nombre'] .  ' ' . $autoridad['Autoridad']['apellido']; ?></dd>
                                 <dt<?php if ($i % 2 == 0) echo $class;?>>Fecha Asunción</dt>
                                 <dd<?php if ($i++ % 2 == 0) echo $class;?>><?php echo isNull($time->format('d/m/Y', $autoridad['Autoridad']['fecha_asuncion']),'Vacío') ;?></dd>
-                                <dt<?php if ($i % 2 == 0) echo $class;?>>Teléfono Personal</dt>
-                                <dd<?php if ($i++ % 2 == 0) echo $class;?>><?php echo isNull($autoridad['Autoridad']['telefono_personal'],'Vacío') ?></dd>
+                                <dt class="acl acl-administradores acl-desarrolladores">Teléfono Personal</dt>
+                                <dd class="acl acl-administradores acl-desarrolladores"><?php echo isNull($autoridad['Autoridad']['telefono_personal'],'Vacío') ?></dd>
                                 <dt<?php if ($i % 2 == 0) echo $class;?>>Teléfono Institucional</dt>
                                 <dd<?php if ($i++ % 2 == 0) echo $class;?>><?php echo isNull($autoridad['Autoridad']['telefono_institucional'] ,'Vacío')?></dd>
-                                <dt<?php if ($i % 2 == 0) echo $class;?>>Email Personal</dt>
-                                <dd<?php if ($i++ % 2 == 0) echo $class;?>><?php echo isNull($autoridad['Autoridad']['email_personal'] ,'Vacío')?></dd>
+                                <dt class="acl acl-administradores acl-desarrolladores">Email Personal</dt>
+                                <dd class="acl acl-administradores acl-desarrolladores"><?php echo isNull($autoridad['Autoridad']['email_personal'] ,'Vacío')?></dd>
                                 <dt<?php if ($i % 2 == 0) echo $class;?>>Email Institucional</dt>
                                 <dd<?php if ($i++ % 2 == 0) echo $class;?>><?php echo isNull($autoridad['Autoridad']['telefono_institucional'],'Vacío') ?></dd>
                                 <dt<?php if ($i % 2 == 0) echo $class;?>>Dirección</dt>
@@ -66,6 +66,6 @@
 
 <div class="actions">
 	<ul>
-                <li><?php echo $html->link(__('Agregar/Modificar Autoridades', true), array('action' => 'index',$jurisdiccion_id)); ?></li>
+                <li><?php echo $html->link(__('Agregar/Modificar Autoridades', true), array('action' => 'index',$jurisdiccion_id), array('class'=>'acl acl-administradores acl-desarrolladores')); ?></li>
 	</ul>
 </div>
