@@ -87,15 +87,6 @@ class PlanesController extends AppController {
         $this->set('ofertasControllers', $ofertasControllers);
     }
 
-   
-
-    function test() {
-
-        $this->set('instit_id', $this->passedArgs['instit_id']);
-        $this->set('oferta_id', $this->passedArgs['oferta_id']);
-        $this->set('ciclo', $this->passedArgs['ciclo']);
-    }
-
     function view($id = null) {
         if (!$id) {
             $this->Session->setFlash(__('El Plan no es correcto.', true));
