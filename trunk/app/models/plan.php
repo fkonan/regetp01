@@ -175,15 +175,7 @@ class Plan extends AppModel {
 
         public function find($conditions = null, $fields = null, $order = null, $recursive = null) {
 
-            if (!empty($fields['asociarAnio'])) {
-               $this->__asociarAnio = true;
-            }
-
-            if (!empty($fields['asociarCompleto']) || $conditions == 'completo' || $conditions == 'countCompleto') {
-               $this->__asociarCompleto = true;
-            }
-
-            if ($this->__asociarAnio || $this->__asociarCompleto) {
+            if ($conditions == 'completo' || $conditions == 'countCompleto') {
                 if ($conditions == 'count') {
                     $ret = $this->__findCompleto('count', $fields, $order, $recursive);
                 } else {
@@ -192,8 +184,6 @@ class Plan extends AppModel {
             } else {
                $ret = parent::find($conditions, $fields, $order, $recursive);
             }
-            // luego de cada find vuelvo a inicializar las variables de asociacion
-            $this->__asociarAnio = $this->__asociarCompleto = false; // las vuelvo a poner en false
             return $ret;
         }
 
@@ -214,14 +204,6 @@ class Plan extends AppModel {
         function __findCompleto($buscaroSoloContar = 'buscar', $parameters = array(), $order = null, $recursive = null) {
 
                 $parameters = array_merge($parameters, compact('conditions', 'fields', 'order', 'recursive'));
-
-                if (isset ($parameters['asociarAnio'])) {
-                   $this->__asociarAnio = $parameters['asociarAnio'];
-                }
-   
-                if (isset ($parameters['asociarCompleto'])) {
-                   $this->__asociarCompleto = $parameters['asociarCompleto'];
-                }
 
                 if (is_numeric($recursive) && $recursive != $this->recursive) {
                     $parameters['recursive'] = $recursive;
@@ -322,10 +304,8 @@ class Plan extends AppModel {
                             'Sector' => array(
                                 'Orientacion'
                                 ),
+                            'Subsector',
                             ),
-                        ),
-                    'SectoresTitulo' => array(
-                        'Subsector'
                         ),
                     'Anio' => array(
                         'EstructuraPlanesAnio',
@@ -336,33 +316,6 @@ class Plan extends AppModel {
             
             $planes = parent::find('all', $parameters);
 
-            $ciclo_id = 0;
-            if ( !empty($parameters['conditions']['Anio.ciclo_id'])) {
-                $ciclo_id = $parameters['conditions']['Anio.ciclo_id'];
-            }
-            if ( !empty($parameters['conditions']['Ciclo.id'])) {
-                $ciclo_id = $parameters['conditions']['Ciclo.id'];
-            }
-
-            if ($this->__asociarAnio) {
-                foreach ( $planes as $key=>&$p) {
-                    $aas = $this->Anio->getAniosDePlanPorCiclo($p['Plan']['id'], $ciclo_id);
-
-                    // hago que tengo una estructura "linda" e igual a
-                    // si no hubiese asociadoAnio, para mayor compatibilidad
-                    unset($p['Anio']);
-                    $p['Anio'] = $aas;
-                    foreach ($p['Anio'] as &$a2){
-                        $a2 = array_merge($a2, $a2['Anio']);
-                        unset($a2['Anio']);
-                    }
-
-                }
-            }
-
-            // luego de cada find vuelvo a inicializar las variables de asociacion
-            $this->__asociarAnio = $this->__asociarCompleto = false; // las vuelvo a poner en false
-            
             return $planes;
         }
 	
