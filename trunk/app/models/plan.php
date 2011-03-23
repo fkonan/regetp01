@@ -175,7 +175,7 @@ class Plan extends AppModel {
 
         public function find($conditions = null, $fields = null, $order = null, $recursive = null) {
             //if ($conditions == 'completo' || $conditions == 'countCompleto') {
-            if ($this->recursive == 3) {
+            if (!empty($fields['recursive']) && $fields['recursive'] == 3) {
                 if ($conditions == 'count') {
                     $ret = $this->__findCompleto('count', $fields, $order, $recursive);
                 } else {
@@ -207,10 +207,6 @@ class Plan extends AppModel {
 
                 if (!empty($parameters['conditions']['Anio.ciclo_id'])) {
                     $ciclo_id = $parameters['conditions']['Anio.ciclo_id'];
-                }
-
-                if (is_numeric($recursive) && $recursive != $this->recursive) {
-                    $parameters['recursive'] = $recursive;
                 }
 
                 $parameters['joins'] = array(

@@ -351,8 +351,9 @@ class PlanesController extends AppController {
         $this->paginate['conditions']['Plan.oferta_id'] = $oferta_id;
         $this->paginate['conditions']['Instit.id'] = $instit_id;
         $this->paginate['order'] = array("Plan.nombre");
+        $this->paginate['recursive'] = 3;
 
-        $this->Plan->recursive = 3;   // find completo
+        //$this->Plan->recursive = 3;   // find completo
         $planes = $this->paginate();
         
         $newVecPlanes = array();
@@ -366,7 +367,7 @@ class PlanesController extends AppController {
                 $plan['Plan']['matricula'] = $this->Plan->dameMatriculaDeCiclo($plan['Plan']['id'],$ciclo);
             }
         }
-        
+
         $sectores = $this->Plan->Instit->listSectoresConOferta($instit_id, $oferta_id);
         $ciclos_anios = $this->Plan->Instit->getCiclosLectivosXOferta($instit_id, $agregar_anio_actual = false);
         $ciclos_anios = $ciclos_anios[FP_ID]['ciclo'];
@@ -394,6 +395,7 @@ class PlanesController extends AppController {
 
     function view_it_sec_sup($instit_id,$oferta_id,$ciclo=null) {        
         $this->paginate['Plan']['order'] = array("Etapa.orden", "Plan.nombre");
+        $this->paginate['Plan']['recursive'] = 3;
 
         $conds = array();
         if (!empty($instit_id)) {
@@ -406,7 +408,7 @@ class PlanesController extends AppController {
             $conds['Anio.ciclo_id'] = $ciclo;
         }
 
-        $this->Plan->recursive = 3;   // find completo
+        //$this->Plan->recursive = 3;   // find completo
         $planes = $this->paginate('Plan', $conds);
         
 
