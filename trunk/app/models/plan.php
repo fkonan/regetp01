@@ -175,12 +175,12 @@ class Plan extends AppModel {
 
         public function find($conditions = null, $fields = null, $order = null, $recursive = null) {
 
-            if (isset ($fields['asociarAnio'])) {
-               $this->__asociarAnio = $fields['asociarAnio'];
+            if (!empty($fields['asociarAnio'])) {
+               $this->__asociarAnio = true;
             }
 
-            if (isset ($fields['asociarCompleto'])) {
-               $this->__asociarCompleto = $fields['asociarCompleto'];
+            if (!empty($fields['asociarCompleto']) || $conditions == 'completo' || $conditions == 'countCompleto') {
+               $this->__asociarCompleto = true;
             }
 
             if ($this->__asociarAnio || $this->__asociarCompleto) {
@@ -212,26 +212,9 @@ class Plan extends AppModel {
          * @return array
          */
         function __findCompleto($buscaroSoloContar = 'buscar', $parameters = array(), $order = null, $recursive = null) {
-                if (!empty($parameters['conditions']['Plan.instit_id']))
-                    $parameters2['conditions']['Plan.instit_id'] = $parameters['conditions']['Plan.instit_id'];
-                if (!empty($parameters['conditions']['Plan.oferta_id']))
-                    $parameters2['conditions']['Plan.oferta_id'] = $parameters['conditions']['Plan.oferta_id'];
-                if (!empty($parameters['conditions']['Anio.ciclo_id']))
-                    $parameters2['conditions']['Anio.ciclo_id'] = $parameters['conditions']['Anio.ciclo_id'];
-
-                if (!empty($parameters2)) {
-                    $parameters['conditions'] = $parameters2['conditions'];
-                }
-
-                if (!empty($parameters['order'])) {
-                    $orden = $parameters['order'];
-                }
 
                 $parameters = array_merge($parameters, compact('conditions', 'fields', 'order', 'recursive'));
-                
-                if (!empty($orden)) {
-                    $parameters['order'] = $orden;
-                }
+
                 if (isset ($parameters['asociarAnio'])) {
                    $this->__asociarAnio = $parameters['asociarAnio'];
                 }
@@ -244,22 +227,6 @@ class Plan extends AppModel {
                     $parameters['recursive'] = $recursive;
                 }
 
-                $ciclo_id = 0;                
-                if ( !empty($parameters['conditions']['Anio.ciclo_id'])) {
-                    $ciclo_id = $parameters['conditions']['Anio.ciclo_id'];
-                }
-                if ( !empty($parameters['conditions']['Ciclo.id'])) {
-                    $ciclo_id = $parameters['conditions']['Ciclo.id'];
-                }
-                
-                //$this->order = array_merge($this->order, array('Etapa.orden ASC'));
-                $parameters['group'] = array('Plan.id', 'Plan.nombre', 'Etapa.orden');
-
-                if (!empty($parameters['contain'])) {
-                    $contain = $parameters['contain'];
-                    unset($parameters['contain']);
-                }
-                
                 $parameters['joins'] = array(
                     array(
                         'table' => 'instits',
@@ -272,18 +239,18 @@ class Plan extends AppModel {
                         'type' => 'LEFT',
                         'alias' => 'EstructuraPlan',
                         'conditions' => array('EstructuraPlan.id = Plan.estructura_plan_id'),
-                    ),
-                    array(
-                        'table' => 'etapas',
-                        'type' => 'LEFT',
-                        'alias' => 'Etapa',
-                        'conditions' => array('EstructuraPlan.etapa_id = Etapa.id'),
-                    ),
+                    ),                    
                     array(
                         'table' => 'anios',
                         'type' => 'LEFT',
                         'alias' => 'Anio',
                         'conditions' => array('Plan.id = Anio.plan_id'),
+                    ),
+                    array(
+                        'table' => 'etapas',
+                        'type' => 'LEFT',
+                        'alias' => 'Etapa',
+                        'conditions' => array('Anio.etapa_id = Etapa.id'),
                     ),
                     array(
                         'table' => 'ciclos',
@@ -317,21 +284,21 @@ class Plan extends AppModel {
                     ),
              );
 
-            $parameters['fields']= 'Plan.id';
-
             if ($buscaroSoloContar == 'count') {
                 // si solo es para obtener el total no necesito seguir...
                 //$parameters['fields'] = array('COUNT(*)');
-                unset($parameters['fields']);
-                $query = $this->subquery('count', $parameters,'Plan');
+                $paramsAux = $parameters;
+                $paramsAux['group']= 'Plan.id';
+                $paramsAux['fields']= 'Plan.id';
+                unset($paramsAux['contain']);
+                $this->recursive = -1;
+                $query = $this->subquery('count', $paramsAux,'Plan');
                 return count($this->query($query));
                 //return parent::find('count', $parameters);
             }
-
-            
+  ;
             // recojo todas las instituciones que cumplan con los criterios de busqueda
             $planesIds = parent::find('list', $parameters);
-
             if (empty($planesIds) ) {
                 // no hay instituciones que cumplan con esos criterios de busqueda
                 return array();
@@ -342,21 +309,40 @@ class Plan extends AppModel {
             unset( $parameters['limit'] );
             unset( $parameters['page'] );
             unset( $parameters['joins'] );
-            unset( $parameters['group'] );
-            unset( $parameters['order'] );
-            unset( $parameters['fields'] );
 
-            if (!empty($contain)) {
-                $parameters['contain'] = $contain;
-            } else {
+            if (empty($parameters['contain'])) {
                 $parameters['contain'] = array(
-                    'Instit' => array('Orientacion'), 'EstructuraPlan.Etapa','Oferta',
-                    'Titulo' => array('SectoresTitulo.Sector' => array('Orientacion'), 'SectoresTitulo.Subsector'),
-                    'Anio',
+                    'Instit' => array(
+                        'Orientacion'
+                        ),
+                    'EstructuraPlan',
+                    'Oferta',
+                    'Titulo' => array(
+                        'SectoresTitulo' => array(
+                            'Sector' => array(
+                                'Orientacion'
+                                ),
+                            ),
+                        ),
+                    'SectoresTitulo' => array(
+                        'Subsector'
+                        ),
+                    'Anio' => array(
+                        'EstructuraPlanesAnio',
+                        'Etapa'
+                        ),
                 );
             }
-
+            
             $planes = parent::find('all', $parameters);
+
+            $ciclo_id = 0;
+            if ( !empty($parameters['conditions']['Anio.ciclo_id'])) {
+                $ciclo_id = $parameters['conditions']['Anio.ciclo_id'];
+            }
+            if ( !empty($parameters['conditions']['Ciclo.id'])) {
+                $ciclo_id = $parameters['conditions']['Ciclo.id'];
+            }
 
             if ($this->__asociarAnio) {
                 foreach ( $planes as $key=>&$p) {
