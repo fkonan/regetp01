@@ -8,7 +8,7 @@ echo $html->css('smoothness/jquery-ui-1.8.6.custom',null, false);
 ?>
 <script type="text/javascript">
     jQuery(document).ready(function(){
-        jQuery("#fechaAsuncionDatePicker").datepicker({ minDate: 1, dateFormat: 'dd/mm/yy' });
+        jQuery("#fechaAsuncionDatePicker").datepicker({ dateFormat: 'dd/mm/yy' });
         /*
          * Bug fix: borro hidden para que permita el funcionamiento de megaselectlist
          */
