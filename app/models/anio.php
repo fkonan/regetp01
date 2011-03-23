@@ -242,8 +242,8 @@ class Anio extends AppModel {
 
         /**
          * Trae todos los anios de un determinado plan
-         * si el ciclo_id es CERO trae la informacion del ULTIMO ciclo lectuvo
-         * que el Plan cuenta informacion
+         * si el ciclo_id es CERO trae la informacion del ULTIMO ciclo lectivo
+         * del cual el Plan cuenta con informacion
          *
          * @param integer $plan_id
          * @param integer $ciclo_id

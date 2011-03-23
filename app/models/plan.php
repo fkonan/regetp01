@@ -224,7 +224,7 @@ class Plan extends AppModel {
                     ),                    
                     array(
                         'table' => 'anios',
-                        'type' => 'INNER',
+                        'type' => 'LEFT',
                         'alias' => 'Anio',
                         'conditions' => array('Plan.id = Anio.plan_id'),
                     ),
@@ -267,8 +267,6 @@ class Plan extends AppModel {
              );
 
             if ($buscaroSoloContar == 'count') {
-                // si solo es para obtener el total no necesito seguir...
-                //$parameters['fields'] = array('COUNT(*)');
                 $paramsAux = $parameters;
                 $paramsAux['group']= 'Plan.id';
                 $paramsAux['fields']= 'Plan.id';
@@ -278,7 +276,7 @@ class Plan extends AppModel {
                 return count($this->query($query));
             }
 
-            // recojo todas las instituciones que cumplan con los criterios de busqueda
+            // recojo todos los planes que cumplan con los criterios de busqueda
             $planesIds = parent::find('list', $parameters);
             if (empty($planesIds) ) {
                 // no hay planes que cumplan con esos criterios de busqueda
