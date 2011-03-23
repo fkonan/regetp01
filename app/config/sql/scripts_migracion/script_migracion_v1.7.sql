@@ -17,7 +17,6 @@ DROP TABLE logs;
 /*
 MODIFICACIONES EN DESCARGAS (QUERIES)
 */
-ALTER TABLE "public"."queries" DROP COLUMN "ver_online";
 ALTER TABLE "public"."queries" DROP COLUMN "categoria";
 ALTER TABLE "public"."queries" ADD COLUMN "vigencia" timestamp without time zone;
 ALTER TABLE "public"."queries" ADD COLUMN "categoria" character varying(1) DEFAULT 't';
