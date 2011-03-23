@@ -1,3 +1,23 @@
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    jQuery(".js-opcional").each(function(index, value) {
+        jQuery(".js-opcional").hide();
+    });
+});
+
+function toogleDatosAnios() {
+    if (jQuery("#mostraranios").is(":checked")) {
+        jQuery(".js-opcional").each(function(index, value) {
+            jQuery(".js-opcional").show();
+        });
+    }
+    else {
+        jQuery(".js-opcional").each(function(index, value) {
+            jQuery(".js-opcional").hide();
+        });
+    }
+}
+</script>
 <?php
 if (empty($planes)) {
     ?>
@@ -7,6 +27,12 @@ if (empty($planes)) {
 ?>
 <div id="tab_oferta">
     <?php
+    if (!empty($planes)) {
+        echo $form->input('mostraranios', array('type' => 'checkbox',
+                'onclick' => 'toogleDatosAnios();',
+                'style' => 'cursor:pointer;',
+                'label' => '<font style="cursor:pointer; font-size:9pt;">Mostrar Año de Formación (A.F.) y Edad Teórica (E.T.).</font>'));
+    }
     $i = 0;
     foreach($planes as $plan){
     ?>
@@ -40,6 +66,8 @@ if (empty($planes)) {
                 <thead>
                     <tr>
                         <th>Año</th>
+                        <th class="js-opcional">A.F</th>
+                        <th class="js-opcional">E.T</th>
                         <th>Matrícula</th>
                         <th>Secciones</th>
                         <th>Horas Taller</th>
@@ -48,10 +76,12 @@ if (empty($planes)) {
             <?php
             $sumMatricula = 0;
             $sumSecciones = 0;
-            foreach($plan['Anio'] as $anio){
+            foreach($plan['Anio'] as $anio) {
             ?>
             <tr>
                 <td><?php echo $anio['EstructuraPlanesAnio']['alias']?></td>
+                <td class="js-opcional"><?php echo @$anio['EstructuraPlanesAnio']['anio_escolaridad'];?></td>
+                <td class="js-opcional"><?php echo @$anio['EstructuraPlanesAnio']['edad_teorica'];?></td>
                 <td><?php echo $anio['matricula']?></td>
                 <td><?php echo $anio['secciones']?></td>
                 <td><?php echo $anio['hs_taller']?></td>
@@ -64,6 +94,8 @@ if (empty($planes)) {
             <tfoot>
                     <tr>
                         <td>Total</td>
+                        <td class="js-opcional">&nbsp;</td>
+                        <td class="js-opcional">&nbsp;</td>
                         <td><?php echo $sumMatricula ?></td>
                         <td><?php echo $sumSecciones ?></td>
                         <td>&nbsp;</td>
