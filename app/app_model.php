@@ -119,6 +119,7 @@ class AppModel extends Model {
             switch ($type){
                 case 'count':
                     $fields = array('COUNT(*)');
+                    unset($options['fields']);
                     break;
             }
         }

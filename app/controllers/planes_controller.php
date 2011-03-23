@@ -356,6 +356,7 @@ class PlanesController extends AppController {
         $this->paginate['conditions']['Instit.id'] = $instit_id;
         $this->paginate['order'] = array("Plan.nombre");
 
+        $this->Plan->recursive = 3;   // find completo
         $planes = $this->paginate();
         
         $newVecPlanes = array();
@@ -395,27 +396,29 @@ class PlanesController extends AppController {
         return ($a_order > $b_order) ? +1 : -1;
     }
 
-    function view_it_sec_sup($instit_id,$oferta_id,$ciclo=null) {
-
-        $this->paginate['Plan']['asociarAnio'] = true;
-        
+    function view_it_sec_sup($instit_id,$oferta_id,$ciclo=null) {        
         $this->paginate['Plan']['order'] = array("Etapa.orden", "Plan.nombre");
 
-        
-        $conds = array(
-            'Plan.instit_id'=> $instit_id,
-            'Plan.oferta_id' => $oferta_id,
-            'Anio.ciclo_id'=>$ciclo
-            );
-        
+        $conds = array();
+        if (!empty($instit_id)) {
+            $conds['Plan.instit_id'] = $instit_id;
+        }
+        if (!empty($oferta_id)) {
+            $conds['Plan.oferta_id'] = $oferta_id;
+        }
+        if (!empty($ciclo)) {
+            $conds['Anio.ciclo_id'] = $ciclo;
+        }
+
+        $this->Plan->recursive = 3;   // find completo
         $planes = $this->paginate('Plan', $conds);
-        //$planes = $this->Plan->Instit->getPlanes($instit_id, $oferta_id, $ciclo);
-        // agrego el index "matricula" directamente que dependa de "Plan"
+        
 
 //        if ($oferta_id == SEC_TEC_ID) {
 //            usort($planes, array( $this, 'comparar_planes_por_orden' ));
 //        }
-        
+//
+        // calcula el total "matricula" y que directamente que dependa de "Plan"
         foreach($planes as &$plan){
             if ( !empty($plan['Plan']) ) {
                 $plan['Plan']['matricula'] = 0;
