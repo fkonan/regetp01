@@ -279,7 +279,6 @@ class PlanesController extends AppController {
     function view_fp($instit_id, $oferta_id, $ciclo=0) {
         $es_una_busqueda = false;
 
-        //debug($this->Session->read('Ciclo.id') . "-". $ciclo);
         $sesNames = array(
             'instit' => 'Instit.id',
             'plan'   => 'Plan.nombre'.$instit_id.$oferta_id.$ciclo,
@@ -351,9 +350,8 @@ class PlanesController extends AppController {
         $this->paginate['conditions']['Plan.oferta_id'] = $oferta_id;
         $this->paginate['conditions']['Instit.id'] = $instit_id;
         $this->paginate['order'] = array("Plan.nombre");
-        $this->paginate['recursive'] = 3;
+        $this->paginate['recursive'] = 3;   // find completo
 
-        //$this->Plan->recursive = 3;   // find completo
         $planes = $this->paginate();
         
         $newVecPlanes = array();
@@ -394,9 +392,6 @@ class PlanesController extends AppController {
     }
 
     function view_it_sec_sup($instit_id,$oferta_id,$ciclo=null) {        
-        $this->paginate['Plan']['order'] = array("Etapa.orden", "Plan.nombre");
-        $this->paginate['Plan']['recursive'] = 3;
-
         $conds = array();
         if (!empty($instit_id)) {
             $conds['Plan.instit_id'] = $instit_id;
@@ -408,14 +403,14 @@ class PlanesController extends AppController {
             $conds['Anio.ciclo_id'] = $ciclo;
         }
 
-        //$this->Plan->recursive = 3;   // find completo
+        $this->paginate['Plan']['order'] = array("Etapa.orden", "Plan.nombre");
+        $this->paginate['Plan']['recursive'] = 3;   // find completo
         $planes = $this->paginate('Plan', $conds);
-        
 
-//        if ($oferta_id == SEC_TEC_ID) {
-//            usort($planes, array( $this, 'comparar_planes_por_orden' ));
-//        }
-//
+        if ($oferta_id == SEC_TEC_ID) {
+            usort($planes, array( $this, 'comparar_planes_por_orden' ));
+        }
+
         // calcula el total "matricula" y que directamente que dependa de "Plan"
         foreach($planes as &$plan){
             if ( !empty($plan['Plan']) ) {
