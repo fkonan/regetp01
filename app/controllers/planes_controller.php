@@ -408,6 +408,7 @@ class PlanesController extends AppController {
         $planes = $this->paginate('Plan', $conds);
 
         if ($oferta_id == SEC_TEC_ID) {
+            // ordena por Orden de Etapa
             usort($planes, array( $this, 'comparar_planes_por_orden' ));
         }
 

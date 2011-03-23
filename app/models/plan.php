@@ -281,7 +281,7 @@ class Plan extends AppModel {
             // recojo todas las instituciones que cumplan con los criterios de busqueda
             $planesIds = parent::find('list', $parameters);
             if (empty($planesIds) ) {
-                // no hay instituciones que cumplan con esos criterios de busqueda
+                // no hay planes que cumplan con esos criterios de busqueda
                 return array();
             }
 
@@ -315,6 +315,7 @@ class Plan extends AppModel {
 
             $planes = parent::find('all', $parameters);
 
+            // parche para eliminar Anios de otros ciclos traidos por "contain"
             $anios = array();
             if (!empty($ciclo_id)) {
                 foreach ($planes as $k => &$plan) {
