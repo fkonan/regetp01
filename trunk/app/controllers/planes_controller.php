@@ -277,10 +277,6 @@ class PlanesController extends AppController {
     }
 
     function view_fp($instit_id, $oferta_id, $ciclo=0) {
-        // solucion temporal para el paginador que no anda
-        // $this->paginate['limit'] = 200;
-
-
         $es_una_busqueda = false;
 
         //debug($this->Session->read('Ciclo.id') . "-". $ciclo);
