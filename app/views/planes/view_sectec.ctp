@@ -27,7 +27,7 @@ if (empty($planes)) {
 ?>
 <div id="tab_oferta">
     <?php
-    if (!empty($planes)) {
+    if (!empty($planes) && !empty($ciclo)) {
         echo $form->input('mostraranios', array('type' => 'checkbox',
                 'onclick' => 'toogleDatosAnios();',
                 'style' => 'cursor:pointer;',
