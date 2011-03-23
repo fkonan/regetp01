@@ -1,7 +1,7 @@
 <?php 
 /* SVN FILE: $Id$ */
 /* Instit Test cases generated on: 2009-09-17 10:09:16 : 1253194756*/
-App::import('Model', 'Instit');
+
 
 
 require_once dirname(__FILE__) . DS . '..' . DS . 'extra_functions.php';
@@ -22,10 +22,6 @@ function arrays_are_similar($a, $b) {
   return true;
 }
 
-class TestInstit extends Instit {
-    var $cacheSources = false;
-    var $useDbConfig = 'test_suite';
-}
 
 class InstitTestCase extends CakeTestCase {
 
@@ -39,14 +35,26 @@ class InstitTestCase extends CakeTestCase {
         $this->fixtures = getAllFixtures();
     }
 	 
-    function start() {
-        parent::start();
-	//$this->Instit = new TestInstit();
+    function startTest() {
         $this->Instit = ClassRegistry::init('Instit');
     }
 
     function testInstitInstance() {
 		$this->assertTrue(is_a($this->Instit, 'Instit'));
+    }
+
+    function testFindQueNoTraigaNada(){
+        $insId = 1651;
+        $this->Instit->recursive = -1;
+        $cond = array('conditions'=> array('id'=>$insId));
+        $results = $this->Instit->find('first', $cond);
+        $this->assertEqual($results, array());
+
+        $results = $this->Instit->find('all', $cond);
+        $this->assertEqual($results, array());
+
+        $results = $this->Instit->find('count', $cond);
+        $this->assertEqual($results, 0);
     }
 
     function testInstitFind() {

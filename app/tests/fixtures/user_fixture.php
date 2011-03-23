@@ -1363,6 +1363,20 @@ class UserFixture extends CakeTestFixture {
 			'created' => null,
 			'modified' => '2011-02-25 13:12:51',
 		),
+            array(
+			'id' => 999,
+			'username' => 'avilar',
+			'nombre' => 'Alejandro',
+			'apellido' => 'Vilar',
+			'password' => '0446543bf9b8d165dfe9d95e8306682423a72577',
+			'mail' => '',
+			'oficina' => 310,
+			'interno' => 2010,
+			'role' => 'desarrollo',
+			'jurisdiccion_id' => 0,
+			'created' => null,
+			'modified' => '2011-02-25 13:12:51',
+		),
 	);
 }
 
