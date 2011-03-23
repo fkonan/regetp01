@@ -174,8 +174,8 @@ class Plan extends AppModel {
 	
 
         public function find($conditions = null, $fields = null, $order = null, $recursive = null) {
-
-            if ($conditions == 'completo' || $conditions == 'countCompleto') {
+            //if ($conditions == 'completo' || $conditions == 'countCompleto') {
+            if ($this->recursive == 3) {
                 if ($conditions == 'count') {
                     $ret = $this->__findCompleto('count', $fields, $order, $recursive);
                 } else {
@@ -273,12 +273,11 @@ class Plan extends AppModel {
                 $paramsAux['group']= 'Plan.id';
                 $paramsAux['fields']= 'Plan.id';
                 unset($paramsAux['contain']);
-                $this->recursive = -1;
+                
                 $query = $this->subquery('count', $paramsAux,'Plan');
                 return count($this->query($query));
-                //return parent::find('count', $parameters);
             }
-  ;
+
             // recojo todas las instituciones que cumplan con los criterios de busqueda
             $planesIds = parent::find('list', $parameters);
             if (empty($planesIds) ) {
@@ -313,7 +312,7 @@ class Plan extends AppModel {
                         ),
                 );
             }
-            
+
             $planes = parent::find('all', $parameters);
 
             return $planes;
