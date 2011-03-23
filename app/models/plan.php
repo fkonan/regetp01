@@ -205,6 +205,10 @@ class Plan extends AppModel {
 
                 $parameters = array_merge($parameters, compact('conditions', 'fields', 'order', 'recursive'));
 
+                if (!empty($parameters['conditions']['Anio.ciclo_id'])) {
+                    $ciclo_id = $parameters['conditions']['Anio.ciclo_id'];
+                }
+
                 if (is_numeric($recursive) && $recursive != $this->recursive) {
                     $parameters['recursive'] = $recursive;
                 }
@@ -224,7 +228,7 @@ class Plan extends AppModel {
                     ),                    
                     array(
                         'table' => 'anios',
-                        'type' => 'LEFT',
+                        'type' => 'INNER',
                         'alias' => 'Anio',
                         'conditions' => array('Plan.id = Anio.plan_id'),
                     ),
@@ -296,7 +300,7 @@ class Plan extends AppModel {
                     'Instit' => array(
                         'Orientacion'
                         ),
-                    'EstructuraPlan',
+                    'EstructuraPlan' => array('Etapa'),
                     'Oferta',
                     'Titulo' => array(
                         'SectoresTitulo' => array(
@@ -314,6 +318,19 @@ class Plan extends AppModel {
             }
 
             $planes = parent::find('all', $parameters);
+
+            $anios = array();
+            if (!empty($ciclo_id)) {
+                foreach ($planes as $k => &$plan) {
+                    if (!empty($plan['Anio'])) {
+                        foreach($plan['Anio'] as $i => &$anio) {
+                            if (!empty($anio['ciclo_id']) && $anio['ciclo_id'] != $ciclo_id) {
+                                unset($plan['Anio'][$i]);
+                            }
+                        }
+                    }
+                }
+            }
 
             return $planes;
         }
