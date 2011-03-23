@@ -1,26 +1,37 @@
 <?php 
-/* SVN FILE: $Id$ */
-/* User Test cases generated on: 2009-10-01 12:10:06 : 1254410466*/
-App::import('Model', 'User');
 
-class TestUser extends User {
+require_once dirname(__FILE__) . DS . '..' . DS . 'extra_functions.php';
 
-	var $cacheSources = false;
-}
 
-class UserTest extends CakeTestCase {
+class UserTestCase extends CakeTestCase {
+	var $User = null;
+	var $fixtures = array();
 
-	function start() {
-		parent::start();
-		$this->User = new TestUser();
+        function __construct(){
+            //parent::__construct();
+            $this->fixtures = getAllFixtures();
+        }
+
+
+	function startTest() {
+            $this->User =& ClassRegistry::init('User');
+            //$this->User->useDbConfig = 'test';
 	}
 
 	function testUserInstance() {
 		$this->assertTrue(is_a($this->User, 'User'));
 	}
 
-	function test() {
+	function testUserFind() {
+		$this->User->recursive = -1;
+		$results = $this->User->find('count');
+                debug($this->User->useDbConfig);
+                debug($results);
 
+		//$this->assertEqual($results, $expected);
 	}
 }
+
+
+
 ?>

@@ -1,15 +1,7 @@
 <?php 
 /* SVN FILE: $Id$ */
 /* Plan Test cases generated on: 2010-04-22 12:01:13 : 1271948473*/
-App::import('Model', 'Plan');
-
-require_once dirname(__FILE__) . DS . '..' . DS . 'extra_functions.php';
-
-
-class TestPlan extends Plan {
-    var $cacheSources = false;
-    var $useDbConfig = 'test_suite';
-}
+require_once dirname(__FILE__) . DS . 'extra_functions.php';
 
 class PlanTestCase extends CakeTestCase {
     /**
@@ -19,65 +11,21 @@ class PlanTestCase extends CakeTestCase {
 
      /* @var $fixtures array */
     var $fixtures = array();
-//    var $fixtures = array(
-//            'app.z_fondo_work', 'app.jurisdiccion', 'app.instit', 'app.claseinstit',
-//            'app.lineas_de_accion', 'app.fondos_lineas_de_accion', 'app.orientacion',
-//            'app.sector', 'app.plan', 'app.subsector');
+    
 
     function  __construct() {
         $this->fixtures = getAllFixtures();
     }
     
-    
     function startTest() {
-        parent::start();
-        $this->Plan = new TestPlan();
-        //$this->Plan =& ClassRegistry::init('Plan');
+        $this->Plan =& ClassRegistry::init('Plan');
     }
 
     function testPlanInstance() {
         $this->assertTrue(is_a($this->Plan, 'Plan'));
     }
 
-    function testFindReLoco() {
-        //$this->Plan->recursive = -1;
-        $p = $this->Plan->find('count');
-        debug($p);
-        die("trajjo algun plan?");
-    }
 
-
-    function testFindFPAsociaAnio(){
-        /*
-        'conditions'=>array(
-                        'Instit.id'=> $institId,
-                        'Titulo.oferta_id' => $ofertaId,
-                        'Anio.ciclo_id' => $ciclo,
-                        )
-                    )
-         *
-         */
-debug($this->Plan->find('all'));die;
-        $conds = array(
-//            'limit' => 20,
-//            'page' => 1,
-            'conditions' => array(
-                    //'Anio.ciclo_id' => 2010,
-                    //'Plan.oferta_id' => 1,
-                    'Instit.id' => 1,
-                ),
-            //'asociarAnio' => 1,
-            'order' => Array('Plan.nombre'),
-        );
-        $planes = array();
-        $planes = $this->Plan->__findCompleto('buscar', $conds);
-debug($this->Plan->find('all'));
-debug($planes);
-        $this->assertTrue(false);
-    }
-
-
-    
 
     function testGetEstructuraSugerida() {
         // plan 1: 2009: mezclado - 2010: 2 de POLI
@@ -85,8 +33,8 @@ debug($planes);
         $this->assertEqual($this->Plan->getEstructuraSugerida(5), 1);
 
         //$this->assertEqual($this->Plan->getEstructuraSugerida(1), 3);
-        
-        // con busqueda forzada, quiere sugerencia igual por mas que tenga el 
+
+        // con busqueda forzada, quiere sugerencia igual por mas que tenga el
         // id de estructura ya asignado en Plan
         $this->assertEqual($this->Plan->getEstructuraSugerida(5, true), 0);
 
@@ -136,19 +84,19 @@ debug($planes);
                         )
                     )
                 );
-        
+
         $cantPlanesQueHayEnFixture = 2;
         $this->assertEqual(count($is1), $cantPlanesQueHayEnFixture, "me tenia que haber traido $cantPlanesQueHayEnFixture planes");
         $this->assertEqual($is1[0]['Instit']['id'], $institId);
     }
 
 
-    function testFindCompleto(){
+    function testFindCompletoPorInstit(){
         $this->Plan->recursive = 1;
 
         // BUSCO POR INSTIT
         //
-        // 
+        //
         $institId = 2;
         $is1 = $this->Plan->find('completo', array(
                     'conditions'=>array(
@@ -156,17 +104,20 @@ debug($planes);
                         )
                     )
                 );
-        
+
         // verifico que todas las condiciones de la busqueda sean cumplidas.
         // o sea, que la Instit.id retornada sea la misma que la buscada
         foreach ($is1 as $i){
             $this->assertEqual($i['Instit']['id'], $institId);
         }
+    }
 
+    function testFindCompletoPorInstitYOferta(){
 
         // BUSCO POR OFERTA
         //
         //
+        $institId = 2;
         $ofertaId = 1;
         $is2 = $this->Plan->find('completo', array(
                     'conditions'=>array(
@@ -175,7 +126,7 @@ debug($planes);
                         )
                     )
                 );
-        
+
         // verifico que todas las condiciones de la busqueda sean cumplidas.
         // o sea, que la Instit.id y el Titulo.id sean los buscados
         foreach ($is2 as $i){
@@ -183,12 +134,16 @@ debug($planes);
             $this->assertEqual($i['Titulo']['oferta_id'], $ofertaId);
         }
 
+    }
 
+    function testFindCompletoPorInstitOfertaYCiclo(){
 
         // BUSCO POR CICLO
         //
         //
         $ciclo = 2009;
+        $institId = 2;
+        $ofertaId = 1;
         $is2 = $this->Plan->find('completo', array(
                     'asociarAnio' => true,
                     'conditions'=>array(
@@ -198,7 +153,7 @@ debug($planes);
                         )
                     )
                 );
-        
+
         // verifico que todas las condiciones de la busqueda sean cumplidas.
         // o sea, que la Instit.id y el Titulo.id Anio.ciclo_id sean los buscados
         foreach ($is2 as $i){
@@ -207,48 +162,22 @@ debug($planes);
                 $this->assertTrue(!empty($a['EstructuraPlanesAnio']),'No asoció el modelo EstructuraPlanesAnio');
                 $this->assertTrue(!empty($a['Etapa']),'No asoció el modelo Etapa');
             }
-            
-            $this->assertEqual($i['Instit']['id'], $institId);
-            $this->assertEqual($i['Titulo']['oferta_id'], $ofertaId);
-            
-        }
-
-        // BUSCO POR CICLO Y NO ASOCIO AÑOS
-        //
-        //
-        $ciclo = 2009;
-        $is2 = $this->Plan->find('completo', array(
-                    'asociarAnio' => false,
-                    'conditions'=>array(
-                        'Instit.id'=> $institId,
-                        'Titulo.oferta_id' => $ofertaId,
-                        'Anio.ciclo_id' => $ciclo,
-                        )
-                    )
-                );
-
-        // verifico que todas las condiciones de la busqueda sean cumplidas.
-        // o sea, que la Instit.id y el Titulo.id Anio.ciclo_id sean los buscados
-        foreach ($is2 as $i){
-            foreach ($i['Anio'] as $a){
-                $this->assertEqual($a['ciclo_id'], $ciclo);
-                
-                // al no asociar no me deberia traer ni la Estructura ni la Etapa
-                $this->assertTrue(empty($a['EstructuraPlanesAnio']));
-                $this->assertTrue(empty($a['Etapa']));
-            }
 
             $this->assertEqual($i['Instit']['id'], $institId);
             $this->assertEqual($i['Titulo']['oferta_id'], $ofertaId);
+
         }
 
     }
 
 
+
     function testDameMatriculaDeCiclo(){
         $planId = 1;
+        $institId = 2;
+        $ofertaId = 1;
         $matricula = $this->Plan->dameMatriculaDeCiclo( $planId );
-        
+
         $plan = $this->Plan->read(null, $planId);
         $contMatricula = 0;
         foreach ($plan['Anio'] as $a) {
