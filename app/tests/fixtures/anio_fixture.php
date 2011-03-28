@@ -124,14 +124,40 @@ class AnioFixture extends CakeTestFixture {
 			'modified' => '2010-04-29 09:26:46'
 		),
             array(
+			'id' => 6456,
+			'plan_id' => 2,
+			'ciclo_id' => 2009,
+			'anio' => 2,
+			'etapa_id' => 2,
+			'matricula' => 6,
+			'secciones' => 7,
+			'hs_taller' => 8,
+                        'estructura_planes_anio_id' => 0,
+			'created' => '2010-04-29 09:26:46',
+			'modified' => '2010-04-29 09:26:46'
+		),
+            array(
 			'id' => 7,
-			'plan_id' => 3,
+			'plan_id' => 2,
 			'ciclo_id' => 2006,
 			'anio' => 1,
 			'etapa_id' => 1,
 			'matricula' => 1,
 			'secciones' => 1,
 			'hs_taller' => 1,
+                        'estructura_planes_anio_id' => 0,
+			'created' => '2010-04-29 09:26:46',
+			'modified' => '2010-04-29 09:26:46'
+		),
+            array (
+                        'id' => 77,
+			'plan_id' => 3,
+			'ciclo_id' => 2007,
+			'anio' => 1,
+			'etapa_id' => 1,
+			'matricula' => 2,
+			'secciones' => 2,
+			'hs_taller' => 2,
                         'estructura_planes_anio_id' => 0,
 			'created' => '2010-04-29 09:26:46',
 			'modified' => '2010-04-29 09:26:46'

@@ -205,10 +205,20 @@ class Plan extends AppModel {
 
                 $parameters = array_merge($parameters, compact('conditions', 'fields', 'order', 'recursive'));
 
-                if (!empty($parameters['conditions']['Anio.ciclo_id'])) {
-                    $ciclo_id = $parameters['conditions']['Anio.ciclo_id'];
+                $ciclo = 0;
+                if(isset($parameters['conditions']['ciclo_id'])) {
+                    $ciclo = $parameters['conditions']['ciclo_id'];
+                    unset($parameters['conditions']['ciclo_id']);
                 }
-
+                if(isset($parameters['conditions']['Anio.ciclo_id'])) {
+                    $ciclo = $parameters['conditions']['Anio.ciclo_id'];
+                    unset($parameters['conditions']['Anio.ciclo_id']);
+                }
+                if(isset($parameters['conditions']['Ciclo.id'])) {
+                    $ciclo = $parameters['conditions']['Ciclo.id'];
+                    unset($parameters['conditions']['Ciclo.id']);
+                }
+            
                 $parameters['joins'] = array(
                     array(
                         'table' => 'instits',
@@ -313,18 +323,8 @@ class Plan extends AppModel {
 
             $planes = parent::find('all', $parameters);
 
-            // parche para eliminar Anios de otros ciclos traidos por "contain"
-            $anios = array();
-            if (!empty($ciclo_id)) {
-                foreach ($planes as $k => &$plan) {
-                    if (!empty($plan['Anio'])) {
-                        foreach($plan['Anio'] as $i => &$anio) {
-                            if (!empty($anio['ciclo_id']) && $anio['ciclo_id'] != $ciclo_id) {
-                                unset($plan['Anio'][$i]);
-                            }
-                        }
-                    }
-                }
+            foreach ( $planes as $key=>&$p) {
+                $p['Anio'] = $this->Anio->getAniosDePlanPorCiclo($p['Plan']['id'], $ciclo);
             }
 
             return $planes;

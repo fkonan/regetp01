@@ -92,24 +92,36 @@ class PlanTestCase extends CakeTestCase {
 
 
     function testFindCompletoPorInstit(){
-        $this->Plan->recursive = 1;
-
         // BUSCO POR INSTIT
         //
         //
         $institId = 2;
-        $is1 = $this->Plan->find('completo', array(
+
+        $is1 = $this->Plan->__findCompleto('buscar', array(
+                    'recursive' => 3,
                     'conditions'=>array(
                         'Instit.id' => $institId,
                         )
                     )
                 );
-
         // verifico que todas las condiciones de la busqueda sean cumplidas.
         // o sea, que la Instit.id retornada sea la misma que la buscada
         foreach ($is1 as $i){
             $this->assertEqual($i['Instit']['id'], $institId);
         }
+
+        $cantTrajo = count($is1);
+        $cantPlanes = 2;
+        $this->assertEqual($cantTrajo, $cantPlanes, "la cantidad de planes para la instit $institId es de $cantPlanes mientras que la busqueda trajo $cantTrajo");
+
+        $cantCount = $this->Plan->__findCompleto('count', array(
+                    'recursive' => 3,
+                    'conditions'=>array(
+                        'Instit.id' => $institId,
+                        )
+                    )
+                );
+        $this->assertEqual($cantTrajo, $cantCount);
     }
 
     function testFindCompletoPorInstitYOferta(){
@@ -119,7 +131,8 @@ class PlanTestCase extends CakeTestCase {
         //
         $institId = 2;
         $ofertaId = 1;
-        $is2 = $this->Plan->find('completo', array(
+        $is2 = $this->Plan->__findCompleto('buscar', array(
+                    'recursive' => 3,
                     'conditions'=>array(
                         'Instit.id'=> $institId,
                         'Titulo.oferta_id' => $ofertaId,
@@ -136,24 +149,26 @@ class PlanTestCase extends CakeTestCase {
 
     }
 
-    function testFindCompletoPorInstitOfertaYCiclo(){
+
+    function testFindCompletoPorInstitOfertaYCicloxEtapa(){
 
         // BUSCO POR CICLO
         //
         //
-        $ciclo = 2009;
+        $ciclo = 2006;
         $institId = 2;
         $ofertaId = 1;
-        $is2 = $this->Plan->find('completo', array(
-                    'asociarAnio' => true,
+        
+        $is2 = $this->Plan->__findCompleto('buscar', array(
                     'conditions'=>array(
                         'Instit.id'=> $institId,
                         'Titulo.oferta_id' => $ofertaId,
                         'Anio.ciclo_id' => $ciclo,
-                        )
+                        ),
+                    'recursive' => 3,
                     )
                 );
-
+        
         // verifico que todas las condiciones de la busqueda sean cumplidas.
         // o sea, que la Instit.id y el Titulo.id Anio.ciclo_id sean los buscados
         foreach ($is2 as $i){
@@ -171,13 +186,45 @@ class PlanTestCase extends CakeTestCase {
     }
 
 
+    function testFindCompletoPorInstitOfertaYCiclo(){
+
+        // BUSCO POR CICLO
+        //
+        //
+        $ciclo = 2009;
+        $institId = 2;
+        $ofertaId = 1;
+        $is2 = $this->Plan->__findCompleto('buscar', array(
+                    'conditions'=>array(
+                        'Instit.id'=> $institId,
+                        'Titulo.oferta_id' => $ofertaId,
+                        'Anio.ciclo_id' => $ciclo,
+                        ),
+                    'recursive' => 3,
+                    )
+                );
+        // verifico que todas las condiciones de la busqueda sean cumplidas.
+        // o sea, que la Instit.id y el Titulo.id Anio.ciclo_id sean los buscados
+        foreach ($is2 as $i){
+            foreach ($i['Anio'] as $a){
+                $this->assertEqual($a['ciclo_id'], $ciclo);
+                $this->assertTrue(!empty($a['EstructuraPlanesAnio']),'No asoció el modelo EstructuraPlanesAnio');
+                $this->assertTrue(!empty($a['Etapa']),'No asoció el modelo Etapa');
+            }
+
+            $this->assertEqual($i['Instit']['id'], $institId);
+            $this->assertEqual($i['Titulo']['oferta_id'], $ofertaId);
+
+        }
+
+    }
 
     function testDameMatriculaDeCiclo(){
         $planId = 1;
         $institId = 2;
         $ofertaId = 1;
         $matricula = $this->Plan->dameMatriculaDeCiclo( $planId );
-
+        $this->Plan->recursive = 1;
         $plan = $this->Plan->read(null, $planId);
         $contMatricula = 0;
         foreach ($plan['Anio'] as $a) {
@@ -193,43 +240,30 @@ class PlanTestCase extends CakeTestCase {
     }
 
 
+    function testTraerPlanesCompletosSinAnios(){
+        $planIdSinAnios = 5;
+        $params = array(
+            'recursive' => 3,
+            'conditions' => array('Plan.id' => $planIdSinAnios),
+        );
+        $ps = $this->Plan->__findCompleto($buscaroSoloContar = 'buscar', $params);
 
-//    function testPaginatorSimple(){
-//        $fields = $order = $limit =  $page = $recursive = $extra = null;
-//        $conditions = array(
-//            'Instit.id' => 1,
-//        );
-//        $limit = 999;
-//
-//        $planes = $this->Plan->paginate($conditions, $fields, $order, $limit, $page, $recursive, $extra);
-//
-//        $planesFind = $this->Plan->find('all',array(
-//            'conditions'=> $conditions,
-//            ));
-//
-//        $this->assertEqual($planes, $planesFind);
-//    }
-//
-//    function testPaginatorAsociaAnio(){
-//        $fields = $order = $limit =  $page = $recursive = null;
-//        $conditions = array(
-//            'Orientacion.id' => 2,
-//        );
-//        $extra = array(
-//            'asociarAnio' => true,
-//            'asociarCompleto' => true,
-//            'contain' => array(
-//                'Titulo' => array('SectoresTitulo' => array('Sector.Orientacion')),
-//            )
-//            );
-//
-//        $cantPlanes = $this->Plan->paginateCount($conditions, $recursive);
-//        $planes = $this->Plan->paginate($conditions, $fields, $order, $limit, $page, $recursive, $extra);
-//
-//        $this->assertEqual($cantPlanes, count($planes));
-//
-//
-//    }
+        $this->assertEqual(count($ps), 1);
+        $this->assertTrue(empty($ps[0]['Anio']));
+    }
+
+
+    function testTraerPlanesCompletosOrdenadosPorEtapa() {
+        $planIdSinAnios = 2;
+        $params = array(
+            'recursive' => 3,
+            'conditions' => array('Plan.id' => $planIdSinAnios),
+        );
+        $ps = $this->Plan->__findCompleto($buscaroSoloContar = 'buscar', $params);
+        debug($ps);
+        $this->assertFalse(true);
+        
+    }
 
 
 }
