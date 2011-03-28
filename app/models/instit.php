@@ -1318,64 +1318,7 @@ class Instit extends AppModel {
             }
         }
 
-        /*
-         * Devuelve todos los planes de la institucion
-         */
-    function getPlanes($conditions = array(), $order = array(), $limit = null, $page = null) {
-  
-            $ciclo=0;
-            if(isset($conditions['ciclo_id'])) {
-                $ciclo = $conditions['ciclo_id'];
-                unset($conditions['ciclo_id']);
-            }
-            if(isset($conditions['Anio.ciclo_id'])) {
-                $ciclo = $conditions['Anio.ciclo_id'];
-                unset($conditions['Anio.ciclo_id']);
-            }
-            if(isset($conditions['Ciclo.id'])) {
-                $ciclo = $conditions['Ciclo.id'];
-                unset($conditions['Ciclo.id']);
-            }
-            if(!empty($conditions['Instit.id'])) {
-                $this->id = $conditions['Instit.id'];
-            }
-            $condsPlan = array();
-
-            // si no le paso ningun ciclo, busco el ULTIMO
-            if ( empty($ciclo )) {
-                $anioXciclo = "(select MAX(a.ciclo_id) as ciclo_id from anios a where \"Plan\".id = a.plan_id)";
-                $condsPlan += array("OR"=> array(
-                    "Anio.ciclo_id = $anioXciclo",
-                    "Anio.ciclo_id is null")
-                );
-            } else {
-                $anioXciclo = $ciclo;
-                $condsPlan['Anio.ciclo_id'] = $ciclo;
-            }
-            unset($conditions['Ciclo.id']);
-
-            $this->recursive = -1;
-            $instit = $this->read(null, $this->id);
-            
-            $mixConditions = array_merge($conditions, $condsPlan);
-            
-            $planes = $this->Plan->find('all', array(
-                'contain' => array(
-                        'Instit',
-                        'Oferta',
-                        'Titulo' => array('Sector','Subsector.Sector'),
-                        'EstructuraPlan.Etapa',
-                        'Anio' => array('EstructuraPlanesAnio', 'Etapa'),
-                ),
-                'order' => $order,
-                'limit' => $limit,
-                'page'  => $page,
-                'conditions' => $mixConditions,
-                'recursive' => 3,
-            ));
-           return $planes;
-        }
-
+       
 
         /**
   	 * Devuelve los sectores que abarca la institucion

@@ -250,18 +250,15 @@ class Anio extends AppModel {
          * @return array del find all de Anios
          */
         function getAniosDePlanPorCiclo($plan_id, $ciclo_id = 0) {
-            
-            if ( empty($ciclo_id) ) {
-                $ciclo_id = $this->Plan->getUltimoCiclo($plan_id);
+            $conds['Anio.plan_id'] = $plan_id;
+            if (!empty($ciclo_id)) {
+                $conds['Anio.ciclo_id'] = $ciclo_id;
             }
 
             $aniosPlan = $this->find('all', array(
                     'contain' => array('EstructuraPlanesAnio','Etapa'),
-                    'order' => 'Anio.anio',
-                    'conditions' => array(
-                        'Anio.plan_id'=> $plan_id,
-                        'Anio.ciclo_id'=>$ciclo_id,
-                        ),                    
+                    'order' => array('Anio.ciclo_id','Anio.anio'),
+                    'conditions' => $conds,
             ));
             $i = 0;
             foreach ($aniosPlan as &$a) {

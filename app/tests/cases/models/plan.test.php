@@ -1,7 +1,7 @@
 <?php 
 /* SVN FILE: $Id$ */
 /* Plan Test cases generated on: 2010-04-22 12:01:13 : 1271948473*/
-require_once dirname(__FILE__) . DS . 'extra_functions.php';
+ require_once dirname(__FILE__) . DS . '..' . DS . 'extra_functions.php';
 
 class PlanTestCase extends CakeTestCase {
     /**
@@ -124,6 +124,38 @@ class PlanTestCase extends CakeTestCase {
         $this->assertEqual($cantTrajo, $cantCount);
     }
 
+
+    function testFindCompletoPorInstitTodosLosCiclos(){
+        // aca lo que quiero testear es que, cuando no le
+        // indico ningun ciclo lectivo. la funcion find_completo me trae
+        // los ULTIMOS ciclos lectivos de cada plan de la instit
+        $institId = 2;
+        $is2 = $this->Plan->__findCompleto('buscar', array(
+                    'recursive' => 3,
+                    'conditions'=>array(
+                        'Instit.id'=> $institId,
+                        )
+                    )
+                );
+        $aniosQueTieneEsteInstit = array(
+                                         2009, 2009,// anios del ultimo ciclo del Plan id = 2
+                                         2007,      // unico anio del ultimo ciclo del Plan id = 3
+            );
+        foreach ($is2 as $i) {
+            foreach ($i['Anio'] as $a ) {
+                $c = $a['ciclo_id'];
+                $key = array_search($c, $aniosQueTieneEsteInstit);
+                if ($key !== FALSE) {
+                    unset($aniosQueTieneEsteInstit[$key]);
+                } else {
+                    $this->fail("el ciclo $c no aparece entre los ciclos que deberia tener esta instit. ¿fixtures outdated? ");
+                }
+            }
+        }
+        $this->assertEqual($aniosQueTieneEsteInstit, array());
+        
+    }
+
     function testFindCompletoPorInstitYOferta(){
 
         // BUSCO POR OFERTA
@@ -168,7 +200,6 @@ class PlanTestCase extends CakeTestCase {
                     'recursive' => 3,
                     )
                 );
-        
         // verifico que todas las condiciones de la busqueda sean cumplidas.
         // o sea, que la Instit.id y el Titulo.id Anio.ciclo_id sean los buscados
         foreach ($is2 as $i){
