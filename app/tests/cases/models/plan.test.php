@@ -251,20 +251,6 @@ class PlanTestCase extends CakeTestCase {
         $this->assertEqual(count($ps), 1);
         $this->assertTrue(empty($ps[0]['Anio']));
     }
-
-
-    function testTraerPlanesCompletosOrdenadosPorEtapa() {
-        $planIdSinAnios = 2;
-        $params = array(
-            'recursive' => 3,
-            'conditions' => array('Plan.id' => $planIdSinAnios),
-        );
-        $ps = $this->Plan->__findCompleto($buscaroSoloContar = 'buscar', $params);
-        debug($ps);
-        $this->assertFalse(true);
-        
-    }
-
-
+    
 }
 ?>
