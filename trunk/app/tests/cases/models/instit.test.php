@@ -325,7 +325,7 @@ class InstitTestCase extends CakeTestCase {
             'Instit.id' => 2,
         ));
         $this->assertEqual(count($ie),2); // hay 2 planes
-        $this->assertEqual(count($ie[0]['Anio']),1); // hay el perimer plan tiene 3 años
+        $this->assertEqual(count($ie[0]['Anio']),2); // hay el perimer plan tiene 2 años
         $this->assertEqual(count($ie[1]['Anio']),3); // hay el segundo plan tiene 3 años
 
     }

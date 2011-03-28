@@ -1358,7 +1358,8 @@ class Instit extends AppModel {
             $instit = $this->read(null, $this->id);
             
             $mixConditions = array_merge($conditions, $condsPlan);
-            $planes = $this->Plan->find('completo', array(
+            
+            $planes = $this->Plan->find('all', array(
                 'contain' => array(
                         'Instit',
                         'Oferta',
@@ -1370,6 +1371,7 @@ class Instit extends AppModel {
                 'limit' => $limit,
                 'page'  => $page,
                 'conditions' => $mixConditions,
+                'recursive' => 3,
             ));
            return $planes;
         }

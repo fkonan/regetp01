@@ -263,6 +263,11 @@ class Anio extends AppModel {
                         'Anio.ciclo_id'=>$ciclo_id,
                         ),                    
             ));
+            $i = 0;
+            foreach ($aniosPlan as &$a) {
+                $a = $a['Anio'] + $a;
+                unset($a['Anio']);
+            }
             return $aniosPlan;
         }
 }
