@@ -204,19 +204,15 @@ class Plan extends AppModel {
         function __findCompleto($buscaroSoloContar = 'buscar', $parameters = array(), $order = null, $recursive = null) {
 
                 $parameters = array_merge($parameters, compact('conditions', 'fields', 'order', 'recursive'));
-
                 $ciclo = 0;
                 if(isset($parameters['conditions']['ciclo_id'])) {
                     $ciclo = $parameters['conditions']['ciclo_id'];
-                    unset($parameters['conditions']['ciclo_id']);
                 }
                 if(isset($parameters['conditions']['Anio.ciclo_id'])) {
                     $ciclo = $parameters['conditions']['Anio.ciclo_id'];
-                    unset($parameters['conditions']['Anio.ciclo_id']);
                 }
                 if(isset($parameters['conditions']['Ciclo.id'])) {
                     $ciclo = $parameters['conditions']['Ciclo.id'];
-                    unset($parameters['conditions']['Ciclo.id']);
                 }
             
                 $parameters['joins'] = array(
@@ -322,9 +318,11 @@ class Plan extends AppModel {
             }
 
             $planes = parent::find('all', $parameters);
-
+            
             foreach ( $planes as $key=>&$p) {
-                $p['Anio'] = $this->Anio->getAniosDePlanPorCiclo($p['Plan']['id'], $ciclo);
+                $ciclo_id = empty($ciclo) ? 
+                                $this->getUltimoCiclo($p['Plan']['id']) : $ciclo;
+                $p['Anio'] = $this->Anio->getAniosDePlanPorCiclo($p['Plan']['id'], $ciclo_id);
             }
 
             return $planes;
@@ -729,7 +727,6 @@ class Plan extends AppModel {
             foreach ($data as $line){
                     $max_ciclo = $line['Anio']['ciclo_id'];
             }
-
             return $max_ciclo;
         }
 
