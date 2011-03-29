@@ -271,19 +271,17 @@ class Plan extends AppModel {
                         'conditions' => array('Orientacion.id = Sector.orientacion_id'),
                     ),
              );
-            $parameters['fields']= 'Plan.id';
-            $parameters['group']= 'Plan.id';
 
+            $parametersForList = $parameters;
+            $parametersForList['fields']= 'Plan.id';
+            $parametersForList['group']= 'Plan.id';
+            unset($parametersForList['contain']);
+            $planesIds = parent::find('list', $parametersForList);
             if ($buscaroSoloContar == 'count') {
-                $paramsAux = $parameters;
-                unset($paramsAux['contain']);
-                
-                $query = $this->subquery('count', $paramsAux,'Plan');
-                return count($this->query($query));
+                return count($planesIds);
             }
 
             // recojo todos los planes que cumplan con los criterios de busqueda
-            $planesIds = parent::find('list', $parameters);
             if (empty($planesIds) ) {
                 // no hay planes que cumplan con esos criterios de busqueda
                 return array();
