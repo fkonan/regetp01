@@ -82,11 +82,9 @@ if (empty($planes)) {
                 if ($i++ % 2 == 0) $class = 'altrow';
                
                 $ciclo_plan = '';
-                if($ciclo == 0){
-                    if (!empty($plan['Anio'][0]['ciclo_id']) && $ciclo==0) {
-                        $primer_anio = current($plan['Anio'][0]);
-                        $ciclo_plan =  (!empty($primer_anio['ciclo_id'])? $primer_anio['ciclo_id']:"") ;
-
+                if($ciclo == 0) {
+                    if (!empty($plan['Anio'][0]['ciclo_id'])) {
+                        $ciclo_plan =  (!empty($plan['Anio'][0]['ciclo_id'])? $plan['Anio'][0]['ciclo_id']:"") ;
                     }
                     echo $this->element('planes/plan_resumen_para_listado', array(
                         'class' => $class,

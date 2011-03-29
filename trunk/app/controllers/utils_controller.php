@@ -331,6 +331,28 @@ class UtilsController extends AppController {
                     }
                     echo " (último login: ".date('d/m/Y H:i', strtotime($user['UserLogin'][0]['created'])).")";
                     break;
+
+                case "vhgerea":
+                    echo "[".$user['User']['id']."] vhgerea: ";
+                    if ($this->Auth->password("cma4re") != $user['User']['password']) {
+                        echo "cambió password";
+                    }
+                    else {
+                        echo "<b>no cambió password</b>";
+                    }
+                    echo " (último login: ".date('d/m/Y H:i', strtotime($user['UserLogin'][0]['created'])).")";
+                    break;
+
+                case "adolbar":
+                    echo "[".$user['User']['id']."] adolbar: ";
+                    if ($this->Auth->password("a29bar") != $user['User']['password']) {
+                        echo "cambió password";
+                    }
+                    else {
+                        echo "<b>no cambió password</b>";
+                    }
+                    echo " (último login: ".date('d/m/Y H:i', strtotime($user['UserLogin'][0]['created'])).")";
+                    break;
             }
             
             echo "<br /><br />";

@@ -76,13 +76,11 @@ $paginator->options(array(
                 $class = 'altrow';
             }
             $ciclo_plan = '';
-            if($ciclo == 0){
-                if (!empty($plan['Anio'][0]['Anio']['ciclo_id']) && $ciclo==0) {
-                    $primer_anio = current($plan['Anio']);
-                    $ciclo_plan =  (!empty($primer_anio['Anio']['ciclo_id'])? $primer_anio['Anio']['ciclo_id']:"") ;
+            if ($ciclo == 0) {
+                if (!empty($plan['Anio'][0]['ciclo_id'])) {
+                    $ciclo_plan =  (!empty($plan['Anio'][0]['ciclo_id'])? $plan['Anio'][0]['ciclo_id']:"") ;
                 }
             }
-
 
             echo $this->element('planes/plan_resumen_para_listado', array(
                 'class' => $class,
