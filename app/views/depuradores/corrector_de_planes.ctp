@@ -119,46 +119,6 @@ echo $html->css(array('jquery.autocomplete'));
                 }
             });
 
-
-            jQuery("#FPlanInstitName").autocomplete("<?echo $html->url(array('controller'=>'instits','action'=>'ajax_search'));?>", {
-		dataType: "json",
-		parse: function(data) {
-			return jQuery.map(data, function(instit) {
-				return {
-					data: instit,
-					value: instit.nombre,
-					result: instit.nombre
-				}
-			});
-		},
-		formatItem: function(item) {
-			return formatInstit(item);
-		}
-            }).result(function(e, item) {
-                    jQuery("#fp_instit_id").remove();
-                    jQuery("#institInfo").remove();
-
-                    var div =   "<div style='border: 1px solid #F0F7FC' id='institCueInfo'>" +
-                                "<span>Institución Seleccionada</span>" +
-                                "<div class='instit_name'><b> [" + item.cue + "] " + item.nombre + "</b></div>" +
-                                "<div class='instit_atributte'><b>Domicilio: " + item.direccion + "</b> </div>" +
-                                "<br />" +
-                                "<div class='instit_atributte'><b>Gestión:" + item.gestion + "</b></div>" +
-                                "<div class='instit_atributte'><b>Jurisdicción:"+ item.jurisdiccion +" </b> </div>" +
-                                "<br />" +
-                                "<div class='instit_atributte'><b>Departamento:" + item.depto + "</b></div>" +
-                                "<div class='instit_atributte'><b>Localidad:" + item.localidad + "</b></div>" +
-                                "</div>";
-
-                    if(item.type == 'Vacio'){
-                        jQuery("#FPlanInstitName").val('');
-                        jQuery("#fp_instit_id").val('');
-                    }
-                    else{
-                        jQuery("#fp_instit_id").val(item.id);
-                    }
-            });
-
             jQuery("#FPlanTituloName").attr('autocomplete','off');
         });
 
@@ -292,17 +252,6 @@ $paginator->options(array('url' => $url_conditions));
     echo $form->input('FPlan.titulo_id', array(
         'type'=>'hidden',
         'id'=>'fp_titulo_id'
-    ));
-
-    echo $form->input('FPlan.InstitName', array(
-                'div'=>array('style'=>'width:420px; float: left; clear: none'),
-                'style'=> 'width:400px; float: left',
-                'label'=>'Nombre o CUE de la institución',
-                'value'=>((!empty($this->data['Instit']['cue']))?($this->data['Instit']['cue'] * 100 + $this->data['Instit']['anexo']):"")));
-
-    echo $form->input('FPlan.instit_id', array(
-        'type'=>'hidden',
-        'id'=>'fp_instit_id'
     ));
 
     echo $ajax->observeField(

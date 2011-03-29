@@ -7,6 +7,14 @@ class DepuradoresController extends AppController {
 	var $uses = array('Instit','Plan','Anio','Sector','Jurisdiccion', 'Tipoinstit',
                     'EstructuraPlan','JurisdiccionesEstructuraPlan','EstructuraPlanesAnio','Titulo');
 	var $db;
+
+        var $sesNames = array(
+            'nombre' => 'Titulo.tituloName',
+            'oferta'   => 'Titulo.oferta_id',
+            'sector' => 'Titulo.sector_id',
+            'subsector' => 'Titulo.subsector_id',
+            'page' => 'Titulo.page',
+        );
 	
 	
 	function agregar_sectores(){
@@ -893,6 +901,178 @@ class DepuradoresController extends AppController {
         $this->set('titulo_id', $titulo_id);
         $this->set(compact('planes','titulos','ofertas',
                 'sectores','subsectores','jurisdicciones'));
+    }
+
+
+
+    function fusionar_titulos() {
+        $ofertas = $this->Titulo->Oferta->find('list');
+        $sectores = $this->Titulo->Sector->find('list',array('order'=>'Sector.name'));
+
+        if (!empty($this->passedArgs['limpiar'])) {
+            // limpia session
+            foreach ($this->sesNames as $sesName) {
+                $this->Session->write($sesName, '');
+            }
+        }
+
+        $bySession = false;
+        // si existe búsqueda en Session, realiza búsqueda
+        if ($this->Session->read($this->sesNames['nombre'])) {
+            $this->data['Depurador']['tituloName'] = $this->passedArgs['tituloName'] = $this->Session->read($this->sesNames['nombre']);
+            $bySession = true;
+        }
+        if ($this->Session->read($this->sesNames['oferta'])) {
+            $this->data['Depurador']['oferta_id'] = $this->passedArgs['ofertaId'] = $this->Session->read($this->sesNames['oferta']);
+            $bySession = true;
+        }
+        if ($this->Session->read($this->sesNames['sector'])) {
+            $this->data['Depurador']['sector_id'] = $this->passedArgs['sectorId'] = $this->Session->read($this->sesNames['sector']);
+            $bySession = true;
+
+            $subsectores = $this->Titulo->Subsector->con_sector('list', $this->Session->read($this->sesNames['sector']));
+        }
+        if ($this->Session->read($this->sesNames['subsector'])) {
+            $this->data['Depurador']['subsector_id'] = $this->passedArgs['subsectorId'] = $this->Session->read($this->sesNames['subsector']);
+            $bySession = true;
+        }
+        if ($this->Session->read($this->sesNames['page'])) {
+            $bySession = true;
+        }
+
+        if (empty($subsectores)) {
+            $subsectores = $this->Titulo->Subsector->con_sector('list');
+        }
+
+        $this->Titulo->recursive = 0;
+        $this->set('titulos', $this->paginate());
+        $this->set(compact('ofertas', 'sectores', 'subsectores', 'bySession'));
+    }
+
+    function fusionar() {
+        if (empty($this->passedArgs) && empty($this->data['Depurador'])) {
+            $this->Session->setFlash(__('No es posible fusionar', true));
+            $this->redirect('/depuradores/fusionar_titulos');
+        }
+
+        if (!empty($this->data['Depurador'])) {
+            $titulos = explode(',', $this->data['Depurador']['titulos']);
+            $titulos_a_tratar = array();
+            foreach($titulos as $titulo) {
+                if ($titulo != $this->data['Depurador']['titulo_definitivo'])
+                    $titulos_a_tratar[] = $titulo;
+            }
+
+            // asigna el titulo definitivo a los planes de los otros titulos que se fusionan
+            $this->Titulo->Plan->updateAll(
+                    array('Plan.titulo_id' => $this->data['Depurador']['titulo_definitivo']),
+                    array('Plan.titulo_id' => $titulos_a_tratar)
+            );
+
+            // se eliminan los titulos que no se fusionaron
+            $this->Titulo->deleteAll(array('Titulo.id' => $titulos_a_tratar), false);
+
+            $this->Session->setFlash(__('Los Títulos se han fusionado correctamente', true));
+            $this->redirect('/depuradores/fusionar_titulos');
+        }
+
+        if (!empty($this->passedArgs)) {
+            $this->Titulo->recursive = -1;
+            $titulos = $this->Titulo->find('list', array(
+                    'conditions' => array('Titulo.id' => $this->passedArgs)
+            ));
+
+            $this->set('titulos', $titulos);
+        }
+    }
+
+
+    function titulos_ajax_index_search() {
+
+        //para mostrar en vista los patrones de busqueda seleccionados
+        $array_condiciones = array();
+        // para el paginator que pueda armar la url
+        $url_conditions = array();
+
+        if (!empty($this->data)) {
+            // si se realizó una búsqueda se limpia la session
+            foreach ($this->sesNames as $sesName) {
+                if ($sesName != $this->sesNames['page']) {
+                    $this->Session->write($sesName, '');
+                }
+            }
+
+            if (!empty($this->data['Depurador']['busquedanueva']) && !$this->data['Depurador']['bysession']) {
+                $this->Session->write($this->sesNames['page'], '');
+            }
+
+            if(!empty($this->data['Depurador']['tituloName'])) {
+                $this->passedArgs['tituloName'] = $this->data['Depurador']['tituloName'];
+                $this->Session->write($this->sesNames['nombre'], $this->data['Depurador']['tituloName']);
+            }
+            if(!empty($this->data['Depurador']['oferta_id'])) {
+                $this->passedArgs['ofertaId'] = $this->data['Depurador']['oferta_id'];
+                $this->Session->write($this->sesNames['oferta'], $this->data['Depurador']['oferta_id']);
+            }
+            if(!empty($this->data['Depurador']['sector_id'])) {
+                $this->passedArgs['sectorId'] = $this->data['Depurador']['sector_id'];
+                $this->Session->write($this->sesNames['sector'], $this->data['Depurador']['sector_id']);
+            }
+            if(!empty($this->data['Depurador']['subsector_id'])) {
+                $this->passedArgs['subsectorId'] = $this->data['Depurador']['subsector_id'];
+                $this->Session->write($this->sesNames['subsector'], $this->data['Depurador']['subsector_id']);
+            }
+        }
+
+        if(!empty($this->passedArgs['tituloName'])) {
+            $q = utf8_decode(strtolower($this->passedArgs['tituloName']));
+            $this->paginate['conditions']['lower(Titulo.name) SIMILAR TO ?'] = convertir_texto_plano($q);
+        }
+        if(!empty($this->passedArgs['ofertaId'])) {
+            $q = utf8_decode($this->passedArgs['ofertaId']);
+            $this->paginate['conditions']['Titulo.oferta_id'] = $q;
+        }
+        if(!empty($this->passedArgs['sectorId']) || !empty($this->passedArgs['subsectorId']) ) {
+
+            $conditions_sector = array();
+            if(!empty($this->passedArgs['sectorId'])){
+                $q = utf8_decode($this->passedArgs['sectorId']);
+                $this->paginate['conditions']['SectoresTitulo.sector_id'] = $q;
+            }
+            if(!empty($this->passedArgs['subsectorId'])){
+                $q = utf8_decode($this->passedArgs['subsectorId']);
+                $this->paginate['conditions']['SectoresTitulo.subsector_id'] = $q;
+            }
+
+            $this->paginate['joins'] = array(
+                array('table'=>'sectores_titulos',
+                      'type' => 'LEFT',
+                      'alias' => 'SectoresTitulo',
+                      'conditions'=> array('SectoresTitulo.titulo_id = Titulo.id')
+                    )
+                );
+        }
+
+        if (!empty($this->passedArgs['page'])) {
+            //$this->paginate['page'] = $this->passedArgs['page'];
+            $this->Session->write($this->sesNames['page'], $this->passedArgs['page']);
+        }
+        elseif ($this->Session->read($this->sesNames['page'])) {
+            $this->paginate['page'] = $this->Session->read($this->sesNames['page']);
+        }
+
+        //datos de paginacion
+        $this->paginate['fields'] = array('DISTINCT ("Titulo"."id")', 'Titulo.name','Titulo.marco_ref', 'Titulo.oferta_id', 'Oferta.abrev');
+        $this->paginate['order'] = array('Titulo.name ASC, Titulo.oferta_id ASC');
+
+        $titulos = $this->paginate('Titulo');
+
+        $this->set('titulos', $titulos);
+        $this->set('url_conditions', $url_conditions);
+        //devuelve un array para mostrar los criterios de busqueda
+        $this->set('conditions', $array_condiciones);
+
+        $this->render('titulos_ajax_index_search');
     }
 
     

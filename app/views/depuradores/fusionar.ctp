@@ -1,5 +1,5 @@
 <div class="titulos form">
-<?php echo $form->create('Titulo', array('action'=>'fusionar'));?>
+<?php echo $form->create('Depurador', array('action'=>'fusionar'));?>
 	<fieldset>
             Fusionar y dejar como Título definitivo:
 	<?php
