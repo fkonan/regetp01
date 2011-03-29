@@ -74,13 +74,14 @@ class QueriesController extends PqueryAppController {
                 foreach($this->categorias_descargas as $key=>$categoria){
                     $conditions['categoria']= $key;
                     if ($key == 't') {
-                        $conditions['vigencia']= '< NOW()';
+                        $conditions['vigencia >']= 'NOW()';
                     }
                     $queries[$key]=$this->Query->find('all',array('order'=>'id,modified DESC', 'conditions'=>$conditions));
                 }
 
-		$this->set('queries',$queries);
+                $this->set('queries',$queries);
 	}
+        
 	
 	/**
 	 * esto me construye un excel en la vista con el id de la query
@@ -102,9 +103,29 @@ class QueriesController extends PqueryAppController {
 			$columnas[] = $key;
 		endwhile;
 
-		$this->set('nombre',$res['Query']['name']);
+		$this->set('nombre',limpiar_nombre($res['Query']['name']));
 		$this->set('columnas',$columnas);
 		$this->set('filas',$consulta_ejecutada);
+
+	}
+
+        function list_columnas($id){
+		$this->layout = '';
+		Configure::write('debug',0);
+
+                $res = $this->Query->findById($id);
+		$sql = $res['Query']['query'] . 'LIMIT 1';
+		$this->Query->recursive = -1;
+		$consulta_ejecutada = $this->Query->query($sql);
+
+		$precols = array_keys($consulta_ejecutada[0]);
+
+                $quitar_columnas = $consulta_ejecutada[0][0];
+		while(list($key,$value) = each($quitar_columnas)):
+			$columnas[] = $key;
+		endwhile;
+
+		$this->set('columnas',$columnas);
 
 	}
 	
@@ -125,14 +146,24 @@ class QueriesController extends PqueryAppController {
 			$categorias = $this->Query->listarCategorias('*'); // me trae todas
 		}
 
-
-
 		$this->set('categorias',$categorias);
 		$this->set('string_categoria',$this->data['Query']['categoria']);
 		$this->layout = 'ajax';
 	}
 
+        function list_campos($id) {
+            $this->layout = "";
+            $this->CustomQuery =& ClassRegistry::init('Pquery.CustomQuery');
 
+            if (isset($this->passedArgs['query.id'])) {
+                $id = $this->passedArgs['query.id'];
+            }
+            if (!$id) {
+                $this->Session->setFlash(__('Invalid id for Query', true));
+                $this->redirect(array('action'=>'index'));
+            }
+            
+        }
 
         function list_view($id="") {
             $this->layout = "sin_menu";

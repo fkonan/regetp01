@@ -228,3 +228,57 @@ INSERT INTO autoridades ( jurisdiccion_id, titulo, nombre, apellido, fecha_asunc
 VALUES(90,'Lic.', 'Silvia', 'Rojkés de Temkin', '2010-07-14');
 INSERT INTO autoridades_cargos (autoridad_id, cargo_id)
 VALUES(24,1);
+
+/*
+DESCARGAS
+*/
+
+/*Habituales*/
+UPDATE queries
+SET categoria = 'h'
+WHERE id in (45,44,48,23,6,5,8,7,27,25);
+
+UPDATE queries
+SET name = 'Depuración de Sectores y Titulos'
+WHERE id = 45;
+
+UPDATE queries
+SET name = 'Todos los Planes sin Repetir'
+WHERE id = 44;
+
+UPDATE queries
+SET name = 'Titulos de Superior'
+WHERE id = 48;
+
+UPDATE queries
+SET name = 'Instituciones por Año de Actualización'
+WHERE id = 23;
+
+UPDATE queries
+SET name = 'Nómina Secundario Técnico'
+WHERE id = 6;
+
+UPDATE queries
+SET name = 'Nómina Superior Técnico'
+WHERE id = 5;
+
+UPDATE queries
+SET name = 'Nómina Itinerario'
+WHERE id = 8;
+
+UPDATE queries
+SET name = 'Nómina Formación Profesional'
+WHERE id = 7;
+
+UPDATE queries
+SET name = 'Instituciones por Tipo de ETP'
+WHERE id = 27;
+
+UPDATE queries
+SET name = 'Instituciones por Ámbito de Gestión según Jurisdicción'
+WHERE id = 25;
+
+/*Borrar*/
+DELETE FROM queries
+WHERE id not in (45,44,48,23,6,5,8,7,27,25);
+
