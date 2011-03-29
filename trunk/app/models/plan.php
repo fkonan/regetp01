@@ -271,11 +271,11 @@ class Plan extends AppModel {
                         'conditions' => array('Orientacion.id = Sector.orientacion_id'),
                     ),
              );
+            $parameters['fields']= 'Plan.id';
+            $parameters['group']= 'Plan.id';
 
             if ($buscaroSoloContar == 'count') {
                 $paramsAux = $parameters;
-                $paramsAux['group']= 'Plan.id';
-                $paramsAux['fields']= 'Plan.id';
                 unset($paramsAux['contain']);
                 
                 $query = $this->subquery('count', $paramsAux,'Plan');
@@ -294,6 +294,8 @@ class Plan extends AppModel {
             unset( $parameters['limit'] );
             unset( $parameters['page'] );
             unset( $parameters['joins'] );
+            unset( $parameters['fields'] );
+            unset( $parameters['group'] );
 
             if (empty($parameters['contain'])) {
                 $parameters['contain'] = array(
