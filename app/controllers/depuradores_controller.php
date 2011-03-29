@@ -680,7 +680,7 @@ class DepuradoresController extends AppController {
         }
 
         if (!empty($oferta_id)) {
-            $this->paginate['Plan']['conditions']['Plan.oferta_id'] = $oferta_id;
+            $this->paginate['conditions']['Plan.oferta_id'] = $oferta_id;
             $url_conditions['Plan.oferta_id'] = $oferta_id;
         }
 
@@ -697,7 +697,7 @@ class DepuradoresController extends AppController {
         }
 
         if(!empty($sector_id)) {
-            $this->paginate['Plan']['conditions']['SectoresTitulo.sector_id'] = $sector_id;
+            $this->paginate['conditions']['SectoresTitulo.sector_id'] = $sector_id;
 
             $url_conditions['Titulo.sector_id'] = $sector_id;
         }
@@ -715,7 +715,7 @@ class DepuradoresController extends AppController {
         }
 
         if(!empty($subsector_id)) {
-            $this->paginate['Plan']['conditions']['SectoresTitulo.subsector_id'] = $subsector_id;
+            $this->paginate['conditions']['SectoresTitulo.subsector_id'] = $subsector_id;
             $url_conditions['Titulo.subsector_id'] = $subsector_id;
         }
 
@@ -732,7 +732,7 @@ class DepuradoresController extends AppController {
         }
 
         if(!empty($jurisdiccion_id)) {
-            $this->paginate['Plan']['conditions']['Instit.jurisdiccion_id'] = $jurisdiccion_id;
+            $this->paginate['conditions']['Instit.jurisdiccion_id'] = $jurisdiccion_id;
             $url_conditions['Instit.jurisdiccion_id'] = $jurisdiccion_id;
         }
 
@@ -750,7 +750,7 @@ class DepuradoresController extends AppController {
         }
 
         if(!empty($plan_nombre)) {
-            $this->paginate['Plan']['conditions']["to_ascii(lower(Plan.nombre)) SIMILAR TO ?"] = array(convertir_para_busqueda_avanzada($plan_nombre));
+            $this->paginate['conditions']["to_ascii(lower(Plan.nombre)) SIMILAR TO ?"] = array(convertir_para_busqueda_avanzada($plan_nombre));
             $array_condiciones['Nombre del Plan'] = $plan_nombre;
             $url_conditions['Plan.plan_nombre'] = $plan_nombre;
         }
@@ -770,27 +770,8 @@ class DepuradoresController extends AppController {
         }
 
         if(!empty($titulo_id)) {
-            $this->paginate['Plan']['conditions']["Plan.titulo_id"] = $titulo_id;
+            $this->paginate['conditions']["Plan.titulo_id"] = $titulo_id;
             $url_conditions['Plan.titulo_id'] = $titulo_id;
-        }
-
-        /*
-         *  Por Instit
-         *
-         */
-
-        $instit_id = '';
-        if(!empty($this->data['FPlan']['instit_id'])) {
-            $instit_id = $this->data['FPlan']['instit_id'];
-        }
-        elseif(!empty($this->passedArgs['Plan.instit_id'])) {
-            $instit_id = $this->passedArgs['Plan.instit_id'];
-            $this->data['FPlan']['instit_id'] = $instit_id;
-        }
-
-        if(!empty($instit_id)) {
-            $this->paginate['Plan']['conditions']["Plan.instit_id"] = $instit_id;
-            $url_conditions['Plan.instit_id'] = $instit_id;
         }
 
         /*
@@ -808,10 +789,10 @@ class DepuradoresController extends AppController {
 
         if (!empty($con_titulo)) {
             if ($con_titulo == 'con') {
-                $this->paginate['Plan']['conditions']['Plan.titulo_id >'] = 0;
+                $this->paginate['conditions']['Plan.titulo_id >'] = 0;
             }
             else {
-                $this->paginate['Plan']['conditions']['Plan.titulo_id ='] = 0;
+                $this->paginate['conditions']['Plan.titulo_id ='] = 0;
             }
 
             $url_conditions['Plan.con_titulo'] = $this->data['FPlan']['con_titulo'];
@@ -821,17 +802,14 @@ class DepuradoresController extends AppController {
         /*                               Busqueda                              */
         /***********************************************************************/
 
-        $this->Titulo->Plan->recursive = 1;//para alivianar la carga del server
-        $this->Titulo->Plan->order = array('Plan.nombre' => 'ASC');
-
         //datos de paginacion
-        $this->paginate['Plan']['order'] = array('Plan.nombre' => 'ASC');
+        $this->paginate['order'] = array('Plan.nombre' => 'ASC');
         if(!empty($this->data['FPlan']['last_page'])) {
-            $this->paginate['Plan']['page'] = $this->data['FPlan']['last_page'];
+            $this->paginate['page'] = $this->data['FPlan']['last_page'];
         }
 
         // limit
-        $this->paginate['Plan']['limit'] = 10;
+        $this->paginate['limit'] = 10;
         if(!empty($this->data['FPlan']['limit'])) {
             $limit = $this->data['FPlan']['limit'];
         }
@@ -842,7 +820,7 @@ class DepuradoresController extends AppController {
 
         if(!empty($limit)) {
             $url_conditions['FPlan.limit'] = $limit;
-            $this->paginate['Plan']['limit'] = $limit;
+            $this->paginate['limit'] = $limit;
         }
 
         // Condicion necesaria
@@ -857,16 +835,14 @@ class DepuradoresController extends AppController {
             $titulo_id = $this->passedArgs['Plan.titulo_id'];
         }
 
-        $this->paginate['Plan']['asociarCompleto'] = true;
-
-        $this->paginate['Plan']['contain'] = array(
+        $this->paginate['contain'] = array(
                 'Instit',
                 'Oferta',
                 'Titulo' => array('SectoresTitulo' => array('Sector','Subsector.Sector')),
                 'EstructuraPlan.Etapa',
                 'Anio'
         );
-
+        $this->paginate['recursive'] = 3;
         $planes = $this->paginate('Plan');
 
         $this->set('url_conditions', $url_conditions);
@@ -879,7 +855,7 @@ class DepuradoresController extends AppController {
         $sectores = $this->Titulo->SectoresTitulo->Sector->find('list');
 
         $subsectores = '';
-        if ($this->data['FPlan']['sector_id']) {
+        if (!empty($this->data['FPlan']['sector_id'])) {
             $subsecConditions = array();
             if (!empty($this->data['FPlan']['sector_id'])) {
                 $subsecConditions = array('Subsector.sector_id'=>$this->data['FPlan']['sector_id']);

@@ -276,6 +276,8 @@ class Plan extends AppModel {
             $parametersForList['fields']= 'Plan.id';
             $parametersForList['group']= 'Plan.id';
             unset($parametersForList['contain']);
+            unset($parametersForList['order']);
+            
             $planesIds = parent::find('list', $parametersForList);
             if ($buscaroSoloContar == 'count') {
                 return count($planesIds);
