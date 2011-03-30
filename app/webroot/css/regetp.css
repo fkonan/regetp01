@@ -2513,3 +2513,8 @@ border-bottom-color: white !important;
         background-color: #ECECEC;
         color: Black;
 }
+
+.plan_matricula_info span {
+    font-weight: bold;
+    color: red;
+}
