@@ -51,26 +51,25 @@ echo $html->css('smoothness/jquery-ui-inet.custom.css',null, false);
 <div>
     <div class="js-tabs-ofertas tabs">
         <ul id="ofertas-tabs" class="horizontal-shadetabs">
-            <li>
-                <a id="htab-h"
-                   href="#ver-oferta-h">
-                    Habituales
+            <?php 
+            foreach ($categorias as $c) {
+                echo '<li>
+                <a id="htab-'.$c.'"
+                   href="#ver-oferta-'.$c.'">
+                   '.$c.'
                 </a>
-            </li>
-            <li>
-                <a id="htab-t"
-                   href="#ver-oferta-t">
-                    Temporales
-                </a>
-            </li>
+            </li>';
+            }
+            ?>
         </ul>
 
-        <div id="ver-oferta-h" class="descargas-container" style="">
+        <?php foreach ($queries as $k=>$querin) {?>
+        <div id="ver-oferta-<?php echo $k ?>" class="descargas-container" style="">
             <div class="acordiones">
             <?php
+            foreach ($querin as $q):
             $i = 0;
-            foreach ($queries['h'] as $q):?>
-
+            ?>
                     <h3>
                         <a href="#"><?php echo 'Nº' .$q['Query']['id'] . ' - '. $q['Query']['name']?></a>
                     </h3>
@@ -105,87 +104,13 @@ echo $html->css('smoothness/jquery-ui-inet.custom.css',null, false);
                         </div>
                         <p><?php echo strip_tags($q['Query']['description'],'<br />'); ?></p>
                     </div>
-                    <!--<div class="descarga_item <?php echo ($i%2 == 0)? 'altrow':''; ?>">
-                        <div class="plan_title">
-                            <span class="descarga_mas_info btn-print">
-                                <? echo $html->link('Preview', array('action'=>'list_view',$q['Query']['id'],'preview:true'));?>
-                            </span>
-                            <?= $html->link('Nº' .$q['Query']['id'] . ' - '. $q['Query']['name'],'contruye_excel/'.$q['Query']['id']); ?>
-                        </div>
-                        <div>
-                            <span class="plan_matricula_info">
-                                <p><?php echo strip_tags($q['Query']['description'],'<br />'); ?></p>
-                            </span>
-                        </div>
-                    </div>
-                    -->
                     <?php
                     $i++;
             endforeach;
             ?>
             </div>
 	</div>
-        <div id="ver-oferta-t" class="descargas-container" style="">
-            <p>Las siguientes descargas fueron requeridas para casos particulares. Las mismas son temporales y serán eliminadas eventualmente.</p>
-            <div class="acordiones">
-            <?php
-            $i = 0;
-            foreach ($queries['t'] as $q):?>
-
-                    <h3>
-                        <a href="#"><?php echo 'Nº' .$q['Query']['id'] . ' - '. $q['Query']['name']?></a>
-                    </h3>
-                    <div>
-                        <div style="border:3px solid #F0F7FC;background-color: #EDEAEA;margin: 1px; padding: 2px;float:right">
-                            <span class="descarga_mas_info">
-                                <? echo $html->link($html->image("preview.png"),
-                                                    array('action'=>'list_view', $q['Query']['id'],'preview:true'),
-                                                    array(),
-                                                    null,
-                                                    false
-                                                   );?>
-                            </span>
-                            <span>
-                                <? echo $html->link($html->image("download.png"),
-                                                    array('action'=>'contruye_excel', $q['Query']['id']),
-                                                    array(),
-                                                    null,
-                                                    false
-                                                   );?>
-                            </span>
-                            <?php if($q['Query']['ver_online']){?>
-                            <span>
-                                <? echo $html->link($html->image("view.png"),
-                                                    array('action'=>'list_view', $q['Query']['id']),
-                                                    array(),
-                                                    null,
-                                                    false
-                                                   );?>
-                            </span>
-                            <?php } ?>
-                            
-                        </div>
-                        <p><?php echo strip_tags($q['Query']['description'],'<br />'); ?></p>
-                    </div>
-                    <!--<div class="descarga_item <?php echo ($i%2 == 0)? 'altrow':''; ?>">
-                        <div class="plan_title">
-                            <span class="descarga_mas_info btn-print">
-                                <? echo $html->link('Preview', array('action'=>'list_view',$q['Query']['id'],'preview:true'));?>
-                            </span>
-                            <?= $html->link('Nº' .$q['Query']['id'] . ' - '. $q['Query']['name'],'contruye_excel/'.$q['Query']['id']); ?>
-                        </div>
-                        <div>
-                            <span class="plan_matricula_info">
-                                <p><?php echo strip_tags($q['Query']['description'],'<br />'); ?></p>
-                            </span>
-                        </div>
-                    </div>
-                    -->
-                    <?php
-                    $i++;
-            endforeach;
-            ?>
-            </div>
-        </div>
+        <?php } ?>
+        
     </div>
 </div>

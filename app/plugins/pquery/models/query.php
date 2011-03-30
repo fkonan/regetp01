@@ -6,32 +6,7 @@ class Query extends PqueryAppModel {
 		'query' => array('notempty'),
 	);
 
-	
-	/**
-	 * Me lista todas las categorias que existen en la Queries
-	 * si se le pasa como parametro un "*" me trae todas
-	 *  
-	 * @param string $filtro
-	 * @return array $categorias find(all)
-	 */
-	function listarCategorias($filtro = '*'){
-
-		$conditions[] = array('categoria <>'=>"");
-
-		if($filtro != '*'){
-			$conditions[] = array("categoria LIKE" => "%".$filtro."%");
-		}
-		$this->recursive = -1;
-
-		$categorias =  $this->find('all', array(
-					'group' => 'categoria',
-					'conditions'=> $conditions,
-					'fields' => array('categoria')
-		));
-
-		return $categorias;
-	}
-	
+        var $belongsTo = array('PqueryCategory');
 	
 	
 	function beforeSave(){

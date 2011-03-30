@@ -9,8 +9,8 @@ echo $paginator->counter(array(
 <table cellpadding="0" cellspacing="0">
 <tr>
 	<th><?php echo $paginator->sort('name');?></th>
-        <th><?php echo $paginator->sort('Cat', 'categoria');?></th>
-        <th><?php echo $paginator->sort('vigencia');?></th>
+        <th><?php echo $paginator->sort('Cat', 'pquery_category_id');?></th>
+        <th><?php echo $paginator->sort('Vigencia', 'expiration_time' );?></th>
 	<th><?php echo $paginator->sort('created');?></th>
 	<th><?php echo $paginator->sort('modified');?></th>
 	<th class="actions"><?php __('Actions');?></th>
@@ -25,8 +25,7 @@ foreach ($queries as $query):
 
         $style = '';
         // ya venció la vigencia de la descarga
-        if ($query['Query']['categoria'] == 't' &&
-            @$query['Query']['vigencia'] && $query['Query']['vigencia'] < date('Y-m-d')) {
+        if (@$query['Query']['expiration_time'] && $query['Query']['expiration_time'] < date('Y-m-d')) {
             $style = ' style="color:red;"';
         }
 ?>
@@ -35,10 +34,10 @@ foreach ($queries as $query):
 			<?php echo 'Nº' .$query['Query']['id'] . ' - '. $query['Query']['name']; ?>
 		</td>
                 <td>
-			<?php echo $query['Query']['categoria']; ?>
+			<?php echo $query['PqueryCategory']['name']; ?>
 		</td>
                 <td>
-			<?php echo (@$query['Query']['vigencia'] ? $time->format('d/m/Y', $query['Query']['vigencia']) : ''); ?>
+			<?php echo (@$query['Query']['expiration_time'] ? $time->format('d/m/Y', $query['Query']['expiration_time']) : ''); ?>
 		</td>
 		<td>
 			<?php echo $time->format('d/m/Y', $query['Query']['created']); ?>

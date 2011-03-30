@@ -54,6 +54,7 @@
             'group'=>'groups',
             'query'=>'queries',
             'user_login'=> 'user_logins',
+            'pquery_category' => 'pquery_categories',
             );
 	
 /**

@@ -7,9 +7,6 @@ class QueriesController extends PqueryAppController {
 	var $helpers = array('Html', 'Form', 'Ajax', 'Time');
 	var $components = array('Auth','RequestHandler');
 
-        var $categorias_descargas = array('h'=>"Habituales", 't'=>"Temporales");
-        
-
 	function index() {
 		$this->Query->recursive = 0;
 		$this->set('queries', $this->paginate());
@@ -33,6 +30,7 @@ class QueriesController extends PqueryAppController {
 				$this->Session->setFlash(__('The Query could not be saved. Please, try again.', true));
 			}
 		}
+                $this->set('pquery_categories',$this->Query->PqueryCategory->find('list'));
 	}
 
 	function edit($id = null) {
@@ -51,6 +49,7 @@ class QueriesController extends PqueryAppController {
 		if (empty($this->data)) {
 			$this->data = $this->Query->read(null, $id);
 		}
+                $this->set('pquery_categories',$this->Query->PqueryCategory->find('list'));
 	}
 
 	function delete($id = null) {
@@ -63,23 +62,24 @@ class QueriesController extends PqueryAppController {
 			$this->redirect(array('action'=>'index'));
 		}
 	}
-	
+
+        
 	function descargar_queries() {
-		
-		$categorias = array();
-		$this->set('categorias',$this->categorias_descargas);
+            $categorias = $this->Query->PqueryCategory->find('list');
+            $this->set('categorias',$categorias);
 
-                $queries = array();
-
-                foreach($this->categorias_descargas as $key=>$categoria){
-                    $conditions['categoria']= $key;
-                    if ($key == 't') {
-                        $conditions['vigencia >']= 'NOW()';
-                    }
-                    $queries[$key]=$this->Query->find('all',array('order'=>'id,modified DESC', 'conditions'=>$conditions));
-                }
-
-                $this->set('queries',$queries);
+            $queries = array();
+            foreach ($categorias as $k=>$c) {
+                $queries[$c]  = $this->Query->find('all',array(
+                    'order' => 'Query.id,Query.modified DESC',
+                    'conditions' => array(
+                        'Query.expiration_time >' => 'NOW()',
+                        'Query.pquery_category_id' => $k,
+                    )
+                    ));    
+            }
+                    
+            $this->set('queries',$queries);
 	}
         
 	
@@ -129,27 +129,6 @@ class QueriesController extends PqueryAppController {
 
 	}
 	
-	
-	function listado_categorias()
-	{
-		Configure::write('debug', 0);
-		$this->Query->recursive = -1;
-                
-		$categorias = array();
-		if(!empty($this->data['Query']['categoria'])){
-			$categorias = $this->Query->listarCategorias($this->data['Query']['categoria']);
-		}
-                if (!empty($this->passedArgs['term'])) {
-                    $categorias = $this->passedArgs['term'];
-                }
-		if (empty($categorias)) {
-			$categorias = $this->Query->listarCategorias('*'); // me trae todas
-		}
-
-		$this->set('categorias',$categorias);
-		$this->set('string_categoria',$this->data['Query']['categoria']);
-		$this->layout = 'ajax';
-	}
 
         function list_view($id="") {
             $this->layout = "sin_menu";
