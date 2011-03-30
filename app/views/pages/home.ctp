@@ -26,13 +26,12 @@ Requerimientos mínimos para utilizar el <b>Sistema Gestión de Registro</b>:<br /
 Desde su puesta en funcionamiento en junio de 2009 el sistema RFIETP se encuentra
 en permanente actualización y mejoramiento, tanto del contenido de información de
 la base de datos como de la aplicación que permite su gestión. En esa línea de
-trabajo a partir del 18 de Febrero del 2011 se ha instalado la versión <?php echo Configure::read('regetpVersion');?> del
+trabajo a partir del 1 de Abril del 2011 se ha instalado la versión <?php echo Configure::read('regetpVersion');?> del
 sistema.
 </p>
-
     <!--<ul>
-        <li>En la nueva versión se ha abierto el acceso de los usuarios Referentes Jurisdiccionales.</li>
-        <li>Mejoras funcionales en la administración para la Unidad de Información.</li>
+        <li>Se incorporó sección de Referentes por cada jurisdicción con información asociada a cada uno.</li>
+        <li>Se rediseñó la sección de Descargas.</li>
     </ul>-->
 
 <br />
