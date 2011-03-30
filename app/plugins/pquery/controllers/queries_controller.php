@@ -22,13 +22,19 @@ class QueriesController extends PqueryAppController {
 
 	function add() {
 		if (!empty($this->data)) {
-			$this->Query->create();
-			if ($this->Query->save($this->data)) {
-				$this->Session->setFlash(__('The Query has been saved', true));
-				$this->redirect(array('action'=>'index'));
-			} else {
-				$this->Session->setFlash(__('The Query could not be saved. Please, try again.', true));
-			}
+                        if($this->validate($this->data['Query']['query'])){
+                            $this->data['Query']['columns'] = implode(",",$this->get_columnas($this->data['Query']['query']));
+                            $this->Query->create();
+                            if ($this->Query->save($this->data)) {
+                                    $this->Session->setFlash(__('The Query has been saved', true));
+                                    $this->redirect(array('action'=>'index'));
+                            } else {
+                                    $this->Session->setFlash(__('The Query could not be saved. Please, try again.', true));
+                            }
+                        }
+                        else{
+                            $this->Session->setFlash(__('La consulta SQL tiene errores', true));
+                        }
 		}
                 $this->set('pquery_categories',$this->Query->PqueryCategory->find('list'));
 	}
@@ -39,12 +45,17 @@ class QueriesController extends PqueryAppController {
 			$this->redirect(array('action'=>'index'));
 		}
 		if (!empty($this->data)) {
-			if ($this->Query->save($this->data)) {
-				$this->Session->setFlash(__('The Query has been saved', true));
-				$this->redirect(array('action'=>'index'));
-			} else {
-				$this->Session->setFlash(__('The Query could not be saved. Please, try again.', true));
-			}
+                        if($this->validate($this->data['Query']['query'])){
+                            $this->data['Query']['columns'] = implode(", ",$this->get_columnas($this->data['Query']['query']));
+                            if ($this->Query->save($this->data)) {
+                                    $this->Session->setFlash(__('The Query has been saved', true));
+                                    $this->redirect(array('action'=>'index'));
+                            } else {
+                                    $this->Session->setFlash(__('The Query could not be saved. Please, try again.', true));
+                            }
+                        } else {
+                                $this->Session->setFlash(__('La consulta SQL tiene errores', true));
+                        }
 		}
 		if (empty($this->data)) {
 			$this->data = $this->Query->read(null, $id);
@@ -73,7 +84,10 @@ class QueriesController extends PqueryAppController {
                 $queries[$c]  = $this->Query->find('all',array(
                     'order' => 'Query.id,Query.modified DESC',
                     'conditions' => array(
-                        'Query.expiration_time >' => 'NOW()',
+                        'OR' => array (
+                            'Query.expiration_time >' => 'NOW()',
+                            'Query.expiration_time IS NULL',
+                        ),
                         'Query.pquery_category_id' => $k,
                     )
                     ));    
@@ -109,12 +123,23 @@ class QueriesController extends PqueryAppController {
 
 	}
 
-        function list_columnas($id){
-		$this->layout = '';
-		Configure::write('debug',0);
+        function validate($query){
 
-                $res = $this->Query->findById($id);
-		$sql = $res['Query']['query'] . 'LIMIT 1';
+                Configure::write('debug',0);
+                
+		$sql = $query . ' LIMIT 1';
+		$this->Query->recursive = -1;
+		$consulta_ejecutada = $this->Query->query($sql);
+
+                Configure::write('debug',2);
+
+                return !empty($consulta_ejecutada);
+
+	}
+
+        function get_columnas($query){
+
+		$sql = $query . ' LIMIT 1';
 		$this->Query->recursive = -1;
 		$consulta_ejecutada = $this->Query->query($sql);
 
@@ -125,8 +150,7 @@ class QueriesController extends PqueryAppController {
 			$columnas[] = $key;
 		endwhile;
 
-		$this->set('columnas',$columnas);
-
+		return $columnas;
 	}
 	
 
