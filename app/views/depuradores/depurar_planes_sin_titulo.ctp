@@ -11,7 +11,7 @@ echo $paginator->counter(array(
 	<th><?php echo $paginator->sort('id');?></th>
 	<th><?php echo $paginator->sort('nombre');?></th>
 	<th><?php echo $paginator->sort('Institución', 'Instit.name');?></th>
-	<th><?php echo $paginator->sort('Oferta.name');?></th>
+	<th><?php echo $paginator->sort('Oferta', 'Oferta.name');?></th>
 	<th class="actions"><?php __('Actions');?></th>
 </tr>
 <?php
