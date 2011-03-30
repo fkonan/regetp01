@@ -151,20 +151,6 @@ class QueriesController extends PqueryAppController {
 		$this->layout = 'ajax';
 	}
 
-        function list_campos($id) {
-            $this->layout = "";
-            $this->CustomQuery =& ClassRegistry::init('Pquery.CustomQuery');
-
-            if (isset($this->passedArgs['query.id'])) {
-                $id = $this->passedArgs['query.id'];
-            }
-            if (!$id) {
-                $this->Session->setFlash(__('Invalid id for Query', true));
-                $this->redirect(array('action'=>'index'));
-            }
-            
-        }
-
         function list_view($id="") {
             $this->layout = "sin_menu";
             $this->CustomQuery =& ClassRegistry::init('Pquery.CustomQuery');
