@@ -1,3 +1,14 @@
+<h1>RFIETP - Novedades de la versión 1.7</h1>
+<br>
+<ul>
+    <li>Se realizó un "Buscador de Títulos de Referencia" con distintos filtros y entradas de búsqueda, como así también, información básica y estadística asociada a cada Título.</li>
+    <li>Se incorporó sección de Referentes por cada jurisdicción con información asociada a cada uno.</li>
+    <li>Se rediseñó la sección de Descargas.</li>
+    <li>Se agregaron depuradores de Planes y Títulos de Referencia.</li>
+    <li>Se implementó el corrector ortográfico en las secciones faltantes.</li>
+</ul>
+<br>
+
 <h1>RFIETP - Novedades de la versión 1.6.8</h1>
 <br>
 <ul>
