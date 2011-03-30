@@ -11,7 +11,7 @@ echo $html->css('smoothness/jquery-ui-inet.custom.css',null, false);
     jQuery(document).ready(function(){
         
         
-        jQuery(".acordiones").accordion();
+        jQuery(".acordiones").accordion({"autoHeight": false});
 
         jQuery('.acordion .head').click(function() {
 		$(this).next().toggle('slow');
@@ -102,7 +102,12 @@ echo $html->css('smoothness/jquery-ui-inet.custom.css',null, false);
                             </span>
                             <?php } ?>
                         </div>
-                        <p><?php echo strip_tags($q['Query']['description'],'<br />'); ?></p>
+                        <div>
+                            <label style="font-weight: bold">Descripción</label>
+                            <span><?php echo strip_tags($q['Query']['description'],'<br />'); ?></span>
+                            <label style="font-weight: bold">Variables</label>
+                            <span><?php echo $q['Query']['columns']; ?></span>
+                        </div>
                     </div>
                     <?php
                     $i++;
