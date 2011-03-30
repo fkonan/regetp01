@@ -28,15 +28,9 @@ function toogleVigencia() {
 		echo $form->input('name');
 		echo $form->input('description');
 
-		 /* @var $ajax AjaxHelper */
-		//echo $ajax->autoComplete('categoria', '/pquery/queries/listado_categorias');
-                
-		echo $form->input('categoria', array('type' => 'select',
-                                            'id' => 'categoria',
-                                            'options' => array('t'=>'Temporales', 'h'=>'Habituales'),
-                                            'style' => 'width:150px; clear:none; float:left;',
-                                            'onchange' => 'toogleVigencia();',
-                                            'default' => 't'));
+                echo $form->input('expiration_time');
+
+		echo $form->input('pquery_category_id', array('label' => 'Categoria', 'options' => $pquery_categories));
 
                 echo $form->input('vigencia', array('id'=>'vigenciaDatePicker',
                                                     'type'=>'text',

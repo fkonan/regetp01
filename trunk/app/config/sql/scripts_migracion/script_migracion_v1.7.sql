@@ -18,8 +18,8 @@ DROP TABLE logs;
 MODIFICACIONES EN DESCARGAS (QUERIES)
 */
 ALTER TABLE "public"."queries" DROP COLUMN "categoria";
-ALTER TABLE "public"."queries" ADD COLUMN "vigencia" timestamp without time zone;
-ALTER TABLE "public"."queries" ADD COLUMN "categoria" character varying(1) DEFAULT 't';
+ALTER TABLE "public"."queries" ADD COLUMN "expiration_time" timestamp without time zone;
+--ALTER TABLE "public"."queries" ADD COLUMN "categoria" character varying(1) DEFAULT 't';
 
 /*
 CORRECCIÓN DE ROLES HARCODEADOS
@@ -282,3 +282,8 @@ WHERE id = 25;
 DELETE FROM queries
 WHERE id not in (45,44,48,23,6,5,8,7,27,25);
 
+
+
+
+CREATE TABLE "public"."pquery_categories" ("id" SERIAL, "name" character varying(64) NOT NULL DEFAULT '', "created" timestamp without time zone, "modified" timestamp without time zone, PRIMARY KEY ("id")) WITHOUT OIDS;
+ALTER TABLE "public"."queries" ADD COLUMN "pquery_category_id" integer NOT NULL DEFAULT 0
