@@ -1,3 +1,20 @@
+<script type="text/javascript">
+jQuery(document).ready(function() {
+
+    jQuery("#resumenplanes").hide();
+
+    jQuery("#resumenlink").click(function() {
+        jQuery("#resumenplanes").toggle('slow');
+
+        if (jQuery("#arrowlink").attr("src") == "<?php echo $html->url('/img'); ?>/arrow_down.png") {
+            jQuery("#arrowlink").attr("src", "<?php echo $html->url('/img'); ?>/arrow_up.png");
+        }
+        else {
+            jQuery("#arrowlink").attr("src", "<?php echo $html->url('/img'); ?>/arrow_down.png");
+        }
+    });
+});
+</script>
 <div class="titulos view">
 <h2><?php  __('Título de Referencia');?></h2>
 
