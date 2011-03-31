@@ -22,7 +22,7 @@ $menuOptions = array(
                 'nombre'=> 'Referentes',
                 'link'=> array('controller'=>'Autoridades','action'=>'index_x_jurisdiccion', $jurisdiccion_id),
                 'options' => array(
-                    'class'=>'acl acl-directores acl-administradores acl-desarrolladores acl-referentes',
+                    'class'=>'acl acl-desarrolladores acl-administradores acl-editores',
                     )
         ),
         array(
