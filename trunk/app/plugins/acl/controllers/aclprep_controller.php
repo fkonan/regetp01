@@ -529,10 +529,6 @@ class AclprepController extends AclAppController {
     function assignPermissions1Dot7() {
         // Usuarios
         $this->Acl->allow('usuarios', 'Titulos/ajax_view_planes_asociados');
-        $this->Acl->allow('usuarios', 'editores/view');
-        $this->Acl->allow('usuarios', 'editores/index');
-        $this->Acl->allow('usuarios', 'administradores/view');
-        $this->Acl->allow('usuarios', 'administradores/index');
        /* $this->Acl->allow('usuarios', 'Titulos/view');
         $this->Acl->allow('usuarios', 'Titulos/index');*/
 
