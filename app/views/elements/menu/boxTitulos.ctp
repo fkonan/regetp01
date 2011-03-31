@@ -1,4 +1,4 @@
-<div id="boxTitulos">
+<div id="boxTitulos" class="acl acl-desarrolladores acl-administradores acl-editores">
     <h1 id="boxTitulos" class="menu_head">Títulos</h1>
 
     <ul class="menu_body">
