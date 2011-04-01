@@ -345,13 +345,13 @@
                     </dl>
                     <br />
 
-                    <div class="acl actions acl-editores acl-administradores acl-desarrolladores">
-                        <ul>
+                    <div class="actions">
+                        <ul class="acl acl-editores acl-administradores acl-desarrolladores">
                             <li><?php echo $html->link(__('Editar Institución', true), array('action'=>'edit', $instit['Instit']['id'])); ?> </li>
-                <?php if($session->read('Auth.User.role') == 'desarrollo') {?>
+                        </ul>
+                        <ul class="acl acl-desarrolladores">
                             <li><?php echo $html->link(__('Eliminar Institución', true), array('action'=>'delete', $instit['Instit']['id']), null, sprintf(__('¿Seguro que desea eliminar la institución? CUE: "%s"', true), $instit['Instit']['cue']. "0".$instit['Instit']['anexo'])); ?></li>
                             <li><?php echo $html->link('ABM CUE Histórico', array('controller'=>'HistorialCues','action'=>'index', $instit['Instit']['id'])); ?></li>
-                    <?php }?>
                         </ul>
                     </div>
 
