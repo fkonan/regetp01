@@ -79,6 +79,7 @@ echo $html->css('smoothness/jquery-ui-1.8.6.custom',null, false);
 	<?php
 		echo $form->input('jurisdiccion_id',array('value'=>$jurisdiccion_id));
 		echo $form->input('titulo',array(
+                                        'label' => 'Títulos',
                                             'div'=>array('style'=>'width:20%; float: left; clear: none'),
                                             'style'=> 'float: left'));
                 echo $form->input('nombre',array(
@@ -87,16 +88,20 @@ echo $html->css('smoothness/jquery-ui-1.8.6.custom',null, false);
 		echo $form->input('apellido',array(
                                             'div'=>array('style'=>'width:36%; float: left; clear: none'),
                                             'style'=> 'float: left'));
-		echo $form->input('fecha_asuncion',array('id'=>'fechaAsuncionDatePicker',
+		echo $form->input('fecha_asuncion',array(
+                                            'label' => 'Fecha Asunción',
+                                            'id'=>'fechaAsuncionDatePicker',
                                                          'type'=>'text',
                                                          'div' =>  array('fechaAsuncionDatePickerDiv',
                                                                          'style' => 'width:20%; clear:none; float:left;'
                                                                         ),
                                                          'style' => 'clear:none; float:left;'));
 		echo $form->input('telefono_personal',array(
+                                        'label' => 'Teléfono Personal',
                                             'div'=>array('style'=>'width:35%; float: left; clear: none'),
                                             'style'=> 'float: left'));
 		echo $form->input('telefono_institucional',array(
+                                        'label' => 'Teléfono Institucional',
                                             'div'=>array('style'=>'width:36%; float: left; clear: none'),
                                             'style'=> 'float: left'));
 		echo $form->input('email_personal',array(
@@ -105,7 +110,9 @@ echo $html->css('smoothness/jquery-ui-1.8.6.custom',null, false);
 		echo $form->input('email_institucional',array(
                                             'div'=>array('style'=>'width:46%; float: left; clear: none'),
                                             'style'=> 'float: left'));
-		echo $form->input('direccion');
+		echo $form->input('direccion', array(
+                                            'label' => 'Dirección',
+                ));
                 echo $form->input('jur_dep_loc', array('label'=>'Departamento/Localidad', 'style'=>'width:92%;','title'=>'Ingrese al menos 3 letras para que comience la busqueda de Departamentos y Localidades.'));
 	?>
         <?php

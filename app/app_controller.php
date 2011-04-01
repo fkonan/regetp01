@@ -58,6 +58,10 @@ class AppController extends Controller {
 	function beforeRender(){
 		$this->set('rutaUrl_for_layout', $this->rutaUrl_for_layout);
                 //debug($this->Acl->check($this->Auth->user(), $this->action));die("aassas");
+
+                if ($this->Requesthandler->isAjax()){
+                    $this->layout = 'ajax';
+                }
                 
 	}
 
