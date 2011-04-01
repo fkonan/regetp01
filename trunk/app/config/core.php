@@ -42,15 +42,7 @@
  * In production mode, flash messages redirect after a time interval.
  * In development mode, you need to click the flash message to continue.
  */
-	Configure::write('debug', 2);
-
-
-        /**
-         * Poner en true cuando el sitio este en mantenimiento.
-         *
-         * esto hace que se
-         */
-        Configure::write('Mantenimiento', false);
+	Configure::write('debug', 0);
 /**
  * Application wide charset encoding
  */
@@ -189,8 +181,8 @@
  * Inet Options
  */
         Configure::write('es_dia_patrio', false);
-        Configure::write('trimestre_activo', '1-2010,2-2010,1-2011');
-        Configure::write('modo_linux', true); // para comando aspell
+	Configure::write('trimestre_activo', '4-2010,1-2011');
+	Configure::write('modo_linux', true);
         Configure::write('grupo_desarrolladores', 'desarrolladores');
         Configure::write('grupo_administradores', 'administradores');
         Configure::write('grupo_editores', 'editores');

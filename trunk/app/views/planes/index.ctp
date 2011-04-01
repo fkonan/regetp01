@@ -8,14 +8,6 @@ echo $javascript->link('async.js',false);
 echo $html->css('ajaxtabs.css',null, false);
 echo $html->css('planes/ui_tabs.css',null, false);
 
-$link = "";
-if($ticket_id != 0) {
-    $link = "<a class='aPend' href=\"";
-    $link .= $html->url(array('controller'=> 'tickets', 'action'=>$action.'/'.$ticket_id));
-    $link .= "\" onClick=\"window.open('".$html->url(array('controller'=> 'tickets', 'action'=>$action.'/'.$ticket_id));
-    $link .= "','_blank' , 'toolbar=0,scro  llbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=310,height=390');";
-    $link .= " return false;\">Pendiente de Actualización</a>";
-}
 ?>
 <script language="JavaScript" type="text/javascript" defer="defer">
     jQuery(document).ready(function(){
@@ -29,6 +21,30 @@ if($ticket_id != 0) {
         
         agregarTabsAUserSession();
     });
+
+
+    function cargarPendiente(element){
+
+       var idiv = jQuery('<div onclick="cargarPendiente.cerrarTooltip" class="tooltip" style="position: absolute; display: block"></div>');
+       var pos = jQuery(element).position();
+       idiv.css({
+           left: pos.left*2,
+           top: pos.top/2
+       });
+       
+       jQuery(document.body).append( idiv.html('... cargando').load(element.href));
+
+       
+
+       cerrarTooltip = function(){
+           idiv.hide();
+       }
+
+       setTimeout(cerrarTooltip, 10000);
+
+       return false;
+    }
+
 </script>
 
 <div id="escuela_estado" class="<? echo $planes['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $planes['Instit']['activo']? 'Institución Ingresada al RFIETP':'Institución NO Ingresada al RFIETP';?></div>
@@ -48,17 +64,20 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
     <div class="tabs-content">
         <div class="related">
         <?php
-                $link = "";
                 if($ticket_id != 0)
                 {
-                        $link = "<div class='aPend' onmouseover=\"this.className='aPend_hover'\" onmouseout=\"this.className='aPend'\"> <a href=\"";
-                        $link .= $html->url(array('controller'=> 'tickets', 'action'=>$action.'/'.$ticket_id));
-                        $link .= "\" onClick=\"window.open('".$html->url(array('controller'=> 'tickets', 'action'=>$action.'/'.$ticket_id));
-                        $link .= "','_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=310,height=390');";
-                        $link .= " return false;\">Pendiente de Actualización</a></div>";
+                    ?>
+            <div class='aPend' onmouseover="this.className='aPend_hover'" onmouseout="this.className='aPend'">
+                <?
+                echo $html->link('Pendiente de Actualización',"/tickets/view/$ticket_id", array(
+                    'onclick' => "return cargarPendiente(this);",
+                ));
+                ?>
+            </div>
+
+                        <?php
                 }
         ?>
-        <?= $link?>
 
         <?
         //si el anexo tiene 1 solo digito le coloco un cero adelante
@@ -201,20 +220,21 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                 <ul>
                 <li><?php echo $html->link(__('Nueva Oferta', true), array('controller'=> 'planes', 'action'=>'add/'. $planes['Instit']['id']));?> </li>
                 <li><?php echo $html->link(__('Depurar Institución', true), '/depuradorPlanes/index/'.$planes['Instit']['id']); ?> </li>
-                <?php
-                // Si puede editar y tiene ticket edita, sino crea
-                if($action!='view')
-                {
-                        if($ticket_id != 0)
-                                {
-                                ?><li><a href="<?= $html->url(array('controller'=> 'tickets', 'action'=>'edit/'.$ticket_id))?>" onClick="window.open('<?= $html->url(array('controller'=> 'tickets', 'action'=>'edit/'.$ticket_id))?>','_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=310,height=390'); return false;">Editar Pendiente</a></li><?
-                                }
-                                else
-                                {
-                                ?><li><a href="<?= $html->url(array('controller'=> 'tickets', 'action'=>'add/'.$planes['Instit']['id']))?>" onClick="window.open('<?= $html->url(array('controller'=> 'tickets', 'action'=>'add/'.$planes['Instit']['id']))?>','_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=310,height=260'); return false;">Nuevo Pendiente</a></li><?
-                                }
-                        }
-                        ?>
+                <li>
+                    <?php
+                    if (empty($ticket_id)) {
+                        $hacer = 'Agregar Nuevo';
+                        $urlTicklet = array('controller'=> 'tickets', 'action'=>'add',$planes['Instit']['id']);
+                    } else {
+                        $hacer = 'Editar';
+                        $urlTicklet = array('controller'=> 'tickets', 'action'=>'edit', $ticket_id);
+                    }
+
+                    echo $html->link("$hacer Pendiente", $urlTicklet, array(
+                            'onclick' => "window.open(this.href,'_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=260,height=360'); return false;",
+                        ));
+                    ?>
+                </li>
                 </ul>
         </div>
     </div>
