@@ -172,7 +172,11 @@ class Plan extends AppModel {
         }
         
 	
-
+        /**
+         * Redefinición de find() del parent. Si trae recursive en 3 realiza
+         * una "búsqueda completa", utilizando campos de tablas a 2 niveles de
+         * relación de distancia
+         */
         public function find($conditions = null, $fields = null, $order = null, $recursive = null) {
             //if ($conditions == 'completo' || $conditions == 'countCompleto') {
             if (!empty($fields['recursive']) && $fields['recursive'] == 3) {
@@ -189,14 +193,12 @@ class Plan extends AppModel {
 
         
         /**
-         * Devuelve un find "all" pero con un monton de JOINS extra.
-         * Ademàs, si se pone $this->__asociarAnio en true, trae los años
-         * asociados con la informacion de EstructuraPlanesAnio y Etapa
+         * Devuelve un find "all" con un monton de JOINs extra.
+         * Los JOINs fueron utilizados porque CakePHP llega al nivel de Belongs To
+         * y en el Contain no utiliza Joins sino que realiza un Select por item,
+         * por este motivo no se podía ordenar o filtrar por un campo de esos Contain.
          * 
          * @param array $parameters
-         *                      ['asociarAnio'] = true   ::: trae los años
-                                        asociados con la informacion de
-         *                              EstructuraPlanesAnio y Etapa
          * @param string $buscaroSoloContar
          *                      Los valores posibles son: 'buscar' (por default)  o 'count'
          * @return array

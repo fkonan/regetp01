@@ -352,35 +352,16 @@ class Instit extends AppModel {
   		else return false;
   		
   		return ($jur_id == $jur)?true:false;
-  	}
-  
-	
-  	/**
-  	 * Esta funcion fue redefinida para que me agregue
-  	 * el nombre completo en el array data de la institucion
-  	 * Entonces, lo que yo logro es que desde mi aplicacion
-  	 * puedo hacer un $this->data[Instit]['nombre_completo']
-  	 * y me va a mostrar el nombre completo tal como si me lo hubiese 
-  	 * traido de la BD
-  	 *
-  	 * @param $conditions
-  	 * @param $fields
-  	 * @param $order
-  	 * @param $recursive
-  	 * @return Array $data
-  	 */
-  	/*function find($conditions = null, $fields = array(), $order = null, $recursive = null) {
-  		$instituciones_data = parent::find($conditions, $fields, $order, $recursive);
-                if (is_array($instituciones_data)
-                    && sizeof($instituciones_data)>0
-                    && $conditions != 'list'
-                    && $conditions != 'count'){
-                        $instituciones_data = $this->__institsConSusRespectivosNombresCompletos($instituciones_data);
-                    }
-                return $instituciones_data;
-  	}
-*/
+        }
 
+        /**
+  	 * Callback que se ejecuta luego de cada find() del model Instit
+         * Añade el nombre completo de la institución como un campo más.
+         * Esta adaptada a los distintos niveles de key del array $results.
+  	 *
+  	 * @param array $results
+  	 * @return array $results
+  	 */
         function afterFind($results) {
 
             if (empty($results)) {
