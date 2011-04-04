@@ -20,22 +20,23 @@ echo $html->css('planes/ui_tabs.css',null, false);
         });
         
         agregarTabsAUserSession();
+
+        jQuery("#pendiente").tooltip(
+            { 
+                effect: 'slide',
+                offset: [60, 0],
+                onBeforeShow: function() {
+                    jQuery(".tooltip").html('... cargando').load(jQuery("#pendiente a").first().attr("href")); 
+                }
+            }
+        );
     });
 
 
     function cargarPendiente(element){
-
-       var idiv = jQuery('<div onclick="cargarPendiente.cerrarTooltip" class="tooltip" style="position: absolute; display: block"></div>');
-       var pos = jQuery(element).position();
-       idiv.css({
-           left: pos.left*2,
-           top: pos.top/2
-       });
        
-       jQuery(document.body).append( idiv.html('... cargando').load(element.href));
-
+       jQuery(".tooltip").html('... cargando').load(element.href);
        
-
        cerrarTooltip = function(){
            idiv.hide();
        }
@@ -67,13 +68,13 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                 if($ticket_id != 0)
                 {
                     ?>
-            <div class='aPend' onmouseover="this.className='aPend_hover'" onmouseout="this.className='aPend'">
+            <div id="pendiente" class='aPend' onmouseover="this.className='aPend_hover'" onmouseout="this.className='aPend'">
                 <?
-                echo $html->link('Pendiente de Actualización',"/tickets/view/$ticket_id", array(
-                    'onclick' => "return cargarPendiente(this);",
-                ));
+                echo $html->link('Pendiente de Actualización',"/tickets/view/$ticket_id");
                 ?>
             </div>
+            <div class="tooltip big"></div>
+            
 
                         <?php
                 }

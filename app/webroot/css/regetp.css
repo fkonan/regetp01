@@ -1860,6 +1860,15 @@ Busqueda Simple de Instituciones
         vertical-align: middle;
 }
 
+.big{
+        background:transparent url(images/white_big.png) no-repeat;
+        _background:transparent url(images/white_big.png) no-repeat;
+        padding-top:25px;
+        padding-left: 25px;
+        width:325px;
+        height: 222px;
+        cursor: pointer;
+}
 
 .small{
     font-size: 8pt;
