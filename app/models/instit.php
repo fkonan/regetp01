@@ -363,6 +363,11 @@ class Instit extends AppModel {
   	 * @return array $results
   	 */
         function afterFind($results) {
+            return $this->__agregarNombreCompletoEnArray($results);
+        }
+
+
+        function __agregarNombreCompletoEnArray($results){
 
             if (empty($results)) {
                 return null;
@@ -411,7 +416,7 @@ class Instit extends AppModel {
 
                         $item_aux['nombre_completo'] = $this->getNombreCompleto($item_aux['nombre'], $item_aux['nroinstit'], $nombre_tipoinstit);
                     }
-                    
+
                     unset($item_aux);
                 }
             }
@@ -707,39 +712,25 @@ class Instit extends AppModel {
 		return 1;
 	}
 
-	
-	function paginateCount ($conditions = null, $recursive = 0)
-        {
-                $parametersAux = compact('conditions', 'fields', 'order', 'limit', 'page');
-                if ($recursive != $this->recursive) {
-                    $parametersAux['recursive'] = $recursive;
-                }
 
-                return $this->__asociarPlanParamsSetup($parametersAux,'count');
-        }
-
-	function paginate($conditions = null, $fields = null, $order = null, $limit = null, $page = 1, $recursive = null, $extra = array())
-        {
-            if ($this->asociarPlan) {
-                $pp = compact('conditions', 'fields', 'order', 'limit', 'page');
-                $parametersAux = array_merge($pp, $extra);
+        public function find($conditions = null, $fields = null, $order = null, $recursive = null) {
+            if ($this->asociarPlan == true) {
+                $parametersAux = compact('order');
+                $parametersAux = array_merge($fields, $parametersAux);
                 if ($recursive != $this->recursive) {
-                    $parametersAux['recursive'] = $recursive;
+                        $parametersAux['recursive'] = $recursive;
                 }
-                
-                return $this->__asociarPlanParamsSetup($parametersAux);
+                if ($conditions == 'count') {
+                    return $this->__asociarPlanParamsSetup($parametersAux,'count');
+                }
+                else {
+                    $inst = $this->__asociarPlanParamsSetup($parametersAux);
+                    return $inst;
+                }
             } else {
-                $parameters = compact('conditions', 'fields', 'order', 'limit', 'page');
-                
-                if ($recursive != $this->recursive) {
-                        $parameters['recursive'] = $recursive;
-                }
-                $extra = array();
-
-                return $this->find('all', array_merge($parameters, $extra));
+                return parent::find($conditions, $fields, $order, $recursive);
             }
         }
-
 
         
 
@@ -753,7 +744,8 @@ class Instit extends AppModel {
          * @return array
          */
         private function __asociarPlanParamsSetup($parameters = array(), $buscaroSoloContar = 'buscar') {
-            
+                
+                //$parameters['recursive'] = -1;
                 $parameters['joins'] = array(
                     array(
                         'table' => 'tipoinstits',
@@ -838,15 +830,14 @@ class Instit extends AppModel {
                 
                 if ($buscaroSoloContar == 'count') {
                     // si solo es para obtener el total no necesito seguir...
-                    return count($this->find('list', $parameters));
+                    return count(parent::find('list', $parameters));
                 }
 
                 $parameters['fields']= 'Instit.id';
                 
-                
 
                 // recojo todas las instituciones que cumplan con los criterios de busqueda
-                $institsIds = $this->find('list', $parameters);
+                $institsIds = parent::find('list', $parameters);
                 if (empty($institsIds) ) {
                     // no hay instituciones que cumplan con esos criterios de busqueda
                     return array();
@@ -860,7 +851,7 @@ class Instit extends AppModel {
                 unset($parameters['group']);
                 unset($parameters['fields']);
 
-                $instits = $this->find('all', $parameters);
+                $instits = parent::find('all', $parameters);
                 
                 return $instits;
         }
