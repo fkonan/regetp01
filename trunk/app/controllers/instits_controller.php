@@ -517,7 +517,9 @@ class InstitsController extends AppController {
          $ops[] = array(
             'model' => 'Instit',
             'field' => 'nroinstit',
-            'friendlyName' => 'Nº de Institución');    
+            'friendlyName' => 'Nº de Institución',
+             'forceText' => true,
+             );
 
          //     Jurisdiccion
          $ops[] = array(
