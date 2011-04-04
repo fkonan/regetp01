@@ -34,9 +34,6 @@ if(isset($script)){
                     'type'      => 'checkbox',
                     'checked'   => false,
                     'label'     => 'Resuelto.',
-                    'div'     => array(
-                        'class' => 'acl acl-editores acl-desarrolladores acl-administradores',
-                    ),
                     ));
 	?>
 	</fieldset>
