@@ -43,7 +43,7 @@ class AppController extends Controller {
 	// se crea mediante un elemento que le inserta un listado de urls
 	// indicando claramente en que lugar del sitio estoy navegando
 	// es una serie de links PEj:
-	// institucion -> ofertas -> plan -> aï¿½o
+	// institucion -> ofertas -> plan -> año
 	// Sencillamente, es un menu de navegacion
 	var $rutaUrl_for_layout = array();	
 	
@@ -75,8 +75,8 @@ class AppController extends Controller {
 		Configure::write('regetpVersion', '1.7');
                 /*
 		$this->Auth->autoRedirect = false;
-		$this->Auth->loginError ='Usuario o Contraseï¿½a Incorrectos';
-		$this->Auth->authError = 'Debe registrarse para acceder a esta pï¿½gina';
+		$this->Auth->loginError ='Usuario o Contraseña Incorrectos';
+		$this->Auth->authError = 'Debe registrarse para acceder a esta página';
 		$this->Auth->logoutRedirect='/pages/home';
 		$this->Auth->allow('display','login','logout');
 		$this->Auth->authorize = 'controller';
@@ -86,9 +86,9 @@ class AppController extends Controller {
                 //$this->Auth->allow('display','login','logout');
                 //$this->Auth->allow('*');return true;
                 $this->Auth->allowedActions = array('display','login','logout');
-                $this->Auth->loginError ='Usuario o Contraseï¿½a Incorrectos';
-		$this->Auth->authError = 'Usted no tiene permisos para acceder a esta pï¿½gina.';
-                $this->Auth->planesMejoraError = 'Usted no tiene acceso a los planes de mejora de otra jurisdicciï¿½n';
+                $this->Auth->loginError ='Usuario o Contraseña Incorrectos';
+		$this->Auth->authError = 'Usted no tiene permisos para acceder a esta página.';
+                $this->Auth->planesMejoraError = 'Usted no tiene acceso a los planes de mejora de otra jurisdicción';
                 $this->Auth->authorize = 'actions';
                 //$this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
                 $this->Auth->logoutRedirect='/pages/home';
@@ -111,7 +111,7 @@ class AppController extends Controller {
 	  switch ($this->Auth->user('role')):
 	  
 	    // usuarios con mas privilegios en el sistema
-	    // por lo general ï¿½stos usuarios puden ver botones ocultos que solo ellos ven, por ejemplo 
+	    // por lo general éstos usuarios puden ver botones ocultos que solo ellos ven, por ejemplo
 	    // el boton para eliminar instituciones
 	    case 'desarrollo':
 	    	$llAuth = true;
@@ -184,7 +184,7 @@ class AppController extends Controller {
                         if ($this->name == 'Fondos' && $this->action == 'index_x_instit') {$llAuth = true;}
                         
                         break;
-		  default: die('El tipo de usuario no concuerda con ninguno setteado en el sistema y se abortarï¿½ la operaciï¿½n');
+		  default: die('El tipo de usuario no concuerda con ninguno setteado en el sistema y se abortará la operación');
 		endswitch;
 		
 		
@@ -234,7 +234,7 @@ class AppController extends Controller {
 		if ($this->name == 'Titulos' && $this->action == 'add_and_give_me_select_options') {$llAuth = true;}
 		
 		/**
-		 * Hacer que solo puedan modificar sus datos y contraseï¿½a el usuario que es dueï¿½o de esos datos
+		 * Hacer que solo puedan modificar sus datos y contraseña el usuario que es dueño de esos datos
 		 */
 	   if ($this->name == 'Users' && $this->action == 'cambiar_password' && $this->passedArgs[0] == $this->Auth->user('id')) {$llAuth = true;}
 	    if ($this->name == 'Users' && $this->action == 'self_user_edit'   && $this->passedArgs[0] == $this->Auth->user('id')) {$llAuth = true;}
@@ -243,7 +243,7 @@ class AppController extends Controller {
 		if ($llAuth == true) {
 			return true;
 		} else {			
-			$this->Session->setFlash('No tiene permisos para acceder a esta opciï¿½n.', true);
+			$this->Session->setFlash('No tiene permisos para acceder a esta opción.', true);
 			
 			if ($this->name == 'Anios' && ($this->action == 'edit' || $this->action == 'add')){
 				$this->redirect('/pages/forbidden');

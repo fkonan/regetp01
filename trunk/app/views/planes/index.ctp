@@ -34,7 +34,7 @@ echo $html->css('planes/ui_tabs.css',null, false);
 
 </script>
 
-<div id="escuela_estado" class="<? echo $planes['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $planes['Instit']['activo']? 'Instituciï¿½n Ingresada al RFIETP':'Instituciï¿½n NO Ingresada al RFIETP';?></div>
+<div id="escuela_estado" class="<? echo $planes['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $planes['Instit']['activo']? 'Institución Ingresada al RFIETP':'Institución NO Ingresada al RFIETP';?></div>
 <?
 $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
 ?>
@@ -56,7 +56,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                     ?>
             <div id="pendiente" class='aPend' onmouseover="this.className='aPend_hover'" onmouseout="this.className='aPend'">
                 <?
-                echo $html->link('Pendiente de Actualizaciï¿½n',"/tickets/view/$ticket_id");
+                echo $html->link('Pendiente de Actualización',"/tickets/view/$ticket_id");
                 ?>
             </div>
             <div class="tooltip big"></div>
@@ -75,9 +75,9 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
         if(empty($planes['Plan'])){
         ?>
             <div class="tabs-content">
-                <h2>Listado de Ofertas <span style="float:right;font-size:9pt"><?php echo $html->link(__('Ver vista clï¿½sica', true), array('controller'=> 'planes', 'action'=>'index_clasico/'. $planes['Instit']['id']))?></span></h2>
+                <h2>Listado de Ofertas <span style="float:right;font-size:9pt"><?php echo $html->link(__('Ver vista clásica', true), array('controller'=> 'planes', 'action'=>'index_clasico/'. $planes['Instit']['id']))?></span></h2>
                    <ul class="lista_fondos" style="padding-top: 20px;">
-                        <p class='msg-atencion'>La Instituciï¿½n no presentï¿½ ofertas</p>
+                        <p class='msg-atencion'>La Institución no presentó ofertas</p>
                    </ul>
             </div>
         <?php
@@ -92,10 +92,10 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                             <?php if(isset($sumatoria_matriculas['array_de_ciclos'])>0 && isset($sumatoria_matriculas['array_de_ofertas'])>0):
                                         $v_matriculas_ciclos = array_reverse($sumatoria_matriculas['array_de_ciclos']);
                                 ?>
-                                <h2>Total de matriculados por oferta segï¿½n ciclo lectivo</h2>
+                                <h2>Total de matriculados por oferta según ciclo lectivo</h2>
                                         <div align="center">
                                                 <table class="tabla" width="80" cellpadding = "0" cellspacing = "0" summary="En esta tabla se muestran los totales de
-                                                                                                                                matrï¿½culas por cada ciclo lectivo, para
+                                                                                                                                matrículas por cada ciclo lectivo, para
                                                                                                                                 cada oferta.">
                                                 <tr>
                                                         <th>Oferta</th>
@@ -130,7 +130,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
 
                     <h2>Listado de Ofertas </h2>
                     <!--
-                    <span style="float:right;font-size:9pt"><?php echo $html->link(__('Ver vista clï¿½sica', true), array('controller'=> 'planes', 'action'=>'index_clasico/'. $planes['Instit']['id']))?></span>
+                    <span style="float:right;font-size:9pt"><?php echo $html->link(__('Ver vista clásica', true), array('controller'=> 'planes', 'action'=>'index_clasico/'. $planes['Instit']['id']))?></span>
                     -->
                     
                     <div class="js-tabs-ofertas tabs planes-container">
@@ -206,7 +206,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
         <div class="acl actions acl-editores acl-desarrolladores acl-administradores">
                 <ul>
                 <li><?php echo $html->link(__('Nueva Oferta', true), array('controller'=> 'planes', 'action'=>'add/'. $planes['Instit']['id']));?> </li>
-                <li><?php echo $html->link(__('Depurar Instituciï¿½n', true), '/depuradorPlanes/index/'.$planes['Instit']['id']); ?> </li>
+                <li><?php echo $html->link(__('Depurar Institución', true), '/depuradorPlanes/index/'.$planes['Instit']['id']); ?> </li>
                 <li>
                     <?php
                     if (empty($ticket_id)) {
