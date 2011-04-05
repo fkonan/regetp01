@@ -2,18 +2,18 @@
 $paginator->options(array('url' => $url_conditions));
 ?>
 <div class="tickets index">
-<h2><?php __('Pendientes de Actualizaciï¿½n. Jurisdicciï¿½n: ' . $jurisdiccion_name);?></h2>
+<h2><?php __('Pendientes de Actualización. Jurisdicción: ' . $jurisdiccion_name);?></h2>
 <p  class="paginate_msg">
 	<?php
 	echo $paginator->counter(array(
-	'format' => __('Pï¿½gina %page% de %pages%<br />Mostrando %current% registros de %count% encontrados, visualizando registros desde el nï¿½ %start%, hasta el %end%', true)
+	'format' => __('Página %page% de %pages%<br />Mostrando %current% registros de %count% encontrados, visualizando registros desde el nº %start%, hasta el %end%', true)
 	));
 	?>
 </p>
 <div id="tooltip" class="tooltip big"></div>
 <table cellpadding="0" cellspacing="0">
 <tr>
-	<th><?php echo $paginator->sort('Fecha Creaciï¿½n','Ticket.created');?></th>
+	<th><?php echo $paginator->sort('Fecha Creación','Ticket.created');?></th>
 	<th><?php echo $paginator->sort('Usuario','user.nombre');?></th>
 	<th><?php echo $paginator->sort('Cue','Instit.cue');?></th>
 	<th><?php echo $paginator->sort('Anexo','Instit.anexo');?></th>
@@ -63,9 +63,9 @@ foreach ($tickets as $ticket):
 
 <div id="paginator_prev_next_links">
 	<?php	
-		echo $paginator->prev('ï¿½ Anterior ',null, null, array('class' => 'disabled'));
+		echo $paginator->prev('<< Anterior ',null, null, array('class' => 'disabled'));
 		echo " | ".$paginator->numbers(array('modulus'=>'9'))." | ";
-		echo $paginator->next(' Siguiente ï¿½', null, null, array('class' => 'disabled'));
+		echo $paginator->next(' Siguiente >>', null, null, array('class' => 'disabled'));
 	?> 
 	</div>
 
