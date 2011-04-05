@@ -78,7 +78,10 @@ foreach ($tickets as $ticket):
 
         jQuery(".verTicket").click(function(){
             jQuery("#tooltip").html('... cargando').load(jQuery(this).attr("href"));
-            jQuery("#tooltip").dialog({modal:true});
+            jQuery("#tooltip").dialog({
+                title: "Observación",
+                modal:true
+            });
         });
         
         //para anular el click default
