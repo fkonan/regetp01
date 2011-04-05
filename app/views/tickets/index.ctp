@@ -1,3 +1,7 @@
+<?php
+echo $javascript->link( 'jquery-ui-1.8.5.custom.min',false);
+echo $html->css('smoothness/jquery-ui-1.8.6.custom', false);
+?>
 <? 
 $paginator->options(array('url' => $url_conditions));
 ?>
@@ -53,7 +57,7 @@ foreach ($tickets as $ticket):
 		</td>
 		<td class="actions">
 			<a href="<?= $html->url(array('controller'=> 'tickets', 'action'=>'edit/'.$ticket['Ticket']['id']))?>" onClick="window.open('<?= $html->url(array('controller'=> 'tickets', 'action'=>'edit/'.$ticket['Ticket']['id']))?>','_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=310,height=390'); return false;">Editar</a>
-                        <?php echo $html->link('ver',"/tickets/view/".$ticket['Ticket']['id'],array('class' => 'verTicket', 'style' => 'display:none;') ); ?>
+                        <?php echo $html->link( $html->image('preview.png'),"/tickets/view/".$ticket['Ticket']['id'],array('class' => 'verTicket', 'escape' => false) ); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -71,19 +75,22 @@ foreach ($tickets as $ticket):
 
 <script language="JavaScript" type="text/javascript" defer="defer">
     jQuery(document).ready(function(){
-        jQuery("tr").each(function(){
-            var url = jQuery(this).parent().find(".verTicket").first().attr("href");
-            jQuery(this).tooltip(
-            {
-                tip: '#tooltip',
-                position: 'top center',
-                delay: 0,
-                onBeforeShow: function() {
-                    jQuery("#tooltip").html('... cargando').load(url);
-                }
 
+        jQuery(".verTicket").click(function(){
+            jQuery("#tooltip").html('... cargando').load(jQuery(this).attr("href"));
+            jQuery("#tooltip").dialog({modal:true});
+        });
+        
+        //para anular el click default
+        jQuery(this).click(function(){return false;});
+
+        //para mantenerlo centrado
+        jQuery(document).scroll(function(){
+            var dia = jQuery("#tooltip")
+            if(dia.is(":visible")){
+                dia.dialog({modal:true, position:'center'});
             }
-        )});
+        });
     });
 
 </script>
