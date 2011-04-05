@@ -1,0 +1,1539 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Model version="3.0">
+<Configuration>
+<Property name="dialect" value="PostgresDialect"/>
+<Property name="ALIAS" value="regetp"/>
+<Property name="DRIVER" value="org.postgresql.Driver"/>
+<Property name="PASSWORD" value="r363TP"/>
+<Property name="PROMPTFORPASSWORD" value="false"/>
+<Property name="URL" value="jdbc:postgresql://127.0.0.1:5432/regetp"/>
+<Property name="USER" value="postgres"/>
+</Configuration>
+<Domains/>
+<Tables>
+<Table id="3d52e0fe-fa32-417a-a95d-6f92558738a3" name="acos" schema="">
+<Property name="LOCATION" value="964:946"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('acos_id_seq'::regclass)" extra="" fraction="0" id="25e489e1-a8ec-4eb9-b0fc-0b95a4d11025" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="311cf7ac-c2ae-4e7d-9831-e9c5bc7d329b" name="parent_id" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="4ca2d550-2555-4d4f-a73a-68661a79b9da" name="model" nullable="true" scale="10" size="255">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="ee31c40f-9b2b-495d-9b53-05cf1b46c9a9" name="foreign_key" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="9c0d6bfc-0525-42aa-8b84-ad259d0b04e0" name="alias" nullable="true" scale="10" size="255">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="3ea65141-068c-4e28-9292-b5b1bf772b05" name="lft" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="5d78f919-b716-4fa3-a4dc-fd7da8b33fe5" name="rght" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Index id="7fd10744-dab3-4239-a890-addb3cc5bac5" indextype="PRIMARYKEY" name="acos_pkey">
+<Indexattribute attributerefid="25e489e1-a8ec-4eb9-b0fc-0b95a4d11025" id="06ba5c2b-c82d-4aad-988a-7d525c944ed4"/>
+</Index>
+</Table>
+<Table id="f2a8f25b-4aa7-42c3-a090-742ad7117209" name="anios" schema="">
+<Property name="LOCATION" value="330:10"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('anios_id_seq'::regclass)" extra="" fraction="0" id="558dfcc2-6c33-4480-882c-01df7b70d4ae" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="39b731bc-7126-46fa-8fcf-3e639aea62b5" name="plan_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="f23a45d8-d5c4-4cbe-b106-660f81ea3a24" name="ciclo_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="87a51993-1a29-41f4-8016-8037540ce29b" name="old_item" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="65953895-c6ed-4b58-b52e-5502dcce4e63" name="anio" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="a6b035ec-6f79-4a06-9056-a27ab62c19ec" name="etapa_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="feaaec70-2c14-4568-8c20-bec810a45f96" name="matricula" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="843ae7fa-afbb-48fa-9d96-90248cde4c6c" name="secciones" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="547dcda6-07ee-4e53-b797-f93128d80a23" name="hs_taller" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="timestamp" defaultvalue="" extra="" fraction="6" id="94edc401-cfe3-4127-9558-1d30390bab7a" name="created" nullable="true" scale="10" size="29">
+<Comment/>
+</Attribute>
+<Attribute datatype="timestamp" defaultvalue="" extra="" fraction="6" id="c6392296-00c6-48eb-b340-305fcd950895" name="modified" nullable="true" scale="10" size="29">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="fc3f25d8-0c79-4b9d-a202-574766af337d" name="estructura_planes_anio_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Index id="5e24b91f-ef26-473e-8dce-5ee4fac32d21" indextype="PRIMARYKEY" name="anios_pkey">
+<Indexattribute attributerefid="558dfcc2-6c33-4480-882c-01df7b70d4ae" id="e48907eb-cad2-4c30-9e45-3de67955d6b7"/>
+</Index>
+<Index id="31617850-f1ee-43ea-b5c4-b2cad116a5f7" indextype="NONUNIQUE" name="plan_ciclo_pkey">
+<Indexattribute attributerefid="39b731bc-7126-46fa-8fcf-3e639aea62b5" id="dc7d0e4a-34a9-466b-a0e6-e09bc54fd596"/>
+<Indexattribute attributerefid="f23a45d8-d5c4-4cbe-b106-660f81ea3a24" id="6988397d-7ac4-4229-ae0f-7fad8fa99a6b"/>
+</Index>
+</Table>
+<Table id="b0311ba8-182b-41b2-923d-53d9213cd22e" name="aros" schema="">
+<Property name="LOCATION" value="968:1097"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('aros_id_seq'::regclass)" extra="" fraction="0" id="5bfb3480-99ee-4fe8-99c6-fb326c29fedb" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="dc120e37-93b6-4c5b-a3ba-4c583abddff0" name="parent_id" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="6cae4101-31d9-4905-9a82-ef5b361e44e0" name="model" nullable="true" scale="10" size="255">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="d2cbbc55-1a88-4286-a9c2-e8b15c6c2546" name="foreign_key" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="13edeb9d-7249-473c-91fd-65d3331cb184" name="alias" nullable="true" scale="10" size="255">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="6383de98-fcda-4eed-a059-6d90e6e76833" name="lft" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="db044927-9ae1-4415-b2ee-019de5f2a991" name="rght" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Index id="db28c5e9-9931-4cbc-9c79-e1968175557d" indextype="PRIMARYKEY" name="aros_pkey">
+<Indexattribute attributerefid="5bfb3480-99ee-4fe8-99c6-fb326c29fedb" id="1d8650ca-5346-4cd9-8cf3-d934c8c6e221"/>
+</Index>
+</Table>
+<Table id="465f3768-c1bc-4722-8427-b0defe4b4f63" name="aros_acos" schema="">
+<Property name="LOCATION" value="1187:986"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('aros_acos_id_seq'::regclass)" extra="" fraction="0" id="246d5b4b-edd9-4a4a-af96-de2be15c78d8" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="bab8cd75-42ef-4300-9d4d-547823c122a9" name="aro_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="99484604-00e0-473e-bae5-9ad9f65eb3b1" name="aco_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="bpchar" defaultvalue="0" extra="" fraction="0" id="a0d8de15-71ee-4d57-8322-abbcfebc6d36" name="_create" nullable="false" scale="10" size="2">
+<Comment/>
+</Attribute>
+<Attribute datatype="bpchar" defaultvalue="0" extra="" fraction="0" id="a5128790-f12e-4eb8-b9ef-e280b733d748" name="_read" nullable="false" scale="10" size="2">
+<Comment/>
+</Attribute>
+<Attribute datatype="bpchar" defaultvalue="0" extra="" fraction="0" id="48872da7-0278-4b35-a62c-acb58492c5b6" name="_update" nullable="false" scale="10" size="2">
+<Comment/>
+</Attribute>
+<Attribute datatype="bpchar" defaultvalue="0" extra="" fraction="0" id="06b4cf1d-3c46-4920-9536-c0fabb7aa488" name="_delete" nullable="false" scale="10" size="2">
+<Comment/>
+</Attribute>
+<Index id="40a0e252-659e-462d-974c-3205bd836674" indextype="PRIMARYKEY" name="aros_acos_pkey">
+<Indexattribute attributerefid="246d5b4b-edd9-4a4a-af96-de2be15c78d8" id="574b2830-eb08-48e2-b057-7b86ee68aac3"/>
+</Index>
+</Table>
+<Table id="8d72a76e-1250-4526-bd59-fa2a2f1aa7d7" name="ciclos" schema="">
+<Property name="LOCATION" value="57:15"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('ciclos_id_seq'::regclass)" extra="" fraction="0" id="35e5d8df-851c-49a2-bec4-c8458b71fe13" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="ba8fb22e-2258-4d5f-8a87-a1dc360297e8" name="name" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Index id="15af9d7e-5309-4910-ab76-bf6d10cec4cd" indextype="PRIMARYKEY" name="ciclos_pkey">
+<Indexattribute attributerefid="35e5d8df-851c-49a2-bec4-c8458b71fe13" id="6b2ca474-545c-45a2-8a42-e27f5414c2eb"/>
+</Index>
+</Table>
+<Table id="d15553c4-6478-446b-8e56-93ee57c83e1a" name="claseinstits" schema="">
+<Property name="LOCATION" value="640:390"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('claseinstits_id_seq'::regclass)" extra="" fraction="0" id="bc9cb137-c1b9-4c1b-9007-d511fb8ce998" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="6f70956a-63d4-4f0a-a209-38c2a8b90801" name="name" nullable="false" scale="10" size="60">
+<Comment/>
+</Attribute>
+<Index id="a7533991-d188-4f4f-9054-7609ab01d52f" indextype="PRIMARYKEY" name="claseinstits_pkey">
+<Indexattribute attributerefid="bc9cb137-c1b9-4c1b-9007-d511fb8ce998" id="b3adede9-d95c-43fd-8c95-98167600ffb9"/>
+</Index>
+</Table>
+<Table id="6601e562-ec57-4fc7-b5f1-0553ab1b6421" name="departamentos" schema="">
+<Property name="LOCATION" value="890:0"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('departamento_id_seq'::regclass)" extra="" fraction="0" id="43f15704-dac6-4e88-860d-7647c7262d23" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="c8859243-982d-4910-b359-5e2d5e12a85f" name="jurisdiccion_id" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="5f517759-8281-4b4f-8137-6304e593bd5b" name="name" nullable="true" scale="10" size="64">
+<Comment/>
+</Attribute>
+<Index id="3f0a13b6-295d-438e-8c8a-55afae05b056" indextype="PRIMARYKEY" name="departamento_id">
+<Indexattribute attributerefid="43f15704-dac6-4e88-860d-7647c7262d23" id="b8cbde55-a250-4df7-80f3-f48bad399ed8"/>
+</Index>
+</Table>
+<Table id="834d8fe0-ca04-4692-8b49-2f05ce28e901" name="dependencias" schema="">
+<Property name="LOCATION" value="630:0"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('dependencias_id_seq'::regclass)" extra="" fraction="0" id="9fd67881-fa01-4342-9793-d9994993da54" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="3e050804-ff19-48fb-a3fb-b525bdc98deb" name="name" nullable="false" scale="10" size="40">
+<Comment/>
+</Attribute>
+<Index id="0dfb8a4b-e799-4573-9555-2e65c470cb7a" indextype="PRIMARYKEY" name="dependencias_pkey">
+<Indexattribute attributerefid="9fd67881-fa01-4342-9793-d9994993da54" id="bbc4e0bc-b9e4-4462-9dd6-d87a79d76c0e"/>
+</Index>
+</Table>
+<Table id="74cc4ebc-b1ae-4475-8aea-2f1b8833bda9" name="estructura_planes" schema="">
+<Property name="LOCATION" value="52:264"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('estructura_planes_id_seq'::regclass)" extra="" fraction="0" id="1022286c-2866-47f5-9ace-c639c64f326d" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="f16bc2a6-58a5-449b-9cbf-931d5719669e" name="name" nullable="true" scale="10" size="130">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="6875e2aa-b1d6-4346-b566-dbfbe804d1a6" name="etapa_id" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="timestamp" defaultvalue="" extra="" fraction="6" id="f18d35bf-d8f3-4897-8d6c-64a0ee1acf14" name="created" nullable="true" scale="10" size="29">
+<Comment/>
+</Attribute>
+<Attribute datatype="timestamp" defaultvalue="" extra="" fraction="6" id="a74e37ff-d5e7-4704-b099-c1bc9ad7d4d1" name="modified" nullable="true" scale="10" size="29">
+<Comment/>
+</Attribute>
+<Index id="aa9739b3-2582-4f2b-ad3d-172c355b1156" indextype="PRIMARYKEY" name="estructura_planes_pkey">
+<Indexattribute attributerefid="1022286c-2866-47f5-9ace-c639c64f326d" id="83b3eb57-5832-46f7-87f7-119e4e2c7d29"/>
+</Index>
+</Table>
+<Table id="6195670d-e16f-479e-9d61-ff132fbe43f7" name="estructura_planes_anios" schema="">
+<Property name="LOCATION" value="50:110"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('estructura_planes_anios_id_seq'::regclass)" extra="" fraction="0" id="2968ce02-6bbf-4f6d-816c-c65478b89f83" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="dd2c5124-5469-48de-ab57-4a9f889c0d47" name="estructura_plan_id" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="7751c49e-e44a-4326-8b32-52586f9a3e06" name="nro_anio" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="6f25aa52-49c9-46b5-8732-44f723055032" name="edad_teorica" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="641f98af-d529-42ac-8266-c537abb70663" name="anio_escolaridad" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="690c1f04-0a53-4862-b814-c8f3fd6d5521" name="alias" nullable="true" scale="10" size="20">
+<Comment/>
+</Attribute>
+<Index id="9d5cb2e4-850f-4cb9-96f6-217d8ac9cad9" indextype="PRIMARYKEY" name="estructura_planes_anios_pkey">
+<Indexattribute attributerefid="2968ce02-6bbf-4f6d-816c-c65478b89f83" id="cc1c2513-3a8a-4308-9861-8b8aa87be160"/>
+</Index>
+</Table>
+<Table id="15043adb-f28f-41fe-830d-e339f8d7bcaa" name="etapas" schema="">
+<Property name="LOCATION" value="51:395"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('etapas_id_seq'::regclass)" extra="" fraction="0" id="78efe171-7232-4004-8598-d9d0cba99e68" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="aeca6133-cc95-47ca-ad48-8dae8951fbcf" name="name" nullable="false" scale="10" size="40">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="0f33a0e9-95df-45c5-ab0d-2f5744519da4" name="abrev" nullable="true" scale="10" size="20">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="3ea2247a-59a5-4f73-97fc-2abe35fb082a" name="orden" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Index id="f77c4b82-2003-40fa-a18e-091e639c4994" indextype="PRIMARYKEY" name="etapas_pkey">
+<Indexattribute attributerefid="78efe171-7232-4004-8598-d9d0cba99e68" id="e60f5078-7a22-42be-9903-0b0c1c11f44b"/>
+</Index>
+</Table>
+<Table id="93b03963-8d8a-4ffd-be07-cdd21bff0d9d" name="etp_estados" schema="">
+<Property name="LOCATION" value="640:170"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('etp_estados_id_seq'::regclass)" extra="" fraction="0" id="0a0db5ef-d9a1-4821-80bd-cf9a6a7d09a9" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="2f71b5dd-5a7c-4608-9455-fab6ec47c540" name="name" nullable="false" scale="10" size="60">
+<Comment/>
+</Attribute>
+<Index id="aa36c6a3-08a8-4032-acdc-b13040d23913" indextype="PRIMARYKEY" name="etp_estados_pkey">
+<Indexattribute attributerefid="0a0db5ef-d9a1-4821-80bd-cf9a6a7d09a9" id="c7a3fdf9-b98e-4986-bc55-938eb537a2b8"/>
+</Index>
+</Table>
+<Table id="6e6feb9c-7829-4be0-85bf-e055fbd757ba" name="fondos" schema="">
+<Property name="LOCATION" value="606:1122"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('fondos_id_seq'::regclass)" extra="" fraction="0" id="6d905d27-4c27-4de5-8a75-01c4987bec16" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="19381be8-da2d-4944-bf88-2de691781505" name="instit_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="45fc7eef-3e09-47be-b514-6a979dc1a6c6" name="jurisdiccion_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="0" extra="" fraction="17" id="7618b611-8830-4434-8027-e6f19e8e7bca" name="total" nullable="false" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="19cbcf04-25bf-40c8-b3e1-21a211a9ca42" name="anio" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="690577d1-98df-4264-b35a-0dab97d9ee79" name="trimestre" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="5e5c4a0b-5675-4ff3-9514-d012a51fe74f" name="memo" nullable="false" scale="10" size="20">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="8ff419d6-f9cc-47a9-9f4b-79fc6d0c505f" name="resolucion" nullable="false" scale="10" size="20">
+<Comment/>
+</Attribute>
+<Attribute datatype="text" defaultvalue="''::character varying" extra="" fraction="0" id="ab67cd32-4c58-45b9-9b66-75ec01fe604a" name="description" nullable="false" scale="10" size="2147483647">
+<Comment/>
+</Attribute>
+<Attribute datatype="timestamp" defaultvalue="" extra="" fraction="6" id="994815fd-f54d-47f6-a2ab-8a097278397e" name="created" nullable="true" scale="10" size="29">
+<Comment/>
+</Attribute>
+<Attribute datatype="timestamp" defaultvalue="" extra="" fraction="6" id="ae2e89cc-e55b-462f-a0f6-59dba9c51c6f" name="modified" nullable="true" scale="10" size="29">
+<Comment/>
+</Attribute>
+<Index id="6b791caf-e165-4641-98f0-615e00b02dd9" indextype="PRIMARYKEY" name="fondos_pkey">
+<Indexattribute attributerefid="6d905d27-4c27-4de5-8a75-01c4987bec16" id="ffdb3830-a1eb-41e6-a516-a3891b110f2c"/>
+</Index>
+</Table>
+<Table id="c443cce8-e651-4bf2-a72b-b9be4473102c" name="fondos_lineas_de_acciones" schema="">
+<Property name="LOCATION" value="604:1380"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('fondos_lineas_de_acciones_id_seq'::regclass)" extra="" fraction="0" id="1dfc3357-0dfe-4db1-959b-90f90c2eeed7" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="5adfa853-5114-414b-82d2-d806be67cb14" name="fondo_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="9b53de32-ed4e-4307-b22e-e7d998b2be7e" name="lineas_de_accion_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="0" extra="" fraction="17" id="53d9da27-90d8-41ea-923f-bada49f17502" name="monto" nullable="false" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="timestamp" defaultvalue="" extra="" fraction="6" id="0408227b-316c-45dd-9b90-ffe901fd28bb" name="created" nullable="true" scale="10" size="29">
+<Comment/>
+</Attribute>
+<Attribute datatype="timestamp" defaultvalue="" extra="" fraction="6" id="6e32353d-fda4-4b45-b44b-b36a73983076" name="modified" nullable="true" scale="10" size="29">
+<Comment/>
+</Attribute>
+<Index id="60da3f1f-3c81-4d13-950b-aea16a2f7c50" indextype="PRIMARYKEY" name="fondos_lineas_de_acciones_pkey">
+<Indexattribute attributerefid="1dfc3357-0dfe-4db1-959b-90f90c2eeed7" id="48d95f65-66f7-442f-8ec8-699c98b996c5"/>
+</Index>
+</Table>
+<Table id="050c346d-e2f7-4fd6-b199-ac4a672bf1dc" name="gestiones" schema="">
+<Property name="LOCATION" value="1190:390"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('gestiones_id_seq'::regclass)" extra="" fraction="0" id="eba244a1-f70e-4c4c-9a50-0475ce6236d9" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="ef71eb33-81f6-40f5-8ae2-0430ab8275a2" name="name" nullable="false" scale="10" size="20">
+<Comment/>
+</Attribute>
+<Index id="7238e451-4021-4013-8fea-2410af502946" indextype="PRIMARYKEY" name="gestiones_pkey">
+<Indexattribute attributerefid="eba244a1-f70e-4c4c-9a50-0475ce6236d9" id="642a3433-0325-42fe-8f9a-93004376d040"/>
+</Index>
+</Table>
+<Table id="da2a6150-4e0f-4ac7-8996-cdeabf20d2e1" name="historial_cues" schema="">
+<Property name="LOCATION" value="1190:210"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('historial_cues_id_seq'::regclass)" extra="" fraction="0" id="0fc57f74-9f18-45fa-a4b9-a959fb19e19d" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="e2eae7ec-bb9c-4836-a04d-a7e8309cde9d" name="instit_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="4fec3c12-0bd3-4343-8735-dce7d61073b6" name="cue" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="44486101-7205-4fe6-9c39-568298e7d471" name="anexo" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="timestamp" defaultvalue="" extra="" fraction="6" id="63ae7aff-841f-4290-bb4f-9896ae57ee2b" name="created" nullable="true" scale="10" size="29">
+<Comment/>
+</Attribute>
+<Attribute datatype="text" defaultvalue="" extra="" fraction="0" id="023bf8ed-2bdc-415e-85a7-5376e7097eb4" name="observaciones" nullable="true" scale="10" size="2147483647">
+<Comment/>
+</Attribute>
+<Index id="605c12fe-3fd7-47da-90bb-747787c4f795" indextype="PRIMARYKEY" name="historial_cues_pkey">
+<Indexattribute attributerefid="0fc57f74-9f18-45fa-a4b9-a959fb19e19d" id="5e114528-9bc1-4d23-b318-c40f597d8f82"/>
+</Index>
+</Table>
+<Table id="1c4004eb-0353-4e4b-b347-786d89133400" name="instits" schema="">
+<Property name="LOCATION" value="870:114"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('instits_id_seq'::regclass)" extra="" fraction="0" id="acb59105-e139-4d9a-94c7-366c1b1bc9e5" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="972787cf-8677-4e29-8366-25de885a6874" name="gestion_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="cca6d1f3-b52c-427c-a93c-3f126e694aac" name="dependencia_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="eac01b66-bc44-4557-89c2-c3d682e90ff3" name="nombre_dep" nullable="false" scale="10" size="100">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="0d83c1f8-3706-43ca-8e71-75e88313c55a" name="tipoinstit_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="c0495fbd-83af-485f-a5bf-6ee9b0b9e492" name="jurisdiccion_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="deffa758-0d34-4ad8-831d-f2bf30fa9459" name="cue" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="cbb53226-53f2-4db7-bb20-f42669c5fc9a" name="anexo" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="2af53b2b-aaa2-49a9-98c6-e7c275f3e330" name="esanexo" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="2cbbe2ca-f550-44e8-9c69-75a4fab7583d" name="nombre" nullable="false" scale="10" size="150">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="bc747910-a38c-4d64-9ae9-10e73203c8aa" name="nroinstit" nullable="false" scale="10" size="20">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="335e88c0-b508-4cd4-82f9-451f2058b923" name="anio_creacion" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="a8fa6426-28aa-409b-9a49-9cdaffea2a1a" name="direccion" nullable="false" scale="10" size="100">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="38cf360e-bac4-43fa-8086-dd5e5325829e" name="depto" nullable="false" scale="10" size="50">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="8ae8ade3-e7ca-45c9-b0ca-195398171eb3" name="localidad" nullable="false" scale="10" size="50">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="aa29cb1d-637c-4548-81d6-7b5490fa8e38" name="cp" nullable="false" scale="10" size="8">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="f7ff6066-12ff-4fbb-ac03-b5893661f2db" name="telefono" nullable="false" scale="10" size="60">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="abbf30cf-8287-414e-8454-a0b464ccd241" name="mail" nullable="false" scale="10" size="60">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="b5f874a5-43e7-4181-b7fa-ffef81898ff8" name="web" nullable="false" scale="10" size="100">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="e83c2e1e-10d8-44cc-bbe6-f56939da29b6" name="dir_nombre" nullable="false" scale="10" size="60">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="ee64638e-b614-4bb7-8c97-c4a8ef181812" name="dir_tipodoc_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="b6f3a6cd-ab64-4b23-b899-a5d671aee66b" name="dir_nrodoc" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="52a4b7fb-ec4a-4b95-b940-ef5288da07fe" name="dir_telefono" nullable="false" scale="10" size="60">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="439c4576-26ba-4309-a1a4-6f03b7997155" name="dir_mail" nullable="false" scale="10" size="60">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="256bcc5a-987f-4c73-b267-75f3cac11e66" name="vice_nombre" nullable="false" scale="10" size="60">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="e08b0951-0c7c-4d5f-a219-97f6273be533" name="vice_tipodoc_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="207cc54b-27b3-4afd-be39-4f85f02849e0" name="vice_nrodoc" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="5cc36409-5bd2-4e44-946e-6f95c66fdfad" name="actualizacion" nullable="false" scale="10" size="30">
+<Comment/>
+</Attribute>
+<Attribute datatype="text" defaultvalue="" extra="" fraction="0" id="f6864fd8-5f7f-4628-a99d-856589053e5c" name="observacion" nullable="false" scale="10" size="2147483647">
+<Comment/>
+</Attribute>
+<Attribute datatype="date" defaultvalue="" extra="" fraction="0" id="23c8db55-924a-447d-ac89-fdac47e21020" name="fecha_mod" nullable="true" scale="10" size="13">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="8609bbfd-5b3e-4cae-8223-8caa1af5e83f" name="activo" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="a3c5ce17-d56c-4ae8-918d-0326667eff34" name="ciclo_alta" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="1e4cfb41-681f-43d0-b808-2a610713b80f" name="ciclo_mod" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="timestamp" defaultvalue="" extra="" fraction="6" id="5063a101-51ff-4a4c-84d7-fde6ea0adb6a" name="created" nullable="true" scale="10" size="29">
+<Comment/>
+</Attribute>
+<Attribute datatype="timestamp" defaultvalue="" extra="" fraction="6" id="4abc57d6-6b4f-49d6-a4c7-b612cbe9ca58" name="modified" nullable="true" scale="10" size="29">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="3d940cc8-ac3d-4480-91d9-e0a1dd31211d" name="localidad_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="ea7de4b9-a14d-431f-bb57-ed100fa3fdd3" name="departamento_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="5a92c8b1-f19d-4ac4-bf24-b78abc489582" name="lugar" nullable="false" scale="10" size="110">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="19eeb3a7-cbcb-4822-9936-7f74fa29bd46" name="mail_alternativo" nullable="false" scale="10" size="60">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="11886cd2-3477-4866-97e4-133e4321d592" name="telefono_alternativo" nullable="false" scale="10" size="60">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="361112c3-51e6-4018-92fa-ea5b797f8d7b" name="etp_estado_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="4b36c20f-2e27-4efe-9df6-6256b2ec913a" name="claseinstit_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="25d57c76-b1df-42c5-a33e-94c548e7e5c9" name="orientacion_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Index id="20358546-9398-4b31-9574-9ef03c4a7ade" indextype="PRIMARYKEY" name="instits_pkey">
+<Indexattribute attributerefid="acb59105-e139-4d9a-94c7-366c1b1bc9e5" id="66799cc8-5226-4c14-83b1-b96378135898"/>
+</Index>
+</Table>
+<Table id="fe600093-997b-4335-82cd-2e867f7c9171" name="jurisdicciones" schema="">
+<Property name="LOCATION" value="325:718"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('jurisdicciones_id_seq'::regclass)" extra="" fraction="0" id="297712ae-2409-4933-9098-22594bc21949" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="d2d5d131-2fc1-4c66-9e6d-af32c550f7e6" name="name" nullable="false" scale="10" size="40">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="706f6330-2d0d-47e6-98f8-a3f562e8dacd" name="autoridad_cargo" nullable="true" scale="10" size="60">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="13aaea9d-4d55-42ef-8429-d034f62fd894" name="autoridad_nombre" nullable="true" scale="10" size="60">
+<Comment/>
+</Attribute>
+<Attribute datatype="date" defaultvalue="" extra="" fraction="0" id="c15337c3-3325-47b7-8134-75f50e84e4ba" name="autoridad_fecha_asuncion" nullable="true" scale="10" size="13">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="2cb96027-cfee-456f-ad98-e80e065a46b5" name="ministerio_nombre" nullable="true" scale="10" size="60">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="257a9d6f-1021-46bf-99bd-50ba9d47082f" name="ministerio_direccion" nullable="true" scale="10" size="200">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="323db170-e7b8-4ee0-a3c6-0f34b049517d" name="ministerio_codigo_postal" nullable="true" scale="10" size="60">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="625cd6a1-6fcd-4a4d-a004-f192714c6707" name="ministerio_telefono" nullable="true" scale="10" size="60">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="9c0be4f6-c6f4-445e-b25b-e89e22e02893" name="ministerio_mail" nullable="true" scale="10" size="150">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="9f41b69f-31c3-4dc2-8890-5d0f5ff9e491" name="ministerio_localidad_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="timestamp" defaultvalue="" extra="" fraction="6" id="47d7a3c7-4a17-4562-8c59-e9f8eff02399" name="modified" nullable="true" scale="10" size="29">
+<Comment/>
+</Attribute>
+<Attribute datatype="timestamp" defaultvalue="" extra="" fraction="6" id="5288b1dd-20af-4c0e-9122-3bb75d38b480" name="updated" nullable="true" scale="10" size="29">
+<Comment/>
+</Attribute>
+<Index id="9913cac2-4836-44a1-8ebb-f480d4eb7902" indextype="PRIMARYKEY" name="jurisdicciones_pkey">
+<Indexattribute attributerefid="297712ae-2409-4933-9098-22594bc21949" id="43da22a7-e7f3-4d23-ae37-0c44e82a493b"/>
+</Index>
+</Table>
+<Table id="810ea621-c7e0-4320-8c46-be0b72ba6f7e" name="jurisdicciones_estructura_planes" schema="">
+<Property name="LOCATION" value="337:1046"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('jurisdicciones_estructura_planes_id_seq'::regclass)" extra="" fraction="0" id="17e5f65c-6ecd-4f25-beef-fac725bfb57a" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="b00b59e1-37d4-4118-8fba-622f8a1174b7" name="jurisdiccion_id" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="fb5d3f02-eeb2-44d7-805b-82fed2944d40" name="estructura_plan_id" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="timestamp" defaultvalue="" extra="" fraction="6" id="50cd4b97-f9e6-4370-8823-a6df2c1185fa" name="created" nullable="true" scale="10" size="29">
+<Comment/>
+</Attribute>
+<Attribute datatype="timestamp" defaultvalue="" extra="" fraction="6" id="7fa3e8d1-1235-41c1-ba88-4c6cde0f9c70" name="modified" nullable="true" scale="10" size="29">
+<Comment/>
+</Attribute>
+<Index id="95d3b464-f1f3-44ac-adc9-cadf2141c07a" indextype="PRIMARYKEY" name="jurisdiccion_estructura_planes_pkey">
+<Indexattribute attributerefid="17e5f65c-6ecd-4f25-beef-fac725bfb57a" id="e028fb73-87f9-4bce-ab28-d95029b757ed"/>
+</Index>
+</Table>
+<Table id="e96ceb02-71fe-4a68-a56e-120d0fe8f235" name="lineas_de_acciones" schema="">
+<Property name="LOCATION" value="605:1598"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('lineas_de_acciones_id_seq'::regclass)" extra="" fraction="0" id="71221722-d248-4b5b-abfd-a259efc770c4" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="c24a4244-91cf-42c0-996c-d4cb5e948a91" name="name" nullable="false" scale="10" size="20">
+<Comment/>
+</Attribute>
+<Attribute datatype="text" defaultvalue="''::character varying" extra="" fraction="0" id="0527486b-a8f3-4b80-b012-feecf631ba7b" name="description" nullable="false" scale="10" size="2147483647">
+<Comment/>
+</Attribute>
+<Attribute datatype="timestamp" defaultvalue="" extra="" fraction="6" id="bf26fb83-0172-40d3-b5c5-8aaa1f9928fb" name="created" nullable="true" scale="10" size="29">
+<Comment/>
+</Attribute>
+<Attribute datatype="timestamp" defaultvalue="" extra="" fraction="6" id="9493accd-e0cd-4521-8085-4d340548f45c" name="modified" nullable="true" scale="10" size="29">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="1ab5f7c2-3870-4935-97f7-568d6008faa3" name="formulario" nullable="true" scale="10" size="20">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="55a33e74-c824-4521-90b9-70bb0f8778c5" name="referencia" nullable="true" scale="10" size="60">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="92e20fff-1d38-412d-a554-752f48499db5" name="orden" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Index id="784b31fa-1719-4b9f-9c5e-94d864d4de37" indextype="PRIMARYKEY" name="lineas_de_acciones_pkey">
+<Indexattribute attributerefid="71221722-d248-4b5b-abfd-a259efc770c4" id="d2b52ab0-88fb-4279-b245-30e9325e6f21"/>
+</Index>
+</Table>
+<Table id="240c4828-37ce-4665-94a7-66b78120b78a" name="localidades" schema="">
+<Property name="LOCATION" value="1190:640"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('localidades_id_seq'::regclass)" extra="" fraction="0" id="bc27c4f5-b885-4f36-b026-ed7816587cfa" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="9d1c5763-144b-4a30-88a2-1ffce608678c" name="departamento_id" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="dca83512-67b1-4bc2-a9e6-6da443454e5a" name="name" nullable="true" scale="10" size="64">
+<Comment/>
+</Attribute>
+<Index id="94c6a27f-8330-447d-9516-b6fc3434a77b" indextype="PRIMARYKEY" name="localidades_id">
+<Indexattribute attributerefid="bc27c4f5-b885-4f36-b026-ed7816587cfa" id="69d32698-59e3-427c-ace1-291e37dda25f"/>
+</Index>
+</Table>
+<Table id="8c62c7b6-b883-410f-a8bb-d83ba58a00fd" name="logs" schema="">
+<Property name="LOCATION" value="1182:1380"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('logs_id_seq'::regclass)" extra="" fraction="0" id="ace2c9f0-42e6-4d69-9675-040e363920d5" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="8e33e997-6b74-4633-b091-7fce36680e79" name="username" nullable="false" scale="10" size="20">
+<Comment/>
+</Attribute>
+<Attribute datatype="date" defaultvalue="" extra="" fraction="0" id="5485e388-fff3-4bf5-8eaf-d426b09ef18e" name="fecha_in" nullable="false" scale="10" size="13">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="05d31fcb-84a1-467f-8d20-63fa8abd51bd" name="hora_in" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="date" defaultvalue="" extra="" fraction="0" id="d62278f3-948f-490e-9373-f4190df2dd4e" name="fecha_out" nullable="false" scale="10" size="13">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="00ecbe49-867a-46e1-87e2-d915ad70d168" name="hora_out" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Index id="99cceb62-4c39-4733-a7ed-89464c26b286" indextype="PRIMARYKEY" name="logs_pkey">
+<Indexattribute attributerefid="ace2c9f0-42e6-4d69-9675-040e363920d5" id="89643a0a-0f1d-418f-a40a-9c5a9f91420e"/>
+</Index>
+</Table>
+<Table id="cb026050-e2e0-46e9-acc3-9b5950387fea" name="ofertas" schema="">
+<Property name="LOCATION" value="640:300"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('ofertas_id_seq'::regclass)" extra="" fraction="0" id="a4f0640f-055f-46d8-88d3-d7158eea3cb3" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="cd7573cc-1c76-4b97-9ed0-77cd03be418d" name="abrev" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="f0b3df61-ccbb-4169-a083-4a9b428d9a87" name="name" nullable="false" scale="10" size="30">
+<Comment/>
+</Attribute>
+<Index id="6e786ea9-1ea3-4f5a-ab6f-b4e3eb1a8d58" indextype="PRIMARYKEY" name="ofertas_pkey">
+<Indexattribute attributerefid="a4f0640f-055f-46d8-88d3-d7158eea3cb3" id="7dcf2221-8793-453d-935b-8f3686431058"/>
+</Index>
+</Table>
+<Table id="7105d90c-c046-4362-9bd1-689545a237c3" name="orientaciones" schema="">
+<Property name="LOCATION" value="599:512"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('orientaciones_id_seq'::regclass)" extra="" fraction="0" id="1c5568cb-bac1-4270-afd6-d35ec5c6572f" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="c2bd5a6c-3674-4bbe-b1fd-8e137f598897" name="name" nullable="false" scale="10" size="100">
+<Comment/>
+</Attribute>
+<Index id="e2bf9975-8ae9-40d8-8655-98e94613ede8" indextype="PRIMARYKEY" name="orientaciones_pkey">
+<Indexattribute attributerefid="1c5568cb-bac1-4270-afd6-d35ec5c6572f" id="ff2597bc-8408-4efd-ac71-e87a5d403a88"/>
+</Index>
+</Table>
+<Table id="2cd94878-5346-4643-9d27-b8829a510389" name="planes" schema="">
+<Property name="LOCATION" value="325:252"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('planes_id_seq'::regclass)" extra="" fraction="0" id="c785c0b0-72fe-4134-8412-42f49d8ac9a3" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="c616c96e-46e7-4fbc-8daf-af13aea82e9c" name="instit_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="b25272b0-4d23-4ce7-a208-7d9660d833a4" name="oferta_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="125018ad-8625-4d3f-9723-9145233bda98" name="old_item" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="831e40a4-87e5-4e26-9367-453cb0471f08" name="norma" nullable="false" scale="10" size="300">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="2800538c-bd38-4b5c-a11f-ea134f1ad1fb" name="nombre" nullable="false" scale="10" size="200">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="677aab5e-7ed6-4f08-aa61-00756e3d0aa4" name="perfil" nullable="false" scale="10" size="200">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="2cadf070-0cf2-4052-902d-8a8a1c485dde" name="sector" nullable="false" scale="10" size="200">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="5aa583da-db47-4ae3-9685-9b1bc8e52279" name="duracion_hs" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="f758125b-38f0-41d7-b88a-fa9ba7a55e98" name="duracion_semanas" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="de531d09-4623-4eb3-95d9-b49dcaa15269" name="duracion_anios" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="8f5a88a5-4684-43bc-99ac-bd0b8a245b49" name="matricula" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="text" defaultvalue="" extra="" fraction="0" id="4ad03563-7ecb-44a1-a65e-64b68c606eeb" name="observacion" nullable="false" scale="10" size="2147483647">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="ad97b17c-38b0-4b81-8567-c06e202fcf92" name="ciclo_alta" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="b030ab6d-c2a3-4471-9f77-5b1a55f06b72" name="ciclo_mod" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="timestamp" defaultvalue="" extra="" fraction="6" id="c6112ef6-576b-4c54-9489-f73371d199cf" name="created" nullable="true" scale="10" size="29">
+<Comment/>
+</Attribute>
+<Attribute datatype="timestamp" defaultvalue="" extra="" fraction="6" id="53a2af43-1228-4f31-84b0-b6591158bfee" name="modified" nullable="true" scale="10" size="29">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="f05d6b2e-de4d-4389-b028-96b9644193c0" name="sector_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="f2ddf68c-039c-401b-ac89-859a5370af4e" name="subsector_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="1c20f7c6-8b77-47cb-a5e2-ddd7d87e3fa3" name="titulo_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="0f3e14b9-4ae7-47ba-bb4b-45f6231bcd3b" name="estructura_plan_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Index id="2b13b120-041c-4f5b-ac7b-653f9ade729b" indextype="PRIMARYKEY" name="planes_pkey">
+<Indexattribute attributerefid="c785c0b0-72fe-4134-8412-42f49d8ac9a3" id="b7628dca-3693-4d8f-92a4-7b1b04d7de83"/>
+</Index>
+<Index id="4973d1a3-497a-4a4f-8a7a-51c8d6decb45" indextype="NONUNIQUE" name="plan_instit_pkey">
+<Indexattribute attributerefid="c616c96e-46e7-4fbc-8daf-af13aea82e9c" id="c9419d39-07e5-4062-a81e-9c1068aadfb5"/>
+<Indexattribute attributerefid="c785c0b0-72fe-4134-8412-42f49d8ac9a3" id="7b3bded8-1ad1-44ad-a45e-cbf3f65dffaf"/>
+<Indexattribute attributerefid="b25272b0-4d23-4ce7-a208-7d9660d833a4" id="df274d27-dd2d-4281-a399-051adf8c42f0"/>
+</Index>
+</Table>
+<Table id="9f75ae78-6859-4fea-8e64-80ae8457250a" name="queries" schema="">
+<Property name="LOCATION" value="901:1528"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('queries_id_seq'::regclass)" extra="" fraction="0" id="c3f8a1b9-8a2a-44eb-a045-09a78dd421fd" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="(NOT NULL::boolean)" extra="" fraction="0" id="c36c5264-c6ed-4c33-aba2-4f9b55d35098" name="name" nullable="true" scale="10" size="70">
+<Comment/>
+</Attribute>
+<Attribute datatype="text" defaultvalue="" extra="" fraction="0" id="768b4a25-48b8-4552-9d22-ef9c3d583505" name="description" nullable="true" scale="10" size="2147483647">
+<Comment/>
+</Attribute>
+<Attribute datatype="text" defaultvalue="" extra="" fraction="0" id="5845c24f-0750-4a6f-ae92-7876aaf70e19" name="query" nullable="true" scale="10" size="2147483647">
+<Comment/>
+</Attribute>
+<Attribute datatype="timestamptz" defaultvalue="" extra="" fraction="6" id="7bf840c0-8b79-4396-ab75-682af66a34f4" name="created" nullable="true" scale="10" size="35">
+<Comment/>
+</Attribute>
+<Attribute datatype="timestamptz" defaultvalue="" extra="" fraction="6" id="f8d30658-119c-4777-bb95-82e1aeb97eac" name="modified" nullable="true" scale="10" size="35">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="(NOT NULL::boolean)" extra="" fraction="0" id="923f997b-7031-427a-a55c-c9d2e419c740" name="categoria" nullable="true" scale="10" size="64">
+<Comment/>
+</Attribute>
+<Attribute datatype="bool" defaultvalue="(NOT NULL::boolean)" extra="" fraction="0" id="bc9be54b-e948-47e4-a85e-44133f5cf89e" name="ver_online" nullable="true" scale="10" size="1">
+<Comment/>
+</Attribute>
+<Index id="1636d429-e52e-4904-b646-c8c423313dea" indextype="PRIMARYKEY" name="queries_id">
+<Indexattribute attributerefid="c3f8a1b9-8a2a-44eb-a045-09a78dd421fd" id="b33cfd0d-9492-461b-a3fb-04895419860f"/>
+</Index>
+</Table>
+<Table id="68b0bd11-e7cc-4dac-8c9c-2ccadb1a0b05" name="referentes" schema="">
+<Property name="LOCATION" value="52:806"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('referentes_id_seq'::regclass)" extra="" fraction="0" id="f3b15f39-8b8a-419c-bb98-e9f9f5208378" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="b9959306-efce-46c2-b496-a4f646c3d72a" name="jurisdiccion_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="6a9b0b66-eb31-41c1-a63c-ea284697b58f" name="name" nullable="false" scale="10" size="60">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="ecd8cb74-bd52-4116-b299-b0bbd2684e91" name="tipodoc_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="788be69b-7001-4e0e-947e-5ce55f2ba2f5" name="nrodoc" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="38ef4d61-e5ca-4e5b-a320-0727878dbd92" name="telefono" nullable="false" scale="10" size="60">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="fb10a79a-6fd7-4e86-a347-003a1cec866f" name="mail" nullable="false" scale="10" size="60">
+<Comment/>
+</Attribute>
+<Index id="edb1514d-8dba-4e42-bd00-d5ceab200760" indextype="PRIMARYKEY" name="referentes_pkey">
+<Indexattribute attributerefid="f3b15f39-8b8a-419c-bb98-e9f9f5208378" id="166c0779-1c96-4564-8b2e-c366608e12fc"/>
+</Index>
+</Table>
+<Table id="cdb5bdca-f80a-4662-80b7-837d8b80c52a" name="sectores" schema="">
+<Property name="LOCATION" value="329:633"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('sectores_id_seq'::regclass)" extra="" fraction="0" id="ca65c955-d867-458b-978e-726b147539c9" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="b58cc726-8d03-495a-9396-5233f98ed615" name="name" nullable="true" scale="10" size="64">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="556ab7aa-da92-4e59-80f3-52d382d1103e" name="orientacion_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Index id="867e8100-4c41-4e79-86dc-5c7018803b19" indextype="PRIMARYKEY" name="id">
+<Indexattribute attributerefid="ca65c955-d867-458b-978e-726b147539c9" id="1e155e08-5a04-4729-a08f-1eb8f981d81b"/>
+</Index>
+</Table>
+<Table id="5b8a3dda-f75f-462c-9e7f-e8eb6685aebe" name="subsectores" schema="">
+<Property name="LOCATION" value="51:721"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('subsectores_id_seq'::regclass)" extra="" fraction="0" id="3a2c802e-f393-48c9-a8b6-285265a53c9a" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="ced4eab7-c140-44c7-8672-52646df49151" name="name" nullable="true" scale="10" size="64">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="873078c1-118e-46b0-b010-e19d20561d74" name="sector_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Index id="fc3aa1eb-5129-440f-99bb-e6be01c095f9" indextype="PRIMARYKEY" name="subsectores_id">
+<Indexattribute attributerefid="3a2c802e-f393-48c9-a8b6-285265a53c9a" id="d0576f57-fe84-481f-9889-4d7ee4a32517"/>
+</Index>
+</Table>
+<Table id="dbdf4381-2649-4c8f-8b4d-87b024a42161" name="sugerencias" schema="">
+<Property name="LOCATION" value="1180:1537"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('sugerencias_id_seq'::regclass)" extra="" fraction="0" id="7c56290b-f163-4572-a00a-e29278ed1018" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="5de5e7c4-7364-4422-8344-8b2bf91cb2e4" name="asunto" nullable="true" scale="10" size="100">
+<Comment/>
+</Attribute>
+<Attribute datatype="text" defaultvalue="" extra="" fraction="0" id="cdbdf3bb-e59a-4989-a73f-5bda5bc9f5cc" name="mensaje" nullable="true" scale="10" size="2147483647">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="0e047d72-0440-4ae0-8cb1-56e7f65fcefd" name="user_id" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="8dd78795-bd28-4fd0-ab40-0a88a2e1d94d" name="IP" nullable="true" scale="10" size="15">
+<Comment/>
+</Attribute>
+<Attribute datatype="timestamp" defaultvalue="" extra="" fraction="6" id="2fdbb360-1e41-4153-9831-19366ae655c4" name="created" nullable="true" scale="10" size="29">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="849e1fbb-ab9a-4e5f-b39b-c32b2bbdfb8f" name="leido" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Index id="89ff5049-5c52-4b64-bd5d-e6a7398e5c54" indextype="PRIMARYKEY" name="sugerencias_pkey">
+<Indexattribute attributerefid="7c56290b-f163-4572-a00a-e29278ed1018" id="f4b044b8-253f-4465-a059-363802114540"/>
+</Index>
+</Table>
+<Table id="e3d47976-c207-4af3-8873-8e34c411dcb5" name="tickets" schema="">
+<Property name="LOCATION" value="1190:460"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('tickets_id_seq'::regclass)" extra="" fraction="0" id="680674e0-9729-41be-a382-d8dc78941493" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="c56875f3-d46f-4ca1-aeeb-eab8139d448e" name="instit_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="2e3eccdb-0eaf-4098-be27-8fcc1d67e611" name="user_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="text" defaultvalue="" extra="" fraction="0" id="961fa1fb-b1bc-42a2-b1b3-01aa7c484425" name="observacion" nullable="false" scale="10" size="2147483647">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="ec5c1010-c287-40f2-b9a8-d890972d7cdf" name="estado" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="timestamp" defaultvalue="" extra="" fraction="6" id="bde8349d-08ff-4bed-9070-5840e1ffead2" name="created" nullable="true" scale="10" size="29">
+<Comment/>
+</Attribute>
+<Attribute datatype="timestamp" defaultvalue="" extra="" fraction="6" id="74dd35ee-fe07-4e9f-85b2-59dd9c0a42f7" name="modified" nullable="true" scale="10" size="29">
+<Comment/>
+</Attribute>
+<Index id="1aa870ea-8a11-4cdb-8416-6a912e7063cd" indextype="PRIMARYKEY" name="tickets_pkey">
+<Indexattribute attributerefid="680674e0-9729-41be-a382-d8dc78941493" id="a3b7af62-442b-4680-9c63-3d09474792be"/>
+</Index>
+</Table>
+<Table id="677174c6-654e-49a6-bffa-1e4c7ddc334d" name="tipodocs" schema="">
+<Property name="LOCATION" value="1190:810"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('tipodocs_id_seq'::regclass)" extra="" fraction="0" id="d1cc33c0-0bda-450b-aa1a-eeb32b1f08c6" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="d15133b9-4517-423a-b80a-c1f9fceeee74" name="abrev" nullable="false" scale="10" size="5">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="78ced143-0f41-4658-83f2-4c98180c1463" name="name" nullable="false" scale="10" size="40">
+<Comment/>
+</Attribute>
+<Index id="eafb656d-f5de-4e92-82c1-f8204abbd8bb" indextype="PRIMARYKEY" name="tipodocs_pkey">
+<Indexattribute attributerefid="d1cc33c0-0bda-450b-aa1a-eeb32b1f08c6" id="35604aa8-adcb-4aa9-b480-d8d413c84357"/>
+</Index>
+</Table>
+<Table id="fa6ef0ac-b5c6-4c23-8a83-424f60d7b0eb" name="tipoinstits" schema="">
+<Property name="LOCATION" value="1185:9"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('tipoinstits_id_seq'::regclass)" extra="" fraction="0" id="7ec5a936-823b-4bed-9fd4-652136baa8cc" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="6ebf855b-8871-4859-8d9e-2ae6e5464431" name="jurisdiccion_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="0a7afd8a-792c-4974-83a1-2eb8fa2f68b6" name="name" nullable="false" scale="10" size="100">
+<Comment/>
+</Attribute>
+<Index id="f9e9d2a1-d684-4f9e-861a-137411f1d811" indextype="PRIMARYKEY" name="tipoinstits_pkey">
+<Indexattribute attributerefid="7ec5a936-823b-4bed-9fd4-652136baa8cc" id="b49973e7-82d3-4826-9e9c-59febdaa2607"/>
+</Index>
+</Table>
+<Table id="a05d141b-75e2-4b20-92a2-260846996d5f" name="titulos" schema="">
+<Property name="LOCATION" value="51:502"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('titulos_id_seq'::regclass)" extra="" fraction="0" id="f098b064-6f8a-4c17-81b9-304e47ae0942" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="f14f24ab-e871-4115-88f6-af5416b83e10" name="name" nullable="false" scale="10" size="200">
+<Comment/>
+</Attribute>
+<Attribute datatype="bool" defaultvalue="false" extra="" fraction="0" id="a195f8b2-02d6-404f-b263-0f52839ce2af" name="marco_ref" nullable="false" scale="10" size="1">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="b16777b4-f9b6-4084-83b9-3682d2e87466" name="oferta_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Index id="1b99d51f-74ae-4236-a10a-50b7d64305ec" indextype="PRIMARYKEY" name="titulos_pkey">
+<Indexattribute attributerefid="f098b064-6f8a-4c17-81b9-304e47ae0942" id="94ec4ea9-b031-45aa-a1e5-7c8bda0fc454"/>
+</Index>
+</Table>
+<Table id="d5e4b62c-85d5-42cf-b73d-12d51d096293" name="user_logins" schema="">
+<Property name="LOCATION" value="1181:1276"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('user_logins_id_seq'::regclass)" extra="" fraction="0" id="896babc8-0102-4ac1-9e84-aa4e26138d05" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="f2ee2e70-e27d-4328-aeff-d9b94460ee0b" name="user_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="timestamp" defaultvalue="" extra="" fraction="6" id="9c9e8660-49a2-4309-913e-f21bcdc43d07" name="created" nullable="true" scale="10" size="29">
+<Comment/>
+</Attribute>
+<Index id="7dd75e8d-7c8b-49f2-b908-a5a21280333e" indextype="PRIMARYKEY" name="user_logins_pkey">
+<Indexattribute attributerefid="896babc8-0102-4ac1-9e84-aa4e26138d05" id="5e0b6430-2a1e-4a9f-94f9-aad779e81d7e"/>
+</Index>
+</Table>
+<Table id="e6dcc638-463e-4ba3-8e29-69a8bca0a38e" name="users" schema="">
+<Property name="LOCATION" value="893:1303"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('users_id_seq'::regclass)" extra="" fraction="0" id="8cc0ae3e-782c-42a4-844a-1b92f9cdd245" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="cdaec81a-2155-42de-8be6-1fcd9ac2e70a" name="username" nullable="false" scale="10" size="20">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="ff279efa-8b9e-4eb1-a3f7-52b2a233bf9c" name="nombre" nullable="false" scale="10" size="50">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="9d22caf1-edbc-4f15-bb18-e07ae4037a49" name="apellido" nullable="false" scale="10" size="50">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="4f8e5e81-c71e-4736-abe3-828fd70fcdf7" name="password" nullable="false" scale="10" size="50">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="c63df033-0a7d-4f20-9a4f-e9de49b6c065" name="mail" nullable="false" scale="10" size="60">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="4813a037-ac2a-4e11-a7bd-bee761f0c738" name="oficina" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="363d46ac-cbca-44f7-9126-18dc26651310" name="interno" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="c5ad62a9-c7c6-4699-a6c1-562d73960bd4" name="role" nullable="false" scale="10" size="20">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="1e5f6fa2-af8c-44f0-b57d-e96d2795c275" name="jurisdiccion_id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="timestamp" defaultvalue="" extra="" fraction="6" id="15f5bcd8-3d38-4255-baac-79101bf316e5" name="created" nullable="true" scale="10" size="29">
+<Comment/>
+</Attribute>
+<Attribute datatype="timestamp" defaultvalue="" extra="" fraction="6" id="34297699-9fa1-41ac-bcb7-b024b0934490" name="modified" nullable="true" scale="10" size="29">
+<Comment/>
+</Attribute>
+<Index id="917da832-8561-4a54-96e5-4f235bfc7652" indextype="PRIMARYKEY" name="users_pkey">
+<Indexattribute attributerefid="8cc0ae3e-782c-42a4-844a-1b92f9cdd245" id="b92a02cf-9a96-4646-8646-deba34a28ede"/>
+</Index>
+</Table>
+<Table id="0bd36ec7-15ff-45b4-8bf1-b47e96b527a9" name="z_fondo_original" schema="">
+<Property name="LOCATION" value="325:1172"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('z_fondo_original_id_seq'::regclass)" extra="" fraction="0" id="2b19c314-cfe6-40c3-b21d-43b4fb237b1c" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="31a4651a-0d69-4cfb-acbd-db24ab74771c" name="linea" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="45b600a7-366e-45ca-9c5e-44ebcfd038fb" name="tipo" nullable="true" scale="10" size="2">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="e2c6a6c0-c9fc-4373-a354-61c8cb34c9e6" name="anio" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="1dc45702-c80a-4209-adb6-b709dbfecea8" name="trimestre" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="73c99398-3be3-44e0-a653-4dab958e606b" name="jurisdiccion_id" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="ede24f9d-e436-4885-8d22-444be672c3f3" name="jurisdiccion_name" nullable="true" scale="10" size="40">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="c61e0af4-f871-459b-8cdf-a2e5bdc6d085" name="memo" nullable="true" scale="10" size="100">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="56d68928-2236-4af4-af50-ee688a02633f" name="cuecompleto" nullable="true" scale="10" size="100">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="eee02b5f-33c1-434b-92e5-d4b6f84a557e" name="instit" nullable="true" scale="10" size="200">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="fa8863c6-b338-4bdd-99b5-f88f26a80d30" name="instit_name" nullable="true" scale="10" size="200">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="4d9b89fc-f707-46e9-b466-03649b26dcc8" name="departamento" nullable="true" scale="10" size="100">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="" extra="" fraction="0" id="a88832f7-2986-4011-afc6-61a5657b526c" name="localidad" nullable="true" scale="10" size="100">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="" extra="" fraction="17" id="b3062c39-bc8f-49e3-bc9d-60cc80c05b38" name="f01" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="" extra="" fraction="17" id="dc7f76d8-a315-43d1-afa7-66fcb3f11b33" name="f02a" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="" extra="" fraction="17" id="4d60f933-8e91-4bc1-8ba6-27cd28c65df4" name="f02b" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="" extra="" fraction="17" id="9e2c777c-2936-482f-931b-934ba99117c0" name="f02c" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="" extra="" fraction="17" id="f2e0dd32-4324-491a-b230-3bddca15ffd4" name="f03a" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="" extra="" fraction="17" id="190198da-c777-4d0d-9a2c-e661780c3e97" name="f03b" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="" extra="" fraction="17" id="fd3ae43a-4378-4e91-84e9-801a9c83ff30" name="f04" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="" extra="" fraction="17" id="2990c062-9998-46d9-91cf-a657e465040e" name="f05" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="" extra="" fraction="17" id="145ad353-34fd-4716-9098-85228819b2c7" name="f06a" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="" extra="" fraction="17" id="e5df0fce-0978-405c-9714-4e7c8eb44e94" name="f06b" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="" extra="" fraction="17" id="7da73ffa-2832-4b9f-8e06-24e4f0747546" name="f06c" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="" extra="" fraction="17" id="7d0b4bee-567d-4688-bece-f7d7690bf49c" name="f07a" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="" extra="" fraction="17" id="9618057d-103b-4b61-8a89-7143dfa6513a" name="f07b" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="" extra="" fraction="17" id="51aa5696-76e2-46a1-ad83-cc51f5014345" name="f07c" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="" extra="" fraction="17" id="377fa8ff-d628-412a-88b7-ed73c49bbd5e" name="f08" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="" extra="" fraction="17" id="4ea3291c-e8f0-44a2-a4e4-0e04daea654a" name="f09" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="" extra="" fraction="17" id="247c386f-b654-4347-b33e-35b8ec00b091" name="f10" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="" extra="" fraction="17" id="0a5f8e0d-5603-4909-a955-a4be1a43ced4" name="total" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="" extra="" fraction="17" id="45e23037-0ba1-43fd-97af-a5ec849ba35e" name="equipinf" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="" extra="" fraction="17" id="93188fde-e62c-4027-ae07-5a6ff577ad22" name="refaccion" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Index id="fe2575fc-bd3f-4728-a1fa-5127453c1303" indextype="PRIMARYKEY" name="z_fondo_original_pkey">
+<Indexattribute attributerefid="2b19c314-cfe6-40c3-b21d-43b4fb237b1c" id="ecec5d3d-9de9-40ce-923e-644edb2ee4e5"/>
+</Index>
+</Table>
+<Table id="1823cd13-e1d0-4181-ab27-053f085feb3d" name="z_fondo_work" schema="">
+<Property name="LOCATION" value="50:1002"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('z_fondo_work_id_seq'::regclass)" extra="" fraction="0" id="651239d2-5a71-403a-b6b9-8c8042fdcc77" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="a6fb7a16-5674-46b7-a291-890ceb97d3e0" name="linea" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="3e9fa3bb-28fd-49c0-99bb-e96011f7b948" name="tipo" nullable="true" scale="10" size="2">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="033acabb-9553-4179-b344-04d4c3b2b5be" name="anio" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="a31c6c63-080d-4bdb-b959-71c2600d6025" name="trimestre" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="13662bd3-4b83-437d-bb6a-b949b5aa116e" name="jurisdiccion_id" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="588a11e6-7330-4cc3-9280-a102e45196e3" name="jurisdiccion_name" nullable="true" scale="10" size="40">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="ff8e9f73-1e6a-413b-af8f-b6c87ba892c7" name="memo" nullable="true" scale="10" size="100">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="44d5bc67-66a4-4bef-bec1-cee743968df0" name="cuecompleto" nullable="true" scale="10" size="100">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="28698cc2-89ac-4012-a15a-d65147db60f6" name="instit" nullable="true" scale="10" size="200">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="42939977-29c3-4ec7-bb12-f574f0e3b89e" name="instit_name" nullable="true" scale="10" size="200">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="364775fc-901f-4b96-881b-a43c5ab42b2f" name="departamento" nullable="true" scale="10" size="100">
+<Comment/>
+</Attribute>
+<Attribute datatype="varchar" defaultvalue="''::character varying" extra="" fraction="0" id="81cfdefa-a669-430a-b5bb-b95e66ba00b5" name="localidad" nullable="true" scale="10" size="100">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="0" extra="" fraction="17" id="4323fba3-27af-4b75-aedb-18783a28c677" name="f01" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="0" extra="" fraction="17" id="042a43e0-6bb1-472b-a795-fd3d00f21b4b" name="f02a" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="0" extra="" fraction="17" id="a360f865-f824-477e-a355-6310af88a75a" name="f02b" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="0" extra="" fraction="17" id="1721d331-64b1-4803-8813-52ec91345339" name="f02c" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="0" extra="" fraction="17" id="bbacc8e6-878c-48fa-9bed-2b66953b48d2" name="f03a" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="0" extra="" fraction="17" id="24726bfc-1c28-47e5-9adf-f872ca9c8a04" name="f03b" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="0" extra="" fraction="17" id="efe01ed1-a29d-43dc-8772-3d2fb6f21229" name="f04" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="0" extra="" fraction="17" id="dfe62e4b-e278-430a-a10f-620e81487090" name="f05" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="0" extra="" fraction="17" id="7fe3ad12-b185-4595-8ee9-c214cf2ea0d1" name="f06a" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="0" extra="" fraction="17" id="f34aa8e6-d1c4-466b-9d2d-3cd22479db00" name="f06b" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="0" extra="" fraction="17" id="84a215ac-d5c5-481e-828d-673d7844293d" name="f06c" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="0" extra="" fraction="17" id="da8f278b-479e-4f7b-b4db-0ca9719d4450" name="f07a" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="0" extra="" fraction="17" id="90cf61f5-b16d-419e-8025-6b1c5583f738" name="f07b" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="0" extra="" fraction="17" id="94231473-ed8f-4f8a-9e7a-789f693d05b6" name="f07c" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="0" extra="" fraction="17" id="60123a67-8a40-4f9e-8c77-891c3271c654" name="f08" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="0" extra="" fraction="17" id="7b6f3fe1-bfe7-4729-b691-9ba1f37942ec" name="f09" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="0" extra="" fraction="17" id="dd2616bb-0bb0-4589-91d3-29226ac807eb" name="f10" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="0" extra="" fraction="17" id="40f728e5-f5bc-47e3-9d79-d476877516e1" name="total" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="0" extra="" fraction="17" id="8fe7acb0-9498-4db0-934c-c8cfcefd7bb4" name="equipinf" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="float8" defaultvalue="0" extra="" fraction="17" id="a5ccd1fb-e078-4ebb-b93f-e78de3545e86" name="refaccion" nullable="true" scale="10" size="17">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="9379df9f-d8a7-483e-88f4-14d9f7c90a12" name="instit_id" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="text" defaultvalue="''::character varying" extra="" fraction="0" id="1b24ba2a-a459-4732-951f-5167b1be89c9" name="observacion" nullable="true" scale="10" size="2147483647">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="4f038748-b925-4f05-a944-1df625167b64" name="totales_checked" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="be7dfb11-d074-4db6-b441-3367cb531f61" name="cue_checked" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="0" extra="" fraction="0" id="b46d22dd-6512-4a8e-acf0-c875598710ee" name="instit_2009" nullable="true" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="text" defaultvalue="''::character varying" extra="" fraction="0" id="fbb88c7f-def1-4d0f-bcdd-211d45e14b2e" name="obs_problema" nullable="true" scale="10" size="2147483647">
+<Comment/>
+</Attribute>
+<Attribute datatype="text" defaultvalue="''::character varying" extra="" fraction="0" id="e26ecf6f-4c46-41b5-b5bf-4a6e9b6c8ee4" name="obs_protocolo" nullable="true" scale="10" size="2147483647">
+<Comment/>
+</Attribute>
+<Attribute datatype="text" defaultvalue="''::character varying" extra="" fraction="0" id="d8f4c372-506e-4c5c-b745-200a4308e9a8" name="obs_resolucion" nullable="true" scale="10" size="2147483647">
+<Comment/>
+</Attribute>
+<Attribute datatype="text" defaultvalue="''::character varying" extra="" fraction="0" id="f0b6346f-190e-49c5-8aa7-9f439f65f704" name="obs_dictamen" nullable="true" scale="10" size="2147483647">
+<Comment/>
+</Attribute>
+<Attribute datatype="text" defaultvalue="''::character varying" extra="" fraction="0" id="f01e2159-aa98-4d96-b906-07b585f0c4e5" name="obs_solucion" nullable="true" scale="10" size="2147483647">
+<Comment/>
+</Attribute>
+<Index id="7d034fa0-84ce-4b4a-b3d9-0ba616ba496f" indextype="PRIMARYKEY" name="z_fondo_work_pkey">
+<Indexattribute attributerefid="651239d2-5a71-403a-b6b9-8c8042fdcc77" id="5338cae3-4664-4a5e-8862-6d640b890a1f"/>
+</Index>
+</Table>
+<Table id="763b172b-a174-4c73-aa57-fd3debdfda5c" name="sectores_titulos" schema="">
+<Property name="LOCATION" value="51:598"/>
+<Comment/>
+<Attribute datatype="serial" defaultvalue="nextval('etapas_id_seq'::regclass)" extra="" fraction="0" id="1365469f-a08f-41c7-9f24-dea513d9eabd" name="id" nullable="false" scale="10" size="10">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="ffc2cd45-8d32-4d60-8c7d-8102aa76095a" name="titulo_id" nullable="true" scale="10" size="">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="0919c608-aebe-40a5-9a62-f61be75639bb" name="sector_id" nullable="true" scale="10" size="">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="01515673-6631-4183-a006-bf32f1752a23" name="subsector_id" nullable="true" scale="10" size="">
+<Comment/>
+</Attribute>
+<Attribute datatype="int4" defaultvalue="" extra="" fraction="0" id="2f38d380-127f-4fd0-8a28-1f3a1db6614c" name="prioridad" nullable="true" scale="10" size="">
+<Comment/>
+</Attribute>
+<Index id="9b2be183-6398-43aa-88f6-817ca00b5200" indextype="PRIMARYKEY" name="pkey_id">
+<Indexattribute expression="id" id="06cea939-01ee-4767-bbe4-d8f8f065473c"/>
+</Index>
+</Table>
+</Tables>
+<Relations>
+<Relation exportingtablerefid="050c346d-e2f7-4fd6-b199-ac4a672bf1dc" id="aa19e04b-cf87-4e8a-b78c-f56fd20eb5d0" importingtablerefid="1c4004eb-0353-4e4b-b347-786d89133400" name="gestion_id" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="1010:492,1316:444"/>
+<Comment/>
+<Mapping exportingexpressionrefid="642a3433-0325-42fe-8f9a-93004376d040" importingattributerefid="972787cf-8677-4e29-8366-25de885a6874"/>
+</Relation>
+<Relation exportingtablerefid="fe600093-997b-4335-82cd-2e867f7c9171" id="b98ea9c0-9a41-43a5-a230-d326c8e8fd51" importingtablerefid="1c4004eb-0353-4e4b-b347-786d89133400" name="jurisdiccion_id" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="444:64"/>
+<Property name="points" value="1010:492,486:783"/>
+<Comment/>
+<Mapping exportingexpressionrefid="43da22a7-e7f3-4d23-ae37-0c44e82a493b" importingattributerefid="c0495fbd-83af-485f-a5bf-6ee9b0b9e492"/>
+</Relation>
+<Relation exportingtablerefid="fe600093-997b-4335-82cd-2e867f7c9171" id="f5d7465a-93c8-48a4-b8a7-f29a72c5f9e6" importingtablerefid="810ea621-c7e0-4320-8c46-be0b72ba6f7e" name="Jurisdiccion_estructura_planes" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="678:-113"/>
+<Property name="points" value="454:1046,470:916"/>
+<Property name="textoffset" value="0:0"/>
+<Comment/>
+<Mapping exportingexpressionrefid="43da22a7-e7f3-4d23-ae37-0c44e82a493b" importingattributerefid="b00b59e1-37d4-4118-8fba-622f8a1174b7"/>
+</Relation>
+<Relation exportingtablerefid="240c4828-37ce-4665-94a7-66b78120b78a" id="2e9ef71b-2406-44c4-9ce7-2e1069d8c2fa" importingtablerefid="1c4004eb-0353-4e4b-b347-786d89133400" name="localidad" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="1010:492,1307:698"/>
+<Comment/>
+<Mapping exportingexpressionrefid="69d32698-59e3-427c-ace1-291e37dda25f" importingattributerefid="3d940cc8-ac3d-4480-91d9-e0a1dd31211d"/>
+</Relation>
+<Relation exportingtablerefid="677174c6-654e-49a6-bffa-1e4c7ddc334d" id="83bd3d62-1ba3-4fc1-8e6c-61f8febb983d" importingtablerefid="1c4004eb-0353-4e4b-b347-786d89133400" name="dir_tipo_doc" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="512:0"/>
+<Property name="points" value="1151:674,1254:810"/>
+<Property name="textoffset" value="0:0"/>
+<Comment/>
+<Mapping exportingexpressionrefid="35604aa8-adcb-4aa9-b480-d8d413c84357" importingattributerefid="ee64638e-b614-4bb7-8c97-c4a8ef181812"/>
+</Relation>
+<Relation exportingtablerefid="677174c6-654e-49a6-bffa-1e4c7ddc334d" id="1df8fa57-728c-4889-9e5f-99a2afd531d9" importingtablerefid="1c4004eb-0353-4e4b-b347-786d89133400" name="vice_tipo_doc" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="645:9"/>
+<Property name="points" value="1151:674,1254:810"/>
+<Property name="textoffset" value="0:0"/>
+<Comment/>
+<Mapping exportingexpressionrefid="35604aa8-adcb-4aa9-b480-d8d413c84357" importingattributerefid="e08b0951-0c7c-4d5f-a219-97f6273be533"/>
+</Relation>
+<Relation exportingtablerefid="fe600093-997b-4335-82cd-2e867f7c9171" id="e6825c78-5195-4bc4-9a33-60b8c3407e2a" importingtablerefid="68b0bd11-e7cc-4dac-8c9c-2ccadb1a0b05" name="referente_jurisdiccion" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="147:837,486:783"/>
+<Comment/>
+<Mapping exportingexpressionrefid="43da22a7-e7f3-4d23-ae37-0c44e82a493b" importingattributerefid="b9959306-efce-46c2-b496-a4f646c3d72a"/>
+</Relation>
+<Relation exportingtablerefid="fa6ef0ac-b5c6-4c23-8a83-424f60d7b0eb" id="79e57a34-1338-4bfa-b5bf-5862d5f04c43" importingtablerefid="1c4004eb-0353-4e4b-b347-786d89133400" name="tipo_instits" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="1010:492,1284:47"/>
+<Comment/>
+<Mapping exportingexpressionrefid="b49973e7-82d3-4826-9e9c-59febdaa2607" importingattributerefid="0d83c1f8-3706-43ca-8e71-75e88313c55a"/>
+</Relation>
+<Relation exportingtablerefid="a05d141b-75e2-4b20-92a2-260846996d5f" id="3b9b232e-fce2-4978-969c-9052877a1735" importingtablerefid="2cd94878-5346-4643-9d27-b8829a510389" name="titulo" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="443:458,144:602"/>
+<Comment/>
+<Mapping exportingexpressionrefid="94ec4ea9-b031-45aa-a1e5-7c8bda0fc454" importingattributerefid="1c20f7c6-8b77-47cb-a5e2-ddd7d87e3fa3"/>
+</Relation>
+<Relation exportingtablerefid="cb026050-e2e0-46e9-acc3-9b5950387fea" id="d2072108-12d1-4592-96d8-563985856827" importingtablerefid="2cd94878-5346-4643-9d27-b8829a510389" name="tipo_oferta" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="443:458,728:353"/>
+<Comment/>
+<Mapping exportingexpressionrefid="7dcf2221-8793-453d-935b-8f3686431058" importingattributerefid="b25272b0-4d23-4ce7-a208-7d9660d833a4"/>
+</Relation>
+<Relation exportingtablerefid="2cd94878-5346-4643-9d27-b8829a510389" id="0986435d-38a1-444d-9eb7-ca1b36a542a2" importingtablerefid="f2a8f25b-4aa7-42c3-a090-742ad7117209" name="plan" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="444:129,443:458"/>
+<Comment/>
+<Mapping exportingexpressionrefid="b7628dca-3693-4d8f-92a4-7b1b04d7de83" importingattributerefid="39b731bc-7126-46fa-8fcf-3e639aea62b5"/>
+</Relation>
+<Relation exportingtablerefid="cdb5bdca-f80a-4662-80b7-837d8b80c52a" id="25860ed8-a796-493a-b774-4b739fe10179" importingtablerefid="2cd94878-5346-4643-9d27-b8829a510389" name="sector" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="443:458,741:542"/>
+<Comment/>
+<Mapping exportingexpressionrefid="1e155e08-5a04-4729-a08f-1eb8f981d81b" importingattributerefid="f05d6b2e-de4d-4389-b028-96b9644193c0"/>
+</Relation>
+<Relation exportingtablerefid="d15553c4-6478-446b-8e56-93ee57c83e1a" id="1cfd0712-feed-441e-85d5-ed980b92662a" importingtablerefid="1c4004eb-0353-4e4b-b347-786d89133400" name="claseinstits" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="1010:492,761:711"/>
+<Comment/>
+<Mapping exportingexpressionrefid="b3adede9-d95c-43fd-8c95-98167600ffb9" importingattributerefid="4b36c20f-2e27-4efe-9df6-6256b2ec913a"/>
+</Relation>
+<Relation exportingtablerefid="7105d90c-c046-4362-9bd1-689545a237c3" id="b78d6a0f-f56b-4352-bd1b-e040ee1a52f6" importingtablerefid="1c4004eb-0353-4e4b-b347-786d89133400" name="orientacion" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="1010:492,744:849"/>
+<Comment/>
+<Mapping exportingexpressionrefid="ff2597bc-8408-4efd-ac71-e87a5d403a88" importingattributerefid="25d57c76-b1df-42c5-a33e-94c548e7e5c9"/>
+</Relation>
+<Relation exportingtablerefid="1c4004eb-0353-4e4b-b347-786d89133400" id="b859f38b-5af6-4f8d-b6e8-30173c19b985" importingtablerefid="2cd94878-5346-4643-9d27-b8829a510389" name="instits" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="443:458,1010:492"/>
+<Comment/>
+<Mapping exportingexpressionrefid="66799cc8-5226-4c14-83b1-b96378135898" importingattributerefid="c616c96e-46e7-4fbc-8daf-af13aea82e9c"/>
+</Relation>
+<Relation exportingtablerefid="5b8a3dda-f75f-462c-9e7f-e8eb6685aebe" id="007712c5-60b4-40bf-b238-61befd9526dd" importingtablerefid="2cd94878-5346-4643-9d27-b8829a510389" name="subsector" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="443:458,140:710"/>
+<Comment/>
+<Mapping exportingexpressionrefid="d0576f57-fe84-481f-9889-4d7ee4a32517" importingattributerefid="f2ddf68c-039c-401b-ac89-859a5370af4e"/>
+</Relation>
+<Relation exportingtablerefid="8d72a76e-1250-4526-bd59-fa2a2f1aa7d7" id="65b72641-78ff-451f-bce7-e3fd9021f3ec" importingtablerefid="f2a8f25b-4aa7-42c3-a090-742ad7117209" name="ciclos" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="444:129,152:45"/>
+<Comment/>
+<Mapping exportingexpressionrefid="6b2ca474-545c-45a2-8a42-e27f5414c2eb" importingattributerefid="f23a45d8-d5c4-4cbe-b106-660f81ea3a24"/>
+</Relation>
+<Relation exportingtablerefid="834d8fe0-ca04-4692-8b49-2f05ce28e901" id="ee5fc89d-89b9-401d-b3f3-a77bbda35470" importingtablerefid="1c4004eb-0353-4e4b-b347-786d89133400" name="dependencia" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="1010:492,719:45"/>
+<Comment/>
+<Mapping exportingexpressionrefid="bbc4e0bc-b9e4-4462-9dd6-d87a79d76c0e" importingattributerefid="cca6d1f3-b52c-427c-a93c-3f126e694aac"/>
+</Relation>
+<Relation exportingtablerefid="6601e562-ec57-4fc7-b5f1-0553ab1b6421" id="baed06e2-8398-4727-b02a-5cee06fa4c13" importingtablerefid="1c4004eb-0353-4e4b-b347-786d89133400" name="departamentos" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="1010:492,981:38"/>
+<Comment/>
+<Mapping exportingexpressionrefid="b8cbde55-a250-4df7-80f3-f48bad399ed8" importingattributerefid="ea7de4b9-a14d-431f-bb57-ed100fa3fdd3"/>
+</Relation>
+<Relation exportingtablerefid="93b03963-8d8a-4ffd-be07-cdd21bff0d9d" id="d87be02e-5c8d-4bf0-b184-22cd051f227d" importingtablerefid="1c4004eb-0353-4e4b-b347-786d89133400" name="etp_estado" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="1010:492,719:249"/>
+<Comment/>
+<Mapping exportingexpressionrefid="c7a3fdf9-b98e-4986-bc55-938eb537a2b8" importingattributerefid="361112c3-51e6-4018-92fa-ea5b797f8d7b"/>
+</Relation>
+<Relation exportingtablerefid="1c4004eb-0353-4e4b-b347-786d89133400" id="4edace60-2700-4882-9bd2-e64ed257ab37" importingtablerefid="e3d47976-c207-4af3-8873-8e34c411dcb5" name="ticket" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="1308:564,1010:492"/>
+<Comment/>
+<Mapping exportingexpressionrefid="66799cc8-5226-4c14-83b1-b96378135898" importingattributerefid="c56875f3-d46f-4ca1-aeeb-eab8139d448e"/>
+</Relation>
+<Relation exportingtablerefid="1c4004eb-0353-4e4b-b347-786d89133400" id="a11f198b-65ef-4c53-8f2d-cba7e839fe35" importingtablerefid="da2a6150-4e0f-4ac7-8996-cdeabf20d2e1" name="historial" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="1299:246,1010:492"/>
+<Comment/>
+<Mapping exportingexpressionrefid="66799cc8-5226-4c14-83b1-b96378135898" importingattributerefid="e2eae7ec-bb9c-4836-a04d-a7e8309cde9d"/>
+</Relation>
+<Relation exportingtablerefid="e6dcc638-463e-4ba3-8e29-69a8bca0a38e" id="3c02b94d-f149-47fb-9319-f1f44f40c1f7" importingtablerefid="d5e4b62c-85d5-42cf-b73d-12d51d096293" name="users_logins" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="1278:1172,1274:1362"/>
+<Comment/>
+<Mapping exportingexpressionrefid="b92a02cf-9a96-4646-8646-deba34a28ede" importingattributerefid="f2ee2e70-e27d-4328-aeff-d9b94460ee0b"/>
+</Relation>
+<Relation exportingtablerefid="b0311ba8-182b-41b2-923d-53d9213cd22e" id="5f424436-effa-4108-8fd8-45e302c6b962" importingtablerefid="465f3768-c1bc-4722-8427-b0defe4b4f63" name="aro_id" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="1293:1017,1034:1206"/>
+<Comment/>
+<Mapping exportingexpressionrefid="1d8650ca-5346-4cd9-8cf3-d934c8c6e221" importingattributerefid="bab8cd75-42ef-4300-9d4d-547823c122a9"/>
+</Relation>
+<Relation exportingtablerefid="3d52e0fe-fa32-417a-a95d-6f92558738a3" id="67e4a0b9-e9ec-49ca-ab5e-cfec098a88dc" importingtablerefid="465f3768-c1bc-4722-8427-b0defe4b4f63" name="aco_id" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="1293:1017,1034:1011"/>
+<Comment/>
+<Mapping exportingexpressionrefid="06ba5c2b-c82d-4aad-988a-7d525c944ed4" importingattributerefid="99484604-00e0-473e-bae5-9ad9f65eb3b1"/>
+</Relation>
+<Relation exportingtablerefid="e6dcc638-463e-4ba3-8e29-69a8bca0a38e" id="ae8b62b2-1d8f-446e-9a31-4b2d918a2977" importingtablerefid="dbdf4381-2649-4c8f-8b4d-87b024a42161" name="user_id" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="1245:1593,1274:1362"/>
+<Comment/>
+<Mapping exportingexpressionrefid="b92a02cf-9a96-4646-8646-deba34a28ede" importingattributerefid="0e047d72-0440-4ae0-8cb1-56e7f65fcefd"/>
+</Relation>
+<Relation exportingtablerefid="74cc4ebc-b1ae-4475-8aea-2f1b8833bda9" id="f2487a60-6790-417d-86a7-2c36b4f84ae2" importingtablerefid="6195670d-e16f-479e-9d61-ff132fbe43f7" name="estructura_plan" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="141:168,147:344"/>
+<Comment/>
+<Mapping exportingexpressionrefid="83b3eb57-5832-46f7-87f7-119e4e2c7d29" importingattributerefid="dd2c5124-5469-48de-ab57-4a9f889c0d47"/>
+</Relation>
+<Relation exportingtablerefid="15043adb-f28f-41fe-830d-e339f8d7bcaa" id="1bfb55b3-cd73-4b8c-9aa7-c7fa07fb5c1b" importingtablerefid="74cc4ebc-b1ae-4475-8aea-2f1b8833bda9" name="etapas" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="147:344,152:497"/>
+<Comment/>
+<Mapping exportingexpressionrefid="e60f5078-7a22-42be-9903-0b0c1c11f44b" importingattributerefid="6875e2aa-b1d6-4346-b566-dbfbe804d1a6"/>
+</Relation>
+<Relation exportingtablerefid="6195670d-e16f-479e-9d61-ff132fbe43f7" id="d9da285b-0d79-441f-b094-cec706c75426" importingtablerefid="f2a8f25b-4aa7-42c3-a090-742ad7117209" name="estructura_planes_anios" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="444:129,141:168"/>
+<Comment/>
+<Mapping exportingexpressionrefid="cc1c2513-3a8a-4308-9861-8b8aa87be160" importingattributerefid="fc3f25d8-0c79-4b9d-a202-574766af337d"/>
+</Relation>
+<Relation exportingtablerefid="74cc4ebc-b1ae-4475-8aea-2f1b8833bda9" id="0d9e8537-1229-43ef-aba2-f0545f3e2199" importingtablerefid="2cd94878-5346-4643-9d27-b8829a510389" name="estructura_planes" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="443:458,147:344"/>
+<Comment/>
+<Mapping exportingexpressionrefid="83b3eb57-5832-46f7-87f7-119e4e2c7d29" importingattributerefid="0f3e14b9-4ae7-47ba-bb4b-45f6231bcd3b"/>
+</Relation>
+<Relation exportingtablerefid="1c4004eb-0353-4e4b-b347-786d89133400" id="507c6248-8893-4916-8129-9df6ed8f42b6" importingtablerefid="6e6feb9c-7829-4be0-85bf-e055fbd757ba" name="fondos_instits" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="640:0"/>
+<Property name="points" value="757:1122,870:841"/>
+<Property name="textoffset" value="0:0"/>
+<Comment/>
+<Mapping exportingexpressionrefid="66799cc8-5226-4c14-83b1-b96378135898" importingattributerefid="19381be8-da2d-4944-bf88-2de691781505"/>
+</Relation>
+<Relation exportingtablerefid="6e6feb9c-7829-4be0-85bf-e055fbd757ba" id="28c55380-0221-46db-9021-d586d6d61ace" importingtablerefid="c443cce8-e651-4bf2-a72b-b9be4473102c" name="fondos_lineas_de_accion" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="780:1248,785:1061"/>
+<Comment/>
+<Mapping exportingexpressionrefid="ffdb3830-a1eb-41e6-a516-a3891b110f2c" importingattributerefid="5adfa853-5114-414b-82d2-d806be67cb14"/>
+</Relation>
+<Relation exportingtablerefid="e96ceb02-71fe-4a68-a56e-120d0fe8f235" id="83d65d00-e605-4547-8b4d-a7d43a00adcc" importingtablerefid="c443cce8-e651-4bf2-a72b-b9be4473102c" name="lineas_de_accion_fondos" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="780:1248,785:1413"/>
+<Comment/>
+<Mapping exportingexpressionrefid="d2b52ab0-88fb-4279-b245-30e9325e6f21" importingattributerefid="9b53de32-ed4e-4307-b22e-e7d998b2be7e"/>
+</Relation>
+<Relation exportingtablerefid="b0311ba8-182b-41b2-923d-53d9213cd22e" id="94df9355-f449-4c15-8260-1b322507fbe6" importingtablerefid="b0311ba8-182b-41b2-923d-53d9213cd22e" name="aros_aros" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="-317:-100,-307:-90"/>
+<Comment/>
+<Mapping exportingexpressionrefid="1d8650ca-5346-4cd9-8cf3-d934c8c6e221" importingattributerefid="dc120e37-93b6-4c5b-a3ba-4c583abddff0"/>
+</Relation>
+<Relation exportingtablerefid="3d52e0fe-fa32-417a-a95d-6f92558738a3" id="cefbf3a1-b714-4933-8ae7-bbaa59125788" importingtablerefid="3d52e0fe-fa32-417a-a95d-6f92558738a3" name="acos_acos" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="500:0"/>
+<Property name="points" value="1120:1388,1160:1388"/>
+<Comment/>
+<Mapping exportingexpressionrefid="06ba5c2b-c82d-4aad-988a-7d525c944ed4" importingattributerefid="311cf7ac-c2ae-4e7d-9831-e9c5bc7d329b"/>
+</Relation>
+<Relation exportingtablerefid="fe600093-997b-4335-82cd-2e867f7c9171" id="79a47532-3603-44ba-ad38-1b5eb6c057df" importingtablerefid="6e6feb9c-7829-4be0-85bf-e055fbd757ba" name="jurisdicciones" ondelete="nothing" onupdate="nothing">
+<Property name="labelposition" value="707:71"/>
+<Property name="points" value="659:1122,550:916"/>
+<Comment/>
+<Mapping exportingexpressionrefid="43da22a7-e7f3-4d23-ae37-0c44e82a493b" importingattributerefid="45fc7eef-3e09-47be-b514-6a979dc1a6c6"/>
+</Relation>
+<Relation exportingtablerefid="fe600093-997b-4335-82cd-2e867f7c9171" id="a35335d5-9344-4f51-985c-857ddb70b384" importingtablerefid="e6dcc638-463e-4ba3-8e29-69a8bca0a38e" name="jurisdiccion" ondelete="setnull" onupdate="setnull">
+<Comment/>
+<Mapping exportingexpressionrefid="43da22a7-e7f3-4d23-ae37-0c44e82a493b" importingattributerefid="1e5f6fa2-af8c-44f0-b57d-e96d2795c275"/>
+</Relation>
+<Relation exportingtablerefid="a05d141b-75e2-4b20-92a2-260846996d5f" id="eaf1ed1b-119e-4e5c-a568-5f266ff7c4bf" importingtablerefid="763b172b-a174-4c73-aa57-fd3debdfda5c" name="titulo_id" ondelete="setnull" onupdate="setnull">
+<Comment/>
+<Mapping exportingexpressionrefid="94ec4ea9-b031-45aa-a1e5-7c8bda0fc454" importingattributerefid="ffc2cd45-8d32-4d60-8c7d-8102aa76095a"/>
+</Relation>
+<Relation exportingtablerefid="5b8a3dda-f75f-462c-9e7f-e8eb6685aebe" id="e16e7843-1f56-4d85-9b3f-b6889b017847" importingtablerefid="763b172b-a174-4c73-aa57-fd3debdfda5c" name="subsector_id" ondelete="setnull" onupdate="setnull">
+<Comment/>
+<Mapping exportingexpressionrefid="d0576f57-fe84-481f-9889-4d7ee4a32517" importingattributerefid="01515673-6631-4183-a006-bf32f1752a23"/>
+</Relation>
+<Relation exportingtablerefid="cdb5bdca-f80a-4662-80b7-837d8b80c52a" id="8e498632-ef2b-4f67-b2af-b8f080adb4e1" importingtablerefid="763b172b-a174-4c73-aa57-fd3debdfda5c" name="sector_id" ondelete="setnull" onupdate="setnull">
+<Comment/>
+<Mapping exportingexpressionrefid="1e155e08-5a04-4729-a08f-1eb8f981d81b" importingattributerefid="0919c608-aebe-40a5-9a62-f61be75639bb"/>
+</Relation>
+</Relations>
+<Views/>
+<Subjectareas>
+<Subjectarea color="-7026951" id="0d2efc06-b24f-4204-978e-b8d213c7972e" name="ACL" visible="true">
+<Item tablerefid="465f3768-c1bc-4722-8427-b0defe4b4f63"/>
+<Item tablerefid="3d52e0fe-fa32-417a-a95d-6f92558738a3"/>
+<Item tablerefid="b0311ba8-182b-41b2-923d-53d9213cd22e"/>
+</Subjectarea>
+<Subjectarea color="-7471700" id="07e9ef2f-8a83-4e08-bc73-d74f67fb6715" name="Fondos" visible="true">
+<Item tablerefid="1823cd13-e1d0-4181-ab27-053f085feb3d"/>
+<Item tablerefid="0bd36ec7-15ff-45b4-8bf1-b47e96b527a9"/>
+<Item tablerefid="810ea621-c7e0-4320-8c46-be0b72ba6f7e"/>
+<Item tablerefid="6e6feb9c-7829-4be0-85bf-e055fbd757ba"/>
+<Item tablerefid="c443cce8-e651-4bf2-a72b-b9be4473102c"/>
+<Item tablerefid="e96ceb02-71fe-4a68-a56e-120d0fe8f235"/>
+</Subjectarea>
+</Subjectareas>
+<Comments/>
+</Model>
