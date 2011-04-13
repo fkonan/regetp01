@@ -1,8 +1,7 @@
 <?php
 echo $javascript->link( 'jquery-ui-1.8.5.custom.min',false);
 echo $html->css('smoothness/jquery-ui-1.8.6.custom', false);
-?>
-<? 
+
 $paginator->options(array('url' => $url_conditions));
 ?>
 <div class="tickets index">
@@ -82,10 +81,8 @@ foreach ($tickets as $ticket):
                 title: "Observación",
                 modal:true
             });
+            return false;
         });
-        
-        //para anular el click default
-        jQuery(this).click(function(){return false;});
 
         //para mantenerlo centrado
         jQuery(document).scroll(function(){
