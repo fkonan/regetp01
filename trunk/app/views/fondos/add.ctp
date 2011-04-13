@@ -412,9 +412,8 @@ echo $html->css('jquery.autocomplete.css');
 </div>
 
 <script type="text/javascript">
-    var i = 0;
-    
     function confirmarLinea(element, linea_de_accion_id, linea_de_accion, monto,id){
+        var i = 0;
         var confirmado = false;
         
         uniqid = jQuery(element).parent('.linea_confirmada').attr("order");
@@ -474,8 +473,8 @@ echo $html->css('jquery.autocomplete.css');
                     lineaMonto +
                     "</dd>" +
                     //"<input class='linea_id' type='hidden' name='data[FondosLineasDeAccion]["+i+"][id]' value='"+ id +"'>" +
-                    "<input class='linea_id' type='hidden' name='data[FondosLineasDeAccion]["+i+"][lineas_de_accion_id]' value='"+ lineaAccionId +"'>" +
-                    "<input class='monto' type='hidden' name='data[FondosLineasDeAccion]["+i+"][monto]' value='" + lineaMonto + "'>" +
+                    "<input class='linea_id' type='hidden' name='data[FondosLineasDeAccion]["+uniqid+"][lineas_de_accion_id]' value='"+ lineaAccionId +"'>" +
+                    "<input class='monto' type='hidden' name='data[FondosLineasDeAccion]["+uniqid+"][monto]' value='" + lineaMonto + "'>" +
                     post;
 
             jQuery(".lista_lineas dl .nueva_linea").remove();

@@ -223,8 +223,7 @@ class FondosController extends AppController {
                         }
                     }
                 }
-              
-                 
+
                 if ($this->Fondo->saveAll($this->data)) {
                     $this->Session->setFlash(__('Se ha guardado el Fondo', true));
 
