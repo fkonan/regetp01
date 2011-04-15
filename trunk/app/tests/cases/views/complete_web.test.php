@@ -1,17 +1,14 @@
 <?php
 require_once('cake_web_test_case_with_fixtures.php');
+require_once dirname(__FILE__) . DS . '..' . DS . 'extra_functions.php';
 
 class CompleteWebTestCase extends CakeWebTestCaseWithFixtures {
     var $baseUrl = "regetp";
-    var $fixtures = array(
-        'app.jurisdiccion', 'app.instit', 'app.claseinstit',
-        'app.orientacion',  'app.sector', 'app.plan', 'app.subsector',
-        'app.tipoinstit', 'app.dependencia', 'app.departamento', 'app.localidad',
-        'app.etp_estado', 'app.oferta', 'app.titulo', 'app.sectores_titulo', 'app.anio', 'app.ciclo',
-        'app.etapa', 'app.gestion', 'app.historial_cue', 'app.user', 'app.ticket',
-        'app.user_login', 'app.fondo', 'app.estructura_plan', 'app.estructura_planes_anio',
-        'app.jurisdicciones_estructura_plan', 'app.user', 'app.aco', 'app.aro', 'app.aros_acos'
-    );
+    var $fixtures = array();
+
+    function __construct(){
+        $this->fixtures = getAllFixtures();
+    }
 
 
     function enterApplication() {
