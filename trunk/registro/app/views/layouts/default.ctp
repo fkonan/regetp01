@@ -50,7 +50,6 @@ $javascript;
             echo $html->css('role/'.$session->read('Auth.User.role'),'stylesheet', array('media'=>'screen'));
         }
 
-        debug($this->helpers);
         echo $javascript->link(array(
         'jquery-1.4.2.min',
         'jquery.form',
