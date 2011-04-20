@@ -44,17 +44,9 @@ if (!empty($plan['Plan'])) {
         </span>
         <?php
         }
-
-        if (!empty($hstaller) && $hstaller == true) {
-        ?>
-        <span class="plan_matricula_info">
-            | Hs Taller: <?php echo empty($plan['Anio']['0']['hs_taller'])?"<span>0</span>":$plan['Anio']['0']['hs_taller']; ?> |
-        </span>
-        <?php
-        }
         ?>
         <span class="plan_sector_info">
-            Sector:
+            | Sector:
             <span class="plan_sector_name">
                 <?php
                 $sectores = array();
