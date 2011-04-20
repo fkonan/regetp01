@@ -22,12 +22,14 @@
  * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
 
-
 header("Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0"); // // HTTP/1.1
 header("Pragma: no-cache");
 header("Expires: Mon, 17 Dec 2007 00:00:00 GMT"); // Date in the past
 
-
+/* @var $html HtmlHelper */
+$html;
+/* @var $javascript JavascriptHelper */
+$javascript;
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -48,6 +50,7 @@ header("Expires: Mon, 17 Dec 2007 00:00:00 GMT"); // Date in the past
             echo $html->css('role/'.$session->read('Auth.User.role'),'stylesheet', array('media'=>'screen'));
         }
 
+        debug($this->helpers);
         echo $javascript->link(array(
         'jquery-1.4.2.min',
         'jquery.form',
