@@ -47,10 +47,13 @@ $javascript;
         echo $html->css('printer','stylesheet', array('media'=>'print'));
         echo $html->css('adapt/mobile.min','stylesheet', array('media'=>'mobile'));
         echo $html->css('adapt/master');
+        echo $html->css('jquery.tooltip','stylesheet');
 
         echo $javascript->link(array(
         'jquery-1.5.2.min',
         'adapt.min.js',
+        'jquery.form',
+        'jquery.tools.min',
         ));
 
         $jsPoner = 'views'.DS.Inflector::underscore($this->name).DS.$this->action;
