@@ -49,7 +49,7 @@ $javascript;
         echo $html->css('adapt/master');
 
         echo $javascript->link(array(
-        'jquery-1.4.2.min',
+        'jquery-1.5.2.min',
         'adapt.min.js',
         ));
 
