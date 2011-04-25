@@ -39,5 +39,256 @@
  * $controllerPaths = array('this path to controllers', 'second full path to controllers', 'etc...');
  *
  */
-//EOF
+
+/**
+ * ID`s de OFERTAS
+ */
+define('SEC_TEC_ID',3);
+define('ITINERARIO_ID',2);
+define('FP_ID',1);
+define('SEC_ID',5);
+define('SUP_ID',6);
+define('SUP_TEC_ID',4);
+
+
+/**
+ * ID`s de ETAPAS
+ */
+define('ETAPA_CB',4);
+define('ETAPA_EGB3',1);
+define('ETAPA_PC',102);
+
+/**
+ * ID`s de DEPENDENCIAS
+ */
+define('DEPENDENCIA_PROVINCIAL', 1);
+define('DEPENDENCIA_NACIONAL', 2);
+define('DEPENDENCIA_OTROS', 9);
+
+
+
+function limpiar_nombre($string) {
+    // replace accented chars
+    $accents = '/&([A-Za-z]{1,2})(grave|acute|circ|cedil|uml|lig);/';
+    $string_encoded = htmlentities($string,ENT_NOQUOTES,'UTF-8');
+
+    //$string = preg_replace($accents,'$1',$string_encoded);
+
+    // clean out the rest
+    $replace = array('([\40])','(-{2,})');
+    $with = array('-','-');
+    $tofind = "ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ";
+    $replac = "AAAAAAaaaaaaOOOOOOooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn";
+    $string = strtr($string,$tofind,$replac);
+
+    $string = preg_replace($replace,$with,$string);
+
+    return low($string);
+}
+
+
+/**
+ *
+ * Lo que hace es convertir una cadena en una expresion regular para
+ * buscar el texto sin tener en cuenta los acentos y la eñe. Busca tipo instits
+ *
+ * @param $text
+ */
+function convertir_para_busqueda_avanzada($text){
+    $text = strtolower($text);
+
+        // reemplado las palabras abreviadas por su version con puntos
+        //  EJ: a EET quedaria: E.E.T, es para mejorar la busqueda
+        /*
+         * $tipoInstitsAbreviadas = array(
+            'ipem'  => 'i.p.e.m',
+            'cfp'   => 'c.f.p',
+            'eet'   => 'e.e.t',
+            'cent'  => 'c.e.n.t',
+            'cea'   => 'c.e.a',
+            'eea'   => 'e.e.a',
+            'cfr'   => 'c.f.r',
+        );*/
+        /* @var $tipoInstit Tipoinstit */
+        $tipoInstit =& ClassRegistry::init('Tipoinstit');
+        $tipoInstitsAbreviadas = $tipoInstit->getAbreviados();
+
+        if (!empty($tipoInstitsAbreviadas))
+            $text = str_replace(array_keys($tipoInstitsAbreviadas), array_values($tipoInstitsAbreviadas), $text);
+
+        $posiblesA = '(á|a|A|Á)';
+        $posiblesE = '(é|e|E|É)';
+        $posiblesI = '(í|i|I|Í)';
+        $posiblesO = '(ó|o|O|Ó)';
+        $posiblesU = '(ú|u|ü|Ú|U|Ü)';
+
+        $text = trim($text);
+        $text = "%$text%";
+        $patron = array (
+                // Espacios, puntos y comas por guion
+                ',' => '\.',
+                '.' => '\.',
+
+                // Vocales
+                'a' => $posiblesA,
+                'e' => $posiblesE,
+                'i' => $posiblesI,
+                'o' => $posiblesO,
+                'u' => $posiblesU,
+
+                'Ü' => $posiblesU,
+                'ü' => $posiblesU,
+
+                'A' => $posiblesA,
+                'E' => $posiblesE,
+                'I' => $posiblesI,
+                'O' => $posiblesO,
+                'U' => $posiblesU,
+
+                'Á' => $posiblesA,
+                'É' => $posiblesE,
+                'Í' => $posiblesI,
+                'Ó' => $posiblesO,
+                'Ú' => $posiblesU,
+
+                'á' => $posiblesA,
+                'é' => $posiblesE,
+                'í' => $posiblesI,
+                'ó' => $posiblesO,
+                'ú' => $posiblesU,
+
+                's' => '(z|s|c)',
+                'c' => '(z|s|c)',
+                'z' => '(z|s|c)',
+
+                // Agregar aqui mas caracteres si es necesario
+                '°'  => '',
+                'º'  => '',
+                'n°' => '%',
+                'nº' => '%',
+                ' '  => '%',
+
+        );
+        // caracteres especiales de expresiones regulares
+        //$text = preg_quote($text);
+
+        $text_aux = '';
+        for($i=0; $i<strlen($text); $i++){
+                $caracter =  low($text[$i]);
+
+                if ( key_exists($caracter, $patron) ) {
+                    $text_aux .= $patron[$caracter];
+                } else {
+                    $text_aux .= $caracter;
+                }
+        }
+
+        return $text_aux;
+}
+
+/**
+ *
+ * Lo que hace es convertir una cadena en una expresion regular para
+ * buscar el texto sin tener en cuenta los acentos y la eñe
+ *
+ * @param $text
+ */
+function convertir_texto_plano($text){
+    $text = strtolower($text);
+
+        $posiblesA = '(á|a|A|Á)';
+        $posiblesE = '(é|e|E|É)';
+        $posiblesI = '(í|i|I|Í)';
+        $posiblesO = '(ó|o|O|Ó)';
+        $posiblesU = '(ú|u|ü|Ú|U|Ü)';
+
+        $text = trim($text);
+        $text = "%$text%";
+        $patron = array (
+                // Espacios, puntos y comas por guion
+                '/.,/' => '\.',
+
+                // Vocales
+                '/a/' => $posiblesA,
+                '/e/' => $posiblesE,
+                '/i/' => $posiblesI,
+                '/o/' => $posiblesO,
+                '/u/' => $posiblesU,
+
+                '/Ü/' => $posiblesU,
+                '/ü/' => $posiblesU,
+
+                '/A/' => $posiblesA,
+                '/E/' => $posiblesE,
+                '/I/' => $posiblesI,
+                '/O/' => $posiblesO,
+                '/U/' => $posiblesU,
+
+                '/Á/' => $posiblesA,
+                '/É/' => $posiblesE,
+                '/Í/' => $posiblesI,
+                '/Ó/' => $posiblesO,
+                '/Ú/' => $posiblesU,
+
+                '/á/' => $posiblesA,
+                '/é/' => $posiblesE,
+                '/í/' => $posiblesI,
+                '/ó/' => $posiblesO,
+                '/ú/' => $posiblesU,
+
+                '/s/' => '(z|s|c)',
+                '/c/' => '(z|s|c)',
+                '/z/' => '(z|s|c)',
+
+                // Agregar aqui mas caracteres si es necesario
+                '/°/' => '',
+                '/º/' => '',
+                '/n°/' => '%',
+                '/nº/' => '%',
+                '/ /' => '%',
+
+        );
+        // caracteres especiales de expresiones regulares
+        //$text = preg_quote($text);
+
+        $text_aux = '';
+        for($i=0; $i<strlen($text); $i++){
+                $caracter =  $text[$i];
+                $text_aux .= preg_replace(array_keys($patron),array_values($patron),$caracter,1);
+        }
+
+        return $text_aux;
+}
+
+
+
+function ordenarPlanesPorEtapaOrden($planes)
+{
+    $arrayOrdenKeys = array();
+    $planetes = array('Plan'=> array());
+
+    // agrupo los Planes por Orden de la etapa
+    foreach ( $planes['Plan'] as $p ) {
+        $ordenPlan = $p['EstructuraPlan']['Etapa']['orden'];
+        $arrayOrdenKeys[$ordenPlan][] = $p;
+    }
+
+    // ordeno por Orden
+    ksort(&$arrayOrdenKeys);
+
+    // armo el array de Planes para devolver, desagrupandolos del arrayOrden
+    foreach ($arrayOrdenKeys as $ops) {
+        foreach ($ops as $p) {
+            $planetes['Plan'][] = $p;
+        }
+    }
+    $planes = $planetes;
+    return $planetes;
+}
+
+function isNull($val,$nullString)
+{
+    return (strlen($val) == 0)?$nullString:$val;
+}
+
 ?>
