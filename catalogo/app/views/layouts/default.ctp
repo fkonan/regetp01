@@ -87,28 +87,27 @@ $javascript;
                 <h1>
                     <?php echo $html->link(__('Catálogo Nacional de Títulos y Certificados', true), '/pages/home', array('class'=>'mainlink')); ?>
                 </h1>
-            </div>
-
-            <div id="content" class="grid_7">
-
+                
                 <div id="menu">
                 </div>
+            </div>
 
-                <div id="cuerpo">
-                    <div id="cuerpo_top">
+            <div id="content" class="grid_12">
+                <div id="cuerpo_top">
                         <div id="cuerpo_top_left">
                             <? //  echo $this->renderElement('rutaUrl', array("ruta" => $rutaUrl_for_layout)); ?>
                         </div>
-                    </div>
-                    <div id="main-content">
+                </div>
+                
+                <div id="cuerpo">
                         <?php $session->flash(); ?>
                         <?php $session->flash('auth'); ?>
                         <?php echo $content_for_layout; ?>
-                    </div>
                 </div>
 
             </div> <!-- FIN div #content -->
 
+            <div class="clear"></div>
             <div id="footer" class="grid_12">
                 <?php echo $html->image('ministerioeduc_logo.png', array(
                                     'style'=>'vertical-align:middle;margin-left:5px; float:left;',
