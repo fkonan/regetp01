@@ -190,6 +190,31 @@
                 <dd>
                     <?php echo ($instit['Instit']['anio_creacion']==0)?'<i>No declarado</i>':$instit['Instit']['anio_creacion']; ?>
                 </dd>
+                <dt><?php __('Titulos'); ?></dt>
+                <dd>
+                    <ul>
+                    <?php
+                    foreach($instit['Plan'] as $plan){
+                    ?>
+                        <li>
+                            <dl>
+                                <dt><?php __('Oferta'); ?></dt>
+                                <dd><?php echo $plan['Titulo']['Oferta']['name']?></dd>
+                                <dt><?php __('Titulo'); ?></dt>
+                                <dd><?php echo $plan['Titulo']['name']?></dd>
+                                <dt><?php __('Sector/Subsector'); ?></dt>
+                                <?php foreach($plan['Titulo']['SectoresTitulo'] as $sector){?>
+                                    <dd><?php echo $sector['Sector']['name'] . ((!empty($sector['Subsector']))?('/' .  $sector['Subsector']['name']):'') ?></dd>
+                                <?php
+                                }
+                                ?>
+                            </dl>
+                        </li>
+                    <?php
+                    }
+                    ?>
+                    </ul>
+                </dd>
             </dl>
         </div>
     </div>    
