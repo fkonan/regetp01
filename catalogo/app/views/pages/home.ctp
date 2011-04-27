@@ -6,7 +6,7 @@
     echo $html->link(
             $img, 
             array(
-                'controller'=>'instits', 
+                'controller'=>'titulos',
                 'action'=>'search',
             ), 
             array(
@@ -20,8 +20,8 @@
     echo $html->link(
             $img, 
             array(
-                'controller'=>'titulos', 
-                'action'=>'search'
+                'controller'=>'instits',
+                'action'=>'search_form'
             ), 
             array(
                 'class' => 'grid_4',

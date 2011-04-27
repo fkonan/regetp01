@@ -42,10 +42,10 @@ echo $html->css(array('jquery.loadmask', 'smoothness/jquery-ui-1.8.6.custom'));
             'label'=> 'Criterios de Búsqueda'
             ));
     
-//    echo $html->link('Búsqueda avanzada','advanced_search_form',array(
-//        'class'=>'link_right small',
-//        'style'=>'margin-bottom: -18px; padding:0px; margin-right: 4px;'
-//    ));
+    echo $html->link('Búsqueda avanzada','advanced_search_form',array(
+        'class'=>'link_right small',
+        'style'=>'margin-bottom: -18px; padding:0px; margin-right: 4px;'
+    ));
     
     echo $form->button('Buscar', array(
                 'class' => 'boton-buscar',
