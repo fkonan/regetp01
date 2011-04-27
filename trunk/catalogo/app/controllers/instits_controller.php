@@ -17,6 +17,7 @@ class InstitsController extends AppController {
             $this->redirect(array('action'=>'index'));
         }
 
+        $this->Instit->contain(array('EtpEstado','Orientacion','Plan'=>array('Titulo'=>array('SectoresTitulo'=>array('Sector','Subsector'),'Oferta'))));
         $instit = $this->Instit->read(null, $id);
 
         $instit['Instit']['dir_tipodoc_name'] = '';
@@ -37,6 +38,7 @@ class InstitsController extends AppController {
         if($instit['EtpEstado']['id']== 1) {
             $programa_de_etp = true;
         }
+
         $this->set('con_programa_de_etp', $programa_de_etp);
         $this->set('relacion_etp', $instit['EtpEstado']['name']);
         $this->set('instit', $instit);
