@@ -1,3 +1,8 @@
+body{
+    background-color: #e9e8df;
+    background-image: url(img/background_gradient.png);
+    background-repeat: repeat-x;
+}
 
 A#titulo_btn{
     background-image: url('img/titulos.png');    
@@ -27,4 +32,112 @@ A#guiaestudiante_btn{
 A#guiaestudiante_btn:HOVER{
     background-image: url('img/guisestudiante_ho.png');
     height: 367px;
+}
+
+
+#header{
+    width: 100%;
+    background: url(img/headerbg.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/headerbg.jpg', sizingMethod='scale');
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/headerbg.jpg', sizingMethod='scale')";
+    margin-bottom: 20px;
+}
+
+#header_images{
+    width: 100%;
+    background: url(img/transparent.png) repeat;
+}
+
+#header_ministerio{
+    width: 265px;
+    height: 87px;
+    float:left;
+    margin-left: 10px;
+}
+#header_inet{
+    /*width: 194px;*/
+    height: 80px;
+    float:right;
+    margin-right: 10px;
+}
+
+#header{
+    width:100%;
+}
+
+#header h1 {
+    background: none;
+    color: #fff;
+    padding: 20px 30px 20px 20px;
+    font-family: "Ubuntu";
+    font-size: 2.5em;
+    font-weight: bolder;
+    background: url(img/transparent.png) repeat;
+    border-bottom: none;
+    margin-bottom: 0;
+}
+#header h1 a {
+    color: #fff;
+    background: none;
+    font-weight: normal;
+    text-decoration: none;
+}
+#header h1 a:hover {
+    color: #fff;
+    background: none;
+    text-decoration: none;
+}
+
+#menu{
+    list-style: none;
+    display: inline-block;
+    width: 100%;
+    margin:0;
+    /*background: url(img/transparent.png) repeat;*/
+    background: #435a78;
+
+}
+
+#menu li{
+    float:right;
+    background: none;
+    margin:0;   
+}
+#menu li a{
+    
+    text-decoration: none;
+    color: #fff;
+    margin:0;
+    padding:3px;
+    font-family: "Ubuntu";
+    font-size: 1.3em;
+    border-right: 2px solid white;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+#menu li a:hover{
+    background: url(img/transparent_white.png) repeat;
+    color: #000;
+}
+
+#logos{
+    background-color: #faf9f7;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width:100%;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #A3A29C;
+    height: 70px;
+    overflow: hidden;
+    text-align: center;
+}
+
+#logos a {
+    display: inline-block;
+    margin: 13px 7px;
 }

@@ -13,6 +13,7 @@ $javascript;
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <?php echo $html->charset(); ?>
+        <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'></link>
         <title>
             <?php __('Catálogo Nacional de Títulos y Certificados');
             echo Configure::read('version')." - "; ?>
@@ -43,11 +44,11 @@ $javascript;
         </script>
         <?php
         echo $html->meta('icon');
-        echo $html->css('catalogo','stylesheet', array('media'=>'screen'));
-        echo $html->css('printer','stylesheet', array('media'=>'print'));
         echo $html->css('adapt/mobile.min','stylesheet', array('media'=>'mobile'));
         echo $html->css('adapt/master');
         echo $html->css('jquery.tooltip','stylesheet');
+        echo $html->css('catalogo','stylesheet', array('media'=>'screen'));
+        echo $html->css('printer','stylesheet', array('media'=>'print'));
 
         echo $javascript->link(array(
         'jquery-1.5.2.min',
@@ -82,16 +83,26 @@ $javascript;
 
 
     <body>
-        <div id="container" class="container_12 clearfix">
-            <div id="header" class="grid_12">
-                <h1>
-                    <?php echo $html->link(__('Catálogo Nacional de Títulos y Certificados', true), '/pages/home', array('class'=>'mainlink')); ?>
-                </h1>
-                
-                <div id="menu">
-                </div>
+        
+        <div id="header">
+            <div id="header_images">
+                <?php
+                    //echo $html->image('header_ministerio.png', array('id'=>'header_ministerio'));
+                    echo $html->image('header_inet.png', array('id'=>'header_inet'));
+                ?>
             </div>
-
+            <h1>
+                <?php echo $html->link(__('Catálogo Nacional de Títulos y Certificados', true), '/pages/home', array('class'=>'mainlink')); ?>
+            </h1>
+            <ul id="menu">
+                <li><a href="">menu1</a></li>
+                <li><a href="">menu1</a></li>
+                <li><a href="">menu1</a></li>
+                <li><a href="">menu1</a></li>
+                <li><a href="">menu1</a></li>
+            </ul>
+        </div>
+        <div id="container" class ="container_12 clearfix">
             <div id="content" class="grid_12">
                 <div id="cuerpo_top">
                         <div id="cuerpo_top_left">
@@ -106,33 +117,21 @@ $javascript;
                 </div>
 
             </div> <!-- FIN div #content -->
-
-            <div class="clear"></div>
-            <div id="footer" class="grid_12">
-                <?php echo $html->image('ministerioeduc_logo.png', array(
-                                    'style'=>'vertical-align:middle;margin-left:5px; float:left;',
-                                    'alt'=> __("Ministerio de Educación de la Nación", true),
-                                    'border'=>"0",
-                                    )
-                      );
-                ?>
-                <p style="float:left;color:#003d5c;font-size:8pt;padding-left:110px; padding-top:10px; vertical-align: middle;font-weight: bold" >Instituto Nacional de Educación Tecnológica</p>
-                <?php echo $html->link(
-                            $html->image('logoinet1.gif', array(
-                                    'style'=>'vertical-align:middle;width:70px;margin-right:10px',
-                                    'alt'=> __("Inet", true),
-                                    'border'=>"0"
-                                    )),
-                            'http://www.inet.edu.ar',
-                            array(
-                                'target'=>'_blank'),
-                            null,
-                            false
-                    );
-                ?>
-            </div>
-
        </div> <!-- FIN div #container -->
+       <div id="logos">
+        <?php
+            echo $html->link($html->image('links/logo_encuentro.png'),'http://www.encuentro.gov.ar/',null, null, false);
+            echo $html->link($html->image('links/logo_pakapaka.png'),'http://www.pakapaka.gov.ar/',null, null, false);
+            echo $html->link($html->image('links/logo_educar.png'),'http://www.educ.ar/',null, null, false);
+            echo $html->link($html->image('links/logo_inet.png'),'http://www.inet.edu.ar/',null, null, false);
+            echo $html->link($html->image('links/logo_infd.png'),'http://www.me.gov.ar/infod/',null, null, false);
+            echo $html->link($html->image('links/logo_bndm.png'),'http://www.bnm.me.gov.ar/',null, null, false);
+            echo $html->link($html->image('links/logo_mercosur.png'),'http://www.sic.inep.gov.br/',null, null, false);
+            echo $html->link($html->image('links/logo_bicentenario.png'),'http://www.bicentenario.argentina.ar/',null, null, false);
+            echo $html->link($html->image('links/logo_argentina.png'),'http://www.argentina.ar/',null, null, false);
+            echo $html->link($html->image('links/logo_argentinagovar.png'),'http://www.argentina.gov.ar/',null, null, false);
+        ?>
+       </div>
 
         <?php echo $html->link(
                 $html->image('cake.power.gif', array('alt'=> __("CakePHP: the rapid development php framework", true), 'border'=>"0", 'style'=>'float:right;margin-right:130px')),
