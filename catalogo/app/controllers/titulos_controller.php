@@ -10,10 +10,13 @@ class TitulosController extends AppController {
             'oferta'   => 'Titulo.oferta_id',
             'sector' => 'Titulo.sector_id',
             'subsector' => 'Titulo.subsector_id',
+            'jurisdiccion' => 'Titulo.jurisdiccion_id',
+            'departamento' => 'Titulo.departamento_id',
+            'localidad' => 'Titulo.localidad_id',
             'page' => 'Titulo.page',
         );
 
-    function index() {
+    function search() {
         $ofertas = $this->Titulo->Oferta->find('list');
         $sectores = $this->Titulo->Sector->find('list',array('order'=>'Sector.name'));
 
@@ -52,9 +55,24 @@ class TitulosController extends AppController {
             $subsectores = $this->Titulo->Subsector->con_sector('list');
         }
 
+        $this->Titulo->Plan->Instit->Jurisdiccion->recursive = -1;
+        $this->Titulo->Plan->Instit->Jurisdiccion->order = 'Jurisdiccion.name';
+        $jurisdicciones = $this->Titulo->Plan->Instit->Jurisdiccion->find('list');
+
+        // que me liste todos los detarpamentos
+        $this->Titulo->Plan->Instit->Departamento->recursive = -1;
+        $departamentos = $this->Titulo->Plan->Instit->Departamento->con_jurisdiccion('list');
+        //$departamentos = array();
+
+
+        // con CERO me trae TODAS las jurisdicciones
+        $this->Titulo->Plan->Instit->Localidad->recursive = -1;
+        $localidades = $this->Titulo->Plan->Instit->Localidad->con_depto_y_jurisdiccion('list');
+
         $this->Titulo->recursive = 0;
         $this->set('titulos', $this->paginate());
-        $this->set(compact('ofertas', 'sectores', 'subsectores', 'bySession'));
+        $this->set(compact('ofertas', 'sectores', 'subsectores', 'jurisdicciones',
+                    'localidades', 'departamentos', 'bySession'));
     }
 
 
@@ -80,7 +98,7 @@ class TitulosController extends AppController {
 
     function view($id = null) {
         if (!$id) {
-            $this->flash(__('Invalid Titulo', true), array('action'=>'index'));
+            $this->flash(__('Invalid Titulo', true), array('action'=>'search'));
         }
 
         $this->Titulo->recursive = -1;
@@ -220,7 +238,7 @@ class TitulosController extends AppController {
      * maneja las condiciones de la busqueda y el paginador
      *
      */
-    function ajax_index_search() {
+    function ajax_search_results() {
 
         //para mostrar en vista los patrones de busqueda seleccionados
         $array_condiciones = array();
@@ -255,6 +273,18 @@ class TitulosController extends AppController {
                 $this->passedArgs['subsectorId'] = $this->data['Titulo']['subsector_id'];
                 $this->Session->write($this->sesNames['subsector'], $this->data['Titulo']['subsector_id']);
             }
+            if(!empty($this->data['Titulo']['jurisdiccion_id'])) {
+                $this->passedArgs['jurisdiccionId'] = $this->data['Titulo']['jurisdiccion_id'];
+                $this->Session->write($this->sesNames['jurisdiccion'], $this->data['Titulo']['jurisdiccion_id']);
+            }
+            if(!empty($this->data['Titulo']['departamento_id'])) {
+                $this->passedArgs['departamentoId'] = $this->data['Titulo']['departamento_id'];
+                $this->Session->write($this->sesNames['departamento'], $this->data['Titulo']['departamento_id']);
+            }
+            if(!empty($this->data['Titulo']['localidad_id'])) {
+                $this->passedArgs['localidadId'] = $this->data['Titulo']['localidad_id'];
+                $this->Session->write($this->sesNames['localidad'], $this->data['Titulo']['localidad_id']);
+            }
         }
 
         if(!empty($this->passedArgs['tituloName'])) {
@@ -277,13 +307,25 @@ class TitulosController extends AppController {
                 $this->paginate['conditions']['SectoresTitulo.subsector_id'] = $q;
             }
 
-            $this->paginate['joins'] = array(
+            /*$this->paginate['joins'] = array(
                 array('table'=>'sectores_titulos',
                       'type' => 'LEFT',
                       'alias' => 'SectoresTitulo',
                       'conditions'=> array('SectoresTitulo.titulo_id = Titulo.id')
                     )
-                );
+                );*/
+        }
+        if(!empty($this->passedArgs['jurisdiccionId'])) {
+            $q = utf8_decode($this->passedArgs['jurisdiccionId']);
+            $this->paginate['conditions']['Instit.jurisdiccion_id'] = $q;
+        }
+        if(!empty($this->passedArgs['departamentoId'])) {
+            $q = utf8_decode($this->passedArgs['departamentoId']);
+            $this->paginate['conditions']['Instit.departamento_id'] = $q;
+        }
+        if(!empty($this->passedArgs['localidadId'])) {
+            $q = utf8_decode($this->passedArgs['localidadId']);
+            $this->paginate['conditions']['Instit.localidad_id'] = $q;
         }
 
         if (!empty($this->passedArgs['page'])) {
@@ -295,17 +337,18 @@ class TitulosController extends AppController {
         }
 
         //datos de paginacion
-        $this->paginate['fields'] = array('DISTINCT ("Titulo"."id")', 'Titulo.name','Titulo.marco_ref', 'Titulo.oferta_id', 'Oferta.abrev');
+        $this->paginate['fields'] = array('Titulo.id', 'Titulo.name','Titulo.marco_ref', 'Titulo.oferta_id', 'Oferta.abrev');
+        $this->paginate['group'] = $this->paginate['fields'];
         $this->paginate['order'] = array('Titulo.name ASC, Titulo.oferta_id ASC');
-
+        $this->paginate['recursive'] = 3;   // find completo
         $titulos = $this->paginate();
 
         $this->set('titulos', $titulos);
         $this->set('url_conditions', $url_conditions);
         //devuelve un array para mostrar los criterios de busqueda
         $this->set('conditions', $array_condiciones);
-
-        $this->render('ajax_index_search');
+        
+        $this->render('ajax_search_results');
     }
 }
 ?>
