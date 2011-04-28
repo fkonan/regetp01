@@ -2,9 +2,10 @@
         
     <?php 
     
-    $img = $html->image('home/titulos.png', array('width'=>'100%'));
+    $img = $html->image('home/titulos.png', array('class'=>'grid_2 alpha'));
+    $div = '<div style="color: blue" class="grid_2 omega">Aqui puede encontrar los titulos y certificados nacionales y blah blah bla</div>';
     echo $html->link(
-            $img, 
+            $img . $div, 
             array(
                 'controller'=>'titulos',
                 'action'=>'search',
@@ -16,9 +17,11 @@
             )
             );
     
-    $img = $html->image('home/instituciones.png', array('width'=>'100%'));
+    
+    $img = $html->image('home/instituciones.png', array('class'=>'grid_2 alpha'));
+    $div = '<div style="color: green" class="grid_2 omega">Aqui puede encontrar las instituciones ingresadas en el Registro Nacional de Educación Técnica Nacional.</div>';
     echo $html->link(
-            $img, 
+            $img . $div, 
             array(
                 'controller'=>'instits',
                 'action'=>'search_form'
@@ -29,9 +32,10 @@
                 'id' => 'instit_btn',
             ));
     
-    $img = $html->image('home/guisestudiante.png', array('width'=>'100%'));
+    $img = $html->image('home/guiaestudiante.png', array('class'=>'grid_2 alpha'));
+    $div = '<div  style="color: #A49B35" class="grid_2 omega">Puede encontrar facilmente una institucion donde estudiar y blah blah blah.</div>';
     echo $html->link(
-            $img, 
+            $img . $div, 
             array(
                 'controller'=>'titulos', 
                 'action'=>'search'
