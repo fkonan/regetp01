@@ -37,8 +37,8 @@
     echo $html->link(
             $img . $div, 
             array(
-                'controller'=>'titulos', 
-                'action'=>'search'
+                'controller'=>'bibliotecas', 
+                'action'=>'index'
             ),
             array(
                 'class' => 'grid_4 omega',
