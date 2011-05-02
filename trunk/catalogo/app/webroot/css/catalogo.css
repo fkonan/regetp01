@@ -1,7 +1,29 @@
+/*CLEARFIX*/
+/* For modern browsers */
+.cf:before,
+.cf:after {
+    content:"";
+    display:table;
+}
+
+.cf:after {
+    clear:both;
+}
+
+/* For IE 6/7 (trigger hasLayout) */
+.cf {
+    zoom:1;
+}
+
+
 body{
     background-color: #e9e8df;
     background-image: url(img/background_gradient.png);
     background-repeat: repeat-x;
+    font-family: "Molengo";
+}
+h1, h2, h3, h4{
+    font-family: "IM Fell DW Pica SC";
 }
 
 h3 {
@@ -40,9 +62,9 @@ A#guiaestudiante_btn:HOVER{
     margin-bottom: 20px;
 }
 
-#header_images{
+#header_title{
     width: 100%;
-    background: url(img/transparent.png) repeat;
+    /*background: url(img/transparent.png) repeat;*/
 }
 
 #header_ministerio{
@@ -52,10 +74,10 @@ A#guiaestudiante_btn:HOVER{
     margin-left: 10px;
 }
 #header_inet{
-    /*width: 194px;*/
-    height: 80px;
-    float:right;
-    margin-right: 10px;
+    width: 140px;
+    padding: 20px;
+    background: url(img/transparent2.png) repeat;
+    float:left;
 }
 
 #header{
@@ -65,13 +87,14 @@ A#guiaestudiante_btn:HOVER{
 #header h1 {
     background: none;
     color: #fff;
-    padding: 20px 30px 20px 20px;
-    font-family: "Ubuntu";
-    font-size: 2.5em;
+    padding: 0px 10px 0px 10px;
+    font-size: 3em;
     font-weight: bolder;
-    background: url(img/transparent.png) repeat;
     border-bottom: none;
     margin-bottom: 0;
+    width: 100%;
+    margin-left: 180px; /*igual al width + padding de header_inet*/
+    background: url(img/transparent2.png) repeat;
 }
 #header h1 a {
     color: #fff;
@@ -87,12 +110,10 @@ A#guiaestudiante_btn:HOVER{
 
 #menu{
     list-style: none;
-    display: inline-block;
-    width: 100%;
-    margin:0;
-    /*background: url(img/transparent.png) repeat;*/
-    background: #435a78;
-
+    float:left;
+    margin-top: 100;
+    background: url(img/transparent2.png) repeat;
+    vertical-align: bottom;
 }
 
 #menu li{
@@ -101,16 +122,13 @@ A#guiaestudiante_btn:HOVER{
     margin:0;   
 }
 #menu li a{
-    
     text-decoration: none;
     color: #fff;
     margin:0;
     padding:3px;
-    font-family: "Ubuntu";
     font-size: 1.3em;
-    border-right: 2px solid white;
-    padding-left: 2px;
-    padding-right: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 #menu li a:hover{
     background: url(img/transparent_white.png) repeat;
@@ -135,26 +153,3 @@ A#guiaestudiante_btn:HOVER{
     margin: 13px 7px;
 }
 
-.titulosview {
-    font-size: 9pt;
-}
-
-/* Scaffold View */
-dl {
-    line-height: 1.6em;
-    margin: 0em 0em;
-    width: 100%;
-}
-dl.altrow {
-    background: #f4f4f4;
-}
-dt {
-    font-weight: bold;
-    padding-left: 4px;
-    vertical-align: top;
-}
-dd {
-    margin-left: 16em;
-    margin-top: -22px;
-    vertical-align: top;
-}

@@ -13,7 +13,8 @@ $javascript;
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <?php echo $html->charset(); ?>
-        <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'></link>
+        <link href='http://fonts.googleapis.com/css?family=IM+Fell+DW+Pica+SC' rel='stylesheet' type='text/css'></link>
+        <link href='http://fonts.googleapis.com/css?family=Molengo' rel='stylesheet' type='text/css'></link>
         <title>
             <?php __('Catálogo Nacional de Títulos y Certificados');
             echo Configure::read('version')." - "; ?>
@@ -85,30 +86,25 @@ $javascript;
     <body>
         
         <div id="header">
-            <div id="header_images">
+            <div id="header_title" class="cf">
                 <?php
                     //echo $html->image('header_ministerio.png', array('id'=>'header_ministerio'));
                     echo $html->image('header_inet.png', array('id'=>'header_inet'));
                 ?>
+                <h1>
+                    <?php echo $html->link(__('Catálogo Nacional de Títulos y Certificados', true), '/pages/home', array('class'=>'mainlink')); ?>
+                </h1>
+                <ul id="menu">
+                    <li><a href="">menu1</a></li>
+                    <li><a href="">menu1</a></li>
+                    <li><a href="">menu1</a></li>
+                    <li><a href="">menu1</a></li>
+                    <li><a href="">menu1</a></li>
+                </ul>
             </div>
-            <h1>
-                <?php echo $html->link(__('Catálogo Nacional de Títulos y Certificados', true), '/pages/home', array('class'=>'mainlink')); ?>
-            </h1>
-            <ul id="menu">
-                <li><a href="">menu1</a></li>
-                <li><a href="">menu1</a></li>
-                <li><a href="">menu1</a></li>
-                <li><a href="">menu1</a></li>
-                <li><a href="">menu1</a></li>
-            </ul>
         </div>
         <div id="container" class ="container_12 clearfix">
-            <div id="content" class="grid_12">
-                <div id="cuerpo_top">
-                        <div id="cuerpo_top_left">
-                            <? //  echo $this->renderElement('rutaUrl', array("ruta" => $rutaUrl_for_layout)); ?>
-                        </div>
-                </div>
+
                 
                 <div id="cuerpo">
                         <?php $session->flash(); ?>
@@ -116,7 +112,7 @@ $javascript;
                         <?php echo $content_for_layout; ?>
                 </div>
 
-            </div> <!-- FIN div #content -->
+
        </div> <!-- FIN div #container -->
        <div id="logos">
         <?php
