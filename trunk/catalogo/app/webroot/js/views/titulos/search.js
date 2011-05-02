@@ -103,6 +103,7 @@
                 }
             });
 
+
             jQuery("#TituloJurDepLoc").autocomplete(locDepUrl, {
                 dataType: "json",
                 delay: 200,
@@ -134,11 +135,6 @@
                 }
             });
 
-            /*jQuery("#InstitJurDepLoc").bind('paste', function(e){jQuery("#InstitJurDepLoc").change()});
-
-            jQuery("#InstitJurDepLoc").attr('autocomplete','off');*/
-
-
             jQuery(".autosubmit").change(function() { formElement.submit(); });
 
             jQuery("#TituloName").bind('paste', function(e){autoSubmit(true)});
@@ -154,3 +150,30 @@
         });
     }
 
+
+
+
+    function viewTitulo(url, titulo) {
+        var dialog = jQuery('<div id="create_dialog"></div>')
+                .html('... cargando información')
+                .dialog({
+                        width: 500,
+                        position: 'top',
+                        zIndex: 3999,
+                        title: titulo,
+                        draggable: false,
+                        modal: true,
+                        resizable: false,
+                        beforeclose: function(event, ui) { jQuery(".ui-dialog").remove(); jQuery("#create_dialog").remove(); }
+        });
+
+        jQuery.ajax({
+          url: url,
+          cache: false,
+          success: function(data) {
+            dialog.html(data);
+          }
+        });
+
+        return false;
+    }

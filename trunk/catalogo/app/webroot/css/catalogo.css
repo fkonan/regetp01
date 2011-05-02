@@ -4,6 +4,11 @@ body{
     background-repeat: repeat-x;
 }
 
+h3 {
+    font-size: 11pt;
+    font-weight: bold;
+}
+
 A#titulo_btn{
 }
 
@@ -128,4 +133,28 @@ A#guiaestudiante_btn:HOVER{
 #logos a {
     display: inline-block;
     margin: 13px 7px;
+}
+
+.titulosview {
+    font-size: 9pt;
+}
+
+/* Scaffold View */
+dl {
+    line-height: 1.6em;
+    margin: 0em 0em;
+    width: 100%;
+}
+dl.altrow {
+    background: #f4f4f4;
+}
+dt {
+    font-weight: bold;
+    padding-left: 4px;
+    vertical-align: top;
+}
+dd {
+    margin-left: 16em;
+    margin-top: -22px;
+    vertical-align: top;
 }
