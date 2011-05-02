@@ -1,0 +1,83 @@
+ul.buscadores {
+	list-style: none;
+	padding: 0;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        border: 5px solid #A1B2C6;
+        background: #EFF3F7;
+        -moz-border-radius: 5px; /*--CSS3 Rounded Corners--*/
+	-khtml-border-radius: 5px; /*--CSS3 Rounded Corners--*/
+	-webkit-border-radius: 5px; /*--CSS3 Rounded Corners--*/
+}
+ul.buscadores li {
+	float: left;
+	padding: 0;
+	text-align: center;
+	display: inline; /*--Gimp Fix aka IE6 Fix - Fixes double margin bug--*/
+}
+ul.buscadores li a.thumb {
+        width: 238px;
+        height: 238px; /*--Height of image--*/
+	cursor: pointer;
+        margin-left: auto;
+        margin-right: auto;
+}
+
+ul.buscadores li span { /*--Used to crop image--*/
+	height: 238px;
+	overflow: hidden;
+	display: block;
+}
+ul.buscadores li a.thumb:hover {
+	background: #333; /*--Hover effect for browser with js turned off--*/
+}
+ul.buscadores li h2 {
+	font-size: 1em;
+	font-weight: bold;
+	text-transform: uppercase;
+	padding-top: 10px;
+        padding-bottom: 10px;
+        color: white;
+        -moz-border-radius-bottomright: 3px; /*--CSS3 Rounded Corners--*/
+        -moz-border-radius-bottomleft: 3px; /*--CSS3 Rounded Corners--*/
+	-khtml-border-radius-bottomright: 3px; /*--CSS3 Rounded Corners--*/
+        -khtml-border-radius-bottomleft: 3px; /*--CSS3 Rounded Corners--*/
+	-webkit-border-radius-bottomright: 3px; /*--CSS3 Rounded Corners--*/
+        -webkit-border-radius-bottomleft: 3px; /*--CSS3 Rounded Corners--*/
+        margin-left: auto;
+        margin-right: auto;
+        width:238px;
+        background-color:  #858789;
+}
+
+ul.buscadores li h2.instits {
+	background-color: #526C8C;
+}
+
+ul.buscadores li h2.titulos {
+	background-color:  #D0202B;
+}
+
+ul.buscadores li h2.guia {
+	background-color:  #333;
+}
+
+
+ul.buscadores li a {
+    text-decoration: none; color: white; display: block;
+}
+
+ul.buscadores li .description{
+    margin-top:20px;
+    background-color: white;
+    height: 80px;
+    text-align: center;
+    padding-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width:238px;
+    cursor:pointer;
+    color: #858789;
+    font-size: 12pt;
+    border: 1px solid #E5E5E5;
+}
