@@ -13,6 +13,7 @@ class TitulosController extends AppController {
             'jurisdiccion' => 'Titulo.jurisdiccion_id',
             'departamento' => 'Titulo.departamento_id',
             'localidad' => 'Titulo.localidad_id',
+            'tituloJurDepLoc' => 'Titulo.tituloJurDepLoc',
             'page' => 'Titulo.page',
         );
 
@@ -45,6 +46,22 @@ class TitulosController extends AppController {
         }
         if ($this->Session->read($this->sesNames['subsector'])) {
             $this->data['Titulo']['subsector_id'] = $this->passedArgs['subsectorId'] = $this->Session->read($this->sesNames['subsector']);
+            $bySession = true;
+        }
+        if ($this->Session->read($this->sesNames['jurisdiccion'])) {
+            $this->data['Titulo']['jurisdiccion_id'] = $this->passedArgs['jurisdiccionId'] = $this->Session->read($this->sesNames['jurisdiccion']);
+            $bySession = true;
+        }
+        if ($this->Session->read($this->sesNames['departamento'])) {
+            $this->data['Titulo']['departamento_id'] = $this->passedArgs['departamentoId'] = $this->Session->read($this->sesNames['departamento']);
+            $bySession = true;
+        }
+        if ($this->Session->read($this->sesNames['localidad'])) {
+            $this->data['Titulo']['localidad_id'] = $this->passedArgs['localidadId'] = $this->Session->read($this->sesNames['localidad']);
+            $bySession = true;
+        }
+        if ($this->Session->read($this->sesNames['tituloJurDepLoc'])) {
+            $this->data['Titulo']['jur_dep_loc'] = $this->passedArgs['tituloJurDepLoc'] = $this->Session->read($this->sesNames['tituloJurDepLoc']);
             $bySession = true;
         }
         if ($this->Session->read($this->sesNames['page'])) {
@@ -97,6 +114,7 @@ class TitulosController extends AppController {
     }
 
     function view($id = null) {
+        $this->layout = false;
         if (!$id) {
             $this->flash(__('Invalid Titulo', true), array('action'=>'search'));
         }
@@ -121,15 +139,6 @@ class TitulosController extends AppController {
         );
         $planes = $this->paginate('Plan');
 
-        // resumen de planes
-        $this->Titulo->Plan->recursive = -1;
-        $conditions = '';
-        $conditions['conditions'] = array('Plan.titulo_id' => $id);
-        $conditions['fields'] = array('Plan.nombre', 'count(*)');
-        $conditions['group'] = array('Plan.nombre');
-        $conditions['order'] = array('count(*) desc', 'Plan.nombre');
-        $planesResumen = $this->Titulo->Plan->find('all', $conditions);
-
         $this->set(compact('titulo','planes','planesResumen'));
     }
 
@@ -138,12 +147,24 @@ class TitulosController extends AppController {
         // Planes del Titulo
         $this->Titulo->Plan->recursive = -1;
         $this->paginate = array(
-                'limit'    => 10,
+                'limit'    => 6,
                 'page'    => 1,
                 'conditions' => array('Plan.titulo_id' => $id),
                 'contain' => array('Instit' => array('Tipoinstit', 'Jurisdiccion(name)')),
-                'order'    => array('Plan.nombre' => 'asc')
+                'order'    => array('Plan.nombre' => 'asc'),
+                'recursive' => 3
         );
+
+        if ($this->Session->read($this->sesNames['jurisdiccion'])) {
+            $this->paginate['conditions']['Instit.jurisdiccion_id'] = $this->Session->read($this->sesNames['jurisdiccion']);
+        }
+        if ($this->Session->read($this->sesNames['departamento'])) {
+            $this->paginate['conditions']['Instit.departamento_id'] = $this->Session->read($this->sesNames['departamento']);
+        }
+        if ($this->Session->read($this->sesNames['localidad'])) {
+            $this->paginate['conditions']['Instit.localidad_id'] = $this->Session->read($this->sesNames['localidad']);
+        }
+
         $planes = $this->paginate('Plan');
 
         $this->set('planes', $planes);
@@ -280,10 +301,12 @@ class TitulosController extends AppController {
             if(!empty($this->data['Titulo']['departamento_id'])) {
                 $this->passedArgs['departamentoId'] = $this->data['Titulo']['departamento_id'];
                 $this->Session->write($this->sesNames['departamento'], $this->data['Titulo']['departamento_id']);
+                $this->Session->write($this->sesNames['tituloJurDepLoc'], $this->data['Titulo']['jur_dep_loc']);
             }
             if(!empty($this->data['Titulo']['localidad_id'])) {
                 $this->passedArgs['localidadId'] = $this->data['Titulo']['localidad_id'];
                 $this->Session->write($this->sesNames['localidad'], $this->data['Titulo']['localidad_id']);
+                $this->Session->write($this->sesNames['tituloJurDepLoc'], $this->data['Titulo']['jur_dep_loc']);
             }
         }
 

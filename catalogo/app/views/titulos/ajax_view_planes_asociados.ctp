@@ -1,6 +1,6 @@
 <?php
     echo $paginator->counter(array(
-    'format' => __('Página %page% de %pages% (%count% Planes de Estudio Asociados)', true)
+    'format' => __('Página %page% de %pages% (%count% Planes de Estudio asociados)', true)
     ));
 
     $paginator->options(array(
@@ -13,8 +13,10 @@
     if (!empty($planes)) {
     ?>
     <table style="font-size: 8pt;">
-        <th><?php echo $paginator->sort('Plan','Plan.nombre');?></th>
+        <!--<th><?php echo $paginator->sort('Plan','Plan.nombre');?></th>-->
         <th><?php echo $paginator->sort('Institución','Plan.instit_id');?></th>
+        <th><?php echo $paginator->sort('Localidad','Instit.localidad_id');?></th>
+        <th><?php echo $paginator->sort('Departamento','Instit.departamento_id');?></th>
         <th><?php echo $paginator->sort('Jurisdicción','Instit.jurisdiccion_id');?></th>
         <?php
         foreach ($planes as $plan) {
@@ -26,6 +28,8 @@
         <tr>
             <td style="text-align:left; vertical-align: middle;"><?php echo $plan['Plan']['nombre']; ?></td>
             <td style="text-align:left; vertical-align: middle;"><?php echo $html->link($plan['Instit']['nombre_completo'], array('controller'=>'Instits', 'action'=>'view', $plan['Instit']['id'])); ?></td>
+            <td style="text-align:left; vertical-align: middle;"><?php echo $plan['Instit']['Localidad']['name']; ?></td>
+            <td style="text-align:left; vertical-align: middle;"><?php echo $plan['Instit']['Departamento']['name']; ?></td>
             <td style="text-align:left; vertical-align: middle;"><?php echo $plan['Instit']['Jurisdiccion']['name']; ?></td>
         </tr>
         <tr><td colspan="3" style="border-bottom:1px solid #CCCCCC;"></td></tr>
@@ -39,7 +43,7 @@
     <div class="paginator_prev_next_links">
             <?php
             if($paginator->numbers()){
-                    echo $paginator->prev('« Anterior ',null, null, array('class' => 'disabled'));
+                    echo $paginator->prev('« Anterior ',null, null, array('class' => 'disabled', 'tag' => 'span'));
                     echo " | ".$paginator->numbers(array('modulus'=>'9'))." | ";
                     echo $paginator->next(' Siguiente »', null, null, array('class' => 'disabled'));
             }

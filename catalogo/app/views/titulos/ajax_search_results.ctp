@@ -49,7 +49,8 @@
                         ?>
                 </td>
                 <td class="actions">
-                        <?php echo $html->link(__('Ver más','View', true), array('action'=>'view', $titulo['Titulo']['id'])); ?>
+                        <?php //echo $html->link(__('Ver más','View', true), array('onclick'=>'viewTitulo('.$titulo['Titulo']['id'].');', 'href'=>'')); ?>
+                    <a onclick="viewTitulo('<?php echo $html->url('/titulos/view/'.$titulo['Titulo']['id']);?>', '<?php echo $titulo['Titulo']['name'];?>');" style="cursor:pointer;">Ver más</a>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -60,7 +61,7 @@
    if ($paginator->numbers()) {
    ?>
     <div style="text-align:center; display:block;margin-bottom: 10px">
-        <?php echo $paginator->prev('<< '.__('anterior', true), array(), null, array('class'=>'disabled'));?>
+        <?php echo $paginator->prev('<< '.__('anterior', true), array(), null, array('class'=>'disabled', 'tag' => 'span'));?>
  | 	<?php echo $paginator->numbers();?>
 	<?php echo $paginator->next(__('siguiente', true).' >>', array(), null, array('class'=>'disabled'));?>
     </div>

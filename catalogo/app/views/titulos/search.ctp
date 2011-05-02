@@ -7,9 +7,9 @@ init('<?echo $html->url(array('controller'=>'localidades','action'=>'ajax_search
 echo $javascript->link(array(
             'jquery.autocomplete',
             'jquery.loadmask.min',
-            'jquery-ui-1.8.5.custom.min',
+            'jquery-ui-1.8.12.custom.min',
         ));
-echo $html->css(array('jquery.loadmask'));
+echo $html->css(array('jquery.loadmask', 'ui-lightness/jquery-ui-1.8.12.custom'));
 ?>
 <?php 
         echo $form->create('Titulo', array(
