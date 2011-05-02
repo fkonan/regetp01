@@ -1,58 +1,89 @@
-<div>
-        
-    <?php 
-    
-    $img = $html->image('home/titulos.png', array('class'=>'grid_2 alpha'));
-    $div = '<div style="color: blue" class="grid_2 omega">Aqui puede encontrar los titulos y certificados nacionales y blah blah bla</div>';
-    echo $html->link(
-            $img . $div, 
-            array(
-                'controller'=>'titulos',
-                'action'=>'search',
-            ), 
-            array(
-                'class' => 'grid_4 alpha',
-                'escape' => false,
-                'id' => 'titulo_btn',
-            )
-            );
-    
-    
-    $img = $html->image('home/instituciones.png', array('class'=>'grid_2 alpha'));
-    $div = '<div style="color: green" class="grid_2 omega">Aqui puede encontrar las instituciones ingresadas en el Registro Nacional de Educación Técnica Nacional.</div>';
-    echo $html->link(
-            $img . $div, 
-            array(
-                'controller'=>'instits',
-                'action'=>'search_form'
-            ), 
-            array(
-                'class' => 'grid_4',
-                'escape' => false,
-                'id' => 'instit_btn',
-            ));
-    
-    $img = $html->image('home/guiaestudiante.png', array('class'=>'grid_2 alpha'));
-    $div = '<div  style="color: #A49B35" class="grid_2 omega">Puede encontrar facilmente una institucion donde estudiar y blah blah blah.</div>';
-    echo $html->link(
-            $img . $div, 
-            array(
-                'controller'=>'bibliotecas', 
-                'action'=>'index'
-            ),
-            array(
-                'class' => 'grid_4 omega',
-                'escape' => false, 
-                'id' => 'guiaestudiante_btn',
-            ));
+<?php 
+echo $html->css('catalogo.home.css');
+echo $javascript->link(array('jquery.animate-colors-min'));
 ?>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
 
+	jQuery(".buscadores li").hover(function() {
+		var thumbOver = jQuery(this).find("img").attr("src");
+
+                jQuery(this).find("a.thumb").css({'background' : 'url(' + thumbOver + ') no-repeat center bottom'});
+
+		jQuery(this).find("span").stop().fadeTo('normal', 0 , function() {
+			jQuery(this).hide();
+		});
+
+                jQuery(this).find(".description p").animate({color: '#000000'});
+                jQuery(this).find("h2").animate({backgroundColor: '#1E8DDB'});
+	} , function() { 
+		jQuery(this).find("span").stop().fadeTo('normal', 1).show();
+
+                jQuery(this).find("h2").animate({backgroundColor: '#858789'});
+                jQuery(this).find(".description p").animate({color: '#858789'});
+	});
+    });
+</script>
+<h2>Info</h2>
+<div class="grid_12">
+        <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum arcu in tellus commodo vestibulum. Aliquam erat volutpat. Cras elementum justo vitae metus consequat in condimentum nunc ultrices. Nam mollis bibendum volutpat. Donec velit ante, varius euismod pulvinar eu, hendrerit eget tellus. Aenean sed euismod augue. Aenean sollicitudin ligula et lorem feugiat vel accumsan sapien porta. Integer mollis ultricies felis non porttitor. Donec fermentum blandit ante vel tempus. Donec pulvinar, magna non aliquet egestas, nulla urna facilisis tortor, vel volutpat leo lorem ultrices odio. Cras lacinia aliquet placerat. Integer luctus massa quis massa blandit ac scelerisque neque dignissim. In iaculis vulputate ligula, sit amet mattis felis cursus eu. Proin iaculis nisi sit amet neque rhoncus vitae tempus lectus ornare. Aliquam in neque mauris.
+        <br/>
+</div>
+<ul class="buscadores grid_12">
+    <?php
+    echo $html->image('home/buscadores.png',array('style'=>'float:right;position:absolute;margin-top:-20px;z-index:9999', 'class'=>'push_11'));
+?>
+    <li class="grid_4 alpha">
+        <?php
+            echo $html->link(
+                    '<span>'.$html->image('home/titulos.png').'</span>',
+                    array('controller'=>'titulos', 'action'=>'search_form'),
+                    array('escape'=>false, 'class'=>'thumb'));
+        ?>
+        <h2>
+            <?php
+                echo $html->link('Buscador de Títulos', array('controller'=>'titulos', 'action'=>'search_form'));
+            ?>
+        </h2>
+        <div class="description">
+            <p>Utilizá este buscador si lo que estas buscando son Títulos o Certificados</p>
+        </div>
+    </li>
+    <li class="grid_4">
+            <?php
+                echo $html->link('<span>'.$html->image('home/instituciones.png').'</span>',array('controller'=>'instits', 'action'=>'search_form'), array('escape'=>false, 'class'=>'thumb'));
+            ?>
+            <h2>
+                <?php
+                    echo $html->link('Buscador de Instituciones', array('controller'=>'instits', 'action'=>'search_form'), array('escape'=>false));
+                ?>
+            </h2>
+            <div class="description">
+                <p>Utilizá este buscador para encontrar una institución en particular</p>
+            </div>
+    </li>
+    <li class="grid_4 omega">
+            <?php
+                echo $html->link('<span>'.$html->image('home/guia.png').'</span>',array('controller'=>'instits', 'action'=>'search_form'), array('escape'=>false, 'class'=>'thumb'));
+            ?>
+            <h2>
+                <?php
+                    echo $html->link('Guía del Estudiante', array('controller'=>'instits', 'action'=>'search_form'));
+                ?>
+            </h2>
+            <div class="description">
+                <p>¿Estas buscando que estudiar y no sabes que? Este buscador te guiará en tu busqueda</p>
+            </div>
+    </li>
+</ul>
+
+<div class="grid_12">
+        <h2>More Info</h2>
+        <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum arcu in tellus commodo vestibulum. Aliquam erat volutpat. Cras elementum justo vitae metus consequat in condimentum nunc ultrices. Nam mollis bibendum volutpat. Donec velit ante, varius euismod pulvinar eu, hendrerit eget tellus. Aenean sed euismod augue. Aenean sollicitudin ligula et lorem feugiat vel accumsan sapien porta. Integer mollis ultricies felis non porttitor. Donec fermentum blandit ante vel tempus. Donec pulvinar, magna non aliquet egestas, nulla urna facilisis tortor, vel volutpat leo lorem ultrices odio. Cras lacinia aliquet placerat. Integer luctus massa quis massa blandit ac scelerisque neque dignissim. In iaculis vulputate ligula, sit amet mattis felis cursus eu. Proin iaculis nisi sit amet neque rhoncus vitae tempus lectus ornare. Aliquam in neque mauris.
+        <br/>
 </div>
 
-<div style="text-align: justify">
-    <h2 style="text-align: center">Lorem ipsum dolor sit amet</h2>
-    <p class="prefix_2 grid_4">Curabitur in nisi justo, non bibendum diam. Pellentesque viverra tincidunt arcu, auctor volutpat tellus tincidunt sed. Aliquam ligula sem, porttitor vitae iaculis non, pretium eu diam. Vestibulum suscipit neque sed tellus ullamcorper id faucibus est rutrum. In lobortis, est et malesuada viverra, dui risus hendrerit arcu, ac congue mi quam sit amet justo. Duis eget risus eu felis dignissim pretium sit amet dignissim eros. Nullam et nisl eros, at dapibus magna. Integer posuere, nulla ut aliquam mollis, dui dolor auctor lectus, eget volutpat ante arcu a felis. Cras gravida, tortor in luctus laoreet, leo massa feugiat est, non dignissim odio diam eu elit. Cras nisi augue, viverra vitae accumsan vitae, aliquet vitae lacus. Ut ipsum mauris, aliquam quis pretium sit amet, tempus a quam. Phasellus turpis ligula, semper et tempus nec, luctus vel mi. Vivamus sed dui sit amet erat condimentum bibendum lacinia non turpis. Nulla porta eleifend vehicula. Ut volutpat neque non nisi faucibus sed sollicitudin augue tincidunt. Pellentesque posuere, diam vel faucibus lacinia, ligula diam gravida nunc, non aliquam tortor enim nec sem. Phasellus viverra mattis arcu, vitae ultrices arcu rutrum sit amet. Nam feugiat nibh feugiat nisi ullamcorper egestas.</p>
-    <p class="grid_4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed tempus lacus. Duis tellus ante, vehicula eget rhoncus a, tincidunt in purus. Aenean euismod suscipit dui a accumsan. Suspendisse potenti. Donec eget libero nulla. Nunc a neque a purus aliquet rhoncus at sit amet lectus. Praesent urna velit, volutpat vitae mollis eget, viverra eu ligula. Morbi ultricies egestas pretium. Curabitur eget nulla augue, eget scelerisque dui. Suspendisse tincidunt tortor quis odio suscipit et convallis ante accumsan. Nunc dolor nisl, tristique id dapibus id, dapibus nec odio. Morbi laoreet, nibh vel suscipit varius, lacus metus mattis felis, id faucibus urna risus id elit.</p>
-</div>
 
 <div class="clear"></div>
