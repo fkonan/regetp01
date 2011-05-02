@@ -26,13 +26,13 @@
             }
         ?>
         <tr>
-            <td style="text-align:left; vertical-align: middle;"><?php echo $plan['Plan']['nombre']; ?></td>
+            <!--<td style="text-align:left; vertical-align: middle;"><?php echo $plan['Plan']['nombre']; ?></td>-->
             <td style="text-align:left; vertical-align: middle;"><?php echo $html->link($plan['Instit']['nombre_completo'], array('controller'=>'Instits', 'action'=>'view', $plan['Instit']['id'])); ?></td>
             <td style="text-align:left; vertical-align: middle;"><?php echo $plan['Instit']['Localidad']['name']; ?></td>
             <td style="text-align:left; vertical-align: middle;"><?php echo $plan['Instit']['Departamento']['name']; ?></td>
             <td style="text-align:left; vertical-align: middle;"><?php echo $plan['Instit']['Jurisdiccion']['name']; ?></td>
         </tr>
-        <tr><td colspan="3" style="border-bottom:1px solid #CCCCCC;"></td></tr>
+        <tr><td colspan="4" style="border-bottom:1px solid #CCCCCC;"></td></tr>
         <?php
         }
         ?>
