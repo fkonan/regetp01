@@ -32,8 +32,11 @@ echo $javascript->link(array('jquery.animate-colors-min'));
 </div>
 <ul class="buscadores grid_12">
     <?php
-        echo $html->image('home/buscadores.png',array('style'=>'float:right;position:absolute;margin-top:-20px;z-index:9999;margin-left:-172px'));
+        echo $html->image('home/buscadores.png',array('style'=>'float:right;position:absolute;margin-top:-20px;z-index:9999;margin-left:-191px'));
     ?>
+    <div class="grid_12">
+            <h2>Haz clic en el buscador que necesites...</h2>
+    </div>
     <li class="grid_4 alpha">
         <?php
             echo $html->link(
