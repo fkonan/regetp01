@@ -150,9 +150,12 @@ class TitulosController extends AppController {
                 'limit'    => 6,
                 'page'    => 1,
                 'conditions' => array('Plan.titulo_id' => $id),
-                'contain' => array('Instit' => array('Tipoinstit', 'Jurisdiccion(name)')),
+                'contain' => array('Instit' => array(
+                                                'Tipoinstit',
+                                                'Localidad(name)',
+                                                'Departamento(name)',
+                                                'Jurisdiccion(name)')),
                 'order'    => array('Plan.nombre' => 'asc'),
-                'recursive' => 3
         );
 
         if ($this->Session->read($this->sesNames['jurisdiccion'])) {
@@ -166,7 +169,6 @@ class TitulosController extends AppController {
         }
 
         $planes = $this->paginate('Plan');
-
         $this->set('planes', $planes);
     }
 
