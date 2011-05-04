@@ -13,6 +13,7 @@ $javascript;
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <?php echo $html->charset(); ?>
+
         <title>
             <?php __('Catálogo Nacional de Títulos y Certificados');
             echo Configure::read('version')." - "; ?>
@@ -87,15 +88,15 @@ $javascript;
             <div id="header_title" class="cf">
                 <?php
                     //echo $html->image('header_ministerio.png', array('id'=>'header_ministerio'));
-                    echo $html->image('header_inet.png', array('id'=>'header_inet'));
+                    echo $html->image('header_inet_shadow.png', array('id'=>'header_inet'));
                 ?>
                 <h1>
                     <?php echo $html->link(__('Catálogo Nacional de Títulos y Certificados', true), '/pages/home', array('class'=>'mainlink')); ?>
                 </h1>
                 <ul id="menu">
-                    <li><a href="">| Contacto</a></li>
-                    <li><a href="">| Biblioteca</a></li>
-                    <li><a href="">| Buscadores</a></li>
+                    <li><a href="">Contacto</a></li>
+                    <li><a href="">Biblioteca</a></li>
+                    <li><a href="">Buscadores</a></li>
                     <li><a href="">Inicio</a></li>
                 </ul>
             </div>

@@ -5,9 +5,9 @@ ul.buscadores {
         padding-bottom: 20px;
         border: 5px solid #A1B2C6;
         background: #FAF9F7;
-        -moz-border-radius: 5px; /*--CSS3 Rounded Corners--*/
-	-khtml-border-radius: 5px; /*--CSS3 Rounded Corners--*/
-	-webkit-border-radius: 5px; /*--CSS3 Rounded Corners--*/
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
 }
 ul.buscadores li {
 	float: left;
