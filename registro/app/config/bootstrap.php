@@ -125,6 +125,7 @@ function convertir_para_busqueda_avanzada($text){
         $posiblesI = '(í|i|I|Í)';
         $posiblesO = '(ó|o|O|Ó)';
         $posiblesU = '(ú|u|ü|Ú|U|Ü)';
+        $posiblesN = '(n|ñ)';
 
         $text = trim($text);
         $text = "%$text%";
@@ -160,6 +161,8 @@ function convertir_para_busqueda_avanzada($text){
                 'í' => $posiblesI,
                 'ó' => $posiblesO,
                 'ú' => $posiblesU,
+            
+                'ñ' => $posiblesN,
 
                 's' => '(z|s|c)',
                 'c' => '(z|s|c)',
