@@ -9,8 +9,8 @@ class FileReaderComponent extends Object {
     /* 
      * @var $pdfs_path String
      * 
-     * path hacia la carpte aque contiene los pdfs, 
-     * es inicializacda en la funcion initialize 
+     * path hacia la carpeta aque contiene los pdfs,
+     * es inicializada en la funcion initialize 
      */
     var $pdfs_path;
 
