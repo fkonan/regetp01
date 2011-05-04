@@ -18,12 +18,14 @@
 
 body{
     background-color: #e9e8df;
-    background-image: url(img/background_gradient.png);
+    background-image: url(img/shadow.png);
     background-repeat: repeat-x;
-    font-family: "Molengo";
+    background-position: 0 100px;
+    
 }
 h1, h2, h3, h4{
-    font-family: "IM Fell DW Pica SC";
+    
+    font-size: 3em;
 }
 
 h3 {
@@ -52,19 +54,14 @@ A#guiaestudiante_btn:HOVER{
 
 #header{
     width: 100%;
-    background: url(img/headerbg.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/headerbg.jpg', sizingMethod='scale');
-    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/headerbg.jpg', sizingMethod='scale')";
     margin-bottom: 20px;
+    background-color: none;
+    background: url(img/header_bg.png) repeat-x;
+    height: 100px;
 }
 
 #header_title{
     width: 100%;
-    /*background: url(img/transparent.png) repeat;*/
 }
 
 #header_ministerio{
@@ -74,10 +71,9 @@ A#guiaestudiante_btn:HOVER{
     margin-left: 10px;
 }
 #header_inet{
-    width: 140px;
-    padding: 20px;
-    background: url(img/transparent2.png) repeat;
+    padding: 10px 10px 10px 0;
     float:left;
+    margin-left: 20px;
 }
 
 #header{
@@ -87,20 +83,22 @@ A#guiaestudiante_btn:HOVER{
 #header h1 {
     background: none;
     color: #fff;
-    padding: 0px 10px 0px 10px;
-    font-size: 3em;
+    padding: 20px 10px 0px 10px;
+    font-size: 2em;
     font-weight: bolder;
     border-bottom: none;
     margin-bottom: 0;
-    width: 100%;
-    margin-left: 180px; /*igual al width + padding de header_inet*/
-    background: url(img/transparent2.png) repeat;
+    float: left;
+    text-shadow: #000 -1px -1px 0;
+    font-size: 2.5em;
+    width: auto;
 }
 #header h1 a {
     color: #fff;
     background: none;
     font-weight: normal;
     text-decoration: none;
+    margin: 0 auto;
 }
 #header h1 a:hover {
     color: #fff;
@@ -110,29 +108,46 @@ A#guiaestudiante_btn:HOVER{
 
 #menu{
     list-style: none;
-    float:left;
-    margin-top: 100;
-    background: url(img/transparent2.png) repeat;
-    vertical-align: bottom;
+    float:right;
+    vertical-align: middle;
+
+    background-color: #435a78;
+    
+    border:1px solid #A1B2C6;
+    margin: 5px 25px 15px 0;
+    padding:5px;
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 
 #menu li{
     float:right;
     background: none;
-    margin:0;   
+    margin:0;
+    height: 100%;
+    border-right: 1px solid #243141;
+    border-left: 1px solid #A1B2C6;
 }
+
+#menu > li:last-child {
+    border-left: none;
+}
+#menu > li:first-child {
+    border-right: none;
+}
+
 #menu li a{
     text-decoration: none;
     color: #fff;
-    margin:0;
-    padding:3px;
+    padding:6px 10px 6px 10px;
     font-size: 1.3em;
-    padding-left: 10px;
-    padding-right: 10px;
+    text-shadow: #000 -1px -1px 0;
+    display: block;
 }
 #menu li a:hover{
-    background: url(img/transparent_white.png) repeat;
-    color: #000;
+    text-shadow: none;
 }
 
 #logos{

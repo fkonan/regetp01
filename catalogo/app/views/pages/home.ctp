@@ -11,27 +11,21 @@ echo $javascript->link(array('jquery.animate-colors-min'));
 
                 jQuery(this).find("a.thumb").css({'background' : 'url(' + thumbOver + ') no-repeat center bottom'});
 
-		jQuery(this).find("span").stop().fadeTo('normal', 0 , function() {
+		jQuery(this).find("span").stop().fadeTo('fast', 0 , function() {
 			jQuery(this).hide();
 		});
 
-                jQuery(this).find(".description p").animate({color: '#000000'});
-                jQuery(this).find("h2").animate({backgroundColor: '#1E8DDB'});
+                jQuery(this).find(".description p").animate({color: '#000000'}, 'fast');
+                jQuery(this).find("h2").animate({backgroundColor: '#1E8DDB'}, 'fast');
 	} , function() { 
-		jQuery(this).find("span").stop().fadeTo('normal', 1).show();
+		jQuery(this).find("span").stop().fadeTo('fast', 1).show();
 
-                jQuery(this).find("h2").animate({backgroundColor: '#858789'});
-                jQuery(this).find(".description p").animate({color: '#858789'});
+                jQuery(this).find("h2").animate({backgroundColor: '#858789'}, 'fast');
+                jQuery(this).find(".description p").animate({color: '#858789'}, 'fast');
 	});
     });
 </script>
 
-<div class="grid_12">
-        <h2>Info</h2>
-        <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum arcu in tellus commodo vestibulum. Aliquam erat volutpat. Cras elementum justo vitae metus consequat in condimentum nunc ultrices. Nam mollis bibendum volutpat. Donec velit ante, varius euismod pulvinar eu, hendrerit eget tellus. Aenean sed euismod augue. Aenean sollicitudin ligula et lorem feugiat vel accumsan sapien porta. Integer mollis ultricies felis non porttitor. Donec fermentum blandit ante vel tempus. Donec pulvinar, magna non aliquet egestas, nulla urna facilisis tortor, vel volutpat leo lorem ultrices odio. Cras lacinia aliquet placerat. Integer luctus massa quis massa blandit ac scelerisque neque dignissim. In iaculis vulputate ligula, sit amet mattis felis cursus eu. Proin iaculis nisi sit amet neque rhoncus vitae tempus lectus ornare. Aliquam in neque mauris.
-        <br/>
-</div>
 <ul class="buscadores grid_12">
     <?php
         echo $html->image('home/buscadores.png',array('style'=>'float:right;position:absolute;margin-top:-20px;z-index:9999;margin-left:-191px'));
