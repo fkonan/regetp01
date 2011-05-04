@@ -17,8 +17,8 @@
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th><?php echo $paginator->sort('Nombre','name');?></th>
-                <th style="width:20px;"><?php echo $paginator->sort("Marco Ref.",'marco_ref');?></th>
-                <th style="width:67px;"><?php echo $paginator->sort("Oferta",'Oferta.name');?></th>
+                <!--<th style="width:20px;"><?php echo $paginator->sort("Marco Ref.",'marco_ref');?></th>-->
+                <th><?php echo $paginator->sort("Oferta",'Oferta.name');?></th>
                 <th class="actions"></th>
             </tr>
         <?php
@@ -35,16 +35,16 @@
                                     );*/
                             echo $titulo['Titulo']['name']; ?>
                 </td>
-                <td>
+                <!--<td>
                         <?php
                         if ($titulo['Titulo']['marco_ref']==1) {
                             echo $html->image('check_blue.jpg');
                         }
                         ?>
-                </td>
+                </td>-->
                 <td>
                         <?php
-                        echo (empty($titulo['Oferta']['abrev']))? "" : $titulo['Oferta']['abrev'];
+                        echo (empty($titulo['Oferta']['name']))? "" : $titulo['Oferta']['name'];
                         echo $form->input('oferta_'.$titulo['Titulo']['id'], array('type' => 'hidden', 'value' => $titulo['Titulo']['oferta_id']));
                         ?>
                 </td>
