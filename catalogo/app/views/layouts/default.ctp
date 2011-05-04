@@ -13,8 +13,6 @@ $javascript;
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <?php echo $html->charset(); ?>
-        <link href='http://fonts.googleapis.com/css?family=IM+Fell+DW+Pica+SC' rel='stylesheet' type='text/css'></link>
-        <link href='http://fonts.googleapis.com/css?family=Molengo' rel='stylesheet' type='text/css'></link>
         <title>
             <?php __('Catálogo Nacional de Títulos y Certificados');
             echo Configure::read('version')." - "; ?>
@@ -95,11 +93,10 @@ $javascript;
                     <?php echo $html->link(__('Catálogo Nacional de Títulos y Certificados', true), '/pages/home', array('class'=>'mainlink')); ?>
                 </h1>
                 <ul id="menu">
-                    <li><a href="">menu1</a></li>
-                    <li><a href="">menu1</a></li>
-                    <li><a href="">menu1</a></li>
-                    <li><a href="">menu1</a></li>
-                    <li><a href="">menu1</a></li>
+                    <li><a href="">| Contacto</a></li>
+                    <li><a href="">| Biblioteca</a></li>
+                    <li><a href="">| Buscadores</a></li>
+                    <li><a href="">Inicio</a></li>
                 </ul>
             </div>
         </div>
