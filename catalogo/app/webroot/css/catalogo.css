@@ -56,12 +56,13 @@ A#guiaestudiante_btn:HOVER{
     width: 100%;
     margin-bottom: 20px;
     background-color: none;
-    background: url(img/bandera_sol.png) right no-repeat, url(img/header_bg.png) repeat-x;
+    background: url(img/header_bg.png) repeat-x;
     height: 100px;
 }
 
 #header_title{
     width: 100%;
+    background: url(img/bandera_sol.png) top right no-repeat;
 }
 
 #header_ministerio{
