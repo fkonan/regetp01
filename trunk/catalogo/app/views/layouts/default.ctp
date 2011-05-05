@@ -95,9 +95,9 @@ $javascript;
                 </h1>
                 <ul id="menu">
                     <li><a href="">Contacto</a></li>
-                    <li><a href="">Biblioteca</a></li>
+                    <li><?php echo $html->link('Biblioteca', array('controller'=>'bibliotecas', 'action'=>'index')); ?></li>
                     <li><a href="">Buscadores</a></li>
-                    <li><a href="">Inicio</a></li>
+                    <li><?php echo $html->link('Inicio', '/pages/home'); ?></li>
                 </ul>
             </div>
         </div>
