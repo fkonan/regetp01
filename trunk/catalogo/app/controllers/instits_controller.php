@@ -16,9 +16,8 @@ class InstitsController extends AppController {
             $this->Session->setFlash(__('Institución Inválida.', true));
             $this->redirect(array('action'=>'index'));
         }
-
-        $this->Instit->contain(array('EtpEstado','Orientacion','Plan'=>array('Titulo'=>array('SectoresTitulo'=>array('Sector','Subsector'),'Oferta'))));
-        $instit = $this->Instit->read(null, $id);
+        $this->Instit->contain(array('Localidad', 'Departamento', 'Jurisdiccion', 'Dependencia', 'Gestion', 'Orientacion', 'Claseinstit', 'EtpEstado','Orientacion','Plan'=>array('Titulo'=>array('SectoresTitulo'=>array('Sector','Subsector'),'Oferta'))));
+        $instit = $this->Instit->find("first", $id);
 
         $instit['Instit']['dir_tipodoc_name'] = '';
         $tipodoc = ClassRegistry::init('Tipodoc')->find('first', array(
