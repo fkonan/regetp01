@@ -4,89 +4,62 @@ echo $javascript->link(array('jquery.animate-colors-min'));
 ?>
 <script type="text/javascript">
     jQuery(document).ready(function() {
-
-	jQuery(".buscadores li").hover(function() {
-                
-		var thumbOver = jQuery(this).find("img").attr("src");
-
-                jQuery(this).find("a.thumb").css({'background' : 'url(' + thumbOver + ') no-repeat center bottom'});
-
-		jQuery(this).find("span").stop().fadeTo('fast', 0 , function() {
-			jQuery(this).hide();
-		});
-
-                jQuery(this).find(".description p").animate({color: '#000000'}, 'fast');
-                jQuery(this).find("h2").animate({backgroundColor: '#1E8DDB'}, 'fast');
+        jQuery(".buscadores li").hover(function() {
+                jQuery(this).find(".description p").css({color: '#000000'});
+                jQuery(this).find("h2").css({backgroundColor: '#1E8DDB'});
 	} , function() { 
-		jQuery(this).find("span").stop().fadeTo('fast', 1).show();
-
-                jQuery(this).find("h2").animate({backgroundColor: '#858789'}, 'fast');
-                jQuery(this).find(".description p").animate({color: '#858789'}, 'fast');
+		jQuery(this).find("h2").css({backgroundColor: '#858789'});
+                jQuery(this).find(".description p").css({color: '#858789'});
 	});
     });
 </script>
 
 <ul class="buscadores grid_12">
-    <?php
-        echo $html->image('home/buscadores.png',array('style'=>'float:right;position:absolute;margin-top:-20px;z-index:9999;margin-left:-191px'));
-    ?>
-    <div class="grid_12">
-            <h2>Busquedas Generales</h2>
+    <h2 class="grid_12">Busquedas por Perfiles</h2>
+    <div class="grid_4 alpha">
+        <h3 class="grid_8">Estudiantes</h3>
+        <li class="grid_4 alpha" >
+            <h2>
+                <?php
+                    echo $html->link('Guía del Estudiante', array('controller'=>'titulos', 'action'=>'search_form'));
+                ?>
+            </h2>
+            <div class="description">
+                <p>Utilizá este buscador si lo que estas buscando son Títulos o Certificados</p>
+            </div>
+        </li>
     </div>
-    <li class="grid_4 alpha" >
-        <?php
-            echo $html->link('<span>'.$html->image('home/guia_small.png').'</span>',array('controller'=>'instits', 'action'=>'search_form'), array('escape'=>false, 'class'=>'thumb'));
-        ?>
-        <h2>
-            <?php
-                echo $html->link('Guía del Estudiante', array('controller'=>'titulos', 'action'=>'search_form'));
-            ?>
-        </h2>
-        <div class="description">
-            <p>Utilizá este buscador si lo que estas buscando son Títulos o Certificados</p>
-        </div>
-        
-    </li>
-    <li class="grid_4">
-            <?php
-                echo $html->link('<span>'.$html->image('home/guia_small.png').'</span>',array('controller'=>'instits', 'action'=>'search_form'), array('escape'=>false, 'class'=>'thumb'));
-            ?>
-            <h2>
-                <?php
-                    echo $html->link('Buscador de Instituciones', array('controller'=>'instits', 'action'=>'search_form'), array('escape'=>false));
-                ?>
-            </h2>
-            <div class="description">
-                <p>Utilizá este buscador si lo que estas buscando son Títulos o Certificados</p>
-            </div>
-            
-    </li>
-    <li class="grid_4 omega">
-            <?php
-                echo $html->link('<span>'.$html->image('home/guia_small.png').'</span>',array('controller'=>'instits', 'action'=>'search_form'), array('escape'=>false, 'class'=>'thumb'));
-            ?>
-            <h2>
-                <?php
-                    echo $html->link('Buscador de Títulos', array('controller'=>'instits', 'action'=>'search_form'));
-                ?>
-            </h2>
-            <div class="description">
-                <p>Utilizá este buscador si lo que estas buscando son Títulos o Certificados</p>
-            </div>
-            
-    </li>
+    <div class="grid_8 omega">
+        <h3 class="grid_8">Otros</h3>
+        <li class="grid_4 alpha">
+                <h2>
+                    <?php
+                        echo $html->link('Buscador de Instituciones', array('controller'=>'instits', 'action'=>'search_form'), array('escape'=>false));
+                    ?>
+                </h2>
+                <div class="description">
+                    <p>Utilizá este buscador si lo que estas buscando son Títulos o Certificados</p>
+                </div>
+
+        </li>
+        <li class="grid_4 omega">
+                <h2>
+                    <?php
+                        echo $html->link('Buscador de Títulos', array('controller'=>'instits', 'action'=>'search_form'));
+                    ?>
+                </h2>
+                <div class="description">
+                    <p>Utilizá este buscador si lo que estas buscando son Títulos o Certificados</p>
+                </div>
+
+        </li>
+    </div>
 </ul>
 <ul class="buscadores grid_12">
-    <?php
-        echo $html->image('home/buscadores.png',array('style'=>'float:right;position:absolute;margin-top:-20px;z-index:9999;margin-left:-191px'));
-    ?>
     <div class="grid_12">
             <h2>Busquedas por Oferta</h2>
     </div>
     <li class="grid_4 alpha">
-            <?php
-                echo $html->link('<span>'.$html->image('home/guia_small.png').'</span>',array('controller'=>'instits', 'action'=>'search_form'), array('escape'=>false, 'class'=>'thumb'));
-            ?>
             <h2>
                 <?php
                     echo $html->link('Formación Profesional', array('controller'=>'instits', 'action'=>'search_form'));
@@ -97,12 +70,6 @@ echo $javascript->link(array('jquery.animate-colors-min'));
             </div>
     </li>
     <li class="grid_4">
-        <?php
-            echo $html->link(
-                    '<span>'.$html->image('home/guia_small.png').'</span>',
-                    array('controller'=>'titulos', 'action'=>'search_form'),
-                    array('escape'=>false, 'class'=>'thumb'));
-        ?>
         <h2>
             <?php
                 echo $html->link('Secundario Técnico', array('controller'=>'titulos', 'action'=>'search_form'));
@@ -113,9 +80,6 @@ echo $javascript->link(array('jquery.animate-colors-min'));
         </div>
     </li>
     <li class="grid_4 omega">
-            <?php
-                echo $html->link('<span>'.$html->image('home/guia_small.png').'</span>',array('controller'=>'instits', 'action'=>'search_form'), array('escape'=>false, 'class'=>'thumb'));
-            ?>
             <h2>
                 <?php
                     echo $html->link('Superior Técnico', array('controller'=>'instits', 'action'=>'search_form'), array('escape'=>false));
