@@ -36,7 +36,7 @@ class FileStructureWritterHelper extends AppHelper {
         if (empty($this->paths[$this->level])) {
                 $this->paths[$this->level] = '';
         }
-        $this->paths[$this->level] .= $mainkey."/";
+        $this->paths[$this->level] = $mainkey."/";
         
         if (!empty($array[$mainkey][$this->files])) {
             $cantFiles = count($array[$mainkey][$this->files]);
