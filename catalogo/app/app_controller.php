@@ -43,7 +43,9 @@ class AppController extends Controller {
 	// es una serie de links PEj:
 	// institucion -> ofertas -> plan -> año
 	// Sencillamente, es un menu de navegacion
-	var $rutaUrl_for_layout = array();	
+	var $rutaUrl_for_layout = array();
+        
+        var $components = array('DebugKit.Toolbar');
 		
 }
 ?>
