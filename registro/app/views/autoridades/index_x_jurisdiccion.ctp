@@ -66,6 +66,6 @@
 
 <div class="actions">
 	<ul>
-                <li><?php echo $html->link(__('Agregar/Modificar Autoridades', true), array('action' => 'index',$jurisdiccion_id), array('class'=>'acl acl-administradores acl-desarrolladores')); ?></li>
+                <li><?php echo $html->link(__('Agregar/Modificar Autoridades', true), array('action' => 'index',$jurisdiccion_id), array('class'=>'acl acl-administradores acl-desarrolladores acl-editores')); ?></li>
 	</ul>
 </div>
