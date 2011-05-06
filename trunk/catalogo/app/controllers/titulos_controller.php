@@ -262,7 +262,8 @@ class TitulosController extends AppController {
      *
      */
     function ajax_search_results() {
-
+        Configure::write('debug',0);
+        //debug($this->RequestHandler);
         //para mostrar en vista los patrones de busqueda seleccionados
         $array_condiciones = array();
         // para el paginator que pueda armar la url
@@ -372,8 +373,12 @@ class TitulosController extends AppController {
         $this->set('url_conditions', $url_conditions);
         //devuelve un array para mostrar los criterios de busqueda
         $this->set('conditions', $array_condiciones);
+             
+    }
+    
+    
+    function guia_del_estudiante(){
         
-        $this->render('ajax_search_results');
     }
 }
 ?>
