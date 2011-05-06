@@ -36,6 +36,8 @@
  */
 class AppController extends Controller {
 	var $helpers = array('Html', 'Form', 'Ajax',  'Javascript');
+        
+        var $components = array('RequestHandler', 'DebugKit.Toolbar');
 	
 	//esta es una variable que sera mostrada en el layout
 	// se crea mediante un elemento que le inserta un listado de urls
@@ -44,8 +46,10 @@ class AppController extends Controller {
 	// institucion -> ofertas -> plan -> año
 	// Sencillamente, es un menu de navegacion
 	var $rutaUrl_for_layout = array();
+
         
-        var $components = array('DebugKit.Toolbar');
-		
+        function beforeFilter() {
+            $this->RequestHandler->setContent('json', 'text/x-json');
+        }	
 }
 ?>
