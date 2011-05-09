@@ -17,9 +17,10 @@ echo $javascript->link(array('jquery.animate-colors-min'));
 <ul class="buscadores grid_12">
     <h2 class="grid_12">Busquedas por Perfiles</h2>
     <div class="grid_4 alpha">
-        <h3 class="grid_8">Estudiantes</h3>
+        <h3 class="grid_4">Estudiantes:</h3>
         <li class="grid_4 alpha" >
             <h2>
+                <?php echo $html->image('home/estudio.png', array('style'=>'float:right; margin-top:-15px;'));?>
                 <?php
                     echo $html->link('Guía del Estudiante', array('controller'=>'titulos', 'action'=>'search_form'));
                 ?>
@@ -30,9 +31,10 @@ echo $javascript->link(array('jquery.animate-colors-min'));
         </li>
     </div>
     <div class="grid_8 omega">
-        <h3 class="grid_8">Otros</h3>
+        <h3 class="grid_8">Otros:</h3>
         <li class="grid_4 alpha">
                 <h2>
+                    <?php echo $html->image('home/school.png', array('style'=>'float:right;margin-top:-16px;'));?>
                     <?php
                         echo $html->link('Buscador de Instituciones', array('controller'=>'instits', 'action'=>'search_form'), array('escape'=>false));
                     ?>
@@ -44,6 +46,7 @@ echo $javascript->link(array('jquery.animate-colors-min'));
         </li>
         <li class="grid_4 omega">
                 <h2>
+                    <?php echo $html->image('home/diploma.png', array('style'=>'float:right; margin-top:-18px;'));?>
                     <?php
                         echo $html->link('Buscador de Títulos', array('controller'=>'instits', 'action'=>'search_form'));
                     ?>
