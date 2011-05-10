@@ -47,9 +47,5 @@ class AppController extends Controller {
 	// Sencillamente, es un menu de navegacion
 	var $rutaUrl_for_layout = array();
 
-        
-        function beforeFilter() {
-            $this->RequestHandler->setContent('json', 'text/x-json');
-        }	
 }
 ?>

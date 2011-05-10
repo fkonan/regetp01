@@ -1,9 +1,9 @@
-
 (function($){
     /////////////////////////////////////////////////////////////////
     // Parametros de configuracion
     // Elementos utilizados
     var titulosForm = $('#TituloSearchForm');
+    
     
     var titulosContainer = $( "#li_titulos > UL" );
     var titulosPaginator = $( "#li_titulos > p" );
@@ -11,13 +11,22 @@
     var titulosTemplate = $("#tituloTemplate");
     var titulosPaginatorCountTag = "b";
     
+    
+    var institsForm = $('#InstitSearchForm');
+    
     var institsContainer = $( "#li_instits > UL" );
     var institsTemplate = $("#institTemplate");
     
+    var institsPaginator = $( "#li_instits > p" );
+    var institsPaginatorCountTag = 'b';
+
+    
     
     /////////////////////////////////////////////////////////////////
-    // Inicializacion
+    // Inicializacion de los formularios
     titulosForm.submit(getTitulos);
+    
+    institsForm.submit(getInstits);
     
     
     
@@ -45,26 +54,18 @@
     }
     
     
-    // esta funcion recien es llamada luego de getTitulos, al seleccionar alguno
-    // de esos titulos encontrados
-    function getInstits(tituloId) {
-       
-        var params = titulosForm.serialize();
-        console.info("get institssss - - - - - - ");
-        console.debug(params);
-        if ( tituloId ) {
-            params = params+"&data[Titulo][id]="+tituloId;
-        }
-        console.debug(params);
+    // trae las instituciones de los titulos seleccionados
+    function getInstits() {
+        var params = institsForm.serialize();
         var postvar = $.post( 
-                urlDomain + 'titulos/ajax_search_results.json',
+                urlDomain + 'instits/search.json',
                 params,
-                __meterTitulosEnTemplate,
+                __meterInstitsEnTemplate,
                 'json'
             );
                 
         postvar.error(function(e, t) {
-            console.info('Llegó con error el json de titulos: ' + t);
+            console.info('Llegó con error el json de instituciones: ' + t);
             console.debug(e);
         });
         return false;
@@ -86,24 +87,25 @@
         
         // meto la nueva data
         titulosTemplate.tmpl( data.data ).appendTo( titulosContainer );
-        
-        titulosContainer.click( onclickHandlerInstits );
+               
+        titulosContainer.find('li > input').change(onclickHandlerTitulos );
     }
     
     
-    var onclickHandlerInstits = function( e ) {        
-        var tgt = $(e.currentTarget);
-        console.debug(tgt);return false;
-        if ( tgt.attr('titulo') ) {
-            console.debug( tgt );
-            getInstits( tgt.attr('titulo') );
-        }
+    var onclickHandlerTitulos = function( e ) {   
+        e.preventDefault();
+        
+        institsForm.submit();
         return false;
     }
     
     
     var __meterInstitsEnTemplate = function ( data ) {
-        institsTemplate.tmpl( data ).appendTo( institsContainer );
+       institsContainer.html('');
+       institsTemplate.tmpl( data.data ).appendTo( institsContainer );
+
+       institsPaginator.show();
+       institsPaginator.children( institsPaginatorCountTag ).html( data.cant );
     }
     
     
