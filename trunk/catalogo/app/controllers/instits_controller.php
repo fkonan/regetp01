@@ -4,7 +4,7 @@ class InstitsController extends AppController {
     var $name = 'Instits';
     var $helpers = array('Html','Form','Ajax','Cache');
     //var $paginate = array('order'=>array('Instit.cue' => 'asc'),'limit'=>'10');
-    var $components = array('RequestHandler', 'Buscable');
+    var $components = array('Buscable');
    
     function index() {
         $this->Instit->recursive = 0;
@@ -175,7 +175,7 @@ class InstitsController extends AppController {
             ));
         }
 
-        echo json_encode($result);
+        $this->set('instits', $result);
     }
 
     function search() {
@@ -420,10 +420,11 @@ class InstitsController extends AppController {
                     if(($pagin[0]['Instit']['cue'] == $this->data['Instit']['cue']) || (($pagin[0]['Instit']['cue']*100+$pagin[0]['Instit']['anexo'] == $this->data['Instit']['cue']))) {
                         $this->redirect('view/'.$pagin[0]['Instit']['id']);
                     }
-        } else {
-            // si es ajax renderizo otra vista
-            $this->render('ajax_search');
         }
+//        else {
+//            // si es ajax renderizo otra vista
+//            $this->render('ajax_search');
+//        }
     }
 }
 ?>

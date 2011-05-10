@@ -15,16 +15,23 @@ y funciones javascript de esta pagina
 Templates de jQuery para los resultados de busqueda
 -->
 <script id="tituloTemplate" type="text/x-jquery-tmpl">
-    <li><a href="instits/search" titulo="${Titulo.id}"><b>${Titulo.name}</b> (${Oferta.name})</a></li>
+    <li titulo-id="${Titulo.id}">
+            <input type="checkbox" name="data[Plan][titulo_id][]" value="${Titulo.id}" >
+            <b>${Titulo.name}</b> (${Oferta.name})            
+    </li>
 </script>
 
+
 <script id="institTemplate" type="text/x-jquery-tmpl">
-    <li><b>${Instit.nombre_completo}</b> (---)</li>
+    <li>
+        <b>${Instit.cue}${Instit.anexo}</b> ${Instit.nombre_completo}
+    </li>
 </script>
 
 
 
 <div id="filtro" class="grid_12">
+    <div class="grid_6 alpha">
     <?php echo $form->create('Titulo', array(
             'action' => 'guia_del_estudiante',
             'name'=>'TituloSearchForm',
@@ -33,26 +40,38 @@ Templates de jQuery para los resultados de busqueda
     
     <?php echo $form->input('Titulo.tituloName') ?>
     <?php echo $form->input('Titulo.oferta_id') ?>
+    </div>
+    
+    <div class="grid_6 alpha">
+    <?php echo $form->input('Titulo.sector_id', array('options'=>$sectores, 'multiple'=>true)) ?>
     
     <?php echo $form->end('Buscar') ?>
+    </div>
     
 </div>
 
+
+<?php echo $form->create('Instit', array(
+            'action'=>'guia_del_estudiante', 
+            'id'=>'InstitSearchForm', 'name'=>'InstitSearchForm' ));
+?>
 <div id="li_titulos" class="grid_6 alpha">
+    
     <h2>¿Qué Estudiar?</h2>
     <p style="display: none"><b></b> Títulos o Certificados encontrados</p>
-    <ul>
-        
-    </ul>
+    <ul></ul>    
 </div>
+<?php echo $form->end(); ?>
+
+
 
 
 <div id="li_instits" class="grid_6 omega">
     <h2>¿Dónde Estudiar?</h2>
-    <ul>
-        
-    </ul>
+    <p style="display: none"><b></b> Instituciones encontradas</p>
+    <ul></ul>
 </div>
+
 
 
 <?php echo $javascript->link('views/titulos/guia_del_estudiante_tail'); ?>

@@ -1,6 +1,5 @@
 <?php
-
-
+    
     $paginator->options(array('update' => 'consoleResult', 'url' => $this->passedArgs,'indicator'=> 'ajax_indicator'));
     ?>
 <div id="resultTitle">
