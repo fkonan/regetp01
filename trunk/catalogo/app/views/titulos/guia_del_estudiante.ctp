@@ -1,9 +1,7 @@
 <?php echo $javascript->link('jquery/jquery.tmpl.min', false); ?>
 <?php echo $javascript->link('jquery/jquery.history', false); ?>
-
-<?php echo $html->css('catalogo.guia_del_estudiante', false);?>
-
-
+<?php echo $javascript->link('jquery.loadmask.min', false); ?>
+<?php echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante')); ?>
 
 <!-- 
 Inicializacion de url global para el manejo de los callbacks 
@@ -47,6 +45,12 @@ Templates de jQuery para los resultados de busqueda
             'id' =>'TituloSearchForm',
             )) ?>
     
+    <?php echo $form->input('Titulo.que', array(
+                'label'=> '¿Qué?',
+                )) ?>
+    <?php echo $form->input('Titulo.donde', array(
+                'label'=> '¿Dónde?',
+                )) ?>
     <?php echo $form->input('Titulo.tituloName') ?>
     <?php echo $form->input('Titulo.oferta_id') ?>
     </div>
@@ -72,6 +76,11 @@ Templates de jQuery para los resultados de busqueda
 </div>
 <?php echo $form->end(); ?>
 
+        <h2>¿Qué Estudiar?</h2>
+        <p style="display: none"><b></b> Títulos o Certificados encontrados</p>
+        <ul></ul>
+    </div>
+    <?php echo $form->end(); ?>
 
 
 
@@ -80,7 +89,6 @@ Templates de jQuery para los resultados de busqueda
     <div class="paginatorContainer"></div>
     <ul class="results"></ul>
 </div>
-
 
 
 <?php echo $javascript->link('views/titulos/guia_del_estudiante_tail'); ?>
