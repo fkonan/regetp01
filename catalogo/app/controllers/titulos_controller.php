@@ -262,7 +262,7 @@ class TitulosController extends AppController {
      *
      */
     function ajax_search_results() {
-        Configure::write('debug',0);
+        Configure::write('debug', 0);
         //debug($this->RequestHandler);
         //para mostrar en vista los patrones de busqueda seleccionados
         $array_condiciones = array();
@@ -311,6 +311,13 @@ class TitulosController extends AppController {
                 $this->Session->write($this->sesNames['localidad'], $this->data['Titulo']['localidad_id']);
                 $this->Session->write($this->sesNames['tituloJurDepLoc'], $this->data['Titulo']['jur_dep_loc']);
             }
+
+            if (!empty($this->data['Titulo']['que'])) {
+                $this->paginate['conditions']['(lower(Tipoinstit.name) || lower(Titulo.name) || lower(Plan.name) || lower(Sector.name) || lower(Subsector.name)) SIMILAR TO ?'] = convertir_para_busqueda_avanzada(utf8_decode($this->data['Titulo']['que']));
+            }
+            if (!empty($this->data['Titulo']['donde'])) {
+                $this->paginate['conditions']['(lower(Jurisdiccion.name) || lower(Departamento.name) || lower(Localidad.name) || lower(Instit.name)) SIMILAR TO ?'] = convertir_para_busqueda_avanzada(utf8_decode($this->data['Titulo']['donde']));
+            }
         }
 
         if(!empty($this->passedArgs['tituloName'])) {
@@ -332,14 +339,6 @@ class TitulosController extends AppController {
                 $q = $this->passedArgs['subsectorId'];
                 $this->paginate['conditions']['SectoresTitulo.subsector_id'] = $q;
             }
-
-            /*$this->paginate['joins'] = array(
-                array('table'=>'sectores_titulos',
-                      'type' => 'LEFT',
-                      'alias' => 'SectoresTitulo',
-                      'conditions'=> array('SectoresTitulo.titulo_id = Titulo.id')
-                    )
-                );*/
         }
         if(!empty($this->passedArgs['jurisdiccionId'])) {
             $q = ($this->passedArgs['jurisdiccionId']);
@@ -361,7 +360,7 @@ class TitulosController extends AppController {
         elseif ($this->Session->read($this->sesNames['page'])) {
             $this->paginate['page'] = $this->Session->read($this->sesNames['page']);
         }
-        
+//debug($this->paginate['conditions']);
         //datos de paginacion
         $this->paginate['fields'] = array('Titulo.id', 'Titulo.name','Titulo.marco_ref', 'Titulo.oferta_id', 'Oferta.abrev');
         $this->paginate['group'] = $this->paginate['fields'];
@@ -375,11 +374,12 @@ class TitulosController extends AppController {
         $this->set('conditions', $array_condiciones);
              
     }
-    
-    
-    function guia_del_estudiante(){
+
+
+    function guiaDelEstudiante() {
         $this->set('sectores', $this->Titulo->Sector->find('list'));
         $this->set('ofertas', $this->Titulo->Oferta->find('list'));
     }
+
 }
 ?>

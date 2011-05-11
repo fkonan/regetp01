@@ -30,13 +30,23 @@
     
     /////////////////////////////////////////////////////////////////
     // functiones Principales
-    //    
+    //
+    var __blockResultConsole = function () {
+        jQuery('#resultados').mask('Buscando');
+        return true;
+    }
+
+    var __unblockResultConsole = function () {
+        jQuery('#resultados').unmask();
+    }
     
     /**
      * Trae los titulos en JSON, usando ajax
      */
     function getTitulos(href) {
         var url = '';
+
+        __blockResultConsole();
         
         if (typeof href == 'object') {
             url = urlDomain + 'titulos/ajax_search_results.json';
@@ -67,7 +77,9 @@
     // trae las instituciones de los titulos seleccionados
     function getInstits(href) {
         var url = '';
-        
+
+        __blockResultConsole();
+
         if (typeof href == 'object') {
             url = urlDomain + 'instits/search.json';
         } else {
@@ -126,6 +138,8 @@
                
         //titulosContainer.delegate('li','click',onChangeHandlerTitulos );
         titulosContainer.find('li > input').change( onChangeHandlerTitulos );
+
+        __unblockResultConsole();
     }
     
     
@@ -169,6 +183,8 @@
         titulosSeleccionadosContainer.html('');
         institsContainer.html('');
         institsPaginator.html('');
+
+        __unblockResultConsole();
     }
     
     

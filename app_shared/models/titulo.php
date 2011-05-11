@@ -136,6 +136,12 @@ class Titulo extends AppModel {
                 'conditions' => array('Instit.id = Plan.instit_id'),
             ),
             array(
+                'table' => 'tipoinstits',
+                'type' => 'LEFT',
+                'alias' => 'Tipoinstit',
+                'conditions' => array('Tipoinstit.id = Instit.tipoinstit_id'),
+            ),
+            array(
                 'table' => 'estructura_planes',
                 'type' => 'LEFT',
                 'alias' => 'EstructuraPlan',
@@ -170,6 +176,12 @@ class Titulo extends AppModel {
                 'type' => 'LEFT',
                 'alias' => 'Sector',
                 'conditions' => array('SectoresTitulo.sector_id = Sector.id'),
+            ),
+            array(
+                'table' => 'subsectores',
+                'type' => 'LEFT',
+                'alias' => 'Subsector',
+                'conditions' => array('SectoresTitulo.subsector_id = Subsector.id'),
             ),
             array(
                 'table' => 'ofertas',
