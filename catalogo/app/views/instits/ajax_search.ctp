@@ -93,9 +93,9 @@
         }
         ?>
     <div style="float:right; display:block;margin-bottom: 10px">
-            <?php
-            echo $paginator->numbers();
-            ?>
+        <?php
+        echo $paginator->numbers();
+        ?>
     </div>
 </div>
 

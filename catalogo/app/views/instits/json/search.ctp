@@ -7,6 +7,7 @@ foreach( $instits as &$i) {
  $objeto = array(
      'cant' => $paginator->counter(array('format' => '%count%')),
      'data'      => $instits,
+     'paginator' => $paginator->numbers(),
  );
  
  echo $javascript->object($objeto);

@@ -1,4 +1,5 @@
 <?php 
+
 /* @var $paginator PaginatorHelper */
 foreach ( $titulos as &$t) {
     $t['Titulo']['name'] = utf8_encode($t['Titulo']['name']);
@@ -8,6 +9,7 @@ foreach ( $titulos as &$t) {
 $titulos = array(
     'cant' => $paginator->counter(array('format' => '%count%')),
     'data' => $titulos,
+    'paginator' => $paginator->numbers(),
 );
 
 echo $javascript->object($titulos);
