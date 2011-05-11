@@ -1,4 +1,4 @@
-(function($){
+(function($){ 
     /////////////////////////////////////////////////////////////////
     // Parametros de configuracion
     // Elementos utilizados
