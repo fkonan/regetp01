@@ -2,25 +2,21 @@
     /////////////////////////////////////////////////////////////////
     // Parametros de configuracion
     // Elementos utilizados
+    
+    var paginatorTemplate = $('#paginatorTemplate');
+    
+    
     var titulosForm = $('#TituloSearchForm');
-    
-    
     var titulosContainer = $( "#li_titulos > UL.results" );
     var titulosSeleccionadosContainer = $( "#li_titulos > UL.seleccionados" );    
-    var titulosPaginator = $( "#li_titulos > .paginator" );
-    var titulosPaginatorCountTag = $( "#li_titulos > .paginator > .count" );
-    
+    var titulosPaginator = $("#li_titulos > .paginatorContainer")
     var titulosTemplate = $("#tituloTemplate");
     
-    
-    
     var institsForm = $('#InstitSearchForm');
-    
     var institsContainer = $( "#li_instits > UL.results" );
     var institsTemplate = $("#institTemplate");
-    
-    var institsPaginator = $( "#li_instits > .paginator" );
-    var institsPaginatorCountTag = $( "#li_instits > .paginator > .count" );
+    var institsPaginator = $("#li_instits > .paginatorContainer")
+  
 
     
     
@@ -44,6 +40,10 @@
         
         if (typeof href == 'object') {
             url = urlDomain + 'titulos/ajax_search_results.json';
+            
+            // redifini la busquda de los filtros entonces limpiar los 
+            // resultados previamente cargados
+            __blanquearContainers();
         } else {
             url = href; 
         }
@@ -119,7 +119,7 @@
         // primero borro el contenido
         titulosContainer.html('');
         
-        __updatePaginatorElement(data, titulosPaginator, titulosPaginatorCountTag, getTitulosDelPaginator);       
+        __updatePaginatorElement(data, titulosPaginator, getTitulosDelPaginator);       
         
         // meto la nueva data
         titulosTemplate.tmpl( data.data ).appendTo( titulosContainer );
@@ -130,14 +130,13 @@
     
     
     
-    var __updatePaginatorElement = function(data, paginatorContainer, paginatorCountContainer, callback) {
-        paginatorContainer.show();
-        paginatorCountContainer.children('b').html( data.cant );
-
-        var pagNumbers = paginatorContainer.children('.numbers');
+    var __updatePaginatorElement = function(data, paginatorContainer, callback) {
+        paginatorContainer.html('');
+        paginatorTemplate.tmpl( data.paginator ).appendTo( paginatorContainer );
+        var pagNumbers = paginatorContainer.find('.numbers');
         pagNumbers.unbind('click');
-        pagNumbers.html('').append( data.paginator );
         pagNumbers.bind('click', callback );
+                
     }
     
     
@@ -162,8 +161,14 @@
        institsContainer.html('');
        institsTemplate.tmpl( data.data ).appendTo( institsContainer );
        
-       __updatePaginatorElement(data, institsPaginator, institsPaginatorCountTag, getInstitsDelPaginator);       
+       __updatePaginatorElement(data, institsPaginator, getInstitsDelPaginator);       
 
+    }
+    
+    var __blanquearContainers = function() {
+        titulosSeleccionadosContainer.html('');
+        institsContainer.html('');
+        institsPaginator.html('');
     }
     
     

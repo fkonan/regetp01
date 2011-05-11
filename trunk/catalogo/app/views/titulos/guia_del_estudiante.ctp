@@ -30,6 +30,13 @@ Templates de jQuery para los resultados de busqueda
     </li>
 </script>
 
+<script id="paginatorTemplate" type="text/x-jquery-tmpl">
+    <div class="paginator">
+        <p class="count"><b>${cant}</b> ${texto}</p>
+        <p class="numbers">{{html numbers}}</p>
+    </div>   
+</script>
+
 
 
 <div id="filtro" class="grid_12">
@@ -58,13 +65,8 @@ Templates de jQuery para los resultados de busqueda
             'id'=>'InstitSearchForm', 'name'=>'InstitSearchForm' ));
 ?>
 <div id="li_titulos" class="grid_6 alpha">
-    
     <h2>¿Qué Estudiar?</h2>
-    <div class="paginator" style="display: none">
-        <p class="count"><b></b> Títulos o Certificados encontrados</p>
-        <p class="numbers">
-        </p>
-    </div>    
+        <div class="paginatorContainer"></div>
     <ul class="seleccionados"></ul>
     <ul class="results"></ul>    
 </div>
@@ -75,12 +77,8 @@ Templates de jQuery para los resultados de busqueda
 
 <div id="li_instits" class="grid_6 omega">
     <h2>¿Dónde Estudiar?</h2>
-    <div class="paginator" style="display: none">
-        <p class="count"><b></b> Instituciones encontrados</p>
-        <p class="numbers">
-        </p>
-    </div>
-    <ul class="results"></ul> 
+    <div class="paginatorContainer"></div>
+    <ul class="results"></ul>
 </div>
 
 
