@@ -6,10 +6,24 @@ foreach ( $titulos as &$t) {
     $t['Oferta']['name'] = utf8_encode($t['Oferta']['name']);
 }
 
+$cant = $paginator->counter(array('format' => '%count%'));
+
+$texto = 'Títulos encontrados';
+if ( $cant == 1) {
+    $texto = 'Título encontrado';
+}
+
+$numbers = $paginator->numbers() ? $paginator->numbers() : '';
+
+$paginator = array(
+    'cant' => $cant,
+    'numbers' => $numbers,
+    'texto' => utf8_encode($texto),
+);
+
 $titulos = array(
-    'cant' => $paginator->counter(array('format' => '%count%')),
+    'paginator' => $paginator,
     'data' => $titulos,
-    'paginator' => $paginator->numbers(),
 );
 
 echo $javascript->object($titulos);
