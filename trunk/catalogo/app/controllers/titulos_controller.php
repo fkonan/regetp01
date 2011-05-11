@@ -361,7 +361,7 @@ class TitulosController extends AppController {
         elseif ($this->Session->read($this->sesNames['page'])) {
             $this->paginate['page'] = $this->Session->read($this->sesNames['page']);
         }
-debug($this->paginate);
+        
         //datos de paginacion
         $this->paginate['fields'] = array('Titulo.id', 'Titulo.name','Titulo.marco_ref', 'Titulo.oferta_id', 'Oferta.abrev');
         $this->paginate['group'] = $this->paginate['fields'];

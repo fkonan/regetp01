@@ -1,6 +1,8 @@
 <?php echo $javascript->link('jquery/jquery.tmpl.min', false); ?>
 <?php echo $javascript->link('jquery/jquery.history', false); ?>
 
+<?php echo $html->css('catalogo.guia_del_estudiante', false);?>
+
 
 
 <!-- 
@@ -16,8 +18,8 @@ Templates de jQuery para los resultados de busqueda
 -->
 <script id="tituloTemplate" type="text/x-jquery-tmpl">
     <li titulo-id="${Titulo.id}">
-            <input type="checkbox" name="data[Plan][titulo_id][]" value="${Titulo.id}" >
-            <b>${Titulo.name}</b> (${Oferta.name})            
+        <input type="checkbox" name="data[Plan][titulo_id][]" value="${Titulo.id}" >
+        <b>${Titulo.name}</b> (${Oferta.name})       
     </li>
 </script>
 
@@ -58,8 +60,13 @@ Templates de jQuery para los resultados de busqueda
 <div id="li_titulos" class="grid_6 alpha">
     
     <h2>¿Qué Estudiar?</h2>
-    <p style="display: none"><b></b> Títulos o Certificados encontrados</p>
-    <ul></ul>    
+    <div class="paginator" style="display: none">
+        <p class="count"><b></b> Títulos o Certificados encontrados</p>
+        <p class="numbers">
+        </p>
+    </div>    
+    <ul class="seleccionados"></ul>
+    <ul class="results"></ul>    
 </div>
 <?php echo $form->end(); ?>
 
@@ -68,8 +75,12 @@ Templates de jQuery para los resultados de busqueda
 
 <div id="li_instits" class="grid_6 omega">
     <h2>¿Dónde Estudiar?</h2>
-    <p style="display: none"><b></b> Instituciones encontradas</p>
-    <ul></ul>
+    <div class="paginator" style="display: none">
+        <p class="count"><b></b> Instituciones encontrados</p>
+        <p class="numbers">
+        </p>
+    </div>
+    <ul class="results"></ul> 
 </div>
 
 
