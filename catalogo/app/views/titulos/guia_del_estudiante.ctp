@@ -68,28 +68,21 @@ Templates de jQuery para los resultados de busqueda
             'action'=>'guia_del_estudiante', 
             'id'=>'InstitSearchForm', 'name'=>'InstitSearchForm' ));
 ?>
-<div id="li_titulos" class="grid_6 alpha">
-    <h2>¿Qué Estudiar?</h2>
-        <div class="paginatorContainer"></div>
-    <ul class="seleccionados"></ul>
-    <ul class="results"></ul>    
-</div>
-<?php echo $form->end(); ?>
-
+<div id="resultados" class="grid_12">
+    <div id="li_titulos" class="grid_6 alpha">
         <h2>¿Qué Estudiar?</h2>
-        <p style="display: none"><b></b> Títulos o Certificados encontrados</p>
-        <ul></ul>
+            <div class="paginatorContainer"></div>
+        <ul class="seleccionados"></ul>
+        <ul class="results"></ul>
     </div>
     <?php echo $form->end(); ?>
 
-
-
-<div id="li_instits" class="grid_6 omega">
-    <h2>¿Dónde Estudiar?</h2>
-    <div class="paginatorContainer"></div>
-    <ul class="results"></ul>
+    <div id="li_instits" class="grid_6 omega">
+        <h2>¿Dónde Estudiar?</h2>
+        <div class="paginatorContainer"></div>
+        <ul class="results"></ul>
+    </div>
 </div>
-
 
 <?php echo $javascript->link('views/titulos/guia_del_estudiante_tail'); ?>
 

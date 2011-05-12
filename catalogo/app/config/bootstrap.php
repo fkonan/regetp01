@@ -46,8 +46,6 @@
 define('SEC_TEC_ID',3);
 define('ITINERARIO_ID',2);
 define('FP_ID',1);
-define('SEC_ID',5);
-define('SUP_ID',6);
 define('SUP_TEC_ID',4);
 
 

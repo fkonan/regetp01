@@ -17,7 +17,7 @@ class TitulosController extends AppController {
             'page' => 'Titulo.page',
         );
 
-    function search() {
+    function search($oferta_id = 0) {
         $ofertas = $this->Titulo->Oferta->find('list');
         $sectores = $this->Titulo->Sector->find('list',array('order'=>'Sector.name'));
 
@@ -36,6 +36,10 @@ class TitulosController extends AppController {
         }
         if ($this->Session->read($this->sesNames['oferta'])) {
             $this->data['Titulo']['oferta_id'] = $this->passedArgs['ofertaId'] = $this->Session->read($this->sesNames['oferta']);
+            $bySession = true;
+        }
+        if ($oferta_id > 0) {
+            $this->data['Titulo']['oferta_id'] = $this->passedArgs['ofertaId'] = $oferta_id;
             $bySession = true;
         }
         if ($this->Session->read($this->sesNames['sector'])) {
@@ -261,7 +265,7 @@ class TitulosController extends AppController {
      * maneja las condiciones de la busqueda y el paginador
      *
      */
-    function ajax_search_results() {
+    function ajax_search_results($oferta_id = 0) {
         Configure::write('debug', 0);
         //debug($this->RequestHandler);
         //para mostrar en vista los patrones de busqueda seleccionados
