@@ -93,6 +93,9 @@
                 __meterInstitsEnTemplate,
                 'json'
             );
+
+        __unblockResultConsole();
+        
         return false;
     }
     
@@ -175,16 +178,15 @@
        institsContainer.html('');
        institsTemplate.tmpl( data.data ).appendTo( institsContainer );
        
-       __updatePaginatorElement(data, institsPaginator, getInstitsDelPaginator);       
+       __updatePaginatorElement(data, institsPaginator, getInstitsDelPaginator);
 
+       __unblockResultConsole();
     }
     
     var __blanquearContainers = function() {
         titulosSeleccionadosContainer.html('');
         institsContainer.html('');
         institsPaginator.html('');
-
-        __unblockResultConsole();
     }
     
     

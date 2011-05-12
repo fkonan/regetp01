@@ -142,6 +142,24 @@ class Titulo extends AppModel {
                 'conditions' => array('Tipoinstit.id = Instit.tipoinstit_id'),
             ),
             array(
+                'table' => 'jurisdicciones',
+                'type' => 'LEFT',
+                'alias' => 'Jurisdiccion',
+                'conditions' => array('Jurisdiccion.id = Instit.jurisdiccion_id'),
+            ),
+            array(
+                'table' => 'departamentos',
+                'type' => 'LEFT',
+                'alias' => 'Departamento',
+                'conditions' => array('Departamento.id = Instit.departamento_id'),
+            ),
+            array(
+                'table' => 'localidades',
+                'type' => 'LEFT',
+                'alias' => 'Localidad',
+                'conditions' => array('Localidad.id = Instit.localidad_id'),
+            ),
+            array(
                 'table' => 'estructura_planes',
                 'type' => 'LEFT',
                 'alias' => 'EstructuraPlan',

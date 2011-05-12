@@ -22,7 +22,7 @@ echo $javascript->link(array('jquery.animate-colors-min'));
             <h2>
                 <?php echo $html->image('home/estudio.png', array('style'=>'float:right; margin-top:-15px;'));?>
                 <?php
-                    echo $html->link('Guía del Estudiante', array('controller'=>'titulos', 'action'=>'search_form'));
+                    echo $html->link('Guía del Estudiante', array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'));
                 ?>
             </h2>
             <div class="description">
@@ -48,7 +48,7 @@ echo $javascript->link(array('jquery.animate-colors-min'));
                 <h2>
                     <?php echo $html->image('home/diploma.png', array('style'=>'float:right; margin-top:-18px;'));?>
                     <?php
-                        echo $html->link('Buscador de Títulos', array('controller'=>'instits', 'action'=>'search_form'));
+                        echo $html->link('Buscador de Títulos', array('controller'=>'titulos', 'action'=>'search'));
                     ?>
                 </h2>
                 <div class="description">
@@ -65,7 +65,7 @@ echo $javascript->link(array('jquery.animate-colors-min'));
     <li class="grid_4 alpha">
             <h2>
                 <?php
-                    echo $html->link('Formación Profesional', array('controller'=>'instits', 'action'=>'search_form'));
+                    echo $html->link('Formación Profesional', array('controller'=>'titulos', 'action'=>'search', FP_ID));
                 ?>
             </h2>
             <div class="description">
@@ -75,7 +75,7 @@ echo $javascript->link(array('jquery.animate-colors-min'));
     <li class="grid_4">
         <h2>
             <?php
-                echo $html->link('Secundario Técnico', array('controller'=>'titulos', 'action'=>'search_form'));
+                echo $html->link('Secundario Técnico', array('controller'=>'titulos', 'action'=>'search', SEC_TEC_ID));
             ?>
         </h2>
         <div class="description">
@@ -85,7 +85,7 @@ echo $javascript->link(array('jquery.animate-colors-min'));
     <li class="grid_4 omega">
             <h2>
                 <?php
-                    echo $html->link('Superior Técnico', array('controller'=>'instits', 'action'=>'search_form'), array('escape'=>false));
+                    echo $html->link('Superior Técnico', array('controller'=>'titulos', 'action'=>'search', SUP_TEC_ID), array('escape'=>false));
                 ?>
             </h2>
             <div class="description">
