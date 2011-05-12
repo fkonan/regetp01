@@ -27,7 +27,7 @@ $javascript;
 
           // false = Only run once, when page first loads.
           // true = Change on window resize and page tilt.
-          dynamic: true,
+          dynamic: false,
 
           // First range entry is the minimum.
           // Last range entry is the maximum.
@@ -44,10 +44,12 @@ $javascript;
         </script>
         <?php
         echo $html->meta('icon');
-        echo $html->css('adapt/mobile.min','stylesheet', array('media'=>'mobile'));
-        echo $html->css('adapt/master');
+        
+        //echo $html->css('adapt/mobile.min','stylesheet', array('media'=>'mobile'));
+        //echo $html->css('adapt/master');
         echo $html->css('jquery.tooltip','stylesheet');
         echo $html->css('catalogo','stylesheet', array('media'=>'screen'));
+        echo $html->css('catalogo.menu','stylesheet');
         echo $html->css('printer','stylesheet', array('media'=>'print'));
 
         echo $javascript->link(array(
@@ -63,53 +65,63 @@ $javascript;
              echo $javascript->link($jsPoner);
         }
 
-
         echo $scripts_for_layout;
 
         ?>
-        <!--[if IE 7]>
-        <style type="text/css">
-            .horizontal-shadetabs a {
-                display: block;
-                height: 28px;
-            }
-        </style>
-        <![endif]-->
-
-        <!--[if IE 6]>
-        <?php echo $html->css('ie6fix');?>
-        <![endif]--> 
     </head>
 
 
     <body>
-        
+    <div class="wrapper">
         <div id="header">
-            <div id="header_title" class="cf">
+            <div id="header_title" class="container_12">
+                
+                <div class="grid_3">
                 <?php
                     //echo $html->image('header_ministerio.png', array('id'=>'header_ministerio'));
-                    echo $html->image('header_inet_shadow.png', array('id'=>'header_inet'));
+                    echo $html->image('logoinettrans.png');
                 ?>
-                <h1>
-                    <?php echo $html->link(__('Catálogo Nacional de Títulos y Certificados', true), '/pages/home', array('class'=>'mainlink')); ?>
-                </h1>
-                <ul id="menu">
-                    <li><a href="">Contacto</a></li>
-                    <li><?php echo $html->link('Biblioteca', array('controller'=>'bibliotecas', 'action'=>'index')); ?></li>
-                    <li><a href="">Buscadores</a></li>
-                    <li><?php echo $html->link('Inicio', '/pages/home'); ?></li>
-                </ul>
-            </div>
-        </div>
-        <div id="container" class ="container_12 clearfix">
-
+                </div>
                 
+                <h1 class="grid_9">
+                    <?php echo $html->link(__('Catálogo Nacional de Títulos y Certificados', true), '/pages/home'); ?>
+                </h1>
+                
+                <div class="clear"></div>
+                
+                
+                <ul id="nav" class="container_12">
+                    <li class="grid_3 current"><?php echo $html->link('Inicio', '/pages/home'); ?></li>
+                    <li class="grid_3"><a href="">Buscadores</a></li>
+                    <li class="grid_3">
+                        <?php echo $html->link('Biblioteca', array('controller'=>'bibliotecas', 'action'=>'index')); ?>
+                        <ul>
+                            <li><a href="#1">Marco de Referencias</a></li>
+                            <li><a href="#2">Foros Sectoriales</a></li>
+                            <li><a href="#2">Cara de Bragueta</a></li>
+                            <li>
+                                <a href="#2">Ocatarinetabelachitchix</a>
+                                <ul>
+                                    <li><a href="#">Màs Magia baby</a></li>
+                                    <li><a href="#">Màs Magia baby</a></li>
+                                </ul>
+                            </li>
+
+			</ul>
+
+                    </li>
+                    <li class="grid_3"><a href="">Contacto</a></li>
+                </ul>
+                
+            </div>         
+            
+        </div>
+        <div id="container" class ="container_12">
                 <div id="cuerpo">
                         <?php $session->flash(); ?>
                         <?php $session->flash('auth'); ?>
                         <?php echo $content_for_layout; ?>
                 </div>
-
 
        </div> <!-- FIN div #container -->
        <div id="logos">
@@ -138,6 +150,7 @@ $javascript;
         ); ?>
 
         <?php echo $cakeDebug; ?>
+    </div>
     </body>
 
 </html>

@@ -1,63 +1,49 @@
 <?php 
-echo $html->css('catalogo.home.css');
+//echo $html->css('catalogo.home.css');
 echo $javascript->link(array('jquery.animate-colors-min'));
 ?>
-<script type="text/javascript">
-    jQuery(document).ready(function() {
-        jQuery(".buscadores li").hover(function() {
-                jQuery(this).find(".description p").css({color: '#000000'});
-                jQuery(this).find("h2").css({backgroundColor: '#1E8DDB'});
-	} , function() { 
-		jQuery(this).find("h2").css({backgroundColor: '#858789'});
-                jQuery(this).find(".description p").css({color: '#858789'});
-	});
-    });
-</script>
 
-<ul class="buscadores grid_12">
-    <h2 class="grid_12">Busquedas por Perfiles</h2>
-    <div class="grid_4 alpha">
-        <h3 class="grid_4">Estudiantes:</h3>
-        <li class="grid_4 alpha" >
+<div class="buscadores grid_12">
+    <h2 class="grid_12 centrado">Búsqueda por Perfil</h2>
+    <div class="grid_6 alpha">
+        <h3>Estudiantes</h3>
+        <a href="<?php echo $html->url(array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'))?>">
             <h2>
-                <?php echo $html->image('home/estudio.png', array('style'=>'float:right; margin-top:-15px;'));?>
-                <?php
-                    echo $html->link('Guía del Estudiante', array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'));
-                ?>
+                Guía del Estudiante
+                <?php echo $html->image('home/estudio.png', array('style'=>'float:right; margin-top:-15px;'));?>                
             </h2>
-            <div class="description">
-                <p>Utilizá este buscador si lo que estas buscando son Títulos o Certificados</p>
-            </div>
-        </li>
+            <p class="description">
+               Utilizá este buscador si lo que estas buscando son Títulos o Certificados
+            </p>
+        </a>
     </div>
-    <div class="grid_8 omega">
-        <h3 class="grid_8">Otros:</h3>
-        <li class="grid_4 alpha">
-                <h2>
-                    <?php echo $html->image('home/school.png', array('style'=>'float:right;margin-top:-16px;'));?>
-                    <?php
-                        echo $html->link('Buscador de Instituciones', array('controller'=>'instits', 'action'=>'search_form'), array('escape'=>false));
-                    ?>
-                </h2>
-                <div class="description">
-                    <p>Utilizá este buscador si lo que estas buscando son Títulos o Certificados</p>
-                </div>
+    
+    <div class="grid_6 omega">
+        <h3>Otros</h3>
+        <a href="<?php echo $html->url(array('controller'=>'instits', 'action'=>'search_form'))?>">
+            <h2>
+                Buscador de Instituciones
+                <?php echo $html->image('home/school.png', array('style'=>'float:right;margin-top:-16px;'));?>
+            </h2>
+            <p class="description">
+                Utilizá este buscador si lo que estas buscando son Títulos o Certificados
+            </p>
+        </a>
+        
+        <a href="<?php echo $html->url(array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'))?>">
+            <h2>
+                Buscador de Títulos
+                <?php echo $html->image('home/diploma.png', array('style'=>'float:right; margin-top:-18px;'));?>                
+            </h2>
+            <p class="description">
+                Utilizá este buscador si lo que estas buscando son Títulos o Certificados
+            </p>
 
-        </li>
-        <li class="grid_4 omega">
-                <h2>
-                    <?php echo $html->image('home/diploma.png', array('style'=>'float:right; margin-top:-18px;'));?>
-                    <?php
-                        echo $html->link('Buscador de Títulos', array('controller'=>'titulos', 'action'=>'search'));
-                    ?>
-                </h2>
-                <div class="description">
-                    <p>Utilizá este buscador si lo que estas buscando son Títulos o Certificados</p>
-                </div>
-
-        </li>
+        </a>
     </div>
-</ul>
+</div>
+
+
 <ul class="buscadores grid_12">
     <div class="grid_12">
             <h2>Busquedas por Oferta</h2>

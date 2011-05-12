@@ -1,35 +1,36 @@
-/*CLEARFIX*/
-/* For modern browsers */
-.cf:before,
-.cf:after {
-    content:"";
-    display:table;
-}
+/*
+#276C9F oscuro
+#5C9CCC claro
+#55565A oscurisimo header
 
-.cf:after {
-    clear:both;
-}
+#EFEFEF grisaseo
+*/
 
-/* For IE 6/7 (trigger hasLayout) */
-.cf {
-    zoom:1;
-}
 
 
 body{
     background-color: #e9e8df;
-    background-image: url(img/shadow.png);
+    /* background-image: url(img/shadow.png); */
     background-repeat: repeat-x;
     background-position: 0 100px;
-    
+    margin: 0px;
+    padding: 0px;
+    font-size: 8pt;
+    font: 0.8em/1.5em Arial,Helvetica,sans-serif;
 }
 h1, h2, h3, h4{
-    
-    font-size: 2em;
+   color: #276C9F
+}
+
+h1.corpus{
+    background-color: #5C9CCC;
+    color: #fff;
+    text-transform: uppercase;
+    float: left;
+    clear: both;
 }
 
 h3 {
-    font-size: 11pt;
     font-weight: bold;
 }
 
@@ -52,18 +53,18 @@ A#guiaestudiante_btn:HOVER{
 }
 
 
-#header{
-    width: 100%;
-    margin-bottom: 20px;
-    background-color: none;
-    background: url(img/header_bg.png) repeat-x;
-    height: 100px;
+#header{    
+    /* background: url(img/header_bg.png) repeat-x; */
+    
+    /* background: url(img/header_bg.png) repeat-x; */
+    
+    background: transparent url(img/bandera_sol.png) top right no-repeat;
+    /* background: #5C9CCC url(images/ui-bg_gloss-wave_55_5c9ccc_500x100.png) repeat-x scroll 50% 50%; */
+    
+    height: 138px;
+    
 }
 
-#header_title{
-    width: 100%;
-    background: url(img/bandera_sol.png) top right no-repeat;
-}
 
 #header_ministerio{
     width: 265px;
@@ -71,85 +72,30 @@ A#guiaestudiante_btn:HOVER{
     float:left;
     margin-left: 10px;
 }
-#header_inet{
-    padding: 10px 10px 10px 0;
-    float:left;
-    margin-left: 20px;
-}
-
-#header{
-    width:100%;
-}
 
 #header h1 {
-    background: none;
-    color: #fff;
-    padding: 20px 10px 0px 10px;
-    font-size: 2em;
-    font-weight: bolder;
-    border-bottom: none;
-    margin-bottom: 0;
-    float: left;
-    text-shadow: #000 -1px -1px 0;
-    font-size: 2.5em;
-    width: auto;
+    margin: 26px 0px 0px 0px;   
+    text-align: center;
 }
-#header h1 a {
-    color: #fff;
-    background: none;
-    font-weight: normal;
+#header h1 a{
     text-decoration: none;
     margin: 0 auto;
+    color: #276C9F;
+    font-weight: bolder;
 }
+
 #header h1 a:hover {
-    color: #fff;
     background: none;
     text-decoration: none;
+    text-shadow: #fff -1px -1px 0;
 }
 
-#menu{
-    list-style: none;
-    float:right;
-    vertical-align: middle;
-
-    background-color: #435a78;
-    
-    border:1px solid #A1B2C6;
-    margin: 5px 25px 15px 0;
-    padding:5px;
-
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+#menuhead{
+    margin-top: 30px;
+    height: 41px;
 }
 
-#menu li{
-    float:right;
-    background: none;
-    margin:0;
-    height: 100%;
-    border-right: 1px solid #243141;
-    border-left: 1px solid #A1B2C6;
-}
 
-#menu > li:last-child {
-    border-left: none;
-}
-#menu > li:first-child {
-    border-right: none;
-}
-
-#menu li a{
-    text-decoration: none;
-    color: #fff;
-    padding:6px 10px 6px 10px;
-    font-size: 1.3em;
-    text-shadow: #000 -1px -1px 0;
-    display: block;
-}
-#menu li a:hover{
-    text-shadow: none;
-}
 
 #logos{
     background-color: #faf9f7;
@@ -164,8 +110,29 @@ A#guiaestudiante_btn:HOVER{
     text-align: center;
 }
 
-#logos a {
+#logos a img {
+    text-decoration: none;
     display: inline-block;
     margin: 13px 7px;
+    border:0px;
 }
 
+
+#container{
+    border: 2px solid #5C9CCC;
+    
+    -webkit-border-top-left-radius: 2em;
+    -webkit-border-top-right-radius: 2em;
+    -moz-border-radius-topleft: 2em;
+    -moz-border-radius-topright: 2em;
+    border-top-left-radius: 2em;
+    border-top-right-radius: 2em;
+    
+    background-color: white;
+    
+}
+
+
+.centrado{
+    text-align: center;
+}
