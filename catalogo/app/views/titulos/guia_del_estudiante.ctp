@@ -38,34 +38,38 @@ Templates de jQuery para los resultados de busqueda
 
 
 <div id="filtro" class="grid_12">
-    <div class="grid_6 alpha">
+    <h2>Filtros</h2>
     <?php echo $form->create('Titulo', array(
             'action' => 'guia_del_estudiante',
             'name'=>'TituloSearchForm',
             'id' =>'TituloSearchForm',
-            )) ?>
-    
+            )) 
+     ?>
+    <div class="grid_5 alpha" style="border-right: 1px solid black">
     <?php echo $form->input('Titulo.que', array(
                 'label'=> '¿Qué?',
                 )) ?>
-    <?php echo $form->input('Titulo.donde', array(
-                'label'=> '¿Dónde?',
-                )) ?>
     <?php echo $form->input('Titulo.tituloName') ?>
     <?php echo $form->input('Titulo.oferta_id') ?>
+    <?php echo $form->input('Titulo.sector_id', array('options'=>$sectores, 'multiple'=>true, 'style'=>'height:100px')) ?>
     </div>
     
-    <div class="grid_6 alpha">
-    <?php echo $form->input('Titulo.sector_id', array('options'=>$sectores, 'multiple'=>true)) ?>
-    
-    <?php echo $form->end('Buscar') ?>
+    <div class="grid_5 omega">
+    <?php echo $form->input('Titulo.donde', array(
+            'label'=> '¿Dónde?',
+            )) ?>
+    <?php echo $form->input('Jurisdiccion.id', array('options'=>$jurisdicciones, 'label'=> 'Jurisdicción')) ?>
+    </div>
+    <div class="grid_12 push_11">
+        <?php echo $form->end('Buscar') ?>
     </div>
     
 </div>
 
 
 <?php echo $form->create('Instit', array(
-            'action'=>'guia_del_estudiante', 
+            'controller'=>'instits',
+            'action'=>'search.json',
             'id'=>'InstitSearchForm', 'name'=>'InstitSearchForm' ));
 ?>
 <div id="resultados" class="grid_12">

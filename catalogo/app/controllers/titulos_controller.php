@@ -383,6 +383,7 @@ class TitulosController extends AppController {
     function guiaDelEstudiante() {
         $this->set('sectores', $this->Titulo->Sector->find('list'));
         $this->set('ofertas', $this->Titulo->Oferta->find('list'));
+        $this->set('jurisdicciones', ClassRegistry::init('Jurisdicciones')->find('list'));
     }
 
 }

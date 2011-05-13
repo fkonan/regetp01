@@ -184,7 +184,7 @@ class InstitsController extends AppController {
 
         // primero seteo si vino formulario o fue el paginador quien llego a este action"
         $vino_formulario = (!empty($this->data)) ? true : false;
-        
+
         // dejo un log de la busqueda realizada
         //$username = $this->Auth->user('nombre').' '.$this->Auth->user('apellido').' ('.$this->Auth->user('username').')';
         //$grupo = $this->Session->read('User.group_alias');
