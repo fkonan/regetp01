@@ -1,0 +1,6 @@
+.alerta-desactualizada{
+    background-image: url(img/outdated.png);
+    background-position: 0 50%;
+    padding: 15px 0px 15px 44px;
+    background-repeat: no-repeat;
+}
