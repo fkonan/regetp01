@@ -290,6 +290,13 @@ class InstitsController extends AppController {
             $this->paginate['viewConditions']['Tipo, Número o Nombre '] = utf8_decode($this->passedArgs['nombre_completo']);
         }
 
+        if(!empty($this->data['Titulo']['que'])) {
+            $this->paginate['Instit']['conditions']['(lower(Tipoinstit.name) || lower(Titulo.name) || lower(Plan.name) || lower(Sector.name) || lower(Subsector.name)) SIMILAR TO ?'] = convertir_para_busqueda_avanzada(utf8_decode($this->data['Titulo']['que']));
+        }
+        if(!empty($this->data['Titulo']['donde'])) {
+            $this->paginate['Instit']['conditions']['(lower(Jurisdiccion.name) || lower(Departamento.name) || lower(Localidad.name) || lower(Instit.name)) SIMILAR TO ?'] = convertir_para_busqueda_avanzada(utf8_decode($this->data['Titulo']['donde']));
+        }
+
 
         //////////////// Automagiccccs filter
 
@@ -395,6 +402,7 @@ class InstitsController extends AppController {
             'model' => 'Instit',
             'field' => 'etp_estado_id',
             'friendlyName' => 'Relación con ETP');
+
          
          $this->Buscable->aplicarCriteriosDeBusqueda($ops);         
 
