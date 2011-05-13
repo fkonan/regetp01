@@ -47,7 +47,7 @@ Templates de jQuery para los resultados de busqueda
      ?>
     <div class="grid_5 alpha" style="border-right: 1px solid black">
     <?php echo $form->input('Titulo.que', array(
-                'label'=> '¿Qué?',
+                'label'=> '¿Qué estudiar?',
                 )) ?>
     <?php echo $form->input('Titulo.tituloName') ?>
     <?php echo $form->input('Titulo.oferta_id') ?>

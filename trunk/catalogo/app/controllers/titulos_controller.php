@@ -301,9 +301,9 @@ class TitulosController extends AppController {
                 $this->passedArgs['subsectorId'] = $this->data['Titulo']['subsector_id'];
                 $this->Session->write($this->sesNames['subsector'], $this->data['Titulo']['subsector_id']);
             }
-            if(!empty($this->data['Titulo']['jurisdiccion_id'])) {
-                $this->passedArgs['jurisdiccionId'] = $this->data['Titulo']['jurisdiccion_id'];
-                $this->Session->write($this->sesNames['jurisdiccion'], $this->data['Titulo']['jurisdiccion_id']);
+            if(!empty($this->data['Instit']['jurisdiccion_id'])) {
+                $this->passedArgs['jurisdiccionId'] = $this->data['Instit']['jurisdiccion_id'];
+                $this->Session->write($this->sesNames['jurisdiccion'], $this->data['Instit']['jurisdiccion_id']);
             }
             if(!empty($this->data['Titulo']['departamento_id'])) {
                 $this->passedArgs['departamentoId'] = $this->data['Titulo']['departamento_id'];
@@ -380,10 +380,14 @@ class TitulosController extends AppController {
     }
 
 
-    function guiaDelEstudiante() {
+    function guiaDelEstudiante() {       
         $this->set('sectores', $this->Titulo->Sector->find('list'));
         $this->set('ofertas', $this->Titulo->Oferta->find('list'));
         $this->set('jurisdicciones', ClassRegistry::init('Jurisdicciones')->find('list'));
+    }
+
+    function que_donde() {
+        
     }
 
 }

@@ -59,7 +59,7 @@ echo $html->css(array('jquery.loadmask', 'ui-redmond/jquery-ui-1.8.12.custom'));
                 ));
 
 
-         echo $form->input('jurisdiccion_id', array(
+         echo $form->input('Instit.jurisdiccion_id', array(
         'label'=>'Jurisdicción',
         'div'=>array('style'=>'float: left;  clear: none; width: 175px;'),
         'style'=> 'display: block; clear: both;',
