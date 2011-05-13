@@ -9,7 +9,7 @@ echo $javascript->link(array(
             'jquery.loadmask.min',
             'jquery-ui-1.8.12.custom.min',
         ));
-echo $html->css(array('jquery.loadmask', 'ui-lightness/jquery-ui-1.8.12.custom'));
+echo $html->css(array('jquery.loadmask', 'ui-redmond/jquery-ui-1.8.12.custom'));
 ?>
 <?php 
         echo $form->create('Titulo', array(

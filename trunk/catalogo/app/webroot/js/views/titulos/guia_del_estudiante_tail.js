@@ -59,6 +59,7 @@
         }
         
         var params = titulosForm.serialize();
+        
         var postvar = $.post( 
                 url,
                 params,
@@ -75,18 +76,22 @@
     
     
     // trae las instituciones de los titulos seleccionados
-    function getInstits(href) {
+    function getInstits(e) {
         var url = '';
 
         __blockResultConsole();
 
-        if (typeof href == 'object') {
-            url = urlDomain + 'instits/search.json';
+        console.debug(e);
+        console.debug( e.target.action);
+        if (typeof e == 'object') {
+            url = e.target.action;
         } else {
-            url = href; 
+            url = e;
         }
+
+        //__crearHiddens();
         
-        var params = institsForm.serialize();
+        var params = titulosForm.serialize() + "&" + institsForm.serialize();
         $.post(
                 url,
                 params,
@@ -156,7 +161,16 @@
                 
     }
     
-    
+    var __crearHiddens = function(){
+        var form = titulosForm.find(":input");
+        $.each(form, function(e, input) {
+            $('<input>').attr({
+                type: 'hidden',
+                name: $(input).attr("name"),
+                value: $(input).val()
+            }).appendTo(institsForm);
+        });
+    }
     
     var onChangeHandlerTitulos = function( e ) {   
         e.preventDefault();
