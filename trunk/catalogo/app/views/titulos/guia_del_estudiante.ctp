@@ -58,7 +58,7 @@ Templates de jQuery para los resultados de busqueda
     <?php echo $form->input('Titulo.donde', array(
             'label'=> '¿Dónde?',
             )) ?>
-    <?php echo $form->input('Jurisdiccion.id', array('options'=>$jurisdicciones, 'label'=> 'Jurisdicción')) ?>
+    <?php echo $form->input('Instit.jurisdiccion_id', array('options'=>$jurisdicciones, 'label'=> 'Jurisdicción')) ?>
     </div>
     <div class="grid_12 push_11">
         <?php echo $form->end('Buscar') ?>
