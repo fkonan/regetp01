@@ -11,6 +11,6 @@ class CorreosController extends AppController{
     function contacto(){
         /* @var $email EmailComponent */
         $email =& $this->Email;
-        $email->to('alevilar@gmail.com');
+        $email->to('pepito@gmail.com');
     }
 }

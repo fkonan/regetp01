@@ -1,5 +1,14 @@
+<?php echo $html->css('catalogo.instits.view');?>
+
+
 <div class="instits view">
-    <div id="escuela_estado" class="<? echo $instit['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $instit['Instit']['activo']? 'Institución Ingresada al RFIETP':'Institución NO Ingresada al RFIETP';?></div>
+    <?php
+        echo $html->link(
+                'Si ha notado algún dato desactualizado, haga click aquí',
+                array('controller' => 'correos', 'action' => 'contacto'),
+                array('class' => 'alerta-desactualizada')
+                );
+    ?>
     <?
     $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
     ?>
@@ -14,7 +23,6 @@
                 echo "<p class='msg-atencion'>$relacion_etp</p>";
             }?>
             <dl>
-
                 <?php
                 if(!$con_programa_de_etp) {	?>
                 <b>
@@ -220,3 +228,4 @@
     </div>    
 </div>
 
+<?php echo $javascript->link('views/titulos/view');?>
