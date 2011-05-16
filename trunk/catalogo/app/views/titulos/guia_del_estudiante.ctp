@@ -49,7 +49,7 @@ Templates de jQuery para los resultados de busqueda
                 'label'=> '¿Qué estudiar?',
                 )) ?>
     <?php echo $form->input('Titulo.tituloName') ?>
-    <?php echo $form->input('Titulo.oferta_id') ?>
+    <?php echo $form->input('Titulo.oferta_id', array('empty' => 'Todas')); ?>
     <?php echo $form->input('Titulo.sector_id', array('options'=>$sectores, 'multiple'=>true, 'style'=>'height:100px')) ?>
     </div>
     
@@ -57,7 +57,7 @@ Templates de jQuery para los resultados de busqueda
     <?php echo $form->input('Titulo.donde', array(
             'label'=> '¿Dónde?',
             )) ?>
-    <?php echo $form->input('Instit.jurisdiccion_id', array('options'=>$jurisdicciones, 'label'=> 'Jurisdicción')) ?>
+    <?php echo $form->input('Instit.jurisdiccion_id', array('options'=>$jurisdicciones, 'empty' => 'Todas', 'label'=> 'Jurisdicción')) ?>
     </div>
     <div class="grid_12 push_11">
         <?php echo $form->end('Buscar') ?>
