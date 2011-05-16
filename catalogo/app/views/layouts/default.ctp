@@ -67,6 +67,8 @@ $javascript;
         'jquery.tools.min',
         ));
 
+        echo $this->element('jqueryui');
+
         $jsPoner = 'views'.DS.Inflector::underscore($this->name).DS.$this->action;
         $jsView = WWW_ROOT.'js'.DS.$jsPoner;
         if (file_exists($jsView.'.js')) {
@@ -77,11 +79,9 @@ $javascript;
 
         ?>
     </head>
-
-
     <body>
         
-    <?php echo $this->element('jqueryui'); ?>
+    
         
     <div class="wrapper">
         <div id="header">
