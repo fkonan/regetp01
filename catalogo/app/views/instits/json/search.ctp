@@ -8,11 +8,11 @@ foreach( $instits as &$i) {
 $cant = $paginator->counter(array('format' => '%count%'));
 
 if ($cant > 1 ) {
-    $texto = 'Títulos encontrados';
+    $texto = 'Instituciones encontradas';
 } elseif( $cant == 1 ) {
-    $texto = 'Título encontrado';
+    $texto = 'Institución encontrada';
 } else {
-    $texto = 'Títulos encontrados. Redefina su búsqueda';
+    $texto = 'Instituciones encontradas. Redefina su búsqueda';
 }
 
 $numbers = $paginator->numbers() ? $paginator->numbers() : '';
