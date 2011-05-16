@@ -1,4 +1,10 @@
-<?php echo $html->css('catalogo.instits.view');?>
+<?php
+
+    echo $this->element('jqueryui');
+
+    echo $html->css('catalogo.instits.view');
+
+    ?>
 
 
 <div class="instits view">

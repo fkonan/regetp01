@@ -19,7 +19,15 @@ $javascript;
             echo Configure::read('version')." - "; ?>
             <?php echo $title_for_layout; ?>
         </title>
+        
         <script type="text/javascript">
+            
+        // URL global que apunta al path de mi sitio, sirve para hacer llamadas
+        // ajax a controlador/action sin problema utilizando:
+        // urlDomain+'controlador/action'
+        var urlDomain = "<?php echo $this->base?>";
+            
+            
         // Edit to suit your needs.
         var ADAPT_CONFIG = {
           // Where is your CSS?
@@ -72,6 +80,9 @@ $javascript;
 
 
     <body>
+        
+    <?php echo $this->element('jqueryui'); ?>
+        
     <div class="wrapper">
         <div id="header">
             <div id="header_title" class="container_12">

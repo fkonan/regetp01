@@ -1,3 +1,5 @@
+<?php echo $this->element('jqueryui'); ?>
+
 <script type="text/javascript">
 init('<?echo $html->url(array('controller'=>'localidades','action'=>'ajax_search_localidades'));?>');
 </script>
@@ -7,9 +9,8 @@ init('<?echo $html->url(array('controller'=>'localidades','action'=>'ajax_search
 echo $javascript->link(array(
             'jquery.autocomplete',
             'jquery.loadmask.min',
-            'jquery-ui-1.8.12.custom.min',
         ));
-echo $html->css(array('jquery.loadmask', 'ui-redmond/jquery-ui-1.8.12.custom'));
+echo $html->css(array('jquery.loadmask'));
 ?>
 <?php 
         echo $form->create('Titulo', array(
