@@ -1,14 +1,24 @@
 <?php echo $javascript->link('jquery/jquery.tmpl.min', false); ?>
 <?php echo $javascript->link('jquery/jquery.history', false); ?>
 <?php echo $javascript->link('jquery.loadmask.min', false); ?>
-<?php echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante')); ?>
+<?php echo $javascript->link('jquery.multiselect.min', false); ?>
+<?php echo $html->css(array('jquery.loadmask', 
+                            'catalogo.guia_del_estudiante',
+                            'jquery.multiselect')); ?>
 
 <!-- 
 Inicializacion de url global para el manejo de los callbacks 
 y funciones javascript de esta pagina 
 -->
 <script type="text/javascript">
-    var urlDomain = "<?php echo $html->url('/')?>";
+    $.(document).ready(function() {
+        var urlDomain = "<?php echo $html->url('/')?>";
+
+        $("#TituloSectorId").multiselect({
+              noneSelectedText: 'Seleccione sectores',
+              selectedList: 4
+           }).multiselectfilter();
+   });
 </script>
 
 <!-- 
@@ -44,19 +54,14 @@ Templates de jQuery para los resultados de busqueda
             'id' =>'TituloSearchForm',
             )) 
      ?>
-    <div class="grid_5 alpha" style="border-right: 1px solid black">
-    <?php echo $form->input('Titulo.que', array(
-                'label'=> '¿Qué estudiar?',
-                )) ?>
+
+    <div class="grid_5 alpha" style="border-right: 1px solid black">   
     <?php echo $form->input('Titulo.tituloName') ?>
     <?php echo $form->input('Titulo.oferta_id', array('empty' => 'Todas')); ?>
-    <?php echo $form->input('Titulo.sector_id', array('options'=>$sectores, 'multiple'=>true, 'style'=>'height:100px')) ?>
+    <?php echo $form->input('Titulo.sector_id', array('options'=>$sectores, 'multiple'=>true)) ?>
     </div>
     
     <div class="grid_5 omega">
-    <?php echo $form->input('Titulo.donde', array(
-            'label'=> '¿Dónde?',
-            )) ?>
     <?php echo $form->input('Instit.jurisdiccion_id', array('options'=>$jurisdicciones, 'empty' => 'Todas', 'label'=> 'Jurisdicción')) ?>
     </div>
     <div class="grid_12 push_11">
@@ -73,7 +78,7 @@ Templates de jQuery para los resultados de busqueda
 ?>
 <div id="resultados" class="grid_12">
     <div id="li_titulos" class="grid_6 alpha">
-        <h2>¿Qué Estudiar?</h2>
+        <h2>¿Qué estudiar?</h2>
             <div class="paginatorContainer"></div>
         <ul class="seleccionados"></ul>
         <ul class="results"></ul>
@@ -81,7 +86,7 @@ Templates de jQuery para los resultados de busqueda
     <?php echo $form->end(); ?>
 
     <div id="li_instits" class="grid_6 omega">
-        <h2>¿Dónde Estudiar?</h2>
+        <h2>¿Dónde estudiar?</h2>
         <div class="paginatorContainer"></div>
         <ul class="results"></ul>
     </div>
