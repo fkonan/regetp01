@@ -21,10 +21,9 @@ Templates de jQuery para los resultados de busqueda
     </li>
 </script>
 
-
 <script id="institTemplate" type="text/x-jquery-tmpl">
     <li>
-        <b>${Instit.cue}${Instit.anexo}</b> ${Instit.nombre_completo}
+        <a href="<?php echo $this->base ?>/instits/view/${Instit.id}"><b>${Instit.cue}${Instit.anexo}</b> ${Instit.nombre_completo}</a>
     </li>
 </script>
 
