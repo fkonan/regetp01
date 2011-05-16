@@ -3,11 +3,25 @@
     $('.alerta-desactualizada').click(handleAlertaDesactualizada);
     
     
-    
+    // Handlers
     function handleAlertaDesactualizada(e) {
         e.preventDefault();
-        var mensaje = window.prompt('Escriba su mensaje', 'Institución desactualizada');
         
-        $.post(e.target.href, {'mensaje': mensaje});
+        var ventanitaDelAmor = document.createElement('div');     
+        ventanitaDelAmor.title = 'Formulario de Envío';
+        
+        $(ventanitaDelAmor).load( urlDomain + '/correos/desactualizada', function(){
+            $(ventanitaDelAmor).find('form').submit(function(e){                
+                e.preventDefault();
+                $.post(this.action, $(this).serialize(), function(e,t){
+                    $(ventanitaDelAmor).dialog('close');
+                })
+            });
+        });
+        
+        $(ventanitaDelAmor).dialog();
+        
+       
+        
     }
 })(jQuery);

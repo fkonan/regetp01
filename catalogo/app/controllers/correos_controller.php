@@ -10,7 +10,15 @@ class CorreosController extends AppController{
     
     function contacto(){
         /* @var $email EmailComponent */
-        $email =& $this->Email;
-        $email->to('pepito@gmail.com');
+        
+    }
+    
+    function desactualizada(){
+        if (!empty($this->data)) {
+            if ($this->RequestHandler->isAjax()) {                
+                $this->autoRender = false;
+                return "Gracias por informarnos sobre una desactualización";
+            }
+        }
     }
 }
