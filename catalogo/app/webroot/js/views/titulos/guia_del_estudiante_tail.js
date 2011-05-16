@@ -81,8 +81,6 @@
 
         __blockResultConsole();
 
-        console.debug(e);
-        console.debug( e.target.action);
         if (typeof e == 'object') {
             url = e.target.action;
         } else {
