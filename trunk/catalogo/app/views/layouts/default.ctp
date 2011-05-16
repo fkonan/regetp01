@@ -58,6 +58,7 @@ $javascript;
         echo $html->css('jquery.tooltip','stylesheet');
         echo $html->css('catalogo','stylesheet', array('media'=>'screen'));
         echo $html->css('catalogo.menu','stylesheet');
+        echo $html->css('ui-redmond/jquery-ui-1.8.12.custom');
         echo $html->css('printer','stylesheet', array('media'=>'print'));
 
         echo $javascript->link(array(
@@ -65,9 +66,8 @@ $javascript;
         'adapt.min.js',
         'jquery.form',
         'jquery.tools.min',
+        'jquery-ui-1.8.12.custom.min',
         ));
-
-        echo $this->element('jqueryui');
 
         $jsPoner = 'views'.DS.Inflector::underscore($this->name).DS.$this->action;
         $jsView = WWW_ROOT.'js'.DS.$jsPoner;

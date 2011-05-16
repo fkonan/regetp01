@@ -11,7 +11,7 @@ Inicializacion de url global para el manejo de los callbacks
 y funciones javascript de esta pagina 
 -->
 <script type="text/javascript">
-    $.(document).ready(function() {
+    $(document).ready(function() {
         var urlDomain = "<?php echo $html->url('/')?>";
 
         $("#TituloSectorId").multiselect({
