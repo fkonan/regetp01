@@ -3,6 +3,7 @@ azules
 #0082ca oscuro
 #25abe1 claro
 
+#f1f1f2 body
 #58585a negro letra
 #b1cc2f verdoso amarillento
 #dcddde gris oscuro fondos
@@ -64,7 +65,7 @@ A#guiaestudiante_btn:HOVER{
     /* background: #5C9CCC url(images/ui-bg_gloss-wave_55_5c9ccc_500x100.png) repeat-x scroll 50% 50%; */
     
     height: 158px;
-    
+    overflow: visible;
 }
 
 #header-left-fluid{
@@ -89,8 +90,8 @@ A#guiaestudiante_btn:HOVER{
 
 
 #head-text{
-    height: 158px;
-    overflow: hidden;
+    position: relative;
+    height: 158px;    
     background: url(img/bandera_trans.png) no-repeat right;
     
 }

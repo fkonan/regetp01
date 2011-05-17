@@ -1,12 +1,13 @@
 #nav {
-    margin: 10px 0px;
-    padding: 7px 6px 0;
-    background: transparent url(img/gradient.png) repeat-x 0 -110px;
-    line-height: 100%;
+   background: transparent url(img/gradient.png) repeat-x 0 -110px;
+   line-height: 100%;
+   position: absolute;
+   bottom: 0px;
+   margin: 0px;
 }
 #nav li {
-    margin: 0 5px;
-    padding: 0 0 8px;
+    margin: 0px;
+    padding: 0 0 0px;
     float: left;
     position: relative;
     list-style: none;
@@ -16,14 +17,21 @@
 
 /* main level link */
 #nav a {
+    background: #0082ca;
     font-weight: bold;
     color: #e7e5e5;
     text-decoration: none;
     display: block;
-    padding:  8px 20px;
+    padding:  15px 20px;
     margin: 0;
-    -webkit-border-radius: 1.6em;
-    -moz-border-radius: 1.6em;    
+     -webkit-border-top-left-radius: 1.6em;
+    -webkit-border-top-right-radius: 1.6em;
+    -moz-border-radius-topleft: 1.6em;
+    -moz-border-radius-topright: 1.6em;
+    border-top-left-radius: 1.6em;
+    border-top-right-radius: 1.6em;
+
+    
     text-shadow: 0 1px 1px rgba(0,0,0, .3);
 }
 #nav a:hover {
@@ -33,7 +41,7 @@
 
 /* main level link hover */
 #nav .current a, #nav li:hover > a {
-	background: transparent url(img/gradient.png) repeat-x 0 -40px;
+	background: #f1f1f2;
 	color: #55565A;
 	border-top: solid 1px #f8f8f8;
 

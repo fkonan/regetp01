@@ -85,46 +85,48 @@ $javascript;
         
     <div class="wrapper">
         <div id="header">
+            <div id="header-left-fluid"></div>
+             <div id="header-right-fluid"></div>
+            
             <div id="header_title" class="container_12">
                 
-                <div class="grid_3">
-                <?php
-                    //echo $html->image('header_ministerio.png', array('id'=>'header_ministerio'));
-                    echo $html->image('logoinettrans.png');
-                ?>
-                </div>
+                <h2 id="logo" class="grid_3">INET</h2>
                 
-                <h1 class="grid_9">
-                    <?php echo $html->link(__('Catálogo Nacional de Títulos y Certificados', true), '/pages/home'); ?>
-                </h1>
+                <div id="head-text" class="grid_9">                
+                    <h1>
+                        <?php echo $html->link(__('Catálogo Nacional de Títulos y Certificados', true), '/pages/home'); ?>
+                    </h1>
+                    <div class="clear"></div>
+                    <ul id="nav" class="grid_8 sufix_1">
+                        <li class="grid_2 current alpha"><?php echo $html->link('Inicio', '/pages/home'); ?></li>
+                        <li class="grid_2"><a href="">Buscadores</a></li>
+                        <li class="grid_2">
+                            <?php echo $html->link('Biblioteca', array('controller'=>'bibliotecas', 'action'=>'index')); ?>
+                            <ul>
+                                <li><a href="#1">Marco de Referencias</a></li>
+                                <li><a href="#2">Foros Sectoriales</a></li>
+                                <li><a href="#2">Cara de Bragueta</a></li>
+                                <li>
+                                    <a href="#2">Ocatarinetabelachitchix</a>
+                                    <ul>
+                                        <li><a href="#">Màs Magia baby</a></li>
+                                        <li><a href="#">Màs Magia baby</a></li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+
+                        </li>
+                        <li class="grid_2 omega"><a href="">Contacto</a></li>
+                    </ul>
+                </div>
                 
                 <div class="clear"></div>
                 
                 
-                <ul id="nav" class="container_12">
-                    <li class="grid_3 current"><?php echo $html->link('Inicio', '/pages/home'); ?></li>
-                    <li class="grid_3"><a href="">Buscadores</a></li>
-                    <li class="grid_3">
-                        <?php echo $html->link('Biblioteca', array('controller'=>'bibliotecas', 'action'=>'index')); ?>
-                        <ul>
-                            <li><a href="#1">Marco de Referencias</a></li>
-                            <li><a href="#2">Foros Sectoriales</a></li>
-                            <li><a href="#2">Cara de Bragueta</a></li>
-                            <li>
-                                <a href="#2">Ocatarinetabelachitchix</a>
-                                <ul>
-                                    <li><a href="#">Màs Magia baby</a></li>
-                                    <li><a href="#">Màs Magia baby</a></li>
-                                </ul>
-                            </li>
-
-			</ul>
-
-                    </li>
-                    <li class="grid_3"><a href="">Contacto</a></li>
-                </ul>
                 
-            </div>         
+                
+            </div>
             
         </div>
         
