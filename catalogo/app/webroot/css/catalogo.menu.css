@@ -1,14 +1,8 @@
 #nav {
     margin: 10px 0px;
     padding: 7px 6px 0;
-    background: #276C9F url(img/gradient.png) repeat-x 0 -110px;
+    background: transparent url(img/gradient.png) repeat-x 0 -110px;
     line-height: 100%;
-    border-radius: 2em;
-    -webkit-border-radius: 2em;
-    -moz-border-radius: 2em;
-
-    -webkit-box-shadow: 0 1px 3px rgba(0,0,0, .4);
-    -moz-box-shadow: 0 1px 3px rgba(0,0,0, .4);
 }
 #nav li {
     margin: 0 5px;
