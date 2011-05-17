@@ -40,6 +40,9 @@
  *
  */
 
+define('NOMBRE_CONTACTO', 'Unidad de Información');
+define('EMAIL_CONTACTO', 'desarrolloetp@inet.edu.ar');
+
 /**
  * ID`s de OFERTAS
  */
