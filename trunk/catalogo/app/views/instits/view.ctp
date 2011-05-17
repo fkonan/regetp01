@@ -209,7 +209,7 @@
         <?php
         echo $html->link(
                 'Si ha notado algún dato desactualizado, haga click aquí',
-                array('controller' => 'correos', 'action' => 'contacto'),
+                array('controller' => 'correos', 'action' => 'desactualizada'),
                 array('class' => 'alerta-desactualizada')
                 );
         ?>
