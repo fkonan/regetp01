@@ -17,7 +17,7 @@ y funciones javascript de esta pagina
         $("#TituloSectorId").multiselect({
               noneSelectedText: 'Seleccione sectores',
               selectedList: 4
-           }).multiselectfilter();
+           });
    });
 </script>
 
