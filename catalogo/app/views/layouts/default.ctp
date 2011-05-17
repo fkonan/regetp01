@@ -127,14 +127,15 @@ $javascript;
             </div>         
             
         </div>
-        <div id="container" class ="container_12">
-                <div id="cuerpo">
+        
+        
+       <div id="container" class ="container_12">
                         <?php $session->flash(); ?>
                         <?php $session->flash('auth'); ?>
-                        <?php echo $content_for_layout; ?>
-                </div>
-
+           
+                        <?php echo $content_for_layout; ?>           
        </div> <!-- FIN div #container -->
+       
        <div id="logos">
         <?php
             echo $html->link($html->image('links/logo_encuentro.png'),'http://www.encuentro.gov.ar/',null, null, false);
@@ -149,16 +150,6 @@ $javascript;
             echo $html->link($html->image('links/logo_argentinagovar.png'),'http://www.argentina.gov.ar/',null, null, false);
         ?>
        </div>
-
-        <?php echo $html->link(
-                $html->image('cake.power.gif', array('alt'=> __("CakePHP: the rapid development php framework", true), 'border'=>"0", 'style'=>'float:right;margin-right:130px')),
-                'http://www.cakephp.org/',
-                array(
-                    'target'=>'_blank',
-                    'id'=>'logo-cake-php'),
-                null,
-                false
-        ); ?>
 
         <?php echo $cakeDebug; ?>
     </div>
