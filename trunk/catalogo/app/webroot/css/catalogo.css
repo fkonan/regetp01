@@ -119,6 +119,11 @@ A#guiaestudiante_btn:HOVER{
 
 
 #container{
+    
+}
+
+
+.cuerpo{
     border: 2px solid #5C9CCC;
     
     -webkit-border-top-left-radius: 2em;
