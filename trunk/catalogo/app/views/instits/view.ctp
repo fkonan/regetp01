@@ -212,6 +212,10 @@
                 array('controller' => 'correos', 'action' => 'desactualizada'),
                 array('class' => 'alerta-desactualizada')
                 );
+
+        echo $form->create('Instit', array('id' => 'institForm'));
+        echo $form->hidden('nombre_completo', array('id' => 'nombre_completo', 'value' => urlencode($instit['Instit']['nombre_completo'])));
+        echo $form->hidden('cue_instit', array('id' => 'cue_instit', 'value' => urlencode($cue_instit)));
         ?>
     </div> 
 
