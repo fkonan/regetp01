@@ -1,10 +1,13 @@
 (function($){
-    // EVENTOS MANEJADOS
-    $('.alerta-desactualizada').click(handleAlertaDesactualizada);
-    
+    // EVENTOS MANEJADOS on dom loaded
+    $(function(){
+        $('.alerta-desactualizada').click(handleAlertaDesactualizada);
+    });
+
     
     // Handlers
     function handleAlertaDesactualizada(e) {
+        
         e.preventDefault();
         
         var ventanitaDelAmor = document.createElement('div');     
