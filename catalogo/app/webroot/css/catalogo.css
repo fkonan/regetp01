@@ -13,7 +13,7 @@ azules
 
 
 body{
-    background-color: #f1f1f2;
+    background-color: #F3F3F4;
     /* background-image: url(img/shadow.png); */
     background-repeat: repeat-x;
     background-position: 0 100px;
@@ -21,6 +21,7 @@ body{
     padding: 0px;
     font-size: 8pt;
     font: 0.8em/1.5em Arial,Helvetica,sans-serif;
+    color: #0B468E;
 }
 h1, h2, h3, h4{
    color: #276C9F
@@ -185,4 +186,14 @@ A#guiaestudiante_btn:HOVER{
 
 .centrado{
     text-align: center;
+}
+
+.clear {
+    clear:both;
+    display:block;
+    height:0;
+    overflow-x:hidden;
+    overflow-y:hidden;
+    visibility:hidden;
+    width:0;
 }
