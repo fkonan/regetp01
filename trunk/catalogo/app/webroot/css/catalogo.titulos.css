@@ -22,3 +22,36 @@
     margin: 0px 0px;
     color: #3F3F3F;
 }
+
+ol, ul {
+    list-style: none outside none;
+}
+#titulos-items li {
+    border-bottom: 1px solid #CDCDCD;
+    height: auto !important;
+    margin: 0;
+    min-height: 30px;
+    padding: 15px 350px 5px 120px;
+    position: relative;
+}
+#titulos-items h3 {
+    display: block;
+    left: 10px;
+    position: absolute;
+    top: 2px;
+    width: 400px;
+}
+.titulos-items-oferta {
+    position: absolute;
+    right: 300px;
+    text-align: right;
+    top: 2px;
+    width: 180px;
+}
+.titulos-items-actions {
+    position: absolute;
+    right: 30px;
+    text-align: right;
+    top: 2px;
+    width: 180px;
+}
