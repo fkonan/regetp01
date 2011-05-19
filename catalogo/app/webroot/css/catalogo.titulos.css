@@ -26,6 +26,10 @@
 ol, ul {
     list-style: none outside none;
 }
+
+#titulos-items {
+    padding: 0;
+}
 #titulos-items li {
     border-bottom: 1px solid #CDCDCD;
     height: auto !important;
@@ -34,12 +38,14 @@ ol, ul {
     padding: 15px 350px 5px 120px;
     position: relative;
 }
-#titulos-items h3 {
+.titulos-items-nombre {
     display: block;
     left: 10px;
     position: absolute;
-    top: 2px;
-    width: 400px;
+    top: 14px;
+    width: 350px;
+    text-align:left;
+    font-size: 9pt;
 }
 .titulos-items-oferta {
     position: absolute;
@@ -54,4 +60,9 @@ ol, ul {
     text-align: right;
     top: 2px;
     width: 180px;
+}
+
+.boxform {
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
