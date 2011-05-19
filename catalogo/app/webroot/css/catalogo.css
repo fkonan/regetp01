@@ -60,19 +60,13 @@ A#guiaestudiante_btn:HOVER{
 }
 
 
-#header{    
-    /* background: url(img/header_bg.png) repeat-x; */
-    
-    /* background: url(img/header_bg.png) repeat-x; */
-    
-    /* background: #5C9CCC url(images/ui-bg_gloss-wave_55_5c9ccc_500x100.png) repeat-x scroll 50% 50%; */
-    
+#header{ 
     height: 158px;
     overflow: visible;
 }
 
 #header-left-fluid{
-    background: none repeat scroll 0 0 #0065A9;
+    background: none repeat scroll 0 0 #0090D0;
     float: left;
     height: 158px;
     position: absolute;
@@ -82,7 +76,7 @@ A#guiaestudiante_btn:HOVER{
 }
 
 #header-right-fluid{
-    background: none repeat scroll 0 0 #3AA8DB;
+    background: none repeat scroll 0 0 #81C3EB;
     float: right;
     height: 158px;
     position: absolute;
@@ -101,15 +95,15 @@ A#guiaestudiante_btn:HOVER{
 
 #logo{
      background: url(img/logo.png) no-repeat;
-     height: 150px;
+     height: 128px;
      overflow: hidden;
      text-indent: -1000px;
-     margin: 0px !important;
+     margin: 16px 0px 0px 0px !important;
      padding: 0px !important;
 }
 
 #header_title{
-    background: url(img/header.png) repeat-y;
+    background: url(img/header_degrade.png) repeat-y;
 }
 
 

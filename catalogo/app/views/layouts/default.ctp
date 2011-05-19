@@ -97,7 +97,7 @@ $javascript;
                         <?php echo $html->link(__('Catálogo Nacional de Títulos y Certificados', true), '/pages/home'); ?>
                     </h1>
                     <div class="clear"></div>
-                    <ul id="nav" class="grid_8 sufix_1">
+                    <ul id="nav" class="grid_8">
                         <li class="grid_2 current alpha"><?php echo $html->link('Inicio', '/pages/home'); ?></li>
                         <li class="grid_2"><a href="">Buscadores</a></li>
                         <li class="grid_2">
