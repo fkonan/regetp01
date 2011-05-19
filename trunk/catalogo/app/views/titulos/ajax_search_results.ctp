@@ -7,7 +7,7 @@ $paginator->options(array('update' => 'consoleResult', 'url' => $this->passedArg
         jQuery("#TituloBysession").val(0);
     }
 </script>
-<div class="grid_10" style="margin-top: 30px">
+<div class="grid_10 prefix_1 suffix_1" style="margin-top: 30px">
     <div class="grid_4 suffix_4">
         Ordenar por: 
         <?php echo $paginator->sort('Nombre','name');?>, <?php echo $paginator->sort("Oferta",'Oferta.name');?>
@@ -17,15 +17,16 @@ $paginator->options(array('update' => 'consoleResult', 'url' => $this->passedArg
             'format' => __('Títulos %start%-%end% de <strong>%count%</strong>', true))); ?>
     </div>
     <div class="clear"></div>
+
     <?
     if (sizeof($titulos) > 0) {?>
-    <ol id="titulos-items" class="grid_10">
+    <ol id="titulos-items">
             <?php
             $i = 0;
             foreach ($titulos as $titulo):
                 ?>
         <li onmouseover="jQuery(this).addClass('alt2row')" onmouseout="jQuery(this).removeClass('alt2row')" >
-            <h3 style="text-align:left; font-size: 9pt;">
+            <span class="titulos-items-nombre">
                         <?php
                         /*$linkTitulo = $html->link(
                                 " (".count($titulo['Plan'])." planes)",
@@ -33,7 +34,7 @@ $paginator->options(array('update' => 'consoleResult', 'url' => $this->passedArg
                                 array('target'=>'_blank')
                                 );*/
                         echo $titulo['Titulo']['name']; ?>
-            </h3>
+            </span>
             <!--<p>
                     <?php
                     if ($titulo['Titulo']['marco_ref']==1) {
@@ -48,8 +49,7 @@ $paginator->options(array('update' => 'consoleResult', 'url' => $this->passedArg
                         ?>
             </p>
             <p class="titulos-items-actions">
-                        <?php //echo $html->link(__('Ver más','View', true), array('onclick'=>'viewTitulo('.$titulo['Titulo']['id'].');', 'href'=>'')); ?>
-                <a onclick="viewTitulo('<?php echo $html->url('/titulos/view/'.$titulo['Titulo']['id']);?>', '<?php echo $titulo['Titulo']['name'];?>');" style="cursor:pointer;">Ver más</a>
+                <a class="mas_info_gris" onclick="viewTitulo('<?php echo $html->url('/titulos/view/'.$titulo['Titulo']['id']);?>', '<?php echo $titulo['Titulo']['name'];?>');" style="cursor:pointer;"></a>
             </p>
         </li>
             <?php endforeach; ?>
@@ -58,11 +58,11 @@ $paginator->options(array('update' => 'consoleResult', 'url' => $this->passedArg
     }
 
     if ($paginator->numbers()) {
-        ?>
-    <div style="text-align:center; display:block;margin-bottom: 10px">
-            <?php echo $paginator->prev('<< '.__('anterior', true), array(), null, array('class'=>'disabled', 'tag' => 'span'));?>
-        | 	<?php echo $paginator->numbers();?>
-            <?php echo $paginator->next(__('siguiente', true).' >>', array(), null, array('class'=>'disabled'));?>
-    </div>
+    ?>
+        <div style="text-align:center; display:block;margin-bottom: 10px">
+                <?php echo $paginator->prev('<< '.__('anterior', true), array(), null, array('class'=>'disabled', 'tag' => 'span'));?>
+            | 	<?php echo $paginator->numbers();?>
+                <?php echo $paginator->next(__('siguiente', true).' >>', array(), null, array('class'=>'disabled'));?>
+        </div>
         <?php  } ?>
 </div>
