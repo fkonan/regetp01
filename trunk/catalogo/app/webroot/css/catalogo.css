@@ -22,7 +22,6 @@ body{
     padding: 0px;
     font-size: 8pt;
     font: 0.8em/1.5em Arial,Helvetica,sans-serif;
-    color: #0B468E;
 }
 h1, h2, h3, h4{
    color: #58585a;
@@ -187,9 +186,40 @@ A#guiaestudiante_btn:HOVER{
 
 .boxblanca{
     background-color: #fff;
+    
+    -webkit-border-radius: 1em;
+    -moz-border-radius: 1em;
+    border-radius: 1em;
 }
 
 .boxgris{
     background-color: #dcddde;
+    
+    -webkit-border-radius: 1em;
+    -moz-border-radius: 1em;
+    border-radius: 1em;
 
+}
+
+.mas_info_azul{
+    text-indent: -1000;
+    overflow: hidden;
+    background: url(img/lupazul.png);
+}
+
+.mas_info_gris{
+    text-indent: -1000;
+    overflow: hidden;
+    background: url(img/lupagris.png);
+}
+
+
+.separador{
+    border-top: solid 5px #25abe1;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+.uppercase{
+    text-transform: uppercase;
 }
