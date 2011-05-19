@@ -3,17 +3,19 @@ azules
 #0082ca oscuro
 #25abe1 claro
 
+#E57609 naranja
+
 #f1f1f2 body
 #58585a negro letra
 #b1cc2f verdoso amarillento
-#dcddde gris oscuro fondos
+#dcddde gris oscuro fondos box
 
 */
 
 
 
 body{
-    background-color: #F3F3F4;
+    background-color: #f1f1f2;
     /* background-image: url(img/shadow.png); */
     background-repeat: repeat-x;
     background-position: 0 100px;
@@ -25,6 +27,14 @@ body{
 }
 h1, h2, h3, h4{
    color: #58585a;
+}
+
+A{
+    color: #E57609;
+}
+
+A:hover{
+    color: #25abe1;
 }
 
 h1.corpus{
@@ -40,23 +50,6 @@ h3 {
     color: #b1cc2f;
 }
 
-A#titulo_btn{
-}
-
-A#titulo_btn:HOVER{
-}
-
-A#instit_btn{
-}
-
-A#instit_btn:HOVER{
-}
-
-A#guiaestudiante_btn{
-}
-
-A#guiaestudiante_btn:HOVER{
-}
 
 
 #header{ 
@@ -114,8 +107,7 @@ A#guiaestudiante_btn:HOVER{
 }
 
 #header h1 {
-    margin: 46px 0px 0px 0px;   
-    text-align: center;
+    margin: 53px 0px 0px 44px; 
     color: white;    
 }
 #header h1 a{
@@ -123,6 +115,7 @@ A#guiaestudiante_btn:HOVER{
     margin: 0 auto;
     color: #fff;
     font-weight: bolder;
+    font-size: 0.8em;
 }
 
 #header h1 a:hover {
@@ -138,26 +131,27 @@ A#guiaestudiante_btn:HOVER{
 
 
 
-#logos{
-    background-color: #faf9f7;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    width:100%;
+.sponsors{
     margin-top: 15px;
     margin-bottom: 20px;
-    border-bottom: 2px solid #A3A29C;
-    height: 70px;
+    border-top: 1px solid #A3A29C;
     overflow: hidden;
     text-align: center;
 }
 
-#logos a img {
+.sponsors a img {
     text-decoration: none;
     display: inline-block;
     margin: 13px 7px;
     border:0px;
 }
 
+#footer{
+    background-color: #fff;
+    text-align: center;
+    color: #A3A29C;
+    padding-bottom: 20px;
+}
 
 #container{
     
@@ -194,12 +188,12 @@ A#guiaestudiante_btn:HOVER{
 
 .boxgris{
     background-color: #dcddde;
-    
     -webkit-border-radius: 1em;
     -moz-border-radius: 1em;
     border-radius: 1em;
 
 }
+
 
 .mas_info_azul{
     text-indent: -1000px;
@@ -208,6 +202,7 @@ A#guiaestudiante_btn:HOVER{
     height: 30px;
     display: block;
     width: 30px;
+    outline: none;
 }
 
 .mas_info_gris{
@@ -217,6 +212,11 @@ A#guiaestudiante_btn:HOVER{
     height: 30px;
     width: 30px;
     display: block;
+    outline: none;
+}
+
+.mas_info_azul:HOVER, .mas_info_gris:HOVER {
+    background-position: 1px 1px;
 }
 
 
