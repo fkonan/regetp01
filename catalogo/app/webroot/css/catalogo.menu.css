@@ -42,7 +42,7 @@
 /* main level link hover */
 #nav .current a, #nav li:hover > a {
 	background: #f1f1f2;
-	color: #55565A;
+	color: #25abe1;
 	border-top: solid 1px #f8f8f8;
 	text-shadow: 0 1px 0 rgba(255,255,255, 1);
 }
@@ -56,19 +56,18 @@
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
 }
-#nav ul a:hover {
-	background: #5C9CCC url(img/gradient.png) repeat-x 0 -100px !important;
-	color: #fff !important;
-
+#nav ul a:hover {	
+	color: #25abe1 !important;
 	-webkit-border-radius: 0;
 	-moz-border-radius: 0;
-
 	text-shadow: 0 1px 1px rgba(0,0,0, .1);
+        
 }
 
 /* dropdown */
 #nav li:hover > ul {
 	display: block;
+        font-size: 0.7em;
 }
 
 /* level 2 list */
@@ -90,6 +89,7 @@
 	-webkit-box-shadow: 0 1px 3px rgba(0,0,0, .3);
 	-moz-box-shadow: 0 1px 3px rgba(0,0,0, .3);
 	box-shadow: 0 1px 3px rgba(0,0,0, .3);
+        font-size: 9pt;
 }
 #nav ul li {
 	float: none;
@@ -108,13 +108,17 @@
 	top: -3px;
 }
 
+#nav ul li{
+    font-size: 9pt;
+}
+
 /* rounded corners of first and last link */
 #nav ul li:first-child > a {
 	-webkit-border-top-left-radius: 9px;
 	-moz-border-radius-topleft: 9px;
 
 	-webkit-border-top-right-radius: 9px;
-	-moz-border-radius-topright: 9px;
+	-moz-border-radius-topright: 9px;        
 }
 #nav ul li:last-child > a {
 	-webkit-border-bottom-left-radius: 9px;

@@ -94,7 +94,7 @@ $javascript;
                 
                 <div id="head-text" class="grid_9">                
                     <h1>
-                        <?php echo $html->link(__('Catálogo Nacional de Títulos y Certificados', true), '/pages/home'); ?>
+                        <?php echo $html->link(__('Catálogo Nacional de Títulos y Certificados', true), '/pages/home', array('class' => 'uppercase')); ?>
                     </h1>
                     <div class="clear"></div>
                     <ul id="nav" class="grid_8">
@@ -107,7 +107,7 @@ $javascript;
                                 <li><a href="#2">Foros Sectoriales</a></li>
                                 <li><a href="#2">Cara de Bragueta</a></li>
                                 <li>
-                                    <a href="#2">Ocatarinetabelachitchix</a>
+                                    <a href="#2">Algo Más</a>
                                     <ul>
                                         <li><a href="#">Màs Magia baby</a></li>
                                         <li><a href="#">Màs Magia baby</a></li>
@@ -137,24 +137,32 @@ $javascript;
            
                         <?php echo $content_for_layout; ?>           
        </div> <!-- FIN div #container -->
-       
-       <div id="logos">
-        <?php
-            echo $html->link($html->image('links/logo_encuentro.png'),'http://www.encuentro.gov.ar/',null, null, false);
-            echo $html->link($html->image('links/logo_pakapaka.png'),'http://www.pakapaka.gov.ar/',null, null, false);
-            echo $html->link($html->image('links/logo_educar.png'),'http://www.educ.ar/',null, null, false);
-            echo $html->link($html->image('links/logo_inet.png'),'http://www.inet.edu.ar/',null, null, false);
-            echo $html->link($html->image('links/logo_infd.png'),'http://www.me.gov.ar/infod/',null, null, false);
-            echo $html->link($html->image('links/logo_bndm.png'),'http://www.bnm.me.gov.ar/',null, null, false);
-            echo $html->link($html->image('links/logo_mercosur.png'),'http://www.sic.inep.gov.br/',null, null, false);
-            echo $html->link($html->image('links/logo_bicentenario.png'),'http://www.bicentenario.argentina.ar/',null, null, false);
-            echo $html->link($html->image('links/logo_argentina.png'),'http://www.argentina.ar/',null, null, false);
-            echo $html->link($html->image('links/logo_argentinagovar.png'),'http://www.argentina.gov.ar/',null, null, false);
-        ?>
+                    
+       <div class="clear"></div>
+       <div id="footer">
+           <div class="sponsors">
+            <?php
+                echo $html->link($html->image('links/fondoblanco/encuentro.png'),'http://www.encuentro.gov.ar/',null, null, false);
+                echo $html->link($html->image('links/fondoblanco/pakapaka.png'),'http://www.pakapaka.gov.ar/',null, null, false);
+                echo $html->link($html->image('links/fondoblanco/educar.png'),'http://www.educ.ar/',null, null, false);                
+                echo $html->link($html->image('links/fondoblanco/infd.png'),'http://www.me.gov.ar/infod/',null, null, false);
+                echo $html->link($html->image('links/fondoblanco/biblo.png'),'http://www.bnm.me.gov.ar/',null, null, false);
+                echo $html->link($html->image('links/fondoblanco/logo_mercosur.png'),'http://www.sic.inep.gov.br/',null, null, false);
+                echo $html->link($html->image('links/fondoblanco/bicentenario.png'),'http://www.bicentenario.argentina.ar/',null, null, false);
+                echo $html->link($html->image('links/fondoblanco/argentina.png'),'http://www.argentina.ar/',null, null, false);
+                echo $html->link($html->image('links/fondoblanco/argentinagovar.png'),'http://www.argentina.gov.ar/',null, null, false);
+            ?>
+           </div>
+           <p>
+               Saavedra 789 C1229ACE | Teléfono (011) 4129-2000
+           </p>
        </div>
+       
 
         <?php echo $cakeDebug; ?>
     </div>
+        
+        
     </body>
 
 </html>
