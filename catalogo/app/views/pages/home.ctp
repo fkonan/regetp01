@@ -1,11 +1,19 @@
-<?php 
-//echo $html->css('catalogo.home.css');
-echo $javascript->link(array('jquery.animate-colors-min'));
-?>
+<h1>Bienvenidos</h1>
+<div class="grid_9 alpha">
+    <cite class="bigquote">
+        necesitamos que todos los argentinos tengan una educación de calidad y en particular los técnicos porque sabemos que las tecnologías van cambiando día a día, así que, hay que contextualizar las escuelas técnicas y también que los chicos nuestros tengan una alta calificación que les permita complementar la formación académica con la transformación tecnológica y estar mejor preparados para el mundo laboral
+    </cite>
+</div>
+<div class="grid_3 omega"><?php echo $html->image('/css/img/me_trans.png')?></div>
 
-<div class="buscadores grid_12">
-    <h2 class="grid_12 centrado">Búsqueda por Perfil</h2>
-    <div class="grid_6 alpha">
+
+
+
+<div class="buscadores grid_12 alpha">
+    <h2 class="separador uppercase grid_4 alpha">Búsquedas por Perfiles</h2>
+    <div class="clear" ></div>
+    
+    <div class="boxblanca grid_6 alpha">
         <h3>Estudiantes</h3>
         <a href="<?php echo $html->url(array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'))?>">
             <h2>
@@ -15,6 +23,8 @@ echo $javascript->link(array('jquery.animate-colors-min'));
             <p class="description">
                Utilizá este buscador si lo que estas buscando son Títulos o Certificados
             </p>
+            
+            <?php echo $html->link('más información');?>
         </a>
     </div>
     
@@ -46,7 +56,7 @@ echo $javascript->link(array('jquery.animate-colors-min'));
 
 <ul class="buscadores grid_12">
     <div class="grid_12">
-            <h2>Busquedas por Oferta</h2>
+            <h2>Búsquedas por Oferta</h2>
     </div>
     <li class="grid_4 alpha">
             <h2>
@@ -79,12 +89,40 @@ echo $javascript->link(array('jquery.animate-colors-min'));
             </div>
     </li>
 </ul>
-<div class="grid_12">
-        <h2>More Info</h2>
-        <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum arcu in tellus commodo vestibulum. Aliquam erat volutpat. Cras elementum justo vitae metus consequat in condimentum nunc ultrices. Nam mollis bibendum volutpat. Donec velit ante, varius euismod pulvinar eu, hendrerit eget tellus. Aenean sed euismod augue. Aenean sollicitudin ligula et lorem feugiat vel accumsan sapien porta. Integer mollis ultricies felis non porttitor. Donec fermentum blandit ante vel tempus. Donec pulvinar, magna non aliquet egestas, nulla urna facilisis tortor, vel volutpat leo lorem ultrices odio. Cras lacinia aliquet placerat. Integer luctus massa quis massa blandit ac scelerisque neque dignissim. In iaculis vulputate ligula, sit amet mattis felis cursus eu. Proin iaculis nisi sit amet neque rhoncus vitae tempus lectus ornare. Aliquam in neque mauris.
-        <br/>
-</div>
 
 
 <div class="clear"></div>
+
+
+
+<div class="grid_8 alpha">
+    <h2>El Rol del Catálogo Nacional de Títulos y Certificados</h2>
+    
+    <p>
+        En función de la mejora continua de la calidad de la educación técnico profesional créase, 
+en el ámbito del Instituto Nacional de Educación Tecnológica, el Registro Federal de Instituciones de 
+Educación Técnico Profesional y el Catálogo Nacional de Títulos y Certificaciones y establécese el proceso de 
+la Homologación de Títulos y Certificaciones. Dichos instrumentos, en forma combinada, permitirán: 
+    </p>
+    
+    <ul>
+        <li>
+            Garantizar el derecho de los estudiantes y de los egresados a la formación y al reconocimiento, en todo el 
+territorio nacional, de estudios, certificaciones y títulos de calidad equivalente. 
+        </li>
+        
+        <li>
+            Definir los diferentes ámbitos institucionales y los distintos niveles de certificación y titulación de la 
+educación técnico profesional. 
+        </li>
+        
+        <li>
+            Propiciar la articulación entre los distintos ámbitos y niveles de la educación técnico-profesional. 
+        </li>
+        
+        <li>
+            Orientar la definición y el desarrollo de programas federales para el fortalecimiento y mejora de las 
+instituciones de educación técnico profesional. 
+        </li>
+    </ul>
+</div>
