@@ -17,6 +17,7 @@ body{
     /* background-image: url(img/shadow.png); */
     background-repeat: repeat-x;
     background-position: 0 100px;
+    color: #58585a;
     margin: 0px;
     padding: 0px;
     font-size: 8pt;
@@ -24,7 +25,7 @@ body{
     color: #0B468E;
 }
 h1, h2, h3, h4{
-   color: #276C9F
+   color: #58585a;
 }
 
 h1.corpus{
@@ -37,6 +38,7 @@ h1.corpus{
 
 h3 {
     font-weight: bold;
+    color: #b1cc2f;
 }
 
 A#titulo_btn{
@@ -186,14 +188,14 @@ A#guiaestudiante_btn:HOVER{
 
 .centrado{
     text-align: center;
+
 }
 
-.clear {
-    clear:both;
-    display:block;
-    height:0;
-    overflow-x:hidden;
-    overflow-y:hidden;
-    visibility:hidden;
-    width:0;
+.boxblanca{
+    background-color: #fff;
+}
+
+.boxgris{
+    background-color: #dcddde;
+
 }
