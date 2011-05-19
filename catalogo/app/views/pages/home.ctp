@@ -23,20 +23,22 @@
         <?php echo $html->link('más información', 
                 array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'),
                 array('class'=>'mas_info_gris'));?>
-
     </div>
     
-    <div class="grid_8 omega">
+    <div class="boxblanca grid_8 omega">
         <h3>Otros</h3>
-        <a href="<?php echo $html->url(array('controller'=>'instits', 'action'=>'search_form'))?>">
-            <h2>
-                Buscador de Instituciones
-                <?php echo $html->image('home/school.png', array('style'=>'float:right;margin-top:-16px;'));?>
-            </h2>
-            <p class="description">
-                Utilizá este buscador si lo que estas buscando son Títulos o Certificados
-            </p>
-        </a>
+        
+        <h3 class="grid_4">Estudiantes</h3>        
+        <h2 class="grid_4" style="margin-top: 0px;">Buscador de Instituciones</h2>
+        <div class="description grid_3">
+           Utilizá este buscador si lo que estas buscando son Títulos o Certificados
+        </div>
+
+        <?php echo $html->link('más información', 
+                array('controller'=>'instits', 'action'=>'search_form'),
+                array('class'=>'mas_info_gris'));?>
+        
+        
         
         <a href="<?php echo $html->url(array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'))?>">
             <h2>
