@@ -13,22 +13,20 @@
     <h2 class="separador uppercase grid_4 alpha">Búsquedas por Perfiles</h2>
     <div class="clear" ></div>
     
-    <div class="boxblanca grid_6 alpha">
-        <h3>Estudiantes</h3>
-        <a href="<?php echo $html->url(array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'))?>">
-            <h2>
-                Guía del Estudiante
-                <?php echo $html->image('home/estudio.png', array('style'=>'float:right; margin-top:-15px;'));?>                
-            </h2>
-            <p class="description">
-               Utilizá este buscador si lo que estas buscando son Títulos o Certificados
-            </p>
-            
-            <?php echo $html->link('más información');?>
-        </a>
+    <div class="boxblanca grid_4 alpha">
+        <h3 class="grid_4">Estudiantes</h3>        
+        <h2 class="grid_4" style="margin-top: 0px;">Guía del Estudiante</h2>
+        <div class="description grid_3">
+           Utilizá este buscador si lo que estas buscando son Títulos o Certificados
+        </div>
+
+        <?php echo $html->link('más información', 
+                array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'),
+                array('class'=>'mas_info_gris'));?>
+
     </div>
     
-    <div class="grid_6 omega">
+    <div class="grid_8 omega">
         <h3>Otros</h3>
         <a href="<?php echo $html->url(array('controller'=>'instits', 'action'=>'search_form'))?>">
             <h2>

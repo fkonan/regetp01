@@ -202,15 +202,21 @@ A#guiaestudiante_btn:HOVER{
 }
 
 .mas_info_azul{
-    text-indent: -1000;
+    text-indent: -1000px;
     overflow: hidden;
-    background: url(img/lupazul.png);
+    background: url(img/lupazul.png) no-repeat;
+    height: 30px;
+    display: block;
+    width: 30px;
 }
 
 .mas_info_gris{
-    text-indent: -1000;
+    text-indent: -1000px;
     overflow: hidden;
-    background: url(img/lupagris.png);
+    background: url(img/lupagris.png)  no-repeat;
+    height: 30px;
+    width: 30px;
+    display: block;
 }
 
 
