@@ -28,7 +28,16 @@ body{
 
 h1, h2, h3 {
    color: #58585a;
-   font-size: 1.6em;
+   margin: 13px 0px 13px 0px;
+}
+h2{
+    font-size: 1.5em;
+}
+h3{
+    font-size: 1.4em;
+}
+h4{
+    font-size: 1.2em;
 }
 
 h4 {
@@ -89,7 +98,20 @@ h3 {
     position: relative;
     height: 158px;    
     background: url(img/bandera_trans.png) no-repeat right;
-    
+}
+
+#head-text:HOVER{
+    background: none;
+}
+
+.bandera-flameando IMG{
+    position: absolute;
+    right: 0px;
+    display: none;
+   height: 150px;
+   width: 400px;
+   opacity:0.4;
+   filter:alpha(opacity=40)
 }
 
 #logo{
@@ -233,6 +255,8 @@ h3 {
     border-top-width: 5px;
     padding-top: 20px;
     margin-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 0px;
 }
 
 .uppercase{

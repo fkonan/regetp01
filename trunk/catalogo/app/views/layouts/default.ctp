@@ -12,6 +12,7 @@ $javascript;
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
+        
         <?php echo $html->charset(); ?>
 
         <title>
@@ -49,6 +50,11 @@ $javascript;
             '1920px           = fluid.min.css'
           ]
         };
+        
+       
+        
+
+        
         </script>
         <?php
         echo $html->meta('icon');
@@ -67,6 +73,7 @@ $javascript;
         'jquery.form',
         'jquery.tools.min',
         'jquery-ui-1.8.12.custom.min',
+            'jquery/jQueryRotateCompressed.2.1',
         ));
 
         $jsPoner = 'views'.DS.Inflector::underscore($this->name).DS.$this->action;
@@ -78,6 +85,30 @@ $javascript;
         echo $scripts_for_layout;
 
         ?>
+        
+        <script>
+     jQuery(document).ready(function(){
+            jQuery('.bandera-flameando IMG').rotate(-20);
+            
+            jQuery('#header').hover(
+            function(){
+               //jQuery('#head-text').animate({opacity: 0.1});
+               jQuery('.bandera-flameando IMG').rotate({animateTo:0});
+               jQuery('.bandera-flameando IMG').show("fade", { direction: "down" }, 300);
+               
+               //jQuery('.bandera-flameando IMG').animate({opacity: 0.8});
+            },
+            function(){
+                jQuery('.bandera-flameando IMG').rotate({animateTo:-20});
+                jQuery('.bandera-flameando IMG').hide("fade", { direction: "down" }, 300);
+                
+                //jQuery('.bandera-flameando IMG').animate({opacity: 0.4});
+            }
+            );
+        }
+        );    
+    </script>
+        
     </head>
     <body>
         
@@ -92,7 +123,8 @@ $javascript;
                 
                 <h2 id="logo" class="grid_3">INET</h2>
                 
-                <div id="head-text" class="grid_9">                
+                <div id="head-text" class="grid_9">
+                    <div class="bandera-flameando"><?php echo $html->image('/css/img/bandera-flamea_rgth.gif'); ?></div>
                     <h1>
                         <?php echo $html->link(__('Catálogo Nacional de Títulos y Certificados', true), '/pages/home', array('class' => 'uppercase')); ?>
                     </h1>

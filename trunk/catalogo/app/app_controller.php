@@ -37,7 +37,7 @@
 class AppController extends Controller {
 	var $helpers = array('Html', 'Form', 'Ajax',  'Javascript');
         
-        var $components = array('RequestHandler', 'DebugKit.Toolbar');
+        var $components = array('RequestHandler');
 	
 	//esta es una variable que sera mostrada en el layout
 	// se crea mediante un elemento que le inserta un listado de urls

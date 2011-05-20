@@ -2,3 +2,12 @@
 UL.seleccionados{
     color: darkslateblue;
 }
+
+
+IMG.step{
+    float: left;
+    width:  30px;
+    margin-left: -10px;
+    margin-top: -10px;
+    
+}

@@ -3,6 +3,9 @@ jQuery.fn.outer = function() {
     return jQuery( jQuery('<div></div>').html(this.clone()) ).html();
 }
 jQuery(document).ready(function () {
+    
+    
+    
     jQuery(document).ajaxError(function(e, xhr, settings, exception) {
         jQuery.unblockUI;
         if (xhr.status == 401){

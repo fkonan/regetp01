@@ -27,8 +27,8 @@
     </div>
     
     <div class="boxblanca grid_8 omega">
+        <h3 class="grid_8" style="margin-bottom: 0px;">Otros/Empresas/Entidades Gubernamentales</h3>
         <div class="box_grid_4 alpha omega" style="border-right: solid #dcddde 1px; padding-right: 10px; margin-right: 9px;">                   
-            <h3>Otros</h3>
             <h2>Buscador de Instituciones</h2>
             <?php echo $html->link('más información', 
                     array('controller'=>'instits', 'action'=>'search_form'),
@@ -41,7 +41,6 @@
         
         
         <div class="box_grid_4 alpha omega">
-            <h3>&nbsp;</h3>
             <h2>Buscador de Títulos</h2>
             <?php echo $html->link('más información', 
                     array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'),

@@ -45,8 +45,9 @@ Templates de jQuery para los resultados de busqueda
 </script>
 
 
-
-<div id="filtro" class="grid_12">
+<br />
+<div id="filtro" class="grid_12 boxblanca">
+    <?php echo $html->image('1-icon.png', array('class' => 'step'));?>
     <h2>Filtros</h2>
     <?php echo $form->create('Titulo', array(
             'action' => 'guia_del_estudiante',
@@ -70,6 +71,8 @@ Templates de jQuery para los resultados de busqueda
     
 </div>
 
+<div class="clear"></div>
+<br />
 
 <?php echo $form->create('Instit', array(
             'controller'=>'instits',
@@ -77,7 +80,8 @@ Templates de jQuery para los resultados de busqueda
             'id'=>'InstitSearchForm', 'name'=>'InstitSearchForm' ));
 ?>
 <div id="resultados" class="grid_12">
-    <div id="li_titulos" class="grid_6 alpha">
+    <div id="li_titulos" class="grid_6 alpha boxgris">
+        <?php echo $html->image('2-icon.png', array('class' => 'step'));?>
         <h2>¿Qué estudiar?</h2>
             <div class="paginatorContainer"></div>
         <ul class="seleccionados"></ul>
@@ -85,7 +89,8 @@ Templates de jQuery para los resultados de busqueda
     </div>
     <?php echo $form->end(); ?>
 
-    <div id="li_instits" class="grid_6 omega">
+    <div id="li_instits" class="grid_6 omega boxgris">
+        <?php echo $html->image('3-icon.png', array('class' => 'step'));?>
         <h2>¿Dónde estudiar?</h2>
         <div class="paginatorContainer"></div>
         <ul class="results"></ul>
