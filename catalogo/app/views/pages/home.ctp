@@ -8,46 +8,47 @@
 
 
 <div class="buscadores grid_12 alpha">
+    <div class="grid_12 alpha omega">
     <h2 class="separador uppercase grid_4 alpha">Búsquedas por Perfiles</h2>
-    <div class="clear" ></div>
+    </div>
     
-    <div class="boxblanca grid_4 alpha">
-        <h3 class="grid_4">Estudiantes</h3>        
-        <h2 class="grid_4" style="margin-top: 0px;">Guía del Estudiante</h2>
-        <p class="description grid_3">
-           Utilizá este buscador si lo que estas buscando son Títulos o Certificados
-        </p>
-
+    <div class="boxblanca box_grid_4 alpha">
+        <h3>Estudiantes</h3>        
+        <h2>Guía del Estudiante</h2>
+        
         <?php echo $html->link('más información', 
                 array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'),
                 array('class'=>'mas_info_gris'));?>
+                
+        <p>
+           Utilizá este buscador si lo que estas buscando son Títulos o Certificados
+        </p>
+
     </div>
     
     <div class="boxblanca grid_8 omega">
-        <h3 class="grid_4">Otros</h3>   
-        
-        <div class="grid_4 alpha omega" style="border-right: solid #dcddde 1px; padding-right: 10px; margin-right: 9px;">                   
-            <h2 class="grid_4" style="margin-top: 0px;">Buscador de Instituciones</h2>
-            <p class="description grid_3">
-               Utilizá este buscador si lo que estas buscando son Títulos o Certificados
-            </p>
-
+        <div class="box_grid_4 alpha omega" style="border-right: solid #dcddde 1px; padding-right: 10px; margin-right: 9px;">                   
+            <h3>Otros</h3>
+            <h2>Buscador de Instituciones</h2>
             <?php echo $html->link('más información', 
                     array('controller'=>'instits', 'action'=>'search_form'),
                     array('class'=>'mas_info_gris'));?>
+            <p>
+               Utilizá este buscador si lo que estas buscando son Títulos o Certificados
+            </p>
         </div>
         
         
         
-        <div class="grid_4 omega alpha">        
-            <h2 class="grid_4" style="margin-top: 0px;">Buscador de Títulos</h2>
-            <p class="description grid_3">
-               Utilizá este buscador si lo que estas buscando son Títulos o Certificados
-            </p>
-
+        <div class="box_grid_4 alpha omega">
+            <h3>&nbsp;</h3>
+            <h2>Buscador de Títulos</h2>
             <?php echo $html->link('más información', 
                     array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'),
                     array('class'=>'mas_info_gris'));?>
+            <p>
+               Utilizá este buscador si lo que estas buscando son Títulos o Certificados
+            </p>
         </div>
         
     </div>
@@ -60,38 +61,45 @@
         <h2 class="uppercase">Búsquedas por Oferta</h2>
     </div>
     
-    <div class="boxgris grid_4 alpha">
+    <div class="box_grid_4 boxgris alpha">
             <h2 class="grid_4">Formación Profesional</h2>
-            <p class="description grid_3">
-                ¿Estas buscando que estudiar y no sabes que? Este buscador te guiará en tu busqueda
-            </p>
             
             <?php echo $html->link('más información', 
                 array('controller'=>'titulos', 'action'=>'search', FP_ID),
                 array('class'=>'mas_info_azul'));?>
+            
+            <p>
+                ¿Estas buscando que estudiar y no sabes que? Este buscador te guiará en tu busqueda
+            </p>
+            
+            
     </div>
     
     
-    <div class="boxgris grid_4">
-            <h2 class="grid_4">Secundario Técnico</h2>
-            <p class="description grid_3">
-               ¿Estas buscando que estudiar y no sabes que? Este buscador te guiará en tu busqueda
-            </p>
+    <div class="box_grid_4 boxgris">
+            <h2>Secundario Técnico</h2>
             
             <?php echo $html->link('más información', 
                 array('controller'=>'titulos', 'action'=>'search', SEC_TEC_ID),
                 array('class'=>'mas_info_azul'));?>
+            <p>
+               ¿Estas buscando que estudiar y no sabes que? Este buscador te guiará en tu busqueda
+            </p>
+            
+            
     </div>
     
-    <div class="boxgris grid_4 omega">
-            <h2 class="grid_4">Superior Técnico</h2>
-            <p class="description grid_3 omega">
-                ¿Estas buscando que estudiar y no sabes que? Este buscador te guiará en tu busqueda
-            </p>
+    <div class="box_grid_4 boxgris omega">
+            <h2>Superior Técnico</h2>
             
             <?php echo $html->link('más información', 
                 array('controller'=>'titulos', 'action'=>'search', SUP_TEC_ID),
-                array('class'=>'mas_info_azul grid_1 omega'));?>
+                array('class'=>'mas_info_azul'));?>
+            <p>
+                ¿Estas buscando que estudiar y no sabes que? Este buscador te guiará en tu busqueda
+            </p>
+            
+            
     </div>
     
 </div>
