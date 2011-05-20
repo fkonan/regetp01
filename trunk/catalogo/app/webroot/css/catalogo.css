@@ -22,11 +22,13 @@ body{
     color: #58585a;
     margin: 0px;
     padding: 0px;
-    font-size: 8pt;
-    font: 0.8em/1.5em Arial,Helvetica,sans-serif;
+    font-size: 0.8em;
+    font-family: Arial,Helvetica,sans-serif;
 }
+
 h1, h2, h3, h4{
    color: #58585a;
+   font-size: 1.6em;
 }
 
 A{
@@ -221,11 +223,43 @@ h3 {
 
 
 .separador{
-    border-top: solid 5px #25abe1;
+    border-top-color: #25abe1;
+    border-top-style: solid;
+    border-top-width: 5px;
     padding-top: 20px;
     margin-top: 20px;
 }
 
 .uppercase{
     text-transform: uppercase;
+}
+
+
+
+.box_grid_4{
+    display: inline;
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 300px;
+}
+
+.box_grid_4 H3, .box_grid_4 H2,  .box_grid_4 P,  .box_grid_4 DIV,  .box_grid_4 A  {
+    margin-left: 10px;
+}
+
+.box_grid_4 H3{
+    clear: both;
+    width: 100%;
+}
+
+.box_grid_4 H2{
+    clear: both;
+    width: 100%;
+}
+
+.box_grid_4 .mas_info_gris, .box_grid_4 .mas_info_azul{
+    float: right;
+    margin-right: 10px;
+    margin-top: 5px;
 }
