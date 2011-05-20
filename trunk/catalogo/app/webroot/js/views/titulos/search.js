@@ -155,7 +155,7 @@
 
     function viewTitulo(url, titulo) {
         var dialog = jQuery('<div id="create_dialog"></div>')
-                .html('... cargando información')
+                .html('... cargando información <span class="ajax-loader"></span>')
                 .dialog({
                         width: 500,
                         position: 'top',

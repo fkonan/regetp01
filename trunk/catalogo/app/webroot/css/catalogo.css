@@ -26,9 +26,14 @@ body{
     font-family: Arial,Helvetica,sans-serif;
 }
 
-h1, h2, h3, h4{
+h1, h2, h3 {
    color: #58585a;
    font-size: 1.6em;
+}
+
+h4 {
+   color: #58585a;
+   font-size: 1.3em;
 }
 
 A{
@@ -262,4 +267,19 @@ h3 {
     float: right;
     margin-right: 10px;
     margin-top: 5px;
+}
+
+.altrow {
+    border-bottom: 1px groove gray;
+    margin-bottom: 3px;
+}
+
+.ajax-loader {
+    text-indent: -1000px;
+    overflow: hidden;
+    background: url(img/ajax-loader.gif) no-repeat;
+    height: 32px;
+    width: 32px;
+    display: block;
+    outline: none;
 }

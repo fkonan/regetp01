@@ -1,5 +1,7 @@
 <?php
-$paginator->options(array('update' => 'consoleResult', 'url' => $this->passedArgs,'indicator'=> 'ajax_indicator'));
+$paginator->options(array(  'update' => 'consoleResult',
+                            'url' => $this->passedArgs,
+                            'indicator'=> 'ajax_paginator_indicator'));
 ?>
 <script type="text/javascript">
     // si hay una búsqueda nueva que no recuerde paginación de session
@@ -60,9 +62,12 @@ $paginator->options(array('update' => 'consoleResult', 'url' => $this->passedArg
     if ($paginator->numbers()) {
     ?>
         <div style="text-align:center; display:block;margin-bottom: 10px">
-                <?php echo $paginator->prev('<< '.__('anterior', true), array(), null, array('class'=>'disabled', 'tag' => 'span'));?>
-            | 	<?php echo $paginator->numbers();?>
-                <?php echo $paginator->next(__('siguiente', true).' >>', array(), null, array('class'=>'disabled'));?>
+            <?php
+            echo $paginator->prev('« Anterior ',null, null, array('class' => 'disabled', 'tag' => 'span'));
+            echo " | ".$paginator->numbers(array('modulus'=>'9'))." | ";
+            echo $paginator->next(' Siguiente »', null, null, array('class' => 'disabled'));
+            ?>
+            <span class="ajax_update" id="ajax_paginator_indicator" style="display:none; padding-left:10px;"><?php echo $html->image('ajax-loader.gif')?></span>
         </div>
         <?php  } ?>
 </div>

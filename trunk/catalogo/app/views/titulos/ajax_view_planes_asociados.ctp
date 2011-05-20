@@ -1,6 +1,6 @@
 <?php
     echo $paginator->counter(array(
-    'format' => __('Página %page% de %pages% (%count% Planes de Estudio asociados)', true)
+    'format' => __('Instituciones %start%-%end% de <strong>%count%</strong>', true)
     ));
 
     $paginator->options(array(
@@ -12,12 +12,13 @@
     $i = 0;
     if (!empty($planes)) {
     ?>
-    <table style="font-size: 8pt;">
-        <!--<th><?php echo $paginator->sort('Plan','Plan.nombre');?></th>-->
+<table cellspacing="0" cellpadding="1">
+        <thead>
         <th><?php echo $paginator->sort('Institución','Plan.instit_id');?></th>
         <th><?php echo $paginator->sort('Localidad','Instit.localidad_id');?></th>
         <th><?php echo $paginator->sort('Departamento','Instit.departamento_id');?></th>
         <th><?php echo $paginator->sort('Jurisdicción','Instit.jurisdiccion_id');?></th>
+        </thead>
         <?php
         foreach ($planes as $plan) {
             $class = '';
@@ -26,7 +27,6 @@
             }
         ?>
         <tr>
-            <!--<td style="text-align:left; vertical-align: middle;"><?php echo $plan['Plan']['nombre']; ?></td>-->
             <td style="text-align:left; vertical-align: middle;"><?php echo $html->link($plan['Instit']['nombre_completo'], array('controller'=>'Instits', 'action'=>'view', $plan['Instit']['id'])); ?></td>
             <td style="text-align:left; vertical-align: middle;"><?php echo $plan['Instit']['Localidad']['name']; ?></td>
             <td style="text-align:left; vertical-align: middle;"><?php echo $plan['Instit']['Departamento']['name']; ?></td>
