@@ -101,6 +101,17 @@
             'style' => 'width: 395px;',
             'class' => 'ui-widget ui-state-default ui-corner-all',
             'after'=>'<br /><i>Ingrese al menos 3 letras para que comience la búsqueda</i>')); ?>
+            <?php
+            $name = $val = '';
+            if (!empty($this->data['Titulo']['localidad_id'])) {
+                $name = "data[Titulo][localidad_id]";
+                $val = $this->data['Titulo']['localidad_id'];
+            }
+            elseif (!empty($this->data['Titulo']['departamento_id'])) {
+                $name = "data[Titulo][departamento_id]";
+                $val = $this->data['Titulo']['departamento_id'];
+            } ?>
+            <input id="hiddenLocDepId" name="<?php echo $name?>" type="hidden" value="<?php echo $val?>" />
         </div>
 
         <div class="clear" style="height:15px;"></div>
@@ -124,7 +135,7 @@
     </div>
     
     <!-- Aca se muestran los resultados de la busqueda-->
-    <div id='consoleResult'></div>
+    <div id="consoleResult" style="min-height:200px; margin-top:30px; padding-bottom:20px;"></div>
 
 </div>
 
