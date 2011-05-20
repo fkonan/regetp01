@@ -22,7 +22,7 @@
     }
 
     function blockResultConsole(formData, jqForm, options) {
-        jQuery('#consoleResultWrapper').mask('Buscando');
+        jQuery('#consoleResult').mask('Buscando');
         return true;
     }
 
@@ -41,7 +41,7 @@
     }
 
     function unblockResultConsole(responseText, statusText, xhr, $form)  {
-        jQuery('#consoleResultWrapper').unmask();
+        jQuery('#consoleResult').unmask();
     }
 
     function formatResult(loc_dep) {

@@ -6,7 +6,7 @@
 <div class="grid_12 titulos search">
     <h1><?php __('Búsqueda de Títulos de Referencia');?></h1>
 
-    <div class="grid_12 boxgris boxform">
+    <div class="grid_12 boxblanca boxform">
         <?php
         echo $javascript->link(array(
         'jquery.autocomplete',
@@ -94,7 +94,7 @@
 
             ?>
         </div>
-        <div style="float: left; margin-left: 35px; width: 400px;">
+        <div id="search-ubicacion" style="float: left; margin-left: 35px; width: 400px;">
             <?php echo $form->input('jur_dep_loc', array(
             'label'=>'Departamento/Localidad<br />',
             'div'=>false,
@@ -124,11 +124,7 @@
     </div>
     
     <!-- Aca se muestran los resultados de la busqueda-->
-    <div id='consoleResultWrapper'  style="clear:both; margin-top: 20px;">
-        <div id='consoleResult' style="min-height: 200px; margin-bottom: 20px;">
-
-        </div>
-    </div>
+    <div id='consoleResult'></div>
 
 </div>
 
