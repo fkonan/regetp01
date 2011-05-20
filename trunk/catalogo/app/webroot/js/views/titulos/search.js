@@ -125,12 +125,12 @@
                     return formatResult(item);
                 }
             }).result(function(e, item) {
-                jQuery("#hiddenLocDepId").remove();
                 if(item.type == 'Vacio'){
                     jQuery("#TituloJurDepLoc").val('');
                 }
                 else{
-                    jQuery("#search-ubicacion").append("<input id='hiddenLocDepId' name='data[Titulo][" + item.type.toLowerCase() + "_id]' type='hidden' value='" + item.id + "' />");
+                    jQuery("#hiddenLocDepId").attr('name', 'data[Titulo]['+ item.type.toLowerCase() + '_id]');
+                    jQuery("#hiddenLocDepId").val(item.id);
                     formElement.submit();
                 }
             });
