@@ -414,17 +414,18 @@ class TitulosController extends AppController {
                 }
             }
 
-            //debug("aji");debug($this->passedArgs['departamentoId']);die;
-
-            if(empty($this->passedArgs['jurisdiccionId']) && (count($filtros['Jurisdiccion']) > 1)) {
-                $filtros['Departamento'] = null;
-            }
-            
-            if((empty($this->passedArgs['departamentoId']) && (count($filtros['Departamento']) > 1 || count($filtros['Jurisdiccion']) > 1 ))) {
-                $filtros['Localidad'] = null;
-            }
-
         }
+
+        if(empty($this->passedArgs['jurisdiccionId']) && (count($filtros['Jurisdiccion']) > 1)) {
+            $filtros['Departamento'] = null;
+        }
+
+        if((empty($this->passedArgs['departamentoId']) && (count($filtros['Departamento']) > 1 || count($filtros['Jurisdiccion']) > 1 ))) {
+            $filtros['Localidad'] = null;
+        }
+        
+        $filtros['TituloName'] = empty($this->passedArgs['tituloName'])?'':$this->passedArgs['tituloName'];
+        
 
         $this->set('titulos', $titulos);
         $this->set('filtros', $filtros);
