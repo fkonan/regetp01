@@ -38,16 +38,13 @@
 .outdated{
     background: url(img/outdated.png) no-repeat;
     background-position: 0 50%;
-
     text-indent: -1000px;
     overflow: hidden;
     height: 44px;
     display: block;
     width: 44px;
-    outline: none;
-    
+    outline: none;    
     float: right;
     margin-right: 20px;
     margin-top: -30px;
-
 }

@@ -15,3 +15,50 @@ IMG.step{
 #resultados{
     min-height: 500px;
 }
+
+.filtro{
+    padding:3px 10px 3px 10px;
+    margin:5px;
+    background-color: #dcddde;
+    -webkit-border-radius: 1em;
+    -moz-border-radius: 1em;
+    border-radius: 1em;
+    display: inline-block;
+}
+
+.filtro a{
+    text-decoration: none;
+}
+.filtros-aplicados{
+    margin-top: 20px;
+    padding:5px;
+}
+
+H3, H2, P, DIV, A  {
+    margin-left: 10px;
+}
+
+H3{
+    clear: both;
+    width: 100%;
+}
+
+H2{
+    clear: both;
+    width: 100%;
+}
+
+
+.jquery-checkbox {display: inline; font-size: 20px; line-height: 32px; cursor: pointer; cursor: hand;}
+.jquery-checkbox .mark {display: inline;}
+.jquery-checkbox img {vertical-align: middle; width: 32px; height: 32px;}
+.jquery-checkbox img{background: transparent url(img/check_box_empty.png) no-repeat;}
+.jquery-checkbox-checked img{background-image: url(img/check_box.png)}
+
+.results li b {
+    font-size: 1.2em;
+}
+
+.seleccionados li b{
+    font-size: 1.2em;
+}
