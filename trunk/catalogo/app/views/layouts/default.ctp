@@ -91,7 +91,6 @@ $javascript;
     <body>
         
     
-        
     <div class="wrapper">
         <div id="header">
             <div id="header-left-fluid"></div>
@@ -107,8 +106,8 @@ $javascript;
                     </h1>
                     <div class="clear"></div>
                     <ul id="nav" class="grid_8">
-                        <li class="grid_2 current alpha"><?php echo $html->link('Inicio', '/pages/home'); ?></li>
-<!--                        <li class="grid_2">
+                        <li class="grid_2 <?php echo ($this->here == $this->base.'/pages/home')?'current':''?> alpha"><?php echo $html->link('Inicio', '/pages/home'); ?></li>
+<!--                        <li class="grid_2 <?php echo (strstr($this->here,$this->base.'/titulos'))?'current':''?>">
                             <a href="">Buscadores</a>
                             <ul>
                                 <li>
@@ -134,7 +133,7 @@ $javascript;
                                 </li>
                             </ul>
                         </li>-->
-                        <li class="grid_2">
+                        <li class="grid_2 <?php echo (strstr($this->here,$this->base.'/bibliotecas'))?'current':''?> ">
                             <?php echo $html->link('Documentación', array('controller'=>'bibliotecas', 'action'=>'index')); ?>
                             <ul>
                                 <li><a href="#1">Marco de Referencias</a></li>
@@ -142,10 +141,11 @@ $javascript;
                                 <li><a href="#2">Cara de Bragueta</a></li>
                             </ul>
                         </li>
-                        <li class="grid_2 omega"><?php echo $html->link('Contacto', array(
+                        <li class="grid_2 omega <?php echo (strstr($this->here,$this->base.'/correos/contacto'))?'current':''?>">
+                            <?php echo $html->link('Contacto', array(
                                                                 'controller' => 'correos',
                                                                 'action'    => 'contacto'
-                        ))?>
+                            ))?>
                         </li>
                     </ul>
                 </div>

@@ -39,7 +39,6 @@
         </div>
         
         
-        
         <div class="box_grid_4 alpha omega">
             <h2>Buscador de Títulos</h2>
             <?php echo $html->link('más información', 
