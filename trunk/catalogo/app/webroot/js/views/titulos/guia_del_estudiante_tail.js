@@ -246,7 +246,9 @@
         
         // meto la nueva data
         titulosTemplate.tmpl( data.data ).appendTo( titulosContainer );
-               
+        
+        $('input:checkbox').checkbox();
+
         //titulosContainer.delegate('li','click',onChangeHandlerTitulos );
         titulosContainer.find('li > input').change( onChangeHandlerTitulos );
 
@@ -275,7 +277,7 @@
         } else {
             titulosContainer.append(tgt.parentNode);
         }
-        
+
         institsForm.submit();
         return false;
     }
@@ -295,6 +297,5 @@
         institsContainer.html('');
         institsPaginator.html('');
     }
-    
     
 })(jQuery);

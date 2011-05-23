@@ -2,6 +2,7 @@
 <?php echo $javascript->link('jquery/jquery.history', false); ?>
 <?php echo $javascript->link('jquery.loadmask.min', false); ?>
 <?php echo $javascript->link('jquery.multiselect.min', false); ?>
+<?php echo $javascript->link('jquery.checkbox.min', false); ?>
 <?php echo $html->css(array('jquery.loadmask', 
                             'catalogo.guia_del_estudiante',
                             'jquery.multiselect')); ?>
@@ -60,19 +61,19 @@ Templates de jQuery para los resultados de busqueda
     </div>
     <div class="grid_12 alpha push_9">
         <?php echo $form->end('Aplicar Filtros');?>
-    </div>
-    <div class="grid_12 alpha">
-        <h3 style="float:left">Filtros Aplicados:</h3>
-        <?php echo $form->create('Titulo', array(
-            'action' => 'guia_del_estudiante',
-            'name'=>'FiltrosAplicadosForm',
-            'id' =>'FiltrosAplicadosForm'
-            ));
-        ?>
+    </div> 
+</div>
 
-        <?php echo $form->end();?>
-    </div>
-    
+<div class="grid_12 boxblanca filtros-aplicados">
+    <h3>Filtros Aplicados:</h3>
+    <?php echo $form->create('Titulo', array(
+        'action' => 'guia_del_estudiante',
+        'name'=>'FiltrosAplicadosForm',
+        'id' =>'FiltrosAplicadosForm'
+        ));
+    ?>
+
+    <?php echo $form->end();?>
 </div>
 
 <div class="clear"></div>
