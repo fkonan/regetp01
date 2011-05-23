@@ -86,28 +86,6 @@ $javascript;
 
         ?>
         
-        <script>
-     jQuery(document).ready(function(){
-            jQuery('.bandera-flameando IMG').rotate(-20);
-            
-            jQuery('#header').hover(
-            function(){
-               //jQuery('#head-text').animate({opacity: 0.1});
-               jQuery('.bandera-flameando IMG').rotate({animateTo:0});
-               jQuery('.bandera-flameando IMG').show("fade", { direction: "down" }, 300);
-               
-               //jQuery('.bandera-flameando IMG').animate({opacity: 0.8});
-            },
-            function(){
-                jQuery('.bandera-flameando IMG').rotate({animateTo:-20});
-                jQuery('.bandera-flameando IMG').hide("fade", { direction: "down" }, 300);
-                
-                //jQuery('.bandera-flameando IMG').animate({opacity: 0.4});
-            }
-            );
-        }
-        );    
-    </script>
         
     </head>
     <body>
@@ -124,32 +102,51 @@ $javascript;
                 <h2 id="logo" class="grid_3">INET</h2>
                 
                 <div id="head-text" class="grid_9">
-                    <div class="bandera-flameando"><?php echo $html->image('/css/img/bandera-flamea_rgth.gif'); ?></div>
                     <h1>
                         <?php echo $html->link(__('Catálogo Nacional de Títulos y Certificados', true), '/pages/home', array('class' => 'uppercase')); ?>
                     </h1>
                     <div class="clear"></div>
                     <ul id="nav" class="grid_8">
                         <li class="grid_2 current alpha"><?php echo $html->link('Inicio', '/pages/home'); ?></li>
-                        <li class="grid_2"><a href="">Buscadores</a></li>
+<!--                        <li class="grid_2">
+                            <a href="">Buscadores</a>
+                            <ul>
+                                <li>
+                                    <?php echo $html->link('Guía del Estudiante', array(
+                                                    'controller' => 'titulos',
+                                                    'action' => 'guiaDelEstudiante'
+                                    )) 
+                                        ?>
+                                </li>
+                                <li>
+                                    <?php echo $html->link('Instituciones', array(
+                                                    'controller' => 'instits',
+                                                    'action' => 'search_form'
+                                    )) 
+                                        ?>
+                                </li>
+                                <li>
+                                    <?php echo $html->link('Títulos', array(
+                                                    'controller' => 'titulos',
+                                                    'action' => 'search'
+                                    )) 
+                                        ?>
+                                </li>
+                            </ul>
+                        </li>-->
                         <li class="grid_2">
-                            <?php echo $html->link('Biblioteca', array('controller'=>'bibliotecas', 'action'=>'index')); ?>
+                            <?php echo $html->link('Documentación', array('controller'=>'bibliotecas', 'action'=>'index')); ?>
                             <ul>
                                 <li><a href="#1">Marco de Referencias</a></li>
                                 <li><a href="#2">Foros Sectoriales</a></li>
                                 <li><a href="#2">Cara de Bragueta</a></li>
-                                <li>
-                                    <a href="#2">Algo Más</a>
-                                    <ul>
-                                        <li><a href="#">Màs Magia baby</a></li>
-                                        <li><a href="#">Màs Magia baby</a></li>
-                                    </ul>
-                                </li>
-
                             </ul>
-
                         </li>
-                        <li class="grid_2 omega"><a href="">Contacto</a></li>
+                        <li class="grid_2 omega"><?php echo $html->link('Contacto', array(
+                                                                'controller' => 'correos',
+                                                                'action'    => 'contacto'
+                        ))?>
+                        </li>
                     </ul>
                 </div>
                 
