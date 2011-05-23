@@ -27,7 +27,7 @@
     </div>
     
     <div class="boxblanca grid_8 omega">
-        <h3 class="grid_8" style="margin-bottom: 0px;">Otros/Empresas/Entidades Gubernamentales</h3>
+        <h3 class="grid_8" style="margin-bottom: 0px;">Organizaciones/Empresas/Entes Gubernamentales</h3>
         <div class="box_grid_4 alpha omega" style="border-right: solid #dcddde 1px; padding-right: 10px; margin-right: 9px;">                   
             <h2>Buscador de Instituciones</h2>
             <?php echo $html->link('más información', 
@@ -43,7 +43,7 @@
         <div class="box_grid_4 alpha omega">
             <h2>Buscador de Títulos</h2>
             <?php echo $html->link('más información', 
-                    array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'),
+                    array('controller'=>'titulos', 'action'=>'search'),
                     array('class'=>'mas_info_gris'));?>
             <p>
                Utilizá este buscador si lo que estas buscando son Títulos o Certificados

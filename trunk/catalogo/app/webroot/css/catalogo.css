@@ -67,7 +67,6 @@ h3 {
 }
 
 
-
 #header{ 
     height: 158px;
     overflow: visible;
@@ -100,19 +99,6 @@ h3 {
     background: url(img/bandera_trans.png) no-repeat right;
 }
 
-#head-text:HOVER{
-    background: none;
-}
-
-.bandera-flameando IMG{
-    position: absolute;
-    right: 0px;
-    display: none;
-   height: 150px;
-   width: 400px;
-   opacity:0.4;
-   filter:alpha(opacity=40)
-}
 
 #logo{
      background: url(img/logo.png) no-repeat;
@@ -222,6 +208,28 @@ h3 {
     border-radius: 1em;
 
 }
+
+
+.mas_info_azul_small{
+    text-indent: -1000px;
+    overflow: hidden;
+    background: url(img/lupazul_small.png) no-repeat;
+    height: 15px;
+    display: block;
+    width: 15px;
+    outline: none;
+}
+
+.mas_info_gris_small{
+    text-indent: -1000px;
+    overflow: hidden;
+    background: url(img/lupagris_small.png)  no-repeat;
+    height: 15px;
+    width: 15px;
+    display: block;
+    outline: none;
+}
+
 
 
 .mas_info_azul{
