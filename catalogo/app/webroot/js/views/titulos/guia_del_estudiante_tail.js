@@ -2,6 +2,7 @@
     /////////////////////////////////////////////////////////////////
     // Parametros de configuracion
     // Elementos utilizados
+
     
     var paginatorTemplate = $('#paginatorTemplate');
     
@@ -11,11 +12,20 @@
     var titulosSeleccionadosContainer = $( "#li_titulos > UL.seleccionados" );    
     var titulosPaginator = $("#li_titulos > .paginatorContainer")
     var titulosTemplate = $("#tituloTemplate");
+    var tituloOfertaCombo = $("#TituloOfertaId");
+    var tituloSectorCombo = $("#TituloSectorId");
+
     
     var institsForm = $('#InstitSearchForm');
     var institsContainer = $( "#li_instits > UL.results" );
     var institsTemplate = $("#institTemplate");
-    var institsPaginator = $("#li_instits > .paginatorContainer")
+    var institsPaginator = $("#li_instits > .paginatorContainer");
+    var institJurisdiccionCombo = $("#InstitJurisdiccionId");
+    var institDepartamentoCombo = $("#InstitDepartamentoId");
+    var institLocalidadCombo = $("#InstitLocalidadId");
+
+    var filtrosForm = $("#FiltrosAplicadosForm");
+    var filtrosContainer = $("#filtrosContainer");
   
 
     
@@ -25,9 +35,18 @@
     titulosForm.submit(getTitulos);
     
     institsForm.submit(getInstits);
-    
-    
-    
+
+    __hideWithLabel(institDepartamentoCombo);
+    __hideWithLabel(institLocalidadCombo);
+    /////////////////////////////////////////////////////////////////
+    //Eventos
+    //
+    $(".deleteable").live("click",function(){
+        $(this).closest(".filtro").remove();
+        titulosForm.submit();
+        return false;
+    });
+
     /////////////////////////////////////////////////////////////////
     // functiones Principales
     //
@@ -39,6 +58,20 @@
     var __unblockResultConsole = function () {
         jQuery('#resultados').unmask();
     }
+
+    function __hideWithLabel(input){
+        var label = titulosForm.find("label[for=" + input.attr("id") + "]");
+        label.hide();
+        input.hide();
+        input.attr('disabled','disabled');
+    }
+
+     function __showWithLabel(input){
+         var label = titulosForm.find("label[for=" + input.attr("id") + "]");
+         label.show();
+         input.show();
+         input.removeAttr('disabled');
+    }
     
     /**
      * Trae los titulos en JSON, usando ajax
@@ -49,27 +82,26 @@
         __blockResultConsole();
         
         if (typeof href == 'object') {
-            url = urlDomain + 'titulos/ajax_search_results.json';
-            
-            // redifini la busquda de los filtros entonces limpiar los 
-            // resultados previamente cargados
+            url = urlDomain + '/titulos/ajax_search_results.json';
             __blanquearContainers();
         } else {
             url = href; 
         }
-        
-        var params = titulosForm.serialize();
+
+        __recargarFiltrosAplicados(titulosForm.serializeArray());
         
         var postvar = $.post( 
                 url,
-                params,
-                __meterTitulosEnTemplate,
+                filtrosForm.serialize(),
+                __actualizarTitulos,
                 'json'
             );
+
                 
-        postvar.error(function(e, t) {
-            console.info('Llegó con error el json de titulos: ' + t);
-            console.debug(e);
+        postvar.error(function (XMLHttpRequest, textStatus, errorThrown) {
+        console.debug(XMLHttpRequest);
+        console.debug(textStatus);
+        console.debug(errorThrown);
         });
         return false;
     }
@@ -87,9 +119,7 @@
             url = e;
         }
 
-        //__crearHiddens();
-        
-        var params = titulosForm.serialize() + "&" + institsForm.serialize();
+        var params = filtrosForm.serialize() + "&" + institsForm.serialize();
         $.post(
                 url,
                 params,
@@ -133,6 +163,69 @@
     // Funciones extra
     //
 
+    var __actualizarTitulos = function (data) {
+        __recargarFiltros(data.filtros);
+        __meterTitulosEnTemplate(data);
+    }
+
+    var __recargarFiltrosAplicados = function (params) {
+        for(var i in params)
+        {
+            if(params[i].name != '_method' && params[i].value != ''){
+                input = titulosForm.find("[name='" + params[i].name + "']");
+                nombre = titulosForm.find("label[for=" + input.attr("id") + "]").html();
+                if(input.is('select')){
+                    valor = titulosForm.find("[name='" + params[i].name + "']").find("option[value='"+params[i].value+"']").html();
+                }
+                else if(input.is('input')){
+                    valor = titulosForm.find("[name='" + params[i].name + "']").val();
+                }
+                
+                $('<span class="filtro"/>').html("<strong>" + nombre + "</strong>: " + valor + "<a href='#' class='deleteable'> X </a>")
+                .append(
+                    $('<input>').attr({
+                        type: 'hidden',
+                        id: params[i].name,
+                        name: params[i].name,
+                        value: params[i].value
+                    })
+                ).appendTo('#FiltrosAplicadosForm');
+            }
+        }
+    }
+
+    var __recargarFiltros = function (data) {
+        __recargaCombo(tituloOfertaCombo,data.Oferta);
+        __recargaCombo(tituloSectorCombo,data.Sector);
+        
+        __recargaCombo(institJurisdiccionCombo,data.Jurisdiccion);
+        __recargaCombo(institDepartamentoCombo,data.Departamento);
+        __recargaCombo(institLocalidadCombo,data.Localidad);
+    }
+
+    var __recargaCombo = function (combo,data){
+        var options = [];
+        var i = 0;
+        var label = titulosForm.find("label[for=" + combo.attr("id") + "]");
+
+        for (key in data) {
+            i++;
+            options.push('<option value="',
+              key, '">',
+              data[key], '</option>');
+        }
+
+
+        if(i > 1){
+            combo.html(options.join(''));
+            __showWithLabel(combo);
+        }
+        else{
+            __hideWithLabel(combo);
+        }
+        
+    }
+
     var __meterTitulosEnTemplate = function (data) {
         // primero borro el contenido
         titulosContainer.html('');
@@ -159,16 +252,6 @@
                 
     }
     
-    var __crearHiddens = function(){
-        var form = titulosForm.find(":input");
-        $.each(form, function(e, input) {
-            $('<input>').attr({
-                type: 'hidden',
-                name: $(input).attr("name"),
-                value: $(input).val()
-            }).appendTo(institsForm);
-        });
-    }
     
     var onChangeHandlerTitulos = function( e ) {   
         e.preventDefault();

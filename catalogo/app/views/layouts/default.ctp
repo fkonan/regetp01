@@ -64,7 +64,7 @@ $javascript;
         echo $html->css('jquery.tooltip','stylesheet');
         echo $html->css('catalogo','stylesheet', array('media'=>'screen'));
         echo $html->css('catalogo.menu','stylesheet');
-        echo $html->css('ui-redmond/jquery-ui-1.8.12.custom');
+        echo $html->css('ui-redmond/jquery-ui-1.8.12.custom','stylesheet');
         echo $html->css('printer','stylesheet', array('media'=>'print'));
 
         echo $javascript->link(array(

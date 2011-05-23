@@ -11,3 +11,7 @@ IMG.step{
     margin-top: -10px;
     
 }
+
+#resultados{
+    min-height: 500px;
+}
