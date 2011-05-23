@@ -55,10 +55,10 @@ H2{
 .jquery-checkbox img{background: transparent url(img/check_box_empty.png) no-repeat;}
 .jquery-checkbox-checked img{background-image: url(img/check_box.png)}
 
-.results li b {
+.results li b, .seleccionados li b{
     font-size: 1.2em;
 }
 
-.seleccionados li b{
-    font-size: 1.2em;
+.results li, .seleccionados li{
+    list-style: none;
 }
