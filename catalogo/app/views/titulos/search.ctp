@@ -1,19 +1,18 @@
-<?php echo $this->element('jqueryui'); ?>
-
+<?php
+    echo $javascript->link(array(
+    'jquery.autocomplete',
+    'jquery.loadmask.min',
+    ));
+    echo $html->css(array('jquery.loadmask', 'jquery.autocomplete', 'catalogo.titulos'));
+?>
 <script type="text/javascript">
     init('<?echo $html->url(array('controller'=>'localidades','action'=>'ajax_search_localidades'));?>');
 </script>
 <div class="grid_12 titulos search">
+    
     <h1><?php __('Búsqueda de Títulos de Referencia');?></h1>
 
     <div class="grid_12 boxblanca boxform">
-        <?php
-        echo $javascript->link(array(
-        'jquery.autocomplete',
-        'jquery.loadmask.min',
-        ));
-        echo $html->css(array('jquery.loadmask', 'jquery.autocomplete', 'catalogo.titulos'));
-        ?>
         <?php
         echo $form->create('Titulo', array(
         'action' => 'ajax_search_results',
