@@ -1,11 +1,4 @@
-
 <?
-/* @var $form FormHelper */
-
-/* @var $javascript JavascriptHelper */
-$javascript;
-
-
 echo $javascript->link(array(
     'jquery.loadmask.min',
     'views/instits/search_form',
@@ -13,79 +6,84 @@ echo $javascript->link(array(
 
 echo $html->css(array('jquery.loadmask', 'smoothness/jquery-ui-1.8.6.custom'));
 ?>
+<div class="grid_12 instits search_form">
 
-<h1><? __('Búsqueda de Instituciones')?></h1>
-<br>
-<div>
-    <?php
-    echo $form->create('Instit', array(
-        'action' => 'search',
-        'name'=>'InstitSearchForm',
-        'id' =>'InstitSearchForm',
-        )
-    );
+    <h1><? __('Búsqueda de Instituciones')?></h1>
 
-    echo $form->hidden('form_name',array('value'=>'buscador rapido'));
+    <div class="grid_12 boxblanca boxform">
+        <?php
+        echo $form->create('Instit', array(
+            'action' => 'search',
+            'name'=>'InstitSearchForm',
+            'id' =>'InstitSearchForm',
+            )
+        );
 
-    echo $form->input('jurisdiccion_id',array(
-            'label'=> 'Jurisdicción',
-            'empty'=> 'Todas',
-            'style' => 'width: 371px; height: 21px;',
-            'div'  => array('style' => 'float:left; clear: none;'),
-            'after' => '<cite>Filtro opcional. Si no selecciona una Jurisdicción se realizará una búsqueda en todo el Registro.</cite>'
-            ));
-
-    echo $form->input('busqueda_libre', array(
-            'id'=>'InstitCue',
-            'div' => array('style' => 'width:400px; float:left;'),
-         //   'style'=>'border:1px solid #BBBBBB; width: 99%; font-size: 22px; height: 29px; color: rgb(117, 117, 117);',
-            'label'=> 'Criterios de Búsqueda'
-            ));
-    
-    echo $html->link('Búsqueda avanzada','advanced_search_form',array(
-        'class'=>'link_right small',
-        'style'=>'margin-bottom: -18px; padding:0px; margin-right: 4px;'
-    ));
-    
-    echo $form->button('Buscar', array(
+        echo $form->hidden('form_name',array('value'=>'buscador rapido'));
+        ?>
+        <div style="margin-right: 0px; margin-left: 20px;">
+            <?php
+            echo $form->input('jurisdiccion_id',array(
+                    'label'=> 'Jurisdicción<br />',
+                    'empty'=> 'Todas',
+                    'div' => false,
+                    'div'  => array('style' => 'float:left; clear: none;'),
+                    'after' => '<cite>(Opcional. Si no selecciona una Jurisdicción se realizará una búsqueda en todo el Registro)</cite>'
+                    ));
+            ?>
+        </div>
+        <div class="clear" style="height: 8px;"></div>
+        <div class="grid_6 alpha">
+            <div style="margin-left: 20px;">
+            <?php
+            echo $form->input('busqueda_libre', array(
+                    'id' => 'InstitCue',
+                    'label' => 'Criterios de Búsqueda<br />',
+                    'style' => 'width: 400px;',
+                    'div' => false
+                    ));
+            ?>
+            </div>
+        </div>
+        <div class="grid_3 suffix_3 omega" >
+        <?php
+            echo $form->button('Buscar', array(
                 'class' => 'boton-buscar',
-                'style' => 'float: left; clear: none; margin-top: 18px; width: 10%',
+                'div' => false,
                 'onclick' => 'autoSubmit(true)',
-         ));
+                 ));
+            ?>
+            <a href="javascript: abrirVentanaAyuda()" style="margin: 22px;" title="Ayuda sobre el buscador">
+            <?php
+            echo $html->image('help.png', array(
+                'alt' => 'Ayuda: ¿Cómo utilizar el buscador?',
+                'id' => 'littleHelpers',
+                'style' => 'border:0;',
+                ));
+            ?>
+                <span style="margin-left: 0px;">Ayuda</span>
+            </a>
+        </div>
+        <div class="clear" style="height: 8px;"></div>
+        <div class="grid_2" style="margin-left: 20px;" >
+            <a class="mas_info_gris_small"></a> 
+            <?php
+            echo $html->link('Búsqueda avanzada','advanced_search_form',array(
+                'class'=>'link_right small',
+            ));
+            ?>
+        </div>
+        <?php
+        echo $form->end();
+        ?>
+    </div>
 
-    echo $form->end();
-    ?>
-    
-    <?php
-    
-    $img =  $html->image('help.png', array(
-        'alt' => 'Ayuda: ¿Cómo utilizar el buscador?',
-        'id' => 'littleHelpers',
-        'style'=>'float:left;',
-        ));
+    <div class="clear" style="height: 30px;"></div>
 
-    ?>
-    <a href="javascript: abrirVentanaAyuda()" style="float:left; margin: 22px;" title="Ayuda sobre el buscador">
-
-    <?php
-    echo $img;
-    
-    ?>
-       <span style="margin-left: 0px;">Ayuda</span>
-    </a>
-    
-
-    <?php
-
-    echo $this->element('boxBuscadorAyuda');
-    ?>
-    
-    
-
-    <div class="clear"></div>
+    <?php echo $this->element('boxBuscadorAyuda'); ?>
     
     <!-- Aca se muestran los resultados de la busqueda-->
-    <div id='consoleResultWrapper' style="border-top: 1px solid #CEE3F6;">
+    <div id='consoleResultWrapper'>
         <div id='consoleResult' style="min-height: 200px; margin-bottom: 20px;"></div>
     </div>
     
