@@ -247,7 +247,7 @@
         // meto la nueva data
         titulosTemplate.tmpl( data.data ).appendTo( titulosContainer );
         
-        $('input:checkbox').checkbox();
+        $('.styled_checkbox').checkbox();
 
         //titulosContainer.delegate('li','click',onChangeHandlerTitulos );
         titulosContainer.find('li > input').change( onChangeHandlerTitulos );

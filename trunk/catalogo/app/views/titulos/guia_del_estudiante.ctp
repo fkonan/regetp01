@@ -27,7 +27,7 @@ Templates de jQuery para los resultados de busqueda
 -->
 <script id="tituloTemplate" type="text/x-jquery-tmpl">
     <li titulo-id="${Titulo.id}">
-        <input type="checkbox" name="data[Plan][titulo_id][]" value="${Titulo.id}" >
+        <input type="checkbox" class="styled_checkbox" name="data[Plan][titulo_id][]" value="${Titulo.id}" >
         <b>${Titulo.name}</b> (${Oferta.name})       
     </li>
 </script>
