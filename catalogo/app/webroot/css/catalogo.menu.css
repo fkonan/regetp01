@@ -31,7 +31,7 @@
     border-top-left-radius: 1em;
     border-top-right-radius: 1em;
 
-    
+    outline: none;
     text-shadow: 0 1px 1px rgba(0,0,0, .3);
 }
 #nav a:hover {

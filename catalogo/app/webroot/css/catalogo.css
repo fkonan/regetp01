@@ -12,7 +12,26 @@ azules
 
 */
 
+.error-message{
+    color: red;
+}
 
+LABEL {
+    color: #000;
+    font-size: 0.8em;
+}
+
+INPUT, TEXTAREA, select {
+    border: 1px solid #dcddde; 
+    background: #f1f1f2; 
+    color: #58585a; 
+}
+INPUT:HOVER, TEXTAREA:HOVER, select:HOVER{
+    background: #F7F7F7; 
+}
+INPUT:FOCUS, TEXTAREA:FOCUS, select:FOCUS{
+    background: #fff;
+}
 
 body{
     background-color: #f1f1f2;
@@ -315,3 +334,52 @@ h3 {
     display: block;
     outline: none;
 }
+
+
+
+/** FORMULARIO DESIGN **/
+
+/* formulario de 6 grids */
+.formu_4{
+    display: inline;
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 300px;
+}
+
+.formu_4 input{
+    width: 188px;
+}
+
+
+
+.formu_4 .input{
+    margin-bottom: 3px;
+}
+
+.formu_4 label{
+    display: inline;
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 80px;
+}
+
+.formu_4 textarea{
+    width: 278px;
+    margin-left: 10px;
+    margin-bottom: 2px;
+}
+
+.formu_4 .submit{
+    margin-left: 10px;
+    margin-bottom: 10px;
+    width: 80px;
+}
+.formu_4 input[type='submit']{
+   width: 80px;
+}
+
+
+
