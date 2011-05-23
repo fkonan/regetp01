@@ -1,6 +1,53 @@
+.titulo{
+    margin:5px 0 5px 0;
+}
+
 .alerta-desactualizada{
-    background-image: url(img/outdated.png);
+    height: 100px;
+    text-decoration: none;
+    color: inherit;
+}
+
+
+.titulo div, .detalles div {
+    margin: 5px 0 5px 0;
+}
+
+.titulo div p, .detalles div p {
+    display:inline-block;
+    width: 150px;
+}
+.titulo div h2, .detalles div h2{
+    display:inline-block;
+    width: 200px;
+    margin:0 13px 0 13px;
+    font-size: 1.2em;
+}
+.titulo div ul, .detalles div ul{
+    display: inline-block;
+    margin-top: 5px;
+    margin-left: 0;
+    width: 150px;
+}
+
+
+.detalles{
+    margin: 20px 0 20px 0;
+}
+
+.outdated{
+    background: url(img/outdated.png) no-repeat;
     background-position: 0 50%;
-    padding: 15px 0px 15px 44px;
-    background-repeat: no-repeat;
+
+    text-indent: -1000px;
+    overflow: hidden;
+    height: 44px;
+    display: block;
+    width: 44px;
+    outline: none;
+    
+    float: right;
+    margin-right: 20px;
+    margin-top: -30px;
+
 }

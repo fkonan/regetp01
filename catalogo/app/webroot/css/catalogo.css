@@ -320,6 +320,28 @@ h3 {
     margin-top: 5px;
 }
 
+.box_grid_6{
+    display: inline;
+    float: left;
+    /*margin-left: 10px;
+    margin-right: 10px;*/
+    width: 450px;
+}
+
+.box_grid_6 H3, .box_grid_6 H2,  .box_grid_6 P,  .box_grid_6 DIV,  .box_grid_6 A  {
+    margin-left: 10px;
+}
+
+.box_grid_6 H3{
+    clear: both;
+    width: 100%;
+}
+
+.box_grid_6 H2{
+    clear: both;
+    width: 100%;
+}
+
 .altrow {
     border-bottom: 1px groove gray;
     margin-bottom: 3px;
