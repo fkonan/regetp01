@@ -51,7 +51,7 @@ $paginator->options(array(  'update' => 'consoleResult',
                         ?>
             </p>
             <p class="titulos-items-actions">
-                <a class="mas_info_gris" onclick="viewTitulo('<?php echo $html->url('/titulos/view/'.$titulo['Titulo']['id']);?>', '<?php echo $titulo['Titulo']['name'];?>');" style="cursor:pointer;"></a>
+                <a class="mas_info_gris_small" onclick="viewTitulo('<?php echo $html->url('/titulos/view/'.$titulo['Titulo']['id']);?>', '<?php echo $titulo['Titulo']['name'];?>');" style="cursor:pointer;"></a>
             </p>
         </li>
             <?php endforeach; ?>
