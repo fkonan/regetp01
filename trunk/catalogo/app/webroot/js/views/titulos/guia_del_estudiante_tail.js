@@ -14,6 +14,8 @@
     var titulosTemplate = $("#tituloTemplate");
     var tituloOfertaCombo = $("#TituloOfertaId");
     var tituloSectorCombo = $("#TituloSectorId");
+    var tituloName = $("#TituloTituloName");
+
 
     
     var institsForm = $('#InstitSearchForm');
@@ -195,6 +197,13 @@
     }
 
     var __recargarFiltros = function (data) {
+        //alert(data.TituloName);
+        if(typeof data.TituloName === 'undefined' || data.TituloName == ''){
+            __showWithLabel(tituloName);
+        }
+        else{
+            __hideWithLabel(tituloName);
+        }
         __recargaCombo(tituloOfertaCombo,data.Oferta);
         __recargaCombo(tituloSectorCombo,data.Sector);
         
@@ -210,6 +219,9 @@
 
         for (key in data) {
             i++;
+            if(i == 1){
+                options.push('<option value="">Seleccione...</option>');
+            }
             options.push('<option value="',
               key, '">',
               data[key], '</option>');

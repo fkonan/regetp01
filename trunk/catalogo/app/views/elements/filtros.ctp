@@ -6,7 +6,7 @@
 </div>
 <div class="grid_6 omega">
     <h4>Ubicación</h4>
-    <?php echo $form->input('Instit.jurisdiccion_id', array('options'=>$jurisdicciones, 'empty' => 'Todas')) ?>
+    <?php echo $form->input('Instit.jurisdiccion_id', array('options'=>$jurisdicciones, 'empty' => 'Seleccione...')) ?>
     <?php echo $form->input('Instit.departamento_id', array('type'=>'select')) ?>
     <?php echo $form->input('Instit.localidad_id', array('type'=>'select')) ?>
 </div>
