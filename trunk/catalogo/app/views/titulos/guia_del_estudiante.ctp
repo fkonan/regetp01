@@ -9,7 +9,7 @@
 <!-- 
 Inicializacion de url global para el manejo de los callbacks 
 y funciones javascript de esta pagina 
--->
+
 <script type="text/javascript">
     $(document).ready(function() {
         var urlDomain = "<?php echo $html->url('/')?>";
@@ -20,7 +20,7 @@ y funciones javascript de esta pagina
            });
    });
 </script>
-
+-->
 <!-- 
 Templates de jQuery para los resultados de busqueda
 -->
@@ -48,25 +48,29 @@ Templates de jQuery para los resultados de busqueda
 <br />
 <div id="filtro" class="grid_12 boxblanca">
     <?php echo $html->image('1-icon.png', array('class' => 'step'));?>
-    <h2>Filtros</h2>
+    <h3>Filtros Disponibles:</h3>
     <?php echo $form->create('Titulo', array(
             'action' => 'guia_del_estudiante',
             'name'=>'TituloSearchForm',
             'id' =>'TituloSearchForm',
-            )) 
-     ?>
+            ));
+    ?>
+    <div class="grid_12 alpha" id="filtrosContainer">
+        <?php echo $this->element('filtros');?>
+    </div>
+    <div class="grid_12 alpha push_9">
+        <?php echo $form->end('Aplicar Filtros');?>
+    </div>
+    <div class="grid_12 alpha">
+        <h3 style="float:left">Filtros Aplicados:</h3>
+        <?php echo $form->create('Titulo', array(
+            'action' => 'guia_del_estudiante',
+            'name'=>'FiltrosAplicadosForm',
+            'id' =>'FiltrosAplicadosForm'
+            ));
+        ?>
 
-    <div class="grid_5 alpha" style="border-right: 1px solid black">   
-    <?php echo $form->input('Titulo.tituloName') ?>
-    <?php echo $form->input('Titulo.oferta_id', array('empty' => 'Todas')); ?>
-    <?php echo $form->input('Titulo.sector_id', array('options'=>$sectores, 'multiple'=>true)) ?>
-    </div>
-    
-    <div class="grid_5 omega">
-    <?php echo $form->input('Instit.jurisdiccion_id', array('options'=>$jurisdicciones, 'empty' => 'Todas', 'label'=> 'Jurisdicción')) ?>
-    </div>
-    <div class="grid_12 push_11">
-        <?php echo $form->end('Buscar') ?>
+        <?php echo $form->end();?>
     </div>
     
 </div>
@@ -82,7 +86,7 @@ Templates de jQuery para los resultados de busqueda
 <div id="resultados" class="grid_12">
     <div id="li_titulos" class="grid_6 alpha boxgris">
         <?php echo $html->image('2-icon.png', array('class' => 'step'));?>
-        <h2>¿Qué estudiar?</h2>
+        <h2>Seleccioná el titulo de interes</h2>
             <div class="paginatorContainer"></div>
         <ul class="seleccionados"></ul>
         <ul class="results"></ul>
