@@ -15,20 +15,26 @@
 
 .titulo div p, .detalles div p {
     display:inline-block;
-    width: 150px;
+    width: 200px;
+    vertical-align: top;
+    margin: 0;
 }
 .titulo div h2, .detalles div h2{
     display:inline-block;
-    width: 200px;
+    width: 150px;
     margin:0 13px 0 13px;
     font-size: 1.2em;
+    vertical-align: top;
 }
 .titulo div ul, .detalles div ul{
     display: inline-block;
     margin-top: 5px;
     margin-left: 0;
-    width: 150px;
+    width: 200px;
+    -moz-padding-start : 0;
+    -webkit-padding-start : 0;
 }
+
 
 
 .detalles{
