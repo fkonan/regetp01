@@ -49,16 +49,33 @@ H2{
 }
 
 
-.jquery-checkbox {display: inline; font-size: 20px; line-height: 32px; cursor: pointer; cursor: hand;}
+.jquery-checkbox {display: inline-block; font-size: 20px; line-height: 32px;}
 .jquery-checkbox .mark {display: inline;}
 .jquery-checkbox img {vertical-align: middle; width: 32px; height: 32px;}
 .jquery-checkbox img{background: transparent url(img/check_box_empty.png) no-repeat;}
 .jquery-checkbox-checked img{background-image: url(img/check_box.png)}
 
-.results li b, .seleccionados li b{
+.results li span b, .seleccionados li span b{
     font-size: 1.2em;
+}
+.titulo_label{
+    display:inline-block;
+    width: 360px;
+    vertical-align: middle;
+    margin-top: 3px;
+    margin-bottom: 6px;
 }
 
 .results li, .seleccionados li{
     list-style: none;
+}
+
+#li_instits ul li{
+    list-style: circle;
+    margin-bottom: 5px;
+}
+
+#li_titulos ul li :hover{
+    color:black;
+    cursor: pointer; cursor: hand;
 }

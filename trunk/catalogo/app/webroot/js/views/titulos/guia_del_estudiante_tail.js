@@ -247,12 +247,17 @@
         // meto la nueva data
         titulosTemplate.tmpl( data.data ).appendTo( titulosContainer );
         
-        $('.styled_checkbox').checkbox();
+        $('.styled_checkbox').checkbox().parent().click(__checkParentClick);
+
 
         //titulosContainer.delegate('li','click',onChangeHandlerTitulos );
         titulosContainer.find('li > input').change( onChangeHandlerTitulos );
 
         __unblockResultConsole();
+    }
+
+    var __checkParentClick = function(eventObject){
+        jQuery(eventObject.currentTarget).find('.styled_checkbox').click();
     }
     
     
