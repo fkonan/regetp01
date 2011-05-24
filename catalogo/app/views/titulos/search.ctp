@@ -15,7 +15,7 @@
     <div class="grid_12 boxblanca boxform">
         <?php
         echo $form->create('Titulo', array(
-        'action' => 'ajax_search_results',
+        'action' => 'ajax_search_results2',
         'name'=>'TituloSearchForm',
         'id' =>'TituloSearchForm',
         )
@@ -102,13 +102,13 @@
             'after'=>'<br /><i>Ingrese al menos 3 letras para que comience la búsqueda</i>')); ?>
             <?php
             $name = $val = '';
-            if (!empty($this->data['Titulo']['localidad_id'])) {
-                $name = "data[Titulo][localidad_id]";
-                $val = $this->data['Titulo']['localidad_id'];
+            if (!empty($this->data['Instit']['localidad_id'])) {
+                $name = "data[Instit][localidad_id]";
+                $val = $this->data['Instit']['localidad_id'];
             }
-            elseif (!empty($this->data['Titulo']['departamento_id'])) {
-                $name = "data[Titulo][departamento_id]";
-                $val = $this->data['Titulo']['departamento_id'];
+            elseif (!empty($this->data['Instit']['departamento_id'])) {
+                $name = "data[Instit][departamento_id]";
+                $val = $this->data['Instit']['departamento_id'];
             } ?>
             <input id="hiddenLocDepId" name="<?php echo $name?>" type="hidden" value="<?php echo $val?>" />
         </div>

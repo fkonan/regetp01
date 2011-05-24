@@ -433,6 +433,126 @@ class TitulosController extends AppController {
     }
 
 
+    /**
+     * Esta accion es el procesamiento del formulario de busqueda
+     * maneja las condiciones de la busqueda y el paginador
+     *
+     */
+    function ajax_search_results2($oferta_id = 0) {
+        Configure::write('debug', 0);
+        //debug($this->RequestHandler);
+        //para mostrar en vista los patrones de busqueda seleccionados
+        $array_condiciones = array();
+        // para el paginator que pueda armar la url
+        $url_conditions = array();
+
+        if (!empty($this->data)) {
+            // si se realizó una búsqueda se limpia la session
+            foreach ($this->sesNames as $sesName) {
+                if ($sesName != $this->sesNames['page']) {
+                    $this->Session->write($sesName, '');
+                }
+            }
+
+            if (!empty($this->data['Titulo']['busquedanueva']) && !$this->data['Titulo']['bysession']) {
+                $this->Session->write($this->sesNames['page'], '');
+            }
+
+            if(!empty($this->data['Titulo']['tituloName'])) {
+                $this->passedArgs['tituloName'] = $this->data['Titulo']['tituloName'];
+                $this->Session->write($this->sesNames['nombre'], $this->data['Titulo']['tituloName']);
+            }
+            if(!empty($this->data['Titulo']['oferta_id'])) {
+                $this->passedArgs['ofertaId'] = $this->data['Titulo']['oferta_id'];
+                $this->Session->write($this->sesNames['oferta'], $this->data['Titulo']['oferta_id']);
+            }
+            if(!empty($this->data['Titulo']['sector_id'])) {
+                $this->passedArgs['sectorId'] = $this->data['Titulo']['sector_id'];
+                $this->Session->write($this->sesNames['sector'], $this->data['Titulo']['sector_id']);
+            }
+            if(!empty($this->data['Titulo']['subsector_id'])) {
+                $this->passedArgs['subsectorId'] = $this->data['Titulo']['subsector_id'];
+                $this->Session->write($this->sesNames['subsector'], $this->data['Titulo']['subsector_id']);
+            }
+            if(!empty($this->data['Instit']['jurisdiccion_id'])) {
+                $this->passedArgs['jurisdiccionId'] = $this->data['Instit']['jurisdiccion_id'];
+                $this->Session->write($this->sesNames['jurisdiccion'], $this->data['Instit']['jurisdiccion_id']);
+            }
+            if(!empty($this->data['Instit']['departamento_id'])) {
+                $this->passedArgs['departamentoId'] = $this->data['Instit']['departamento_id'];
+                $this->Session->write($this->sesNames['departamento'], $this->data['Instit']['departamento_id']);
+                $this->Session->write($this->sesNames['tituloJurDepLoc'], $this->data['Instit']['jur_dep_loc']);
+            }
+            if(!empty($this->data['Instit']['localidad_id'])) {
+                $this->passedArgs['localidadId'] = $this->data['Instit']['localidad_id'];
+                $this->Session->write($this->sesNames['localidad'], $this->data['Instit']['localidad_id']);
+                $this->Session->write($this->sesNames['tituloJurDepLoc'], $this->data['Instit']['jur_dep_loc']);
+            }
+
+            /*if (!empty($this->data['Titulo']['que'])) {
+                $this->paginate['conditions']['(lower(Tipoinstit.name) || lower(Titulo.name) || lower(Plan.name) || lower(Sector.name) || lower(Subsector.name)) SIMILAR TO ?'] = convertir_para_busqueda_avanzada(utf8_decode($this->data['Titulo']['que']));
+            }
+            if (!empty($this->data['Titulo']['donde'])) {
+                $this->paginate['conditions']['(lower(Jurisdiccion.name) || lower(Departamento.name) || lower(Localidad.name) || lower(Instit.name)) SIMILAR TO ?'] = convertir_para_busqueda_avanzada(utf8_decode($this->data['Titulo']['donde']));
+            }*/
+        }
+
+        if(!empty($this->passedArgs['tituloName'])) {
+            $q = utf8_decode(strtolower($this->passedArgs['tituloName']));
+            $this->paginate['conditions']['lower(Titulo.name) SIMILAR TO ?'] = convertir_texto_plano($q);
+        }
+        if(!empty($this->passedArgs['ofertaId'])) {
+            $q = ($this->passedArgs['ofertaId']);
+            $this->paginate['conditions']['Titulo.oferta_id'] = $q;
+        }
+        if(!empty($this->passedArgs['sectorId']) || !empty($this->passedArgs['subsectorId']) ) {
+
+            $conditions_sector = array();
+            if(!empty($this->passedArgs['sectorId'])){
+                $q = $this->passedArgs['sectorId'];
+                $this->paginate['conditions']['SectoresTitulo.sector_id'] = $q;
+            }
+            if(!empty($this->passedArgs['subsectorId'])){
+                $q = $this->passedArgs['subsectorId'];
+                $this->paginate['conditions']['SectoresTitulo.subsector_id'] = $q;
+            }
+        }
+        if(!empty($this->passedArgs['jurisdiccionId'])) {
+            $q = ($this->passedArgs['jurisdiccionId']);
+            $this->paginate['conditions']['Instit.jurisdiccion_id'] = $q;
+        }
+        if(!empty($this->passedArgs['departamentoId'])) {
+            $q = ($this->passedArgs['departamentoId']);
+            $this->paginate['conditions']['Instit.departamento_id'] = $q;
+        }
+        if(!empty($this->passedArgs['localidadId'])) {
+            $q = ($this->passedArgs['localidadId']);
+            $this->paginate['conditions']['Instit.localidad_id'] = $q;
+        }
+
+        if (!empty($this->passedArgs['page'])) {
+            //$this->paginate['page'] = $this->passedArgs['page'];
+            $this->Session->write($this->sesNames['page'], $this->passedArgs['page']);
+        }
+        elseif ($this->Session->read($this->sesNames['page'])) {
+            $this->paginate['page'] = $this->Session->read($this->sesNames['page']);
+        }
+        //debug($this->paginate['conditions']);
+        //datos de paginacion
+        $this->paginate['fields'] = array('Titulo.id', 'Titulo.name','Titulo.marco_ref', 'Titulo.oferta_id', 'Oferta.abrev');
+        $this->paginate['group'] = $this->paginate['fields'];
+        $this->paginate['order'] = array('Titulo.name ASC, Titulo.oferta_id ASC');
+        $this->paginate['recursive'] = 3;   // find completo
+        $titulos = $this->paginate();
+
+        $this->set('titulos', $titulos);
+        $this->set('url_conditions', $url_conditions);
+        //devuelve un array para mostrar los criterios de busqueda
+        $this->set('conditions', $array_condiciones);
+
+    }
+
+
     function guiaDelEstudiante() {
         $this->set('sectores', $this->Titulo->Sector->find('list'));
         $this->set('ofertas', $this->Titulo->Oferta->find('list'));
