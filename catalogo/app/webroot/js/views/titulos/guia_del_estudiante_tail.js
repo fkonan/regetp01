@@ -183,7 +183,7 @@
                     valor = titulosForm.find("[name='" + params[i].name + "']").val();
                 }
                 
-                $('<span class="filtro"/>').html("<strong>" + nombre + "</strong>: " + valor + "<a href='#' class='deleteable'> X </a>")
+                $('<span class="filtro"/>').html("<strong>" + nombre + "</strong> " + valor + "<a href='#' class='deleteable'> X </a>")
                 .append(
                     $('<input>').attr({
                         type: 'hidden',
@@ -202,6 +202,7 @@
             __showWithLabel(tituloName);
         }
         else{
+            tituloName.val('');
             __hideWithLabel(tituloName);
         }
         __recargaCombo(tituloOfertaCombo,data.Oferta);
