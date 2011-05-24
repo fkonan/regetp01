@@ -79,3 +79,12 @@ H2{
     color:black;
     cursor: pointer; cursor: hand;
 }
+
+.boxblanca{
+    margin-right: 13px;
+    padding-bottom: 20px;
+}
+
+.boxgris{
+    padding-bottom: 13px;
+}

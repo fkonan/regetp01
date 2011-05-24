@@ -47,35 +47,36 @@ Templates de jQuery para los resultados de busqueda
 
 
 <br />
-<div id="filtro" class="grid_12 boxblanca">
-    <?php echo $html->image('1-icon.png', array('class' => 'step'));?>
-    <h3>Filtros Disponibles:</h3>
-    <?php echo $form->create('Titulo', array(
-            'action' => 'guia_del_estudiante',
-            'name'=>'TituloSearchForm',
-            'id' =>'TituloSearchForm',
-            ));
-    ?>
-    <div class="grid_12 alpha" id="filtrosContainer">
-        <?php echo $this->element('filtros');?>
+<div class="grid_12 boxgris">
+     <?php echo $html->image('1-icon.png', array('class' => 'step'));?>
+    <h2>Seleccione Criterios de Busqueda:</h2>
+    <div id="filtro" class="boxblanca">
+        <?php echo $form->create('Titulo', array(
+                'action' => 'guia_del_estudiante',
+                'name'=>'TituloSearchForm',
+                'id' =>'TituloSearchForm',
+                ));
+        ?>
+        <div  id="filtrosContainer">
+            <?php echo $this->element('filtros');?>
+        </div>
+        <div>
+            <?php echo $form->end('Buscar');?>
+        </div>
     </div>
-    <div class="grid_12 alpha push_9">
-        <?php echo $form->end('Aplicar Filtros');?>
-    </div> 
+
+    <div class="boxblanca filtros-aplicados">
+        <h3>Criterios Aplicados:</h3>
+        <?php echo $form->create('Titulo', array(
+            'action' => 'guia_del_estudiante',
+            'name'=>'FiltrosAplicadosForm',
+            'id' =>'FiltrosAplicadosForm'
+            ));
+        ?>
+
+        <?php echo $form->end();?>
+    </div>
 </div>
-
-<div class="grid_12 boxblanca filtros-aplicados">
-    <h3>Filtros Aplicados:</h3>
-    <?php echo $form->create('Titulo', array(
-        'action' => 'guia_del_estudiante',
-        'name'=>'FiltrosAplicadosForm',
-        'id' =>'FiltrosAplicadosForm'
-        ));
-    ?>
-
-    <?php echo $form->end();?>
-</div>
-
 <div class="clear"></div>
 <br />
 
@@ -90,7 +91,9 @@ Templates de jQuery para los resultados de busqueda
         <h2>Seleccioná el titulo de interes</h2>
             <div class="paginatorContainer"></div>
         <ul class="seleccionados"></ul>
-        <ul class="results"></ul>
+        <ul class="results">
+            Sin Resultados
+        </ul>
     </div>
     <?php echo $form->end(); ?>
 
@@ -98,7 +101,9 @@ Templates de jQuery para los resultados de busqueda
         <?php echo $html->image('3-icon.png', array('class' => 'step'));?>
         <h2>¿Dónde estudiar?</h2>
         <div class="paginatorContainer"></div>
-        <ul class="results"></ul>
+        <ul class="results">
+            Sin Resultados
+        </ul>
     </div>
 </div>
 
