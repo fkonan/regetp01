@@ -44,7 +44,7 @@ class InstitsController extends AppController {
     }
     
     function advanced_search_form() {
-        $this->cacheAction = '1 day';
+        //$this->cacheAction = '1 day';
 
         if (!empty($this->data)) {
             $this->redirect('search');

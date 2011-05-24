@@ -36,6 +36,8 @@
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
         
+        Router::connect('/docs/*', array('controller' => 'pages', 'action' => 'display'));
+        
         Router::connect('/files', '/app/webroot/files');
         
         

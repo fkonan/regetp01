@@ -19,6 +19,8 @@ azules
 LABEL {
     color: #000;
     font-size: 0.8em;
+    clear: both;
+    display: block;
 }
 
 INPUT, TEXTAREA, select {
