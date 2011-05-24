@@ -6,7 +6,7 @@
    margin: 0px;
 }
 #nav li {
-    margin: 0px 5px;
+    margin: 0px 3px;
     padding: 0 0 0px;
     float: left;
     position: relative;
@@ -24,12 +24,12 @@
     display: block;
     padding:  13px 0px;
     margin: 0;
-     -webkit-border-top-left-radius: 1em;
-    -webkit-border-top-right-radius: 1em;
-    -moz-border-radius-topleft: 1em;
-    -moz-border-radius-topright: 1em;
-    border-top-left-radius: 1em;
-    border-top-right-radius: 1em;
+    -webkit-border-top-left-radius: 0.5em;
+    -webkit-border-top-right-radius: 0.5em;
+    -moz-border-radius-topleft: 0.5em;
+    -moz-border-radius-topright: 0.5em;
+    border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
 
     outline: none;
     text-shadow: 0 1px 1px rgba(0,0,0, .3);
