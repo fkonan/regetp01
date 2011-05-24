@@ -234,9 +234,10 @@ h3 {
     overflow: hidden;
     background: url(img/lupazul_small.png) no-repeat;
     height: 15px;
-    display: block;
+    display: inline-block;
     width: 15px;
     outline: none;
+    vertical-align: middle;
 }
 
 .mas_info_gris_small{
@@ -245,8 +246,9 @@ h3 {
     background: url(img/lupagris_small.png)  no-repeat;
     height: 15px;
     width: 15px;
-    display: block;
+    display: inline-block;
     outline: none;
+    vertical-align: middle;
 }
 
 
@@ -256,9 +258,10 @@ h3 {
     overflow: hidden;
     background: url(img/lupazul.png) no-repeat;
     height: 30px;
-    display: block;
+    display: inline-block;
     width: 30px;
     outline: none;
+    vertical-align: middle;
 }
 
 .mas_info_gris{
@@ -267,8 +270,9 @@ h3 {
     background: url(img/lupagris.png)  no-repeat;
     height: 30px;
     width: 30px;
-    display: block;
+    display: inline-block;
     outline: none;
+    vertical-align: middle;
 }
 
 .mas_info_azul:HOVER, .mas_info_gris:HOVER {
