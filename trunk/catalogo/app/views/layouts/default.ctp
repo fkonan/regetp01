@@ -87,6 +87,11 @@ $javascript;
         ?>
         
         
+        <!--[if IE 6]>
+         <?php echo $html->css('catalogo_ie_fix');?>
+        <![endif]-->
+        
+        
     </head>
     <body>
         
@@ -133,12 +138,30 @@ $javascript;
                                 </li>
                             </ul>
                         </li>-->
-                        <li class="grid_2 <?php echo (strstr($this->here,$this->base.'/bibliotecas'))?'current':''?> ">
-                            <?php echo $html->link('Documentación', array('controller'=>'bibliotecas', 'action'=>'index')); ?>
+                        <li class="grid_2 <?php echo (strstr($this->here,$this->base.'/docs'))?'current':''?> ">
+                            <?php echo $html->link('Documentación', array('controller'=>'docs', 'action'=>'introduccion')); ?>
                             <ul>
-                                <li><a href="#1">Marco de Referencias</a></li>
-                                <li><a href="#2">Foros Sectoriales</a></li>
-                                <li><a href="#2">Cara de Bragueta</a></li>
+                                <li>
+                                    <?php echo $html->link('Información Sectorial','#')?>
+                                    <ul>
+                                        <li><?php echo $html->link('Familias Profesionales','/docs/familias')?></li>
+                                        <li><?php echo $html->link('Foros Sectoriales','/docs/foros')?></li>
+                                        <li><?php echo $html->link('Entidades Participantes','/docs/entidades')?></li>
+                                    </ul>
+                                </li>
+                                <li><?php echo $html->link('Proceso de Homologación','/docs/homologacion')?></li>
+                                <li><?php echo $html->link('Marcos de Referencia','/docs/marcos')?></li>
+                                
+                                <li>
+                                    <?php echo $html->link('Niveles y Modalidades','#')?>
+                                    <ul>
+                                        <li><?php echo $html->link('Educación Técnica de Nivel Medio y Superior','/docs/mediaysuperior')?></li>
+                                        <li><?php echo $html->link('Formación Profesional','/docs/fp')?></li>
+                                    </ul>
+                                </li>
+                                
+                                <li><?php echo $html->link('Normativa de Referencia','/docs/normativa')?></li>
+                                
                             </ul>
                         </li>
                         <li class="grid_2 omega <?php echo (strstr($this->here,$this->base.'/correos/contacto'))?'current':''?>">

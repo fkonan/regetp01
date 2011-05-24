@@ -1,7 +1,6 @@
 <h1>Contáctenos</h1>
 
 
-
 <div class="grid_4 alpha" style="margin-top: -12px; ">
      <?php echo $html->image('contact_icon.png'); ?>
 </div>

@@ -17,7 +17,8 @@ echo $html->css('jquery.autocomplete.css', false);
 <h1><? __('Búsqueda Avanzada de Instituciones')?></h1>
 
 
-<div>
+<div class=" boxblanca" style="padding: 20px;">
+
     <?= $form->create('Instit',array('action' => 'search','name'=>'InstitSearchForm'));?>
 
     <fieldset id="search" class="search-div" >

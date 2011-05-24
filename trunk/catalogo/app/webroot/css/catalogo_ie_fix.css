@@ -1,17 +1,10 @@
 
 #head-text{
-    position: relative;
-    height: 158px;    
      background: none;
 }
 
 #logo{
      background: none;
-     height: 128px;
-     overflow: hidden;
-     text-indent: -1000px;
-     margin: 16px 0px 0px 0px !important;
-     padding: 0px !important;
 }
 
 #header_title{
