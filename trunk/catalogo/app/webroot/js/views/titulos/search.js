@@ -129,7 +129,7 @@
                     jQuery("#TituloJurDepLoc").val('');
                 }
                 else{
-                    jQuery("#hiddenLocDepId").attr('name', 'data[Titulo]['+ item.type.toLowerCase() + '_id]');
+                    jQuery("#hiddenLocDepId").attr('name', 'data[Instit]['+ item.type.toLowerCase() + '_id]');
                     jQuery("#hiddenLocDepId").val(item.id);
                     formElement.submit();
                 }
