@@ -1,6 +1,25 @@
 <?php  $paginator->options(array('update' => 'consoleResult', 'url' => $this->passedArgs,'indicator'=> 'ajax_indicator')); ?>
-<div class="grid_10 alpha omega prefix_1 suffix_1 boxblanca" style="padding-top: 10px">
+
+<?php echo $html->css(array('catalogo.advanced_search', 'catalogo.instits'), $inline=false); ?>
+<div class="grid_10 alpha omega prefix_1 suffix_1 boxblanca" id="search_results">
 <div class="clear"></div>
+<? if (sizeof($conditions)>0): ?>
+	Criterios de búsqueda seleccionados:
+	<dl class="criterios_busq">
+	<?
+
+	 foreach($conditions as $key => $value){
+		?><dt><?
+			echo '- '.$key.': ';
+		?></dt><?
+		?><dd><?
+			echo $value."&nbsp";
+		?></dd><?
+	}
+
+	?>
+	</dl>
+<? endif; ?>
     <div class="grid_6 suffix_2">
     <?php
     $sort = 'cue';

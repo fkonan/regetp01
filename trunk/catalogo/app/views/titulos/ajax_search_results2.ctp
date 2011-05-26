@@ -9,7 +9,7 @@ $paginator->options(array(  'update' => 'consoleResult',
         jQuery("#TituloBysession").val(0);
     }
 </script>
-<div class="grid_10 prefix_1 suffix_1 boxblanca" style="padding-top: 10px">
+<div id="search_results" class="grid_10 prefix_1 suffix_1 boxblanca">
     <div class="grid_4 suffix_4">
         Ordenar por: 
         <?php echo $paginator->sort('Nombre','name');?>, <?php echo $paginator->sort("Oferta",'Oferta.name');?>
