@@ -188,19 +188,15 @@
     <?php endfor?>
     </div>
     <div class="clear separador"></div>
-    <a class="grid_12 alpha omega box_grid_6 boxgris alerta-desactualizada" href ="<?php echo $html->url(array("controller" => "correos","action" => "desactualizada"));?>">
+    <div class="grid_12 alpha omega box_grid_6 boxgris alerta-desactualizada">
         <h2>Ayudenos a mantener los datos actualizados</h2>
         <p>Si ha notado algún dato desactualizado, haga click aquí</p>
-        <span class="outdated"/>
-    <?php
-        echo $html->link(
-                '',
-                array('controller' => 'correos', 'action' => 'desactualizada')
-                );
-
+        <span class="outdated"></span>
+        <?php
         echo $form->create('Instit', array('id' => 'institForm'));
         echo $form->hidden('nombre_completo', array('id' => 'nombre_completo', 'value' => urlencode($instit['Instit']['nombre_completo'])));
         echo $form->hidden('cue_instit', array('id' => 'cue_instit', 'value' => urlencode($cue_instit)));
+        echo $form->end();
         ?>
-    </a>
+    </div>
 </div>
