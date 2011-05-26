@@ -23,9 +23,6 @@
     color: #3F3F3F;
 }
 
-ol, ul {
-    list-style: none outside none;
-}
 
 #titulos-items {
     padding: 0;
