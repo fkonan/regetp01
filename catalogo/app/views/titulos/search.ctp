@@ -28,7 +28,7 @@
             'oferta_id',
             array(
             'div' => false,
-            'class' => 'autosubmit ui-widget ui-state-default ui-corner-all',
+            'class' => 'autosubmit ',
             'label'=> 'Oferta<br />',
             'id' => 'ofertaId',
             'empty' => 'Todas',
@@ -41,7 +41,7 @@
             <?php
             echo $form->input('sector_id', array(
             'div' => false,
-            'class' => 'autosubmit ui-widget ui-state-default ui-corner-all',
+            'class' => 'autosubmit ',
             'type'=>'select','empty'=>'Seleccione','options'=>$sectores,'label'=>'Sector<br />','id'=>'sectorId','after'=>$meter)
             );
             ?>
@@ -50,7 +50,7 @@
             <?php
             echo $form->input('subsector_id', array(
             'div' => false,
-            'class' => 'autosubmit ui-widget ui-state-default ui-corner-all',
+            'class' => 'autosubmit ',
             'empty' => 'Seleccione','type'=>'select', 'style'=>'width:400px;' ,'label'=>'Subsector<br />', 'id'=>'subsectorId','after'=> $meter)
             );
 
@@ -74,7 +74,7 @@
             array(
             'label'=> 'Nombre del Título de Referencia<br />',
             'div' => false,
-            'class' => 'ui-widget ui-state-default ui-corner-all',
+            'class' => '',
             'id' => 'TituloName',
             ));
             ?>
@@ -86,7 +86,7 @@
             'label'=>'Jurisdicción<br />',
             'div' => false,
             'style'=> 'display: block; clear: both;',
-            'class' => 'autosubmit ui-widget ui-state-default ui-corner-all',
+            'class' => 'autosubmit ',
             'empty' => array('0'=>'Todas'),
             'id'=>'jurisdiccion_id'));
             echo '<span class="ajax_update" id="ajax_indicator" style="display:none; margin-top: -32px; float: right; clear: none">'.$html->image('ajax-loader.gif').'</span>';
@@ -98,7 +98,7 @@
             'label'=>'Departamento/Localidad<br />',
             'div'=>false,
             'style' => 'width: 395px;',
-            'class' => 'ui-widget ui-state-default ui-corner-all',
+            'class' => '',
             'after'=>'<br /><i>Ingrese al menos 3 letras para que comience la búsqueda</i>')); ?>
             <?php
             $name = $val = '';
@@ -118,7 +118,7 @@
         <div class="grid_2 prefix_9" >
             <?php
             echo $form->button('Limpiar búsqueda', array(
-            'class' => 'boton-buscar ui-state-default ui-corner-all',
+            'class' => 'boton-buscar',
             'style' => 'cursor: pointer;',
             'div' => false,
             'onclick' => 'location.href="'.$html->url("search").'/limpiar:1"',
