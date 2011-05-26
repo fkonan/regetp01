@@ -18,12 +18,12 @@ echo $html->css('catalogo.advanced_search', false);
 <h1><? __('Búsqueda Avanzada de Instituciones')?></h1>
 
 
-<div>
+<div class="boxgris grid_12">
+    <h2>Seleccione Criterios de Busqueda:</h2>
     <?= $form->create('Instit',array('action' => 'search','name'=>'InstitSearchForm'));?>
 
-    <fieldset id="search" class="search-div" >
-        <legend>General</legend>
-
+    <fieldset id="search" class="search-div boxblanca" >
+        <h4>General</h4>
         <?php
         echo $form->input('cue', array(
         'label'=>'CUE',
@@ -52,23 +52,29 @@ echo $html->css('catalogo.advanced_search', false);
     <!--
 				BUSQUEDA POR SU UBICACION
 		-->
-    <fieldset id="search-ubicacion" class="search-div" >
-        <legend>Por Ubicación</legend>
-        <?php echo $form->input('jur_dep_loc', array('label'=>'Departamento/Localidad', 'style'=>'width:515px;','title'=>'Ingrese al menos 3 letras para que comience la busqueda de Departamentos y Localidades.')); ?>
-        <?php echo $form->input('direccion', array('label'=>'Domicilio', 'style'=>'width:515px;')); ?>
+    <fieldset id="search-ubicacion" class="search-div boxblanca" >
+        <h4>Por Ubicación:</h4>
+        <?php echo $form->input('jur_dep_loc',
+                                array('label'=>'Departamento/Localidad',
+                                      'style'=>'width:90%;',
+                                      'title'=>'Ingrese al menos 3 letras para que comience la busqueda de Departamentos y Localidades.',
+                                      'div'=>array('style'=>'width:50%;clear: none;float:left'))); ?>
+        <?php echo $form->input('direccion',
+                                array('label'=>'Domicilio',
+                                      'style'=>'width:90%;',
+                                      'div'=>array('style'=>'width:50%;clear: none;float:left'))); ?>
     </fieldset>
 
 
     <!--
 				BUSQUEDA POR SU NOMBRE
 		-->
-    <fieldset id="search-denominacion"  class="search-div" >
-        <legend>Por Nombre</legend>
+    <fieldset id="search-denominacion"  class="search-div boxblanca" >
+        <h4>Por Nombre:</h4>
         <?php
         echo $form->input('tipoinstit_id', array(
         'label'=>array('text'=>'Tipo','id'=>'label-tipoinstit'),
-        //'div'=>false,
-        'style'=> 'display:inline;vertical-align:bottom',
+        'div'=>array('style'=>'clear: none;float:left;width:75px'),
         'empty' => 'Todos',
         'type'=>'select',
         'title'=> 'Para activar este campo, seleccione primero una jurisdicción'));
@@ -103,8 +109,8 @@ echo $html->css('catalogo.advanced_search', false);
     <!--
 				BUSQUEDA POR SU OFERTA
 		-->
-    <fieldset id="search-planes"  class="search-div" >
-        <legend>Por Oferta</legend>
+    <fieldset id="search-planes"  class="search-div boxblanca" >
+        <h4>Por Oferta:</h4>
         <?php
         echo $form->input('Plan.oferta_id',array(
         'options'=>$ofertas,
@@ -165,9 +171,8 @@ echo $html->css('catalogo.advanced_search', false);
     <!--
             BUSQUEDA POR OTRAS CARACTERISTICAS
     -->
-
-    <fieldset id="search-otros"  class="search-div" >
-        <legend>Por Otras Caracteristicas</legend>
+    <fieldset id="search-otros"  class="search-div boxblanca" >
+        <h4>Por Otras Caracteristicas:</h4>
         <?php
         echo $form->input('Instit.orientacion_id',array(
         'label'=> 'Orientación',
@@ -179,7 +184,7 @@ echo $html->css('catalogo.advanced_search', false);
         echo $form->input('Instit.claseinstit_id', array(
         'empty' => 'Todas',
         'label'=> 'Tipo de Institución de ETP',
-        'div'=>array('style'=>'float: left; width:240px; clear: none'),
+        'div'=>array('style'=>'float: left; width:250px; clear: none'),
         'style'=> 'display:inline;width:240px;vertical-align:bottom',
         ));
 
@@ -187,14 +192,14 @@ echo $html->css('catalogo.advanced_search', false);
         echo $form->input('Instit.etp_estado_id', array(
         'empty' => 'Todas',
         'label'=>'Relación con ETP',
-        'div'=>array('style'=>'float: left; width:250px; clear: left'),
+        'div'=>array('style'=>'float: left; width:250px; clear: none'),
         'style'=> 'display:inline;width:240px;vertical-align:bottom',
         ));
 
         echo $form->input('Instit.gestion_id', array(
         'empty' => 'Todas',
         'label'=> 'Ámbito de Gestión',
-        'div'=>array('style'=>'float: left; width:250px; clear: none'),
+        'div'=>array('style'=>'float: left; width:250px; clear: left'),
         'style'=> 'display:inline;width: 240px;vertical-align:bottom',
         ));
 
@@ -202,7 +207,7 @@ echo $html->css('catalogo.advanced_search', false);
         echo $form->input('Instit.dependencia_id', array(
         'empty' => 'Todas',
         'label'=> 'Tipo de Dependencia',
-        'div'=>array('style'=>'float: left; width:250px; clear: left'),
+        'div'=>array('style'=>'float: left; width:250px; clear: none'),
         'style'=> 'display:inline;width:240px;vertical-align:bottom',));
 
 

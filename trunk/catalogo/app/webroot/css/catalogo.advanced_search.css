@@ -40,11 +40,8 @@ ol, ul {
 }
 
 .search-div {
-    margin-bottom: 10px;
-    -webkit-border-radius: 1em;
-    -moz-border-radius: 1em;
-    border-radius: 1em;
-    border-color: #f1f1f2;
+    margin: 10px 10px 0 10px;
+    border: none;
 }
 
 .boton-buscar {
@@ -55,8 +52,17 @@ ol, ul {
     font-weight: bold;
     height: 30px;
     width: 130px;
+    margin: 0 10px 10px 0;
 }
 
 label {
     margin-top: 6px;
+}
+
+h2{
+    padding: 10px 0 0 10px;
+}
+
+h2, h4{
+    margin-top: 0;
 }
