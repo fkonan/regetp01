@@ -6,6 +6,15 @@
     height: 100px;
     text-decoration: none;
     color: inherit;
+    cursor: pointer; cursor: hand;
+}
+
+.alerta-desactualizada:hover{
+    color: #25abe1;
+}
+
+.alerta-desactualizada p{
+    text-align:center;
 }
 
 
