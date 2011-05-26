@@ -4,7 +4,9 @@ echo $javascript->link(array(
     'views/instits/search_form',
         ), false);
 
-echo $html->css(array('jquery.loadmask', 'smoothness/jquery-ui-1.8.6.custom'));
+echo $html->css(array(  'jquery.loadmask',
+                        'catalogo.instits',
+                        'smoothness/jquery-ui-1.8.6.custom'));
 ?>
 <div class="grid_12 instits search_form">
 
@@ -45,7 +47,7 @@ echo $html->css(array('jquery.loadmask', 'smoothness/jquery-ui-1.8.6.custom'));
             ?>
             </div>
         </div>
-        <div class="grid_3 suffix_3 omega" >
+        <div class="grid_3 suffix_3 omega" style="padding-top:11px;" >
         <?php
             echo $form->button('Buscar', array(
                 'class' => 'boton-buscar',
@@ -83,8 +85,6 @@ echo $html->css(array('jquery.loadmask', 'smoothness/jquery-ui-1.8.6.custom'));
     <?php echo $this->element('boxBuscadorAyuda'); ?>
     
     <!-- Aca se muestran los resultados de la busqueda-->
-    <div id='consoleResultWrapper'>
-        <div id='consoleResult' style="min-height: 200px; margin-bottom: 20px;"></div>
-    </div>
+    <div id='consoleResult' class="grid_12" style="min-height: 200px; margin-bottom: 20px;"></div>
     
 </div>

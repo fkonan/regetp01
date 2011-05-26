@@ -39,7 +39,7 @@
     }
 
     function blockResultConsole(formData, jqForm, options) {
-        jQuery('#consoleResultWrapper').mask('Buscando');
+        jQuery('#consoleResult').mask('Buscando');
         jQuery('.help_body').hide();
         
         if(jQuery('.help_head').hasClass('menu_head')){
@@ -68,12 +68,12 @@
         var redirigiendo = false;
         if (jQuery('.listado li').size() == 1 && !isNaN(jQuery('#InstitCue').val())){
             redirigiendo = true;
-            jQuery('#consoleResultWrapper').mask('Encontrada');
+            jQuery('#consoleResult').mask('Encontrada');
             jQuery('.listado li A').click();
             //location.replace(jQuery('.listado li').first().attr('href'));
         }
         if (!redirigiendo){
-            jQuery('#consoleResultWrapper').unmask();
+            jQuery('#consoleResult').unmask();
         }
     }
 
