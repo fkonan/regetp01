@@ -18,8 +18,7 @@ echo $html->css('catalogo.advanced_search', false);
 <h1><? __('Búsqueda Avanzada de Instituciones')?></h1>
 
 
-<div class=" boxblanca" style="padding: 20px;">
-
+<div>
     <?= $form->create('Instit',array('action' => 'search','name'=>'InstitSearchForm'));?>
 
     <fieldset id="search" class="search-div" >

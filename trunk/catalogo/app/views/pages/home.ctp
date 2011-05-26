@@ -1,118 +1,7 @@
-<h1>Bienvenidos</h1>
-<div class="grid_9 alpha">
-    <cite class="bigquote">
-        Necesitamos que todos los argentinos tengan una educación de calidad y en particular los técnicos porque sabemos que las tecnologías van cambiando día a día, así que, hay que contextualizar las escuelas técnicas y también que los chicos nuestros tengan una alta calificación que les permita complementar la formación académica con la transformación tecnológica y estar mejor preparados para el mundo laboral
-    </cite>
-</div>
-<div class="grid_3 omega"><?php echo $html->image('/css/img/me_trans.png')?></div>
+<?php echo $html->css('catalogo.home', false);?>
 
-
-<div class="buscadores grid_12 alpha">
-    <div class="grid_12 alpha omega">
-    <h2 class="separador uppercase grid_4 alpha">Búsquedas por Perfiles</h2>
-    </div>
-    
-    <div class="boxblanca box_grid_4 alpha">
-        <h3>Estudiantes</h3>        
-        <h2>Guía del Estudiante</h2>
-        
-        <?php echo $html->link('más información', 
-                array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'),
-                array('class'=>'mas_info_gris'));?>
-                
-        <p>
-           Utilizá este buscador si lo que estas buscando son Títulos o Certificados
-        </p>
-
-    </div>
-    
-    <div class="boxblanca grid_8 omega">
-        <h3 class="grid_8" style="margin-bottom: 0px;">Organizaciones/Empresas/Entes Gubernamentales</h3>
-        <div class="box_grid_4  alpha" style="">                   
-            <h2>Buscador de Instituciones</h2>
-            <?php echo $html->link('más información', 
-                    array('controller'=>'instits', 'action'=>'search_form'),
-                    array('class'=>'mas_info_gris'));?>
-            <p>
-               Utilizá este buscador si lo que estas buscando son Títulos o Certificados
-            </p>
-        </div>
-        
-  
-        <div class="box_grid_4 omega" style="margin-left: -1px; border-left: solid #dcddde 1px;">
-            <div class="grid_4 omega">
-            <h2>Buscador de Títulos</h2>
-            <?php echo $html->link('más información', 
-                    array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'),
-                    array('class'=>'mas_info_gris'));?>
-            <p>
-               Utilizá este buscador si lo que estas buscando son Títulos o Certificados
-            </p>
-            </div>
-        </div>
-        
-    </div>
-</div>
-
-
-<div class="buscadores">
-    <div class="grid_12 alpha omega">
-        <br />
-        <h2 class="uppercase">Búsquedas por Oferta</h2>
-    </div>
-    
-    <div class="box_grid_4 boxgris alpha">
-            <h2 class="grid_4">Formación Profesional</h2>
-            
-            <?php echo $html->link('más información', 
-                array('controller'=>'titulos', 'action'=>'search', FP_ID),
-                array('class'=>'mas_info_azul'));?>
-            
-            <p>
-                ¿Estas buscando que estudiar y no sabes que? Este buscador te guiará en tu busqueda
-            </p>
-            
-            
-    </div>
-    
-    
-    <div class="box_grid_4 boxgris">
-            <h2>Secundario Técnico</h2>
-            
-            <?php echo $html->link('más información', 
-                array('controller'=>'titulos', 'action'=>'search', SEC_TEC_ID),
-                array('class'=>'mas_info_azul'));?>
-            <p>
-               ¿Estas buscando que estudiar y no sabes que? Este buscador te guiará en tu busqueda
-            </p>
-            
-            
-    </div>
-    
-    <div class="box_grid_4 boxgris omega">
-            <h2>Superior Técnico</h2>
-            
-            <?php echo $html->link('más información', 
-                array('controller'=>'titulos', 'action'=>'search', SUP_TEC_ID),
-                array('class'=>'mas_info_azul'));?>
-            <p>
-                ¿Estas buscando que estudiar y no sabes que? Este buscador te guiará en tu busqueda
-            </p>
-            
-            
-    </div>
-    
-</div>
-
-
-<div class="clear"></div>
-
-
-
-<div class="grid_12 alpha">
-    <br />
-    <h2>El Rol del Catálogo Nacional de Títulos y Certificados</h2>
-    
+<h1 class="grid_12">El Catálogo Nacional de Títulos y Certificaciones</h1>
+<div class="grid_9">
     <p>
         En función de la mejora continua de la calidad de la educación técnico profesional créase, 
 en el ámbito del Instituto Nacional de Educación Tecnológica, el Registro Federal de Instituciones de 
@@ -141,3 +30,103 @@ instituciones de educación técnico profesional.
         </li>
     </ul>
 </div>
+
+
+<div class="grid_3"><?php echo $html->image('/css/img/me_trans.png')?></div>
+
+
+    
+<h2 class="separador grid_4">Búsquedas por Perfiles</h2>
+<div class="clear"></div>
+
+<div class="boxblanca grid_4">
+    <div class="box_pad_wrapper">
+    <h3>Estudiantes</h3>        
+    <h4>Guía del Estudiante</h4>
+
+    <?php echo $html->link('más información', 
+            array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'),
+            array('class'=>'mas_info_gris'));?>
+    <p>
+       Utilizá este buscador si lo que estas buscando son Títulos o Certificados
+    </p>
+    </div>
+</div>
+    
+<div class="boxblanca grid_8">
+    <h3 style="margin-left: 10px; margin-bottom: 0px;">Organizaciones/Empresas/Entes Gubernamentales</h3>
+    <div class="grid_4 alpha" style="">                   
+        <div class="box_pad_wrapper">
+        <h4>Buscador de Instituciones</h4>
+        <?php echo $html->link('más información', 
+                array('controller'=>'instits', 'action'=>'search_form'),
+                array('class'=>'mas_info_gris'));?>
+        <p>
+           Utilizá este buscador si lo que estas buscando son Títulos o Certificados
+        </p>
+        </div>
+    </div>
+
+
+    <div class="grid_4 alpha omega" style="margin-left: -1px; border-left: solid #dcddde 1px;">
+        <div class="box_pad_wrapper" style="margin-left: 10px; padding-right: 0px;">
+        <h4>Buscador de Títulos</h4>
+        <?php echo $html->link('más información', 
+                array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'),
+                array('class'=>'mas_info_gris'));?>
+        <p>
+           Utilizá este buscador si lo que estas buscando son Títulos o Certificados
+        </p>
+        </div>
+    </div>
+
+</div>
+
+
+<h2 class="grid_12">Búsquedas por Oferta</h2>
+    
+<div class="clear"></div>
+
+<div class="grid_4 boxgris">
+    <div class="box_pad_wrapper">
+        <h4>Formación Profesional</h4>
+
+        <?php echo $html->link('más información', 
+            array('controller'=>'titulos', 'action'=>'search', FP_ID),
+            array('class'=>'mas_info_azul'));?>
+
+        <p>
+            ¿Estas buscando que estudiar y no sabes que? Este buscador te guiará en tu busqueda
+        </p>
+    </div>
+</div>
+    
+    
+<div class="grid_4 boxgris">
+     <div class="box_pad_wrapper">
+    <h4>Secundario Técnico</h4>
+
+    <?php echo $html->link('más información', 
+        array('controller'=>'titulos', 'action'=>'search', SEC_TEC_ID),
+        array('class'=>'mas_info_azul'));?>
+    <p>
+       ¿Estas buscando que estudiar y no sabes que? Este buscador te guiará en tu busqueda
+    </p>
+     </div>
+
+</div>
+    
+<div class="grid_4 boxgris">
+    <div class="box_pad_wrapper">
+    <h4>Superior Técnico</h4>
+
+    <?php echo $html->link('más información', 
+        array('controller'=>'titulos', 'action'=>'search', SUP_TEC_ID),
+        array('class'=>'mas_info_azul'));?>
+    <p>
+        ¿Estas buscando que estudiar y no sabes que? Este buscador te guiará en tu busqueda
+    </p>
+     </div>
+</div>
+    
+
