@@ -1,83 +1,8 @@
-ul.buscadores li A {    
-    text-decoration: none;
+
+.box_pad_wrapper{
+    padding: 0px 10px;
 }
 
-ul.buscadores {
-	list-style: none;
-	padding: 0;
-        padding-top: 20px;
-        padding-bottom: 30px;
-        border: 5px solid #A1B2C6;
-        background: #FAF9F7;
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-        border-radius: 5px;
-}
-ul.buscadores li {
-	float: left;
-	padding: 0;
-	text-align: center;
-	display: inline; /*--Gimp Fix aka IE6 Fix - Fixes double margin bug--*/
-}
-ul.buscadores li a.thumb {
-        width: 237px;
-        height: 150px; /*--Height of image--*/
-	cursor: pointer;
-        margin-left: auto;
-        margin-right: auto;
-}
-
-ul.buscadores li span { /*--Used to crop image--*/
-	height: 150px;
-	overflow: hidden;
-	display: block;
-}
-ul.buscadores li a.thumb:hover {
-	background: #333; /*--Hover effect for browser with js turned off--*/
-}
-ul.buscadores li h2 {
-	font-size: 1em;
-	font-weight: bold;
-	padding-top: 10px;
-        padding-bottom: 10px;
-        color: white;
-        -moz-border-radius: 3px; /*--CSS3 Rounded Corners--*/
-        -khtml-border-radius: 3px; /*--CSS3 Rounded Corners--*/
-        -webkit-border-radius: 3px; /*--CSS3 Rounded Corners--*/
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 0px;
-        width:237px;
-        background-color:  #858789 ;
-}
-
-ul.buscadores li h2.instits {
-	background-color: #526C8C;
-}
-
-ul.buscadores li h2.titulos {
-	background-color:  #D0202B;
-}
-
-ul.buscadores li h2.guia {
-	background-color:  #333;
-}
-
-
-ul.buscadores li a {
-    text-decoration: none; color: white; display: block;
-}
-
-ul.buscadores li .description{
-    background-color: white;
-    height: 80px;
-    text-align: center;
-    padding-top: 10px;
-    margin-left: auto;
-    margin-right: auto;
-    width:237px;
-    cursor:pointer;
-    color: #858789;
-    font-size: 11pt;
-    border: 1px solid #E5E5E5;
+.box_pad_wrapper .mas_info_gris, .box_pad_wrapper .mas_info_azul{
+    float: right;
 }

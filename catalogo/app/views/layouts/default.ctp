@@ -16,7 +16,7 @@ $javascript;
         <?php echo $html->charset(); ?>
 
         <title>
-            <?php __('Catálogo Nacional de Títulos y Certificados');
+            <?php __('Catálogo Nacional de Títulos y Certificaciones de Educación Técnico Profesional');
             echo Configure::read('version')." - "; ?>
             <?php echo $title_for_layout; ?>
         </title>
@@ -44,10 +44,7 @@ $javascript;
           range: [
             '760px            = mobile.min.css',
             '760px  to 980px  = 720.min.css',
-            '980px  to 1280px = 960.min.css',
-            '1280px to 1600px = 1200.min.css',
-            '1600px to 1920px = 1560.min.css',
-            '1920px           = fluid.min.css'
+            '980px  to 1920px = 960.min.css',
           ]
         };
         
@@ -106,13 +103,21 @@ $javascript;
                 <h2 id="logo" class="grid_3">INET</h2>
                 
                 <div id="head-text" class="grid_9">
-                    <h1>
-                        <?php echo $html->link(__('Catálogo Nacional de Títulos y Certificados', true), '/pages/home', array('class' => 'uppercase')); ?>
+                    <h1 class="grid_6">
+                        <?php echo $html->link(__('Catálogo Nacional de Títulos y Certificaciones de Educación Técnico Profesional', true), '/pages/home'); ?>
                     </h1>
                     <div class="clear"></div>
                     <ul id="nav" class="grid_8">
                         <li class="grid_2 <?php echo ($this->here == $this->base.'/pages/home')?'current':''?> alpha"><?php echo $html->link('Inicio', '/pages/home'); ?></li>
-<!--                        <li class="grid_2 <?php echo (strstr($this->here,$this->base.'/titulos'))?'current':''?>">
+                        
+                        
+                        <?php 
+                        $activo = false;
+                        if ($this->action == 'search' || $this->action == 'search_form' || $this->action == 'guiaDelEstudiante'){
+                            $activo = true;
+                        }
+                        ?>
+                        <li class="grid_2 <?php echo ($activo)?'current':''?>">
                             <a href="">Buscadores</a>
                             <ul>
                                 <li>
@@ -137,7 +142,7 @@ $javascript;
                                         ?>
                                 </li>
                             </ul>
-                        </li>-->
+                        </li>
                         <li class="grid_2 <?php echo (strstr($this->here,$this->base.'/docs'))?'current':''?> ">
                             <?php echo $html->link('Documentación', array('controller'=>'docs', 'action'=>'introduccion')); ?>
                             <ul>

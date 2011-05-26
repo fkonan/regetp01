@@ -1,35 +1,33 @@
 <h1>Contáctenos</h1>
 
 
-<div class="grid_4 alpha" style="margin-top: -12px; ">
-     <?php echo $html->image('contact_icon.png'); ?>
+<div class="grid_4 boxblanca">
+     <?php echo $html->image('img_cont_contacto_transp.png', array('height'=>'200', 'class'=>'grid_4 alpha omega')); ?>
 </div>
 
 <div class="omega boxblanca formu_4">
     <br />
     <?php
-
     echo $form->create('Correo', array('action' => 'contacto'));
-
     echo $form->input('from', array('label'=>'Nombre'));
-    echo $form->input('mail', array('label'=>'E-mail'));
+    echo $form->input('mail', array('label'=>'E-Mail'));
     echo $form->input('telefono', array('label'=>'Teléfono'));
-
     echo $form->input('descripcion', array('label'=>false, 'rows' => 5, 'cols' => 50));
-
     echo $form->end('Enviar');
-
     ?>
 </div>
 
-<div class="grid_4 boxgris">
+<div class="grid_4 boxgris" style="height: 200px">
      
-    <h2 style="margin: 10px 20px;">Unidad de Información</h2>
-    <p style="margin: 10px 20px;">       
-        Este formulario lo comunica con la Unidad de Información del INET oficina 311.
-        Puede enviarnos un mensaje desde aquí, o desde nuestro correo electrónico: ui@inet.edu.ar.
-        <br /><br /> 
-        Si lo desea pude llamarnos por teléfono de 10 a 18 hs al (011) 4129-2000 Interno 4032/4033.
+    <h2 style="margin: 10px 20px;">Formulario de Contacto</h2>
+    <p style="margin: 10px 20px;">   
+        Mediante este formulario usted se pondrá en contacto con la Unidad de Información del INET.
+        <br />
+        <br />
+        Otras vías:<br />
+                  <?php echo $html->image('emailButton.png');?> xxxx@inet.edu.ar<br />
+                  <?php echo $html->image('phone16x16.png');?> (011) 4129-2000 Interno 4032/4033<br />
+                  <?php echo $html->image('office-building.png');?> Saavedra 789 CABA, Buenos Aires, Argentina. Oficina 311. <br />
     </p>
 </div>
 
