@@ -5,8 +5,9 @@ echo $javascript->link(array(
         ), false);
 
 echo $html->css(array(  'jquery.loadmask',
-                        'catalogo.instits',
-                        'smoothness/jquery-ui-1.8.6.custom'));
+                        'smoothness/jquery-ui-1.8.6.custom',
+                        'catalogo.advanced_search',
+                        'catalogo.instits',));
 ?>
 <div class="grid_12 instits search_form">
 
@@ -79,8 +80,6 @@ echo $html->css(array(  'jquery.loadmask',
         echo $form->end();
         ?>
     </div>
-
-    <div class="clear" style="height: 30px;"></div>
 
     <?php echo $this->element('boxBuscadorAyuda'); ?>
     

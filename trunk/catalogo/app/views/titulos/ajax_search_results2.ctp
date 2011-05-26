@@ -9,7 +9,7 @@ $paginator->options(array(  'update' => 'consoleResult',
         jQuery("#TituloBysession").val(0);
     }
 </script>
-<div class="grid_10 prefix_1 suffix_1 boxblanca" style="margin-top: 30px; padding-top: 10px">
+<div class="grid_10 prefix_1 suffix_1 boxblanca" style="padding-top: 10px">
     <div class="grid_4 suffix_4">
         Ordenar por: 
         <?php echo $paginator->sort('Nombre','name');?>, <?php echo $paginator->sort("Oferta",'Oferta.name');?>
@@ -20,15 +20,14 @@ $paginator->options(array(  'update' => 'consoleResult',
     </div>
     <div class="clear"></div>
 
-    <?
-    if (sizeof($titulos) > 0) {?>
-    <ol id="titulos-items">
+    <? if (sizeof($titulos) > 0) {?>
+    <ol id="items">
             <?php
             $i = 0;
             foreach ($titulos as $titulo):
                 ?>
         <li onmouseover="jQuery(this).addClass('alt2row')" onmouseout="jQuery(this).removeClass('alt2row')" >
-            <span class="titulos-items-nombre">
+            <span class="items-nombre">
                         <?php
                         /*$linkTitulo = $html->link(
                                 " (".count($titulo['Plan'])." planes)",
@@ -50,7 +49,7 @@ $paginator->options(array(  'update' => 'consoleResult',
                         echo $form->input('oferta_'.$titulo['Titulo']['id'], array('type' => 'hidden', 'value' => $titulo['Titulo']['oferta_id']));
                         ?>
             </p>
-            <p class="titulos-items-actions">
+            <p class="items-actions">
                 <a class="mas_info_gris_small" onclick="viewTitulo('<?php echo $html->url('/titulos/view/'.$titulo['Titulo']['id']);?>', '<?php echo $titulo['Titulo']['name'];?>');" style="cursor:pointer;"></a>
             </p>
         </li>
