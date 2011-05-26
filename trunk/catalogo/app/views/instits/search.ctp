@@ -1,5 +1,5 @@
 <?php  $paginator->options(array('update' => 'consoleResult', 'url' => $this->passedArgs,'indicator'=> 'ajax_indicator')); ?>
-<div class="grid_10 prefix_1 suffix_1 boxblanca" style="padding-top: 10px">
+<div class="grid_10 alpha omega prefix_1 suffix_1 boxblanca" style="padding-top: 10px">
 <div class="clear"></div>
     <div class="grid_6 suffix_2">
     <?php
