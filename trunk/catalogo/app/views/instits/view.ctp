@@ -1,6 +1,6 @@
 <?php
 
-    echo $html->css('catalogo.instits.view', false);
+    echo $html->css('catalogo.instits', false);
     //echo $html->css('catalogo.titulos', false);
     $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
 ?>
