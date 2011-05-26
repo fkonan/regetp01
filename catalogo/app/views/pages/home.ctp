@@ -48,34 +48,34 @@ instituciones de educación técnico profesional.
             array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'),
             array('class'=>'mas_info_gris'));?>
     <p>
-       Utilizá este buscador si lo que estas buscando son Títulos o Certificados
+       Aquí podrás encontrarar lugares donde estudiar y obtener un título o certificación.
     </p>
     </div>
 </div>
     
 <div class="boxblanca grid_8">
-    <h3 style="margin-left: 10px; margin-bottom: 0px;">Organizaciones/Empresas/Entes Gubernamentales</h3>
+    <h3 style="margin-left: 10px; margin-bottom: 0px;">Empresas, Profesionales, Funcionarios, Otros</h3>
     <div class="grid_4 alpha" style="">                   
         <div class="box_pad_wrapper">
-        <h4>Buscador de Instituciones</h4>
-        <?php echo $html->link('más información', 
-                array('controller'=>'instits', 'action'=>'search_form'),
-                array('class'=>'mas_info_gris'));?>
-        <p>
-           Utilizá este buscador si lo que estas buscando son Títulos o Certificados
-        </p>
+            <h4>Buscador de Títulos</h4>
+            <?php echo $html->link('más información', 
+                    array('controller'=>'titulos', 'action'=>'search'),
+                    array('class'=>'mas_info_gris'));?>
+            <p>
+               Mediante este buscador se puede obtener un listado de títulos o certificaciones de Educación Técnico Profesonal
+            </p>
         </div>
     </div>
 
 
     <div class="grid_4 alpha omega" style="margin-left: -1px; border-left: solid #dcddde 1px;">
         <div class="box_pad_wrapper" style="margin-left: 10px; padding-right: 0px;">
-        <h4>Buscador de Títulos</h4>
+            <h4>Buscador de Instituciones</h4>
         <?php echo $html->link('más información', 
-                array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'),
+                array('controller'=>'instits', 'action'=>'search_form'),
                 array('class'=>'mas_info_gris'));?>
         <p>
-           Utilizá este buscador si lo que estas buscando son Títulos o Certificados
+           Mediante este buscador se obtiene un listado de instituciones del Registro Federal de Instituciones de Educación Técnico Profesonal
         </p>
         </div>
     </div>
