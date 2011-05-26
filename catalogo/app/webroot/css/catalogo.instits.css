@@ -62,3 +62,34 @@
     text-decoration: none;
     color: #58585A;
 }
+
+.items-nombre {
+    display: block;
+    margin-left: 10px;
+    text-align:left;
+    font-size: 9pt;
+    font-weight: bold;
+}
+
+.instit-items-domicilio1 {
+    display: inline-block;
+    width: 40%;
+    padding-left: 20px;
+}
+.instit-items-domicilio2 {
+    display: inline-block;
+    width: 40%;
+}
+.instit-items-gestion {
+    display: inline-block;
+    width: 10%;
+}
+
+.instit-items-domicilio1 p, .instit-items-domicilio2 p{
+    margin: .2em 0px;
+    font-size: 9pt;
+}
+
+.items-actions{
+    top:17px;
+}

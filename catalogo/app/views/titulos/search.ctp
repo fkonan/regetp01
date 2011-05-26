@@ -3,7 +3,7 @@
     'jquery.autocomplete',
     'jquery.loadmask.min',
     ));
-    echo $html->css(array('jquery.loadmask', 'jquery.autocomplete', 'catalogo.titulos'));
+    echo $html->css(array('jquery.loadmask', 'jquery.autocomplete', 'catalogo.advanced_search', 'catalogo.titulos'));
 ?>
 <script type="text/javascript">
     init('<?echo $html->url(array('controller'=>'localidades','action'=>'ajax_search_localidades'));?>');
