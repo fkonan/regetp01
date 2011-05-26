@@ -87,6 +87,10 @@ h3 {
     color: #b1cc2f;
 }
 
+ol, ul {
+    list-style: none outside none;
+}
+
 
 #header{ 
     height: 158px;
