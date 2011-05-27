@@ -115,13 +115,18 @@
 
         <div class="clear" style="height:15px;"></div>
         
-        <div class="grid_2 prefix_9" >
+        <div class="grid_2 prefix_10" >
             <?php
-            echo $form->button('Limpiar búsqueda', array(
+            /*echo $form->button('Limpiar búsqueda', array(
             'class' => 'boton-buscar',
             'style' => 'cursor: pointer;',
             'div' => false,
             'onclick' => 'location.href="'.$html->url("search").'/limpiar:1"',
+            ));**/
+            echo $form->submit('Buscar', array(
+            'class' => 'boton-buscar',
+            'style' => 'cursor: pointer;',
+            'div' => false
             ));
             ?>
         </div>

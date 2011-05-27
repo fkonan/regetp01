@@ -95,7 +95,7 @@
             // bind form using 'ajaxForm'
             formElement.ajaxForm(options);
 
-            jQuery("#TituloName").keyup(autoSubmit);
+            //jQuery("#TituloName").keyup(autoSubmit);
 
             jQuery("#TituloName").keypress(function(e) {
                 if (e.keyCode == 10 || e.keyCode == 13){
@@ -135,9 +135,9 @@
                 }
             });
 
-            jQuery(".autosubmit").change(function() { formElement.submit(); });
+            //jQuery(".autosubmit").change(function() { formElement.submit(); });
 
-            jQuery("#TituloName").bind('paste', function(e){autoSubmit(true)});
+            //jQuery("#TituloName").bind('paste', function(e){autoSubmit(true)});
 
             jQuery("#jurisdiccion_id").change(function () {
                 jQuery("#ajax_indicator").hide();
