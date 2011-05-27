@@ -228,7 +228,7 @@ echo $html->css('catalogo.advanced_search', false);
 
     <div style="padding-top: 20px; padding-bottom: 25px; padding-right: 3px;">
     <?php echo $form->button('Buscar',array(
-        'class'=>'boxgris boton-buscar',
+        'class'=>'boxgris boton-buscar-avanzado',
         'onclick'=>'enviar()'));
     ?>
     </div>
