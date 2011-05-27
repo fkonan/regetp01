@@ -239,7 +239,6 @@ ol, ul {
 
 
 .mas_info_azul_small{
-    text-indent: -1000px;
     overflow: hidden;
     background: url(img/lupazul_small.png) no-repeat;
     height: 15px;
@@ -250,7 +249,6 @@ ol, ul {
 }
 
 .mas_info_gris_small{
-    text-indent: -1000px;
     overflow: hidden;
     background: url(img/lupagris_small.png)  no-repeat;
     height: 15px;
@@ -263,7 +261,6 @@ ol, ul {
 
 
 .mas_info_azul{
-    text-indent: -1000px;
     overflow: hidden;
     background: url(img/lupazul.png) no-repeat;
     height: 30px;
@@ -274,7 +271,6 @@ ol, ul {
 }
 
 .mas_info_gris{
-    text-indent: -1000px;
     overflow: hidden;
     background: url(img/lupagris.png)  no-repeat;
     height: 30px;
