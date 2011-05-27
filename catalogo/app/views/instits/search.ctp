@@ -20,30 +20,32 @@
 	?>
 	</dl>
 <? endif; ?>
-    <div class="grid_6 suffix_2">
-    <?php
-    $sort = 'cue';
-    if(isset($this->passedArgs['sort'])){
-    $sort = $this->passedArgs['sort'];
-    }
-    ?>
-        Ordenar por:
-        <? $class = ($sort == 'cue')?'marcada':'';?>
-        <span class="<?= $class?>"><?php echo $paginator->sort('cue');?></span>,
+    <div class="grid_10 alpha list-header">
+        <div class="grid_6 alpha">
+        <?php
+        $sort = 'cue';
+        if(isset($this->passedArgs['sort'])){
+        $sort = $this->passedArgs['sort'];
+        }
+        ?>
+            Ordenar por:
+            <? $class = ($sort == 'cue')?'marcada':'';?>
+            <span class="<?= $class?>"><?php echo $paginator->sort('cue');?></span>,
 
-        <? $class = ($sort == 'Jurisdiccion.name')?'marcada':'';?>
-        <span class="<?= $class?>"><?php echo $paginator->sort('Jurisdicción','Jurisdiccion.name');?></span>,
+            <? $class = ($sort == 'Jurisdiccion.name')?'marcada':'';?>
+            <span class="<?= $class?>"><?php echo $paginator->sort('Jurisdicción','Jurisdiccion.name');?></span>,
 
-        <? $class = ($sort == 'Departamento.name')?'marcada':'';?>
-        <span class="<?= $class?>"><?php echo $paginator->sort('Departamento','Departamento.name');?></span>,
+            <? $class = ($sort == 'Departamento.name')?'marcada':'';?>
+            <span class="<?= $class?>"><?php echo $paginator->sort('Departamento','Departamento.name');?></span>,
 
-        <? $class = ($sort == 'Localidad.name')?'marcada':'';?>
-        <span class="<?= $class?>"><?php echo $paginator->sort('Localidad','Localidad.name');?></span>
+            <? $class = ($sort == 'Localidad.name')?'marcada':'';?>
+            <span class="<?= $class?>"><?php echo $paginator->sort('Localidad','Localidad.name');?></span>
 
-    </div>
-    <div class="grid_4">
-        <?php echo $paginator->counter(array(
-            'format' => __('Instituciones %start%-%end% de <strong>%count%</strong>', true))); ?>
+        </div>
+        <div class="grid_4 omega">
+            <?php echo $paginator->counter(array(
+                'format' => __('Instituciones %start%-%end% de <strong>%count%</strong>', true))); ?>
+        </div>
     </div>
     <div class="clear"></div>
 
