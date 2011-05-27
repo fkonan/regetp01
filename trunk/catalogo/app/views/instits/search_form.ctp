@@ -56,25 +56,25 @@ echo $html->css(array(  'jquery.loadmask',
                 'onclick' => 'autoSubmit(true)',
                  ));
             ?>
-            <a href="javascript: abrirVentanaAyuda()" style="margin: 22px;" title="Ayuda sobre el buscador">
-            <?php
-            echo $html->image('help.png', array(
-                'alt' => 'Ayuda: ¿Cómo utilizar el buscador?',
-                'id' => 'littleHelpers',
-                'style' => 'border:0;',
-                ));
-            ?>
-                <span style="margin-left: 0px;">Ayuda</span>
+            <a href="javascript: abrirVentanaAyuda()" style="margin: 22px 2px 22px 22px;" title="Ayuda sobre el buscador">
+                Ayuda
             </a>
+                <?php
+                echo $html->image('help.png', array(
+                    'alt' => 'Ayuda: ¿Cómo utilizar el buscador?',
+                    'id' => 'littleHelpers',
+                    'style' => 'border:0; margin-left:0;',
+                    ));
+                ?>
         </div>
         <div class="clear" style="height: 8px;"></div>
         <div class="grid_2" style="margin-left: 20px;" >
-            <a class="mas_info_gris_small"></a> 
             <?php
             echo $html->link('Búsqueda avanzada','advanced_search_form',array(
                 'class'=>'link_right small',
             ));
             ?>
+            <a class="mas_info_gris_small"></a> 
         </div>
         <?php
         echo $form->end();
