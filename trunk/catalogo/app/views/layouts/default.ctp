@@ -65,12 +65,13 @@ $javascript;
         echo $html->css('printer','stylesheet', array('media'=>'print'));
 
         echo $javascript->link(array(
-        'jquery-1.5.2.min',
-        'adapt.min.js',
-        'jquery.form',
-        'jquery.tools.min',
-        'jquery-ui-1.8.12.custom.min',
+            'jquery-1.5.2.min',
+            'adapt.min.js',
+            'jquery.form',
+            'jquery.tools.min',
+            'jquery-ui-1.8.12.custom.min',
             'jquery/jQueryRotateCompressed.2.1',
+            'jquery/jquery.superfish',
         ));
 
         $jsPoner = 'views'.DS.Inflector::underscore($this->name).DS.$this->action;
@@ -107,75 +108,10 @@ $javascript;
                         <?php echo $html->link(__('Catálogo Nacional de Títulos y Certificaciones de Educación Técnico Profesional', true), '/pages/home'); ?>
                     </h1>
                     <div class="clear"></div>
-                    <ul id="nav" class="grid_8 alpha prefix_1">
-                        <li class="grid_2 <?php echo ($this->here == $this->base.'/pages/home')?'current':''?> alpha"><?php echo $html->link('Inicio', '/pages/home'); ?></li>
-                        
-                        
-                        <?php 
-                        $activo = false;
-                        if ($this->action == 'search' || $this->action == 'search_form' || $this->action == 'guiaDelEstudiante'){
-                            $activo = true;
-                        }
-                        ?>
-                        <li class="grid_2 <?php echo ($activo)?'current':''?>">
-                            <a href="">Buscadores</a>
-                            <ul>
-                                <li>
-                                    <?php echo $html->link('Guía del Estudiante', array(
-                                                    'controller' => 'titulos',
-                                                    'action' => 'guiaDelEstudiante'
-                                    )) 
-                                        ?>
-                                </li>
-                                <li>
-                                    <?php echo $html->link('Instituciones', array(
-                                                    'controller' => 'instits',
-                                                    'action' => 'search_form'
-                                    )) 
-                                        ?>
-                                </li>
-                                <li>
-                                    <?php echo $html->link('Títulos', array(
-                                                    'controller' => 'titulos',
-                                                    'action' => 'search'
-                                    )) 
-                                        ?>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="grid_2 <?php echo (strstr($this->here,$this->base.'/docs'))?'current':''?> ">
-                            <?php echo $html->link('Documentación', array('controller'=>'docs', 'action'=>'introduccion')); ?>
-                            <ul>
-                                <li>
-                                    <?php echo $html->link('Información Sectorial','#')?>
-                                    <ul>
-                                        <li><?php echo $html->link('Familias Profesionales','/docs/familias')?></li>
-                                        <li><?php echo $html->link('Foros Sectoriales','/docs/foros')?></li>
-                                        <li><?php echo $html->link('Entidades Participantes','/docs/entidades')?></li>
-                                    </ul>
-                                </li>
-                                <li><?php echo $html->link('Proceso de Homologación','/docs/homologacion')?></li>
-                                <li><?php echo $html->link('Marcos de Referencia','/docs/marcos')?></li>
-                                
-                                <li>
-                                    <?php echo $html->link('Niveles y Modalidades','#')?>
-                                    <ul>
-                                        <li><?php echo $html->link('Educación Técnica de Nivel Medio y Superior','/docs/mediaysuperior')?></li>
-                                        <li><?php echo $html->link('Formación Profesional','/docs/fp')?></li>
-                                    </ul>
-                                </li>
-                                
-                                <li><?php echo $html->link('Normativa de Referencia','/docs/normativa')?></li>
-                                
-                            </ul>
-                        </li>
-                        <li class="grid_2 omega <?php echo (strstr($this->here,$this->base.'/correos/contacto'))?'current':''?>">
-                            <?php echo $html->link('Contacto', array(
-                                                                'controller' => 'correos',
-                                                                'action'    => 'contacto'
-                            ))?>
-                        </li>
-                    </ul>
+                    
+                    <?php echo $this->element('menu');?>
+                    
+                    
                 </div>
                 
                 <div class="clear"></div>
@@ -213,6 +149,12 @@ $javascript;
 
         <?php echo $cakeDebug; ?>
     </div>
+        
+        <script type="text/javascript">
+            
+            // menu hover dropdown
+            $("ul.nav").superfish(); 
+        </script>
         
         
     </body>
