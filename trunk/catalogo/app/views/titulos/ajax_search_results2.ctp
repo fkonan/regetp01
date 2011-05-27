@@ -10,13 +10,26 @@ $paginator->options(array(  'update' => 'consoleResult',
     }
 </script>
 <div id="search_results" class="grid_10 prefix_1 suffix_1 boxblanca">
-    <div class="grid_4 suffix_4">
-        Ordenar por: 
-        <?php echo $paginator->sort('Nombre','name');?>, <?php echo $paginator->sort("Oferta",'Oferta.name');?>
-    </div>
-    <div class="grid_4">
-        <?php echo $paginator->counter(array(
-            'format' => __('Títulos %start%-%end% de <strong>%count%</strong>', true))); ?>
+    <div class="grid_10 alpha list-header">
+        <div class="grid_3 suffix_3 alpha">
+            <?php
+            $sort = 'cue';
+            if(isset($this->passedArgs['sort'])){
+            $sort = $this->passedArgs['sort'];
+            }
+            ?>
+            Ordenar por:
+            <? $class = ($sort == 'name')?'marcada':'';?>
+            <span class="<?= $class?>"><?php echo $paginator->sort('Nombre','name');?></span>,
+
+            <? $class = ($sort == 'Oferta.name')?'marcada':'';?>
+            <span class="<?= $class?>"><?php echo $paginator->sort("Oferta",'Oferta.name');?></span>
+
+        </div>
+        <div class="grid_3 suffix_1 omega">
+            <?php echo $paginator->counter(array(
+                'format' => __('Títulos %start%-%end% de <strong>%count%</strong>', true))); ?>
+        </div>
     </div>
     <div class="clear"></div>
 
@@ -43,15 +56,14 @@ $paginator->options(array(  'update' => 'consoleResult',
                     }
                     ?>
             </p>-->
-            <p class="titulos-items-oferta">
+            <span class="titulos-items-oferta">
                         <?php
                         echo (empty($titulo['Oferta']['name']))? "" : $titulo['Oferta']['name'];
-                        echo $form->input('oferta_'.$titulo['Titulo']['id'], array('type' => 'hidden', 'value' => $titulo['Titulo']['oferta_id']));
                         ?>
-            </p>
-            <p class="items-actions">
+            </span>
+            <span class="items-actions">
                 <a class="mas_info_gris_small" onclick="viewTitulo('<?php echo $html->url('/titulos/view/'.$titulo['Titulo']['id']);?>', '<?php echo $titulo['Titulo']['name'];?>');" style="cursor:pointer;"></a>
-            </p>
+            </span>
         </li>
             <?php endforeach; ?>
     </ol>

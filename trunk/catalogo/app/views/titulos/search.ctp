@@ -10,7 +10,7 @@
 </script>
 <div class="grid_12 titulos search">
     
-    <h1><?php __('Búsqueda de Títulos de Referencia');?></h1>
+    <h1><?php __('Búsqueda de Títulos');?></h1>
 
     <div class="grid_12 boxblanca boxform">
         <?php
@@ -21,7 +21,7 @@
         )
         );
         ?>
-        <div style="margin-right: 0px; margin-left: 20px; float: left; width: 200px;">
+        <div style="margin-right: 0px; padding-left: 20px; float: left; width: 200px;">
             <?php
 
             echo $form->input(
@@ -29,7 +29,7 @@
             array(
             'div' => false,
             'class' => 'autosubmit ',
-            'label'=> 'Oferta<br />',
+            'label'=> 'Oferta',
             'id' => 'ofertaId',
             'empty' => 'Todas',
             ));
@@ -37,21 +37,21 @@
             $meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
             ?>
         </div>
-        <div style="float: left; margin-left: 7px; width: 251px;">
+        <div style="float: left; padding-left: 7px; width: 251px;">
             <?php
             echo $form->input('sector_id', array(
             'div' => false,
             'class' => 'autosubmit ',
-            'type'=>'select','empty'=>'Seleccione','options'=>$sectores,'label'=>'Sector<br />','id'=>'sectorId','after'=>$meter)
+            'type'=>'select','empty'=>'Seleccione','options'=>$sectores,'label'=>'Sector','id'=>'sectorId','after'=>$meter)
             );
             ?>
         </div>
-        <div style="float: left; margin-left: 35px; width: 400px;">
+        <div style="float: left; padding-left: 35px; width: 400px;">
             <?php
             echo $form->input('subsector_id', array(
             'div' => false,
             'class' => 'autosubmit ',
-            'empty' => 'Seleccione','type'=>'select', 'style'=>'width:400px;' ,'label'=>'Subsector<br />', 'id'=>'subsectorId','after'=> $meter)
+            'empty' => 'Seleccione','type'=>'select', 'style'=>'width:400px;' ,'label'=>'Subsector', 'id'=>'subsectorId','after'=> $meter)
             );
 
             echo $ajax->observeField('sectorId',
@@ -67,23 +67,23 @@
 
         <div class="clear" style="height: 8px;"></div>
 
-        <div style="margin-right: 0px; margin-left: 20px; float: left; width: 200px;">
+        <div style="margin-right: 0px; padding-left: 20px; float: left; width: 200px;">
             <?php
             echo $form->input(
             'tituloName',
             array(
-            'label'=> 'Nombre del Título de Referencia<br />',
+            'label'=> 'Nombre del Título',
             'div' => false,
             'class' => '',
             'id' => 'TituloName',
             ));
             ?>
         </div>
-        <div style="float: left; margin-left: 7px; width: 251px;">
+        <div style="float: left; padding-left: 7px; width: 251px;">
             <?php
 
             echo $form->input('Instit.jurisdiccion_id', array(
-            'label'=>'Jurisdicción<br />',
+            'label'=>'Jurisdicción',
             'div' => false,
             'style'=> 'display: block; clear: both;',
             'class' => 'autosubmit ',
@@ -93,9 +93,9 @@
 
             ?>
         </div>
-        <div id="search-ubicacion" style="float: left; margin-left: 35px; width: 400px;">
+        <div id="search-ubicacion" style="float: left; padding-left: 35px; width: 400px;">
             <?php echo $form->input('jur_dep_loc', array(
-            'label'=>'Departamento/Localidad<br />',
+            'label'=>'Departamento/Localidad',
             'div'=>false,
             'style' => 'width: 395px;',
             'class' => '',

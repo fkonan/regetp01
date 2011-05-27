@@ -9,8 +9,8 @@ ol, ul {
     border-bottom: 1px solid #CDCDCD;
     height: auto !important;
     margin: 0;
-    min-height: 15px;
-    padding: 15px 0px 5px 0px;
+    min-height: 25px;
+    padding: 7px 0px 7px 0px;
     position: relative;
 }
 
@@ -18,8 +18,8 @@ ol, ul {
     position: absolute;
     right: 10px;
     text-align: right;
-    top: -2px;
-    width: 180px;
+    top: 12px;
+    width: 50px;
 }
 
 .paginator_prev_next_links {
@@ -65,4 +65,12 @@ h2{
 
 h2, h4{
     margin-top: 0;
+}
+
+.list-header {
+    background-color: #F1F1F2;
+    border-bottom: 1px groove #58585A;
+    border-top: 1px ridge #58585A;
+    padding-bottom: 5px;
+    padding-top: 5px;
 }
