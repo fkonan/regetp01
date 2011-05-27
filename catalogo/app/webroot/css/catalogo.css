@@ -43,7 +43,7 @@ body{
     color: #58585a;
     margin: 0px;
     padding: 0px;
-    font-size: 0.8em;
+    font-size: 80%;
     font-family: Arial,Helvetica,sans-serif;
 }
 
@@ -51,6 +51,11 @@ h1, h2, h3, h4 {
    color: #58585a;
    margin: 13px 0px 13px 0px;
 }
+
+h1{
+    font-size: 1.6em;
+}
+
 h2{
     font-size: 1.5em;
 }
@@ -120,7 +125,7 @@ ol, ul {
 
 #head-text{
     position: relative;
-    height: 158px;    
+    height: 158px;
     background: url(img/bandera_trans.png) no-repeat right;
 }
 
@@ -130,8 +135,6 @@ ol, ul {
      height: 128px;
      overflow: hidden;
      text-indent: -1000px;
-     margin: 16px 0px 0px 0px !important;
-     padding: 0px !important;
 }
 
 #header_title{
@@ -147,7 +150,7 @@ ol, ul {
 }
 
 #header h1 {
-    margin: 35px 0px 0px 44px; 
+    margin: 35px 0px 0px 0px; 
     color: white;    
 }
 #header h1 a{

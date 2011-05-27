@@ -103,11 +103,11 @@ $javascript;
                 <h2 id="logo" class="grid_3">INET</h2>
                 
                 <div id="head-text" class="grid_9">
-                    <h1 class="grid_6">
+                    <h1 class="grid_6 alpha prefix_1">
                         <?php echo $html->link(__('Catálogo Nacional de Títulos y Certificaciones de Educación Técnico Profesional', true), '/pages/home'); ?>
                     </h1>
                     <div class="clear"></div>
-                    <ul id="nav" class="grid_8">
+                    <ul id="nav" class="grid_8 alpha prefix_1">
                         <li class="grid_2 <?php echo ($this->here == $this->base.'/pages/home')?'current':''?> alpha"><?php echo $html->link('Inicio', '/pages/home'); ?></li>
                         
                         
@@ -179,12 +179,7 @@ $javascript;
                 </div>
                 
                 <div class="clear"></div>
-                
-                
-                
-                
             </div>
-            
         </div>
         
         

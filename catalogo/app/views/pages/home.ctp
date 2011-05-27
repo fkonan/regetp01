@@ -1,6 +1,7 @@
 <?php echo $html->css('catalogo.home', false);?>
 
 <h1 class="grid_12">El Catálogo Nacional de Títulos y Certificaciones</h1>
+
 <div class="grid_9">
     <p>
         En función de la mejora continua de la calidad de la educación técnico profesional créase, 
@@ -31,8 +32,7 @@ instituciones de educación técnico profesional.
     </ul>
 </div>
 
-
-<div class="grid_3"><?php echo $html->image('/css/img/me_trans.png')?></div>
+<?php echo $html->image('/css/img/me_trans.png', array('class' => 'grid_3'))?>
 
 
     
