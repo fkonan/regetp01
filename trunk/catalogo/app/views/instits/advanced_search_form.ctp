@@ -18,7 +18,7 @@ echo $html->css('catalogo.advanced_search', false);
 <h1><? __('Búsqueda Avanzada de Instituciones')?></h1>
 
 
-<div class="boxgris grid_12">
+<div class="boxgris grid_12 search-fields">
     <h2>Seleccione Criterios de Busqueda:</h2>
     <?= $form->create('Instit',array('action' => 'search','name'=>'InstitSearchForm'));?>
 

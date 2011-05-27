@@ -80,6 +80,7 @@
                     <p class="items-actions">
                         <a class="mas_info_gris_small"  href="<?= $html->url('/instits/view/'.$instit['Instit']['id'])?>" ></a>
                     </p>
+                    <div style="clear:both;"></div>
             </li>
 
         <? endforeach?>
