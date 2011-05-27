@@ -59,11 +59,11 @@ label {
     margin-top: 6px;
 }
 
-h2{
+.search-fields h2{
     padding: 10px 0 0 10px;
 }
 
-h2, h4{
+.search-fields h2, .search-div h4{
     margin-top: 0;
 }
 
