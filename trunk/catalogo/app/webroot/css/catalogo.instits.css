@@ -1,5 +1,11 @@
 .titulo{
     margin:5px 0 5px 0;
+    min-height: 113px;
+}
+
+.titulo h3 {
+    padding: 10px 0 0px 14px;
+    margin: 0px;
 }
 
 .alerta-desactualizada{
@@ -7,6 +13,10 @@
     text-decoration: none;
     color: inherit;
     cursor: pointer; cursor: hand;
+}
+.alerta-desactualizada h2 {
+    padding: 10px 0 0px 14px;
+    margin: 0px;
 }
 
 .alerta-desactualizada:hover{
@@ -23,17 +33,16 @@
 }
 
 .titulo div p, .detalles div p {
-    display:inline-block;
+    display:inline;
     width: 200px;
-    vertical-align: top;
     margin: 0;
 }
 .titulo div h2, .detalles div h2{
-    display:inline-block;
+    display:inline;
     width: 150px;
     margin:0 13px 0 13px;
     font-size: 1.2em;
-    vertical-align: top;
+    text-align: right;
 }
 .titulo div ul, .detalles div ul{
     display: inline-block;
@@ -48,6 +57,10 @@
 
 .detalles{
     margin: 20px 0 20px 0;
+}
+.detalles h3 {
+    padding: 10px 0 0px 14px;
+    margin: 0px;
 }
 
 .outdated{
