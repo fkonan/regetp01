@@ -8,11 +8,11 @@
 
 <div class="grid_12">
     <div class="grid_12 alpha omega boxblanca detalles">
-        <h3 class="grid_12"><?php echo $cue_instit ?> <?php echo $instit['Instit']['nombre_completo'] ?></h3>
-        <div class="box_grid_6 grid_6 alpha">
+        <h3><?php echo $cue_instit ?> <?php echo $instit['Instit']['nombre_completo'] ?></h3>
+        <div class="grid_6 alpha">
             <?php if(!$con_programa_de_etp){?>
                 <h2>
-                    &nbsp;<?php echo $relacion_etp; ?>
+                    <?php echo $relacion_etp; ?>
                 </h2>
             <?php }?>
 
@@ -158,7 +158,7 @@
     </div>
     </div>
 
-    <h2 class="grid_12 separador alpha omega">Títulos o Certificados que brinda la Institución</h2>
+    <h2 class="grid_12 separador alpha omega">Títulos o Certificaciones que brinda la Institución</h2>
     <?php $len = count($instit['Plan'])?>
     <div class="grid_6 alpha">
     <?php for ($index = 0; $index < $len; $index++): ?>
@@ -166,7 +166,7 @@
         <?php if($index == round($len/2)){?>
             </div><div class="grid_6 omega">
         <?php }?>
-        <div class="boxblanca box_grid_6 titulo">
+        <div class="boxblanca titulo">
 
             <h3><?php echo $plan['Titulo']['name']?></h3>
             <div>
@@ -188,7 +188,7 @@
     <?php endfor?>
     </div>
     <div class="clear separador"></div>
-    <div class="grid_12 alpha omega box_grid_6 boxgris alerta-desactualizada">
+    <div class="grid_12 alpha omega boxgris alerta-desactualizada">
         <h2>Ayudenos a mantener los datos actualizados</h2>
         <p>Si ha notado algún dato desactualizado, haga click aquí</p>
         <span class="outdated"></span>
