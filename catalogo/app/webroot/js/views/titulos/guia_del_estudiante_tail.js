@@ -166,7 +166,8 @@
     //
     // Funciones extra
     //
-
+    /////////////////////////////////////////////////////////////////
+    
     var __actualizarTitulos = function (data) {
         __recargarFiltros(data.filtros);
         __meterTitulosEnTemplate(data);
