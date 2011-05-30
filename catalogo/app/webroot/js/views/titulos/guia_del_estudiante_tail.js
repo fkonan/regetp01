@@ -55,7 +55,7 @@
         titulosForm.submit();
         return false;
     });
-
+    
     function deleteFilter(id){
         var escapedId = id.replace(/\[/g, "\\[");
         escapedId = escapedId.replace(/\]/g, "\\]");
@@ -238,6 +238,20 @@
         __recargaCombo(institDepartamentoCombo,data.Departamento);
         __recargaCombo(institLocalidadCombo,data.Localidad);
         __recargaCombo(institGestionCombo,data.Gestion);
+
+        $(".seccion").each(function(i) {
+            var size = 0;
+
+            size += $(this).find("input:visible").size();
+            size += $(this).find("select:visible").size();
+
+            if(size == 0 ){
+                $(this).find('.msj-vacio').show();
+            }
+            else{
+                $(this).find('.msj-vacio').hide();
+            }
+        });
     }
 
     var __recargaCombo = function (combo,data){
@@ -254,7 +268,6 @@
               key, '">',
               data[key], '</option>');
         }
-
 
         if(i > 1){
             combo.html(options.join(''));

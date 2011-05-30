@@ -88,3 +88,7 @@ H2{
 .boxgris{
     padding-bottom: 13px;
 }
+
+.msj-vacio{
+    display:none;
+}
