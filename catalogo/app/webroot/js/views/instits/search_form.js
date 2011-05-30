@@ -1,3 +1,4 @@
+(function($){
     /*
      *
      *      VARIABLES GLOBALES
@@ -32,20 +33,20 @@
 
 
     function iniciarTooltip(){
-        jQuery.tools.tooltip.conf.events.input = 'focus,blur';
-        jQuery.tools.tooltip.conf.events.tooltip = '';
-        jQuery.tools.tooltip.conf.events.widget = 'focus, blur';
-        jQuery("#"+formId+" :input[title]").tooltip({effect: 'slide', offset:[22,0]});
+        $.tools.tooltip.conf.events.input = 'focus,blur';
+        $.tools.tooltip.conf.events.tooltip = '';
+        $.tools.tooltip.conf.events.widget = 'focus, blur';
+        $("#"+formId+" :input[title]").tooltip({effect: 'slide', offset:[22,0]});
     }
 
     function blockResultConsole(formData, jqForm, options) {
-        jQuery('#consoleResult').mask('Buscando');
-        jQuery('.help_body').hide();
+        $('#consoleResult').mask('Buscando');
+        $('.help_body').hide();
         
-        if(jQuery('.help_head').hasClass('menu_head')){
-            jQuery('.help_head').removeClass('menu_head').addClass('menu_head_open');
-        }else if(jQuery('.help_head').hasClass('menu_head_open')){
-            jQuery('.help_head').removeClass('menu_head_open').addClass('menu_head');
+        if($('.help_head').hasClass('menu_head')){
+            $('.help_head').removeClass('menu_head').addClass('menu_head_open');
+        }else if($('.help_head').hasClass('menu_head_open')){
+            $('.help_head').removeClass('menu_head_open').addClass('menu_head');
         }
         return true;
     }
@@ -56,24 +57,25 @@
             forzar = false;
         }
 
-        if(jQuery("#InstitCue").val().length > 1 || forzar){
+        if($("#InstitCue").val().length > 1 || forzar){
               clearTimeout(timerid);
               timerid = setTimeout(function() {
                   formElement.submit();
               }, 1000);
           }
+          return false;
     }
 
     function unblockResultConsole(responseText, statusText, xhr, $form)  {
         var redirigiendo = false;
-        if (jQuery('.listado li').size() == 1 && !isNaN(jQuery('#InstitCue').val())){
+        if ($('.listado li').size() == 1 && !isNaN($('#InstitCue').val())){
             redirigiendo = true;
-            jQuery('#consoleResult').mask('Encontrada');
-            jQuery('.listado li A').click();
-            //location.replace(jQuery('.listado li').first().attr('href'));
+            $('#consoleResult').mask('Encontrada');
+            $('.listado li A').click();
+            //location.replace($('.listado li').first().attr('href'));
         }
         if (!redirigiendo){
-            jQuery('#consoleResult').unmask();
+            $('#consoleResult').unmask();
         }
     }
 
@@ -88,8 +90,19 @@
      *  
      */
 
-    jQuery(document).ready(function() {
-        formElement = jQuery('#'+formId);
+    $(document).ready(function() {
+        
+        // link de ayuda
+        $('A[href="#boxAyuda"]').click(function(){
+            //console.debug($('#boxAyuda'));
+            $('.help_body').toggle('fade');
+            return false;
+        });
+        
+        
+        // observers para la busqueda
+        formElement = $('#'+formId);
+        
         
         var options = {
             target:        '#consoleResult',   // target element(s) to be updated with server response
@@ -101,24 +114,72 @@
         // bind form using 'ajaxForm'
         formElement.ajaxForm(options);
 
-        jQuery("#InstitCue").keyup(autoSubmit);
+        $("#InstitCue").keyup(autoSubmit);
 
-        jQuery("#InstitCue").keypress(function(e) {
+        $("#InstitCue").keypress(function(e) {
             if (e.keyCode == 10 || e.keyCode == 13){
                 return false;
             }
         });
 
-        jQuery("#InstitJurisdiccionId").change(autoSubmit);
+        $("#InstitJurisdiccionId").change(autoSubmit);
 
-        jQuery('#boxAyuda .menu_body').show();
+        $('#boxAyuda .menu_body').show();
 
-        jQuery("#InstitCue").bind('paste', function(e){autoSubmit(true)});
+        $("#InstitCue").bind('paste', function(e){autoSubmit(true)});
 
     });
 
 
 
-function abrirVentanaAyuda() {
-    jQuery('#boxAyuda .menu_body').slideToggle();
-}
+    function abrirVentanaAyuda() {
+        $('#boxAyuda .menu_body').slideToggle();
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*****************************************************
+     *  HISTORY PLUGIN
+     */
+    var origContent = "";
+
+    function loadContent(hash) {
+        if(hash != "") {
+            if(origContent == "") {
+                origContent = $('#search_results').html();
+            }
+            $('#search_results').load(hash);
+        } else if(origContent != "") {
+            $('#search_results').html(origContent);
+        }
+    }
+
+    $(document).ready(function() {
+            $.history.init(loadContent);
+            
+            formElement.submit(function(){
+                var url = this.action;
+                url = url.replace(/^.*#/, '');
+                $.history.load(url);
+                return false;
+            });
+            $('#navigation a').not('.external-link').click(function(e) {
+                    var url = $(this).attr('href');
+                    //url = url.replace(/^.*#/, '');
+                    $.history.load(url);
+                    return false;
+                });
+        });
+       /*
+        * FIN HISTORY PLUGIN
+        *********************************************************/
+
+})(jQuery);

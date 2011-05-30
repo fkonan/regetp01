@@ -1,7 +1,6 @@
 <?
 echo $javascript->link(array(
     'jquery.loadmask.min',
-    'views/instits/search_form',
         ), false);
 
 echo $html->css(array(  'jquery.loadmask',
@@ -28,8 +27,7 @@ echo $html->css(array(  'jquery.loadmask',
             <?php
             echo $form->input('jurisdiccion_id',array(
                     'label'=> 'Jurisdicción<br />',
-                    'empty'=> 'Todas',
-                    'div' => false,
+                    'empty'=> 'Todas',                    
                     'div'  => array('style' => 'float:left; clear: none;'),
                     'after' => '<cite>(Opcional. Si no selecciona una Jurisdicción se realizará una búsqueda en todo el Registro)</cite>'
                     ));
@@ -51,12 +49,12 @@ echo $html->css(array(  'jquery.loadmask',
         <div class="grid_3 suffix_3 omega" style="padding-top:11px;" >
         <?php
             echo $form->button('Buscar', array(
+                'type' => 'submit',
                 'class' => 'boton-buscar',
                 'div' => false,
-                'onclick' => 'autoSubmit(true)',
                  ));
             ?>
-            <a href="javascript: abrirVentanaAyuda()" style="margin: 22px 2px 22px 22px;" title="Ayuda sobre el buscador">
+            <a href="#boxAyuda" style="margin: 22px 2px 22px 22px;" title="Ayuda sobre el buscador">
                 Ayuda
             </a>
                 <?php
