@@ -73,6 +73,7 @@ Templates de jQuery para los resultados de busqueda
             'id' =>'FiltrosAplicadosForm'
             ));
         ?>
+        <p id="sin_filtros">No hay fitros aplicados</p>
 
         <?php echo $form->end();?>
     </div>
