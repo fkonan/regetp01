@@ -267,11 +267,9 @@ class TitulosController extends AppController {
      */
     function ajax_search_results($oferta_id = 0) {
         Configure::write('debug', 0);
-        //debug($this->RequestHandler);
-        //para mostrar en vista los patrones de busqueda seleccionados
+
         $array_condiciones = array();
         $array_condiciones_ubicacion = array();
-        // para el paginator que pueda armar la url
         $url_conditions = array();
 
         if (!empty($this->data)) {
@@ -316,14 +314,10 @@ class TitulosController extends AppController {
                 $this->Session->write($this->sesNames['localidad'], $this->data['Instit']['localidad_id']);
                 $this->Session->write($this->sesNames['tituloJurDepLoc'], $this->data['Instit']['jur_dep_loc']);
             }
-            /*
-            if (!empty($this->data['Titulo']['que'])) {
-                $this->paginate['conditions']['(lower(Tipoinstit.name) || lower(Titulo.name) || lower(Plan.name) || lower(Sector.name) || lower(Subsector.name)) SIMILAR TO ?'] = convertir_para_busqueda_avanzada(utf8_decode($this->data['Titulo']['que']));
+            if(!empty($this->data['Instit']['gestion_id'])) {
+                $this->passedArgs['gestionId'] = $this->data['Instit']['gestion_id'];
+                $this->Session->write($this->sesNames['gestion'], $this->data['Instit']['gestion_id']);
             }
-            if (!empty($this->data['Titulo']['donde'])) {
-                $this->paginate['conditions']['(lower(Jurisdiccion.name) || lower(Departamento.name) || lower(Localidad.name) || lower(Instit.name)) SIMILAR TO ?'] = convertir_para_busqueda_avanzada(utf8_decode($this->data['Titulo']['donde']));
-            }
-            */
         }
 
         if(!empty($this->passedArgs['tituloName'])) {
@@ -360,6 +354,11 @@ class TitulosController extends AppController {
             $array_condiciones['conditions']['Instit.localidad_id'] = $q;
             $array_condiciones_ubicacion['Instit.localidad_id'] = $q;
         }
+        if(!empty($this->passedArgs['gestionId'])) {
+            $q = ($this->passedArgs['gestionId']);
+            $array_condiciones['conditions']['Instit.gestion_id'] = $q;
+            $array_condiciones_ubicacion['Instit.gestion_id'] = $q;
+        }
 
         if (!empty($this->passedArgs['page'])) {
             //$this->paginate['page'] = $this->passedArgs['page'];
@@ -394,27 +393,94 @@ class TitulosController extends AppController {
         $this->paginate = $array_condiciones;
         $titulos = $this->paginate();
 
-        $titulos_completo = $this->Titulo->find('all',$array_condiciones);
+        //FILTROS
+
         $filtros = array();
+        $array_condiciones['recursive'] = -1;
+        $array_condiciones['contain'] = null;
+        $array_condiciones['order'] = null;
+        $array_condiciones['joins'] = array(
+            array(
+                'table' => 'planes',
+                'type' => 'LEFT',
+                'alias' => 'Plan',
+                'conditions' => array('Titulo.id = Plan.titulo_id'),
+            ),
+            array(
+                'table' => 'instits',
+                'type' => 'LEFT',
+                'alias' => 'Instit',
+                'conditions' => array('Instit.id = Plan.instit_id'),
+            ),
+            array(
+                'table' => 'jurisdicciones',
+                'type' => 'LEFT',
+                'alias' => 'Jurisdiccion',
+                'conditions' => array('Jurisdiccion.id = Instit.jurisdiccion_id'),
+            ),
+            array(
+                'table' => 'departamentos',
+                'type' => 'LEFT',
+                'alias' => 'Departamento',
+                'conditions' => array('Departamento.id = Instit.departamento_id'),
+            ),
+            array(
+                'table' => 'localidades',
+                'type' => 'LEFT',
+                'alias' => 'Localidad',
+                'conditions' => array('Localidad.id = Instit.localidad_id'),
+            ),
+            array(
+                'table' => 'sectores_titulos',
+                'type' => 'LEFT',
+                'alias' => 'SectoresTitulo',
+                'conditions' => array('SectoresTitulo.titulo_id = Titulo.id'),
+            ),
+            array(
+                'table' => 'sectores',
+                'type' => 'LEFT',
+                'alias' => 'Sector',
+                'conditions' => array('SectoresTitulo.sector_id = Sector.id'),
+            ),
+            array(
+                'table' => 'subsectores',
+                'type' => 'LEFT',
+                'alias' => 'Subsector',
+                'conditions' => array('SectoresTitulo.subsector_id = Subsector.id'),
+            ),
+            array(
+                'table' => 'ofertas',
+                'type' => 'LEFT',
+                'alias' => 'Oferta',
+                'conditions' => array('Titulo.oferta_id = Oferta.id'),
+            )
+        );
 
-        foreach($titulos_completo as $titulo){
-            $filtros['Oferta'][$titulo['Oferta']['id']] =  $titulo['Oferta']['name'];
+        //FILTROS
+        
+        $array_condiciones['fields'] = array('DISTINCT Oferta.id', 'Oferta.name');
+        $array_condiciones['group'] = array('Oferta.id', 'Oferta.name');
+        $filtros['Oferta'] = $this->Titulo->find('all',$array_condiciones);
 
-            if(empty($this->passedArgs['sectorId'])){
-                foreach($titulo['SectoresTitulo'] as $sector){
-                    $filtros['Sector'][$sector['sector_id']] = $sector['Sector']['name'];
-                }
-            }
+        $array_condiciones['fields'] = array('DISTINCT Sector.id', 'Sector.name');
+        $array_condiciones['group'] = array('Sector.id', 'Sector.name');
+        $filtros['Sector'] = $this->Titulo->find('all',$array_condiciones);
 
-            foreach($titulo['Plan'] as $plan){
-                if(!empty($plan['Instit'])){
-                    $filtros['Localidad'][$plan['Instit']['localidad_id']] = $plan['Instit']['Localidad']['name'];
-                    $filtros['Departamento'][$plan['Instit']['departamento_id']] = $plan['Instit']['Departamento']['name'];
-                    $filtros['Jurisdiccion'][$plan['Instit']['jurisdiccion_id']] = $plan['Instit']['Jurisdiccion']['name'];
-                }
-            }
+        $array_condiciones['fields'] = array('DISTINCT Jurisdiccion.id', 'Jurisdiccion.name');
+        $array_condiciones['group'] = array('Jurisdiccion.id', 'Jurisdiccion.name');
+        $filtros['Jurisdiccion'] = $this->Titulo->find('all',$array_condiciones);
 
-        }
+        $array_condiciones['fields'] = array('DISTINCT Departamento.id', 'Departamento.name');
+        $array_condiciones['group'] = array('Departamento.id', 'Departamento.name');
+        $filtros['Departamento'] = $this->Titulo->find('all',$array_condiciones);
+
+        $array_condiciones['fields'] = array('DISTINCT Localidad.id', 'Localidad.name');
+        $array_condiciones['group'] = array('Localidad.id', 'Localidad.name');
+        $filtros['Localidad'] = $this->Titulo->find('all',$array_condiciones);
+
+        $array_condiciones['fields'] = array('DISTINCT Gestion.id', 'Gestion.name');
+        $array_condiciones['group'] = array('Gestion.id', 'Gestion.name');
+        $filtros['Gestion'] = $this->Titulo->find('all',$array_condiciones);
 
         if(empty($this->passedArgs['jurisdiccionId']) && (count($filtros['Jurisdiccion']) > 1)) {
             $filtros['Departamento'] = null;
@@ -426,7 +492,6 @@ class TitulosController extends AppController {
         
         $filtros['TituloName'] = empty($this->passedArgs['tituloName'])?'':$this->passedArgs['tituloName'];
         
-
         $this->set('titulos', $titulos);
         $this->set('filtros', $filtros);
 

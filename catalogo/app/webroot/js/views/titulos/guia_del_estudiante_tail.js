@@ -25,6 +25,7 @@
     var institJurisdiccionCombo = $("#InstitJurisdiccionId");
     var institDepartamentoCombo = $("#InstitDepartamentoId");
     var institLocalidadCombo = $("#InstitLocalidadId");
+    var institGestionCombo = $("#InstitGestionId");
 
     var filtrosForm = $("#FiltrosAplicadosForm");
     var filtrosContainer = $("#filtrosContainer");
@@ -197,7 +198,6 @@
     }
 
     var __recargarFiltros = function (data) {
-        //alert(data.TituloName);
         if(typeof data.TituloName === 'undefined' || data.TituloName == ''){
             __showWithLabel(tituloName);
         }
@@ -211,6 +211,7 @@
         __recargaCombo(institJurisdiccionCombo,data.Jurisdiccion);
         __recargaCombo(institDepartamentoCombo,data.Departamento);
         __recargaCombo(institLocalidadCombo,data.Localidad);
+        __recargaCombo(institGestionCombo,data.Gestion);
     }
 
     var __recargaCombo = function (combo,data){
