@@ -28,20 +28,12 @@
 }
 
 .items-nombre {
-    display: block;
-    left: 10px;
-    position: absolute;
-    top: 12px;
-    width: 460px;
     text-align:left;
     font-size: 9pt;
 }
 
-.titulos-items-oferta {
-    position: absolute;
-    right: 24px;
-    top: 12px;
-    width: 220px;
+.items-actions {
+    margin:0;
 }
 
 #tituloPlanes {

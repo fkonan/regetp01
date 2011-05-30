@@ -50,7 +50,7 @@
     <div class="clear"></div>
 
     <? if (sizeof($instits) > 0) :?>
-    <ol id="items">
+    <ol id="items" class="grid_10 alpha omega">
         <?php foreach($instits as $instit) : ?>
             <?  $año_actual = date("Y");
                 $fecha_hasta = "$año_actual-07-21"; //hasta julio
@@ -63,24 +63,30 @@
                 }
             ?>
 
-            <li onmouseover="jQuery(this).addClass('alt2row')" onmouseout="jQuery(this).removeClass('alt2row')" >
-                <span class="items-nombre">
+            <li clasS="grid_10 alpha omega">
+                <span class="items-nombre grid_10 alpha omega">
                     <?= "".($instit['Instit']['cue']*100)+$instit['Instit']['anexo']." - ". $instit['Instit']['nombre_completo']; ?>
                 </span>
-
-                    <div class="instit-items-domicilio1">
-                        <p>Domicilio: <?= $instit['Instit']['direccion'] ?></p>
-                        <p>Departamento: <?= $instit['Departamento']['name'] ?></p>
-                    </div>
-                    <div class="instit-items-domicilio2">
-                        <p>Localidad: <?= $instit['Localidad']['name'] ?></p>
-                        <p>Jurisdicción: <?= $instit['Jurisdiccion']['name'] ?></p>
-                    </div>
-                    <div class="instit-items-gestion"><?= $instit['Gestion']['name'] ?></div>
-                    <p class="items-actions">
-                        <a class="mas_info_gris_small"  href="<?= $html->url('/instits/view/'.$instit['Instit']['id'])?>" ></a>
-                    </p>
-                    <div style="clear:both;"></div>
+                <div class="clear"></div>
+                <div class="instit-items-domicilio1 alpha grid_3">
+                    <p>Domicilio: <?= $instit['Instit']['direccion'] ?></p>
+                    <p>Departamento: <?= $instit['Departamento']['name'] ?></p>
+                </div>
+                <div class="instit-items-domicilio2 grid_3">
+                    <p>Localidad: <?= $instit['Localidad']['name'] ?></p>
+                    <p>Jurisdicción: <?= $instit['Jurisdiccion']['name'] ?></p>
+                </div>
+                <div class="instit-items-gestion grid_3"><?= $instit['Gestion']['name'] ?></div>
+                <p class="items-actions grid_1">
+                    <a href="<?= $html->url('/instits/view/'.$instit['Instit']['id'])?>">
+                        <?php
+                            echo $html->image('../css/img/lupagris_small.png', array(
+                                'alt' => 'Mas informacion',
+                                'style' => 'border:0;',
+                                ));
+                        ?>
+                    </a>
+                </p>
             </li>
 
         <? endforeach?>
