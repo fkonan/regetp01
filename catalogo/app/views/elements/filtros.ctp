@@ -4,8 +4,8 @@
     <?php echo $form->input('Titulo.oferta_id',
             array('empty' => 'Seleccione...',
                   'div'=>false,
-                  'label' => 'Oferta<br />',
-                  'class' => 'autosubmit ui-widget ui-state-default ui-corner-all'));
+                  'label' => 'Oferta <span class="asterisk">*</span><br />',
+                  'class' => 'autosubmit ui-widget ui-state-default ui-corner-all mandatory'));
     ?>
     </div>
     <div>
@@ -37,9 +37,9 @@
     <?php echo $form->input('Instit.jurisdiccion_id', 
             array('options'=>$jurisdicciones,
                 'div'=>false,
-                'label' => 'Jurisdicción<br />',
+                'label' => 'Jurisdicción <span class="asterisk">*</span><br />',
                 'empty' => 'Seleccione...',
-                'class' => 'autosubmit ui-widget ui-state-default ui-corner-all'
+                'class' => 'autosubmit ui-widget ui-state-default ui-corner-all mandatory'
                 )
             )
     ?>
@@ -48,7 +48,7 @@
                   'div'=>false,
                   'label' => 'Departamento<br />',
                   'empty' => 'Seleccione...',
-                   'class' => 'autosubmit ui-widget ui-state-default ui-corner-all'
+                  'class' => 'autosubmit ui-widget ui-state-default ui-corner-all'
                 )
             ) ?>
     <?php echo $form->input('Instit.localidad_id',

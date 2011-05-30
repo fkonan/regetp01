@@ -92,3 +92,8 @@ H2{
 .msj-vacio{
     display:none;
 }
+
+.asterisk{
+    color:red;
+    font-weight: bold;
+}
