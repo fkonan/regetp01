@@ -1,4 +1,4 @@
-<div class="grid_4 alpha">
+<div class="seccion grid_4 alpha">
     <h4>Títulos</h4>
     <div>
     <?php echo $form->input('Titulo.oferta_id',
@@ -30,8 +30,9 @@
                             )
     ?>
     </div>
+    <p class="msj-vacio">No hay filtros disponibles...</p>
 </div>
-<div class="grid_4">
+<div class="seccion grid_4">
     <h4>Ubicación</h4>
     <?php echo $form->input('Instit.jurisdiccion_id', 
             array('options'=>$jurisdicciones,
@@ -58,8 +59,9 @@
                    'class' => 'autosubmit ui-widget ui-state-default ui-corner-all'
                 )
             ) ?>
+    <p class="msj-vacio">No hay filtros disponibles...</p>
 </div>
-<div class="grid_3 omega">
+<div class="seccion grid_3 omega">
     <h4>Institución</h4>
     <div>
     <?php echo $form->input('Instit.gestion_id',
@@ -82,4 +84,5 @@
             )
     ?>
     </div>
+    <p class="msj-vacio">No hay filtros disponibles...</p>
 </div>
