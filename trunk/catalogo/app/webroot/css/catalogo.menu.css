@@ -13,7 +13,6 @@
     position: relative;
     list-style: none;
     text-align: center;
-    width: 130px;
 }
 
 
@@ -37,7 +36,6 @@
     text-shadow: 0 1px 1px rgba(0,0,0, .3);
 }
 .nav a:hover {
-    background: #000;
     color: #fff;
 }
 
@@ -49,7 +47,7 @@
 
 /* sub levels link hover */
 .nav ul li:hover a, .nav li:hover li a {
-	background: none;
+	background: #F1F1F2;
 	border: none;
 	color: #55565A;
 
@@ -79,7 +77,7 @@
 	position: absolute;
 	top: 36px;
 	left: 0;
-	background: #EFEFEF url(img/gradient.png) repeat-x 0 0;
+	background: #F1F1F2 url(img/gradient.png) repeat-x 0 0;
 	border: solid 1px #b4b4b4;
 
 	-webkit-border-radius: 10px;
@@ -281,8 +279,6 @@ li.sfHover > a > .sf-sub-indicator {
 
 /*** shadows for all but IE6 ***/
 .sf-shadow ul {
-	
-	padding: 0 8px 9px 0;
 	-moz-border-radius-bottomleft: 17px;
 	-moz-border-radius-topright: 17px;
 	-webkit-border-top-right-radius: 17px;
