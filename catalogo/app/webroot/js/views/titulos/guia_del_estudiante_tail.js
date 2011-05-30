@@ -26,6 +26,7 @@
     var institDepartamentoCombo = $("#InstitDepartamentoId");
     var institLocalidadCombo = $("#InstitLocalidadId");
     var institGestionCombo = $("#InstitGestionId");
+    var institName = $("#InstitNombre");
 
     var filtrosForm = $("#FiltrosAplicadosForm");
     var filtrosContainer = $("#filtrosContainer");
@@ -204,6 +205,14 @@
         else{
             tituloName.val('');
             __hideWithLabel(tituloName);
+        }
+
+        if(typeof data.InstitName === 'undefined' || data.InstitName == ''){
+            __showWithLabel(institName);
+        }
+        else{
+            institName.val('');
+            __hideWithLabel(institName);
         }
         __recargaCombo(tituloOfertaCombo,data.Oferta);
         __recargaCombo(tituloSectorCombo,data.Sector);

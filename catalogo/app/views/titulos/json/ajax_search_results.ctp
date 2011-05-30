@@ -37,6 +37,9 @@ if(!empty($filtros['Gestion'])){
     }
 }
 
+$filtros_aux['TituloName'] = utf8_encode($filtros['TituloName']);
+$filtros_aux['InstitName']= utf8_encode($filtros['InstitName']);
+
 $cant = $paginator->counter(array('format' => '%count%'));
 
 $texto = 'Títulos encontrados';

@@ -318,6 +318,10 @@ class TitulosController extends AppController {
                 $this->passedArgs['gestionId'] = $this->data['Instit']['gestion_id'];
                 $this->Session->write($this->sesNames['gestion'], $this->data['Instit']['gestion_id']);
             }
+            if(!empty($this->data['Instit']['nombre'])) {
+                $this->passedArgs['institName'] = $this->data['Instit']['nombre'];
+                $this->Session->write($this->sesNames['institName'], $this->data['Instit']['nombre']);
+            }
         }
 
         if(!empty($this->passedArgs['tituloName'])) {
@@ -358,6 +362,11 @@ class TitulosController extends AppController {
             $q = ($this->passedArgs['gestionId']);
             $array_condiciones['conditions']['Instit.gestion_id'] = $q;
             $array_condiciones_ubicacion['Instit.gestion_id'] = $q;
+        }
+        if(!empty($this->passedArgs['institName'])){
+            $q = ($this->passedArgs['institName']);
+            $array_condiciones['conditions']["(lower(Tipoinstit.name) || lower(Instit.nombre)) SIMILAR TO ?"] = convertir_para_busqueda_avanzada($q);
+            $array_condiciones_ubicacion['conditions']["(lower(Tipoinstit.name) || lower(Instit.nombre)) SIMILAR TO ?"] = convertir_para_busqueda_avanzada($q);
         }
 
         if (!empty($this->passedArgs['page'])) {
@@ -413,6 +422,12 @@ class TitulosController extends AppController {
                 'conditions' => array('Instit.id = Plan.instit_id'),
             ),
             array(
+                'table' => 'gestiones',
+                'type' => 'LEFT',
+                'alias' => 'Gestion',
+                'conditions' => array('Gestion.id = Instit.gestion_id'),
+            ),
+            array(
                 'table' => 'jurisdicciones',
                 'type' => 'LEFT',
                 'alias' => 'Jurisdiccion',
@@ -456,8 +471,7 @@ class TitulosController extends AppController {
             )
         );
 
-        //FILTROS
-        
+                
         $array_condiciones['fields'] = array('DISTINCT Oferta.id', 'Oferta.name');
         $array_condiciones['group'] = array('Oferta.id', 'Oferta.name');
         $filtros['Oferta'] = $this->Titulo->find('all',$array_condiciones);
@@ -491,7 +505,9 @@ class TitulosController extends AppController {
         }
         
         $filtros['TituloName'] = empty($this->passedArgs['tituloName'])?'':$this->passedArgs['tituloName'];
-        
+        $filtros['InstitName'] = empty($this->passedArgs['institName'])?'':$this->passedArgs['institName'];
+
+        //debug($filtros);die;
         $this->set('titulos', $titulos);
         $this->set('filtros', $filtros);
 
