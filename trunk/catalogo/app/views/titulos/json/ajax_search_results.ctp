@@ -1,30 +1,40 @@
 <?php 
-
+$filtros_aux = array();
 /* @var $paginator PaginatorHelper */
 foreach ( $titulos as &$t) {
     $t['Titulo']['name'] = utf8_encode($t['Titulo']['name']);
     $t['Oferta']['name'] = utf8_encode($t['Oferta']['name']);
 }
 
-/* @var $paginator PaginatorHelper */
-foreach ( $filtros['Oferta'] as $key=>&$f) {
-    $f = utf8_encode($f);
+if(!empty($filtros['Oferta'])){
+    foreach ( $filtros['Oferta'] as $key=>&$f) {
+        $filtros_aux['Oferta'][ $f['Oferta']['id']] = utf8_encode($f['Oferta']['name']);
+    }
 }
-
-foreach ( $filtros['Sector'] as $key=>&$f) {
-    $f = utf8_encode($f);
+if(!empty($filtros['Sector'])){
+    foreach ( $filtros['Sector'] as $key=>&$f) {
+        $filtros_aux['Sector'][ $f['Sector']['id']] = utf8_encode($f['Sector']['name']);
+    }
 }
-
-foreach ( $filtros['Jurisdiccion'] as $key=>&$f) {
-    $f = utf8_encode($f);
+if(!empty($filtros['Jurisdiccion'])){
+    foreach ( $filtros['Jurisdiccion'] as $key=>&$f) {
+        $filtros_aux['Jurisdiccion'][ $f['Jurisdiccion']['id']] = utf8_encode($f['Jurisdiccion']['name']);
+    }
 }
-
-foreach ( $filtros['Departamento'] as $key=>&$f) {
-    $f = utf8_encode($f);
+if(!empty($filtros['Departamento'])){
+    foreach ( $filtros['Departamento'] as $key=>&$f) {
+        $filtros_aux['Departamento'][ $f['Departamento']['id']] = utf8_encode($f['Departamento']['name']);
+    }
 }
-
-foreach ( $filtros['Localidad'] as $key=>&$f) {
-    $f = utf8_encode($f);
+if(!empty($filtros['Localidad'])){
+    foreach ( $filtros['Localidad'] as $key=>&$f) {
+        $filtros_aux['Localidad'][ $f['Localidad']['id']] = utf8_encode($f['Localidad']['name']);
+    }
+}
+if(!empty($filtros['Gestion'])){
+    foreach ( $filtros['Gestion'] as $key=>&$f) {
+        $filtros_aux['Gestion'][ $f['Gestion']['id']] = utf8_encode($f['Gestion']['name']);
+    }
 }
 
 $cant = $paginator->counter(array('format' => '%count%'));
@@ -45,7 +55,7 @@ $paginator = array(
 $titulos = array(
     'paginator' => $paginator,
     'data' => $titulos,
-    'filtros' => $filtros
+    'filtros' => $filtros_aux
 );
 
 echo $javascript->object($titulos);
