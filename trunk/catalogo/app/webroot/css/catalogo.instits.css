@@ -73,34 +73,17 @@
 }
 
 .items-nombre {
-    display: block;
-    margin-left: 10px;
-    text-align:left;
     font-size: 9pt;
     font-weight: bold;
 }
 
-.instit-items-domicilio1 {
-    float:left;
-    width: 40%;
-    padding-left: 20px;
-}
-.instit-items-domicilio2 {
-    float:left;
-    width: 40%;
-}
-.instit-items-gestion {
-    float:right;
-    width: 10%;
-}
-
 .instit-items-domicilio1 p, .instit-items-domicilio2 p{
-    margin: .2em 0px;
     font-size: 9pt;
+    margin:1px;
 }
 
-.items-actions{
-    top:17px;
+.items-actions {
+    margin:0;
 }
 
 #boxAyuda{

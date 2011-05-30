@@ -34,13 +34,13 @@ $paginator->options(array(  'update' => 'consoleResult',
     <div class="clear"></div>
 
     <? if (sizeof($titulos) > 0) {?>
-    <ol id="items">
+    <ol id="items" class ="grid_10 alpha omega">
             <?php
             $i = 0;
             foreach ($titulos as $titulo):
                 ?>
-        <li onmouseover="jQuery(this).addClass('alt2row')" onmouseout="jQuery(this).removeClass('alt2row')" >
-            <span class="items-nombre">
+        <li class="grid_10 alpha omega">
+            <span class="items-nombre alpha grid_7">
                         <?php
                         /*$linkTitulo = $html->link(
                                 " (".count($titulo['Plan'])." planes)",
@@ -56,14 +56,23 @@ $paginator->options(array(  'update' => 'consoleResult',
                     }
                     ?>
             </p>-->
-            <span class="titulos-items-oferta">
+            <span class="titulos-items-oferta grid_2">
                         <?php
                         echo (empty($titulo['Oferta']['name']))? "" : $titulo['Oferta']['name'];
                         ?>
             </span>
-            <span class="items-actions">
-                <a class="mas_info_gris_small" onclick="viewTitulo('<?php echo $html->url('/titulos/view/'.$titulo['Titulo']['id']);?>', '<?php echo $titulo['Titulo']['name'];?>');" style="cursor:pointer;"></a>
-            </span>
+            <p class="items-actions omega grid_1">
+                <a href="<?= $html->url('/instits/view/'.$instit['Instit']['id'])?>">
+                    <?php
+                        echo $html->image('../css/img/lupagris_small.png', array(
+                            'alt' => 'Mas informacion',
+                            'style' => 'border:0;',
+                            'onclick'=>"viewTitulo('".$html->url('/titulos/view/'.$titulo['Titulo']['id'])."', '".$titulo['Titulo']['name']."');"
+                            ));
+                    ?>
+                </a>
+            </p>
+            
         </li>
             <?php endforeach; ?>
     </ol>
