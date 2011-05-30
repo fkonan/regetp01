@@ -1,4 +1,4 @@
-<ul class="nav grid_8 alpha prefix_1">
+<ul class="nav grid_8 alpha prefix_1 sf-menu">
         <li class="grid_2 <?php echo ($this->here == $this->base.'/pages/home')?'current':''?> alpha"><?php echo $html->link('Inicio', '/pages/home'); ?></li>
 
 
