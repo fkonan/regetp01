@@ -30,6 +30,10 @@
 
     var filtrosForm = $("#FiltrosAplicadosForm");
     var filtrosContainer = $("#filtrosContainer");
+
+    var __parentFilters = new Array();
+    __parentFilters["data[Instit][jurisdiccion_id]"] = ["data[Instit][departamento_id]"];
+    __parentFilters["data[Instit][departamento_id]"] = ["data[Instit][localidad_id]"];
   
 
     
@@ -45,11 +49,23 @@
     /////////////////////////////////////////////////////////////////
     //Eventos
     //
-    $(".deleteable").live("click",function(){
-        $(this).closest(".filtro").remove();
+    $(".deleteable").live("click",function(event){
+        var idToDelete = jQuery(event.currentTarget).siblings("input").attr('id');
+        deleteFilter(idToDelete);
         titulosForm.submit();
         return false;
     });
+
+    function deleteFilter(id){
+        var escapedId = id.replace(/\[/g, "\\[");
+        escapedId = escapedId.replace(/\]/g, "\\]");
+        jQuery("#" + escapedId).parent().remove();
+        if(__parentFilters[id]){
+            for(var childId in __parentFilters[id]) {
+                deleteFilter(__parentFilters[id][childId]);
+            }
+        }
+    }
 
     /////////////////////////////////////////////////////////////////
     // functiones Principales
