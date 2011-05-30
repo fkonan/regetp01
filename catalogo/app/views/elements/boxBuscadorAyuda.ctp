@@ -1,4 +1,5 @@
 <div id="boxAyuda" class="grid_12 boxblanca">
+    <h2 class="grid_12">Ayuda: ¿Cómo utilizar el buscador?</h2>
     <ul class="grid_12 menu_body help_body">
         <br/>
         <P LANG="es-ES" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="es-ES">Puede

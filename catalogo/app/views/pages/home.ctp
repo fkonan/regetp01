@@ -42,13 +42,13 @@ instituciones de educación técnico profesional.
 <div class="boxblanca grid_4">
     <div class="box_pad_wrapper">
     <h3>Estudiantes</h3>        
-    <h4>Guía del Estudiante</h4>
+    <h4><?php echo $html->link('Guía del Estudiante',array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'));?></h4>
 
     <?php echo $html->link('más información', 
             array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'),
             array('class'=>'mas_info_gris'));?>
     <p>
-       Aquí podrás encontrarar lugares donde estudiar y obtener un título o certificación.
+       La Guía del Estudiante ayudará a que puedas encontrarar donde estudiar y obtener un título o certificación según tus gustos e intereses.
     </p>
     </div>
 </div>
@@ -57,12 +57,12 @@ instituciones de educación técnico profesional.
     <h3 style="margin-left: 10px; margin-bottom: 0px;">Empresas, Profesionales, Funcionarios, Otros</h3>
     <div class="grid_4 alpha" style="">                   
         <div class="box_pad_wrapper">
-            <h4>Buscador de Títulos</h4>
+            <h4><?php echo $html->link('Buscador de Títulos',array('controller'=>'titulos', 'action'=>'search'));?></h4>
             <?php echo $html->link('más información', 
                     array('controller'=>'titulos', 'action'=>'search'),
                     array('class'=>'mas_info_gris'));?>
             <p>
-               Mediante este buscador se puede obtener un listado de títulos o certificaciones de Educación Técnico Profesonal
+               Desde aquí obtendrás un listado de títulos o certificaciones de la Educación Técnico Profesional según los criterios de búsqueda ingresados.
             </p>
         </div>
     </div>
@@ -70,12 +70,12 @@ instituciones de educación técnico profesional.
 
     <div class="grid_4 alpha omega" style="margin-left: -1px; border-left: solid #dcddde 1px;">
         <div class="box_pad_wrapper" style="margin-left: 10px; padding-right: 0px;">
-            <h4>Buscador de Instituciones</h4>
+            <h4><?php echo $html->link('Buscador de Instituciones',array('controller'=>'instits', 'action'=>'search_form'))?></h4>
         <?php echo $html->link('más información', 
                 array('controller'=>'instits', 'action'=>'search_form'),
                 array('class'=>'mas_info_gris'));?>
         <p>
-           Mediante este buscador se obtiene un listado de instituciones del Registro Federal de Instituciones de Educación Técnico Profesonal
+           Desde aquí obtendrás un listado de instituciones del Registro Nacional Educación Técnico Profesional según los criterios de búsqueda ingresados.
         </p>
         </div>
     </div>
@@ -86,47 +86,46 @@ instituciones de educación técnico profesional.
 <h2 class="grid_12">Búsquedas por Oferta</h2>
     
 <div class="clear"></div>
+    
+<div class="grid_4 boxgris">
+     <div class="box_pad_wrapper">
+    <h4><?php echo $html->link('Secundario Técnico',array('controller'=>'titulos', 'action'=>'search', SEC_TEC_ID));?></h4>
+
+    <?php echo $html->link('más información', 
+        array('controller'=>'titulos', 'action'=>'search', SEC_TEC_ID),
+        array('class'=>'mas_info_azul'));?>
+    <p>
+       Esta opción sirve para obtener información sobre títulos de tecnicaturas de nivel medio.
+    </p>
+     </div>
+
+</div>
+    
+<div class="grid_4 boxgris">
+    <div class="box_pad_wrapper">
+    <h4><?php echo $html->link('Superior Técnico', array('controller'=>'titulos', 'action'=>'search', SUP_TEC_ID));?></h4>
+
+    <?php echo $html->link('más información', 
+        array('controller'=>'titulos', 'action'=>'search', SUP_TEC_ID),
+        array('class'=>'mas_info_azul'));?>
+    <p>
+        Esta opción sirve para obtener información sobre títulos de tecnicaturas de nivel superior.
+    </p>
+     </div>
+</div>
+
 
 <div class="grid_4 boxgris">
     <div class="box_pad_wrapper">
-        <h4>Formación Profesional</h4>
+        <h4><?php echo $html->link('Formación Profesional', array('controller'=>'titulos', 'action'=>'search', FP_ID));?></h4>
 
         <?php echo $html->link('más información', 
             array('controller'=>'titulos', 'action'=>'search', FP_ID),
             array('class'=>'mas_info_azul'));?>
 
         <p>
-            ¿Estas buscando que estudiar y no sabes que? Este buscador te guiará en tu busqueda
-        </p>
+        Esta opción sirve para obtener información sobre certificaciones de formación profesional y educación continua.        </p>
     </div>
-</div>
-    
-    
-<div class="grid_4 boxgris">
-     <div class="box_pad_wrapper">
-    <h4>Secundario Técnico</h4>
-
-    <?php echo $html->link('más información', 
-        array('controller'=>'titulos', 'action'=>'search', SEC_TEC_ID),
-        array('class'=>'mas_info_azul'));?>
-    <p>
-       ¿Estas buscando que estudiar y no sabes que? Este buscador te guiará en tu busqueda
-    </p>
-     </div>
-
-</div>
-    
-<div class="grid_4 boxgris">
-    <div class="box_pad_wrapper">
-    <h4>Superior Técnico</h4>
-
-    <?php echo $html->link('más información', 
-        array('controller'=>'titulos', 'action'=>'search', SUP_TEC_ID),
-        array('class'=>'mas_info_azul'));?>
-    <p>
-        ¿Estas buscando que estudiar y no sabes que? Este buscador te guiará en tu busqueda
-    </p>
-     </div>
 </div>
     
 

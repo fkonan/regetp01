@@ -52,6 +52,17 @@ h1, h2, h3, h4 {
    margin: 13px 0px 13px 0px;
 }
 
+h1 A, h2 A, h3 A, h4 A{
+   color: #58585a;
+   margin: 13px 0px 13px 0px;
+   text-decoration: none;
+}
+h1 A:HOVER, h2 A:HOVER, h3 A:HOVER, h4 A:HOVER{
+   color: #58585a;
+   margin: 13px 0px 13px 0px;
+   text-decoration: underline;
+}
+
 h1{
     font-size: 1.6em;
 }
