@@ -76,7 +76,7 @@
     <?php echo $form->input('Instit.nombre',
             array(
                 'div'=>false,
-                'label' => 'Nombre<br />',
+                'label' => 'Nombre de la Institución<br />',
                 'class' => 'autosubmit ui-widget ui-state-default ui-corner-all'
                 )
             )
