@@ -69,9 +69,9 @@ $javascript;
             'adapt.min.js',
             'jquery.form',
             'jquery.tools.min',
-            'jquery-ui-1.8.12.custom.min',
-            'jquery/jQueryRotateCompressed.2.1',
+            'jquery-ui-1.8.12.custom.min',           
             'jquery/jquery.superfish',
+            'jquery/jquery.history',
         ));
 
         $jsPoner = 'views'.DS.Inflector::underscore($this->name).DS.$this->action;

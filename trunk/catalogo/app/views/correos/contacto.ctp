@@ -1,8 +1,8 @@
 <h1>Contáctenos</h1>
 
 
-<div class="grid_4 boxblanca">
-     <?php echo $html->image('img_cont_contacto_transp.png', array('height'=>'200', 'class'=>'grid_4 alpha omega')); ?>
+<div class="grid_2">
+     <?php echo $html->image('img_cont_contacto_transp.png', array('class'=>'grid_1 alpha omega')); ?>
 </div>
 
 <div class="omega boxblanca formu_4">
