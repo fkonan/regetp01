@@ -213,6 +213,12 @@
                 ).appendTo('#FiltrosAplicadosForm');
             }
         }
+        if(i > 0){
+            $("#sin_filtros").hide();
+        }
+        else{
+            $("#sin_filtros").show();
+        }
     }
 
     var __recargarFiltros = function (data) {
@@ -239,7 +245,7 @@
         __recargaCombo(institLocalidadCombo,data.Localidad);
         __recargaCombo(institGestionCombo,data.Gestion);
 
-        $(".seccion").each(function(i) {
+        $(".seccion").each(function() {
             var size = 0;
 
             size += $(this).find("input:visible").size();
