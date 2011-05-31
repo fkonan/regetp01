@@ -34,6 +34,7 @@
 </div>
 <div class="seccion grid_4">
     <h4>Ubicación</h4>
+    <div>
     <?php echo $form->input('Instit.jurisdiccion_id', 
             array('options'=>$jurisdicciones,
                 'div'=>false,
@@ -43,6 +44,8 @@
                 )
             )
     ?>
+    </div>
+    <div>
     <?php echo $form->input('Instit.departamento_id',
             array('type'=>'select',
                   'div'=>false,
@@ -51,6 +54,8 @@
                   'class' => 'autosubmit ui-widget ui-state-default ui-corner-all'
                 )
             ) ?>
+    </div>
+    <div>
     <?php echo $form->input('Instit.localidad_id',
             array('type'=>'select',
                   'div'=>false,
@@ -59,6 +64,7 @@
                    'class' => 'autosubmit ui-widget ui-state-default ui-corner-all'
                 )
             ) ?>
+    </div>
     <p class="msj-vacio">No hay filtros disponibles...</p>
 </div>
 <div class="seccion grid_3 omega">

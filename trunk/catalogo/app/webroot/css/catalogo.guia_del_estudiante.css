@@ -34,10 +34,6 @@ IMG.step{
     padding:5px;
 }
 
-H3, H2, P, DIV, A  {
-    margin-left: 10px;
-}
-
 H3{
     clear: both;
     width: 100%;
@@ -47,7 +43,6 @@ H2{
     clear: both;
     width: 100%;
 }
-
 
 .jquery-checkbox {display: inline-block; font-size: 20px; line-height: 32px;}
 .jquery-checkbox .mark {display: inline;}
@@ -96,4 +91,18 @@ H2{
 .asterisk{
     color:red;
     font-weight: bold;
+}
+
+.boxgris .boxblanca{
+    margin: 13px;
+}
+
+.boxgris h2, .boxblanca h2,
+.boxgris h3, .boxblanca h3,
+.boxgris p, .boxblanca p{
+    margin-left:13px;
+}
+
+.seccion div, .seccion h4{
+    margin-left: 13px;
 }
