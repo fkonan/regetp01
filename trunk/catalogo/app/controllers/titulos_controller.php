@@ -620,9 +620,9 @@ class TitulosController extends AppController {
         }
         //debug($this->paginate['conditions']);
         //datos de paginacion
-        $this->paginate['fields'] = array('Titulo.id', 'Titulo.name','Titulo.marco_ref', 'Titulo.oferta_id', 'Oferta.abrev');
+        $this->paginate['fields'] = array('Titulo.id', 'Titulo.name','Titulo.marco_ref', 'Titulo.oferta_id', 'Oferta.abrev', 'Oferta.name');
         $this->paginate['group'] = $this->paginate['fields'];
-        $this->paginate['order'] = array('Titulo.name ASC, Titulo.oferta_id ASC');
+        $this->paginate['order'] = array('Titulo.name' => 'ASC', 'Titulo.oferta_id' => 'ASC');
         $this->paginate['recursive'] = 3;   // find completo
         $titulos = $this->paginate();
 

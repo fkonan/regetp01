@@ -12,7 +12,7 @@
     
     <h1><?php __('Búsqueda de Títulos');?></h1>
 
-    <div class="grid_12 boxblanca boxform">
+    <div class="grid_12 alpha omega boxblanca boxform">
         <?php
         echo $form->create('Titulo', array(
         'action' => 'ajax_search_results2',
@@ -34,7 +34,7 @@
             'empty' => 'Todas',
             ));
 
-            $meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
+            $meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif', array('style' => 'float:right; height: 19px;')).'</span>';
             ?>
         </div>
         <div style="float: left; padding-left: 7px; width: 251px;">
@@ -42,6 +42,7 @@
             echo $form->input('sector_id', array(
             'div' => false,
             'class' => 'autosubmit ',
+            'style' => 'width: 90%',
             'type'=>'select','empty'=>'Seleccione','options'=>$sectores,'label'=>'Sector','id'=>'sectorId','after'=>$meter)
             );
             ?>
@@ -139,7 +140,7 @@
     </div>
     
     <!-- Aca se muestran los resultados de la busqueda-->
-    <div id="consoleResult" style="min-height:200px; margin-top:30px; padding-bottom:20px;"></div>
+    <div id="consoleResult" class="grid_12 alpha omega" style="min-height:200px; margin-top:30px; padding-bottom:20px;"></div>
 
 </div>
 

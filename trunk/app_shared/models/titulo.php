@@ -120,7 +120,7 @@ class Titulo extends AppModel {
      */
     function __findCompleto($buscaroSoloContar = 'buscar', $parameters = array(), $order = null, $recursive = null) {
 
-        $parameters = array_merge($parameters, compact('conditions', 'fields', 'order', 'recursive'));
+        $parameters = array_merge($parameters, compact('conditions', 'fields', 'recursive'));
 
         $parameters['joins'] = array(
             array(
@@ -217,11 +217,11 @@ class Titulo extends AppModel {
 
         $parametersForList = $parameters;
         $parametersForList['fields']= 'Titulo.id';
-        $parametersForList['group']= 'Titulo.id';
+        //$parametersForList['group']= 'Titulo.id';
         $orderaux = $this->order;
         $this->order = null;
         unset($parametersForList['contain']);
-        unset($parametersForList['order']);
+        //unset($parametersForList['order']);
 
         $titulosIds = parent::find('list', $parametersForList);
         if ($buscaroSoloContar == 'count') {

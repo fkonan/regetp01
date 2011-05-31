@@ -9,7 +9,7 @@ $paginator->options(array(  'update' => 'consoleResult',
         jQuery("#TituloBysession").val(0);
     }
 </script>
-<div id="search_results" class="grid_10 prefix_1 suffix_1 boxblanca">
+<div id="search_results" class="grid_10 prefix_1 suffix_1 alpha omega boxblanca">
     <div class="grid_10 alpha list-header">
         <div class="grid_3 suffix_3 alpha">
             <?php
@@ -19,8 +19,8 @@ $paginator->options(array(  'update' => 'consoleResult',
             }
             ?>
             Ordenar por:
-            <? $class = ($sort == 'name')?'marcada':'';?>
-            <span class="<?= $class?>"><?php echo $paginator->sort('Nombre','name');?></span>,
+            <? $class = ($sort == 'Titulo.name')?'marcada':'';?>
+            <span class="<?= $class?>"><?php echo $paginator->sort('Nombre','Titulo.name');?></span>,
 
             <? $class = ($sort == 'Oferta.name')?'marcada':'';?>
             <span class="<?= $class?>"><?php echo $paginator->sort("Oferta",'Oferta.name');?></span>
@@ -62,15 +62,13 @@ $paginator->options(array(  'update' => 'consoleResult',
                         ?>
             </span>
             <p class="items-actions omega grid_1">
-                <a href="<?= $html->url('/instits/view/'.$instit['Instit']['id'])?>">
-                    <?php
-                        echo $html->image('../css/img/lupagris_small.png', array(
-                            'alt' => 'Mas informacion',
-                            'style' => 'border:0;',
-                            'onclick'=>"viewTitulo('".$html->url('/titulos/view/'.$titulo['Titulo']['id'])."', '".$titulo['Titulo']['name']."');"
-                            ));
-                    ?>
-                </a>
+                <?php
+                    echo $html->image('../css/img/lupagris_small.png', array(
+                        'alt' => 'Mas informacion',
+                        'style' => 'border:0; cursor:pointer;',
+                        'onclick'=>"viewTitulo('".$html->url('/titulos/view/'.$titulo['Titulo']['id'])."', '".$titulo['Titulo']['name']."');"
+                        ));
+                ?>
             </p>
             
         </li>
