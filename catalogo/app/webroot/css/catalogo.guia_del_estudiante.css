@@ -44,9 +44,9 @@ H2{
     width: 100%;
 }
 
-.jquery-checkbox {display: inline-block; font-size: 20px; line-height: 32px;}
+.jquery-checkbox {display: inline-block; font-size: 20px; line-height: 25px;}
 .jquery-checkbox .mark {display: inline;}
-.jquery-checkbox img {vertical-align: middle; width: 32px; height: 32px;}
+.jquery-checkbox img {vertical-align: middle; width: 25px; height: 25px;}
 .jquery-checkbox img{background: transparent url(img/check_box_empty.png) no-repeat;}
 .jquery-checkbox-checked img{background-image: url(img/check_box.png)}
 
