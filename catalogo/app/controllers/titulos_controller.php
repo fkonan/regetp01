@@ -271,6 +271,7 @@ class TitulosController extends AppController {
         $array_condiciones = array();
         $array_condiciones_ubicacion = array();
         $url_conditions = array();
+        $filtros = array();
 
         if (!empty($this->data)) {
             // si se realizó una búsqueda se limpia la session
@@ -403,8 +404,8 @@ class TitulosController extends AppController {
         $titulos = $this->paginate();
 
         //FILTROS
-
-        $filtros = array();
+        
+        
         $array_condiciones['recursive'] = -1;
         $array_condiciones['contain'] = null;
         $array_condiciones['order'] = null;
@@ -471,7 +472,6 @@ class TitulosController extends AppController {
             )
         );
 
-                
         $array_condiciones['fields'] = array('DISTINCT Oferta.id', 'Oferta.name');
         $array_condiciones['group'] = array('Oferta.id', 'Oferta.name');
         $filtros['Oferta'] = $this->Titulo->find('all',$array_condiciones);
@@ -503,14 +503,12 @@ class TitulosController extends AppController {
         if((empty($this->passedArgs['departamentoId']) && (count($filtros['Departamento']) > 1 || count($filtros['Jurisdiccion']) > 1 ))) {
             $filtros['Localidad'] = null;
         }
-        
+
         $filtros['TituloName'] = empty($this->passedArgs['tituloName'])?'':$this->passedArgs['tituloName'];
         $filtros['InstitName'] = empty($this->passedArgs['institName'])?'':$this->passedArgs['institName'];
-
-        //debug($filtros);die;
+        
         $this->set('titulos', $titulos);
         $this->set('filtros', $filtros);
-
     }
 
 
