@@ -6,10 +6,10 @@ ol, ul {
     padding: 0;
 }
 #items li {
-    border-bottom: 1px solid #CDCDCD;
+    border-bottom: 1px dashed #CDCDCD;
     height: auto !important;
     margin: 0;
-    padding: 7px 0px 7px 0px;
+    padding: 3px 0;
     position: relative;
 }
 

@@ -5,189 +5,207 @@
     $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
 ?>
 
-
-<div class="grid_12">
-    <div class="grid_12 alpha omega boxblanca detalles">
-        <h3><?php echo $cue_instit ?> <?php echo $instit['Instit']['nombre_completo'] ?></h3>
-        <div class="grid_6 alpha">
+<br />
+<div class="grid_12 boxblanca">
+    <h2 class="grid_12"><?php echo $cue_instit ?> <?php echo $instit['Instit']['nombre_completo'] ?></h2>
+            
+        <dl class="grid_6 alpha">
             <?php if(!$con_programa_de_etp){?>
-                <h2>
+                <dt>
                     <?php echo $relacion_etp; ?>
-                </h2>
+                </dt>
+                <dd>&nbsp;</dd>
             <?php }?>
 
             <?php if($instit['Instit']['claseinstit_id']) {?>
-                <div>
-                    <h2><?php __('Tipo de Institución'); ?>:</h2>
-                    <p>
+                    <dt><?php __('Tipo de Institución'); ?>:</dt>
+                    <dd>
                         <?php
                         if(!empty($instit['Claseinstit']['name'])) {
                             echo $instit['Claseinstit']['name'];
                         }else {
                             echo "<i>No declarado</i>";
                         } ?>
-                    </p>
-                </div>
+                    </dd>
             <?php }?>
 
 
             <? if($instit['Orientacion']['name']) {?>
-                <div>
-                    <h2 ><?php __('Orientación'); ?>:</h2>
-                    <p>
+                    <dt ><?php __('Orientación'); ?>:</dt>
+                    <dd>
                         <?php
                         if(!empty($instit['Orientacion']['name'])) {
                             echo $instit['Orientacion']['name'];
                         }else {
                             echo "<i>No declarado</i>";
                         } ?>
-                    </p>
-                </div>
+                    </dd>
             <? } ?>
-            <div>
-                <h2 ><?php __('Ámbito de Gestión'); ?>:</h2>
-                <p>
+                <dt ><?php __('Ámbito de Gestión'); ?>:</dt>
+                <dd>
                     <?php
                     if(!empty($instit['Gestion']['name'])) {
                         echo $instit['Gestion']['name'];
                     }else {
                         echo "<i>No declarado</i>";
                     } ?>
-                </p>
-            </div>
-            <div>
-                <h2><?php __('Tipo de Dependencia'); ?>:</h2>
-                <p>
+                </dd>
+
+                <dt><?php __('Tipo de Dependencia'); ?>:</dt>
+                <dd>
                     <?php
                     if(!empty($instit['Dependencia']['name'])) {
                         echo $instit['Dependencia']['name'];
                     }else {
                         echo "<i>No declarado</i>";
                     } ?>
-                </p>
-            </div>
-        </div>
-        <div  class="box_grid_6 grid_6 omega">
-            <div>
-                <h2><?php __('Direccion'); ?>:</h2>
-                <p>
-                <?php
-                    if(!empty($instit['Instit']['direccion'])) {
-                        echo $instit['Instit']['direccion'].", ";
-                    }
-                    if(!empty($instit['Instit']['lugar'])) {
-                        echo $instit['Instit']['lugar'].", ";
-                    }
-                    if(!empty($instit['Localidad']['name'])) {
-                        echo $instit['Localidad']['name'].", ";
-                    }
-                    if(!empty($instit['Departamento']['name'])) {
-                        echo $instit['Departamento']['name'].", ";
-                    }
-                    if(!empty($instit['Jurisdiccion']['name'])) {
-                        echo $instit['Jurisdiccion']['name'];
-                    }
-                ?>
+                </dd>
+        </dl>  
+    
+        <dl class="grid_6 omega">
+            <!-- Por cuestiones de diseño, para que coincidan las columnas -->
+            <dt>&nbsp;</dt><dd>&nbsp;</dd>
+            
+            
+            <dt><?php __('Dirección'); ?>:</dt>
+            <dd>
+            <?php
+                if(!empty($instit['Instit']['direccion'])) {
+                    echo $instit['Instit']['direccion'].", ";
+                }
+                if(!empty($instit['Instit']['lugar'])) {
+                    echo $instit['Instit']['lugar'].", ";
+                }
+                if(!empty($instit['Localidad']['name'])) {
+                    echo $instit['Localidad']['name'].", ";
+                }
+                if(!empty($instit['Departamento']['name'])) {
+                    echo $instit['Departamento']['name'].", ";
+                }
+                if(!empty($instit['Jurisdiccion']['name'])) {
+                    echo $instit['Jurisdiccion']['name'];
+                }
+            ?>
+            </dd>
 
-            <div>
-                <h2><?php __('Código Postal'); ?>:</h2>
-                <p>
+                <dt><?php __('Código Postal'); ?>:</dt>
+                <dd>
                     <?php
                     if(!empty($instit['Instit']['cp'])) {
                         echo $instit['Instit']['cp'];
                     }else {
                         echo "<i>No declarado</i>";
                     } ?>
-                </p>
-            </div>
+                </dd>
 
             <?php if($instit['Instit']['telefono']): ?>
-                <div>
-                    <h2><?php __('Teléfonos'); ?>:</h2>
-                    <p>
+                    <dt><?php __('Teléfono'); ?>:</dt>
+                    <dd>
                             <?php
                             if(!empty($instit['Instit']['telefono'])) {
                                 echo $instit['Instit']['telefono'];
                             }if(!empty($instit['Instit']['telefono_alternativo'])) {
                                 echo ", ".$instit['Instit']['telefono_alternativo'];
                             } ?>
-                    </p>
-                </div>
+                    </dd>
             <?php endif;?>
 
             <?php if($instit['Instit']['mail']): ?>
-                <div>
-                    <h2><?php __('E-Mail'); ?>:</h2>
-                    <p>
+                    <dt><?php __('E-Mail'); ?>:</dt>
+                    <dd>
                             <?php
                             if(!empty($instit['Instit']['mail'])) {
                                 echo $instit['Instit']['mail'];
                             }else {
                                 echo "<i>No declarado</i>";
                             } ?>
-                    </p>
-                </div>
+                    </dd>
             <?php endif;?>
             <?php if($instit['Instit']['mail_alternativo']): ?>
-                <div>
-                    <h2><?php __('E-Mail Alternativo'); ?>:</h2>
-                    <p>
+                    <dt><?php __('E-Mail Alternativo'); ?>:</dt>
+                    <dd>
                             <?php
                             if(!empty($instit['Instit']['mail_alternativo'])) {
                                 echo $instit['Instit']['mail_alternativo'];
                             }else {
                                 echo "<i>No declarado</i>";
                             } ?>
-                    </p>
-                </div>
+                    </dd>
             <?php endif;?>
             <?php if($instit['Instit']['web']): ?>
-                <div>
-                    <h2><?php __('Web'); ?>:</h2>
-                    <p>
+                    <dt><?php __('Web'); ?>:</dt>
+                    <dd>
                             <?php
                             if(!empty($instit['Instit']['web'])) {
                                 echo $instit['Instit']['web'];
                             }else {
                                 echo "<i>No declarado</i>";
                             } ?>
-                    </p>
-                </div>
+                    </dd>
             <?php endif;?>
-        </div>
+        </dl>
     </div>
-    </div>
+
 
     <h2 class="grid_12 separador alpha omega">Títulos o Certificaciones que brinda la Institución</h2>
-    <?php $len = count($instit['Plan'])?>
-    <div class="grid_6 alpha">
-    <?php for ($index = 0; $index < $len; $index++): ?>
-    <?php $plan = $instit['Plan'][$index];?>
-        <?php if($index == round($len/2)){?>
-            </div><div class="grid_6 omega">
-        <?php }?>
-        <div class="boxblanca titulo">
+    <div class="clear"></div>
+    
+    <div class="grid_12 boxblanca">
 
-            <h3><?php echo $plan['Titulo']['name']?></h3>
-            <div>
-                <h2>Oferta:</h2>
-                <p><?php echo $plan['Titulo']['Oferta']['name']?></p>
-            </div>
-            <div>
-                <h2>Sectores:</h2>
-                <ul>
-                <?php foreach($plan['Titulo']['SectoresTitulo'] as $sector){?>
-                    <li><?php echo $sector['Sector']['name'] . ((!empty($sector['Subsector']))?('/' .  $sector['Subsector']['name']):'') ?></li>
-                <?php
+    <?php 
+        $ofertaAnt = '';
+        foreach ($instit['Plan'] as $plan) { ?>
+        
+        <?
+        if ($ofertaAnt != $plan['Titulo']['Oferta']['id'] ) {
+            echo "<h4>". $plan['Titulo']['Oferta']['name'] ."</h4>";
+            $ofertaAnt = $plan['Titulo']['Oferta']['id'];
+        }
+        ?>
+        
+        <div class="grid_4 alpha omega">
+            <div class="titulo_name"><?php echo $plan['nombre']?></div>
+        <dl class="titulo">
+                <dt>Nombre que le da el INET:</dt>
+                <dd><?php echo $plan['Titulo']['name']?></dd>
+                
+                <dt>Sector / Subsector:</dt>
+                <dd>
+                    <ul>
+                    <?php foreach($plan['Titulo']['SectoresTitulo'] as $sector) {?>
+                        <li><?php echo $sector['Sector']['name'] . ((!empty($sector['Subsector']))?('/' .  $sector['Subsector']['name']):'') ?></li>
+                    <?php
 
-                }
-                ?>
-                </ul>
-            </div>
+                    }
+                    ?>
+                    </ul>
+                </dd>
+                
+<!--                <dt>Oferta:</dt>
+                <dd><?php echo $plan['Titulo']['Oferta']['name']?></dd>-->
+                
+                <?php if ($plan['Titulo']['Oferta']['id'] == FP_ID || $plan['duracion_hs'] || $plan['duracion_semanas']) { ?>
+                <dt>Duración:</dt>
+                <dd>
+                    <?php  
+                        if (!empty($plan['duracion_hs'])){
+                            echo $plan['duracion_hs'] . ' hs.';
+                        }
+                        elseif (!empty($plan['duracion_semanas'])) {
+                            echo $plan['duracion_semanas']. ' semanas';
+                        }  ?>
+                &nbsp;
+                </dd>
+                <?php } ?>
+                
+                
+        </dl>
         </div>
-    <?php endfor?>
+    <?php }?>
     </div>
+    
     <div class="clear separador"></div>
+    
     <div class="grid_12 alpha omega boxgris alerta-desactualizada">
         <h2>Ayudenos a mantener los datos actualizados</h2>
         <p>Si ha notado algún dato desactualizado, haga click aquí</p>
@@ -199,4 +217,3 @@
         echo $form->end();
         ?>
     </div>
-</div>

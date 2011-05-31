@@ -1,6 +1,27 @@
+
+dt{
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+dd{
+    margin-left: 10px;
+}
+
+dd ul{
+    margin: 0px;
+    padding: 0px;
+}
+
+
+.titulo_name{
+    color: #b1cc2f;
+    font-weight: bolder;
+}
+
 .titulo{
+    font-size: 0.95em;
     margin:5px 0 5px 0;
-    min-height: 113px;
 }
 
 .titulo h3 {
@@ -37,13 +58,7 @@
     width: 200px;
     margin: 0;
 }
-.titulo div h2, .detalles div h2{
-    display:inline;
-    width: 150px;
-    margin:0 13px 0 13px;
-    font-size: 1.2em;
-    text-align: right;
-}
+
 .titulo div ul, .detalles div ul{
     display: inline-block;
     margin-top: 5px;
