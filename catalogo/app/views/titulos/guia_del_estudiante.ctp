@@ -60,9 +60,10 @@ Templates de jQuery para los resultados de busqueda
         <div  id="filtrosContainer">
             <?php echo $this->element('filtros');?>
         </div>
-        <div>
+        <div class="grid_1 alpha omega prefix_10">
             <?php echo $form->end('Buscar');?>
         </div>
+        <div class="clear"></div>
     </div>
 
     <div class="boxblanca filtros-aplicados">
