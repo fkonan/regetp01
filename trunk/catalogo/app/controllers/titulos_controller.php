@@ -625,7 +625,7 @@ class TitulosController extends AppController {
         $this->set('sectores', $this->Titulo->Sector->find('list'));
         $this->set('ofertas', $this->Titulo->Oferta->find('list'));
         $this->set('gestiones', $this->Titulo->Plan->Instit->Gestion->find('list'));
-        $this->set('jurisdicciones', ClassRegistry::init('Jurisdicciones')->find('list'));
+        $this->set('jurisdicciones', $this->Titulo->Plan->Instit->Jurisdiccion->find('list', array('order' => 'Jurisdiccion.name')));
     }
 
     function que_donde() {

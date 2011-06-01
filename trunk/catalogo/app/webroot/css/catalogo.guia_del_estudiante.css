@@ -59,6 +59,8 @@ H2{
     vertical-align: middle;
     margin-top: 3px;
     margin-bottom: 6px;
+    font-size: 1.2em;
+    color: #58585A;
 }
 
 .results li, .seleccionados li{
@@ -73,6 +75,19 @@ H2{
 #li_titulos ul li :hover{
     color:black;
     cursor: pointer; cursor: hand;
+}
+#li_instits ul li :hover{
+    color:black;
+    cursor: pointer; cursor: hand;
+}
+#li_instits a {
+    color: #58585a;
+    text-decoration: none;
+    font-size: 10pt;
+}
+#li_instits a :hover {
+    color:black;
+    text-decoration: none;
 }
 
 .boxblanca{
@@ -105,4 +120,18 @@ H2{
 
 .seccion div, .seccion h4{
     margin-left: 13px;
+}
+
+.paginator .count {
+    font-size: 11pt;
+}
+
+.paginator a {
+    color: #58585a;
+}
+
+.deleteable {
+    font-size: 8pt;
+    font-weight: bold;
+    padding-left: 4px;
 }
