@@ -1,3 +1,6 @@
+<?php
+echo $html->css(array('catalogo.titulos'));
+?>
 <script type="text/javascript">
 jQuery(document).ready(function() {
         if (jQuery("#arrowlink").attr("src") == "<?php echo $html->url('/img'); ?>/arrow_down.png") {
@@ -8,28 +11,43 @@ jQuery(document).ready(function() {
         }
     });
 </script>
-<div class="titulosview">
-    <ul style="padding-left:5px;">
-        <li class="altrow">
-            <strong><?php __('Oferta'); ?>:</strong> <?php echo $titulo['Oferta']['name']; ?>
-        </li>
-        <li class="altrow">
-            <strong><?php __('Marco de referencia'); ?>:</strong> <?php echo ($titulo['Titulo']['marco_ref']==1)? "Con marco de referencia":"Sin marco de referencia"; ?>
-        </li>
-        <li class="altrow">
-            <strong><?php __('Sectores/Subsectores'); ?>:</strong>
-        <?php
-        foreach ($titulo['SectoresTitulo'] as $sector) {
-        ?>
-                <?php echo $sector['Sector']['name']; ?>
-                <?php echo (!empty($sector['Subsector']['name']) ? '/ '.$sector['Subsector']['name'] : '' ); ?>
-        <?php
-        }
-        ?>
-        </li>
-    </ul>
-    
-    <h4><?php  __('Instituciones con Planes de Estudio asociados');?></h4>
+<h2><?php echo $titulo['Titulo']['name']?></h2>
+<div class="grid_6 alpha omega boxblanca">
+    <dl>
+        <dt ><?php __('Oferta'); ?>:</dt>
+        <dd>
+            <?php
+            if(!empty($titulo['Oferta']['name'])) {
+                echo $titulo['Oferta']['name'];
+            }else {
+                echo "<i>No declarado</i>";
+            } ?>
+        </dd>
+
+        <dt ><?php __('Marco de referencia'); ?>:</dt>
+        <dd>
+            <?php
+            if($titulo['Titulo']['marco_ref'] == 1) {
+                echo "Con marco de referencia";
+            }else {
+                echo "Sin marco de referencia";
+            } ?>
+        </dd>
+
+        <dt ><?php __('Sectores/Subsectores'); ?>:</dt>
+        <dd>
+            <?php
+            foreach ($titulo['SectoresTitulo'] as $sector) {
+                echo $sector['Sector']['name'];
+                echo (!empty($sector['Subsector']['name']) ? '/'.$sector['Subsector']['name'] : '' );
+                echo "<br />";
+            } ?>
+        </dd>
+    </dl>
+</div>
+<div class="clear" style="height:20px;"></div>
+<h4><?php  __('Instituciones con Planes de Estudio asociados');?></h4>
+<div class="boxblanca" style="padding:15px;">
     <div id="tituloPlanes">
         <?php echo $this->requestAction('/titulos/ajax_view_planes_asociados/'.$titulo['Titulo']['id'], array('return')); ?>
     </div>

@@ -109,6 +109,27 @@ ol, ul {
 }
 
 
+dt{
+    float: left;
+    font-weight: bold;
+    margin-right: 10px;
+    text-align: right;
+    width: 150px;
+}
+
+dd{
+    display: table;
+    margin-bottom: 5px;
+    margin-left: 0;
+    margin-bottom: 5px;
+}
+
+dd ul{
+    margin: 0px;
+    padding: 0px;
+}
+
+
 #header{ 
     height: 158px;
     overflow: visible;
