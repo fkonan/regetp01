@@ -67,6 +67,10 @@ H2{
     list-style: none;
 }
 
+#li_instits, #li_titulos{
+    min-height: 150px;
+}
+
 #li_instits ul li{
     list-style: circle;
     margin-bottom: 5px;
