@@ -118,7 +118,12 @@ class TitulosController extends AppController {
     }
 
     function view($id = null) {
-        $this->layout = false;
+        if ( $this->RequestHandler->isAjax() ) {
+            Configure::write ( 'debug', 0 );
+            $this->layout = false;
+            $this->render = 'view_popup';
+        }
+        
         if (!$id) {
             $this->flash(__('Invalid Titulo', true), array('action'=>'search'));
         }
