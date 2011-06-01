@@ -5,7 +5,7 @@
             array('empty' => 'Seleccione...',
                   'div'=>false,
                   'label' => 'Oferta<br />',
-                  'class' => 'autosubmit ui-widget ui-state-default ui-corner-all'));
+                  'class' => 'autosubmit'));
     ?>
     </div>
     <div>
@@ -15,7 +15,7 @@
                   'label' => 'Sector<br />',
                   'empty' => 'Seleccione...',
                   'multiple'=>false,
-                  'class' => 'autosubmit ui-widget ui-state-default ui-corner-all'
+                  'class' => 'autosubmit'
                 )
             )
     ?>
@@ -25,7 +25,7 @@
                             array(
                             'div'=>false,
                             'label' => 'Nombre del Título<br />',
-                            'class' => 'autosubmit ui-widget ui-state-default ui-corner-all'
+                            'class' => 'autosubmit'
                                 )
                             )
     ?>
@@ -40,7 +40,7 @@
                 'div'=>false,
                 'label' => 'Jurisdicción<br />',
                 'empty' => 'Seleccione...',
-                'class' => 'autosubmit ui-widget ui-state-default ui-corner-all'
+                'class' => 'autosubmit mandatory'
                 )
             )
     ?>
@@ -51,7 +51,7 @@
                   'div'=>false,
                   'label' => 'Departamento<br />',
                   'empty' => 'Seleccione...',
-                  'class' => 'autosubmit ui-widget ui-state-default ui-corner-all'
+                  'class' => 'autosubmit'
                 )
             ) ?>
     </div>
@@ -61,7 +61,7 @@
                   'div'=>false,
                   'label' => 'Localidad<br />',
                   'empty' => 'Seleccione...',
-                   'class' => 'autosubmit ui-widget ui-state-default ui-corner-all'
+                   'class' => 'autosubmit'
                 )
             ) ?>
     </div>
@@ -75,7 +75,7 @@
                 'div'=>false,
                 'label' => 'Ámbito de Gestión<br />',
                 'empty' => 'Seleccione...',
-                'class' => 'autosubmit ui-widget ui-state-default ui-corner-all'
+                'class' => 'autosubmit'
                 )
             )
     ?>
@@ -85,7 +85,7 @@
             array(
                 'div'=>false,
                 'label' => 'Nombre de la Institución<br />',
-                'class' => 'autosubmit ui-widget ui-state-default ui-corner-all'
+                'class' => 'autosubmit'
                 )
             )
     ?>
