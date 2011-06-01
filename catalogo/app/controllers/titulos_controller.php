@@ -384,23 +384,7 @@ class TitulosController extends AppController {
         }
 
         $array_condiciones['fields'] = array('Titulo.id', 'Titulo.name','Titulo.marco_ref', 'Titulo.oferta_id', 'Oferta.abrev');
-        $array_condiciones['contain'] = array(
-                                            'SectoresTitulo' => array(
-                                                'Sector' => array(
-                                                    'Orientacion'
-                                                    ),
-                                                'Subsector',
-                                                ),
-                                            'Oferta',
-                                            'Plan'=>array(
-                                                'Instit'=>array(
-                                                    'conditions'=>$array_condiciones_ubicacion ,
-                                                    'Jurisdiccion',
-                                                    'Departamento',
-                                                    'Localidad')
-                                                )
-                                        );
-
+        
         $array_condiciones['group'] = $array_condiciones['fields'];
         $array_condiciones['order'] = array('Titulo.name ASC, Titulo.oferta_id ASC');
         $array_condiciones['recursive'] = 3;   // find completo
