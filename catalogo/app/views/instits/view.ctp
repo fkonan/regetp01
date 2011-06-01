@@ -149,7 +149,7 @@
 
     <h4 class="grid_11 prefix_1">Títulos o Certificaciones que brinda la Institución</h4>
     
-    <div class="grid_10 boxblanca">
+    <div class="grid_10 boxblanca push_1">
 
         <ul>
             
@@ -180,10 +180,10 @@
         // si es FP le agrego la duracion
         $duracion = '';
         if (!empty($plan['duracion_hs'])){
-            $duracion = 'Duración:' . $plan['duracion_hs'] . ' hs.';
+            $duracion = '. <cite style="color:#b1cc2f">Duración:' . $plan['duracion_hs'] . ' hs.</cite>';
         }
         elseif (!empty($plan['duracion_semanas'])) {
-            $duracion = 'Duración:' . $plan['duracion_semanas']. ' semanas';
+            $duracion = '. <cite style="color:#b1cc2f>Duración:' . $plan['duracion_semanas']. ' semanas</cite>';
         }  
         
         $planNombre .= $duracion;
