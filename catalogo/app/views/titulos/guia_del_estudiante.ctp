@@ -25,6 +25,8 @@ y funciones javascript de esta pagina
 <!-- 
 Templates de jQuery para los resultados de busqueda
 -->
+<div class="clear" style="height:20px;"></div>
+
 <script id="tituloTemplate" type="text/x-jquery-tmpl">
     <li titulo-id="${Titulo.id}">
         <input type="checkbox" class="styled_checkbox" name="data[Plan][titulo_id][]" value="${Titulo.id}" id="check_${Titulo.id}" >
@@ -45,9 +47,7 @@ Templates de jQuery para los resultados de busqueda
     </div>   
 </script>
 
-
-<br />
-<div class="grid_12 boxgris">
+<div class="grid_12 alpha omega boxgris">
      <?php echo $html->image('1-icon.png', array('class' => 'step'));?>
     <h2>Seleccione Criterios de Busqueda:</h2>
     <div id="filtro" class="boxblanca">
@@ -79,15 +79,15 @@ Templates de jQuery para los resultados de busqueda
         <?php echo $form->end();?>
     </div>
 </div>
-<div class="clear"></div>
-<br />
+
+<div class="clear" style="height:20px;"></div>
 
 <?php echo $form->create('Instit', array(
             'controller'=>'instits',
             'action'=>'search.json',
             'id'=>'InstitSearchForm', 'name'=>'InstitSearchForm' ));
 ?>
-<div id="resultados" class="grid_12">
+<div id="resultados" class="grid_12 alpha omega">
     <div id="li_titulos" class="grid_6 alpha boxgris">
         <?php echo $html->image('2-icon.png', array('class' => 'step'));?>
         <h2>Seleccioná el titulo de interes</h2>
