@@ -9,14 +9,7 @@
 
 <br />
 <div class="grid_12 boxblanca">
-        <dl class="grid_6 alpha">
-            <?php if(!$con_programa_de_etp){?>
-                <dt>
-                    <?php echo $relacion_etp; ?>
-                </dt>
-                <dd>&nbsp;</dd>
-            <?php }?>
-
+        <dl class="grid_5 prefix_1 alpha">
             <?php if($instit['Instit']['claseinstit_id']) {?>
                     <dt><?php __('Tipo de Institución'); ?>:</dt>
                     <dd>
@@ -60,13 +53,15 @@
                         echo "<i>No declarado</i>";
                     } ?>
                 </dd>
+                <?php if(!$con_programa_de_etp){?>
+                    <dt>
+                        <?php echo $relacion_etp; ?>
+                    </dt>
+                    <dd>&nbsp;</dd>
+                <?php }?>
         </dl>  
     
-        <dl class="grid_6 omega">
-            <!-- Por cuestiones de diseño, para que coincidan las columnas -->
-            <dt>&nbsp;</dt><dd>&nbsp;</dd>
-            
-            
+        <dl class="grid_5 omega">
             <dt><?php __('Dirección'); ?>:</dt>
             <dd>
             <?php
@@ -147,27 +142,10 @@
     </div>
 
 
-    <h4 class="grid_11 prefix_3">Títulos o Certificaciones que brinda la Institución</h4>
-    
-    
-     <?php
-    
-        echo $html->link( 
-                'Si ha notado algún dato desactualizado, haga click aquí',
-                '/correos/contacto',
-                array(
-                   'class'         => "grid_3 boxgris alerta-desactualizada",
-                   'instit-nombre' => $instit['Instit']['nombre_completo'],
-                   'instit-cue'    => $cue_instit,
-                ));
-    ?>
-    
-    
-    <div class="grid_9 boxblanca">
+    <h4 class="grid_12">Títulos o Certificaciones que brinda la Institución</h4>
 
-        <ul>
-            
-        
+    <div class="grid_9 boxblanca">
+    <ul id="titulos-list">
     <?php 
         $ofertaAnt = '';
         foreach ($instit['Plan'] as $plan) { ?>
@@ -194,10 +172,10 @@
         // si es FP le agrego la duracion
         $duracion = '';
         if (!empty($plan['duracion_hs'])){
-            $duracion = '. <cite style="color:#b1cc2f">Duración:' . $plan['duracion_hs'] . ' hs.</cite>';
+            $duracion = '. <cite>Duración:' . $plan['duracion_hs'] . ' hs.</cite>';
         }
         elseif (!empty($plan['duracion_semanas'])) {
-            $duracion = '. <cite style="color:#b1cc2f>Duración:' . $plan['duracion_semanas']. ' semanas</cite>';
+            $duracion = '. <cite>Duración:' . $plan['duracion_semanas']. ' semanas</cite>';
         }  
         
         $planNombre .= $duracion;
@@ -219,8 +197,16 @@
 
                 
     <?php }?>
+        </ul>
     </div>
-    
-    <div class="clear separador"></div>
-    
-   
+    <?php
+
+        echo $html->link(
+                'Si ha notado algún dato desactualizado, haga click aquí',
+                '/correos/contacto',
+                array(
+                   'class'         => "grid_3 boxgris alerta-desactualizada",
+                   'instit-nombre' => $instit['Instit']['nombre_completo'],
+                   'instit-cue'    => $cue_instit,
+                ));
+    ?>

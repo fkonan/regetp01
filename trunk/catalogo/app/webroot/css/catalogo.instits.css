@@ -98,3 +98,27 @@ dd ul{
 #boxAyuda{
     margin-top: 30px;
 }
+
+cite{
+    color:#b1cc2f;
+}
+
+#titulos-list{
+    padding-right: 40px;
+}
+#titulos-list li{
+    border-bottom: 1px dashed #CDCDCD;
+    height: auto !important;
+    margin: 0;
+    padding: 3px 0;
+    position: relative;
+}
+
+#titulos-list li:hover{
+    color:black;
+}
+
+.mas_info_gris_small{
+    float: right;
+    margin-right: 20px;
+}
