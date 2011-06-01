@@ -12,10 +12,9 @@
         
         var ventanitaDelAmor = document.createElement('div');     
         ventanitaDelAmor.title = 'Formulario de Envío';
-
-        var params = "cue_instit:" + $("#cue_instit").val() + "/nombre_completo:" + $("#nombre_completo").val();
+        var params = "cue_instit:" + $(this).attr('instit-cue') + "/nombre_completo:" + $(this).attr('instit-nombre');
         
-        $(ventanitaDelAmor).load( urlDomain+'/correos/desactualizada/'+params, function(){
+        $(ventanitaDelAmor).load( document.referrer+'correos/desactualizada/'+params, function(){
             $(ventanitaDelAmor).find('form').submit(function(e){                
                 e.preventDefault();
                 $.post(this.action, $(this).serialize(), function(e,t){
@@ -32,5 +31,6 @@
                         modal: true,
                         resizable: false
                     });
+        return false;
     }
 })(jQuery);

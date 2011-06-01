@@ -30,24 +30,16 @@ dd ul{
     margin: 0px;
 }
 
-.alerta-desactualizada{
-    height: 100px;
+.alerta-desactualizada{   
     text-decoration: none;
-    color: inherit;
     cursor: pointer; cursor: hand;
-}
-.alerta-desactualizada h2 {
-    padding: 10px 0 0px 14px;
-    margin: 0px;
-}
-
-.alerta-desactualizada:hover{
-    color: #25abe1;
+    background: url(img/outdated.png) #DCDDDE no-repeat;
+    background-position: 50% 7px;
+    text-align: center;
+    padding-top: 57px;
+    padding-bottom: 30px;
 }
 
-.alerta-desactualizada p{
-    text-align:center;
-}
 
 
 .titulo div, .detalles div {
@@ -79,19 +71,7 @@ dd ul{
     margin: 0px;
 }
 
-.outdated{
-    background: url(img/outdated.png) no-repeat;
-    background-position: 0 50%;
-    text-indent: -1000px;
-    overflow: hidden;
-    height: 44px;
-    display: block;
-    width: 44px;
-    outline: none;    
-    float: right;
-    margin-right: 20px;
-    margin-top: -30px;
-}
+
 
 .marcada {
     font-weight: bold;
