@@ -147,9 +147,23 @@
     </div>
 
 
-    <h4 class="grid_11 prefix_1">Títulos o Certificaciones que brinda la Institución</h4>
+    <h4 class="grid_11 prefix_3">Títulos o Certificaciones que brinda la Institución</h4>
     
-    <div class="grid_10 boxblanca push_1">
+    
+     <?php
+    
+        echo $html->link( 
+                'Si ha notado algún dato desactualizado, haga click aquí',
+                '/correos/contacto',
+                array(
+                   'class'         => "grid_3 boxgris alerta-desactualizada",
+                   'instit-nombre' => $instit['Instit']['nombre_completo'],
+                   'instit-cue'    => $cue_instit,
+                ));
+    ?>
+    
+    
+    <div class="grid_9 boxblanca">
 
         <ul>
             
@@ -195,6 +209,7 @@
             'action' => 'view', 
             $plan['Titulo']['id']
             ), array(
+                'alt' => 'Ver más información del título',
                 'class' => 'mas_info_gris_small',
             ));
         $planNombre .= $link;
@@ -208,14 +223,4 @@
     
     <div class="clear separador"></div>
     
-    <div class="grid_12 alpha omega boxgris alerta-desactualizada">
-        <h2>Ayudenos a mantener los datos actualizados</h2>
-        <p>Si ha notado algún dato desactualizado, haga click aquí</p>
-        <span class="outdated"></span>
-        <?php
-        echo $form->create('Instit', array('id' => 'institForm'));
-        echo $form->hidden('nombre_completo', array('id' => 'nombre_completo', 'value' => urlencode($instit['Instit']['nombre_completo'])));
-        echo $form->hidden('cue_instit', array('id' => 'cue_instit', 'value' => urlencode($cue_instit)));
-        echo $form->end();
-        ?>
-    </div>
+   
