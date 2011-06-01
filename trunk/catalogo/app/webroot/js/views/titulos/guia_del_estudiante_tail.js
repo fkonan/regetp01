@@ -71,12 +71,14 @@
     // functiones Principales
     //
     var __blockResultConsole = function () {
-        jQuery('#resultados').mask('Buscando');
+        jQuery('#li_instits').mask('Buscando');
+        jQuery('#li_titulos').mask('Buscando');
         return true;
     }
 
     var __unblockResultConsole = function () {
-        jQuery('#resultados').unmask();
+        jQuery('#li_instits').unmask();
+        jQuery('#li_titulos').unmask();
     }
 
     function __hideWithLabel(input){
@@ -131,7 +133,7 @@
     function getInstits(e) {
         var url = '';
 
-        __blockResultConsole();
+        $('#li_instits').mask('Buscando');
 
         if (typeof e == 'object') {
             url = e.target.action;
@@ -147,8 +149,6 @@
                 'json'
             );
 
-        __unblockResultConsole();
-        
         return false;
     }
     
@@ -190,9 +190,11 @@
     }
 
     var __recargarFiltrosAplicados = function (params) {
+        
         for(var i in params)
         {
             if(params[i].name != '_method' && params[i].value != ''){
+                cont++;
                 input = titulosForm.find("[name='" + params[i].name + "']");
                 nombre = titulosForm.find("label[for=" + input.attr("id") + "]").html();
                 if(input.is('select')){
@@ -213,7 +215,8 @@
                 ).appendTo('#FiltrosAplicadosForm');
             }
         }
-        if(i > 0){
+        var cont = $(".filtros-aplicados .filtro").length;
+        if(cont > 0){
             $("#sin_filtros").hide();
         }
         else{
@@ -338,7 +341,7 @@
        
        __updatePaginatorElement(data, institsPaginator, getInstitsDelPaginator);
 
-       __unblockResultConsole();
+       $('#li_instits').unmask();
     }
     
     var __blanquearContainers = function() {
