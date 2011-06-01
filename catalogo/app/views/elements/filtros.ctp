@@ -4,8 +4,8 @@
     <?php echo $form->input('Titulo.oferta_id',
             array('empty' => 'Seleccione...',
                   'div'=>false,
-                  'label' => 'Oferta <span class="asterisk">*</span><br />',
-                  'class' => 'autosubmit ui-widget ui-state-default ui-corner-all mandatory'));
+                  'label' => 'Oferta<br />',
+                  'class' => 'autosubmit ui-widget ui-state-default ui-corner-all'));
     ?>
     </div>
     <div>
@@ -38,9 +38,9 @@
     <?php echo $form->input('Instit.jurisdiccion_id', 
             array('options'=>$jurisdicciones,
                 'div'=>false,
-                'label' => 'Jurisdicción <span class="asterisk">*</span><br />',
+                'label' => 'Jurisdicción<br />',
                 'empty' => 'Seleccione...',
-                'class' => 'autosubmit ui-widget ui-state-default ui-corner-all mandatory'
+                'class' => 'autosubmit ui-widget ui-state-default ui-corner-all'
                 )
             )
     ?>

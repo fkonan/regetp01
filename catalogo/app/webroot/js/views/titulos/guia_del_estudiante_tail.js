@@ -97,43 +97,32 @@
      * Trae los titulos en JSON, usando ajax
      */
     function getTitulos(href) {
-        var validates = true;
-        titulosForm.find(".mandatory").each(function(index, obj){
-            var field = jQuery(obj);
-            if(!field.val()){
-                validates = false;
-                field.effect("highlight", {color:"red"}, 1000);
-            }
-        });
-        
-        if(validates){
 
-            var url = '';
+        var url = '';
 
-            __blockResultConsole();
+        __blockResultConsole();
 
-            if (typeof href == 'object') {
-                url = urlDomain + '/titulos/ajax_search_results.json';
-                __blanquearContainers();
-            } else {
-                url = href;
-            }
-            __recargarFiltrosAplicados(titulosForm.serializeArray());
-
-            var postvar = $.post(
-                    url,
-                    filtrosForm.serialize(),
-                    __actualizarTitulos,
-                    'json'
-                );
-
-
-            postvar.error(function (XMLHttpRequest, textStatus, errorThrown) {
-            console.debug(XMLHttpRequest);
-            console.debug(textStatus);
-            console.debug(errorThrown);
-            });
+        if (typeof href == 'object') {
+            url = urlDomain + '/titulos/ajax_search_results.json';
+            __blanquearContainers();
+        } else {
+            url = href;
         }
+        __recargarFiltrosAplicados(titulosForm.serializeArray());
+
+        var postvar = $.post(
+                url,
+                filtrosForm.serialize(),
+                __actualizarTitulos,
+                'json'
+            );
+
+
+        postvar.error(function (XMLHttpRequest, textStatus, errorThrown) {
+        console.debug(XMLHttpRequest);
+        console.debug(textStatus);
+        console.debug(errorThrown);
+        });
         return false;
     }
     
@@ -304,9 +293,6 @@
         
         // meto la nueva data
         titulosTemplate.tmpl( data.data ).appendTo( titulosContainer );
-        
-        $('.styled_checkbox').checkbox().parent().click(__checkParentClick);
-
 
         //titulosContainer.delegate('li','click',onChangeHandlerTitulos );
         titulosContainer.find('li > input').change( onChangeHandlerTitulos );
