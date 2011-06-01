@@ -5,10 +5,10 @@
     $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
 ?>
 
+<h2 class="grid_12"><?php echo $cue_instit ?> <?php echo $instit['Instit']['nombre_completo'] ?></h2>
+
 <br />
 <div class="grid_12 boxblanca">
-    <h2 class="grid_12"><?php echo $cue_instit ?> <?php echo $instit['Instit']['nombre_completo'] ?></h2>
-            
         <dl class="grid_6 alpha">
             <?php if(!$con_programa_de_etp){?>
                 <dt>
@@ -147,11 +147,13 @@
     </div>
 
 
-    <h2 class="grid_12 separador alpha omega">Títulos o Certificaciones que brinda la Institución</h2>
-    <div class="clear"></div>
+    <h4 class="grid_11 prefix_1">Títulos o Certificaciones que brinda la Institución</h4>
     
-    <div class="grid_12 boxblanca">
+    <div class="grid_10 boxblanca">
 
+        <ul>
+            
+        
     <?php 
         $ofertaAnt = '';
         foreach ($instit['Plan'] as $plan) { ?>
@@ -161,46 +163,46 @@
             echo "<h4>". $plan['Titulo']['Oferta']['name'] ."</h4>";
             $ofertaAnt = $plan['Titulo']['Oferta']['id'];
         }
-        ?>
         
-        <div class="grid_4 alpha omega">
-            <div class="titulo_name"><?php echo $plan['nombre']?></div>
-        <dl class="titulo">
-                <dt>Nombre que le da el INET:</dt>
-                <dd><?php echo $plan['Titulo']['name']?></dd>
-                
-                <dt>Sector / Subsector:</dt>
-                <dd>
-                    <ul>
-                    <?php foreach($plan['Titulo']['SectoresTitulo'] as $sector) {?>
-                        <li><?php echo $sector['Sector']['name'] . ((!empty($sector['Subsector']))?('/' .  $sector['Subsector']['name']):'') ?></li>
-                    <?php
+        // inicializo el nombre del titulo que voy a escribir
+        $planTituloNombre = '';
+        $planNombre = $plan['nombre'];        
+        
+        
+        // si el titulo de referencia es distinto que el nombre del
+        // plan se lo tengo que agregar entre parentesis
+        // entonces quedaria: Asistente de Peluquero (Titulo: Peluquero)
+        if ( trim(strtolower($planNombre)) != trim(strtolower($plan['Titulo']['name'])) ){
+            
+            $planNombre .= ' (' .  $plan['Titulo']['name'] . ')';
+        }
+        
+        // si es FP le agrego la duracion
+        $duracion = '';
+        if (!empty($plan['duracion_hs'])){
+            $duracion = 'Duración:' . $plan['duracion_hs'] . ' hs.';
+        }
+        elseif (!empty($plan['duracion_semanas'])) {
+            $duracion = 'Duración:' . $plan['duracion_semanas']. ' semanas';
+        }  
+        
+        $planNombre .= $duracion;
+        
+        
+        // le agrego un link hacia el titulo de referencia
+        $link = $html->link('Ver Más' , array(
+            'controller' => 'titulos', 
+            'action' => 'view', 
+            $plan['Titulo']['id']
+            ), array(
+                'class' => 'mas_info_gris_small',
+            ));
+        $planNombre .= $link;
+        ?>
+            
+        <li><?php echo $planNombre?></li>
 
-                    }
-                    ?>
-                    </ul>
-                </dd>
                 
-<!--                <dt>Oferta:</dt>
-                <dd><?php echo $plan['Titulo']['Oferta']['name']?></dd>-->
-                
-                <?php if ($plan['Titulo']['Oferta']['id'] == FP_ID || $plan['duracion_hs'] || $plan['duracion_semanas']) { ?>
-                <dt>Duración:</dt>
-                <dd>
-                    <?php  
-                        if (!empty($plan['duracion_hs'])){
-                            echo $plan['duracion_hs'] . ' hs.';
-                        }
-                        elseif (!empty($plan['duracion_semanas'])) {
-                            echo $plan['duracion_semanas']. ' semanas';
-                        }  ?>
-                &nbsp;
-                </dd>
-                <?php } ?>
-                
-                
-        </dl>
-        </div>
     <?php }?>
     </div>
     
