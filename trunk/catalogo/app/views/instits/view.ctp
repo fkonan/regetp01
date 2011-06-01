@@ -209,7 +209,7 @@
             'action' => 'view', 
             $plan['Titulo']['id']
             ), array(
-                'alt' => 'Ver más información del título',
+                'title' => 'Ver más información del título',
                 'class' => 'mas_info_gris_small',
             ));
         $planNombre .= $link;
