@@ -329,8 +329,13 @@
         } else {
             titulosContainer.append(tgt.parentNode);
         }
-
-        institsForm.submit();
+        
+        if(titulosSeleccionadosContainer.children().length > 0){
+            institsForm.submit();
+        }else{
+            institsContainer.text("Sin Resultados");
+            institsPaginator.html("");
+        }
         return false;
     }
     
