@@ -158,7 +158,17 @@
         
         // inicializo el nombre del titulo que voy a escribir
         $planTituloNombre = '';
-        $planNombre = $plan['nombre'];        
+        // le agrego un link hacia el titulo de referencia
+        $link = $html->link('Ver Más' , array(
+            'controller' => 'titulos',
+            'action' => 'view',
+            $plan['Titulo']['id']
+            ), array(
+                'title' => 'Ver más información del título',
+                'class' => 'mas_info_gris_small',
+            ));
+        $planNombre = $link;
+        $planNombre .= $plan['nombre'];
         
         
         // si el titulo de referencia es distinto que el nombre del
@@ -179,18 +189,6 @@
         }  
         
         $planNombre .= $duracion;
-        
-        
-        // le agrego un link hacia el titulo de referencia
-        $link = $html->link('Ver Más' , array(
-            'controller' => 'titulos', 
-            'action' => 'view', 
-            $plan['Titulo']['id']
-            ), array(
-                'title' => 'Ver más información del título',
-                'class' => 'mas_info_gris_small',
-            ));
-        $planNombre .= $link;
         ?>
             
         <li><?php echo $planNombre?></li>
