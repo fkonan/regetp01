@@ -1,57 +1,96 @@
 <?php
-    echo $paginator->counter(array(
-    'format' => __('Instituciones %start%-%end% de <strong>%count%</strong>', true)
-    ));
+    echo $html->css('catalogo.instits', false);
+    echo $html->css('catalogo.advanced_search', false);
 
     $paginator->options(array(
         'url'     => $this->passedArgs,
         'update'  => 'tituloPlanes',
         'indicator' => 'spinner',
         ));
-
-    $i = 0;
-    if (!empty($planes)) {
-    ?>
-<table cellspacing="0" cellpadding="1">
-        <thead>
-        <th><?php echo $paginator->sort('Institución','Plan.instit_id');?></th>
-        <th><?php echo $paginator->sort('Localidad','Instit.localidad_id');?></th>
-        <th><?php echo $paginator->sort('Departamento','Instit.departamento_id');?></th>
-        <th><?php echo $paginator->sort('Jurisdicción','Instit.jurisdiccion_id');?></th>
-        </thead>
-        <?php
-        foreach ($planes as $plan) {
-            $class = '';
-            if ($i++ % 2 == 0) {
-                $class = 'altrow';
-            }
-        ?>
-        <tr>
-            <td style="text-align:left; vertical-align: middle;"><?php echo $html->link($plan['Instit']['nombre_completo'], array('controller'=>'Instits', 'action'=>'view', $plan['Instit']['id'])); ?></td>
-            <td style="text-align:left; vertical-align: middle;"><?php echo $plan['Instit']['Localidad']['name']; ?></td>
-            <td style="text-align:left; vertical-align: middle;"><?php echo $plan['Instit']['Departamento']['name']; ?></td>
-            <td style="text-align:left; vertical-align: middle;"><?php echo $plan['Instit']['Jurisdiccion']['name']; ?></td>
-        </tr>
-        <tr><td colspan="4" style="border-bottom:1px solid #CCCCCC;"></td></tr>
-        <?php
-        }
-        ?>
-    </table>
-    <?php
-    }
-    ?>
-    <div class="paginator_prev_next_links">
+?>
+<div class="grid_10 alpha omega prefix_1 suffix_1 boxblanca" id="search_results">
+    <div class="clear"></div>
+    <div class="grid_10 alpha list-header">
+        <div class="grid_6 alpha">
             <?php
-            if($paginator->numbers()){
-                    echo $paginator->prev('« Anterior ',null, null, array('class' => 'disabled', 'tag' => 'span'));
-                    echo " | ".$paginator->numbers(array('modulus'=>'9'))." | ";
-                    echo $paginator->next(' Siguiente »', null, null, array('class' => 'disabled'));
+            $sort = 'cue';
+            if(isset($this->passedArgs['sort'])){
+            $sort = $this->passedArgs['sort'];
             }
             ?>
-    </div>
+            Ordenar por:
+            <? $class = ($sort == 'Instit.cue')?'marcada':'';?>
+            <span class="<?= $class?>"><?php echo $paginator->sort('Institución','Instit.cue');?></span>,
 
-    <div id="spinner" style="display: none; text-align: center; margin-top:10px;">
-    <?php
-    echo $html->image('loadercircle16x16.gif')
-    ?>
+            <? $class = ($sort == 'Localidad.name')?'marcada':'';?>
+            <span class="<?= $class?>"><?php echo $paginator->sort('Localidad','Localidad.name');?></span>,
+
+            <? $class = ($sort == 'Departamento.name')?'marcada':'';?>
+            <span class="<?= $class?>"><?php echo $paginator->sort('Departamento','Departamento.name');?></span>,
+
+            <? $class = ($sort == 'Jurisdiccion.name')?'marcada':'';?>
+            <span class="<?= $class?>"><?php echo $paginator->sort('Jurisdiccion','Jurisdiccion.name');?></span>
+
+        </div>
+        <div class="grid_4 omega">
+            <?php echo $paginator->counter(array(
+                'format' => __('Instituciones %start%-%end% de <strong>%count%</strong>', true))); ?>
+        </div>
     </div>
+    <div class="clear"></div>
+
+    <ol id="items" class="grid_10 alpha omega">
+        <?php foreach($planes as $plan) : ?>
+            <?  $año_actual = date("Y");
+                $fecha_hasta = "$año_actual-07-21"; //hasta julio
+                $fecha_desde = "$año_actual-01-01"; //desde enero
+                $clase = '';
+                if($plan['Instit']['activo']) {
+                    $clase .= ' escuela_activa';
+                }else {
+                    $clase .= ' escuela_inactiva';
+                }
+            ?>
+
+            <li class="grid_10 alpha omega" style="margin-bottom: 5px;">
+                <span class="items-nombre grid_10 alpha omega">
+                    <?= "".($plan['Instit']['cue']*100)+$plan['Instit']['anexo']." - ". $plan['Instit']['nombre_completo']; ?>
+                </span>
+                <div class="clear"></div>
+                <div class="instit-items-domicilio1 alpha grid_3">
+                    <p>Domicilio: <?= $plan['Instit']['direccion'] ?></p>
+                    <p>Departamento: <?= $plan['Instit']['Departamento']['name'] ?></p>
+                </div>
+                <div class="instit-items-domicilio2 grid_3">
+                    <p>Localidad: <?= $plan['Instit']['Localidad']['name'] ?></p>
+                    <p>Jurisdicción: <?= $plan['Instit']['Jurisdiccion']['name'] ?></p>
+                </div>
+                <div class="instit-items-gestion grid_3"><?= $plan['Instit']['Gestion']['name'] ?></div>
+                <p class="items-actions grid_1">
+                    <a href="<?= $html->url('/instits/view/'.$plan['Instit']['id'])?>">
+                        <?php
+                            echo $html->image('../css/img/lupagris_small.png', array(
+                                'alt' => 'Mas informacion',
+                                'style' => 'border:0;',
+                                ));
+                        ?>
+                    </a>
+                </p>
+            </li>
+
+        <? endforeach?>
+    </ol>
+ 
+    <?php
+    if ($paginator->numbers()) {
+    ?>
+        <div style="text-align:center; display:block;margin-bottom: 10px">
+            <?php
+            echo $paginator->prev('« Anterior ',null, null, array('class' => 'disabled', 'tag' => 'span'));
+            echo " | ".$paginator->numbers(array('modulus'=>'9'))." | ";
+            echo $paginator->next(' Siguiente »', null, null, array('class' => 'disabled'));
+            ?>
+            <span class="ajax_update" id="ajax_paginator_indicator" style="display:none; padding-left:10px;"><?php echo $html->image('ajax-loader.gif')?></span>
+        </div>
+        <?php  } ?>
+</div>

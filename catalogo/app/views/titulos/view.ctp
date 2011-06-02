@@ -47,8 +47,6 @@ jQuery(document).ready(function() {
 </div>
 <div class="clear" style="height:20px;"></div>
 <h4><?php  __('Instituciones con Planes de Estudio asociados');?></h4>
-<div class="boxblanca" style="padding:15px;">
-    <div id="tituloPlanes">
-        <?php echo $this->requestAction('/titulos/ajax_view_planes_asociados/'.$titulo['Titulo']['id'], array('return')); ?>
-    </div>
+<div id="tituloPlanes" class="grid_12 alpha omega">
+    <?php echo $this->requestAction('/titulos/ajax_view_planes_asociados/'.$titulo['Titulo']['id'], array('return')); ?>
 </div>

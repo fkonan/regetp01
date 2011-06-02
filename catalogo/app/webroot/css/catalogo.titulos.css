@@ -36,33 +36,6 @@
     margin:0;
 }
 
-#tituloPlanes {
-    font-size: 8pt;
-}
-#tituloPlanes a {
-    text-decoration: none;
-}
-#tituloPlanes a:hover {
-    text-decoration: underline;
-}
-
-#tituloPlanes table {
-    width: 100%;
-}
-#tituloPlanes thead {
-    background-color: #87B7D9;
-    height: 18px;
-}
-#tituloPlanes thead th {
-    border-bottom: 1px solid #333333;
-    text-align: left;
-    margin-top: 4px;
-}
-#tituloPlanes thead th a {
-    text-decoration: none;
-    color: white;
-}
-
 .titulosview {
     background-color: white;
     

@@ -1,5 +1,6 @@
 <?php
 echo $html->css(array('catalogo.titulos'));
+debug($titulo);
 ?>
 <script type="text/javascript">
 jQuery(document).ready(function() {
