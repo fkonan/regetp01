@@ -11,8 +11,21 @@ echo $html->css(array(  'jquery.loadmask',
 <div class="grid_12 instits search_form">
 
     <h1><? __('Búsqueda de Instituciones')?></h1>
-
-    <div class="grid_12 boxblanca boxform">
+    <p>
+        Desde aquí obtendrás un listado de instituciones del Registro Nacional Educación Técnico Profesional según los criterios de búsqueda ingresados. 
+        Para obtener ayuda sobre el uso del buscador, haga click aqui
+        <a href="#boxAyuda" title="Ayuda sobre el buscador">
+        Ayuda
+        </a>
+        <?php
+        echo $html->image('help.png', array(
+            'alt' => 'Ayuda: ¿Cómo utilizar el buscador?',
+            'id' => 'littleHelpers',
+            'style' => 'border:0; margin-left:0;',
+            ));
+        ?>
+    </p>
+    <div class="grid_12 boxblancacuadrada boxform">
         <?php
         echo $form->create('Instit', array(
             'action' => 'search',
@@ -20,59 +33,39 @@ echo $html->css(array(  'jquery.loadmask',
             'id' =>'InstitSearchForm',
             )
         );
-
         echo $form->hidden('form_name',array('value'=>'buscador rapido'));
         ?>
-        <div style="margin-right: 0px; margin-left: 20px;">
-            <?php
-            echo $form->input('jurisdiccion_id',array(
-                    'label'=> 'Jurisdicción<br />',
-                    'empty'=> 'Todas',                    
-                    'div'  => array('style' => 'float:left; clear: none;'),
-                    'after' => '<cite>(Opcional. Si no selecciona una Jurisdicción se realizará una búsqueda en todo el Registro)</cite>'
-                    ));
-            ?>
-        </div>
-        <div class="clear" style="height: 8px;"></div>
-        <div class="grid_6 alpha">
+        <div class="grid_12">
             <div style="margin-left: 20px;">
-            <?php
-            echo $form->input('busqueda_libre', array(
-                    'id' => 'InstitCue',
-                    'label' => 'Criterios de Búsqueda<br />',
-                    'style' => 'width: 400px;',
-                    'div' => false
-                    ));
-            ?>
+                <?php
+                echo $form->input('jurisdiccion_id',array(
+                        'label'=> 'Jurisdicción',
+                        'empty'=> 'Todas',
+                        'div'=>array('style'=>'width:210px; float: left; clear: none'),
+                        'style'=> 'width:200px; float: left',
+                        ));
+                echo $form->input('busqueda_libre', array(
+                        'id' => 'InstitCue',
+                        'label' => 'CUE o Nombre de la Institución',
+                        'div'=>array('style'=>'width:540px; float: left; clear: none'),
+                        'style'=> 'width:530px; float: left',
+                        ));
+
+                echo $form->button('Buscar', array(
+                    'type' => 'submit',
+                    'class' => 'boton-buscar',
+                    'div'=>false,
+                    'style'=> 'width:80px; float: right;margin-top:17px;margin-right:20px',
+                     ));
+                ?>
             </div>
         </div>
-        <div class="grid_3 suffix_3 omega" style="padding-top:11px;" >
-        <?php
-            echo $form->button('Buscar', array(
-                'type' => 'submit',
-                'class' => 'boton-buscar',
-                'div' => false,
-                 ));
-            ?>
-            <a href="#boxAyuda" style="margin: 22px 2px 22px 22px;" title="Ayuda sobre el buscador">
-                Ayuda
-            </a>
-                <?php
-                echo $html->image('help.png', array(
-                    'alt' => 'Ayuda: ¿Cómo utilizar el buscador?',
-                    'id' => 'littleHelpers',
-                    'style' => 'border:0; margin-left:0;',
-                    ));
-                ?>
-        </div>
-        <div class="clear" style="height: 8px;"></div>
-        <div class="grid_2" style="margin-left: 20px;" >
+        <div style="float:right; margin-right: 10px">
             <?php
-            echo $html->link('Búsqueda avanzada','advanced_search_form',array(
-                'class'=>'link_right small',
-            ));
+                echo $html->link('Búsqueda avanzada','advanced_search_form',array(
+                    'class'=>'link_right small',
+                ));
             ?>
-            <a class="mas_info_gris_small"></a> 
         </div>
         <?php
         echo $form->end();
@@ -82,6 +75,7 @@ echo $html->css(array(  'jquery.loadmask',
     <?php echo $this->element('boxBuscadorAyuda'); ?>
     
     <!-- Aca se muestran los resultados de la busqueda-->
-    <div id='consoleResult' class="grid_12" style="min-height: 200px; margin-bottom: 20px;"></div>
+    <div id='consoleResult' class="grid_12" style="min-height: 200px; margin-bottom: 20px;margin-top: 20px;">
+    </div>
     
 </div>
