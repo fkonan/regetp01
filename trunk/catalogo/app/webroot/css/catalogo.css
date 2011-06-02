@@ -18,8 +18,8 @@ azules
 
 
 LABEL {
-    color: #000;
-    font-size: 0.8em;
+    color: #58585a;
+    font-size: 1.2em;
     clear: both;
     display: block;
 }
@@ -260,6 +260,12 @@ dd ul{
     -webkit-border-radius: 1em;
     -moz-border-radius: 1em;
     border-radius: 1em;
+}
+
+.boxblancacuadrada{
+    background-color: #fff;
+    border: 2px solid #F1F1F2;
+
 }
 
 .boxgris{

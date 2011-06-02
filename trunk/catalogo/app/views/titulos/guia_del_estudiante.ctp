@@ -1,30 +1,10 @@
 <?php echo $javascript->link('jquery/jquery.tmpl.min', false); ?>
 <?php echo $javascript->link('jquery/jquery.history', false); ?>
 <?php echo $javascript->link('jquery.loadmask.min', false); ?>
-<?php echo $javascript->link('jquery.multiselect.min', false); ?>
-<?php echo $javascript->link('jquery.checkbox.min', false); ?>
 <?php echo $html->css(array('jquery.loadmask', 
-                            'catalogo.guia_del_estudiante',
-                            'jquery.multiselect')); ?>
+                            'catalogo.guia_del_estudiante')); ?>
 
-<!-- 
-Inicializacion de url global para el manejo de los callbacks 
-y funciones javascript de esta pagina 
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        var urlDomain = "<?php echo $html->url('/')?>";
-
-        $("#TituloSectorId").multiselect({
-              noneSelectedText: 'Seleccione sectores',
-              selectedList: 4
-           });
-   });
-</script>
--->
-<!-- 
-Templates de jQuery para los resultados de busqueda
--->
+<h1>Guía del Estudiante</h1>
 <div class="clear" style="height:20px;"></div>
 
 <script id="tituloTemplate" type="text/x-jquery-tmpl">
