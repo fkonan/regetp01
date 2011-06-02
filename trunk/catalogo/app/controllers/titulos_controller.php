@@ -117,13 +117,7 @@ class TitulosController extends AppController {
         $this->set('titulos',$this->Titulo->find('list', array('conditions'=>$conditions)));
     }
 
-    function view($id = null) {
-        if ( $this->RequestHandler->isAjax() ) {
-            Configure::write ( 'debug', 0 );
-            $this->layout = false;
-            $this->render = 'view_popup';
-        }
-        
+    function view($id = null) {       
         if (!$id) {
             $this->flash(__('Invalid Titulo', true), array('action'=>'search'));
         }
@@ -148,7 +142,13 @@ class TitulosController extends AppController {
         );
         $planes = $this->paginate('Plan');
 
-        $this->set(compact('titulo','planes','planesResumen'));
+        $this->set(compact('titulo','planes'));
+
+        if ( $this->RequestHandler->isAjax() ) {
+            Configure::write ( 'debug', 0 );
+            $this->layout = false;
+            $this->render('view_popup');
+        }
     }
 
 
@@ -156,11 +156,12 @@ class TitulosController extends AppController {
         // Planes del Titulo
         $this->Titulo->Plan->recursive = -1;
         $this->paginate = array(
-                'limit'    => 6,
+                'limit'    => 20,
                 'page'    => 1,
                 'conditions' => array('Plan.titulo_id' => $id),
                 'contain' => array('Instit' => array(
                                                 'Tipoinstit',
+                                                'Gestion(name)',
                                                 'Localidad(name)',
                                                 'Departamento(name)',
                                                 'Jurisdiccion(name)')),
@@ -178,6 +179,7 @@ class TitulosController extends AppController {
         }
 
         $planes = $this->paginate('Plan');
+        
         $this->set('planes', $planes);
     }
 
