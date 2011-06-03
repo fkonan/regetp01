@@ -144,61 +144,63 @@
 
     <h4 class="grid_12">Títulos o Certificaciones que brinda la Institución</h4>
 
-    <div class="grid_9 boxblanca">
-    <ul id="titulos-list">
-    <?php 
-        $ofertaAnt = '';
-        foreach ($instit['Plan'] as $plan) { ?>
-        
-        <?
-        if ($ofertaAnt != $plan['Oferta']['id'] ) {
-            echo "<h4>". $plan['Oferta']['name'] ."</h4>";
-            $ofertaAnt = $plan['Oferta']['id'];
-        }
-        
-        // inicializo el nombre del titulo que voy a escribir
-        $planTituloNombre = '';
-        $planNombre = '';
-        // le agrego un link hacia el titulo de referencias
-        if(!empty($plan['Titulo'])){
-        $link = $html->link('Ver Más' , array(
-            'controller' => 'titulos',
-            'action' => 'view',
-            $plan['Titulo']['id']
-            ), array(
-                'title' => 'Ver más información del título',
-                'class' => 'mas_info_gris_small',
-            ));
-            $planNombre .= $link;
-        }
-        $planNombre .= $plan['nombre'];
-        
-        
-        // si el titulo de referencia es distinto que el nombre del
-        // plan se lo tengo que agregar entre parentesis
-        // entonces quedaria: Asistente de Peluquero (Titulo: Peluquero)
-        if (!empty($plan['Titulo']) && trim(strtolower($planNombre)) != trim(strtolower($plan['Titulo']['name'])) ){
-            
-            $planNombre .= ' (' .  $plan['Titulo']['name'] . ')';
-        }
-        
-        // si es FP le agrego la duracion
-        $duracion = '';
-        if (!empty($plan['duracion_hs'])){
-            $duracion = '. <cite>Duración:' . $plan['duracion_hs'] . ' hs.</cite>';
-        }
-        elseif (!empty($plan['duracion_semanas'])) {
-            $duracion = '. <cite>Duración:' . $plan['duracion_semanas']. ' semanas</cite>';
-        }  
-        
-        $planNombre .= $duracion;
-        ?>
-            
-        <li><?php echo $planNombre?></li>
-
+    <div class="grid_9">
+        <div class="boxblanca">
+            <ul id="titulos-list">
+            <?php 
+                $ofertaAnt = '';
+                foreach ($instit['Plan'] as $plan) { ?>
                 
-    <?php }?>
-        </ul>
+                <?
+                if ($ofertaAnt != $plan['Oferta']['id'] ) {
+                    echo "<h4>". $plan['Oferta']['name'] ."</h4>";
+                    $ofertaAnt = $plan['Oferta']['id'];
+                }
+                
+                // inicializo el nombre del titulo que voy a escribir
+                $planTituloNombre = '';
+                $planNombre = '';
+                // le agrego un link hacia el titulo de referencias
+                if(!empty($plan['Titulo'])){
+                $link = $html->link('Ver Más' , array(
+                    'controller' => 'titulos',
+                    'action' => 'view',
+                    $plan['Titulo']['id']
+                    ), array(
+                        'title' => 'Ver más información del título',
+                        'class' => 'mas_info_gris_small',
+                    ));
+                    $planNombre .= $link;
+                }
+                $planNombre .= $plan['nombre'];
+                
+                
+                // si el titulo de referencia es distinto que el nombre del
+                // plan se lo tengo que agregar entre parentesis
+                // entonces quedaria: Asistente de Peluquero (Titulo: Peluquero)
+                if (!empty($plan['Titulo']) && trim(strtolower($planNombre)) != trim(strtolower($plan['Titulo']['name'])) ){
+                    
+                    $planNombre .= ' (' .  $plan['Titulo']['name'] . ')';
+                }
+                
+                // si es FP le agrego la duracion
+                $duracion = '';
+                if (!empty($plan['duracion_hs'])){
+                    $duracion = '. <cite>Duración:' . $plan['duracion_hs'] . ' hs.</cite>';
+                }
+                elseif (!empty($plan['duracion_semanas'])) {
+                    $duracion = '. <cite>Duración:' . $plan['duracion_semanas']. ' semanas</cite>';
+                }  
+                
+                $planNombre .= $duracion;
+                ?>
+                    
+                <li><?php echo $planNombre?></li>
+        
+                        
+            <?php }?>
+            </ul>
+        </div>
     </div>
     <?php
 
