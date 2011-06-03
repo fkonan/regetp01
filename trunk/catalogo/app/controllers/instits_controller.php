@@ -16,7 +16,7 @@ class InstitsController extends AppController {
             $this->Session->setFlash(__('Institución Inválida.', true));
             $this->redirect(array('action'=>'index'));
         }
-        $this->Instit->contain(array('Localidad', 'Departamento', 'Jurisdiccion', 'Dependencia', 'Gestion', 'Orientacion', 'Claseinstit', 'EtpEstado',
+        $this->Instit->contain(array('Localidad', 'Departamento', 'Tipoinstit', 'Jurisdiccion', 'Dependencia', 'Gestion', 'Orientacion', 'Claseinstit', 'EtpEstado',
                                      'Plan'=>array('Titulo'=>array('SectoresTitulo'=>array('Sector','Subsector'),'Oferta'), 'Oferta','fields'=>'nombre','order'=>'oferta_id')));
         $instit = $this->Instit->find("first", $id);
 
