@@ -320,8 +320,6 @@
     
     
     var onChangeHandlerTitulos = function( e ) {   
-        e.preventDefault();
-        
         var tgt = e.currentTarget;
         
         if (tgt.checked) {
@@ -336,7 +334,6 @@
             institsContainer.text("Sin Resultados");
             institsPaginator.html("");
         }
-        return false;
     }
     
     
