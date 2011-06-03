@@ -78,8 +78,8 @@
                     ?>
                     </p>
                 </div>
-                <div class="instit-items-gestion grid_3 push_1"><?= $instit['Gestion']['name'] ?></div>
-                <p class="items-actions grid_1">
+                <div class="instit-items-gestion grid_3"><?= $instit['Gestion']['name'] ?></div>
+                <p class="items-actions grid_1 omega">
                     <a href="<?= $html->url('/instits/view/'.$instit['Instit']['id'])?>">
                         <?php
                             echo $html->image('../css/img/lupagris_small.png', array(
