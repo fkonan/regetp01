@@ -11,7 +11,9 @@
 <div class="grid_12 titulos search">
     
     <h1><?php __('Búsqueda de Títulos');?></h1>
-
+    <p>
+        Desde aquí obtendrás un listado de títulos o certificaciones de la Educación Técnico Profesional según los criterios de búsqueda ingresados.
+    </p>
     <div class="grid_12 alpha omega boxblanca boxform">
         <?php
         echo $form->create('Titulo', array(
@@ -140,18 +142,6 @@
     </div>
     
     <!-- Aca se muestran los resultados de la busqueda-->
-    <div id="consoleResult" class="grid_12 alpha omega" style="min-height:200px; margin-top:30px; padding-bottom:20px;"></div>
+    <div id="consoleResult" class="grid_12 alpha omega" style="min-height:200px; margin-top:15px; padding-bottom:20px;"></div>
 
 </div>
-
-<script type="text/javascript">
-    jQuery(document).ready(function() {
-<?php
-if ($bySession) {
-    ?>
-            jQuery("#TituloSearchForm").submit();
-    <?php
-}
-?>
-    });
-</script>
