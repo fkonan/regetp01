@@ -65,21 +65,11 @@
             <dt><?php __('Dirección'); ?>:</dt>
             <dd>
             <?php
-                if(!empty($instit['Instit']['direccion'])) {
-                    echo $instit['Instit']['direccion'].", ";
-                }
-                if(!empty($instit['Instit']['lugar'])) {
-                    echo $instit['Instit']['lugar'].", ";
-                }
-                if(!empty($instit['Localidad']['name'])) {
-                    echo $instit['Localidad']['name'].", ";
-                }
-                if(!empty($instit['Departamento']['name'])) {
-                    echo $instit['Departamento']['name'].", ";
-                }
-                if(!empty($instit['Jurisdiccion']['name'])) {
-                    echo $instit['Jurisdiccion']['name'];
-                }
+
+                echo joinNotNull(", ", array($instit['Instit']['direccion'],$instit['Instit']['lugar'],
+                                             $instit['Localidad']['name'],$instit['Departamento']['name'],
+                                             $instit['Jurisdiccion']['name']));
+
             ?>
             </dd>
 

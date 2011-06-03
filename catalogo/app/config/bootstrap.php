@@ -292,4 +292,14 @@ function isNull($val,$nullString)
     return (strlen($val) == 0)?$nullString:$val;
 }
 
+function notEmpty($var)
+{
+    return !empty($var);
+}
+
+function joinNotNull($glue, $val){
+    $values = array_filter($val, "notEmpty");
+    echo join(", ", $values);
+}
+
 ?>
