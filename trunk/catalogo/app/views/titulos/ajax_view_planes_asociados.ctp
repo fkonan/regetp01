@@ -20,7 +20,7 @@
             ?>
             Ordenar por:
             <? $class = ($sort == 'Instit.cue')?'marcada':'';?>
-            <span class="<?= $class?>"><?php echo $paginator->sort('Institución','Instit.cue');?></span>,
+            <span class="<?= $class?>"><?php echo $paginator->sort('CUE','Instit.cue');?></span>,
 
             <? $class = ($sort == 'Localidad.name')?'marcada':'';?>
             <span class="<?= $class?>"><?php echo $paginator->sort('Localidad','Localidad.name');?></span>,

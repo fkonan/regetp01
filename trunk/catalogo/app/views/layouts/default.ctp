@@ -126,7 +126,7 @@ $javascript;
                         <?php echo $content_for_layout; ?>           
        </div> <!-- FIN div #container -->
                     
-       <div class="clear"></div>
+       <div class="clear" style="height: 30px;"></div>
        <div id="footer">
            <div class="sponsors">
             <?php

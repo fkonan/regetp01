@@ -12,8 +12,8 @@ jQuery(document).ready(function() {
     });
 </script>
 <h2><?php echo $titulo['Titulo']['name']?></h2>
-<div class="grid_6 alpha omega boxblanca">
-    <dl>
+<div class="grid_12 boxblanca">
+    <dl style="padding-left: 20px;">
         <dt ><?php __('Oferta'); ?>:</dt>
         <dd>
             <?php
@@ -47,6 +47,6 @@ jQuery(document).ready(function() {
 </div>
 <div class="clear" style="height:20px;"></div>
 <h4><?php  __('Instituciones con Planes de Estudio asociados');?></h4>
-<div id="tituloPlanes" class="grid_12 alpha omega">
+<div id="tituloPlanes" class="grid_12">
     <?php echo $this->requestAction('/titulos/ajax_view_planes_asociados/'.$titulo['Titulo']['id'], array('return')); ?>
 </div>

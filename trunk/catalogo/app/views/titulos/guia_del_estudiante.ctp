@@ -27,7 +27,7 @@
     </div>   
 </script>
 
-<div class="grid_12 alpha omega boxgris">
+<div class="grid_12 boxgris">
      <?php echo $html->image('1-icon.png', array('class' => 'step'));?>
     <h2>Seleccione Criterios de Busqueda:</h2>
     <div id="filtro" class="boxblanca">
@@ -67,7 +67,7 @@
             'action'=>'search.json',
             'id'=>'InstitSearchForm', 'name'=>'InstitSearchForm' ));
 ?>
-<div id="resultados" class="grid_12 alpha omega">
+<div id="resultados" class="grid_12">
     <div id="li_titulos" class="grid_6 alpha boxgris">
         <?php echo $html->image('2-icon.png', array('class' => 'step'));?>
         <h2>Seleccioná el titulo de interes</h2>
