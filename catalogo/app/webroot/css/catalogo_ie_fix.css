@@ -11,3 +11,10 @@
     background: url(img/header_completo.png) no-repeat;
     /* background: url(img/header_degrade.png) repeat-y; */
 }
+
+.step{
+     float: left;
+     margin-left: 10px !important;
+     margin-top: 10px !important;
+     width: 21px;
+}
