@@ -9,8 +9,8 @@ $paginator->options(array(  'update' => 'consoleResult',
         jQuery("#TituloBysession").val(0);
     }
 </script>
-<div id="search_results" class="grid_10 prefix_1 suffix_1 alpha omega boxblanca">
-    <div class="grid_10 alpha list-header">
+<div id="search_results" class="grid_12 alpha omega boxblanca" style="padding:5px">
+    <div class="grid_12 alpha list-header">
         <div class="grid_3 suffix_3 alpha">
             <?php
             $sort = 'cue';
@@ -34,20 +34,21 @@ $paginator->options(array(  'update' => 'consoleResult',
     <div class="clear"></div>
 
     <? if (sizeof($titulos) > 0) {?>
-    <ol id="items" class ="grid_10 alpha omega">
+    <ol id="items" class ="grid_12 alpha omega">
             <?php
             $i = 0;
             foreach ($titulos as $titulo):
                 ?>
-        <li class="grid_10 alpha omega">
+        <li class="grid_12 alpha omega">
             <span class="items-nombre alpha grid_7">
-                        <?php
+                        <strong><?php
                         /*$linkTitulo = $html->link(
                                 " (".count($titulo['Plan'])." planes)",
                                 '/titulos/corrector_de_planes/Plan.titulo_id:'.$titulo['Titulo']['id'],
                                 array('target'=>'_blank')
                                 );*/
                         echo $titulo['Titulo']['name']; ?>
+                        </strong>
             </span>
             <!--<p>
                     <?php
@@ -56,7 +57,7 @@ $paginator->options(array(  'update' => 'consoleResult',
                     }
                     ?>
             </p>-->
-            <span class="titulos-items-oferta grid_2">
+            <span class="titulos-items-oferta grid_4">
                         <?php
                         echo (empty($titulo['Oferta']['name']))? "" : $titulo['Oferta']['name'];
                         ?>

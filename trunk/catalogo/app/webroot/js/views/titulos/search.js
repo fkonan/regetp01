@@ -146,7 +146,7 @@
                 jQuery("#TituloJurDepLoc").val("");
             });
 
-            formElement.submit();
+            //formElement.submit();
         });
     }
 
