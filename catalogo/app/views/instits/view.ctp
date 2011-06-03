@@ -65,11 +65,10 @@
             <dt><?php __('Dirección'); ?>:</dt>
             <dd>
             <?php
-
                 echo joinNotNull(", ", array($instit['Instit']['direccion'],$instit['Instit']['lugar'],
-                                             $instit['Localidad']['name'],$instit['Departamento']['name'],
+                                             $instit['Localidad']['name'],
+                                             $instit['Departamento']['name'] == $instit['Localidad']['name']?null:$instit['Departamento']['name'],
                                              $instit['Jurisdiccion']['name']));
-
             ?>
             </dd>
 
