@@ -11,6 +11,9 @@ ol, ul {
     margin: 0;
     padding: 3px 0;
     position: relative;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
 }
 
 .paginator_prev_next_links {

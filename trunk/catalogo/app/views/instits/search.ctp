@@ -1,7 +1,7 @@
 <?php  $paginator->options(array('update' => 'consoleResult', 'url' => $this->passedArgs,'indicator'=> 'ajax_indicator')); ?>
 
 <?php echo $html->css(array('catalogo.advanced_search', 'catalogo.instits'), $inline=false); ?>
-<div class="grid_10 alpha omega prefix_1 suffix_1 boxblanca" id="search_results">
+<div class="grid_12 alpha omega boxblanca" style="padding:5px" id="search_results">
 <div class="clear"></div>
 <? if (sizeof($conditions)>0): ?>
 	Criterios de búsqueda seleccionados:
@@ -20,7 +20,7 @@
 	?>
 	</dl>
 <? endif; ?>
-    <div class="grid_10 alpha list-header">
+    <div class="grid_12 alpha list-header">
         <div class="grid_6 alpha">
         <?php
         $sort = 'cue';
@@ -50,7 +50,7 @@
     <div class="clear"></div>
 
     <? if (sizeof($instits) > 0) :?>
-    <ol id="items" class="grid_10 alpha omega">
+    <ol id="items" class="grid_12 alpha omega">
         <?php foreach($instits as $instit) : ?>
             <?  $año_actual = date("Y");
                 $fecha_hasta = "$año_actual-07-21"; //hasta julio
@@ -63,20 +63,33 @@
                 }
             ?>
 
-            <li clasS="grid_10 alpha omega">
-                <span class="items-nombre grid_10 alpha omega">
+            <li clasS="grid_12 alpha omega">
+                <span class="items-nombre grid_12 alpha omega">
                     <?= "".($instit['Instit']['cue']*100)+$instit['Instit']['anexo']." - ". $instit['Instit']['nombre_completo']; ?>
                 </span>
                 <div class="clear"></div>
-                <div class="instit-items-domicilio1 alpha grid_3">
-                    <p>Domicilio: <?= $instit['Instit']['direccion'] ?></p>
-                    <p>Departamento: <?= $instit['Departamento']['name'] ?></p>
+                <div class="instit-items-domicilio1 alpha grid_8">
+                    <p>Domicilio: 
+                    <?php
+                        if(!empty($instit['Instit']['direccion'])) {
+                            echo $instit['Instit']['direccion'].", ";
+                        }
+                        if(!empty($instit['Instit']['lugar'])) {
+                            echo $instit['Instit']['lugar'].", ";
+                        }
+                        if(!empty($instit['Localidad']['name'])) {
+                            echo $instit['Localidad']['name'].", ";
+                        }
+                        if(!empty($instit['Departamento']['name'])) {
+                            echo $instit['Departamento']['name'].", ";
+                        }
+                        if(!empty($instit['Jurisdiccion']['name'])) {
+                            echo $instit['Jurisdiccion']['name'];
+                        }
+                    ?>
+                    </p>
                 </div>
-                <div class="instit-items-domicilio2 grid_3">
-                    <p>Localidad: <?= $instit['Localidad']['name'] ?></p>
-                    <p>Jurisdicción: <?= $instit['Jurisdiccion']['name'] ?></p>
-                </div>
-                <div class="instit-items-gestion grid_3"><?= $instit['Gestion']['name'] ?></div>
+                <div class="instit-items-gestion grid_3 push_1"><?= $instit['Gestion']['name'] ?></div>
                 <p class="items-actions grid_1">
                     <a href="<?= $html->url('/instits/view/'.$instit['Instit']['id'])?>">
                         <?php
