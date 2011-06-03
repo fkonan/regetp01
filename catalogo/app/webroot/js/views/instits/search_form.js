@@ -41,7 +41,7 @@
 
     function blockResultConsole(formData, jqForm, options) {
         $('#consoleResult').mask('Buscando');
-        $('.help_body').hide();
+        $('#boxAyuda').hide();
         
         if($('.help_head').hasClass('menu_head')){
             $('.help_head').removeClass('menu_head').addClass('menu_head_open');
@@ -95,7 +95,7 @@
         // link de ayuda
         $('A[href="#boxAyuda"]').click(function(){
             //console.debug($('#boxAyuda'));
-            $('.help_body').toggle('fade');
+            $('#boxAyuda').toggle('fade');
             return false;
         });
         
