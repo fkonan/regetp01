@@ -404,6 +404,39 @@ dd ul{
    width: 80px;
 }
 
+/**/
+
+.formu_6 input{
+    width: 340px;
+}
+
+.formu_6 .input{
+    margin-bottom: 3px;
+}
+
+.formu_6 label{
+    display: inline;
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 80px;
+}
+
+.formu_6 textarea{
+    width: 430px;
+    margin-left: 10px;
+    margin-bottom: 2px;
+}
+
+.formu_6 .submit{
+    margin-left: 10px;
+    margin-bottom: 10px;
+    width: 80px;
+}
+.formu_6 input[type='submit']{
+   width: 80px;
+}
+/**/
 
 .boxform {
     padding-top: 20px;

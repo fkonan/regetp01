@@ -1,23 +1,18 @@
 <h1>Contáctenos</h1>
-
-
-<div class="grid_2">
-     <?php echo $html->image('img_cont_contacto_transp.png', array('class'=>'grid_1 alpha omega')); ?>
+<div class="grid_6">
+     <div class='boxblanca formu_6'>
+          <br />
+          <?php
+          echo $form->create('Correo', array('action' => 'contacto'));
+          echo $form->input('from', array('label'=>'Nombre'));
+          echo $form->input('mail', array('label'=>'E-Mail'));
+          echo $form->input('telefono', array('label'=>'Teléfono'));
+          echo $form->input('descripcion', array('label'=>false, 'rows' => 5, 'cols' => 50));
+          echo $form->end('Enviar');
+          ?>    
+    </div>
 </div>
-
-<div class="omega boxblanca formu_4">
-    <br />
-    <?php
-    echo $form->create('Correo', array('action' => 'contacto'));
-    echo $form->input('from', array('label'=>'Nombre'));
-    echo $form->input('mail', array('label'=>'E-Mail'));
-    echo $form->input('telefono', array('label'=>'Teléfono'));
-    echo $form->input('descripcion', array('label'=>false, 'rows' => 5, 'cols' => 50));
-    echo $form->end('Enviar');
-    ?>
-</div>
-
-<div class="grid_4 boxgris" style="height: 200px">
+<div class="grid_6 boxgris" style="height: 220px">
      
     <h2 style="margin: 10px 20px;">Formulario de Contacto</h2>
     <p style="margin: 10px 20px;">   
