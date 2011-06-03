@@ -1,7 +1,7 @@
 (function($){
     // EVENTOS MANEJADOS on dom loaded
     $(function(){
-        $('.alerta-desactualizada').click(handleAlertaDesactualizada);
+        $('#alerta-desactualizada').click(handleAlertaDesactualizada);
     });
 
     
@@ -10,12 +10,13 @@
         
         e.preventDefault();
         
-        var ventanitaDelAmor = document.createElement('div');     
+        var ventanitaDelAmor = document.createElement('div');
         ventanitaDelAmor.title = 'Formulario de Envío';
-        var params = "cue_instit:" + $(this).attr('instit-cue') + "/nombre_completo:" + $(this).attr('instit-nombre');
-        
-        $(ventanitaDelAmor).load( document.referrer+'correos/desactualizada/'+params, function(){
-            $(ventanitaDelAmor).find('form').submit(function(e){                
+        var params = "cue_instit:" + $("#instit-cue").val() + "/nombre_completo:" + $("#instit-nombre").val();
+
+        $(ventanitaDelAmor).load($("#urlDesactualizada").val() + '/' + params, function(data){
+            $(ventanitaDelAmor).html(data);
+            $(ventanitaDelAmor).find('form').submit(function(e){
                 e.preventDefault();
                 $.post(this.action, $(this).serialize(), function(e,t){
                     $(ventanitaDelAmor).dialog('close');
@@ -31,6 +32,7 @@
                         modal: true,
                         resizable: false
                     });
+
         return false;
     }
 })(jQuery);
