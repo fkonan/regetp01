@@ -13,7 +13,7 @@
             }
             ?>
             <? $class = ($sort == 'cue')?'marcada':'';?>
-        <li class="<?= $class?>"><?php echo $paginator->sort('cue');?></li>
+        <li class="<?= $class?>"><?php echo $paginator->sort('CUE','cue');?></li>
 
             <? $class = ($sort == 'Jurisdiccion.name')?'marcada':'';?>
         <li class="<?= $class?>"><?php echo $paginator->sort('Jurisdicción','Jurisdiccion.name');?></li>

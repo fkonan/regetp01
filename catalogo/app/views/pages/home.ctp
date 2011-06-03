@@ -32,58 +32,64 @@ instituciones de educación técnico profesional.
     </ul>
 </div>
 
-<?php echo $html->image('/css/img/me_trans.png', array('class' => 'grid_3'))?>
+<?php echo $html->image('/css/img/me_trans.png', array('class' => 'grid_3', 'style' => 'padding-top:35px;'))?>
 
 
     
-<h2 class="separador grid_4">Búsquedas por Perfiles</h2>
+<h2 class="separador grid_4">Búsqueda por Perfiles</h2>
 <div class="clear"></div>
 
-<div class="boxblanca grid_4">
-    <div class="box_pad_wrapper">
-    <h3>Estudiantes</h3>        
-    <h4><?php echo $html->link('Guía del Estudiante',array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'));?></h4>
-
-    <?php echo $html->link('más información', 
-            array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'),
-            array('class'=>'mas_info_gris'));?>
-    <p>
-       La Guía del Estudiante ayudará a que puedas encontrarar donde estudiar y obtener un título o certificación según tus gustos e intereses.
-    </p>
-    </div>
-</div>
-    
-<div class="boxblanca grid_8">
-    <h3 style="margin-left: 10px; margin-bottom: 0px;">Empresas, profesionales, funcionarios y otros</h3>
-    <div class="grid_4 alpha" style="">                   
+<div class="grid_4">
+    <div class="boxblanca">
         <div class="box_pad_wrapper">
-            <h4><?php echo $html->link('Buscador de Títulos',array('controller'=>'titulos', 'action'=>'search'));?></h4>
-            <?php echo $html->link('más información', 
-                    array('controller'=>'titulos', 'action'=>'search'),
-                    array('class'=>'mas_info_gris'));?>
-            <p>
-               Desde aquí obtendrás un listado de títulos o certificaciones de la Educación Técnico Profesional según los criterios de búsqueda ingresados.
-            </p>
-        </div>
-    </div>
+        <h3>Estudiantes</h3>
+        <h4><?php echo $html->link('Guía del Estudiante',array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'));?></h4>
 
-
-    <div class="grid_4 alpha omega" style="margin-left: -1px; border-left: solid #dcddde 1px;">
-        <div class="box_pad_wrapper" style="margin-left: 10px; padding-right: 0px;">
-            <h4><?php echo $html->link('Buscador de Instituciones',array('controller'=>'instits', 'action'=>'search_form'))?></h4>
-        <?php echo $html->link('más información', 
-                array('controller'=>'instits', 'action'=>'search_form'),
+        <?php echo $html->link('más información',
+                array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'),
                 array('class'=>'mas_info_gris'));?>
         <p>
-           Desde aquí obtendrás un listado de instituciones del Registro Nacional Educación Técnico Profesional según los criterios de búsqueda ingresados.
+           La Guía del Estudiante ayudará a que puedas encontrarar donde estudiar y obtener un título o certificación según tus gustos e intereses.
         </p>
         </div>
     </div>
+</div>
+    
+<div class="grid_8">
+    <div class="boxblanca">
+        <h3 style="margin-left: 10px; margin-bottom: 0px;">Empresas, profesionales, funcionarios y otros</h3>
+        <div class="box_home_buscadores">
+            <div class="box_pad_wrapper">
+                <h4><?php echo $html->link('Buscador de Títulos',array('controller'=>'titulos', 'action'=>'search'));?></h4>
+                <?php echo $html->link('más información',
+                        array('controller'=>'titulos', 'action'=>'search'),
+                        array('class'=>'mas_info_gris'));?>
+                <p>
+                   Desde aquí obtendrás un listado de títulos o certificaciones de la Educación Técnico Profesional según los criterios de búsqueda ingresados.
+                </p>
+            </div>
+        </div>
 
+        <div class="box_home_buscadores_separador">&nbsp;</div>
+
+        <div class="box_home_buscadores">
+            <div class="box_pad_wrapper" style="margin-left: 10px; padding-right: 0px;">
+                <h4><?php echo $html->link('Buscador de Instituciones',array('controller'=>'instits', 'action'=>'search_form'))?></h4>
+            <?php echo $html->link('más información',
+                    array('controller'=>'instits', 'action'=>'search_form'),
+                    array('class'=>'mas_info_gris'));?>
+            <p>
+               Desde aquí obtendrás un listado de instituciones del Registro Nacional Educación Técnico Profesional según los criterios de búsqueda ingresados.
+            </p>
+            </div>
+        </div>
+
+        <div class="clear"></div>
+    </div>
 </div>
 
 
-<h2 class="grid_12">Búsquedas por Oferta</h2>
+<h2 class="grid_12">Búsqueda por Oferta</h2>
     
 <div class="clear"></div>
     

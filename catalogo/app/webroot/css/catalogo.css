@@ -44,8 +44,8 @@ body{
     color: #58585a;
     margin: 0px;
     padding: 0px;
-    font-size: 80%;
-    font-family: Arial,Helvetica,sans-serif;
+    font-family: sans-serif;
+    font-size: 9pt;
 }
 
 h1, h2, h3, h4 {
@@ -191,7 +191,7 @@ dd ul{
     margin: 0 auto;
     color: #fff;
     font-weight: bolder;
-    font-size: 0.8em;
+    font-size: 0.9em;
 }
 
 #header h1 a:hover {
@@ -209,8 +209,8 @@ dd ul{
 
 .sponsors{
     margin-top: 15px;
-    margin-bottom: 20px;
-    border-top: 1px solid #A3A29C;
+    margin-bottom: 10px;
+    border-top: 1px solid #e2e2e4;
     overflow: hidden;
     text-align: center;
 }
@@ -226,7 +226,7 @@ dd ul{
     background-color: #fff;
     text-align: center;
     color: #A3A29C;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 }
 
 #container{
@@ -256,7 +256,7 @@ dd ul{
 
 .boxblanca{
     background-color: #fff;
-    
+    border: 1px solid #e2e2e4;
     -webkit-border-radius: 1em;
     -moz-border-radius: 1em;
     border-radius: 1em;
@@ -435,4 +435,17 @@ dd ul{
 
 .help_body table tr td{
     border-bottom: 1px solid #CCCCCC;
+}
+
+.box_home_buscadores {
+    width: 49%;
+    float: left;
+}
+
+.box_home_buscadores_separador {
+    width: 1%;
+    float: left;
+    border-left: 1px solid #e2e2e4;
+    height: 58px;
+    margin-top: 30px;
 }
