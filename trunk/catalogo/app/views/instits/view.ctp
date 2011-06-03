@@ -191,14 +191,21 @@
             </ul>
         </div>
     </div>
-    <?php
 
-        echo $html->link(
-                'Si ha notado algún dato desactualizado, haga click aquí',
-                '/correos/contacto',
-                array(
-                   'class'         => "grid_3 boxgris alerta-desactualizada",
-                   'instit-nombre' => $instit['Instit']['nombre_completo'],
-                   'instit-cue'    => $cue_instit,
-                ));
+    <?php
+    // se utilizan para pop-up de alerta desactualizada
+    echo $form->hidden('instit-nombre', array('id' => 'instit-nombre', 'value' => $instit['Instit']['nombre_completo']));
+    echo $form->hidden('instit-cue', array('id' => 'instit-cue', 'value' => $cue_instit));
+    echo $form->hidden('urlDesactualizada', array('id' => 'urlDesactualizada', 'value' => $html->url('/correos/desactualizada')));
+    ?>
+    <div id="alerta-desactualizada" class="grid_3 boxgris alerta-desactualizada">
+        Si ha notado algún dato desactualizado, haga click aquí
+    </div>
+    <? /*echo $html->link(
+            '<div id="alerta-desactualizada" class="grid_3 boxgris alerta-desactualizada">
+    Si ha notado algún dato desactualizado, haga click aquí</div>',
+            '#',
+            array(
+               'escape' => false
+            ));*/
     ?>
