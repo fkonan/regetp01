@@ -8,8 +8,8 @@
     
     
     var titulosForm = $('#TituloSearchForm');
-    var titulosContainer = $( "#li_titulos > UL.results" );
-    var titulosSeleccionadosContainer = $( "#li_titulos > UL.seleccionados" );    
+    var titulosContainer = $( "#li_titulos ul.results" );
+    var titulosSeleccionadosContainer = $( "#li_titulos UL.seleccionados" );    
     var titulosPaginator = $("#li_titulos > .paginatorContainer")
     var titulosTemplate = $("#tituloTemplate");
     var tituloOfertaCombo = $("#TituloOfertaId");
