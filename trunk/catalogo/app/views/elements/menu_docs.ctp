@@ -1,6 +1,8 @@
+<h1 class="grid_12">Documentaci&oacute;n</h1>
+
 <div id="menu1" class="grid_3">
     <div class="boxblanca">
-        <h2>Documentaci&oacute;n</h2>
+        
         <p><a href="introduccion">Introducci&oacute;n</a></p>
         <h4>Informaci&oacute;n sectorial</h4>
         <ul>

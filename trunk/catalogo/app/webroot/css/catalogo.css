@@ -106,6 +106,7 @@ h3 {
 
 ol, ul {
     list-style: url(img/listitem.gif);
+    padding-left: 30px;
 }
 
 
@@ -260,6 +261,7 @@ dd ul{
     -webkit-border-radius: 1em;
     -moz-border-radius: 1em;
     border-radius: 1em;
+    padding: 5px 10px;
 }
 
 .boxblancacuadrada{
@@ -273,7 +275,8 @@ dd ul{
     -webkit-border-radius: 1em;
     -moz-border-radius: 1em;
     border-radius: 1em;
-
+    padding: 5px 10px;
+    border: 1px solid #D1D2D3;
 }
 
 

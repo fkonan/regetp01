@@ -41,7 +41,6 @@ instituciones de educación técnico profesional.
 
 <div class="grid_4">
     <div class="boxblanca">
-        <div class="box_pad_wrapper">
         <h3>Estudiantes</h3>
         <h4><?php echo $html->link('Guía del Estudiante',array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'));?></h4>
 
@@ -51,7 +50,6 @@ instituciones de educación técnico profesional.
         <p>
            La Guía del Estudiante ayudará a que puedas encontrarar donde estudiar y obtener un título o certificación según tus gustos e intereses.
         </p>
-        </div>
     </div>
 </div>
     
@@ -93,8 +91,8 @@ instituciones de educación técnico profesional.
     
 <div class="clear"></div>
     
-<div class="grid_4 boxgris">
-     <div class="box_pad_wrapper">
+<div class="grid_4">
+     <div class="boxgris">
     <h4><?php echo $html->link('Secundario Técnico',array('controller'=>'titulos', 'action'=>'search', SEC_TEC_ID));?></h4>
 
     <?php echo $html->link('más información', 
@@ -107,8 +105,8 @@ instituciones de educación técnico profesional.
 
 </div>
     
-<div class="grid_4 boxgris">
-    <div class="box_pad_wrapper">
+<div class="grid_4">
+    <div class="boxgris">
     <h4><?php echo $html->link('Superior Técnico', array('controller'=>'titulos', 'action'=>'search', SUP_TEC_ID));?></h4>
 
     <?php echo $html->link('más información', 
@@ -121,8 +119,8 @@ instituciones de educación técnico profesional.
 </div>
 
 
-<div class="grid_4 boxgris">
-    <div class="box_pad_wrapper">
+<div class="grid_4">
+    <div class="boxgris">
         <h4><?php echo $html->link('Formación Profesional', array('controller'=>'titulos', 'action'=>'search', FP_ID));?></h4>
 
         <?php echo $html->link('más información', 
