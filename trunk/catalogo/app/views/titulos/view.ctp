@@ -34,19 +34,19 @@ jQuery(document).ready(function() {
             } ?>
         </dd>
 
-        <dt ><?php __('Sectores/Subsectores'); ?>:</dt>
+        <dt ><?php __('Sectores / Subsectores'); ?>:</dt>
         <dd>
             <?php
             foreach ($titulo['SectoresTitulo'] as $sector) {
                 echo $sector['Sector']['name'];
-                echo (!empty($sector['Subsector']['name']) ? '/'.$sector['Subsector']['name'] : '' );
+                echo (!empty($sector['Subsector']['name']) ? ' / '.$sector['Subsector']['name'] : '' );
                 echo "<br />";
             } ?>
         </dd>
     </dl>
 </div>
 <div class="clear" style="height:20px;"></div>
-<h4><?php  __('Instituciones con Planes de Estudio asociados');?></h4>
+<h4><?php  __('Instituciones que ofrecen el título o certificación');?></h4>
 <div id="tituloPlanes" class="grid_12">
     <?php echo $this->requestAction('/titulos/planes_asociados/'.$titulo['Titulo']['id'], array('return')); ?>
 </div>
