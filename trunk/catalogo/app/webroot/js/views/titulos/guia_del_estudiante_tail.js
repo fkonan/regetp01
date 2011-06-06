@@ -265,20 +265,20 @@
 
     var __recargaCombo = function (combo,data){
         var options = [];
-        var i = 0;
         var label = titulosForm.find("label[for=" + combo.attr("id") + "]");
-
+        options.push('<option value="">Seleccione...</option>');
+        var n = 0;
         for (key in data) {
-            i++;
-            if(i == 1){
-                options.push('<option value="">Seleccione...</option>');
-            }
+          if(key != "" && data[key] != ""){
             options.push('<option value="',
-              key, '">',
-              data[key], '</option>');
+                         key, '">',
+                         data[key], '</option>');
+            n++;
+          }
         }
+        
 
-        if(i > 1){
+        if(n > 2){
             combo.html(options.join(''));
             __showWithLabel(combo);
         }
