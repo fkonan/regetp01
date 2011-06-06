@@ -29,8 +29,8 @@ $html->css(array('jquery.loadmask',
         numbers}}</p>
     </div>
 </script>
-
-<div class="grid_12 boxgris">
+<div class="grid_12">
+<div class="boxgris">
      <?php echo $html->image('1-icon.png', array('class' => 'step'));?>
     <h2>Seleccione Criterios de Busqueda:</h2> <div id="filtro"
     class="boxblanca">
@@ -53,11 +53,13 @@ $html->css(array('jquery.loadmask',
         <?php echo $form->end();?>
     </div>
 </div>
+</div>
 
 <div class="clear" style="height:20px;"></div>
 
 <div id="resultados" class="grid_12">
-    <div id="li_titulos" class="grid_6 alpha boxgris">
+    <div class="grid_6 alpha">
+    <div id="li_titulos" class="boxgris">
                             <?php echo $form->create('Instit', array(
                             'controller'=>'instits', 'action'=>'search.json',
                             'id'=>'InstitSearchForm', 'name'=>'InstitSearchForm' ));
@@ -70,14 +72,16 @@ $html->css(array('jquery.loadmask',
         </ul>
         <?php echo $form->end(); ?>
     </div>
+    </div>
     
-
-    <div id="li_instits" class="grid_6 omega boxgris">
+    <div class="grid_6 omega">
+    <div id="li_instits" class="boxgris">
         <?php echo $html->image('3-icon.png', array('class' => 'step'));?>
         <h2>¿Dónde estudiar?</h2> <div class="paginatorContainer"></div> <ul
         class="results">
             Sin Resultados
         </ul>
+    </div>
     </div>
 </div>
 
