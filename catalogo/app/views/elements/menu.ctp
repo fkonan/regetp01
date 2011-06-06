@@ -35,29 +35,29 @@
             </ul>
         </li>
 
-        <li class="grid_2 <?php echo (strstr($this->here,$this->base.'/docs'))?'current':''?> ">
-            <?php echo $html->link('Documentación', array('controller'=>'docs', 'action'=>'introduccion')); ?>
+        <li class="grid_2 <?php echo (strstr($this->here,$this->base.'/pages'))?'current':''?> ">
+            <?php echo $html->link('Documentación', array('controller'=>'pages', 'action'=>'introduccion')); ?>
             <ul>
                 <li>
                     <?php echo $html->link('Información Sectorial','#')?>
                     <ul>
-                        <li><?php echo $html->link('Familias Profesionales','/docs/familias')?></li>
-                        <li><?php echo $html->link('Foros Sectoriales','/docs/foros')?></li>
-                        <li><?php echo $html->link('Entidades Participantes','/docs/entidades')?></li>
+                        <li><?php echo $html->link('Familias Profesionales','/pages/familias')?></li>
+                        <li><?php echo $html->link('Foros Sectoriales','/pages/foros')?></li>
+                        <li><?php echo $html->link('Entidades Participantes','/pages/entidades')?></li>
                     </ul>
                 </li>
-                <li><?php echo $html->link('Proceso de Homologación','/docs/homologacion')?></li>
-                <li><?php echo $html->link('Marcos de Referencia','/docs/marcos')?></li>
+                <li><?php echo $html->link('Proceso de Homologación','/pages/homologacion')?></li>
+                <li><?php echo $html->link('Marcos de Referencia','/pages/marcos')?></li>
 
                 <li>
                     <?php echo $html->link('Niveles y Modalidades','#')?>
                     <ul>
-                        <li><?php echo $html->link('Educación Técnica de Nivel Medio y Superior','/docs/mediaysuperior')?></li>
-                        <li><?php echo $html->link('Formación Profesional','/docs/fp')?></li>
+                        <li><?php echo $html->link('Educación Técnica de Nivel Medio y Superior','/pages/mediaysuperior')?></li>
+                        <li><?php echo $html->link('Formación Profesional','/pages/fp')?></li>
                     </ul>
                 </li>
 
-                <li><?php echo $html->link('Normativa de Referencia','/docs/normativa')?></li>
+                <li><?php echo $html->link('Normativa de Referencia','/pages/normativa')?></li>
 
             </ul>
         </li>

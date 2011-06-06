@@ -91,6 +91,10 @@ A:hover{
     color: #25abe1;
 }
 
+A:visited{
+    color: #9B4B06;
+}
+
 h1.corpus{
     background-color: #5C9CCC;
     color: #fff;
@@ -106,6 +110,11 @@ h3 {
 
 ol, ul {
     list-style: url(img/listitem.gif);
+    padding-left: 30px;
+}
+
+ol ol, ul ul{
+    list-style: url(img/listitem2.gif);
     padding-left: 30px;
 }
 

@@ -310,6 +310,14 @@ class HtmlHelper extends AppHelper {
 			}
 			unset($htmlAttributes['default']);
 		}
+                
+                if ( $this->here == $url) {
+                    if (!empty($htmlAttributes['class'])) {
+                        $htmlAttributes['class'] .= ' current';
+                    } else {
+                        $htmlAttributes['class'] = ' current';
+                    }
+                }
 		return $this->output(sprintf($this->tags['link'], $url, $this->_parseAttributes($htmlAttributes), $title));
 	}
 /**
