@@ -142,50 +142,49 @@
         <ul id="titulos-list">
         <?php
             $ofertaAnt = '';
-            foreach ($instit['Plan'] as $plan) { ?>
+            foreach ($instit['Plan'] as $plan) 
+            {
+                if ($ofertaAnt != $plan['Oferta']['id'] ) {
+                    echo "<h4>". $plan['Oferta']['name'] ."</h4>";
+                    $ofertaAnt = $plan['Oferta']['id'];
+                }
 
-            <?
-            if ($ofertaAnt != $plan['Oferta']['id'] ) {
-                echo "<h4>". $plan['Oferta']['name'] ."</h4>";
-                $ofertaAnt = $plan['Oferta']['id'];
-            }
-
-            // inicializo el nombre del titulo que voy a escribir
-            $planTituloNombre = '';
-            $planNombre = '';
-            // le agrego un link hacia el titulo de referencias
-            if(!empty($plan['Titulo'])){
-            $link = $html->link('Ver Más' , array(
-                'controller' => 'titulos',
-                'action' => 'view',
-                $plan['Titulo']['id']
-                ), array(
-                    'title' => 'Ver más información del título',
-                    'class' => 'mas_info_gris_small',
-                ));
-                $planNombre .= $link;
-            }
-            $planNombre .= $plan['nombre'];
+                // inicializo el nombre del titulo que voy a escribir
+                $planTituloNombre = '';
+                $planNombre = '';
+                // le agrego un link hacia el titulo de referencias
+                if(!empty($plan['Titulo'])){
+                $link = $html->link('Ver Más' , array(
+                    'controller' => 'titulos',
+                    'action' => 'view',
+                    $plan['Titulo']['id']
+                    ), array(
+                        'title' => 'Ver más información del título',
+                        'class' => 'mas_info_gris_small',
+                    ));
+                    $planNombre .= $link;
+                }
+                $planNombre .= $plan['nombre'];
 
 
-            // si el titulo de referencia es distinto que el nombre del
-            // plan se lo tengo que agregar entre parentesis
-            // entonces quedaria: Asistente de Peluquero (Titulo: Peluquero)
-            if (!empty($plan['Titulo']) && trim(strtolower($planNombre)) != trim(strtolower($plan['Titulo']['name'])) ){
+                // si el titulo de referencia es distinto que el nombre del
+                // plan se lo tengo que agregar entre parentesis
+                // entonces quedaria: Asistente de Peluquero (Titulo: Peluquero)
+                if (!empty($plan['Titulo']) && trim(strtolower($planNombre)) != trim(strtolower($plan['Titulo']['name'])) ){
 
-                $planNombre .= ' (' .  $plan['Titulo']['name'] . ')';
-            }
+                    $planNombre .= ' (' .  $plan['Titulo']['name'] . ')';
+                }
 
-            // si es FP le agrego la duracion
-            $duracion = '';
-            if (!empty($plan['duracion_hs'])){
-                $duracion = '. <cite>Duración:' . $plan['duracion_hs'] . ' hs.</cite>';
-            }
-            elseif (!empty($plan['duracion_semanas'])) {
-                $duracion = '. <cite>Duración:' . $plan['duracion_semanas']. ' semanas</cite>';
-            }
+                // si es FP le agrego la duracion
+                $duracion = '';
+                if (!empty($plan['duracion_hs'])){
+                    $duracion = '. <cite>Duración: ' . $plan['duracion_hs'] . ' hs.</cite>';
+                }
+                elseif (!empty($plan['duracion_semanas'])) {
+                    $duracion = '. <cite>Duración: ' . $plan['duracion_semanas']. ' semanas</cite>';
+                }
 
-            $planNombre .= $duracion;
+                $planNombre .= $duracion;
             ?>
 
             <li><?php echo $planNombre?></li>
