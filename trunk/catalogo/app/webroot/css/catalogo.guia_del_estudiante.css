@@ -71,7 +71,7 @@ H2{
 }
 
 #li_instits ul li{
-    list-style: circle;
+    list-style: disc outside url("img/listitem.gif");
     margin-bottom: 5px;
 }
 
