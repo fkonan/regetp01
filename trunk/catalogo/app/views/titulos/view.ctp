@@ -46,7 +46,7 @@ jQuery(document).ready(function() {
     </dl>
 </div>
 <div class="clear" style="height:20px;"></div>
-<h4><?php  __('Instituciones que ofrecen el título o certificación');?></h4>
+<h4><?php  __('Instituciones que ofrecen el t&iacute;tulo o certificaci&oacute;n');?></h4>
 <div id="tituloPlanes" class="grid_12">
     <?php echo $this->requestAction('/titulos/planes_asociados/'.$titulo['Titulo']['id'], array('return')); ?>
 </div>
