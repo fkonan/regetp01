@@ -33,11 +33,7 @@ dd ul{
 .alerta-desactualizada{   
     text-decoration: none;
     cursor: pointer; cursor: hand;
-    background: url(img/outdated.png) #DCDDDE no-repeat;
-    background-position: 50% 7px;
-    text-align: center;
-    padding-top: 57px;
-    padding-bottom: 30px;
+    margin-top: 15px;
 }
 
 
