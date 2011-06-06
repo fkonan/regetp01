@@ -6,9 +6,9 @@
 ?>
 
 <h2 class="grid_12"><?php echo $cue_instit ?> <?php echo $instit['Instit']['nombre_completo'] ?></h2>
-
 <br />
-<div class="grid_12 boxblanca">
+<div class="grid_12">
+    <div class="boxblanca">
         <dl class="grid_5 prefix_1 alpha">
             <?php if($instit['Instit']['claseinstit_id']) {?>
                     <dt><?php __('Tipo de Institución'); ?>:</dt>
@@ -128,84 +128,95 @@
                     </dd>
             <?php endif;?>
         </dl>
+        <div class="clear"></div>
     </div>
+</div>
 
+<h4 class="grid_12">Títulos o Certificaciones que ofrece la Institución</h4>
 
-    <h4 class="grid_12">Títulos o Certificaciones que brinda la Institución</h4>
-
-    <div class="grid_9">
-        <div class="boxblanca">
-            <ul id="titulos-list">
-            <?php 
-                $ofertaAnt = '';
-                foreach ($instit['Plan'] as $plan) { ?>
-                
-                <?
-                if ($ofertaAnt != $plan['Oferta']['id'] ) {
-                    echo "<h4>". $plan['Oferta']['name'] ."</h4>";
-                    $ofertaAnt = $plan['Oferta']['id'];
-                }
-                
-                // inicializo el nombre del titulo que voy a escribir
-                $planTituloNombre = '';
-                $planNombre = '';
-                // le agrego un link hacia el titulo de referencias
-                if(!empty($plan['Titulo'])){
-                $link = $html->link('Ver Más' , array(
-                    'controller' => 'titulos',
-                    'action' => 'view',
-                    $plan['Titulo']['id']
-                    ), array(
-                        'title' => 'Ver más información del título',
-                        'class' => 'mas_info_gris_small',
-                    ));
-                    $planNombre .= $link;
-                }
-                $planNombre .= $plan['nombre'];
-                
-                
-                // si el titulo de referencia es distinto que el nombre del
-                // plan se lo tengo que agregar entre parentesis
-                // entonces quedaria: Asistente de Peluquero (Titulo: Peluquero)
-                if (!empty($plan['Titulo']) && trim(strtolower($planNombre)) != trim(strtolower($plan['Titulo']['name'])) ){
-                    
-                    $planNombre .= ' (' .  $plan['Titulo']['name'] . ')';
-                }
-                
-                // si es FP le agrego la duracion
-                $duracion = '';
-                if (!empty($plan['duracion_hs'])){
-                    $duracion = '. <cite>Duración:' . $plan['duracion_hs'] . ' hs.</cite>';
-                }
-                elseif (!empty($plan['duracion_semanas'])) {
-                    $duracion = '. <cite>Duración:' . $plan['duracion_semanas']. ' semanas</cite>';
-                }  
-                
-                $planNombre .= $duracion;
-                ?>
-                    
-                <li><?php echo $planNombre?></li>
-        
-                        
-            <?php }?>
-            </ul>
-        </div>
-    </div>
-
+<div class="grid_9">
+    <div class="boxblanca">
     <?php
-    // se utilizan para pop-up de alerta desactualizada
-    echo $form->hidden('instit-nombre', array('id' => 'instit-nombre', 'value' => $instit['Instit']['nombre_completo']));
-    echo $form->hidden('instit-cue', array('id' => 'instit-cue', 'value' => $cue_instit));
-    echo $form->hidden('urlDesactualizada', array('id' => 'urlDesactualizada', 'value' => $html->url('/correos/desactualizada')));
+    if (!empty($instit['Plan'])) {
     ?>
-    <div id="alerta-desactualizada" class="grid_3 boxgris alerta-desactualizada">
-        Si ha notado algún dato desactualizado, haga click aquí
+        <ul id="titulos-list">
+        <?php
+            $ofertaAnt = '';
+            foreach ($instit['Plan'] as $plan) { ?>
+
+            <?
+            if ($ofertaAnt != $plan['Oferta']['id'] ) {
+                echo "<h4>". $plan['Oferta']['name'] ."</h4>";
+                $ofertaAnt = $plan['Oferta']['id'];
+            }
+
+            // inicializo el nombre del titulo que voy a escribir
+            $planTituloNombre = '';
+            $planNombre = '';
+            // le agrego un link hacia el titulo de referencias
+            if(!empty($plan['Titulo'])){
+            $link = $html->link('Ver Más' , array(
+                'controller' => 'titulos',
+                'action' => 'view',
+                $plan['Titulo']['id']
+                ), array(
+                    'title' => 'Ver más información del título',
+                    'class' => 'mas_info_gris_small',
+                ));
+                $planNombre .= $link;
+            }
+            $planNombre .= $plan['nombre'];
+
+
+            // si el titulo de referencia es distinto que el nombre del
+            // plan se lo tengo que agregar entre parentesis
+            // entonces quedaria: Asistente de Peluquero (Titulo: Peluquero)
+            if (!empty($plan['Titulo']) && trim(strtolower($planNombre)) != trim(strtolower($plan['Titulo']['name'])) ){
+
+                $planNombre .= ' (' .  $plan['Titulo']['name'] . ')';
+            }
+
+            // si es FP le agrego la duracion
+            $duracion = '';
+            if (!empty($plan['duracion_hs'])){
+                $duracion = '. <cite>Duración:' . $plan['duracion_hs'] . ' hs.</cite>';
+            }
+            elseif (!empty($plan['duracion_semanas'])) {
+                $duracion = '. <cite>Duración:' . $plan['duracion_semanas']. ' semanas</cite>';
+            }
+
+            $planNombre .= $duracion;
+            ?>
+
+            <li><?php echo $planNombre?></li>
+        <?php }?>
+        </ul>
+    <?php
+    }
+    else {
+    ?>
+        <i>La institución no presenta Títulos ni Certificaciones</i>
+    <?php
+    }
+    ?>
     </div>
-    <? /*echo $html->link(
-            '<div id="alerta-desactualizada" class="grid_3 boxgris alerta-desactualizada">
-    Si ha notado algún dato desactualizado, haga click aquí</div>',
-            '#',
-            array(
-               'escape' => false
-            ));*/
-    ?>
+</div>
+<?php
+// se utilizan para pop-up de alerta desactualizada
+echo $form->hidden('instit-nombre', array('id' => 'instit-nombre', 'value' => $instit['Instit']['nombre_completo']));
+echo $form->hidden('instit-cue', array('id' => 'instit-cue', 'value' => $cue_instit));
+echo $form->hidden('urlDesactualizada', array('id' => 'urlDesactualizada', 'value' => $html->url('/correos/desactualizada')));
+?>
+<div id="alerta-desactualizada" class="grid_3">
+    <div class="boxgris alerta-desactualizada">
+    Si ha notado algún dato desactualizado, haga click aquí
+    </div>
+</div>
+<? /*echo $html->link(
+        '<div id="alerta-desactualizada" class="grid_3 boxgris alerta-desactualizada">
+Si ha notado algún dato desactualizado, haga click aquí</div>',
+        '#',
+        array(
+           'escape' => false
+        ));*/
+?>
