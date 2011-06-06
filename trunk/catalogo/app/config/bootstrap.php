@@ -299,7 +299,7 @@ function notEmpty($var)
 
 function joinNotNull($glue, $val){
     $values = array_filter($val, "notEmpty");
-    echo join(", ", $values);
+    echo join($glue, $values);
 }
 
 ?>
