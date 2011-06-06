@@ -1,7 +1,12 @@
-
-
-
 .boxblanca .mas_info_gris, .boxblanca .mas_info_azul,
 .boxgris .mas_info_azul, .boxgris .mas_info_azul{
     float: right;
+}
+
+/*Todo lo que tienen adentro el boxgris y el boxblanca en la home*/
+.boxblanca h3,.boxblanca h4,.boxblanca a,.boxblanca a:hover,.boxblanca p,
+.boxgris h3,.boxgris h4,.boxgris a, .boxgris a:hover,.boxgris p
+{
+    margin-left: 10px;
+    margin-right:10px;
 }
