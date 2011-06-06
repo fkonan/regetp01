@@ -152,7 +152,7 @@ class TitulosController extends AppController {
     }
 
 
-    function ajax_view_planes_asociados($id) {
+    function planes_asociados($id) {
         // Planes del Titulo
         $this->Titulo->Plan->recursive = -1;
         $this->paginate = array(
