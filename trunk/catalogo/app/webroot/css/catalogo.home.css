@@ -1,8 +1,7 @@
 
-.box_pad_wrapper{
-    padding: 0px 10px;
-}
 
-.box_pad_wrapper .mas_info_gris, .box_pad_wrapper .mas_info_azul{
+
+.boxblanca .mas_info_gris, .boxblanca .mas_info_azul,
+.boxgris .mas_info_azul, .boxgris .mas_info_azul{
     float: right;
 }
