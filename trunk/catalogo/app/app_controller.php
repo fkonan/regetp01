@@ -37,7 +37,7 @@
 class AppController extends Controller {
 	var $helpers = array('Html', 'Form', 'Ajax',  'Javascript');
         
-        var $components = array('RequestHandler');
+        var $components = array('Auth','RequestHandler');
 	
 	//esta es una variable que sera mostrada en el layout
 	// se crea mediante un elemento que le inserta un listado de urls
@@ -47,5 +47,28 @@ class AppController extends Controller {
 	// Sencillamente, es un menu de navegacion
 	var $rutaUrl_for_layout = array();
 
+        
+        
+        
+        
+        function beforeFilter(){
+                
+                //Configure AuthComponent
+                //$this->Auth->allow('display','login','logout');
+                //$this->Auth->allow('*');return true;
+                $this->Auth->loginError ='Usuario o Contraseña Incorrectos';
+		$this->Auth->authError = 'Usted no tiene permisos para acceder a esta página.';
+                $this->Auth->authorize = 'controller';
+                $this->Auth->logoutRedirect='/pages/home';
+                $this->Auth->autoRedirect = false;
+     
+	}
+        
+        function isAuthorized(){
+            // todos los usuarios registrados estan autorizados
+            return true;
+        }
+        
+        
 }
 ?>
