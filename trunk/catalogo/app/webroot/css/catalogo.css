@@ -485,3 +485,14 @@ dd ul{
     height: 58px;
     margin-top: 30px;
 }
+
+.borde_derecho{
+    border-right:1px solid #D1D1D1;
+    margin-right: -20px;
+    min-height: 110px;
+}
+
+.borde_izquierdo{
+    border-left:1px solid #D1D1D1;
+
+}
