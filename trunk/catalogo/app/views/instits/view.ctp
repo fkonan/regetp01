@@ -5,11 +5,17 @@
     $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
 ?>
 
-<h2 class="grid_12"><?php echo $cue_instit ?> <?php echo $instit['Instit']['nombre_completo'] ?></h2>
+<h2 class="grid_8 alpha">
+<?php echo $cue_instit ?> <?php echo $instit['Instit']['nombre_completo'] ?>
+</h2>
+<a class="grid_4 omega alerta-desactualizada" id="alerta-desactualizada">
+    Notificar institución desactualizada
+</a>
 <br />
-<div class="grid_12">
+<div class="grid_6 alpha">
     <div class="boxblanca">
-        <dl class="grid_5 prefix_1 alpha">
+        <h3>Datos Generales</h3>
+        <dl>
             <?php if($instit['Instit']['claseinstit_id']) {?>
                     <dt><?php __('Tipo de Institución'); ?>:</dt>
                     <dd>
@@ -60,8 +66,13 @@
                     <dd>&nbsp;</dd>
                 <?php }?>
         </dl>  
-    
-        <dl class="grid_5 omega">
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="grid_6 omega">
+    <div class="boxblanca">
+        <h3>Ficha de Contacto</h3>
+        <dl>
             <dt><?php __('Dirección'); ?>:</dt>
             <dd>
             <?php
@@ -131,10 +142,9 @@
         <div class="clear"></div>
     </div>
 </div>
-
 <h4 class="grid_12">Títulos o Certificaciones que ofrece la Institución</h4>
 
-<div class="grid_9">
+<div class="grid_12 alpha omega">
     <div class="boxblanca">
     <?php
     if (!empty($instit['Plan'])) {
@@ -206,11 +216,7 @@ echo $form->hidden('instit-nombre', array('id' => 'instit-nombre', 'value' => $i
 echo $form->hidden('instit-cue', array('id' => 'instit-cue', 'value' => $cue_instit));
 echo $form->hidden('urlDesactualizada', array('id' => 'urlDesactualizada', 'value' => $html->url('/correos/desactualizada')));
 ?>
-<div id="alerta-desactualizada" class="grid_3">
-    <div class="boxgris alerta-desactualizada">
-    Si ha notado algún dato desactualizado, haga click aquí
-    </div>
-</div>
+
 <? /*echo $html->link(
         '<div id="alerta-desactualizada" class="grid_3 boxgris alerta-desactualizada">
 Si ha notado algún dato desactualizado, haga click aquí</div>',
