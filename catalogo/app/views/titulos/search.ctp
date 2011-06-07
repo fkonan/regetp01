@@ -14,7 +14,7 @@
     <p>
         Desde aquí obtendrás un listado de títulos o certificaciones de la Educación Técnico Profesional según los criterios de búsqueda ingresados.
     </p>
-    <div class="boxblanca boxform grid_12">
+    <div class="boxblanca">
         <?php
         echo $form->create('Titulo', array(
         'action' => 'ajax_search_results2',
@@ -23,7 +23,7 @@
         )
         );
         ?>
-        <div class="grid_4 alpha field-col">
+        <div class="field-col">
             <?php
             echo $form->input('oferta_id',array( 'div' => false,
                                                 'class' => 'autosubmit ',
@@ -37,7 +37,7 @@
                                                   'id' => 'TituloName', ));
             ?>
         </div>
-        <div class="grid_4 field-col">
+        <div class="field-col">
             <?php
             echo $form->input('sector_id', array( 'div' => false,
                                                  'class' => 'autosubmit ',
@@ -55,7 +55,7 @@
             echo '<span class="ajax_update" id="ajax_indicator" style="display:none; margin-top: -32px; float: right; clear: none">'.$html->image('ajax-loader.gif').'</span>';
             ?>
         </div>
-        <div class="grid_4 omega field-col">
+        <div class="field-col">
             <?php
             echo $form->input('subsector_id', array( 'div' => false,
                                                     'class' => 'autosubmit ',
@@ -113,6 +113,6 @@
     </div>
     
     <!-- Aca se muestran los resultados de la busqueda-->
-    <div id="consoleResult" class="grid_12 alpha omega" style="min-height:200px; margin-top:15px; padding-bottom:20px;"></div>
+    <div id="consoleResult" style="min-height:200px; margin-top:15px; padding-bottom:20px;"></div>
 
 </div>

@@ -180,7 +180,7 @@
                 // si el titulo de referencia es distinto que el nombre del
                 // plan se lo tengo que agregar entre parentesis
                 // entonces quedaria: Asistente de Peluquero (Titulo: Peluquero)
-                if (!empty($plan['Titulo']) && trim(strtolower($planNombre)) != trim(strtolower($plan['Titulo']['name'])) ){
+                if (!empty($plan['Titulo']) && strcasecmp(trim($plan['nombre']), trim($plan['Titulo']['name'])) != 0){
 
                     $planNombre .= ' (' .  $plan['Titulo']['name'] . ')';
                 }

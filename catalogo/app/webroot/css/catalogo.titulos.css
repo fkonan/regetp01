@@ -40,6 +40,10 @@
     background-color: white;   
 }
 
+.field-col {
+    width: 33%;
+    float: left;
+}
 .field-col select, .field-col input, .field-col label {
     width:90%;
     margin-left:4%;
