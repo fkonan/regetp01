@@ -60,11 +60,9 @@ label {
 }
 
 .list-header {
-    background-color: #F1F1F2;
     border-bottom: 1px groove #58585A;
-    border-top: 1px ridge #58585A;
     padding-bottom: 5px;
-    padding-top: 5px;
+    padding-top: 10px;
 }
 
 #items li:hover{
