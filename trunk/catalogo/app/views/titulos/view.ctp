@@ -14,6 +14,7 @@ jQuery(document).ready(function() {
 <h2><?php echo $titulo['Titulo']['name']?></h2>
 <div class="grid_12 boxblanca">
     <dl style="padding-left: 20px;">
+        <h3>Datos Generales</h3>
         <dt ><?php __('Oferta'); ?>:</dt>
         <dd>
             <?php
