@@ -232,11 +232,12 @@ ul.sf-menu li li li.sfHover ul {
 /*** arrows **/
 .sf-menu a.sf-with-ul {
 	min-width:		1px; /* trigger IE7 hasLayout so spans position accurately */
+        padding-right: 13px;
 }
 .sf-sub-indicator {
 	position:		absolute;
 	display:		block;
-	right:			.1em;
+	right:			.3em;
 	top:			1.05em; /* IE6 only */
 	width:			10px;
 	height:			10px;
