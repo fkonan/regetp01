@@ -1,7 +1,7 @@
 <?php  $paginator->options(array('update' => 'consoleResult', 'url' => $this->passedArgs,'indicator'=> 'ajax_indicator')); ?>
 
 <?php echo $html->css(array('catalogo.advanced_search', 'catalogo.instits'), $inline=false); ?>
-<div class="grid_12 alpha omega boxblanca" style="padding:5px" id="search_results">
+<div class="grid_12 alpha omega boxblanca" style="padding:5px; margin-top:20px;" id="search_results">
 <div class="clear"></div>
 <? if (sizeof($conditions)>0): ?>
 	Criterios de búsqueda seleccionados:
