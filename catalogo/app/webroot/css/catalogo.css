@@ -173,11 +173,8 @@ dd ul{
 }
 
 
-#logo{
-     background: url(img/logo.png) no-repeat;
-     height: 128px;
-     overflow: hidden;
-     text-indent: -1000px;
+#logo img{
+    height: 128px;
 }
 
 #header_title{

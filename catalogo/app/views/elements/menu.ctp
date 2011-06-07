@@ -1,5 +1,5 @@
 <ul class="nav grid_8 alpha prefix_1 sf-menu">
-        <li class="grid_2 <?php echo ($this->here == $this->base.'/pages/home')?'current':''?> alpha"><?php echo $html->link('Inicio', '/pages/home'); ?></li>
+        <li class="<?php echo ($this->here == $this->base.'/pages/home')?'current':''?> "><?php echo $html->link('Inicio', '/pages/home', array('class'=>'menu-item')); ?></li>
 
 
         <?php 
@@ -8,8 +8,8 @@
             $activo = true;
         }
         ?>
-        <li class="grid_2 <?php echo ($activo)?'current':''?>">
-            <a href="">Buscadores</a>
+        <li class="<?php echo ($activo)?'current':''?>">
+            <a class='menu-item' href="">Buscadores</a>
             <ul>
                 <li>
                     <?php echo $html->link('Guía del Estudiante', array(
@@ -35,8 +35,8 @@
             </ul>
         </li>
 
-        <li class="grid_2 <?php echo (strstr($this->here,$this->base.'/pages') && ($this->here != $this->base.'/pages/home'))?'current':''?> ">
-            <?php echo $html->link('Documentación', array('controller'=>'pages', 'action'=>'introduccion')); ?>
+        <li class="<?php echo (strstr($this->here,$this->base.'/pages') && ($this->here != $this->base.'/pages/home'))?'current':''?> ">
+            <?php echo $html->link('Documentación', array('controller'=>'pages', 'action'=>'introduccion'), array('class'=>'menu-item')); ?>
             <ul>
                 <li>
                     <?php echo $html->link('Información Sectorial','#')?>
@@ -61,10 +61,10 @@
 
             </ul>
         </li>
-        <li class="grid_2 omega <?php echo (strstr($this->here,$this->base.'/correos/contacto'))?'current':''?>">
+        <li class="<?php echo (strstr($this->here,$this->base.'/correos/contacto'))?'current':''?>">
             <?php echo $html->link('Contacto', array(
                                                 'controller' => 'correos',
-                                                'action'    => 'contacto'
-            ))?>
+                                                'action'    => 'contacto'),
+                                                array('class'=>'menu-item'))?>
         </li>
 </ul>

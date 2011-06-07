@@ -100,9 +100,9 @@ $javascript;
              <div id="header-right-fluid"></div>
             
             <div id="header_title" class="container_12">
-                
-                <h2 id="logo" class="grid_3">INET</h2>
-                
+                <div id="logo" class="grid_3">
+                    <?php echo $html->image('../css/img/logo.png', array()); ?>
+                </div>                
                 <div id="head-text" class="grid_9">
                     <h1 class="grid_6 alpha prefix_1">
                         <?php echo $html->link(__('Catálogo Nacional de Títulos y Certificaciones de Educación Técnico Profesional', true), '/pages/home'); ?>

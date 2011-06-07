@@ -23,7 +23,8 @@
     color: #e7e5e5;
     text-decoration: none;
     display: block;
-    padding:  13px 0px;
+    padding-top: 13px;
+    padding-bottom: 13px;
     margin: 0;
     -webkit-border-top-left-radius: 0.5em;
     -webkit-border-top-right-radius: 0.5em;
@@ -232,7 +233,6 @@ ul.sf-menu li li li.sfHover ul {
 /*** arrows **/
 .sf-menu a.sf-with-ul {
 	min-width:		1px; /* trigger IE7 hasLayout so spans position accurately */
-        padding-right: 13px;
 }
 .sf-sub-indicator {
 	position:		absolute;
@@ -278,4 +278,9 @@ li.sfHover > a > .sf-sub-indicator {
 }
 .sf-shadow ul.sf-shadow-off {
 	background: transparent;
+}
+
+.menu-item{
+   padding-left:15px;
+   padding-right: 15px;
 }
