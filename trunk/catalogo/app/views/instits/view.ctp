@@ -106,7 +106,7 @@
             <?php endif;?>
 
             <?php if($instit['Instit']['mail']): ?>
-                    <dt><?php __('E-Mail'); ?>:</dt>
+                    <dt style="width:50px"><?php __('E-Mail'); ?>:</dt>
                     <dd>
                             <?php
                             if(!empty($instit['Instit']['mail'])) {
