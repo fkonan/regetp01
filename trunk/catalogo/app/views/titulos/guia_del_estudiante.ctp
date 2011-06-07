@@ -6,7 +6,7 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
 ?>
 <div class="grid_12">
 <h1>Guía del Estudiante</h1>
-
+<p>La Guía del Estudiante ayudará a que puedas encontrarar donde estudiar y obtener un título o certificación según tus gustos e intereses. </p>
 
 <script id="tituloTemplate" type="text/x-jquery-tmpl">
         <li titulo-id="${Titulo.id}">
@@ -33,7 +33,7 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
 </script>
     <div class="boxgris">
         <?php echo $html->image('1-icon.png', array('class' => 'step'));?>
-        <h2>Seleccione criterios de búsqueda:</h2> <div id="filtro"
+        <h2>Seleccioná criterios de búsqueda:</h2> <div id="filtro"
                                                         class="boxblanca">
                                                             <?php echo $form->create('Titulo', array(
                                                             'action' => 'guia_del_estudiante', 'name'=>'TituloSearchForm',
