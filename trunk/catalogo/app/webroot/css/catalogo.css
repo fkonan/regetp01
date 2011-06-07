@@ -53,7 +53,7 @@ h1, h2, h3, h4 {
    margin: 13px 0px 13px 0px;
 }
 
-h1 A, h2 A, h3 A, h4 A{
+h1 A, h1 A:visited, h2 A, h1 A:visited, h3 A, h3 A:visited, h4 A, h4 A:visited{
    color: #58585a;
    margin: 13px 0px 13px 0px;
    text-decoration: none;
@@ -84,7 +84,7 @@ h4 {
 }
 
 A{
-    color: #E57609;
+    color: #0082ca;
 }
 
 A:hover{
@@ -92,7 +92,7 @@ A:hover{
 }
 
 A:visited{
-    color: #9B4B06;
+   
 }
 
 h1.corpus{
