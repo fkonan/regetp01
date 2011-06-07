@@ -118,3 +118,7 @@ cite{
     float: right;
     margin-right: 20px;
 }
+
+.ficha_info{
+    min-height: 175px;
+}

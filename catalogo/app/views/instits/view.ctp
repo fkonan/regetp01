@@ -13,7 +13,7 @@
 </a>
 <br />
 <div class="grid_6 alpha">
-    <div class="boxblanca">
+    <div class="boxblanca ficha_info">
         <h3>Datos Generales</h3>
         <dl>
             <?php if($instit['Instit']['claseinstit_id']) {?>
