@@ -35,7 +35,7 @@
             </ul>
         </li>
 
-        <li class="grid_2 <?php echo (strstr($this->here,$this->base.'/pages'))?'current':''?> ">
+        <li class="grid_2 <?php echo (strstr($this->here,$this->base.'/pages') && ($this->here != $this->base.'/pages/home'))?'current':''?> ">
             <?php echo $html->link('Documentación', array('controller'=>'pages', 'action'=>'introduccion')); ?>
             <ul>
                 <li>
