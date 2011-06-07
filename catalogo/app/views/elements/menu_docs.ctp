@@ -17,11 +17,7 @@
                 <li><?php echo $html->link('Familias profesionales', 'familias');?></li>
                 <li>
                     <?php echo $html->link('Foros sectoriales', 'foros');?>
-                    <ul>
-                        <li>
-                            <?php echo $html->link('Metodologia', 'foros_metodologia');?>
-                        </li>
-                    </ul>
+
                 </li>
                 <li><?php echo $html->link('Entidades participantes', 'entidades');?></li>
             </ul>
