@@ -92,7 +92,7 @@ A:hover{
 }
 
 A:visited{
-   
+    /*color: #9B4B06;*/
 }
 
 h1.corpus{
@@ -270,7 +270,7 @@ dd ul{
     -webkit-border-radius: 1em;
     -moz-border-radius: 1em;
     border-radius: 1em;
-    padding: 5px 0px 5px 0px;
+    padding: 5px 10px;
 }
 
 .boxblancacuadrada{
@@ -284,7 +284,7 @@ dd ul{
     -webkit-border-radius: 1em;
     -moz-border-radius: 1em;
     border-radius: 1em;
-    padding: 5px 0px 5px 0px;
+    padding: 5px 10px;
     border: 1px solid #D1D2D3;
 }
 
@@ -480,19 +480,6 @@ dd ul{
 
 .help_body table tr td{
     border-bottom: 1px solid #CCCCCC;
-}
-
-.box_home_buscadores {
-    width: 49%;
-    float: left;
-}
-
-.box_home_buscadores_separador {
-    width: 1%;
-    float: left;
-    border-left: 1px solid #e2e2e4;
-    height: 58px;
-    margin-top: 30px;
 }
 
 .borde_derecho{

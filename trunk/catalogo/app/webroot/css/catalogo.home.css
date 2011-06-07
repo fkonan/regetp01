@@ -3,10 +3,17 @@
     float: right;
 }
 
-/*Todo lo que tienen adentro el boxgris y el boxblanca en la home*/
-.boxblanca h3,.boxblanca h4,.boxblanca a,.boxblanca a:hover,.boxblanca p,
-.boxgris h3,.boxgris h4,.boxgris a, .boxgris a:hover,.boxgris p
-{
-    margin-left: 10px;
-    margin-right:10px;
+.box_home_buscadores {
+    width: 49%;
+    float: left;
+    margin-top: -14px;
+
+}
+
+.box_home_buscadores_separador {
+    width: 1%;
+    float: left;
+    border-right: 1px solid #e2e2e4;
+    height: 58px;
+    margin-top: 30px;
 }
