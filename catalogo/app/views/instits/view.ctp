@@ -70,7 +70,7 @@
     </div>
 </div>
 <div class="grid_6 omega">
-    <div class="boxblanca">
+    <div class="boxblanca ficha_info">
         <h3>Ficha de Contacto</h3>
         <dl>
             <dt><?php __('Dirección'); ?>:</dt>
