@@ -55,7 +55,7 @@ instituciones de educación técnico profesional.
     
 <div class="grid_8">
     <div class="boxblanca">
-        <h3 style="margin-left: 10px; margin-bottom: 0px;">Empresas, profesionales, funcionarios y otros</h3>
+        <h3>Empresas, profesionales, funcionarios y otros</h3>
         <div class="box_home_buscadores">
             <div class="box_pad_wrapper">
                 <h4><?php echo $html->link('Buscador de Títulos',array('controller'=>'titulos', 'action'=>'search'));?></h4>
