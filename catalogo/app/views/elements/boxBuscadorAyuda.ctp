@@ -1,4 +1,4 @@
-<div id="boxAyuda" class="grid_12 boxblanca alpha omega">
+<div id="boxAyuda" class="boxblanca">
     <h2 class="grid_12">Ayuda: ¿Cómo utilizar el buscador?</h2>
     <ul class="grid_12 menu_body help_body" style="display:none">
         <br/>
@@ -152,4 +152,5 @@
             </SPAN>.</P>
 
     </ul>
+    <div class="clear"></div>
 </div>

@@ -73,7 +73,7 @@
 </div>
 <div class="seccion grid_3 omega">
     <h3>Institución</h3>
-    <div>
+    <div class="borde_derecho">
     <?php echo $form->input('Instit.gestion_id',
             array('options'=>$gestiones,
                 'div'=>false,
