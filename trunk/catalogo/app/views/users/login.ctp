@@ -1,5 +1,5 @@
 <?php echo $html->css('catalogo.users.login', false);?>
-<div class="grid_6 prefix_3 suffix_3">
+<div class="grid_6 push_3">
     <div class="boxblanca">
         <h3>Iniciar Sesión</h3>
         <?php
