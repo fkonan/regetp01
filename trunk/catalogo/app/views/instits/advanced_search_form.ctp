@@ -8,22 +8,17 @@ echo $javascript->link(array(
 echo $html->css('jquery.autocomplete.css', false);
 echo $html->css('catalogo.advanced_search', false);
 ?>
-
-
-
 <script type="text/javascript" language="javascript">
     init__AdvancedSearchFormJs("<?echo $html->url(array('controller'=>'localidades','action'=>'ajax_search_localidades'));?>","<?echo $html->url(array('controller'=>'titulos','action'=>'ajax_search'));?>");
 </script>
 
-<h1><? __('Búsqueda Avanzada de Instituciones')?></h1>
+<div class="grid_12 search-fields">
+    <h1><? __('Búsqueda Avanzada de Instituciones')?></h1>
 
-
-<div class="boxgris grid_12 search-fields">
-    <h2>Seleccione Criterios de Busqueda:</h2>
     <?= $form->create('Instit',array('action' => 'search','name'=>'InstitSearchForm'));?>
 
     <fieldset id="search" class="search-div boxblanca" >
-        <h4>General</h4>
+        <h3>General</h3>
         <?php
         echo $form->input('cue', array(
         'label'=>'CUE',
@@ -53,16 +48,16 @@ echo $html->css('catalogo.advanced_search', false);
 				BUSQUEDA POR SU UBICACION
 		-->
     <fieldset id="search-ubicacion" class="search-div boxblanca" >
-        <h4>Por Ubicación:</h4>
+        <h3>Por Ubicación</h3>
         <?php echo $form->input('jur_dep_loc',
-                                array('label'=>'Departamento/Localidad',
-                                      'style'=>'width:90%;',
-                                      'title'=>'Ingrese al menos 3 letras para que comience la busqueda de Departamentos y Localidades.',
-                                      'div'=>array('style'=>'width:50%;clear: none;float:left'))); ?>
+        array('label'=>'Departamento/Localidad',
+        'style'=>'width:90%;',
+        'title'=>'Ingrese al menos 3 letras para que comience la busqueda de Departamentos y Localidades.',
+        'div'=>array('style'=>'width:50%;clear: none;float:left'))); ?>
         <?php echo $form->input('direccion',
-                                array('label'=>'Domicilio',
-                                      'style'=>'width:90%;',
-                                      'div'=>array('style'=>'width:50%;clear: none;float:left'))); ?>
+        array('label'=>'Domicilio',
+        'style'=>'width:90%;',
+        'div'=>array('style'=>'width:50%;clear: none;float:left'))); ?>
     </fieldset>
 
 
@@ -70,7 +65,7 @@ echo $html->css('catalogo.advanced_search', false);
 				BUSQUEDA POR SU NOMBRE
 		-->
     <fieldset id="search-denominacion"  class="search-div boxblanca" >
-        <h4>Por Nombre:</h4>
+        <h3>Por Nombre</h3>
         <?php
         echo $form->input('tipoinstit_id', array(
         'label'=>array('text'=>'Tipo','id'=>'label-tipoinstit'),
@@ -110,7 +105,7 @@ echo $html->css('catalogo.advanced_search', false);
 				BUSQUEDA POR SU OFERTA
 		-->
     <fieldset id="search-planes"  class="search-div boxblanca" >
-        <h4>Por Oferta:</h4>
+        <h3>Por Oferta</h3>
         <?php
         echo $form->input('Plan.oferta_id',array(
         'options'=>$ofertas,
@@ -127,42 +122,42 @@ echo $html->css('catalogo.advanced_search', false);
         ));
 
         echo $form->input('SectoresTitulo.sector_id',array(
-            'label'=>'Sector',
-            'id'=>'SectorId',
-            'div'=>array('style'=>'float: left; width:250px; clear: left'),
-            'style'=> 'display:inline;width:240px;vertical-align:bottom',
-            'options'=>$sectores,
-            'empty'=>'Seleccione'
+        'label'=>'Sector',
+        'id'=>'SectorId',
+        'div'=>array('style'=>'float: left; width:250px; clear: left'),
+        'style'=> 'display:inline;width:240px;vertical-align:bottom',
+        'options'=>$sectores,
+        'empty'=>'Seleccione'
         ));
 
         echo $form->input('SectoresTitulo.subsector_id',array(
-            'type' => 'select',
-            'id'=>'SubsectorId',
-            'label'=>'Subsector',
-            'div'=>array('style'=>'float: left;  clear: none'),
-            'style'=> 'display:inline;vertical-align:bottom',
-            'empty'=>'Seleccione',
+        'type' => 'select',
+        'id'=>'SubsectorId',
+        'label'=>'Subsector',
+        'div'=>array('style'=>'float: left;  clear: none'),
+        'style'=> 'display:inline;vertical-align:bottom',
+        'empty'=>'Seleccione',
         ));
 
         echo $ajax->observeField('SectorId',
         array('url' => '/subsectores/ajax_select_subsector_form_por_sector',
-            'update'=>'SubsectorId',
-            'loading'=>'jQuery("#SubsectorId").attr("disabled","disabled");',
-            'complete'=>'jQuery("#SubsectorId").removeAttr("disabled");',
-            'onChange'=>true
+        'update'=>'SubsectorId',
+        'loading'=>'jQuery("#SubsectorId").attr("disabled","disabled");',
+        'complete'=>'jQuery("#SubsectorId").removeAttr("disabled");',
+        'onChange'=>true
         ));
-        
+
         echo $form->input(
         'tituloName',
         array(
-            'label'=> 'Título de Referencia',
-            'id' => 'PlanTituloName',
-            'style'=>'max-width: 515px; width:92%;',
-            //'after'=> '<cite>Seleccione primero una oferta.</cite>',
-            'div'=>array('id'=>'divPlanTituloName')));
-        
+        'label'=> 'Título de Referencia',
+        'id' => 'PlanTituloName',
+        'style'=>'max-width: 515px; width:92%;',
+        //'after'=> '<cite>Seleccione primero una oferta.</cite>',
+        'div'=>array('id'=>'divPlanTituloName')));
+
         echo $form->input('Plan.titulo_id',array('id'=>'PlanTituloId','type'=>'hidden'));
-        
+
         ?>
 
     </fieldset>
@@ -172,7 +167,7 @@ echo $html->css('catalogo.advanced_search', false);
             BUSQUEDA POR OTRAS CARACTERISTICAS
     -->
     <fieldset id="search-otros"  class="search-div boxblanca" >
-        <h4>Por Otras Caracteristicas:</h4>
+        <h3>Por Otras Caracteristicas</h3>
         <?php
         echo $form->input('Instit.orientacion_id',array(
         'label'=> 'Orientación',
@@ -227,12 +222,12 @@ echo $html->css('catalogo.advanced_search', false);
     </fieldset>
 
     <div style="padding-top: 20px; padding-bottom: 25px; padding-right: 3px;">
-    <?php echo $form->button('Buscar',array(
+        <?php echo $form->button('Buscar',array(
         'class'=>'boxgris boton-buscar-avanzado',
         'onclick'=>'enviar()'));
-    ?>
+        ?>
     </div>
-    
+
     <?php echo $form->end(); ?>
 
 </div>
