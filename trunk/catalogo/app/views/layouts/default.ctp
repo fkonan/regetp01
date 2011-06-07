@@ -118,11 +118,9 @@ $javascript;
             </div>
         </div>
         
-        
+        <?php $session->flash(); ?>
+        <?php $session->flash('auth'); ?>
        <div id="container" class ="container_12">
-                        <?php $session->flash(); ?>
-                        <?php $session->flash('auth'); ?>
-           
                         <?php echo $content_for_layout; ?>           
        </div> <!-- FIN div #container -->
                     
