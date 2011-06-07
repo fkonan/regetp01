@@ -5,22 +5,20 @@
 <div class="grid_9">
     <div class="boxblanca">
         <h1>Foros sectoriales</h1>
-        <p>&nbsp;</p>
         <p>Descripci&oacute;n, Mecanismos de funcionamiento [Pablo]</p>
-        <p>&nbsp;</p>
-        <p>Metodolog&iacute;a [Pablo]</p>
-        <p>&nbsp;</p>
+        
+        <p><?echo $html->link('Ver metodología','/pages/foros_metodologia');?></p>
+        
         <h4>Foros</h4>
-        <p>&nbsp;</p>
-        <h4>Foro ABC [Template,  repetir para cada foro]</h4>
-        <p>	    Participantes:  A, B, C, D.<br />
-        </p>
-        <p>Alg&uacute;n dato  m&aacute;s? (Opcional: estado, agenda, etc.)<br />
-        </p>
-        <p>Informe  sectorial (Link a PDF) </p>
-        <p>&nbsp;</p>
-        <p>Listado de Foros c/ referencias? [Pablo]</p>
-        <p>&nbsp;</p>
+        
+        <?php 
+        $vops = array(
+            'foroName' => 'Fsd',
+            'participantes' => array('pepe', 'lola'),
+            'docInfoSectorial' => '/files/pdfs/'
+        );
+        
+        $this->element('foro') ?>
         <p>Informes [Asignar al foro correspondiente]</p>
         <ul type="disc">
             <li>Hort&iacute;cola (Link a PDF)</li>
