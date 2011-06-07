@@ -138,3 +138,7 @@ H2{
     font-weight: bold;
     padding-left: 4px;
 }
+
+input[type=text], textarea, select{
+    width: 95%;
+}

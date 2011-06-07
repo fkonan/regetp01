@@ -41,26 +41,26 @@ echo $html->css(array(  'jquery.loadmask',
                 echo $form->input('jurisdiccion_id',array(
                         'label'=> 'Jurisdicción',
                         'empty'=> 'Todas',
-                        'div'=>array('style'=>'width:210px; float: left; clear: none'),
-                        'style'=> 'width:200px; float: left',
+                        'div'=>array('class'=>'grid_4 alpha'),
+                        'style' =>'width:100%'
                         ));
                 echo $form->input('busqueda_libre', array(
                         'id' => 'InstitCue',
                         'label' => 'CUE o Nombre de la Institución',
-                        'div'=>array('style'=>'width:540px; float: left; clear: none'),
-                        'style'=> 'width:530px; float: left',
+                        'div'=>array('class'=>'grid_6 alpha'),
+                        'style' =>'width:100%'
                         ));
 
                 echo $form->button('Buscar', array(
                     'type' => 'submit',
                     'class' => 'boton-buscar',
                     'div'=>false,
-                    'style'=> 'width:80px; float: right;margin-top:17px;margin-right:20px',
+                    'style'=> 'width:80px; float: right;margin-top:23px;margin-right:20px',
                      ));
                 ?>
             </div>
         </div>
-        <div style="float:right; margin-right: 10px">
+        <div style="float:right; margin-right: 8px; margin-top: 5px">
             <?php
                 echo $html->link('Búsqueda avanzada','advanced_search_form',array(
                     'class'=>'link_right small',

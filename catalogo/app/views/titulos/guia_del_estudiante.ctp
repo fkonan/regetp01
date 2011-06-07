@@ -4,10 +4,6 @@ echo $javascript->link('jquery/jquery.history', false);
 echo $javascript->link('jquery.loadmask.min', false);
 echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inline = false);
 ?>
-<div class="grid_12">
-<h1>Guía del Estudiante</h1>
-<p>La Guía del Estudiante ayudará a que puedas encontrarar donde estudiar y obtener un título o certificación según tus gustos e intereses. </p>
-
 <script id="tituloTemplate" type="text/x-jquery-tmpl">
         <li titulo-id="${Titulo.id}">
         <input type="checkbox" class="styled_checkbox"
@@ -21,8 +17,8 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
         <li>
         <a href="<?php echo $this->base
 ?>/instits/view/${Instit.id}"><b>${Instit.cue}${Instit.anexo}</b>
-                ${Instit.nombre_completo}</a>
-                </li>
+    ${Instit.nombre_completo}</a>
+    </li>
 </script>
 
 <script id="paginatorTemplate" type="text/x-jquery-tmpl">
@@ -31,25 +27,35 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
             numbers}}</p>
         </div>
 </script>
+
+<div class="grid_12">
+    <h1>Guía del Estudiante</h1>
+    <p>La Guía del Estudiante ayudará a que puedas encontrarar donde estudiar y obtener un título o certificación según tus gustos e intereses. </p>
+
     <div class="boxgris">
         <?php echo $html->image('1-icon.png', array('class' => 'step'));?>
-        <h2>Seleccioná criterios de búsqueda:</h2> <div id="filtro"
-                                                        class="boxblanca">
-                                                            <?php echo $form->create('Titulo', array(
-                                                            'action' => 'guia_del_estudiante', 'name'=>'TituloSearchForm',
-                                                            'id' =>'TituloSearchForm', ));
-            ?> <div id="filtrosContainer">
+        <h2>Seleccioná criterios de búsqueda:</h2> 
+        <div id="filtro" class="boxblanca">
+            <?php echo $form->create('Titulo', array(
+            'action' => 'guia_del_estudiante', 'name'=>'TituloSearchForm',
+            'id' =>'TituloSearchForm', ));
+            ?>
+            <div id="filtrosContainer">
                 <?php echo $this->element('filtros');?>
-            </div> <div class="grid_1 alpha omega prefix_10">
+            </div>
+            <div class="grid_1 prefix_9">
                 <?php echo $form->end('Buscar');?>
-            </div> <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
         </div>
 
         <div class="boxblanca filtros-aplicados">
-            <h3>Criterios aplicados:</h3> <?php echo $form->create('Titulo', array(
+            <h3>Criterios aplicados:</h3>
+            <?php echo $form->create('Titulo', array(
             'action' => 'guia_del_estudiante', 'name'=>'FiltrosAplicadosForm',
             'id' =>'FiltrosAplicadosForm' ));
-            ?> <p id="sin_filtros">No hay fitros aplicados</p>
+            ?>
+            <p id="sin_filtros">No hay fitros aplicados</p>
 
             <?php echo $form->end();?>
         </div>
