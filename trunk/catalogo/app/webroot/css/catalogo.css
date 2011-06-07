@@ -419,7 +419,7 @@ dd ul{
 /**/
 
 .formu_6 input{
-    width: 340px;
+    width: 67%;
 }
 
 .formu_6 .input{
@@ -434,7 +434,7 @@ dd ul{
 }
 
 .formu_6 textarea{
-    width: 430px;
+    width: 95%;
     margin-bottom: 2px;
 }
 
