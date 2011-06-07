@@ -37,6 +37,11 @@
 }
 
 .titulosview {
-    background-color: white;
-    
+    background-color: white;   
+}
+
+.field-col select, .field-col input, .field-col label {
+    width:90%;
+    margin-left:4%;
+    margin-right:4%;
 }
