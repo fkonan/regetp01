@@ -25,7 +25,7 @@ echo $html->css(array(  'jquery.loadmask',
             ));
         ?>
     </p>
-    <div class="grid_12 boxblanca alpha omega boxform">
+    <div class="boxblanca boxform">
         <?php
         echo $form->create('Instit', array(
             'action' => 'search',
@@ -70,12 +70,13 @@ echo $html->css(array(  'jquery.loadmask',
         <?php
         echo $form->end();
         ?>
+        <div class="clear"></div>
     </div>
 
     <?php echo $this->element('boxBuscadorAyuda'); ?>
     
     <!-- Aca se muestran los resultados de la busqueda-->
-    <div id='consoleResult' class="grid_12 alpha omega" style="min-height: 200px; margin-bottom: 20px;margin-top: 20px;">
+    <div id='consoleResult' style="min-height: 200px; margin-bottom: 20px;margin-top: 20px;">
     </div>
     
 </div>
