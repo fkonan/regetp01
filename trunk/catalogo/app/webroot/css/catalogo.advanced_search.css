@@ -9,10 +9,8 @@ ol, ul {
     border-bottom: 1px dashed #CDCDCD;
     height: auto !important;
     margin: 0;
-    padding: 3px 0;
+    padding: 5px 0;
     position: relative;
-    margin-top: 5px;
-    margin-bottom: 5px;
     margin-left: 5px;
 }
 
