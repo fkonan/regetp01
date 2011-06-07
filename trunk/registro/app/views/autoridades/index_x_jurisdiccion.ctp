@@ -21,8 +21,8 @@
                                 <h2><?php echo $autoridad['Cargo']['nombre']?></h2>
                                 <dt<?php if ($i % 2 == 0) echo $class;?>>Nombre</dt>
                                 <dd<?php if ($i++ % 2 == 0) echo $class;?>><?php echo $autoridad['Autoridad']['titulo'] . ' ' . $autoridad['Autoridad']['nombre'] .  ' ' . $autoridad['Autoridad']['apellido']; ?></dd>
-                                <dt<?php if ($i % 2 == 0) echo $class;?>>Fecha Asunción</dt>
-                                <dd<?php if ($i++ % 2 == 0) echo $class;?>><?php echo isNull($time->format('d/m/Y', $autoridad['Autoridad']['fecha_asuncion']),'Vacío') ;?></dd>
+                                <!--<dt<?php if ($i % 2 == 0) echo $class;?>>Fecha Asunción</dt>
+                                <dd<?php if ($i++ % 2 == 0) echo $class;?>><?php echo isNull($time->format('d/m/Y', $autoridad['Autoridad']['fecha_asuncion']),'Vacío') ;?></dd>-->
                                 <dt class="acl acl-administradores acl-desarrolladores acl-editores">Teléfono Personal</dt>
                                 <dd class="acl acl-administradores acl-desarrolladores acl-editores"><?php echo isNull($autoridad['Autoridad']['telefono_personal'],'Vacío') ?></dd>
                                 <dt<?php if ($i % 2 == 0) echo $class;?>>Teléfono Institucional</dt>
