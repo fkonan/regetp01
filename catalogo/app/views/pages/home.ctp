@@ -54,7 +54,7 @@ instituciones de educación técnico profesional.
 </div>
     
 <div class="grid_8">
-    <div class="boxblanca">
+    <div class="boxblanca boxdocs">
         <h3>Empresas, profesionales, funcionarios y otros</h3>
         <div class="box_home_buscadores">
             <div class="box_pad_wrapper">

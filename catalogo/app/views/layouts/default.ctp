@@ -16,9 +16,9 @@ $javascript;
         <?php echo $html->charset(); ?>
 
         <title>
-            <?php __('Catálogo Nacional de Títulos y Certificaciones de Educación Técnico Profesional');
-            echo Configure::read('version')." - "; ?>
-            <?php echo $title_for_layout; ?>
+            <?php  echo  $title_for_layout; ?>
+            <?php echo Configure::read('version')." - "; ?>
+            <?php __('Catálogo Nacional de Títulos y Certificaciones de Educación Técnico Profesional'); ?>
         </title>
         
         <script type="text/javascript">

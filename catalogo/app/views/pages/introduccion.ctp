@@ -4,7 +4,7 @@
 
 
 <div class="grid_9">
-    <div class="boxblanca">
+    <div class="boxblanca boxdocs">
         <h2>Introducci&oacute;n </h2>
                 
         <h3>La Educación Técnica Profesional en Argentina</h3>
@@ -25,12 +25,11 @@
         <p>
             Una de sus principales funciones es constituirse en fuente de información para diversos usuarios (entidades de gobierno y administración de la educación nacionales e internacionales ? en particular MERCOSUR-, otros sectores de gobierno -en particular Ministerios de Economía, de Trabajo y de Desarrollo Social-, colegios profesionales, empleadores ? cámaras y empresas-, trabajadores ? sindicatos y gremios-, estudiantes potenciales, etc.) sobre certificaciones y títulos y sus correspondientes ofertas formativas.
         </p>
-
         
         <h4>M&aacute;s informaci&oacute;n</h4>
         <ul>
             <li><a href="http://www.inet.edu.ar/" target="_blank">Instituto Nacional de Educaci&oacute;n Tecnol&oacute;gica</a></li>
-            <li><a href="normativa.html">Normativa de referencia</a></li>
+            <li><?php echo $html->link('Normativa de referencia', '/pages/normativa');?></li>
         </ul>
         <p>&nbsp;</p>
     </div>

@@ -4,7 +4,7 @@
 
 
 <div class="grid_9">
-    <div class="boxblanca">
+    <div class="boxblanca boxdocs">
 
         <h1>Marcos de referencia    </h1>
         <p>&nbsp;</p>

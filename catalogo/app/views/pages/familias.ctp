@@ -1,9 +1,12 @@
-
+<?php
+    //debug($this);
+    $this->pageTitle = 'Familias Profesionales';
+?>
 
 <?php echo $this->element('menu_docs')?>
 
 <div class="grid_9">
-    <div class="boxblanca">
+    <div class="boxblanca boxdocs">
         <h2>Familias profesionales</h2>
         <p style="color: red">Presentaci&oacute;n [Pablo]</p>
         
