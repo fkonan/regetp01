@@ -76,7 +76,7 @@ echo $html->css(array(  'jquery.loadmask',
     <?php echo $this->element('boxBuscadorAyuda'); ?>
     
     <!-- Aca se muestran los resultados de la busqueda-->
-    <div id='consoleResult' style="min-height: 200px; margin-bottom: 20px;margin-top: 20px;">
+    <div id='consoleResult' style="min-height: 200px; margin-bottom: 20px; margin-top:15px;">
     </div>
     
 </div>

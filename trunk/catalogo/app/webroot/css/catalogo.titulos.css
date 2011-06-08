@@ -29,11 +29,22 @@
 
 .items-nombre {
     text-align:left;
+    float: left;
     font-size: 9pt;
+    width: 70%;
 }
+.items-oferta {
+    text-align:left;
+    float: left;
+    font-size: 9pt;
+    width: 20%;
+}
+
 
 .items-actions {
     margin:0;
+    float: left;
+    width: 10%;
 }
 
 .titulosview {
