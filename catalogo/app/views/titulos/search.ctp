@@ -74,7 +74,7 @@
             echo $form->input('jur_dep_loc', array('label'=>'Departamento/Localidad',
                                                     'div'=>false,
                                                     'class' => '',
-                                                    'after'=>'<br /><i>Ingrese al menos 3 letraspara que comience la búsqueda</i>'));
+                                                    'after'=>'<br /><i>Ingrese al menos 3 letras para que comience la búsqueda</i>'));
             $name = $val = '';
             if (!empty($this->data['Instit']['localidad_id'])) {
                 $name = "data[Instit][localidad_id]"; $val =

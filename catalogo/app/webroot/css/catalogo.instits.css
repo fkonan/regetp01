@@ -82,13 +82,20 @@ dd ul{
     font-weight: bold;
 }
 
-.instit-items-domicilio1 p, .instit-items-domicilio2 p{
+.items-domicilio {
+    float: left;
     font-size: 9pt;
-    margin:1px;
+    width: 70%
+}
+.items-gestion {
+    float: left;
+    font-size: 9pt;
+    width: 20%
 }
 
 .items-actions {
-    margin:0;
+    float: left;
+    width: 10%
 }
 
 #boxAyuda{
@@ -120,5 +127,5 @@ cite{
 }
 
 .ficha_info{
-    min-height: 200px;
+    min-height: 158px;
 }

@@ -26,10 +26,6 @@ ol, ul {
    color: #58585A;
 }
 
-#search_results{
-    padding-top: 20px;
-}
-
 .search-div {
     margin: 10px 0;
     padding: 0px 10px 10px 10px;
@@ -62,6 +58,14 @@ label {
     border-bottom: 1px groove #58585A;
     padding-bottom: 5px;
     padding-top: 10px;
+}
+.list-header .sorter {
+    width: 70%;
+    float: left;
+}
+.list-header .paging {
+    width: 30%;
+    float: left;
 }
 
 #items li:hover{

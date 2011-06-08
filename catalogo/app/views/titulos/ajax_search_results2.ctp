@@ -9,11 +9,11 @@ $paginator->options(array(  'update' => 'consoleResult',
         jQuery("#TituloBysession").val(0);
     }
 </script>
-<div id="search_results" class="grid_12 alpha omega boxblanca" style="padding:5px">
-    <div class="grid_12 alpha list-header">
-        <div class="grid_3 suffix_3 alpha">
+<div id="search_results" class="boxblanca">
+    <div class="list-header">
+        <div class="sorter">
             <?php
-            $sort = 'cue';
+            $sort = 'Titulo.name';
             if(isset($this->passedArgs['sort'])){
             $sort = $this->passedArgs['sort'];
             }
@@ -26,21 +26,20 @@ $paginator->options(array(  'update' => 'consoleResult',
             <span class="<?= $class?>"><?php echo $paginator->sort("Oferta",'Oferta.name');?></span>
 
         </div>
-        <div class="grid_3 suffix_1 omega">
+        <div class="paging">
             <?php echo $paginator->counter(array(
                 'format' => __('Títulos %start%-%end% de <strong>%count%</strong>', true))); ?>
         </div>
+        <div class="clear"></div>
     </div>
-    <div class="clear"></div>
-
-    <? if (sizeof($titulos) > 0) {?>
-    <ol id="items" class ="grid_12 alpha omega">
-            <?php
-            $i = 0;
-            foreach ($titulos as $titulo):
-                ?>
-        <li class="grid_12 alpha omega">
-            <span class="items-nombre alpha grid_7">
+    <? if (!empty($titulos)) {?>
+    <ol id="items">
+        <?php
+        $i = 0;
+        foreach ($titulos as $titulo):
+        ?>
+        <li>
+            <div class="items-nombre">
                         <strong><?php
                         /*$linkTitulo = $html->link(
                                 " (".count($titulo['Plan'])." planes)",
@@ -49,7 +48,7 @@ $paginator->options(array(  'update' => 'consoleResult',
                                 );*/
                         echo $titulo['Titulo']['name']; ?>
                         </strong>
-            </span>
+            </div>
             <!--<p>
                     <?php
                     if ($titulo['Titulo']['marco_ref']==1) {
@@ -57,12 +56,12 @@ $paginator->options(array(  'update' => 'consoleResult',
                     }
                     ?>
             </p>-->
-            <span class="titulos-items-oferta grid_4">
+            <div class="items-oferta">
                         <?php
                         echo (empty($titulo['Oferta']['name']))? "" : $titulo['Oferta']['name'];
                         ?>
-            </span>
-            <p class="items-actions omega grid_1">
+            </div>
+            <div class="items-actions">
                 <?php
                     echo $html->image('../css/img/lupagris_small.png', array(
                         'alt' => 'Mas informacion',
@@ -70,8 +69,8 @@ $paginator->options(array(  'update' => 'consoleResult',
                         'onclick'=>"viewTitulo('".$html->url('/titulos/view/'.$titulo['Titulo']['id'])."', '".$titulo['Titulo']['name']."');"
                         ));
                 ?>
-            </p>
-            
+            </div>
+            <div class="clear"></div>
         </li>
             <?php endforeach; ?>
     </ol>
@@ -89,4 +88,5 @@ $paginator->options(array(  'update' => 'consoleResult',
             <span class="ajax_update" id="ajax_paginator_indicator" style="display:none; padding-left:10px;"><?php echo $html->image('ajax-loader.gif')?></span>
         </div>
         <?php  } ?>
+    <div class="clear"></div>
 </div>
