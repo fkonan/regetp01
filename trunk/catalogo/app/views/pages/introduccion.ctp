@@ -1,3 +1,6 @@
+<?php 
+$this->pageTitle= 'Introducción';
+?>
 <br />
 
 <?php echo $this->element('menu_docs')?>
