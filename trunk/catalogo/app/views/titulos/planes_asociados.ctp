@@ -8,10 +8,9 @@ $paginator->options(array(
 'indicator' => 'spinner',
 ));
 ?>
-<div class="grid_12 alpha omega boxblanca" style="padding:5px" id="search_results">
-    <div class="clear"></div>
-    <div class="grid_12 alpha list-header">
-        <div class="grid_8 alpha">
+<div class="boxblanca" id="search_results">
+    <div class="list-header">
+        <div class="sorter">
             <?php
             $sort = 'cue';
             if(isset($this->passedArgs['sort'])){
@@ -32,15 +31,14 @@ $paginator->options(array(
             <span class="<?= $class?>"><?php echo $paginator->sort('Jurisdiccion','Jurisdiccion.name');?></span>
 
         </div>
-        <div class="grid_4 omega">
+        <div class="paging">
             <?php echo $paginator->counter(array(
             'format' => __('Instituciones %start%-%end% de <strong>%count%</strong>', true))); ?>
         </div>
+        <div class="clear"></div>
     </div>
-    <div class="clear"></div>
-
-    <? if (sizeof($planes) > 0) {?>
-    <ol id="items" class="grid_12 alpha omega">
+    <? if (!empty($planes) > 0) { ?>
+    <ol id="items">
         <?php foreach($planes as $plan) : ?>
         <?  $año_actual = date("Y");
         $fecha_hasta = "$año_actual-07-21"; //hasta julio
@@ -52,24 +50,22 @@ $paginator->options(array(
         $clase .= ' escuela_inactiva';
         }
         ?>
-
-        <li clasS="grid_12 alpha omega">
-            <span class="items-nombre grid_12 alpha omega">
+        <li>
+            <div class="items-nombre">
                 <?= "".($plan['Instit']['cue']*100)+$plan['Instit']['anexo']." - ". $plan['Instit']['nombre_completo']; ?>
-            </span>
+            </div>
             <div class="clear"></div>
-            <div class="instit-items-domicilio1 alpha grid_8">
-                <p>Domicilio:
+            <div class="items-domicilio">
+                Domicilio:
                     <?php
                     echo joinNotNull(", ", array($plan['Instit']['direccion'],$plan['Instit']['lugar'],
                     $plan['Instit']['Localidad']['name'],
                     $plan['Instit']['Departamento']['name'] == $plan['Instit']['Localidad']['name']?null:$plan['Instit']['Departamento']['name'],
                     $plan['Instit']['Jurisdiccion']['name']));
                     ?>
-                </p>
             </div>
-            <div class="instit-items-gestion grid_3"><?= $plan['Instit']['Gestion']['name'] ?></div>
-            <p class="items-actions grid_1 omega">
+            <div class="items-gestion"><?= $plan['Instit']['Gestion']['name'] ?></div>
+            <div class="items-actions">
                 <a href="<?= $html->url('/instits/view/'.$plan['Instit']['id'])?>">
                     <?php
                     echo $html->image('../css/img/lupagris_small.png', array(
@@ -78,7 +74,8 @@ $paginator->options(array(
                     ));
                     ?>
                 </a>
-            </p>
+            </div>
+            <div class="clear"></div>
         </li>
 
         <? endforeach?>
