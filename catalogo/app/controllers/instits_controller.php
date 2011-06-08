@@ -12,6 +12,8 @@ class InstitsController extends AppController {
     }
 
     function view($id = null) {
+        $this->pageTitle = "Instituciones";
+
         if (!$id) {
             $this->Session->setFlash(__('Institución Inválida.', true));
             $this->redirect(array('action'=>'index'));
@@ -46,7 +48,7 @@ class InstitsController extends AppController {
     }
     
     function advanced_search_form() {
-        //$this->cacheAction = '1 day';
+        $this->pageTitle = "Buscador de Instituciones";
 
         if (!empty($this->data)) {
             $this->redirect('search');
@@ -104,6 +106,7 @@ class InstitsController extends AppController {
     }
 
     function search_form() {
+        $this->pageTitle = "Buscador de Instituciones";
         $this->set('jurisdicciones', $this->Instit->Jurisdiccion->find('list'));
     }
 

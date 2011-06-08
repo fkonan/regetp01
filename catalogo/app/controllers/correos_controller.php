@@ -9,6 +9,7 @@ class CorreosController extends AppController{
     var $components = array('Email');
     
     function contacto() {
+        $this->pageTitle = "Contacto";
         if (!empty($this->data)) {
             // pasa data al model para validar
             $this->Correo->set( $this->data );
