@@ -4,21 +4,94 @@
 
 <div class="grid_9">
     <div class="boxblanca boxdocs">
-        <h1>Foros sectoriales</h1>
+        <h2>Foros sectoriales</h2>
         <p>Descripci&oacute;n, Mecanismos de funcionamiento [Pablo]</p>
         
         <p><?echo $html->link('Ver metodología','/pages/foros_metodologia');?></p>
         
-        <h4>Foros</h4>
+        <h3>Foros</h3>
         
         <?php 
+                
         $vops = array(
-            'foroName' => 'Fsd',
-            'participantes' => array('pepe', 'lola'),
-            'docInfoSectorial' => '/files/pdfs/'
+            'foroName' => 'Hortícola',
+            'participantes' => array(),
+            'docInfoSectorial' => '/files/pdfs/info_sectorial/horticultura_informe_final.pdf'
         );
+        echo $this->element('foro', $vops);
         
-        $this->element('foro') ?>
+        
+        $vops = array(
+            'foroName' => 'Estética Profesional',
+            'participantes' => array(),
+            'docInfoSectorial' => '/files/pdfs/info_sectorial/Informe_sectorial_estetica_profesional.pdf'
+        );
+        echo $this->element('foro', $vops);
+        
+        $vops = array(
+            'foroName' => 'Textil / Indumentaria',
+            'participantes' => array(),
+            'docInfoSectorial' => '/files/pdfs/info_sectorial/sector_indumentaria.pdf'
+        );
+        echo $this->element('foro', $vops);
+        
+        
+        $vops = array(
+            'foroName' => 'Producción Lechera',
+            'participantes' => array(),
+            'docInfoSectorial' => '/files/pdfs/info_sectorial/sector_indumentaria.pdf'
+        );
+        echo $this->element('foro', $vops);
+        
+        
+        $vops = array(
+            'foroName' => 'Automotriz',
+            'participantes' => array(),
+            'docInfoSectorial' => '/files/pdfs/info_sectorial/Sector automotriz - Informe Final.pdf'
+        );
+        echo $this->element('foro', $vops);
+        
+        
+        $vops = array(
+            'foroName' => 'Energía Eléctrica',
+            'participantes' => array(
+                'ACYEDE', 'CADIME','APSE','EDENOR','EDESUR',
+                'Ministerio de la Producción', 'ATEERA', 'TRANSENER', 
+                'Sindicato de Luz y Fuerza', 'FATLyF', 'APSEE', 
+                'FACTéc', 'FNPT'
+            ),
+            'docInfoSectorial' => '/files/pdfs/info_sectorial/INFORME SECTORIAL SECTOR ENERGIA ELECTRICA.pdf'
+        );
+        echo $this->element('foro', $vops);
+        
+        
+        $vops = array(
+            'foroName' => 'Informática',
+            'participantes' => array(),
+            //'docInfoSectorial' => '/files/pdfs/info_sectorial/INFORME SECTORIAL SECTOR ENERGIA ELECTRICA.pdf'
+        );
+        echo $this->element('foro', $vops);
+       
+        
+        $vops = array(
+            'foroName' => 'Madera y Mueble',
+            'participantes' => array(),
+            'docInfoSectorial' => '/files/pdfs/info_sectorial/madera y mueble.pdf'
+        );
+        echo $this->element('foro', $vops);
+        
+        
+        
+        $vops = array(
+            'foroName' => 'Metalmecánica',
+            'participantes' => array(),
+            'docInfoSectorial' => '/files/pdfs/info_sectorial/madera y mueble.pdf'
+        );
+        echo $this->element('foro', $vops);
+        
+        ?>
+        
+        
         <p>Informes [Asignar al foro correspondiente]</p>
         <ul type="disc">
             <li>Hort&iacute;cola (Link a PDF)</li>
@@ -28,10 +101,10 @@
             <li>Automotriz (Link a PDF)</li>
             <li>Construcciones (Link a PDF)</li>
             <li>Energ&iacute;a El&eacute;ctrica (Link a PDF)</li>
-            <li>Hoteler&iacute;a y Gastronom&iacute;a (Link a PDF)</li>
-            <li>Inform&aacute;tica (Link a PDF)</li>
+            <li>Hotelería y Gastronomía (Link a PDF)</li>
+            <li>Informática (Link a PDF)</li>
             <li>Madera y Mueble (Link a PDF)</li>
-            <li>Metalmec&aacute;nica (Link a PDF)</li>
+            <li>Metalmecánica (Link a PDF)</li>
         </ul>
         <p>&nbsp;</p>
     </div>

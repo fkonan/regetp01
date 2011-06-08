@@ -19,7 +19,13 @@
             <li><?php echo $html->link('Madera y Mueble', '/files/pdfs/info_sectorial/madera_y_mueble.doc'); ?></li>
             <li><?php echo $html->link('Mecánica Automotriz', '/files/pdfs/info_sectorial/mecanica_aut.doc'); ?></li>
             <li><?php echo $html->link('Metalmecánica', '/files/pdfs/info_sectorial/metalmecanica.doc'); ?></li>
-            <li><?php echo $html->link('Textil', '/files/pdfs/info_sectorial/textil.doc'); ?></li>
+            <li><?php echo $html->link('Textil e Indumentaria', '/files/pdfs/info_sectorial/textil.doc'); ?></li>
+            <hr />
+            <p style="color:red">De las siguientes, faltan los cuadros</p>
+            <li>Construcciones</li>
+            <li>Hortícola</li>
+            <li>Hotelería y Gastronomía</li>
+            <li>Producción Lechera</li>
         </ul>
         
         <h3>M&aacute;s informaci&oacute;n</h3>
