@@ -18,6 +18,8 @@ class TitulosController extends AppController {
         );
 
     function search($oferta_id = 0) {
+        $this->pageTitle = "Buscador de Títulos";
+        
         $ofertas = $this->Titulo->Oferta->find('list');
         $sectores = $this->Titulo->Sector->find('list',array('order'=>'Sector.name'));
 
@@ -117,7 +119,9 @@ class TitulosController extends AppController {
         $this->set('titulos',$this->Titulo->find('list', array('conditions'=>$conditions)));
     }
 
-    function view($id = null) {       
+    function view($id = null) {
+        $this->pageTitle = "Títulos";
+
         if (!$id) {
             $this->flash(__('Invalid Titulo', true), array('action'=>'search'));
         }
@@ -624,6 +628,7 @@ class TitulosController extends AppController {
 
 
     function guiaDelEstudiante() {
+        $this->pageTitle = "Guía del Estudiante";
         $this->set('sectores', $this->Titulo->Sector->find('list'));
         $this->set('ofertas', $this->Titulo->Oferta->find('list'));
         $this->set('gestiones', $this->Titulo->Plan->Instit->Gestion->find('list'));

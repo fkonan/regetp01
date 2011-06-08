@@ -8,7 +8,9 @@ class BibliotecasController extends AppController{
     var $components = array('FileReader');
     
     function index(){
-        
+
+        $this->pageTitle = "Biblioteca";
+
         $this->cacheAction = true;
         
         $pdfs_path = WWW_ROOT . 'files' . DS. 'pdfs' . DS;       

@@ -1,4 +1,8 @@
-<?php echo $html->css('catalogo.home', false);?>
+<?php 
+    echo $html->css('catalogo.home', false);
+
+    $this->pageTitle = "Inicio";
+?>
 
 <h1 class="grid_12">El Catálogo Nacional de Títulos y Certificaciones</h1>
 
