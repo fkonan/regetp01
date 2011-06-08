@@ -4,7 +4,7 @@
 
 
 <div class="grid_9">
-    <div class="boxblanca">
+    <div class="boxblanca boxdocs">
 
         <h1>Educaci&oacute;n T&eacute;cnica de Nivel Medio y Superior </h1>
         <p>&nbsp;</p>

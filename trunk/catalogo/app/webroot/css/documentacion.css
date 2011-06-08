@@ -23,3 +23,10 @@
      color: #0082ca;
      text-decoration: none;
 }
+
+
+.boxdocs{
+    padding-left: 20px;
+    padding-right: 25px;
+    text-align: justify;
+}

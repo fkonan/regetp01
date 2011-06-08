@@ -3,7 +3,7 @@
 <?php echo $this->element('menu_docs')?>
 
 <div class="grid_9">
-    <div class="boxblanca">
+    <div class="boxblanca boxdocs">
         <h1>Foros sectoriales</h1>
         <p>Descripci&oacute;n, Mecanismos de funcionamiento [Pablo]</p>
         

@@ -2,7 +2,7 @@
 <?php echo $this->element('menu_docs')?>
 
 <div class="grid_9">
-    <div class="boxblanca">
+    <div class="boxblanca boxdocs">
         
     
 <h2>Metodología de trabajo para los foros</h2>
