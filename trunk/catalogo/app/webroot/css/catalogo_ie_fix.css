@@ -5,6 +5,8 @@
 
 #logo{
      background: none;
+}
+#logo img {
      display: none;
 }
 
