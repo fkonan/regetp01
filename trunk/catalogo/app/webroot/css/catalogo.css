@@ -73,9 +73,13 @@ h2{
 }
 h3{
     font-size: 1.4em;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 h4{
-    font-size: 1.2em;
+    font-size: 1.12em;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 h4 {
@@ -258,7 +262,6 @@ dd ul{
 
 .centrado{
     text-align: center;
-
 }
 
 .boxblanca{
