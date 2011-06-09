@@ -17,21 +17,18 @@ IMG.step{
 }
 
 .filtro{
-    padding:3px 10px 3px 10px;
-    margin:5px;
-    background-color: #dcddde;
-    -webkit-border-radius: 1em;
-    -moz-border-radius: 1em;
-    border-radius: 1em;
+    padding:3px 10px 3px 10px !important;
+    margin:0px 5px 5px 0px;
     display: inline-block;
+    width: 95%;
 }
 
 .filtro a{
     text-decoration: none;
 }
 .filtros-aplicados{
-    margin-top: 20px;
-    padding:5px;
+    padding: 5px !important;
+    margin-top: 0px !important;
 }
 
 H3{
@@ -95,7 +92,7 @@ H2{
 
 .boxblanca{
     margin-right: 13px;
-    padding-bottom: 20px;
+    padding:2px 0px 5px 5px;
 }
 
 .boxgris{
@@ -137,12 +134,40 @@ H2{
     font-size: 8pt;
     font-weight: bold;
     padding-left: 4px;
+    float: right;
 }
 
 input[type=text], textarea, select{
-    width: 95%;
+    width: 93%;
 }
 
 ol, ul {
     padding-left: 10px;
+}
+
+#sin_filtros {
+    margin-top: 4px;
+}
+
+.criterios_aplicados{
+    color:#B1CC31;
+    font-size: 10pt;
+    font-weight: bold;
+    margin-top:5px;
+    margin-right: 5px;
+    margin-bottom: 3px;
+}
+
+#filtro{
+    padding-top: 8px;
+    padding-bottom: 15px;
+    font-size: 0.9em;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.add_filter{
+    cursor:pointer;
+    font-size: 9pt;
+    margin-left: 2px
 }

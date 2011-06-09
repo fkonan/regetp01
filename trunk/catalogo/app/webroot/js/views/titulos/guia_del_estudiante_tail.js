@@ -3,14 +3,13 @@
     // Parametros de configuracion
     // Elementos utilizados
 
-    
     var paginatorTemplate = $('#paginatorTemplate');
     
     
     var titulosForm = $('#TituloSearchForm');
     var titulosContainer = $( "#li_titulos ul.results" );
     var titulosSeleccionadosContainer = $( "#li_titulos UL.seleccionados" );    
-    var titulosPaginator = $("#li_titulos > .paginatorContainer")
+    var titulosPaginator = $("#li_titulos .paginatorContainer")
     var titulosTemplate = $("#tituloTemplate");
     var tituloOfertaCombo = $("#TituloOfertaId");
     var tituloSectorCombo = $("#TituloSectorId");
@@ -55,6 +54,14 @@
         titulosForm.submit();
         return false;
     });
+
+    $(".add_filter").live("click",function(event){
+        titulosForm.submit();
+    });
+
+    $(".autosubmit").live("change",function(event){
+        titulosForm.submit();
+    });
     
     function deleteFilter(id){
         var escapedId = id.replace(/\[/g, "\\[");
@@ -83,16 +90,20 @@
 
     function __hideWithLabel(input){
         var label = titulosForm.find("label[for=" + input.attr("id") + "]");
+        var plus = $(input).next('.add_filter');
         label.hide();
         input.hide();
         input.attr('disabled','disabled');
+        plus.hide();
     }
 
      function __showWithLabel(input){
          var label = titulosForm.find("label[for=" + input.attr("id") + "]");
+         var plus = $(input).next('.add_filter');
          label.show();
          input.show();
          input.removeAttr('disabled');
+         plus.show();
     }
     
     /**
@@ -196,7 +207,7 @@
             if(params[i].name != '_method' && params[i].value != ''){
                 cont++;
                 input = titulosForm.find("[name='" + params[i].name + "']");
-                nombre = titulosForm.find("label[for=" + input.attr("id") + "]").html();
+                nombre = titulosForm.find("label[for=" + input.attr("id") + "]").html().replace("<br>", "");
                 if(input.is('select')){
                     valor = titulosForm.find("[name='" + params[i].name + "']").find("option[value='"+params[i].value+"']").html();
                 }
@@ -222,6 +233,7 @@
         else{
             $("#sin_filtros").show();
         }
+        __ajustarAlturas();
     }
 
     var __recargarFiltros = function (data) {
@@ -261,6 +273,16 @@
                 $(this).find('.msj-vacio').hide();
             }
         });
+
+        __ajustarAlturas();
+    }
+
+    var __ajustarAlturas = function () {
+        $('#filtro, .filtros-aplicados').attr('style', '');
+        hFiltro = $('#filtro').outerHeight(); // Get height
+        hAplicados = $('.filtros-aplicados').outerHeight(); // Get height
+        mHeight = hFiltro > hAplicados ? hFiltro : hAplicados;  // Set mHeight to the larger of the two heights
+        $('#filtro, .filtros-aplicados').outerHeight(mHeight);  // Set both to equal heights
     }
 
     var __recargaCombo = function (combo,data){
@@ -351,5 +373,9 @@
         institsContainer.html('');
         institsPaginator.html('');
     }
-    
+
+    $(function(){
+       __ajustarAlturas();
+    });
+
 })(jQuery);
