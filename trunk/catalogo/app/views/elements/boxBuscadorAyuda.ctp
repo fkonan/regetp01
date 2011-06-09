@@ -1,7 +1,6 @@
 <div id="boxAyuda" class="boxblanca">
-    <h2 class="grid_12">Ayuda: ¿Cómo utilizar el buscador?</h2>
-    <ul class="grid_12 menu_body help_body" style="display:none">
-        <br/>
+    <h3>Ayuda: ¿Cómo utilizar el buscador?</h3>
+    <ul class="menu_body help_body" style="display:none">
         <P LANG="es-ES" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="es-ES">Puede
                 buscar por CUE</SPAN><SPAN LANG="es-ES">
                 (con &oacute; sin n&uacute;mero de anexo) &oacute; por parte del CUE.
@@ -150,7 +149,6 @@
                 'div'=>false));
                 ?>
             </SPAN>.</P>
-
     </ul>
     <div class="clear"></div>
 </div>
