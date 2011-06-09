@@ -172,7 +172,6 @@ dd ul{
     background: url(img/bandera_trans.png) no-repeat right;
 }
 
-
 #logo img{
     height: 128px;
 }
@@ -339,7 +338,7 @@ dd ul{
 .separador{
     border-top-color: #25abe1;
     border-top-style: solid;
-    border-top-width: 5px;
+    border-top-width: 1px;
     padding-top: 20px;
     margin-top: 20px;
     padding-bottom: 20px;

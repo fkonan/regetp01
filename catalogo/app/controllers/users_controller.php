@@ -2,6 +2,7 @@
 class UsersController extends AppController{
     function login()
     {
+        $this->pageTitle = '';
         if ($this->Auth->login()){
             $this->redirect($this->Auth->redirect());	
         }
