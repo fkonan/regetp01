@@ -464,7 +464,7 @@ dd ul{
     font-size: 8pt;
     width:98%;
     margin:0px;
-    padding:5px;
+    padding: 0 5px 5px 5px;
 }
 
 .help_body table{
