@@ -9,8 +9,11 @@
         
         <p><?echo $html->link('Ver metodología','/pages/foros_metodologia');?></p>
         
+        
         <h3>Foros</h3>
         
+        <p style="color:red">Falta informe de: Informatica, Construcciones y Hoteleria y Gastronomia</p>
+
         <?php 
                 
         $vops = array(
@@ -20,6 +23,7 @@
         );
         echo $this->element('foro', $vops);
         
+      
         
         $vops = array(
             'foroName' => 'Estética Profesional',
@@ -65,13 +69,6 @@
         echo $this->element('foro', $vops);
         
         
-        $vops = array(
-            'foroName' => 'Informática',
-            'participantes' => array(),
-            //'docInfoSectorial' => '/files/pdfs/info_sectorial/INFORME SECTORIAL SECTOR ENERGIA ELECTRICA.pdf'
-        );
-        echo $this->element('foro', $vops);
-       
         
         $vops = array(
             'foroName' => 'Madera y Mueble',
@@ -91,21 +88,6 @@
         
         ?>
         
-        
-        <p>Informes [Asignar al foro correspondiente]</p>
-        <ul type="disc">
-            <li>Hort&iacute;cola (Link a PDF)</li>
-            <li>Est&eacute;tica Profesional (Link a PDF)</li>
-            <li>Textil / Indumentaria (Link a PDF)</li>
-            <li>Producci&oacute;n Lechera (Link a PDF)</li>
-            <li>Automotriz (Link a PDF)</li>
-            <li>Construcciones (Link a PDF)</li>
-            <li>Energ&iacute;a El&eacute;ctrica (Link a PDF)</li>
-            <li>Hotelería y Gastronomía (Link a PDF)</li>
-            <li>Informática (Link a PDF)</li>
-            <li>Madera y Mueble (Link a PDF)</li>
-            <li>Metalmecánica (Link a PDF)</li>
-        </ul>
-        <p>&nbsp;</p>
+       
     </div>
 </div>
