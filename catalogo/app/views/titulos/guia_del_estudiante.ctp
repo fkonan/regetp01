@@ -35,7 +35,7 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
     <div class="boxgris">
         <?php echo $html->image('1-icon.png', array('class' => 'step'));?>
         <h2>Seleccioná criterios de búsqueda:</h2> 
-        <div id="filtro" class="boxblanca">
+        <div id="filtro" class="boxblanca grid_8">
             <?php echo $form->create('Titulo', array(
             'action' => 'guia_del_estudiante', 'name'=>'TituloSearchForm',
             'id' =>'TituloSearchForm', ));
@@ -43,14 +43,11 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
             <div id="filtrosContainer">
                 <?php echo $this->element('filtros');?>
             </div>
-            <div class="grid_1 prefix_9">
-                <?php echo $form->end('Buscar');?>
-            </div>
+            <?php echo $form->end();?>
             <div class="clear"></div>
         </div>
-
-        <div class="boxblanca filtros-aplicados">
-            <h3>Criterios aplicados:</h3>
+        <div class="boxblanca filtros-aplicados grid_3">
+            <span class="criterios_aplicados">Criterios aplicados:</span>
             <?php echo $form->create('Titulo', array(
             'action' => 'guia_del_estudiante', 'name'=>'FiltrosAplicadosForm',
             'id' =>'FiltrosAplicadosForm' ));
@@ -59,6 +56,7 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
 
             <?php echo $form->end();?>
         </div>
+        <div class="clear"></div>
     </div>
 </div>
 
