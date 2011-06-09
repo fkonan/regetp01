@@ -54,7 +54,6 @@ H2{
 }
 .titulo_label{
     display:inline-block;
-    width: 360px;
     vertical-align: middle;
     margin-top: 3px;
     margin-bottom: 6px;
@@ -141,4 +140,8 @@ H2{
 
 input[type=text], textarea, select{
     width: 95%;
+}
+
+ol, ul {
+    padding-left: 10px;
 }
