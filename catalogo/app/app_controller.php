@@ -51,14 +51,15 @@ class AppController extends Controller {
                 $this->Auth->logoutRedirect='/pages/home';
                 $this->Auth->autoRedirect = false;
                 
-                
+              
                 // si es Ajax y no tengo permisos que me tire un error HTTP
                 // asi lo puedo capturar desde jQuery
-                if($this->RequestHandler->isAjax()){                    
-                    if (!$this->Acl->check($this->Auth->user(), $this->action)){
+                if($this->RequestHandler->isAjax()){
+                    if (!$this->Auth->User('id') ) {
                         header('HTTP/1.1 401 Unauthorized');
                     }
-                } 
+                    
+                }
      
 	}
         
