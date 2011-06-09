@@ -5,13 +5,10 @@ echo $html->css('catalogo.instits', false);
 $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
 ?>
 <div class="grid_12">
-    <h2 class="grid_8 alpha">
+    <h2 class="grid_12 alpha">
         <?php echo $cue_instit ?> <?php echo $instit['Instit']['nombre_completo'] ?>
     </h2>
-    <a class="grid_4 omega alerta-desactualizada" id="alerta-desactualizada">
-        Notificar institución desactualizada
-    </a>
-
+    
     <div class="clear"></div>
 
     <div class="grid_6 alpha">
@@ -148,7 +145,14 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
 
     <div class="clear"></div>
     
-    <h4>Títulos o Certificaciones que ofrece la Institución</h4>
+    <h4 class="grid_8 alpha">
+        Títulos o Certificaciones que ofrece la Institución
+    </h4>
+    
+    <a class="grid_4 omega alerta-desactualizada" id="alerta-desactualizada" style="margin-top: 7px;">
+        Notificar institución desactualizada
+    </a>
+    <div class="clear"></div>
 
     <div class="boxblanca">
         <?php
