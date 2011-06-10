@@ -1,4 +1,3 @@
-<br />
 
 <?php echo $this->element('menu_docs')?>
 
@@ -40,6 +39,13 @@ El proceso de homologación consiste en el análisis de planes de estudio relativo
 <p>
 Los marcos de referencia enuncian el conjunto de los criterios básicos y estándares que definen y caracterizan los aspectos sustantivos a ser considerados en el proceso de homologación de los títulos o certificados y sus correspondientes ofertas formativas, brindando los elementos necesarios para llevar a cabo las acciones de análisis y de evaluación comparativa antes señaladas.
 </p>
+
+
+ <h4>Referencia  normativa</h4>
+        <ul>
+            <li>Proceso de Homologación y Marcos de Referencia de Títulos y Certificaciones de Educaci&oacute;n T&eacute;cnico Profesional. <?php echo $html->link('Res. C.F.C.y E. Nº 261/06.', '/files/pdfs/otros/Res. CFCyE nro. 261-06.pdf')?></li>
+            <li>Lineamientos y criterios para la inclusi&oacute;n de t&iacute;tulos t&eacute;cnicos de       nivel secundario y de nivel superior y de certificados de formaci&oacute;n       profesional en el proceso de homologaci&oacute;n. <?php echo $html->link('Res. Nº 91/09', '/files/pdfs/otros/Res 91-09.pdf'); ?> <?php echo $html->link('Anexo I', '/files/pdfs/otros/91-09-anexoI.pdf'); ?> y <?php echo $html->link('Anexo II', '/files/pdfs/otros/91-09-anexoII.pdf'); ?></li>
+        </ul>
         
 
     </div>

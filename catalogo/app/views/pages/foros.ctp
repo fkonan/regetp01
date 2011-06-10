@@ -1,4 +1,3 @@
-<br />
 
 <?php echo $this->element('menu_docs')?>
 
@@ -40,41 +39,24 @@ Para obtener más información sobre características, objetivos y modos de funcion
 
         <?php 
                 
-        $vops = array(
-            'foroName' => 'Hortícola',
-            'participantes' => array(),
-            'docInfoSectorial' => '/files/pdfs/info_sectorial/horticultura_informe_final.pdf'
-        );
-        echo $this->element('foro', $vops);
-        
-      
-        
-        $vops = array(
-            'foroName' => 'Estética Profesional',
-            'participantes' => array(),
-            'docInfoSectorial' => '/files/pdfs/info_sectorial/Informe_sectorial_estetica_profesional.pdf'
-        );
-        echo $this->element('foro', $vops);
-        
-        $vops = array(
-            'foroName' => 'Textil / Indumentaria',
-            'participantes' => array(),
-            'docInfoSectorial' => '/files/pdfs/info_sectorial/sector_indumentaria.pdf'
-        );
-        echo $this->element('foro', $vops);
-        
-        
-        $vops = array(
-            'foroName' => 'Producción Lechera',
-            'participantes' => array(),
-            'docInfoSectorial' => '/files/pdfs/info_sectorial/sector_indumentaria.pdf'
-        );
-        echo $this->element('foro', $vops);
-        
         
         $vops = array(
             'foroName' => 'Automotriz',
-            'participantes' => array(),
+            'participantes' => array(
+                'ACRABA',
+                'APTA' ,
+                'ATAAP' ,
+                'ATRAR',
+                'FNPT' ,
+                'Ministerio de la Producción',
+                'SMATA' ,
+                'MTEySS',
+                'UDA' ,
+                'UTMAN' ,
+                'FAATRA',
+                'AMET',
+                'UMAM',
+            ),
             'docInfoSectorial' => '/files/pdfs/info_sectorial/Sector automotriz - Informe Final.pdf'
         );
         echo $this->element('foro', $vops);
@@ -93,10 +75,68 @@ Para obtener más información sobre características, objetivos y modos de funcion
         echo $this->element('foro', $vops);
         
         
+        $vops = array(
+            'foroName' => 'Estética Profesional',
+            'participantes' => array(
+                'Confederación General de Peluqueros y Peinadores de la R:A:',
+                'Federación Nacional de Trabajadores de Peluquería y Afines.',
+                'Confederación Nacional de Patrones Peluqueros',
+                'Escuela de Cosmetología, Cosmiatría, Estética Corporal y Maquillaje. (Viviana Bustos)',
+                'FACE',
+                'APPYA',
+                'Asociación Argentina de Cosmetología y Estética',
+                'AMRA',
+                'ANMAT',
+                'Ministerio de Salud ',
+            ),
+            'docInfoSectorial' => '/files/pdfs/info_sectorial/Informe_sectorial_estetica_profesional.pdf'
+        );
+        echo $this->element('foro', $vops);
+        
+        
+        
+        $vops = array(
+            'foroName' => 'Hortícola',
+            'participantes' => array(),
+            'docInfoSectorial' => '/files/pdfs/info_sectorial/horticultura_informe_final.pdf'
+        );
+        echo $this->element('foro', $vops);
+        
+        
+        
+        
+        $vops = array(
+            'foroName' => 'Informática',
+            'participantes' => array(
+                'COORDIEP',
+                'CPCI',
+                'CESSI',
+                'UDA',
+                'Polo IT Buenos Aires',
+                'SADIO',
+                'USUARIA',
+                'Córdoba Technology, Cluster de Tecnología de la Información',
+                'Ministerio de la Producción',
+                'COPITEC',
+                'CICOMRA',
+                'CEIL',
+                'FNPT' ,
+            ),
+            'docInfoSectorial' => ''
+        );
+        echo $this->element('foro', $vops);
+        
+        
         
         $vops = array(
             'foroName' => 'Madera y Mueble',
-            'participantes' => array(),
+            'participantes' => array(
+                'FAIMA',
+                'INTI' ,
+                'RITIM',
+                'Ministerio de Producción',
+                'AFOA',
+            ),
             'docInfoSectorial' => '/files/pdfs/info_sectorial/madera y mueble.pdf'
         );
         echo $this->element('foro', $vops);
@@ -105,10 +145,47 @@ Para obtener más información sobre características, objetivos y modos de funcion
         
         $vops = array(
             'foroName' => 'Metalmecánica',
-            'participantes' => array(),
+            'participantes' => array(
+                'Ministerio de la Producción.',
+                'CAME',
+                'UOM',
+                'UDA',
+                'ASIMRA',
+                'FNPT',
+                'AMET' ,
+                'ADIMRA',
+            ),
             'docInfoSectorial' => '/files/pdfs/info_sectorial/madera y mueble.pdf'
         );
         echo $this->element('foro', $vops);
+        
+        
+        
+        $vops = array(
+            'foroName' => 'Producción Lechera',
+            'participantes' => array(),
+            'docInfoSectorial' => '/files/pdfs/info_sectorial/sector_indumentaria.pdf'
+        );
+        echo $this->element('foro', $vops);
+        
+        
+        
+        $vops = array(
+            'foroName' => 'Textil / Indumentaria',
+            'participantes' => array(
+                'Asociación Confeccionistas de Pergamino',
+                'FAIIA',
+                'Unión Cortadores de la Indumentaria',
+                'AAQCT',
+                'INTI',
+                'AOT',
+                'Fundación Pro-Tejer',
+                'UIA',
+            ),
+            'docInfoSectorial' => '/files/pdfs/info_sectorial/sector_indumentaria.pdf'
+        );
+        echo $this->element('foro', $vops);
+        
         
         ?>
         

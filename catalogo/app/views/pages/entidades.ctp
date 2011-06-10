@@ -1,4 +1,4 @@
-<br />
+
 <?php echo $this->element('menu_docs')?>
 
 <div id="cuerpo1" class="grid_9">

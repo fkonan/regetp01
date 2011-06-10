@@ -11,7 +11,7 @@
         <p style="color: red">Presentaci&oacute;n [Pablo]</p>
         
         <h3>Listado de familias  </h3>
-        <p class="warning">Haciendo click en el nombre de la familia se podrá descargar un cuadro con información ampliada.</p>
+        <p class="warning">Haciendo click en el nombre de la familia podrá ver un cuadro con información ampliada.</p>
         <ul>
             <li><?php echo $html->link('Energía Eléctrica', '/pages/flias/energia_electrica'); ?></li>
             <li><?php echo $html->link('Estética Profesional', '/pages/flias/estetica_profesional'); ?></li>
