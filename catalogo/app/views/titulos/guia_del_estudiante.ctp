@@ -6,7 +6,7 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
 ?>
 <script id="tituloTemplate" type="text/x-jquery-tmpl">
     <li titulo-id="${Titulo.id}">
-        <input type="checkbox" class="styled_checkbox" name="data[Plan][titulo_id][]" value="${Titulo.id}" id="check_${Titulo.id}" />
+        <input type="radio" class="styled_checkbox" name="data[Plan][titulo_id]" value="${Titulo.id}" id="check_${Titulo.id}" />
         <label for="check_${Titulo.id}" class="titulo_label">
         <span class="items-nombre">
             <strong>${Titulo.name}</strong>
