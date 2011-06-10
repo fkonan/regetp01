@@ -27,18 +27,18 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
             ${Instit.cue}${Instit.anexo} - ${Instit.nombre_completo}</a>
         </div>
         <div class="items-domicilio">
-            ${Departamento.name}, ${Localidad.name}
+            ${Localidad.name}, ${Departamento.name}, ${Jurisdiccion.name}
         </div>
     </li>
 </script>
-
+<?php  //$paginator->options(array('update' => 'consoleResult', 'url' => $this->passedArgs,'indicator'=> 'ajax_indicator')); ?>
 <script id="paginatorTemplate" type="text/x-jquery-tmpl">
     <div class="list-header">
         <div class="sorter">
-           <b>${cant}</b> ${texto}
+           ${desde}-${hasta} de <b>${cant}</b> ${texto}
         </div>
         <div class="paging">
-            {{html numbers}}
+            <span class="numbers">{{html numbers}}</span>
         </div>
         <div class="clear"></div>
     </div>
