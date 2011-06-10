@@ -21,10 +21,14 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
 </script>
 
 <script id="institTemplate" type="text/x-jquery-tmpl">
-        <li>
-        <a href="<?php echo $this->base
-?>/instits/view/${Instit.id}"><b>${Instit.cue}${Instit.anexo}</b>
-    ${Instit.nombre_completo}</a>
+    <li>
+        <div class="items-nombre">
+            <a href="<?php echo $this->base?>/instits/view/${Instit.id}">
+            ${Instit.cue}${Instit.anexo} - ${Instit.nombre_completo}</a>
+        </div>
+        <div class="items-domicilio">
+            ${Departamento.name}, ${Localidad.name}
+        </div>
     </li>
 </script>
 
@@ -97,7 +101,7 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
             <?php echo $html->image('3-icon.png', array('class' => 'step'));?>
             <h3>¿Dónde estudiar?</h3>
             <div class="paginatorContainer"></div>
-            <ul class="results">
+            <ul id="items" class="results">
                 Sin Resultados
             </ul>
         </div>

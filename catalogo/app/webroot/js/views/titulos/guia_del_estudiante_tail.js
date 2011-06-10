@@ -198,6 +198,7 @@
     var __actualizarTitulos = function (data) {
         __recargarFiltros(data.filtros);
         __meterTitulosEnTemplate(data);
+        __ajustarAlturas('#li_instits', '#li_titulos');
     }
 
     var __recargarFiltrosAplicados = function (params) {
@@ -233,7 +234,7 @@
         else{
             $("#sin_filtros").show();
         }
-        __ajustarAlturas();
+        __ajustarAlturas('#filtro', '.filtros-aplicados');
     }
 
     var __recargarFiltros = function (data) {
@@ -274,15 +275,15 @@
             }
         });
 
-        __ajustarAlturas();
+        __ajustarAlturas('#filtro', '.filtros-aplicados');
     }
 
-    var __ajustarAlturas = function () {
-        $('#filtro, .filtros-aplicados').attr('style', '');
-        hFiltro = $('#filtro').outerHeight(); // Get height
-        hAplicados = $('.filtros-aplicados').outerHeight(); // Get height
+    var __ajustarAlturas = function (selector1, selector2) {
+        $(selector1+','+ selector2).attr('style', '');
+        hFiltro = $(selector1).outerHeight(); // Get height
+        hAplicados = $(selector2).outerHeight(); // Get height
         mHeight = hFiltro > hAplicados ? hFiltro : hAplicados;  // Set mHeight to the larger of the two heights
-        $('#filtro, .filtros-aplicados').outerHeight(mHeight);  // Set both to equal heights
+        $(selector1+','+ selector2).outerHeight(mHeight);  // Set both to equal heights
     }
 
     var __recargaCombo = function (combo,data){
@@ -366,6 +367,7 @@
        __updatePaginatorElement(data, institsPaginator, getInstitsDelPaginator);
 
        $('#li_instits').unmask();
+       __ajustarAlturas('#li_instits', '#li_titulos');
     }
     
     var __blanquearContainers = function() {
@@ -375,7 +377,7 @@
     }
 
     $(function(){
-       __ajustarAlturas();
+       __ajustarAlturas('#filtro', '.filtros-aplicados');
     });
 
 })(jQuery);
