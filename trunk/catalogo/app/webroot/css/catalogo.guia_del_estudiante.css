@@ -70,9 +70,9 @@ H2{
 }
 
 #li_instits ul li{
-    list-style: disc outside url("img/listitem.gif");
+    /*list-style: disc outside url("img/listitem.gif"); */
     margin-bottom: 5px;
-    margin-left: 20px;
+    /*margin-left: 20px;*/
 }
 
 #li_titulos ul li :hover{
@@ -166,6 +166,7 @@ ol, ul {
     margin-top: 0px;
     margin-bottom: 0px;
     width: 65%;
+    border: 0px;
 }
 
 .add_filter{
@@ -213,6 +214,7 @@ ol, ul {
 .items-nombre {
     text-align:left;
     font-size: 9pt;
+    font-weight: bold;
 }
 .items-oferta {
     text-align:left;
