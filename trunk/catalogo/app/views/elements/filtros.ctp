@@ -1,5 +1,5 @@
 <div class="seccion grid_3 alpha">
-    <h3>Títulos</h3>
+    <h4>Títulos</h4>
     <div>
         <div>
             <?php echo $form->input('Titulo.oferta_id',
@@ -34,9 +34,9 @@
         <p class="msj-vacio">No hay filtros disponibles...</p>
     </div>
 </div>
-<div class="seccion grid_4 omega borde_izquierdo">
+<div class="seccion grid_4 omega">
     <div class="seccion">
-        <h3>Ubicación</h3>
+        <h4>Ubicación</h4>
         <div>
             <div>
                 <?php echo $form->input('Instit.jurisdiccion_id',
@@ -73,7 +73,7 @@
         </div>
     </div>
     <div class="seccion">
-        <h3>Institución</h3>
+        <h4>Institución</h4>
         <div>
             <div>
                 <?php echo $form->input('Instit.gestion_id',

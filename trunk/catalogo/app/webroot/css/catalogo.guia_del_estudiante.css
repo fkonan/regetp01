@@ -48,7 +48,7 @@ H2{
 .jquery-checkbox img{background: transparent url(img/check_box_empty.png) no-repeat;}
 .jquery-checkbox-checked img{background-image: url(img/check_box.png)}
 
-.results li span b, .seleccionados li span b{
+.results li span b span b{
     font-size: 1.2em;
 }
 .titulo_label{
@@ -72,6 +72,7 @@ H2{
 #li_instits ul li{
     list-style: disc outside url("img/listitem.gif");
     margin-bottom: 5px;
+    margin-left: 20px;
 }
 
 #li_titulos ul li :hover{
@@ -85,7 +86,7 @@ H2{
 #li_instits a {
     color: #58585a;
     text-decoration: none;
-    font-size: 10pt;
+    font-size: 9pt;
 }
 #li_instits a :hover {
     color:black;
@@ -141,7 +142,7 @@ input[type=text], textarea, select{
 }
 
 ol, ul {
-    padding-left: 10px;
+    padding-left: 0px;
 }
 
 #sin_filtros {
@@ -158,8 +159,8 @@ ol, ul {
 }
 
 #filtro{
-    /*padding-top: 8px;
-    padding-bottom: 15px;*/
+    /*padding-top: 8px;*/
+    padding-bottom: 15px;
     float: left;
     font-size: 0.9em;
     margin-top: 0px;
@@ -171,4 +172,50 @@ ol, ul {
     cursor:pointer;
     font-size: 9pt;
     margin-left: 2px
+}
+
+#items {
+    padding: 0;
+}
+#items li {
+    border-bottom: 1px dashed #CDCDCD;
+    height: auto !important;
+    margin: 0;
+    position: relative;
+    margin-left: 5px;
+}
+#items li:hover{
+    color: #000000;
+}
+
+.seleccionados li {
+    border-bottom: 1px dashed darkblue;
+    height: auto !important;
+    margin: 0;
+    position: relative;
+    margin-left: 5px;
+}
+
+.list-header {
+    border-bottom: 1px groove #58585A;
+    padding-bottom: 5px;
+    padding-top: 10px;
+}
+.list-header .sorter {
+    width: 50%;
+    float: left;
+}
+.list-header .paging {
+    width: 50%;
+    float: left;
+}
+
+.items-nombre {
+    text-align:left;
+    font-size: 9pt;
+}
+.items-oferta {
+    text-align:left;
+    clear: both;
+    font-size: 9pt;
 }
