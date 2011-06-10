@@ -8,7 +8,6 @@
     
     var titulosForm = $('#TituloSearchForm');
     var titulosContainer = $( "#li_titulos ul.results" );
-    var titulosSeleccionadosContainer = $( "#li_titulos UL.seleccionados" );    
     var titulosPaginator = $("#li_titulos .paginatorContainer")
     var titulosTemplate = $("#tituloTemplate");
     var tituloOfertaCombo = $("#TituloOfertaId");
@@ -343,20 +342,12 @@
     
     
     var onChangeHandlerTitulos = function( e ) {   
-        var tgt = e.currentTarget;
-        
-        if (tgt.checked) {
-            titulosSeleccionadosContainer.append(tgt.parentNode);
-        } else {
-            titulosContainer.append(tgt.parentNode);
-        }
-        
-        if(titulosSeleccionadosContainer.children().length > 0){
+       //if(titulosSeleccionadosContainer.children().length > 0){
             institsForm.submit();
-        }else{
-            institsContainer.text("Sin Resultados");
-            institsPaginator.html("");
-        }
+        //}else{
+        //    institsContainer.text("Sin Resultados");
+        //    institsPaginator.html("");
+        //}
     }
     
     
@@ -371,7 +362,6 @@
     }
     
     var __blanquearContainers = function() {
-        titulosSeleccionadosContainer.html('');
         institsContainer.html('');
         institsPaginator.html('');
     }
