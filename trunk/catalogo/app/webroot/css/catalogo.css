@@ -497,3 +497,32 @@ dd ul{
     padding-bottom: 0px;
     margin-top: 5px;
 }
+
+/* TABLAS */
+table
+{
+    /*font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;*/
+    font-size: 12px;
+    background: #fff;
+    margin: 5px;
+    border-collapse: collapse;
+    text-align: left;
+}
+table th
+{
+    font-size: 14px;
+    font-weight: bold;
+    color: #58585A;
+    padding: 10px 8px;
+    border-bottom: 5px solid #25ABE1;
+}
+table td
+{
+    border-bottom: 1px dashed #58585A;
+    color: #58585A;
+    padding: 6px 8px;
+}
+table tbody tr:hover td
+{
+    color: black;
+}
