@@ -35,6 +35,19 @@ Para obtener más información sobre características, objetivos y modos de funcion
         
         <h3>Foros</h3>
         
+        <h4>Índice de foros</h4>
+        <ul>
+            <li><a href="#Automotriz">Automotriz</a></li>
+            <li><a href="#Energía Eléctrica">Energía Eléctrica</a></li>
+            <li><a href="#Estética Profesional">Estética Profesional</a></li>
+            <li><a href="#Hortícola">Hortícola</a></li>
+            <li><a href="#Informática">Informática</a></li>
+            <li><a href="#Madera y Mueble">Madera y Mueble</a></li>
+            <li><a href="#Metalmecánica">Metalmecánica</a></li>
+            <li><a href="#Producción Lechera">Producción Lechera</a></li>
+            <li><a href="#Textil / Indumentaria">Textil / Indumentaria</a></li>
+        </ul>
+        
         <p style="color:red">Falta informe de: Informatica, Construcciones y Hoteleria y Gastronomia</p>
 
         <?php 

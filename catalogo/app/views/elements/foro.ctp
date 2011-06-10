@@ -1,5 +1,5 @@
-<div style="margin-left: 10%; margin-right: 10%">
-    <div style="border-bottom: 1px dashed #000" class=""></div>
+<div>
+    <div id="<?php echo $foroName; ?>" style="border-bottom: 1px dashed #000" class=""></div>
         <div class="clear"></div>
 
     <h4><?php echo $foroName; ?></h4>
