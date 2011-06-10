@@ -41,17 +41,23 @@ $filtros_aux['TituloName'] = utf8_encode($filtros['TituloName']);
 $filtros_aux['InstitName']= utf8_encode($filtros['InstitName']);
 
 $cant = $paginator->counter(array('format' => '%count%'));
+$desde = $paginator->counter(array('format' => '%start%'));
+$hasta = $paginator->counter(array('format' => '%end%'));
 
 $texto = 'Títulos encontrados';
 if ( $cant == 1) {
     $texto = 'Título encontrado';
 }
 
-$numbers = $paginator->numbers() ? $paginator->numbers() : '';
+$numbers = $paginator->numbers() ? $paginator->numbers(array('modulus'=>5)) : '';
 
 $paginator = array(
+    'desde' => $desde,
+    'hasta' => $hasta,
     'cant' => $cant,
     'numbers' => $numbers,
+    'prev' => $paginator->prev('«', null, null, array('class' => 'disabled')),
+    'next' => $paginator->next('»', null, null, array('class' => 'disabled')),
     'texto' => utf8_encode($texto),
 );
 
