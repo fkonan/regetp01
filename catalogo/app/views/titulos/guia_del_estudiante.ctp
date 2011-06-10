@@ -5,12 +5,19 @@ echo $javascript->link('jquery.loadmask.min', false);
 echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inline = false);
 ?>
 <script id="tituloTemplate" type="text/x-jquery-tmpl">
-        <li titulo-id="${Titulo.id}">
-        <input type="checkbox" class="styled_checkbox"
-            name="data[Plan][titulo_id][]" value="${Titulo.id}"
-            id="check_${Titulo.id}" > <label for="check_${Titulo.id}"
-            class="titulo_label"><b>${Titulo.name}</b> (${Oferta.name})</label>
-                </li>
+    <li titulo-id="${Titulo.id}">
+        <input type="checkbox" class="styled_checkbox" name="data[Plan][titulo_id][]" value="${Titulo.id}" id="check_${Titulo.id}" />
+        <label for="check_${Titulo.id}" class="titulo_label">
+        <span class="items-nombre">
+            <strong>${Titulo.name}</strong>
+        </span>
+        <br />
+        <span class="items-oferta">
+                ${Oferta.name}
+        </span>
+        </label>
+        <div class="clear"></div>
+    </li>
 </script>
 
 <script id="institTemplate" type="text/x-jquery-tmpl">
@@ -22,19 +29,24 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
 </script>
 
 <script id="paginatorTemplate" type="text/x-jquery-tmpl">
-        <div class="paginator">
-        <p class="count"><b>${cant}</b> ${texto}</p> <p class="numbers">{{html
-            numbers}}</p>
+    <div class="list-header">
+        <div class="sorter">
+           <b>${cant}</b> ${texto}
         </div>
+        <div class="paging">
+            {{html numbers}}
+        </div>
+        <div class="clear"></div>
+    </div>
 </script>
 
 <div class="grid_12">
     <h1>Guía del Estudiante</h1>
     <p>La Guía del Estudiante ayudará a que puedas encontrarar donde estudiar y obtener un título o certificación según tus gustos e intereses. </p>
 
-    <div class="boxgris">
+    <div class="boxblanca">
         <?php echo $html->image('1-icon.png', array('class' => 'step'));?>
-        <h2>Seleccioná criterios de búsqueda:</h2> 
+        <h3>Seleccioná criterios de búsqueda</h3>
         <div id="filtro" class="boxblanca">
             <?php echo $form->create('Titulo', array(
             'action' => 'guia_del_estudiante', 'name'=>'TituloSearchForm',
@@ -64,16 +76,16 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
 
 <div id="resultados" class="grid_12">
     <div class="grid_6 alpha">
-        <div id="li_titulos" class="boxgris">
+        <div id="li_titulos" class="boxblanca">
             <?php echo $form->create('Instit', array(
             'controller'=>'instits', 'action'=>'search.json',
             'id'=>'InstitSearchForm', 'name'=>'InstitSearchForm' ));
             ?>
             <?php echo $html->image('2-icon.png', array('class' => 'step'));?>
-            <h2>Seleccioná el titulo de interés</h2>
+            <h3>Seleccioná el titulo de interés</h3>
             <div class="paginatorContainer"></div>
             <ul class="seleccionados"></ul>
-            <ul class="results">
+            <ul id="items" class="results">
                 Sin Resultados
             </ul>
             <?php echo $form->end(); ?>
@@ -81,10 +93,11 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
     </div>
 
     <div class="grid_6 omega">
-        <div id="li_instits" class="boxgris">
+        <div id="li_instits" class="boxblanca">
             <?php echo $html->image('3-icon.png', array('class' => 'step'));?>
-            <h2>¿Dónde estudiar?</h2> <div class="paginatorContainer"></div> <ul
-                class="results">
+            <h3>¿Dónde estudiar?</h3>
+            <div class="paginatorContainer"></div>
+            <ul class="results">
                 Sin Resultados
             </ul>
         </div>
