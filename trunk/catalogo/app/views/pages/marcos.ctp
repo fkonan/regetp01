@@ -1,4 +1,3 @@
-<br />
 
 <?php echo $this->element('menu_docs')?>
 
@@ -21,8 +20,7 @@
         
         <h4>Referencia  normativa</h4>
         <ul>
-            <li>Proceso de Homologaci&oacute;n y Marcos de Referencia de T&iacute;tulos y       Certificaciones de Educaci&oacute;n T&eacute;cnico Profesional. Res. C.F.C.y E. N&deg; 261/06.</li>
-            <li>Lineamientos y criterios para la inclusi&oacute;n de t&iacute;tulos t&eacute;cnicos de       nivel secundario y de nivel superior y de certificados de formaci&oacute;n       profesional en el proceso de homologaci&oacute;n. Res. N&deg; 91/09 anexos I y II.</li>
+            Proceso de Homologación y Marcos de Referencia de Títulos y Certificaciones de Educaci&oacute;n T&eacute;cnico Profesional. <?php echo $html->link('Res. C.F.C.y E. Nº 261/06.', '/files/pdfs/otros/Res. CFCyE nro. 261-06.pdf')?>
         </ul>
         
         <h3>Marcos de  referencia aprobados</h3>

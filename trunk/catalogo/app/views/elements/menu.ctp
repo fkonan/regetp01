@@ -37,29 +37,7 @@
 
         <li class="<?php echo (strstr($this->here,$this->base.'/pages') && ($this->here != $this->base.'/pages/home'))?'current':''?> ">
             <?php echo $html->link('Documentación', array('controller'=>'pages', 'action'=>'introduccion'), array('class'=>'menu-item')); ?>
-            <ul>
-                <li>
-                    <?php echo $html->link('Información Sectorial','#')?>
-                    <ul>
-                        <li><?php echo $html->link('Familias Profesionales','/pages/familias')?></li>
-                        <li><?php echo $html->link('Foros Sectoriales','/pages/foros')?></li>
-                        <li><?php echo $html->link('Entidades Participantes','/pages/entidades')?></li>
-                    </ul>
-                </li>
-                <li><?php echo $html->link('Proceso de Homologación','/pages/homologacion')?></li>
-                <li><?php echo $html->link('Marcos de Referencia','/pages/marcos')?></li>
-
-                <li>
-                    <?php echo $html->link('Niveles y Modalidades','#')?>
-                    <ul>
-                        <li><?php echo $html->link('Educación Técnica de Nivel Medio y Superior','/pages/mediaysuperior')?></li>
-                        <li><?php echo $html->link('Formación Profesional','/pages/fp')?></li>
-                    </ul>
-                </li>
-
-                <li><?php echo $html->link('Normativa de Referencia','/pages/normativa')?></li>
-
-            </ul>
+            <?php echo $this->element('ul_menu_docs') ?>
         </li>
         <li class="<?php echo (strstr($this->here,$this->base.'/correos/contacto'))?'current':''?>">
             <?php echo $html->link('Contacto', array(

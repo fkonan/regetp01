@@ -1,4 +1,3 @@
-<br />
 
 <?php echo $this->element('menu_docs')?>
 
