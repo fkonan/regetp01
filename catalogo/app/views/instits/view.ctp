@@ -194,7 +194,7 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
                     }
 
                     // si es FP le agrego la duracion
-                    $duracion = '';
+                    /*$duracion = '';
                     if (!empty($plan['duracion_hs'])) {
                         $duracion = '. <cite>Duración: ' . $plan['duracion_hs'] . ' hs.</cite>';
                     }
@@ -202,7 +202,7 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
                         $duracion = '. <cite>Duración: ' . $plan['duracion_semanas']. ' semanas</cite>';
                     }
 
-                    $planNombre .= $duracion;
+                    $planNombre .= $duracion;*/
                     ?>
 
             <li><?php echo $planNombre?></li>

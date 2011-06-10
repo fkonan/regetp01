@@ -20,7 +20,6 @@ IMG.step{
     padding:3px 10px 3px 10px !important;
     margin:0px 5px 5px 0px;
     display: inline-block;
-    width: 95%;
 }
 
 .filtro a{
@@ -29,6 +28,9 @@ IMG.step{
 .filtros-aplicados{
     padding: 5px !important;
     margin-top: 0px !important;
+    width: 31%;
+    float: left;
+    margin-left: 5px;
 }
 
 H3{
@@ -91,7 +93,6 @@ H2{
 }
 
 .boxblanca{
-    margin-right: 13px;
     padding:2px 0px 5px 5px;
 }
 
@@ -108,9 +109,7 @@ H2{
     font-weight: bold;
 }
 
-.boxgris .boxblanca{
-    margin: 13px;
-}
+
 
 .boxgris h2, .boxblanca h2,
 .boxgris h3, .boxblanca h3,
@@ -159,11 +158,13 @@ ol, ul {
 }
 
 #filtro{
-    padding-top: 8px;
-    padding-bottom: 15px;
+    /*padding-top: 8px;
+    padding-bottom: 15px;*/
+    float: left;
     font-size: 0.9em;
     margin-top: 0px;
     margin-bottom: 0px;
+    width: 65%;
 }
 
 .add_filter{
