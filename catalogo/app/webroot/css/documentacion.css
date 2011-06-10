@@ -30,3 +30,10 @@
     padding-right: 25px;
     text-align: justify;
 }
+
+.marcos li{
+    height:22px;
+}
+.marcos li a{
+    padding-top:0;
+}

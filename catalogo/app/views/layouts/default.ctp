@@ -66,6 +66,7 @@ $javascript;
         echo $html->css('catalogo.menu','stylesheet');
         echo $html->css('ui-redmond/jquery-ui-1.8.12.custom','stylesheet');
         echo $html->css('printer','stylesheet', array('media'=>'print'));
+        echo $html->css('iconize','stylesheet');
 
         echo $javascript->link(array(
         'jquery-1.5.2.min',
@@ -95,8 +96,6 @@ $javascript;
 
     </head>
     <body>
-
-
         <div class="wrapper">
             <div id="header">
                 <div id="header_title" class="container_12">
