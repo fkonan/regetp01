@@ -2,6 +2,7 @@
 echo $javascript->link('jquery/jquery.tmpl.min', false);
 echo $javascript->link('jquery/jquery.history', false);
 echo $javascript->link('jquery.loadmask.min', false);
+echo $javascript->link('jquery.blockUI', false);
 echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inline = false);
 ?>
 <script id="tituloTemplate" type="text/x-jquery-tmpl">
