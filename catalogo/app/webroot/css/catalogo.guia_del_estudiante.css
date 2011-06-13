@@ -83,7 +83,7 @@ H2{
     color:black;
     cursor: pointer; cursor: hand;
 }
-#li_instits a {
+.items-nombre a {
     color: #58585a;
     text-decoration: none;
     font-size: 9pt;
@@ -203,11 +203,11 @@ ol, ul {
     padding-top: 10px;
 }
 .list-header .sorter {
-    width: 50%;
+    width: 60%;
     float: left;
 }
 .list-header .paging {
-    width: 50%;
+    width: 40%;
     float: left;
 }
 

@@ -38,7 +38,7 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
            ${desde}-${hasta} de <b>${cant}</b> ${texto}
         </div>
         <div class="paging">
-            <span class="numbers">{{html numbers}}</span>
+             <span class="numbers">{{html numbers}}</span>
         </div>
         <div class="clear"></div>
     </div>
@@ -49,7 +49,7 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
     <p>La Guía del Estudiante ayudará a que puedas encontrarar donde estudiar y obtener un título o certificación según tus gustos e intereses. </p>
 
     <div class="boxblanca">
-        <?php echo $html->image('1-icon.png', array('class' => 'step'));?>
+        <?php echo $html->image('step1.gif', array('class' => 'step'));?>
         <h3>Seleccioná criterios de búsqueda</h3>
         <div id="filtro" class="boxblanca">
             <?php echo $form->create('Titulo', array(
@@ -85,7 +85,7 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
             'controller'=>'instits', 'action'=>'search.json',
             'id'=>'InstitSearchForm', 'name'=>'InstitSearchForm' ));
             ?>
-            <?php echo $html->image('2-icon.png', array('class' => 'step'));?>
+            <?php echo $html->image('step2.gif', array('class' => 'step'));?>
             <h3>Seleccioná el titulo de interés</h3>
             <div class="paginatorContainer"></div>
             <ul class="seleccionados"></ul>
@@ -98,7 +98,7 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
 
     <div class="grid_6 omega">
         <div id="li_instits" class="boxblanca">
-            <?php echo $html->image('3-icon.png', array('class' => 'step'));?>
+            <?php echo $html->image('step3.gif', array('class' => 'step'));?>
             <h3>¿Dónde estudiar?</h3>
             <div class="paginatorContainer"></div>
             <ul id="items" class="results">
