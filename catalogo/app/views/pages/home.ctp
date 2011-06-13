@@ -7,7 +7,7 @@ $this->pageTitle = "Inicio";
 
 <div class="grid_6">
     <h1>La Educación Técnico Profesional en Argentina</h1>
-    La Educación Técnico Profesional es la modalidad de la Educación Secundaria y la Educación Superior responsable de la formación de técnicos medios y técnicos superiores en áreas ocupacionales específicas, y de la formación profesional (formación profesional inicial, capacitación continua y capacitación laboral). Se rige por la Ley Nº 26.058 y promueve la formación de profesionales, especialidades, ocupaciones o carreras, relacionadas con el desempeño laboral.
+    <p>La Educación Técnico Profesional es la modalidad de la Educación Secundaria y la Educación Superior responsable de la formación de técnicos medios y técnicos superiores en áreas ocupacionales específicas, y de la formación profesional (formación profesional inicial, capacitación continua y capacitación laboral). Se rige por la Ley Nº 26.058 y promueve la formación de profesionales, especialidades, ocupaciones o carreras, relacionadas con el desempeño laboral.</p>
 </div>
 <div class="grid_5 photo">
     <div style="height:180px;">
