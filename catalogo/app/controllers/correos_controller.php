@@ -1,6 +1,4 @@
 <?php
-
-
 class CorreosController extends AppController{
     
     // sin tablas asociadas a este controlador
@@ -18,14 +16,27 @@ class CorreosController extends AppController{
                 $mensaje = "Nombre: ".$this->data['Correo']['from']."\n";
                 $mensaje .= "E-mail: ".$this->data['Correo']['mail']."\n";
                 $mensaje .= "Teléfono: ".$this->data['Correo']['telefono']."\n\n";
-
                 $mensaje .= $this->data['Correo']['descripcion']."\n";
 
-                $this->Email->from    = $this->data['Correo']['from'].' <'.$this->data['Correo']['mail'].'>';
-                $this->Email->to      = NOMBRE_CONTACTO.' <'.EMAIL_CONTACTO.'>';
-                $this->Email->subject = 'Contacto desde Catálogo';
-                $this->Email->send($mensaje);
+                /* SMTP Options */
+                $this->Email->smtpOptions = array(
+                    'port'=>'25',
+                    'timeout'=>'30',
+                    'host' => '168.83.21.13',
+                    'username'=>'desarrolloetp',
+                    'password'=>'etpdesar',
+                );
 
+                $this->Email->delivery = 'smtp';
+                $this->Email->from     = $this->data['Correo']['from'].' <'.$this->data['Correo']['mail'].'>';
+		$this->Email->to       = NOMBRE_CONTACTO.' <'.EMAIL_CONTACTO.'>';
+                $this->Email->subject  = 'Contacto desde Catálogo';
+                $this->Email->template = 'simple';
+                $this->set("message", $mensaje);
+                           
+                $this->Email->send();
+                
+                $this->set('smtp_errors', $this->Email->smtpError);
                 $this->Session->setFlash(__("Su mensaje ha sido enviado", true));
             }
         }
@@ -52,11 +63,24 @@ class CorreosController extends AppController{
 
                 $mensaje .= $this->data['Correo']['descripcion']."\n";
 
-                $this->Email->from    = $this->data['Correo']['from'].' <'.$this->data['Correo']['mail'].'>';
-                $this->Email->to      = NOMBRE_CONTACTO.' <'.EMAIL_CONTACTO.'>';
-                $this->Email->subject = 'Institución '. $this->data['Correo']['cue'] .' desactualizada';
-                $this->Email->send($mensaje);
+                /* SMTP Options */
+                $this->Email->smtpOptions = array(
+                    'port'=>'25',
+                    'timeout'=>'30',
+                    'host' => '168.83.21.13',
+                    'username'=>'desarrolloetp',
+                    'password'=>'etpdesar',
+                );
 
+                $this->Email->delivery = 'smtp';
+                $this->Email->from     = $this->data['Correo']['from'].' <'.$this->data['Correo']['mail'].'>';
+		$this->Email->to       = NOMBRE_CONTACTO.' <'.EMAIL_CONTACTO.'>';
+                $this->Email->subject = 'Institución '. $this->data['Correo']['cue'] .' desactualizada';
+                $this->Email->template = 'simple';
+                $this->set("message", $mensaje);
+                           
+                $this->Email->send();
+                
                 $this->autoRender = false;
                 //$this->Session->setFlash(__("Gracias por informarnos sobre una desactualización", true));
             }
