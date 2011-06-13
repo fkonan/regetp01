@@ -22,7 +22,7 @@ $this->pageTitle = "Inicio";
         <?php echo $html->image('escuela-tecnica2.jpg') ?>
     </div>
 </div>
-<div class="grid_5">
+<div class="grid_6">
     
     <div>
         <p>
