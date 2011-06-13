@@ -118,6 +118,7 @@
 
         var url = '';
 
+        $('#filtro,.filtros-aplicados').block({ message: null });
         __blockResultConsole();
 
         if (typeof href == 'object') {
@@ -331,6 +332,7 @@
         titulosContainer.find('li > input').change( onChangeHandlerTitulos );
 
         __unblockResultConsole();
+        $('#filtro,.filtros-aplicados').unblock();
     }
 
     var __checkParentClick = function(eventObject){
