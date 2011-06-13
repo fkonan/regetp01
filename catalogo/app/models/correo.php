@@ -14,7 +14,7 @@ class Correo extends AppModel {
                             )
                         ),
                         'mail' => array(
-                            'rule' => array('email', true),
+                            'rule' => 'email',
                             'message' => 'Por favor ingrese un email válido'
                             )
 	);
