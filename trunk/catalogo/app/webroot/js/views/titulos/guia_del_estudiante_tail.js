@@ -77,13 +77,12 @@
     // functiones Principales
     //
     var __blockResultConsole = function () {
-        jQuery('#li_instits').mask('Buscando');
+        jQuery(institsContainer).html('');
         jQuery('#li_titulos').mask('Buscando');
         return true;
     }
 
     var __unblockResultConsole = function () {
-        jQuery('#li_instits').unmask();
         jQuery('#li_titulos').unmask();
     }
 
