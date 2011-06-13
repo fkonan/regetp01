@@ -19,8 +19,13 @@ class InstitsController extends AppController {
             $this->redirect(array('action'=>'index'));
         }
 
-        $this->Instit->contain(array('Localidad', 'Departamento', 'Tipoinstit', 'Jurisdiccion', 'Dependencia', 'Gestion', 'Orientacion', 'Claseinstit', 'EtpEstado',
-                                     'Plan'=>array('Titulo'=>array('Oferta'), 'Oferta')));
+        $this->Instit->contain(array(   'Localidad', 'Departamento', 'Tipoinstit', 'Jurisdiccion',
+                                        'Dependencia', 'Gestion', 'Orientacion', 'Claseinstit', 'EtpEstado',
+                                        'Plan' => array(
+                                            'order' => array('Plan.oferta_id'),
+                                            'Titulo' => array('Oferta'),
+                                            'Oferta')
+                                ));
         $instit = $this->Instit->find("first", $id);
 
         $instit['Instit']['dir_tipodoc_name'] = '';
