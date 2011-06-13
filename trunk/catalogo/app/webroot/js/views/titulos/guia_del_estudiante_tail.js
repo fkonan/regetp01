@@ -102,6 +102,7 @@
          input.show();
          input.removeAttr('disabled');
          plus.show();
+         $(input).effect("highlight", {}, 1000);
     }
     
     /**
@@ -233,6 +234,8 @@
             $("#sin_filtros").show();
         }
         __ajustarAlturas('#filtro', '.filtros-aplicados');
+        
+        $(".filtros-aplicados").effect("highlight", {}, 3000);
     }
 
     var __recargarFiltros = function (data) {
