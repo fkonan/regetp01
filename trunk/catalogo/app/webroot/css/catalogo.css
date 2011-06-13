@@ -526,3 +526,15 @@ table tbody tr:hover td
 {
     color: black;
 }
+
+.photo{
+    -moz-background-clip:border;
+    -moz-background-inline-policy:continuous;
+    -moz-background-origin:padding;
+    background:white none repeat scroll 0 0;
+    border:1px solid #BEC0C4;
+    clip:79px;
+    margin-bottom:29px;
+    margin-top:15px;
+    padding:8px;
+}
