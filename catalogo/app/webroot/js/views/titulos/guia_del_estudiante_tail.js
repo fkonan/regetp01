@@ -118,7 +118,10 @@
 
         var url = '';
 
-        $('#filtro,.filtros-aplicados').block({ message: null });
+        $('#filtro,.filtros-aplicados').block({ message: null,
+                                                css: { backgroundColor: 'transparent'}
+        });
+
         __blockResultConsole();
 
         if (typeof href == 'object') {
