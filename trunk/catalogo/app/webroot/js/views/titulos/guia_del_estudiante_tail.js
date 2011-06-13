@@ -57,6 +57,12 @@
     $(".add_filter").live("click",function(event){
         titulosForm.submit();
     });
+    
+    $('input[type=text]').live("keypress", function(e){
+        if(e.which == 13){
+            titulosForm.submit();   
+        }
+    });
 
     $(".autosubmit").live("change",function(event){
         titulosForm.submit();
