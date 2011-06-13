@@ -45,7 +45,6 @@ $javascript;
                 // Last range entry is the maximum.
                 // Separate ranges by "to" keyword.
                 range: [
-                    '760px            = mobile.min.css',
                     '760px  to 980px  = 720.min.css',
                     '980px  to 1920px = 960.min.css'
                 ]
