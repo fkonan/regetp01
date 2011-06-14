@@ -13,7 +13,7 @@
     </div>
 </div>
 <div class="grid_6">
-    <div class='boxgris' style="height: 244px">
+    <div class='boxgris' style="height: 232px">
         <h2 style="margin: 10px 20px;">Otras vías de contacto</h2>
         <p style="margin: 10px 20px;">
             También podrá ponerse en contacto con la Unidad de Información del INET mediante las siguientes vías:
