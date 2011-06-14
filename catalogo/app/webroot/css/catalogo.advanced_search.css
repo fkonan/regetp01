@@ -29,9 +29,20 @@ ol, ul {
    color: #58585A;
 }
 
-.search-div {
-    margin: 10px 0;
-    padding: 0px 10px 10px 10px;
+legend{
+    color: #b1cc2f;
+    font-weight: bolder;
+}
+
+FIELDSET {
+    border: 1px solid #E2E2E4;
+     -webkit-border-radius: 1em;
+    -moz-border-radius: 1em;
+    border-radius: 1em;
+    margin: 1% 1%;
+    padding: 0px 1% 8px 1%;
+    width: 45%;
+    float: left;
 }
 
 .boton-buscar-avanzado {
@@ -47,14 +58,6 @@ ol, ul {
 
 label {
     margin-top: 6px;
-}
-
-.search-fields h2{
-    padding: 10px 0 0 10px;
-}
-
-.search-fields h2, .search-div h4{
-    margin-top: 0;
 }
 
 .list-header {
