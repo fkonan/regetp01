@@ -12,30 +12,32 @@ echo $html->css('catalogo.advanced_search', false);
     init__AdvancedSearchFormJs("<?echo $html->url(array('controller'=>'localidades','action'=>'ajax_search_localidades'));?>","<?echo $html->url(array('controller'=>'titulos','action'=>'ajax_search'));?>");
 </script>
 
-<div class="grid_12 search-fields">
-    <h1><? __('Búsqueda Avanzada de Instituciones')?></h1>
 
-    <?= $form->create('Instit',array('action' => 'search','name'=>'InstitSearchForm'));?>
+<h1 class="grid_12"><? __('Búsqueda Avanzada de Instituciones')?></h1>
+<?= $form->create('Instit',array('action' => 'search','name'=>'InstitSearchForm'));?>
+<div class="grid_12 boxblanca">
 
-    <fieldset id="search" class="search-div boxblanca" >
-        <h3>General</h3>
+    
+
+    <fieldset id="search" class="">
+        <legend>General</legend>
         <?php
         echo $form->input('cue', array(
         'label'=>'CUE',
-        'div'=>array('style'=>'width:90px; float: left; clear: none'),
-        'style'=> 'width:80px; float: left',
+        'div'=>array('style'=>'width:30%; float: left; clear: none'),
+        'style'=> 'width:90%; float: left',
         'maxlength'=>9 ,
         'title'=> 'Ej: 600118 o 5000216. También puede buscar con el n° de anexo, Ej: 60011800'));
 
         echo $form->input('nombre_completo', array(
         'label'=>'Nombre',
-        'div'=>array('style'=>'width:260px; float: left; clear: none'),
-        'style'=> 'width:250px',
+        'div'=>array('style'=>'width:40%; float: left; clear: none'),
+        'style'=> 'width:90%',
         'title'=> 'Realiza una búsqueda por tipo de establecimiento, número y nombre propio de la institución.<br>Ej: Escuela 3 San Martín'));
 
         echo $form->input('jurisdiccion_id', array(
         'label'=>'Jurisdicción',
-        'div'=>array('style'=>'float: left;  clear: none; width: 175px;'),
+        'div'=>array('style'=>'float: left;  clear: none; width: 30%'),
         'class'=> 'display: block; clear: both;',
         'empty' => array('0'=>'Todas'),
         'id'=>'jurisdiccion_id'));
@@ -47,8 +49,8 @@ echo $html->css('catalogo.advanced_search', false);
     <!--
 				BUSQUEDA POR SU UBICACION
 		-->
-    <fieldset id="search-ubicacion" class="search-div boxblanca" >
-        <h3>Por Ubicación</h3>
+    <fieldset id="search-ubicacion" class="">
+        <legend>Por Ubicación</legend>
         <?php echo $form->input('jur_dep_loc',
         array('label'=>'Departamento/Localidad',
         'style'=>'width:90%;',
@@ -64,12 +66,13 @@ echo $html->css('catalogo.advanced_search', false);
     <!--
 				BUSQUEDA POR SU NOMBRE
 		-->
-    <fieldset id="search-denominacion"  class="search-div boxblanca" >
-        <h3>Por Nombre</h3>
+    <fieldset id="search-denominacion"  class="" >
+        <legend>Por Nombre</legend>
         <?php
         echo $form->input('tipoinstit_id', array(
         'label'=>array('text'=>'Tipo','id'=>'label-tipoinstit'),
-        'div'=>array('style'=>'clear: none;float:left;width:75px'),
+        'div'=>array('style'=>'clear: none;float:left;width:30%'),
+        'style' => 'width: 90%',
         'empty' => 'Todos',
         'type'=>'select',
         'title'=> 'Para activar este campo, seleccione primero una jurisdicción'));
@@ -85,8 +88,8 @@ echo $html->css('catalogo.advanced_search', false);
         <?php
         echo $form->input('nroinstit', array(
         'label'=>'Número',
-        'style'=> 'width:90px; float: left',
-        'div'=>array('style'=>'float: left; width:100px; clear: none'),
+        'style'=> 'width:90%; float: left',
+        'div'=>array('style'=>'float: left; width:20%; clear: none'),
         'class'=> 'display: block; clear: both;',
         'empty' => array('0'=>'Todas'),
         ));
@@ -94,8 +97,8 @@ echo $html->css('catalogo.advanced_search', false);
         <?php
         echo $form->input('nombre', array(
         'label'=>'Nombre',
-        'style'=> 'width:415px; float: left',
-        'div'=>array('style'=>'float: left;  clear: none'),
+        'style'=> 'width:92%; float: left',
+        'div'=>array('style'=>'float: left;  clear: none; width: 50%'),
         'title'=> 'Ej: "Sarmiento" o "Gral. Belgrano". No confundir el nombre con el tipo de establecimiento'));
         ?>
     </fieldset>
@@ -104,28 +107,28 @@ echo $html->css('catalogo.advanced_search', false);
     <!--
 				BUSQUEDA POR SU OFERTA
 		-->
-    <fieldset id="search-planes"  class="search-div boxblanca" >
-        <h3>Por Oferta</h3>
+    <fieldset id="search-planes"  class="" >
+        <legend>Por Oferta</legend>
         <?php
         echo $form->input('Plan.oferta_id',array(
         'options'=>$ofertas,
         'id'=>'OfertaId',
-        'div'=>array('style'=>'float: left; width:250px; clear: none'),
-        'style'=> 'display:inline;width:240px;vertical-align:bottom',
+        'div'=>array('style'=>'float: left; width:50%; clear: none'),
+        'style'=> 'display:inline;width:90%;vertical-align:bottom',
         'empty'=>'Seleccione',
         'label'=>'Con Oferta'));
 
         echo $form->input('Plan.norma',array(
         'label'=>'Normativa',
-        'div'=>array('style'=>'float: left; width: 275px;  clear: none'),
-        'style'=> 'display:inline;vertical-align:bottom;  width: 265px;',
+        'div'=>array('style'=>'float: left; width: 50%;  clear: none'),
+        'style'=> 'display:inline;vertical-align:bottom;  width: 90%;',
         ));
 
         echo $form->input('SectoresTitulo.sector_id',array(
         'label'=>'Sector',
         'id'=>'SectorId',
-        'div'=>array('style'=>'float: left; width:250px; clear: left'),
-        'style'=> 'display:inline;width:240px;vertical-align:bottom',
+        'div'=>array('style'=>'float: left; width:50%; clear: left'),
+        'style'=> 'display:inline;width:90%;vertical-align:bottom',
         'options'=>$sectores,
         'empty'=>'Seleccione'
         ));
@@ -134,8 +137,8 @@ echo $html->css('catalogo.advanced_search', false);
         'type' => 'select',
         'id'=>'SubsectorId',
         'label'=>'Subsector',
-        'div'=>array('style'=>'float: left;  clear: none'),
-        'style'=> 'display:inline;vertical-align:bottom',
+        'div'=>array('style'=>'float: left;  clear: none; width: 50%'),
+        'style'=> 'display:inline;vertical-align:bottom; width: 90%',
         'empty'=>'Seleccione',
         ));
 
@@ -152,9 +155,8 @@ echo $html->css('catalogo.advanced_search', false);
         array(
         'label'=> 'Título de Referencia',
         'id' => 'PlanTituloName',
-        'style'=>'max-width: 515px; width:92%;',
-        //'after'=> '<cite>Seleccione primero una oferta.</cite>',
-        'div'=>array('id'=>'divPlanTituloName')));
+        'style'=>'max-width: 515px; width:95%;',
+        'div'=>array('id'=>'divPlanTituloName', 'style'=>'width: 100%')));
 
         echo $form->input('Plan.titulo_id',array('id'=>'PlanTituloId','type'=>'hidden'));
 
@@ -166,64 +168,66 @@ echo $html->css('catalogo.advanced_search', false);
     <!--
             BUSQUEDA POR OTRAS CARACTERISTICAS
     -->
-    <fieldset id="search-otros"  class="search-div boxblanca" >
-        <h3>Por Otras Caracteristicas</h3>
+    <fieldset id="search-otros"  class="" style="margin-top: -65px;">
+        <legend>Por Otras Características</legend>
         <?php
         echo $form->input('Instit.orientacion_id',array(
         'label'=> 'Orientación',
-        'div'=>array('style'=>'float: left; width:250px; clear: none'),
-        'style'=> 'display:inline;width:240px;vertical-align:bottom',
+        'div'=>array('style'=>'float: left; width:50%; clear: none'),
+        'style'=> 'display:inline;width:90%;vertical-align:bottom',
         'empty'=>'Seleccione',
         ));
 
         echo $form->input('Instit.claseinstit_id', array(
         'empty' => 'Todas',
         'label'=> 'Tipo de Institución de ETP',
-        'div'=>array('style'=>'float: left; width:250px; clear: none'),
-        'style'=> 'display:inline;width:240px;vertical-align:bottom',
+        'div'=>array('style'=>'float: left; width:50%; clear: none'),
+        'style'=> 'display:inline;width:90%;vertical-align:bottom',
         ));
 
 
         echo $form->input('Instit.etp_estado_id', array(
         'empty' => 'Todas',
         'label'=>'Relación con ETP',
-        'div'=>array('style'=>'float: left; width:250px; clear: none'),
-        'style'=> 'display:inline;width:240px;vertical-align:bottom',
+        'div'=>array('style'=>'float: left; width:50%; clear: none'),
+        'style'=> 'display:inline;width:90%;vertical-align:bottom',
         ));
 
         echo $form->input('Instit.gestion_id', array(
         'empty' => 'Todas',
         'label'=> 'Ámbito de Gestión',
-        'div'=>array('style'=>'float: left; width:250px; clear: left'),
-        'style'=> 'display:inline;width: 240px;vertical-align:bottom',
+        'div'=>array('style'=>'float: left; width:50%; clear: left'),
+        'style'=> 'display:inline;width: 90%;vertical-align:bottom',
         ));
 
 
         echo $form->input('Instit.dependencia_id', array(
         'empty' => 'Todas',
         'label'=> 'Tipo de Dependencia',
-        'div'=>array('style'=>'float: left; width:250px; clear: none'),
-        'style'=> 'display:inline;width:240px;vertical-align:bottom',));
+        'div'=>array('style'=>'float: left; width:50%; clear: none'),
+        'style'=> 'display:inline;width:90%;vertical-align:bottom',));
 
 
         // no hay busqueda por anexo
         //$array_anexo = array('-1'=>'Buscar Todas','0'=>'No','1'=>'Si');
         //echo $form->input('esanexo',array('options'=> $array_anexo,'label'=>'Anexo'));
 
-        $array_activa = array('-1'=>'Buscar Todas','0'=>'No','1'=>'Si');
-        echo $form->input('activo',array(
-        'options'=> $array_activa,
-        'label'=> 'Institución Ingresada al RFIETP',
-        'div'=>array('style'=>'float: left; width:250px; clear: none'),
-        'style'=> 'display:inline;width:240px;vertical-align:bottom',
-        ));
+//        $array_activa = array('-1'=>'Buscar Todas','0'=>'No','1'=>'Si');
+//        echo $form->input('activo',array(
+//        'options'=> $array_activa,
+//        'label'=> 'Institución Ingresada al RFIETP',
+//        'div'=>array('style'=>'float: left; width:50%; clear: none'),
+//        'style'=> 'display:inline;width:90%;vertical-align:bottom',
+//        ));
         ?>
 
     </fieldset>
 
-    <div style="padding-top: 20px; padding-bottom: 25px; padding-right: 3px;">
+    
+    <div style="width: 50%; float: left; margin-top: 55px;">
         <?php echo $form->button('Buscar',array(
-        'class'=>'boxgris boton-buscar-avanzado',
+        'class'=>'boxgris',
+        'style' => 'margin: auto; margin-left: 13px;',
         'onclick'=>'enviar()'));
         ?>
     </div>
