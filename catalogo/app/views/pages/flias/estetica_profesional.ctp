@@ -1,13 +1,14 @@
 <?php echo $this->element('menu_docs')?>
   <div id="cuerpo1" class="grid_9">
     <div class=" boxblanca boxdocs">
+    <h2>Familia profesional del sector Estética Profesional</h2>
     <table>
       <thead>
         <tr>
-          <th>Agrupamiento de Figuras</th>
-          <th>Figuras Formativas</th>
-          <th>Perfiles de Referencia</th>
-          <th>Fecha de Aprobacion</th>
+          <th>Agrupamiento de figuras</th>
+          <th>Figuras formativas</th>
+          <th>Perfiles de referencia</th>
+          <th>Fecha de aprobacion</th>
         </tr>
       </thead>
 	    <TR>

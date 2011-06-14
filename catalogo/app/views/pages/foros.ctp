@@ -70,7 +70,9 @@ Para obtener más información sobre características, objetivos y modos de funcion
                 'AMET',
                 'UMAM',
             ),
-            'docInfoSectorial' => '/files/pdfs/info_sectorial/Sector automotriz - Informe Final.pdf'
+            'docInfoSectorial' => '/files/pdfs/info_sectorial/Sector automotriz - Informe Final.pdf',
+            'fliaProfesional' => array('nombre'=>'Mecánica Automotriz',
+                                       'link'=>'/pages/flias/mecanica_automotriz')
         );
         echo $this->element('foro', $vops);
         
@@ -83,7 +85,9 @@ Para obtener más información sobre características, objetivos y modos de funcion
                 'Sindicato de Luz y Fuerza', 'FATLyF', 'APSEE', 
                 'FACTéc', 'FNPT'
             ),
-            'docInfoSectorial' => '/files/pdfs/info_sectorial/INFORME SECTORIAL SECTOR ENERGIA ELECTRICA.pdf'
+            'docInfoSectorial' => '/files/pdfs/info_sectorial/INFORME SECTORIAL SECTOR ENERGIA ELECTRICA.pdf',
+            'fliaProfesional' => array('nombre'=>'Energía Eléctrica',
+                                       'link'=>'/pages/flias/energia_electrica')
         );
         echo $this->element('foro', $vops);
         
@@ -102,7 +106,9 @@ Para obtener más información sobre características, objetivos y modos de funcion
                 'ANMAT',
                 'Ministerio de Salud ',
             ),
-            'docInfoSectorial' => '/files/pdfs/info_sectorial/Informe_sectorial_estetica_profesional.pdf'
+            'docInfoSectorial' => '/files/pdfs/info_sectorial/Informe_sectorial_estetica_profesional.pdf',
+            'fliaProfesional' => array('nombre'=>'Estética Profesional',
+                                       'link'=>'/pages/flias/estetica_profesional')
         );
         echo $this->element('foro', $vops);
         
@@ -135,7 +141,9 @@ Para obtener más información sobre características, objetivos y modos de funcion
                 'CEIL',
                 'FNPT' ,
             ),
-            'docInfoSectorial' => ''
+            'docInfoSectorial' => '',
+            'fliaProfesional' => array('nombre'=>'Informática',
+                                       'link'=>'/pages/flias/informatica')
         );
         echo $this->element('foro', $vops);
         
@@ -150,7 +158,9 @@ Para obtener más información sobre características, objetivos y modos de funcion
                 'Ministerio de Producción',
                 'AFOA',
             ),
-            'docInfoSectorial' => '/files/pdfs/info_sectorial/madera y mueble.pdf'
+            'docInfoSectorial' => '/files/pdfs/info_sectorial/madera y mueble.pdf',
+            'fliaProfesional' => array('nombre'=>'Madera y Mueble',
+                                       'link'=>'/pages/flias/madera_y_mueble')
         );
         echo $this->element('foro', $vops);
         
@@ -168,7 +178,9 @@ Para obtener más información sobre características, objetivos y modos de funcion
                 'AMET' ,
                 'ADIMRA',
             ),
-            'docInfoSectorial' => '/files/pdfs/info_sectorial/madera y mueble.pdf'
+            'docInfoSectorial' => '/files/pdfs/info_sectorial/madera y mueble.pdf',
+            'fliaProfesional' => array('nombre'=>'Metalmecánica',
+                                       'link'=>'/pages/flias/metalmecanica')
         );
         echo $this->element('foro', $vops);
         
@@ -195,7 +207,9 @@ Para obtener más información sobre características, objetivos y modos de funcion
                 'Fundación Pro-Tejer',
                 'UIA',
             ),
-            'docInfoSectorial' => '/files/pdfs/info_sectorial/sector_indumentaria.pdf'
+            'docInfoSectorial' => '/files/pdfs/info_sectorial/sector_indumentaria.pdf',
+            'fliaProfesional' => array('nombre'=>'Textil',
+                                       'link'=>'/pages/flias/textil')
         );
         echo $this->element('foro', $vops);
         
