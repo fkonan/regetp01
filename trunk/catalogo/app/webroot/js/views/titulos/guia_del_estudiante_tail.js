@@ -118,9 +118,9 @@
 
         var url = '';
 
-        $('#filtro,.filtros-aplicados').block({ message: null,
-                                                css: { backgroundColor: 'transparent'}
-        });
+//        $('#filtro,.filtros-aplicados').block({ message: null,
+//                                                css: { backgroundColor: 'transparent'}
+//        });
 
         __blockResultConsole();
 
@@ -335,7 +335,7 @@
         titulosContainer.find('li > input').change( onChangeHandlerTitulos );
 
         __unblockResultConsole();
-        $('#filtro,.filtros-aplicados').unblock();
+        //$('#filtro,.filtros-aplicados').unblock();
     }
 
     var __checkParentClick = function(eventObject){
