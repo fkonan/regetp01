@@ -38,3 +38,8 @@
 .photo div img{
     width:100%;
 }
+
+.home_info p{
+    padding-right:20px;
+    text-align:justify;
+}
