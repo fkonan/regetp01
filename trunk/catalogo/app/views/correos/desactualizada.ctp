@@ -1,7 +1,7 @@
 <h1>Institución desactualizada</h1>
 
 <p>
-    Agregue una breve descripción sobre el problema detectado
+    Si quiere actualizar, agregar o modificar los datos de una institución complete el siguiente formulario
 </p>
 
 <?php
