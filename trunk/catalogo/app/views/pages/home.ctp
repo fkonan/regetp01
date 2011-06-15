@@ -6,44 +6,35 @@ $this->pageTitle = "Inicio";
 
 <div class="grid_12 home_info" style="margin-top: 10px">
     <div class="boxblanca">
-        <div style="width:75%; float:left">
+        <div style="float:left">
             <div>
+                <?php echo $html->image('home/tecnica2.jpg', array('class'=>'photo')) ?>
                 <h2>La Educación Técnico Profesional en Argentina</h2>
                 <p>La Educación Técnico Profesional es la modalidad de la Educación Secundaria y la Educación Superior responsable de la formación de técnicos medios y técnicos superiores en áreas ocupacionales específicas, y de la formación profesional (formación profesional inicial, capacitación continua y capacitación laboral). Se rige por la Ley Nº 26.058 y promueve la formación de profesionales, especialidades, ocupaciones o carreras, relacionadas con el desempeño laboral.</p>
-            </div>
-            <div>
+           
                 <h2>Catálogo Nacional de Títulos y Certificaciones</h2>
-                <div>
-                    <div>
-                        <p>
-                            El Catálogo Nacional de Títulos y Certificaciones es uno de los instrumentos previstos por la Ley Nº 26.058 para la mejora continua de la Educación Técnico Profesional. Como instrumento operativo y de consulta el Catálogo constituye un servicio permanente de información actualizada sobre títulos y certificaciones de la educación técnico profesional en el ámbito nacional que permite:
-                        </p>
+                <p>
+                    El Catálogo Nacional de Títulos y Certificaciones es uno de los instrumentos previstos por la Ley Nº 26.058 para la mejora continua de la Educación Técnico Profesional. Como instrumento operativo y de consulta el Catálogo constituye un servicio permanente de información actualizada sobre títulos y certificaciones de la educación técnico profesional en el ámbito nacional que permite:
+                </p>
 
-                        <ul>
-                            <li>
-                                Consultar toda la información y normativa relacionada con su funcionamiento y características (familias profesionales, marcos de referencia, procesos de homologación, foros sectoriales, etc.) en el apartado de [Documentación].
-                            </li>
+                <ul>
+                    <li>
+                        Consultar toda la información y normativa relacionada con su funcionamiento y características (familias profesionales, marcos de referencia, procesos de homologación, foros sectoriales, etc.) en el apartado de [Documentación].
+                    </li>
 
-                            <li>
-                                Realizar búsquedas de títulos y certificaciones utilizando las distintas estrategias de acceso que se ofrecen a continuación.
-                            </li>
+                    <li>
+                        Realizar búsquedas de títulos y certificaciones utilizando las distintas estrategias de acceso que se ofrecen a continuación.
+                    </li>
 
-                            <!-- <li>
-                                 Propiciar la articulación entre los distintos ámbitos y niveles de la educación técnico-profesional.
-                             </li>
+                    <!-- <li>
+                         Propiciar la articulación entre los distintos ámbitos y niveles de la educación técnico-profesional.
+                     </li>
 
-                             <li>
-                                 Orientar la definición y el desarrollo de programas federales para el fortalecimiento y mejora de las
-                     instituciones de educación técnico profesional.
-                             </li>-->
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="photo" style="width:22%; float:left">
-            <div style="height:300px">
-                <?php echo $html->image('home/home1.jpg') ?>
+                     <li>
+                         Orientar la definición y el desarrollo de programas federales para el fortalecimiento y mejora de las
+             instituciones de educación técnico profesional.
+                     </li>-->
+                </ul>
             </div>
         </div>
         <div class="clear"></div>
