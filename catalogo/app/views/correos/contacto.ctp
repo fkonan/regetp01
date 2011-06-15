@@ -19,7 +19,8 @@
             También podrá ponerse en contacto con la Unidad de Información del INET mediante las siguientes vías:
             <br />
             <br />
-            <?php echo $html->image('emailButton.png');?> desarrolloetp@inet.edu.ar<br />
+            <?php echo $html->image('emailButton.png');?>
+            <?php echo $hideMail->hide("desarrolloetp@inet.edu.ar");?><br/>
             <?php echo $html->image('phone16x16.png');?> (011) 4129-2000 Interno 4032/4033<br />
             <?php echo $html->image('office-building.png');?> Saavedra 789 CABA, Buenos Aires, Argentina. Oficina 311. <br />
         </p>
