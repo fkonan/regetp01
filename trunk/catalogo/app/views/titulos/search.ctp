@@ -29,7 +29,13 @@
                                                 'class' => 'autosubmit ',
                                                 'label'=> 'Oferta',
                                                 'id' => 'ofertaId',
-                                                'empty' => 'Todas', )); 
+                                                'empty' => 'Todas',
+                                                'disabled'=> $bloquearOferta
+                                               ));
+            if($bloquearOferta){
+                echo $form->input('oferta_id',array( 'type' => 'hidden'));
+            }
+            
             $meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif', array('style' => 'float:right; height: 19px;')).'</span>';
             echo $form->input('tituloName', array( 'label'=> 'Nombre del Título',
                                                   'div' => false,
