@@ -18,11 +18,13 @@
     <div class="clear"></div>
     <p>
     <?php if (!empty($fliaProfesional) ):?>        
-        <?php echo $html->link('Familia profesional del sector '.$fliaProfesional["nombre"], $fliaProfesional["link"]) ?>
+        <?php echo $html->link('Familia profesional del sector '.$fliaProfesional["nombre"], $fliaProfesional["link"], array('target'=>'_blank')) ?>
+    <?php else: ?>
+        <p style="color:red">Falta familia profesional</p>
     <?php endif ?>
     <?php if (!empty($docInfoSectorial) ):?>
         <div class="clear"></div>
-        <?php echo $html->link('Informe sectorial', $docInfoSectorial) ?>
+        <?php echo $html->link('Informe sectorial', $docInfoSectorial, array('target'=>'_blank')) ?>
     <?php endif ?>
     </p>
 </div>    
