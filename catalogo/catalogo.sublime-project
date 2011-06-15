@@ -47,54 +47,28 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "/var/www/catalogo/app/app_controller.php",
-			"settings":
-			{
-				"buffer_size": 2556,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/var/www/catalogo/app/views/helpers/hide_mail.php",
-			"settings":
-			{
-				"buffer_size": 938,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/var/www/catalogo/app/views/correos/contacto.ctp",
-			"settings":
-			{
-				"buffer_size": 1278,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/var/www/catalogo/app/views/helpers/text_image.php",
-			"settings":
-			{
-				"buffer_size": 14940,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/var/www/catalogo/app/views/instits/view.ctp",
-			"settings":
-			{
-				"buffer_size": 8959,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"file_history":
 	[
-		"/var/www/catalogo/app/views/helpers/text_image.php",
-		"/var/www/catalogo/app/views/correos/contacto.ctp",
 		"/var/www/catalogo/app/app_controller.php",
 		"/var/www/catalogo/app/views/helpers/hide_mail.php",
+		"/var/www/catalogo/app/views/correos/contacto.ctp",
+		"/var/www/catalogo/app/views/helpers/text_image.php",
+		"/var/www/catalogo/app/views/instits/view.ctp",
+		"/var/www/catalogo/app/webroot/css/catalogo.css",
+		"/var/www/catalogo/app/views/elements/menu.ctp",
+		"/var/www/catalogo/app/webroot/css/documentacion.css",
+		"/var/www/catalogo/app/views/pages/marcos.ctp",
+		"/var/www/catalogo/app/views/pages/fp/perfiles.ctp",
+		"/var/www/catalogo/app/views/pages/familias.ctp",
+		"/var/www/catalogo/app/views/pages/flias/energia_electrica.ctp",
+		"/var/www/catalogo/app/views/pages/flias/estetica_profesional.ctp",
+		"/var/www/catalogo/app/views/pages/flias/informatica.ctp",
+		"/var/www/catalogo/app/views/pages/flias/madera_y_mueble.ctp",
+		"/var/www/catalogo/app/views/pages/flias/mecanica_automotriz.ctp",
+		"/var/www/catalogo/app/views/pages/flias/metalmecanica.ctp",
+		"/var/www/catalogo/app/views/pages/flias/textil.ctp",
 		"/home/mlambir/.config/sublime-text-2/Packages/Default/Default (Linux).sublime-keymap",
 		"/home/mlambir/.config/sublime-text-2/Packages/User/Default (Linux).sublime-keymap",
 		"/home/mlambir/Desktop/test.php",
@@ -104,7 +78,6 @@
 		"/var/www/catalogo/README",
 		"/var/www/catalogo/app/views/layouts/default.ctp",
 		"/var/www/catalogo/app/webroot/css/catalogo.home.css",
-		"/var/www/catalogo/app/webroot/css/catalogo.css",
 		"/var/www/catalogo/app/views/pages/home.ctp",
 		"/var/www/catalogo/app/views/elements/boxBuscadorAyuda.ctp",
 		"/var/www/catalogo/app/controllers/titulos_controller.php"
@@ -123,6 +96,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			");?></li>",
+			";",
+			"li",
 			"png",
 			"close",
 			"__imagePath",
@@ -140,6 +116,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			", array('target'=>'_blank'));?></li>"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -157,147 +134,8 @@
 	"groups":
 	[
 		{
-			"selected": 1,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "/var/www/catalogo/app/app_controller.php",
-					"settings":
-					{
-						"buffer_size": 2556,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1158,
-								1159
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 8,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0,
-						"translation.y": 672,
-						"zoom_level": 1
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/var/www/catalogo/app/views/helpers/hide_mail.php",
-					"settings":
-					{
-						"buffer_size": 938,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								673,
-								673
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage"
-						},
-						"translation.x": 0,
-						"translation.y": 0,
-						"zoom_level": 1
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/var/www/catalogo/app/views/correos/contacto.ctp",
-					"settings":
-					{
-						"buffer_size": 1278,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1022,
-								959
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0,
-						"translation.y": 0,
-						"zoom_level": 1
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "/var/www/catalogo/app/views/helpers/text_image.php",
-					"settings":
-					{
-						"buffer_size": 14940,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								10143,
-								10146
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0,
-						"translation.y": 5062,
-						"zoom_level": 1
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "/var/www/catalogo/app/views/instits/view.ctp",
-					"settings":
-					{
-						"buffer_size": 8959,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4461,
-								4461
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0,
-						"translation.y": 1701,
-						"zoom_level": 1
-					},
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -330,16 +168,52 @@
 		"height": 0,
 		"selected_items":
 		[
+			[
+				"texti",
+				"app/views/pages/flias/textil.ctp"
+			],
+			[
+				"flias",
+				"app/views/pages/flias/metalmecanica.ctp"
+			],
+			[
+				"flias/",
+				"app/views/pages/flias/energia_electrica.ctp"
+			],
+			[
+				"familias",
+				"app/views/pages/familias.ctp"
+			],
+			[
+				"perfiles",
+				"app/views/pages/fp/perfiles.ctp"
+			],
+			[
+				"marcos.ct",
+				"app/views/pages/marcos.ctp"
+			],
+			[
+				"docum",
+				"app/webroot/css/documentacion.css"
+			],
+			[
+				"menu.ctp",
+				"app/views/elements/menu.ctp"
+			],
+			[
+				"catalogo.css",
+				"app/webroot/css/catalogo.css"
+			]
 		],
 		"width": 0
 	},
 	"select_project":
 	{
-		"height": 0,
+		"height": 500,
 		"selected_items":
 		[
 		],
-		"width": 0
+		"width": 380
 	},
 	"show_minimap": true,
 	"show_tabs": true,
