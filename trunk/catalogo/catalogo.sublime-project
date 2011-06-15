@@ -4,6 +4,42 @@
 		"selected_items":
 		[
 			[
+				"ima",
+				"imageurl"
+			],
+			[
+				"md",
+				"md5"
+			],
+			[
+				"imagepn",
+				"imagepng"
+			],
+			[
+				"ImageString",
+				"imagestring"
+			],
+			[
+				"strl",
+				"strlen"
+			],
+			[
+				"imgfont",
+				"imagefontheight"
+			],
+			[
+				"imagefontwi",
+				"imagefontwidth"
+			],
+			[
+				"ma",
+				"mail"
+			],
+			[
+				"this",
+				"readline_list_history"
+			],
+			[
 				"p",
 				"php: <?php … ?>"
 			]
@@ -12,41 +48,64 @@
 	"buffers":
 	[
 		{
-			"file": "/var/www/catalogo/app/views/layouts/default.ctp",
+			"file": "/var/www/catalogo/app/app_controller.php",
 			"settings":
 			{
-				"buffer_size": 5807,
+				"buffer_size": 2556,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/var/www/catalogo/app/webroot/css/catalogo.home.css",
+			"file": "/var/www/catalogo/app/views/helpers/hide_mail.php",
 			"settings":
 			{
-				"buffer_size": 990,
+				"buffer_size": 938,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/var/www/catalogo/app/webroot/css/catalogo.css",
+			"file": "/var/www/catalogo/app/views/correos/contacto.ctp",
 			"settings":
 			{
-				"buffer_size": 2713,
+				"buffer_size": 1278,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/var/www/catalogo/app/views/pages/home.ctp",
+			"file": "/var/www/catalogo/app/views/helpers/text_image.php",
 			"settings":
 			{
-				"buffer_size": 3571,
+				"buffer_size": 14940,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/var/www/catalogo/app/views/instits/view.ctp",
+			"settings":
+			{
+				"buffer_size": 8959,
+				"line_ending": "Windows"
 			}
 		}
 	],
 	"build_system": "",
 	"file_history":
 	[
+		"/var/www/catalogo/app/views/helpers/text_image.php",
+		"/var/www/catalogo/app/views/correos/contacto.ctp",
+		"/var/www/catalogo/app/app_controller.php",
+		"/var/www/catalogo/app/views/helpers/hide_mail.php",
+		"/home/mlambir/.config/sublime-text-2/Packages/Default/Default (Linux).sublime-keymap",
+		"/home/mlambir/.config/sublime-text-2/Packages/User/Default (Linux).sublime-keymap",
+		"/home/mlambir/Desktop/test.php",
+		"/home/mlambir/Desktop/test.js",
+		"/home/mlambir/.config/sublime-text-2/Packages/Default/Global.sublime-settings",
+		"/var/www/catalogo/app/index.php",
+		"/var/www/catalogo/README",
+		"/var/www/catalogo/app/views/layouts/default.ctp",
+		"/var/www/catalogo/app/webroot/css/catalogo.home.css",
+		"/var/www/catalogo/app/webroot/css/catalogo.css",
+		"/var/www/catalogo/app/views/pages/home.ctp",
 		"/var/www/catalogo/app/views/elements/boxBuscadorAyuda.ctp",
 		"/var/www/catalogo/app/controllers/titulos_controller.php"
 	],
@@ -64,6 +123,16 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"png",
+			"close",
+			"__imagePath",
+			"__imagePath\n}",
+			"__imagePath",
+			"save",
+			"gd",
+			"webroot",
+			"text",
+			"open"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -88,56 +157,82 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/var/www/catalogo/app/views/layouts/default.ctp",
+					"file": "/var/www/catalogo/app/app_controller.php",
 					"settings":
 					{
-						"buffer_size": 5807,
+						"buffer_size": 2556,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1986,
-								1986
+								1158,
+								1159
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 8,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0,
-						"translation.y": 2304,
+						"translation.y": 672,
 						"zoom_level": 1
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "/var/www/catalogo/app/webroot/css/catalogo.home.css",
+					"file": "/var/www/catalogo/app/views/helpers/hide_mail.php",
 					"settings":
 					{
-						"buffer_size": 990,
+						"buffer_size": 938,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								990,
-								990
+								673,
+								673
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0,
+						"translation.y": 0,
+						"zoom_level": 1
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/var/www/catalogo/app/views/correos/contacto.ctp",
+					"settings":
+					{
+						"buffer_size": 1278,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1022,
+								959
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
@@ -148,47 +243,47 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "/var/www/catalogo/app/webroot/css/catalogo.css",
+					"buffer": 3,
+					"file": "/var/www/catalogo/app/views/helpers/text_image.php",
 					"settings":
 					{
-						"buffer_size": 2713,
+						"buffer_size": 14940,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								10143,
+								10146
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"syntax": "Packages/PHP/PHP.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0,
-						"translation.y": 2352,
+						"translation.y": 5062,
 						"zoom_level": 1
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "/var/www/catalogo/app/views/pages/home.ctp",
+					"buffer": 4,
+					"file": "/var/www/catalogo/app/views/instits/view.ctp",
 					"settings":
 					{
-						"buffer_size": 3571,
+						"buffer_size": 8959,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								52,
-								52
+								4461,
+								4461
 							]
 						],
 						"settings":
@@ -198,7 +293,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0,
-						"translation.y": 624,
+						"translation.y": 1701,
 						"zoom_level": 1
 					},
 					"type": "text"
@@ -249,6 +344,6 @@
 	"show_minimap": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 205,
+	"side_bar_width": 178,
 	"status_bar_visible": true
 }

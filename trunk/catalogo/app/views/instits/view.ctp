@@ -110,21 +110,21 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
                 <dd>
                         <?php
                         if(!empty($instit['Instit']['mail'])) {
-                            echo $instit['Instit']['mail'];
+                            echo $hideMail->hide($instit['Instit']['mail']);
                         }else {
                             echo "<i>No declarado</i>";
     } ?>
                 </dd>
                 <?php endif;?>
 <?php if($instit['Instit']['mail_alternativo']): ?>
-                <dt><?php __('E-Mail Alternativo'); ?>:</dt>
+                <dt style="width:105px"><?php __('E-Mail Alternativo'); ?>:</dt>
                 <dd>
                         <?php
                         if(!empty($instit['Instit']['mail_alternativo'])) {
-                            echo $instit['Instit']['mail_alternativo'];
+                            echo $hideMail->hide($instit['Instit']['mail_alternativo']);
                         }else {
                             echo "<i>No declarado</i>";
-    } ?>
+                            } ?>
                 </dd>
                 <?php endif;?>
 <?php if($instit['Instit']['web']): ?>
