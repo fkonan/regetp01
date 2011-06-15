@@ -8,7 +8,7 @@
           <th>Agrupamiento de figuras</th>
           <th>Figuras formativas</th>
           <th>Perfiles de referencia</th>
-          <th>Fecha de aprobacion</th>
+          <th>Fecha de aprobacion*</th>
         </tr>
       </thead>
       <tr>
@@ -137,7 +137,7 @@
       </tr>
       <tr>
         <td rowspan="4">Mantenimiento y reparación de
-        carrocerá­a</td>
+        carrocería</td>
         <td>Chapista</td>
         <td>Chapista de Automotores</td>
         <td>17-12-09</td>
@@ -158,5 +158,6 @@
         <td></td>
       </tr>
     </table>
+    <p>* es la fecha de aprobación del marco de referencia correspondiente</p>
     </div>
   </div>
