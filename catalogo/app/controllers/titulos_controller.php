@@ -31,6 +31,7 @@ class TitulosController extends AppController {
         }
 
         $bySession = false;
+        $bloquearOferta = false;
         // si existe búsqueda en Session, realiza búsqueda
         if ($this->Session->read($this->sesNames['nombre'])) {
             $this->data['Titulo']['tituloName'] = $this->passedArgs['tituloName'] = $this->Session->read($this->sesNames['nombre']);
@@ -42,6 +43,7 @@ class TitulosController extends AppController {
         }
         if ($oferta_id > 0) {
             $this->data['Titulo']['oferta_id'] = $this->passedArgs['ofertaId'] = $oferta_id;
+            $bloquearOferta = true;
             $bySession = true;
         }
         if ($this->Session->read($this->sesNames['sector'])) {
@@ -95,7 +97,7 @@ class TitulosController extends AppController {
         $this->Titulo->recursive = 0;
         $this->set('titulos', $this->paginate());
         $this->set(compact('ofertas', 'sectores', 'subsectores', 'jurisdicciones',
-                    'localidades', 'departamentos', 'bySession'));
+                    'localidades', 'departamentos', 'bySession','bloquearOferta'));
     }
 
 
