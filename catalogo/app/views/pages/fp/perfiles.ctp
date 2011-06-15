@@ -8,7 +8,7 @@
 
 <H1 style="BACKGROUND: white">Perfiles Profesionales</H1> 
 
-<P>Definición de Ofertas de FP </A>- publicado el 3/1/2008</P> 
+<P>Definición de Ofertas de FP</P> 
 
 <P>La responsabilidad de llevar a cabo el relevamiento y sistematización 
     de los 
