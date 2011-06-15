@@ -35,6 +35,7 @@
                         draggable: false,
                         modal: true,
                         resizable: false,
+                        title:"Notificación de información desactualizada",
                         beforeClose: function(event, ui) {
                             $("#dialog").remove();
                         }

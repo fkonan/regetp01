@@ -22,7 +22,7 @@ class InstitsController extends AppController {
         $this->Instit->contain(array(   'Localidad', 'Departamento', 'Tipoinstit', 'Jurisdiccion',
                                         'Dependencia', 'Gestion', 'Orientacion', 'Claseinstit', 'EtpEstado',
                                         'Plan' => array(
-                                            'order' => array('Plan.oferta_id'),
+                                            'order' => array('Plan.oferta_id', 'Plan.nombre'),
                                             'Titulo' => array('Oferta'),
                                             'Oferta')
                                 ));
