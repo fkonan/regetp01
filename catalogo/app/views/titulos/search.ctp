@@ -15,6 +15,7 @@
         Desde aquí obtendrás un listado de títulos o certificaciones de la Educación Técnico Profesional según los criterios de búsqueda ingresados.
     </p>
     <div class="boxblanca">
+        <h3>Seleccione criterios de búsqueda</h3>
         <?php
         echo $form->create('Titulo', array(
         'action' => 'ajax_search_results2',

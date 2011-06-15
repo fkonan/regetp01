@@ -10,6 +10,7 @@ $paginator->options(array(  'update' => 'consoleResult',
     }
 </script>
 <div id="search_results" class="boxblanca">
+    <h3>Listado de resultados</h3>
     <div class="list-header">
         <div class="sorter">
             <?php
