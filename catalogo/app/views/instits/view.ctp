@@ -98,10 +98,7 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
                         <?php
                         if(!empty($instit['Instit']['telefono'])) {
                             echo $instit['Instit']['telefono'];
-                        }if
-                        (!empty($instit['Instit']['telefono_alternativo'])) {
-                            echo ", ".$instit['Instit']['telefono_alternativo'];
-    } ?>
+                        }?>
                 </dd>
 <?php endif;?>
 
@@ -144,11 +141,7 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
     </div>
 
     <div class="clear"></div>
-    
-    <h4 class="grid_8 alpha">
-        Títulos o Certificaciones que ofrece la Institución
-    </h4>
-    
+   
     <a class="grid_4 omega alerta-desactualizada" id="alerta-desactualizada" style="margin-top: 7px;">
         Notificar institución desactualizada
     </a>
@@ -159,6 +152,9 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
         if (!empty($instit['Plan'])) {
     ?>
         <ul id="titulos-list">
+                <h3>
+                    Títulos o Certificaciones que ofrece la Institución
+                </h3>
                 <?php
                 $ofertaAnt = '';
                 foreach ($instit['Plan'] as $plan) {
