@@ -532,3 +532,7 @@ table tbody tr:hover td
 li{
     margin-top: 4px;
 }
+
+.disabled{
+    display:inline;
+}
