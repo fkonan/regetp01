@@ -146,9 +146,36 @@ class TitulosController extends AppController {
                 'contain' => array('Instit' => array('Tipoinstit', 'Jurisdiccion(name)')),
                 'order'    => array('Plan.nombre' => 'asc')
         );
+
+        $criterios = array();
+        if ($this->Session->read($this->sesNames['jurisdiccion'])) {
+            $this->Titulo->Plan->Instit->Jurisdiccion->recursive = 0;
+            $jurisdiccion = $this->Titulo->Plan->Instit->Jurisdiccion->findById($this->Session->read($this->sesNames['jurisdiccion']));
+
+            if (!empty($jurisdiccion)) {
+                $criterios['Jurisdiccion'] = $jurisdiccion['Jurisdiccion']['name'];
+            }
+        }
+        if ($this->Session->read($this->sesNames['departamento'])) {
+            $this->Titulo->Plan->Instit->Departamento->recursive = 0;
+            $departamento = $this->Titulo->Plan->Instit->Departamento->findById($this->Session->read($this->sesNames['departamento']));
+
+            if (!empty($departamento)) {
+                $criterios['Departamento'] = $departamento['Departamento']['name'];
+            }
+        }
+        if ($this->Session->read($this->sesNames['localidad'])) {
+            $this->Titulo->Plan->Instit->Localidad->recursive = 0;
+            $localidad = $this->Titulo->Plan->Instit->Localidad->findById($this->Session->read($this->sesNames['localidad']));
+
+            if (!empty($localidad)) {
+                $criterios['Localidad'] = $localidad['Localidad']['name'];
+            }
+        }
+        
         $planes = $this->paginate('Plan');
 
-        $this->set(compact('titulo','planes'));
+        $this->set(compact('titulo','planes', 'criterios'));
 
         if ( $this->RequestHandler->isAjax() ) {
             Configure::write ( 'debug', 0 );
@@ -158,8 +185,11 @@ class TitulosController extends AppController {
     }
 
 
-    function planes_asociados($id) {
+    function planes_asociados($id, $criterios=null) {
         // Planes del Titulo
+        if (!empty($this->params['criterios'])) {
+            $criterios = $this->params['criterios'];
+        }
         $this->Titulo->Plan->recursive = -1;
         $this->paginate = array(
                 'limit'    => 20,
@@ -186,6 +216,7 @@ class TitulosController extends AppController {
 
         $planes = $this->paginate('Plan');
         
+        $this->set('criterios', $criterios);
         $this->set('planes', $planes);
     }
 
@@ -564,7 +595,6 @@ class TitulosController extends AppController {
                 $this->Session->write($this->sesNames['localidad'], $this->data['Instit']['localidad_id']);
                 $this->Session->write($this->sesNames['tituloJurDepLoc'], $this->data['Instit']['jur_dep_loc']);
             }
-
             /*if (!empty($this->data['Titulo']['que'])) {
                 $this->paginate['conditions']['(lower(Tipoinstit.name) || lower(Titulo.name) || lower(Plan.name) || lower(Sector.name) || lower(Subsector.name)) SIMILAR TO ?'] = convertir_para_busqueda_avanzada(utf8_decode($this->data['Titulo']['que']));
             }
