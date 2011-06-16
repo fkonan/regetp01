@@ -39,6 +39,7 @@ $paginator->options(array(  'update' => 'consoleResult',
         $i = 0;
         foreach ($titulos as $titulo):
         ?>
+        <a href="<?php echo $html->url('/titulos/view/'.$titulo['Titulo']['id'])?>">
         <li>
             <div class="items-nombre">
                         <strong><?php
@@ -75,6 +76,7 @@ $paginator->options(array(  'update' => 'consoleResult',
             </div>
             <div class="clear"></div>
         </li>
+        </a>
             <?php endforeach; ?>
     </ol>
         <?php
