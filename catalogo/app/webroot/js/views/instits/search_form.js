@@ -1,3 +1,63 @@
+function init__SearchFormJs(urlLocalidades){
+    jQuery(document).ready(function() {
+        iniciarTooltip();
+
+        jQuery("#InstitJurDepLoc").autocomplete(urlLocalidades, {
+            dataType: "json",
+            delay: 200,
+            max:30,
+            cacheLength:1,
+            extraParams: {
+                jur: function() { return jQuery('#jurisdiccion_id').val(); }
+            } ,
+            parse: function(data) {
+                return jQuery.map(data, function(loc_dep) {
+                    return {
+                        data: loc_dep,
+                        value: loc_dep.id,
+                        result: formatResult(loc_dep)
+                    }
+                });
+            },
+            formatItem: function(item) {
+                return formatResult(item);
+            }
+        }).result(function(e, item) {
+            jQuery("#hiddenLocDepId").remove();
+            if(item.type == 'Vacio'){
+                jQuery("#InstitJurDepLoc").val('');
+            }
+            else{
+                jQuery("#InstitSearchForm #search-ubicacion").append("<input id='hiddenLocDepId' name='data[Instit][" + item.type.toLowerCase() + "_id]' type='hidden' value='" + item.id + "' />");
+            }
+        });
+
+        jQuery("#InstitJurDepLoc").bind('paste', function(e){jQuery("#InstitJurDepLoc").change()});
+
+        jQuery("#InstitJurDepLoc").attr('autocomplete','off');
+    });
+}
+function iniciarTooltip(){
+    jQuery.tools.tooltip.conf.events.input = 'focus,blur';
+    jQuery.tools.tooltip.conf.events.tooltip = '';
+    jQuery.tools.tooltip.conf.events.widget = 'focus, blur';
+    jQuery("#InstitSearchForm :input[title]").tooltip({
+        effect: 'slide',
+        offset:[22,0]
+    });
+}
+function formatResult(loc_dep) {
+    if(loc_dep.type == 'Localidad'){
+        return loc_dep.localidad + ', ' + loc_dep.departamento + ' (' + loc_dep.jurisdiccion + ')';
+    }
+    else if(loc_dep.type == 'Departamento'){
+        return loc_dep.departamento + ' (' + loc_dep.jurisdiccion + ')';
+    }
+    else{
+        return loc_dep.localidad;
+    }
+}
+
 (function($){
     /*
      *
@@ -20,17 +80,6 @@
      * @var Dom Object
      */
     var formElement = null;
-    
-
-
-
-    /*
-     *
-     *      FUNCIONES
-     *
-     *
-     */
-
 
     function iniciarTooltip(){
         $.tools.tooltip.conf.events.input = 'focus,blur';
