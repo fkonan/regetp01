@@ -6,10 +6,12 @@
     <div class="boxblanca boxdocs">
 
         <h2>Marcos de referencia    </h2>
-        
+   
         <p>
         Los marcos de referencia enuncian el conjunto de los criterios básicos y estándares que definen y caracterizan los aspectos sustantivos a ser considerados en el proceso de homologación de los títulos o certificados y sus correspondientes ofertas formativas, brindando los elementos necesarios para llevar a cabo las acciones de análisis y de evaluación de planes de estudio relativos a titulaciones técnicas o certificados de formación profesional. Son aprobados por el Consejo Federal de Educación.
         </p>
+        
+        <? echo $html->image('material/marcoref.jpg', array('class' => 'docimg', 'style' => 'width: 200px; float: left; border: none')); ?>
         <p>
         En distintas Reuniones de la Comisión Federal de Educación Técnica Profesional y en talleres específicos se han definido y desarrollado una serie de Marcos de referencia para la homologación de Títulos y Certificados, priorizando según el volumen de oferta formativa a nivel nacional y tecnicaturas que deben estar a resguardo del estado en virtud de que el ejercicio profesional pone en riesgo de modo directo el medio ambiente, la salud y los bienes de los habitantes.
         </p>

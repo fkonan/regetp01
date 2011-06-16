@@ -1,3 +1,9 @@
+.docimg{
+    margin: 10px;
+    border: 1px solid #000;
+    float: right;
+}
+
 
 #menu1 h2{
     font-size: 9pt;
