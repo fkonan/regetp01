@@ -27,11 +27,8 @@ Estos Foros se constituyen en el marco del CoNETyP y están integrados por repres
 </p>
 
 <p>
-Para obtener más información sobre <b>características, objetivos y modos de funcionamiento</b> de los foros consulte el siguiente documento:
+Para obtener más información sobre <b>características, objetivos y modos de funcionamiento</b> de los foros consulte el siguiente documento: <?echo $html->link('metodología de trabajo para los foros','/pages/foros_metodologia');?>
 </p>
-        
-        <p><?echo $html->link('Ver metodología','/pages/foros_metodologia');?></p>
-        
         
         <h3>Foros</h3>
         

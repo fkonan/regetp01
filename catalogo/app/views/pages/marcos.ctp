@@ -17,6 +17,9 @@
         Cada marco de referencia contiene información relativa a la identificación del título o certificación (sector de actividad socio productiva de pertenencia, perfil profesional, familia profesional, título de referencia), un referencial al perfil profesional (alcance del perfil, funciones, área ocupacional, habilitaciones profesionales), y una descripción de las trayectorias formativas que se deben respetar (formación general y específica, prácticas profesionalizantes, carga horaria mínima).
         </p>        
         
+        <p>
+            Puede obtener mayor información sobre los perfiles profesionales haciendo <?php echo $html->link('click aquí', '/pages/fp/perfiles'); ?>
+        </p>
         
         <h4>Referencia  normativa</h4>
         <ul>
