@@ -483,6 +483,7 @@ dd ul{
 
 .borde_izquierdo{
     border-left:1px solid #D1D1D1;
+    padding-left: 15px;
 
 }
 
@@ -535,4 +536,11 @@ li{
 
 .disabled{
     display:inline;
+}
+
+.inputs_largos input, .inputs_largos select{
+    width: 95%;
+}
+.inputs_largos input[type=submit]{
+    width: 100px;
 }
