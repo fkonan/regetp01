@@ -6,9 +6,9 @@
     <div class="boxblanca boxdocs">
 
 
-<H1 style="BACKGROUND: white">Perfiles Profesionales</H1> 
+<H2 style="BACKGROUND: white">Perfiles Profesionales</H2> 
 
-<P>Definición de Ofertas de FP</P> 
+<h3>Definición de Ofertas de FP</h3> 
 
 <P>La responsabilidad de llevar a cabo el relevamiento y sistematización 
     de los 
@@ -65,8 +65,6 @@ autoridad de la empresa, unidad económica u organización laboral. En consecuenci
 se considera el grado de autonomía profesional en relación a las 
 capacidades y/o competencias adquiridas a través de la formación profesional y 
 la experiencia laboral. </P> 
-<P> </P> 
-
 
 
 <h3>2.- Funciones que ejerce el profesional</h3>

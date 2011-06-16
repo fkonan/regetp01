@@ -8,12 +8,8 @@
         <h1>Formaci&oacute;n Profesional </h1>
         <p>&nbsp;</p>
         <p>Presentaci&oacute;n [Manolo]</p>
-        <ul>
-            <li><? echo $html->link('Marcos de referencia','/pages/fp/marcos_ref'); ?></li>
-            <li><? echo $html->link('Perfiles profesionales','/pages/fp/perfiles'); ?></li>
-            <li><? echo $html->link('Recomendaciones para el diseño curricular','/pages/fp/recomendaciones'); ?>
-                 </li>
-        </ul>
+        
+        
         <p>&nbsp;</p>
         <p>Estructura de la ETP /&nbsp; T&iacute;tulos y Certificados de la Educaci&oacute;n  T&eacute;cnico Profesional [Gustavo, Doc. &ldquo;Estructura de la ETP&rdquo; en base a Res CFC  13/07] (PARTE FORMACION PROFESIONAL?)</p>
         <p>&nbsp;</p>
@@ -24,7 +20,7 @@
         <p>&nbsp;</p>
         <h4>M&aacute;s  informaci&oacute;n</h4>
         <ul>
-            <li><? echo $html->link('Programa de Formación Profesional (link hacia la página del Inet)', 'http://www.inet.edu.ar/programas/formacio_profesional.html');?></li>
+            <li><? echo $html->link('Programa de Formación Profesional', 'http://www.inet.edu.ar/programas/formacio_profesional.html', array('target' => '_blank'));?></li>
         </ul>
         <p>&nbsp;</p>
 

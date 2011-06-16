@@ -16,9 +16,14 @@
 
         <li>
             <?php echo $html->link('Procesos de homologación', array('controller' => 'pages', 'action' => 'display', 'homologacion'));?>
+        </li>
         <li>
             <?php echo $html->link('Marcos de referencia', array('controller' => 'pages', 'action' => 'display', 'marcos'));?>
-        
+            <ul>
+                <li><?php echo $html->link('Perfiles profesionales', array('controller' => 'pages', 'action' => 'display', 'fp/perfiles'));?></li>
+            </ul>
+            
+        </li>    
         <li>
             Niveles y Modalidades
             <ul>

@@ -317,9 +317,11 @@ dd ul{
     width: 30px;
     outline: none;
     vertical-align: middle;
+    margin: 10px 10px 15px 20px;
 }
 
 .mas_info_gris{
+    margin: 0px 10px;
     text-indent: -1000px;
     overflow: hidden;
     background: url(img/lupagris.png)  no-repeat;

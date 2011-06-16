@@ -20,8 +20,9 @@ energía; informática y telecomunicaciones; salud y ambiente, economía y administ
 seguridad e higiene; turismo, gastronomía y hotelería; especialidades artísticas vinculadas con
 lo técnico/tecnológico.
         </p>
-        <span style="color: red">FALTA EL HTML del LINK</span>
-        <?php echo $html->link('Más información...', '/pages'); ?>
+        <p>
+        <?php echo $html->link('Más información...', '/pages/educ_tec_prof'); ?>
+        </p>
         
         <h3>Catálogo Nacional de Títulos y Certificaciones de Educación Técnico Profesional</h3>
         
