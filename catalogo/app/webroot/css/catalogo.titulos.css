@@ -44,6 +44,15 @@
     width: 10%;
 }
 
+#items a{
+    text-decoration: none;
+    color: #58585A;
+}
+
+#items li a:hover{
+    color: #000000;
+}
+
 .titulosview {
     background-color: white;   
 }
