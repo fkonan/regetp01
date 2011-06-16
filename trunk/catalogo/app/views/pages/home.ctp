@@ -9,7 +9,7 @@ $this->pageTitle = "Inicio";
         <div style="float:left">
             <div>
                 
-                <?php echo $html->image('material/inicio2010.jpg', array('class'=>'photo')) ?> 
+                <?php echo $html->image('material/inicio2010.jpg', array('style'=>'float: right; height: 110px; margin: 0px 0px 0px 20px;')) ?> 
                 
                 
                 <h2>La Educación Técnico Profesional en Argentina</h2>
@@ -25,7 +25,8 @@ $this->pageTitle = "Inicio";
                 <?php echo $html->link('Más información...', '/pages/educ_tec_prof'); ?>
                 </p>
                 
-                               
+                  
+                <?php echo $html->image('material/taller carpinteria.gif', array('style'=>'float: right; height: 205px; margin: 0px 0px 0px 20px;')) ?> 
                 <h2>Catálogo Nacional de Títulos y Certificaciones</h2>
                 <p>
                     El Catálogo Nacional de Títulos y Certificaciones es uno de los instrumentos previstos por la Ley Nº 26.058 para la mejora continua de la Educación Técnico Profesional. Como instrumento operativo y de consulta el Catálogo constituye un servicio permanente de información actualizada sobre títulos y certificaciones de la educación técnico profesional en el ámbito nacional que permite:
