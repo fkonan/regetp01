@@ -49,6 +49,6 @@ echo $html->css(array('catalogo.titulos'));
     </div>
     <h4><?php  __('Instituciones que ofrecen el t&iacute;tulo o certificaci&oacute;n');?></h4>
     <div id="tituloPlanes">
-        <?php echo $this->requestAction('/titulos/planes_asociados/'.$titulo['Titulo']['id'], array('return')); ?>
+        <?php echo $this->requestAction('/titulos/planes_asociados/'.$titulo['Titulo']['id'], array('return', 'criterios' => @$criterios)); ?>
     </div>
 </div>

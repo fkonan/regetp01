@@ -95,7 +95,7 @@
         </div>
         <div class="clear" style="height:15px;"></div>
         
-        <div class="grid_2 prefix_10" >
+        <div style="text-align: right; padding-right: 25px;" >
             <?php
             /*echo $form->button('Limpiar búsqueda', array(
             'class' => 'boton-buscar',

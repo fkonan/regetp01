@@ -9,6 +9,23 @@ $paginator->options(array(
 ));
 ?>
 <div class="boxblanca" id="search_results">
+    <? if (sizeof($criterios)>0): ?>
+	Criterios de búsqueda seleccionados:
+	<dl class="criterios_busq">
+	<?
+
+	 foreach($criterios as $key => $value){
+		?><dt><?
+			echo '- '.$key.': ';
+		?></dt><?
+		?><dd><?
+			echo $value."&nbsp";
+		?></dd><?
+	}
+
+	?>
+	</dl>
+    <? endif; ?>
     <div class="list-header">
         <div class="sorter">
             <?php
