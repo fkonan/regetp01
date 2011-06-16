@@ -4,8 +4,9 @@
 <div class="grid_9">
     <div class="boxblanca boxdocs">
         <h2>Foros sectoriales</h2>
-        
-        
+     
+         <? echo $html->image('material/foro.jpg', array('class' => 'docimg')); ?>
+
         <p>
         La ley 26.058 crea tres instrumentos para la mejora continua de la calidad de la Educación Técnica Profesional: el Registro Federal de Instituciones de Educación Técnica Profesional, el proceso de Homologación de Títulos y Certificaciones y el Catálogo Nacional de Títulos y Certificaciones. Durante los últimos años, una de las tareas centrales del INET ha sido la construcción del Catálogo Nacional de Títulos y Certificaciones que, tal como indica la ley, se organiza en función de las familias y perfiles profesionales adoptados para la definición de las ofertas formativas.
 </p>
@@ -17,7 +18,7 @@ Si bien el Catálogo es una nómina de los títulos y/o certificaciones profesional
 <p>
 Para asegurar la pertinencia productiva de los títulos y certificados que conforman el Catálogo, se han convocado Foros Sectoriales. Se entiende por Foro Sectorial un grupo de trabajo cuyo objetivo ?en este caso- consiste en identificar diferentes funciones, posiciones y figuras laborales y en caracterizar los diferentes perfiles que permitan construir y ordenar las ofertas formativas correspondientes y enmarcarlas en las familias profesionales del sector.
  </p>
- 
+
  <p>
 La identificación de familias profesionales responde a la necesidad de determinar carencias formativas en el mundo productivo y al mismo tiempo es un puente eficaz y válido para el desarrollo de políticas de empleo. Por tanto, el Foro se constituye tanto como instancia proveedora de insumos como mecanismo de validación de las ofertas que se generen. 
 </p>
