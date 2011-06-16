@@ -5,7 +5,7 @@ class HideMailHelper extends Helper {
     function hide($mail, $imgAttr=null) {
         // chequea si la librería GD esta instalada en el server
         if (!extension_loaded('gd') || !function_exists('gd_info')) {
-            return '';
+            return $mail;
         }
 
         $filepath = IMAGES_URL."mail/" ;
