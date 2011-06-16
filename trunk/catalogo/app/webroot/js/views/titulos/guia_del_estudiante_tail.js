@@ -14,7 +14,6 @@
     var tituloSectorCombo = $("#TituloSectorId");
     var tituloName = $("#TituloTituloName");
 
-
     
     var institsForm = $('#InstitSearchForm');
     var institsContainer = $( "#li_instits > UL.results" );
