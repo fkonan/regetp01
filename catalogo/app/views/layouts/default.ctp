@@ -91,7 +91,18 @@ $javascript;
         <!--[if IE 6]>
         <?php echo $html->css('catalogo_ie_fix');?>
         <![endif]-->
-
+        
+        <script type="text/javascript">
+            jQuery(document).ajaxError( function(event, jqXHR, ajaxSettings, thrownError){
+                if (xhr.status == 401){
+                    // primero pregunta, antes de hacer un reload
+                    // no vaya a ser cosa que pierda lo que estaba haciendo
+                    if ( confirm('Ha caducado su sesión, ¿desea ingrear nuevamente al sistema?') ) {
+                        window.location.reload(true);
+                    }
+                }                
+            } );
+        </script>
 
     </head>
     <body>
