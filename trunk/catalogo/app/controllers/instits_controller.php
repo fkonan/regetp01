@@ -52,64 +52,6 @@ class InstitsController extends AppController {
         $this->set('instit', $instit);
     }
     
-    function advanced_search_form() {
-        $this->pageTitle = "Buscador de Instituciones";
-
-        if (!empty($this->data)) {
-            $this->redirect('search');
-        }
-
-        $this->Instit->Gestion->recursive = -1;
-        $this->Instit->Gestion->order = 'Gestion.name';
-        $gestiones = $this->Instit->Gestion->find('list');
-
-        $this->Instit->Dependencia->recursive = -1;
-        $this->Instit->Dependencia->order ='Dependencia.name';
-        $dependencias = $this->Instit->Dependencia->find('list');
-
-        $this->Instit->Jurisdiccion->recursive = -1;
-        $this->Instit->Jurisdiccion->order = 'Jurisdiccion.name';
-        $jurisdicciones = $this->Instit->Jurisdiccion->find('list');
-
-        // que me liste todos los detarpamentos
-        $this->Instit->Departamento->recursive = -1;
-        $departamentos = $this->Instit->Departamento->con_jurisdiccion('list');
-        //$departamentos = array();
-
-
-        // con CERO me trae TODAS las jurisdicciones
-        $this->Instit->Localidad->recursive = -1;
-        $localidades = $this->Instit->Localidad->con_depto_y_jurisdiccion('list');
-        //$localidades = array();
-
-        $this->Instit->Plan->Oferta->recursive = -1;
-        $ofertas = $this->Instit->Plan->Oferta->find('list');
-
-        $this->Instit->Plan->Titulo->Sector->recursive = -1;
-        $this->Instit->Plan->Titulo->Sector->order ='Sector.name';
-        $sectores = $this->Instit->Plan->Titulo->Sector->find('list');
-
-        $this->Instit->Plan->Titulo->Subsector->order ='Subsector.name';
-        $subsectores = $this->Instit->Plan->Titulo->Subsector->find('list');
-
-        $this->Instit->Claseinstit->recursive = -1;
-        $this->Instit->Claseinstit->order = 'Claseinstit.name';
-        $claseinstits = $this->Instit->Claseinstit->find('list');
-
-        $this->Instit->EtpEstado->recursive = -1;
-        $this->Instit->EtpEstado->order = 'EtpEstado.name';
-        $etpEstados = $this->Instit->EtpEstado->find('list');
-
-        $orientaciones = $this->Instit->Orientacion->find('list');
-
-        $titulos = $this->Instit->Plan->Titulo->find('list');
-
-        $this->set(compact(
-                'gestiones', 'dependencias', 'jurisdicciones',
-                'ofertas','localidades','departamentos','sectores',
-                'claseinstits','etpEstados','orientaciones', 'subsectores', 'titulos'));
-    }
-
     function search_form() {
         $this->pageTitle = "Buscador de Instituciones";
         $this->set('jurisdicciones', $this->Instit->Jurisdiccion->find('list'));
