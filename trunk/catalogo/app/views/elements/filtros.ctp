@@ -34,7 +34,7 @@
         <p class="msj-vacio">No hay filtros disponibles...</p>
     </div>
 </div>
-<div class="seccion grid_4 omega">
+<div class="seccion grid_4 alpha omega">
     <div class="seccion">
         <h4>Ubicación</h4>
         <div>
