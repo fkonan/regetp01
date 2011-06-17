@@ -1,14 +1,13 @@
 <?php
-
 echo $html->css('catalogo.instits', false);
-//echo $html->css('catalogo.titulos', false);
+
 $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
 ?>
 <div class="grid_12">
     <h2 class="grid_12 alpha">
         <?php echo $cue_instit ?> <?php echo $instit['Instit']['nombre_completo'] ?>
     </h2>
-    
+
     <div class="clear"></div>
 
     <div class="grid_6 alpha">
@@ -72,7 +71,7 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
         <div class="boxblanca ficha_info">
             <h3>Ficha de Contacto</h3>
             <dl>
-                <dt><?php __('Dirección'); ?>:</dt>
+                <dt style="width:110px;"><?php __('Dirección'); ?>:</dt>
                 <dd>
                     <?php
                     echo joinNotNull(", ", array($instit['Instit']['direccion'],$instit['Instit']['lugar'],
@@ -82,7 +81,7 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
                     ?>
                 </dd>
 
-                <dt><?php __('Código Postal'); ?>:</dt>
+                <dt style="width:110px;"><?php __('Código Postal'); ?>:</dt>
                 <dd>
                     <?php
                     if(!empty($instit['Instit']['cp'])) {
@@ -93,116 +92,90 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
                 </dd>
 
                 <?php if($instit['Instit']['telefono']): ?>
-                <dt><?php __('Teléfono'); ?>:</dt>
+                <dt style="width:110px;"><?php __('Teléfono'); ?>:</dt>
                 <dd>
                         <?php
                         if(!empty($instit['Instit']['telefono'])) {
                             echo $instit['Instit']['telefono'];
                         }?>
                 </dd>
-<?php endif;?>
+                <?php endif;?>
 
-<?php if($instit['Instit']['mail']): ?>
-                <dt style="width:50px"><?php __('E-Mail'); ?>:</dt>
+                <?php if($instit['Instit']['mail']): ?>
+                <dt style="width:110px;"><?php __('E-Mail'); ?>:</dt>
                 <dd>
                         <?php
                         if(!empty($instit['Instit']['mail'])) {
                             echo $hideMail->hide($instit['Instit']['mail']);
                         }else {
                             echo "<i>No declarado</i>";
-    } ?>
+                        } ?>
                 </dd>
                 <?php endif;?>
-<?php if($instit['Instit']['mail_alternativo']): ?>
-                <dt style="width:105px"><?php __('E-Mail Alternativo'); ?>:</dt>
-                <dd>
-                        <?php
-                        if(!empty($instit['Instit']['mail_alternativo'])) {
-                            echo $hideMail->hide($instit['Instit']['mail_alternativo']);
-                        }else {
-                            echo "<i>No declarado</i>";
-                            } ?>
-                </dd>
-                <?php endif;?>
-<?php if($instit['Instit']['web']): ?>
-                <dt><?php __('Web'); ?>:</dt>
+                <?php if($instit['Instit']['web']): ?>
+                <dt style="width:110px;"><?php __('Web'); ?>:</dt>
                 <dd>
                         <?php
                         if(!empty($instit['Instit']['web'])) {
                             echo $instit['Instit']['web'];
                         }else {
                             echo "<i>No declarado</i>";
-    } ?>
+                        } ?>
                 </dd>
-<?php endif;?>
+                <?php endif;?>
             </dl>
             <div class="clear"></div>
         </div>
     </div>
 
-    <div class="clear"></div>
-   
-    <a class="grid_4 omega alerta-desactualizada" id="alerta-desactualizada" style="margin-top: 7px;">
-        Notificar institución desactualizada
-    </a>
-    <div class="clear"></div>
+    <div class="clear" style="height:20px;"></div>
 
     <div class="boxblanca">
         <?php
         if (!empty($instit['Plan'])) {
-    ?>
+            ?>
+        <h3>Títulos o Certificaciones que ofrece la Institución</h3>
         <ul id="titulos-list">
-                <h3>
-                    Títulos o Certificaciones que ofrece la Institución
-                </h3>
-                <?php
-                $ofertaAnt = '';
-                foreach ($instit['Plan'] as $plan) {
-                    if ($ofertaAnt != $plan['Oferta']['id'] ) {
-                        echo "<h4>". $plan['Oferta']['name'] ."</h4>";
-                        $ofertaAnt = $plan['Oferta']['id'];
-                    }
+        <?php
+        $ofertaAnt = '';
+        foreach ($instit['Plan'] as $plan) {
+            if ($ofertaAnt != $plan['Oferta']['id'] ) {
+                echo "<h4>". $plan['Oferta']['name'] ."</h4>";
+                $ofertaAnt = $plan['Oferta']['id'];
+            }
 
-                    // inicializo el nombre del titulo que voy a escribir
-                    $planTituloNombre = '';
-                    $planNombre = '';
-                    // le agrego un link hacia el titulo de referencias
-                    if(!empty($plan['Titulo'])) {
-                        $link = $html->link('Ver Más' , array(
-                                'controller' => 'titulos',
-                                'action' => 'view',
-                                $plan['Titulo']['id']
-                                ), array(
-                                'title' => 'Ver más información del título',
-                                'class' => 'mas_info_gris_small',
-                        ));
-                        $planNombre .= $link;
-                    }
-                    $planNombre .= $plan['nombre'];
+            // inicializo el nombre del titulo que voy a escribir
+            $planTituloNombre = '';
+            $planNombre = '';
+            // le agrego un link hacia el titulo de referencias
+
+            $planNombre .= $plan['nombre'];
 
 
-                    // si el titulo de referencia es distinto que el nombre del
-                    // plan se lo tengo que agregar entre parentesis
-                    // entonces quedaria: Asistente de Peluquero (Titulo: Peluquero)
-                    if (!empty($plan['Titulo']) && strcasecmp(trim($plan['nombre']), trim($plan['Titulo']['name'])) != 0) {
+            // si el titulo de referencia es distinto que el nombre del
+            // plan se lo tengo que agregar entre parentesis
+            // entonces quedaria: Asistente de Peluquero (Titulo: Peluquero)
+            if (!empty($plan['Titulo']) && strcasecmp(trim($plan['nombre']), trim($plan['Titulo']['name'])) != 0) {
 
-                        $planNombre .= ' (' .  $plan['Titulo']['name'] . ')';
-                    }
+                $planNombre .= ' (' .  $plan['Titulo']['name'] . ')';
+            }
 
-                    // si es FP le agrego la duracion
-                    /*$duracion = '';
-                    if (!empty($plan['duracion_hs'])) {
-                        $duracion = '. <cite>Duración: ' . $plan['duracion_hs'] . ' hs.</cite>';
-                    }
-                    elseif (!empty($plan['duracion_semanas'])) {
-                        $duracion = '. <cite>Duración: ' . $plan['duracion_semanas']. ' semanas</cite>';
-                    }
+            // si es FP le agrego la duracion
+            /*$duracion = '';
+            if (!empty($plan['duracion_hs'])) {
+                $duracion = '. <cite>Duración: ' . $plan['duracion_hs'] . ' hs.</cite>';
+            }
+            elseif (!empty($plan['duracion_semanas'])) {
+                $duracion = '. <cite>Duración: ' . $plan['duracion_semanas']. ' semanas</cite>';
+            }
 
-                    $planNombre .= $duracion;*/
-                    ?>
-
-            <li><?php echo $planNombre?></li>
-                    <?php }?>
+            $planNombre .= $duracion;*/
+            ?>
+            <li onclick="viewTitulo('<?php echo $html->url('/titulos/view_titulo_plan/'.$plan['Titulo']['id'].'/'.$plan['id'])?>', '<?php echo $plan['Titulo']['name']?>');">
+                <?php echo $planNombre?>
+                   <span title="Mas informacion" class="mas_info_azul_small"></span>
+            </li>
+            <?php }?>
         </ul>
             <?php
         }
@@ -214,7 +187,7 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
         ?>
         <div class="clear"></div>
     </div>
-    
+
     <?php
 // se utilizan para pop-up de alerta desactualizada
     echo $form->hidden('instit-nombre', array('id' => 'instit-nombre', 'value' => $instit['Instit']['nombre_completo']));
@@ -230,4 +203,9 @@ Si ha notado algún dato desactualizado, haga click aquí</div>',
            'escape' => false
         ));*/
     ?>
+    <div class="clear"></div>
+
+    <a class="grid_4 omega alerta-desactualizada" id="alerta-desactualizada" style="margin-top: 7px;">
+        Notificación de información desactualizada
+    </a>
 </div>

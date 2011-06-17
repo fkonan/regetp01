@@ -138,7 +138,7 @@ class TitulosController extends AppController {
         $titulo = $this->Titulo->find('first', $conditions);
 
         // Planes del Titulo
-        $this->Titulo->Plan->recursive = -1;
+        $this->Titulo->Plan->recursive = 0;
         $this->paginate = array(
                 'limit'    => 20,
                 'page'    => 1,
@@ -179,6 +179,30 @@ class TitulosController extends AppController {
 
         if ( $this->RequestHandler->isAjax() ) {
             Configure::write ( 'debug', 0 );
+            $this->layout = false;
+            $this->render('view_popup');
+        }
+    }
+
+
+    function view_titulo_plan($id, $plan_id) {
+        if (!$id) {
+            $this->flash(__('Invalid Titulo', true), array('action'=>'search'));
+        }
+
+        // info del Plan (incluido ult. ciclo)
+        $plan = $this->Titulo->Plan->find('first', array(
+                'recursive' => 3,
+                'conditions' => array('Plan.id' => $plan_id),
+                'contain' => array('Instit' => array('Tipoinstit', 'Jurisdiccion(name)'),
+                                    'Oferta',
+                                    'Titulo' => array('SectoresTitulo' => array('Sector', 'Subsector'))),
+        ));
+
+        $this->set('plan', $plan[0]);
+
+        if ( $this->RequestHandler->isAjax() ) {
+            Configure::write ( 'debug', 1 );
             $this->layout = false;
             $this->render('view_popup');
         }

@@ -107,24 +107,37 @@ cite{
     color:#b1cc2f;
 }
 
+.titulosview ul {
+    padding-left: 30px;
+}
+
 #titulos-list{
     padding-right: 40px;
 }
-#titulos-list li{
+#titulos-list li {
     border-bottom: 1px dashed #CDCDCD;
     height: auto !important;
     margin: 0;
     padding: 3px 0;
     position: relative;
+    cursor: pointer;
 }
 
 #titulos-list li:hover{
     color:black;
 }
 
+
 .mas_info_gris_small{
     float: right;
     margin-right: 20px;
+    cursor: pointer;
+}
+
+.mas_info_azul_small{
+    float: right;
+    margin-right: 20px;
+    cursor: pointer;
 }
 
 .ficha_info{
