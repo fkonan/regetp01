@@ -1,7 +1,3 @@
-<?php
-echo $html->css(array('catalogo.titulos'));
-debug($titulo);
-?>
 <script type="text/javascript">
 jQuery(document).ready(function() {
         if (jQuery("#arrowlink").attr("src") == "<?php echo $html->url('/img'); ?>/arrow_down.png") {
@@ -13,17 +9,20 @@ jQuery(document).ready(function() {
     });
 </script>
 <div class="titulosview">
-    <ul style="padding-left:5px;">
+    <ul>
         <li class="altrow">
-            <strong><?php __('Oferta'); ?>:</strong> <?php echo $titulo['Oferta']['name']; ?>
+            <strong><?php __('Oferta'); ?>:</strong> <?php echo $plan['Oferta']['name']; ?>
         </li>
         <li class="altrow">
-            <strong><?php __('Marco de referencia'); ?>:</strong> <?php echo ($titulo['Titulo']['marco_ref']==1)? "Con marco de referencia":"Sin marco de referencia"; ?>
+            <strong><?php echo ($plan['Titulo']['marco_ref']==1)? "Con marco de referencia":"Sin marco de referencia"; ?></strong>
+            <?php if ($plan['Titulo']['marco_ref'] == 1) { ?>
+            [<a href="<?php echo $html->url('/pages/marcos')?>" style="color: #0082CA;">Ver documentación sobre marcos de referencia</a>]
+            <?php } ?>
         </li>
         <li class="altrow">
             <strong><?php __('Sectores/Subsectores'); ?>:</strong>
         <?php
-        foreach ($titulo['SectoresTitulo'] as $sector) {
+        foreach ($plan['Titulo']['SectoresTitulo'] as $sector) {
         ?>
                 <?php echo $sector['Sector']['name']; ?>
                 <?php echo (!empty($sector['Subsector']['name']) ? '/ '.$sector['Subsector']['name'] : '' ); ?>
@@ -31,10 +30,15 @@ jQuery(document).ready(function() {
         }
         ?>
         </li>
+        <li class="altrow">
+            <strong><?php __('Normativa'); ?>:</strong> <?php echo $plan['Plan']['norma']; ?>
+        </li>
+        <?php
+        if (!empty($plan['Anio'][0]['ciclo_id'])) {
+        ?>
+        <li class="altrow">
+            <strong><?php __('Ultima actualización'); ?>:</strong> <?php echo $plan['Anio'][0]['ciclo_id']; ?>
+        </li>
+        <?php }?>
     </ul>
-    
-    <h4><?php  __('Instituciones con Planes de Estudio asociados');?></h4>
-    <div id="tituloPlanes">
-        <?php echo $this->requestAction('/titulos/ajax_view_planes_asociados/'.$titulo['Titulo']['id'], array('return')); ?>
-    </div>
 </div>
