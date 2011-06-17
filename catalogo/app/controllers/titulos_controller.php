@@ -148,6 +148,14 @@ class TitulosController extends AppController {
         );
 
         $criterios = array();
+
+        if (!empty($this->data['Instit']['jurisdiccion_id']) && $this->data['Instit']['jurisdiccion_id'] != 'vacio') {
+            $this->Session->write($this->sesNames['jurisdiccion'], $this->data['Instit']['jurisdiccion_id']);
+        }
+        else if($this->data['Instit']['jurisdiccion_id'] == 'vacio'){
+            $this->Session->write($this->sesNames['jurisdiccion'], '');
+        }
+
         if ($this->Session->read($this->sesNames['jurisdiccion'])) {
             $this->Titulo->Plan->Instit->Jurisdiccion->recursive = 0;
             $jurisdiccion = $this->Titulo->Plan->Instit->Jurisdiccion->findById($this->Session->read($this->sesNames['jurisdiccion']));
@@ -156,6 +164,7 @@ class TitulosController extends AppController {
                 $criterios['Jurisdiccion'] = $jurisdiccion['Jurisdiccion']['name'];
             }
         }
+        
         if ($this->Session->read($this->sesNames['departamento'])) {
             $this->Titulo->Plan->Instit->Departamento->recursive = 0;
             $departamento = $this->Titulo->Plan->Instit->Departamento->findById($this->Session->read($this->sesNames['departamento']));
@@ -172,10 +181,12 @@ class TitulosController extends AppController {
                 $criterios['Localidad'] = $localidad['Localidad']['name'];
             }
         }
-        
+
+        $jurisdicciones = $this->Titulo->Plan->Instit->Jurisdiccion->find('list');
+
         $planes = $this->paginate('Plan');
 
-        $this->set(compact('titulo','planes', 'criterios'));
+        $this->set(compact('titulo','planes', 'criterios','jurisdicciones'));
 
         if ( $this->RequestHandler->isAjax() ) {
             Configure::write ( 'debug', 0 );
@@ -210,6 +221,7 @@ class TitulosController extends AppController {
 
 
     function planes_asociados($id, $criterios=null) {
+        $jurisdiccion_id = 'vacio';
         // Planes del Titulo
         if (!empty($this->params['criterios'])) {
             $criterios = $this->params['criterios'];
@@ -230,6 +242,7 @@ class TitulosController extends AppController {
 
         if ($this->Session->read($this->sesNames['jurisdiccion'])) {
             $this->paginate['conditions']['Instit.jurisdiccion_id'] = $this->Session->read($this->sesNames['jurisdiccion']);
+            $jurisdiccion_id = $this->Session->read($this->sesNames['jurisdiccion']);
         }
         if ($this->Session->read($this->sesNames['departamento'])) {
             $this->paginate['conditions']['Instit.departamento_id'] = $this->Session->read($this->sesNames['departamento']);
@@ -242,6 +255,8 @@ class TitulosController extends AppController {
         
         $this->set('criterios', $criterios);
         $this->set('planes', $planes);
+        $this->set('id', $id);
+        $this->set('jurisdiccion_id', $jurisdiccion_id);
     }
 
 
