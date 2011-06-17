@@ -33,7 +33,7 @@
             width: 500,
             position: 'top',
             zIndex: 3999,
-            draggable: false,
+            draggable: true,
             modal: true,
             resizable: false,
             title:"Notificación de información desactualizada",
@@ -53,10 +53,10 @@ function viewTitulo(url, title) {
     .html('... cargando información <span class="ajax-loader"></span>')
     .dialog({
         width: 500,
-        position: 'top',
+        //position: 'top',
         zIndex: 3999,
         title: title,
-        draggable: false,
+        draggable: true,
         modal: true,
         resizable: false,
         beforeclose: function(event, ui) {

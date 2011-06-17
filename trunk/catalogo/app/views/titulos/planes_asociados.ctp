@@ -9,6 +9,23 @@ $paginator->options(array(
 ));
 ?>
 <div class="boxblanca" id="search_results">
+    <div style="float:right">
+        <?php
+        echo $form->create('Titulo', array(
+            'action' => 'view/' . $id,
+            'name'=>'InstitsForm',
+            'id' =>'InstitsForm',
+            )
+            );
+        echo $form->input('Instit.jurisdiccion_id', array('label'=>'Jurisdicción',
+                                                                      'div' => false,
+                                                                      'class' => 'autosubmit ',
+                                                                      'value' => $jurisdiccion_id,
+                                                                      'empty' => array('vacio'=>'Todas'),
+                                                                      'id'=>'jurisdiccion_id'));
+        echo $form->end();
+        ?>
+    </div>
     <? if (sizeof($criterios)>0): ?>
 	Criterios de búsqueda seleccionados:
 	<dl class="criterios_busq">
@@ -108,3 +125,8 @@ $paginator->options(array(
     </div>
     <?php  } ?>
 </div>
+<script type="text/javascript">
+    $(".autosubmit").change(function() {
+        $('#InstitsForm').submit();
+    });
+</script>
