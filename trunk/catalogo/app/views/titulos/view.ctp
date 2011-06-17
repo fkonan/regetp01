@@ -30,7 +30,7 @@ echo $html->css(array('catalogo.titulos'));
             <dd>
                 <?php
                 if($titulo['Titulo']['marco_ref'] == 1) {
-                    echo "Con marco de referencia";
+                    echo $html->link('Con marco de referencia', array('controller' => 'pages', 'action' => 'display', 'marcos'));
                 }else {
                     echo "Sin marco de referencia";
                 } ?>
