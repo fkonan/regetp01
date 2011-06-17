@@ -24,6 +24,7 @@ echo $html->css(array(  'jquery.loadmask',
         Para obtener ayuda sobre el uso del buscador, haga click aqui
     </p>
     <div class="boxblanca boxform">
+        <h3>Seleccione criterios de búsqueda</h3>
         <?php
         echo $form->create('Instit', array(
         'action' => 'search',
@@ -35,24 +36,36 @@ echo $html->css(array(  'jquery.loadmask',
         ?>
         <div class="instit_search">
             <?php 
+            echo "<div style='clear:both; width: 100%'>";
             echo $form->input('jurisdiccion_id', 
                               array('label'=>'Jurisdicción',
                                     'empty' => array('0'=>'Todas'),
                                     'id'=>'jurisdiccion_id'));
+            
+            echo "</div>";
+            echo "<div style='clear:both; width: 100%'>";
             echo $form->input('jur_dep_loc',
                               array('label'=>'Departamento/Localidad',
                                     'title'=>'Ingrese al menos 3 letras para que comience la busqueda de Departamentos y Localidades.'));
 
+            echo "</div>";
+            echo "<div style='clear:both; width: 100%'>";
             echo $form->input('direccion',array('label'=>'Domicilio',));
 
+            echo "</div>";
+            echo "<div style='clear:both; width: 100%'>";
             echo $form->input(  'busqueda_libre', array(
                                 'id' => 'InstitCue',
                                 'label' => 'CUE o Nombre de la Institución',
                                 ));
+            echo "</div>";
+            echo "<div style='clear:both; width: 100%'>";
             echo $form->button('Buscar', array(
             'type' => 'submit',
-            'class' => 'boton-buscar',
+            'style' => 'width: 130px; clear: both; margin-left: 17px; margin-top: 20px;',
+            'class' => '',
             ));
+            echo "</div>";
             ?>
         </div>
         
