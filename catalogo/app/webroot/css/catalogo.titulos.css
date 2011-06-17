@@ -66,3 +66,9 @@
     margin-left:4%;
     margin-right:4%;
 }
+
+.mas_info_azul_small{
+    cursor: pointer;
+    float: right;
+    margin-right: 20px;
+}

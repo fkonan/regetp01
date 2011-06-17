@@ -10,8 +10,8 @@ $(function() {
       sleep: 2,
       fade: 1
     }, [
-      { src: '<?php echo $html->url("/img/material/agustinafernandezweb.jpg");?>'},
       { src: '<?php echo $html->url("/img/material/esculturasarteg.jpg");?>'},
+      { src: '<?php echo $html->url("/img/material/agustinafernandezweb.jpg");?>'},
       { src: '<?php echo $html->url("/img/material/soldadura.jpg");?>'}
     ]);
 

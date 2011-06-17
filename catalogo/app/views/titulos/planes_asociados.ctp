@@ -84,12 +84,7 @@ $paginator->options(array(
             <div class="items-gestion"><?= $plan['Instit']['Gestion']['name'] ?></div>
             <div class="items-actions">
                 <a href="<?= $html->url('/instits/view/'.$plan['Instit']['id'])?>">
-                    <?php
-                    echo $html->image('../css/img/lupagris_small.png', array(
-                    'alt' => 'Mas informacion',
-                    'style' => 'border:0;',
-                    ));
-                    ?>
+                    <span class="mas_info_azul_small"></span>
                 </a>
             </div>
             <div class="clear"></div>
