@@ -76,12 +76,7 @@
                 <div class="items-gestion"><?= $instit['Gestion']['name'] ?></div>
                 <div class="items-actions">
                     <a href="<?= $html->url('/instits/view/'.$instit['Instit']['id'])?>">
-                        <?php
-                            echo $html->image('../css/img/lupagris_small.png', array(
-                                'alt' => 'Mas informacion',
-                                'style' => 'border:0;',
-                                ));
-                        ?>
+                        <span class="mas_info_azul_small"></span>
                     </a>
                 </div>
                 <div class="clear"></div>
