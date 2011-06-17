@@ -65,13 +65,7 @@ $paginator->options(array(  'update' => 'consoleResult',
             </div>
             <div class="items-actions">
                 <a href="<?php echo $html->url('/titulos/view/'.$titulo['Titulo']['id'])?>">
-                <?php
-                    echo $html->image('../css/img/lupazul_small.png', array(
-                        'alt' => 'Mas informacion',
-                        'style' => 'border:0; cursor:pointer;',
-                        //'onclick'=>"viewTitulo('".$html->url('/titulos/view/'.$titulo['Titulo']['id'])."', '".$titulo['Titulo']['name']."');"
-                        ));
-                ?>
+                <span class="mas_info_azul_small"></span>
                 </a>
             </div>
             <div class="clear"></div>

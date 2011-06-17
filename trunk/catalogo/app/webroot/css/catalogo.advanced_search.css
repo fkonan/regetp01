@@ -87,7 +87,7 @@ label {
 
 .instit_search div{
     float:left;
-    width:25%;
+    width:40%;
     padding-left:2%;
     padding-right:2%;
 }
@@ -102,8 +102,4 @@ label {
     float:right;
     clear:both;
     margin-right:30px;
-}
-
-#InstitCue{
-    width:220%;
 }
