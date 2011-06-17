@@ -39,8 +39,8 @@ $paginator->options(array(  'update' => 'consoleResult',
         $i = 0;
         foreach ($titulos as $titulo):
         ?>
-        <a href="<?php echo $html->url('/titulos/view/'.$titulo['Titulo']['id'])?>">
         <li>
+            <a href="<?php echo $html->url('/titulos/view/'.$titulo['Titulo']['id'])?>" style="display:block;">
             <div class="items-nombre">
                         <strong><?php
                         /*$linkTitulo = $html->link(
@@ -64,13 +64,11 @@ $paginator->options(array(  'update' => 'consoleResult',
                         ?>
             </div>
             <div class="items-actions">
-                <a href="<?php echo $html->url('/titulos/view/'.$titulo['Titulo']['id'])?>">
                 <span class="mas_info_azul_small"></span>
-                </a>
             </div>
             <div class="clear"></div>
+            </a>
         </li>
-        </a>
             <?php endforeach; ?>
     </ol>
         <?php
