@@ -79,7 +79,7 @@ $(function() {
         <?php echo $html->link('más información',
                 array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'),
                 array('class'=>'mas_info_azul'));?>
-        <p>
+        <p style="text-align: justify">
             La Guía del Estudiante ayudará a que puedas encontrarar donde estudiar y obtener un título o certificación según tus gustos e intereses.
         </p>
     </div>

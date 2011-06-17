@@ -19,7 +19,7 @@ IMG.step{
 .filtro{
     padding:3px 10px 3px 10px !important;
     margin:0px 5px 5px 0px;
-    display: inline-block;
+    display: block;
 }
 
 .filtro a{
@@ -28,9 +28,10 @@ IMG.step{
 .filtros-aplicados{
     padding: 5px !important;
     margin-top: 0px !important;
-    width: 31%;
     float: left;
     margin-left: 5px;
+    border-left: 1px solid silver;
+    width: 37%;
 }
 
 H3{
@@ -138,7 +139,7 @@ H2{
 }
 
 input[type=text], textarea, select{
-    width: 93%;
+    width: 90%;
 }
 
 ol, ul {
@@ -165,8 +166,8 @@ ol, ul {
     font-size: 0.9em;
     margin-top: 0px;
     margin-bottom: 0px;
-    width: 65%;
     border: 0px;
+    width: 57%;
 }
 
 .add_filter{
