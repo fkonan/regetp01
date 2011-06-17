@@ -24,9 +24,9 @@
         )
         );
         ?>
-        <div style="width:58%;float:left">
+        <div style="width:66%;float:left">
             <h4>Oferta y sector</h4>
-            <div style="width:60%;float:left">
+            <div style="width:40%;float:left">
                 <?php
                     echo $form->input('oferta_id',array( 'div' => false,
                                                         'class' => 'autosubmit ',
@@ -46,7 +46,7 @@
                                                           'id' => 'TituloName', ));
                     ?>
                 </div>
-                <div style="width:40%;float:left">
+                <div style="width:60%;float:left">
                     <?php
                     echo $form->input('sector_id', array( 'div' => false,
                                                      'class' => 'autosubmit ',
@@ -73,7 +73,7 @@
                     ?>
                 </div>
         </div>
-        <div style="width:40%;float:left" class="borde_izquierdo">
+        <div style="width:32%;float:left" class="borde_izquierdo">
             <h4>Localización de la Oferta</h4>
             <?php
             
