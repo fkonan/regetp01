@@ -88,12 +88,15 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
             'id'=>'InstitSearchForm', 'name'=>'InstitSearchForm' ));
             ?>
             <?php echo $html->image('step2.gif', array('class' => 'step'));?>
+            
             <h3>Seleccioná el titulo de interés</h3>
-            <div class="paginatorContainer"></div>
-            <ul class="seleccionados"></ul>
-            <ul id="items" class="results">
-                Sin Resultados
-            </ul>
+            <div class="results_titulos">
+                <div class="paginatorContainer"></div>
+                <ul class="seleccionados"></ul>
+                <ul id="items" class="results">
+                    Sin Resultados
+                </ul>
+            </div>
             <?php echo $form->end(); ?>
         </div>
     </div>
@@ -101,11 +104,14 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
     <div class="grid_6 omega">
         <div id="li_instits" class="boxblanca">
             <?php echo $html->image('step3.gif', array('class' => 'step'));?>
+            
             <h3>¿Dónde estudiar?</h3>
-            <div class="paginatorContainer"></div>
-            <ul id="items" class="results">
-                Sin Resultados
-            </ul>
+            <div class="results_instits">
+                <div class="paginatorContainer"></div>
+                <ul id="items" class="results">
+                    Sin Resultados
+                </ul>
+            </div>
         </div>
     </div>
 </div>

@@ -16,9 +16,9 @@
 
     
     var institsForm = $('#InstitSearchForm');
-    var institsContainer = $( "#li_instits > UL.results" );
+    var institsContainer = $( "#li_instits ul.results" );
     var institsTemplate = $("#institTemplate");
-    var institsPaginator = $("#li_instits > .paginatorContainer");
+    var institsPaginator = $("#li_instits .paginatorContainer");
     var institJurisdiccionCombo = $("#InstitJurisdiccionId");
     var institDepartamentoCombo = $("#InstitDepartamentoId");
     var institLocalidadCombo = $("#InstitLocalidadId");
@@ -83,12 +83,12 @@
     //
     var __blockResultConsole = function () {
         jQuery(institsContainer).html('');
-        jQuery('#li_titulos').mask('Buscando');
+        jQuery('.results_titulos').mask('Buscando');
         return true;
     }
 
     var __unblockResultConsole = function () {
-        jQuery('#li_titulos').unmask();
+        jQuery('.results_titulos').unmask();
     }
 
     function __hideWithLabel(input){
@@ -152,7 +152,7 @@
     function getInstits(e) {
         var url = '';
 
-        $('#li_instits').mask('Buscando');
+        $('.results_instits').mask('Buscando');
 
         if (typeof e == 'object') {
             url = e.target.action;
@@ -206,7 +206,9 @@
     var __actualizarTitulos = function (data) {
         __recargarFiltros(data.filtros);
         __meterTitulosEnTemplate(data);
-        __ajustarAlturas('#li_instits', '#li_titulos');
+        __ajustarAlturas(['.results_titulos','.results_instits']);
+        __ajustarAlturas(['#li_instits', '#li_titulos']);
+        
     }
 
     var __recargarFiltrosAplicados = function (params) {
@@ -242,7 +244,7 @@
         else{
             $("#sin_filtros").show();
         }
-        __ajustarAlturas('#filtro', '.filtros-aplicados');
+        __ajustarAlturas(['#filtro', '.filtros-aplicados']);
         
         $(".filtros-aplicados").effect("highlight", {}, 3000);
     }
@@ -285,15 +287,22 @@
             }
         });
 
-        __ajustarAlturas('#filtro', '.filtros-aplicados');
+        __ajustarAlturas(['#filtro', '.filtros-aplicados']);
     }
 
-    var __ajustarAlturas = function (selector1, selector2) {
-        $(selector1+','+ selector2).attr('style', '');
-        hFiltro = $(selector1).outerHeight(); // Get height
-        hAplicados = $(selector2).outerHeight(); // Get height
-        mHeight = hFiltro > hAplicados ? hFiltro : hAplicados;  // Set mHeight to the larger of the two heights
-        $(selector1+','+ selector2).outerHeight(mHeight);  // Set both to equal heights
+    function __ajustarAlturas(selectores) {
+        alturaMax = 0;
+        alturaSelector = 0;
+        selectoresText = selectores.join(",");
+        
+        $(selectoresText).attr('style', '');
+
+        for (x=0;x<selectores.length;x++){
+            alturaSelector = $(selectores[x]).outerHeight();
+            alturaMax = alturaSelector > alturaMax ? alturaSelector : alturaMax;
+        }
+        
+        $(selectoresText).outerHeight(alturaMax);
     }
 
     var __recargaCombo = function (combo,data){
@@ -369,8 +378,10 @@
        
        __updatePaginatorElement(data, institsPaginator, getInstitsDelPaginator);
 
-       $('#li_instits').unmask();
-       __ajustarAlturas('#li_instits', '#li_titulos');
+       $('.results_instits').unmask();
+       __ajustarAlturas(['.results_titulos','.results_instits']);
+       __ajustarAlturas(['#li_instits', '#li_titulos']);
+       
     }
     
     var __blanquearContainers = function() {
@@ -379,7 +390,7 @@
     }
 
     $(function(){
-       __ajustarAlturas('#filtro', '.filtros-aplicados');
+       __ajustarAlturas(['#filtro', '.filtros-aplicados']);
     });
 
 })(jQuery);
