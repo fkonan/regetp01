@@ -72,3 +72,17 @@
     float: right;
     margin-right: 20px;
 }
+
+.box_izquierda {
+    width:66%;
+    float:left;
+    border-right: 1px solid #D1D1D1;
+    margin-right: 0px;
+}
+
+.box_derecha {
+    width:32%;
+    float:left;
+    padding-left: 10px;
+    border: 0px;
+}

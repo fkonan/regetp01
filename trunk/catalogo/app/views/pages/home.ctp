@@ -79,8 +79,8 @@ $(function() {
         <?php echo $html->link('más información',
                 array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'),
                 array('class'=>'mas_info_azul'));?>
-        <p style="text-align: justify">
-            La Guía del Estudiante ayudará a que puedas encontrarar donde estudiar y obtener un título o certificación según tus gustos e intereses.
+        <p>
+            Este buscador te ayudará a encontrar <strong>qué</strong> y <strong>dónde</strong> estudiar mediante tres sencillos pasos que guían la selección.
         </p>
     </div>
 </div>
@@ -97,8 +97,7 @@ $(function() {
                         array('controller'=>'titulos', 'action'=>'search'),
                         array('class'=>'mas_info_azul'));
                      ?>
-                <p style="text-align: justify">
-                     
+                <p>
                     Obtenga un listado de títulos y certificaciones filtrando por sector de actividad socio productiva y/o localización de la oferta (jurisdicción, departamento, localidad).
                 </p>
             </div>
@@ -113,8 +112,7 @@ $(function() {
                 <?php echo $html->link('más información',
                         array('controller'=>'instits', 'action'=>'search_form'),
                         array('class'=>'mas_info_azul', 'style'=> 'margin-right: 5px'));?>
-                <p style="text-align: justify">
-                     
+                <p>
                     Obtenga el detalle de los títulos y certificaciones que ofrece una institución educativa.
                 </p>
             </div>
@@ -130,44 +128,49 @@ $(function() {
 <div class="clear"></div>
 
 <div class="grid_4">
-    <div class="boxgris">
-        <h4><?php echo $html->link('Secundario Técnico',array('controller'=>'titulos', 'action'=>'search', SEC_TEC_ID));?></h4>
+    <div class="boxgris boxoferta">
+        <h4><?php echo $html->link('Nivel Medio Técnico',array('controller'=>'titulos', 'action'=>'search', SEC_TEC_ID));?></h4>
 
          <?php echo $html->link('más información',
                 array('controller'=>'titulos', 'action'=>'search', SEC_TEC_ID),
                 array('class'=>'mas_info_azul'));?>
-        <p style="text-align: justify">
-            Esta opción sirve para obtener información sobre títulos de tecnicaturas de nivel medio.
-            <br /><br />
-        </p>
+        <div class="titulo">Requisitos de ingreso</div>
+        <p>Primaria completa</p>
+        <div class="titulo">Duración</div>
+        <p>6 años</p>
+        <div class="titulo">Título otorgado</div>
+        <p>Técnico (en distintas especialidades)</p>
     </div>
 
 </div>
 
 <div class="grid_4">
-    <div class="boxgris">
-        <h4><?php echo $html->link('Superior Técnico', array('controller'=>'titulos', 'action'=>'search', SUP_TEC_ID));?></h4>
+    <div class="boxgris boxoferta">
+        <h4><?php echo $html->link('Nivel Superior Técnico', array('controller'=>'titulos', 'action'=>'search', SUP_TEC_ID));?></h4>
 
         <?php echo $html->link('más información',
         array('controller'=>'titulos', 'action'=>'search', SUP_TEC_ID),
         array('class'=>'mas_info_azul'));?>
-        <p style="text-align: justify">
-            
-            Esta opción sirve para obtener información sobre títulos de tecnicaturas de nivel superior.
-            <br /><br />
-        </p>
+        <div class="titulo">Requisitos de ingreso</div>
+        <p>Secundaria completa</p>
+        <div class="titulo">Duración</div>
+        <p>3 años</p>
+        <div class="titulo">Título otorgado</div>
+        <p>Técnico Superior (en distintas especialidades)</p>
     </div>
 </div>
 
 
 <div class="grid_4">
-    <div class="boxgris">
+    <div class="boxgris boxoferta">
         <h4><?php echo $html->link('Formación Profesional', array('controller'=>'titulos', 'action'=>'search', FP_ID));?></h4>
          <?php echo $html->link('más información',
                 array('controller'=>'titulos', 'action'=>'search', FP_ID),
                 array('class'=>'mas_info_azul'));?>
-        <p style="text-align: justify">
-            Esta opción sirve para obtener información sobre certificaciones de formación profesional y educación continua.        </p>
+        <div class="titulo">Requisitos de ingreso y duración</div>
+        <p>Variables</p>
+        <div class="titulo">Certificaciones</div>
+        <p>Certificados de Formación Profesional, Certificados de Formación Continua, Certificados de Capacitación Laboral</p>
     </div>
 </div>
 

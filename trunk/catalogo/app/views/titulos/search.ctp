@@ -11,9 +11,7 @@
 <div class="grid_12 titulos search">
     
     <h1><?php __('Búsqueda de Títulos');?></h1>
-    <p>
-        Desde aquí obtendrás un listado de títulos o certificaciones de la Educación Técnico Profesional según los criterios de búsqueda ingresados.
-    </p>
+
     <div class="boxblanca inputs_largos">
         <h3>Seleccione criterios de búsqueda</h3>
         <?php
@@ -24,56 +22,53 @@
         )
         );
         ?>
-        <div style="width:66%;float:left">
+        <div class="box_izquierda">
             <h4>Oferta y sector</h4>
-            <div style="width:40%;float:left">
-                <?php
-                    echo $form->input('oferta_id',array( 'div' => false,
+            <?php
+                echo $form->input('oferta_id',array( 'div' => true,
+                                                    'class' => 'autosubmit ',
+                                                    'label'=> 'Oferta',
+                                                    'id' => 'ofertaId',
+                                                    'empty' => 'Todas',
+                                                    'disabled'=> $bloquearOferta
+                                                   ));
+                if($bloquearOferta){
+                    echo $form->input('oferta_id',array( 'type' => 'hidden'));
+                }
+                
+                $meter = '<span id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif', array('style' => 'float:right; height: 19px;')).'</span>';
+
+                echo $form->input('sector_id', array( 'div' => true,
+                                                 'class' => 'autosubmit ',
+                                                 'type'=>'select',
+                                                 'empty'=>'Seleccione',
+                                                 'options'=>$sectores,
+                                                 'label'=>'Sector',
+                                                 'id'=>'sectorId',
+                                                 'after'=>$meter));
+
+                echo $form->input('subsector_id', array( 'div' => true,
                                                         'class' => 'autosubmit ',
-                                                        'label'=> 'Oferta',
-                                                        'id' => 'ofertaId',
-                                                        'empty' => 'Todas',
-                                                        'disabled'=> $bloquearOferta
-                                                       ));
-                    if($bloquearOferta){
-                        echo $form->input('oferta_id',array( 'type' => 'hidden'));
-                    }
+                                                        'empty' => 'Seleccione',
+                                                        'type'=>'select',
+                                                        'label'=>'Subsector',
+                                                        'id'=>'subsectorId',
+                                                        'after'=> $meter));
 
-                    $meter = '<span class="ajax_update" id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif', array('style' => 'float:right; height: 19px;')).'</span>';
-                    echo $form->input('tituloName', array( 'label'=> 'Nombre del Título',
-                                                          'div' => false,
-                                                          'class' => '',
-                                                          'id' => 'TituloName', ));
-                    ?>
-                </div>
-                <div style="width:60%;float:left">
-                    <?php
-                    echo $form->input('sector_id', array( 'div' => false,
-                                                     'class' => 'autosubmit ',
-                                                     'type'=>'select',
-                                                     'empty'=>'Seleccione',
-                                                     'options'=>$sectores,
-                                                     'label'=>'Sector',
-                                                     'id'=>'sectorId',
-                                                     'after'=>$meter));
-                    
-                    echo $form->input('subsector_id', array( 'div' => false,
-                                                            'class' => 'autosubmit ',
-                                                            'empty' => 'Seleccione',
-                                                            'type'=>'select',
-                                                            'label'=>'Subsector',
-                                                            'id'=>'subsectorId',
-                                                            'after'=> $meter));
+                echo $ajax->observeField('sectorId', array( 'url' =>'/subsectores/ajax_select_subsector_form_por_sector',
+                                                            'update'=>'subsectorId',
+                                                            'loading'=>'jQuery("#ajax_indicator").show();jQuery("#subsectorId").attr("disabled","disabled")',
+                                                            'complete'=>'jQuery("#ajax_indicator").hide();jQuery("#subsectorId").removeAttr("disabled")',
+                                                            'onChange'=>true ));
 
-                    echo $ajax->observeField('sectorId', array( 'url' =>'/subsectores/ajax_select_subsector_form_por_sector',
-                                                                'update'=>'subsectorId',
-                                                                'loading'=>'jQuery("#ajax_indicator").show();jQuery("#subsectorId").attr("disabled","disabled")',
-                                                                'complete'=>'jQuery("#ajax_indicator").hide();jQuery("#subsectorId").removeAttr("disabled")',
-                                                                'onChange'=>true ));
-                    ?>
-                </div>
+                
+                echo $form->input('tituloName', array( 'label'=> 'Nombre del Título',
+                                                      'div' => true,
+                                                      'class' => '',
+                                                      'id' => 'TituloName', ));
+                ?>
         </div>
-        <div style="width:32%;float:left" class="borde_izquierdo">
+        <div class="box_derecha">
             <h4>Localización de la Oferta</h4>
             <?php
             

@@ -29,3 +29,12 @@
     padding-right:20px;
     text-align:justify;
 }
+
+.boxgris .titulo {
+    /*font-style: italic;*/
+}
+
+.boxoferta p {
+    margin: 0px 0px 0px 10px;
+    font-style: italic;
+}
