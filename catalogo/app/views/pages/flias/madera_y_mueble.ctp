@@ -8,7 +8,7 @@
           <th>Agrupamiento de figuras</th>
           <th>Figuras formativas</th>
           <th>Perfiles de referencia</th>
-          <th>Fecha de aprobacion*</th>
+          <th>Fecha de aprobación*</th>
         </tr>
       </thead>
 	    <TR>
@@ -79,7 +79,7 @@
 		<TD></TD>
 		<TD></TD>
 	    </TR>
-	</TABLE>
-	<p>* es la fecha de aprobación del marco de referencia correspondiente</p>
+	</table>
+	<p>* Es la fecha de aprobación del marco de referencia correspondiente</p>
     </div>	
 </div>

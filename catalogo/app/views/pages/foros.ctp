@@ -33,7 +33,7 @@ Para obtener más información sobre <b>características, objetivos y modos de func
         
         <h3>Foros</h3>
         
-        <h4>Índice de foros</h4>
+        <!--<h4>Índice de foros</h4>
         <ul>
             <li><a href="#Automotriz">Automotriz</a></li>
             <li><a href="#Energía Eléctrica">Energía Eléctrica</a></li>
@@ -44,7 +44,7 @@ Para obtener más información sobre <b>características, objetivos y modos de func
             <li><a href="#Metalmecánica">Metalmecánica</a></li>
             <li><a href="#Producción Lechera">Producción Lechera</a></li>
             <li><a href="#Textil / Indumentaria">Textil / Indumentaria</a></li>
-        </ul>
+        </ul>-->
         
         <p style="color:red">Falta informe de: Informatica, Construcciones y Hoteleria y Gastronomia</p>
 
