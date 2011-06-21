@@ -85,6 +85,7 @@ $paginator->options(array(
         }
         ?>
         <li>
+            <a href="<?= $html->url('/instits/view/'.$plan['Instit']['id'])?>" style="display:block; cursor:pointer;">
             <div class="items-nombre">
                 <?= "".($plan['Instit']['cue']*100)+$plan['Instit']['anexo']." - ". $plan['Instit']['nombre_completo']; ?>
             </div>
@@ -100,19 +101,22 @@ $paginator->options(array(
             </div>
             <div class="items-gestion"><?= $plan['Instit']['Gestion']['name'] ?></div>
             <div class="items-actions">
-                <a href="<?= $html->url('/instits/view/'.$plan['Instit']['id'])?>">
-                    <span class="mas_info_azul_small"></span>
-                </a>
+                <span class="mas_info_azul_small"></span>
             </div>
             <div class="clear"></div>
+            </a>
         </li>
 
         <? endforeach?>
     </ol>
     <?php
     }
-    ?>
+    else {
+        ?>
+    <div id="no_results">No hay resultados</div>
     <?php
+    }
+    
     if ($paginator->numbers()) {
     ?>
     <div style="text-align:center; display:block;margin-bottom: 10px">

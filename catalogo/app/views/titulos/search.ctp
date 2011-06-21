@@ -96,7 +96,7 @@
         </div>
         <div class="clear" style="height:15px;"></div>
         
-        <div style="text-align: right; padding-right: 25px;" >
+        <div style="text-align: right; margin-top: -34px; padding-bottom: 10px; padding-right: 46px;">
             <?php
             /*echo $form->button('Limpiar búsqueda', array(
             'class' => 'boton-buscar',
