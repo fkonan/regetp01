@@ -73,6 +73,11 @@ $paginator->options(array(  'update' => 'consoleResult',
     </ol>
         <?php
     }
+    else {
+        ?>
+    <div id="no_results">No hay resultados</div>
+    <?php
+    }
 
     if ($paginator->numbers()) {
     ?>

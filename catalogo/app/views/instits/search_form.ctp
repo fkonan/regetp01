@@ -19,10 +19,7 @@ echo $html->css(array(  'jquery.loadmask',
 <div class="grid_12 instits search_form">
 
     <h1><? __('Búsqueda de Instituciones')?></h1>
-    <p>
-        Desde aquí obtendrás un listado de instituciones del Registro Nacional Educación Técnico Profesional según los criterios de búsqueda ingresados. 
-        Para obtener ayuda sobre el uso del buscador, haga click aqui
-    </p>
+    
     <div class="boxblanca boxform">
         <h3>Seleccione criterios de búsqueda</h3>
         <?php

@@ -48,7 +48,7 @@
         </div>
         <div class="clear"></div>
     </div>
-    <? if (sizeof($instits) > 0) :?>
+    <? if (sizeof($instits) > 0) { ?>
     <ol id="items">
         <?php foreach($instits as $instit) : ?>
             <?  $año_actual = date("Y");
@@ -85,10 +85,15 @@
 
         <? endforeach?>
     </ol>
-
-    <?endif?>
-
-    <?php if ($paginator->numbers()) : ?>
+    <?php
+    }
+    else {
+        ?>
+    <div id="no_results">No hay resultados</div>
+    <?php
+    }
+    
+    if ($paginator->numbers()) { ?>
         <div style="text-align:center; display:block;margin-bottom: 10px">
             <?php
             echo $paginator->prev('« Anterior ',null, null, array('class' => 'disabled', 'tag' => 'span'));
@@ -97,5 +102,5 @@
             ?>
             <span class="ajax_update" id="ajax_paginator_indicator" style="display:none; padding-left:10px;"><?php echo $html->image('ajax-loader.gif')?></span>
         </div>
-    <?php endif ?>
+    <?php } ?>
 </div>

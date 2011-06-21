@@ -544,3 +544,8 @@ li{
 .inputs_largos input[type=submit]{
     width: 100px;
 }
+
+#no_results {
+    margin: 20px;
+    font-style: italic;
+}
