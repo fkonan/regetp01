@@ -30,7 +30,7 @@
                                 <dt class="acl acl-administradores acl-desarrolladores acl-editores">Email Personal</dt>
                                 <dd class="acl acl-administradores acl-desarrolladores acl-editores"><?php echo isNull($autoridad['Autoridad']['email_personal'] ,'Vacío')?></dd>
                                 <dt<?php if ($i % 2 == 0) echo $class;?>>Email Institucional</dt>
-                                <dd<?php if ($i++ % 2 == 0) echo $class;?>><?php echo isNull($autoridad['Autoridad']['telefono_institucional'],'Vacío') ?></dd>
+                                <dd<?php if ($i++ % 2 == 0) echo $class;?>><?php echo isNull($autoridad['Autoridad']['email_institucional'],'Vacío') ?></dd>
                                 <dt<?php if ($i % 2 == 0) echo $class;?>>Dirección</dt>
                                 <dd<?php if ($i++ % 2 == 0) echo $class;?>>
                                     <?php
