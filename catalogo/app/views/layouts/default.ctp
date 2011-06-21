@@ -66,6 +66,10 @@ $javascript;
         echo $html->css('ui-redmond/jquery-ui-1.8.12.custom','stylesheet');
         echo $html->css('printer','stylesheet', array('media'=>'print'));
         echo $html->css('iconize','stylesheet');
+        echo $html->css('catalogo800x600',
+                        'stylesheet', array(
+                            'media' => 'screen and (max-width: 960px)'
+                            ));
 
         echo $javascript->link(array(
         'jquery-1.5.2.min',
@@ -74,6 +78,7 @@ $javascript;
         'jquery.tools.min',
         'jquery-ui-1.8.12.custom.min',
         'jquery/jquery.superfish',
+        'supersubs',
         'jquery/jquery.history',
         ));
 
@@ -108,9 +113,8 @@ $javascript;
     <body>
         <div class="wrapper">
             <div id="header">
-                <div id="header_title" class="container_12">
-                    <div id="header-left-fluid"></div>
-                    <div id="header-right-fluid"></div>
+            <div class="header_wrapper">
+                <div id="header_title" class="container_12">                    
                     <div class="grid_12">
                         <a href="<?php echo $html->url('/')?>">
                             <div id="logo" class="grid_3 alpha">
@@ -130,6 +134,7 @@ $javascript;
                     </div>
                     <div class="clear"></div>
                 </div>
+            </div>
             </div>
 
             <?php $session->flash(); ?>

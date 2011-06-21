@@ -19,19 +19,20 @@
                         ?>
                 </li>
                 <li>
-                    <?php echo $html->link('Instituciones', array(
-                                    'controller' => 'instits',
-                                    'action' => 'search_form'
-                    )) 
-                        ?>
-                </li>
-                <li>
                     <?php echo $html->link('Títulos', array(
                                     'controller' => 'titulos',
                                     'action' => 'search'
                     )) 
                         ?>
                 </li>
+                <li>
+                    <?php echo $html->link('Instituciones', array(
+                                    'controller' => 'instits',
+                                    'action' => 'search_form'
+                    )) 
+                        ?>
+                </li>
+                
             </ul>
         </li>
 

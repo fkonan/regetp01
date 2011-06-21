@@ -10,8 +10,12 @@
      display: none;
 }
 
-#header_title{
-    background: url(img/header_completo.png) no-repeat;
+.header_wrapper{
+    background: url(img/header_completo.png) no-repeat !important;
+}
+
+#header{
+    
     /* background: url(img/header_degrade.png) repeat-y; */
 }
 
