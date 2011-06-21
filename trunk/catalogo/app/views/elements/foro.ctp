@@ -1,7 +1,7 @@
-<div>
+<div style="padding-bottom: 10px;">
     <div id="<?php echo $foroName; ?>" style="border-bottom: 1px dashed #000" class=""></div>
 
-    <h4>Foro del sector <?php echo $foroName; ?></h4>
+    <h3>Foro del Sector <?php echo $foroName; ?></h3>
     <?php
     $i = 0;
     if (!empty($participantes) && count($participantes) > 0) {?>

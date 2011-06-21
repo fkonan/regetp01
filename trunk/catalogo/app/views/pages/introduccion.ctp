@@ -26,7 +26,7 @@ lo técnico/tecnológico.
         </p>
         <br/>
         
-        <h3>Catálogo Nacional de Títulos y Certificaciones de Educación Técnico Profesional</h3>
+        <h3>Catálogo Nacional de Títulos y Certificaciones</h3>
         
         <p>
             El Catálogo Nacional de Títulos y Certificaciones fue creado por la 

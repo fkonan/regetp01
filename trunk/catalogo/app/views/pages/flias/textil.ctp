@@ -8,7 +8,7 @@
           <th>Agrupamiento de figuras</th>
           <th>Figuras formativas</th>
           <th>Perfiles de referencia</th>
-          <th>Fecha de aprobacion*</th>
+          <th>Fecha de aprobación*</th>
         </tr>
       </thead>
       <tr>
@@ -168,7 +168,7 @@
       </tr>
       <tr>
         <td rowspan="3">Estamperí­a</td>
-        <td>Operador de equipos de Estamperí­a</td>
+        <td>Operador de equipos de** Estamperí­a</td>
         <td></td>
         <td></td>
       </tr>
@@ -178,7 +178,7 @@
         <td></td>
       </tr>
       <tr>
-        <td>Diseñador de Sistemas para Estampado</td>
+        <td>Diseñador de Sistemas para** Estampado</td>
         <td></td>
         <td></td>
       </tr>
@@ -268,6 +268,6 @@
       </tr>
     </tbody>
   </table>
-  <p>* es la fecha de aprobación del marco de referencia correspondiente</p>
+  <p>* Es la fecha de aprobación del marco de referencia correspondiente</p>
   </div>
 </div>

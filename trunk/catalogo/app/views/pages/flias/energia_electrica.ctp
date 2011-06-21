@@ -8,7 +8,7 @@
           <th>Agrupamiento de figuras</th>
           <th>Figuras formativas</th>
           <th>Perfiles de referencia</th>
-          <th>Fecha de aprobacion*</th>
+          <th>Fecha de aprobación*</th>
         </tr>
       </thead>
 	    <TR>
@@ -152,12 +152,12 @@
 		    <TD></TD>
 	    </TR>
 	    <TR>
-		    <TD>Montador de pequeños electrodomésticos con especialización en elementos caloríficos</TD>
+		    <TD>Montador de pequeños electrodomésticos con** Especialización en elementos caloríficos</TD>
 		    <TD></TD>
 		    <TD></TD>
 	    </TR>
 	    <TR>
-		    <TD>Montador de pequeños electrodomésticos con especialización en elementos motorizados.</TD>
+		    <TD>Montador de pequeños electrodomésticos con** Especialización en elementos motorizados.</TD>
 		    <TD></TD>
 		    <TD></TD>
 	    </TR>
@@ -167,17 +167,17 @@
 		    <TD></TD>
 	    </TR>
 	    <TR>
-		    <TD>Montador de grandes electrodomésticos con especialización en refrigeración</TD>
+		    <TD>Montador de grandes electrodomésticos con** Especialización en refrigeración</TD>
 		    <TD></TD>
 		    <TD></TD>
 	    </TR>
 	    <TR>
-		    <TD>Montador de grandes electrodomésticos con especialización en elementos caloríficos</TD>
+		    <TD>Montador de grandes electrodomésticos con** Especialización en elementos caloríficos</TD>
 		    <TD></TD>
 		    <TD></TD>
 	    </TR>
 	    <TR>
-		    <TD>Montador de grandes electrodomésticos con especialización en máquinas de lavar</TD>
+		    <TD>Montador de grandes electrodomésticos con** Especialización en máquinas de lavar</TD>
 		    <TD></TD>
 		    <TD></TD>
 	    </TR>
@@ -191,7 +191,7 @@
 		    <TD></TD>
 		    <TD></TD>
 	    </TR>
-	</TABLE>
-	<p>* es la fecha de aprobación del marco de referencia correspondiente</p>
+	</table>
+	<p>* Es la fecha de aprobación del marco de referencia correspondiente</p>
     </div>	
 </div>
