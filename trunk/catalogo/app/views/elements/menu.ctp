@@ -1,4 +1,4 @@
-<ul class="nav grid_8 alpha prefix_1 sf-menu">
+<ul id="menu" class="nav grid_8 alpha prefix_1 sf-menu">
         <li class="<?php echo ($this->here == $this->base.'/pages/home')?'current':''?> "><?php echo $html->link('Inicio', '/pages/home', array('class'=>'menu-item')); ?></li>
 
 
@@ -9,7 +9,7 @@
         }
         ?>
         <li class="<?php echo ($activo)?'current':''?>">
-            <a class='menu-item' href="">Buscadores</a>
+            <a class='menu-item' href="#">Buscadores</a>
             <ul>
                 <li>
                     <?php echo $html->link('Guía del Estudiante', array(
@@ -46,3 +46,13 @@
                                                 array('class'=>'menu-item'))?>
         </li>
 </ul>
+
+
+<script type="text/javascript">
+    // menu hover dropdown
+    $( function() {
+            $("ul.nav").superfish();
+            $("ul.nav").find('ul').bgIframe();
+    } );
+    
+</script>

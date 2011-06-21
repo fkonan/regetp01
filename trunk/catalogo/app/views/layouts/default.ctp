@@ -77,8 +77,8 @@ $javascript;
         'jquery.form',
         'jquery.tools.min',
         'jquery-ui-1.8.12.custom.min',
+        'jquery/jquery.bgiframe.min',
         'jquery/jquery.superfish',
-        'supersubs',
         'jquery/jquery.history',
         ));
 
@@ -91,6 +91,8 @@ $javascript;
         echo $scripts_for_layout;
 
         ?>
+
+		<script type="text/javascript" src="http://brandon.jquery.com/firebuglite/firebug.js"></script>
 
 
         <!--[if IE 6]>
@@ -166,12 +168,6 @@ $javascript;
 
             <?php echo $cakeDebug; ?>
         </div>
-
-        <script type="text/javascript">
-
-            // menu hover dropdown
-            $("ul.nav").superfish(); 
-        </script>
 
 
     </body>
