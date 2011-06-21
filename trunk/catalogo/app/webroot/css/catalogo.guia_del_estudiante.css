@@ -68,6 +68,7 @@ H2{
 
 #li_instits, #li_titulos{
     min-height: 150px;
+    padding-right: 5px;
 }
 
 #li_instits ul li{
@@ -221,4 +222,8 @@ ol, ul {
     text-align:left;
     clear: both;
     font-size: 9pt;
+}
+
+.results_titulos, .results_instits{
+    margin-bottom: 30px;
 }
