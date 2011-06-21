@@ -78,6 +78,13 @@ dd ul{
     color: #58585A;
 }
 
+#items li a {
+    text-decoration: none;
+    color: #58585A;
+}
+#items li a:hover{
+    color: #000000;
+}
 .items-nombre {
     font-size: 9pt;
     font-weight: bold;

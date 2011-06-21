@@ -62,6 +62,7 @@
                 }
             ?>
             <li>
+                <a href="<?= $html->url('/instits/view/'.$instit['Instit']['id'])?>" style="display:block; cursor:pointer;">
                 <div class="items-nombre">
                     <?= "".($instit['Instit']['cue']*100)+$instit['Instit']['anexo']." - ". $instit['Instit']['nombre_completo']; ?>
                 </div>
@@ -76,11 +77,10 @@
                 </div>
                 <div class="items-gestion"><?= $instit['Gestion']['name'] ?></div>
                 <div class="items-actions">
-                    <a href="<?= $html->url('/instits/view/'.$instit['Instit']['id'])?>">
-                        <span class="mas_info_azul_small"></span>
-                    </a>
+                    <span class="mas_info_azul_small"></span>
                 </div>
                 <div class="clear"></div>
+                </a>
             </li>
 
         <? endforeach?>
