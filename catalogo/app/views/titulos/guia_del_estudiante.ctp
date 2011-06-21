@@ -52,7 +52,7 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
     <div class="boxblanca">
         <?php echo $html->image('step1.gif', array('class' => 'step'));?>
        
-        <div id="filtro" class="boxblanca">
+        <div id="filtro">
              <h3>Seleccioná criterios de búsqueda</h3>
             <?php echo $form->create('Titulo', array(
             'action' => 'guia_del_estudiante', 'name'=>'TituloSearchForm',
@@ -64,7 +64,7 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
             <?php echo $form->end();?>
             <div class="clear"></div>
         </div>
-        <div class=" filtros-aplicados ">
+        <div class="filtros-aplicados ">
             <h3>Criterios aplicados</h3>
             <?php echo $form->create('Titulo', array(
             'action' => 'guia_del_estudiante', 'name'=>'FiltrosAplicadosForm',

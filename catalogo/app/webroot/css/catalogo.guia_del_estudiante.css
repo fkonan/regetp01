@@ -114,13 +114,6 @@ H2{
 }
 
 
-
-.boxgris h2, .boxblanca h2,
-.boxgris h3, .boxblanca h3,
-.boxgris p, .boxblanca p{
-    margin-left:13px;
-}
-
 .seccion div, .seccion h4{
     margin-left: 8px;
 }
@@ -165,11 +158,14 @@ ol, ul {
     /*padding-top: 8px;*/
     padding-bottom: 15px;
     float: left;
-    font-size: 0.9em;
     margin-top: 0px;
     margin-bottom: 0px;
     border: 0px;
     width: 57%;
+}
+
+#filtro #filtrosContainer{
+    font-size: 0.9em;
 }
 
 .add_filter{
