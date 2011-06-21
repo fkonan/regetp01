@@ -31,12 +31,12 @@ IMG.step{
     float: left;
     margin-left: 5px;
     border-left: 1px solid silver;
-    width: 37%;
+    width: 30%;
 }
 
 H3{
     clear: both;
-    width: 100%;
+    width: 80%;
 }
 
 H2{
@@ -64,6 +64,7 @@ H2{
 
 .results li, .seleccionados li{
     list-style: none;
+    list-style-image: none; /*IE*/
 }
 
 #li_instits, #li_titulos{
@@ -225,5 +226,5 @@ ol, ul {
 }
 
 .results_titulos, .results_instits{
-    margin-bottom: 30px;
+    min-height: 110px;
 }
