@@ -16,7 +16,7 @@ echo $html->css(array('catalogo.titulos'));
     <div class="boxblanca">
         <dl style="padding-left: 20px;">
             <h3>Datos Generales</h3>
-            <dt ><?php __('Oferta'); ?>:</dt>
+            <dt style="width: 168px;"><?php __('Oferta'); ?>:</dt>
             <dd>
                 <?php
                 if(!empty($titulo['Oferta']['name'])) {
@@ -26,23 +26,21 @@ echo $html->css(array('catalogo.titulos'));
                 } ?>
             </dd>
 
-            <dt ><?php __('Marco de referencia'); ?>:</dt>
-            <dd>
-                <?php
-                if($titulo['Titulo']['marco_ref'] == 1) {
-                    echo $html->link('Con marco de referencia', array('controller' => 'pages', 'action' => 'display', 'marcos'));
-                }else {
-                    echo "Sin marco de referencia";
-                } ?>
-            </dd>
-
-            <dt ><?php __('Sectores / Subsectores'); ?>:</dt>
+            <dt style="width: 168px;"><?php __('Sectores / Subsectores'); ?>:</dt>
             <dd>
                 <?php
                 foreach ($titulo['SectoresTitulo'] as $sector) {
                     echo $sector['Sector']['name'];
                     echo (!empty($sector['Subsector']['name']) ? ' / '.$sector['Subsector']['name'] : '' );
                     echo "<br />";
+                } ?>
+            </dd>
+
+            <dt style="width: 168px;"><?php echo ($titulo['Titulo']['marco_ref']==1)? "Con marco de referencia":"Sin marco de referencia"; ?></dt>
+            <dd>
+                <?php
+                if($titulo['Titulo']['marco_ref'] == 1) {
+                    echo "[".$html->link('Consultar el marco correspondiente', array('controller' => 'pages', 'action' => 'display', 'marcos'))."]";
                 } ?>
             </dd>
         </dl>
