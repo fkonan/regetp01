@@ -72,7 +72,7 @@ $(function() {
 <div class="clear"></div>
 
 <div class="grid_4">
-    <div class="boxblanca">
+    <div class="boxblanca boxestudiantes">
         <h3>Estudiantes</h3>
         <h4><?php echo $html->link('Guía del Estudiante',array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'));?></h4>
         
@@ -128,7 +128,7 @@ $(function() {
 <div class="clear"></div>
 
 <div class="grid_4">
-    <div class="boxgris boxoferta">
+    <div class="boxgris boxoferta1 ">
         <h4><?php echo $html->link('Nivel Medio Técnico',array('controller'=>'titulos', 'action'=>'search', SEC_TEC_ID));?></h4>
 
          <?php echo $html->link('más información',
@@ -144,7 +144,7 @@ $(function() {
 </div>
 
 <div class="grid_4">
-    <div class="boxgris boxoferta">
+    <div class="boxgris boxoferta2">
         <h4><?php echo $html->link('Nivel Superior Técnico', array('controller'=>'titulos', 'action'=>'search', SUP_TEC_ID));?></h4>
 
         <?php echo $html->link('más información',
@@ -160,7 +160,7 @@ $(function() {
 
 
 <div class="grid_4">
-    <div class="boxgris boxoferta">
+    <div class="boxgris boxoferta3">
         <h4><?php echo $html->link('Formación Profesional', array('controller'=>'titulos', 'action'=>'search', FP_ID));?></h4>
          <?php echo $html->link('más información',
                 array('controller'=>'titulos', 'action'=>'search', FP_ID),
