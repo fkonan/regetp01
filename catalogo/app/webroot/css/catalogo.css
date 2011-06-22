@@ -534,3 +534,19 @@ li{
 .inputs_largos input[type=submit]{
     width: 100px;
 }
+
+#head-text{
+    z-index: 997;
+}
+
+#menu{
+    z-index: 997;
+}
+
+#menu li{
+    z-index: 998;
+}
+
+#menu li ul{
+    z-index: 999;
+}
