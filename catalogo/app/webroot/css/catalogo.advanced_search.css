@@ -81,25 +81,3 @@ label {
     clear: none;
 }
 
-.instit_search{
-    margin-left: 20px;
-}
-
-.instit_search div{
-    float:left;
-    width:40%;
-    padding-left:2%;
-    padding-right:2%;
-}
-.instit_search div label{
-    clear:right;
-}
-.instit_search div input, .instit_search div select{
-    width:100%;
-}
-
-.instit_search .boton-buscar{
-    float:right;
-    clear:both;
-    margin-right:30px;
-}

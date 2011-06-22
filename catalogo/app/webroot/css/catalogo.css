@@ -468,13 +468,32 @@ background: linear-gradient(left, #0090d0 0%,#81c3eb 100%); /* W3C */
 
 .borde_derecho{
     border-right:1px solid #D1D1D1;
-    margin-right: -20px;
 }
 
 .borde_izquierdo{
     border-left:1px solid #D1D1D1;
     padding-left: 15px;
 
+}
+
+.box_izquierda {
+    width:48%;
+    float:left;
+    border-right: 1px solid #D1D1D1;
+    margin-right: 0px;
+}
+
+.box_derecha {
+    width:48%;
+    float:left;
+    padding-left: 10px;
+    border: 0px;
+}
+
+.box_centrada {
+    width:50%;
+    margin-left : auto;
+    margin-right: auto;
 }
 
 .message{
