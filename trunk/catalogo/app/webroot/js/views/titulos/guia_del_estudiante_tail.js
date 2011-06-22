@@ -140,9 +140,9 @@
 
 
         postvar.error(function (XMLHttpRequest, textStatus, errorThrown) {
-        console.debug(XMLHttpRequest);
-        console.debug(textStatus);
-        console.debug(errorThrown);
+        //console.debug(XMLHttpRequest);
+        //console.debug(textStatus);
+        //console.debug(errorThrown);
         });
         return false;
     }
