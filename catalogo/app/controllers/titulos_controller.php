@@ -625,14 +625,32 @@ class TitulosController extends AppController {
                 $this->Session->write($this->sesNames['jurisdiccion'], $this->data['Instit']['jurisdiccion_id']);
             }
             if(!empty($this->data['Instit']['departamento_id'])) {
-                $this->passedArgs['departamentoId'] = $this->data['Instit']['departamento_id'];
-                $this->Session->write($this->sesNames['departamento'], $this->data['Instit']['departamento_id']);
-                $this->Session->write($this->sesNames['tituloJurDepLoc'], $this->data['Instit']['jur_dep_loc']);
+                $dto =$this->Titulo->Plan->Instit->Departamento->findById($this->data['Instit']['departamento_id']);
+                $this->data['Titulo']['jur_dep_loc'] = utf8_decode($this->data['Titulo']['jur_dep_loc']);
+                $nombre = $dto["Departamento"]["name"] . " (" . $dto["Jurisdiccion"]["name"] . ")"; 
+                if($nombre != $this->data['Titulo']['jur_dep_loc']){
+                    $this->passedArgs['jurDepLoc'] = $this->data['Titulo']['jur_dep_loc'];
+                }else{
+                    $this->passedArgs['departamentoId'] = $this->data['Instit']['departamento_id'];
+                    $this->Session->write($this->sesNames['departamento'], $this->data['Instit']['departamento_id']);
+                    $this->Session->write($this->sesNames['tituloJurDepLoc'], $this->data['Titulo']['jur_dep_loc']);
+                }
             }
-            if(!empty($this->data['Instit']['localidad_id'])) {
-                $this->passedArgs['localidadId'] = $this->data['Instit']['localidad_id'];
-                $this->Session->write($this->sesNames['localidad'], $this->data['Instit']['localidad_id']);
-                $this->Session->write($this->sesNames['tituloJurDepLoc'], $this->data['Instit']['jur_dep_loc']);
+            else if(!empty($this->data['Instit']['localidad_id'])) {
+                $loc =$this->Titulo->Plan->Instit->Localidad->find("first", 
+                            array("conditions" => array("Localidad.id"=>$this->data['Instit']['localidad_id']), 
+                                  "contain"=>array("Departamento"=>array("Jurisdiccion"))));
+                $nombre = $loc["Localidad"]["name"] .", " . $loc["Departamento"]["name"] . " (" . $loc["Departamento"]["Jurisdiccion"]["name"] . ")"; 
+                $this->data['Titulo']['jur_dep_loc'] = utf8_decode($this->data['Titulo']['jur_dep_loc']);
+                if($nombre != $this->data['Titulo']['jur_dep_loc']){
+                    $this->passedArgs['jurDepLoc'] = $this->data['Titulo']['jur_dep_loc'];
+                }else{
+                    $this->passedArgs['localidadId'] = $this->data['Instit']['localidad_id'];
+                    $this->Session->write($this->sesNames['localidad'], $this->data['Instit']['localidad_id']);
+                    $this->Session->write($this->sesNames['tituloJurDepLoc'], $this->data['Titulo']['jur_dep_loc']);
+                }
+            }else if(!empty($this->data['Titulo']['jur_dep_loc'])){
+                $this->passedArgs['jurDepLoc'] = utf8_decode($this->data['Titulo']['jur_dep_loc']);
             }
             /*if (!empty($this->data['Titulo']['que'])) {
                 $this->paginate['conditions']['(lower(Tipoinstit.name) || lower(Titulo.name) || lower(Plan.name) || lower(Sector.name) || lower(Subsector.name)) SIMILAR TO ?'] = convertir_para_busqueda_avanzada(utf8_decode($this->data['Titulo']['que']));
@@ -673,6 +691,10 @@ class TitulosController extends AppController {
         if(!empty($this->passedArgs['localidadId'])) {
             $q = ($this->passedArgs['localidadId']);
             $this->paginate['conditions']['Instit.localidad_id'] = $q;
+        }
+        if(!empty($this->passedArgs['jurDepLoc'])){
+            $q = $this->passedArgs['jurDepLoc'];
+            $this->paginate['conditions']["(lower(Localidad.name) || lower(Departamento.name)) SIMILAR TO ?"] = convertir_para_busqueda_avanzada($q);
         }
 
         if (!empty($this->passedArgs['page'])) {
