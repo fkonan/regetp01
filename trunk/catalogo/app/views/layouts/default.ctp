@@ -109,6 +109,26 @@ $javascript;
                     }
                 }                
             } );
+
+            jQuery(document).ready(function () {
+                __ajustarAlturas(['.boxestudiantes','.boxdocs']);
+                __ajustarAlturas(['.boxoferta1','.boxoferta2','.boxoferta3']);
+            });
+
+            function __ajustarAlturas(selectores) {
+                alturaMax = 0;
+                alturaSelector = 0;
+                selectoresText = selectores.join(",");
+
+                $(selectoresText).attr('style', '');
+
+                for (x=0;x<selectores.length;x++){
+                    alturaSelector = $(selectores[x]).outerHeight();
+                    alturaMax = alturaSelector > alturaMax ? alturaSelector : alturaMax;
+                }
+
+                $(selectoresText).outerHeight(alturaMax);
+             }
         </script>
 
     </head>

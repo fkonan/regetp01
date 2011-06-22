@@ -290,21 +290,6 @@
         __ajustarAlturas(['#filtro', '.filtros-aplicados']);
     }
 
-    function __ajustarAlturas(selectores) {
-        alturaMax = 0;
-        alturaSelector = 0;
-        selectoresText = selectores.join(",");
-        
-        $(selectoresText).attr('style', '');
-
-        for (x=0;x<selectores.length;x++){
-            alturaSelector = $(selectores[x]).outerHeight();
-            alturaMax = alturaSelector > alturaMax ? alturaSelector : alturaMax;
-        }
-        
-        $(selectoresText).outerHeight(alturaMax);
-    }
-
     var __recargaCombo = function (combo,data){
         var options = [];
         var label = titulosForm.find("label[for=" + combo.attr("id") + "]");
@@ -388,6 +373,21 @@
         institsContainer.html('');
         institsPaginator.html('');
     }
+
+    function __ajustarAlturas(selectores) {
+        alturaMax = 0;
+        alturaSelector = 0;
+        selectoresText = selectores.join(",");
+
+        $(selectoresText).attr('style', '');
+
+        for (x=0;x<selectores.length;x++){
+            alturaSelector = $(selectores[x]).outerHeight();
+            alturaMax = alturaSelector > alturaMax ? alturaSelector : alturaMax;
+        }
+
+        $(selectoresText).outerHeight(alturaMax);
+     }
 
     $(function(){
        __ajustarAlturas(['#filtro', '.filtros-aplicados']);
