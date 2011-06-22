@@ -91,8 +91,8 @@ $javascript;
         echo $scripts_for_layout;
 
         ?>
-
-		<script type="text/javascript" src="http://brandon.jquery.com/firebuglite/firebug.js"></script>
+        
+        <!--<script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>-->
 
 
         <!--[if IE 6]>
