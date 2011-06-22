@@ -226,7 +226,7 @@
                     valor = titulosForm.find("[name='" + params[i].name + "']").val();
                 }
                 
-                $('<span class="filtro"/>').html("<strong>" + nombre + "</strong> " + valor + "<a href='#' class='deleteable'> X </a>")
+                $('<span class="filtro"/>').html("<span><strong>" + nombre + "</strong>" + valor + "</span><a href='#' class='deleteable'> X </a><div class='clear'></div>")
                 .append(
                     $('<input>').attr({
                         type: 'hidden',
