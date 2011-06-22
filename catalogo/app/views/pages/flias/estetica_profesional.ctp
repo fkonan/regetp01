@@ -1,7 +1,7 @@
 <?php echo $this->element('menu_docs')?>
   <div id="cuerpo1" class="grid_9">
     <div class=" boxblanca boxdocs">
-    <h2>Familia profesional del sector** Estética Profesional</h2>
+    <h2>Familia profesional del sector Estética Profesional</h2>
     <table>
       <thead>
         <tr>
