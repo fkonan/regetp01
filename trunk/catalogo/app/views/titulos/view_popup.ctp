@@ -16,16 +16,16 @@ jQuery(document).ready(function() {
         <li class="altrow">
             <strong><?php echo ($plan['Titulo']['marco_ref']==1)? "Con marco de referencia":"Sin marco de referencia"; ?></strong>
             <?php if ($plan['Titulo']['marco_ref'] == 1) { ?>
-            [<a href="<?php echo $html->url('/pages/marcos')?>" style="color: #0082CA;">Ver documentación sobre marcos de referencia</a>]
+            [<a href="<?php echo $html->url('/pages/marcos')?>" style="color: #0082CA;">Consultar el marco correspondiente</a>]
             <?php } ?>
         </li>
         <li class="altrow">
-            <strong><?php __('Sectores/Subsectores'); ?>:</strong>
+            <strong><?php __('Sectores / Subsectores'); ?>:</strong>
         <?php
         foreach ($plan['Titulo']['SectoresTitulo'] as $sector) {
         ?>
                 <?php echo $sector['Sector']['name']; ?>
-                <?php echo (!empty($sector['Subsector']['name']) ? '/ '.$sector['Subsector']['name'] : '' ); ?>
+                <?php echo (!empty($sector['Subsector']['name']) ? ' / '.$sector['Subsector']['name'] : '' ); ?>
         <?php
         }
         ?>
