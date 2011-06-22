@@ -124,6 +124,11 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
                 </dd>
                 <?php endif;?>
             </dl>
+            
+            <a class="grid_4 omega alerta-desactualizada" id="alerta-desactualizada" style="margin-top: 7px;">
+                Notificar información desactualizada
+            </a>
+            
             <div class="clear"></div>
         </div>
     </div>
@@ -205,7 +210,5 @@ Si ha notado algún dato desactualizado, haga click aquí</div>',
     ?>
     <div class="clear"></div>
 
-    <a class="grid_4 omega alerta-desactualizada" id="alerta-desactualizada" style="margin-top: 7px;">
-        Notificación de información desactualizada
-    </a>
+    
 </div>

@@ -1,4 +1,4 @@
-<h1 style="margin-top:0px;"><?php echo $this->passedArgs['nombre_completo']?> desactualizada</h1>
+<h4 style="margin-top:0px;"><?php echo $this->passedArgs['nombre_completo']?></h4>
 
 <p>
     Si quiere actualizar, agregar o modificar los datos de una institución complete el siguiente formulario
