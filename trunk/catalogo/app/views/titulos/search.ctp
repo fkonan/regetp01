@@ -93,24 +93,21 @@
             }
             ?>
             <input id="hiddenLocDepId" name="<?php echo $name?>" type="hidden" value="<?php echo $val?>" />
-        </div>
-        <div class="clear" style="height:15px;"></div>
-        
-        <div style="text-align: right; margin-top: -34px; padding-bottom: 10px; padding-right: 46px;">
+            
+            <div class="clear" style="height:50px;"></div>
+            
             <?php
-            /*echo $form->button('Limpiar búsqueda', array(
-            'class' => 'boton-buscar',
-            'style' => 'cursor: pointer;',
-            'div' => false,
-            'onclick' => 'location.href="'.$html->url("search").'/limpiar:1"',
-            ));**/
+            
             echo $form->submit('Buscar', array(
             'class' => 'boton-buscar',
-            'style' => 'cursor: pointer;',
+            'style' => 'cursor: pointer; float:right; width:100px',
             'div' => false
             ));
             ?>
+
         </div>
+        <div class="clear" style="height:15px;"></div>
+
         <?php
         echo $form->input('bysession', array('type'=>'hidden', 'value'=>$bySession));
         echo $form->input('busquedanueva', array('type'=>'hidden', 'value'=>'1'));
