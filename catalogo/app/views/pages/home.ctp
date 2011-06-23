@@ -81,7 +81,7 @@ $(function() {
                 array('class'=>'mas_info_azul'));?>
         <p>
             Usá este buscador para encontrar <strong>qué</strong> y <strong>dónde</strong> estudiar mediante tres sencillos pasos.
-            <br />
+            <br /><br /><br />
         </p>
     </div>
 </div>
