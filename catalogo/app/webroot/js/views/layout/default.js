@@ -17,7 +17,7 @@
                 if ( confirm('Ha caducado su sesión, ¿desea ingrear nuevamente al sistema?') ) {
                     window.location.reload(true);
                 }
-            }                
+            }
         });
 
        
