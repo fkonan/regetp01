@@ -1,0 +1,5 @@
+.ficha_info INPUT, .ficha_info textarea, .ficha_info select, .ficha_info label{
+    width: 60%;
+    margin-left: 20%
+        
+}

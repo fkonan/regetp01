@@ -20,11 +20,11 @@ class CorreosController extends AppController{
 
                 /* SMTP Options */
                 $this->Email->smtpOptions = array(
-                    'port'=>'25',
-                    'timeout'=>'30',
-                    'host' => '168.83.21.13',
-                    'username'=>'desarrolloetp',
-                    'password'=>'etpdesar',
+                    'port'    => Configure::read('Email.port'),
+                    'timeout' => Configure::read('Email.timeout'),
+                    'host'    => Configure::read('Email.host'),
+                    'username'=> Configure::read('Email.username'),
+                    'password'=> Configure::read('Email.password'),
                 );
 
                 $this->Email->delivery = 'smtp';
@@ -43,6 +43,7 @@ class CorreosController extends AppController{
     }
     
     function desactualizada(){
+        
         if (!empty($this->data)) {
             if ($this->RequestHandler->isAjax()) {
 
@@ -63,13 +64,14 @@ class CorreosController extends AppController{
 
                 $mensaje .= $this->data['Correo']['descripcion']."\n";
 
+                
                 /* SMTP Options */
                 $this->Email->smtpOptions = array(
-                    'port'=>'25',
-                    'timeout'=>'30',
-                    'host' => '168.83.21.13',
-                    'username'=>'desarrolloetp',
-                    'password'=>'etpdesar',
+                    'port'    => Configure::read('Email.port'),
+                    'timeout' => Configure::read('Email.timeout'),
+                    'host'    => Configure::read('Email.host'),
+                    'username'=> Configure::read('Email.username'),
+                    'password'=> Configure::read('Email.password'),
                 );
 
                 $this->Email->delivery = 'smtp';
@@ -85,5 +87,10 @@ class CorreosController extends AppController{
                 //$this->Session->setFlash(__("Gracias por informarnos sobre una desactualización", true));
             }
         }
-    }
+        if ( !empty($this->passedArgs['cue_instit']) && !empty($this->passedArgs['nombre_completo']) ) {
+                $this->data['Correo']['cue_instit'] = $this->passedArgs['cue_instit'];
+                $this->data['Correo']['nombre_completo'] = $this->passedArgs['nombre_completo'];
+        }
+            $this->set('nombre_completo', $this->data['Correo']['nombre_completo']);
+        }
 }

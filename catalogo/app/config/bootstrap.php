@@ -43,6 +43,17 @@
 define('NOMBRE_CONTACTO', 'Unidad de Información');
 define('EMAIL_CONTACTO', 'desarrolloetp@inet.edu.ar');
 
+
+
+/**
+ *  Configuracion del envio de emails
+ */
+Configure::write('Email.port', '25');
+Configure::write('Email.timeout', '30');
+Configure::write('Email.host', '168.83.21.13');
+Configure::write('Email.username', 'desarrolloetp');
+Configure::write('Email.password', 'etpdesar');
+
 /**
  * ID`s de OFERTAS
  */

@@ -10,26 +10,25 @@
     function handleAlertaDesactualizada(e) {
         
         e.preventDefault();
-        
         var ventanitaDelAmor = $("<div id='dialog'>");
         ventanitaDelAmor.title = 'Formulario de Envío';
-        var params = "cue_instit:" + escape($("#instit-cue").val()) + "/nombre_completo:" + escape($("#instit-nombre").val());
 
-        $(ventanitaDelAmor).load($("#urlDesactualizada").val() + '/' + params, function(data){
-            $(ventanitaDelAmor).html(data);
-            $(ventanitaDelAmor).find('form').submit(function(e){
+        ventanitaDelAmor.load( this.href, function(data){
+            ventanitaDelAmor.find('form').submit( function(e) {
                 if ($.trim($("#CorreoDescripcion").val()) == '') {
                     alert("Debe especificar una descripción sobre la desactualización");
                     return false;
                 }
                 e.preventDefault();
+                $('#CorreoDesactualizadaForm').html('<p style="text-align: center;">Enviando ...</p>');
                 $.post(this.action, $(this).serialize(), function(e,t){
-                    $(ventanitaDelAmor).dialog('close');
+                    ventanitaDelAmor.dialog('close');
                 })
             });
-        });
+        } );
         
-        $(ventanitaDelAmor).dialog({
+        $('body').append(ventanitaDelAmor);
+        $("#dialog").dialog({
             width: 500,
             position: 'top',
             zIndex: 3999,

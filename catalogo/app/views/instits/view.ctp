@@ -67,6 +67,9 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
             <div class="clear"></div>
         </div>
     </div>
+    
+    
+    
     <div class="grid_6 omega">
         <div class="boxblanca ficha_info">
             <h3>Ficha de Contacto</h3>
@@ -125,15 +128,25 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
                 <?php endif;?>
             </dl>
             
-            <a class="grid_4 omega alerta-desactualizada" id="alerta-desactualizada" style="margin-top: 7px;">
-                Notificar información desactualizada
-            </a>
             
-            <div class="clear"></div>
+            <?php 
+            echo $html->link(
+                    'Notificar información desactualizada',
+                    array(
+                        'controller'  => 'correos',
+                        'action'      => 'desactualizada',
+                        'nombre_completo' => urlencode($instit['Instit']['nombre_completo']),
+                        'cue_instit' => $cue_instit,
+                    ),
+                    array(
+                        'id' => 'alerta-desactualizada',
+                        )); 
+            ?>                      
+                        
         </div>
     </div>
 
-    <div class="clear" style="height:20px;"></div>
+    <div class="clear" style="height:18px;"></div>
 
     <div class="boxblanca">
         <?php
@@ -145,7 +158,7 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
         $ofertaAnt = '';
         foreach ($instit['Plan'] as $plan) {
             if ($ofertaAnt != $plan['Oferta']['id'] ) {
-                echo "<h4>". $plan['Oferta']['name'] ."</h4>";
+                echo "<h4 style='margin-top: 15px;'>". $plan['Oferta']['name'] ."</h4>";
                 $ofertaAnt = $plan['Oferta']['id'];
             }
 
@@ -165,16 +178,6 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
                 $planNombre .= ' (' .  $plan['Titulo']['name'] . ')';
             }
 
-            // si es FP le agrego la duracion
-            /*$duracion = '';
-            if (!empty($plan['duracion_hs'])) {
-                $duracion = '. <cite>Duración: ' . $plan['duracion_hs'] . ' hs.</cite>';
-            }
-            elseif (!empty($plan['duracion_semanas'])) {
-                $duracion = '. <cite>Duración: ' . $plan['duracion_semanas']. ' semanas</cite>';
-            }
-
-            $planNombre .= $duracion;*/
             ?>
             <li onclick="viewTitulo('<?php echo $html->url('/titulos/view_titulo_plan/'.$plan['Titulo']['id'].'/'.$plan['id'])?>', '<?php echo $plan['Titulo']['name']?>');">
                 <?php echo $planNombre?>
@@ -192,13 +195,7 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
         ?>
         <div class="clear"></div>
     </div>
-
-    <?php
-// se utilizan para pop-up de alerta desactualizada
-    echo $form->hidden('instit-nombre', array('id' => 'instit-nombre', 'value' => $instit['Instit']['nombre_completo']));
-    echo $form->hidden('instit-cue', array('id' => 'instit-cue', 'value' => $cue_instit));
-    echo $form->hidden('urlDesactualizada', array('id' => 'urlDesactualizada', 'value' => $html->url('/correos/desactualizada')));
-    ?>
+    
 
     <? /*echo $html->link(
         '<div id="alerta-desactualizada" class="grid_3 boxgris alerta-desactualizada">
