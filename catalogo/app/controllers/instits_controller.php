@@ -70,6 +70,7 @@ class InstitsController extends AppController {
         if ( $this->RequestHandler->isAjax() ) {
           Configure::write ( 'debug', 0 );
         }
+        Configure::write('debug', 2);
         //para mostrar en vista los patrones de busqueda seleccionados
         $this->paginate['viewConditions'] = array();
 
@@ -189,6 +190,37 @@ class InstitsController extends AppController {
         }
 
 
+        /*
+        para el campo de departamento/localidad
+        */
+        if(!empty($this->data['Instit']['departamento_id'])) {
+            $dto =$this->Instit->Departamento->findById($this->data['Instit']['departamento_id']);
+            $this->data['Instit']['jur_dep_loc'] = utf8_decode($this->data['Instit']['jur_dep_loc']);
+            $nombre = $dto["Departamento"]["name"] . " (" . $dto["Jurisdiccion"]["name"] . ")"; 
+            if($nombre != $this->data['Instit']['jur_dep_loc']){
+                unset($this->data['Instit']['departamento_id']);
+                $q = $this->data['Instit']['jur_dep_loc'];
+                $this->paginate['Instit']['conditions']["(lower(Localidad.name) || lower(Departamento.name)) SIMILAR TO ?"] = convertir_para_busqueda_avanzada($q);
+            }
+        }
+        else if(!empty($this->data['Instit']['localidad_id'])) {
+            $loc =$this->Instit->Localidad->find("first", 
+                        array("conditions" => array("Localidad.id"=>$this->data['Instit']['localidad_id']), 
+                              "contain"=>array("Departamento"=>array("Jurisdiccion"))));
+            $nombre = $loc["Localidad"]["name"] .", " . $loc["Departamento"]["name"] . " (" . $loc["Departamento"]["Jurisdiccion"]["name"] . ")"; 
+            $this->data['Instit']['jur_dep_loc'] = utf8_decode($this->data['Instit']['jur_dep_loc']);
+            if($nombre != $this->data['Instit']['jur_dep_loc']){
+                unset($this->data['Instit']['localidad_id']);
+                $q = $this->data['Instit']['jur_dep_loc'];
+                $this->paginate['conditions']["(lower(Localidad.name) || lower(Departamento.name)) SIMILAR TO ?"] = convertir_para_busqueda_avanzada($q);
+            }
+        }else if(!empty($this->data['Instit']['jur_dep_loc'])){
+            $q = $this->data['Instit']['jur_dep_loc'];
+                $this->paginate['conditions']["(lower(Localidad.name) || lower(Departamento.name)) SIMILAR TO ?"] = convertir_para_busqueda_avanzada($q);    
+        }
+
+
+
         //////////////// Automagiccccs filter
 
         //     Nro Institucion
@@ -203,7 +235,17 @@ class InstitsController extends AppController {
          $ops[] = array(
             'field' => 'jurisdiccion_id',
             'friendlyName' => 'Jurisdicción');
-        
+
+         //      Departamento
+         $ops[] = array(
+            'field' => 'departamento_id',
+            'friendlyName' => 'Departamento');
+
+         //      Localidad
+         $ops[] = array(
+            'field' => 'localidad_id',
+            'friendlyName' => 'Localidad');
+
          //      TIPO INSTIT
          $ops[] = array(
             'field' => 'tipoinstit_id',
@@ -218,16 +260,6 @@ class InstitsController extends AppController {
          $ops[] = array(
             'field' => 'direccion',
             'friendlyName' => 'Domicilio');
-
-         //      Departamento
-         $ops[] = array(
-            'field' => 'departamento_id',
-            'friendlyName' => 'Departamento');
-
-         //      Localidad
-         $ops[] = array(
-            'field' => 'localidad_id',
-            'friendlyName' => 'Localidad');
         
          //      GESTION
          $ops[] = array(
