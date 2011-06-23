@@ -70,7 +70,6 @@ class InstitsController extends AppController {
         if ( $this->RequestHandler->isAjax() ) {
           Configure::write ( 'debug', 0 );
         }
-        Configure::write('debug', 2);
         //para mostrar en vista los patrones de busqueda seleccionados
         $this->paginate['viewConditions'] = array();
 
