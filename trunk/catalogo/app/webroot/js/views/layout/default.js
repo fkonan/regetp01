@@ -22,7 +22,7 @@
 
        
         __ajustarAlturas(['.boxestudiantes']);
-        __ajustarAlturas(['.boxoferta1','.boxoferta2','.boxoferta3']);
+        //__ajustarAlturas(['.boxoferta1','.boxoferta2','.boxoferta3']);
 
     });
     

@@ -140,6 +140,7 @@ $(function() {
             <li>Duración: 6 o 7 años</li>
             <li>Título otorgado: Técnico (en distintas especialidades).</li>
         </ul>
+        <br />
     </div>
 
 </div>
@@ -156,6 +157,7 @@ $(function() {
             <li>Duración: 3 o 4 años</li>
             <li>Título otorgado: Técnico Superior (en distintas especialidades).</li>
         </ul>
+        <br />
     </div>
 </div>
 
