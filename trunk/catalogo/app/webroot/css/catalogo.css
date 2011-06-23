@@ -24,6 +24,12 @@ LABEL {
     display: block;
 }
 
+input:disabled, select:disabled{
+    background-color: white;
+    border: none;
+    font-size: 9pt;
+}
+
 INPUT, TEXTAREA, select {
     border: 1px solid #dcddde; 
     background: #f1f1f2; 
