@@ -46,11 +46,6 @@ body{
     padding: 0px;
     font-family: sans-serif;
     font-size: 9pt;
-   
-}
-
-.wrapper{
-     clear: both;
 }
 
 h1, h2{
@@ -209,6 +204,7 @@ background: linear-gradient(left, #0090d0 0%,#81c3eb 100%); /* W3C */
 
 
 .sponsors{
+    margin-top: 15px;
     margin-bottom: 10px;
     border-top: 1px solid #e2e2e4;
     overflow: hidden;
@@ -227,9 +223,6 @@ background: linear-gradient(left, #0090d0 0%,#81c3eb 100%); /* W3C */
     text-align: center;
     color: #A3A29C;
     padding-bottom: 10px;
-    height: 120px;
-    bottom: 0px;
-    width: 100%;
 }
 
 #container{
