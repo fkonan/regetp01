@@ -33,8 +33,7 @@ dd ul{
 
 .alerta-desactualizada{   
     text-decoration: none;
-    cursor: pointer; cursor: hand;
-    margin-top: 15px;
+    cursor: hand;
 }
 
 

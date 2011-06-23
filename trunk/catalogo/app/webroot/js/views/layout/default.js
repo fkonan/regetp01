@@ -1,50 +1,69 @@
-jQuery.noConflict();
-jQuery.fn.outer = function() {
-    return jQuery( jQuery('<div></div>').html(this.clone()) ).html();
-}
-jQuery(document).ready(function () {
+
+(function($) {
     
+    /*** ----------------------------------------- 
+     *
+     *              jQuery ON DOM READY
+     *
+     *---------------------------------------- ***/
+    $(document).ready(function () {
     
-    __ajustarAlturas(['.boxestudiantes','.boxdocs']);
-    
-    jQuery(document).ajaxError(function(e, xhr, settings, exception) {
-        jQuery.unblockUI;
-        if (xhr.status == 401){
-            alert('Su usuario no tiene permisos para acceder a esta página');
-            if (!jQuer.y('#authMessageJs')){
-        //                            var authMessage = '<div id="authMessageJs" class="message">Usted no tiene permisos para realizar esta operación</div>';
-        //                            jQuery('#main-content').prepend(authMessage);
-        }
-        }
+        // Si la sesion del usuario caducó, capturar el Error 
+        // cuando se hace una peticion Ajax
+        $(document).ajaxError( function(event, jqXHR, ajaxSettings, thrownError){
+            if (xhr.status == 401){
+                // primero pregunta, antes de hacer un reload
+                // no vaya a ser cosa que pierda lo que estaba haciendo
+                if ( confirm('Ha caducado su sesión, ¿desea ingrear nuevamente al sistema?') ) {
+                    window.location.reload(true);
+                }
+            }                
+        });
+
+       
+        __ajustarAlturas(['.boxestudiantes']);
+        __ajustarAlturas(['.boxoferta1','.boxoferta2','.boxoferta3']);
 
     });
-});
+    
 
-    function PopularCombo(comboSelector, actionJson,parameters, agregarEmpty, spinner){
-        var options = [];
-        if(spinner){
-            spinner.show();
+
+    /**************************************************************************/
+    /*** ---        Funciones Extra                                     --- ***/
+
+    /**
+     *
+     *  Controla la altura de los elementos pasados como parámetros ajustandolos
+     *  para que tengan la misma altura.
+     *  Iguala en base al selector. Por ejemplo si le paso '.boxes' me ajusta todos
+     *  los elementos con la clase .boxes
+     *  
+     *  
+     *  @param selectores Array de elementos DOM que quiero igualar en altura
+     */
+    function __ajustarAlturas(selectores) {
+        alturaMax = 0;
+        alturaSelector = 0;
+        selectoresText = selectores.join(",");
+
+        $(selectoresText).attr('style', '');
+
+        for (x=0;x<selectores.length;x++){
+            alturaSelector = $(selectores[x]).outerHeight();
+            alturaMax = alturaSelector > alturaMax ? alturaSelector : alturaMax;
         }
-        comboSelector.html('<option value="0">Cargando...</option>');
-        comboSelector.attr('disabled', 'disabled');
-        jQuery.getJSON(actionJson, parameters, function(result) {
-            if(agregarEmpty){
-                options.push('<option value="0">Ninguno</option>');
-            }
-            for (var i = 0; i < result.length; i++) {
-                options.push('<option value="',
-                  result[i].id, '">',
-                  result[i].name, '</option>');
-            }
-            comboSelector.html(options.join(''));
-            if(spinner){
-                spinner.hide();
-            }
 
-            comboSelector.removeAttr('disabled');
-            }
-            );
+        $(selectoresText).outerHeight(alturaMax);
      }
-     
+
+
+})(jQuery);
+
+
+
+
+
+
+    
      
 

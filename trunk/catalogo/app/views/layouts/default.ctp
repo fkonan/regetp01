@@ -80,6 +80,7 @@ $javascript;
         'jquery/jquery.bgiframe.min',
         'jquery/jquery.superfish',
         'jquery/jquery.history',
+        'views/layout/default',
         ));
 
         $jsPoner = 'views'.DS.Inflector::underscore($this->name).DS.$this->action;
@@ -99,37 +100,6 @@ $javascript;
         <?php echo $html->css('catalogo_ie_fix');?>
         <![endif]-->
         
-        <script type="text/javascript">
-            jQuery(document).ajaxError( function(event, jqXHR, ajaxSettings, thrownError){
-                if (xhr.status == 401){
-                    // primero pregunta, antes de hacer un reload
-                    // no vaya a ser cosa que pierda lo que estaba haciendo
-                    if ( confirm('Ha caducado su sesión, ¿desea ingrear nuevamente al sistema?') ) {
-                        window.location.reload(true);
-                    }
-                }                
-            } );
-
-            jQuery(document).ready(function () {
-                __ajustarAlturas(['.boxestudiantes','.boxdocs']);
-                __ajustarAlturas(['.boxoferta1','.boxoferta2','.boxoferta3']);
-            });
-
-            function __ajustarAlturas(selectores) {
-                alturaMax = 0;
-                alturaSelector = 0;
-                selectoresText = selectores.join(",");
-
-                $(selectoresText).attr('style', '');
-
-                for (x=0;x<selectores.length;x++){
-                    alturaSelector = $(selectores[x]).outerHeight();
-                    alturaMax = alturaSelector > alturaMax ? alturaSelector : alturaMax;
-                }
-
-                $(selectoresText).outerHeight(alturaMax);
-             }
-        </script>
 
     </head>
     <body>
@@ -165,30 +135,33 @@ $javascript;
                 <?php echo $content_for_layout; ?>
             </div> <!-- FIN div #container -->
 
-            <div class="clear" style="height: 30px;"></div>
-            <div id="footer">
-                <div class="sponsors">
-                    <?php
-                    echo $html->link($html->image('links/fondoblanco/encuentro.png'),'http://www.encuentro.gov.ar/',null, null, false);
-                    echo $html->link($html->image('links/fondoblanco/pakapaka.png'),'http://www.pakapaka.gov.ar/',null, null, false);
-                    echo $html->link($html->image('links/fondoblanco/educar.png'),'http://www.educ.ar/',null, null, false);
-                    echo $html->link($html->image('links/fondoblanco/infd.png'),'http://www.me.gov.ar/infod/',null, null, false);
-                    echo $html->link($html->image('links/fondoblanco/biblo.png'),'http://www.bnm.me.gov.ar/',null, null, false);
-                    echo $html->link($html->image('links/fondoblanco/logo_mercosur.png'),'http://www.sic.inep.gov.br/',null, null, false);
-                    echo $html->link($html->image('links/fondoblanco/bicentenario.png'),'http://www.bicentenario.argentina.ar/',null, null, false);
-                    echo $html->link($html->image('links/fondoblanco/argentina.png'),'http://www.argentina.ar/',null, null, false);
-                    echo $html->link($html->image('links/fondoblanco/argentinagovar.png'),'http://www.argentina.gov.ar/',null, null, false);
-                    ?>
-                </div>
-                <p>
-                    Saavedra 789 C1229ACE | Teléfono (011) 4129-2000
-                </p>
-            </div>
+            <div class="clear" style="height: 15px;"></div>
+            
+            
 
 
             <?php echo $cakeDebug; ?>
         </div>
 
+        
+        <div id="footer">
+            <div class="sponsors">
+                <?php
+                echo $html->link($html->image('links/fondoblanco/encuentro.png'),'http://www.encuentro.gov.ar/',null, null, false);
+                echo $html->link($html->image('links/fondoblanco/pakapaka.png'),'http://www.pakapaka.gov.ar/',null, null, false);
+                echo $html->link($html->image('links/fondoblanco/educar.png'),'http://www.educ.ar/',null, null, false);
+                echo $html->link($html->image('links/fondoblanco/infd.png'),'http://www.me.gov.ar/infod/',null, null, false);
+                echo $html->link($html->image('links/fondoblanco/biblo.png'),'http://www.bnm.me.gov.ar/',null, null, false);
+                echo $html->link($html->image('links/fondoblanco/logo_mercosur.png'),'http://www.sic.inep.gov.br/',null, null, false);
+                echo $html->link($html->image('links/fondoblanco/bicentenario.png'),'http://www.bicentenario.argentina.ar/',null, null, false);
+                echo $html->link($html->image('links/fondoblanco/argentina.png'),'http://www.argentina.ar/',null, null, false);
+                echo $html->link($html->image('links/fondoblanco/argentinagovar.png'),'http://www.argentina.gov.ar/',null, null, false);
+                ?>
+            </div>
+            <p>
+                Saavedra 789 C1229ACE | Teléfono (011) 4129-2000
+            </p>
+        </div>
 
     </body>
 
