@@ -141,10 +141,8 @@ $javascript;
 
 
             <?php echo $cakeDebug; ?>
-        </div>
-
-        
-        <div id="footer">
+            
+            <div id="footer">
             <div class="sponsors">
                 <?php
                 echo $html->link($html->image('links/fondoblanco/encuentro.png'),'http://www.encuentro.gov.ar/',null, null, false);
@@ -161,6 +159,8 @@ $javascript;
             <p>
                 Saavedra 789 C1229ACE | Teléfono (011) 4129-2000
             </p>
+        </div>
+            
         </div>
 
     </body>

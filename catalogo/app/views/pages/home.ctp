@@ -81,6 +81,7 @@ $(function() {
                 array('class'=>'mas_info_azul'));?>
         <p>
             Usá este buscador para encontrar <strong>qué</strong> y <strong>dónde</strong> estudiar mediante tres sencillos pasos.
+            <br />
         </p>
     </div>
 </div>
@@ -129,14 +130,14 @@ $(function() {
 
 <div class="grid_4">
     <div class="boxgris boxoferta1 ">
-        <h4><?php echo $html->link('Nivel Medio Técnico',array('controller'=>'titulos', 'action'=>'search', SEC_TEC_ID));?></h4>
+        <h4><?php echo $html->link('Nivel Secundario Técnico',array('controller'=>'titulos', 'action'=>'search', SEC_TEC_ID));?></h4>
 
          <?php echo $html->link('más información',
                 array('controller'=>'titulos', 'action'=>'search', SEC_TEC_ID),
                 array('class'=>'mas_info_azul'));?>
         <ul style="margin-left: 0px; padding-left: 17px;">
             <li>Requisitos de ingreso: Primaria completa</li>
-            <li>Duración: 6 años</li>
+            <li>Duración: 6 o 7 años</li>
             <li>Título otorgado: Técnico (en distintas especialidades).</li>
         </ul>
     </div>
@@ -152,7 +153,7 @@ $(function() {
         array('class'=>'mas_info_azul'));?>
         <ul style="margin-left: 0px; padding-left: 17px;">
             <li>Requisitos de ingreso: Secundaria completa</li>
-            <li>Duración: 3 años</li>
+            <li>Duración: 3 o 4 años</li>
             <li>Título otorgado: Técnico Superior (en distintas especialidades).</li>
         </ul>
     </div>
