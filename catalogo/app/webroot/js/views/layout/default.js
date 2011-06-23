@@ -10,7 +10,7 @@
     
         // Si la sesion del usuario caducó, capturar el Error 
         // cuando se hace una peticion Ajax
-        $(document).ajaxError( function(event, jqXHR, ajaxSettings, thrownError){
+        $(document).ajaxError( function(event, xhr, ajaxSettings, thrownError){
             if (xhr.status == 401){
                 // primero pregunta, antes de hacer un reload
                 // no vaya a ser cosa que pierda lo que estaba haciendo
