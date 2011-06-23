@@ -40,6 +40,7 @@ echo $html->css(array(  'jquery.loadmask',
                                         'id'=>'jurisdiccion_id'));
                 echo $form->input('jur_dep_loc',
                                   array('label'=>'Departamento/Localidad',
+                                        'div' => array('id' => 'search-ubicacion'),
                                         'title'=>'Ingrese al menos 3 letras para que comience la busqueda de Departamentos y Localidades.'));
                 echo $form->input('direccion',array('label'=>'Domicilio',));
 

@@ -142,7 +142,8 @@
             jQuery("#jurisdiccion_id").change(function () {
                 jQuery("#ajax_indicator").hide();
                 borrarDatos('#TituloJurDepLoc');
-                jQuery("#TituloJurDepLoc").val("");
+                jQuery("#TituloJurDepLoc").val('');
+                jQuery("#hiddenLocDepId").val('');
             });
 
             //formElement.submit();
