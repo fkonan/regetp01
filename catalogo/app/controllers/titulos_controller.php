@@ -628,7 +628,7 @@ class TitulosController extends AppController {
                 $dto =$this->Titulo->Plan->Instit->Departamento->findById($this->data['Instit']['departamento_id']);
                 $this->data['Titulo']['jur_dep_loc'] = utf8_decode($this->data['Titulo']['jur_dep_loc']);
                 $nombre = $dto["Departamento"]["name"] . " (" . $dto["Jurisdiccion"]["name"] . ")"; 
-                if($nombre != $this->data['Titulo']['jur_dep_loc']){
+                if(isset($this->data['Titulo']['jur_dep_loc']) && $nombre != $this->data['Titulo']['jur_dep_loc']){
                     $this->passedArgs['jurDepLoc'] = $this->data['Titulo']['jur_dep_loc'];
                 }else{
                     $this->passedArgs['departamentoId'] = $this->data['Instit']['departamento_id'];
@@ -642,7 +642,7 @@ class TitulosController extends AppController {
                                   "contain"=>array("Departamento"=>array("Jurisdiccion"))));
                 $nombre = $loc["Localidad"]["name"] .", " . $loc["Departamento"]["name"] . " (" . $loc["Departamento"]["Jurisdiccion"]["name"] . ")"; 
                 $this->data['Titulo']['jur_dep_loc'] = utf8_decode($this->data['Titulo']['jur_dep_loc']);
-                if($nombre != $this->data['Titulo']['jur_dep_loc']){
+                if(isset($this->data['Titulo']['jur_dep_loc']) && $nombre != $this->data['Titulo']['jur_dep_loc']){
                     $this->passedArgs['jurDepLoc'] = $this->data['Titulo']['jur_dep_loc'];
                 }else{
                     $this->passedArgs['localidadId'] = $this->data['Instit']['localidad_id'];

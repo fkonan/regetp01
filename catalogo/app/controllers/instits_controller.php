@@ -192,7 +192,7 @@ class InstitsController extends AppController {
         /*
         para el campo de departamento/localidad
         */
-        if(!empty($this->data['Instit']['departamento_id'])) {
+        if(isset($this->data['Instit']['jur_dep_loc']) && !empty($this->data['Instit']['departamento_id'])) {
             $dto =$this->Instit->Departamento->findById($this->data['Instit']['departamento_id']);
             $this->data['Instit']['jur_dep_loc'] = utf8_decode($this->data['Instit']['jur_dep_loc']);
             $nombre = $dto["Departamento"]["name"] . " (" . $dto["Jurisdiccion"]["name"] . ")"; 
@@ -202,7 +202,7 @@ class InstitsController extends AppController {
                 $this->paginate['Instit']['conditions']["(lower(Localidad.name) || lower(Departamento.name)) SIMILAR TO ?"] = convertir_para_busqueda_avanzada($q);
             }
         }
-        else if(!empty($this->data['Instit']['localidad_id'])) {
+        else if(isset($this->data['Instit']['jur_dep_loc']) && !empty($this->data['Instit']['localidad_id'])) {
             $loc =$this->Instit->Localidad->find("first", 
                         array("conditions" => array("Localidad.id"=>$this->data['Instit']['localidad_id']), 
                               "contain"=>array("Departamento"=>array("Jurisdiccion"))));
