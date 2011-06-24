@@ -87,7 +87,7 @@ $(function() {
 </div>
 
 <div class="grid_8">
-    <div class="boxblanca boxdocs">
+    <div class="boxblanca boxdocs boxestudiantes">
         <h3>Empresas, profesionales, funcionarios, etc.</h3>
         <div class="box_home_buscadores">
             <div class="box_pad_wrapper" style="margin-right: 15px">
