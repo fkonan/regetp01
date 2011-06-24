@@ -49,12 +49,14 @@
         $(selectoresText).attr('style', '');
 
         for (x=0;x<selectores.length;x++){
-            alturaSelector = $(selectores[x]).outerHeight();
-            alturaMax = alturaSelector > alturaMax ? alturaSelector : alturaMax;
+            jQuery.each($(selectores[x]), function() {
+                alturaSelector = $(this).outerHeight();
+                alturaMax = alturaSelector > alturaMax ? alturaSelector : alturaMax;
+            });
         }
 
         $(selectoresText).outerHeight(alturaMax);
-     }
+    }
 
 
 })(jQuery);
