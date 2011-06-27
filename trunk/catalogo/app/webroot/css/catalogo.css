@@ -26,7 +26,6 @@ LABEL {
 
 input:disabled, select:disabled{
     background-color: white;
-    border: none;
     font-size: 9pt;
 }
 
