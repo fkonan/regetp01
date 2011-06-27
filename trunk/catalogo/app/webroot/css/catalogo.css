@@ -146,7 +146,7 @@ dd ul{
 
 
 #header{ 
-    height: 158px;
+    height: 145px;
     overflow: visible;
     
 background: #0090d0; /* Old browsers */
@@ -163,8 +163,7 @@ background: linear-gradient(left, #0090d0 0%,#81c3eb 100%); /* W3C */
 
 #head-text{
     position: relative;
-    height: 158px;
-    background: url(img/bandera_trans.png) no-repeat right;
+    height: 145px;
 }
 
 #logo img{
@@ -173,6 +172,7 @@ background: linear-gradient(left, #0090d0 0%,#81c3eb 100%); /* W3C */
 
 #header_title{
    position: relative;
+   background: url(img/bandera_trans.png) no-repeat right;
 }
 
 
@@ -194,7 +194,7 @@ background: linear-gradient(left, #0090d0 0%,#81c3eb 100%); /* W3C */
     margin: 0 auto;
     color: #fff;
     font-weight: bolder;
-    font-size: 0.88em;
+    font-size: 1.2em;
     text-shadow: #000 1px 1px 0;
 }
 
