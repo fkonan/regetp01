@@ -121,3 +121,14 @@
     <div id="consoleResult" style="min-height:200px; margin-top:15px; padding-bottom:20px;"></div>
 
 </div>
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    <?php
+    if ($bySession) {
+    ?>
+        jQuery("#TituloSearchForm").submit();
+    <?php
+    }
+    ?>
+});
+</script>
