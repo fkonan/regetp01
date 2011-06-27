@@ -87,7 +87,7 @@ $(function() {
 </div>
 
 <div class="grid_8">
-    <div class="boxblanca boxdocs boxestudiantes">
+    <div class="boxblanca boxestudiantes">
         <h3>Empresas, profesionales, funcionarios, etc.</h3>
         <div class="box_home_buscadores">
             <div class="box_pad_wrapper" style="margin-right: 15px">
@@ -129,7 +129,7 @@ $(function() {
 <div class="clear"></div>
 
 <div class="grid_4">
-    <div class="boxgris boxoferta1 ">
+    <div class="boxgris boxoferta">
         <h4><?php echo $html->link('Nivel Secundario Técnico',array('controller'=>'titulos', 'action'=>'search', SEC_TEC_ID));?></h4>
 
          <?php echo $html->link('más información',
@@ -146,7 +146,7 @@ $(function() {
 </div>
 
 <div class="grid_4">
-    <div class="boxgris boxoferta2">
+    <div class="boxgris boxoferta">
         <h4><?php echo $html->link('Nivel Superior Técnico', array('controller'=>'titulos', 'action'=>'search', SUP_TEC_ID));?></h4>
 
         <?php echo $html->link('más información',
@@ -163,7 +163,7 @@ $(function() {
 
 
 <div class="grid_4">
-    <div class="boxgris boxoferta3">
+    <div class="boxgris boxoferta">
         <h4><?php echo $html->link('Formación Profesional', array('controller'=>'titulos', 'action'=>'search', FP_ID));?></h4>
          <?php echo $html->link('más información',
                 array('controller'=>'titulos', 'action'=>'search', FP_ID),

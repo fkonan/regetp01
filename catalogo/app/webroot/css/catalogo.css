@@ -575,3 +575,11 @@ li{
 #menu li ul{
     z-index: 999;
 }
+
+.boxestudiantes{
+    height: 160px;
+}
+
+.boxoferta{
+    height: 150px;
+}
