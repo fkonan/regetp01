@@ -106,9 +106,9 @@ $javascript;
         <div class="wrapper">
             <div id="header">
             <div class="header_wrapper">
-                <div id="header_title" class="container_12">   
+                <div id="header_title" class="container_12">
                     
-                    <div class="grid_12" style="z-index: 1">
+                    <div class="grid_12" style="z-index: 1; ">
                         <a href="<?php echo $html->url('/')?>" id="logo" class="grid_2 alpha">
                             <?php echo $html->image('../css/img/logo.png', array(
                                 'border'=> 0,
@@ -116,19 +116,21 @@ $javascript;
                                 'class' => 'grid_3 alpha',
                                 )); 
                             ?>
-                            <?php echo $html->image('header_ministerio_recortada.png', array(
-                                'border'=> 0,
-                                'id'    => 'logo',
-                                'class' => 'grid_3 alpha',
-                                )); 
-                            ?>
                         </a>
-                        <div id="head-text" class="grid_10 omega" style="z-index: 1">
+                        <div id="head-text" class="grid_8" style="z-index: 1">
                             <h1 style="z-index: 2">
                                 <?php echo $html->link(__('Catálogo Nacional de Títulos y Certificaciones de Educación Técnico Profesional', true), '/pages/home'); ?>
                             </h1>
                             <?php echo $this->element('menu');?>
                         </div>
+                        <a href="<?php echo $html->url('/')?>" id="logo" class="grid_2 omega">
+                            <?php echo $html->image('header_ministerio_recortada.png', array(
+                                    'border'=> 0,
+                                    'id'    => 'logo',
+                                    'class' => 'grid_3 alpha',
+                                    ));
+                                ?>
+                        </a>
                     </div>
                     <div class="clear"></div>
                 </div>
