@@ -19,10 +19,9 @@
                 }
             }
         });
-
        
-        __ajustarAlturas(['.boxestudiantes']);
-        __ajustarAlturas(['.boxoferta1','.boxoferta2','.boxoferta3']);
+        //__ajustarAlturas(['.boxestudiantes']);
+        //__ajustarAlturas(['.boxoferta']);
 
     });
     
@@ -47,15 +46,16 @@
         selectoresText = selectores.join(",");
 
         $(selectoresText).attr('style', '');
+        $(selectoresText).outerHeight(0);
 
         for (x=0;x<selectores.length;x++){
             jQuery.each($(selectores[x]), function() {
-                alturaSelector = $(this).outerHeight();
+                alturaSelector = $(this).height();
                 alturaMax = alturaSelector > alturaMax ? alturaSelector : alturaMax;
             });
         }
 
-        $(selectoresText).outerHeight(alturaMax);
+        $(selectoresText).height(alturaMax);
     }
 
 
