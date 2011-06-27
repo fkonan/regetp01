@@ -68,7 +68,7 @@ $(function() {
     </div>
 </div>
 
-<h2 class="grid_12">Búsquedas por perfiles</h2>
+<h2 class="grid_12">Búsquedas según perfil del usuario</h2>
 <div class="clear"></div>
 
 <div class="grid_4">
@@ -88,7 +88,7 @@ $(function() {
 
 <div class="grid_8">
     <div class="boxblanca boxestudiantes">
-        <h3>Empresas, profesionales, funcionarios, etc.</h3>
+        <h3>Empresas, profesionales, funcionarios, sindicatos, etc.</h3>
         <div class="box_home_buscadores">
             <div class="box_pad_wrapper" style="margin-right: 15px">
                 <h4><?php echo $html->link('Búsqueda de títulos y certificaciones',array('controller'=>'titulos', 'action'=>'search'));?></h4>

@@ -13,7 +13,7 @@ class CorreosController extends AppController{
             $this->Correo->set( $this->data );
 
             if ($this->Correo->validates()) {
-                $mensaje = "Nombre: ".$this->data['Correo']['from']."\n";
+                $mensaje  = "Nombre: ".$this->data['Correo']['from']."\n";
                 $mensaje .= "E-mail: ".$this->data['Correo']['mail']."\n";
                 $mensaje .= "Teléfono: ".$this->data['Correo']['telefono']."\n\n";
                 $mensaje .= $this->data['Correo']['descripcion']."\n";
@@ -45,7 +45,6 @@ class CorreosController extends AppController{
     function desactualizada(){
         
         if (!empty($this->data)) {
-            if ($this->RequestHandler->isAjax()) {
 
                 if (empty($this->data['Correo']['from'])) {
                         $this->data['Correo']['from'] = 'No especificado';
@@ -55,8 +54,8 @@ class CorreosController extends AppController{
                 }
 
                 $mensaje = "Datos de la institución desactualizada:\n\n";
-                $mensaje .= $this->passedArgs['cue_instit']."\n";
-                $mensaje .= $this->passedArgs['nombre_completo']."\n\n";
+                $mensaje .= $this->data['Correo']['cue_instit']."\n";
+                $mensaje .= $this->data['Correo']['nombre_completo']."\n\n";
 
                 $mensaje .= "Nombre: ".$this->data['Correo']['from']."\n";
                 $mensaje .= "E-mail: ".$this->data['Correo']['mail']."\n";
@@ -85,7 +84,6 @@ class CorreosController extends AppController{
                 
                 $this->autoRender = false;
                 //$this->Session->setFlash(__("Gracias por informarnos sobre una desactualización", true));
-            }
         }
         if ( !empty($this->passedArgs['cue_instit']) && !empty($this->passedArgs['nombre_completo']) ) {
                 $this->data['Correo']['cue_instit'] = $this->passedArgs['cue_instit'];

@@ -22,7 +22,7 @@
             <li><?php echo $html->link('Madera y Mueble', '/pages/flias/madera_y_mueble'); ?></li>
             <li><?php echo $html->link('Mecánica Automotriz', '/pages/flias/mecanica_automotriz'); ?></li>
             <li><?php echo $html->link('Metalmecánica', '/pages/flias/metalmecanica'); ?></li>
-            <li><?php echo $html->link('Tlecomunicaciones', '/pages/flias/telecomunicaciones'); ?></li>
+            <li><?php echo $html->link('Telecomunicaciones', '/pages/flias/telecomunicaciones'); ?></li>
             <li><?php echo $html->link('Textil', '/pages/flias/textil'); ?></li>
             <hr />
             <p style="color:red">De las siguientes, faltan los cuadros</p>
