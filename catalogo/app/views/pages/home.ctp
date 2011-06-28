@@ -14,7 +14,6 @@ $(function() {
       { src: '<?php echo $html->url("/img/material/home_2.jpg");?>'},
       { src: '<?php echo $html->url("/img/material/home_3.jpg");?>'}
     ]);
-
 });
 </script>
 
@@ -22,8 +21,6 @@ $(function() {
     <div class="boxblanca">
         <div style="float:left">
             <div>
-                
-                
                 <div id="placeholder" style="float: right; width:300px; height:300px; margin: 0px 0px 0px 20px;"></div>
                 
                 <h2>La Educación Técnico Profesional en Argentina</h2>
