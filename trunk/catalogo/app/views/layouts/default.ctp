@@ -104,37 +104,42 @@ $javascript;
     </head>
     <body>
         <div class="wrapper">
+            
+                
+            <div class="clear"></div>
             <div id="header">
+                
+                
+                
             <div class="header_wrapper">
                 <div id="header_title" class="container_12">
                     
-                    <div class="grid_12" style="z-index: 1; ">
-                        <a href="<?php echo $html->url('/')?>" id="logo" class="grid_2 alpha">
-                            <?php echo $html->image('../css/img/logo.png', array(
+                    <a href="<?php echo $html->url('/')?>"class="logo grid_2">
+                        <?php echo $html->image('../css/img/logo.png', array(
+                            'border'=> 0,
+                            'class' => 'logo',
+                            )); 
+                        ?>
+                    </a>
+                    <a href="<?php echo $html->url('/')?>" class="logo grid_2">
+                        <?php echo $html->image('header_ministerio_recortada.png', array(
                                 'border'=> 0,
-                                'id'    => 'logo',
-                                'class' => 'grid_3 alpha',
-                                )); 
+                                'class' => 'logo',
+                                ));
                             ?>
-                        </a>
-                        <div id="head-text" class="grid_8" style="z-index: 1">
-                            <h1 style="z-index: 2">
-                                <?php echo $html->link(__('Catálogo Nacional de Títulos y Certificaciones de Educación Técnico Profesional', true), '/pages/home'); ?>
-                            </h1>
-                            <?php echo $this->element('menu');?>
-                        </div>
-                        <a href="<?php echo $html->url('/')?>" id="logo" class="grid_2 omega">
-                            <?php echo $html->image('header_ministerio_recortada.png', array(
-                                    'border'=> 0,
-                                    'id'    => 'logo',
-                                    'class' => 'grid_3 alpha',
-                                    ));
-                                ?>
-                        </a>
-                    </div>
-                    <div class="clear"></div>
+                    </a>
+                    
+                    <h1 class="grid_8">
+                        <?php echo $html->link(__('Catálogo Nacional de Títulos y Certificaciones de Educación Técnico Profesional', true), '/pages/home', array('class' => 'grid_6')); ?>
+                    </h1>
                 </div>
             </div>
+            <div class="menu_wrapper"  style="z-index: 1; ">
+                <div class="container_12">
+                <?php echo $this->element('menu');?>
+                </div>
+            </div>
+                
             </div>
 
             <?php $session->flash(); ?>

@@ -23,11 +23,11 @@
         );
         ?>
         <div class="box_izquierda">
-            <h4>Oferta y sector</h4>
+            <h4>Nivel y Sector</h4>
             <?php
                 echo $form->input('oferta_id',array( 'div' => true,
                                                     'class' => 'autosubmit ',
-                                                    'label'=> 'Oferta',
+                                                    'label'=> 'Nivel',
                                                     'id' => 'ofertaId',
                                                     'empty' => 'Todas',
                                                     'disabled'=> $bloquearOferta

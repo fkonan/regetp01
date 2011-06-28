@@ -193,6 +193,6 @@
 			<TD><BR></TD>
 		</TR>
 	</table>
-	<p>* Es la fecha de aprobación del marco de referencia correspondiente</p>
+	<p>* Es la fecha de aprobación del foro correspondiente</p>
     </div>	
 </div>
