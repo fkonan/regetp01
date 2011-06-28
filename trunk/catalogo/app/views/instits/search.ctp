@@ -104,3 +104,14 @@
         </div>
     <?php } ?>
 </div>
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    <?php
+    if ($bySession) {
+    ?>
+        jQuery("#InstitSearchForm").submit();
+    <?php
+    }
+    ?>
+});
+</script>
