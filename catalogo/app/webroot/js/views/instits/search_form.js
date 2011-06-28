@@ -23,18 +23,25 @@ function init__SearchFormJs(urlLocalidades){
                 return formatResult(item);
             }
         }).result(function(e, item) {
-            jQuery("#hiddenLocDepId").remove();
-            if(item.type == 'Vacio'){
-                jQuery("#InstitJurDepLoc").val('');
-            }
-            else{
-                jQuery("#search-ubicacion").append("<input id='hiddenLocDepId' name='data[Instit][" + item.type.toLowerCase() + "_id]' type='hidden' value='" + item.id + "' />");
-            }
+                if(item.type == 'Vacio'){
+                    jQuery("#InstitJurDepLoc").val('');
+                }
+                else{
+                    jQuery("#hiddenLocDepId").attr('name', 'data[Instit]['+ item.type.toLowerCase() + '_id]');
+                    jQuery("#hiddenLocDepId").val(item.id);
+                    formElement.submit();
+                }
         });
 
         jQuery("#InstitJurDepLoc").bind('paste', function(e){jQuery("#InstitJurDepLoc").change()});
 
         jQuery("#InstitJurDepLoc").attr('autocomplete','off');
+
+        jQuery("#jurisdiccion_id").change(function () {
+                jQuery("#ajax_indicator").hide();
+                jQuery("#InstitJurDepLoc").val('');
+                jQuery("#hiddenLocDepId").val('');
+            });
     });
 }
 function iniciarTooltip(){
@@ -170,8 +177,6 @@ function formatResult(loc_dep) {
                 return false;
             }
         });
-
-        $("#InstitJurisdiccionId").change(autoSubmit);
 
         $('#boxAyuda .menu_body').show();
 

@@ -5,7 +5,17 @@ class InstitsController extends AppController {
     var $helpers = array('Html','Form','Ajax','Cache');
     //var $paginate = array('order'=>array('Instit.cue' => 'asc'),'limit'=>'10');
     var $components = array('Buscable');
-   
+
+    var $sesNames = array(
+            'jurisdiccion' => 'Instit.jurisdiccion_id',
+            'departamento' => 'Instit.departamento_id',
+            'localidad' => 'Instit.localidad_id',
+            'jurDepLoc' => 'Instit.JurDepLoc',
+            'direccion' => 'Instit.direccion',
+            'busqueda_libre' => 'Instit.busqueda_libre',
+            'page' => 'Instit.page',
+        );
+
     function index() {
         $this->Instit->recursive = 0;
         $this->set('instits', $this->paginate());
@@ -55,6 +65,47 @@ class InstitsController extends AppController {
     function search_form() {
         $this->pageTitle = "Buscador de Instituciones";
         $this->set('jurisdicciones', $this->Instit->Jurisdiccion->find('list'));
+
+        if (!empty($this->passedArgs['limpiar'])) {
+            // limpia session
+            foreach ($this->sesNames as $sesName) {
+                $this->Session->write($sesName, '');
+            }
+        }
+        
+        $bySession = false;
+        $bloquearOferta = false;
+        // si existe búsqueda en Session, realiza búsqueda
+        if ($this->Session->read($this->sesNames['jurisdiccion'])) {
+            $this->data['Instit']['jurisdiccion_id'] = $this->Session->read($this->sesNames['jurisdiccion']);
+            $bySession = true;
+        }
+        if ($this->Session->read($this->sesNames['departamento'])) {
+            $this->data['Instit']['departamento_id'] = $this->Session->read($this->sesNames['departamento']);
+            $bySession = true;
+        }
+        if ($this->Session->read($this->sesNames['localidad'])) {
+            $this->data['Instit']['localidad_id'] = $this->Session->read($this->sesNames['localidad']);
+            $bySession = true;
+        }
+        if ($this->Session->read($this->sesNames['jurDepLoc'])) {
+            $this->data['Instit']['jur_dep_loc'] = $this->Session->read($this->sesNames['jurDepLoc']);
+            $bySession = true;
+        }
+        if ($this->Session->read($this->sesNames['direccion'])) {
+            $this->data['Instit']['direccion'] = $this->Session->read($this->sesNames['direccion']);
+            $bySession = true;
+        }
+        if ($this->Session->read($this->sesNames['busqueda_libre'])) {
+            $this->data['Instit']['busqueda_libre'] = $this->Session->read($this->sesNames['busqueda_libre']);
+            $bySession = true;
+        }
+        if ($this->Session->read($this->sesNames['page'])) {
+            $bySession = true;
+        }
+
+        $this->set('bySession', $bySession);
+
     }
 
     function simpleSearch() {
@@ -110,6 +161,10 @@ class InstitsController extends AppController {
                 //debug(convertir_para_busqueda_avanzada($q)); die();
                 $this->paginate['Instit']['conditions'] = array("(to_ascii(lower(Tipoinstit.name)) || ' n ' || to_ascii(lower(Instit.nroinstit)) || ' ' || lower(Instit.nombre)) SIMILAR TO ?" => convertir_para_busqueda_avanzada($q));
             }
+
+            $this->paginate['viewConditions']['CUE o Nombre '] = utf8_decode($this->passedArgs['busqueda_libre']);
+
+            $this->Session->write($this->sesNames['busqueda_libre'], $this->data['Instit']['busqueda_libre']);
         }
 
         /*
@@ -192,33 +247,54 @@ class InstitsController extends AppController {
         /*
         para el campo de departamento/localidad
         */
-        if(isset($this->data['Instit']['jur_dep_loc']) && !empty($this->data['Instit']['departamento_id'])) {
-            $dto =$this->Instit->Departamento->findById($this->data['Instit']['departamento_id']);
-            $this->data['Instit']['jur_dep_loc'] = utf8_decode($this->data['Instit']['jur_dep_loc']);
-            $nombre = $dto["Departamento"]["name"] . " (" . $dto["Jurisdiccion"]["name"] . ")"; 
-            if($nombre != $this->data['Instit']['jur_dep_loc']){
-                unset($this->data['Instit']['departamento_id']);
-                $q = $this->data['Instit']['jur_dep_loc'];
-                $this->paginate['Instit']['conditions']["(lower(Localidad.name) || lower(Departamento.name)) SIMILAR TO ?"] = convertir_para_busqueda_avanzada($q);
+        if (!empty($this->data['Instit']['jur_dep_loc'])) {
+            if (!empty($this->data['Instit']['departamento_id'])) {
+                $dto = $this->Instit->Departamento->findById($this->data['Instit']['departamento_id']);
+                $this->data['Instit']['jur_dep_loc'] = utf8_decode($this->data['Instit']['jur_dep_loc']);
+                $nombre = $dto["Departamento"]["name"] . " (" . $dto["Jurisdiccion"]["name"] . ")";
+                if ($nombre != $this->data['Instit']['jur_dep_loc']) {
+                    unset($this->data['Instit']['departamento_id']);
+                    $q = $this->data['Instit']['jur_dep_loc'];
+                    $this->paginate['Instit']['conditions']["(lower(Localidad.name) || lower(Departamento.name)) SIMILAR TO ?"] = convertir_para_busqueda_avanzada($q);
+                }
+
+                $this->Session->write($this->sesNames['departamento'], $this->data['Instit']['departamento_id']);
             }
-        }
-        else if(isset($this->data['Instit']['jur_dep_loc']) && !empty($this->data['Instit']['localidad_id'])) {
-            $loc =$this->Instit->Localidad->find("first", 
-                        array("conditions" => array("Localidad.id"=>$this->data['Instit']['localidad_id']), 
-                              "contain"=>array("Departamento"=>array("Jurisdiccion"))));
-            $nombre = $loc["Localidad"]["name"] .", " . $loc["Departamento"]["name"] . " (" . $loc["Departamento"]["Jurisdiccion"]["name"] . ")"; 
-            $this->data['Instit']['jur_dep_loc'] = utf8_decode($this->data['Instit']['jur_dep_loc']);
-            if($nombre != $this->data['Instit']['jur_dep_loc']){
-                unset($this->data['Instit']['localidad_id']);
-                $q = $this->data['Instit']['jur_dep_loc'];
-                $this->paginate['conditions']["(lower(Localidad.name) || lower(Departamento.name)) SIMILAR TO ?"] = convertir_para_busqueda_avanzada($q);
+            elseif (!empty($this->data['Instit']['localidad_id'])) {
+                $loc = $this->Instit->Localidad->find("first",
+                            array("conditions" => array("Localidad.id"=>$this->data['Instit']['localidad_id']),
+                                  "contain"=>array("Departamento"=>array("Jurisdiccion"))));
+                $nombre = $loc["Localidad"]["name"] .", " . $loc["Departamento"]["name"] . " (" . $loc["Departamento"]["Jurisdiccion"]["name"] . ")";
+                $this->data['Instit']['jur_dep_loc'] = utf8_decode($this->data['Instit']['jur_dep_loc']);
+                if ($nombre != $this->data['Instit']['jur_dep_loc']) {
+                    unset($this->data['Instit']['localidad_id']);
+                    $q = $this->data['Instit']['jur_dep_loc'];
+                    $this->paginate['conditions']["(lower(Localidad.name) || lower(Departamento.name)) SIMILAR TO ?"] = convertir_para_busqueda_avanzada($q);
+                }
+
+                $this->Session->write($this->sesNames['localidad'], $this->data['Instit']['localidad_id']);
             }
-        }else if(!empty($this->data['Instit']['jur_dep_loc'])){
+            
             $q = $this->data['Instit']['jur_dep_loc'];
-                $this->paginate['conditions']["(lower(Localidad.name) || lower(Departamento.name)) SIMILAR TO ?"] = convertir_para_busqueda_avanzada($q);    
+            $this->paginate['conditions']["(lower(Localidad.name) || lower(Departamento.name)) SIMILAR TO ?"] = convertir_para_busqueda_avanzada($q);
+
+            $this->Session->write($this->sesNames['jurDepLoc'], $this->data['Instit']['jur_dep_loc']);
         }
 
+        if (!empty($this->data['Instit']['jurisdiccion_id'])) {
+            $this->Session->write($this->sesNames['jurisdiccion'], $this->data['Instit']['jurisdiccion_id']);
+        }
+        if (!empty($this->data['Instit']['direccion'])) {
+            $this->Session->write($this->sesNames['direccion'], $this->data['Instit']['direccion']);
+        }
 
+        if (!empty($this->passedArgs['page'])) {
+            //$this->paginate['page'] = $this->passedArgs['page'];
+            $this->Session->write($this->sesNames['page'], $this->passedArgs['page']);
+        }
+        elseif ($this->Session->read($this->sesNames['page'])) {
+            $this->paginate['page'] = $this->Session->read($this->sesNames['page']);
+        }
 
         //////////////// Automagiccccs filter
 

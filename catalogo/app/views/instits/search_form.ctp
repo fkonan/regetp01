@@ -48,7 +48,17 @@ echo $html->css(array(  'jquery.loadmask',
                                     'id' => 'InstitCue',
                                     'label' => 'CUE o Nombre de la Institución',
                                     ));
+
+                $name = $val = '';
+                if (!empty($this->data['Instit']['localidad_id'])) {
+                    $name = "data[Instit][localidad_id]"; $val =
+                    $this->data['Instit']['localidad_id'];
+                } elseif (!empty($this->data['Instit']['departamento_id'])) {
+                    $name = "data[Instit][departamento_id]"; $val =
+                    $this->data['Instit']['departamento_id'];
+                }
                 ?>
+                <input id="hiddenLocDepId" name="<?php echo $name?>" type="hidden" value="<?php echo $val?>" />
             </div>
             <?php
             echo "<div style='clear:both; width: 100%'>";
