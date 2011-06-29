@@ -28,7 +28,7 @@
                 <li>
                     <?php echo $html->link('Instituciones', array(
                                     'controller' => 'instits',
-                                    'action' => 'search_form'
+                                    'action' => 'search'
                     )) 
                         ?>
                 </li>

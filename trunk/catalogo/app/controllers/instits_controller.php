@@ -62,7 +62,7 @@ class InstitsController extends AppController {
         $this->set('instit', $instit);
     }
     
-    function search_form() {
+    function search() {
         $this->pageTitle = "Buscador de Instituciones";
         $this->set('jurisdicciones', $this->Instit->Jurisdiccion->find('list'));
 
@@ -117,7 +117,7 @@ class InstitsController extends AppController {
     }
 
 
-    function search() {
+    function search_results() {
         if ( $this->RequestHandler->isAjax() ) {
           Configure::write ( 'debug', 0 );
         }

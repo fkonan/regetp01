@@ -84,7 +84,7 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
     <div class="grid_6 alpha">
         <div id="li_titulos" class="boxblanca">
             <?php echo $form->create('Instit', array(
-            'controller'=>'instits', 'action'=>'search.json',
+            'controller'=>'instits', 'action'=>'search_results.json',
             'id'=>'InstitSearchForm', 'name'=>'InstitSearchForm' ));
             ?>
             <?php echo $html->image('step2.gif', array('class' => 'step'));?>

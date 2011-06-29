@@ -135,7 +135,7 @@
         __blockResultConsole();
 
         if (typeof href == 'object') {
-            url = urlDomain + '/titulos/ajax_search_results.json';
+            url = urlDomain + '/titulos/filtros_search_results.json';
             __blanquearContainers();
         } else {
             url = href;

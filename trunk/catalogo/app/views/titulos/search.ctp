@@ -16,7 +16,7 @@
         <h3>Seleccione criterios de búsqueda</h3>
         <?php
         echo $form->create('Titulo', array(
-        'action' => 'ajax_search_results2',
+        'action' => 'search_results',
         'name'=>'TituloSearchForm',
         'id' =>'TituloSearchForm',
         )
