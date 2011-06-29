@@ -107,40 +107,49 @@ $javascript;
             
                 
             <div class="clear"></div>
+            
             <div id="header">
-                
-                
-                
-            <div class="header_wrapper">
-                <div id="header_title" class="container_12">
-                    
-                    <a href="<?php echo $html->url('/')?>"class="logo grid_2">
-                        <?php echo $html->image('../css/img/logo.png', array(
-                            'border'=> 0,
-                            'class' => 'logo',
-                            )); 
-                        ?>
-                    </a>
-                    <a href="<?php echo $html->url('/')?>" class="logo grid_2">
-                        <?php echo $html->image('header_ministerio_recortada.png', array(
+                <div class="header_wrapper">
+                    <div id="header_title" class="container_12">
+
+                        <a href="<?php echo $html->url('/')?>"class="logo">
+                            <?php echo $html->image('header_inet.png', array(
                                 'border'=> 0,
                                 'class' => 'logo',
-                                ));
+                                'style' => 'float: left',
+                                )); 
                             ?>
-                    </a>
-                    
-                    <h1 class="grid_8">
-                        <?php echo $html->link(__('Catálogo Nacional de Títulos y Certificaciones de Educación Técnico Profesional', true), '/pages/home', array('class' => 'grid_6')); ?>
-                    </h1>
+                        </a>
+                       
+                        
+                        <h1 class="">
+                            &nbsp;<?php echo $html->link(__('Catálogo Nacional de Títulos y Certificaciones de Educación Técnico Profesional', true), '/pages/home', array('class' => '')); ?>
+                        </h1>
+                        
+                    </div>
                 </div>
-            </div>
-            <div class="menu_wrapper"  style="z-index: 1; ">
+            
+                
+                <div class="menu_wrapper"  style="z-index: 1; ">
                 <div class="container_12">
+                    <a href="<?php echo $html->url('/')?>" class="logo"
+                           style=""
+                           >
+                            <?php echo $html->image('header_ministerio.png', array(
+                                    'border'=> 0,
+                                    'class' => 'logo',
+                                    ));
+                                ?>
+                        </a>
+                    
                 <?php echo $this->element('menu');?>
                 </div>
             </div>
                 
+                
+                
             </div>
+            
 
             <?php $session->flash(); ?>
             <?php $session->flash('auth'); ?>

@@ -18,13 +18,14 @@
 
 /* main level link */
 .nav a {
+    background: #0082ca;
     font-weight: bold;
     color: #e7e5e5;
     text-decoration: none;
     display: block;
     padding-top: 13px;
     padding-bottom: 13px;
-    margin: 0px;
+    margin: 0;
     -webkit-border-top-left-radius: 0.5em;
     -webkit-border-top-right-radius: 0.5em;
     -moz-border-radius-topleft: 0.5em;
@@ -40,19 +41,8 @@
 
 /* main level link hover */
 .nav .current a, .nav li:hover > a {
-	
-        
--webkit-box-shadow: 1px 1px 2px 1px #000000;
--moz-box-shadow: 1px 1px 2px 1px #000000;
-box-shadow: 1px 1px 2px 1px #000000; 
-        
-        -webkit-border-radius: 2em;
-        -webkit-border-radius: 2em;
-        -moz-border-radius: 2em;
-        -moz-border-radius: 2em;
-        border-radius: 2em;
-        border-radius: 2em;
-
+	background: #f1f1f2;
+	color: #25abe1;	
 }
 
 /* sub levels link hover */
