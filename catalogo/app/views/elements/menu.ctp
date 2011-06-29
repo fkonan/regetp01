@@ -4,7 +4,7 @@
 
         <?php 
         $activo = false;
-        if ($this->action == 'search' || $this->action == 'search_form' || $this->action == 'guiaDelEstudiante'){
+        if ($this->action == 'search' || $this->action == 'guiaDelEstudiante'){
             $activo = true;
         }
         ?>
