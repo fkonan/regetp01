@@ -348,7 +348,7 @@ class TitulosController extends AppController {
      * maneja las condiciones de la busqueda y el paginador
      *
      */
-    function ajax_search_results($oferta_id = 0) {
+    function filtros_search_results($oferta_id = 0) {
         Configure::write('debug', 0);
 
         $array_condiciones = array();
@@ -589,7 +589,7 @@ class TitulosController extends AppController {
      * maneja las condiciones de la busqueda y el paginador
      *
      */
-    function ajax_search_results2($oferta_id = 0) {
+    function search_results($oferta_id = 0) {
         Configure::write('debug', 0);
         //debug($this->RequestHandler);
         //para mostrar en vista los patrones de busqueda seleccionados

@@ -1,108 +1,88 @@
-<?php  $paginator->options(array('update' => 'consoleResult', 'url' => $this->passedArgs,'indicator'=> 'ajax_paginator_indicator')); ?>
+<?
+echo $javascript->link(array(
+'jquery.loadmask.min',
+'jquery.autocomplete'
+), false);
 
-<?php echo $html->css(array('catalogo.advanced_search', 'catalogo.instits'), $inline=false); ?>
-<div class="boxblanca" id="search_results">
-<h3>Listado de resultados</h3>
-<? if (sizeof($conditions)>0): ?>
-	Criterios de búsqueda seleccionados:
-	<dl class="criterios_busq">
-	<?
+echo $html->css(array(  'jquery.loadmask',
+                        'smoothness/jquery-ui-1.8.6.custom',
+                        'catalogo.advanced_search',
+                        'catalogo.instits',
+                        'jquery.autocomplete.css'
+                        ), $inline=false);
+?>
 
-	 foreach($conditions as $key => $value){
-		?><dt><?
-			echo '- '.$key.': ';
-		?></dt><?
-		?><dd><?
-			echo $value."&nbsp";
-		?></dd><?
-	}
+<script type="text/javascript" language="javascript">
+        init__SearchFormJs("<?echo $html->url(array('controller'=>'localidades','action'=>'ajax_search_localidades'));?>");
+</script>
 
-	?>
-	</dl>
-<? endif; ?>
-    <div class="list-header">
-        <div class="sorter">
+<div class="grid_12 instits search_form">
+
+    <h1><? __('Búsqueda de Instituciones')?></h1>
+    
+    <div class="boxblanca inputs_largos">
+        <h3>Seleccione criterios de búsqueda</h3>
         <?php
-        $sort = 'cue';
-        if(isset($this->passedArgs['sort'])){
-        $sort = $this->passedArgs['sort'];
-        }
+        echo $form->create('Instit', array(
+        'action' => 'search_results',
+        'name'=>'InstitSearchForm',
+        'id' =>'InstitSearchForm',
+        )
+        );
+        echo $form->hidden('form_name',array('value'=>'buscador rapido'));
         ?>
-            Ordenar por:
-            <? $class = ($sort == 'cue')?'marcada':'';?>
-            <span class="<?= $class?>"><?php echo $paginator->sort('CUE', 'cue');?></span>,
+        <div class="instit_search">
+            <div class="box_centrada">
+                <?php
+                echo $form->input('jurisdiccion_id',
+                                  array('label'=>'Jurisdicción',
+                                        'empty' => array('0'=>'Todas'),
+                                        'id'=>'jurisdiccion_id'));
+                echo $form->input('jur_dep_loc',
+                                  array('label'=>'Departamento/Localidad',
+                                        'div' => array('id' => 'search-ubicacion'),
+                                        'title'=>'Ingrese al menos 3 letras para que comience la busqueda de Departamentos y Localidades.'));
+                echo $form->input('direccion',array('label'=>'Domicilio',));
 
-            <? $class = ($sort == 'Jurisdiccion.name')?'marcada':'';?>
-            <span class="<?= $class?>"><?php echo $paginator->sort('Jurisdicción','Jurisdiccion.name');?></span>,
+                echo $form->input(  'busqueda_libre', array(
+                                    'id' => 'InstitCue',
+                                    'label' => 'CUE o Nombre de la Institución',
+                                    ));
 
-            <? $class = ($sort == 'Departamento.name')?'marcada':'';?>
-            <span class="<?= $class?>"><?php echo $paginator->sort('Departamento','Departamento.name');?></span>,
-
-            <? $class = ($sort == 'Localidad.name')?'marcada':'';?>
-            <span class="<?= $class?>"><?php echo $paginator->sort('Localidad','Localidad.name');?></span>
-
+                $name = $val = '';
+                if (!empty($this->data['Instit']['localidad_id'])) {
+                    $name = "data[Instit][localidad_id]"; $val =
+                    $this->data['Instit']['localidad_id'];
+                } elseif (!empty($this->data['Instit']['departamento_id'])) {
+                    $name = "data[Instit][departamento_id]"; $val =
+                    $this->data['Instit']['departamento_id'];
+                }
+                ?>
+                <input id="hiddenLocDepId" name="<?php echo $name?>" type="hidden" value="<?php echo $val?>" />
+            </div>
+            <?php
+            echo "<div style='clear:both; width: 100%'>";
+                echo $form->button('Buscar', array(
+                'type' => 'submit',
+                'style' => 'width: 130px; clear: both;margin-right:20px;float:right;margin-bottom:10px',
+                'class' => '',
+                ));
+                echo "</div>";
+            ?>
+            <div class="clear"></div>
         </div>
-        <div class="paging">
-            <?php echo $paginator->counter(array(
-                'format' => __('Instituciones %start%-%end% de <strong>%count%</strong>', true))); ?>
-        </div>
+        
+        <?php
+            echo $form->end();
+        ?>
         <div class="clear"></div>
     </div>
-    <? if (sizeof($instits) > 0) { ?>
-    <ol id="items">
-        <?php foreach($instits as $instit) : ?>
-            <?  $año_actual = date("Y");
-                $fecha_hasta = "$año_actual-07-21"; //hasta julio
-                $fecha_desde = "$año_actual-01-01"; //desde enero
-                $clase = '';
-                if($instit['Instit']['activo']) {
-                    $clase .= ' escuela_activa';
-                }else {
-                    $clase .= ' escuela_inactiva';
-                }
-            ?>
-            <li>
-                <a href="<?= $html->url('/instits/view/'.$instit['Instit']['id'])?>" style="display:block; cursor:pointer;">
-                <div class="items-nombre">
-                    <?= "".($instit['Instit']['cue']*100)+$instit['Instit']['anexo']." - ". $instit['Instit']['nombre_completo']; ?>
-                </div>
-                <div class="items-domicilio">
-                    Domicilio: 
-                    <?php
-                        echo joinNotNull(", ", array($instit['Instit']['direccion'],$instit['Instit']['lugar'],
-                                             $instit['Localidad']['name'],
-                                             $instit['Departamento']['name'] == $instit['Localidad']['name']?null:$instit['Departamento']['name'],
-                                             $instit['Jurisdiccion']['name']));
-                    ?>
-                </div>
-                <div class="items-gestion"><?= $instit['Gestion']['name'] ?></div>
-                <div class="items-actions">
-                    <span class="mas_info_azul_small"></span>
-                </div>
-                <div class="clear"></div>
-                </a>
-            </li>
 
-        <? endforeach?>
-    </ol>
-    <?php
-    }
-    else {
-        ?>
-    <div id="no_results">No hay resultados</div>
-    <?php
-    }
-    
-    if ($paginator->numbers()) { ?>
-        <div style="text-align:center; display:block;margin-bottom: 10px">
-            <?php
-            echo $paginator->prev('« Anterior ',null, null, array('class' => 'disabled', 'tag' => 'span'));
-            echo " | ".$paginator->numbers(array('modulus'=>'9'))." | ";
-            echo $paginator->next(' Siguiente »', null, null, array('class' => 'disabled'));
-            ?>
-            <span class="ajax_update" id="ajax_paginator_indicator" style="display:none; padding-left:10px;"><?php echo $html->image('ajax-loader.gif')?></span>
-        </div>
-    <?php } ?>
+    <!-- Aca se muestran los resultados de la busqueda-->
+    <div class="clear"></div>
+    <div id='consoleResult' style="min-height: 200px; margin-bottom: 20px; margin-top:15px;">
+    </div>
+
 </div>
 <script type="text/javascript">
 jQuery(document).ready(function() {
