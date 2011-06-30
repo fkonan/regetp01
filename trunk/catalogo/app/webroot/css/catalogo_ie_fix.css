@@ -1,12 +1,12 @@
 
 #head-text{
-     background: none;
+     
 }
 
 #logo{
      background: none;
 }
-#logo img {
+.logo {
      display: none;
 }
 
@@ -15,8 +15,14 @@
 }
 
 #header{
-    
-    /* background: url(img/header_degrade.png) repeat-y; */
+    background: none
+}
+#header_title{
+    background: none
+}
+.menu_wrapper{
+    margin-top:-72px;
+    margin-left:100px;
 }
 
 .step{

@@ -1,4 +1,4 @@
-<ul id="menu" class="nav alpha omega prefix_6 sf-menu">
+<ul id="menu" class="nav push_2 sf-menu grid_8">
         <li class="<?php echo ($this->here == $this->base.'/pages/home')?'current':''?> "><?php echo $html->link('Inicio', '/pages/home', array('class'=>'menu-item')); ?></li>
 
 
