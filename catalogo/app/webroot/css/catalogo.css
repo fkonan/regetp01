@@ -225,9 +225,8 @@ background: linear-gradient(left, #0090d0 0%,#7fc2ea 100%); /* W3C */
     text-shadow: none;
 }
 
-#menuhead{
-    margin-top: 30px;
-    height: 41px;
+#menu{
+    margin-top: 34px;
 }
 
 
