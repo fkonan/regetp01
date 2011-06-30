@@ -21,6 +21,10 @@ delete from planes where titulo_id in(select id from titulos where oferta_id in(
 delete from planes where instit_id in (select id from instits where activo = 0);
 delete from instits where activo = 0;
 
+/* eliminar instituciones con programa de ETP*/
+delete from planes where instit_id in (select id from instits where etp_estado_id = 1);
+delete from instits where etp_estado_id = 1;
+
 /*borro planes residuales*/
 delete from planes where nombre like '%residual%';
 
