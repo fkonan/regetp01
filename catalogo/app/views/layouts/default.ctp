@@ -112,7 +112,7 @@ $javascript;
                 <div class="header_wrapper">
                     <div id="header_title" class="container_12">
 
-                        <a href="<?php echo $html->url('/')?>"class="logo">
+                        <a href="<?php echo $html->url('/')?>"class="logo no-print">
                             <?php echo $html->image('header_inet.png', array(
                                 'border'=> 0,
                                 'class' => 'logo',
@@ -130,7 +130,7 @@ $javascript;
                 </div>
             
                 
-                <div class="menu_wrapper"  style="z-index: 1; ">
+                <div class="menu_wrapper no-print"  style="z-index: 1; ">
                 <div class="container_12">
                     <a href="<?php echo $html->url('/')?>" class="logo"
                            style=""
@@ -164,24 +164,24 @@ $javascript;
 
             <?php echo $cakeDebug; ?>
             
-            <div id="footer">
-            <div class="sponsors">
-                <?php
-                echo $html->link($html->image('links/fondoblanco/encuentro.png'),'http://www.encuentro.gov.ar/',null, null, false);
-                echo $html->link($html->image('links/fondoblanco/pakapaka.png'),'http://www.pakapaka.gov.ar/',null, null, false);
-                echo $html->link($html->image('links/fondoblanco/educar.png'),'http://www.educ.ar/',null, null, false);
-                echo $html->link($html->image('links/fondoblanco/infd.png'),'http://www.me.gov.ar/infod/',null, null, false);
-                echo $html->link($html->image('links/fondoblanco/biblo.png'),'http://www.bnm.me.gov.ar/',null, null, false);
-                echo $html->link($html->image('links/fondoblanco/logo_mercosur.png'),'http://www.sic.inep.gov.br/',null, null, false);
-                echo $html->link($html->image('links/fondoblanco/bicentenario.png'),'http://www.bicentenario.argentina.ar/',null, null, false);
-                echo $html->link($html->image('links/fondoblanco/argentina.png'),'http://www.argentina.ar/',null, null, false);
-                echo $html->link($html->image('links/fondoblanco/argentinagovar.png'),'http://www.argentina.gov.ar/',null, null, false);
-                ?>
+            <div id="footer" class="no-print">
+                <div class="sponsors">
+                    <?php
+                    echo $html->link($html->image('links/fondoblanco/encuentro.png'),'http://www.encuentro.gov.ar/',null, null, false);
+                    echo $html->link($html->image('links/fondoblanco/pakapaka.png'),'http://www.pakapaka.gov.ar/',null, null, false);
+                    echo $html->link($html->image('links/fondoblanco/educar.png'),'http://www.educ.ar/',null, null, false);
+                    echo $html->link($html->image('links/fondoblanco/infd.png'),'http://www.me.gov.ar/infod/',null, null, false);
+                    echo $html->link($html->image('links/fondoblanco/biblo.png'),'http://www.bnm.me.gov.ar/',null, null, false);
+                    echo $html->link($html->image('links/fondoblanco/logo_mercosur.png'),'http://www.sic.inep.gov.br/',null, null, false);
+                    echo $html->link($html->image('links/fondoblanco/bicentenario.png'),'http://www.bicentenario.argentina.ar/',null, null, false);
+                    echo $html->link($html->image('links/fondoblanco/argentina.png'),'http://www.argentina.ar/',null, null, false);
+                    echo $html->link($html->image('links/fondoblanco/argentinagovar.png'),'http://www.argentina.gov.ar/',null, null, false);
+                    ?>
+                </div>
+                <p>
+                    Saavedra 789 C1229ACE | Teléfono (011) 4129-2000
+                </p>
             </div>
-            <p>
-                Saavedra 789 C1229ACE | Teléfono (011) 4129-2000
-            </p>
-        </div>
             
         </div>
 
