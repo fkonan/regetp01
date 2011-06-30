@@ -223,7 +223,7 @@ class UtilsController extends AppController {
         foreach ($users as $user) {
             switch ($user['User']['username']) {
                 case "edillon":
-                    echo "[".$user['User']['id']."] edillon: ";
+                    echo "[".$user['User']['id']."] ".$user['User']['username'].": ";
                     if ($this->Auth->password("xMz23U") != $user['User']['password']) {
                         echo "cambió password";
                     } 
@@ -234,7 +234,7 @@ class UtilsController extends AppController {
                     break;
 
                 case "pcassutti":
-                    echo "[".$user['User']['id']."] pcassutti: ";
+                    echo "[".$user['User']['id']."] ".$user['User']['username'].": ";
                     if ($this->Auth->password("P26cT1") != $user['User']['password']) {
                         echo "cambió password";
                     } 
@@ -245,7 +245,7 @@ class UtilsController extends AppController {
                     break;
 
                 case "mrubio":
-                    echo "[".$user['User']['id']."] mrubio: ";
+                    echo "[".$user['User']['id']."] ".$user['User']['username'].": ";
                     if ($this->Auth->password("rt53xq") != $user['User']['password']) {
                         echo "cambió password";
                     } 
@@ -256,7 +256,7 @@ class UtilsController extends AppController {
                     break;
 
                 case "dadicarlo":
-                    echo "[".$user['User']['id']."] dadicarlo: ";
+                    echo "[".$user['User']['id']."] ".$user['User']['username'].": ";
                     if ($this->Auth->password("Ti44tW") != $user['User']['password']) {
                         echo "cambió password";
                     } 
@@ -267,7 +267,7 @@ class UtilsController extends AppController {
                     break;
 
                 case "jaramendi":
-                    echo "[".$user['User']['id']."] jaramendi: ";
+                    echo "[".$user['User']['id']."] ".$user['User']['username'].": ";
                     if ($this->Auth->password("ajm18x") != $user['User']['password']) {
                         echo "cambió password";
                     } 
@@ -278,7 +278,7 @@ class UtilsController extends AppController {
                     break;
 
                 case "cmaggio":
-                    echo "[".$user['User']['id']."] cmaggio: ";
+                    echo "[".$user['User']['id']."] ".$user['User']['username'].": ";
                     if ($this->Auth->password("c14rma") != $user['User']['password']) {
                         echo "cambió password";
                     } 
@@ -289,7 +289,7 @@ class UtilsController extends AppController {
                     break;
 
                 case "cdeluca":
-                    echo "[".$user['User']['id']."] cdeluca: ";
+                    echo "[".$user['User']['id']."] ".$user['User']['username'].": ";
                     if ($this->Auth->password("wer7df") != $user['User']['password']) {
                         echo "cambió password";
                     } 
@@ -300,7 +300,7 @@ class UtilsController extends AppController {
                     break;
 
                 case "jmonteagudo":
-                    echo "[".$user['User']['id']."] jmonteagudo: ";
+                    echo "[".$user['User']['id']."] ".$user['User']['username'].": ";
                     if ($this->Auth->password("rsj65m") != $user['User']['password']) {
                         echo "cambió password";
                     } 
@@ -311,7 +311,7 @@ class UtilsController extends AppController {
                     break;
 
                 case "hjose":
-                    echo "[".$user['User']['id']."] hjose: ";
+                    echo "[".$user['User']['id']."] ".$user['User']['username'].": ";
                     if ($this->Auth->password("yu27bu") != $user['User']['password']) {
                         echo "cambió password";
                     }
@@ -322,7 +322,7 @@ class UtilsController extends AppController {
                     break;
 
                 case "mavila":
-                    echo "[".$user['User']['id']."] mavila: ";
+                    echo "[".$user['User']['id']."] ".$user['User']['username'].": ";
                     if ($this->Auth->password("r56tuu") != $user['User']['password']) {
                         echo "cambió password";
                     }
@@ -333,7 +333,7 @@ class UtilsController extends AppController {
                     break;
 
                 case "vhgerea":
-                    echo "[".$user['User']['id']."] vhgerea: ";
+                    echo "[".$user['User']['id']."] ".$user['User']['username'].": ";
                     if ($this->Auth->password("cma4re") != $user['User']['password']) {
                         echo "cambió password";
                     }
@@ -344,7 +344,7 @@ class UtilsController extends AppController {
                     break;
 
                 case "adolbar":
-                    echo "[".$user['User']['id']."] adolbar: ";
+                    echo "[".$user['User']['id']."] ".$user['User']['username'].": ";
                     if ($this->Auth->password("a29bar") != $user['User']['password']) {
                         echo "cambió password";
                     }
@@ -355,7 +355,7 @@ class UtilsController extends AppController {
                     break;
 
                 case "murbieta":
-                    echo "[".$user['User']['id']."] murbieta: ";
+                    echo "[".$user['User']['id']."] ".$user['User']['username'].": ";
                     if ($this->Auth->password("ta43uu") != $user['User']['password']) {
                         echo "cambió password";
                     }
@@ -366,7 +366,7 @@ class UtilsController extends AppController {
                     break;
 
                 case "mbroky":
-                    echo "[".$user['User']['id']."] mbroky: ";
+                    echo "[".$user['User']['id']."] ".$user['User']['username'].": ";
                     if ($this->Auth->password("lus7ou") != $user['User']['password']) {
                         echo "cambió password";
                     }
@@ -377,8 +377,30 @@ class UtilsController extends AppController {
                     break;
 
                 case "sreyes":
-                    echo "[".$user['User']['id']."] sreyes: ";
+                    echo "[".$user['User']['id']."] ".$user['User']['username'].": ";
                     if ($this->Auth->password("mo92na") != $user['User']['password']) {
+                        echo "cambió password";
+                    }
+                    else {
+                        echo "<b>no cambió password</b>";
+                    }
+                    echo " (último login: ".date('d/m/Y H:i', strtotime($user['UserLogin'][0]['created'])).")";
+                    break;
+
+                case "slibonati":
+                    echo "[".$user['User']['id']."] ".$user['User']['username'].": ";
+                    if ($this->Auth->password("m37til") != $user['User']['password']) {
+                        echo "cambió password";
+                    }
+                    else {
+                        echo "<b>no cambió password</b>";
+                    }
+                    echo " (último login: ".date('d/m/Y H:i', strtotime($user['UserLogin'][0]['created'])).")";
+                    break;
+
+                case "daringoli":
+                    echo "[".$user['User']['id']."] ".$user['User']['username'].": ";
+                    if ($this->Auth->password("apr0Mo") != $user['User']['password']) {
                         echo "cambió password";
                     }
                     else {
