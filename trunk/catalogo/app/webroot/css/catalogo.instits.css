@@ -148,4 +148,15 @@ cite{
 
 .ficha_info{
     min-height: 158px;
+    border: 0 none;
+    float: left;
+    margin-bottom: 0;
+    margin-top: 0;
+    width: 50%;
+}
+
+.ficha_info.right{
+    border-left: 1px solid silver;
+    width: 47%;
+    padding-left:2%
 }

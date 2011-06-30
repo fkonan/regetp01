@@ -10,139 +10,136 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
 
     <div class="clear"></div>
 
-    <div class="grid_6 alpha">
-        <div class="boxblanca ficha_info">
-            <h3>Datos Generales</h3>
-            <dl>
-                <?php if($instit['Instit']['claseinstit_id']) {?>
-                <dt><?php __('Tipo de Institución'); ?>:</dt>
-                <dd>
+    <div class="grid_12 alpha omega">
+        <div class="boxblanca">
+            <div class="ficha_info">
+                <h3>Datos Generales</h3>
+                <dl>
+                    <?php if($instit['Instit']['claseinstit_id']) {?>
+                    <dt><?php __('Tipo de Institución'); ?>:</dt>
+                    <dd>
+                            <?php
+                            if(!empty($instit['Claseinstit']['name'])) {
+                                echo $instit['Claseinstit']['name'];
+                            }else {
+                                echo "<i>No declarado</i>";
+                            } ?>
+                    </dd>
+                        <?php }?>
+
+
+                    <? if($instit['Orientacion']['name']) {?>
+                    <dt ><?php __('Orientación'); ?>:</dt>
+                    <dd>
+                            <?php
+                            if(!empty($instit['Orientacion']['name'])) {
+                                echo $instit['Orientacion']['name'];
+                            }else {
+                                echo "<i>No declarado</i>";
+                            } ?>
+                    </dd>
+                        <? } ?>
+                    <dt ><?php __('Ámbito de Gestión'); ?>:</dt>
+                    <dd>
                         <?php
-                        if(!empty($instit['Claseinstit']['name'])) {
-                            echo $instit['Claseinstit']['name'];
+                        if(!empty($instit['Gestion']['name'])) {
+                            echo $instit['Gestion']['name'];
                         }else {
                             echo "<i>No declarado</i>";
                         } ?>
-                </dd>
-                    <?php }?>
+                    </dd>
 
-
-                <? if($instit['Orientacion']['name']) {?>
-                <dt ><?php __('Orientación'); ?>:</dt>
-                <dd>
+                    <dt><?php __('Tipo de Dependencia'); ?>:</dt>
+                    <dd>
                         <?php
-                        if(!empty($instit['Orientacion']['name'])) {
-                            echo $instit['Orientacion']['name'];
+                        if(!empty($instit['Dependencia']['name'])) {
+                            echo $instit['Dependencia']['name'];
                         }else {
                             echo "<i>No declarado</i>";
                         } ?>
-                </dd>
-                    <? } ?>
-                <dt ><?php __('Ámbito de Gestión'); ?>:</dt>
-                <dd>
-                    <?php
-                    if(!empty($instit['Gestion']['name'])) {
-                        echo $instit['Gestion']['name'];
-                    }else {
-                        echo "<i>No declarado</i>";
-                    } ?>
-                </dd>
+                    </dd>
+                    <?php if(!$con_programa_de_etp) {?>
+                    <dt>
+                            <?php echo $relacion_etp; ?>
+                    </dt>
+                    <dd>&nbsp;</dd>
+                        <?php }?>
+                </dl>
+            </div>    
+            <div class="ficha_info right">
+                <h3>Ficha de Contacto</h3>
+                <dl>
+                    <dt style="width:110px;"><?php __('Dirección'); ?>:</dt>
+                    <dd>
+                        <?php
+                        echo joinNotNull(", ", array($instit['Instit']['direccion'],$instit['Instit']['lugar'],
+                        $instit['Localidad']['name'],
+                        $instit['Departamento']['name'] == $instit['Localidad']['name']?null:$instit['Departamento']['name'],
+                        $instit['Jurisdiccion']['name']));
+                        ?>
+                    </dd>
 
-                <dt><?php __('Tipo de Dependencia'); ?>:</dt>
-                <dd>
-                    <?php
-                    if(!empty($instit['Dependencia']['name'])) {
-                        echo $instit['Dependencia']['name'];
-                    }else {
-                        echo "<i>No declarado</i>";
-                    } ?>
-                </dd>
-                <?php if(!$con_programa_de_etp) {?>
-                <dt>
-                        <?php echo $relacion_etp; ?>
-                </dt>
-                <dd>&nbsp;</dd>
-                    <?php }?>
-            </dl>
+                    <dt style="width:110px;"><?php __('Código Postal'); ?>:</dt>
+                    <dd>
+                        <?php
+                        if(!empty($instit['Instit']['cp'])) {
+                            echo $instit['Instit']['cp'];
+                        }else {
+                            echo "<i>No declarado</i>";
+                        } ?>
+                    </dd>
+
+                    <?php if($instit['Instit']['telefono']): ?>
+                    <dt style="width:110px;"><?php __('Teléfono'); ?>:</dt>
+                    <dd>
+                            <?php
+                            if(!empty($instit['Instit']['telefono'])) {
+                                echo $instit['Instit']['telefono'];
+                            }?>
+                    </dd>
+                    <?php endif;?>
+
+                    <?php if($instit['Instit']['mail']): ?>
+                    <dt style="width:110px;"><?php __('E-Mail'); ?>:</dt>
+                    <dd>
+                            <?php
+                            if(!empty($instit['Instit']['mail'])) {
+                                echo $hideMail->hide($instit['Instit']['mail']);
+                            }else {
+                                echo "<i>No declarado</i>";
+                            } ?>
+                    </dd>
+                    <?php endif;?>
+                    <?php if($instit['Instit']['web']): ?>
+                    <dt style="width:110px;"><?php __('Web'); ?>:</dt>
+                    <dd>
+                            <?php
+                            if(!empty($instit['Instit']['web'])) {
+                                echo $instit['Instit']['web'];
+                            }else {
+                                echo "<i>No declarado</i>";
+                            } ?>
+                    </dd>
+                    <?php endif;?>
+                </dl>
+                
+                
+                <?php 
+                echo $html->link(
+                        'Notificar información desactualizada',
+                        array(
+                            'controller'  => 'correos',
+                            'action'      => 'desactualizada',
+                            'nombre_completo' => urlencode($instit['Instit']['nombre_completo']),
+                            'cue_instit' => $cue_instit,
+                        ),
+                        array(
+                            'id' => 'alerta-desactualizada',
+                            )); 
+                ?>                      
+                            
+            </div>
             <div class="clear"></div>
-        </div>
-    </div>
-    
-    
-    
-    <div class="grid_6 omega">
-        <div class="boxblanca ficha_info">
-            <h3>Ficha de Contacto</h3>
-            <dl>
-                <dt style="width:110px;"><?php __('Dirección'); ?>:</dt>
-                <dd>
-                    <?php
-                    echo joinNotNull(", ", array($instit['Instit']['direccion'],$instit['Instit']['lugar'],
-                    $instit['Localidad']['name'],
-                    $instit['Departamento']['name'] == $instit['Localidad']['name']?null:$instit['Departamento']['name'],
-                    $instit['Jurisdiccion']['name']));
-                    ?>
-                </dd>
-
-                <dt style="width:110px;"><?php __('Código Postal'); ?>:</dt>
-                <dd>
-                    <?php
-                    if(!empty($instit['Instit']['cp'])) {
-                        echo $instit['Instit']['cp'];
-                    }else {
-                        echo "<i>No declarado</i>";
-                    } ?>
-                </dd>
-
-                <?php if($instit['Instit']['telefono']): ?>
-                <dt style="width:110px;"><?php __('Teléfono'); ?>:</dt>
-                <dd>
-                        <?php
-                        if(!empty($instit['Instit']['telefono'])) {
-                            echo $instit['Instit']['telefono'];
-                        }?>
-                </dd>
-                <?php endif;?>
-
-                <?php if($instit['Instit']['mail']): ?>
-                <dt style="width:110px;"><?php __('E-Mail'); ?>:</dt>
-                <dd>
-                        <?php
-                        if(!empty($instit['Instit']['mail'])) {
-                            echo $hideMail->hide($instit['Instit']['mail']);
-                        }else {
-                            echo "<i>No declarado</i>";
-                        } ?>
-                </dd>
-                <?php endif;?>
-                <?php if($instit['Instit']['web']): ?>
-                <dt style="width:110px;"><?php __('Web'); ?>:</dt>
-                <dd>
-                        <?php
-                        if(!empty($instit['Instit']['web'])) {
-                            echo $instit['Instit']['web'];
-                        }else {
-                            echo "<i>No declarado</i>";
-                        } ?>
-                </dd>
-                <?php endif;?>
-            </dl>
-            
-            
-            <?php 
-            echo $html->link(
-                    'Notificar información desactualizada',
-                    array(
-                        'controller'  => 'correos',
-                        'action'      => 'desactualizada',
-                        'nombre_completo' => urlencode($instit['Instit']['nombre_completo']),
-                        'cue_instit' => $cue_instit,
-                    ),
-                    array(
-                        'id' => 'alerta-desactualizada',
-                        )); 
-            ?>                      
-                        
         </div>
     </div>
 
