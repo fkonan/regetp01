@@ -203,12 +203,14 @@ background: linear-gradient(left, #0090d0 0%,#7fc2ea 100%); /* W3C */
 
 #header h1 {
     color: white;
-    text-align: center;
+    left: 106px;
+    margin: 0;
     padding: 10px;
-    margin: 0px;
     position: relative;
+    text-align: center;
+    top: 21px;
+    width: 600px;
     z-index: 5;
-    top: 33px;
 }
 #header h1 a{
     text-decoration: none;
