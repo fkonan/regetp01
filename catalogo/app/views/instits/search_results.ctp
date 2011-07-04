@@ -49,7 +49,7 @@
         <div class="clear"></div>
     </div>
     <? if (sizeof($instits) > 0) { ?>
-    <ol id="items">
+        <ol id="items" class="items">
         <?php foreach($instits as $instit) : ?>
             <?  $año_actual = date("Y");
                 $fecha_hasta = "$año_actual-07-21"; //hasta julio

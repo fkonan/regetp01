@@ -93,7 +93,7 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
             <div class="results_titulos">
                 <div class="paginatorContainer"></div>
                 <ul class="seleccionados"></ul>
-                <ul id="items" class="results">
+                <ul id="items" class="items results">
                     Sin Resultados
                 </ul>
             </div>
@@ -108,7 +108,7 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
             <h3>¿Dónde estudiar?</h3>
             <div class="results_instits">
                 <div class="paginatorContainer"></div>
-                <ul id="items" class="results">
+                <ul id="items" class="items results">
                     Sin Resultados
                 </ul>
             </div>

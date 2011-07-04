@@ -21,15 +21,6 @@ dd ul{
     font-weight: bolder;
 }
 
-.titulo{
-    font-size: 0.95em;
-    margin:5px 0 5px 0;
-}
-
-.titulo h3 {
-    padding: 10px 0 0px 14px;
-    margin: 0px;
-}
 
 .alerta-desactualizada{   
     text-decoration: none;
@@ -87,22 +78,23 @@ dd ul{
 .items-nombre {
     font-size: 9pt;
     font-weight: bold;
+    width: auto;
 }
 
 .items-domicilio {
-    float: left;
     font-size: 9pt;
-    width: 70%
+    font-weight: normal;
 }
 .items-gestion {
     float: left;
     font-size: 9pt;
-    width: 20%
+    font-style: italic;
+    font-weight: normal;
 }
 
 .items-actions {
-    float: left;
-    width: 10%
+    padding-top: 8px; 
+    float: right;
 }
 
 #boxAyuda{
@@ -117,34 +109,27 @@ cite{
     padding-left: 30px;
 }
 
-#titulos-list{
-    padding-right: 40px;
+
+ul.titulos-list{
+    list-style-image: url(img/diploma_listitem.png);
 }
-#titulos-list li {
+ul.titulos-list li{
     border-bottom: 1px dashed #CDCDCD;
+    cursor: pointer;
     height: auto !important;
     margin: 0;
     padding: 3px 0;
     position: relative;
-    cursor: pointer;
 }
-
-#titulos-list li:hover{
+ul.titulos-list li:hover{
     color:black;
 }
 
-
-.mas_info_gris_small{
-    float: right;
-    margin-right: 20px;
+ul.titulos-list li .mas_info_azul_small, ul.titulos-list li .mas_info_gris_small{
     cursor: pointer;
+    float: right;
 }
 
-.mas_info_azul_small{
-    float: right;
-    margin-right: 20px;
-    cursor: pointer;
-}
 
 .ficha_info{
     min-height: 158px;

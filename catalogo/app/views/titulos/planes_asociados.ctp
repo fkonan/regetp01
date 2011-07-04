@@ -72,7 +72,7 @@ $paginator->options(array(
         <div class="clear"></div>
     </div>
     <? if (!empty($planes) > 0) { ?>
-    <ol id="items">
+        <ul id="items" class="items">
         <?php foreach($planes as $plan) : ?>
         <?  $año_actual = date("Y");
         $fecha_hasta = "$año_actual-07-21"; //hasta julio
@@ -91,29 +91,35 @@ $paginator->options(array(
                                     'id' => $plan['Instit']['id'],
                                     'slug' => slug($plan['Instit']['nombre_completo'])))
                     ?>" style="display:block; cursor:pointer;">
-            <div class="items-nombre">
-                <?= "".($plan['Instit']['cue']*100)+$plan['Instit']['anexo']." - ". $plan['Instit']['nombre_completo']; ?>
-            </div>
-            <div class="clear"></div>
-            <div class="items-domicilio">
-                Domicilio:
-                    <?php
-                    echo joinNotNull(", ", array($plan['Instit']['direccion'],$plan['Instit']['lugar'],
-                    $plan['Instit']['Localidad']['name'],
-                    $plan['Instit']['Departamento']['name'] == $plan['Instit']['Localidad']['name']?null:$plan['Instit']['Departamento']['name'],
-                    $plan['Instit']['Jurisdiccion']['name']));
-                    ?>
-            </div>
-            <div class="items-gestion"><?= $plan['Instit']['Gestion']['name'] ?></div>
-            <div class="items-actions">
-                <span class="mas_info_azul_small"></span>
-            </div>
-            <div class="clear"></div>
+                
+                <span class="items-actions">
+                    <span class="mas_info_azul_small"></span>
+                </span>
+                
+                <span class="items-nombre">
+                    <?= "".($plan['Instit']['cue']*100)+$plan['Instit']['anexo']." - ". $plan['Instit']['nombre_completo']; ?>
+                    
+                    <br />
+                    <span class="items-gestion"><?= $plan['Instit']['Gestion']['name'] ?></span>
+                    <span class="items-domicilio">
+                    &nbsp;-
+                    Domicilio:
+                        <?php
+                        echo joinNotNull(", ", array($plan['Instit']['direccion'],$plan['Instit']['lugar'],
+                        $plan['Instit']['Localidad']['name'],
+                        $plan['Instit']['Departamento']['name'] == $plan['Instit']['Localidad']['name']?null:$plan['Instit']['Departamento']['name'],
+                        $plan['Instit']['Jurisdiccion']['name']));
+                        ?>
+                    </span>
+                </span>                
+                
+                
+                <div class="clear"></div>
             </a>
         </li>
 
         <? endforeach?>
-    </ol>
+    </ul>
     <?php
     }
     else {
