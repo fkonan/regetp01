@@ -42,12 +42,14 @@
 
         Router::connect('/guia-del-estudiante', array('controller' => 'titulos', 'action' => 'guiaDelEstudiante'));
 
-        Router::connect('/titulos/nivel-secundario-tecnico', array('controller' => 'titulos', 'action' => 'search', 3));
-        Router::connect('/titulos/nivel-superior-tecnico', array('controller' => 'titulos', 'action' => 'search', 4));
-        Router::connect('/titulos/formacion-profesional', array('controller' => 'titulos', 'action' => 'search', 1));
+        Router::connect('/titulos-nivel-secundario-tecnico', array('controller' => 'titulos', 'action' => 'search', 3));
+        Router::connect('/titulos-nivel-superior-tecnico', array('controller' => 'titulos', 'action' => 'search', 4));
+        Router::connect('/titulos-formacion-profesional', array('controller' => 'titulos', 'action' => 'search', 1));
 
         Router::connect('/buscador-de-titulos-y-certificaciones', array('controller' => 'titulos', 'action' => 'search'));
         Router::connect('/buscador-de-instituciones', array('controller' => 'instits', 'action' => 'search'));
+
+        Router::connect('/contacto', array('controller' => 'correos', 'action' => 'contacto'));
 
         Router::connect(    // E.g. /titulos/CakePHP_Rocks-3
             '/titulo/:slug-:id',
