@@ -313,4 +313,34 @@ function joinNotNull($glue, $val){
     echo join($glue, $values);
 }
 
+/**
+ * Returns a lower case string with all spaces converted to $replacement and non word characters removed.
+ *
+ * @param string $string
+ * @param string $replacement
+ * @param int $length  max string length
+ * @return string
+ * @access public
+ */
+function slug($string, $replacement = '-', $length = 100) {
+    $tofind = "ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ";
+    $replac = "AAAAAAaaaaaaOOOOOOooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn";
+    $string = strtolower(strtr($string,$tofind,$replac));
+    
+    $posParentesisIni = strpos($string, '(');
+    $posParentesisFin = strpos($string, ')');
+    if ($posParentesisIni !== false && $posParentesisFin !== false && $posParentesisFin > $posParentesisIni) {
+        // existe algo entre paréntesis, se elimina
+        $string = substr_replace($string, '', $posParentesisIni, $posParentesisFin - $posParentesisIni);
+    }
+
+    $string = Inflector::slug($string, $replacement);
+
+    if (strlen($string) > $length) {
+        $string = substr($string, 0, $length);
+    }
+
+    return $string;
+}
+
 ?>

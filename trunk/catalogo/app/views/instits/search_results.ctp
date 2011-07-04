@@ -62,7 +62,12 @@
                 }
             ?>
             <li>
-                <a href="<?= $html->url('/instits/view/'.$instit['Instit']['id'])?>" style="display:block; cursor:pointer;">
+                <a href="<?php echo $html->url(array(
+                                    'controller' => 'instits',
+                                    'action' => 'view',
+                                    'id' => $instit['Instit']['id'],
+                                    'slug' => slug($instit['Instit']['nombre_completo'])))
+                    ?>" style="display:block; cursor:pointer;">
                 <div class="items-nombre">
                     <?= "".($instit['Instit']['cue']*100)+$instit['Instit']['anexo']." - ". $instit['Instit']['nombre_completo']; ?>
                 </div>

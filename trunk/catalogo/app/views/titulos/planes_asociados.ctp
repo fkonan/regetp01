@@ -85,7 +85,12 @@ $paginator->options(array(
         }
         ?>
         <li>
-            <a href="<?= $html->url('/instits/view/'.$plan['Instit']['id'])?>" style="display:block; cursor:pointer;">
+            <a href="<?php echo $html->url(array(
+                                    'controller' => 'instits',
+                                    'action' => 'view',
+                                    'id' => $plan['Instit']['id'],
+                                    'slug' => slug($plan['Instit']['nombre_completo'])))
+                    ?>" style="display:block; cursor:pointer;">
             <div class="items-nombre">
                 <?= "".($plan['Instit']['cue']*100)+$plan['Instit']['anexo']." - ". $plan['Instit']['nombre_completo']; ?>
             </div>
