@@ -11,14 +11,14 @@
 }
 
 .header_wrapper{
-    background: url(img/header_completo.png) no-repeat !important;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0090d0', endColorstr='#7fc2ea',GradientType=1 ); /* IE6-9 */    
 }
 
 #header{
-    background: none
+    background: none;
 }
 #header_title{
-    background: none
+    background: url(img/header_completo.png) no-repeat;
 }
 .menu_wrapper{
     margin-top:-72px;

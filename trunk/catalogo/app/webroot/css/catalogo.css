@@ -70,14 +70,14 @@ h1 A:HOVER, h2 A:HOVER, h3 A:HOVER, h4 A:HOVER{
 }
 
 h1{
-    font-size: 1.6em;
+    font-size: 1.45em;
 }
 
 h2{
-    font-size: 1.43em;
+    font-size: 1.42em;
 }
 h3{
-    font-size: 1.4em;
+    font-size: 1.3em;
     margin-bottom: 5px;
     margin-top: 5px;
 }
@@ -108,10 +108,28 @@ h1.corpus{
     clear: both;
 }
 
+
+
+h1.titulo, h2.titulo, h3.titulo, h4.titulo {
+    padding-left: 30px;
+    background: url(img/diploma_16.png);
+    background-position: 0% 50%;
+    background-repeat: no-repeat;
+}
+
+h1.instit, h2.instit, h3.instit, h4.instit{
+    padding-left: 30px;
+    background: url(img/pizarron_16.png);
+    background-position: 0% 50%;
+    background-repeat: no-repeat;
+}
+
 h3 {
     font-weight: bold;
     color: #b1cc2f;
 }
+
+
 
 ol, ul {
     list-style: url(img/listitem.gif);
@@ -122,6 +140,19 @@ ol ol, ul ul{
     list-style: url(img/listitem2.gif);
     padding-left: 30px;
 }
+
+
+ul.items{
+    margin: 0px;
+}
+
+ul.items li{
+    border-bottom: 1px dashed #CDCDCD;
+    height: auto !important;
+    position: relative;
+}
+
+
 
 
 dt{
@@ -182,7 +213,7 @@ background: linear-gradient(left, #0090d0 0%,#7fc2ea 100%); /* W3C */
 #header_title{
    position: relative;
    background: url(img/bandera_trans.png) no-repeat right;
-   height: 144px;
+   height: 142px;
 }
 
 
@@ -208,7 +239,7 @@ background: linear-gradient(left, #0090d0 0%,#7fc2ea 100%); /* W3C */
     margin: 0px;
     position: relative;
     z-index: 5;
-    top: 33px;
+    top: 37px;
 }
 #header h1 a{
     text-decoration: none;
@@ -307,7 +338,7 @@ background: linear-gradient(left, #0090d0 0%,#7fc2ea 100%); /* W3C */
     overflow: hidden;
     background: url(img/lupazul_small.png) no-repeat;
     height: 15px;
-    display: inline-block;
+    display: block;
     width: 15px;
     outline: none;
     vertical-align: middle;
@@ -319,7 +350,7 @@ background: linear-gradient(left, #0090d0 0%,#7fc2ea 100%); /* W3C */
     background: url(img/lupagris_small.png)  no-repeat;
     height: 15px;
     width: 15px;
-    display: inline-block;
+    display: block;
     outline: none;
     vertical-align: middle;
 }

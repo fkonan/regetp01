@@ -1,5 +1,7 @@
 <?php
 echo $html->css(array('catalogo.titulos'));
+
+$this->pageTitle =  $titulo['Titulo']['name'];
 ?>
 <script type="text/javascript">
     jQuery(document).ready(function() {
@@ -12,10 +14,10 @@ echo $html->css(array('catalogo.titulos'));
     });
 </script>
 <div class="grid_12">
-    <h2><?php echo $titulo['Titulo']['name']?></h2>
+    <h1><?php echo $titulo['Titulo']['name']?></h1>
     <div class="boxblanca">
-        <dl style="padding-left: 20px;">
-            <h3>Datos Generales</h3>
+        <h3 class="titulo">Datos generales del título o certificado</h3>
+        <dl>
             <dt style="width: 168px;"><?php __('Oferta'); ?>:</dt>
             <dd>
                 <?php
@@ -45,7 +47,7 @@ echo $html->css(array('catalogo.titulos'));
             </dd>
         </dl>
     </div>
-    <h4><?php  __('Instituciones que ofrecen el t&iacute;tulo o certificaci&oacute;n');?></h4>
+    <h2><?php  __('Instituciones que ofrecen el t&iacute;tulo o certificaci&oacute;n');?></h2>
     <div id="tituloPlanes">
         <?php echo $this->requestAction('/titulos/planes_asociados/'.$titulo['Titulo']['id'], array('return', 'criterios' => @$criterios)); ?>
     </div>

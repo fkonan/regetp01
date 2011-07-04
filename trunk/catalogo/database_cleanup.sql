@@ -54,6 +54,14 @@ delete from estructura_planes where etapa_id = 102;
 delete from etapas where id = 102;
 
 
+/*
+    Borrar Planes Huerfanos. 
+
+¡¡ Debe estar ultima esta query !! 
+*/
+delete from planes where instit_id not in (select id from instits);
+
+
 /*borro todos los usuarios*/
 delete from users;
 /*creo el usuario "invitado":"catalogo2011"*/

@@ -23,13 +23,13 @@
         );
         ?>
         <div class="box_izquierda">
-            <h4>Nivel y Sector</h4>
+            <h4>Nivel y Sector de la Oferta</h4>
             <?php
                 echo $form->input('oferta_id',array( 'div' => true,
                                                     'class' => 'autosubmit ',
                                                     'label'=> 'Nivel',
                                                     'id' => 'ofertaId',
-                                                    'empty' => 'Todas',
+                                                    'empty' => 'Seleccione',
                                                     'disabled'=> $bloquearOferta
                                                    ));
                 if($bloquearOferta){
@@ -75,7 +75,7 @@
             echo $form->input('Instit.jurisdiccion_id', array('label'=>'Jurisdicción',
                                                                   'div' => false,
                                                                   'class' => 'autosubmit ',
-                                                                  'empty' => array('0'=>'Todas'),
+                                                                  'empty' => array('0'=>'Seleccione'),
                                                                   'id'=>'jurisdiccion_id'));
             echo '<span class="ajax_update" id="ajax_indicator" style="display:none; margin-top: -32px; float: right; clear: none">'.$html->image('ajax-loader.gif').'</span>';
                 

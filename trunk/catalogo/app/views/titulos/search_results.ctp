@@ -34,7 +34,7 @@ $paginator->options(array(  'update' => 'consoleResult',
         <div class="clear"></div>
     </div>
     <? if (!empty($titulos)) {?>
-    <ol id="items">
+    <ol id="items" class="items">
         <?php
         $i = 0;
         foreach ($titulos as $titulo):

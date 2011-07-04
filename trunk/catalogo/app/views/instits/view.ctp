@@ -2,18 +2,20 @@
 echo $html->css('catalogo.instits', false);
 
 $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
+
+$this->pageTitle =  $cue_instit.' '.$instit['Instit']['nombre_completo'];
+
 ?>
 <div class="grid_12">
-    <h2 class="grid_12 alpha">
+    <h1>
         <?php echo $cue_instit ?> <?php echo $instit['Instit']['nombre_completo'] ?>
-    </h2>
+    </h1>
 
-    <div class="clear"></div>
 
     <div class="grid_12 alpha omega">
         <div class="boxblanca">
             <div class="ficha_info">
-                <h3>Datos Generales</h3>
+                <h3 class="instit">Datos generales de la institución</h3>
                 <dl>
                     <?php if($instit['Instit']['claseinstit_id']) {?>
                     <dt><?php __('Tipo de Institución'); ?>:</dt>
@@ -143,19 +145,20 @@ $cue_instit = ($instit['Instit']['cue']*100)+$instit['Instit']['anexo'];
         </div>
     </div>
 
-    <div class="clear" style="height:18px;"></div>
+    <div class="clear"></div>
 
+    <h2>Títulos o Certificaciones que ofrece la Institución</h2>
     <div class="boxblanca">
         <?php
         if (!empty($instit['Plan'])) {
             ?>
-        <h3>Títulos o Certificaciones que ofrece la Institución</h3>
-        <ul id="titulos-list">
+        
+        <ul id="titulos-list" class="titulos-list items">
         <?php
         $ofertaAnt = '';
         foreach ($instit['Plan'] as $plan) {
             if ($ofertaAnt != $plan['Oferta']['id'] ) {
-                echo "<h4 style='margin-top: 15px;'>". $plan['Oferta']['name'] ."</h4>";
+                echo "<h3 style='margin-top: 15px;'>". $plan['Oferta']['name'] ."</h3>";
                 $ofertaAnt = $plan['Oferta']['id'];
             }
 
