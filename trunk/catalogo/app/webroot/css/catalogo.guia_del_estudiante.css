@@ -236,3 +236,7 @@ ol, ul {
 .results_titulos, .results_instits{
     min-height: 110px;
 }
+
+.selected_title{
+    background-color: #ECF4F9;
+}

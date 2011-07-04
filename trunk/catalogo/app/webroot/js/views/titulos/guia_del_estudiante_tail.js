@@ -56,6 +56,11 @@
     $(".add_filter").live("click",function(event){
         titulosForm.submit();
     });
+
+    $(".styled_checkbox").live("click",function(event){
+        $("#items li").removeClass("selected_title");
+        $(this).parent().addClass("selected_title")
+    });
     
     $('input[type=text]').live("keypress", function(e){
         if(e.which == 13){
