@@ -22,11 +22,11 @@ class HideMailHelper extends Helper {
             $image = imagecreatetruecolor($width,$height);
 
             /*el color rojo lo uso como background transparente*/
-            $red = imagecolorallocate($image, 255, 0, 0);
+            $white = imagecolorallocate($image, 255, 255, 255);
             $fontColor = ImageColorAllocate($image, 88, 88, 90);
 
-            imagefill($image, 0, 0, $red);
-            imagecolortransparent($image, $red);
+            imagefill($image, 0, 0, $white);
+            imagecolortransparent($image, $white);
             imagestring($image, 3, 0, 0, $mail, $fontColor);
 
             imagepng($image, $filename);
