@@ -39,6 +39,35 @@
         Router::connect('/docs/*', array('controller' => 'pages', 'action' => 'display'));
         
         Router::connect('/files', '/app/webroot/files');
+
+        Router::connect('/guia-del-estudiante', array('controller' => 'titulos', 'action' => 'guiaDelEstudiante'));
+
+        Router::connect('/titulos/nivel-secundario-tecnico', array('controller' => 'titulos', 'action' => 'search', 3));
+        Router::connect('/titulos/nivel-superior-tecnico', array('controller' => 'titulos', 'action' => 'search', 4));
+        Router::connect('/titulos/formacion-profesional', array('controller' => 'titulos', 'action' => 'search', 1));
+
+        Router::connect('/buscador-de-titulos-y-certificaciones', array('controller' => 'titulos', 'action' => 'search'));
+        Router::connect('/buscador-de-instituciones', array('controller' => 'instits', 'action' => 'search'));
+
+        Router::connect(    // E.g. /titulos/CakePHP_Rocks-3
+            '/titulo/:slug-:id',
+            array('controller' => 'titulos', 'action' => 'view'),
+            array(
+                // order matters since this will simply map ":id" to $id in your action
+                'pass' => array('id', 'slug'),
+                'id' => '[0-9]+'
+            )
+        );
+
+        Router::connect(    // E.g. /instits/CakePHP_Rocks-3
+            '/institucion/:slug-:id',
+            array('controller' => 'instits', 'action' => 'view'),
+            array(
+                // order matters since this will simply map ":id" to $id in your action
+                'pass' => array('id', 'slug'),
+                'id' => '[0-9]+'
+            )
+        );
         
         
         Router::parseExtensions('json');

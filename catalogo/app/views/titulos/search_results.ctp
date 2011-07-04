@@ -40,7 +40,12 @@ $paginator->options(array(  'update' => 'consoleResult',
         foreach ($titulos as $titulo):
         ?>
         <li>
-            <a href="<?php echo $html->url('/titulos/view/'.$titulo['Titulo']['id'])?>" style="display:block;">
+            <a href="<?php echo $html->url(array(
+                                    'controller' => 'titulos',
+                                    'action' => 'view',
+                                    'id' => $titulo['Titulo']['id'],
+                                    'slug' => slug($titulo['Titulo']['name'])))
+                    ?>" style="display:block;">
             <div class="items-nombre">
                         <strong><?php
                         /*$linkTitulo = $html->link(

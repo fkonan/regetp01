@@ -105,10 +105,10 @@ $(function() {
 
         <div class="box_home_buscadores">
             <div class="box_pad_wrapper" style="margin-left: 20px; padding-right: 0px;">
-                <h4><?php echo $html->link('Búsqueda por instituciones',array('controller'=>'instits', 'action'=>'search_form'))?></h4>
+                <h4><?php echo $html->link('Búsqueda por instituciones',array('controller'=>'instits', 'action'=>'search'))?></h4>
                
                 <?php echo $html->link('más información',
-                        array('controller'=>'instits', 'action'=>'search_form'),
+                        array('controller'=>'instits', 'action'=>'search'),
                         array('class'=>'mas_info_azul', 'style'=> 'margin-right: 5px'));?>
                 <p>
                     Para obtener el detalle de los títulos y certificaciones que ofrece una institución educativa.
