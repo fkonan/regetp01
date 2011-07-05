@@ -1,6 +1,11 @@
 <?php
 
 foreach( $instits as &$i) {
+    $i['Instit']['url'] = utf8_encode($html->url(array(
+                                    'controller' => 'instits',
+                                    'action' => 'view',
+                                    'id' => $i['Instit']['id'],
+                                    'slug' => slug($i['Instit']['nombre_completo']))));
     $i['Instit']['nombre_completo'] = utf8_encode($i['Instit']['nombre_completo']);
     $i['Departamento']['name'] = utf8_encode($i['Departamento']['name']);
     $i['Localidad']['name'] = utf8_encode($i['Localidad']['name']);
