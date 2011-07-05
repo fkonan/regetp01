@@ -111,13 +111,13 @@ h1.corpus{
 
 
 h1.titulo, h2.titulo, h3.titulo, h4.titulo {    
-    background: url(img/diploma_16.png);
+    background: url(img/diploma.png);
     background-position: 100% 50%;
     background-repeat: no-repeat;
 }
 
 h1.instit, h2.instit, h3.instit, h4.instit{
-    background: url(img/pizarron_16.png);
+    background: url(img/pizarron_22.png);
     background-position: 100% 50%;
     background-repeat: no-repeat;
 }
