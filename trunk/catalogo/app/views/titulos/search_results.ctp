@@ -86,14 +86,15 @@ $paginator->options(array(  'update' => 'consoleResult',
 
     if ($paginator->numbers()) {
     ?>
-        <div style="text-align:center; display:block;margin-bottom: 10px">
+        <div style="text-align:center; margin-bottom: 10px">
             <?php
             echo $paginator->prev('« Anterior ',null, null, array('class' => 'disabled', 'tag' => 'span'));
             echo " | ".$paginator->numbers(array('modulus'=>'9'))." | ";
             echo $paginator->next(' Siguiente »', null, null, array('class' => 'disabled'));
             ?>
-            <span class="ajax_update" id="ajax_paginator_indicator" style="display:none; padding-left:10px;"><?php echo $html->image('ajax-loader.gif')?></span>
         </div>
+
+        <div id="ajax_paginator_indicator" style="display: none;text-align: center"><?php echo $html->image('ajax-loader.gif')?></div>
         <?php  } ?>
     <div class="clear"></div>
 </div>

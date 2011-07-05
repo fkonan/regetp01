@@ -252,7 +252,7 @@
                     valor = titulosForm.find("[name='" + params[i].name + "']").val();
                 }
                 
-                $('<span class="filtro"/>').html("<span><strong>" + nombre + ":</strong>" + valor + "</span><a href='#' class='deleteable' alt='Quitar este criterio de búsqueda'> X </a><div class='clear'></div>")
+                $('<span class="filtro"/>').html("<span><strong>" + nombre + "</strong>" + valor + "</span><a href='#' class='deleteable' alt='Quitar este criterio de búsqueda'> X </a><div class='clear'></div>")
                 .append(
                     $('<input>').attr({
                         type: 'hidden',
