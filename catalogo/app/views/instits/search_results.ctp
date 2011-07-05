@@ -68,10 +68,17 @@
                                     'id' => $instit['Instit']['id'],
                                     'slug' => slug($instit['Instit']['nombre_completo'])))
                     ?>" style="display:block; cursor:pointer;">
-                <div class="items-nombre">
+                <span class="items-actions">
+                    <span class="mas_info_azul_small"></span>
+                </span>
+                    
+                <span class="items-nombre">
                     <?= "".($instit['Instit']['cue']*100)+$instit['Instit']['anexo']." - ". $instit['Instit']['nombre_completo']; ?>
-                </div>
-                <div class="items-domicilio">
+                </span>
+                <br />
+                <span class="items-gestion"><?= $instit['Gestion']['name'] ?></span>
+                <span class="items-domicilio">
+                    &nbsp; - 
                     Domicilio: 
                     <?php
                         echo joinNotNull(", ", array($instit['Instit']['direccion'],$instit['Instit']['lugar'],
@@ -79,11 +86,9 @@
                                              $instit['Departamento']['name'] == $instit['Localidad']['name']?null:$instit['Departamento']['name'],
                                              $instit['Jurisdiccion']['name']));
                     ?>
-                </div>
-                <div class="items-gestion"><?= $instit['Gestion']['name'] ?></div>
-                <div class="items-actions">
-                    <span class="mas_info_azul_small"></span>
-                </div>
+                </span>
+                
+                
                 <div class="clear"></div>
                 </a>
             </li>
@@ -105,7 +110,7 @@
             echo " | ".$paginator->numbers(array('modulus'=>'9'))." | ";
             echo $paginator->next(' Siguiente »', null, null, array('class' => 'disabled'));
             ?>
-            <span class="ajax_update" id="ajax_paginator_indicator" style="display:none; padding-left:10px;"><?php echo $html->image('ajax-loader.gif')?></span>
+            <div id="ajax_paginator_indicator" style="display: none;text-align: center"><?php echo $html->image('ajax-loader.gif')?></div>
         </div>
     <?php } ?>
 </div>

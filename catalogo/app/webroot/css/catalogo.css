@@ -142,11 +142,11 @@ ol ol, ul ul{
 }
 
 
-ul.items{
+ul.items, ol.items{
     margin: 0px;
 }
 
-ul.items li{
+ul.items li, ol.items li{
     border-bottom: 1px dashed #CDCDCD;
     height: auto !important;
     position: relative;
