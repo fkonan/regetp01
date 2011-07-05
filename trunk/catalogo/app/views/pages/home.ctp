@@ -65,7 +65,7 @@ $(function() {
     </div>
 </div>
 
-<h2 class="grid_12">Búsquedas según perfil del usuario</h2>
+<h2 class="grid_12">Búsquedas según características del usuario</h2>
 <div class="clear"></div>
 
 <div class="grid_4">
@@ -121,7 +121,7 @@ $(function() {
 </div>
 
 
-<h2 class="grid_12">Búsquedas por oferta formativa</h2>
+<h2 class="grid_12">Búsqueda por nivel de la oferta</h2>
 
 <div class="clear"></div>
 
