@@ -23,7 +23,7 @@
         );
         ?>
         <div class="box_izquierda">
-            <h4>Nivel y Sector de la Oferta</h4>
+            <h4>Nivel y Sector</h4>
             <?php
                 echo $form->input('oferta_id',array( 'div' => true,
                                                     'class' => 'autosubmit ',
@@ -69,7 +69,7 @@
                 ?>
         </div>
         <div class="box_derecha">
-            <h4>Localización de la Oferta</h4>
+            <h4>Localización</h4>
             <?php
             
             echo $form->input('Instit.jurisdiccion_id', array('label'=>'Jurisdicción',
