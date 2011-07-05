@@ -7,15 +7,14 @@ $this->pageTitle =  $cue_instit.' '.$instit['Instit']['nombre_completo'];
 
 ?>
 <div class="grid_12">
-    <h1>
+    <h1 class="instit">
         <?php echo $cue_instit ?> <?php echo $instit['Instit']['nombre_completo'] ?>
     </h1>
-
 
     <div class="grid_12 alpha omega">
         <div class="boxblanca">
             <div class="ficha_info">
-                <h3 class="instit">Datos generales de la institución</h3>
+                <h3>Datos generales de la institución</h3>
                 <dl>
                     <?php if($instit['Instit']['claseinstit_id']) {?>
                     <dt><?php __('Tipo de Institución'); ?>:</dt>
@@ -69,7 +68,7 @@ $this->pageTitle =  $cue_instit.' '.$instit['Instit']['nombre_completo'];
                 </dl>
             </div>    
             <div class="ficha_info right">
-                <h3>Ficha de Contacto</h3>
+                <h3>Ficha de contacto</h3>
                 <dl>
                     <dt style="width:110px;"><?php __('Dirección'); ?>:</dt>
                     <dd>
@@ -147,7 +146,7 @@ $this->pageTitle =  $cue_instit.' '.$instit['Instit']['nombre_completo'];
 
     <div class="clear"></div>
 
-    <h2>Títulos o Certificaciones que ofrece la Institución</h2>
+    <h2 class="titulo">Títulos o Certificaciones que ofrece la institución</h2>
     <div class="boxblanca">
         <?php
         if (!empty($instit['Plan'])) {

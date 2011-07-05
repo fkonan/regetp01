@@ -111,7 +111,6 @@ cite{
 
 
 ul.titulos-list{
-    list-style-image: url(img/diploma_listitem.png);
 }
 ul.titulos-list li{
     border-bottom: 1px dashed #CDCDCD;
