@@ -50,6 +50,7 @@
         Router::connect('/buscador-de-instituciones', array('controller' => 'instits', 'action' => 'search'));
 
         Router::connect('/contacto', array('controller' => 'correos', 'action' => 'contacto'));
+        
 
         Router::connect(    // E.g. /titulos/CakePHP_Rocks-3
             '/titulo/:slug-:id',

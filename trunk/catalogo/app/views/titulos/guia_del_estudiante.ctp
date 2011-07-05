@@ -24,7 +24,7 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
 <script id="institTemplate" type="text/x-jquery-tmpl">
     <li>
         <div class="items-nombre">
-            <a href="<?php echo $this->base?>/instits/view/${Instit.id}">
+            <a href="${Instit.url}">
             ${Instit.cue}${Instit.anexo} - ${Instit.nombre_completo}</a>
         </div>
         <div class="items-domicilio">
