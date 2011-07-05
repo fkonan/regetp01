@@ -14,9 +14,9 @@ $this->pageTitle =  $titulo['Titulo']['name'];
     });
 </script>
 <div class="grid_12">
-    <h1 class="titulo"><?php echo $titulo['Titulo']['name']?></h1>
+    <h1><?php echo $titulo['Titulo']['name']?></h1>
     <div class="boxblanca">
-        <h3>Datos generales del título o certificación</h3>
+        <h3 class="titulo">Datos generales del título o certificación</h3>
         <dl>
             <dt style="width: 168px;"><?php __('Oferta'); ?>:</dt>
             <dd>
@@ -46,9 +46,15 @@ $this->pageTitle =  $titulo['Titulo']['name'];
                 } ?>
             </dd>
         </dl>
+        <br />
     </div>
-    <h2 class="instit"><?php  __('Instituciones que ofrecen el t&iacute;tulo o certificaci&oacute;n');?></h2>
+    
+    <div class="clear" style="height: 10px;"></div>
+    
     <div id="tituloPlanes">
-        <?php echo $this->requestAction('/titulos/planes_asociados/'.$titulo['Titulo']['id'], array('return', 'criterios' => @$criterios)); ?>
+        <div class="boxblanca" id="search_results">
+            <h3 class="instit"><?php  __('Instituciones que ofrecen el t&iacute;tulo o certificaci&oacute;n');?></h3>
+            <?php echo $this->requestAction('/titulos/planes_asociados/'.$titulo['Titulo']['id'], array('return', 'criterios' => @$criterios)); ?>
+        </div>
     </div>
 </div>

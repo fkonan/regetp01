@@ -41,12 +41,5 @@ jQuery(document).ready(function() {
         </li>
         <?php }?>
     </ul>
-    <?php echo $html->link('Ver más información del título o certificación', 
-                                array(  'controller' => 'titulos', 
-                                        'action' => 'view', 
-                                        $plan['Plan']['titulo_id']
-                                ), 
-                                array('target'=>'_blank')
-                          ); 
-    ?>
+   
 </div>

@@ -7,7 +7,7 @@ $this->pageTitle =  $cue_instit.' '.$instit['Instit']['nombre_completo'];
 
 ?>
 <div class="grid_12">
-    <h1 class="instit">
+    <h1>
         <?php echo $cue_instit ?> <?php echo $instit['Instit']['nombre_completo'] ?>
     </h1>
 
@@ -68,7 +68,7 @@ $this->pageTitle =  $cue_instit.' '.$instit['Instit']['nombre_completo'];
                 </dl>
             </div>    
             <div class="ficha_info right">
-                <h3>Ficha de contacto</h3>
+                <h3 class="instit">Ficha de contacto</h3>
                 <dl>
                     <dt style="width:110px;"><?php __('Dirección'); ?>:</dt>
                     <dd>
@@ -144,10 +144,11 @@ $this->pageTitle =  $cue_instit.' '.$instit['Instit']['nombre_completo'];
         </div>
     </div>
 
-    <div class="clear"></div>
+    <div class="clear" style="height: 10px;"></div>
 
-    <h2 class="titulo">Títulos o Certificaciones que ofrece la institución</h2>
+    
     <div class="boxblanca">
+        <h3 class="titulo">Títulos o Certificaciones que ofrece la institución</h3>
         <?php
         if (!empty($instit['Plan'])) {
             ?>
@@ -157,7 +158,7 @@ $this->pageTitle =  $cue_instit.' '.$instit['Instit']['nombre_completo'];
         $ofertaAnt = '';
         foreach ($instit['Plan'] as $plan) {
             if ($ofertaAnt != $plan['Oferta']['id'] ) {
-                echo "<h3 style='margin-top: 15px;'>". $plan['Oferta']['name'] ."</h3>";
+                echo "<h4 style='margin-top: 15px;'>". $plan['Oferta']['name'] ."</h4>";
                 $ofertaAnt = $plan['Oferta']['id'];
             }
 

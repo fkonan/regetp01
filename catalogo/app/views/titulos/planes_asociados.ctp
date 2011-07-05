@@ -8,7 +8,7 @@ $paginator->options(array(
 'indicator' => 'spinner',
 ));
 ?>
-<div class="boxblanca" id="search_results">
+
     <div style="float:right">
         <?php
         echo $form->create('Titulo', array(
@@ -139,7 +139,7 @@ $paginator->options(array(
         <span class="ajax_update" id="ajax_paginator_indicator" style="display:none; padding-left:10px;"><?php echo $html->image('ajax-loader.gif')?></span>
     </div>
     <?php  } ?>
-</div>
+
 <script type="text/javascript">
     $(".autosubmit").change(function() {
         $('#InstitsForm').submit();
