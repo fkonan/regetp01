@@ -180,8 +180,9 @@ $this->pageTitle =  $cue_instit.' '.$instit['Instit']['nombre_completo'];
 
             ?>
             <li onclick="viewTitulo('<?php echo $html->url('/titulos/view_titulo_plan/'.$plan['Titulo']['id'].'/'.$plan['id'])?>', '<?php echo $plan['Titulo']['name']?>');">
-                <?php echo $planNombre?>
-                   <span title="Mas informacion" class="mas_info_azul_small"></span>
+                <div class="linkconatiner-more-info">
+                    <?php echo $planNombre?>
+                </div>
             </li>
             <?php }?>
         </ul>

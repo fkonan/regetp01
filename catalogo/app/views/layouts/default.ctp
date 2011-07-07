@@ -105,55 +105,13 @@ $javascript;
     <body>
         <div class="wrapper">
             
-                
-            <div class="clear"></div>
-            
-            <div id="header">
-                <div class="header_wrapper">
-                    <div id="header_title" class="container_12">
-
-                        <a href="<?php echo $html->url('/')?>"class="logo no-print grid_2">
-                            <?php echo $html->image('header_inet.png', array(
-                                'border'=> 0,
-                                'class' => 'logo',
-                                'style' => 'float: left',
-                                )); 
-                            ?>
-                        </a>
-                       
-                        
-                        <h1 class="grid_10">
-                            &nbsp;<?php echo $html->link(__('Catálogo Nacional de Títulos y Certificaciones de Educación Técnico Profesional', true), '/pages/home', array('class' => 'logo')); ?>
-                        </h1>
-                        
-                    </div>
-                </div>
-            
-                
-                <div class="menu_wrapper no-print"  style="z-index: 1; ">
-                <div class="container_12">
-                    <a href="<?php echo $html->url('/')?>" class="logo grid_2"
-                           style=""
-                           >
-                            <?php echo $html->image('header_ministerio.png', array(
-                                    'border'=> 0,
-                                    'class' => 'logo',
-                                    ));
-                                ?>
-                        </a>
-                    
-                <?php echo $this->element('menu');?>
-                </div>
-                <div class="clear"></div>
-            </div>
-                
-                
-                
-            </div>
-            
+            <!--     Header       -->
+            <?php echo $this->element('default_header')?>
+            <!--     Fin del Header       -->
 
             <?php $session->flash(); ?>
             <?php $session->flash('auth'); ?>
+            
             <div id="container" class ="container_12">
                 <?php echo $content_for_layout; ?>
             </div> <!-- FIN div #container -->

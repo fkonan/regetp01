@@ -49,7 +49,7 @@
         <div class="clear"></div>
     </div>
     <? if (sizeof($instits) > 0) { ?>
-        <ol id="items" class="items">
+        <ul id="items" class="items">
         <?php foreach($instits as $instit) : ?>
             <?  $año_actual = date("Y");
                 $fecha_hasta = "$año_actual-07-21"; //hasta julio
@@ -64,13 +64,10 @@
             <li>
                 <a href="<?php echo $html->url(array(
                                     'controller' => 'instits',
-                                    'action' => 'view',
+                                    'action' => 'view',                                    
                                     'id' => $instit['Instit']['id'],
                                     'slug' => slug($instit['Instit']['nombre_completo'])))
-                    ?>" style="display:block; cursor:pointer;">
-                <span class="items-actions">
-                    <span class="mas_info_azul_small"></span>
-                </span>
+                        ?>" class="linkconatiner-more-info">
                     
                 <span class="items-nombre">
                     <?= "".($instit['Instit']['cue']*100)+$instit['Instit']['anexo']." - ". $instit['Instit']['nombre_completo']; ?>
@@ -94,7 +91,7 @@
             </li>
 
         <? endforeach?>
-    </ol>
+    </ul>
     <?php
     }
     else {

@@ -26,23 +26,13 @@ p.titulo, div.titulo{
 
 .items-nombre {
     text-align:left;
-    float: left;
-    font-size: 9pt;
-    width: 70%;
 }
 .items-oferta {
     text-align:left;
-    float: left;
-    font-size: 9pt;
-    width: 20%;
+    float: right;
+    margin-right: 40px;
 }
 
-
-.items-actions {
-    margin:0;
-    float: left;
-    width: 10%;
-}
 
 #items a{
     text-decoration: none;

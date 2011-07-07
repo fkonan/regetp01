@@ -80,10 +80,12 @@ echo $html->css(array(  'jquery.loadmask',
 
     <!-- Aca se muestran los resultados de la busqueda-->
     <div class="clear"></div>
+    
     <div id='consoleResult' style="min-height: 200px; margin-bottom: 20px; margin-top:15px;">
     </div>
 
 </div>
+
 <script type="text/javascript">
 jQuery(document).ready(function() {
     <?php
