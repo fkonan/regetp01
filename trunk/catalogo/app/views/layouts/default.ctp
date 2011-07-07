@@ -70,6 +70,7 @@ $javascript;
                         'stylesheet', array(
                             'media' => 'screen and (max-width: 960px)'
                             ));
+        echo $html->css('catalogo.default_header');
 
         echo $javascript->link(array(
         'jquery-1.5.2.min',
@@ -97,7 +98,7 @@ $javascript;
 
 
         <!--[if IE 6]>
-        <?php echo $html->css('catalogo_ie_fix');?>
+        <?php echo $html->css('catalogo.ie6_fix');?>
         <![endif]-->
         
 
