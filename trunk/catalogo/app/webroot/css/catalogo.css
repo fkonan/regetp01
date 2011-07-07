@@ -174,90 +174,6 @@ dd ul{
 }
 
 
-#header{ 
-    overflow: visible;
-    background: #0082CA;
-
-background: rgb(0,144,208); /* Old browsers */
-background: #0090d0; /* Old browsers */
-background: -moz-linear-gradient(left, #0090d0 0%, #7fc2ea 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, right top, color-stop(0%,#0090d0), color-stop(100%,#7fc2ea)); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(left, #0090d0 0%,#7fc2ea 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(left, #0090d0 0%,#7fc2ea 100%); /* Opera11.10+ */
-background: -ms-linear-gradient(left, #0090d0 0%,#7fc2ea 100%); /* IE10+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0090d0', endColorstr='#7fc2ea',GradientType=1 ); /* IE6-9 */
-background: linear-gradient(left, #0090d0 0%,#7fc2ea 100%); /* W3C */
-
-}
-
-.header_wrapper{
-    height: 72px;
-
-}
-
-.menu_wrapper{ 
-    position: relative;
-}
-
-.logo{
-}
-
-.logo img{
-    height: 70px;
-}
-
-
-
-#header_title{
-   position: relative;
-   background: url(img/bandera_trans.png) no-repeat right;
-   height: 142px;
-}
-
-
-#header_ministerio{
-    width: 265px;
-    height: 87px;
-    float:left;
-    margin-left: 10px;
-}
-
-#bandera_header{
-    position: relative;
-    background: url(img/bandera_trans.png) no-repeat right;
-    height: 100px;
-    margin: 0;
-    padding-top: 27px;
-}
-
-#header h1 {
-    color: white;
-    text-align: center;
-    padding: 10px;
-    margin: 0px;
-    position: relative;
-    z-index: 5;
-    top: 37px;
-}
-#header h1 a{
-    text-decoration: none;
-    margin: 0 auto;
-    color: #fff;
-    font-weight: bolder;
-    font-size: 0.76em;
-    text-shadow: #000 1px 1px 0;
-}
-
-#header h1 a:hover {
-    background: none;
-    text-decoration: none;
-    text-shadow: none;
-}
-
-#menu{
-    margin-top: 34px;
-}
-
 
 
 .sponsors{
@@ -623,4 +539,13 @@ li{
 
 .boxoferta{
     height: 150px;
+}
+
+
+
+.linkconatiner-more-info{
+    background: url(img/lupazul_small.png) no-repeat 100% 50%;
+    display:block; 
+    cursor: hand;
+    cursor:pointer;
 }

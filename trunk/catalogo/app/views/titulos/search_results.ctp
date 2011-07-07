@@ -34,7 +34,7 @@ $paginator->options(array(  'update' => 'consoleResult',
         <div class="clear"></div>
     </div>
     <? if (!empty($titulos)) {?>
-    <ol id="items" class="items">
+    <ul id="items" class="items">
         <?php
         $i = 0;
         foreach ($titulos as $titulo):
@@ -45,8 +45,9 @@ $paginator->options(array(  'update' => 'consoleResult',
                                     'action' => 'view',
                                     'id' => $titulo['Titulo']['id'],
                                     'slug' => slug($titulo['Titulo']['name'])))
-                    ?>" style="display:block;">
-            <div class="items-nombre">
+                    ?>"
+                    class="linkconatiner-more-info">
+            <span class="items-nombre">
                         <strong><?php
                         /*$linkTitulo = $html->link(
                                 " (".count($titulo['Plan'])." planes)",
@@ -55,27 +56,19 @@ $paginator->options(array(  'update' => 'consoleResult',
                                 );*/
                         echo $titulo['Titulo']['name']; ?>
                         </strong>
-            </div>
-            <!--<p>
-                    <?php
-                    if ($titulo['Titulo']['marco_ref']==1) {
-                        echo $html->image('check_blue.jpg');
-                    }
-                    ?>
-            </p>-->
-            <div class="items-oferta">
+            </span>
+                    
+            <span class="items-oferta">
                         <?php
                         echo (empty($titulo['Oferta']['name']))? "" : $titulo['Oferta']['name'];
                         ?>
-            </div>
-            <div class="items-actions">
-                <span class="mas_info_azul_small"></span>
-            </div>
+            </span>
+                    
             <div class="clear"></div>
             </a>
         </li>
             <?php endforeach; ?>
-    </ol>
+    </ul>
         <?php
     }
     else {

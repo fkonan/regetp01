@@ -141,6 +141,7 @@ ul.titulos-list li .mas_info_azul_small, ul.titulos-list li .mas_info_gris_small
 
 .ficha_info.right{
     border-left: 1px solid silver;
-    width: 48%;
-    padding-left:2%
+    width: 50%;
+    margin-left: -11px;
+    padding-left: 10px;
 }

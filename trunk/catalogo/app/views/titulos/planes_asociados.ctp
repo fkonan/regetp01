@@ -90,11 +90,8 @@ $paginator->options(array(
                                     'action' => 'view',
                                     'id' => $plan['Instit']['id'],
                                     'slug' => slug($plan['Instit']['nombre_completo'])))
-                    ?>" style="display:block; cursor:pointer;">
-                
-                <span class="items-actions">
-                    <span class="mas_info_azul_small"></span>
-                </span>
+                    ?>" 
+                    class="linkconatiner-more-info">
                 
                 <span class="items-nombre">
                     <?= "".($plan['Instit']['cue']*100)+$plan['Instit']['anexo']." - ". $plan['Instit']['nombre_completo']; ?>
@@ -114,12 +111,12 @@ $paginator->options(array(
                 </span>                
                 
                 
-                <div class="clear"></div>
             </a>
         </li>
 
         <? endforeach?>
-    </ul>
+    </ul>        
+    
     <?php
     }
     else {

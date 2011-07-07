@@ -1,4 +1,11 @@
-<ul id="menu" class="nav push_2 sf-menu grid_8">
+<?php echo $html->image('header_ministerio_recortada.png', array(
+                            'border'=> 0,
+                            'class' => 'logo',
+                            'style' => 'display: right; position: absolute; right: 10px; width: 90px; bottom: 0px;'
+                            ));
+                        ?>
+
+<ul id="menu" class="nav push_1 sf-menu grid_8">
         <li class="<?php echo ($this->here == $this->base.'/pages/home')?'current':''?> "><?php echo $html->link('Inicio', '/pages/home', array('class'=>'menu-item')); ?></li>
 
 
