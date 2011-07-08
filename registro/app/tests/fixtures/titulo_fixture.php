@@ -41,6 +41,12 @@ class TituloFixture extends CakeTestFixture {
 			'marco_ref' => false,
 			'oferta_id' => 3,
 		),
+                array(
+			'id' => 344,
+			'name' => 'Plomero',
+			'marco_ref' => false,
+			'oferta_id' => 1,
+		),
 	);
 }
 
