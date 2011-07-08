@@ -8,7 +8,7 @@
     
     var titulosForm = $('#TituloSearchForm');
     var titulosContainer = $( "#li_titulos ul.results" );
-    var titulosPaginator = $("#li_titulos .paginatorContainer")
+    var titulosPaginator = $("#li_titulos .paginatorContainer");
     var titulosTemplate = $("#tituloTemplate");
     var tituloOfertaCombo = $("#TituloOfertaId");
     var tituloSectorCombo = $("#TituloSectorId");
@@ -28,22 +28,10 @@
     var filtrosForm = $("#FiltrosAplicadosForm");
     var filtrosContainer = $("#filtrosContainer");
 
-    var __parentFilters = new Array();
+    var __parentFilters = [];
     __parentFilters["data[Instit][jurisdiccion_id]"] = ["data[Instit][departamento_id]"];
     __parentFilters["data[Instit][departamento_id]"] = ["data[Instit][localidad_id]"];
   
-
-    
-    
-    /////////////////////////////////////////////////////////////////
-    // Inicializacion de los formularios
-    titulosForm.submit(getTitulos);
-    
-    institsForm.submit(getInstits);
-
-    __hideWithLabel(institDepartamentoCombo);
-    __hideWithLabel(institLocalidadCombo);
-    /////////////////////////////////////////////////////////////////
     //Eventos
     //
     $(".deleteable").live("click",function(event){
@@ -59,11 +47,11 @@
 
     $(".styled_checkbox").live("click",function(event){
         $("#items li").removeClass("selected_title");
-        $(this).parent().addClass("selected_title")
+        $(this).parent().addClass("selected_title");
     });
     
     $('input[type=text]').live("keypress", function(e){
-        if(e.which == 13){
+        if(e.which === 13){
             titulosForm.submit();   
         }
     });
@@ -74,11 +62,14 @@
     
     function deleteFilter(id){
         var escapedId = id.replace(/\[/g, "\\[");
+        var childId;
         escapedId = escapedId.replace(/\]/g, "\\]");
         jQuery("#" + escapedId).parent().remove();
         if(__parentFilters[id]){
-            for(var childId in __parentFilters[id]) {
-                deleteFilter(__parentFilters[id][childId]);
+            for(childId in __parentFilters[id]) {
+                if (__parentFilters[id].hasOwnProperty(childId)){
+                    deleteFilter(__parentFilters[id][childId]);
+                }
             }
         }
     }
@@ -100,23 +91,23 @@
             }
         });
         return true;
-    }
+    };
 
     var __unblockResultConsole = function () {
         jQuery('.results_titulos').unmask();
         jQuery('#filtro, .filtros-aplicados ').unblock();
-    }
+    };
 
-    function __hideWithLabel(input){
+    var __hideWithLabel = function(input){
         var label = titulosForm.find("label[for=" + input.attr("id") + "]");
         var plus = $(input).next('.add_filter');
         label.hide();
         input.hide();
         input.attr('disabled','disabled');
         plus.hide();
-    }
+    };
 
-    function __showWithLabel(input){
+    var __showWithLabel = function(input){
          var label = titulosForm.find("label[for=" + input.attr("id") + "]");
          var plus = $(input).next('.add_filter');
          label.show();
@@ -124,7 +115,7 @@
          input.removeAttr('disabled');
          plus.show();
          $(input).effect("highlight", {}, 1000);
-    }
+    };
     
     /**
      * Trae los titulos en JSON, usando ajax
@@ -139,7 +130,7 @@
 
         __blockResultConsole();
 
-        if (typeof href == 'object') {
+        if (typeof href === 'object') {
             url = urlDomain + '/titulos/filtros_search_results.json';
             __blanquearContainers();
         } else {
@@ -180,7 +171,7 @@
             }
         });
 
-        if (typeof e == 'object') {
+        if (typeof e === 'object') {
             url = e.target.action;
         } else {
             url = e;
@@ -197,7 +188,7 @@
         return false;
     }
     
-    // este serà llamado luego de hacver click en alguna pagina del paginator
+    // este sera llamado luego de hacver click en alguna pagina del paginator
     function getTitulosDelPaginator(e) {      
         e.preventDefault();
 
@@ -210,7 +201,7 @@
     
     
     
-    // este serà llamado luego de hacver click en alguna pagina del paginator
+    // este sera llamado luego de hacver click en alguna pagina del paginator
     function getInstitsDelPaginator(e) {
         e.preventDefault();
 
@@ -235,14 +226,14 @@
         __ajustarAlturas(['.results_titulos','.results_instits']);
         __ajustarAlturas(['#li_instits', '#li_titulos']);
         
-    }
+    };
 
     var __recargarFiltrosAplicados = function (params) {
-        
-        for(var i in params)
+        var i;
+        var len = params.length;
+        for(i = 0; i< len;i++)
         {
-            if(params[i].name != '_method' && params[i].value != ''){
-                cont++;
+            if(params[i].name !== '_method' && params[i].value !== ''){
                 input = titulosForm.find("[name='" + params[i].name + "']");
                 nombre = titulosForm.find("label[for=" + input.attr("id") + "]").html().replace("<br>", "");
                 if(input.is('select')){
@@ -252,7 +243,7 @@
                     valor = titulosForm.find("[name='" + params[i].name + "']").val();
                 }
                 
-                $('<span class="filtro"/>').html("<span><strong>" + nombre + "</strong>" + valor + "</span><a href='#' class='deleteable' alt='Quitar este criterio de búsqueda'> X </a><div class='clear'></div>")
+                $('<span class="filtro"/>').html("<span><strong>" + nombre + "</strong>" + valor + "</span><a href='#' class='deleteable' alt='Quitar este criterio de b&uacute;squeda'> X </a><div class='clear'></div>")
                 .append(
                     $('<input>').attr({
                         type: 'hidden',
@@ -273,10 +264,10 @@
         __ajustarAlturas(['#filtro', '.filtros-aplicados']);
         
         $(".filtros-aplicados").effect("highlight", {}, 3000);
-    }
+    };
 
     var __recargarFiltros = function (data) {
-        if(typeof data.TituloName === 'undefined' || data.TituloName == ''){
+        if(typeof data.TituloName === 'undefined' || data.TituloName === ''){
             __showWithLabel(tituloName);
         }
         else{
@@ -284,7 +275,7 @@
             __hideWithLabel(tituloName);
         }
 
-        if(typeof data.InstitName === 'undefined' || data.InstitName == ''){
+        if(typeof data.InstitName === 'undefined' || data.InstitName === ''){
             __showWithLabel(institName);
         }
         else{
@@ -305,7 +296,7 @@
             size += $(this).find("input:visible").size();
             size += $(this).find("select:visible").size();
 
-            if(size == 0 ){
+            if(size === 0 ){
                 $(this).find('.msj-vacio').show();
             }
             else{
@@ -314,20 +305,23 @@
         });
 
         __ajustarAlturas(['#filtro', '.filtros-aplicados']);
-    }
+    };
 
     var __recargaCombo = function (combo,data){
         var options = [];
         var label = titulosForm.find("label[for=" + combo.attr("id") + "]");
         options.push('<option value="">Seleccione...</option>');
         var n = 0;
+        var key;
         for (key in data) {
-          if(key != "" && data[key] != ""){
-            options.push('<option value="',
-                         key, '">',
-                         data[key], '</option>');
-            n++;
-          }
+            if(data.hasOwnProperty(key)){
+                if(key !== "" && data[key] !== ""){
+                options.push('<option value="',
+                             key, '">',
+                             data[key], '</option>');
+                n++;
+                }
+            }
         }
         
 
@@ -339,7 +333,7 @@
             __hideWithLabel(combo);
         }
         
-    }
+    };
 
     var __meterTitulosEnTemplate = function (data) {
         // primero borro el contenido
@@ -355,13 +349,11 @@
 
         __unblockResultConsole();
         //$('#filtro,.filtros-aplicados').unblock();
-    }
+    };
 
     var __checkParentClick = function(eventObject){
         jQuery(eventObject.currentTarget).find('.styled_checkbox').click();
-    }
-    
-    
+    };
     
     var __updatePaginatorElement = function(data, paginatorContainer, callback) {
         paginatorContainer.html('');
@@ -370,17 +362,12 @@
         pagNumbers.unbind('click');
         pagNumbers.bind('click', callback );
                 
-    }
+    };
     
     
     var onChangeHandlerTitulos = function( e ) {   
-       //if(titulosSeleccionadosContainer.children().length > 0){
-            institsForm.submit();
-        //}else{
-        //    institsContainer.text("Sin Resultados");
-        //    institsPaginator.html("");
-        //}
-    }
+        institsForm.submit();
+    };
     
     
     var __meterInstitsEnTemplate = function ( data ) {
@@ -393,12 +380,12 @@
        jQuery('#filtro, .filtros-aplicados ').unblock();
        __ajustarAlturas(['.results_titulos','.results_instits']);
        __ajustarAlturas(['#li_instits', '#li_titulos']);
-    }
+    };
     
     var __blanquearContainers = function() {
         institsContainer.html('');
         institsPaginator.html('');
-    }
+    };
 
     function __ajustarAlturas(selectores) {
         alturaMax = 0;
@@ -419,4 +406,15 @@
        __ajustarAlturas(['#filtro', '.filtros-aplicados']);
     });
 
-})(jQuery);
+
+    /////////////////////////////////////////////////////////////////
+    // Inicializacion de los formularios
+    titulosForm.submit(getTitulos);
+    
+    institsForm.submit(getInstits);
+
+    __hideWithLabel(institDepartamentoCombo);
+    __hideWithLabel(institLocalidadCombo);
+    /////////////////////////////////////////////////////////////////
+
+}(jQuery));
