@@ -49,11 +49,6 @@ $javascript;
                     '980px  to 1920px = 960.min.css'
                 ]
             };
-
-
-
-
-
         </script>
         <?php
         echo $html->meta('icon');
@@ -82,6 +77,7 @@ $javascript;
         'jquery/jquery.superfish',
         'jquery/jquery.history',
         'views/layout/default',
+        'DD_belatedPNG_0.0.8a-min',
         ));
 
         $jsPoner = 'views'.DS.Inflector::underscore($this->name).DS.$this->action;
@@ -93,7 +89,11 @@ $javascript;
         echo $scripts_for_layout;
 
         ?>
-        
+        <script type="text/javascript">
+            $(function() {
+                DD_belatedPNG.fix('.inet_logo');
+            });
+        </script>
         <!--<script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>-->
 
 
