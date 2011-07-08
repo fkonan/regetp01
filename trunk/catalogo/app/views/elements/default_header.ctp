@@ -7,7 +7,7 @@
             <a href="<?php echo $html->url('/')?>"class="no-print grid_3">
                 <?php echo $html->image('../css/img/logo.png', array(
                     'border'=> 0,
-                    'class' => '',
+                    'class' => 'inet_logo',
                     'style' => 'float: left',
                     )); 
                 ?>

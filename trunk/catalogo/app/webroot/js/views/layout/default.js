@@ -22,7 +22,6 @@
        
         //__ajustarAlturas(['.boxestudiantes']);
         //__ajustarAlturas(['.boxoferta']);
-
     });
     
 
