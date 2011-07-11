@@ -6,14 +6,14 @@ $this->pageTitle = "Inicio";
 
 <script type="text/javascript">
 $(function() {
-    $('#placeholder').crossSlide({
-      sleep: 2,
-      fade: 1
-    }, [
-      { src: '<?php echo $html->url("/img/material/home_1.jpg");?>'},
-      { src: '<?php echo $html->url("/img/material/home_2.jpg");?>'},
-      { src: '<?php echo $html->url("/img/material/home_3.jpg");?>'}
-    ]);
+//    $('#placeholder').crossSlide({
+//      sleep: 2,
+//      fade: 1
+//    }, [
+//      { src: '<?php echo $html->url("/img/material/home_1.jpg");?>'},
+//      { src: '<?php echo $html->url("/img/material/home_2.jpg");?>'},
+//      { src: '<?php echo $html->url("/img/material/home_3.jpg");?>'}
+//    ]);
 });
 </script>
 

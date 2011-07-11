@@ -1,12 +1,11 @@
+
 .nav {
    background: transparent url(img/gradient.png) repeat-x 0 -110px;
-   line-height: 100%;
-   position: absolute;
-   bottom: 0px;
-   margin: 0px;
    z-index: 4000;
-   right: 0;
+   padding: 0px;
+   margin: 0px;
 }
+
 .nav li {
     margin: 0px 3px;
     padding: 0 0 0px;
@@ -141,12 +140,7 @@
 	line-height: 0;
 	height: 0;
 }
-.nav {
-	display: inline-block;
-} 
-html[xmlns] .nav {
-	display: block;
-}
+
  
 * html .nav {
 	height: 1%;

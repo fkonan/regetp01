@@ -96,7 +96,7 @@ $javascript;
         </script>
         <!--<script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>-->
 
-
+        
         <!--[if IE 6]>
         <?php echo $html->css('catalogo.ie6_fix');?>
         <![endif]-->
