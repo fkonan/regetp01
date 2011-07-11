@@ -5,23 +5,15 @@ $this->pageTitle = "Inicio";
 ?>
 
 <script type="text/javascript">
-$(function() {
-//    $('#placeholder').crossSlide({
-//      sleep: 2,
-//      fade: 1
-//    }, [
-//      { src: '<?php echo $html->url("/img/material/home_1.jpg");?>'},
-//      { src: '<?php echo $html->url("/img/material/home_2.jpg");?>'},
-//      { src: '<?php echo $html->url("/img/material/home_3.jpg");?>'}
-//    ]);
-});
 </script>
 
 <div class="grid_12 home_info" style="margin-top: 10px">
     <div class="boxblanca">
         <div style="float:left">
             <div>
-                <div id="placeholder" style="float: right; width:300px; height:300px; margin: 0px 0px 0px 20px;"></div>
+                <div id="placeholder" style="float: right; width:300px; height:300px; margin: 0px 0px 0px 20px;">
+                    <?php echo $html->image('material/home_1.jpg') ?> 
+                </div>
                 
                 <h2>La Educación Técnico Profesional en Argentina</h2>
                 <p>La Educación Técnico Profesional es la modalidad de la 
