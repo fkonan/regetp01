@@ -1,7 +1,7 @@
 <?php echo $html->image('header_ministerio_recortada.png', array(
                             'border'=> 0,
                             'class' => 'logo',
-                            'style' => 'display: right; position: absolute; right: 10px; width: 90px; bottom: 0px;'
+                            'style' => 'display: right; position: absolute; right: 10px; width: 72px; bottom: 0px;'
                             ));
                         ?>
 
