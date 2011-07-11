@@ -24,7 +24,7 @@ $paginator->options(array(  'update' => 'consoleResult',
             <span class="<?= $class?>"><?php echo $paginator->sort('Nombre','Titulo.name');?></span>,
 
             <? $class = ($sort == 'Oferta.name')?'marcada':'';?>
-            <span class="<?= $class?>"><?php echo $paginator->sort("Oferta",'Oferta.name');?></span>
+            <span class="<?= $class?>"><?php echo $paginator->sort("Nivel",'Oferta.name');?></span>
 
         </div>
         <div class="paging">

@@ -4,11 +4,10 @@ echo $html->css('catalogo.advanced_search', false);
 
 $paginator->options(array(
 'url'     => $this->passedArgs,
-'update'  => 'tituloPlanes',
+'update'  => 'search_results',
 'indicator' => 'spinner',
 ));
 ?>
-
     <div style="float:right">
         <?php
         echo $form->create('Titulo', array(
@@ -110,7 +109,6 @@ $paginator->options(array(
                     </span>
                 </span>                
                 
-                
             </a>
         </li>
 
@@ -127,16 +125,15 @@ $paginator->options(array(
     
     if ($paginator->numbers()) {
     ?>
-    <div style="text-align:center; display:block;margin-bottom: 10px">
+    <div style="text-align:center; display:block;margin: 10px 0 10px 0">
         <?php
         echo $paginator->prev('« Anterior ',null, null, array('class' => 'disabled', 'tag' => 'span'));
         echo " | ".$paginator->numbers(array('modulus'=>'9'))." | ";
         echo $paginator->next(' Siguiente »', null, null, array('class' => 'disabled'));
         ?>
-        <span class="ajax_update" id="ajax_paginator_indicator" style="display:none; padding-left:10px;"><?php echo $html->image('ajax-loader.gif')?></span>
+        <div id="spinner" style="display:none; padding-left:10px;"><?php echo $html->image('ajax-loader.gif')?></div>
     </div>
     <?php  } ?>
-
 <script type="text/javascript">
     $(".autosubmit").change(function() {
         $('#InstitsForm').submit();
