@@ -325,7 +325,7 @@
         }
         
 
-        if(n > 2){
+        if(n >= 2){
             combo.html(options.join(''));
             __showWithLabel(combo);
         }
