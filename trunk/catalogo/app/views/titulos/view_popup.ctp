@@ -11,7 +11,7 @@ jQuery(document).ready(function() {
 <div class="titulosview">
     <ul>
         <li class="">
-            <strong><?php __('Oferta'); ?>:</strong> <?php echo $plan['Oferta']['name']; ?>
+            <strong><?php __('Nivel'); ?>:</strong> <?php echo $plan['Oferta']['name']; ?>
         </li>
         <li class="">
             <strong><?php echo ($plan['Titulo']['marco_ref']==1)? "Con marco de referencia":"Sin marco de referencia"; ?></strong>
@@ -29,9 +29,6 @@ jQuery(document).ready(function() {
         <?php
         }
         ?>
-        </li>
-        <li class="">
-            <strong><?php __('Normativa'); ?>:</strong> <?php echo $plan['Plan']['norma']; ?>
         </li>
         <?php
         if (!empty($plan['Anio'][0]['ciclo_id'])) {

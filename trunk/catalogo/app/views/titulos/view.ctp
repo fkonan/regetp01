@@ -18,7 +18,7 @@ $this->pageTitle =  $titulo['Titulo']['name'];
     <div class="boxblanca">
         <h3 class="titulo">Datos generales del título o certificación</h3>
         <dl>
-            <dt style="width: 168px;"><?php __('Oferta'); ?>:</dt>
+            <dt style="width: 168px;"><?php __('Nivel'); ?>:</dt>
             <dd>
                 <?php
                 if(!empty($titulo['Oferta']['name'])) {

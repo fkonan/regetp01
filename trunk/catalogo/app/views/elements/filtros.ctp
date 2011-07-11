@@ -1,15 +1,25 @@
 <div class="seccion grid_3 alpha">
     <h4>Títulos</h4>
     <div>
-        <div>
+        <div style="padding:2px 0 2px 0;">
+            <?php echo $form->input('Titulo.tituloName',
+            array(
+            'div'=>false,
+            'label' => 'Nombre del Título<br />',
+            'after' => '<a class="add_filter">+</a>'
+            )
+            )
+            ?>
+        </div>
+        <div style="padding:2px 0 2px 0;">
             <?php echo $form->input('Titulo.oferta_id',
             array('empty' => 'Seleccione...',
             'div'=>false,
-            'label' => 'Oferta<br />',
+            'label' => 'Nivel<br />',
             'class' => 'autosubmit'));
             ?>
         </div>
-        <div>
+        <div style="padding:2px 0 2px 0;">
             <?php echo $form->input('Titulo.sector_id',
             array('options'=>$sectores,
             'div'=>false,
@@ -21,16 +31,6 @@
             )
             ?>
         </div>
-        <div>
-            <?php echo $form->input('Titulo.tituloName',
-            array(
-            'div'=>false,
-            'label' => 'Nombre del Título<br />',
-            'after' => '<a class="add_filter">+</a>'
-            )
-            )
-            ?>
-        </div>
         <p class="msj-vacio">No hay filtros disponibles...</p>
     </div>
 </div>
@@ -38,7 +38,7 @@
     <div class="seccion">
         <h4>Ubicación</h4>
         <div>
-            <div>
+            <div style="padding:2px 0 2px 0;">
                 <?php echo $form->input('Instit.jurisdiccion_id',
                 array('options'=>$jurisdicciones,
                 'div'=>false,
@@ -49,7 +49,7 @@
                 )
                 ?>
             </div>
-            <div>
+            <div style="padding:2px 0 2px 0;">
                 <?php echo $form->input('Instit.departamento_id',
                 array('type'=>'select',
                 'div'=>false,
@@ -59,7 +59,7 @@
                 )
                 ) ?>
             </div>
-            <div>
+            <div style="padding:2px 0 2px 0;">
                 <?php echo $form->input('Instit.localidad_id',
                 array('type'=>'select',
                 'div'=>false,
@@ -75,7 +75,7 @@
     <div class="seccion">
         <h4>Institución</h4>
         <div>
-            <div>
+            <div style="padding:2px 0 2px 0;">
                 <?php echo $form->input('Instit.gestion_id',
                 array('options'=>$gestiones,
                 'div'=>false,
@@ -86,7 +86,7 @@
                 )
                 ?>
             </div>
-            <div>
+            <div style="padding:2px 0 2px 0;">
                 <?php echo $form->input('Instit.nombre',
                 array(
                 'div'=>false,
