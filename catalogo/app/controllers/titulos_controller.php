@@ -414,7 +414,7 @@ class TitulosController extends AppController {
         }
         if(!empty($this->passedArgs['ofertaId'])) {
             $q = ($this->passedArgs['ofertaId']);
-             $array_condiciones['conditions']['Titulo.oferta_id'] = $q;
+            $array_condiciones['conditions']['Titulo.oferta_id'] = $q;
         }
         if(!empty($this->passedArgs['sectorId']) || !empty($this->passedArgs['subsectorId']) ) {
 
@@ -539,32 +539,32 @@ class TitulosController extends AppController {
             )
         );
 
-        $array_condiciones['fields'] = array('DISTINCT Oferta.id', 'Oferta.name');
+        $array_condiciones['fields'] = array('Oferta.id', 'Oferta.name');
         $array_condiciones['group'] = array('Oferta.id', 'Oferta.name');
         $array_condiciones['order'] = array('Oferta.name');
         $filtros['Oferta'] = $this->Titulo->find('all',$array_condiciones);
 
-        $array_condiciones['fields'] = array('DISTINCT Sector.id', 'Sector.name');
+        $array_condiciones['fields'] = array('Sector.id', 'Sector.name');
         $array_condiciones['group'] = array('Sector.id', 'Sector.name');
         $array_condiciones['order'] = array('Sector.name');
         $filtros['Sector'] = $this->Titulo->find('all',$array_condiciones);
 
-        $array_condiciones['fields'] = array('DISTINCT Jurisdiccion.id', 'Jurisdiccion.name');
+        $array_condiciones['fields'] = array('Jurisdiccion.id', 'Jurisdiccion.name');
         $array_condiciones['group'] = array('Jurisdiccion.id', 'Jurisdiccion.name');
         $array_condiciones['order'] = array('Jurisdiccion.name');
         $filtros['Jurisdiccion'] = $this->Titulo->find('all',$array_condiciones);
 
-        $array_condiciones['fields'] = array('DISTINCT Departamento.id', 'Departamento.name');
+        $array_condiciones['fields'] = array('Departamento.id', 'Departamento.name');
         $array_condiciones['group'] = array('Departamento.id', 'Departamento.name');
         $array_condiciones['order'] = array('Departamento.name');
         $filtros['Departamento'] = $this->Titulo->find('all',$array_condiciones);
 
-        $array_condiciones['fields'] = array('DISTINCT Localidad.id', 'Localidad.name');
+        $array_condiciones['fields'] = array('Localidad.id', 'Localidad.name');
         $array_condiciones['group'] = array('Localidad.id', 'Localidad.name');
         $array_condiciones['order'] = array('Localidad.name');
         $filtros['Localidad'] = $this->Titulo->find('all',$array_condiciones);
 
-        $array_condiciones['fields'] = array('DISTINCT Gestion.id', 'Gestion.name');
+        $array_condiciones['fields'] = array('Gestion.id', 'Gestion.name');
         $array_condiciones['group'] = array('Gestion.id', 'Gestion.name');
         $filtros['Gestion'] = $this->Titulo->find('all',$array_condiciones);
 
