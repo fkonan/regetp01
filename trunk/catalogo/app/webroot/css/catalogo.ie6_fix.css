@@ -1,3 +1,10 @@
+#header{
+   background-color: #0090d0;
+   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0090d0', endColorstr='#7fc2ea',GradientType=1 ); /* IE6-9 */    
+}
+
+#bandera_header{
+}
 
 #head-text{
      
@@ -7,23 +14,19 @@
      background: none;
 }
 .logo {
-     display: none;
+     
 }
 
 .header_wrapper{
-   
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0090d0', endColorstr='#7fc2ea',GradientType=1 ); /* IE6-9 */    
+    background: none;
 }
 
-#header{
-    background-color: #0090d0;    
-}
+
+
 #header_title{
     background: none;
 }
-.menu_wrapper{
-    margin-top:-72px;
-    margin-left:100px;
+.menu_wrapper{    
 }
 
 .step{
