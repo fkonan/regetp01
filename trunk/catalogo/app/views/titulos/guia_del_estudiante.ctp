@@ -118,3 +118,14 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
 
 <?php echo $javascript->link('views/titulos/guia_del_estudiante_tail'); ?>
 
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    <?php
+    if ($bySession) {
+    ?>
+        jQuery("#TituloSearchForm").submit();
+    <?php
+    }
+    ?>
+});
+</script>
