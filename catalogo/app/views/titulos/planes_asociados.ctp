@@ -20,7 +20,7 @@ $paginator->options(array(
                                                                       'div' => false,
                                                                       'class' => 'autosubmit ',
                                                                       'value' => $jurisdiccion_id,
-                                                                      'empty' => array('vacio'=>'Todas'),
+                                                                      'empty' => array(''=>'Todas'),
                                                                       'id'=>'jurisdiccion_id'));
         echo $form->end();
         ?>
