@@ -10,7 +10,7 @@
     var titulosContainer = $( "#li_titulos ul.results" );
     var titulosPaginator = $("#li_titulos .paginatorContainer");
     var titulosTemplate = $("#tituloTemplate");
-    var tituloOfertaCombo = $("#TituloOfertaId");
+    var tituloOfertaSection = $("#ofertas_section");
     var tituloSectorCombo = $("#TituloSectorId");
     var tituloName = $("#TituloTituloName");
 
@@ -234,13 +234,19 @@
         for(i = 0; i< len;i++)
         {
             if(params[i].name !== '_method' && params[i].value !== ''){
-                input = titulosForm.find("[name='" + params[i].name + "']");
-                nombre = titulosForm.find("label[for=" + input.attr("id") + "]").html().replace("<br>", "");
+                input = titulosForm.find("[name='" + params[i].name + "'][value=" + params[i].value + "]");
+                
                 if(input.is('select')){
                     valor = titulosForm.find("[name='" + params[i].name + "']").find("option[value='"+params[i].value+"']").html();
+                    nombre = titulosForm.find("label[for=" + input.attr("id") + "]").html().replace("<br>", "");
+                }
+                else if(input.is('input[type=radio]')){
+                    valor = titulosForm.find("label[for=" + input.attr("id") + "]").html().replace("<br>", "");
+                    nombre = titulosForm.find("label[for='" + params[i].name + "']").html().replace("<br>", "");
                 }
                 else if(input.is('input')){
                     valor = titulosForm.find("[name='" + params[i].name + "']").val();
+                    nombre = titulosForm.find("label[for=" + input.attr("id") + "]").html().replace("<br>", "");
                 }
                 
                 $('<span class="filtro"/>').html("<span><strong>" + nombre + "</strong>" + valor + "</span><a href='#' class='deleteable' alt='Quitar este criterio de b&uacute;squeda'> X </a><div class='clear'></div>")
@@ -282,7 +288,7 @@
             institName.val('');
             __hideWithLabel(institName);
         }
-        __recargaCombo(tituloOfertaCombo,data.Oferta);
+        __recargaRadio(tituloOfertaSection,data.Oferta);
         __recargaCombo(tituloSectorCombo,data.Sector);
         
         __recargaCombo(institJurisdiccionCombo,data.Jurisdiccion);
@@ -333,6 +339,40 @@
             __hideWithLabel(combo);
         }
         
+    };
+
+    var __recargaRadio = function (ofertasSection,data){
+        var options = [];
+        var n = 0;
+        var key;
+
+        ofertasSection.html('');
+        
+        options.push('<label for="data[Titulo][oferta_id]">Nivel<br></label>');
+                
+        for (key in data) {
+            if(data.hasOwnProperty(key)){
+                if(key !== "" && data[key] !== ""){
+                    options.push('<input type="radio" value="' +
+                                 key +
+                                 'class="autosubmit ofertas_radio" id="TituloOfertaId' +
+                                 n +
+                                 '" name="data[Titulo][oferta_id]"/>' +
+                                 '<label for="TituloOfertaId' + n + '">' + data[key] + '</label>'
+                                );
+                    n++;
+                }
+            }
+        }
+
+        if(n >= 2){
+            ofertasSection.html(options.join(''));
+            __showWithLabel(ofertasSection);
+        }
+        else{
+            __hideWithLabel(ofertasSection);
+        }
+
     };
 
     var __meterTitulosEnTemplate = function (data) {

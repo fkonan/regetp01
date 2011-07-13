@@ -240,3 +240,11 @@ ol, ul {
 .selected_title{
     background-color: #ECF4F9;
 }
+
+label{
+    clear:none;
+}
+
+input[type=radio]{
+    float:left;
+}
