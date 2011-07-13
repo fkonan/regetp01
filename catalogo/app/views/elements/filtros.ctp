@@ -1,22 +1,16 @@
 <div class="seccion grid_3 alpha">
     <h4>Títulos</h4>
     <div>
-        <div style="padding:2px 0 2px 0;">
-            <?php echo $form->input('Titulo.tituloName',
-            array(
-            'div'=>false,
-            'label' => 'Nombre del Título<br />',
-            'after' => '<a class="add_filter">+</a>'
-            )
-            )
-            ?>
-        </div>
-        <div style="padding:2px 0 2px 0;">
-            <?php echo $form->input('Titulo.oferta_id',
-            array('empty' => 'Seleccione...',
-            'div'=>false,
-            'label' => 'Nivel<br />',
-            'class' => 'autosubmit'));
+        <div id="ofertas_section" style="padding:2px 0 2px 0;">
+            <label for="data[Titulo][oferta_id]">Nivel<br></label>
+            <?php
+            echo
+            $form->radio('Titulo.oferta_id',$ofertas,
+                        array('empty' => 'Seleccione...',
+                            'legend' => false,
+                            'class' => 'autosubmit ofertas_radio',
+                            'value'=> false)
+                        );
             ?>
         </div>
         <div style="padding:2px 0 2px 0;">
@@ -27,6 +21,16 @@
             'empty' => 'Seleccione...',
             'multiple'=>false,
             'class' => 'autosubmit'
+            )
+            )
+            ?>
+        </div>
+        <div style="padding:2px 0 2px 0;">
+            <?php echo $form->input('Titulo.tituloName',
+            array(
+            'div'=>false,
+            'label' => 'Nombre del Título<br />',
+            'after' => '<a class="add_filter">+</a>'
             )
             )
             ?>
