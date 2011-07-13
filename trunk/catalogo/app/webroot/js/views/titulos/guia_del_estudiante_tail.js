@@ -355,7 +355,7 @@
                 if(key !== "" && data[key] !== ""){
                     options.push('<input type="radio" value="' +
                                  key +
-                                 'class="autosubmit ofertas_radio" id="TituloOfertaId' +
+                                 '" class="autosubmit ofertas_radio" id="TituloOfertaId' +
                                  n +
                                  '" name="data[Titulo][oferta_id]"/>' +
                                  '<label for="TituloOfertaId' + n + '">' + data[key] + '</label>'
