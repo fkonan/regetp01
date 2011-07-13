@@ -22,7 +22,7 @@
     var institJurisdiccionCombo = $("#InstitJurisdiccionId");
     var institDepartamentoCombo = $("#InstitDepartamentoId");
     var institLocalidadCombo = $("#InstitLocalidadId");
-    var institGestionCombo = $("#InstitGestionId");
+    var institGestionSection = $("#gestion_section");
     var institName = $("#InstitNombre");
 
     var filtrosForm = $("#FiltrosAplicadosForm");
@@ -288,13 +288,13 @@
             institName.val('');
             __hideWithLabel(institName);
         }
-        __recargaRadio(tituloOfertaSection,data.Oferta);
+        __recargaRadio(tituloOfertaSection,data.Oferta, 'TituloOfertaId','data[Titulo][oferta_id]');
         __recargaCombo(tituloSectorCombo,data.Sector);
         
         __recargaCombo(institJurisdiccionCombo,data.Jurisdiccion);
         __recargaCombo(institDepartamentoCombo,data.Departamento);
         __recargaCombo(institLocalidadCombo,data.Localidad);
-        __recargaCombo(institGestionCombo,data.Gestion);
+        __recargaRadio(institGestionSection,data.Gestion, 'InstitGestionId','data[Instit][gestion_id]');
 
         $(".seccion").each(function() {
             var size = 0;
@@ -341,24 +341,22 @@
         
     };
 
-    var __recargaRadio = function (ofertasSection,data){
+    var __recargaRadio = function (section,data, id,name){
         var options = [];
         var n = 0;
         var key;
 
-        ofertasSection.html('');
-        
-        options.push('<label for="data[Titulo][oferta_id]">Nivel<br></label>');
+        section.html('');
                 
         for (key in data) {
             if(data.hasOwnProperty(key)){
                 if(key !== "" && data[key] !== ""){
                     options.push('<input type="radio" value="' +
                                  key +
-                                 '" class="autosubmit ofertas_radio" id="TituloOfertaId' +
+                                 '" class="autosubmit" id="' + id +
                                  n +
-                                 '" name="data[Titulo][oferta_id]"/>' +
-                                 '<label for="TituloOfertaId' + n + '">' + data[key] + '</label>'
+                                 '" name="' + name + '"/>' +
+                                 '<label for="' + id +  n + '">' + data[key] + '</label>'
                                 );
                     n++;
                 }
@@ -366,11 +364,14 @@
         }
 
         if(n >= 2){
-            ofertasSection.html(options.join(''));
-            __showWithLabel(ofertasSection);
+            section.html(options.join(''));
+            __showWithLabel(section);
+            titulosForm.find("label[for='" + name + "']").show();
+
         }
         else{
-            __hideWithLabel(ofertasSection);
+            __hideWithLabel(section);
+             titulosForm.find("label[for='" + name + "']").hide();
         }
 
     };

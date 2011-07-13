@@ -37,6 +37,11 @@ IMG.step{
     width: 10px;
     margin-right: 30px;
 }
+
+#filtro label{
+    text-decoration:underline;
+}
+
 .filtros-aplicados{
     padding: 5px !important;
     margin-top: 0px !important;
@@ -247,4 +252,12 @@ label{
 
 input[type=radio]{
     float:left;
+}
+
+#ofertas_section label{
+    text-decoration: none !important;
+}
+#gestion_section label{
+    float:left;
+    text-decoration: none !important;
 }

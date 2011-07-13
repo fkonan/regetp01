@@ -567,6 +567,7 @@ class TitulosController extends AppController {
 
         $array_condiciones['fields'] = array('Gestion.id', 'Gestion.name');
         $array_condiciones['group'] = array('Gestion.id', 'Gestion.name');
+        $array_condiciones['order'] = array('Gestion.name');
         $filtros['Gestion'] = $this->Titulo->find('all',$array_condiciones);
 
         if(empty($this->passedArgs['jurisdiccionId']) && (count($filtros['Jurisdiccion']) > 1)) {
