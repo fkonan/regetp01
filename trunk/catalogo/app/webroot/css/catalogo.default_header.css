@@ -19,16 +19,19 @@
     margin-right: auto;
     width: 960px;
     background: url(img/bandera_trans.png) no-repeat right;
+    background-position: 100% 0%;
     padding-top: 15px;
 }
 
 .menu_wrapper{ 
-    
+    position: absolute;
+    bottom: 0px;
 }
 
 .logo{
     float: left;
 }
+
 
 .logo img{
 }
@@ -48,9 +51,10 @@
 }
 
 #bandera_header{
-   width: 70%;
    margin-left: 20%;
    padding-left: 10%;
+   height: 132px;
+   position: relative;
 }
 
 

@@ -17,13 +17,21 @@
             <h1 class="">
                 &nbsp;<?php echo $html->link(__('Catálogo Nacional de Títulos y Certificaciones de Educación Técnico Profesional', true), '/pages/home', array('class' => '')); ?>
             </h1>
-            
+         
+
             <div class="menu_wrapper no-print"  style="z-index: 50; ">
-                    <?php echo $this->element('menu');?>
+                    <?php echo $this->element('menu');?>                
             </div>
+            
+               
+            <?php
+ echo $html->image('header_ministerio_recortada.png', array(
+                            'border'=> 0,
+                            'class' => 'logo',
+                            'style' => 'width: 72px; position: absolute; bottom: 0px; right: 0px;'
+                            ));
+                        ?>
             
         </div>
     </div>
 </div>
-
-<div class="clear"></div>
