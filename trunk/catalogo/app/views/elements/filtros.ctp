@@ -1,17 +1,19 @@
 <div class="seccion grid_3 alpha">
     <h4>Títulos</h4>
     <div>
-        <div id="ofertas_section" style="padding:2px 0 2px 0;">
+        <div style="padding:2px 0 2px 0;">
             <label for="data[Titulo][oferta_id]">Nivel<br></label>
-            <?php
-            echo
-            $form->radio('Titulo.oferta_id',$ofertas,
-                        array('empty' => 'Seleccione...',
-                            'legend' => false,
-                            'class' => 'autosubmit ofertas_radio',
-                            'value'=> false)
-                        );
-            ?>
+            <div id="ofertas_section" >
+                <?php
+                echo
+                $form->radio('Titulo.oferta_id',$ofertas,
+                            array('empty' => 'Seleccione...',
+                                'legend' => false,
+                                'class' => 'autosubmit',
+                                'value'=> false)
+                            );
+                ?>
+            </div>
         </div>
         <div style="padding:2px 0 2px 0;">
             <?php echo $form->input('Titulo.sector_id',
@@ -80,15 +82,19 @@
         <h4>Institución</h4>
         <div>
             <div style="padding:2px 0 2px 0;">
-                <?php echo $form->input('Instit.gestion_id',
-                array('options'=>$gestiones,
-                'div'=>false,
-                'label' => 'Ámbito de Gestión<br />',
-                'empty' => 'Seleccione...',
-                'class' => 'autosubmit'
-                )
-                )
-                ?>
+                <label for="data[Instit][gestion_id]">Ámbito de Gestión<br></label>
+                <div id="gestion_section">
+                    <?php
+                    echo
+                    $form->radio('Instit.gestion_id',$gestiones,
+                                array('empty' => 'Seleccione...',
+                                    'legend' => false,
+                                    'class' => 'autosubmit',
+                                    'value'=> false)
+                                );
+                    ?>
+                </div>
+                <div class="clear"></div>
             </div>
             <div style="padding:2px 0 2px 0;">
                 <?php echo $form->input('Instit.nombre',
