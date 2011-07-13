@@ -1,10 +1,3 @@
-<?php
- echo $html->image('header_ministerio_recortada.png', array(
-                            'border'=> 0,
-                            'class' => 'logo',
-                            'style' => 'width: 72px; float: right; margin-top: -5px;'
-                            ));
-                        ?>
 
 <ul id="menu" class="nav sf-menu">
         <li class="<?php echo ($this->here == $this->base.'/pages/home')?'current':''?> "><?php echo $html->link('Inicio', '/pages/home', array('class'=>'menu-item')); ?></li>
