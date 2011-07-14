@@ -179,6 +179,8 @@ function convertir_para_busqueda_avanzada($text){
                 'n°' => '%',
                 'nº' => '%',
                 ' '  => '%',
+                '('  => '%',
+                ')'  => '%',
 
         );
         // caracteres especiales de expresiones regulares
