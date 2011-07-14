@@ -11,6 +11,7 @@ $paginator->options(array(
     <div style="float:right">
         <?php
         echo $form->create('Titulo', array(
+            'controller' => 'titulos',
             'action' => 'view/' . $id,
             'name'=>'InstitsForm',
             'id' =>'InstitsForm',

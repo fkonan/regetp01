@@ -14,6 +14,7 @@ class TitulosController extends AppController {
             'departamento' => 'Titulo.departamento_id',
             'localidad' => 'Titulo.localidad_id',
             'tituloJurDepLoc' => 'Titulo.tituloJurDepLoc',
+            'gestion' => 'Titulo.gestion_id',
             'page' => 'Titulo.page',
         );
 
@@ -659,6 +660,10 @@ class TitulosController extends AppController {
             }else if(!empty($this->data['Titulo']['jur_dep_loc'])){
                 $this->passedArgs['jurDepLoc'] = utf8_decode($this->data['Titulo']['jur_dep_loc']);
             }
+            if(!empty($this->data['Instit']['gestion_id'])) {
+                $this->passedArgs['gestionId'] = $this->data['Instit']['gestion_id'];
+                $this->Session->write($this->sesNames['gestion'], $this->data['Instit']['gestion_id']);
+            }
             /*if (!empty($this->data['Titulo']['que'])) {
                 $this->paginate['conditions']['(lower(Tipoinstit.name) || lower(Titulo.name) || lower(Plan.name) || lower(Sector.name) || lower(Subsector.name)) SIMILAR TO ?'] = convertir_para_busqueda_avanzada(utf8_decode($this->data['Titulo']['que']));
             }
@@ -765,6 +770,10 @@ class TitulosController extends AppController {
         }
         if ($this->Session->read($this->sesNames['tituloJurDepLoc'])) {
             $this->data['Instit']['jur_dep_loc'] = $this->passedArgs['tituloJurDepLoc'] = $this->Session->read($this->sesNames['tituloJurDepLoc']);
+            $bySession = true;
+        }
+        if ($this->Session->read($this->sesNames['gestion'])) {
+            $this->data['Instit']['gestion_id'] = $this->passedArgs['gestionId'] = $this->Session->read($this->sesNames['gestion']);
             $bySession = true;
         }
         if ($this->Session->read($this->sesNames['page'])) {
