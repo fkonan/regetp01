@@ -47,22 +47,24 @@ $paginator->options(array(  'update' => 'consoleResult',
                                     'slug' => slug($titulo['Titulo']['name'])))
                     ?>"
                     class="linkconatiner-more-info">
-            <span class="items-nombre">
-                        <strong><?php
-                        /*$linkTitulo = $html->link(
-                                " (".count($titulo['Plan'])." planes)",
-                                '/titulos/corrector_de_planes/Plan.titulo_id:'.$titulo['Titulo']['id'],
-                                array('target'=>'_blank')
-                                );*/
-                        echo $titulo['Titulo']['name']; ?>
-                        </strong>
-            </span>
                     
-            <span class="items-oferta">
+                    <span class="items-oferta">
                         <?php
                         echo (empty($titulo['Oferta']['name']))? "" : $titulo['Oferta']['name'];
                         ?>
-            </span>
+                    </span>
+                    <span class="items-nombre">
+                                <strong><?php
+                                /*$linkTitulo = $html->link(
+                                        " (".count($titulo['Plan'])." planes)",
+                                        '/titulos/corrector_de_planes/Plan.titulo_id:'.$titulo['Titulo']['id'],
+                                        array('target'=>'_blank')
+                                        );*/
+                                echo $titulo['Titulo']['name']; ?>
+                                </strong>
+                    </span>
+                    
+            
                     
             <div class="clear"></div>
             </a>

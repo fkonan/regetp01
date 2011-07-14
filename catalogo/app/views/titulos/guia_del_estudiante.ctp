@@ -47,7 +47,7 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
 
 <div class="grid_12">
     <h1>Guía del Estudiante</h1>
-    <p>La Guía del Estudiante ayudará a que puedas encontrarar donde estudiar y obtener un título o certificación según tus gustos e intereses. </p>
+    <p>La Guía del Estudiante ayudará a que puedas encontrarar dónde estudiar y obtener un título o certificación según tus gustos e intereses. </p>
 
     <div class="boxblanca">
         <?php echo $html->image('step1.gif', array('class' => 'step'));?>
@@ -105,10 +105,10 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
         <div id="li_instits" class="boxblanca">
             <?php echo $html->image('step3.gif', array('class' => 'step'));?>
             
-            <h3>¿Dónde estudiar?</h3>
+            <h3>Listado de Instituciones</h3>
             <div class="results_instits">
                 <div class="paginatorContainer"></div>
-                <ul id="items" class="items results">
+                <ul id="items" class="items results" style="margin-top: 15px;">
                     Sin Resultados
                 </ul>
             </div>

@@ -544,8 +544,14 @@ li{
 
 
 .linkconatiner-more-info{
-    background: url(img/lupazul_small.png) no-repeat 100% 50%;
     display:block; 
     cursor: hand;
     cursor:pointer;
+    color: #58585a;
+    padding-right: 15px;
+}
+
+.linkconatiner-more-info:HOVER{
+    background: url(img/lupazul_small.png) no-repeat 100% 50%;
+    color: black;
 }
