@@ -29,8 +29,10 @@ p.titulo, div.titulo{
 }
 .items-oferta {
     text-align:left;
-    float: right;
+    font-style: italic;
     margin-right: 40px;
+    float: left;
+    width: 160px
 }
 
 
