@@ -234,7 +234,14 @@
         for(i = 0; i< len;i++)
         {
             if(params[i].name !== '_method' && params[i].value !== ''){
-                input = titulosForm.find("[name='" + params[i].name + "'][value=" + params[i].value + "]");
+                input = titulosForm.find("[name='" + params[i].name + "']");
+                
+                if(input.size() > 1){
+                    input = jQuery.grep(input, function(n, j){
+                      return $(n).val() == params[i].value;
+                    });
+                    input = $(input);
+                }
                 
                 if(input.is('select')){
                     valor = titulosForm.find("[name='" + params[i].name + "']").find("option[value='"+params[i].value+"']").html();
