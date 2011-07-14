@@ -11,7 +11,7 @@
      *  es el elemento del formulario, se inicializa en en document.ready()
      * @var Dom Object
      */
-    var formElement = null;
+    var formElement = $('#InstitSearchForm');
 
 
     function iniciarTooltip(){

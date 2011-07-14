@@ -1,6 +1,12 @@
 function init__SearchFormJs(urlLocalidades){
     jQuery(document).ready(function() {
         iniciarTooltip();
+        
+        /**
+         *  es el elemento del formulario, se inicializa en en document.ready()
+         * @var Dom Object
+         */
+        var formElement = $('#InstitSearchForm');
 
         jQuery("#InstitJurDepLoc").autocomplete(urlLocalidades, {
             dataType: "json",
