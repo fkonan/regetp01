@@ -9,8 +9,7 @@
                 $form->radio('Titulo.oferta_id',$ofertas,
                             array('empty' => 'Seleccione...',
                                 'legend' => false,
-                                'class' => 'autosubmit',
-                                'value'=> false)
+                                'class' => 'autosubmit')
                             );
                 ?>
             </div>
@@ -89,8 +88,7 @@
                     $form->radio('Instit.gestion_id',$gestiones,
                                 array('empty' => 'Seleccione...',
                                     'legend' => false,
-                                    'class' => 'autosubmit',
-                                    'value'=> false)
+                                    'class' => 'autosubmit')
                                 );
                     ?>
                 </div>
