@@ -25,7 +25,7 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
     <li>
         <div class="items-nombre">
             <a href="${Instit.url}">
-            ${Instit.cue}${Instit.anexo} - ${Instit.nombre_completo}</a>
+            ${Instit.nombre_completo}</a>
         </div>
         <div class="items-domicilio">
             ${Localidad.name}, ${Departamento.name}, ${Jurisdiccion.name}
