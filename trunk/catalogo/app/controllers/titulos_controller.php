@@ -405,8 +405,8 @@ class TitulosController extends AppController {
                 $this->Session->write($this->sesNames['gestion'], $this->data['Instit']['gestion_id']);
             }
             if(!empty($this->data['Instit']['nombre'])) {
-                $this->passedArgs['institName'] = $this->data['Instit']['nombre'];
-                $this->Session->write($this->sesNames['institName'], $this->data['Instit']['nombre']);
+                $this->passedArgs['institName'] = utf8_decode($this->data['Instit']['nombre']);
+                $this->Session->write($this->sesNames['institName'], utf8_decode($this->data['Instit']['nombre']));
             }
         }
 
