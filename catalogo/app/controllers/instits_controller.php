@@ -219,8 +219,6 @@ class InstitsController extends AppController {
                 endswitch;
         }
 
-
-
         /**
          *      NOMBRE COMPLETO
          */
@@ -403,7 +401,7 @@ class InstitsController extends AppController {
 
          
          $this->Buscable->aplicarCriteriosDeBusqueda($ops);         
-
+         
         /*********************************************************************/
         /*          FIN -*-CONDITIONS-*- de busqueda                         */
         /*********************************************************************/

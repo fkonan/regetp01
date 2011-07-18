@@ -451,8 +451,8 @@ class TitulosController extends AppController {
         }
         if(!empty($this->passedArgs['institName'])){
             $q = ($this->passedArgs['institName']);
-            $array_condiciones['conditions']["(lower(Tipoinstit.name) || lower(Instit.nombre)) SIMILAR TO ?"] = convertir_para_busqueda_avanzada($q);
-            $array_condiciones_ubicacion['conditions']["(lower(Tipoinstit.name) || lower(Instit.nombre)) SIMILAR TO ?"] = convertir_para_busqueda_avanzada($q);
+            $array_condiciones['conditions']["lower(Instit.nombre) SIMILAR TO ?"] = convertir_para_busqueda_avanzada($q);
+            $array_condiciones_ubicacion['conditions']["lower(Instit.nombre) SIMILAR TO ?"] = convertir_para_busqueda_avanzada($q);
         }
 
         if (!empty($this->passedArgs['page'])) {
