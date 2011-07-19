@@ -1,13 +1,16 @@
-Para poder utilizar el corrector ortográfico aspell se deben tener instalados en el servidor:
+Para poder utilizar el corrector ortogrï¿½fico aspell se deben tener instalados en el servidor:
 - comando aspell (/usr/bin/ aspell)
-- diccionario en español (aspell-es)
+- diccionario en espaï¿½ol (aspell-es)
+
+Instalar aspell espaÃ±ol:
+sudo apt-get install aspell-es
 
 Editar permisos:
 sudo chmod 646 NetBeansProjects/regetp/app/webroot/js/activespell/personal_dictionary/personal_dictionary.txt
 
 Crear un diccionario aparte con las palabras tecnicas usadas por la UI:
 - aspell --lang=es create master /usr/lib/aspell/tecnico.rws < /var/www/regetp/docs/tecnico.txt
-- agregar "add tecnico.rws" a /usr/lib/aspell/ es.multi
+- agregar "add tecnico.rws" a /usr/lib/aspell/es.multi
 
 
 Para backup del diccionario se debe guardar el archivo tecnico.rws o bien con el tecnico.txt
