@@ -706,7 +706,7 @@ class TitulosController extends AppController {
         }
         if(!empty($this->passedArgs['jurDepLoc'])){
             $q = $this->passedArgs['jurDepLoc'];
-            $this->paginate['conditions']["(lower(Localidad.name) || lower(Departamento.name)) SIMILAR TO ?"] = convertir_para_busqueda_avanzada($q);
+            $this->paginate['conditions']["to_ascii(lower(Localidad.name) || lower(Departamento.name) || lower(Jurisdiccion.name)) SIMILAR TO ?"] = convertir_para_busqueda_avanzada($q);
         }
 
         if (!empty($this->passedArgs['page'])) {
