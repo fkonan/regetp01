@@ -253,7 +253,7 @@ class InstitsController extends AppController {
                 if ($nombre != $this->data['Instit']['jur_dep_loc']) {
                     unset($this->data['Instit']['departamento_id']);
                     $q = $this->data['Instit']['jur_dep_loc'];
-                    $this->paginate['Instit']['conditions']["(lower(Localidad.name) || lower(Departamento.name)) SIMILAR TO ?"] = convertir_para_busqueda_avanzada($q);
+                    $this->paginate['Instit']['conditions']["to_ascii(lower(Localidad.name) || lower(Departamento.name) || lower(Jurisdiccion.name)) SIMILAR TO ?"] = convertir_para_busqueda_avanzada($q);
                 }
 
                 $this->Session->write($this->sesNames['departamento'], $this->data['Instit']['departamento_id']);
@@ -267,14 +267,14 @@ class InstitsController extends AppController {
                 if ($nombre != $this->data['Instit']['jur_dep_loc']) {
                     unset($this->data['Instit']['localidad_id']);
                     $q = $this->data['Instit']['jur_dep_loc'];
-                    $this->paginate['conditions']["(lower(Localidad.name) || lower(Departamento.name)) SIMILAR TO ?"] = convertir_para_busqueda_avanzada($q);
+                    $this->paginate['conditions']["to_ascii(lower(Localidad.name) || lower(Departamento.name) || lower(Jurisdiccion.name)) SIMILAR TO ?"] = convertir_para_busqueda_avanzada($q);
                 }
 
                 $this->Session->write($this->sesNames['localidad'], $this->data['Instit']['localidad_id']);
             }
             
             $q = $this->data['Instit']['jur_dep_loc'];
-            $this->paginate['conditions']["(lower(Localidad.name) || lower(Departamento.name)) SIMILAR TO ?"] = convertir_para_busqueda_avanzada($q);
+            $this->paginate['conditions']["to_ascii(lower(Localidad.name) || lower(Departamento.name) || lower(Jurisdiccion.name)) SIMILAR TO ?"] = convertir_para_busqueda_avanzada($q);
 
             $this->Session->write($this->sesNames['jurDepLoc'], $this->data['Instit']['jur_dep_loc']);
         }
