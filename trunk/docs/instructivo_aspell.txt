@@ -1,8 +1,8 @@
-Para poder utilizar el corrector ortogrï¿½fico aspell se deben tener instalados en el servidor:
+Para poder utilizar el corrector ortográfico aspell se deben tener instalados en el servidor:
 - comando aspell (/usr/bin/ aspell)
-- diccionario en espaï¿½ol (aspell-es)
+- diccionario en español (aspell-es)
 
-Instalar aspell espaÃ±ol:
+Instalar aspell españl:
 sudo apt-get install aspell-es
 
 Editar permisos:
