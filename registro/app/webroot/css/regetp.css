@@ -322,6 +322,15 @@ ul, li {
     font-size: 9pt;
 }
 
+
+
+.current{
+    top: 3px;
+    position: relative;
+    color: #3366CC;
+    font-weight: bold;
+}
+
 #menu a {
     font-weight: normal;
     text-decoration: none;
@@ -1164,14 +1173,6 @@ div.code-coverage-results span.result-good {
 }
 
 
-
-.current{
-    font-size: 19px;
-    top: 3px;
-    position: relative;
-    color: #3366CC;
-    font-weight: bold;
-}
 
 .paginate_msg{
     margin-top: 1.5em;
