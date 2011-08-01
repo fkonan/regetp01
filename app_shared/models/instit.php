@@ -326,9 +326,33 @@ class Instit extends AppModel {
 				'allowEmpty' => true,
 				'message' => 'Si la institución es del tipo Itinerario Formativo deberia ser "con programa de ETP".'
 			)
-		)
+		),
+            
+                'nombre_dep' => array(
+                    'dep_nacional' => array(
+                        'rule' => 'dep_nacional',
+                        'message' => 'Si la dependencia es Nacional, debe escribir su nombre',
+                    ),
+                ),
 	);
 	
+        
+        /**
+         * Si la dependencia es del tipo Nacional, entonces debe de haberse ingresado el 
+         * nombre si o si.
+         * Esta funcion verifica que eso ocurra
+         * @return boolean
+         */
+        function dep_nacional(){
+            if ( $this->data['Instit']['dependencia_id'] == DEPENDENCIA_NACIONAL ){
+                if (empty( $this->data['Instit']['nombre_dep'] )){
+                    return false;
+                }
+            }
+            return true;
+            
+        }
+        
 	
   	/**
   	 * Validacion de CUE por jurisdiccion
