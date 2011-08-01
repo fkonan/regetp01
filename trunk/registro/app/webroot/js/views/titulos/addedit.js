@@ -1,13 +1,25 @@
+jQuery(document).ready(function () {
+    // deshabilita ENTER
+    jQuery('form').keypress(stopRKey);
+});
+
+function stopRKey(evt) {
+  var evt = (evt) ? evt : ((event) ? event : null);
+  var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+  if (evt.keyCode == 13)  {return false;}
+} 
+
 function SearchSimilars(url, name, id) {
     jQuery(document).ready(function() {
        jQuery('#divTituloName').mask('Buscando títulos similares...');
        
        var urlcompleta = '';
-       if (escape(name) && id) {
-           urlcompleta = url+escape(name)+'/'+id;
+       var param = encodeURIComponent(escape(name).replace('/', ' '));
+       if (param && id) {
+           urlcompleta = url+param+'/'+id;
        }
-       else if (escape(name)) {
-           urlcompleta = url+escape(name);
+       else if (param) {
+           urlcompleta = url+param;
        }
 
        if (urlcompleta) {
