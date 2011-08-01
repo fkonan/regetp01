@@ -17,19 +17,15 @@ class UtilsController extends AppController {
         
         $this->autoRender = false;
 
-        $this->Departamento->recursive = -1;
-        $departamentos = $this->Departamento->find('all', array(
-                                'fields' => array('Departamento.id', 'Departamento.name')
+        $this->Plan->recursive = -1;
+        $planes = $this->Plan->find('all', array(
+                                'fields' => array('Plan.id', 'Plan.norma')
         ));
 
         $this->Instit->recursive = -1;
         $instits = $this->Instit->find('all', array(
                                 'fields' => array('id',
-                                                  'nombre',
-                                                  'lugar',
                                                   'direccion',
-                                                  'dir_nombre',
-                                                  'vice_nombre',
                                     ),
                                 'order' => array('id')
         ));
@@ -76,11 +72,15 @@ class UtilsController extends AppController {
         $this->Departamento->saveAll($departamentos);
 */
         foreach($instits as &$instit) {
-            /*$instit['instit']['nombre'] = $this->__strToSpecialLower($instit['instit']['nombre']);
-            $instit['instit']['direccion'] = $this->__strToSpecialLower($instit['instit']['direccion']);
-            $instit['instit']['dir_nombre'] = $this->__strToSpecialLower($instit['instit']['dir_nombre']);
-            $instit['instit']['vice_nombre'] = $this->__strToSpecialLower($instit['instit']['vice_nombre']);*/
-            $instit['instit']['lugar'] = $this->__strToSpecialLower($instit['instit']['lugar']);
+            //$instit['instit']['nombre'] = $this->__strToSpecialLower($instit['instit']['nombre']);
+            //$instit['instit']['direccion'] = $this->__strToSpecialLower($instit['instit']['direccion']);
+            //$instit['instit']['dir_nombre'] = $this->__strToSpecialLower($instit['instit']['dir_nombre']);
+            //$instit['instit']['vice_nombre'] = $this->__strToSpecialLower($instit['instit']['vice_nombre']);
+            //$instit['instit']['lugar'] = $this->__strToSpecialLower($instit['instit']['lugar']);
+            if (!empty($instit['instit']['direccion'])) {
+                $instit['instit']['direccion'] = str_ireplace("S/n", "S/N", $instit['instit']['direccion']);
+                $instit['instit']['direccion'] = str_ireplace("s/n", "S/N", $instit['instit']['direccion']);
+            }
         }
         $this->Instit->saveAll($instits, array('validate'=>false));
 /*
@@ -93,13 +93,15 @@ class UtilsController extends AppController {
             $localidad['Localidad']['name'] = $this->__strToSpecialLower($localidad['Localidad']['name']);
         }
         $this->Localidad->saveAll($localidades, array('validate'=>false));
-
+*/
         foreach($planes as &$plan) {
-            $plan['Plan']['nombre'] = $this->__strToSpecialLower($plan['Plan']['nombre']);
-            $plan['Plan']['perfil'] = $this->__strToSpecialLower($plan['Plan']['perfil']);
+            //$plan['Plan']['nombre'] = $this->__strToSpecialLower($plan['Plan']['nombre']);
+            //$plan['Plan']['perfil'] = $this->__strToSpecialLower($plan['Plan']['perfil']);
+            if (!empty($plan['Plan']['norma']))
+               $plan['Plan']['norma'] = $this->__strToSpecialLower($plan['Plan']['norma']);
         }
         $this->Plan->saveAll($planes, array('validate'=>false));
-
+/*
         foreach($sectores as &$sector) {
             $sector['Sector']['name'] = $this->__strToSpecialLower($sector['Sector']['name']);
         }
@@ -145,7 +147,7 @@ class UtilsController extends AppController {
         foreach ($palabras as $key => &$palabra) {
 
             if (strlen($palabra) <= 4 &&
-                ($palabra == 'EGB' ||
+                ($palabra == 'EGB' || $palabra == 'S/N' ||
                  $palabra == 'II' || $palabra == 'III' || $palabra == 'IV' ||
                  $palabra == 'VI' || $palabra == 'VII' || $palabra == 'VIII' ||
                  $palabra == 'IX' || $palabra == 'XI' || $palabra == 'XII' || $palabra == 'XIII')) {
