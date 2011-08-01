@@ -55,10 +55,12 @@ define('SUP_ID',6);
 define('SUP_TEC_ID',4);
 
 
+
 /**
  * ID`s de ETAPAS
  */
 define('ETAPA_CB',4);
+define('ETAPA_POLIMODAL',2);
 define('ETAPA_EGB3',1);
 define('ETAPA_PC',102);
 

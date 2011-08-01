@@ -92,6 +92,12 @@ class Anio extends AppModel {
 				'message' => 'Debe ingresar un valor numérico.'	
 			),
 		),
+                'etapa_id' => array(
+                    'it_es_polimodal' => array(
+                        'rule' => 'it_es_polimodal',
+                        'message' => 'Un IT debe ser de Etapa Polimodal'
+                )
+            ),
 
 //                'estructura_planes_anio_id'=>array(
 ////			'estructuraValida'=> array(
@@ -108,6 +114,20 @@ class Anio extends AppModel {
 //			),
 //		),
 	);
+        
+        
+        /**
+         * Devuelve true en caso de que un itinerario sea con etapa Polimodal
+         * caso contrario devuelve false.
+         * sirve para validar ya que todos los IT deberian ser Polimodales
+         * @return boolean
+         */
+        function it_es_polimodal(){
+            if ($this->data['Anio']['etapa_id'] == ETAPA_POLIMODAL) {
+                return true;
+            }
+            return false;
+        }
 
 	
 	
