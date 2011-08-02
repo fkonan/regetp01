@@ -4,8 +4,12 @@ App::import('Model','Pquery.CustomQUery');
 class QueriesController extends PqueryAppController {
 
 	var $name = 'Queries';
-	var $helpers = array('Html', 'Form', 'Ajax', 'Time');
-	var $components = array('Auth','RequestHandler');
+	var $helpers = array('Time');
+        
+        function beforeFilter() {
+            parent::beforeFilter();
+            $this->RequestHandler->setContent('xls', 'application/vnd.ms-excel');
+        }
 
 	function index() {
 		$this->Query->recursive = 0;
@@ -102,9 +106,7 @@ class QueriesController extends PqueryAppController {
 	 * @param $id
 	 */
 	function contruye_excel($id){
-		$this->layout = 'excel';
-		Configure::write('debug',0);
-		$this->RequestHandler->setContent('xls', 'application/vnd.ms-excel');
+                
 		$res = $this->Query->findById($id);
 		$sql = $res['Query']['query'];
 		$this->Query->recursive = -1;
@@ -120,7 +122,6 @@ class QueriesController extends PqueryAppController {
 		$this->set('nombre',limpiar_nombre($res['Query']['name']));
 		$this->set('columnas',$columnas);
 		$this->set('filas',$consulta_ejecutada);
-
 	}
 
         function validate($query){
