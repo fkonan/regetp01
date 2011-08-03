@@ -97,6 +97,7 @@ class PlanesController extends AppController {
         $this->Plan->contain(array(
             'Anio' => array('EstructuraPlanesAnio'),
             'Oferta',
+            'EstructuraPlan' => array('Etapa'),
             'Titulo' => array(
                 'SectoresTitulo' => array('Sector','Subsector','order'=>array('SectoresTitulo.prioridad DESC'))
                 )
@@ -135,18 +136,18 @@ class PlanesController extends AppController {
         $planes_view_tabla['options'] = array();
         //	Si es FP mostrar la vista para FP, sino mostrar la vista por default (view)
         switch ($plan['Plan']['oferta_id']):
-            case 1: // FP
+            case FP_ID: // FP
                 $planes_view_tabla['element'] = 'planes_view_tabla_fp';
                 break;
-            case 4: //SNU
-            case 6: //SUP NO TECNICO
+            case SUP_TEC_ID: // SUP TEC
+            case SUP_ID: //SUP NO TECNICO
                 $planes_view_tabla['element'] = 'planes_view_tabla_snu';
                 break;
-            case 2: //IT
-            case 5: //SNU
+            case ITINERARIO_ID: //IT
+            case SEC_ID: //SNU
                 $planes_view_tabla['element'] = 'planes_view_tabla_normal';
                 break;
-            case 3: //MT, SEC
+            case SEC_TEC_ID: //MT, SEC
             // 'planes_view_tabla_st_old' es una solucion temporal,
             // vamos atener que usar el elemento $planes_view_tabla['element'] = 'planes_view_tabla_st' en un futuro
                 $planes_view_tabla['element'] = 'planes_view_tabla_st_old';
