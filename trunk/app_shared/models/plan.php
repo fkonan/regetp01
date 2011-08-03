@@ -68,6 +68,24 @@ class Plan extends AppModel {
 	);
 	
 	var $validate = array(
+                'instit_id' => array(
+                    'number' => array(
+                                'rule' => VALID_NUMBER,
+                                'required' => true,
+                                'allowEmpty' => false,
+                                'message' => 'Debe asociar el plan a una institución.'
+
+                        ),
+                ),
+                'oferta_id' => array(
+                    'number' => array(
+                                'rule' => VALID_NUMBER,
+                                'required' => true,
+                                'allowEmpty' => false,
+                                'message' => 'Debe especificar la oferta del plan.'
+
+                        ),
+                ),
 		'nombre' => array(
 			'notEmpty'=> array(
 				'rule' => VALID_NOT_EMPTY,

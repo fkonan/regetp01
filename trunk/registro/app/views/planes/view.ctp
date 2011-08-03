@@ -26,6 +26,13 @@ $cue_instit = $instit['cue'].$anexo;
 			&nbsp;
 		</dd>
 		
+                <?php if ($plan['Plan']['oferta_id'] == SEC_TEC_ID && !empty($plan['EstructuraPlan']['Etapa'])) { ?>
+                <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Etapa'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?= $plan['EstructuraPlan']['Etapa']['name']; ?>
+			&nbsp;
+		</dd>
+                <?php }?>
 
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Normativa'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>

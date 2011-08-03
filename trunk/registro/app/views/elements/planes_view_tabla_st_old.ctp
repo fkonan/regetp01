@@ -51,7 +51,6 @@
             <th><?php __('Año'); ?></th>
             <th class="js-opcional"><?php __('A.F'); ?></th>
             <th class="js-opcional"><?php __('E.T'); ?></th>
-            <th><?php __('Etapa'); ?></th>
             <th><?php __('Matrícula'); ?></th>
             <th><?php __('Secciones'); ?></th>
             <th><?php __('Horas Taller'); ?></th>
@@ -72,7 +71,6 @@
             <td><?php echo @$anio['EstructuraPlanesAnio']['alias'];?></td>
             <td class="js-opcional"><?php echo @$anio['EstructuraPlanesAnio']['anio_escolaridad'];?></td>
             <td class="js-opcional"><?php echo @$anio['EstructuraPlanesAnio']['edad_teorica'];?></td>
-            <td><?php echo $this->requestAction('/Etapas/dame_nombre/'.$anio['etapa_id']);?></td>
             <td><?php echo  empty($anio['matricula'])?'-':$anio['matricula'];
             $tot_matricula += $anio['matricula']; ?></td>
             <td><?php echo empty($anio['secciones'])?'-':$anio['secciones'];
