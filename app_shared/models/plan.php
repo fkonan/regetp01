@@ -757,6 +757,41 @@ class Plan extends AppModel {
         }
 
         
+        /*
+         * Trae los planes de la misma institucion con nombre igual o similar al dado por parametro
+         */
+        function getSimilars($name, $instit_id, $plan_id=null) {
+            $similars = array();
+
+            if (!empty($name)) {
+                $nombre = $name;
+            }
+            elseif (!empty($this->data['Plan']['nombre'])) {
+                $nombre = $this->data['Plan']['nombre'];
+            }
+
+            if (!empty($plan_id)) {
+                $id = $plan_id;
+            }
+            elseif (!empty($this->data['Plan']['id'])) {
+                $id = $this->data['Plan']['id'];
+            }
+
+            if(!empty($nombre)) {
+                $conditions = array('lower(Plan.nombre)  SIMILAR TO ?' => convertir_texto_plano($nombre),
+                                    'Plan.instit_id' => $instit_id);
+
+                if (!empty($id)) {
+                    // si esta editando, que no sea el mismo
+                    $conditions['Plan.id <>'] = $id;
+                }
+
+                $similars = $this->find('all', array(
+                                'conditions' => $conditions));
+            }
+
+            return $similars;
+        }
 
         
 }

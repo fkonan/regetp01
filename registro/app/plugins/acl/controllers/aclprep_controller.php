@@ -545,6 +545,13 @@ class AclprepController extends AclAppController {
 
         die('done 1.7');
     }
+    
+    function assignPermissions1Dot7Dot1() {
+        // Usuarios
+        $this->Acl->allow('usuarios', 'Planes/ajax_similars');
+
+        die('done 1.7.1');
+    }
 
 
     

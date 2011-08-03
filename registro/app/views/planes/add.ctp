@@ -7,7 +7,7 @@ echo $javascript->link(array('jquery.autocomplete',
 echo $html->css(array('jquery.autocomplete.css', 'spell_checker.css'));
 ?>
 <script type="text/javascript">
-    init("<?echo $html->url(array('controller'=>'titulos','action'=>'ajax_search'));?>");
+    init("<?echo $html->url(array('controller'=>'titulos','action'=>'ajax_search'));?>", "<?echo $html->url(array('controller'=>'planes','action'=>'ajax_similars'));?>");
 </script>
 
 <h1>Nueva Oferta Educativa</h1>
@@ -79,14 +79,19 @@ $cue_instit = $instit['cue'].$anexo;
                     'complete'=>'jQuery("#ajax_indicator").hide();jQuery("#PlanTituloName").removeAttr("disabled")',
                     'onChange'=>true)
                      );
-        
+                
 		echo $form->input('norma',array('label'=>'Normativa'));
 		
                 echo $form->input('nombre', array('id' => 'spell_checker1',
                                                   'title' => 'spellcheck_icons',
                                                   'style' => 'width: 85%; clear: none;',
                                                   ((Configure::read('modo_linux'))? 'accesskey': '') => $html->url('/js/activespell/').'spell_checker.php'));
-		//echo $form->input('perfil');
+		
+                ?>
+            
+                <div id="similars" class="attention"></div>
+            
+                <?php
                 echo $form->input('perfil', array('id' => 'spell_checker2',
                                                   'title' => 'spellcheck_icons',
                                                   'style' => 'width: 85%; clear: none;',

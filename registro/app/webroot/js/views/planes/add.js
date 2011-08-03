@@ -23,8 +23,27 @@ function formatResult(titulo) {
         return titulo.name;
 }
 
+function SearchSimilars(url, name, instit_id, id) {
+       jQuery('#divTituloName').mask('Buscando títulos similares...');
+       
+       var urlcompleta = '';
+       var param = encodeURIComponent(escape(name).replace('/', ' '));
+       if (param && id) {
+           urlcompleta = url+'/'+param+'/'+instit_id+'/'+id;
+       }
+       else if (param) {
+           urlcompleta = url+'/'+param+'/'+instit_id;
+       }
 
-function init(autocomplete_url) {
+       if (urlcompleta) {
+           jQuery('#similars').load(urlcompleta, function(){
+               jQuery('#similars').attr('style', 'display:block');
+               jQuery('#divTituloName').unmask();
+           });
+       }
+}
+
+function init(autocomplete_url, searchSimilars_url) {
     jQuery(document).ready(function () {
         // deshabilita ENTER
         jQuery('form').keypress(
@@ -34,6 +53,16 @@ function init(autocomplete_url) {
               if (evt.keyCode == 13)  {return false;}
             });
 
+        // planes con nombre similar en la institucion
+        jQuery("#spell_checker1").live('blur', function() {
+            if (jQuery("#PlanId").val()) {    // edit
+                SearchSimilars(searchSimilars_url, jQuery("#spell_checker1").val(), jQuery("#PlanInstitId").val(), jQuery("#PlanId").val());
+            }
+            else {  // add
+                SearchSimilars(searchSimilars_url, jQuery("#spell_checker1").val(), jQuery("#PlanInstitId").val());
+            }
+        });
+        
         toggleTitulos();
         toggleEstructuraPlan();
 
