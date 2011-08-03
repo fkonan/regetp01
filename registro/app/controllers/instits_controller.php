@@ -436,8 +436,8 @@ class InstitsController extends AppController {
                 $this->paginate['Instit']['conditions'] = array("to_char(cue*100+anexo, 'FM999999999FM') SIMILAR TO ?" => "%". $q ."%");
             }
             else{
-                //debug(convertir_para_busqueda_avanzada($q)); die();
-                $this->paginate['Instit']['conditions'] = array("(to_ascii(lower(Tipoinstit.name)) || ' n ' || to_ascii(lower(Instit.nroinstit)) || ' ' || lower(Instit.nombre)) SIMILAR TO ?" => convertir_para_busqueda_avanzada($q));
+                //debug(convertir_para_busqueda_avanzada($q));  die();
+                $this->paginate['Instit']['conditions'] = array("(lower(Tipoinstit.name) || ' n ' || lower(Instit.nroinstit) || ' ' || lower(Instit.nombre)) SIMILAR TO ?" => convertir_para_busqueda_avanzada($q));
             }
         }
 
