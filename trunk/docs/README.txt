@@ -1,4 +1,4 @@
-Documentaci贸n de RFIETP:
+Documentaci髇 de RFIETP:
 
 =========================================================================================================
 TECNOLOGIAS UTILIZADAS
@@ -16,7 +16,7 @@ PHP 4.3.2 o mayor
 SVN
 =========================================================================================================
 Estructura:
-Las dos aplicaciones (Registro y Cat谩logo) estan separados cada una en su directorio.
+Las dos aplicaciones (Registro y Cat醠ogo) estan separados cada una en su directorio.
 
 svn
 --branches
@@ -25,7 +25,7 @@ svn
 ----app_shared (modelos compartidos por las dos aplicaciones)
 ----catalogo
 -------*
-----docs (carpeta de documentaci贸n general)
+----docs (carpeta de documentaci髇 general)
 ----registro
 -------*
 
@@ -40,9 +40,15 @@ INSTALACION
 =========================================================================================================
 1. Hacer checkout del trunk.
 2. Crear base de datos en PostgreSQL.
-3. Crear en cada aplicaci贸n en directorio app/config/ archivo database.php con configuraci贸n de conexi贸n a base de datos 
-[Para m谩s informaci贸n dirigirse a http://book.cakephp.org/view/922/Database-Configuration]
-4. Dar perimsos de escritura en cada aplicaci贸n a directorio /app/tmp/.
-5. Activar aspell en espa帽ol (solo en Linux) preferentemente, para uso de corrector ortogr谩fico. En caso de correr bajo Windows o simplemente no querer utilizar esta funcionalidad se debe setear en "false" la variable de configuraci贸n "modo_linux" de registro/app/config/core.php
-[Para m谩s informaci贸n dirigirse a trunk/docs/instructivo_aspell.txt]
+3. Crear en cada aplicaci髇 en directorio app/config/ archivo database.php con configuraci髇 de conexi髇 a base de datos 
+[Para m醩 informaci髇 dirigirse a http://book.cakephp.org/view/922/Database-Configuration]
+4. Dar perimsos de escritura en cada aplicaci髇 a directorio /app/tmp/.
+5. Activar aspell en espa駉l (solo en Linux) preferentemente, para uso de corrector ortogr醘ico. En caso de correr bajo Windows o simplemente no querer utilizar esta funcionalidad se debe setear en "false" la variable de configuraci髇 "modo_linux" de registro/app/config/core.php
+[Para m醩 informaci髇 dirigirse a trunk/docs/instructivo_aspell.txt]
 
+=========================================================================================================
+PERMISOS
+=========================================================================================================
+Ejecutar con permisos de Desarrollador: 
+    Desarrollo - Usuarios y permisos - Actualizar controladores
+Correr en el mismo panel de Usuarios y permisos los "Scripts de permisos" de las distintas versiones hasta la 鷏tima.
