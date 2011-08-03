@@ -24,6 +24,7 @@ Things in the system that are wanted (most often actions or data) are called acc
 <br />
 <h2>Scripts de permisos</h2><br />
 
+<div><?php print $html->link('Version 1.7.1', '/acl/aclprep/assignPermissions1Dot7Dot1',array('target'=>'_blank')) ?></div>
 <div><?php print $html->link('Version 1.7', '/acl/aclprep/assignPermissions1Dot7',array('target'=>'_blank')) ?></div>
 <div><?php print $html->link('Version 1.6.4', '/acl/aclprep/assignPermissions1Dot6Dot4',array('target'=>'_blank')) ?></div>
 <div><?php print $html->link('Version 1.6.3', '/acl/aclprep/assignPermissions1Dot6Dot3',array('target'=>'_blank')) ?></div>

@@ -444,6 +444,23 @@ class PlanesController extends AppController {
         }
     }
     
+    function ajax_similars($name, $instit_id, $id=null) {
+        $similars = array();
+        if (strlen($name)) {
+            $pos = strpos('/', $name);
+            if ($pos !== false) {
+                $name = substr($name, 0, $pos);
+            }
+
+            $this->Plan->recursive = 0;
+            $similars = $this->Plan->getSimilars($name, $instit_id, $id);
+        }
+
+        $this->set('name', $name);
+        $this->set('similars', $similars);
+    }
+    
+    
     function edicionMasiva1Dot6Dot3() {
         set_time_limit(30000000);
         $this->Plan->recursive = 0;
@@ -467,7 +484,7 @@ class PlanesController extends AppController {
             $planes_to_save['Plan'][] = $plan['Plan'];
         }
 
-        $this->Plan->saveAll($planes_to_save['Plan']);
+        // descomentar para su uso => $this->Plan->saveAll($planes_to_save['Plan']);
 
         die('done');
     }

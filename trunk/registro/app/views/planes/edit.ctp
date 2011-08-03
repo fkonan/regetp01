@@ -3,7 +3,7 @@ echo $javascript->link(array('jquery.autocomplete', 'jquery.blockUI', 'jquery.lo
 echo $html->css(array('jquery.autocomplete.css', 'spell_checker.css'));
 ?>
 <script type="text/javascript">
-    init("<?echo $html->url(array('controller'=>'titulos','action'=>'ajax_search'));?>");
+    init("<?echo $html->url(array('controller'=>'titulos','action'=>'ajax_search'));?>", "<?echo $html->url(array('controller'=>'planes','action'=>'ajax_similars'));?>");
 </script>
 
 <h1>Editar Plan</h1>
@@ -89,7 +89,6 @@ $cue_instit = $instit['cue'].$anexo;
                     'onChange'=>true)
                      );
                 
-
         echo $form->input('norma',array('label'=>'Normativa'));
 
         $meter = '<span class="ajax_update" id="ajax_indicator2" style="display:none;">'.$html->image('ajax-loader.gif').'</span>';
@@ -101,7 +100,11 @@ $cue_instit = $instit['cue'].$anexo;
                                         )
                          );
         
-        //echo $form->input('perfil');
+        ?>
+            
+        <div id="similars" class="attention"></div>
+
+        <?php
         echo $form->input('perfil', array('id' => 'spell_checker2',
                                                   'title' => 'spellcheck_icons',
                                                   'style' => 'width: 85%; clear: none;',

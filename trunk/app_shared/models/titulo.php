@@ -54,7 +54,9 @@ class Titulo extends AppModel {
             }
         }
 
-
+        /*
+         * Trae los titulos con nombre igual o similar al dado por parametro
+         */
         function getSimilars($name=null, $titulo_id=null) {
             $similars = array();
 
