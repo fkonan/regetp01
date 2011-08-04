@@ -291,7 +291,7 @@ class PlanesController extends AppController {
         if (!empty($this->data)) {
             $es_una_busqueda = true;
             $this->Session->write($sesNames['instit'],$instit_id);
-            $this->Session->write($sesNames['plan'], $this->data['Plan']['nombre']);
+            $this->Session->write($sesNames['plan'], utf8_decode($this->data['Plan']['nombre']));
             $this->Session->write($sesNames['sector'], $this->data['Sector']['id']);
             $this->Session->write('page', '');
         }
@@ -299,7 +299,7 @@ class PlanesController extends AppController {
             // busqueda en Session
             if ($this->Session->read($sesNames['instit']) == $instit_id) {
                 if ($this->Session->read($sesNames['plan'])) {
-                    $this->data['Plan']['nombre'] = utf8_decode($this->Session->read($sesNames['plan']));
+                    $this->data['Plan']['nombre'] = $this->Session->read($sesNames['plan']);
                 }
 
                 if ($this->Session->read($sesNames['sector'])) {
