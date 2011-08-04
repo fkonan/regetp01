@@ -2528,3 +2528,19 @@ border-bottom-color: white !important;
     font-weight: bold;
     color: red;
 }
+
+.ultima_act_ciclo{
+    border:3px solid #DF7D7D;
+    background-color: #FF9F9F;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 590px;
+    padding: 5px;
+    height:17px;
+    text-decoration: none;
+    color:black;
+    font-variant: small-caps;
+    font-size: 13px;
+}
