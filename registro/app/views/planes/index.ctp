@@ -40,8 +40,14 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
 ?>
 <h2><?= $cue_instit ?> - <?= $planes['Instit']['nombre_completo']?></h2>
 
-<br>
 <div>
+    <?php
+    if(!empty($ultimo_ciclo_actualizado) &&  
+       $ultimo_ciclo_actualizado > 0 && $ultimo_ciclo_actualizado < (date('Y')-2)) { ?>
+        <div class="ultima_act_ciclo">
+            Atención: La oferta educativa de la institución no ha sido actualizada en los últimos 2 años
+        </div>
+    <?php } ?>
     <?php
         echo $this->element('menu_solapas_para_instit',array('instit_id' => $planes['Instit']['id']));
     ?>
@@ -51,21 +57,14 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
     <div class="tabs-content">
         <div class="related">
         <?php
-                if($ticket_id != 0)
-                {
-                    ?>
+         if($ticket_id != 0) { ?>
             <div id="pendiente" class='aPend' onmouseover="this.className='aPend_hover'" onmouseout="this.className='aPend'">
                 <?
                 echo $html->link('Pendiente de Actualización',"/tickets/view/$ticket_id");
                 ?>
             </div>
             <div class="tooltip big"></div>
-            
-
-                        <?php
-                }
-        ?>
-
+        <?php } ?>
         <?
         //si el anexo tiene 1 solo digito le coloco un cero adelante
         $anexo = ($planes['Instit']['anexo']<10)?'0'.$planes['Instit']['anexo']:$planes['Instit']['anexo'];

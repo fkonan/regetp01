@@ -44,9 +44,11 @@ class InstitsController extends AppController {
         if($instit['EtpEstado']['id']== 1) {
             $programa_de_etp = true;
         }
+        
         $this->set('con_programa_de_etp', $programa_de_etp);
         $this->set('relacion_etp', $instit['EtpEstado']['name']);
         $this->set('instit', $instit);
+        $this->set('ultimo_ciclo_actualizado',$this->Instit->getUltimoCiclo($id));
     }
 
     function add() {

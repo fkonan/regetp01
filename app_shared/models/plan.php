@@ -746,8 +746,10 @@ class Plan extends AppModel {
             $data = $this->query($sql);
 
             $max_ciclo = 0;
-            foreach ($data as $line){
-                    $max_ciclo = $line['Anio']['ciclo_id'];
+            if (!empty($data)) {
+                foreach ($data as $line){
+                        $max_ciclo = $line['Anio']['ciclo_id'];
+                }
             }
             return $max_ciclo;
         }

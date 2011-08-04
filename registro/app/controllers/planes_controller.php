@@ -85,6 +85,7 @@ class PlanesController extends AppController {
 
         $this->set(compact('ofertas','ciclos','sectores'));
         $this->set('ofertasControllers', $ofertasControllers);
+        $this->set('ultimo_ciclo_actualizado',$this->Plan->Instit->getUltimoCiclo($id));
     }
 
     function view($id = null) {

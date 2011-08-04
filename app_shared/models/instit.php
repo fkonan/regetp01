@@ -387,11 +387,11 @@ class Instit extends AppModel {
   	 * @return array $results
   	 */
         function afterFind($results) {
-            return $this->__agregarNombreCompletoEnArray($results);
+            return $this->__agregarDataExtra($results);
         }
 
 
-        function __agregarNombreCompletoEnArray($results){
+        function __agregarDataExtra($results){
 
             if (empty($results)) {
                 return null;
@@ -439,6 +439,7 @@ class Instit extends AppModel {
                         }*/
 
                         $item_aux['nombre_completo'] = $this->getNombreCompleto($item_aux['nombre'], $item_aux['nroinstit'], $nombre_tipoinstit);
+                        //$item_aux['ultimo_ciclo'] = $this->getUltimoCiclo($item_aux['id']);
                     }
 
                     unset($item_aux);
@@ -448,6 +449,7 @@ class Instit extends AppModel {
                 $nombre_tipoinstit = isset($results['Tipoinstit']['name']) ? $results['Tipoinstit']['name'] : '';
 
                 $results['nombre_completo'] = $this->getNombreCompleto($results['nombre'], $results['nroinstit'], $nombre_tipoinstit);
+                //$results['ultimo_ciclo'] = $this->getUltimoCiclo($item_aux['id']);
             }
 
             return $results;
@@ -1570,6 +1572,26 @@ class Instit extends AppModel {
 		return $vec;
   	}
 
-        
+
+        /**
+         * devuelve el ultimo ciclo lectivo de la institución
+         */
+        function getUltimoCiclo($instit_id){
+            $sql = ' SELECT max("Anio"."ciclo_id") AS "Anio__ciclo_id"
+                       FROM instits i
+                        INNER JOIN planes AS "Plan" ON "Plan".instit_id = i.id
+                        INNER JOIN anios AS "Anio" ON "Anio".plan_id = "Plan".id
+                      WHERE i.id = ' . $instit_id;
+
+            $data = $this->query($sql);
+
+            $max_ciclo = 0;
+            if (!empty($data)) {
+                foreach ($data as $line){
+                        $max_ciclo = $line['Anio']['ciclo_id'];
+                }
+            }
+            return $max_ciclo;
+        }
 }
 ?>
