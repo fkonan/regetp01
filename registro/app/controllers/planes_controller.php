@@ -326,7 +326,7 @@ class PlanesController extends AppController {
             $planNombre = $this->passedArgs['Plan.nombre'];
         }
         if (!empty($planNombre)) {
-            $this->paginate['conditions']['to_ascii(lower(Plan.nombre)) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada($planNombre));
+            $this->paginate['conditions']['lower(Plan.nombre) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada($planNombre));
             $url_conditions['Plan.nombre'] = $planNombre;
         }
 
