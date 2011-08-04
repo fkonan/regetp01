@@ -22,7 +22,7 @@ svn
 --branches
 --tags
 --trunk
-----app_shared (modelos compartidos por las dos aplicaciones)
+----app_shared (archivos compartidos por las dos aplicaciones)
 ----catalogo
 -------*
 ----docs (carpeta de documentación general)
@@ -43,7 +43,7 @@ INSTALACION
 3. Crear en cada aplicación en directorio app/config/ archivo database.php con configuración de conexión 
 a base de datos 
 [Para más información dirigirse a http://book.cakephp.org/view/922/Database-Configuration]
-4. Dar perimsos de escritura en cada aplicación a directorio /app/tmp/.
+4. Dar permisos de escritura en cada aplicación a directorio /app/tmp/.
 5. Activar aspell en español (solo en Linux) preferentemente, para uso de corrector ortográfico. 
 En caso de correr bajo Windows o simplemente no querer utilizar esta funcionalidad se debe setear en 
 "false" la variable de configuración "modo_linux" de registro/app/config/core.php
