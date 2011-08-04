@@ -320,10 +320,10 @@ class PlanesController extends AppController {
 
         $planNombre = null;
         if (!empty($this->data['Plan']['nombre'])) {
-            $planNombre = $this->data['Plan']['nombre'];
+            $planNombre = utf8_decode($this->data['Plan']['nombre']);
         }
         if (!empty($this->passedArgs['Plan.nombre'])) {
-            $planNombre = $this->passedArgs['Plan.nombre'];
+            $planNombre = utf8_decode($this->passedArgs['Plan.nombre']);
         }
         if (!empty($planNombre)) {
             $this->paginate['conditions']['lower(Plan.nombre) SIMILAR TO ?'] = array(convertir_para_busqueda_avanzada($planNombre));
