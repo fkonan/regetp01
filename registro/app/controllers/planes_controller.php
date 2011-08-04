@@ -299,7 +299,7 @@ class PlanesController extends AppController {
             // busqueda en Session
             if ($this->Session->read($sesNames['instit']) == $instit_id) {
                 if ($this->Session->read($sesNames['plan'])) {
-                    $this->data['Plan']['nombre'] = $this->Session->read($sesNames['plan']);
+                    $this->data['Plan']['nombre'] = utf8_decode($this->Session->read($sesNames['plan']));
                 }
 
                 if ($this->Session->read($sesNames['sector'])) {
