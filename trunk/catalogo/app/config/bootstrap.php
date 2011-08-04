@@ -52,7 +52,7 @@ Configure::write('Email.port', '25');
 Configure::write('Email.timeout', '30');
 Configure::write('Email.host', '168.83.21.13');
 Configure::write('Email.username', 'desarrolloetp');
-Configure::write('Email.password', 'etpdesar');
+Configure::write('Email.password', '*****'); //cambiar!
 
 /**
  * ID`s de OFERTAS
