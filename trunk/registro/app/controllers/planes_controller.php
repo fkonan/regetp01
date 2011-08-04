@@ -287,12 +287,14 @@ class PlanesController extends AppController {
             'sector' => 'Sector.id'.$instit_id.$oferta_id,
             'page' => 'page'.$instit_id.$oferta_id.$ciclo,
         );
+        
+        $this->data['Plan']['nombre'] = utf8_decode($this->data['Plan']['nombre']);
 
         if (!empty($this->data)) {
             $es_una_busqueda = true;
             $this->Session->write($sesNames['instit'],$instit_id);
-            $this->Session->write($sesNames['plan'], utf8_decode($this->data['Plan']['nombre']));
-            $this->Session->write($sesNames['sector'], $this->data['Sector']['id']);
+            $this->Session->write($sesNames['plan'], $this->data['Plan']['nombre']);
+            if (!empty($this->data['Sector']['id'])) $this->Session->write($sesNames['sector'], $this->data['Sector']['id']);
             $this->Session->write('page', '');
         }
         else {
@@ -320,7 +322,7 @@ class PlanesController extends AppController {
 
         $planNombre = null;
         if (!empty($this->data['Plan']['nombre'])) {
-            $planNombre = utf8_decode($this->data['Plan']['nombre']);
+            $planNombre = $this->data['Plan']['nombre'];
         }
         if (!empty($this->passedArgs['Plan.nombre'])) {
             $planNombre = utf8_decode($this->passedArgs['Plan.nombre']);
