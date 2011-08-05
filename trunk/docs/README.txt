@@ -41,7 +41,7 @@ INSTALACION
 1. Hacer checkout del trunk.
 2. Crear base de datos en PostgreSQL.
 3. Crear en cada aplicación en directorio app/config/ archivo database.php con configuración de conexión 
-a base de datos 
+a base de datos y config.email.php con configuración de servidor de email (tomar como base config.email.php.default).
 [Para más información dirigirse a http://book.cakephp.org/view/922/Database-Configuration]
 4. Dar permisos de escritura en cada aplicación a directorio /app/tmp/.
 5. Activar aspell en español (solo en Linux) preferentemente, para uso de corrector ortográfico. 
