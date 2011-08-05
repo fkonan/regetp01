@@ -3,12 +3,12 @@ begin transaction;
 /*borro toda la tabla "fondos"*/
 truncate fondos;
 
-/*borro el sector "Otros"*/
-delete from subsectores where sector_id = 39;
-delete from sectores where id = 39; 
-delete from titulos where id in (select titulo_id from sectores_titulos where sector_id = 39);
-delete from planes where titulo_id in (select titulo_id from sectores_titulos where sector_id = 39);
-delete from sectores_titulos where sector_id = 39;
+/*borro el sector "Otros" y "tecnico" */
+delete from subsectores where sector_id = 39 or sector_id = 39;
+delete from sectores where id = 39 or id = 5;
+delete from titulos where id in (select titulo_id from sectores_titulos where sector_id = 39 or sector_id = 5);
+delete from planes where titulo_id in (select titulo_id from sectores_titulos where sector_id = 39 or sector_id = 5);
+delete from sectores_titulos where sector_id = 39 or sector_id = 5;
 
 
 /*eliminar las ofertas no tecnicas*/
