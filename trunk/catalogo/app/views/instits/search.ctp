@@ -14,6 +14,9 @@ echo $html->css(array(  'jquery.loadmask',
 
 <script type="text/javascript" language="javascript">
         init__SearchFormJs("<?echo $html->url(array('controller'=>'localidades','action'=>'ajax_search_localidades'));?>");
+        
+
+
 </script>
 
 <div class="grid_12 instits search_form">
