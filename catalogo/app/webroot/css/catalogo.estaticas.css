@@ -1,0 +1,45 @@
+/*
+BUSCADORES
+*/
+
+.boxblanca .mas_info_gris, .boxblanca .mas_info_azul,
+.boxgris .mas_info_azul, .boxgris .mas_info_azul{
+    float: right;
+}
+
+.box_home_buscadores {
+    width: 49%;
+    float: left;
+    margin-top: -3px;
+
+}
+
+.box_home_buscadores_separador {
+    width: 1%;
+    float: left;
+    border-right: 1px solid #e2e2e4;
+    height: 58px;
+    margin-top: 30px;
+}
+
+.photo{
+    float:right;
+    height:295px;
+    margin-left: 10px;
+    border: 1px solid #D6E6EE;
+}
+
+.home_info p{
+    padding-right:20px;
+    text-align:justify;
+}
+
+.boxgris .titulo {
+    /*font-style: italic;*/
+}
+
+.boxoferta p {
+    margin: 0px 0px 0px 10px;
+    font-style: italic;
+}
+
