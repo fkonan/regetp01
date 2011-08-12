@@ -23,15 +23,6 @@
                     <?php echo $this->element('menu');?>                
             </div>
             
-               
-            <?php
- echo $html->image('header_ministerio_recortada.png', array(
-                            'border'=> 0,
-                            'class' => 'logo',
-                            'style' => 'width: 72px; position: absolute; bottom: 0px; right: 0px;'
-                            ));
-                        ?>
-            
         </div>
     </div>
 </div>

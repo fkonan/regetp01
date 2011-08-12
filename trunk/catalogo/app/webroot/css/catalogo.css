@@ -192,10 +192,13 @@ dd ul{
 }
 
 #footer{
-    background-color: #fff;
+    border-top: solid 1px #0082ca;
+    background: #dcddde;
     text-align: center;
-    color: #A3A29C;
+    margin-top: 10px;
     padding-bottom: 10px;
+    position: relative;
+    font-size: x-small;
 }
 
 #container{
@@ -232,6 +235,10 @@ dd ul{
     position: relative;
 }
 
+.boxblanca h1,.boxblanca h2,.boxblanca h3{
+    
+}
+
 .boxblancacuadrada{
     background-color: #fff;
     border: 2px solid #F1F1F2;
@@ -246,6 +253,10 @@ dd ul{
     padding: 5px 10px;
     border: 1px solid #D1D2D3;
     position: relative;
+}
+
+.boxgris h1,.boxgris h2,.boxgris h3{
+    color: #25abe1;
 }
 
 
@@ -301,6 +312,23 @@ dd ul{
     background-position: 1px 1px;
 }
 
+.picround{
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    float: left;
+}
+
+.separador-azul{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 3px;
+    background-color: #0082ca;
+    -webkit-border-radius: 60px;
+    -moz-border-radius: 60px;
+    border-radius: 60px;
+}
 
 .separador{
     padding-top: 10px;
