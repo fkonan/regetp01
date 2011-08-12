@@ -1,5 +1,6 @@
 /*
 azules
+#2a546b oscurisimo
 #0082ca oscuro
 #25abe1 claro
 
@@ -199,6 +200,7 @@ dd ul{
     padding-bottom: 10px;
     position: relative;
     font-size: x-small;
+    color: #2a546b;
 }
 
 #container{
