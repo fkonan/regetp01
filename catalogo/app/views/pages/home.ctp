@@ -26,6 +26,8 @@ $this->pageTitle = "Inicio";
             culpa qui officia deserunt mollit anim id est laborum
         </p>
 
+        <div class="clear"></div>
+        
         <ul class="ul-horizontal centrado">
             <li><?php echo $html->link('Propósitos', '#'); ?></li>
             <li><?php echo $html->link('Ideas Eje', '#'); ?></li>
@@ -48,7 +50,7 @@ $this->pageTitle = "Inicio";
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
         </p>
         
-        <?= $html->image('search.png', array('style'=>'float: right; position: absolute; right: 10px'))?>
+        <?= $html->image('search.png', array('style'=>'float: right; position: absolute; right: 10px; width: 36px;'))?>
         <ul>
             <li><?php echo $html->link('Títulos', '#'); ?></li>
             <li><?php echo $html->link('Instituciones', '#'); ?></li>
@@ -94,9 +96,10 @@ $this->pageTitle = "Inicio";
                 labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
                 nisi ut aliquip ex ea commodo consequat. 
             </p>
+            <div class="clear"></div>
             <ul class="ul-horizontal centrado">
-                <li><?php echo $html->link('Mapas de instituciones', '#'); ?></li>
-                <li><?php echo $html->link('Gráficos de especialidades', '#'); ?></li>
+                <li><?php echo $html->link('Instituciones', '#'); ?></li>
+                <li><?php echo $html->link('Especialidades', '#'); ?></li>
             </ul>
     </div>
 </div>
