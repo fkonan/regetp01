@@ -32,9 +32,9 @@ $this->pageTitle = "Inicio";
         <div class="clear"></div>
         
         <ul class="ul-horizontal centrado">
-            <li><?php echo $html->link('Propósitos', '#'); ?></li>
-            <li><?php echo $html->link('Ideas Eje', '#'); ?></li>
-            <li><?php echo $html->link('Entidades Relacionadas', '#'); ?></li>
+            <li><?php echo $html->link('Propósitos', '/pages/propositos'); ?></li>
+            <li><?php echo $html->link('Ideas Eje', '/pages/ideaseje'); ?></li>
+            <li><?php echo $html->link('Entidades Relacionadas', '/pages/graficoinet'); ?></li>
         </ul>
     </div>
     
