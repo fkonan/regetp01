@@ -1,5 +1,5 @@
 <div style="padding-bottom: 10px;">
-    <div id="<?php echo $foroName; ?>" style="border-bottom: 1px dashed #000" class=""></div>
+    <div id="<?php echo $foroName; ?>" class=""></div>
 
     <h3>Foro del Sector <?php echo $foroName; ?></h3>
     <?php
@@ -21,6 +21,8 @@
         <?php if (!empty($docInfoSectorial) ):?>
             <div class="clear"></div>
             <?php echo $html->link('Informe sectorial', $docInfoSectorial, array('target'=>'_blank')) ?>
+        <?php else: ?>
+            <p style="color:red">Falta Informe Sectorial</p>
         <?php endif ?>
         <br />
         <!-- Familia Profesional -->    
