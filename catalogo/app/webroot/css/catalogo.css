@@ -301,12 +301,8 @@ dd ul{
 
 
 .separador{
-    border-top-color: #25abe1;
-    border-top-style: solid;
-    border-top-width: 1px;
-    padding-top: 20px;
-    margin-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 10px;
+    margin-top: 10px;
     margin-bottom: 0px;
 }
 
@@ -554,4 +550,17 @@ li{
 .linkconatiner-more-info:HOVER{
     background: url(img/lupazul_small.png) no-repeat 100% 50%;
     color: black;
+}
+
+
+ul.ul-horizontal{
+    margin: 0px;
+    padding: 0px;
+}
+
+.ul-horizontal li{
+    background: url(img/listitem.gif) no-repeat 0% 50%;
+    padding-left: 15px;
+    margin-left: 20px;
+    display: inline;
 }
