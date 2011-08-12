@@ -38,7 +38,7 @@
         </li>
 
         <li class="<?php echo (strstr($this->here,$this->base.'/pages') && ($this->here != $this->base.'/pages/home'))?'current':''?> ">
-            <?php echo $html->link('Documentación', array('controller'=>'pages', 'action'=>'introduccion'), array('class'=>'menu-item')); ?>
+            <?php echo $html->link('Documentación', array('controller'=>'pages', 'action'=>'doc_index'), array('class'=>'menu-item')); ?>
         </li>
         <li class="<?php echo (strstr($this->here,$this->base.'/correos/contacto'))?'current':''?>">
             <?php echo $html->link('Contacto', array(
