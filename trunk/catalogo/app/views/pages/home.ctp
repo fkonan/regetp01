@@ -56,9 +56,7 @@ $this->pageTitle = "Inicio";
         
         <?= $html->image('search.png', array('style'=>'float: right; position: absolute; right: 10px; width: 36px;'))?>
         <ul>
-            <li><?php echo $html->link('Títulos', '#'); ?></li>
-            <li><?php echo $html->link('Instituciones', '#'); ?></li>
-            <li><?php echo $html->link('Guía del estudiante', '#'); ?></li>
+            <li><?php echo $html->link('Ver más', '/pages/buscadores'); ?></li>
         </ul>
     </div>
 </div>
@@ -80,7 +78,7 @@ $this->pageTitle = "Inicio";
                 nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
             </p>
             <ul class="ul-horizontal">
-                <li><?php echo $html->link('Grafo de la ley', '#'); ?></li>
+                <li><?php echo $html->link('Grafo de la ley', '/pages/grafo_ley'); ?></li>
             </ul>
     </div>
 </div>
@@ -101,8 +99,7 @@ $this->pageTitle = "Inicio";
             </p>
             <div class="clear"></div>
             <ul class="ul-horizontal centrado">
-                <li><?php echo $html->link('Instituciones', '#'); ?></li>
-                <li><?php echo $html->link('Especialidades', '#'); ?></li>
+                <li><?php echo $html->link('Ver más', '/pages/mapas_y_graficos'); ?></li>
             </ul>
     </div>
 </div>
