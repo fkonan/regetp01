@@ -18,7 +18,7 @@ jQuery(document).ready(function() {
     <div>
         <?php echo $html->image('graficoinet.gif', array('usemap' => '#mapgrafico')) ?>
         <map name="mapgrafico">
-            <area shape="rect" id="ministerio" alt="" title="" href="d" coords="2,53,250,114" />
+            <area shape="rect" id="ministerio" alt="" title="" coords="2,53,250,114" />
             <area shape="rect" id="seced" alt="a" title="" coords="47,172,265,242" />
             <area shape="rect" id="secpol" alt="a" title="" coords="280,173,476,243" />
             <area shape="rect" id="consejo" alt="" title="Ámbito de concertación, acuerdo y coordinación de la política educativa

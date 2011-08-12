@@ -14,7 +14,7 @@ jQuery(document).ready(function() {
             <strong><?php __('Nivel'); ?>:</strong> <?php echo $plan['Oferta']['name']; ?>
         </li>
         <li class="">
-            <strong><?php echo ($plan['Titulo']['marco_ref']==1)? "Con marco de referencia":"Sin marco de referencia"; ?></strong>
+            <strong><?php echo ($plan['Titulo']['marco_ref']==1)? "Especialidad con marco de referencia":"Especialidad sin marco de referencia"; ?></strong>
             <?php if ($plan['Titulo']['marco_ref'] == 1) { ?>
             [<a href="<?php echo $html->url('/pages/marcos')?>" style="color: #0082CA;">Consultar el marco correspondiente</a>]
             <?php } ?>
