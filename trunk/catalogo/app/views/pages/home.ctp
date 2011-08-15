@@ -32,9 +32,9 @@ $this->pageTitle = "Inicio";
         <div class="clear"></div>
         
         <ul class="ul-horizontal centrado">
-            <li><?php echo $html->link('Propósitos', '/pages/propositos'); ?></li>
-            <li><?php echo $html->link('Ideas Eje', '/pages/ideaseje'); ?></li>
-            <li><?php echo $html->link('Entidades Relacionadas', '/pages/graficoinet'); ?></li>
+            <li><?php echo $html->link('Propósitos', array('controller' => 'pages', 'action' => 'propositos')); ?></li>
+            <li><?php echo $html->link('Ideas eje', array('controller' => 'pages', 'action' => 'ideaseje')); ?></li>
+            <li><?php echo $html->link('Entidades relacionadas', array('controller' => 'pages', 'action' => 'graficoinet')); ?></li>
         </ul>
     </div>
     
@@ -56,7 +56,7 @@ $this->pageTitle = "Inicio";
         
         <?= $html->image('search.png', array('style'=>'float: right; position: absolute; right: 10px; width: 36px;'))?>
         <ul>
-            <li><?php echo $html->link('Ver más', '/pages/buscadores'); ?></li>
+            <li><?php echo $html->link('Ver más', array('controller' => 'pages', 'action' => 'buscadores')); ?></li>
         </ul>
     </div>
 </div>
@@ -78,7 +78,7 @@ $this->pageTitle = "Inicio";
                 nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
             </p>
             <ul class="ul-horizontal">
-                <li><?php echo $html->link('Grafo de la ley', '/pages/grafo_ley'); ?></li>
+                <li><?php echo $html->link('Grafo de la ley', array('controller' => 'pages', 'action' => 'grafo_ley')); ?></li>
             </ul>
     </div>
 </div>
@@ -99,7 +99,7 @@ $this->pageTitle = "Inicio";
             </p>
             <div class="clear"></div>
             <ul class="ul-horizontal centrado">
-                <li><?php echo $html->link('Ver más', '/pages/mapas_y_graficos'); ?></li>
+                <li><?php echo $html->link('Ver más', array('controller' => 'pages', 'action' => 'mapas_y_graficos')); ?></li>
             </ul>
     </div>
 </div>

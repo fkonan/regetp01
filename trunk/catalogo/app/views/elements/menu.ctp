@@ -37,7 +37,7 @@
             </ul>
         </li>
 
-        <li class="<?php echo (strstr($this->here,$this->base.'/pages') && ($this->here != $this->base.'/pages/home'))?'current':''?> ">
+        <li class="<?php echo ($this->here == $this->base.'/pages/doc_index')?'current':''?> ">
             <?php echo $html->link('Documentación', array('controller'=>'pages', 'action'=>'doc_index'), array('class'=>'menu-item')); ?>
         </li>
         <li class="<?php echo (strstr($this->here,$this->base.'/correos/contacto'))?'current':''?>">

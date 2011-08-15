@@ -168,8 +168,10 @@ $javascript;
                 <p>
                     
                     <b><i>Instituto Nacional de Educación Tecnológica</i></b>
-                    <br /><br />
+                    <br />
                     Saavedra 789 C1229ACE | (011) 4129-2000
+                    <br /><br />
+                    <?php echo $html->link('Mapa del sitio', array('controller' => 'pages', 'action' => 'mapa_del_sitio')); ?>
                 </p>
                 <div class="clear"></div>
             </div>
