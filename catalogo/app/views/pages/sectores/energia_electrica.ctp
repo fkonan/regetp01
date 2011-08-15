@@ -1,0 +1,26 @@
+<?php 
+$this->pageTitle= 'Energía Eléctrica';
+?>
+
+<?php echo $this->element('menu_docs')?>
+
+
+<div class="grid_9">
+    <div class="boxblanca boxdocs">
+		<?php  
+        $vops = array(
+            'foroName' => 'Energía Eléctrica',
+            'participantes' => array(
+                'ACYEDE', 'CADIME','APSE','EDENOR','EDESUR',
+                'Ministerio de la Producción', 'ATEERA', 'TRANSENER', 
+                'Sindicato de Luz y Fuerza', 'FATLyF', 'APSEE', 
+                'FACTéc', 'FNPT'
+            ),
+            'docInfoSectorial' => '/files/pdfs/info_sectorial/INFORME SECTORIAL SECTOR ENERGIA ELECTRICA.pdf',
+            'fliaProfesional' => array('nombre'=>'Energía Eléctrica',
+                                       'link'=>'/pages/doc_residual/flias/energia_electrica')
+        );
+        echo $this->element('foro', $vops);
+		?>
+    </div>
+</div>
