@@ -15,7 +15,7 @@ $this->pageTitle = "Inicio";
 -->
 <div class="grid_9">
     <div class="boxblanca">
-        <h2 class="centrado">El Instituto Nacional de Educación Técnica</h2>
+        <h2>El Instituto Nacional de Educación Técnica</h2>
           
         <div class="picround" style="margin-right: 10px;">
         <?php echo $html->image('material/soldadura.jpg', array('style' => "float: left; height: 120px;" )) ?> 
@@ -49,7 +49,7 @@ $this->pageTitle = "Inicio";
     <div class="boxgris">
         
         
-        <h2 class="centrado">Buscadores</h2>
+        <h2>Buscadores</h2>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
         </p>
@@ -71,7 +71,7 @@ $this->pageTitle = "Inicio";
 -->
 <div class="grid_6">
     <div class="boxblanca">
-            <h2 class="centrado">Las políticas en Argentina <br />para la educación técnico profesional</h2>
+            <h2>Las políticas en Argentina <br />para la educación técnico profesional</h2>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
                 labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
@@ -90,7 +90,7 @@ $this->pageTitle = "Inicio";
 -->
 <div class="grid_6">
     <div class="boxblanca">
-            <h2 class="centrado">La educación técnico profesional en cifras</h2>
+            <h2>La educación técnico profesional en cifras</h2>
             <?php echo $html->image('mapaFP.jpg', array('style' => 'float: left; height: 90px; margin: 0px 10px 0px 0px;')); ?>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
