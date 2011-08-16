@@ -44,7 +44,10 @@ class AppController extends Controller {
                 
                 //Configure AuthComponent
                 //$this->Auth->allow('display','login','logout');
-                $this->Auth->allow('*');return true;
+                if (Configure::read('debug') > 0) {
+                        $this->Auth->allow('*');
+                        return true;
+                }
                 $this->Auth->loginError ='Usuario o Contraseña Incorrectos';
 		$this->Auth->authError = 'Usted no tiene permisos para acceder a esta página.';
                 $this->Auth->authorize = 'controller';
