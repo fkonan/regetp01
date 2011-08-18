@@ -3,10 +3,36 @@
     float: right;
 }
 
+.boxcontent {
+    padding:5px;
+}
+
+.boxblanca {
+    padding:0px;
+}
+
+.boxblanca.inet h2{
+    background-color: #008EBB;
+    color:white;
+    padding: 10px;
+    margin-top:0px;
+}
+
+.boxblanca.politicas h2{
+    background-color: #949799;
+    color:white;
+    padding: 10px;
+    margin-top:0px;
+}
+
+.boxblanca.cifras h2{
+    background-color: #949799;
+    color:white;
+    padding: 10px;
+    margin-top:0px;
+}
 .box_home_buscadores {
-    width: 49%;
-    float: left;
-    margin-top: -3px;
+    height: 188px;
 
 }
 
@@ -39,3 +65,80 @@
     font-style: italic;
 }
 
+#fechaRedesSociales {
+    background-color: #DEE2E4;
+    border-radius: 6px 6px 6px 6px;
+    margin-bottom: 6px;
+    margin-left: 4px;
+    overflow: hidden;
+    padding: 5px 10px 5px 5px;    
+    height: 40px;
+}
+
+#fechaRedesSociales .fecha {
+    background: url("../img/sprites_20110531-01.jpg") no-repeat scroll 0 -467px #FFFFFF;
+    border-radius: 3px 3px 3px 3px;
+    float: left;
+    font-size: 82%;
+    padding: 12px 46px 11px 29px;
+    margin-top: 0px;
+    width: 15%;
+}
+
+#redesSociales {
+    background: url("../img/sprites_20110531-01.jpg") no-repeat scroll -160px -934px #FFFFFF;
+    border-radius: 3px 3px 3px 3px;
+    float: right;
+    margin-top: 7px;
+    overflow: hidden;
+    padding: 5px 0 4px;
+    width: 16%;
+    list-style: none;
+}
+
+#redesSociales .youtube {
+    padding-left: 15px;
+}
+
+#redesSociales li {
+    float: left;
+    font-size: 82%;
+    padding-left: 9px;
+    margin-top:0px;
+}
+
+#redesSociales .youtube a {
+    background: url("../img/sprites_20110531-01.jpg") no-repeat scroll 0 -389px transparent;
+}
+#redesSociales .facebook a {
+    background: url("../img/sprites_20110531-01.jpg") no-repeat scroll 0 -413px transparent;
+}
+#redesSociales .twitter a {
+    background: url("../img/sprites_20110531-01.jpg") no-repeat scroll 0 -363px transparent;
+}
+#redesSociales .rss a {
+    background: url("../img/sprites_20110531-01.jpg") no-repeat scroll 0 -436px transparent;
+}
+
+#redesSociales .rss a {
+    background: url("../img/sprites_20110531-01.jpg") no-repeat scroll 0 -436px transparent;
+}
+#redesSociales .youtube a:hover {
+    background: url("../img/sprites_20110531-01.jpg") no-repeat scroll -18px -389px transparent;
+}
+#redesSociales .facebook a:hover {
+    background: url("../img/sprites_20110531-01.jpg") no-repeat scroll -19px -413px transparent;
+}
+#redesSociales .twitter a:hover {
+    background: url("../img/sprites_20110531-01.jpg") no-repeat scroll -18px -363px transparent;
+}
+#redesSociales .rss a:hover {
+    background: url("../img/sprites_20110531-01.jpg") no-repeat scroll -18px -436px transparent;
+}
+
+#redesSociales li a {
+    display: block;
+    height: 16px;
+    text-indent: -3000px;
+    width: 17px;
+}
