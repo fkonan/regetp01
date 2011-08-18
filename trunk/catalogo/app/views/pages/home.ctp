@@ -10,7 +10,7 @@ $this->pageTitle = "Inicio";
 <script>
     google.load("feeds", "1");
      $(document).ready(function() {
-        $('#dnews').dnews({ feedurl:'http://www.argentina.ar/rss/rss_prensa_es.xml', showdetail: true, controlsalwaysvisible: false });
+        $('#dnews').dnews({ feedurl:'http://portal.educ.ar/noticias/index.xml', showdetail: true, controlsalwaysvisible: false });
      });
 </script>
 <div class="clear separador"></div>
