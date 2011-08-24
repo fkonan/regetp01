@@ -10,31 +10,7 @@
         }
         ?>
         <li class="<?php echo ($activo)?'current':''?>">
-            <a class='menu-item' href="#">Buscadores</a>
-            <ul>
-                <li>
-                    <?php echo $html->link('Guía del Estudiante', array(
-                                    'controller' => 'titulos',
-                                    'action' => 'guiaDelEstudiante'
-                    )) 
-                        ?>
-                </li>
-                <li>
-                    <?php echo $html->link('Títulos', array(
-                                    'controller' => 'titulos',
-                                    'action' => 'search'
-                    )) 
-                        ?>
-                </li>
-                <li>
-                    <?php echo $html->link('Instituciones', array(
-                                    'controller' => 'instits',
-                                    'action' => 'search'
-                    )) 
-                        ?>
-                </li>
-                
-            </ul>
+            <?php echo $html->link('Buscadores', array('controller'=>'pages', 'action'=>'buscadores'), array('class'=>'menu-item')); ?>
         </li>
 
         <li class="<?php echo ($this->here == $this->base.'/pages/doc_index')?'current':''?> ">
