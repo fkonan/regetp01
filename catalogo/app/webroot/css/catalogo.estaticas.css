@@ -42,4 +42,76 @@ BUSCADORES
     margin: 0px 0px 0px 10px;
     font-style: italic;
 }
+.references{
+    float: right;
+}
 
+.references ul{
+    font-size: 12pt;
+}
+
+.mapwrapper{ 
+        height: 700px; 
+        padding: 5px;
+        cursor: move;
+        overflow: hidden; /*keep map contents from spilling over if JS is disabled*/
+        border: 1px solid #E7F3FD;
+    } 
+.viewport{ 
+        height: 688px;
+        cursor: move; 
+        overflow: hidden; /*keep map contents from spilling over if JS is disabled*/ 
+    } 
+    
+.map-control {
+    background: url("../img/home/map-control.png") no-repeat scroll 0 0 transparent;
+    height: 63px;
+    position: absolute;
+    left: 20px;
+    top: 40px;
+    width: 100px;
+}
+.map-control a {
+    display: block;
+    height: 18px;
+    outline: medium none;
+    position: absolute;
+    text-indent: -999em;
+    width: 18px;
+}
+.map-control a:hover {
+    background: none repeat scroll 0 0 #535353;
+    opacity: 0.4;
+}
+.map-control a.left {
+    left: 39px;
+    top: 22px;
+}
+.map-control a.right {
+    left: 79px;
+    top: 22px;
+}
+.map-control a.up {
+    left: 59px;
+    top: 2px;
+}
+.map-control a.down {
+    left: 59px;
+    top: 42px;
+}
+.map-control a.zoom {
+    height: 21px;
+    left: 2px;
+    top: 8px;
+    width: 21px;
+}
+.map-control a.back {
+    height: 21px;
+    left: 2px;
+    top: 31px;
+    width: 21px;
+}
+
+.mapwrapper {
+    position: relative;
+}
