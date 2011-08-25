@@ -1,14 +1,8 @@
 <?php
-$paginator->options(array(  'update' => 'consoleResult',
-                            'url' => $this->passedArgs,
-                            'indicator'=> 'ajax_paginator_indicator'));
+$paginator->options(array( 'url' => $this->passedArgs,
+                           'indicator'=> 'ajax_paginator_indicator'));
 ?>
-<script type="text/javascript">
-    // si hay una búsqueda nueva que no recuerde paginación de session
-    if (jQuery("#TituloBusquedanueva").val() == 1) {
-        jQuery("#TituloBysession").val(0);
-    }
-</script>
+
 <div id="search_results" class="boxblanca">
     <h3>Listado de resultados</h3>
     <div class="list-header">

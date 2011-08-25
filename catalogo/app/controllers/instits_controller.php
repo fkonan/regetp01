@@ -74,9 +74,9 @@ class InstitsController extends AppController {
     function search() {
         
         // preparo los GET params que vienen del formulario enviando type GET
-        $getParams = $this->params;
-        unset($getParams['url']['url']);
-        unset($getParams['url']['ext']);
+        $getParams = $this->params['url'];
+        unset($getParams['url']);
+        unset($getParams['ext']);
         
         //para mostrar en vista los patrones de busqueda seleccionados
         $this->paginate['viewConditions'] = array();
