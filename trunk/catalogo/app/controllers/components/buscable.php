@@ -27,20 +27,21 @@ class BuscableComponent extends Object {
     }
 
 
-    function aplicarCriteriosDeBusqueda($ops) {
+    function aplicarCriteriosDeBusqueda($ops, $fillThisData = false) {
         if (empty($ops)) {
             $ops = $this->searchOptions;
         }
         if (count($ops) == 0) return -1; // no hay nada que buscar
 
         foreach ($ops as $o) {
-                 $this->__aplicarCriterio($o);
+                 $this->__aplicarCriterio($o, $fillThisData);
         }
     }
     
     /**
      *
      * @param array $o -- Options array
+     * @param boolean $fillThisData si esta en true, cada field pasado lo agrega al this->data
      * Opciones psibles son:
      *      string model => nombre del modelo
      *      string field => nombre del campo que quiero buscar
@@ -49,7 +50,7 @@ class BuscableComponent extends Object {
      *      boolean asociarPlan => para realizar busquedas avanzadas en el sector del titulo por ejemplo
      *
      */
-    private function __aplicarCriterio($o = null) {
+    private function __aplicarCriterio($o = null, $fillThisData = false) {
         
         if (empty($o)) return -1; // no hay nada que buscar
 
@@ -69,6 +70,10 @@ class BuscableComponent extends Object {
         if(!empty($this->controller->data[$model][$field])) {
             $valor = $this->controller->data[$model][$field];
         }
+        
+        if( !empty($this->controller->params['url'][$field]) ) {
+            $valor = $this->controller->passedArgs[$modelField] = $this->controller->params['url'][$field];
+        }
 
         if( !empty($this->controller->passedArgs[$modelField]) ) {
             $valor = $this->controller->passedArgs[$modelField];
@@ -82,6 +87,10 @@ class BuscableComponent extends Object {
             }
 
             $this->controller->paginate['modelosInvolucrados'][] = $model;
+            
+            if ($fillThisData){
+                $this->controller->data[$model][$field] = $valor;
+            }
 
             $friendlyName = empty($friendlyName) ?  $field : $friendlyName;
             $this->controller->paginate['viewConditions'][$friendlyName] = $valor;
