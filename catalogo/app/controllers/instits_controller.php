@@ -163,5 +163,45 @@ class InstitsController extends AppController {
             $this->set('vino_formulario', $vino_formulario);
             $this->set('jurisdicciones', $this->Instit->Jurisdiccion->find('list'));
     }
+    
+    
+    function getDatosJurisdiccionParaMapa($oferta_id, $jurisdiccion_id) {
+        if (!$oferta_id || !$jurisdiccion_id) {
+            return false;
+        }
+
+        // cantidad de instits en esa jurisdiccion con al menos una de esa oferta
+        $data = $this->Instit->query("select count(*) from (select i.id from instits i 
+                                inner join planes p on p.instit_id = i.id
+                                where i.jurisdiccion_id = ".$jurisdiccion_id." and
+                                p.oferta_id = ".$oferta_id."
+                                group by i.id) as instits");
+
+        $total = $data[0][0]['count'];
+        $this->set('total', $total);
+        
+        // cantidad de estatales con las mismas condiciones
+        $data = $this->Instit->query("select count(*) from (select i.id from instits i 
+                                inner join planes p on p.instit_id = i.id
+                                where i.jurisdiccion_id = ".$jurisdiccion_id." and
+                                p.oferta_id = ".$oferta_id." and i.gestion_id = 1
+                                group by i.id) as instits");
+
+        $estatales = $data[0][0]['count'];
+        $this->set('estatales', $estatales);
+        
+        $promedio = 0;
+        if ($total > 0) {
+            $promedio = round($estatales * 100 / $total);
+        }
+        $this->set('promedio', $promedio);
+        
+
+        if ( $this->RequestHandler->isAjax() ) {
+            Configure::write ( 'debug', 0 );
+            $this->layout = false;
+            $this->render('infomapa_popup');
+        }
+    }
 }
 ?>
