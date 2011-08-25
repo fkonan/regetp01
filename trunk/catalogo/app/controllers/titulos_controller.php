@@ -3,7 +3,7 @@ class TitulosController extends AppController {
 
     var $name = 'Titulos';
     var $helpers = array('Html', 'Form');
-    var $components = array('RequestHandler');
+    var $components = array('RequestHandler', 'Buscable');
 
     var $sesNames = array(
             'nombre' => 'Titulo.tituloName',
@@ -24,59 +24,7 @@ class TitulosController extends AppController {
         $ofertas = $this->Titulo->Oferta->find('list');
         $sectores = $this->Titulo->Sector->find('list',array('order'=>'Sector.name'));
 
-        if (!empty($this->passedArgs['limpiar'])) {
-            // limpia session
-            foreach ($this->sesNames as $sesName) {
-                $this->Session->write($sesName, '');
-            }
-        }
-
-        $bySession = false;
-        $bloquearOferta = false;
-        // si existe búsqueda en Session, realiza búsqueda
-        if ($this->Session->read($this->sesNames['nombre'])) {
-            $this->data['Titulo']['tituloName'] = $this->passedArgs['tituloName'] = $this->Session->read($this->sesNames['nombre']);
-            $bySession = true;
-        }
-        if ($this->Session->read($this->sesNames['oferta'])) {
-            $this->data['Titulo']['oferta_id'] = $this->passedArgs['ofertaId'] = $this->Session->read($this->sesNames['oferta']);
-            $bySession = true;
-        }
-        if ($oferta_id > 0) {
-            $this->data['Titulo']['oferta_id'] = $this->passedArgs['ofertaId'] = $oferta_id;
-            $bloquearOferta = true;
-            $bySession = true;
-        }
-        if ($this->Session->read($this->sesNames['sector'])) {
-            $this->data['Titulo']['sector_id'] = $this->passedArgs['sectorId'] = $this->Session->read($this->sesNames['sector']);
-            $bySession = true;
-
-            $subsectores = $this->Titulo->Subsector->con_sector('list', $this->Session->read($this->sesNames['sector']));
-        }
-        if ($this->Session->read($this->sesNames['subsector'])) {
-            $this->data['Titulo']['subsector_id'] = $this->passedArgs['subsectorId'] = $this->Session->read($this->sesNames['subsector']);
-            $bySession = true;
-        }
-        if ($this->Session->read($this->sesNames['jurisdiccion'])) {
-            $this->data['Titulo']['jurisdiccion_id'] = $this->passedArgs['jurisdiccionId'] = $this->Session->read($this->sesNames['jurisdiccion']);
-            $bySession = true;
-        }
-        if ($this->Session->read($this->sesNames['departamento'])) {
-            $this->data['Titulo']['departamento_id'] = $this->passedArgs['departamentoId'] = $this->Session->read($this->sesNames['departamento']);
-            $bySession = true;
-        }
-        if ($this->Session->read($this->sesNames['localidad'])) {
-            $this->data['Titulo']['localidad_id'] = $this->passedArgs['localidadId'] = $this->Session->read($this->sesNames['localidad']);
-            $bySession = true;
-        }
-        if ($this->Session->read($this->sesNames['tituloJurDepLoc'])) {
-            $this->data['Titulo']['jur_dep_loc'] = $this->passedArgs['tituloJurDepLoc'] = $this->Session->read($this->sesNames['tituloJurDepLoc']);
-            $bySession = true;
-        }
-        if ($this->Session->read($this->sesNames['page'])) {
-            $bySession = true;
-        }
-
+        $subsectores = array();
         if (empty($subsectores)) {
             $subsectores = $this->Titulo->Subsector->con_sector('list');
         }
@@ -99,6 +47,89 @@ class TitulosController extends AppController {
         $this->set('titulos', $this->paginate());
         $this->set(compact('ofertas', 'sectores', 'subsectores', 'jurisdicciones',
                     'localidades', 'departamentos', 'bySession','bloquearOferta'));
+        
+        
+        
+        // preparo los GET params que vienen del formulario enviando type GET
+        $getParams = $this->params['url'];
+        unset($getParams['url']);
+        unset($getParams['ext']);
+        
+        //para mostrar en vista los patrones de busqueda seleccionados
+        $this->paginate['viewConditions'] = array();
+        
+        // primero seteo si vino formulario o fue el paginador quien llego a este action"
+        $vino_formulario = (!empty($this->data) || (!empty($this->passedArgs)) || !empty($getParams)) ? true : false;
+
+        if ($vino_formulario){
+            $url_conditions = array();
+        
+                //      Nombre del titulo
+                 $ops[] = array(
+                    'field' => 'name',
+                    'friendlyName' => 'Nombre');
+                 
+                 
+                 
+                 //      Oferta
+                 $ops[] = array(
+                    'field' => 'oferta_id',
+                    'friendlyName' => 'Oferta o Nivel');
+                 
+                 //      Sector
+                 $ops[] = array(
+                     'model' => 'SectoresTitulo',
+                    'field' => 'sector_id',
+                    'friendlyName' => 'Sector');
+                 
+                 //      Subsector
+                 $ops[] = array(
+                     'model' => 'SectoresTitulo',
+                    'field' => 'subsector_id',
+                    'friendlyName' => 'Subsector');
+                 
+                 //      Jurisdiccion
+                 $ops[] = array(
+                    'model' => 'Instit',
+                    'field' => 'jurisdiccion_id',
+                    'friendlyName' => 'Jurisdicción');
+                 
+                 //      Departamento
+                 $ops[] = array(
+                    'model' => 'Instit',
+                    'field' => 'departamento_id',
+                    'friendlyName' => 'Domicilio');
+                 
+                 //      Localidad
+                 $ops[] = array(
+                     'model' => 'Instit',
+                     'field' => 'localidad_id',
+                     'friendlyName' => 'Localidad',
+                     );
+                 
+                 //      Gestion
+                 $ops[] = array(
+                    'model' => 'Instit',
+                    'field' => 'gestion_id',
+                    'friendlyName' => 'Gestión');
+
+                 $this->Buscable->aplicarCriteriosDeBusqueda($ops, true);  
+                 
+                 //datos de paginacion
+                $this->paginate['Titulo']['fields'] = array('Titulo.id', 'Titulo.name','Titulo.marco_ref', 'Titulo.oferta_id', 'Oferta.abrev', 'Oferta.name');
+                $this->paginate['Titulo']['group'] = $this->paginate['Titulo']['fields'];
+                $this->paginate['Titulo']['order'] = array('Titulo.name' => 'ASC', 'Titulo.oferta_id' => 'ASC');
+                $this->paginate['Titulo']['recursive'] = 3;   // find completo
+                $titulos = $this->paginate('Titulo');
+
+                $this->set('titulos', $titulos);
+                $this->set('url_conditions', $this->passedArgs);
+                //devuelve un array para mostrar los criterios de busqueda
+                $this->set('conditions', $this->paginate['viewConditions']);
+    }
+
+        $this->set('vino_formulario', $vino_formulario);
+
     }
 
 
@@ -587,149 +618,6 @@ class TitulosController extends AppController {
     }
 
 
-    /**
-     * Esta accion es el procesamiento del formulario de busqueda
-     * maneja las condiciones de la busqueda y el paginador
-     *
-     */
-    function search_results($oferta_id = 0) {
-        Configure::write('debug', 0);
-        //debug($this->RequestHandler);
-        //para mostrar en vista los patrones de busqueda seleccionados
-        $array_condiciones = array();
-        // para el paginator que pueda armar la url
-        $url_conditions = array();
-
-        if (!empty($this->data)) {
-            // si se realizó una búsqueda se limpia la session
-            foreach ($this->sesNames as $sesName) {
-                if ($sesName != $this->sesNames['page']) {
-                    $this->Session->write($sesName, '');
-                }
-            }
-
-            if (!empty($this->data['Titulo']['busquedanueva']) && !$this->data['Titulo']['bysession']) {
-                $this->Session->write($this->sesNames['page'], '');
-            }
-
-            if(!empty($this->data['Titulo']['tituloName'])) {
-                $this->passedArgs['tituloName'] = $this->data['Titulo']['tituloName'];
-                $this->Session->write($this->sesNames['nombre'], $this->data['Titulo']['tituloName']);
-            }
-            if(!empty($this->data['Titulo']['oferta_id'])) {
-                $this->passedArgs['ofertaId'] = $this->data['Titulo']['oferta_id'];
-                $this->Session->write($this->sesNames['oferta'], $this->data['Titulo']['oferta_id']);
-            }
-            if(!empty($this->data['Titulo']['sector_id'])) {
-                $this->passedArgs['sectorId'] = $this->data['Titulo']['sector_id'];
-                $this->Session->write($this->sesNames['sector'], $this->data['Titulo']['sector_id']);
-            }
-            if(!empty($this->data['Titulo']['subsector_id'])) {
-                $this->passedArgs['subsectorId'] = $this->data['Titulo']['subsector_id'];
-                $this->Session->write($this->sesNames['subsector'], $this->data['Titulo']['subsector_id']);
-            }
-            if(!empty($this->data['Instit']['jurisdiccion_id'])) {
-                $this->passedArgs['jurisdiccionId'] = $this->data['Instit']['jurisdiccion_id'];
-                $this->Session->write($this->sesNames['jurisdiccion'], $this->data['Instit']['jurisdiccion_id']);
-            }
-            if(!empty($this->data['Instit']['departamento_id'])) {
-                $dto =$this->Titulo->Plan->Instit->Departamento->findById($this->data['Instit']['departamento_id']);
-                $this->data['Titulo']['jur_dep_loc'] = utf8_decode($this->data['Titulo']['jur_dep_loc']);
-                $nombre = $dto["Departamento"]["name"] . " (" . $dto["Jurisdiccion"]["name"] . ")"; 
-                if(isset($this->data['Titulo']['jur_dep_loc']) && $nombre != $this->data['Titulo']['jur_dep_loc']){
-                    $this->passedArgs['jurDepLoc'] = $this->data['Titulo']['jur_dep_loc'];
-                }else{
-                    $this->passedArgs['departamentoId'] = $this->data['Instit']['departamento_id'];
-                    $this->Session->write($this->sesNames['departamento'], $this->data['Instit']['departamento_id']);
-                    $this->Session->write($this->sesNames['tituloJurDepLoc'], $this->data['Titulo']['jur_dep_loc']);
-                }
-            }
-            else if(!empty($this->data['Instit']['localidad_id'])) {
-                $loc =$this->Titulo->Plan->Instit->Localidad->find("first", 
-                            array("conditions" => array("Localidad.id"=>$this->data['Instit']['localidad_id']), 
-                                  "contain"=>array("Departamento"=>array("Jurisdiccion"))));
-                $nombre = $loc["Localidad"]["name"] .", " . $loc["Departamento"]["name"] . " (" . $loc["Departamento"]["Jurisdiccion"]["name"] . ")"; 
-                $this->data['Titulo']['jur_dep_loc'] = utf8_decode($this->data['Titulo']['jur_dep_loc']);
-                if(isset($this->data['Titulo']['jur_dep_loc']) && $nombre != $this->data['Titulo']['jur_dep_loc']){
-                    $this->passedArgs['jurDepLoc'] = $this->data['Titulo']['jur_dep_loc'];
-                }else{
-                    $this->passedArgs['localidadId'] = $this->data['Instit']['localidad_id'];
-                    $this->Session->write($this->sesNames['localidad'], $this->data['Instit']['localidad_id']);
-                    $this->Session->write($this->sesNames['tituloJurDepLoc'], $this->data['Titulo']['jur_dep_loc']);
-                }
-            }else if(!empty($this->data['Titulo']['jur_dep_loc'])){
-                $this->passedArgs['jurDepLoc'] = utf8_decode($this->data['Titulo']['jur_dep_loc']);
-            }
-            if(!empty($this->data['Instit']['gestion_id'])) {
-                $this->passedArgs['gestionId'] = $this->data['Instit']['gestion_id'];
-                $this->Session->write($this->sesNames['gestion'], $this->data['Instit']['gestion_id']);
-            }
-            /*if (!empty($this->data['Titulo']['que'])) {
-                $this->paginate['conditions']['(lower(Tipoinstit.name) || lower(Titulo.name) || lower(Plan.name) || lower(Sector.name) || lower(Subsector.name)) SIMILAR TO ?'] = convertir_para_busqueda_avanzada(utf8_decode($this->data['Titulo']['que']));
-            }
-            if (!empty($this->data['Titulo']['donde'])) {
-                $this->paginate['conditions']['(lower(Jurisdiccion.name) || lower(Departamento.name) || lower(Localidad.name) || lower(Instit.name)) SIMILAR TO ?'] = convertir_para_busqueda_avanzada(utf8_decode($this->data['Titulo']['donde']));
-            }*/
-        }
-
-        if(!empty($this->passedArgs['tituloName'])) {
-            $q = utf8_decode(strtolower($this->passedArgs['tituloName']));
-            $this->paginate['conditions']['lower(Titulo.name) SIMILAR TO ?'] = convertir_texto_plano($q);
-        }
-        if(!empty($this->passedArgs['ofertaId'])) {
-            $q = ($this->passedArgs['ofertaId']);
-            $this->paginate['conditions']['Titulo.oferta_id'] = $q;
-        }
-        if(!empty($this->passedArgs['sectorId']) || !empty($this->passedArgs['subsectorId']) ) {
-
-            $conditions_sector = array();
-            if(!empty($this->passedArgs['sectorId'])){
-                $q = $this->passedArgs['sectorId'];
-                $this->paginate['conditions']['SectoresTitulo.sector_id'] = $q;
-            }
-            if(!empty($this->passedArgs['subsectorId'])){
-                $q = $this->passedArgs['subsectorId'];
-                $this->paginate['conditions']['SectoresTitulo.subsector_id'] = $q;
-            }
-        }
-        if(!empty($this->passedArgs['jurisdiccionId'])) {
-            $q = ($this->passedArgs['jurisdiccionId']);
-            $this->paginate['conditions']['Instit.jurisdiccion_id'] = $q;
-        }
-        if(!empty($this->passedArgs['departamentoId'])) {
-            $q = ($this->passedArgs['departamentoId']);
-            $this->paginate['conditions']['Instit.departamento_id'] = $q;
-        }
-        if(!empty($this->passedArgs['localidadId'])) {
-            $q = ($this->passedArgs['localidadId']);
-            $this->paginate['conditions']['Instit.localidad_id'] = $q;
-        }
-        if(!empty($this->passedArgs['jurDepLoc'])){
-            $q = $this->passedArgs['jurDepLoc'];
-            $this->paginate['conditions']["to_ascii(lower(Localidad.name) || lower(Departamento.name) || lower(Jurisdiccion.name)) SIMILAR TO ?"] = convertir_para_busqueda_avanzada($q);
-        }
-
-        if (!empty($this->passedArgs['page'])) {
-            //$this->paginate['page'] = $this->passedArgs['page'];
-            $this->Session->write($this->sesNames['page'], $this->passedArgs['page']);
-        }
-        elseif ($this->Session->read($this->sesNames['page'])) {
-            $this->paginate['page'] = $this->Session->read($this->sesNames['page']);
-        }
-        //debug($this->paginate['conditions']);
-        //datos de paginacion
-        $this->paginate['fields'] = array('Titulo.id', 'Titulo.name','Titulo.marco_ref', 'Titulo.oferta_id', 'Oferta.abrev', 'Oferta.name');
-        $this->paginate['group'] = $this->paginate['fields'];
-        $this->paginate['order'] = array('Titulo.name' => 'ASC', 'Titulo.oferta_id' => 'ASC');
-        $this->paginate['recursive'] = 3;   // find completo
-        $titulos = $this->paginate();
-
-        $this->set('titulos', $titulos);
-        $this->set('url_conditions', $url_conditions);
-        //devuelve un array para mostrar los criterios de busqueda
-        $this->set('conditions', $array_condiciones);
-
-    }
 
 
     function guiaDelEstudiante() {
