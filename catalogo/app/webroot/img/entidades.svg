@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   version="1.2"
+   width="700"
+   height="400"
+   id="svg2">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient3600">
+      <stop
+         id="stop3602"
+         style="stop-color:#ffb601;stop-opacity:1"
+         offset="0" />
+      <stop
+         id="stop3604"
+         style="stop-color:#ffdf91;stop-opacity:1"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3600-6">
+      <stop
+         id="stop3602-8"
+         style="stop-color:#cb8d35;stop-opacity:1"
+         offset="0" />
+      <stop
+         id="stop3604-1"
+         style="stop-color:#e8cea8;stop-opacity:1"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3600-0-3">
+      <stop
+         id="stop3602-0-1"
+         style="stop-color:#7dbaff;stop-opacity:1"
+         offset="0" />
+      <stop
+         id="stop3604-6-0"
+         style="stop-color:#f2f8ff;stop-opacity:1"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3600-0-3-1">
+      <stop
+         id="stop3602-0-1-0"
+         style="stop-color:#253e8f;stop-opacity:1"
+         offset="0" />
+      <stop
+         id="stop3604-6-0-3"
+         style="stop-color:#385bcc;stop-opacity:1"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       x1="264.28571"
+       y1="142.79076"
+       x2="264.28571"
+       y2="293.36218"
+       id="linearGradient3983-7"
+       xlink:href="#linearGradient3600-6-4"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.41292493,0,0,0.4237654,410.40319,250.8447)" />
+    <linearGradient
+       id="linearGradient3600-6-4">
+      <stop
+         id="stop3602-8-7"
+         style="stop-color:#cb8d35;stop-opacity:1"
+         offset="0" />
+      <stop
+         id="stop3604-1-1"
+         style="stop-color:#e8cea8;stop-opacity:1"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       x1="264.28571"
+       y1="142.79076"
+       x2="264.28571"
+       y2="293.36218"
+       id="linearGradient3032"
+       xlink:href="#linearGradient3600"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.41292493,0,0,0.44413871,50.512182,-40.020813)" />
+    <linearGradient
+       x1="264.28571"
+       y1="142.79076"
+       x2="264.28571"
+       y2="293.36218"
+       id="linearGradient3044"
+       xlink:href="#linearGradient3600-6"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.41292493,0,0,0.53785607,307.70547,-51.166766)" />
+    <linearGradient
+       x1="264.28571"
+       y1="142.79076"
+       x2="264.28571"
+       y2="293.36218"
+       id="linearGradient3056"
+       xlink:href="#linearGradient3600-0-3"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.41292493,0,0,0.53785607,50.512186,80.4715)" />
+    <linearGradient
+       x1="264.28571"
+       y1="142.79076"
+       x2="264.28571"
+       y2="293.36218"
+       id="linearGradient3069"
+       xlink:href="#linearGradient3600-0-3"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.41292493,0,0,0.53785607,208.60347,80.47149)" />
+    <linearGradient
+       x1="264.28571"
+       y1="142.79076"
+       x2="264.28571"
+       y2="293.36218"
+       id="linearGradient3083"
+       xlink:href="#linearGradient3600-0-3-1"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.41292493,0,0,0.53785607,436.30211,80.47149)" />
+    <linearGradient
+       x1="264.28571"
+       y1="142.79076"
+       x2="264.28571"
+       y2="293.36218"
+       id="linearGradient3097"
+       xlink:href="#linearGradient3600-6"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.41292493,0,0,0.4237654,51.544552,230.8447)" />
+    <linearGradient
+       x1="264.28571"
+       y1="142.79076"
+       x2="264.28571"
+       y2="293.36218"
+       id="linearGradient3111"
+       xlink:href="#linearGradient3600-6"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.41292493,0,0,0.4237654,430.40319,230.8447)" />
+  </defs>
+  <g
+     transform="translate(-42.259507,6.3116936)"
+     id="layer1">
+    <g
+       transform="translate(20,-20)"
+       id="g4567">
+      <path
+         d="m 568.3764,228.956 0,58.24347 -207.64225,0 0,66.38508"
+         id="path4142"
+         style="fill:none;stroke:#c87600;stroke-width:6;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:6, 6;stroke-dashoffset:0" />
+      <path
+         d="m 274.31079,353.71352 200.21774,0"
+         id="path4118-9"
+         style="fill:none;stroke:#c87600;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:6, 6;stroke-dashoffset:0" />
+      <path
+         d="m 92.450927,84.162731 -47.19142,0 0,271.414569 60.169053,0"
+         id="path4118"
+         style="fill:none;stroke:#c87600;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:6, 6;stroke-dashoffset:0" />
+      <path
+         d="m 222.22732,87.657342 123.87749,0"
+         id="path4114"
+         style="fill:none;stroke:#e8a400;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <g
+         transform="matrix(0.41292493,0,0,0.4077043,59.416925,30.198103)"
+         id="g4109"
+         style="stroke:#e9a200;stroke-width:14.6232214;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none">
+        <path
+           d="m 211.42857,215.21933 0,171.42857"
+           id="path4103"
+           style="fill:none;stroke:#e9a200;stroke-width:14.6232214;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+        <path
+           d="m 208.57143,306.6479 1037.14287,0 0,94.28571"
+           id="path4105"
+           style="fill:none;stroke:#e9a200;stroke-width:14.6232214;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+        <path
+           d="m 705.71429,306.6479 0,94.28571"
+           id="path4107"
+           style="fill:none;stroke:#e9a200;stroke-width:14.6232214;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      </g>
+    </g>
+    <g
+       id="g_consejo_educ">
+      <rect
+         width="172.24869"
+         height="79.910042"
+         rx="20"
+         ry="20"
+         x="352.53732"
+         y="26.171955"
+         id="rect3590-3"
+         style="fill:url(#linearGradient3044);fill-opacity:1;stroke:#4f3715;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <text
+         x="435.47113"
+         y="62.409878"
+         transform="scale(1.0063821,0.99365837)"
+         id="text4313"
+         xml:space="preserve"
+         style="font-size:16.41225243px;font-style:normal;font-weight:bold;line-height:125%;fill:#4f3715;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold"><tspan
+           x="438.32404"
+           y="62.409878"
+           id="tspan4315"
+           style="font-size:16.41225243px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#4f3715;fill-opacity:1;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold">Consejo Federal </tspan><tspan
+           x="435.47113"
+           y="82.925194"
+           id="tspan4454"
+           style="font-size:16.41225243px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#4f3715;fill-opacity:1;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold">de Educación</tspan></text>
+    </g>
+    <g
+       id="g_secretaria_educ">
+      <rect
+         width="128.59662"
+         height="79.910042"
+         rx="20"
+         ry="20"
+         x="95.344032"
+         y="157.81024"
+         id="rect3590-39"
+         style="fill:url(#linearGradient3056);fill-opacity:1;stroke:#002f64;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <text
+         x="158.08902"
+         y="195.21686"
+         transform="scale(1.0063821,0.99365837)"
+         id="text4331"
+         xml:space="preserve"
+         style="font-size:16.41225243px;font-style:normal;font-weight:normal;fill:#002f64;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+           x="160.70152"
+           y="195.21686"
+           id="tspan4333"
+           style="text-align:center;text-anchor:middle;fill:#002f64;fill-opacity:1">Secretaría de </tspan><tspan
+           x="158.08902"
+           y="215.73218"
+           id="tspan4337"
+           style="text-align:center;text-anchor:middle;fill:#002f64;fill-opacity:1">Educación</tspan></text>
+    </g>
+    <g
+       id="g_secretaria_politicas">
+      <rect
+         width="198.20396"
+         height="79.910042"
+         rx="20"
+         ry="20"
+         x="253.43532"
+         y="157.81024"
+         id="rect3590-39-0"
+         style="fill:url(#linearGradient3069);fill-opacity:1;stroke:#002f64;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <text
+         x="349.9931"
+         y="184.9592"
+         transform="scale(1.0063821,0.99365837)"
+         id="text4342"
+         xml:space="preserve"
+         style="font-size:16.41225243px;font-style:normal;font-weight:normal;fill:#002f64;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+           x="352.60559"
+           y="184.9592"
+           id="tspan4344"
+           style="text-align:center;text-anchor:middle;fill:#002f64;fill-opacity:1">Secretaría de </tspan><tspan
+           x="352.60559"
+           y="205.47452"
+           id="tspan4348"
+           style="text-align:center;text-anchor:middle;fill:#002f64;fill-opacity:1">Políticas </tspan><tspan
+           x="349.9931"
+           y="225.98982"
+           id="tspan4352"
+           style="text-align:center;text-anchor:middle;fill:#002f64;fill-opacity:1">Universitarias</tspan></text>
+    </g>
+    <g
+       id="g_inet">
+      <rect
+         width="217.08054"
+         height="79.910042"
+         rx="20"
+         ry="20"
+         x="481.13397"
+         y="157.81024"
+         id="rect3590-39-0-5"
+         style="fill:url(#linearGradient3083);fill-opacity:1;stroke:#cddaff;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <text
+         x="585.18146"
+         y="182.97578"
+         transform="scale(1.0063821,0.99365837)"
+         id="text4372"
+         xml:space="preserve"
+         style="font-size:16.41225243px;font-style:normal;font-weight:normal;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+           x="588.03436"
+           y="182.97578"
+           id="tspan4374"
+           style="font-weight:bold;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;-inkscape-font-specification:Bitstream Vera Sans Bold">Instituto Nacional de </tspan><tspan
+           x="588.03436"
+           y="203.4911"
+           id="tspan4378"
+           style="font-weight:bold;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;-inkscape-font-specification:Bitstream Vera Sans Bold">Educación </tspan><tspan
+           x="585.18146"
+           y="224.00641"
+           id="tspan4382"
+           style="font-weight:bold;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;-inkscape-font-specification:Bitstream Vera Sans Bold">Tecnológica</tspan></text>
+    </g>
+    <g
+       id="g_consejo_etp">
+      <rect
+         width="215.90074"
+         height="79.910049"
+         rx="20"
+         ry="20"
+         x="96.376396"
+         y="291.77826"
+         id="rect3590-3-0"
+         style="fill:url(#linearGradient3097);fill-opacity:1;stroke:#4f3715;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <text
+         x="202.27771"
+         y="319.45364"
+         transform="scale(1.0063821,0.99365837)"
+         id="text4412"
+         xml:space="preserve"
+         style="font-size:16.41225243px;font-style:normal;font-weight:normal;fill:#4f3715;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+           x="205.13062"
+           y="319.45364"
+           id="tspan4414"
+           style="font-weight:bold;text-align:center;text-anchor:middle;fill:#4f3715;fill-opacity:1;-inkscape-font-specification:Bitstream Vera Sans Bold">Consejo Nacional de </tspan><tspan
+           x="205.13062"
+           y="339.96896"
+           id="tspan4418"
+           style="font-weight:bold;text-align:center;text-anchor:middle;fill:#4f3715;fill-opacity:1;-inkscape-font-specification:Bitstream Vera Sans Bold">Educación - Trabajo y </tspan><tspan
+           x="202.27771"
+           y="360.48428"
+           id="tspan4422"
+           style="font-weight:bold;text-align:center;text-anchor:middle;fill:#4f3715;fill-opacity:1;-inkscape-font-specification:Bitstream Vera Sans Bold">Producción</tspan></text>
+    </g>
+    <g
+       id="g_comision_etp">
+      <rect
+         width="222.97946"
+         height="79.910049"
+         rx="20"
+         ry="20"
+         x="475.23505"
+         y="291.77826"
+         id="rect3590-3-0-6"
+         style="fill:url(#linearGradient3111);fill-opacity:1;stroke:#4f3715;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <text
+         x="582.59528"
+         y="319.7822"
+         transform="scale(1.0063821,0.99365837)"
+         id="text4440"
+         xml:space="preserve"
+         style="font-size:16.41225243px;font-style:normal;font-weight:normal;fill:#4f3715;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+           x="585.44818"
+           y="319.7822"
+           id="tspan4442"
+           style="font-weight:bold;text-align:center;text-anchor:middle;fill:#4f3715;fill-opacity:1;-inkscape-font-specification:Bitstream Vera Sans Bold">Comisión Nacional de </tspan><tspan
+           x="585.44818"
+           y="340.29752"
+           id="tspan4446"
+           style="font-weight:bold;text-align:center;text-anchor:middle;fill:#4f3715;fill-opacity:1;-inkscape-font-specification:Bitstream Vera Sans Bold">Educación Técnico </tspan><tspan
+           x="582.59528"
+           y="360.81284"
+           id="tspan4450"
+           style="font-weight:bold;text-align:center;text-anchor:middle;fill:#4f3715;fill-opacity:1;-inkscape-font-specification:Bitstream Vera Sans Bold">Profesional</tspan></text>
+    </g>
+    <g
+       id="g_ministerio">
+      <rect
+         width="155.73169"
+         height="79.910034"
+         rx="20"
+         ry="19.999998"
+         x="95.344032"
+         y="23.842232"
+         id="rect3590"
+         style="fill:url(#linearGradient3032);fill-opacity:1;stroke:#644500;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <text
+         x="172.3837"
+         y="59.257698"
+         id="text4303"
+         xml:space="preserve"
+         style="font-size:18px;font-style:normal;font-weight:bold;text-align:center;text-anchor:middle;fill:#644500;fill-opacity:0.97254902;stroke:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold"><tspan
+           x="175.5126"
+           y="59.257698"
+           id="tspan4305">Ministerio de </tspan><tspan
+           x="172.3837"
+           y="81.757698"
+           id="tspan4309">Educación</tspan></text>
+    </g>
+  </g>
+</svg>

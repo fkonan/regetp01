@@ -32,7 +32,7 @@ $this->pageTitle = "Inicio";
 -->
 <div class="grid_9">
     <div class="boxblanca inet">
-        <h2>El Instituto Nacional de Educación Técnica</h2>
+        <h2>El Instituto Nacional de Educación Tecnológica</h2>
         <div class="boxcontent">
             <div class="picround" style="margin-right: 10px;">
             <?php echo $html->image('material/soldadura.jpg', array('style' => "float: left; height: 120px;" )) ?> 
@@ -49,9 +49,7 @@ $this->pageTitle = "Inicio";
             <div class="clear"></div>
 
             <ul class="ul-horizontal centrado">
-                <li><?php echo $html->link('Propósitos', array('controller' => 'pages', 'action' => 'propositos')); ?></li>
-                <li><?php echo $html->link('Ideas eje', array('controller' => 'pages', 'action' => 'ideaseje')); ?></li>
-                <li><?php echo $html->link('Entidades relacionadas', array('controller' => 'pages', 'action' => 'graficoinet')); ?></li>
+                <li><?php echo $html->link('Ver más', array('controller' => 'pages', 'action' => 'el_inet')); ?></li>
             </ul>
         </div>
     </div>
