@@ -66,7 +66,9 @@ $javascript;
                             'media' => 'screen and (max-width: 960px)'
                             ));
         echo $html->css('catalogo.default_header');
-
+        ?>
+            <script src="<?= $this->webroot ?>js/svg.js" data-htc-filename="<?= $this->webroot ?>svg-htc.php"></script>
+        <? 
         echo $javascript->link(array(
         'jquery-1.5.2.min',
         'adapt.min.js',
