@@ -57,6 +57,7 @@ class BuscableComponent extends Object {
         // inicializo variables del array de opciones
         $model = empty($o['model'])?$this->controller->modelClass:$o['model'] ;
         $field = $o['field'];
+        $inputName = empty($o['input-name'])? $o['field'] : $o['input-name'];
         $friendlyName = empty($o['friendlyName']) ? $field : $o['friendlyName'];
         $forceText = empty($o['forceText']) ? false : true;
         $valor = null; // es el valor DATO del campo que voy a buscar
@@ -67,12 +68,12 @@ class BuscableComponent extends Object {
         $this->controller->paginate['modelosInvolucrados'] = array();
 
         // paso al vector del paginador para unificar la busqueda
-        if(!empty($this->controller->data[$model][$field])) {
-            $valor = $this->controller->data[$model][$field];
+        if(!empty($this->controller->data[$model][$inputName])) {
+            $valor = $this->controller->data[$model][$inputName];
         }
         
-        if( !empty($this->controller->params['url'][$field]) ) {
-            $valor = $this->controller->passedArgs[$modelField] = $this->controller->params['url'][$field];
+        if( !empty($this->controller->params['url'][$inputName]) ) {
+            $valor = $this->controller->passedArgs[$modelField] = $this->controller->params['url'][$inputName];
         }
 
         if( !empty($this->controller->passedArgs[$modelField]) ) {
@@ -89,7 +90,7 @@ class BuscableComponent extends Object {
             $this->controller->paginate['modelosInvolucrados'][] = $model;
             
             if ($fillThisData){
-                $this->controller->data[$model][$field] = $valor;
+                $this->controller->data[$model][$inputName] = $valor;
             }
 
             $friendlyName = empty($friendlyName) ?  $field : $friendlyName;
@@ -97,7 +98,7 @@ class BuscableComponent extends Object {
 
             if ( (!is_numeric($valor) && !is_array($valor)) && is_string($valor) || $forceText === true) {
                 // es texto
-                $this->controller->paginate[$this->controller->modelClass]['conditions']['to_ascii(lower('.$modelField.')) SIMILAR TO ?']
+                $this->controller->paginate[$this->controller->modelClass]['conditions']['lower('.$modelField.') SIMILAR TO ?']
                     = convertir_para_busqueda_avanzada(utf8_decode($valor));
                 $array_condiciones[$modelField] = utf8_decode($valor);
                 $url_conditions[$field] = utf8_decode($valor);

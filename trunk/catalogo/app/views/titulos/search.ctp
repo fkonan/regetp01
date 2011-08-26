@@ -60,10 +60,7 @@
                                                             'onChange'=>true ));
 
                 
-                echo $form->input('name', array( 'label'=> 'Nombre del Título',
-                                                      'div' => true,
-                                                      'class' => '',
-                                                      'id' => 'TituloName', ));
+                echo $form->input('tituloname', array( 'label'=> 'Nombre del Título' ));
                 ?>
         </div>
         <div class="box_derecha">
@@ -77,8 +74,20 @@
                                                                   'id'=>'jurisdiccion_id'));
             echo '<span class="ajax_update" id="ajax_indicator" style="display:none; margin-top: -32px; float: right; clear: none">'.$html->image('ajax-loader.gif').'</span>';
                 
-            echo $form->input('Instit.departamento_id', array('label'=>'Departamento', 'empty' => 'Seleccione'));
-            echo $form->input('Instit.localidad_id', array('label'=>'Localidad', 'empty' => 'Seleccione'));
+            echo $form->input('Instit.departamento_id', array(
+                'label'=>'Departamento', 
+                'empty' => 'Seleccione'));
+            
+            echo $ajax->observeField('jurisdiccion_id', array( 
+                                    'url' =>'/departamentos/ajax_select_departamento_form_por_jurisdiccion',
+                                    'update'=>'InstitDepartamentoId',
+                                    'loading'=>'jQuery("#InstitDepartamentoId").attr("disabled","disabled")',
+                                    'complete'=>'jQuery("#InstitDepartamentoId").removeAttr("disabled")',
+                                    'onChange'=>true )
+                    );
+            
+            
+            echo $form->input('Localidad.name', array('label'=>'Localidad', 'empty' => 'Seleccione'));
            
             ?>
             <div class="clear" style="height:50px;"></div>
@@ -110,6 +119,23 @@ if ($vino_formulario) {
 
     <div id="search_results" class="boxblanca">
         <h3>Listado de resultados</h3>
+    <? if (sizeof($conditions)>0): ?>
+            Criterios de búsqueda seleccionados:
+            <dl class="criterios_busq">
+            <?
+
+             foreach($conditions as $key => $value){
+                    ?><dt><?
+                            echo '- '.$key.': ';
+                    ?></dt><?
+                    ?><dd><?
+                            echo $value."&nbsp";
+                    ?></dd><?
+            }
+
+            ?>
+            </dl>
+        <?php endif; ?>
         <div class="list-header">
             <div class="sorter">
                 <?php
@@ -174,7 +200,9 @@ if ($vino_formulario) {
         }
         else {
             ?>
-        <div id="no_results">No hay resultados</div>
+            <div class="clear"></div><br />
+            <div id="no_results" style="color: red">No hay resultados</div><br />
+            <div class="clear"></div>
         <?php
         }
 

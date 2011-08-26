@@ -9,23 +9,23 @@ class DepartamentosController extends AppController {
 	
 	function ajax_select_departamento_form_por_jurisdiccion(){
             $this->layout = 'ajax';
-            Configure::write('debug',0);
+            Configure::write('debug',1);
+            
+            debug($this->data);
+            
+            $jurId = !empty($this->data['jurisdiccion_id']) ? $this->data['jurisdiccion_id'] : 0;
+            $jurId = !empty($this->params['url']['jurisdiccion_id']) ? $this->params['url']['jurisdiccion_id'] : 0;
+            $jurId = !empty($this->passedArgs['jurisdiccion_id']) ? $this->passedArgs['jurisdiccion_id'] : 0;
+            
+            
+            $deptos = $this->Departamento->con_jurisdiccion('all',$jurId);
 
-            $jur_id = 0;
-            if ($jur = current($this->data)):
-                if (isset($jur)):
-                        $jur_id = $jur['jurisdiccion_id'];
-                endif;
-            endif;
-
-            $deptos = $this->Departamento->con_jurisdiccion('all',$jur_id);
-
-            $this->set('todos', ($jur_id != 0 )?false:true);
+            $this->set('todos', ($jurId != 0 )?false:true);
 
             $this->set('deptos', $deptos);
 
              //prevent useless warnings for Ajax
-            $this->render('ajax_select_departamento_form_por_jurisdiccion','ajax');
+//            $this->render('ajax_select_departamento_form_por_jurisdiccion','ajax');
 	}
 	
 	function ajax_buscar_departamento(){
@@ -52,8 +52,8 @@ class DepartamentosController extends AppController {
             $items = $this->Departamento->find("all", array(
                             'contain'=> array("Localidad"),
                             'conditions'=> array("OR"=>array(
-                                "to_ascii(lower(Localidad.name)) SIMILAR TO ?" => "%". $q ."%",
-                                "to_ascii(lower(Departamento.name)) SIMILAR TO ?" => "%". $q ."%"
+                                "lower(Localidad.name) SIMILAR TO ?" => "%". $q ."%",
+                                "lower(Departamento.name) SIMILAR TO ?" => "%". $q ."%"
                                 )
                             )
                         )

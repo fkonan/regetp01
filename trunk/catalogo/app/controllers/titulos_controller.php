@@ -21,36 +21,7 @@ class TitulosController extends AppController {
     function search($oferta_id = 0) {
         $this->pageTitle = "Buscador de Títulos";
         
-        $ofertas = $this->Titulo->Oferta->find('list');
-        $sectores = $this->Titulo->Sector->find('list',array('order'=>'Sector.name'));
-
-        $subsectores = array();
-        if (empty($subsectores)) {
-            $subsectores = $this->Titulo->Subsector->con_sector('list');
-        }
-
-        $this->Titulo->Plan->Instit->Jurisdiccion->recursive = -1;
-        $this->Titulo->Plan->Instit->Jurisdiccion->order = 'Jurisdiccion.name';
-        $jurisdicciones = $this->Titulo->Plan->Instit->Jurisdiccion->find('list');
-
-        // que me liste todos los detarpamentos
-        $this->Titulo->Plan->Instit->Departamento->recursive = -1;
-        $departamentos = $this->Titulo->Plan->Instit->Departamento->con_jurisdiccion('list');
-        //$departamentos = array();
-
-
-        // con CERO me trae TODAS las jurisdicciones
-        $this->Titulo->Plan->Instit->Localidad->recursive = -1;
-        $localidades = $this->Titulo->Plan->Instit->Localidad->con_depto_y_jurisdiccion('list');
-
-        $this->Titulo->recursive = 0;
-        $this->set('titulos', $this->paginate());
-        $this->set(compact('ofertas', 'sectores', 'subsectores', 'jurisdicciones',
-                    'localidades', 'departamentos', 'bySession','bloquearOferta'));
-        
-        
-        
-        // preparo los GET params que vienen del formulario enviando type GET
+         // preparo los GET params que vienen del formulario enviando type GET
         $getParams = $this->params['url'];
         unset($getParams['url']);
         unset($getParams['ext']);
@@ -66,13 +37,16 @@ class TitulosController extends AppController {
         
                 //      Nombre del titulo
                  $ops[] = array(
+                    'model' => 'Titulo',
                     'field' => 'name',
+                     'input-name' => 'tituloname',
                     'friendlyName' => 'Nombre');
                  
                  
                  
                  //      Oferta
                  $ops[] = array(
+                     'model' => 'Titulo',
                     'field' => 'oferta_id',
                     'friendlyName' => 'Oferta o Nivel');
                  
@@ -102,8 +76,8 @@ class TitulosController extends AppController {
                  
                  //      Localidad
                  $ops[] = array(
-                     'model' => 'Instit',
-                     'field' => 'localidad_id',
+                     'model' => 'Localidad',
+                     'field' => 'name',
                      'friendlyName' => 'Localidad',
                      );
                  
@@ -126,8 +100,37 @@ class TitulosController extends AppController {
                 $this->set('url_conditions', $this->passedArgs);
                 //devuelve un array para mostrar los criterios de busqueda
                 $this->set('conditions', $this->paginate['viewConditions']);
-    }
+        }
+    
+    
+        
+        $ofertas = $this->Titulo->Oferta->find('list');
+        $sectores = $this->Titulo->Sector->find('list',array('order'=>'Sector.name'));
 
+        $subsectores = array();
+        if (empty($subsectores)) {
+            $subsectores = $this->Titulo->Subsector->con_sector('list');
+        }
+
+        $this->Titulo->Plan->Instit->Jurisdiccion->recursive = -1;
+        $this->Titulo->Plan->Instit->Jurisdiccion->order = 'Jurisdiccion.name';
+        $jurisdicciones = $this->Titulo->Plan->Instit->Jurisdiccion->find('list');
+
+        // que me liste todos los detarpamentos
+        $this->Titulo->Plan->Instit->Departamento->recursive = -1;
+        $departamentos = $this->Titulo->Plan->Instit->Departamento->con_jurisdiccion('list');
+        //$departamentos = array();
+
+
+        // con CERO me trae TODAS las jurisdicciones
+        $this->Titulo->Plan->Instit->Localidad->recursive = -1;
+        $localidades = $this->Titulo->Plan->Instit->Localidad->con_depto_y_jurisdiccion('list');
+
+        $this->Titulo->recursive = 0;
+        $this->set('titulos', $this->paginate());
+        $this->set(compact('ofertas', 'sectores', 'subsectores', 'jurisdicciones',
+                    'localidades', 'departamentos', 'bySession','bloquearOferta'));
+        
         $this->set('vino_formulario', $vino_formulario);
 
     }
