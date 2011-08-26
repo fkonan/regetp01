@@ -59,12 +59,7 @@ $this->pageTitle =  $cue_instit.' '.$instit['Instit']['nombre_completo'];
                             echo "<i>No declarado</i>";
                         } ?>
                     </dd>
-                    <?php if(!$con_programa_de_etp) {?>
-                    <dt>
-                            <?php echo $relacion_etp; ?>
-                    </dt>
-                    <dd>&nbsp;</dd>
-                        <?php }?>
+                   
                 </dl>
             </div>    
             <div class="ficha_info right">

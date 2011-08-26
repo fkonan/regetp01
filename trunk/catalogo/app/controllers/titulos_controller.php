@@ -29,7 +29,7 @@ class TitulosController extends AppController {
         //para mostrar en vista los patrones de busqueda seleccionados
         $this->paginate['viewConditions'] = array();
         
-        // primero seteo si vino formulario o fue el paginador quien llego a este action"
+        // primero seteo si vino formulario, fue el paginador, o GET que llegaron datos
         $vino_formulario = (!empty($this->data) || (!empty($this->passedArgs)) || !empty($getParams)) ? true : false;
 
         if ($vino_formulario){
@@ -101,8 +101,6 @@ class TitulosController extends AppController {
                 //devuelve un array para mostrar los criterios de busqueda
                 $this->set('conditions', $this->paginate['viewConditions']);
         }
-    
-    
         
         $ofertas = $this->Titulo->Oferta->find('list');
         $sectores = $this->Titulo->Sector->find('list',array('order'=>'Sector.name'));
@@ -122,14 +120,10 @@ class TitulosController extends AppController {
         //$departamentos = array();
 
 
-        // con CERO me trae TODAS las jurisdicciones
-        $this->Titulo->Plan->Instit->Localidad->recursive = -1;
-        $localidades = $this->Titulo->Plan->Instit->Localidad->con_depto_y_jurisdiccion('list');
-
         $this->Titulo->recursive = 0;
         $this->set('titulos', $this->paginate());
-        $this->set(compact('ofertas', 'sectores', 'subsectores', 'jurisdicciones',
-                    'localidades', 'departamentos', 'bySession','bloquearOferta'));
+        $this->set(compact('ofertas', 'sectores', 'subsectores', 'jurisdicciones', 
+                'departamentos', 'bySession','bloquearOferta'));
         
         $this->set('vino_formulario', $vino_formulario);
 

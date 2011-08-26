@@ -11,12 +11,10 @@ class DepartamentosController extends AppController {
             $this->layout = 'ajax';
             Configure::write('debug',1);
             
-            debug($this->data);
-            
             $jurId = !empty($this->data['jurisdiccion_id']) ? $this->data['jurisdiccion_id'] : 0;
-            $jurId = !empty($this->params['url']['jurisdiccion_id']) ? $this->params['url']['jurisdiccion_id'] : 0;
-            $jurId = !empty($this->passedArgs['jurisdiccion_id']) ? $this->passedArgs['jurisdiccion_id'] : 0;
-            
+            $jurId = !empty($this->params['url']['jurisdiccion_id']) ? $this->params['url']['jurisdiccion_id'] : $jurId;
+            $jurId = !empty($this->passedArgs['jurisdiccion_id']) ? $this->passedArgs['jurisdiccion_id'] : $jurId;
+            debug($jurId);
             
             $deptos = $this->Departamento->con_jurisdiccion('all',$jurId);
 

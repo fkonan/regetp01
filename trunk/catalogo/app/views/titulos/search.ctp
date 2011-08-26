@@ -19,7 +19,7 @@
         'action' => $this->action,
         'name'=>'TituloSearchForm',
         'id' =>'TituloSearchForm',
-            'type' => 'get',
+        'type' => 'get',
         )
         );
         ?>
@@ -36,30 +36,23 @@
                 
                 $meter = '<span id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif', array('style' => 'float:right; height: 19px;')).'</span>';
 
-                echo $form->input('SectoresTitulo.sector_id', array( 'div' => true,
-                                                 'class' => 'autosubmit ',
-                                                 'type'=>'select',
-                                                 'empty'=>'Seleccione',
-                                                 'options'=>$sectores,
-                                                 'label'=>'Sector',
-                                                 'id'=>'sectorId',
-                                                 'after'=>$meter));
+                echo $form->input('SectoresTitulo.sector_id',array(
+                    'label'=>'Sector',
+                    'id'=>'SectorId',
+                    'div'=>array('style'=>'float: left;  clear: left'),
+                    'style'=> 'display:inline;width:247px;vertical-align:bottom',
+                    'empty'=>'Seleccione'
+                ));
 
-                echo $form->input('SectoresTitulo.subsector_id', array( 'div' => true,
-                                                        'class' => 'autosubmit ',
-                                                        'empty' => 'Seleccione',
-                                                        'type'=>'select',
-                                                        'label'=>'Subsector',
-                                                        'id'=>'subsectorId',
-                                                        'after'=> $meter));
+                echo $form->input('SectoresTitulo.subsector_id',array(
+                    'type' => 'select',
+                    'id'=>'SubsectorId',
+                    'label'=>'Subsector',
+                    'div'=>array('style'=>'float: left;  clear: none'),
+                    'style'=> 'display:inline;width:267px;vertical-align:bottom',
+                    'empty'=>'Seleccione',
+                ));
 
-                echo $ajax->observeField('sectorId', array( 'url' =>'/subsectores/ajax_select_subsector_form_por_sector',
-                                                            'update'=>'subsectorId',
-                                                            'loading'=>'jQuery("#ajax_indicator").show();jQuery("#subsectorId").attr("disabled","disabled")',
-                                                            'complete'=>'jQuery("#ajax_indicator").hide();jQuery("#subsectorId").removeAttr("disabled")',
-                                                            'onChange'=>true ));
-
-                
                 echo $form->input('tituloname', array( 'label'=> 'Nombre del Título' ));
                 ?>
         </div>
@@ -75,17 +68,9 @@
             echo '<span class="ajax_update" id="ajax_indicator" style="display:none; margin-top: -32px; float: right; clear: none">'.$html->image('ajax-loader.gif').'</span>';
                 
             echo $form->input('Instit.departamento_id', array(
+                'id' => 'departamento_id',
                 'label'=>'Departamento', 
                 'empty' => 'Seleccione'));
-            
-            echo $ajax->observeField('jurisdiccion_id', array( 
-                                    'url' =>'/departamentos/ajax_select_departamento_form_por_jurisdiccion',
-                                    'update'=>'InstitDepartamentoId',
-                                    'loading'=>'jQuery("#InstitDepartamentoId").attr("disabled","disabled")',
-                                    'complete'=>'jQuery("#InstitDepartamentoId").removeAttr("disabled")',
-                                    'onChange'=>true )
-                    );
-            
             
             echo $form->input('Localidad.name', array('label'=>'Localidad', 'empty' => 'Seleccione'));
            
