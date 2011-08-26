@@ -31,8 +31,11 @@ echo $html->css(array(  'jquery.loadmask',
                               array('label'=>'Jurisdicción',
                                     'empty' => array('0'=>'Seleccione'),
                                     'id'=>'jurisdiccion_id'));
-            echo $form->input('departamento_id',
-                              array('label'=>'Departamento', 'empty' => 'Seleccione'));
+            echo $form->input('departamento_id',array(
+                                  'label'=>'Departamento', 
+                                  'empty' => 'Seleccione',
+                                  'id' => 'departamento_id',
+                ));
             
             echo $form->input('Localidad.name',
                               array('label'=>'Localidad'));
