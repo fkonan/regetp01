@@ -117,7 +117,7 @@ class InstitsController extends AppController {
                     }
                     else{
                         //debug(convertir_para_busqueda_avanzada($q)); die();
-                        $this->paginate['Instit']['conditions'] = array("(to_ascii(lower(Tipoinstit.name)) || ' n ' || to_ascii(lower(Instit.nroinstit)) || ' ' || lower(Instit.nombre)) SIMILAR TO ?" => convertir_para_busqueda_avanzada($q));
+                        $this->paginate['Instit']['conditions'] = array("((lower(Tipoinstit.name)) || ' n ' || (lower(Instit.nroinstit)) || ' ' || lower(Instit.nombre)) SIMILAR TO ?" => convertir_para_busqueda_avanzada($q));
                     }
                     
                     $this->data['Instit']['busqueda_libre'] = $q;
@@ -138,7 +138,8 @@ class InstitsController extends AppController {
 
                  //      Localidad
                  $ops[] = array(
-                    'field' => 'localidad_id',
+                    'model' => 'Localidad',
+                    'field' => 'name',
                     'friendlyName' => 'Localidad');
                  
                  //      Localidad
@@ -162,6 +163,7 @@ class InstitsController extends AppController {
             
             $this->set('vino_formulario', $vino_formulario);
             $this->set('jurisdicciones', $this->Instit->Jurisdiccion->find('list'));
+            $this->set('departamentos', $this->Instit->Departamento->con_jurisdiccion('list'));
     }
     
     

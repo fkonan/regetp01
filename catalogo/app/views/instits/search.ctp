@@ -26,16 +26,15 @@ echo $html->css(array(  'jquery.loadmask',
                 'type' => 'get',
             )
             );
-            echo $form->hidden('form_name',array('value'=>'buscador rapido'));
 
             echo $form->input('jurisdiccion_id',
                               array('label'=>'Jurisdicción',
-                                    'empty' => array('0'=>'Todas'),
+                                    'empty' => array('0'=>'Seleccione'),
                                     'id'=>'jurisdiccion_id'));
             echo $form->input('departamento_id',
-                              array('label'=>'Departamento'));
+                              array('label'=>'Departamento', 'empty' => 'Seleccione'));
             
-            echo $form->input('localidad_id',
+            echo $form->input('Localidad.name',
                               array('label'=>'Localidad'));
             ?>
         </div>
