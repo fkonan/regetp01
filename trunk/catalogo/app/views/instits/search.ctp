@@ -181,9 +181,13 @@ echo $html->css(array(  'jquery.loadmask',
             ?>
             <div class="clear"></div><br />
             <div id="no_results" style="color: red">No hay resultados</div><br />
-            <div class="clear"></div>
+            
         <?php
         }
+        ?>
+            <div class="clear separador"></div>
+            
+            <?php
 
         if ($paginator->numbers()) { ?>
             <div style="text-align:center; display:block;margin-bottom: 10px">

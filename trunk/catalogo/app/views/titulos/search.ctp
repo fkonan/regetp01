@@ -23,14 +23,15 @@
         )
         );
         ?>
-        <div class="box_izquierda">
+        <div class="box_izquierda inputs_largos">
             <h4>Nivel y Sector</h4>
             <?php
                 echo $form->input('oferta_id',array( 'div' => true,
                                                     'class' => 'autosubmit ',
                                                     'label'=> 'Nivel',
                                                     'id' => 'ofertaId',
-                                                    'empty' => 'Seleccione'
+                                                    'empty' => 'Seleccione',
+                                                    'disabled' => (empty($oferta_id) ? false : true),
                                                    ));
                
                 
@@ -39,8 +40,6 @@
                 echo $form->input('SectoresTitulo.sector_id',array(
                     'label'=>'Sector',
                     'id'=>'SectorId',
-                    'div'=>array('style'=>'float: left;  clear: left'),
-                    'style'=> 'display:inline;width:247px;vertical-align:bottom',
                     'empty'=>'Seleccione'
                 ));
 
@@ -48,8 +47,6 @@
                     'type' => 'select',
                     'id'=>'SubsectorId',
                     'label'=>'Subsector',
-                    'div'=>array('style'=>'float: left;  clear: none'),
-                    'style'=> 'display:inline;width:267px;vertical-align:bottom',
                     'empty'=>'Seleccione',
                 ));
 
@@ -75,7 +72,7 @@
             echo $form->input('Localidad.name', array('label'=>'Localidad', 'empty' => 'Seleccione'));
            
             ?>
-            <div class="clear" style="height:50px;"></div>
+            <div class="clear" style="height:23px;"></div>
             
             <?php
             
@@ -187,10 +184,13 @@ if ($vino_formulario) {
             ?>
             <div class="clear"></div><br />
             <div id="no_results" style="color: red">No hay resultados</div><br />
-            <div class="clear"></div>
+            
         <?php
         }
-
+        ?>
+            <div class="clear separador"></div>
+        
+        <?php
         if ($paginator->numbers()) {
         ?>
             <div style="text-align:center; margin-bottom: 10px">
