@@ -1,4 +1,7 @@
 <div class="clear separador"></div>
+<?php 
+echo $javascript->link('animar_cuadros');
+?>
 <style type="text/css">
   #descripcion{
     background-color: lightgray;
@@ -75,65 +78,19 @@
 </div>
 
 <script type="text/javascript">
-
-  /* esto es un hack para que jquery me deje animar propiedades que no son de CSS */
-  var $_fx_step_default = $.fx.step._default;
-  $.fx.step._default = function (fx) {
-    if (!fx.elem.customAnimate) return $_fx_step_default(fx);
-    fx.elem[fx.prop] = fx.now;
-    fx.elem.updated = true;
-  };
-
   window.onsvgload = function(){
-    /*ids de cada grupo del svg con su texto corresponidente*/
+    /*texto temporal*/
+    var lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas erat lacus, facilisis sed scelerisque dictum, accumsan eu nunc. Maecenas sed ligula sed quam luctus consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.";
     var nodos = [
-      {id:"g_ministerio", texto:""},
+      {id:"g_ministerio", texto:lorem},
       {id:"g_consejo_educ", texto:"Ámbito de concertación, acuerdo y coordinación de la política educativa nacional, presidido por el Ministro de Educación e integrado por las autoridades educativas de las 24 jurisdicciones."},
-      {id:"g_secretaria_educ", texto:""},
-      {id:"g_secretaria_politicas", texto:""},
-      {id:"g_inet", texto:""},
+      {id:"g_secretaria_educ", texto:lorem},
+      {id:"g_secretaria_politicas", texto:lorem},
+      {id:"g_inet", texto:lorem},
       {id:"g_consejo_etp", texto:"Consejo asesor del Ministerio de Educación integrado por representantes de los Ministerios de Trabajo, Ciencia y Tecnología, Economía, Producción, cámaras y asociaciones empresarias, sindicatos y gremios sectoriales y docentes, colegios profesionales de técnicos."},
       {id:"g_comision_etp", texto:"Espacio de trabajo conjunto con los equipos político-técnicos de las 24 jurisdicciones del país."}
     ];
 
-
-    var doc = document.getElementById('mySVGObject').contentDocument;
-    var len = nodos.length;
-    for(var i = 0; i<len ; i++){
-      var nodo = doc.getElementById(nodos[i]["id"]);
-      $(nodo).mouseenter(get_resizer(nodo, 1,1.2, nodos[i]["texto"]))
-             .mouseleave(get_resizer(nodo, 1.2,1));
-    }
-    
-    function get_resizer(nodo, scaleFrom, scaleTo, text){
-      return function(){
-        if(text){
-          $("#descripcion").hide().text(text).fadeIn("fast");  
-        }else{
-          $("#descripcion").fadeOut();
-        }
-        
-        var object = nodo
-        /*este DIV se crea pero no se agrega al DOM, es solamente para tener algun
-          lugar donde meter la propiedad a animar (scale)*/
-        var tmpObj = $.extend($('<div>')[0], {
-          scale: scaleFrom,
-          customAnimate: true,
-          updated: true
-        });
-        $(tmpObj).animate({"scale": scaleTo},{duration:500, 
-          step:function (scale, fx) {
-            var c = $(object).find("rect");
-            var tx = parseFloat(c.attr("x")) + parseFloat(c.attr("width"))/2;
-            tx = tx - tx*scale;
-            var ty = parseFloat(c.attr("y")) + parseFloat(c.attr("height"))/2;
-            ty = ty - ty*scale;
-            /*el translate se hace porque el scale me mueve el centro del objeto*/
-            var transform = "translate("+(tx).toString()+","+(ty).toString()+"), scale("+(scale).toString()+")";
-            object.setAttribute("transform",transform);
-          }
-        });
-      }
-    }
+    animar_cuadros('mySVGObject', nodos, 'descripcion');
   };
 </script>
