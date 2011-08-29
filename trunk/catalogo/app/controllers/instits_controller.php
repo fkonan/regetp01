@@ -171,6 +171,8 @@ class InstitsController extends AppController {
         if (!$oferta_id || !$jurisdiccion_id) {
             return false;
         }
+        
+        $total = $estatales = $matriculados = 0;
 
         // cantidad de instits en esa jurisdiccion con al menos una de esa oferta
         $data = $this->Instit->query("select count(*) from (select i.id from instits i 
@@ -179,7 +181,9 @@ class InstitsController extends AppController {
                                 p.oferta_id = ".$oferta_id."
                                 group by i.id) as instits");
 
-        $total = $data[0][0]['count'];
+        if (!empty($data[0][0])) {
+            $total = $data[0][0]['count'];
+        }
         $this->set('total', $total);
         
         // cantidad de estatales con las mismas condiciones
@@ -189,7 +193,9 @@ class InstitsController extends AppController {
                                 p.oferta_id = ".$oferta_id." and i.gestion_id = 1
                                 group by i.id) as instits");
 
-        $estatales = $data[0][0]['count'];
+        if (!empty($data[0][0])) {
+            $estatales = $data[0][0]['count'];
+        }
         $this->set('estatales', $estatales);
         
         $promedio = 0;
@@ -197,6 +203,19 @@ class InstitsController extends AppController {
             $promedio = round($estatales * 100 / $total);
         }
         $this->set('promedio', $promedio);
+        
+        // matriculados
+        $this->Instit->Jurisdiccion->bindModel(array('hasMany' => array('Matriculado')));
+        $data = $this->Instit->Jurisdiccion->Matriculado->find('first', array(
+                                    'fields' => array('Matriculado.cantidad'),
+                                    'conditions' => array('Matriculado.oferta_id' => $oferta_id,
+                                                          'Matriculado.jurisdiccion_id' => $jurisdiccion_id)
+        ));
+        
+        if (!empty($data)) {
+            $matriculados = number_format($data['Matriculado']['cantidad'], 0, ',', '.');
+        }
+        $this->set('matriculados', $matriculados);
         
 
         if ( $this->RequestHandler->isAjax() ) {
