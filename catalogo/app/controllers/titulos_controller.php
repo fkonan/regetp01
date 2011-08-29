@@ -26,6 +26,11 @@ class TitulosController extends AppController {
         unset($getParams['url']);
         unset($getParams['ext']);
         
+        if (!empty($oferta_id)){
+            $this->passedArgs['Titulo.oferta_id'] = $oferta_id;
+            $this->set('oferta_id', $oferta_id);
+        }
+        
         //para mostrar en vista los patrones de busqueda seleccionados
         $this->paginate['viewConditions'] = array();
         
