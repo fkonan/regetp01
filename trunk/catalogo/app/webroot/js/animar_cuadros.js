@@ -15,10 +15,6 @@ function animar_cuadros (id_svg,nodos,id_descripcion) {
 	         .mouseleave(get_resizer(nodo, 1.2,1));
 	}
 
-	function get_bounds(nodo){
-		console.debug(nodo);
-	}
-
 	function get_resizer(nodo, scaleFrom, scaleTo, text){
 	  return function(){
 	    if(text){
@@ -37,10 +33,10 @@ function animar_cuadros (id_svg,nodos,id_descripcion) {
 	    });
 	    $(tmpObj).animate({"scale": scaleTo},{duration:500, 
 	      step:function (scale, fx) {
-	      	var bounds = object.getBoundingClientRect();
-	        var tx = bounds["left"] + bounds["width"]/2;
+	      	var bounds = object.getBBox();
+	        var tx = bounds["x"] + bounds["width"]/2;
 	        tx = tx - tx*scale;
-	        var ty = bounds["top"] + bounds["height"]/2;
+	        var ty = bounds["y"] + bounds["height"]/2;
 	        ty = ty - ty*scale;
 	        /*el translate se hace porque el scale me mueve el centro del objeto*/
 	        var transform = "translate("+(tx).toString()+","+(ty).toString()+"), scale("+(scale).toString()+")";
