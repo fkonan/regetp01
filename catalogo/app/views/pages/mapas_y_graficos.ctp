@@ -47,6 +47,26 @@ echo $html->css('catalogo.estaticas');
         return false;
     }
     
+    function viewGrafico(srcGrafico, titulo, width) {
+        var dialog = jQuery('<div id="create_dialog"></div>')
+        .html('<img src="'+srcGrafico+'" />')
+        .dialog({
+            width: width,
+            //position: 'top',
+            zIndex: 3999,
+            title: titulo,
+            draggable: false,
+            modal: true,
+            resizable: false,
+            beforeclose: function(event, ui) {
+                jQuery(".ui-dialog").remove();
+                jQuery("#create_dialog").remove();
+            }
+        });
+
+        return false;
+    }
+    
     jQuery(document).ready(function(){
         jQuery('.js-tabs-ofertas').tabs();
         $(".viewport").mapbox({mousewheel: true, layerSplit: 8});
@@ -163,9 +183,9 @@ echo $html->css('catalogo.estaticas');
                             <li>57% de Gestión estatal</li>
                         </ul>
                         <br/>
-                        <h3> Gráfico (Hac click sobre la imagen)</h3>
+                        <h3> Gráfico</h3>
                         <div>
-                            <? echo $html->image('home/graficoNivelSuperior.png', array('class' => 'grafico_barras docimg', 'style' => 'width:388px')); ?>
+                            <? echo $html->image('home/graficoNivelSuperior.png', array('class' => 'grafico_barras docimg', 'onclick' => 'viewGrafico(this.src, "Nivel Superior", 655)', 'style' => 'width:307px; cursor:pointer;')); ?>
                         </div>
                         <br/>
                         <h3>Buscador</h3>
@@ -262,9 +282,9 @@ echo $html->css('catalogo.estaticas');
                             <li>87% de Gestión estatal</li>
                         </ul>
                         <br/>
-                        <h3> Gráfico (Hac click sobre la imagen)</h3>
+                        <h3> Gráfico</h3>
                         <div>
-                            <? echo $html->image('home/graficoNivelSecundario.png', array('class' => 'ver_grafico_barras docimg', 'style' => 'width:388px')); ?>
+                            <? echo $html->image('home/graficoNivelSecundario.png', array('class' => 'ver_grafico_barras docimg', 'onclick' => 'viewGrafico(this.src, "Nivel Secundario", 655)', 'style' => 'width:307px; cursor:pointer;')); ?>
                         </div>
                         <br/>
                         <h3>Buscador</h3>
@@ -362,10 +382,10 @@ echo $html->css('catalogo.estaticas');
                             <li>93% de Gestión estatal</li>
                         </ul>
                         <br/>
-                        <h3> Gráfico (Hac click sobre la imagen)</h3>
+                        <h3> Gráfico</h3>
                         <div>
                             <p style="color:red"> Falta Gráfico </p>
-                            <? echo $html->image('home/graficoFP.png', array('class' => 'docimg', 'style' => 'width:388px')); ?>
+                            <? echo $html->image('home/graficoFP.png', array('class' => 'docimg', 'style' => 'width:307px')); ?>
                         </div>
                         <br/>
                         <h3>Buscador</h3>
