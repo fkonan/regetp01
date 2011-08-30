@@ -96,6 +96,3 @@ $this->pageTitle = "Inicio";
             </div>
     </div>
 </div>
-<div class="grid_12 alpha omega" id="fechaRedesSociales">
-    <p class="fecha"> <?php echo actual_date();?></p>
-</div>
