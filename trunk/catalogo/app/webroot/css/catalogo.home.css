@@ -69,10 +69,9 @@
     background-color: #DEE2E4;
     border-radius: 6px 6px 6px 6px;
     margin-bottom: 6px;
-    margin-left: 4px;
     overflow: hidden;
-    padding: 5px 10px 5px 5px;    
-    height: 40px;
+    padding: 5px 0px 5px 0px;    
+    height: 30px;
 }
 
 #fechaRedesSociales .fecha {
@@ -80,8 +79,9 @@
     border-radius: 3px 3px 3px 3px;
     float: left;
     font-size: 82%;
-    padding: 12px 46px 11px 29px;
+    padding: 4px 20px 7px 29px;
     margin-top: 0px;
+    margin-left: 5px;
     width: 16%;
 }
 
@@ -89,10 +89,10 @@
     background: url("../img/sprites_20110531-01.jpg") no-repeat scroll -160px -934px #FFFFFF;
     border-radius: 3px 3px 3px 3px;
     float: right;
-    margin-top: 7px;
+    margin-top: 3px;
     overflow: hidden;
     padding: 5px 0 4px;
-    width: 16%;
+    width: 25%;
     list-style: none;
 }
 
@@ -141,4 +141,66 @@
     height: 16px;
     text-indent: -3000px;
     width: 17px;
+}
+
+/*
+Slider
+*/
+#slider {
+    border: 1px solid #CCCCCC;
+    height: 285px;
+    margin: 75px auto 0;
+    overflow: hidden;
+    position: relative;
+    width: 300px;
+    z-index: 10;
+}
+#buttons {
+    height: 40px;
+    margin: -100px auto;
+    position: relative;
+    width: 726px;
+    z-index: 100;
+}
+#right {
+    background-image: url("../img/next_button.png");
+    cursor: pointer;
+    float: right;
+    height: 40px;
+    text-indent: -99999px;
+    width: 105px;
+}
+#left {
+    background-image: url("../img/back_button.png");
+    cursor: pointer;
+    float: left;
+    height: 40px;
+    text-indent: -99999px;
+    width: 105px;
+}
+#slider ul {
+    position: relative;
+}
+#slider ul li {
+    float: left;
+}
+#numbers {
+    height: auto;
+    margin: 35px auto;
+    text-align: center;
+}
+#numbers li {
+    background-image: url("../img/dot_sprite.png");
+    background-repeat: no-repeat;
+    cursor: pointer;
+    float: left;
+    height: 13px;
+    margin: 0 0 5px 0;
+    position: relative;
+    text-indent: -99999px;
+    width: 18px;
+    z-index: 100;
+}
+.activenum {
+    background-position: 0 -13px;
 }
