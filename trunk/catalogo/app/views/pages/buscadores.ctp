@@ -5,21 +5,6 @@ echo $html->css('catalogo.estaticas', false);
 <h2 class="grid_12">Búsquedas según características del usuario</h2>
 <div class="clear"></div>
 
-<div class="grid_4">
-    <div class="boxblanca boxestudiantes">
-        <h3>Estudiantes</h3>
-        <h4><?php echo $html->link('Guía del Estudiante',array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'));?></h4>
-        
-        <?php echo $html->link('más información',
-                array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'),
-                array('class'=>'mas_info_azul'));?>
-        <p>
-            Usá este buscador para encontrar <strong>qué</strong> y <strong>dónde</strong> estudiar mediante tres sencillos pasos.
-            <br /><br /><br />
-        </p>
-    </div>
-</div>
-
 <div class="grid_8">
     <div class="boxblanca boxestudiantes">
         <h3>Empresas, profesionales, funcionarios, sindicatos, etc.</h3>
@@ -57,6 +42,20 @@ echo $html->css('catalogo.estaticas', false);
     </div>
 </div>
 
+<div class="grid_4">
+    <div class="boxblanca boxestudiantes">
+        <h3>Estudiantes</h3>
+        <h4><?php echo $html->link('Guía del Estudiante',array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'));?></h4>
+        
+        <?php echo $html->link('más información',
+                array('controller'=>'titulos', 'action'=>'guiaDelEstudiante'),
+                array('class'=>'mas_info_azul'));?>
+        <p>
+            Usá este buscador para encontrar <strong>qué</strong> y <strong>dónde</strong> estudiar mediante tres sencillos pasos.
+            <br /><br /><br />
+        </p>
+    </div>
+</div>
 
 <h2 class="grid_12">Búsqueda por nivel de la oferta</h2>
 

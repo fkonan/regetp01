@@ -19,12 +19,22 @@ $this->pageTitle = "Inicio";
             <?php echo $html->image('material/soldadura.jpg', array('style' => "float: left; height: 120px;" )) ?> 
             </div>
 
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
-                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit 
-                esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
-                culpa qui officia deserunt mollit anim id est laborum
+            <p style="margin-top:-5px">
+                El Registro Federal de Instituciones de Educación Técnico Profesional (RFIETP) es la instancia de inscripción de las instituciones que emiten títulos y certificados de Educación Técnica Profesional que presentan cada una de las jurisdicciones provinciales y universidades nacionales. 
+                El  RFIETP   contiene los  datos básicos de establecimiento (nombre de la institución, dirección, localidad, departamento, teléfono, director, entre otros), e información referida sus los planes de estudio (títulos, cantidad de horas taller en la semana, cantidad de matriculados, de secciones, entre otras);
+Esta información resulta de insumo para:
+            <ul>
+                <li>
+                    Diagnosticar, planificar y llevar a cabo planes de mejora que se apliquen con prioridad a aquellas escuelas que demanden un mayor esfuerzo de reconstrucción y desarrollo; 
+                </li>
+                <li>
+                    Fortalecer a aquellas instituciones que se puedan preparar como centros de referencia en su especialidad técnica 
+                </li>
+                <li>
+                    Alcanzar en todas las instituciones incorporadas los criterios y parámetros de calidad de la educación profesional acordados por el Consejo Federal de Cultura y Educación (Ley  Nº 26.058/2005, Capitulo IV, Artículo Nº 34). 
+                </li>
+            </ul>
+                El Registro funciona entonces como insumo para la evaluación de los programas de fortalecimiento institucional que presentan las instituciones educativas al INET en el marco de los planes de mejora continua de la calidad de la educación técnico profesional del Fondo Nacional para la Educación Técnico Profesional.
             </p>
 
             <div class="clear"></div>
