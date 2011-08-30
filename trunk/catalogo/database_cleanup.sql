@@ -84,6 +84,8 @@ WITH (
 )
 ;
 
+ALTER TABLE public.matriculados OWNER TO www;
+
 /* FP */
 INSERT INTO matriculados VALUES (5, 6, 1, 95137);
 INSERT INTO matriculados VALUES (6, 10, 1, 4965);
