@@ -17,7 +17,9 @@ echo $javascript->link('animar_cuadros');
 </style>
 <div class="grid_12">
     <div class="boxblanca boxdocs">
-        <h1>Estructura del Instituto Nacional de Educación Tecnológica</h1>
+        <h1>El Instituto Nacional de Educación Tecnológica</h1>
+        
+        <h3>Estructura</h3>
         <div>
         <!--[if !IE]>-->
           <object data="../img/entidades.svg" type="image/svg+xml"
@@ -31,7 +33,7 @@ echo $javascript->link('animar_cuadros');
           </object>
         </div>
         <div id="descripcion"></div>
-        <h1>Propósitos</h1>
+        <h3>Propósitos</h3>
 
         Los lineamientos, las estrategias y los programas llevados a cabo, a partir del trabajo 
         conjunto entre las veinticuatro jurisdicciones educativas del país y el INET están 
@@ -55,7 +57,7 @@ echo $javascript->link('animar_cuadros');
                 estándares internacionales de calidad.
             </li>
         </ol>
-        <h1>Ideas eje</h1>
+        <h3>Ideas eje</h3>
         <ol>
             <li>Carácter estratégico de la educación técnico profesional para el desarrollo social
     y el crecimiento económico.

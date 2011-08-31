@@ -5,22 +5,22 @@
         <h1>Mapa del sitio</h1>
 
         <ol>
-            <li><?php echo $html->link('Home', array('controller' => 'pages', 'action' => 'home')); ?></li>
-            <li>El Instituto Nacional de Educación Técnica
+            <li><?php echo $html->link('Inicio', array('controller' => 'pages', 'action' => 'home')); ?></li>
+            <li><?php echo $html->link('El Instituto Nacional de Educación Tecnológica', array('controller' => 'pages', 'action' => 'el_inet')); ?>
                 <ol>
-                    <li><?php echo $html->link('Propósitos', array('controller' => 'pages', 'action' => 'propositos')); ?></li>
-                    <li><?php echo $html->link('Ideas eje', array('controller' => 'pages', 'action' => 'ideaseje')); ?></li>
-                    <li><?php echo $html->link('Entidades relacionadas', array('controller' => 'pages', 'action' => 'graficoinet')); ?></li>
+                    <li>Propósitos</li>
+                    <li>Ideas eje</li>
+                    <li>Entidades relacionadas</li>
                 </ol>
             </li>
             
-            <li>Las políticas en Argentina para la educación técnico profesional
+            <li><?php echo $html->link('Las políticas para la Educación Técnico Profesional en Argentina', array('controller' => 'pages', 'action' => 'grafo_ley')); ?>
                 <ol>
-                    <li><?php echo $html->link('Grafo de la ley', array('controller' => 'pages', 'action' => 'grafo_ley')); ?></li>
+                    <li>Grafo de la ley</li>
                 </ol>
             </li>
             
-            <li><?php echo $html->link('La educación técnico profesional en cifras', array('controller' => 'pages', 'action' => 'mapas_y_graficos')); ?></li>
+            <li><?php echo $html->link('La Educación Técnico Profesional en cifras', array('controller' => 'pages', 'action' => 'mapas_y_graficos')); ?></li>
             
             <li><?php echo $html->link('Buscadores', array('controller' => 'pages', 'action' => 'buscadores')); ?>
                 <ol>

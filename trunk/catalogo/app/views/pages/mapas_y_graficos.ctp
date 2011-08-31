@@ -71,6 +71,7 @@ echo $html->css('catalogo.estaticas');
     
     jQuery(document).ready(function(){
         jQuery('.js-tabs-ofertas').tabs();
+        
         $(".viewport").mapbox({mousewheel: true, layerSplit: 8});
         
         jQuery(".map-control a").click(function() {//control panel 
@@ -101,24 +102,24 @@ echo $html->css('catalogo.estaticas');
 
 <div class="grid_12">
     <div class="boxblanca">
-        <h1>Distribución geográfica Instituciones de ETP</h1>
+        <h1>La Educación Técnico Profesional en cifras</h1>
         <div>
             <div class="js-tabs-ofertas tabs">
                 <ul id="ofertas-tabs" class="horizontal-shadetabs">
                     <li>
-                        <a id="htab-1" href="#ver-oferta-1">Nivel Superior</a>
+                        <a id="htab-2" href="#ver-oferta-sec">Nivel Secundario</a>
                     </li>
                     <li>
-                        <a id="htab-2" href="#ver-oferta-2">Nivel Secundario</a>
+                        <a id="htab-1" href="#ver-oferta-sup">Nivel Superior</a>
                     </li>
                     <li>
-                        <a id="htab-3" href="#ver-oferta-3">Formación Profesional</a>
+                        <a id="htab-3" href="#ver-oferta-fp">Formación Profesional</a>
                     </li>
                 </ul>
 
-                <div id="ver-oferta-1" class="descargas-container" style="">
+                <div id="ver-oferta-sup" class="descargas-container" style="">
                     <div style="width: 57%; float: left;">
-                        <h3> Mapa </h3>
+                        <h3>Institutos Técnicos de Educación Superior</h3>
                         <a onclick="changeMap(this, 'mapaSupNavegador', 'mapaSup')" href="#">Navegar mapa</a>
                         <div id="mapaSup">
                             <? echo $html->image('home/mapaSup2011.jpg', array('usemap' => '#mapSup', 'class'=>'mapa')); ?> 
@@ -185,14 +186,14 @@ echo $html->css('catalogo.estaticas');
                         </div>
                     </div>
                     <div style="margin-left:25px; width: 35%; float: left;">
-                        <h3> Datos Generales </h3>
+                        <h3> Datos generales </h3>
                         <ul>
                             <li>820 instituciones registradas en RFIETP</li>
                             <li>176.817 matriculados</li>
                             <li>57% de Gestión estatal</li>
                         </ul>
                         <br/>
-                        <h3> Gráfico</h3>
+                        <h3>Gráfico de instituciones por sector</h3>
                         <div>
                             <? echo $html->image('home/graficoNivelSuperior.png', array('class' => 'grafico_barras docimg', 'onclick' => 'viewGrafico(this.src, "Nivel Superior", 655)', 'style' => 'width:307px; cursor:pointer;')); ?>
                         </div>
@@ -215,9 +216,9 @@ echo $html->css('catalogo.estaticas');
                     <div class="clear"></div>
 
                 </div>
-                <div id="ver-oferta-2" class="descargas-container" style="">
+                <div id="ver-oferta-sec" class="descargas-container" style="">
                     <div style="width: 57%; float: left;">
-                        <h3> Mapa </h3>
+                        <h3>Escuelas Secundarias de Formación Técnica Profesional</h3>
                         <a onclick="changeMap(this, 'mapaSecNavegador', 'mapaSec')" href="#">Navegar mapa</a>
                         <div id="mapaSec">
                             <? echo $html->image('home/mapaSec2011.jpg', array('usemap' => '#mapSec', 'class'=>'mapa')); ?> 
@@ -284,14 +285,14 @@ echo $html->css('catalogo.estaticas');
                         </div>
                     </div>
                     <div style="margin-left:25px; width: 35%; float: left;">
-                        <h3> Datos Generales </h3>
+                        <h3> Datos generales </h3>
                         <ul>
                             <li>1.578 instituciones registradas en RFIETP</li>
                             <li>610.899 matriculados</li>
                             <li>87% de Gestión estatal</li>
                         </ul>
                         <br/>
-                        <h3> Gráfico</h3>
+                        <h3>Gráfico de instituciones por sector</h3>
                         <div>
                             <? echo $html->image('home/graficoNivelSecundario.png', array('class' => 'ver_grafico_barras docimg', 'onclick' => 'viewGrafico(this.src, "Nivel Secundario", 655)', 'style' => 'width:307px; cursor:pointer;')); ?>
                         </div>
@@ -314,10 +315,10 @@ echo $html->css('catalogo.estaticas');
                     <div class="clear"></div>
 
                 </div>
-                <div id="ver-oferta-3" class="descargas-container" style="">
+                <div id="ver-oferta-fp" class="descargas-container" style="">
 
                     <div style="width: 57%; float: left;">
-                        <h3> Mapa </h3>
+                        <h3>Centros de Formación Técnica Profesional</h3>
                         <a onclick="changeMap(this, 'mapaCFPNavegador', 'mapaCFP')" href="#">Navegar mapa</a>
                         <div id="mapaCFP">
                             <? echo $html->image('home/mapaCFP2011.jpg', array('usemap' => '#mapCFP', 'class'=>'mapa')); ?> 
@@ -384,14 +385,14 @@ echo $html->css('catalogo.estaticas');
                         </div>
                     </div>
                     <div style="margin-left:25px; width: 35%; float: left;">
-                        <h3> Datos Generales </h3>
+                        <h3> Datos generales </h3>
                         <ul>
                             <li>1.082 instituciones registradas en RFIETP</li>
                             <li>235.656 matriculados</li>
                             <li>93% de Gestión estatal</li>
                         </ul>
                         <br/>
-                        <h3> Gráfico</h3>
+                        <h3>Gráfico de instituciones por sector</h3>
                         <div>
                             <p style="color:red"> Falta Gráfico </p>
                             <? echo $html->image('home/graficoFP.png', array('class' => 'docimg', 'style' => 'width:307px')); ?>

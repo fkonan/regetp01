@@ -72,7 +72,7 @@ Esta información resulta de insumo para:
 -->
 <div class="grid_6 alpha">
     <div class="boxblanca politicas">
-            <h2>Las Políticas en Argentina para la Educación Técnico Profesional</h2>
+            <h2>Las políticas para la Educación Técnico Profesional en Argentina</h2>
             <div class="boxcontent">
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
@@ -91,7 +91,7 @@ Esta información resulta de insumo para:
 -->
 <div class="grid_6 omega">
     <div class="boxblanca cifras">
-            <h2>La Educación Técnico Profesional en Cifras</h2>
+            <h2>La Educación Técnico Profesional en cifras</h2>
             <div class="boxcontent">
                 <?php echo $html->image('mapaFP.jpg', array('style' => 'float: left; height: 90px; margin: 0px 10px 0px 0px;')); ?>
                 <p>
