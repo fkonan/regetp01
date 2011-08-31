@@ -1,8 +1,10 @@
+
 <?php
 echo $javascript->link(array(
     'jquery.mousewheel.min',
     'mapbox.min',
-    'jquery.blockUI'
+    'jquery.blockUI',
+    'jquery.maphilight.min'
 ));
 echo $html->css('catalogo.estaticas');
 ?>
@@ -83,6 +85,13 @@ echo $html->css('catalogo.estaticas');
             return false; 
         }); 
         
+        jQuery('.mapa').maphilight({
+            fade: false,
+            fillColor: '045FB4',
+            fillOpacity: 0.2,
+            stroke: false
+        });
+
         //jQuery("#LinkNavegarMapaSup").click(changeMap('mapaSupNavegador', 'mapaSup'));
          
     })
@@ -112,7 +121,7 @@ echo $html->css('catalogo.estaticas');
                         <h3> Mapa </h3>
                         <a onclick="changeMap(this, 'mapaSupNavegador', 'mapaSup')" href="#">Navegar mapa</a>
                         <div id="mapaSup">
-                            <? echo $html->image('home/mapaSup2011.jpg', array('usemap' => '#mapSup')); ?> 
+                            <? echo $html->image('home/mapaSup2011.jpg', array('usemap' => '#mapSup', 'class'=>'mapa')); ?> 
                             <map id="mapSup" name="mapSup">
                                 <area shape="poly" coords="120,59,134,71,135,57,141,53,143,63,155,77,177,72,176,55,164,53,154,39,158,26,147,26,139,20,127,29,118,39" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo SUP_TEC_ID?>','38','Jujuy')" alt="Jujuy" title="Jujuy"   />
                                 <area shape="poly" coords="156,27,157,35,167,53,178,52,178,71,172,74,163,75,152,70,144,65,143,56,137,57,136,67,121,60,96,73,97,86,130,89,129,101,135,112,148,108,172,110,173,98,187,98,209,73,209,34,202,27,185,25,175,39,168,29" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo SUP_TEC_ID?>','66','Salta')" alt="Salta" title="Salta"   />
@@ -211,7 +220,7 @@ echo $html->css('catalogo.estaticas');
                         <h3> Mapa </h3>
                         <a onclick="changeMap(this, 'mapaSecNavegador', 'mapaSec')" href="#">Navegar mapa</a>
                         <div id="mapaSec">
-                            <? echo $html->image('home/mapaSec2011.jpg', array('usemap' => '#mapSec')); ?> 
+                            <? echo $html->image('home/mapaSec2011.jpg', array('usemap' => '#mapSec', 'class'=>'mapa')); ?> 
                             <map id="mapSec" name="mapSec">
                                 <area shape="poly" coords="120,59,134,71,135,57,141,53,143,63,155,77,177,72,176,55,164,53,154,39,158,26,147,26,139,20,127,29,118,39" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo SEC_TEC_ID?>','38','Jujuy')" alt="Jujuy" title="Jujuy"   />
                                 <area shape="poly" coords="156,27,157,35,167,53,178,52,178,71,172,74,163,75,152,70,144,65,143,56,137,57,136,67,121,60,96,73,97,86,130,89,129,101,135,112,148,108,172,110,173,98,187,98,209,73,209,34,202,27,185,25,175,39,168,29" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo SEC_TEC_ID?>','66','Salta')" alt="Salta" title="Salta"   />
@@ -311,7 +320,7 @@ echo $html->css('catalogo.estaticas');
                         <h3> Mapa </h3>
                         <a onclick="changeMap(this, 'mapaCFPNavegador', 'mapaCFP')" href="#">Navegar mapa</a>
                         <div id="mapaCFP">
-                            <? echo $html->image('home/mapaCFP2011.jpg', array('usemap' => '#mapCFP')); ?> 
+                            <? echo $html->image('home/mapaCFP2011.jpg', array('usemap' => '#mapCFP', 'class'=>'mapa')); ?> 
                             <map id="mapCFP" name="mapCFP">
                                 <area shape="poly" coords="120,59,134,71,135,57,141,53,143,63,155,77,177,72,176,55,164,53,154,39,158,26,147,26,139,20,127,29,118,39" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo FP_ID?>','38','Jujuy')" alt="Jujuy" title="Jujuy"   />
                                 <area shape="poly" coords="156,27,157,35,167,53,178,52,178,71,172,74,163,75,152,70,144,65,143,56,137,57,136,67,121,60,96,73,97,86,130,89,129,101,135,112,148,108,172,110,173,98,187,98,209,73,209,34,202,27,185,25,175,39,168,29" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo FP_ID?>','66','Salta')" alt="Salta" title="Salta"   />
