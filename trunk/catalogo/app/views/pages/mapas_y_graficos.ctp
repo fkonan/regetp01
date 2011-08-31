@@ -70,7 +70,11 @@ echo $html->css('catalogo.estaticas');
     }
     
     jQuery(document).ready(function(){
-        jQuery('.js-tabs-ofertas').tabs();
+        jQuery('.js-tabs-ofertas').tabs({
+            fx: { 
+            opacity: 'toggle' 
+            }
+        });
         
         $(".viewport").mapbox({mousewheel: true, layerSplit: 8});
         
