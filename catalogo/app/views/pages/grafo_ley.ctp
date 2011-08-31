@@ -17,7 +17,8 @@ echo $javascript->link('animar_cuadros');
 </style>
 <div class="grid_12">
     <div class="boxblanca boxdocs">
-        <h1>Ley de Educación Técnico Profesional</h1>
+        <h1>Las políticas para la Educación Técnico Profesional en Argentina</h1>
+        <h3>Ley de Educación Técnico Profesional</h3>
         <div>
         <!--[if !IE]>-->
           <object data="../img/grafo.svg" type="image/svg+xml"
