@@ -5,9 +5,6 @@ $this->pageTitle = "Inicio";
 ?>
 <div class="clear separador"></div> 
 
-<div class="grid_12 alpha omega" id="fechaRedesSociales">
-    <p class="fecha"> <?php echo actual_date();?></p>
-</div>
 <!--                
             INET
 -->
@@ -20,21 +17,11 @@ $this->pageTitle = "Inicio";
             </div>
 
             <p style="margin-top:-5px">
-                El Registro Federal de Instituciones de Educación Técnico Profesional (RFIETP) es la instancia de inscripción de las instituciones que emiten títulos y certificados de Educación Técnica Profesional que presentan cada una de las jurisdicciones provinciales y universidades nacionales. 
-                El  RFIETP   contiene los  datos básicos de establecimiento (nombre de la institución, dirección, localidad, departamento, teléfono, director, entre otros), e información referida sus los planes de estudio (títulos, cantidad de horas taller en la semana, cantidad de matriculados, de secciones, entre otras);
-Esta información resulta de insumo para:
-            <ul>
-                <li>
-                    Diagnosticar, planificar y llevar a cabo planes de mejora que se apliquen con prioridad a aquellas escuelas que demanden un mayor esfuerzo de reconstrucción y desarrollo; 
-                </li>
-                <li>
-                    Fortalecer a aquellas instituciones que se puedan preparar como centros de referencia en su especialidad técnica 
-                </li>
-                <li>
-                    Alcanzar en todas las instituciones incorporadas los criterios y parámetros de calidad de la educación profesional acordados por el Consejo Federal de Cultura y Educación (Ley  Nº 26.058/2005, Capitulo IV, Artículo Nº 34). 
-                </li>
-            </ul>
-                El Registro funciona entonces como insumo para la evaluación de los programas de fortalecimiento institucional que presentan las instituciones educativas al INET en el marco de los planes de mejora continua de la calidad de la educación técnico profesional del Fondo Nacional para la Educación Técnico Profesional.
+               Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
+                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+                    nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
+                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+                    nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
             </p>
 
             <div class="clear"></div>
@@ -52,8 +39,6 @@ Esta información resulta de insumo para:
 -->
 <div class="grid_3 omega">
     <div class="boxgris box_home_buscadores">
-        
-        
         <h2>Buscadores</h2>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
@@ -79,7 +64,7 @@ Esta información resulta de insumo para:
                     labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
                     nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
                 </p>
-                <ul class="ul-horizontal">
+                <ul class="ul-horizontal centrado">
                     <li><?php echo $html->link('Grafo de la ley', array('controller' => 'pages', 'action' => 'grafo_ley')); ?></li>
                 </ul>
             </div>

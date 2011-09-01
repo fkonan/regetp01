@@ -348,5 +348,9 @@ function slug($string, $replacement = '-', $length = 100) {
         $date = $week_days[$week_day_now] . ", " . $day_now . " de " . $months[$month_now] . " de " . $year_now;   
         return $date;    
     }  
+    
+    
+
+
 
 ?>
