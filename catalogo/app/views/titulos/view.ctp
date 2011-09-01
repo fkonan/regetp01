@@ -38,7 +38,7 @@ $this->pageTitle =  $titulo['Titulo']['name'];
                 } ?>
             </dd>
 
-            <dt style="width: 168px;"><?php echo ($titulo['Titulo']['marco_ref']==1)? "Especialidad con marco de referencia":"Especialidad sin marco de referencia"; ?></dt>
+            <dt style="width: 268px;"><?php echo ($titulo['Titulo']['marco_ref']==1)? "Especialidad con marco de referencia":"Especialidad sin marco de referencia"; ?></dt>
             <dd>
                 <?php
                 if($titulo['Titulo']['marco_ref'] == 1) {
