@@ -22,7 +22,9 @@
             <div class="menu_wrapper no-print"  style="z-index: 50; ">
                     <?php echo $this->element('menu');?>                
             </div>
-            
+             
         </div>
+        <span class="fecha" style="float: right; margin-top: -20px; color: white;"> <?php echo actual_date();?></span>
     </div>
+   
 </div>

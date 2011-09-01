@@ -7,30 +7,14 @@
     padding:5px;
 }
 
-.boxblanca {
-    padding:0px;
+
+.boxblanca h2{
+    text-align: center;
+    border-bottom: 1px solid #E2E2E4;
 }
 
-.boxblanca.inet h2{
-    background-color: #008EBB;
-    color:white;
-    padding: 10px;
-    margin-top:0px;
-}
 
-.boxblanca.politicas h2{
-    background-color: #949799;
-    color:white;
-    padding: 10px;
-    margin-top:0px;
-}
 
-.boxblanca.cifras h2{
-    background-color: #949799;
-    color:white;
-    padding: 10px;
-    margin-top:0px;
-}
 .box_home_buscadores {
     height: 188px;
 

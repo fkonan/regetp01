@@ -144,34 +144,40 @@ $javascript;
 
             <?php echo $cakeDebug; ?>
             
-            <div id="footer" class="no-print">
-                <div class="sponsors">
-                    <?php
-                    echo $html->link($html->image('me_trans.png', array( 'border'=> 0,'style' => 'height: 50px;')),'http://www.argentina.gov.ar/',null, null, false);
-//                    echo $html->link($html->image('links/fondoblanco/encuentro.png'),'http://www.encuentro.gov.ar/',null, null, false);
-//                    echo $html->link($html->image('links/fondoblanco/pakapaka.png'),'http://www.pakapaka.gov.ar/',null, null, false);
-//                    echo $html->link($html->image('links/fondoblanco/educar.png'),'http://www.educ.ar/',null, null, false);
-//                    echo $html->link($html->image('links/fondoblanco/infd.png'),'http://www.me.gov.ar/infod/',null, null, false);
-//                    echo $html->link($html->image('links/fondoblanco/biblo.png'),'http://www.bnm.me.gov.ar/',null, null, false);
-//                    echo $html->link($html->image('links/fondoblanco/logo_mercosur.png'),'http://www.sic.inep.gov.br/',null, null, false);
-//                    echo $html->link($html->image('links/fondoblanco/bicentenario.png'),'http://www.bicentenario.argentina.ar/',null, null, false);
-//                    echo $html->link($html->image('links/fondoblanco/argentina.png'),'http://www.argentina.ar/',null, null, false);
-//                    echo $html->link($html->image('links/fondoblanco/argentinagovar.png'),'http://www.argentina.gov.ar/',null, null, false);
-                    
-                    ?>
-                </div>
+            <div id="footer" class="no-print">                
+                <div class="container_12">
+                    <div class="clear separador"></div>
 
-                <p>
-                    
-                    <b><i>Instituto Nacional de Educación Tecnológica</i></b>
-                    <br />
-                    Saavedra 789 C1229ACE | (011) 4129-2000
-                    <br /><br />
-                    <?php echo $html->link('Mapa del sitio', array('controller' => 'pages', 'action' => 'mapa_del_sitio')); ?>
-                     - 
-                    <?php echo $html->link('Contacto', array('controller' => 'correos', 'action' => 'contacto')); ?>
-                </p>
-                <div class="clear"></div>
+                    <div class="grid_6">
+                        <div class="clear separador"></div>
+                        <b><i>Instituto Nacional de Educación Tecnológica</i></b>
+                        <br />
+                        Saavedra 789 C1229ACE | (011) 4129-2000
+                        <br /><br />
+                        <?php echo $html->link('Mapa del sitio', array('controller' => 'pages', 'action' => 'mapa_del_sitio')); ?>
+                         - 
+                        <?php echo $html->link('Contacto', array('controller' => 'correos', 'action' => 'contacto')); ?>
+                    </div>
+
+
+                    <div class="sponsors grid_6">
+                        <?php
+                        echo $html->link($html->image('me_trans.png', array( 'border'=> 0,'style' => 'height: 50px;')),'http://www.me.gov.ar/',null, null, false);
+    //                    echo $html->link($html->image('links/fondoblanco/encuentro.png'),'http://www.encuentro.gov.ar/',null, null, false);
+    //                    echo $html->link($html->image('links/fondoblanco/pakapaka.png'),'http://www.pakapaka.gov.ar/',null, null, false);
+    //                    echo $html->link($html->image('links/fondoblanco/educar.png'),'http://www.educ.ar/',null, null, false);
+    //                    echo $html->link($html->image('links/fondoblanco/infd.png'),'http://www.me.gov.ar/infod/',null, null, false);
+    //                    echo $html->link($html->image('links/fondoblanco/biblo.png'),'http://www.bnm.me.gov.ar/',null, null, false);
+    //                    echo $html->link($html->image('links/fondoblanco/logo_mercosur.png'),'http://www.sic.inep.gov.br/',null, null, false);
+    //                    echo $html->link($html->image('links/fondoblanco/bicentenario.png'),'http://www.bicentenario.argentina.ar/',null, null, false);
+    //                    echo $html->link($html->image('links/fondoblanco/argentina.png'),'http://www.argentina.ar/',null, null, false);
+    //                    echo $html->link($html->image('links/fondoblanco/argentinagovar.png'),'http://www.argentina.gov.ar/',null, null, false);
+
+                        ?>
+                    </div>
+
+                </div>
+                <div class="clear separador"></div>
             </div>
             
         </div>
