@@ -49,6 +49,10 @@ function currentPara($view, $donde){
                                                 'action'    => 'contacto'),
                                                 array('class'=>'menu-item'))?>
         </li>
+        
+        <li>
+            <?php echo $html->link('Doc Residual', '/pages/doc_residual/introduccion', array('class'=>'menu-item')); ?>
+        </li>
 </ul>
 
 
