@@ -30,6 +30,7 @@ $this->pageTitle= 'Automotríz';
 	                                       'link'=>'/pages/flias/mecanica_automotriz')
 	        );
 	        echo $this->element('foro', $vops);
-		?>
+                
+                ?>
     </div>
 </div>

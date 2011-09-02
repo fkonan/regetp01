@@ -1,7 +1,8 @@
+<h2><?php echo "Sector $foroName"; ?></h2>
 <div style="padding-bottom: 10px;">
     <div id="<?php echo $foroName; ?>" class=""></div>
 
-    <h3>Foro del Sector <?php echo $foroName; ?></h3>
+    <h3>Foro del Sector</h3>
     <?php
     $i = 0;
     if (!empty($participantes) && count($participantes) > 0) {?>
@@ -33,3 +34,17 @@
         <?php endif ?>
     </p>
 </div>    
+
+<?php 
+//
+// En la carpeta /webroot/files/pdfs/nombre_del_sector si hay archivos, los ennumero
+
+$carpetaDeEsteSector = 'files/pdfs/'.basename($this->here);
+debug( $fileStructureWritter->tieneArchivos( $carpetaDeEsteSector ) );
+if ($fileStructureWritter->tieneArchivos( $carpetaDeEsteSector )) {
+?>
+    <h3>Marcos de Referencia</h3>
+    <?php
+    $fileStructureWritter->write($carpetaDeEsteSector );
+}
+?>

@@ -35,7 +35,7 @@
  * @subpackage    cake.app
  */
 class AppController extends Controller {
-	var $helpers = array('Html', 'Form', 'Ajax',  'Javascript', 'HideMail');
+	var $helpers = array('Html', 'Form', 'Ajax',  'Javascript', 'HideMail', 'FileStructureWritter');
         
         var $components = array('Auth','RequestHandler');
         
