@@ -9,6 +9,7 @@
 	        <li>
 	            Informaci&oacute;n sectorial
 	            <ul>
+                        <li><?php echo $html->link('Aeronáutica', array('controller' => 'pages', 'action' => 'display', 'sectores/aeronautica'));?></li>
                         <li><?php echo $html->link('Agropecuaria', array('controller' => 'pages', 'action' => 'display', 'sectores/agropecuaria'));?></li>
 	                <li><?php echo $html->link('Automotriz', array('controller' => 'pages', 'action' => 'display', 'sectores/automotriz'));?></li>
                         <li><?php echo $html->link('Construcciones', array('controller' => 'pages', 'action' => 'display', 'sectores/construcciones'));?></li>
