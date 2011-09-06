@@ -33,14 +33,6 @@ echo $javascript->link('animar_cuadros');
         </div>
         <div id="descripcion"></div>
 
-        <h3>Registro Federal de Instituciones de Educación Técnico Profesional </h3>
-    El Registro Federal de Instituciones de Educación Técnico Profesional (RFIETP) es la instancia de inscripción de las instituciones que emiten títulos y certificados de Educación Técnica Profesional que presentan cada una de las jurisdicciones provinciales y universidades nacionales. El  RFIETP   contiene los  datos básicos de establecimiento (nombre de la institución, dirección, localidad, departamento, teléfono, director, entre otros), e información referida sus los planes de estudio (títulos, cantidad de horas taller en la semana, cantidad de matriculados, de secciones, entre otras);
-Esta información resulta de insumo para:
-        <ol>
-            <li>Diagnosticar, planificar y llevar a cabo planes de mejora que se apliquen con prioridad a aquellas escuelas que demanden un mayor esfuerzo de reconstrucción y desarrollo</li>
-            <li>Fortalecer a aquellas instituciones que se puedan preparar como centros de referencia en su especialidad técnica y </li>
-            <li>Alcanzar en todas las instituciones incorporadas los criterios y parámetros de calidad de la educación profesional acordados por el Consejo Federal de Cultura y Educación (Ley  Nº 26.058/2005, Capitulo IV, Artículo Nº 34). El Registro funciona entonces como insumo para la evaluación de los programas de fortalecimiento institucional que presentan las instituciones educativas al INET en el marco de los planes de mejora continua de la calidad de la educación técnico profesional del Fondo Nacional para la Educación Técnico Profesional</li>
-        </ol>
     </div>
 </div>
 
@@ -52,7 +44,7 @@ Esta información resulta de insumo para:
     var nodos = [
       {id:"g_bases", texto:lorem},
       {id:"g_homologacion", texto:lorem},
-      {id:"g_registro", texto:lorem},
+      {id:"g_registro", titulo:"Registro Federal de Instituciones de Educación Técnico Profesional", texto:"El Registro Federal de Instituciones de Educación Técnico Profesional (RFIETP) es la instancia de inscripción de las instituciones que emiten títulos y certificados de Educación Técnica Profesional que presentan cada una de las jurisdicciones provinciales y universidades nacionales. El  RFIETP   contiene los  datos básicos de establecimiento (nombre de la institución, dirección, localidad, departamento, teléfono, director, entre otros), e información referida sus los planes de estudio (títulos, cantidad de horas taller en la semana, cantidad de matriculados, de secciones, entre otras); Esta información resulta de insumo para:        <ol>            <li>Diagnosticar, planificar y llevar a cabo planes de mejora que se apliquen con prioridad a aquellas escuelas que demanden un mayor esfuerzo de reconstrucción y desarrollo</li><li>Fortalecer a aquellas instituciones que se puedan preparar como centros de referencia en su especialidad técnica y </li><li>Alcanzar en todas las instituciones incorporadas los criterios y parámetros de calidad de la educación profesional acordados por el Consejo Federal de Cultura y Educación (Ley  Nº 26.058/2005, Capitulo IV, Artículo Nº 34). El Registro funciona entonces como insumo para la evaluación de los programas de fortalecimiento institucional que presentan las instituciones educativas al INET en el marco de los planes de mejora continua de la calidad de la educación técnico profesional del Fondo Nacional para la Educación Técnico Profesional</li></ol>"},
       {id:"g_catalogo", texto:lorem},
       {id:"g_fortalecimiento", texto:lorem},
       {id:"g_plan_de_mejoras", texto:lorem},
