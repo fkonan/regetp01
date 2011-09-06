@@ -9,5 +9,8 @@ $this->pageTitle= 'Aeronáutica';
     <div class="boxblanca boxdocs">
         <h2>Sector Aeronáutico</h2>
         
+        <?php echo $this->element('marcos_ref')?>
     </div>
+    
+    
 </div>

@@ -29,6 +29,18 @@ $paginator->options(array( 'url' => $this->passedArgs,
     </div>
     <? if (!empty($titulos)) {?>
     <ul id="items" class="items">
+        <li>
+            <div>
+                <span class="items-oferta" style="color: #b1cc2f">
+                        Nivel
+                </span>
+                <span class="items-nombre" style="color: #b1cc2f">
+                        Nombre del Título o Certificado
+                </span>
+            <div class="clear"></div>
+            </div>
+        </li>
+        
         <?php
         $i = 0;
         foreach ($titulos as $titulo):
