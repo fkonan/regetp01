@@ -19,6 +19,7 @@ class TitulosController extends AppController {
         );
 
     function search($oferta_id = 0) {
+        $localidad = "";
         $this->pageTitle = "Buscador de Títulos";
         
          // preparo los GET params que vienen del formulario enviando type GET
@@ -38,6 +39,14 @@ class TitulosController extends AppController {
         $vino_formulario = (!empty($this->data) || (!empty($this->passedArgs)) || !empty($getParams)) ? true : false;
 
         if ($vino_formulario){
+            
+            if(!empty($getParams['localidad_id'])) {
+                $localidad = $this->Titulo->Plan->Instit->Localidad->find("first", 
+                        array(
+                            'conditions'=> array('Localidad.id'=>$getParams['localidad_id']),
+                            'recursive'=>-1));
+            }
+            
             $url_conditions = array();
         
                 //      Nombre del titulo
@@ -81,10 +90,9 @@ class TitulosController extends AppController {
                  
                  //      Localidad
                  $ops[] = array(
-                     'model' => 'Localidad',
-                     'field' => 'name',
-                     'friendlyName' => 'Localidad',
-                     );
+                    'model' => 'Instit',
+                    'field' => 'localidad_id',
+                    'friendlyName' => 'Localidad');
                  
                  //      Gestion
                  $ops[] = array(
@@ -127,6 +135,7 @@ class TitulosController extends AppController {
 
         $this->Titulo->recursive = 0;
         $this->set('titulos', $this->paginate());
+        $this->set('localidad', $localidad);
         $this->set(compact('ofertas', 'sectores', 'subsectores', 'jurisdicciones', 
                 'departamentos', 'bySession','bloquearOferta'));
         
@@ -675,10 +684,6 @@ class TitulosController extends AppController {
         $this->set('ofertas', $this->Titulo->Oferta->find('list'));
         $this->set('gestiones', $this->Titulo->Plan->Instit->Gestion->find('list'));
         $this->set('jurisdicciones', $this->Titulo->Plan->Instit->Jurisdiccion->find('list', array('order' => 'Jurisdiccion.name')));
-    }
-
-    function que_donde() {
-
     }
 
 }

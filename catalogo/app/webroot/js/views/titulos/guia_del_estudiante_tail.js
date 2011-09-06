@@ -178,13 +178,18 @@
         }
 
         var params = filtrosForm.serialize() + "&" + institsForm.serialize();
-        $.post(
+        var postvar = $.post(
                 url,
                 params,
                 __meterInstitsEnTemplate,
                 'json'
             );
 
+        postvar.error(function (XMLHttpRequest, textStatus, errorThrown) {
+            console.debug(XMLHttpRequest);
+            console.debug(textStatus);
+            console.debug(errorThrown);
+        });
         return false;
     }
     
