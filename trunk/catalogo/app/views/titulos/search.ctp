@@ -2,11 +2,14 @@
     echo $javascript->link(array(
     'jquery.autocomplete',
     'jquery.loadmask.min',
+    'views/titulos/search'
     ));
     echo $html->css(array('jquery.loadmask', 'jquery.autocomplete', 'catalogo.advanced_search', 'catalogo.titulos'), null, array(), false);
 ?>
 <script type="text/javascript">
-//    init('<?echo $html->url(array('controller'=>'localidades','action'=>'ajax_search_localidades'));?>');
+    $(document).ready(function(){
+        init__SearchFormJs("<? echo $html->url(array('controller' => 'localidades', 'action' => 'ajax_search_localidades')); ?>");
+    });
 </script>
 <div class="grid_12 titulos search">
     
@@ -69,9 +72,20 @@
                 'label'=>'Departamento', 
                 'empty' => 'Seleccione'));
             
-            echo $form->input('Localidad.name', array('label'=>'Localidad', 'empty' => 'Seleccione'));
-           
+            if($localidad != null){
+               $localidad_name =  $localidad['Localidad']['name'];
+               $localidad_id = $localidad['Localidad']['id'];
+            }
+            else{
+                $localidad_name =  "";
+                $localidad_id = "";
+            }
+
+            echo $form->input('Localidad.name', array('label' => 'Localidad','value'=>$localidad_name));
+
             ?>
+            <input id="hiddenLocId" name="localidad_id" type="hidden" value="<?php echo $localidad_id?>" />
+            
             <div class="clear" style="height:23px;"></div>
             
             <?php
