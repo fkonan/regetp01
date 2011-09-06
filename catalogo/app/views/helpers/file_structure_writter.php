@@ -86,7 +86,7 @@ class FileStructureWritterHelper extends AppHelper {
                         $arraux = array();
                         $arraux[$k] = $folder;
 
-                        echo "<li>".$k;
+                        echo "<li>".utf8_decode($k);
 
                         $this->getFileStructure($arraux);
                     }
