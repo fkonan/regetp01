@@ -101,12 +101,10 @@ echo $html->css('catalogo.estaticas');
          
     })
 </script>
-
-<div class="clear separador"></div>
-
 <div class="grid_12">
-    <div class="boxblanca">
-        <h1>La Educación Técnico Profesional en cifras</h1>
+    <h1>La Educación Técnico Profesional en cifras</h1>
+
+    <div class="boxblanca">       
         <div>
             <div class="js-tabs-ofertas tabs">
                 <ul id="ofertas-tabs" class="horizontal-shadetabs">
@@ -199,7 +197,7 @@ echo $html->css('catalogo.estaticas');
                         <br/>
                         <h3>Gráfico de instituciones por sector</h3>
                         <div>
-                            <? echo $html->image('home/graficoNivelSuperior.png', array('class' => 'grafico_barras docimg', 'onclick' => 'viewGrafico(this.src, "Nivel Superior", 655)', 'style' => 'width:307px; cursor:pointer;')); ?>
+                            <? echo $html->image('home/graficoNivelSuperior.png', array('class' => 'grafico_barras docimg', 'onclick' => 'viewGrafico(this.src, "Nivel Superior", 670)', 'style' => 'width:307px; cursor:pointer;')); ?>
                         </div>
                         <br/>
                         <h3>Buscador</h3>
@@ -298,7 +296,7 @@ echo $html->css('catalogo.estaticas');
                         <br/>
                         <h3>Gráfico de instituciones por sector</h3>
                         <div>
-                            <? echo $html->image('home/graficoNivelSecundario.png', array('class' => 'ver_grafico_barras docimg', 'onclick' => 'viewGrafico(this.src, "Nivel Secundario", 655)', 'style' => 'width:307px; cursor:pointer;')); ?>
+                            <? echo $html->image('home/graficoNivelSecundario.png', array('class' => 'ver_grafico_barras docimg', 'onclick' => 'viewGrafico(this.src, "Nivel Secundario", 670)', 'style' => 'width:307px; cursor:pointer;')); ?>
                         </div>
                         <br/>
                         <h3>Buscador</h3>

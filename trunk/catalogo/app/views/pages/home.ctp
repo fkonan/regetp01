@@ -16,7 +16,7 @@ $this->pageTitle = "Inicio";
             <?php echo $html->image('material/soldadura.jpg', array('style' => "float: left; height: 120px;" )) ?> 
             </div>
 
-            <p style="margin-top:-5px">
+            <p style="margin-top:0px">
                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
                     labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
                     nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
@@ -26,7 +26,7 @@ $this->pageTitle = "Inicio";
 
             <div class="clear"></div>
 
-            <ul class="ul-horizontal centrado">
+            <ul class="ul-horizontal">
                 <li><?php echo $html->link('Ver más', array('controller' => 'pages', 'action' => 'el_inet')); ?></li>
             </ul>
         </div>
@@ -64,7 +64,7 @@ $this->pageTitle = "Inicio";
                     labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
                     nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
                 </p>
-                <ul class="ul-horizontal centrado">
+                <ul class="ul-horizontal">
                     <li><?php echo $html->link('Grafo de la ley', array('controller' => 'pages', 'action' => 'grafo_ley')); ?></li>
                 </ul>
             </div>
@@ -85,7 +85,7 @@ $this->pageTitle = "Inicio";
                     nisi ut aliquip ex ea commodo consequat. 
                 </p>
                 <div class="clear"></div>
-                <ul class="ul-horizontal centrado">
+                <ul class="ul-horizontal">
                     <li><?php echo $html->link('Ver más', array('controller' => 'pages', 'action' => 'mapas_y_graficos')); ?></li>
                 </ul>
             </div>
