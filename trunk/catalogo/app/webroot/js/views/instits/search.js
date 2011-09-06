@@ -1,5 +1,12 @@
 (function($){
     $(document).ready(function(){
+
+        if($('#jurisdiccion_id').val() != 0){
+            $depto_aux = $('#departamento_id').val();
+            reloadCombo($('#jurisdiccion_id').val(), $depto_aux);
+
+        }
+        
         $('#jurisdiccion_id').change(function(){
             reloadCombo($(this).val());
             $("#ajax_indicator").hide();
@@ -17,14 +24,7 @@
             if($("#LocalidadName").val().length == 0){
                 $("#hiddenLocId").val('');
             }
-        });
-        
-        if($('#jurisdiccion_id').val() != 0){
-            $depto_aux = $('#departamento_id').val();
-            reloadCombo($('#jurisdiccion_id').val(), $depto_aux);
-            
-        }
-        
+        });       
 
     });
     
