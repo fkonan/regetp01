@@ -32,7 +32,5 @@ $this->pageTitle= 'Automotríz';
 	        echo $this->element('foro', $vops);
                 
                 ?>
-        
-        <?php echo $this->element('marcos_ref')?>
     </div>
 </div>
