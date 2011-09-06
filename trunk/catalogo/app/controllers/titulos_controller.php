@@ -40,6 +40,10 @@ class TitulosController extends AppController {
 
         if ($vino_formulario){
             
+            if(!empty($getParams['jurisdiccion_id'])) {
+                $this->Session->write($this->sesNames['jurisdiccion'], $getParams['jurisdiccion_id']);
+            }
+            
             if(!empty($getParams['localidad_id'])) {
                 $localidad = $this->Titulo->Plan->Instit->Localidad->find("first", 
                         array(
