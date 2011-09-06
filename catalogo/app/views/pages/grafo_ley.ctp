@@ -1,4 +1,3 @@
-<div class="clear separador"></div>
 <?php 
 echo $javascript->link('animar_cuadros');
 ?>
@@ -16,8 +15,8 @@ echo $javascript->link('animar_cuadros');
   }
 </style>
 <div class="grid_12">
+    <h1>Las políticas para la Educación Técnico Profesional en Argentina</h1>
     <div class="boxblanca boxdocs">
-        <h1>Las políticas para la Educación Técnico Profesional en Argentina</h1>
         <h3>Ley de Educación Técnico Profesional</h3>
         <div>
         <!--[if !IE]>-->

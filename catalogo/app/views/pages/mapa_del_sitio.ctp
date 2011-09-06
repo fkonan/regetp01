@@ -1,9 +1,7 @@
-<div class="clear separador"></div>
-
 <div class="grid_12">
-    <div class="boxblanca boxdocs">
-        <h1>Mapa del sitio</h1>
+    <h1>Mapa del sitio</h1>
 
+    <div class="boxblanca boxdocs"> 
         <ol>
             <li><?php echo $html->link('Inicio', array('controller' => 'pages', 'action' => 'home')); ?></li>
             <li><?php echo $html->link('El Instituto Nacional de Educación Tecnológica', array('controller' => 'pages', 'action' => 'el_inet')); ?>

@@ -1,4 +1,3 @@
-<div class="clear separador"></div>
 <?php 
 echo $javascript->link('animar_cuadros');
 ?>
@@ -16,9 +15,9 @@ echo $javascript->link('animar_cuadros');
   }
 </style>
 <div class="grid_12">
+    <h1>El Instituto Nacional de Educación Tecnológica</h1>
     <div class="boxblanca boxdocs">
-        <h1>El Instituto Nacional de Educación Tecnológica</h1>
-        
+            
         <h3>Estructura</h3>
         <div>
         <!--[if !IE]>-->
