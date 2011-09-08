@@ -33,7 +33,8 @@ class FileStructureWritterHelper extends AppHelper {
     }
     
     function tieneArchivos($carpeta){
-        return count($this->getFiles($carpeta)) > 0;
+        $ff = array_pop( $this->getFiles($carpeta) );
+        return (!empty($ff) && ( count($ff['files']) > 0 || count($ff['folders']) > 0 ) ) ;
     }
     
     function getFiles($carpeta, &$vArchivos = array()){
