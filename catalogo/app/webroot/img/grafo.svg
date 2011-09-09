@@ -14,7 +14,7 @@
    width="686.88324"
    height="501.69452"
    id="svg2"
-   inkscape:version="0.47 r22583"
+   inkscape:version="0.48.1 r9760"
    sodipodi:docname="grafo.svg">
   <metadata
      id="metadata3421">
@@ -24,7 +24,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -37,15 +37,15 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1280"
-     inkscape:window-height="947"
+     inkscape:window-width="1680"
+     inkscape:window-height="1002"
      id="namedview3419"
      showgrid="false"
      inkscape:zoom="1.18"
-     inkscape:cx="257.65431"
+     inkscape:cx="233.96833"
      inkscape:cy="245.10919"
-     inkscape:window-x="0"
-     inkscape:window-y="25"
+     inkscape:window-x="1023"
+     inkscape:window-y="24"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg2"
      showguides="true"
@@ -645,37 +645,38 @@
        sodipodi:cy="56.779659"
        sodipodi:cx="-327.96609"
        id="path3446"
-       style="fill:url(#linearGradient4220);fill-opacity:1;stroke:#002f64;stroke-width:6.63070869;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       style="fill:url(#linearGradient4220);fill-opacity:1;stroke:#002f64;stroke-width:2.6522834;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        sodipodi:type="arc" />
     <text
        xml:space="preserve"
-       style="font-size:15.0813446px;font-style:normal;font-weight:normal;text-align:start;text-anchor:start;fill:#002f64;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="304.242"
-       y="62.791973"
-       id="text4098"><tspan
+       style="font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#002f64;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="301.69962"
+       y="67.029259"
+       id="text4098"
+       sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="304.242"
-         y="62.791973"
+         x="301.69962"
+         y="67.029259"
          id="tspan4100"><tspan
-           x="304.242"
-           y="62.791973"
-           style="font-size:10.55694103px;text-align:start;text-anchor:start;fill:#002f64"
+           x="301.69962"
+           y="67.029259"
+           style="font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#002f64;font-family:Sans;-inkscape-font-specification:Sans"
            id="tspan4102">Base de Datos </tspan></tspan><tspan
          sodipodi:role="line"
-         x="304.13892"
-         y="75.988152"
+         x="301.59653"
+         y="80.225441"
          id="tspan4104"><tspan
-           x="304.13892"
-           y="75.988152"
-           style="font-size:10.55694103px;text-align:start;text-anchor:start;fill:#002f64"
+           x="301.59653"
+           y="80.225441"
+           style="font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#002f64;font-family:Sans;-inkscape-font-specification:Sans"
            id="tspan4106">Institucionales </tspan></tspan><tspan
          sodipodi:role="line"
-         x="324.37646"
-         y="89.184326"
+         x="321.83408"
+         y="93.421616"
          id="tspan4108"><tspan
-           x="324.37646"
-           y="89.184326"
-           style="font-size:10.55694103px;text-align:start;text-anchor:start;fill:#002f64"
+           x="321.83408"
+           y="93.421616"
+           style="font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#002f64;font-family:Sans;-inkscape-font-specification:Sans"
            id="tspan4110">de ETP</tspan></tspan></text>
   </g>
   <g
@@ -689,21 +690,22 @@
        sodipodi:cy="56.779659"
        sodipodi:cx="-327.96609"
        id="path3446-6"
-       style="fill:url(#linearGradient4750);fill-opacity:1;stroke:#002f64;stroke-width:5.42857933;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       style="fill:url(#linearGradient4750);fill-opacity:1;stroke:#002f64;stroke-width:2.17143179;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        sodipodi:type="arc" />
     <text
        transform="scale(0.99904638,1.0009545)"
        id="text4070"
        y="192.36658"
        x="146.66147"
-       style="font-size:12.06507492000000070px;font-style:normal;font-weight:bold;text-align:start;text-anchor:start;fill:#002f64;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold"
-       xml:space="preserve"><tspan
+       style="font-size:12.00000018px;font-style:normal;font-weight:normal;text-align:start;text-anchor:start;fill:#002f64;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans;font-stretch:normal;font-variant:normal;writing-mode:lr;line-height:125%"
+       xml:space="preserve"
+       sodipodi:linespacing="125%"><tspan
          id="tspan4072"
          y="192.36658"
          x="146.66147"
          sodipodi:role="line"><tspan
            id="tspan4074"
-           style="fill:#002f64;-inkscape-font-specification:Bitstream Vera Sans Bold;text-anchor:start;text-align:start"
+           style="text-align:start;text-anchor:start;fill:#002f64;-inkscape-font-specification:Sans;font-family:Sans;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:12.00000018px;writing-mode:lr;line-height:125%"
            y="192.36658"
            x="146.66147">Procesos De </tspan></tspan><tspan
          id="tspan4076"
@@ -711,7 +713,7 @@
          x="140.03981"
          sodipodi:role="line"><tspan
            id="tspan4078"
-           style="fill:#002f64;-inkscape-font-specification:Bitstream Vera Sans Bold;text-anchor:start;text-align:start"
+           style="text-align:start;text-anchor:start;fill:#002f64;-inkscape-font-specification:Sans;font-family:Sans;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:12.00000018px;writing-mode:lr;line-height:125%"
            y="207.44791"
            x="140.03981">Homologación</tspan></tspan></text>
   </g>
@@ -726,47 +728,52 @@
        sodipodi:cy="56.779659"
        sodipodi:cx="-327.96609"
        id="path3446-6-9"
-       style="fill:url(#linearGradient4752);fill-opacity:1;stroke:#002f64;stroke-width:5.42857933;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       style="fill:url(#linearGradient4752);fill-opacity:1;stroke:#002f64;stroke-width:2.17143179;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        sodipodi:type="arc" />
     <text
-       transform="scale(0.99904638,1.0009545)"
+       transform="scale(0.9990464,1.0009545)"
        id="text4080"
-       y="178.67293"
-       x="314.39963"
-       style="font-size:12.06507492000000070px;font-style:normal;font-weight:bold;text-align:start;text-anchor:start;fill:#002f64;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold"
-       xml:space="preserve"><tspan
+       y="181.21288"
+       x="321.18576"
+       style="font-size:12.06507492px;font-style:normal;font-weight:bold;text-align:start;line-height:125%;text-anchor:start;fill:#002f64;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       xml:space="preserve"
+       sodipodi:linespacing="125%"><tspan
          id="tspan4082"
-         y="178.67293"
-         x="314.39963"
-         sodipodi:role="line"><tspan
+         y="181.21288"
+         x="321.18576"
+         sodipodi:role="line"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Sans;-inkscape-font-specification:Sans"><tspan
            id="tspan4084"
-           style="fill:#002f64;-inkscape-font-specification:Bitstream Vera Sans Bold;text-anchor:start;text-align:start"
-           y="178.67293"
-           x="314.39963">Registro </tspan></tspan><tspan
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#002f64;font-family:Sans;-inkscape-font-specification:Sans"
+           y="181.21288"
+           x="321.18576">Registro </tspan></tspan><tspan
          id="tspan4086"
-         y="193.75426"
-         x="307.11816"
-         sodipodi:role="line"><tspan
+         y="196.2942"
+         x="313.9043"
+         sodipodi:role="line"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Sans;-inkscape-font-specification:Sans"><tspan
            id="tspan4088"
-           style="fill:#002f64;-inkscape-font-specification:Bitstream Vera Sans Bold;text-anchor:start;text-align:start"
-           y="193.75426"
-           x="307.11816">Federal de </tspan></tspan><tspan
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#002f64;font-family:Sans;-inkscape-font-specification:Sans"
+           y="196.2942"
+           x="313.9043">Federal de </tspan></tspan><tspan
          id="tspan4090"
-         y="208.8356"
-         x="299.05905"
-         sodipodi:role="line"><tspan
+         y="211.37555"
+         x="305.84518"
+         sodipodi:role="line"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Sans;-inkscape-font-specification:Sans"><tspan
            id="tspan4092"
-           style="fill:#002f64;-inkscape-font-specification:Bitstream Vera Sans Bold;text-anchor:start;text-align:start"
-           y="208.8356"
-           x="299.05905">Instituciones </tspan></tspan><tspan
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#002f64;font-family:Sans;-inkscape-font-specification:Sans"
+           y="211.37555"
+           x="305.84518">Instituciones </tspan></tspan><tspan
          id="tspan4094"
-         y="223.91695"
-         x="319.97266"
-         sodipodi:role="line"><tspan
+         y="226.45689"
+         x="326.75879"
+         sodipodi:role="line"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Sans;-inkscape-font-specification:Sans"><tspan
            id="tspan4096"
-           style="fill:#002f64;-inkscape-font-specification:Bitstream Vera Sans Bold;text-anchor:start;text-align:start"
-           y="223.91695"
-           x="319.97266">de ETP</tspan></tspan></text>
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#002f64;font-family:Sans;-inkscape-font-specification:Sans"
+           y="226.45689"
+           x="326.75879">de ETP</tspan></tspan></text>
   </g>
   <g
      id="g_catalogo"
@@ -779,31 +786,32 @@
        sodipodi:cy="56.779659"
        sodipodi:cx="-327.96609"
        id="path3446-6-2"
-       style="fill:url(#linearGradient4754);fill-opacity:1;stroke:#002f64;stroke-width:5.42857933;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       style="fill:url(#linearGradient4754);fill-opacity:1;stroke:#002f64;stroke-width:2.17143179;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        sodipodi:type="arc" />
     <text
-       transform="scale(0.99904638,1.0009545)"
+       transform="scale(0.9990464,1.0009545)"
        id="text4112"
-       y="195.04948"
-       x="468.52179"
-       style="font-size:12.06507492000000070px;font-style:normal;font-weight:bold;text-align:start;text-anchor:start;fill:#002f64;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold"
-       xml:space="preserve"><tspan
+       y="196.74278"
+       x="472.76312"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#002f64;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       xml:space="preserve"
+       sodipodi:linespacing="125%"><tspan
          id="tspan4114"
-         y="195.04948"
-         x="468.52179"
+         y="196.74278"
+         x="472.76312"
          sodipodi:role="line"><tspan
            id="tspan4116"
-           style="fill:#002f64;-inkscape-font-specification:Bitstream Vera Sans Bold;text-anchor:start;text-align:start"
-           y="195.04948"
-           x="468.52179">Catálogo </tspan></tspan><tspan
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#002f64;font-family:Sans;-inkscape-font-specification:Sans"
+           y="196.74278"
+           x="472.76312">Catálogo </tspan></tspan><tspan
          id="tspan4118"
-         y="210.13083"
-         x="469.29941"
+         y="211.82413"
+         x="473.54074"
          sodipodi:role="line"><tspan
            id="tspan4120"
-           style="fill:#002f64;-inkscape-font-specification:Bitstream Vera Sans Bold;text-anchor:start;text-align:start"
-           y="210.13083"
-           x="469.29941">Nacional</tspan></tspan></text>
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#002f64;font-family:Sans;-inkscape-font-specification:Sans"
+           y="211.82413"
+           x="473.54074">Nacional</tspan></tspan></text>
   </g>
   <g
      id="g_plan_de_mejoras"
@@ -816,30 +824,31 @@
        sodipodi:cy="56.779659"
        sodipodi:cx="-327.96609"
        id="path3446-60"
-       style="fill:url(#linearGradient4762);fill-opacity:1;stroke:#642300;stroke-width:6.63070869;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       style="fill:url(#linearGradient4762);fill-opacity:1;stroke:#642300;stroke-width:2.6522834;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        sodipodi:type="arc" />
     <text
        id="text4042"
        y="343.4906"
        x="248.26126"
        style="font-size:15.0813446px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#642300;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       xml:space="preserve"><tspan
-         style="text-anchor:start;text-align:start"
+       xml:space="preserve"
+       sodipodi:linespacing="125%"><tspan
+         style="text-anchor:start;text-align:start;-inkscape-font-specification:Sans;font-family:Sans;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:10px;writing-mode:lr;line-height:125%"
          id="tspan4044"
          y="343.4906"
          x="248.26126"
          sodipodi:role="line"><tspan
            id="tspan4046"
-           style="font-size:10.55694103000000084px;fill:#642300;text-anchor:start;text-align:start"
+           style="font-size:10px;fill:#642300;text-anchor:start;text-align:start;-inkscape-font-specification:Sans;font-family:Sans;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;writing-mode:lr;line-height:125%"
            y="343.4906"
            x="248.26126">Plan de </tspan></tspan><tspan
-         style="text-anchor:start;text-align:start"
+         style="text-anchor:start;text-align:start;-inkscape-font-specification:Sans;font-family:Sans;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:10px;writing-mode:lr;line-height:125%"
          id="tspan4048"
          y="356.6868"
          x="247.1169"
          sodipodi:role="line"><tspan
            id="tspan4050"
-           style="font-size:10.55694103000000084px;fill:#642300;text-anchor:start;text-align:start"
+           style="font-size:10px;fill:#642300;text-anchor:start;text-align:start;-inkscape-font-specification:Sans;font-family:Sans;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;writing-mode:lr;line-height:125%"
            y="356.6868"
            x="247.1169">Mejoras</tspan></tspan></text>
   </g>
@@ -854,7 +863,7 @@
        sodipodi:cy="56.779659"
        sodipodi:cx="-327.96609"
        id="path3446-0"
-       style="fill:url(#linearGradient4760);fill-opacity:1;stroke:#642300;stroke-width:6.63070869;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       style="fill:url(#linearGradient4760);fill-opacity:1;stroke:#642300;stroke-width:2.6522834;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        sodipodi:type="arc" />
     <text
        id="text4036"
@@ -883,20 +892,20 @@
        sodipodi:cy="56.779659"
        sodipodi:cx="-327.96609"
        id="path3446-60-0"
-       style="fill:url(#linearGradient4758);fill-opacity:1;stroke:#17391b;stroke-width:6.63070869;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       style="fill:url(#linearGradient4758);fill-opacity:1;stroke:#17391b;stroke-width:2.6522834;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        sodipodi:type="arc" />
     <text
        id="text4052"
        y="292.52231"
        x="36.290306"
-       style="font-size:15.08134459999999955px;font-style:normal;font-weight:normal;text-align:start;text-anchor:start;fill:#17391b;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       style="font-size:15.08134459999999955px;font-style:normal;font-weight:normal;text-align:start;text-anchor:start;fill:#000d00;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
          id="tspan4054"
          y="292.52231"
          x="36.290306"
          sodipodi:role="line"><tspan
            id="tspan4056"
-           style="font-size:9.04880713999999919px;fill:#17391b;text-anchor:start;text-align:start"
+           style="font-size:9.04880713999999919px;fill:#000d00;text-anchor:start;text-align:start;fill-opacity:1"
            y="292.52231"
            x="36.290306">Fortalecimiento </tspan></tspan><tspan
          id="tspan4058"
@@ -904,7 +913,7 @@
          x="37.465588"
          sodipodi:role="line"><tspan
            id="tspan4060"
-           style="font-size:9.04880713999999919px;fill:#17391b;text-anchor:start;text-align:start"
+           style="font-size:9.04880713999999919px;fill:#000d00;text-anchor:start;text-align:start;fill-opacity:1"
            y="303.83331"
            x="37.465588">de la Gestión a </tspan></tspan><tspan
          id="tspan4062"
@@ -912,7 +921,7 @@
          x="35.592205"
          sodipodi:role="line"><tspan
            id="tspan4064"
-           style="font-size:9.04880713999999919px;fill:#17391b;text-anchor:start;text-align:start"
+           style="font-size:9.04880713999999919px;fill:#000d00;text-anchor:start;text-align:start;fill-opacity:1"
            y="315.14435"
            x="35.592205">nivel Nacional y </tspan></tspan><tspan
          id="tspan4066"
@@ -920,7 +929,7 @@
          x="41.848606"
          sodipodi:role="line"><tspan
            id="tspan4068"
-           style="font-size:9.04880713999999919px;fill:#17391b;text-anchor:start;text-align:start"
+           style="font-size:9.04880713999999919px;fill:#000d00;text-anchor:start;text-align:start;fill-opacity:1"
            y="326.45535"
            x="41.848606">Jurisdiccional</tspan></tspan></text>
   </g>
@@ -935,30 +944,30 @@
        sodipodi:cy="56.779659"
        sodipodi:cx="-327.96609"
        id="path3446-60-0-7"
-       style="fill:url(#linearGradient4748);fill-opacity:1;stroke:#17391b;stroke-width:6.63070869;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       style="fill:url(#linearGradient4748);fill-opacity:1;stroke:#17391b;stroke-width:2.6522834;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        sodipodi:type="arc" />
     <text
        id="text4026"
        y="303.79797"
        x="591.3382"
-       style="font-size:15.0813446px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#17391b;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       style="font-size:15.08134459999999955px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000d00;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        xml:space="preserve"><tspan
-         style="text-anchor:start;text-align:start"
+         style="text-anchor:start;text-align:start;fill:#000d00;fill-opacity:1"
          id="tspan4028"
          y="303.79797"
          x="591.3382"
          sodipodi:role="line"><tspan
            id="tspan4030"
-           style="font-size:9.04880713999999919px;fill:#17391b;text-anchor:start;text-align:start"
+           style="font-size:9.04880713999999919px;fill:#000d00;text-anchor:start;text-align:start;fill-opacity:1"
            y="303.79797"
            x="591.3382">Estudios e </tspan></tspan><tspan
-         style="text-anchor:start;text-align:start"
+         style="text-anchor:start;text-align:start;fill:#000d00;fill-opacity:1"
          id="tspan4032"
          y="315.10898"
          x="579.45282"
          sodipodi:role="line"><tspan
            id="tspan4034"
-           style="font-size:9.04880713999999919px;fill:#17391b;text-anchor:start;text-align:start"
+           style="font-size:9.04880713999999919px;fill:#000d00;text-anchor:start;text-align:start;fill-opacity:1"
            y="315.10898"
            x="579.45282">Investigaciones</tspan></tspan></text>
   </g>
@@ -973,17 +982,20 @@
        height="39.620483"
        width="515.06628"
        id="rect4658"
-       style="fill:url(#linearGradient4014);fill-opacity:1;stroke:#642300;stroke-width:5;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+       style="fill:url(#linearGradient4014);fill-opacity:1;stroke:#642300;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
     <text
        id="text4660"
-       y="475.72647"
-       x="137.3394"
-       style="font-size:30.16268921px;font-style:normal;font-weight:normal;fill:#642300;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       xml:space="preserve"><tspan
-         y="475.72647"
-         x="137.3394"
+       y="432.53479"
+       x="264.97272"
+       style="font-size:51.83086777px;font-style:normal;font-weight:normal;line-height:125%;fill:#642300;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       xml:space="preserve"
+       sodipodi:linespacing="125%"
+       transform="scale(0.91597463,1.0917333)"><tspan
+         y="432.53479"
+         x="264.97272"
          id="tspan4662"
-         sodipodi:role="line">Fondo Nacional Para la ETP</tspan></text>
+         sodipodi:role="line"
+         style="font-size:15.99999996px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr;text-anchor:start;font-family:Sans;-inkscape-font-specification:Sans">Fondo Nacional Para la ETP</tspan></text>
   </g>
   <g
      id="g10044"

@@ -19,10 +19,10 @@ echo $javascript->link('animar_cuadros');
     <div class="boxblanca boxdocs">
             
         <h3>Estructura</h3>
-        <div>
+        <div class="centrado">
         <!--[if !IE]>-->
-          <object data="../img/entidades.svg" type="image/svg+xml"
-                  width="100%" height="400" id="mySVGObject"> <!--<![endif]-->
+        <object data="../img/entidades.svg" type="image/svg+xml" width="700" height="400"
+                  id="mySVGObject"> <!--<![endif]-->
         <!--[if lt IE 9]>
           <object src="../img/entidades.svg" classid="image/svg+xml"
                   width="700" height="391" id="mySVGObject"> <![endif]-->
@@ -84,13 +84,13 @@ echo $javascript->link('animar_cuadros');
     /*texto temporal*/
     var lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas erat lacus, facilisis sed scelerisque dictum, accumsan eu nunc. Maecenas sed ligula sed quam luctus consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.";
     var nodos = [
-      {id:"g_ministerio", texto:lorem},
-      {id:"g_consejo_educ", texto:"Ámbito de concertación, acuerdo y coordinación de la política educativa nacional, presidido por el Ministro de Educación e integrado por las autoridades educativas de las 24 jurisdicciones."},
+      {id:"g_ministerio", titulo: "Ministerio de Educación", texto:lorem},
+      {id:"g_consejo_educ", titulo: "Consejo Federal de Educación", texto:"Ámbito de concertación, acuerdo y coordinación de la política educativa nacional, presidido por el Ministro de Educación e integrado por las autoridades educativas de las 24 jurisdicciones."},
       {id:"g_secretaria_educ", texto:lorem},
       {id:"g_secretaria_politicas", texto:lorem},
       //{id:"g_inet", texto:lorem},
-      {id:"g_consejo_etp", texto:"Consejo asesor del Ministerio de Educación integrado por representantes de los Ministerios de Trabajo, Ciencia y Tecnología, Economía, Producción, cámaras y asociaciones empresarias, sindicatos y gremios sectoriales y docentes, colegios profesionales de técnicos."},
-      {id:"g_comision_etp", texto:"Espacio de trabajo conjunto con los equipos político-técnicos de las 24 jurisdicciones del país."}
+      {id:"g_consejo_etp", titulo: "Consejo Nacional", texto:"Consejo asesor del Ministerio de Educación integrado por representantes de los Ministerios de Trabajo, Ciencia y Tecnología, Economía, Producción, cámaras y asociaciones empresarias, sindicatos y gremios sectoriales y docentes, colegios profesionales de técnicos."},
+      {id:"g_comision_etp", titulo: "Comisión Nacional", texto:"Espacio de trabajo conjunto con los equipos político-técnicos de las 24 jurisdicciones del país."}
     ];
 
     animar_cuadros('mySVGObject', nodos, 'descripcion');
