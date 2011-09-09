@@ -596,3 +596,10 @@ ul.ul-horizontal{
     margin-left: 20px;
     display: inline;
 }
+
+
+
+#g_ministerio{
+    cursor: hand;
+    cursor: move;
+}
