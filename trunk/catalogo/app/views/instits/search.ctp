@@ -1,15 +1,12 @@
 <?
 echo $javascript->link(array(
     'jquery.loadmask.min',
-    'jquery.autocomplete',
     'views/instits/search'
         ), false);
 
 echo $html->css(array('jquery.loadmask',
-    'smoothness/jquery-ui-1.8.6.custom',
     'catalogo.advanced_search',
     'catalogo.instits',
-    'jquery.autocomplete.css'
         ), $inline = false);
 ?>
 <script type="text/javascript" language="javascript">

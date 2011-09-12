@@ -70,11 +70,11 @@ $javascript;
             <script src="<?= $this->webroot ?>js/svg.js" data-path="<?=$this->webroot?>" data-htc-filename="svg-htc.php"></script>
         <? 
         echo $javascript->link(array(
-        'jquery-1.5.2.min',
+        'jquery-1.6.2.min',
         'adapt.min.js',
         'jquery.form',
         'jquery.tools.min',
-        'jquery-ui-1.8.12.custom.min',
+        'jquery-ui-1.8.16.custom.min',
         'jquery/jquery.bgiframe.min',
         'jquery/jquery.superfish',
         'jquery/jquery.history',

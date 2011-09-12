@@ -1,10 +1,9 @@
 <?php
     echo $javascript->link(array(
-    'jquery.autocomplete',
     'jquery.loadmask.min',
     'views/titulos/search'
     ));
-    echo $html->css(array('jquery.loadmask', 'jquery.autocomplete', 'catalogo.advanced_search', 'catalogo.titulos'), null, array(), false);
+    echo $html->css(array('jquery.loadmask', 'catalogo.advanced_search', 'catalogo.titulos'), null, array(), false);
 ?>
 <script type="text/javascript">
     $(document).ready(function(){

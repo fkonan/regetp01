@@ -1,40 +1,36 @@
-(function($){
-    $(document).ready(function(){
-        $('#SectorId').change(function(){
-            var url = urlDomain+'/subsectores/ajax_select_subsector_form_por_sector';
-            $.post(url,{'data[sector_id]':$(this).val()},function(data){
-                $('#SubsectorId').html(data);
-            })
-        });
-        
-        $('#jurisdiccion_id').change(function(){
-            reloadCombo($(this).val());
-            $("#ajax_indicator").hide();
-            $('#LocalidadName').val('');
-            $("#hiddenLocId").val('');
-        });
-        
-        $('#departamento_id').change(function(){
-            $("#ajax_indicator").hide();
-            $('#LocalidadName').val('');
-            $("#hiddenLocId").val('');
-        });
-        
-        $("#LocalidadName").change(function(){
-            if($("#LocalidadName").val().length == 0){
-                $("#hiddenLocId").val('');
-            }
-        });
-        
-        if($('#jurisdiccion_id').val() != 0){
-            $depto_aux = $('#departamento_id').val();
-            reloadCombo($('#jurisdiccion_id').val(), $depto_aux);
-            
-        }
+$(document).ready(function(){
+    $('#SectorId').change(function(){
+        var url = urlDomain+'/subsectores/ajax_select_subsector_form_por_sector';
+        $.post(url,{'data[sector_id]':$(this).val()},function(data){
+            $('#SubsectorId').html(data);
+        })
     });
     
+    if($('#jurisdiccion_id').val() != 0){
+        $depto_aux = $('#departamento_id').val();
+        reloadCombo($('#jurisdiccion_id').val(), $depto_aux);
+    }
+
+    $('#jurisdiccion_id').change(function(){
+        reloadCombo($(this).val());
+        $("#ajax_indicator").hide();
+        $('#LocalidadName').val('');
+        $("#hiddenLocId").val('');
+    });
+
+    $('#departamento_id').change(function(){
+        $("#ajax_indicator").hide();
+        $('#LocalidadName').val('');
+        $("#hiddenLocId").val('');
+    });
+
+    $("#LocalidadName").change(function(){
+        if($("#LocalidadName").val().length == 0){
+            $("#hiddenLocId").val('');
+        }
+    });
+});
     
-})(jQuery);
 
 function reloadCombo(jur, depto){
     var url = urlDomain+'/departamentos/ajax_select_departamento_form_por_jurisdiccion';
@@ -48,38 +44,54 @@ function formatResult(loc_dep) {
     return loc_dep.localidad;
 }
 
-function init__SearchFormJs(locDepUrl) {
-    jQuery("#LocalidadName").autocomplete(locDepUrl, {
-                dataType: "json",
-                delay: 200,
-                max:30,
-                cacheLength:1,
-                extraParams: {
-                    jur: function() { return jQuery('#jurisdiccion_id').val(); },
-                    depto: function() { return jQuery('#departamento_id').val(); }
-                } ,
-                parse: function(data) {
-                    return jQuery.map(data, function(loc) {
-                        return {
-                            data: loc,
-                            value: loc.id,
-                            result: formatResult(loc)
-                        }
+function init__SearchFormJs(locUrl) {
+    $( "#LocalidadName" ).autocomplete({
+            source: function( request, response ) {
+                    $.ajax({
+                            url: locUrl,
+                            dataType: "json",
+                            data: {
+                                    featureClass: "P",
+                                    style: "full",
+                                    maxRows: 30,
+                                    q: request.term,
+                                    jur: function() { return jQuery('#jurisdiccion_id').val(); },
+                                    depto: function() { return jQuery('#departamento_id').val(); }
+                            },
+                            success: function( data ) {
+                                    response( $.map( data, function( item ) {
+                                            return {
+                                                    label: item.localidad_id == '' ? item.localidad : item.localidad + ', ' + item.departamento + ' (' + item.jurisdiccion + ')',
+                                                    value: item.localidad,
+                                                    localidad_id: item.localidad_id,
+                                                    jurisdiccion_id: item.jurisdiccion_id,
+                                                    departamento_id: item.departamento_id,
+                                                    shortlabel: item.localidad
+                                            }
+                                    }));
+                            }
                     });
-                },
-                formatItem: function(item) {
-                    if(item.type == 'Vacio' )
-                        return item.localidad;
-                    return item.localidad + ', ' + item.departamento + ' (' + item.jurisdiccion + ')';
-                }
-            }).result(function(e, item) {
-                if(item.type == 'Vacio'){
-                    $("#LocalidadName").val('');
-                }
-                else{
-                    $("#hiddenLocId").val(item.localidad_id);                    
-                    $("#jurisdiccion_id").val(item.jurisdiccion_id);
-                    $("#departamento_id").val(item.departamento_id);
-                }
-            });
+            },
+            minLength: 2,
+            select: function( event, ui ) {
+                    if(ui.item && ui.item.jurisdiccion_id) {
+                        $("#jurisdiccion_id").val(ui.item.jurisdiccion_id);
+                        $("#departamento_id").val(ui.item.departamento_id);
+                        $("#LocalidadName").val(ui.item.shortlabel);
+                        $("#hiddenLocId").val(ui.item.localidad_id);
+                    }
+                    else {
+                        $("#LocalidadName").val('');
+                        $("#hiddenLocId").val('');
+                    }
+                     
+            },
+            open: function() {
+                    $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+            },
+            close: function() {
+                    $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+            }
+    });
+    
 }
