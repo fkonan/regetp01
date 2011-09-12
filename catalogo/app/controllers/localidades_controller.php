@@ -123,7 +123,7 @@ class LocalidadesController extends AppController {
 
         if (sizeof($result) == 0) {
             array_push($result, array(
-                "id" => '',
+                "localidad_id" => '',
                 "type" => "Vacio",
                 "localidad" => 'No se encontraron resultados'
             ));
