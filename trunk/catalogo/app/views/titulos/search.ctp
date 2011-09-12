@@ -13,17 +13,18 @@
 </script>
 <div class="grid_12 titulos search">
     
-    <h1><?php __('Búsqueda de Títulos');?></h1>
+    <h1><?php __('Búsqueda de Títulos');?><?php echo empty($oferta_id)?'':' de Nivel: '.$ofertas[$oferta_id]?></h1>
 
     <div class="boxblanca inputs_largos">
         <h3>Seleccione criterios de búsqueda</h3>
         <?php
+        $oferta = empty($oferta_id) ? '' : '/'.$oferta_id;
         echo $form->create('Titulo', array(
-        'action' => $this->action,
-        'name'=>'TituloSearchForm',
-        'id' =>'TituloSearchForm',
-        'type' => 'get',
-        )
+            'url' => array('action' => $this->action, $oferta),
+            'name'=>'TituloSearchForm',
+            'id' =>'TituloSearchForm',
+            'type' => 'get',
+            )
         );
         ?>
         <div class="box_izquierda inputs_largos">
@@ -34,9 +35,9 @@
                                                     'label'=> 'Nivel',
                                                     'id' => 'ofertaId',
                                                     'empty' => 'Seleccione',
-                                                    'disabled' => (empty($oferta_id) ? false : true),
+                                                    'type' => (empty($oferta_id) ? 'select' : 'hidden'),
                                                    ));
-               
+                
                 
                 $meter = '<span id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif', array('style' => 'float:right; height: 19px;')).'</span>';
 

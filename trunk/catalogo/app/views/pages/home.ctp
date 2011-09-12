@@ -1,4 +1,4 @@
-<script src="https://www.google.com/jsapi?key=ABQIAAAAB9-4gZ-EdgJfDxJFt0gpERTMa6vFho1POZQcegfZ_L_wbfYheBQjEPuUk3RRDdCPUjVvstGMAxLpRQ" type="text/javascript"><!--mce:0--></script>
+<!--<script src="https://www.google.com/jsapi?key=ABQIAAAAB9-4gZ-EdgJfDxJFt0gpERTMa6vFho1POZQcegfZ_L_wbfYheBQjEPuUk3RRDdCPUjVvstGMAxLpRQ" type="text/javascript">mce:0</script>-->
 <?php 
 echo $html->css('catalogo.home', false);
 $this->pageTitle = "Inicio";
@@ -26,7 +26,7 @@ $this->pageTitle = "Inicio";
 
             <div class="clear"></div>
 
-            <ul class="ul-horizontal">
+            <ul class="ul-horizontal" style="text-align: right">
                 <li><?php echo $html->link('Ver más', array('controller' => 'pages', 'action' => 'el_inet')); ?></li>
             </ul>
         </div>
@@ -46,7 +46,7 @@ $this->pageTitle = "Inicio";
         
         <?= $html->image('search.png', array('style'=>'float: right; position: absolute; right: 10px; width: 36px;'))?>
         <ul>
-            <li><?php echo $html->link('Ver más', array('controller' => 'pages', 'action' => 'buscadores')); ?></li>
+            <li><?php echo $html->link('Realizar búsquedas', array('controller' => 'pages', 'action' => 'buscadores')); ?></li>
         </ul>
     </div>
 </div>
@@ -64,8 +64,8 @@ $this->pageTitle = "Inicio";
                     labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
                     nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
                 </p>
-                <ul class="ul-horizontal">
-                    <li><?php echo $html->link('Grafo de la ley', array('controller' => 'pages', 'action' => 'grafo_ley')); ?></li>
+                <ul class="ul-horizontal" style="text-align: right">
+                    <li><?php echo $html->link('Ver grafo de la ley', array('controller' => 'pages', 'action' => 'grafo_ley')); ?></li>
                 </ul>
             </div>
     </div>
@@ -85,7 +85,7 @@ $this->pageTitle = "Inicio";
                     nisi ut aliquip ex ea commodo consequat. 
                 </p>
                 <div class="clear"></div>
-                <ul class="ul-horizontal">
+                <ul class="ul-horizontal" style="text-align: right">
                     <li><?php echo $html->link('Ver más', array('controller' => 'pages', 'action' => 'mapas_y_graficos')); ?></li>
                 </ul>
             </div>
