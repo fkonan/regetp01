@@ -135,9 +135,9 @@ if (!empty($vino_formulario)) {
             <ul id="items" class="items">
         <?php foreach ($instits as $instit) : ?>
                 <?
-                $año_actual = date("Y");
-                $fecha_hasta = "$año_actual-07-21"; //hasta julio
-                $fecha_desde = "$año_actual-01-01"; //desde enero
+                $anio_actual = date("Y");
+                $fecha_hasta = "$anio_actual-07-21"; //hasta julio
+                $fecha_desde = "$anio_actual-01-01"; //desde enero
                 $clase = '';
                 if ($instit['Instit']['activo']) {
                     $clase .= ' escuela_activa';
