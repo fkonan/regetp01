@@ -90,7 +90,7 @@ class TitulosController extends AppController {
                  $ops[] = array(
                     'model' => 'Instit',
                     'field' => 'departamento_id',
-                    'friendlyName' => 'Domicilio');
+                    'friendlyName' => 'Departamento');
                  
                  //      Localidad
                  $ops[] = array(
