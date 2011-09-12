@@ -397,7 +397,7 @@ echo $html->css('catalogo.estaticas');
                         <h3>Gráfico de instituciones por sector</h3>
                         <div>
                             <p style="color:red"> Falta Gráfico </p>
-                            <? echo $html->image('home/graficoFP.png', array('class' => 'docimg', 'style' => 'width:307px')); ?>
+                            <? //echo $html->image('home/graficoFP.png', array('class' => 'docimg', 'style' => 'width:307px')); ?>
                         </div>
                         <br/>
                         <h3>Buscador</h3>
