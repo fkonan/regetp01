@@ -106,7 +106,7 @@ echo $html->css('catalogo.estaticas');
 
     <div class="boxblanca">       
         <div>
-            <div class="js-tabs-ofertas tabs">
+            <div class="js-tabs-ofertas tabs" style="height:824px;">
                 <ul id="ofertas-tabs" class="horizontal-shadetabs">
                     <li>
                         <a id="htab-2" href="#ver-oferta-sec">Nivel Secundario</a>
