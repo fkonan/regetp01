@@ -76,7 +76,7 @@
  * Turn off all caching application-wide.
  *
  */
-	Configure::write('Cache.disable', false);
+	Configure::write('Cache.disable', true);
 /**
  * Enable cache checking.
  *
@@ -181,13 +181,14 @@
  * Inet Options
  */
         Configure::write('es_dia_patrio', false);
-	Configure::write('trimestre_activo', '4-2010,1-2011');
+	Configure::write('trimestre_activo', '1-2011,2-2011');
 	Configure::write('modo_linux', true);
         Configure::write('grupo_desarrolladores', 'desarrolladores');
         Configure::write('grupo_administradores', 'administradores');
         Configure::write('grupo_editores', 'editores');
         Configure::write('grupo_invitados', 'invitados');
         Configure::write('grupo_referentes', 'referentes');
+        Configure::write('grupo_ministros', 'ministros');
 /**
  *
  * Cache Engine Configuration

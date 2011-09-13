@@ -1,3 +1,20 @@
+<h1>RFIETP - Novedades de la versión 1.7.1</h1>
+<br>
+<ul>
+    <!--<li>Se publicaron los Planes de Mejora del primer semestre de 2011.</li>-->
+    <li>Se han modificado y confeccionado Descargas (reportes) que utiliza la Unidad de Información.</li>
+    <li>Se optimizaron los buscadores.</li>
+    <li>Se retocaron cuestiones estéticas en el diseño de diferentes secciones.</li>
+    <li>Se incorporaron nuevos cargos en autoridades referentes.</li>
+    <li>Se agilizó la carga de instituciones y ofertas del tipo Itinerario para evitar errores de carga.</li>
+    <li>La normativa de las ofertas se convirtió en minúsculas.</li>
+    <li>Se incorporó un aviso automático vía e-mail una vez enviada una sugerencia.</li>
+    <li>Se mejoró la validación en la carga y edición de instituciones y ofertas.</li>
+    <li>Se agregó un mensaje de advertencia en vista de institución cuando la misma posée información de oferta desactualizada por una cantidad de años configurable.</li>
+    <li>Se ha creado el rol de usuario "Ministro".</li>
+</ul>
+<br>
+
 <h1>RFIETP - Novedades de la versión 1.7</h1>
 <br>
 <ul>
