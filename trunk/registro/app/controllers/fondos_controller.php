@@ -16,7 +16,8 @@ class FondosController extends AppController {
                 $instit = $this->Fondo->Instit->read(null, $id);
 
                 // chequea que lo vea usuario de la jurisdiccion (condicion)
-                if ($this->Session->read('User.group_alias') == strtolower(Configure::read('grupo_referentes'))) {
+                if ($this->Session->read('User.group_alias') == strtolower(Configure::read('grupo_referentes')) ||
+                    $this->Session->read('User.group_alias') == strtolower(Configure::read('grupo_ministros'))) {
                     if ($this->Session->read('User.jurisdiccion_id') != $instit['Instit']['jurisdiccion_id']) {
                         $this->Session->setFlash(__($this->Auth->planesMejoraError, true));
                         $this->redirect(array('controller'=>'Instits', 'action'=>'view', $id));
@@ -52,7 +53,8 @@ class FondosController extends AppController {
             
             if ($id) {
                 // chequea que lo vea usuario de la jurisdiccion (condicion)
-                if ($this->Session->read('User.group_alias') == strtolower(Configure::read('grupo_referentes'))) {
+                if ($this->Session->read('User.group_alias') == strtolower(Configure::read('grupo_referentes')) ||
+                    $this->Session->read('User.group_alias') == strtolower(Configure::read('grupo_ministros'))) {
                     if ($this->Session->read('User.jurisdiccion_id') != $id) {
                         $this->Session->setFlash(__($this->Auth->planesMejoraError, true));
                         $this->redirect(array('controller'=>'Jurisdicciones', 'action'=>'view', $id));

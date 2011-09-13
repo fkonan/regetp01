@@ -549,6 +549,18 @@ class AclprepController extends AclAppController {
     function assignPermissions1Dot7Dot1() {
         // Usuarios
         $this->Acl->allow('usuarios', 'Planes/ajax_similars');
+        
+        // crear rol Ministros
+        $aro = new Aro();
+        $aro->create();
+        $aro->save(array(
+                    'alias' => 'ministros',
+                    'parent_id' => '1'
+            ));
+        
+        $this->Acl->allow('ministros', 'Fondos/index_x_instit');
+        $this->Acl->allow('ministros', 'Fondos/index_x_jurisdiccion');
+        
 
         die('done 1.7.1');
     }
