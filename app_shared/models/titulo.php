@@ -41,7 +41,8 @@ class Titulo extends AppModel {
         );
 
 
-        function beforeDelete() {
+        function beforeDelete($casca) {
+            parent::beforeDelete($casca);
             // chequea si contiene planes asociados, no permite
             $count = $this->Plan->find('count', array(
                             'conditions'=>array('Plan.titulo_id'=>$this->id)
@@ -50,6 +51,7 @@ class Titulo extends AppModel {
                 return true;
             }
             else {
+                $this->validationErrors[] = 'Existen Planes que tienen este tìtulo';
                 return false;
             }
         }

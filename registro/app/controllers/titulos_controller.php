@@ -222,18 +222,22 @@ class TitulosController extends AppController {
 
         $this->set(compact('ofertas','sectores'));
     }
+    
 
     function delete($id = null) {
         if (!$id) {
             $this->Session->setFlash(__('Titulo inválido', true));
-            $this->redirect(array('action'=>'index'));
         }
         else {
             if ($this->Titulo->del($id)) {
                 $this->Session->setFlash(__('Titulo eliminado', true));
             }
             else {
-                $this->Session->setFlash(__('No se puede eliminar el Título', true));
+                $txt = 'No se puede eliminar el Título: ';
+                foreach( $this->Titulo->validationErrors as $v){
+                    $txt .= $v.', ';
+                }
+                $this->Session->setFlash($txt);
             }
             
             $this->redirect(array('action'=>'index'));
