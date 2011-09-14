@@ -32,6 +32,7 @@ sistema.
     <ul>
         <!--<li>Se publicaron los Planes de Mejora del primer semestre de 2011.</li>-->
         <li>Se optimizaron los buscadores.</li>
+        <li>Se completó información de los referentes de cada provincia. Se lo puede ver en <i>Información Jurisdiccional</i></li>
         <li>Se retocaron cuestiones estéticas en el diseño de diferentes secciones.</li>
         <li>Se ha creado el rol de usuario "Ministro".</li>
         <li>Se agregó un mensaje de advertencia en vista de institución cuando la misma posée información de oferta desactualizada.</li>
