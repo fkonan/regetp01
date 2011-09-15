@@ -27,14 +27,13 @@ Desde su puesta en funcionamiento en junio de 2009 el sistema RFIETP se encuentr
 en permanente actualización y mejoramiento, tanto del contenido de información de
 la base de datos como de la aplicación que permite su gestión. En esa línea de
 trabajo a partir del 14 de septiembre de 2011 se ha instalado la versión <?php echo Configure::read('regetpVersion');?> del
-sistema.
+sistema. Sus principales novedades son:
 </p>
     <ul>
         <!--<li>Se publicaron los Planes de Mejora del primer semestre de 2011.</li>-->
         <li>Se optimizaron los buscadores.</li>
         <li>Se completó información de los referentes de cada provincia. Se lo puede ver en <i>Información Jurisdiccional</i></li>
         <li>Se retocaron cuestiones estéticas en el diseño de diferentes secciones.</li>
-        <li>Se ha creado el rol de usuario "Ministro".</li>
         <li>Se agregó un mensaje de advertencia en vista de institución cuando la misma posée información de oferta desactualizada.</li>
     </ul>
 
