@@ -122,6 +122,7 @@ class UtilsController extends AppController {
         }
         $this->Titulo->saveAll($titulos, array('validate'=>false));
 */
+        die("Finalizado!");
     }
 
     /*
@@ -145,63 +146,64 @@ class UtilsController extends AppController {
         $palabras = split(' ', $string);
 
         foreach ($palabras as $key => &$palabra) {
+            if (!empty($palabra)) {
+                if (strlen($palabra) <= 4 &&
+                    ($palabra == 'EGB' || $palabra == 'S/N' ||
+                     $palabra == 'II' || $palabra == 'III' || $palabra == 'IV' ||
+                     $palabra == 'VI' || $palabra == 'VII' || $palabra == 'VIII' ||
+                     $palabra == 'IX' || $palabra == 'XI' || $palabra == 'XII' || $palabra == 'XIII')) {
 
-            if (strlen($palabra) <= 4 &&
-                ($palabra == 'EGB' || $palabra == 'S/N' ||
-                 $palabra == 'II' || $palabra == 'III' || $palabra == 'IV' ||
-                 $palabra == 'VI' || $palabra == 'VII' || $palabra == 'VIII' ||
-                 $palabra == 'IX' || $palabra == 'XI' || $palabra == 'XII' || $palabra == 'XIII')) {
-
-                $palabra = strtoupper($palabra);
-            }
-            elseif ($key == 0 && strpos($palabra, '.') === false && $palabra[0] != '"' && $palabra[0] != '(') {
-                $palabra = ucfirst(strtolower($palabra));
-            }
-            elseif (in_array(strtolower($palabra), $preposiciones)) {
-                // es preposicion
-                $palabra = strtolower($palabra);
-            }
-            elseif (in_array(strtolower($palabra), $nexos)) {
-                // es nexo
-                $palabra = strtolower($palabra);
-            }
-            elseif (in_array(strtolower($palabra), $articulos)) {
-                // es artículo, si contiene antes una preposicion va en minúscula
-                if (in_array(strtolower($palabras[$key-1]), $preposiciones)) {
-                    // Antofagasta de la Sierra
-                    $palabra = strtolower($palabra);
+                    $palabra = strtoupper($palabra);
                 }
-                else {
-                    // General Las Heras
+                elseif ($key == 0 && strpos($palabra, '.') === false && $palabra[0] != '"' && $palabra[0] != '(') {
                     $palabra = ucfirst(strtolower($palabra));
                 }
-            }
-            elseif (strpos($palabra, '.') !== false) {
-                // contiene puntos: C.A.B.A / Dr.
-                $palabra = ucfirst(strtolower($palabra));
-
-                $precede_punto = false;
-                for($i=0; $i < strlen($palabra); $i++) {
-                    if ($precede_punto) {
-                        $palabra[$i] = strtoupper($palabra[$i]);
-                        $precede_punto = false;
+                elseif (in_array(strtolower($palabra), $preposiciones)) {
+                    // es preposicion
+                    $palabra = strtolower($palabra);
+                }
+                elseif (in_array(strtolower($palabra), $nexos)) {
+                    // es nexo
+                    $palabra = strtolower($palabra);
+                }
+                elseif (in_array(strtolower($palabra), $articulos)) {
+                    // es artículo, si contiene antes una preposicion va en minúscula
+                    if (in_array(strtolower($palabras[$key-1]), $preposiciones)) {
+                        // Antofagasta de la Sierra
+                        $palabra = strtolower($palabra);
                     }
-                    elseif ($palabra[$i] == '.' && $i > 0) {
-                        $precede_punto = true;
-                    }
-                    elseif ($palabra[$i] == '"' || $palabra[$i] == '(') {
-                        $precede_punto = true;
+                    else {
+                        // General Las Heras
+                        $palabra = ucfirst(strtolower($palabra));
                     }
                 }
-            }
-            elseif (strlen($palabra) > 1 && ($palabra[0] == '"' || $palabra[0] == '(' || $palabra[0] == '\'')) {
-                // comienza con comillas, parentesis (C.A.B.J) | "Jose de San Martín"
-                $palabra = strtolower($palabra);
-                $palabra[1] = strtoupper($palabra[1]);
-            }
-            elseif (strpos($palabra, '.') === false) {
-                // no es preposicion ni contiene puntos, paréntesis, comillas
-                $palabra = ucfirst(strtolower($palabra));
+                elseif (strpos($palabra, '.') !== false) {
+                    // contiene puntos: C.A.B.A / Dr.
+                    $palabra = ucfirst(strtolower($palabra));
+
+                    $precede_punto = false;
+                    for($i=0; $i < strlen($palabra); $i++) {
+                        if ($precede_punto) {
+                            $palabra[$i] = strtoupper($palabra[$i]);
+                            $precede_punto = false;
+                        }
+                        elseif ($palabra[$i] == '.' && $i > 0) {
+                            $precede_punto = true;
+                        }
+                        elseif ($palabra[$i] == '"' || $palabra[$i] == '(') {
+                            $precede_punto = true;
+                        }
+                    }
+                }
+                elseif (strlen($palabra) > 1 && ($palabra[0] == '"' || $palabra[0] == '(' || $palabra[0] == '\'')) {
+                    // comienza con comillas, parentesis (C.A.B.J) | "Jose de San Martín"
+                    $palabra = strtolower($palabra);
+                    $palabra[1] = strtoupper($palabra[1]);
+                }
+                elseif (strpos($palabra, '.') === false) {
+                    // no es preposicion ni contiene puntos, paréntesis, comillas
+                    $palabra = ucfirst(strtolower($palabra));
+                }
             }
         }
 
