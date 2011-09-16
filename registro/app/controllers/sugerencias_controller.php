@@ -3,6 +3,7 @@ class SugerenciasController extends AppController {
 
     var $name = 'Sugerencias';
     var $helpers = array('Html', 'Form', 'Text', 'Time');
+	var $components = array('Email');
 
     function index() {
         $this->Sugerencia->recursive = 0;
@@ -30,7 +31,7 @@ class SugerenciasController extends AppController {
         if (!empty($this->data)) {
             $this->Sugerencia->create();
             if ($this->Sugerencia->save($this->data)) {
-                $this->Session->setFlash(__('¡Gracias por enviarnos una sugerencia!', true));
+                $this->Session->setFlash(__('ï¿½Gracias por enviarnos una sugerencia!', true));
 
                 $this->Sugerencia->User->recursive = 0;
                 $user = $this->Sugerencia->User->find('first', array(
@@ -54,7 +55,7 @@ class SugerenciasController extends AppController {
                     $this->Email->delivery = 'smtp';
                     $this->Email->from     = NOMBRE_CONTACTO.' <'.EMAIL_CONTACTO.'>';
                     $this->Email->to       = $user['User']['mail'].' <'.$user['User']['username'].'>';
-                    $this->Email->subject  = 'Su sugerencia ha sido enviada con éxito!';
+                    $this->Email->subject  = 'Su sugerencia ha sido enviada con ï¿½xito!';
                     $this->Email->template = 'simple';
                     $this->set("message", $mensaje);
 
