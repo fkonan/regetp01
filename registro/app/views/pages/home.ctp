@@ -20,7 +20,7 @@ Requerimientos mínimos para utilizar el <b>Sistema Gestión de Registro</b>:<br /
 
 <br />
 
-<h2>Nueva Versión <?php echo Configure::read('regetpVersion');?></h2>
+<h2>Versión <?php echo Configure::read('regetpVersion');?></h2>
 
 <p>
 Desde su puesta en funcionamiento en junio de 2009 el sistema RFIETP se encuentra
