@@ -14,13 +14,22 @@
                             if(!empty($ministro)){
                             ?>
                                 <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Cargo'); ?></dt>
-                                <dd<?php if ($i++ % 2 == 0) echo $class;?>><?php echo $ministro['Cargo'][0]['nombre']; ?></dd>
+								<?php if (!empty($ministro['Cargo'])): ?>
+									<dd<?php if ($i++ % 2 == 0) echo $class;?>><?php echo $ministro['Cargo'][0]['nombre']; ?></dd>	
+								<?php else: ?>
+									<dd<?php if ($i++ % 2 == 0) echo $class;?>>-</dd>	
+								<?php endif ?>
+                                
 
                                 <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Nombre'); ?></dt>
                                 <dd<?php if ($i++ % 2 == 0) echo $class;?>><?php echo $ministro['Autoridad']['titulo'] . ' ' . $ministro['Autoridad']['nombre'] .  ' ' . $ministro['Autoridad']['apellido']; ?></dd>
 
                                 <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Fecha de asunción'); ?></dt>
-                                <dd<?php if ($i++ % 2 == 0) echo $class;?>><?php echo isNull($time->format('d/m/Y', $ministro['Autoridad']['fecha_asuncion']),'Vacío') ;?></dd>
+                                <?php if (!empty($ministro['Autoridad']['fecha_asuncion'])): ?>
+                                    <dd<?php if ($i++ % 2 == 0) echo $class;?>><?php echo $time->format('d/m/Y',$ministro['Autoridad']['fecha_asuncion']);?></dd>
+                                <?php else: ?>
+                                    <dd<?php if ($i++ % 2 == 0) echo $class;?>>-</dd>
+                                <?php endif ?>
                             <?php
                             }
                             else{
