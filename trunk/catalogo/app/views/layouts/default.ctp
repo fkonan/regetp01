@@ -148,6 +148,22 @@ $javascript;
                 <div class="container_12">
                     <div class="clear separador"></div>
 
+                    <div class="sponsors grid_3">
+                        <?php echo $html->link(
+                                    $html->image('logoinet.gif', array(
+                                            'alt'=> __("Inet", true),
+                                            'border'=>"0",
+                                            'style' => 'height: 50px;'
+                                            )),
+                                    'http://www.inet.edu.ar',
+                                    array(
+                                        'target'=>'_blank'),
+                                    null,
+                                    false
+                            );
+                        ?>
+                    </div>
+                    
                     <div class="grid_6">
                         <div class="clear separador"></div>
                         <b><i>Instituto Nacional de Educación Tecnológica</i></b>
@@ -160,20 +176,8 @@ $javascript;
                     </div>
 
 
-                    <div class="sponsors grid_6">
-                        <?php
-                        echo $html->link($html->image('me_trans.png', array( 'border'=> 0,'style' => 'height: 50px;')),'http://www.me.gov.ar/',null, null, false);
-    //                    echo $html->link($html->image('links/fondoblanco/encuentro.png'),'http://www.encuentro.gov.ar/',null, null, false);
-    //                    echo $html->link($html->image('links/fondoblanco/pakapaka.png'),'http://www.pakapaka.gov.ar/',null, null, false);
-    //                    echo $html->link($html->image('links/fondoblanco/educar.png'),'http://www.educ.ar/',null, null, false);
-    //                    echo $html->link($html->image('links/fondoblanco/infd.png'),'http://www.me.gov.ar/infod/',null, null, false);
-    //                    echo $html->link($html->image('links/fondoblanco/biblo.png'),'http://www.bnm.me.gov.ar/',null, null, false);
-    //                    echo $html->link($html->image('links/fondoblanco/logo_mercosur.png'),'http://www.sic.inep.gov.br/',null, null, false);
-    //                    echo $html->link($html->image('links/fondoblanco/bicentenario.png'),'http://www.bicentenario.argentina.ar/',null, null, false);
-    //                    echo $html->link($html->image('links/fondoblanco/argentina.png'),'http://www.argentina.ar/',null, null, false);
-    //                    echo $html->link($html->image('links/fondoblanco/argentinagovar.png'),'http://www.argentina.gov.ar/',null, null, false);
-
-                        ?>
+                    <div class="sponsors grid_3">
+                        <?php echo $html->link($html->image('me_trans.png', array( 'border'=> 0,'style' => 'height: 50px;')),'http://www.me.gov.ar/', array('target' => '_blank'), null, false); ?>
                     </div>
 
                 </div>

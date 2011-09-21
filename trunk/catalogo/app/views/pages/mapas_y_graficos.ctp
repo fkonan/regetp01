@@ -104,7 +104,15 @@ echo $html->css('catalogo.estaticas');
 <div class="grid_12">
     <h1>La Educación Técnico Profesional en cifras</h1>
 
-    <div class="boxblanca">       
+    <div class="boxblanca">    
+        <p>
+            A continuación se presenta información estadística de la Educación Técnico
+Profesional. Las fuentes de información son: 1) el Relevamiento Anual llevado
+a cabo por la Dirección Nacional de Información y Evaluación de la Calidad
+Educativa (DINIECE) del Ministerio de Educación de la Nación, y 2) la información
+presentada por las instituciones educativas a la base de datos del Registro Federal de
+Instituciones de Educación Técnica Profesional (RFIETP).
+        </p>
         <div>
             <div class="js-tabs-ofertas tabs" style="height:824px;">
                 <ul id="ofertas-tabs" class="horizontal-shadetabs">
@@ -142,7 +150,7 @@ echo $html->css('catalogo.estaticas');
                                 <area shape="poly" coords="71,236,61,219,61,207,69,193,72,174,76,156,87,159,89,178,99,181,113,192,122,204,123,215,129,224,118,222,116,228,103,228,94,234,90,226,82,229" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo SUP_TEC_ID?>','70','San Juan')" alt="San Juan" title="San Juan"   />
                                 <area shape="poly" coords="157,307,156,252,162,235,156,235,154,227,148,225,132,226,117,224,121,234,124,245,124,256,133,266,131,275,134,286,132,308" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo SUP_TEC_ID?>','74','San Luis')" alt="San Luis" title="San Luis"   />
                                 <area shape="poly" coords="189,277,184,400,193,411,200,404,197,394,205,381,203,369,220,371,261,363,280,355,295,328,297,323,289,320,285,313,286,309,293,302,285,295,277,281,268,275,238,256,236,261,230,262,216,275" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo SUP_TEC_ID?>','6','Buenos Aires')" alt="Buenos Aires" title="Buenos Aires"   />
-                                <area shape="poly" coords="406,199,391,204,374,237,374,255,398,284,419,265,432,266,454,251,454,242,445,226,439,219,433,219,421,208" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo SUP_TEC_ID?>','2','CABA')" alt="CABA" title="CABA"   />
+                                <area shape="poly" coords="406,199,391,204,374,237,374,255,398,284,419,265,432,266,454,251,454,242,445,226,439,219,433,219,421,208" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo SUP_TEC_ID?>','2','Ciudad Autónoma de Buenos Aires')" alt="Ciudad Autónoma de Buenos Aires" title="Ciudad Autónoma de Buenos Aires"   />
                                 <area shape="poly" coords="186,289,158,289,158,309,106,309,106,338,114,341,114,351,123,353,135,359,160,365,170,366,184,378" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo SUP_TEC_ID?>','42','La Pampa')" alt="La Pampa" title="La Pampa"   />
                                 <area shape="poly" coords="71,238,81,233,88,227,95,237,101,230,117,231,119,244,127,261,128,272,133,288,129,308,106,307,105,338,90,330,81,329,67,312,72,307,68,296,70,281,78,272,78,251,73,254" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo SUP_TEC_ID?>','50','Mendoza')" alt="Mendoza" title="Mendoza"   />
                                 <area shape="poly" coords="70,316,79,329,92,333,106,339,105,365,92,379,78,388,78,399,60,407,52,413,52,397,50,392,59,378,56,370,61,369,64,363,58,342,60,331,59,319,70,308" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo SUP_TEC_ID?>','58','Neuquén')" alt="Neuquén" title="Neuquén"   />
@@ -190,12 +198,12 @@ echo $html->css('catalogo.estaticas');
                     <div style="margin-left:25px; width: 35%; float: left;">
                         <h3> Datos generales </h3>
                         <ul>
-                            <li>820 instituciones registradas en RFIETP</li>
-                            <li>176.817 matriculados</li>
-                            <li>57% de Gestión estatal</li>
+                            <li>820 instituciones ingresadas al RFIETP (*)</li>
+                            <li>57% de las instituciones son de gestión estatal (*)</li>
+                            <li>176.817 alumnos matriculados (**)</li>
                         </ul>
                         <br/>
-                        <h3>Gráfico de instituciones por sector</h3>
+                        <h3>Porcentaje de alumnos matriculados por sector socioproductivo (***)</h3>
                         <div>
                             <? echo $html->image('home/graficoNivelSuperior.png', array('class' => 'grafico_barras docimg', 'onclick' => 'viewGrafico(this.src, "Nivel Superior", 670)', 'style' => 'width:307px; cursor:pointer;')); ?>
                         </div>
@@ -241,7 +249,7 @@ echo $html->css('catalogo.estaticas');
                                 <area shape="poly" coords="71,236,61,219,61,207,69,193,72,174,76,156,87,159,89,178,99,181,113,192,122,204,123,215,129,224,118,222,116,228,103,228,94,234,90,226,82,229" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo SEC_TEC_ID?>','70','San Juan')" alt="San Juan" title="San Juan"   />
                                 <area shape="poly" coords="157,307,156,252,162,235,156,235,154,227,148,225,132,226,117,224,121,234,124,245,124,256,133,266,131,275,134,286,132,308" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo SEC_TEC_ID?>','74','San Luis')" alt="San Luis" title="San Luis"   />
                                 <area shape="poly" coords="189,277,184,400,193,411,200,404,197,394,205,381,203,369,220,371,261,363,280,355,295,328,297,323,289,320,285,313,286,309,293,302,285,295,277,281,268,275,238,256,236,261,230,262,216,275" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo SEC_TEC_ID?>','6','Buenos Aires')" alt="Buenos Aires" title="Buenos Aires"   />
-                                <area shape="poly" coords="406,199,391,204,374,237,374,255,398,284,419,265,432,266,454,251,454,242,445,226,439,219,433,219,421,208" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo SEC_TEC_ID?>','2','CABA')" alt="CABA" title="CABA"   />
+                                <area shape="poly" coords="406,199,391,204,374,237,374,255,398,284,419,265,432,266,454,251,454,242,445,226,439,219,433,219,421,208" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo SEC_TEC_ID?>','2','Ciudad Autónoma de Buenos Aires')" alt="Ciudad Autónoma de Buenos Aires" title="Ciudad Autónoma de Buenos Aires"   />
                                 <area shape="poly" coords="186,289,158,289,158,309,106,309,106,338,114,341,114,351,123,353,135,359,160,365,170,366,184,378" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo SEC_TEC_ID?>','42','La Pampa')" alt="La Pampa" title="La Pampa"   />
                                 <area shape="poly" coords="71,238,81,233,88,227,95,237,101,230,117,231,119,244,127,261,128,272,133,288,129,308,106,307,105,338,90,330,81,329,67,312,72,307,68,296,70,281,78,272,78,251,73,254" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo SEC_TEC_ID?>','50','Mendoza')" alt="Mendoza" title="Mendoza"   />
                                 <area shape="poly" coords="70,316,79,329,92,333,106,339,105,365,92,379,78,388,78,399,60,407,52,413,52,397,50,392,59,378,56,370,61,369,64,363,58,342,60,331,59,319,70,308" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo SEC_TEC_ID?>','58','Neuquén')" alt="Neuquén" title="Neuquén"   />
@@ -289,12 +297,12 @@ echo $html->css('catalogo.estaticas');
                     <div style="margin-left:25px; width: 35%; float: left;">
                         <h3> Datos generales </h3>
                         <ul>
-                            <li>1.578 instituciones registradas en RFIETP</li>
-                            <li>610.899 matriculados</li>
-                            <li>87% de Gestión estatal</li>
+                            <li>1.578 instituciones ingresadas al RFIETP (*)</li>
+                            <li>87% de las instituciones son de gestión estatal (*)</li>
+                            <li>610.899 alumnos matriculados (**)</li>
                         </ul>
                         <br/>
-                        <h3>Gráfico de instituciones por sector</h3>
+                        <h3>Porcentaje de alumnos matriculados por sector socioproductivo (***)</h3>
                         <div>
                             <? echo $html->image('home/graficoNivelSecundario.png', array('class' => 'ver_grafico_barras docimg', 'onclick' => 'viewGrafico(this.src, "Nivel Secundario", 670)', 'style' => 'width:307px; cursor:pointer;')); ?>
                         </div>
@@ -341,7 +349,7 @@ echo $html->css('catalogo.estaticas');
                                 <area shape="poly" coords="71,236,61,219,61,207,69,193,72,174,76,156,87,159,89,178,99,181,113,192,122,204,123,215,129,224,118,222,116,228,103,228,94,234,90,226,82,229" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo FP_ID?>','70','San Juan')" alt="San Juan" title="San Juan"   />
                                 <area shape="poly" coords="157,307,156,252,162,235,156,235,154,227,148,225,132,226,117,224,121,234,124,245,124,256,133,266,131,275,134,286,132,308" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo FP_ID?>','74','San Luis')" alt="San Luis" title="San Luis"   />
                                 <area shape="poly" coords="189,277,184,400,193,411,200,404,197,394,205,381,203,369,220,371,261,363,280,355,295,328,297,323,289,320,285,313,286,309,293,302,285,295,277,281,268,275,238,256,236,261,230,262,216,275" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo FP_ID?>','6','Buenos Aires')" alt="Buenos Aires" title="Buenos Aires"   />
-                                <area shape="poly" coords="406,199,391,204,374,237,374,255,398,284,419,265,432,266,454,251,454,242,445,226,439,219,433,219,421,208" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo FP_ID?>','2','CABA')" alt="CABA" title="CABA"   />
+                                <area shape="poly" coords="406,199,391,204,374,237,374,255,398,284,419,265,432,266,454,251,454,242,445,226,439,219,433,219,421,208" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo FP_ID?>','2','Ciudad Autónoma de Buenos Aires')" alt="Ciudad Autónoma de Buenos Aires" title="Ciudad Autónoma de Buenos Aires"   />
                                 <area shape="poly" coords="186,289,158,289,158,309,106,309,106,338,114,341,114,351,123,353,135,359,160,365,170,366,184,378" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo FP_ID?>','42','La Pampa')" alt="La Pampa" title="La Pampa"   />
                                 <area shape="poly" coords="71,238,81,233,88,227,95,237,101,230,117,231,119,244,127,261,128,272,133,288,129,308,106,307,105,338,90,330,81,329,67,312,72,307,68,296,70,281,78,272,78,251,73,254" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo FP_ID?>','50','Mendoza')" alt="Mendoza" title="Mendoza"   />
                                 <area shape="poly" coords="70,316,79,329,92,333,106,339,105,365,92,379,78,388,78,399,60,407,52,413,52,397,50,392,59,378,56,370,61,369,64,363,58,342,60,331,59,319,70,308" style="cursor:pointer;"  onclick="viewJurisdiccion('<?php echo FP_ID?>','58','Neuquén')" alt="Neuquén" title="Neuquén"   />
@@ -389,12 +397,12 @@ echo $html->css('catalogo.estaticas');
                     <div style="margin-left:25px; width: 35%; float: left;">
                         <h3> Datos generales </h3>
                         <ul>
-                            <li>1.082 instituciones registradas en RFIETP</li>
-                            <li>235.656 matriculados</li>
-                            <li>93% de Gestión estatal</li>
+                            <li>1.082 instituciones ingresadas al RFIETP (*)</li>
+                            <li>93% de las instituciones son de gestión estatal (*)</li>
+                            <li>235.656 alumnos matriculados (**)</li>
                         </ul>
                         <br/>
-                        <h3>Gráfico de instituciones por sector</h3>
+                        <h3>Porcentaje de alumnos matriculados por sector socioproductivo (***)</h3>
                         <div>
                             <p style="color:red"> Falta Gráfico </p>
                             <? //echo $html->image('home/graficoFP.png', array('class' => 'docimg', 'style' => 'width:307px')); ?>
@@ -417,5 +425,16 @@ echo $html->css('catalogo.estaticas');
                 </div>
             </div>
         </div>
+        <p style="font-size: 9px;">
+            (*) ME - INET. Unidad de Información - Área Registro Federal de Instituciones de
+            Educación Técnico Profesional (RFIETP). Instituciones ingresadas a la base de datos
+            del RFIETP a la fecha.
+            <br />
+            (**) ME - DINIECE. Área Gestión de la Información. Relevamiento Anual 2009.
+            <br />
+            (***) ME - INET. Unidad de Información - Área Registro Federal de Instituciones
+            de Educación Técnico Profesional (RFIETP) Los datos corresponden a la última
+            información presentada por los establecimientos al RFIETP. Información al 30/09/2011.
+        </p>
     </div>
 </div>
