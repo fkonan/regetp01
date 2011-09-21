@@ -80,9 +80,11 @@ $this->pageTitle = "Inicio";
             <div class="boxcontent">
                 <?php echo $html->image('mapaFP.jpg', array('style' => 'float: left; height: 90px; margin: 0px 10px 0px 0px;')); ?>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
-                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                    nisi ut aliquip ex ea commodo consequat. 
+                    Información estadística de la Educación Técnico Profesional. Las fuentes de información son: 1) el Relevamiento Anual llevado
+a cabo por la Dirección Nacional de Información y Evaluación de la Calidad
+Educativa (DINIECE) del Ministerio de Educación de la Nación, y 2) la información
+presentada por las instituciones educativas a la base de datos del Registro Federal de
+Instituciones de Educación Técnica Profesional (RFIETP).
                 </p>
                 <div class="clear"></div>
                 <ul class="ul-horizontal" style="text-align: right">
