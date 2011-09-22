@@ -228,7 +228,7 @@ Instituciones de Educación Técnica Profesional (RFIETP).
                 </div>
                 <div id="ver-oferta-sec" class="descargas-container" style="">
                     <div style="width: 57%; float: left;">
-                        <h3>Escuelas Secundarias de Formación Técnica Profesional</h3>
+                        <h3>Escuelas Secundarias de Educación Técnica Profesional</h3>
                         <a onclick="changeMap(this, 'mapaSecNavegador', 'mapaSec')" href="#">Navegar mapa</a>
                         <div id="mapaSec">
                             <? echo $html->image('home/mapaSec2011.jpg', array('usemap' => '#mapSec', 'class'=>'mapa')); ?> 
