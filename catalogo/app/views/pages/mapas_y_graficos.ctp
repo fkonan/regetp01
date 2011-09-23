@@ -4,11 +4,13 @@ echo $javascript->link(array(
     'jquery.mousewheel.min',
     'mapbox.min',
     'jquery.blockUI',
-    'jquery.maphilight.min'
+    'jquery.maphilight.min', 
+    'https://www.google.com/jsapi'
 ));
 echo $html->css('catalogo.estaticas');
 ?>
 <script type="text/javascript">
+	google.load("visualization", "1", {packages:["corechart"]});
     function changeMap(element, id1, id2) {
         jQuery("#"+id1).toggle();
         jQuery("#"+id2).toggle();
@@ -49,24 +51,23 @@ echo $html->css('catalogo.estaticas');
         return false;
     }
     
-    function viewGrafico(srcGrafico, titulo, width) {
-        var dialog = jQuery('<div id="create_dialog"></div>')
-        .html('<img src="'+srcGrafico+'" />')
-        .dialog({
-            width: width,
-            //position: 'top',
-            zIndex: 3999,
-            title: titulo,
-            draggable: false,
-            modal: true,
-            resizable: false,
-            beforeclose: function(event, ui) {
-                jQuery(".ui-dialog").remove();
-                jQuery("#create_dialog").remove();
-            }
-        });
+    function crear_cuadro(id, raw_data){
+    	var data = new google.visualization.DataTable();
+	    data.addColumn('string', 'Sector');
+        data.addColumn('number', 'Cantidad');
+	    data.addRows(raw_data);
+	    data.sort({column: 1, desc: true});
 
-        return false;
+		$("#"+id).click(function(){popupCuadro(raw_data)});	    
+	    var chart = new google.visualization.BarChart(document.getElementById(id));
+		chart.draw(data, {width: 307, 
+						  height: 600, 
+						  title: 'Alumnos matriculados por sector socioproductivo (***)',
+						  legend:'none', 
+						  chartArea: {left:100,top:60,width:"90%",height:"85%"}, 
+						  colors:["#0082CA"],
+						  });
+
     }
     
     jQuery(document).ready(function(){
@@ -98,7 +99,84 @@ echo $html->css('catalogo.estaticas');
         });
 
         //jQuery("#LinkNavegarMapaSup").click(changeMap('mapaSupNavegador', 'mapaSup'));
-         
+        
+		data_sup = [["Administración", 46101 ],
+					["Salud", 32913 ],
+					["Informática", 22716 ],
+					["Seguridad, Ambiente e Higiene", 1115 ],
+					["Agropecuario", 11133 ],
+					["Industria Gráfica y Multimedial", 11049 ],
+					["Turismo", 10884 ],
+					["Gastronomía y Hotelería", 9000 ],
+					["Actividades Artísticas Técnicas", 4432 ],
+					["Electrónica", 4163 ],
+					["Industria de la Alimentación", 3227 ],
+					["Textil e Indumentaria", 2259 ],
+					["Electromecánica", 1785 ],
+					["Industria de Procesos", 1714 ],
+					["Construcción", 1298 ],
+					["Minería e Hidrocarburos", 1089 ],
+					["Automotriz", 880 ],
+					["Energía", 386 ],
+					["Energia Eléctrica", 253 ],
+					["Madera y Mueble", 204 ],
+					["Mecánica Metalmecánica y Metalurgia", 167 ],
+					["Naval", 121 ],
+					["Estética Profesional", 51]];
+		
+		data_sec = [["Electromecánica", 72378 ],
+					["Agropecuario", 40897 ],
+					["Construcción", 32458 ],
+					["Informática", 27001 ],
+					["Administración", 26253 ],
+					["Electrónica", 22105 ],
+					["Industria de Procesos", 20623 ],
+					["Automotriz", 8043 ],
+					["Mecánica, Metalmecánica y Metalurgia", 665 ],
+					["Industria de la Alimentación", 6153 ],
+					["Energia Eléctrica", 4781 ],
+					["Industria Gráfica y Multimedial", 4313 ],
+					["Aeronáutica", 3058 ],
+					["Turismo", 2951 ],
+					["Seguridad, Ambiente e Higiene", 2273 ],
+					["Minería e Hidrocarburos", 203 ],
+					["Actividades Artísticas Técnicas", 992 ],
+					["Salud", 689 ],
+					["Naval", 550 ],
+					["Textil e Indumentaria", 327 ],
+					["Madera y Mueble", 314 ],
+					["Gastronomía y Hotelería", 227 ],
+					["Energía", 206 ]];
+					
+		data_fp = [["Informática", 94269 ],
+					["Textil e Indumentaria", 57633 ],
+					["Gastronomía y Hotelería", 55001 ],
+					["Construcción", 47042 ],
+					["Administración", 31460 ],
+					["Energia Eléctrica", 29748 ],
+					["Estética Profesional", 28966 ],
+					["Automotriz", 22440 ],
+					["Agropecuario", 22215 ],
+					["Mecánica, Metalmecánica y Metalurgia", 2821 ],
+					["Madera y Mueble", 19032 ],
+					["Industria Gráfica y Multimedial", 18521 ],
+					["Actividades Artísticas Técnicas", 15639 ],
+					["Electrónica", 13288 ],
+					["Industria de la Alimentación", 11933 ],
+					["Idioma", 10057 ],
+					["Electromecánica", 6224 ],
+					["Seguridad, Ambiente e Higiene", 113 ],
+					["Cuero y Calzado", 3855 ],
+					["Turismo", 3707 ],
+					["Salud", 3243 ],
+					["Industria de Procesos", 2755 ],
+					["Aeronáutica", 141 ],
+					["Minería e Hidrocarburos", 91 ],
+					["Energía", 76 ]];
+					
+		crear_cuadro('grafico_sup', data_sup);
+		crear_cuadro('grafico_sec', data_sec);
+		crear_cuadro('grafico_fp', data_fp);
     })
 </script>
 <div class="grid_12">
@@ -203,25 +281,11 @@ Instituciones de Educación Técnica Profesional (RFIETP).
                             <li>176.817 alumnos matriculados (**)</li>
                         </ul>
                         <br/>
-                        <h3>Porcentaje de alumnos matriculados por sector socioproductivo (***)</h3>
                         <div>
-                            <? echo $html->image('home/graficoNivelSuperior.png', array('class' => 'grafico_barras docimg', 'onclick' => 'viewGrafico(this.src, "Nivel Superior", 670)', 'style' => 'width:307px; cursor:pointer;')); ?>
+                            <? //echo $html->image('home/graficoNivelSuperior.png', array('class' => 'grafico_barras docimg', 'onclick' => 'viewGrafico(this.src, "Nivel Superior", 670)', 'style' => 'width:307px; cursor:pointer;')); ?>
+                            <div id="grafico_sup" ></div>
                         </div>
                         <br/>
-                        <h3>Buscador</h3>
-                        <div class="boxgris boxoferta">
-                            <h4><?php echo $html->link('Nivel Superior Técnico', array('controller' => 'titulos', 'action' => 'search', SUP_TEC_ID)); ?></h4>
-
-                            <?php
-                            echo $html->link('más información', array('controller' => 'titulos', 'action' => 'search', SUP_TEC_ID), array('class' => 'mas_info_azul'));
-                            ?>
-                            <ul style="margin-left: 0px; padding-left: 17px;">
-                                <li>Requisitos de ingreso: Secundaria completa</li>
-                                <li>Duración: 3 o 4 años</li>
-                                <li>Título otorgado: Técnico Superior (en distintas especialidades).</li>
-                            </ul>
-                            <br />
-                        </div>
                     </div>
                     <div class="clear"></div>
 
@@ -302,25 +366,11 @@ Instituciones de Educación Técnica Profesional (RFIETP).
                             <li>610.899 alumnos matriculados (**)</li>
                         </ul>
                         <br/>
-                        <h3>Porcentaje de alumnos matriculados por sector socioproductivo (***)</h3>
                         <div>
-                            <? echo $html->image('home/graficoNivelSecundario.png', array('class' => 'ver_grafico_barras docimg', 'onclick' => 'viewGrafico(this.src, "Nivel Secundario", 670)', 'style' => 'width:307px; cursor:pointer;')); ?>
+                            <? //echo $html->image('home/graficoNivelSecundario.png', array('class' => 'ver_grafico_barras docimg', 'onclick' => 'viewGrafico(this.src, "Nivel Secundario", 670)', 'style' => 'width:307px; cursor:pointer;')); ?>
+                            <div id="grafico_sec"></div>
                         </div>
                         <br/>
-                        <h3>Buscador</h3>
-                        <div class="boxgris boxoferta">
-                            <h4><?php echo $html->link('Nivel Secundario Técnico', array('controller' => 'titulos', 'action' => 'search', SEC_TEC_ID)); ?></h4>
-
-                            <?php
-                            echo $html->link('más información', array('controller' => 'titulos', 'action' => 'search', SEC_TEC_ID), array('class' => 'mas_info_azul'));
-                            ?>
-                            <ul style="margin-left: 0px; padding-left: 17px;">
-                                <li>Requisitos de ingreso: Primaria completa</li>
-                                <li>Duración: 6 o 7 años</li>
-                                <li>Título otorgado: Técnico (en distintas especialidades).</li>
-                            </ul>
-                            <br />
-                        </div>
                     </div>
                     <div class="clear"></div>
 
@@ -402,24 +452,11 @@ Instituciones de Educación Técnica Profesional (RFIETP).
                             <li>235.656 alumnos matriculados (**)</li>
                         </ul>
                         <br/>
-                        <h3>Porcentaje de alumnos matriculados por sector socioproductivo (***)</h3>
                         <div>
-                            <p style="color:red"> Falta Gráfico </p>
                             <? //echo $html->image('home/graficoFP.png', array('class' => 'docimg', 'style' => 'width:307px')); ?>
+                            <div id="grafico_fp"></div>
                         </div>
                         <br/>
-                        <h3>Buscador</h3>
-                        <div class="boxgris boxoferta">
-                            <h4><?php echo $html->link('Formación Profesional', array('controller' => 'titulos', 'action' => 'search', FP_ID)); ?></h4>
-                            <?php
-                            echo $html->link('más información', array('controller' => 'titulos', 'action' => 'search', FP_ID), array('class' => 'mas_info_azul'));
-                            ?>
-
-                            <ul style="margin-left: 0px; padding-left: 17px;">
-                                <li>Requisitos de ingreso y duración variables</li>
-                                <li>Certificaciones: <br />Certificados de Formación Profesional, Certificados de Formación Continua, Certificados de Capacitación Laboral.</li>
-                            </ul>
-                        </div>
                     </div>
                     <div class="clear"></div>
                 </div>
