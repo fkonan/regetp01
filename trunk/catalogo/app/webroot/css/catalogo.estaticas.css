@@ -1,6 +1,11 @@
 /*
 BUSCADORES
 */
+area{
+    cursor: hand;
+    cursor: pointer;
+}
+
 
 .boxblanca .mas_info_gris, .boxblanca .mas_info_azul,
 .boxgris .mas_info_azul, .boxgris .mas_info_azul{
