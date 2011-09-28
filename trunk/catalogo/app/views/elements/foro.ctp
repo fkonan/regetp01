@@ -2,7 +2,7 @@
 <div style="padding-bottom: 10px;">
     <div id="<?php echo $foroName; ?>" class=""></div>
 
-    <h3>Foro del Sector</h3>
+    <h3>Foro</h3>
     <?php
     $i = 0;
     if (!empty($participantes) && count($participantes) > 0) {?>
