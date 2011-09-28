@@ -640,7 +640,7 @@ class TitulosController extends AppController {
         $bySession = false;
         $bloquearOferta = false;
         // si existe búsqueda en Session, realiza búsqueda
-        if ($this->Session->read($this->sesNames['nombre'])) {
+        /*if ($this->Session->read($this->sesNames['nombre'])) {
             $this->data['Titulo']['tituloName'] = $this->passedArgs['tituloName'] = $this->Session->read($this->sesNames['nombre']);
             $bySession = true;
         }
@@ -680,7 +680,7 @@ class TitulosController extends AppController {
         }
         if ($this->Session->read($this->sesNames['page'])) {
             $bySession = true;
-        }
+        }*/
 
         $this->set('bySession', $bySession);
         $this->set('sectores', $this->Titulo->Sector->find('list'));
