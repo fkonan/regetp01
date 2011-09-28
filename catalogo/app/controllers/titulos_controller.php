@@ -404,14 +404,13 @@ class TitulosController extends AppController {
         $url_conditions = array();
         $filtros = array();
 
-        if (!empty($this->data)) {
-            // si se realizó una búsqueda se limpia la session
-            foreach ($this->sesNames as $sesName) {
-                if ($sesName != $this->sesNames['page']) {
-                    $this->Session->write($sesName, '');
-                }
+        // si se realizó una búsqueda se limpia la session
+        foreach ($this->sesNames as $sesName) {
+            if ($sesName != $this->sesNames['page']) {
+                $this->Session->write($sesName, '');
             }
-
+        }
+        if (!empty($this->data)) {
             if (!empty($this->data['Titulo']['busquedanueva']) && !$this->data['Titulo']['bysession']) {
                 $this->Session->write($this->sesNames['page'], '');
             }
