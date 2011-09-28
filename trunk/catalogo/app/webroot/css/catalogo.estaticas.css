@@ -1,11 +1,15 @@
 /*
 BUSCADORES
 */
-area{
-    cursor: hand;
+area{    
     cursor: pointer;
+    cursor: hand;
+    background: pink;
 }
 
+area:HOVER{    
+    background-color: pink;
+}
 
 .boxblanca .mas_info_gris, .boxblanca .mas_info_azul,
 .boxgris .mas_info_azul, .boxgris .mas_info_azul{
