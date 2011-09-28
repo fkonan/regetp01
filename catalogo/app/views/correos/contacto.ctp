@@ -16,7 +16,7 @@
     <div class='boxgris' style="height: 232px">
         <h2 style="margin: 10px 20px;">Otras vías de contacto</h2>
         <p style="margin: 10px 20px;">
-            También podrá ponerse en contacto con la Unidad de Información del INET mediante las siguientes vías:
+            También podrá contactarse con la Unidad de Información del INET mediante las siguientes vías:
             <br />
             <br />
             <?php echo $html->image('emailButton.png');?>
