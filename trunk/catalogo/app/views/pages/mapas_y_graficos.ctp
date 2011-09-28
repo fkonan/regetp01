@@ -25,7 +25,7 @@ echo $html->css('catalogo.estaticas');
             Instituciones de Educación Técnica Profesional (RFIETP).
         </p>
         <div>
-            <div class="js-tabs-ofertas tabs" style="height:824px;">
+            <div class="js-tabs-ofertas tabs">
                 <ul id="ofertas-tabs" class="horizontal-shadetabs">
                     <li>
                         <a id="htab-2" href="#ver-oferta-sec">Nivel Secundario</a>
@@ -105,6 +105,9 @@ echo $html->css('catalogo.estaticas');
                                 <a class="back" href="#zoom_out">Back</a>
                             </div>
                         </div>
+                        <br />
+                        <h3> Alumnos matriculados por sector socioproductivo (***) </h3>
+                        <div id="grafico_sup"></div>
                     </div>
                     <div style="margin-left:25px; width: 35%; float: left;">
                         <h3> Datos generales </h3>
@@ -113,15 +116,7 @@ echo $html->css('catalogo.estaticas');
                             <li>57% de las instituciones son de gestión estatal (*)</li>
                             <li>176.817 alumnos matriculados (**)</li>
                         </ul>
-                        <br/>
-                        <div>
-                            <? //echo $html->image('home/graficoNivelSuperior.png', array('class' => 'grafico_barras docimg', 'onclick' => 'viewGrafico(this.src, "Nivel Superior", 670)', 'style' => 'width:307px; cursor:pointer;')); ?>
-                            <div id="grafico_sup" ></div>
-                        </div>
-                        <br/>
                     </div>
-                    <div class="clear"></div>
-
                 </div>
                 <div id="ver-oferta-sec" class="descargas-container" style="">
                     <div style="width: 57%; float: left;">
@@ -190,6 +185,9 @@ echo $html->css('catalogo.estaticas');
                                 <a class="back" href="#zoom_out">Back</a>
                             </div>
                         </div>
+                        <br />
+                        <h3> Alumnos matriculados por sector socioproductivo (***) </h3>
+                        <div id="grafico_sec"></div>
                     </div>
                     <div style="margin-left:25px; width: 35%; float: left;">
                         <h3> Datos generales </h3>
@@ -198,14 +196,7 @@ echo $html->css('catalogo.estaticas');
                             <li>87% de las instituciones son de gestión estatal (*)</li>
                             <li>610.899 alumnos matriculados (**)</li>
                         </ul>
-                        <br/>
-                        <div>
-                            <? //echo $html->image('home/graficoNivelSecundario.png', array('class' => 'ver_grafico_barras docimg', 'onclick' => 'viewGrafico(this.src, "Nivel Secundario", 670)', 'style' => 'width:307px; cursor:pointer;')); ?>
-                            <div id="grafico_sec"></div>
-                        </div>
-                        <br/>
                     </div>
-                    <div class="clear"></div>
 
                 </div>
                 <div id="ver-oferta-fp" class="descargas-container" style="">
@@ -276,6 +267,9 @@ echo $html->css('catalogo.estaticas');
                                 <a class="back" href="#zoom_out">Back</a>
                             </div>
                         </div>
+                        <br />
+                        <h3> Alumnos matriculados por sector socioproductivo (***) </h3>
+                        <div id="grafico_fp"></div>
                     </div>
                     <div style="margin-left:25px; width: 35%; float: left;">
                         <h3> Datos generales </h3>
@@ -284,15 +278,9 @@ echo $html->css('catalogo.estaticas');
                             <li>93% de las instituciones son de gestión estatal (*)</li>
                             <li>235.656 alumnos matriculados (**)</li>
                         </ul>
-                        <br/>
-                        <div>
-                            <? //echo $html->image('home/graficoFP.png', array('class' => 'docimg', 'style' => 'width:307px')); ?>
-                            <div id="grafico_fp"></div>
-                        </div>
-                        <br/>
                     </div>
-                    <div class="clear"></div>
                 </div>
+                <div class="clear"></div>
             </div>
         </div>
         <p style="font-size: 9px;">
@@ -306,5 +294,6 @@ echo $html->css('catalogo.estaticas');
             de Educación Técnico Profesional (RFIETP) Los datos corresponden a la última
             información presentada por los establecimientos al RFIETP. Información al 30/09/2011.
         </p>
+        <div class="clear"></div>
     </div>
 </div>
