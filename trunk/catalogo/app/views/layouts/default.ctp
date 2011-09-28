@@ -13,10 +13,6 @@ $javascript;
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         
-
-        <script src="<?= $this->webroot ?>js/svg/svg.js" data-path="<?=$this->webroot?>js/svg/"></script>
-        
-        
         <?php echo $html->charset(); ?>
 
         <title>
