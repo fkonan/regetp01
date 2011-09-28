@@ -58,19 +58,28 @@ area:HOVER{
 .references ul{
     font-size: 12pt;
 }
-
-.mapwrapper{ 
-        height: 700px; 
+.mapa{ 
+        margin-left: auto; 
+        margin-right: auto; 
+        text-align: center;
+    } 
+.mapwrapper{  
+        width: 487px;
         padding: 5px;
         cursor: move;
         overflow: hidden; /*keep map contents from spilling over if JS is disabled*/
         border: 1px solid #E7F3FD;
-    } 
+        margin-left: auto; 
+        margin-right: auto; 
+        text-align: center;
+        position: relative;
+} 
 .viewport{ 
         height: 688px;
         cursor: move; 
         overflow: hidden; /*keep map contents from spilling over if JS is disabled*/ 
     } 
+    
     
 .map-control {
     background: url("../img/home/map-control.png") no-repeat scroll 0 0 transparent;
@@ -121,6 +130,6 @@ area:HOVER{
     width: 21px;
 }
 
-.mapwrapper {
-    position: relative;
+.current-map-layer {
+    left: 0;
 }

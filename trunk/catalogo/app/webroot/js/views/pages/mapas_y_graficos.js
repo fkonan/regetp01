@@ -160,14 +160,15 @@ jQuery(document).ready(function(){
 
 		$("#"+id).click(function(){popupCuadro(raw_data)});	    
 	    var chart = new google.visualization.BarChart(document.getElementById(id));
-		chart.draw(data, {width: 600, 
-						  height: 700,
-                                                  backgroundColor: '#FCFDFD',
-                                                  fontSize: 11,
-						  legend:'none', 
-						  chartArea: {left:200,top:20,width:"90%",height:"85%"}, 
-						  colors:["#0082CA"]
-						  });
+		chart.draw(data, {
+                                      width: 400, 
+                                      height: 700, 
+                                      backgroundColor: '#FCFDFD',
+                                      fontSize: 11,
+                                      legend:'none', 
+                                      chartArea: {left:200,top:20,width:"90%",height:"85%"}, 
+                                      colors:["#0082CA"]
+                                  });
 
     }
     
