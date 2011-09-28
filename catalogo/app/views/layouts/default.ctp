@@ -1,8 +1,8 @@
 <?php
 
-header("Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0"); // // HTTP/1.1
-header("Pragma: no-cache");
-header("Expires: Mon, 17 Dec 2007 00:00:00 GMT"); // Date in the past
+//header("Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0"); // // HTTP/1.1
+//header("Pragma: no-cache");
+//header("Expires: Mon, 17 Dec 2007 00:00:00 GMT"); // Date in the past
 
 /* @var $html HtmlHelper */
 $html;
@@ -12,7 +12,11 @@ $javascript;
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
+        
 
+        <script src="<?= $this->webroot ?>js/svg/svg.js" data-path="<?=$this->webroot?>js/svg/"></script>
+        
+        
         <?php echo $html->charset(); ?>
 
         <title>
@@ -66,9 +70,7 @@ $javascript;
                             'media' => 'screen and (max-width: 960px)'
                             ));
         echo $html->css('catalogo.default_header');
-        ?>
-            <script src="<?= $this->webroot ?>js/svg.js" data-path="<?=$this->webroot?>" data-htc-filename="svg-htc.php"></script>
-        <? 
+
         echo $javascript->link(array(
         'jquery-1.6.2.min',
         'adapt.min.js',
@@ -79,7 +81,7 @@ $javascript;
         'jquery/jquery.superfish',
         'jquery/jquery.history',
         'views/layout/default',
-        'DD_belatedPNG_0.0.8a-min',
+//        'DD_belatedPNG_0.0.8a-min',
         ));
 
         $jsPoner = 'views'.DS.Inflector::underscore($this->name).DS.$this->action;
@@ -92,12 +94,11 @@ $javascript;
 
         ?>
         <script type="text/javascript">
-            $(function() {
-                DD_belatedPNG.fix('.inet_logo');
-            });
+//            $(function() {
+//                DD_belatedPNG.fix('.inet_logo');
+//            });
         </script>
-        <!--<script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>-->
-
+            
         
         <!--[if IE 6]>
         <?php echo $html->css('catalogo.ie6_fix');?>
