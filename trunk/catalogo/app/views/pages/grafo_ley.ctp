@@ -23,15 +23,15 @@ echo $javascript->link('animar_cuadros');
           <object data="../img/grafo.svg" type="image/svg+xml"
                  width="687" height="502" id="mySVGObject"> <!--<![endif]-->
         <!--[if lt IE 9]>
-          <object src="../img/grafo.svg" classid="image/svg+xml"
-                   id="mySVGObject"> <![endif]-->
+          <?php echo $html->image('grafo.png');?>
+        <![endif]-->
         <!--[if gte IE 9]>
           <object data="../img/grafo.svg" type="image/svg+xml"
                    id="mySVGObject"> <![endif]-->
           </object>
         </div>
         <div id="descripcion"></div>
-
+<br />
     </div>
 </div>
 

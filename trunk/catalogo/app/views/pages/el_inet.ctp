@@ -20,16 +20,24 @@ echo $javascript->link('animar_cuadros');
             
         <h3>Estructura</h3>
         <div class="centrado">
-        <!--[if !IE]>-->
-        <object data="../img/entidades.svg" type="image/svg+xml" width="700" height="400"
-                  id="mySVGObject"> <!--<![endif]-->
+                        
+            <!--[if !IE]> -->
+             <object data="<?php echo $html->url('/img/entidades.svg') ?>" type="image/svg+xml" width="700" height="400"
+                  id="mySVGObject"> 
+            </object>
+            <!-- <![endif]-->
+
+        
         <!--[if lt IE 9]>
-          <object src="../img/entidades.svg" classid="image/svg+xml"
-                  width="700" height="391" id="mySVGObject"> <![endif]-->
+          <?php echo $html->image('entidades.png');?>
+        <![endif]-->
+        
         <!--[if gte IE 9]>
-          <object data="../img/entidades.svg" type="image/svg+xml"
-                  width="700" height="391" id="mySVGObject"> <![endif]-->
-          </object>
+          <object data="<?php echo $html->url('/img/entidades.svg') ?>" type="image/svg+xml"
+                  width="700" height="400" id="mySVGObject"> 
+        </object>
+        <![endif]-->
+          
         </div>
         <div id="descripcion"></div>
                 
