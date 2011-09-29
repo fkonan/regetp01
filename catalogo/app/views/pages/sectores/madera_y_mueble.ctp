@@ -19,7 +19,7 @@ $this->pageTitle= 'Madera y Mueble';
             ),
             'docInfoSectorial' => '/files/pdfs/info_sectorial/madera y mueble.pdf',
             'fliaProfesional' => array('nombre'=>'Madera y Mueble',
-                                       'link'=>'/pages/doc_residual/flias/madera_y_mueble')
+                                       'link'=>'/pages/flias/madera_y_mueble')
         );
         echo $this->element('foro', $vops);
 		?>

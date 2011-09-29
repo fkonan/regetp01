@@ -24,7 +24,7 @@ $this->pageTitle= 'Estética Profesional';
             ),
             'docInfoSectorial' => '/files/pdfs/info_sectorial/Informe_sectorial_estetica_profesional.pdf',
             'fliaProfesional' => array('nombre'=>'Estética Profesional',
-                                       'link'=>'/pages/doc_residual/flias/estetica_profesional')
+                                       'link'=>'/pages/flias/estetica_profesional')
         );
         echo $this->element('foro', $vops);
 		?>
