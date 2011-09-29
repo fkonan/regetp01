@@ -40,10 +40,7 @@ $this->pageTitle =  $titulo['Titulo']['name'];
 
             <dt style="width: 268px;"><?php echo ($titulo['Titulo']['marco_ref']==1)? "Especialidad con marco de referencia":"Especialidad sin marco de referencia"; ?></dt>
             <dd>
-                <?php
-                if($titulo['Titulo']['marco_ref'] == 1) {
-                    echo "[".$html->link('Consultar el marco correspondiente', array('controller' => 'pages', 'action' => 'display', 'marcos'))."]";
-                } ?>
+                &nbsp;
             </dd>
         </dl>
         <br />

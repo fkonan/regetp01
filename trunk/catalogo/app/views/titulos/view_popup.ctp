@@ -15,9 +15,7 @@ jQuery(document).ready(function() {
         </li>
         <li class="">
             <strong><?php echo ($plan['Titulo']['marco_ref']==1)? "Especialidad con marco de referencia":"Especialidad sin marco de referencia"; ?></strong>
-            <?php if ($plan['Titulo']['marco_ref'] == 1) { ?>
-            [<a href="<?php echo $html->url('/pages/marcos')?>" style="color: #0082CA;">Consultar el marco correspondiente</a>]
-            <?php } ?>
+            
         </li>
         <li class="">
             <strong><?php __('Sectores / Subsectores'); ?>:</strong>
