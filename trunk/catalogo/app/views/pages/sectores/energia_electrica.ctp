@@ -18,7 +18,7 @@ $this->pageTitle= 'Energía Eléctrica';
             ),
             'docInfoSectorial' => '/files/pdfs/info_sectorial/INFORME SECTORIAL SECTOR ENERGIA ELECTRICA.pdf',
             'fliaProfesional' => array('nombre'=>'Energía Eléctrica',
-                                       'link'=>'/pages/doc_residual/flias/energia_electrica')
+                                       'link'=>'/pages/flias/energia_electrica')
         );
         echo $this->element('foro', $vops);
 		?>

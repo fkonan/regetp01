@@ -22,7 +22,7 @@ $this->pageTitle= 'Textil / Indumentaria';
             ),
             'docInfoSectorial' => '/files/pdfs/info_sectorial/sector_indumentaria.pdf',
             'fliaProfesional' => array('nombre'=>'Textil',
-                                       'link'=>'/pages/doc_residual/flias/textil')
+                                       'link'=>'/pages/flias/textil')
         );
         echo $this->element('foro', $vops);
 		?>

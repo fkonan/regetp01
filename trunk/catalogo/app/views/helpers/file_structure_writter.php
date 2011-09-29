@@ -27,6 +27,8 @@ class FileStructureWritterHelper extends AppHelper {
     // paths de cada file para poder generar su link de descarga
     var $paths = '';
     var $level = 1;
+
+    var $carpeta = "";
     
     function write($carpeta){
         return $this->getFileStructure( $this->getFiles($carpeta) );
@@ -39,6 +41,9 @@ class FileStructureWritterHelper extends AppHelper {
     
     function getFiles($carpeta, &$vArchivos = array()){
         // agarro el nombre de la carpeta que estoy leyendo
+
+        $this->carpeta = $carpeta;
+
         $carpetaSplitted = split(DS, $carpeta);
         $folderName = array_pop($carpetaSplitted);
         
@@ -123,6 +128,6 @@ class FileStructureWritterHelper extends AppHelper {
             $path .= $this->paths[$i];
         }
 
-        return $this->Html->url('/files/pdfs/' . $path . $file);
+        return $this->Html->url($this->carpeta. "/". $file);
     }
 }

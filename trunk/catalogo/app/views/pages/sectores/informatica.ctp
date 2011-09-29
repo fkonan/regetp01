@@ -27,7 +27,7 @@ $this->pageTitle= 'Informática';
             ),
             'docInfoSectorial' => '',
             'fliaProfesional' => array('nombre'=>'Informática',
-                                       'link'=>'/pages/doc_residual/flias/informatica')
+                                       'link'=>'/pages/flias/informatica')
         );
         echo $this->element('foro', $vops);
 		?>

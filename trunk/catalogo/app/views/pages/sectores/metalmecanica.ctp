@@ -22,7 +22,7 @@ $this->pageTitle= 'Metalmecánica';
             ),
             'docInfoSectorial' => '/files/pdfs/info_sectorial/madera y mueble.pdf',
             'fliaProfesional' => array('nombre'=>'Metalmecánica',
-                                       'link'=>'/pages/doc_residual/flias/metalmecanica')
+                                       'link'=>'/pages/flias/metalmecanica')
         );
         echo $this->element('foro', $vops);
 		?>
