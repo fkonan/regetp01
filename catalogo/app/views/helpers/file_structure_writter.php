@@ -128,6 +128,6 @@ class FileStructureWritterHelper extends AppHelper {
             $path .= $this->paths[$i];
         }
 
-        return $this->Html->url($this->carpeta. "/". $file);
+        return $this->Html->url("/" . $this->carpeta. "/". $file);
     }
 }
