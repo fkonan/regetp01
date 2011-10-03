@@ -240,7 +240,8 @@ class TitulosController extends AppController {
         if (!empty($this->params['criterios'])) {
             $criterios = $this->params['criterios'];
         }
-        $this->Titulo->Plan->recursive = -1;
+        
+        $this->Titulo->Plan->recursive = 1;
         $this->paginate = array(
                 'limit'    => 20,
                 'page'    => 1,
@@ -254,57 +255,33 @@ class TitulosController extends AppController {
                 'order'    => array('Plan.nombre' => 'asc'),
         );
 
+        if (isset($this->data['Instit']['jurisdiccion_id'])) {
+            if ($this->data['Instit']['jurisdiccion_id'] > 0) {
+                $this->paginate['conditions']['Instit.jurisdiccion_id'] = $this->data['Instit']['jurisdiccion_id'];
+                $jurisdiccion_id = $this->data['Instit']['jurisdiccion_id'];
+
+                if (!empty($jurisdiccion)) {
+                    $criterios['Jurisdiccion'] = $jurisdiccion['Jurisdiccion']['name'];
+                }
+            }
+            
+            $this->Session->write($this->sesNames['jurisdiccion'], $this->data['Instit']['jurisdiccion_id']);
+        }
+                
         if ($this->Session->read($this->sesNames['jurisdiccion'])) {
             $this->paginate['conditions']['Instit.jurisdiccion_id'] = $this->Session->read($this->sesNames['jurisdiccion']);
             $jurisdiccion_id = $this->Session->read($this->sesNames['jurisdiccion']);
         }
-        if (!empty($this->data['Instit']['jurisdiccion_id'])) {
-            $this->paginate['conditions']['Instit.jurisdiccion_id'] = $this->data['Instit']['jurisdiccion_id'];
-            $jurisdiccion_id = $this->data['Instit']['jurisdiccion_id'];
-
-            if (!empty($jurisdiccion)) {
-                $criterios['Jurisdiccion'] = $jurisdiccion['Jurisdiccion']['name'];
-            }
-        }
-        
-        if ($this->Session->read($this->sesNames['departamento'])) {
-            $this->Titulo->Plan->Instit->Departamento->recursive = 0;
-            $departamento = $this->Titulo->Plan->Instit->Departamento->findById($this->Session->read($this->sesNames['departamento']));
-
-            if (!empty($departamento)) {
-                if ($departamento['Departamento']['jurisdiccion_id'] == $this->data['Instit']['jurisdiccion_id']) {
-                    $criterios['Departamento'] = $departamento['Departamento']['name'];
-                    $this->paginate['conditions']['Instit.departamento_id'] = $this->Session->read($this->sesNames['departamento']);
-                }
-            }
-        }
-        
-        if ($this->Session->read($this->sesNames['localidad'])) {
-            $this->Titulo->Plan->Instit->Localidad->recursive = 0;
-            $localidad = $this->Titulo->Plan->Instit->Localidad->findById($this->Session->read($this->sesNames['localidad']));
-
-            if (!empty($localidad)) {
-                if ($localidad['Departamento']['jurisdiccion_id'] == $this->data['Instit']['jurisdiccion_id']) {
-                    $criterios['Localidad'] = $localidad['Localidad']['name'];
-                    $this->paginate['conditions']['Instit.localidad_id'] = $this->Session->read($this->sesNames['localidad']);
-                }
-            }
-        }
-
-
-        /*if ($this->Session->read($this->sesNames['departamento'])) {
-            $this->paginate['conditions']['Instit.departamento_id'] = $this->Session->read($this->sesNames['departamento']);
-        }
-        if ($this->Session->read($this->sesNames['localidad'])) {
-            $this->paginate['conditions']['Instit.localidad_id'] = $this->Session->read($this->sesNames['localidad']);
-        }*/
 
         $planes = $this->paginate('Plan');
+        
+        $jurisdicciones = $this->Titulo->Plan->Instit->Jurisdiccion->find('list');
         
         $this->set('criterios', $criterios);
         $this->set('planes', $planes);
         $this->set('id', $id);
         $this->set('jurisdiccion_id', $jurisdiccion_id);
+        $this->set('jurisdicciones', $jurisdicciones);
     }
 
 

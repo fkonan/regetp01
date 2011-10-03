@@ -21,7 +21,7 @@ $paginator->options(array(
                                                                       'div' => false,
                                                                       'class' => 'autosubmit ',
                                                                       'value' => $jurisdiccion_id,
-                                                                      'empty' => array(''=>'Todas'),
+                                                                      'empty' => array('0'=>'Todas'),
                                                                       'id'=>'jurisdiccion_id'));
         echo $form->end();
         ?>
@@ -55,15 +55,17 @@ $paginator->options(array(
             <? $class = ($sort == 'Instit.cue')?'marcada':'';?>
             <span class="<?= $class?>"><?php echo $paginator->sort('CUE','Instit.cue');?></span>,
 
-            <? $class = ($sort == 'Localidad.name')?'marcada':'';?>
-            <span class="<?= $class?>"><?php echo $paginator->sort('Localidad','Localidad.name');?></span>,
+            <? $class = ($sort == 'Instit.localidad_id')?'marcada':'';?>
+            <span class="<?= $class?>"><?php echo $paginator->sort('Localidad','Instit.localidad_id');?></span>,
 
-            <? $class = ($sort == 'Departamento.name')?'marcada':'';?>
-            <span class="<?= $class?>"><?php echo $paginator->sort('Departamento','Departamento.name');?></span>,
+            <? $class = ($sort == 'Instit.departamento_id')?'marcada':'';?>
+            <span class="<?= $class?>"><?php echo $paginator->sort('Departamento','Instit.departamento_id');?></span>
 
-            <? $class = ($sort == 'Jurisdiccion.name')?'marcada':'';?>
-            <span class="<?= $class?>"><?php echo $paginator->sort('Jurisdiccion','Jurisdiccion.name');?></span>
-
+            <?
+            if (empty($jurisdiccion_id)) {
+                $class = ($sort == 'Instit.jurisdiccion_id')?'marcada':'';?>
+                , <span class="<?= $class?>"><?php echo $paginator->sort('Jurisdiccion','Instit.jurisdiccion_id');?></span>
+            <?php }?>
         </div>
         <div class="paging">
             <?php echo $paginator->counter(array(
@@ -74,46 +76,50 @@ $paginator->options(array(
     <? if (!empty($planes) > 0) { ?>
         <ul id="items" class="items">
         <?php foreach($planes as $plan) : ?>
-        <?  $año_actual = date("Y");
-        $fecha_hasta = "$año_actual-07-21"; //hasta julio
-        $fecha_desde = "$año_actual-01-01"; //desde enero
-        $clase = '';
-        if($plan['Instit']['activo']) {
-        $clase .= ' escuela_activa';
-        }else {
-        $clase .= ' escuela_inactiva';
-        }
-        ?>
-        <li>
-            <a href="<?php echo $html->url(array(
-                                    'controller' => 'instits',
-                                    'action' => 'view',
-                                    'id' => $plan['Instit']['id'],
-                                    'slug' => slug($plan['Instit']['nombre_completo'])))
-                    ?>" 
-                    class="linkconatiner-more-info">
-                
-                <span class="items-nombre">
-                    <?= "".($plan['Instit']['cue']*100)+$plan['Instit']['anexo']." - ". $plan['Instit']['nombre_completo']; ?>
-                    
-                    <br />
-                    <span class="items-gestion"><?= $plan['Instit']['Gestion']['name'] ?></span>
-                    <span class="items-domicilio">
-                    &nbsp;-
-                    Domicilio:
-                        <?php
-                        echo joinNotNull(", ", array($plan['Instit']['direccion'],$plan['Instit']['lugar'],
-                        $plan['Instit']['Localidad']['name'],
-                        $plan['Instit']['Departamento']['name'] == $plan['Instit']['Localidad']['name']?null:$plan['Instit']['Departamento']['name'],
-                        $plan['Instit']['Jurisdiccion']['name']));
-                        ?>
-                    </span>
-                </span>                
-                
-            </a>
-        </li>
+        <?  
+        if (!empty($plan['Instit'])) {
+            $año_actual = date("Y");
+            $fecha_hasta = "$año_actual-07-21"; //hasta julio
+            $fecha_desde = "$año_actual-01-01"; //desde enero
+            $clase = '';
+            if($plan['Instit']['activo']) {
+            $clase .= ' escuela_activa';
+            }else {
+            $clase .= ' escuela_inactiva';
+            }
+            ?>
+            <li>
+                <a href="<?php echo $html->url(array(
+                                        'controller' => 'instits',
+                                        'action' => 'view',
+                                        'id' => $plan['Instit']['id'],
+                                        'slug' => slug($plan['Instit']['nombre_completo'])))
+                        ?>" 
+                        class="linkconatiner-more-info">
 
-        <? endforeach?>
+                    <span class="items-nombre">
+                        <?= "".($plan['Instit']['cue']*100)+$plan['Instit']['anexo']." - ". $plan['Instit']['nombre_completo']; ?>
+
+                        <br />
+                        <span class="items-gestion"><?= $plan['Instit']['Gestion']['name'] ?></span>
+                        <span class="items-domicilio">
+                        &nbsp;-
+                        Domicilio:
+                            <?php
+                            echo joinNotNull(", ", array($plan['Instit']['direccion'],$plan['Instit']['lugar'],
+                            $plan['Instit']['Localidad']['name'],
+                            $plan['Instit']['Departamento']['name'] == $plan['Instit']['Localidad']['name']?null:$plan['Instit']['Departamento']['name'],
+                            $plan['Instit']['Jurisdiccion']['name']));
+                            ?>
+                        </span>
+                    </span>                
+
+                </a>
+            </li>
+        <? 
+        } 
+        endforeach
+        ?>
     </ul>        
     
     <?php
