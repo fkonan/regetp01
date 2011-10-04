@@ -14,8 +14,17 @@ function animar_cuadros (id_svg,nodos,id_descripcion) {
         $(nodo).css( {cursor:'pointer'})
                .mouseenter(get_resizer(nodo, 1,1.1))
                .mouseleave(get_resizer(nodo, 1.1,1))
-               .click(getViewDescription(nodos[i]["titulo"], nodos[i]["texto"]));
+        if(nodos[i]["link"]){
+            $(nodo).click(getOpenLink(nodos[i]["link"]));
+        }else{
+            $(nodo).click(getViewDescription(nodos[i]["titulo"], nodos[i]["texto"]));    
+        }
 
+    }
+    function getOpenLink(link){
+        return function(){
+            window.open(link);
+        }
     }
     function getViewDescription(titulo, texto) {
         if(!texto){
