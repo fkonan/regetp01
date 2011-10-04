@@ -41,7 +41,7 @@ echo $javascript->link('animar_cuadros');
         </div>
         <div id="descripcion"></div>
                 
-        <h3>Propósitos</h3>
+        <!--<h3>Propósitos</h3>
 
         Los lineamientos, las estrategias y los programas llevados a cabo, a partir del trabajo 
         conjunto entre las veinticuatro jurisdicciones educativas del país y el INET están 
@@ -64,26 +64,7 @@ echo $javascript->link('animar_cuadros');
                 actualizar sus modelos institucionales y estrategias de intervención aproximándola a 
                 estándares internacionales de calidad.
             </li>
-        </ol>
-        <h3>Ideas eje</h3>
-        <ol>
-            <li>Carácter estratégico de la educación técnico profesional para el desarrollo social
-    y el crecimiento económico.
-            </li>
-            <li>Vinculación con los sectores de la ciencia y la tecnología, el trabajo y la
-    producción.
-            </li>
-            <li>Relevancia y pertinencia con necesidades sociales y productivas ? sectorial y
-    territorial ?.
-            </li>
-            <li>Efectividad político-técnica de la acción conjunta con las jurisdicciones
-    educativas, en el marco de los acuerdos federales.
-            </li>
-            <li>Integración sistémica y calidad de las instituciones y las trayectorias formativas.
-            </li>
-            <li>Inversión sostenida para la mejora continua de la educación técnico profesional.
-            </li>
-        </ol>
+        </ol>-->
     </div>
 </div>
 
