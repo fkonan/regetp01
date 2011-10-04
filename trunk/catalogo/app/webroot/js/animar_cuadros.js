@@ -11,9 +11,11 @@ function animar_cuadros (id_svg,nodos,id_descripcion) {
     var len = nodos.length;
     for(var i = 0; i<len ; i++){
         var nodo = doc.getElementById(nodos[i]["id"]);
-        $(nodo).mouseenter(get_resizer(nodo, 1,1.1))
-        .mouseleave(get_resizer(nodo, 1.1,1))
-        .click(getViewDescription(nodos[i]["titulo"], nodos[i]["texto"]));
+        $(nodo).css( {cursor:'pointer'})
+               .mouseenter(get_resizer(nodo, 1,1.1))
+               .mouseleave(get_resizer(nodo, 1.1,1))
+               .click(getViewDescription(nodos[i]["titulo"], nodos[i]["texto"]));
+
     }
     function getViewDescription(titulo, texto) {
         if(!texto){
@@ -43,8 +45,6 @@ function animar_cuadros (id_svg,nodos,id_descripcion) {
 
     function get_resizer(nodo, scaleFrom, scaleTo, text){        
         return function(){
-            $(nodo).css( {cursor:'hand'});
-            $(nodo).css( {cursor:'pointer'});
             if(text){
                 $("#" + id_descripcion).hide().text(text).fadeIn("fast");
             }else{
