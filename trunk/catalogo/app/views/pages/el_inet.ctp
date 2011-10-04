@@ -61,11 +61,11 @@ echo $javascript->link('animar_cuadros');
     /*texto temporal*/
     var lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas erat lacus, facilisis sed scelerisque dictum, accumsan eu nunc. Maecenas sed ligula sed quam luctus consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.";
     var nodos = [
-      {id:"g_ministerio", titulo: "Ministerio de Educación", texto:lorem},
-      {id:"g_consejo_educ", titulo: "Consejo Federal de Educación", texto:"Ámbito de concertación, acuerdo y coordinación de la política educativa nacional, presidido por el Ministro de Educación Nacional e integrado por las autoridades educativas de las 23 provincias argentinas y de la Ciudad Autónoma de Buenos Aires."},
+      {id:"g_ministerio", titulo: "Ministerio de Educación", link:"http://www.me.gov.ar/"},
+      {id:"g_consejo_educ", titulo: "Consejo Federal de Educación", texto:"Ámbito de concertación, acuerdo y coordinación de la política educativa nacional, presidido por el Ministro de Educación Nacional e integrado por las autoridades educativas de las 23 provincias argentinas y de la Ciudad Autónoma de Buenos Aires.<br/><a href='http://portal.educacion.gov.ar/consejo'>Link</a>"},
       {id:"g_secretaria_educ", texto:lorem},
       {id:"g_secretaria_politicas", texto:lorem},
-      //{id:"g_inet", texto:lorem},
+      {id:"g_inet", link:"http://www.inet.edu.ar/"},
       {id:"g_consejo_etp", titulo: "Consejo Nacional", texto:"Consejo asesor del Ministerio de Educación Nacional integrado por representantes de los Ministerios de Trabajo, Ciencia y Tecnología, Economía, Producción, cámaras y asociaciones empresarias, sindicatos y gremios sectoriales y docentes, colegios profesionales de técnicos."},
       {id:"g_comision_etp", titulo: "Comisión Federal", texto:"Espacio de trabajo conjunto con los equipos político-técnicos de las 23 provincias argentinas y de la Ciudad Autónoma de Buenos Aires."}
     ];
