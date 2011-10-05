@@ -13,15 +13,22 @@ $this->pageTitle = "Inicio";
         <h2>El Instituto Nacional de Educación Tecnológica</h2>
         <div class="boxcontent">
             <div class="picround" style="margin-right: 10px;">
-            <?php echo $html->image('material/soldadura.jpg', array('style' => "float: left; height: 120px;" )) ?> 
+            <?php echo $html->image('material/netbooks-a-alumnos-de-corrientes.jpg', array('style' => "float: left; height: 120px;" )) ?> 
             </div>
 
             <p style="margin-top:0px">
-               Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
-                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                    nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
-                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                    nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+               El INET es el ámbito del Ministerio de Educación que tiene a su cargo la coordinación de la
+aplicación de las políticas públicas de manera concertada y concurrente con las provincias y la
+Ciudad Autónoma de Buenos Aires, relativas a la educación técnico profesional en los niveles
+secundario técnico, superior técnico y de formación profesional.
+Promueve la mejora continua de la calidad de la ETP, asegurando mayores niveles de inclusión
+y adecuando en forma permanente la oferta educativa a las necesidades sociales, productivas y
+territoriales.
+La Ley de Educación Técnico Profesional 26058 en su art. 45. asigna las responsabilidades y
+funciones del organismo.
+Cuenta con dos ámbitos permanentes de consulta y acuerdo: la Comisión Federal de ETP y
+el Consejo Nacional de Educación Trabajo y Producción (CoNETyP), con quienes elabora las
+propuestas a ser presentadas para su aprobación al Consejo Federal de Educación.
             </p>
 
             <div class="clear"></div>
@@ -41,7 +48,10 @@ $this->pageTitle = "Inicio";
     <div class="boxgris box_home_buscadores">
         <h2>Buscadores</h2>
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
+            Por medio de los buscadores se facilita a los distintos usuarios una consulta ágil referida a la
+            oferta de títulos y certificados, según sectores, niveles y especialidades, así como su localización
+            en las instituciones educativas de gestión estatal y privada de las provincias y la Ciudad
+            Autónoma de Buenos Aires.
         </p>
         
         <?= $html->image('search.png', array('style'=>'float: right; position: absolute; right: 10px; width: 36px;'))?>
@@ -91,13 +101,23 @@ $this->pageTitle = "Inicio";
 -->
 <div class="grid_6 omega">
     <div class="boxblanca cifras">
-            <h2>La Educación Técnico Profesional en cifras</h2>
+        <h2>La Educación Técnico Profesional en cifras<br />&nbsp;</h2>
             <div class="boxcontent">
-                <?php echo $html->image('mapaFP.jpg', array('style' => 'float: left; height: 90px; margin: 0px 10px 0px 0px;')); ?>
+               
+               
                 <p>
-                    Información estadística de la Educación Técnico Profesional. Las fuentes de información son: 1) el Relevamiento Anual llevado
+                    Información estadística de la Educación Técnico Profesional. 
+                </p>
+                <p>
+                    Las fuentes de información son: 
+                </p>
+                 <?php echo $html->image('mapaFP.jpg', array('style' => 'float: left; margin: 0px 10px 0px 0px; height: 196px;')); ?>
+                <p>                    
+                    1) el Relevamiento Anual llevado
 a cabo por la Dirección Nacional de Información y Evaluación de la Calidad
-Educativa (DINIECE) del Ministerio de Educación de la Nación, y 2) la información
+Educativa (DINIECE) del Ministerio de Educación de la Nación, y 
+<br /><br />
+                    2) la información
 presentada por las instituciones educativas a la base de datos del Registro Federal de
 Instituciones de Educación Técnica Profesional (RFIETP).
                 </p>
