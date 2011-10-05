@@ -1,9 +1,5 @@
 //$(document).ready(function(){
 (function($){    
-    if($('#jurisdiccion_id').val() != 0){
-        $depto_aux = $('#departamento_id').val();
-        reloadCombo($('#jurisdiccion_id').val(), $depto_aux);
-    }
 
     $('#SectorId').change(function(){
         var url = urlDomain+'/subsectores/ajax_select_subsector_form_por_sector';
