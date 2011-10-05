@@ -123,8 +123,12 @@ class TitulosController extends AppController {
         $sectores = $this->Titulo->Sector->find('list',array('order'=>'Sector.name'));
 
         $subsectores = array();
+        $sectAux = 0;
+        if(!empty($getParams['sector_id'])) {
+                $sectAux = $getParams['sector_id'];
+        }
         if (empty($subsectores)) {
-            $subsectores = $this->Titulo->Subsector->con_sector('list');
+            $subsectores = $this->Titulo->Subsector->con_sector('list', $sectAux);
         }
 
         $this->Titulo->Plan->Instit->Jurisdiccion->recursive = -1;
@@ -133,7 +137,12 @@ class TitulosController extends AppController {
 
         // que me liste todos los detarpamentos
         $this->Titulo->Plan->Instit->Departamento->recursive = -1;
-        $departamentos = $this->Titulo->Plan->Instit->Departamento->con_jurisdiccion('list');
+        
+        $jurAux = 0;
+        if(!empty($getParams['jurisdiccion_id'])) {
+                $jurAux = $getParams['jurisdiccion_id'];
+        }
+        $departamentos = $this->Titulo->Plan->Instit->Departamento->con_jurisdiccion('list', $jurAux);
         //$departamentos = array();
 
 
