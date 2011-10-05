@@ -171,7 +171,12 @@ class InstitsController extends AppController {
             $this->set('localidad', $localidad);
             $this->set('vino_formulario', $vino_formulario);
             $this->set('jurisdicciones', $this->Instit->Jurisdiccion->find('list'));
-            $this->set('departamentos', $this->Instit->Departamento->con_jurisdiccion('list'));
+            
+            $jurAux = 0;
+            if(!empty($this->data['Instit']['jurisdiccion_id'])) {
+                    $jurAux = $this->data['Instit']['jurisdiccion_id'];
+            }
+            $this->set('departamentos', $this->Instit->Departamento->con_jurisdiccion('list', $jurAux));
     }
     
     
