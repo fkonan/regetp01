@@ -123,9 +123,11 @@ presentada por las instituciones educativas a la base de datos del Registro Fede
 Instituciones de Educación Técnica Profesional (RFIETP).
                 </p>
                 <div class="clear"></div>
+                <div class="clear" style="height: 33px;"></div>
                 <ul class="ul-horizontal" style="text-align: right">
                     <li><?php echo $html->link('Ver más', array('controller' => 'pages', 'action' => 'mapas_y_graficos')); ?></li>
                 </ul>
+                
             </div>
     </div>
 </div>
