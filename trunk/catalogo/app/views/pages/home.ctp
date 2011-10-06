@@ -68,6 +68,7 @@ propuestas a ser presentadas para su aprobación al Consejo Federal de Educación.
 <div class="grid_6 alpha">
     <div class="boxblanca politicas">
             <h2>Las políticas para la Educación Técnico Profesional en Argentina</h2>
+            <h3>Ideas Eje</h3>
             <div class="boxcontent">
                 <p>
                     <ol>
