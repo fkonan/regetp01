@@ -16,20 +16,20 @@ $this->pageTitle = "Inicio";
             <?php echo $html->image('material/netbooks-a-alumnos-de-corrientes.jpg', array('style' => "float: left; height: 120px;" )) ?> 
             </div>
 
-            <p style="margin-top:0px">
+            <div>
                El INET es el ámbito del Ministerio de Educación que tiene a su cargo la coordinación de la
 aplicación de las políticas públicas de manera concertada y concurrente con las provincias y la
 Ciudad Autónoma de Buenos Aires, relativas a la educación técnico profesional en los niveles
-secundario técnico, superior técnico y de formación profesional.
+secundario técnico, superior técnico y de formación profesional.<br />
 Promueve la mejora continua de la calidad de la ETP, asegurando mayores niveles de inclusión
 y adecuando en forma permanente la oferta educativa a las necesidades sociales, productivas y
-territoriales.
+territoriales.<br/>
 La Ley de Educación Técnico Profesional 26058 en su art. 45. asigna las responsabilidades y
 funciones del organismo.
 Cuenta con dos ámbitos permanentes de consulta y acuerdo: la Comisión Federal de ETP y
 el Consejo Nacional de Educación Trabajo y Producción (CoNETyP), con quienes elabora las
 propuestas a ser presentadas para su aprobación al Consejo Federal de Educación.
-            </p>
+            </div>
 
             <div class="clear"></div>
 
@@ -54,7 +54,7 @@ propuestas a ser presentadas para su aprobación al Consejo Federal de Educación.
             Autónoma de Buenos Aires.
         </p>
         
-        <?= $html->image('search.png', array('style'=>'float: right; position: absolute; right: 10px; width: 36px;'))?>
+        <?= $html->image('search.png', array('style'=>'float: right; position: absolute; right: 10px; width: 36px; bottom: -7px'))?>
         <ul>
             <li><?php echo $html->link('Realizar búsquedas', array('controller' => 'pages', 'action' => 'buscadores')); ?></li>
         </ul>
