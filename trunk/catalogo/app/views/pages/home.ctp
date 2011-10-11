@@ -13,7 +13,7 @@ $this->pageTitle = "Inicio";
         <h2>El Instituto Nacional de Educación Tecnológica</h2>
         <div class="boxcontent">
             <div class="picround" style="margin-right: 10px;">
-            <?php echo $html->image('material/netbooks-a-alumnos-de-corrientes.jpg', array('style' => "float: left; height: 120px;" )) ?> 
+            <?php echo $html->image('fotoinet.gif', array('style' => "float: left; height: 120px;" )) ?> 
             </div>
 
             <div>
