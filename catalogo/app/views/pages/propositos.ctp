@@ -7,7 +7,7 @@
         Los lineamientos, las estrategias y los programas llevados a cabo, a partir del trabajo 
         conjunto entre las veinticuatro jurisdicciones educativas del país y el INET están 
         orientados a:
-        <ol>
+        <ul>
             <li>Fortalecer, en términos de calidad y pertinencia, la educación técnico profesional 
                 para favorecer procesos de inclusión social y facilitar la incorporación de la juventud al 
                 mundo del trabajo y la formación continua de los adultos a lo largo de su vida activa, y 
@@ -25,6 +25,6 @@
                 actualizar sus modelos institucionales y estrategias de intervención aproximándola a 
                 estándares internacionales de calidad.
             </li>
-        </ol>
+        </ul>
     </div>
 </div>

@@ -20,7 +20,7 @@ echo $javascript->link('animar_cuadros');
         Los lineamientos, las estrategias y los programas llevados a cabo a partir del trabajo conjunto,
         de carácter federal, entre las veinticuatro jurisdicciones educativas y el Instituto Nacional de
         Educación Tecnológica están orientados a:
-        <ol>
+        <ul>
             <li>Fortalecer, en términos de calidad y pertinencia, la educación técnico profesional
                 para favorecer procesos de inclusión social y facilitar la incorporación de la juventud al
                 mundo del trabajo y la formación continua de los adultos a lo largo de su vida activa,
@@ -36,7 +36,7 @@ echo $javascript->link('animar_cuadros');
                 en términos de desarrollo social y económico, valorar su estatus social y educativo,
                 actualizar sus modelos institucionales y estrategias de intervención aproximándola a
                 estándares internacionales de calidad.</li>
-        </ol>
+        </ul>
         
         La Ley de Educación Técnico Profesional, sancionada en 2005, expresa tales políticas a
         través de la creación de tres instrumentos de regulación y de un fondo de inversión que

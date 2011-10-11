@@ -3,7 +3,7 @@
 <div class="boxblanca boxdocs">
 
     <h1>Ideas eje</h1>
-    <ol>
+    <ul>
         <li>Carácter estratégico de la educación técnico profesional para el desarrollo social
 y el crecimiento económico.
         </li>
@@ -20,5 +20,5 @@ educativas, en el marco de los acuerdos federales.
         </li>
         <li>Inversión sostenida para la mejora continua de la educación técnico profesional.
         </li>
-    </ol>
+    </ul>
 </div>

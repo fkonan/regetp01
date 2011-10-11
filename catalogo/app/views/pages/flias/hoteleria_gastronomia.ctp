@@ -5,90 +5,92 @@
     <table>
       <thead>
         <tr>
-          <th>Agrupamiento de figuras</th>
-          <th>Figuras formativas</th>
-          <th>Perfiles de referencia</th>
-          <th>Fecha de aprobación*</th>
-        </tr>
+        <th>Agrupamiento</th>
+        <th>Figura Formativa</th>
+        <th>Perfiles de referencia</th>
+        <th></th>
+            </tr>
       </thead>
-    <TR>
-      <TD ROWSPAN=9>Gastronomía</TD>
-      <TD><FONT>Mozo </FONT></TD>
-      <TD><BR></TD>
-      <TD><BR></TD>
-    </TR>
-    <TR>
-      <TD><FONT>Bartender </FONT></TD>
-      <TD><BR></TD>
-      <TD><BR></TD>
-    </TR>
-    <TR>
-      <TD><FONT>Sommelier </FONT></TD>
-      <TD><BR></TD>
-      <TD><BR></TD>
-    </TR>
-    <TR>
-      <TD><FONT>Especialista en Sommellerie </FONT></TD>
-      <TD><BR></TD>
-      <TD><BR></TD>
-    </TR>
-    <TR>
-      <TD><FONT>Cocinero </FONT></TD>
-      <TD><BR></TD>
-      <TD><BR></TD>
-    </TR>
-    <TR>
-      <TD><FONT>Pastelero </FONT></TD>
-      <TD><BR></TD>
-      <TD><BR></TD>
-    </TR>
-    <TR>
-      <TD><FONT>Panadero </FONT></TD>
-      <TD><BR></TD>
-      <TD><BR></TD>
-    </TR>
-    <TR>
-      <TD><FONT>Gastronómico profesional </FONT></TD>
-      <TD><BR></TD>
-      <TD><BR></TD>
-    </TR>
-    <TR>
-      <TD><FONT>Organizador de operaciones gastronómicas</FONT></TD>
-      <TD><BR></TD>
-      <TD><BR></TD>
-    </TR>
-    <TR>
-      <TD ROWSPAN=6>Hotelería</TD>
-      <TD><FONT>Mucama </FONT></TD>
-      <TD><BR></TD>
-      <TD><BR></TD>
-    </TR>
-    <TR>
-      <TD><FONT>Recepcionista </FONT></TD>
-      <TD><BR></TD>
-      <TD><BR></TD>
-    </TR>
-    <TR>
-      <TD><FONT>Ama de llaves </FONT></TD>
-      <TD><BR></TD>
-      <TD><BR></TD>
-    </TR>
-    <TR>
-      <TD><FONT>Organizador de operaciones hoteleras </FONT></TD>
-      <TD><BR></TD>
-      <TD><BR></TD>
-    </TR>
-    <TR>
-      <TD><FONT>Organizador de eventos </FONT></TD>
-      <TD><BR></TD>
-      <TD><BR></TD>
-    </TR>
-    <TR>
-      <TD><FONT>Reservas </FONT></TD>
-      <TD><BR></TD>
-      <TD><BR></TD>
-    </TR>
-  </table>
-  <p>* Es la fecha de aprobación del foro correspondiente</p>
+  <tbody>
+    <tr>
+      <td rowspan="6">Hotelería</td>
+      <td>Mucama</td>
+      <td>Mucama</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Recepcionista</td>
+      <td>Recepcionista</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Ama de llaves</td>
+      <td>Ama de llaves</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Organizador de operaciones hoteleras</td>
+      <td>Organizador de operaciones hoteleras</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Organizador de eventos</td>
+      <td>Organizador de eventos</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Reservas</td>
+      <td>Reservas</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td rowspan="9">Gastronomía</td>
+      <td>Mozo</td>
+      <td>Mozo</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Bartender</td>
+      <td>Bartender</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Sommelier</td>
+      <td>Sommelier</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Especialista en Sommellerie</td>
+      <td>Especialista en Sommellerie</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Cocinero</td>
+      <td>Cocinero</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Pastelero</td>
+      <td>Pastelero</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Panadero</td>
+      <td>Panadero</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Gastronómico profesional</td>
+      <td>Gastronómico profesional</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Organizador de operaciones gastronómicas</td>
+      <td>Organizador de operaciones gastronómicas</td>
+      <td></td>
+    </tr>S
+  </tbody>
+</table>
+
     </div>  
 </div>
