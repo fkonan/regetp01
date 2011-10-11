@@ -10,6 +10,8 @@ $this->pageTitle= 'Construcciones';
 		<?php  
         $vops = array(
             'foroName' => 'Construcciones',
+            'fliaProfesional' => array('nombre'=>'Construcciones',
+                           'link'=>'/pages/flias/construccion')
         );
         echo $this->element('foro', $vops);
 		?>
