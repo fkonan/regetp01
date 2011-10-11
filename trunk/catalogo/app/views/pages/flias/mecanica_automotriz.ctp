@@ -16,12 +16,12 @@
       <td rowspan="5">Mantenimiento y reparación de automotores</td>
       <td>Técnico superior en motores</td>
       <td>Técnico superior en motores</td>
-      <td>X</td>
+      <td></td>
     </tr>
     <tr>
       <td>Técnico en automotores</td>
       <td>Técnico en automotores</td>
-      <td>X</td>
+      <td></td>
     </tr>
     <tr>
       <td>Mecánico electrónico de automotores</td>
@@ -31,7 +31,7 @@
     <tr>
       <td>Auxiliar de Mecánico de motos</td>
       <td>Auxiliar de Mecánico de motos</td>
-      <td>X</td>
+      <td></td>
     </tr>
     <tr>
       <td>Mecánico de motos</td>
