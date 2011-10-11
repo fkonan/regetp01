@@ -5,7 +5,7 @@
     <div class="boxblanca boxdocs">
         <h1>Normativa de referencia</h1>
 
-        <ol>
+        <ul>
             <li>Ley de Educación Nacional Nº 26206</li>
             <li>Ley de Educación Técnico Profesional Nº 26058</li>
             <li>
@@ -35,6 +35,6 @@
             </li>
             
             <li>Sobre la acreditación de instituciones que dictan carreras de salud. Res. CFE Nro. 35/07.</li>
-        </ol>
+        </ul>
     </div>
 </div>

@@ -23,7 +23,7 @@
       de la certificaci&oacute;n; II.- Referencial al Perfil
       profesional; y III.-Trayectoria Formativa.</p>
 
-      <ol>
+      <ul>
         <li><strong>Identificaci&oacute;n de la
         certificaci&oacute;n</strong><b><br></b> Conforma una
         suerte de ficha clasificatoria de la certificaci&oacute;n
@@ -67,7 +67,7 @@
         componente del Marco de Referencia que establece los
         componentes curriculares m&iacute;nimos y necesarios para
         la formaci&oacute;n correspondiente. Estos son:</li>
-      </ol>
+      </ul>
 
       <div style="margin-left: 2em">
         <ul>

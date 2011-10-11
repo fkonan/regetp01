@@ -2,84 +2,81 @@
   <div id="cuerpo1" class="grid_9">
     <div class=" boxblanca boxdocs">
     <h2>Familia profesional del sector Madera y Mueble</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Agrupamiento de figuras</th>
-          <th>Figuras formativas</th>
-          <th>Perfiles de referencia</th>
-          <th>Fecha de aprobación*</th>
-        </tr>
-      </thead>
-	    <TR>
-		<TD rowspan="2">Primera Transformación</TD>
-		<TD>Auxiliar de Aserradero</TD>
-		<TD>Auxiliar de Aserradero</TD>
-		<TD>27-05-10</TD>
-	    </TR>
-	    <TR>
-		<TD>Operador de Máquina Principal de Aserradero</TD>
-		<TD>Operador de Máquina Principal de Aserradero</TD>
-		<TD>6-12-10</TD>
-	    </TR>
-	    <TR>
-		<TD rowspan="4">Segunda Transformación</TD>
-		<TD>Operador de Moldurera</TD>
-		<TD>Operador de Moldurera</TD>
-		<TD>6-12-10</TD>
-	    </TR>
-	    <TR>
-		<TD>Operador de Secado y Tratamiento Térmico de la Madera</TD>
-		<TD>Operador de Secado y Tratamiento Térmico de la Madera</TD>
-		<TD>27-05-10</TD>
-	    </TR>
-       	    <TR>
-		<TD>Operador de Protección y Preservación de la Madera</TD>
-		<TD></TD>
-		<TD></TD>
-	    </TR>
-  	    <TR>
-		<TD>Operador de Máquinas de Remanufactura de la madera</TD>
-		<TD></TD>
-		<TD></TD>
-	    </TR>
-	    <TR>
-		<TD rowspan="7">Tercera Transformación</TD>
-		<TD>Carpintero de Banco</TD>
-		<TD></TD>
-		<TD></TD>
-	    </TR>
-	    <TR>
-		<TD>Carpintero de Obra</TD>
-		<TD></TD>
-		<TD></TD>
-	    </TR>
-	    <TR>
-		<TD>Operador de Sala de Afilado (pertinente también a la primera y segunda transformación)</TD>
-		<TD>Operador de Sala de Afilado</TD>
-		<TD>6-12-10</TD>
-	    </TR>
-	    <TR>
-		<TD>Operador de Máquinas y Herramientas para manufacturas en madera</TD>
-		<TD></TD>
-		<TD></TD>
-	    </TR>
-	    <TR>
-		<TD>Operador de Tratamiento de Superficies</TD>
-		<TD></TD>
-		<TD></TD>
-	    </TR>
-	    <TR>
-		<TD>Tapicero de Muebles</TD>
-		<TD></TD>
-		<TD></TD>
-	    </TR>
-	    <TR>
-		<TD>Auxiliar de Carpintero de Banco</TD>
-		<TD></TD>
-		<TD></TD>
-	    </TR>
-	</table>
-	<p>* Es la fecha de aprobación del foro correspondiente</p>
+<table>
+	
+	<thead>
+		<tr>
+			<th>Agrupamiento</th>
+			<th>Figura Formativa</th>
+			<th>Perfiles de referencia</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<tr>
+			<td></td>
+			<td>Técnico en Industrialización de la Madera y el Mueble</td>
+			<td>Técnico en Industrialización de la Madera y el Mueble</td>
+		</tr>
+		<tr>
+			<td rowspan="4">PrimeraTransformación</td>
+			<td>Auxiliar de  Aserradero</td>
+			<td>Auxiliar de  Aserradero</td>
+		</tr>
+		<tr>
+			<td>Operador de Máquina Principal de Aserradero</td>
+			<td>Operador de Máquina Principal de Aserradero</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>Oficial de mantenimiento</td>
+		</tr>
+		<tr>
+			<td>Operador de Moldurera</td>
+			<td>Operador de Moldurera</td>
+		</tr>
+		<tr>
+			<td rowspan="3">Segunda Transformación</td>
+			<td>Operador de Secado y Tratamiento Térmico de la Madera</td>
+			<td>Operador de Camara de Secado</td>
+		</tr>
+		<tr>
+			<td>Operador de Máquinas de Remanufactura de la madera</td>
+			<td>Operador de Máquinas de Remanufactura de la madera</td>
+		</tr>
+		<tr>
+			<td>Operador de Protección y Preservación de la Madera</td>
+			<td>Operador de Protección y Preservación de la Madera</td>
+		</tr>
+		<tr>
+			<td rowspan="7">TerceraTransformación</td>
+			<td>Auxiliar Carpintero de Banco</td>
+			<td>Auxiliar Carpintero de Banco</td>
+		</tr>
+		<tr>
+			<td>Carpintero de Banco</td>
+			<td rowspan="2">Carpintero de banco</td>
+		</tr>
+		<tr>
+			<td>Carpintero de Obra</td>
+			</tr>
+		<tr>
+			<td>Operador de Sala de Afilado (pertinente también a la Primera Transforamción)</td>
+			<td>Afilador</td>
+		</tr>
+		<tr>
+			<td>Operador de Máquinas y Herramientas para manufacturas en madera</td>
+			<td>Operador de Máquinas y Herramientas para manufacturas en madera</td>
+		</tr>
+		<tr>
+			<td>Operador en Tratamiento de Superficies</td>
+			<td>Operario de tratamiento y acabado de superficies</td>
+		</tr>
+		<tr>
+			<td>Tapicero de Muebles</td>
+			<td>Tapicero de Muebles</td>
+		</tr>
+	</tbody>
+</table>
     </div>	
 </div>

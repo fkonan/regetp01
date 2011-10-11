@@ -71,7 +71,7 @@ propuestas a ser presentadas para su aprobación al Consejo Federal de Educación.
             <h3>Ideas Eje</h3>
             <div class="boxcontent">
                 <p>
-                    <ol>
+                    <ul>
                         <li>Carácter estratégico de la educación técnico profesional para el desarrollo social
                 y el crecimiento económico.
                         </li>
@@ -88,7 +88,7 @@ propuestas a ser presentadas para su aprobación al Consejo Federal de Educación.
                         </li>
                         <li>Inversión sostenida para la mejora continua de la educación técnico profesional.
                         </li>
-                    </ol>
+                    </ul>
                 </p>
                 <ul class="ul-horizontal" style="text-align: right">
                     <li><?php echo $html->link('Ver más', array('controller' => 'pages', 'action' => 'grafo_ley')); ?></li>

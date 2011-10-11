@@ -32,7 +32,7 @@ Nº 261/06, punto 13.2.).
 figura profesional en cuestión, en las situaciones y contextos reales de 
 trabajo propios de su área ocupacional.
 
-<OL> 
+<ul> 
   <LI>Alcance del Perfil Profesional.</li> 
   <LI>Funciones que ejerce el profesional (a veces, también  subfunciones).</li> 
   <LI>Área.
@@ -43,7 +43,7 @@ función que
   <LI>Condiciones y Alcances del Ejercicio Profesional para cada 
 función que 
   ejerce el profesional.</LI>
-</OL> 
+</ul> 
 
 
 <h3>1.- Alcance del Perfil Profesional</h3> 
