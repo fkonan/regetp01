@@ -7,9 +7,12 @@ $this->pageTitle= 'Aeronáutica';
 
 <div class="grid_9">
     <div class="boxblanca boxdocs">
-        <h2>Sector Aeronáutico</h2>
-        
-        <?php echo $this->element('marcos_ref')?>
+		<?php  
+        $vops = array(
+            'foroName' => 'Aeronáutica',
+        );
+        echo $this->element('foro', $vops);
+		?>
     </div>
     
     
