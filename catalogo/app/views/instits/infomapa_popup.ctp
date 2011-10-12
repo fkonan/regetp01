@@ -1,7 +1,7 @@
 <div>
     <ul>
         <li class="">
-            <strong><?php __('Instituciones registradas al RFIETP'); ?>:</strong> <?php echo $total ?>
+            <strong><?php __('Instituciones ingresadas al RFIETP'); ?>:</strong> <?php echo $total ?>
         </li>        
         <li class="">
             <strong><?php __('% de Instituciones de gestión estatal'); ?>:</strong> <?php echo $promedio ?>
