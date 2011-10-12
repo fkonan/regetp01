@@ -33,7 +33,7 @@
                                                     'class' => 'autosubmit ',
                                                     'label'=> 'Nivel',
                                                     'id' => 'ofertaId',
-                                                    'empty' => 'Seleccione',
+                                                    'empty' => 'Todos',
                                                     'type' => (empty($oferta_id) ? 'select' : 'hidden'),
                                                    ));
                 
@@ -43,14 +43,14 @@
                 echo $form->input('SectoresTitulo.sector_id',array(
                     'label'=>'Sector',
                     'id'=>'SectorId',
-                    'empty'=>'Seleccione'
+                    'empty'=>'Todos'
                 ));
 
                 echo $form->input('SectoresTitulo.subsector_id',array(
                     'type' => 'select',
                     'id'=>'SubsectorId',
                     'label'=>'Subsector',
-                    'empty'=>'Seleccione',
+                    'empty'=>'Todos',
                 ));
 
                 echo $form->input('tituloname', array( 'label'=> 'Nombre del Título' ));
@@ -63,14 +63,14 @@
             echo $form->input('Instit.jurisdiccion_id', array('label'=>'Jurisdicción',
                                                                   'div' => false,
                                                                   'class' => 'autosubmit ',
-                                                                  'empty' => array('0'=>'Seleccione'),
+                                                                  'empty' => array('0'=>'Todas'),
                                                                   'id'=>'jurisdiccion_id'));
             echo '<span class="ajax_update" id="ajax_indicator" style="display:none; margin-top: -32px; float: right; clear: none">'.$html->image('ajax-loader.gif').'</span>';
                 
             echo $form->input('Instit.departamento_id', array(
                 'id' => 'departamento_id',
                 'label'=>'Departamento', 
-                'empty' => 'Seleccione'));
+                'empty' => 'Todos'));
             
             if($localidad != null){
                $localidad_name =  $localidad['Localidad']['name'];
