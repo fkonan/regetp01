@@ -40,6 +40,13 @@ class TitulosController extends AppController {
 
         if ($vino_formulario){
             
+            // se limpia la session
+            foreach ($this->sesNames as $sesName) {
+                if ($sesName != $this->sesNames['page']) {
+                    $this->Session->write($sesName, '');
+                }
+            }
+            
             if(!empty($getParams['jurisdiccion_id'])) {
                 $this->Session->write($this->sesNames['jurisdiccion'], $getParams['jurisdiccion_id']);
             }

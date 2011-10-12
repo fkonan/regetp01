@@ -30,11 +30,11 @@ echo $html->css(array('jquery.loadmask',
         );
 
         echo $form->input('jurisdiccion_id', array('label' => 'Jurisdicción',
-            'empty' => array('0' => 'Seleccione'),
+            'empty' => array('0' => 'Todas'),
             'id' => 'jurisdiccion_id'));
         echo $form->input('departamento_id', array(
             'label' => 'Departamento',
-            'empty' => 'Seleccione',
+            'empty' => 'Todos',
             'id' => 'departamento_id',
         ));
         
