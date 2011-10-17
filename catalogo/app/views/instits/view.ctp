@@ -101,6 +101,7 @@ $this->pageTitle =  $cue_instit.' '.$instit['Instit']['nombre_completo'];
                             <?php
                             if(!empty($instit['Instit']['mail'])) {
                                 echo $hideMail->hide($instit['Instit']['mail']);
+                                echo "&nbsp;"; //pongo un espacio para que el campo tome la altura del texto
                             }else {
                                 echo "<i>No declarado</i>";
                             } ?>
