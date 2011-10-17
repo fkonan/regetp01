@@ -260,3 +260,12 @@ input[type=radio]{
     float:left;
     text-decoration: none !important;
 }
+
+.results li a{
+    color:#58585A;
+    text-decoration:none
+}
+
+.results li a:hover{
+    color:black;
+}

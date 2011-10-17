@@ -23,13 +23,14 @@ echo $html->css(array('jquery.loadmask', 'catalogo.guia_del_estudiante'), $inlin
 
 <script id="institTemplate" type="text/x-jquery-tmpl">
     <li>
-        <div class="items-nombre">
-            <a href="${Instit.url}">
-            ${Instit.nombre_completo}</a>
-        </div>
-        <div class="items-domicilio">
-            ${Localidad.name}, ${Departamento.name}, ${Jurisdiccion.name}
-        </div>
+        <a href="${Instit.url}">
+            <div class="items-nombre">
+                ${Instit.nombre_completo}
+            </div>
+            <div class="items-domicilio">
+                ${Localidad.name}, ${Departamento.name}, ${Jurisdiccion.name}
+            </div>
+        </a>
     </li>
 </script>
 <?php  //$paginator->options(array('update' => 'consoleResult', 'url' => $this->passedArgs,'indicator'=> 'ajax_indicator')); ?>
