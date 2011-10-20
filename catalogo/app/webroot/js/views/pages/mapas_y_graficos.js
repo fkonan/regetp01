@@ -79,21 +79,7 @@ jQuery(document).ready(function(){
             opacity: 'toggle' 
             }
         });
-        
-        $(".viewport").mapbox({mousewheel: true, layerSplit: 8});
-        
-        jQuery(".map-control a").click(function() {//control panel 
-            var viewport = $(this).closest('.mapwrapper').find('.viewport'); 
-            //this.className is same as method to be called 
-            if(this.className == "zoom" || this.className == "back") { 
-                viewport.mapbox(this.className, 2);//step twice 
-            } 
-            else { 
-                viewport.mapbox(this.className); 
-            } 
-            return false; 
-        }); 
-        
+                
         jQuery('.mapa').maphilight({
             fade: false,
             fillColor: '045FB4',
@@ -110,18 +96,6 @@ jQuery(document).ready(function(){
 
     google.load("visualization", "1", {packages:["corechart"]});
     
-    
-    function changeMap(element, id1, id2) {
-        jQuery("#"+id1).toggle();
-        jQuery("#"+id2).toggle();
-        
-        if (jQuery(element).html().toLowerCase() == 'navegar mapa') {
-            jQuery(element).html('Volver a mapa clickeable');
-        }
-        else {
-            jQuery(element).html('Navegar mapa');
-        }
-    }
 
     function viewJurisdiccion(oferta_id, jurisdiccion_id, titulo) {
         var dialog = jQuery('<div id="create_dialog"></div>')
