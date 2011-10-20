@@ -142,6 +142,12 @@
                     <td style="text-align:right;"><?=number_format($fondo['FondoTemporal']['refaccion'],2,",",".")?></td>
                 </tr>
                 <? } ?>
+                <? if ($fondo['FondoTemporal']['aula_movil']) { ?>
+                <tr>
+                    <td style="text-align:left;">refaccion</td>
+                    <td style="text-align:right;"><?=number_format($fondo['FondoTemporal']['aula_movil'],2,",",".")?></td>
+                </tr>
+                <? } ?>
                 <? if ($fondo['FondoTemporal']['total']) { ?>
                 <tr>
                     <td style="text-align:left;"><b>Suma Líneas de Acción</b></td>

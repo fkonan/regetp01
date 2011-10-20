@@ -24,6 +24,7 @@
                 echo $form->input('f10');
                 echo $form->input('equipinf');
                 echo $form->input('refaccion');
+                echo $form->input('aula_movil');
                 echo "<br/>-----------------------------------------------------------------------------------------------<br/>";
                 echo $form->input('total');
                 echo $form->hidden('totales_checked',array('value'=>0));
