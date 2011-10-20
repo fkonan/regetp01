@@ -71,17 +71,20 @@
                 'id' => 'departamento_id',
                 'label'=>'Departamento', 
                 'empty' => 'Todos'));
-            
+
+            $localidad_name =  "";
+                $localidad_id = "";
             if($localidad != null){
                $localidad_name =  $localidad['Localidad']['name'];
-               $localidad_id = $localidad['Localidad']['id'];
+               if (!empty($localidad['Localidad']['id'])) {
+                    $localidad_id = $localidad['Localidad']['id'];
+               }
             }
-            else{
-                $localidad_name =  "";
-                $localidad_id = "";
+            elseif (!empty($this->data['Titulo']['localidad_name'])){
+                $localidad_name =  $this->data['Titulo']['localidad_name'];
             }
 
-            echo $form->input('Localidad.name', array('label' => 'Localidad','value'=>$localidad_name));
+            echo $form->input('Instit.localidad_name', array('label' => 'Localidad','value'=>$localidad_name, 'id' => 'LocalidadName'));
 
             ?>
             <input id="hiddenLocId" name="localidad_id" type="hidden" value="<?php echo $localidad_id?>" />
@@ -159,14 +162,25 @@ if ($vino_formulario) {
             <?php
             $i = 0;
             foreach ($titulos as $titulo):
+                $url = array(
+                        'controller' => 'titulos',
+                        'action' => 'view',
+                        'id' => $titulo['Titulo']['id'],
+                        'slug' => slug($titulo['Titulo']['name'])
+                    );
+            
+            if (!empty($this->passedArgs['Instit.jurisdiccion_id']) ){
+                $url['Instit.jurisdiccion_id'] = $this->passedArgs['Instit.jurisdiccion_id'];
+            }
+            if (!empty($this->passedArgs['Instit.departamento_id']) ){
+                $url['Instit.departamento_id'] = $this->passedArgs['Instit.departamento_id'];
+            }
+            if (!empty($this->passedArgs['Instit.localidad_id']) ){
+                $url['Instit.localidad_id'] = $this->passedArgs['Instit.localidad_id'];
+            }
             ?>
             <li>
-                <a href="<?php echo $html->url(array(
-                                        'controller' => 'titulos',
-                                        'action' => 'view',
-                                        'id' => $titulo['Titulo']['id'],
-                                        'slug' => slug($titulo['Titulo']['name'])))
-                        ?>"
+                <a href="<?php echo $html->url($url)?>"
                         class="linkconatiner-more-info">
 
                         <span class="items-oferta">

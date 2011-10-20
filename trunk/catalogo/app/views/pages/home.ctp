@@ -45,15 +45,15 @@ propuestas a ser presentadas para su aprobación al Consejo Federal de Educación.
             Buscador
 -->
 <div class="grid_3 omega">
+    <div>
+        <?php echo $html->link($html->image('logo_me_trans.png', array( 'border'=> 0, 'width'=>'100%')),'http://www.me.gov.ar/', array('target' => '_blank'), null, false); ?>
+    </div>
     <div class="boxgris box_home_buscadores">
         <h2>Buscadores</h2>
         <p>
-            Por medio de los buscadores se facilita a los distintos usuarios una consulta ágil referida a la
-            oferta de títulos y certificados, según sectores, niveles y especialidades, así como su localización
-            en las instituciones educativas de gestión estatal y privada de las provincias y la Ciudad
-            Autónoma de Buenos Aires.
+            Encuentre fácilmente los títulos y certificados ofrecidos en las instituciones educativas de gestión estatal y privada de la Repúbica Argentina.
         </p>
-        
+        <br/>
         <?= $html->image('search.png', array('style'=>'float: right; position: absolute; right: 10px; width: 36px; bottom: -7px'))?>
         <ul>
             <li><?php echo $html->link('Realizar búsquedas', array('controller' => 'pages', 'action' => 'buscadores')); ?></li>

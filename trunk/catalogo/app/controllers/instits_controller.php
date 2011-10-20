@@ -492,7 +492,7 @@ class InstitsController extends AppController {
          $ops[] = array(
             'model' => 'Plan',
             'field' => 'titulo_id',
-            'friendlyName' => 'Con Título de Referencia',
+            'friendlyName' => 'Título o Certificado',
             'asociarPlan' => true,
              );
 

@@ -50,8 +50,17 @@ $this->pageTitle =  $titulo['Titulo']['name'];
     
     <div id="tituloPlanes">
         <div class="boxblanca" id="search_results">
-            <h3 class="instit"><?php  __('Instituciones que ofrecen el t&iacute;tulo o certificaci&oacute;n');?></h3>
-            <?php echo $this->requestAction('/titulos/planes_asociados/'.$titulo['Titulo']['id'], array('return', 'criterios' => @$criterios)); ?>
+            <h3 class="instit"><?php  __('Mostrando instituciones que ofrecen el t&iacute;tulo o certificaci&oacute;n con filtros aplicados');?></h3>
+            
+            <?php 
+            $reqUrl = '/instits/search_results/Plan.titulo_id:'.$titulo['Titulo']['id'];
+            foreach ($this->passedArgs as $k=>$v) {
+                $reqUrl .= '/'.$k.':'.$v;
+            }
+            
+            echo $this->requestAction( $reqUrl, array('return') ); 
+            ?>
+    
         </div>
     </div>
 </div>
