@@ -9,7 +9,7 @@ $this->pageTitle= 'Textil / Indumentaria';
     <div class="boxblanca boxdocs">
 		<?php  
         $vops = array(
-            'foroName' => 'Construcciones',
+            'foroName' => 'Textil / Indumentaria',
             'participantes' => array(
                 'Asociación Confeccionistas de Pergamino',
                 'FAIIA',
