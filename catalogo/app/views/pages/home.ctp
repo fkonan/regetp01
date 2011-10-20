@@ -13,10 +13,10 @@ $this->pageTitle = "Inicio";
         <h2>El Instituto Nacional de Educación Tecnológica</h2>
         <div class="boxcontent" style="padding-bottom: 7px">
             <div class="picround" style="margin-right: 10px;">
-            <?php echo $html->image('material/fotoinet166x120.jpg', array('style' => "float: left; height: 120px;" )) ?>
+            <?php echo $html->image('material/fotoinet.jpg', array('style' => "float: left; height: 244px;" )) ?>
             </div>
 
-            <div style="height: 222px;">
+            <div style="height: 302px;">
                El INET es el organismo del Ministerio de Educación que tiene a su cargo la coordinación de la
 aplicación de las políticas públicas de manera concertada y concurrente con las provincias y la
 Ciudad Autónoma de Buenos Aires, relativas a la educación técnico profesional en los niveles
@@ -51,9 +51,8 @@ propuestas a ser presentadas para su aprobación al Consejo Federal de Educación.
     <div class="boxgris box_home_buscadores">
         <h2>Buscadores</h2>
         <p>
-            Encuentre fácilmente los títulos y certificados ofrecidos en las instituciones educativas de gestión estatal y privada de la Repúbica Argentina.
+            Por medio de los buscadores se facilita a los distintos usuarios una consulta ágil referida a la oferta de títulos y certificados, según sectores, niveles y especialidades, así como su localización en las instituciones educativas de gestión estatal y privada de las provincias y la Ciudad Autónoma de Buenos Aires.
         </p>
-        <br/>
         <?= $html->image('search.png', array('style'=>'float: right; position: absolute; right: 10px; width: 36px; bottom: -7px'))?>
         <ul>
             <li><?php echo $html->link('Realizar búsquedas', array('controller' => 'pages', 'action' => 'buscadores')); ?></li>

@@ -257,56 +257,6 @@ class TitulosController extends AppController {
     }
 
 
-    function planes_asociados($id) {    
-        $jurisdiccion_id = '';
-        
-        $cond = array();
-        foreach ($this->passedArgs as $k=>$v) {
-            if ( $k && strstr($k, '.') ){
-                $cond[$k] = $v;
-                $criterios[$k] = $v; 
-            }
-        }
-        $cond['Plan.titulo_id'] = $id;
-        
-        $this->Titulo->Plan->recursive = 3;
-        $this->paginate['Plan'] = array(
-                'recursive' => 3,
-                'limit'    => 20,
-                'page'    => 1,
-                'conditions' => $cond,
-                'contain' => array('Instit' => array(
-                                                'Tipoinstit',
-                                                'Gestion(name)',
-                                                'Localidad(name)',
-                                                'Departamento(name)',
-                                                'Jurisdiccion(name)')),
-                'order'    => array('Instit.cue*100+Instit.anexo' => 'asc'),
-        );
-
-        if (isset($this->data['Instit']['jurisdiccion_id'])) {
-            if ($this->data['Instit']['jurisdiccion_id'] > 0) {
-                $this->paginate['conditions']['Instit.jurisdiccion_id'] = $this->data['Instit']['jurisdiccion_id'];
-                $jurisdiccion_id = $this->data['Instit']['jurisdiccion_id'];
-
-                if (!empty($jurisdiccion)) {
-                    $criterios['Jurisdiccion'] = $jurisdiccion['Jurisdiccion']['name'];
-                }
-            }            
-        }
-
-
-        $planes = $this->paginate('Plan');
-        
-        $jurisdicciones = $this->Titulo->Plan->Instit->Jurisdiccion->find('list');
-        
-        $this->set('criterios', $criterios);
-        $this->set('planes', $planes);
-        $this->set('id', $id);
-        $this->set('jurisdiccion_id', $jurisdiccion_id);
-        $this->set('jurisdicciones', $jurisdicciones);
-    }
-
 
     function ajax_search($q = null) {
         $this->autoRender = false;

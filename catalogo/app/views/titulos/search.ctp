@@ -92,7 +92,6 @@
             <div class="clear" style="height:23px;"></div>
             
             <?php
-            
             echo $form->end('Buscar');
             ?>
 
