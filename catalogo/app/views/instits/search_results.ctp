@@ -8,75 +8,32 @@ $paginator->options(array(
     'indicator' => 'spinner',
 ));
 ?>
-    <div style="float:right">
-        <?php
-        echo $form->create('Titulo', array(
-            'controller' => 'titulos',
-            'action' => 'view/' . $id,
-            'name'=>'InstitsForm',
-            'id' =>'InstitsForm',
-            )
-            );
-        echo $form->input('Instit.jurisdiccion_id', array('label'=>'Jurisdicción',
-                                                                      'div' => false,
-                                                                      'class' => 'autosubmit ',
-                                                                      'value' => $jurisdiccion_id,
-                                                                      'empty' => array('0'=>'Todas'),
-                                                                      'id'=>'jurisdiccion_id'));
-        echo $form->end();
+    
+
+<dl class="criterios_busq">
+        <?
+        foreach ($conditions as $key => $value) {
+            ?><dt><?
+            echo '- ' . $key . ': ';
+            ?></dt><?
+            ?><dd><?
+            echo $value . "&nbsp";
+            ?></dd><?
+        }
         ?>
-    </div>
-    <? if (sizeof($criterios)>0): ?>
-	Criterios de búsqueda seleccionados:
-	<dl class="criterios_busq">
-	<?
+            </dl>
 
-	 foreach($criterios as $key => $value){
-		?><dt><?
-			echo '- '.$key.': ';
-		?></dt><?
-		?><dd><?
-			echo $value."&nbsp";
-		?></dd><?
-	}
 
-	?>
-	</dl>
-    <? endif; ?>
     <div class="list-header">
-        <div class="sorter">
-            <?php
-            $sort = 'cue';
-            if(isset($this->passedArgs['sort'])){
-            $sort = $this->passedArgs['sort'];
-            }
-            ?>
-            Ordenar por:
-            <? $class = ($sort == 'Instit.cue')?'marcada':'';?>
-            <span class="<?= $class?>"><?php echo $paginator->sort('CUE','Instit.cue');?></span>,
-
-            <? $class = ($sort == 'Instit.localidad_id')?'marcada':'';?>
-            <span class="<?= $class?>"><?php echo $paginator->sort('Localidad','Instit.localidad_id');?></span>,
-
-            <? $class = ($sort == 'Instit.departamento_id')?'marcada':'';?>
-            <span class="<?= $class?>"><?php echo $paginator->sort('Departamento','Instit.departamento_id');?></span>
-
-            <?
-            if (empty($jurisdiccion_id)) {
-                $class = ($sort == 'Instit.jurisdiccion_id')?'marcada':'';?>
-                , <span class="<?= $class?>"><?php echo $paginator->sort('Jurisdiccion','Instit.jurisdiccion_id');?></span>
-            <?php }?>
-        </div>
         <div class="paging">
             <?php echo $paginator->counter(array(
-            'format' => __('Instituciones %start%-%end% de <strong>%count%</strong>', true))); ?>
+            'format' => __('Mostrando instituciones %start%-%end% de <strong>%count%</strong>', true))); ?>
         </div>
         <div class="clear"></div>
     </div>
-    <? if (!empty($planes) > 0) { ?>
+    <? if (!empty($instits) > 0) { ?>
         <ul id="items" class="items">
-        <?php foreach($planes as $plan) : ?>
-        <?  
+        <?php foreach($instits as $plan) : 
         if (!empty($plan['Instit'])) {
             $año_actual = date("Y");
             $fecha_hasta = "$año_actual-07-21"; //hasta julio
@@ -101,15 +58,15 @@ $paginator->options(array(
                         <?= "".($plan['Instit']['cue']*100)+$plan['Instit']['anexo']." - ". $plan['Instit']['nombre_completo']; ?>
 
                         <br />
-                        <span class="items-gestion"><?= $plan['Instit']['Gestion']['name'] ?></span>
+                        <span class="items-gestion"><?= $plan['Gestion']['name'] ?></span>
                         <span class="items-domicilio">
                         &nbsp;-
                         Domicilio:
                             <?php
                             echo joinNotNull(", ", array($plan['Instit']['direccion'],$plan['Instit']['lugar'],
-                            $plan['Instit']['Localidad']['name'],
-                            $plan['Instit']['Departamento']['name'] == $plan['Instit']['Localidad']['name']?null:$plan['Instit']['Departamento']['name'],
-                            $plan['Instit']['Jurisdiccion']['name']));
+                            $plan['Localidad']['name'],
+                            $plan['Departamento']['name'] == $plan['Localidad']['name']?null:$plan['Departamento']['name'],
+                            $plan['Jurisdiccion']['name']));
                             ?>
                         </span>
                     </span>                

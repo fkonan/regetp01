@@ -64,7 +64,7 @@ class TitulosController extends AppController {
                  $ops[] = array(
                     'model' => 'Titulo',
                     'field' => 'name',
-                     'input-name' => 'tituloname',
+                    'input-name' => 'tituloname',
                     'friendlyName' => 'Nombre');
                  
                  
@@ -99,11 +99,22 @@ class TitulosController extends AppController {
                     'field' => 'departamento_id',
                     'friendlyName' => 'Departamento');
                  
-                 //      Localidad
-                 $ops[] = array(
-                    'model' => 'Instit',
-                    'field' => 'localidad_id',
-                    'friendlyName' => 'Localidad');
+                 if ( !empty( $getParams['localidad_id'] ) ) {
+                     //      Localidad
+                     $ops[] = array(
+                        'model' => 'Instit',
+                        'field' => 'localidad_id',
+                        'friendlyName' => 'Localidad');
+                 } else {
+                     $localidad['Localidad']['name'] =  $getParams['localidad_name'];
+                     //      Localidad, pero por su nombre
+                     $ops[] = array(
+                        'model' => 'Localidad',
+                        'field' => 'name',
+                        'input-name' => 'localidad_name',
+                        'forceText' => true,
+                        'friendlyName' => 'Localidad');
+                 }
                  
                  //      Gestion
                  $ops[] = array(
@@ -196,7 +207,9 @@ class TitulosController extends AppController {
         $conditions['conditions'] = array('Titulo.id' => $id);
         $conditions['contain'] = array(
                             'Oferta',
-                            'SectoresTitulo' => array('Sector', 'Subsector')
+                            'SectoresTitulo' => array(
+                                'Sector', 
+                                'Subsector'),
         );
         $titulo = $this->Titulo->find('first', $conditions);
 
@@ -210,13 +223,7 @@ class TitulosController extends AppController {
                 'order'    => array('Plan.nombre' => 'asc')
         );
 
-        $criterios = array();
-
-        $jurisdicciones = $this->Titulo->Plan->Instit->Jurisdiccion->find('list');
-
-        $planes = $this->paginate('Plan');
-
-        $this->set(compact('titulo','planes', 'criterios','jurisdicciones'));
+        $this->set(compact('titulo','planes', 'jurisdicciones'));
 
         if ( $this->RequestHandler->isAjax() ) {
             Configure::write ( 'debug', 0 );
@@ -250,25 +257,31 @@ class TitulosController extends AppController {
     }
 
 
-    function planes_asociados($id, $criterios=null) {
+    function planes_asociados($id) {    
         $jurisdiccion_id = '';
-        // Planes del Titulo
-        if (!empty($this->params['criterios'])) {
-            $criterios = $this->params['criterios'];
-        }
         
-        $this->Titulo->Plan->recursive = 1;
-        $this->paginate = array(
+        $cond = array();
+        foreach ($this->passedArgs as $k=>$v) {
+            if ( $k && strstr($k, '.') ){
+                $cond[$k] = $v;
+                $criterios[$k] = $v; 
+            }
+        }
+        $cond['Plan.titulo_id'] = $id;
+        
+        $this->Titulo->Plan->recursive = 3;
+        $this->paginate['Plan'] = array(
+                'recursive' => 3,
                 'limit'    => 20,
                 'page'    => 1,
-                'conditions' => array('Plan.titulo_id' => $id),
+                'conditions' => $cond,
                 'contain' => array('Instit' => array(
                                                 'Tipoinstit',
                                                 'Gestion(name)',
                                                 'Localidad(name)',
                                                 'Departamento(name)',
                                                 'Jurisdiccion(name)')),
-                'order'    => array('Plan.nombre' => 'asc'),
+                'order'    => array('Instit.cue*100+Instit.anexo' => 'asc'),
         );
 
         if (isset($this->data['Instit']['jurisdiccion_id'])) {
@@ -279,15 +292,9 @@ class TitulosController extends AppController {
                 if (!empty($jurisdiccion)) {
                     $criterios['Jurisdiccion'] = $jurisdiccion['Jurisdiccion']['name'];
                 }
-            }
-            
-            $this->Session->write($this->sesNames['jurisdiccion'], $this->data['Instit']['jurisdiccion_id']);
+            }            
         }
-                
-        if ($this->Session->read($this->sesNames['jurisdiccion'])) {
-            $this->paginate['conditions']['Instit.jurisdiccion_id'] = $this->Session->read($this->sesNames['jurisdiccion']);
-            $jurisdiccion_id = $this->Session->read($this->sesNames['jurisdiccion']);
-        }
+
 
         $planes = $this->paginate('Plan');
         

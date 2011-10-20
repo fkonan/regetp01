@@ -1,12 +1,12 @@
 (function($){
     // EVENTOS MANEJADOS on dom loaded
     $(function(){
-        $('#alerta-desactualizada').click(handleAlertaDesactualizada);
-        $('.js-masinfo-titulo').click(viewTitulo);
+        $('#alerta-desactualizada').click( handleAlertaDesactualizada );
+        $('.js-masinfo-titulo').click( viewTitulo );
     });
 
     
-    // Handlers
+    // Abre el poppu de envio de email. que es como un formulario de contacto
     function handleAlertaDesactualizada(e) {
         
         e.preventDefault();
@@ -49,7 +49,7 @@
 
 function viewTitulo(url, title) {
     var dialog = jQuery('<div id="create_dialog"></div>')
-    .html('... cargando información <span class="ajax-loader"></span>')
+    .html('<p style="text-align: center">... cargando información <span class="ajax-loader"></span></p>')
     .dialog({
         width: 500,
         //position: 'top',
