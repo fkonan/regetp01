@@ -31,12 +31,20 @@ class InstitsController extends AppController {
 
         $this->Instit->contain(array(   'Localidad', 'Departamento', 'Tipoinstit', 'Jurisdiccion',
                                         'Dependencia', 'Gestion', 'Orientacion', 'Claseinstit', 'EtpEstado',
-                                        'Plan' => array(
-                                            'order' => array('Plan.oferta_id', 'Plan.nombre'),
-                                            'Titulo' => array('Oferta'),
-                                            'Oferta')
-                                ));
+                                     ));
+        
         $instit = $this->Instit->find("first", $id);
+        
+        $planes =  $this->Instit->Plan->find('all', array(
+           'contain' => array(
+               'Titulo.Oferta',
+               'Oferta',
+           ),
+           'order' => array( 'Oferta.order' ),
+           'conditions' => array(
+                'Plan.instit_id' => $id,
+            )
+        ));
 
         $instit['Instit']['dir_tipodoc_name'] = '';
         $tipodoc = ClassRegistry::init('Tipodoc')->find('first', array(
@@ -60,6 +68,7 @@ class InstitsController extends AppController {
         $this->set('con_programa_de_etp', $programa_de_etp);
         $this->set('relacion_etp', $instit['EtpEstado']['name']);
         $this->set('instit', $instit);
+        $this->set('planes', $planes);
     }
     
     function simpleSearch() {

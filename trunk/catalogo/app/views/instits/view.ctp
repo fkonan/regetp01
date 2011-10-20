@@ -146,13 +146,13 @@ $this->pageTitle =  $cue_instit.' '.$instit['Instit']['nombre_completo'];
     <div class="boxblanca">
         <h3 class="titulo">Títulos o Certificaciones que ofrece la institución</h3>
         <?php
-        if (!empty($instit['Plan'])) {
-            ?>
+        if (!empty($planes)) {
+            ?>  
         
         <ul id="titulos-list" class="titulos-list items">
         <?php
         $ofertaAnt = '';
-        foreach ($instit['Plan'] as $plan) {
+        foreach ($planes as $plan) {
             if ($ofertaAnt != $plan['Oferta']['id'] ) {
                 echo "<h4 style='margin-top: 15px;'>". $plan['Oferta']['name'] ."</h4>";
                 $ofertaAnt = $plan['Oferta']['id'];
@@ -163,19 +163,19 @@ $this->pageTitle =  $cue_instit.' '.$instit['Instit']['nombre_completo'];
             $planNombre = '';
             // le agrego un link hacia el titulo de referencias
 
-            $planNombre .= $plan['nombre'];
+            $planNombre .= $plan['Plan']['nombre'];
 
 
             // si el titulo de referencia es distinto que el nombre del
             // plan se lo tengo que agregar entre parentesis
             // entonces quedaria: Asistente de Peluquero (Titulo: Peluquero)
-            if (!empty($plan['Titulo']) && strcasecmp(trim($plan['nombre']), trim($plan['Titulo']['name'])) != 0) {
+            if (!empty($plan['Titulo']) && strcasecmp(trim($plan['Plan']['nombre']), trim($plan['Titulo']['name'])) != 0) {
 
                 $planNombre .= ' (' .  $plan['Titulo']['name'] . ')';
             }
 
             ?>
-            <li onclick="viewTitulo('<?php echo $html->url('/titulos/view_titulo_plan/'.$plan['Titulo']['id'].'/'.$plan['id'])?>', '<?php echo $plan['Titulo']['name']?>');">
+            <li onclick="viewTitulo('<?php echo $html->url('/titulos/view_titulo_plan/'.$plan['Titulo']['id'].'/'.$plan['Plan']['id'])?>', '<?php echo $plan['Titulo']['name']?>');">
                 <a class="linkconatiner-more-info">
                     <?php echo $planNombre?>
                 </a>

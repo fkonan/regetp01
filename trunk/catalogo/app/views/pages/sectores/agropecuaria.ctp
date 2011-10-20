@@ -22,8 +22,14 @@ $this->pageTitle= 'Agropecuaria';
 			<li>Florí­cola</li>
 			<li>Forestal</li>
 			<li>Frutí­cola - Olivicultura</li>
-			<li>Hortí­cola</li>
-			<li>Producción Lechera</li>
+			<li>Hortícola
+                            
+                            <?php echo $html->link('Informe sectorial', '/files/pdfs/info_sectorial/horticultura_informe_final.pdf', array('target'=>'_blank')) ?>
+
+                        </li>
+			<li>Producción Lechera
+                        <?php echo $html->link('Informe sectorial', '/files/pdfs/info_sectorial/informe_lechero.pdf', array('target'=>'_blank')) ?>
+                        </li>
 			<li>Vitivinicultura</li>
 		</ul>
     </div>
