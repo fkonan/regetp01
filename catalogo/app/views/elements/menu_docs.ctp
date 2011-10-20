@@ -58,7 +58,7 @@
                         </li>-->
 <!--                        <li><?php echo $html->link('Petróleo y Gas', array('controller' => 'pages', 'action' => 'display', 'sectores/petroleo_y_gas'));?></li>-->
 <!--                        <li><?php echo $html->link('Química y Farmacia', array('controller' => 'pages', 'action' => 'display', 'sectores/quimica_y_farmacia'));?></li>-->
-<!--                        <li><?php echo $html->link('Salud', array('controller' => 'pages', 'action' => 'display', 'sectores/salud'));?></li>-->
+                        <li><?php echo $html->link('Salud', array('controller' => 'pages', 'action' => 'display', 'sectores/salud'));?></li>
                         <li><?php echo $html->link('Textil e Indumentaria', array('controller' => 'pages', 'action' => 'display', 'sectores/textil_indumentaria'));?></li>
 <!--                        <li><?php echo $html->link('Turismo', array('controller' => 'pages', 'action' => 'display', 'sectores/turismo'));?></li>-->
 	            </ul>
