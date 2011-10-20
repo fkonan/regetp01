@@ -115,7 +115,7 @@ echo $javascript->link('scriptaculous-js-1.8.3/src/scriptaculous');
             <td>
                     <?
                     echo (empty($fondo['Instit']['Localidad']['name']))? '' : 'Loc:' . $fondo['Instit']['Localidad']['name'].'<br>';
-                    echo $fondo['Instit']['Departamento']['name'];
+                    echo (empty($fondo['Instit']['Departamento']['name']))?'':$fondo['Instit']['Departamento']['name'];
                     ?>
             </td>
             <td class="xls">
@@ -137,7 +137,8 @@ echo $javascript->link('scriptaculous-js-1.8.3/src/scriptaculous');
                     $fondo['FondoTemporal']['f09'] +
                     $fondo['FondoTemporal']['f10'] +
                     $fondo['FondoTemporal']['equipinf'] +
-                    $fondo['FondoTemporal']['refaccion'] -
+                    $fondo['FondoTemporal']['refaccion'] +
+                    $fondo['FondoTemporal']['aula_movil']-
                     $fondo['FondoTemporal']['total']); ?>
             </td>
 

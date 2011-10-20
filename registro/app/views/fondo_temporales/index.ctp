@@ -43,6 +43,7 @@ echo $paginator->counter(array(
         <th><?php echo $paginator->sort('f09');?></th>
         <th><?php echo $paginator->sort('equipinf');?></th>
         <th><?php echo $paginator->sort('refaccion');?></th>
+        <th><?php echo $paginator->sort('aula_movil');?></th>
         <th><?php echo $paginator->sort('observacion');?></th>
 	<th class="actions"><?php __('Actions');?></th>
 </tr>
@@ -170,6 +171,9 @@ foreach ($fondos as $fondo):
 		</td>
                 <td>
 			<?php echo $fondo['FondoTemporal']['refaccion']; ?>
+		</td>
+                <td>
+			<?php echo $fondo['FondoTemporal']['aula_movil']; ?>
 		</td>
                 <td>
 			<?php echo $fondo['FondoTemporal']['observacion']; ?>
