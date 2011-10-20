@@ -1,8 +1,4 @@
-
 <?php
-
-echo $javascript->link('jquery.mousewheel.min',false);
-echo $javascript->link('mapbox.min',false);
 echo $javascript->link('jquery.blockUI',false);
 echo $javascript->link('jquery.maphilight.min',false);
 echo $javascript->link('https://www.google.com/jsapi',false);
@@ -39,8 +35,7 @@ echo $html->css('catalogo.estaticas', false);
 
                 <div id="ver-oferta-sup" class="descargas-container" style="">
                     <h3>Institutos Técnicos de Educación Superior</h3>
-                    <a onclick="changeMap(this, 'mapaSupNavegador', 'mapaSup')" href="#">Navegar mapa</a>
-                    <div id="mapaSup">
+                    <div style="text-align: center;">
                         <? echo $html->image('home/mapaSup2011.jpg', array('usemap' => '#mapSup', 'class'=>'mapa')); ?> 
                         <map id="mapSup" name="mapSup">
                             <area shape="poly" coords="125,49,138,61,140,47,146,43,148,53,160,67,180,60,182,47,169,43,159,29,163,16,152,16,144,10,132,19,124,30" onclick="viewJurisdiccion('<?php echo SUP_TEC_ID?>','38','Jujuy')" alt="Jujuy" title="Jujuy"   />
@@ -68,40 +63,7 @@ echo $html->css('catalogo.estaticas', false);
                             <area shape="poly" coords="68,505,126,502,125,510,134,521,148,523,151,541,138,547,126,563,124,579,108,590,108,608,118,632,96,625,71,626,65,612,67,601,63,597,56,601,49,592,47,570,56,568,55,561,62,552,56,541,64,527,62,521,67,518,65,507" onclick="viewJurisdiccion('<?php echo SUP_TEC_ID?>','78','Santa Cruz')" alt="Santa Cruz" title="Santa Cruz"   />
                             <area shape="poly" coords="113,640,113,683,132,683,142,687,156,677,143,675,136,669,128,664,121,653" onclick="viewJurisdiccion('<?php echo SUP_TEC_ID?>','94','Tierra del Fuego')" alt="Tierra del Fuego" title="Tierra del Fuego"   />
                       </map>
-                    </div> 
-                    <div id="mapaSupNavegador" class="mapwrapper" style="display: none;">
-                        <div class="viewport"> 
-                            <div> 
-                                <!--top level map content goes here--> 
-                                <? echo $html->image('home/mapaSup2011.jpg', array('class' => 'docimg', 'style' => '')); ?> 
-                            </div> 
-                            <div style="width: 1152px; height: 1683px;"> 
-                                <? echo $html->image('home/mapaSup2011_1.jpg', array('class' => 'docimg', 'style' => '')); ?> 
-                                <div class="mapcontent"> 
-                                    <!--map content goes here--> 
-                                </div> 
-                            </div> 
-                            <div style="width: 1644px; height: 2400px;"> 
-                                <? echo $html->image('home/mapaSup2011_2.jpg', array('class' => 'docimg', 'style' => '')); ?> 
-                                <div class="mapcontent"> 
-                                    <!--map content goes here--> 
-                                </div> 
-                            </div> 
-                            <div style="width: 2348px; height: 3438px;"> 
-                                <? echo $html->image('home/mapaSup2011_3.jpg', array('class' => 'docimg', 'style' => '')); ?> 
-                                <div class="mapcontent"> 
-                                    <!--map content goes here--> 
-                                </div> 
-                            </div> 
-                        </div> 
-                        <div class="map-control">
-                            <a class="left" href="#left">Left</a>
-                            <a class="right" href="#right">Right</a>
-                            <a class="up" href="#up">Up</a>
-                            <a class="down" href="#down">Down</a>
-                            <a class="zoom" href="#zoom">Zoom</a>
-                            <a class="back" href="#zoom_out">Back</a>
-                        </div>
+                      <a href="<?php echo $html->url('/files/mapas/sup2011.pdf'); ?>" style="clear:both;">Descargar mapa</a>
                     </div>
                     <br />
                     <div style="width: 65%; float: left;">
@@ -119,8 +81,7 @@ echo $html->css('catalogo.estaticas', false);
                 </div>
                 <div id="ver-oferta-sec" class="descargas-container" style="">
                     <h3>Escuelas Secundarias de Educación Técnica Profesional</h3>
-                    <a onclick="changeMap(this, 'mapaSecNavegador', 'mapaSec')" href="#">Navegar mapa</a>
-                    <div id="mapaSec" style="margin-left: auto; margin-right: auto; text-align: center;">
+                    <div style="text-align: center;">
                         <? echo $html->image('home/mapaSec2011.jpg', array('usemap' => '#mapSec', 'class'=>'mapa')); ?> 
                         <map id="mapSec" name="mapSec">
                             <area shape="poly" coords="118,45,132,57,133,43,139,39,141,49,153,63,175,58,174,41,162,39,152,25,156,12,145,12,137,6,125,15,118,26" onclick="viewJurisdiccion('<?php echo SEC_TEC_ID?>','38','Jujuy')" alt="Jujuy" title="Jujuy"   />
@@ -148,41 +109,8 @@ echo $html->css('catalogo.estaticas', false);
                             <area shape="poly" coords="65,507,123,504,122,512,130,525,145,525,148,543,135,549,123,565,121,583,106,593,102,609,110,634,93,627,67,631,62,614,64,603,60,599,50,607,45,595,44,572,53,570,52,563,59,554,53,543,61,529,59,523,64,520,62,509" onclick="viewJurisdiccion('<?php echo SEC_TEC_ID?>','78','Santa Cruz')" alt="Santa Cruz" title="Santa Cruz"   />
                             <area shape="poly" coords="109,645,109,688,128,688,138,692,152,682,139,680,132,674,124,669,117,658" onclick="viewJurisdiccion('<?php echo SEC_TEC_ID?>','94','Tierra del Fuego')" alt="Tierra del Fuego" title="Tierra del Fuego"   />
                       </map>
+                      <a href="<?php echo $html->url('/files/mapas/sectec2011.pdf'); ?>" style="clear:both;">Descargar mapa</a>
                     </div> 
-                    <div id="mapaSecNavegador" class="mapwrapper" style="display: none;">
-                        <div class="viewport"> 
-                            <div> 
-                                <!--top level map content goes here--> 
-                                <? echo $html->image('home/mapaSec2011.jpg', array('class' => 'docimg', 'style' => '')); ?> 
-                            </div> 
-                            <div style="width: 1155px; height: 1662px;"> 
-                                <? echo $html->image('home/mapaSec2011_1.jpg', array('class' => 'docimg', 'style' => '')); ?> 
-                                <div class="mapcontent"> 
-                                    <!--map content goes here--> 
-                                </div> 
-                            </div> 
-                            <div style="width: 1640px; height: 2368px;"> 
-                                <? echo $html->image('home/mapaSec2011_2.jpg', array('class' => 'docimg', 'style' => '')); ?> 
-                                <div class="mapcontent"> 
-                                    <!--map content goes here--> 
-                                </div> 
-                            </div> 
-                            <div style="width: 2354px; height: 3388px;"> 
-                                <? echo $html->image('home/mapaSec2011_3.jpg', array('class' => 'docimg', 'style' => '')); ?> 
-                                <div class="mapcontent"> 
-                                    <!--map content goes here--> 
-                                </div> 
-                            </div> 
-                        </div> 
-                        <div class="map-control">
-                            <a class="left" href="#left">Left</a>
-                            <a class="right" href="#right">Right</a>
-                            <a class="up" href="#up">Up</a>
-                            <a class="down" href="#down">Down</a>
-                            <a class="zoom" href="#zoom">Zoom</a>
-                            <a class="back" href="#zoom_out">Back</a>
-                        </div>
-                    </div>
                     <br />
                     <div style="width: 65%; float: left;">
                         <h3> Alumnos matriculados por sector socioproductivo (***) </h3>
@@ -199,8 +127,7 @@ echo $html->css('catalogo.estaticas', false);
                 </div>
                 <div id="ver-oferta-fp" class="descargas-container" style="">
                     <h3>Centros de Formación Técnica Profesional</h3>
-                    <a onclick="changeMap(this, 'mapaCFPNavegador', 'mapaCFP')" href="#">Navegar mapa</a>
-                    <div id="mapaCFP">
+                    <div style="text-align: center;">
                         <? echo $html->image('home/mapaCFP2011.jpg', array('usemap' => '#mapCFP', 'class'=>'mapa')); ?> 
                         <map id="mapCFP" name="mapCFP">
                             <area shape="poly" coords="120,60,123,47,120,40,123,33,130,28,137,27,138,20,146,24,158,27,153,36,159,47,165,57,175,56,176,68,168,76,154,75,152,75,148,66,145,64,144,55,138,54,135,62,134,70" onclick="viewJurisdiccion('<?php echo FP_ID?>','38','Jujuy')" alt="Jujuy" title="Jujuy"   />
@@ -228,41 +155,8 @@ echo $html->css('catalogo.estaticas', false);
                             <area shape="poly" coords="63,516,119,515,120,520,126,527,134,536,145,536,147,544,145,555,132,563,124,573,120,581,118,595,109,600,103,605,101,617,104,630,114,646,97,640,80,637,67,638,61,628,62,615,60,610,53,615,48,614,44,607,44,594,42,583,48,584,48,580,55,573,54,568,58,563,53,557,55,551,60,542,59,532,63,527,57,520" onclick="viewJurisdiccion('<?php echo FP_ID?>','78','Santa Cruz')" alt="Santa Cruz" title="Santa Cruz"   />
                             <area shape="poly" coords="110,653,112,696,129,696,141,698,151,696,152,692,153,690,141,689,134,683,124,676,118,665" onclick="viewJurisdiccion('<?php echo FP_ID?>','94','Tierra del Fuego')" alt="Tierra del Fuego" title="Tierra del Fuego"   />
                         </map>
+                        <a href="<?php echo $html->url('/files/mapas/cfp2011.pdf'); ?>" style="clear:both;">Descargar mapa</a>
                     </div> 
-                    <div id="mapaCFPNavegador" class="mapwrapper" style="display: none;">
-                        <div class="viewport"> 
-                            <div> 
-                                <!--top level map content goes here--> 
-                                <? echo $html->image('home/mapaCFP2011.jpg', array('class' => 'docimg', 'style' => '')); ?> 
-                            </div> 
-                            <div style="width: 1152px; height: 1680px;"> 
-                                <? echo $html->image('home/mapaCFP2011_1.jpg', array('class' => 'docimg', 'style' => '')); ?> 
-                                <div class="mapcontent"> 
-                                    <!--map content goes here--> 
-                                </div> 
-                            </div> 
-                            <div style="width: 1644px; height: 2400px;"> 
-                                <? echo $html->image('home/mapaCFP2011_2.jpg', array('class' => 'docimg', 'style' => '')); ?> 
-                                <div class="mapcontent"> 
-                                    <!--map content goes here--> 
-                                </div> 
-                            </div> 
-                            <div style="width: 2326px; height: 3420px;"> 
-                                <? echo $html->image('home/mapaCFP2011_3.jpg', array('class' => 'docimg', 'style' => '')); ?> 
-                                <div class="mapcontent"> 
-                                    <!--map content goes here--> 
-                                </div> 
-                            </div> 
-                        </div> 
-                        <div class="map-control">
-                            <a class="left" href="#left">Left</a>
-                            <a class="right" href="#right">Right</a>
-                            <a class="up" href="#up">Up</a>
-                            <a class="down" href="#down">Down</a>
-                            <a class="zoom" href="#zoom">Zoom</a>
-                            <a class="back" href="#zoom_out">Back</a>
-                        </div>
-                    </div>
                     <br />
                     <div style="width: 65%; float: left;">
                         <h3> Alumnos matriculados por sector socioproductivo (***) </h3>
