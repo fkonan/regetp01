@@ -356,6 +356,8 @@ dd ul{
     width: 32px;
     display: block;
     outline: none;
+    margin: auto;
+    text-align: center;
 }
 
 
