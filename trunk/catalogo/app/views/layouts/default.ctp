@@ -53,31 +53,36 @@ $javascript;
         <?php
         echo $html->meta('icon');
 
-        //echo $html->css('adapt/mobile.min','stylesheet', array('media'=>'mobile'));
-        //echo $html->css('adapt/master');
-        echo $html->css('jquery.tooltip','stylesheet');
-        echo $html->css('catalogo','stylesheet', array('media'=>'screen'));
-        echo $html->css('catalogo.menu','stylesheet');
-        echo $html->css('ui-redmond/jquery-ui-1.8.12.custom','stylesheet');
+        $combinator->prepend_libs('css', array(
+            'jquery.tooltip',
+            'catalogo',
+            'catalogo.menu',
+            'ui-redmond/jquery-ui-1.8.12.custom',
+            'iconize',
+            'catalogo.default_header',
+        ));
+
+        $combinator->prepend_libs('js', array(
+            'jquery-1.6.2.min',
+            'adapt.min.js',
+            'jquery.form',
+            'jquery.tools.min',
+            'jquery-ui-1.8.16.custom.min',
+            'jquery/jquery.bgiframe.min',
+            'jquery/jquery.superfish',
+            'jquery/jquery.history',
+            'views/layout/default',
+        ));
+
+        echo $combinator->scripts('css');
+
         echo $html->css('printer','stylesheet', array('media'=>'print'));
-        echo $html->css('iconize','stylesheet');
         echo $html->css('catalogo800x600',
                         'stylesheet', array(
                             'media' => 'screen and (max-width: 960px)'
                             ));
-        echo $html->css('catalogo.default_header');
-        echo $javascript->link(array(
-        'jquery-1.6.2.min',
-        'adapt.min.js',
-        'jquery.form',
-        'jquery.tools.min',
-        'jquery-ui-1.8.16.custom.min',
-        'jquery/jquery.bgiframe.min',
-        'jquery/jquery.superfish',
-        'jquery/jquery.history',
-        'views/layout/default',
-//        'DD_belatedPNG_0.0.8a-min',
-        ));
+
+        echo $combinator->scripts('js');
 
         $jsPoner = 'views'.DS.Inflector::underscore($this->name).DS.$this->action;
         $jsView = WWW_ROOT.'js'.DS.$jsPoner;

@@ -1,84 +1,97 @@
-<?php
-echo $html->css('catalogo.instits', false);
-echo $html->css('catalogo.advanced_search', false);
+<?php  $paginator->options(array('update' => 'consoleResult', 'url' => $this->passedArgs,'indicator'=> 'ajax_paginator_indicator')); ?>
 
-$paginator->options(array(
-    'url'     => $this->passedArgs,
-    'update'  => 'search_results',
-    'indicator' => 'spinner',
-));
-?>
-    
+<?php echo $html->css(array('catalogo.advanced_search', 'catalogo.instits'), $inline=false); ?>
+<div class="boxblanca" id="search_results">
+<h3>Listado de resultados</h3>
+<? if (sizeof($conditions)>0): ?>
+	Criterios de búsqueda seleccionados:
+	<dl class="criterios_busq">
+	<?
 
-<dl class="criterios_busq">
-        <?
-        foreach ($conditions as $key => $value) {
-            ?><dt><?
-            echo '- ' . $key . ': ';
-            ?></dt><?
-            ?><dd><?
-            echo $value . "&nbsp";
-            ?></dd><?
+	 foreach($conditions as $key => $value){
+		?><dt><?
+			echo '- '.$key.': ';
+		?></dt><?
+		?><dd><?
+			echo $value."&nbsp";
+		?></dd><?
+	}
+
+	?>
+	</dl>
+<? endif; ?>
+    <div class="list-header">
+        <div class="sorter">
+        <?php
+        $sort = 'cue';
+        if(isset($this->passedArgs['sort'])){
+        $sort = $this->passedArgs['sort'];
         }
         ?>
-            </dl>
+            Ordenar por:
+            <? $class = ($sort == 'cue')?'marcada':'';?>
+            <span class="<?= $class?>"><?php echo $paginator->sort('CUE', 'cue');?></span>,
 
+            <? $class = ($sort == 'Jurisdiccion.name')?'marcada':'';?>
+            <span class="<?= $class?>"><?php echo $paginator->sort('Jurisdicción','Jurisdiccion.name');?></span>,
 
-    <div class="list-header">
+            <? $class = ($sort == 'Departamento.name')?'marcada':'';?>
+            <span class="<?= $class?>"><?php echo $paginator->sort('Departamento','Departamento.name');?></span>,
+
+            <? $class = ($sort == 'Localidad.name')?'marcada':'';?>
+            <span class="<?= $class?>"><?php echo $paginator->sort('Localidad','Localidad.name');?></span>
+
+        </div>
         <div class="paging">
             <?php echo $paginator->counter(array(
-            'format' => __('Mostrando instituciones %start%-%end% de <strong>%count%</strong>', true))); ?>
+                'format' => __('Instituciones %start%-%end% de <strong>%count%</strong>', true))); ?>
         </div>
         <div class="clear"></div>
     </div>
-    <? if (!empty($instits) > 0) { ?>
+    <? if (sizeof($instits) > 0) { ?>
         <ul id="items" class="items">
-        <?php foreach($instits as $plan) : 
-        if (!empty($plan['Instit'])) {
-            $año_actual = date("Y");
-            $fecha_hasta = "$año_actual-07-21"; //hasta julio
-            $fecha_desde = "$año_actual-01-01"; //desde enero
-            $clase = '';
-            if($plan['Instit']['activo']) {
-            $clase .= ' escuela_activa';
-            }else {
-            $clase .= ' escuela_inactiva';
-            }
+        <?php foreach($instits as $instit) : ?>
+            <?  $año_actual = date("Y");
+                $fecha_hasta = "$año_actual-07-21"; //hasta julio
+                $fecha_desde = "$año_actual-01-01"; //desde enero
+                $clase = '';
+                if($instit['Instit']['activo']) {
+                    $clase .= ' escuela_activa';
+                }else {
+                    $clase .= ' escuela_inactiva';
+                }
             ?>
             <li>
                 <a href="<?php echo $html->url(array(
-                                        'controller' => 'instits',
-                                        'action' => 'view',
-                                        'id' => $plan['Instit']['id'],
-                                        'slug' => slug($plan['Instit']['nombre_completo'])))
-                        ?>" 
-                        class="linkconatiner-more-info">
-
-                    <span class="items-nombre">
-                        <?= "".($plan['Instit']['cue']*100)+$plan['Instit']['anexo']." - ". $plan['Instit']['nombre_completo']; ?>
-
-                        <br />
-                        <span class="items-gestion"><?= $plan['Gestion']['name'] ?></span>
-                        <span class="items-domicilio">
-                        &nbsp;-
-                        Domicilio:
-                            <?php
-                            echo joinNotNull(", ", array($plan['Instit']['direccion'],$plan['Instit']['lugar'],
-                            $plan['Localidad']['name'],
-                            $plan['Departamento']['name'] == $plan['Localidad']['name']?null:$plan['Departamento']['name'],
-                            $plan['Jurisdiccion']['name']));
-                            ?>
-                        </span>
-                    </span>                
-
+                                    'controller' => 'instits',
+                                    'action' => 'view',                                    
+                                    'id' => $instit['Instit']['id'],
+                                    'slug' => slug($instit['Instit']['nombre_completo'])))
+                        ?>" class="linkconatiner-more-info">
+                    
+                <span class="items-nombre">
+                    <?= "".($instit['Instit']['cue']*100)+$instit['Instit']['anexo']." - ". $instit['Instit']['nombre_completo']; ?>
+                </span>
+                <br />
+                <span class="items-gestion"><?= $instit['Gestion']['name'] ?></span>
+                <span class="items-domicilio">
+                    &nbsp; - 
+                    Domicilio: 
+                    <?php
+                        echo joinNotNull(", ", array($instit['Instit']['direccion'],$instit['Instit']['lugar'],
+                                             $instit['Localidad']['name'],
+                                             $instit['Departamento']['name'] == $instit['Localidad']['name']?null:$instit['Departamento']['name'],
+                                             $instit['Jurisdiccion']['name']));
+                    ?>
+                </span>
+                
+                
+                <div class="clear"></div>
                 </a>
             </li>
-        <? 
-        } 
-        endforeach
-        ?>
-    </ul>        
-    
+
+        <? endforeach?>
+    </ul>
     <?php
     }
     else {
@@ -87,19 +100,14 @@ $paginator->options(array(
     <?php
     }
     
-    if ($paginator->numbers()) {
-    ?>
-    <div style="text-align:center; display:block;margin: 10px 0 10px 0">
-        <?php
-        echo $paginator->prev('« Anterior ',null, null, array('class' => 'disabled', 'tag' => 'span'));
-        echo " | ".$paginator->numbers(array('modulus'=>'9'))." | ";
-        echo $paginator->next(' Siguiente »', null, null, array('class' => 'disabled'));
-        ?>
-        <div id="spinner" style="display:none; padding-left:10px;"><?php echo $html->image('ajax-loader.gif')?></div>
-    </div>
-    <?php  } ?>
-<script type="text/javascript">
-    $(".autosubmit").change(function() {
-        $('#InstitsForm').submit();
-    });
-</script>
+    if ($paginator->numbers()) { ?>
+        <div style="text-align:center; display:block;margin-bottom: 10px">
+            <?php
+            echo $paginator->prev('« Anterior ',null, null, array('class' => 'disabled', 'tag' => 'span'));
+            echo " | ".$paginator->numbers(array('modulus'=>'9'))." | ";
+            echo $paginator->next(' Siguiente »', null, null, array('class' => 'disabled'));
+            ?>
+            <div id="ajax_paginator_indicator" style="display: none;text-align: center"><?php echo $html->image('ajax-loader.gif')?></div>
+        </div>
+    <?php } ?>
+</div>
