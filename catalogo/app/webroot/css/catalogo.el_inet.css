@@ -29,10 +29,10 @@
       text-decoration: none;
       font-weight: bold;      
       
-      -webkit-transition: all 1s ease-in-out; 
-      -moz-transition: all 1s ease-in-out; 
-      -o-transition: all 1s ease-in-out; 
-      -ms-transition: all 1s ease-in-out;
+      -webkit-transition: all 0.3s ease-in-out; 
+      -moz-transition: all 0.3s ease-in-out; 
+      -o-transition: all 0.3s ease-in-out; 
+      -ms-transition: all 0.3s ease-in-out;
   }
   
   #el_inet_graph A:hover{
