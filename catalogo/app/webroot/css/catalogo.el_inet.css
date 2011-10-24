@@ -28,14 +28,19 @@
       padding: 5px;
       text-decoration: none;
       font-weight: bold;      
+      
+      -webkit-transition: all 1s ease-in-out; 
+      -moz-transition: all 1s ease-in-out; 
+      -o-transition: all 1s ease-in-out; 
+      -ms-transition: all 1s ease-in-out;
   }
   
   #el_inet_graph A:hover{
         background-repeat: no-repeat;
-        -webkit-transform: rotate(360deg) scale(2); 
-        -moz-transform: rotate(360deg) scale(2); 
-        -o-transform: rotate(360deg) scale(2); 
-        -ms-transform: rotate(360deg) scale(2);
+        -webkit-transform: scale(1.2); 
+        -moz-transform: scale(1.2); 
+        -o-transform: scale(1.2); 
+        -ms-transform: scale(1.2);
         
   }
 
