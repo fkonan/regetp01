@@ -13,6 +13,60 @@ echo $javascript->link('animar_cuadros');
     width: 250px;
     display:none;
   }
+  
+  #el_inet_graph{
+      background: url('../img/el_inet/fondo.png');
+      width: 613px;
+      height: 356px;
+      position: relative;
+      margin: auto;
+  }
+  
+  #el_inet_graph A{
+      position: absolute;
+      background-repeat: no-repeat;
+  }
+  
+  #graph_consejo_federal{
+      top: 25px;
+      left: 283px;
+      width: 157px;
+      height: 73px;
+      background: url('../img/el_inet/consejo_federal.png');
+  }
+  
+  #graph_consejo_nacional{
+      top: 258px;
+      left: 60px;
+      width: 157px;
+      height: 73px;
+      background: url('../img/el_inet/consejo_nacional.png');
+  }
+  
+  #graph_me{
+      top: 23px;
+      left: 39px;
+      width: 148px;
+      height: 78px;
+      background: url('../img/el_inet/me.png');
+  }
+  
+  #graph_inet{
+      top: 140px;
+      left: 393px;
+      width: 181px;
+      height: 81px;
+      background: url('../img/el_inet/inet.png');
+  }
+  
+  #graph_comision{
+      top: 258px;
+      left: 396px;
+      width: 157px;
+      height: 73px;
+      background: url('../img/el_inet/comision.png');
+  }
+  
 </style>
 <div class="grid_12">
     <h1>El Instituto Nacional de Educación Tecnológica</h1>
@@ -21,31 +75,15 @@ echo $javascript->link('animar_cuadros');
         <h3>Estructura</h3>
         <div class="centrado">
                         
-             <object data="<?php echo $html->url('/img/entidades.svg') ?>" type="image/svg+xml" width="700" height="400"
-                  id="mySVGObject"> 
-            </object>
-
+            <div id="el_inet_graph">
+                <a href="#" id="graph_comision">Comisión</a>
+                <a href="#" id="graph_consejo_federal">Consejo Federal</a>
+                <a href="#" id="graph_consejo_nacional">COnsejo Nacional</a>
+                <a href="#" id="graph_inet">INET</a>
+                <a href="#" id="graph_me">Ministerio</a>
+            </div>
           
         </div>
         <div id="descripcion"></div>
     </div>
 </div>
-
-<script type="text/javascript">
-  window.onsvgload = function(){
-    /*texto temporal*/
-    var lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas erat lacus, facilisis sed scelerisque dictum, accumsan eu nunc. Maecenas sed ligula sed quam luctus consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.";
-    var nodos = [
-      {id:"g_ministerio", titulo: "Ministerio de Educación", link:"http://www.me.gov.ar/"},
-      {id:"g_consejo_educ", titulo: "Consejo Federal de Educación", texto:"Ámbito de concertación, acuerdo y coordinación de la política educativa nacional, presidido por el Ministro de Educación Nacional e integrado por las autoridades educativas de las 23 provincias argentinas y de la Ciudad Autónoma de Buenos Aires.<br/><p>Para obtener más información <a target='_blank' href='http://portal.educacion.gov.ar/consejo/2009/12/04/el-consejo/'>haga click aquí</a></p>"},
-      //{id:"g_secretaria_educ___"},
-      //{id:"g_secretaria_politicas___"},
-      {id:"g_inet", titulo: "Instituto Nacional de Educación Tecnológica",texto:" El INET es el organismo del Ministerio de Educación que tiene a su cargo la coordinación de la aplicación de las políticas públicas de manera concertada y concurrente con las provincias y la Ciudad Autónoma de Buenos Aires, relativas a la educación técnico profesional en los niveles secundario técnico, superior técnico y de formación profesional.<br /> Promueve la mejora continua de la calidad de la ETP, asegurando mayores niveles de inclusión y adecuando en forma permanente la oferta educativa a las necesidades sociales, productivas y territoriales.<br/> La Ley de Educación Técnico Profesional 26058 en su art. 45. asigna las responsabilidades y funciones del organismo. Cuenta con dos ámbitos permanentes de consulta y acuerdo: la Comisión Federal de ETP y el Consejo Nacional de Educación Trabajo y Producción (CoNETyP), con quienes elabora las propuestas a ser presentadas para su aprobación al Consejo Federal de Educación.<br/><p>Para obtener más información <a target='_blank' href='http://www.inet.edu.ar/'>haga click aquí</a></p>"},
-      {id:"g_consejo_etp", titulo: "Consejo Nacional de Educación Trabajo y Producción (CONETyP)", texto:"Este Consejo, cuya Secretaría Permanente lleva la Dirección Ejecutiva del INET, tiene como función asesorar al Ministro de Educación en todos los aspectos que tiendan a la vinculación de la educación con el mundo del trabajo, de la producción, de la ciencia y la tecnología.<BR /> En el marco de dicho Consejo se desarrollan foros sectoriales, constituidos por referentes clave de cada sector, a partir de los cuales se elaboran las propuestas específicas de formación y capacitación.<BR />Para asegurar su representatividad, el CONETyP se conforma con representantes de los Ministerios de Educación, de Trabajo y de Producción, de Ciencia y Tecnología, del Consejo Federal de Educación, de las cámaras empresarias - en particular de la pequeña y mediana empresa -, de las organizaciones de los trabajadores, incluidas las entidades gremiales docentes, las entidades profesionales de técnicos, y de entidades empleadoras que brindan educación técnico profesional de gestión privada."},
-      {id:"g_comision_etp", titulo: "Comisión Federal de Educación Técnico Profesional",texto: "Esta Comisión creada por Ley de Educación Técnico Profesional Nº 26058, art. 49 y 50 tiene como propósito principal garantizar los circuitos de consulta técnica para la formulación y seguimiento de los programas federales orientados a la aplicación de dicha Ley en el marco de los acuerdos del Consejo Federal de Educación, como organismo de concertación de la política educativa nacional.<br/>La Comisión Federal de Educación Técnico Profesional está integrada por los representantes de las provincias y del Gobierno de la Ciudad Autónoma de Buenos Aires, designados por las máximas autoridades jurisdiccionales respectivas y su actividad está coordinada por la Dirección Ejecutiva del INET."}
-    ];
-
-    animar_cuadros('mySVGObject', nodos, 'descripcion');
-  };
-</script>
-<script src="<?= $this->webroot ?>js/svg/svg.js" data-path="<?=$this->webroot.'js/svg/'?>" ></script>
