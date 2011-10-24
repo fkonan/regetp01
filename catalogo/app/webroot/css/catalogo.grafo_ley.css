@@ -48,7 +48,6 @@
   .circulo{
     top: 15px;
     width: 106px;
-    height: 106px;
     color: #002f64;
     background: url('../img/grafo/circulo_azul.png');
     font-size: 8pt;
@@ -61,16 +60,19 @@
   #graph_proceso{  
       color: #002f64;    
       left: 120px;
+      height:73px;
       padding-top: 38px !important;
   }
   #graph_registro{      
       color: #002f64;
       left: 284px;
+      height:78px;
       padding-top: 33px !important;
   }
   #graph_catalogo{      
       color: #002f64;
       left: 445px;
+      height:62px;
       padding-top: 49px !important;
   }
 
