@@ -1,0 +1,102 @@
+.show_in_dialog{
+    display: none;
+}
+
+  #descripcion{
+    background-color: lightgray;
+    border: 2px solid gray;
+    border-radius: 10px 10px 10px 10px;
+    left: 600px;
+    padding: 10px;
+    position: absolute;
+    top: 50px;
+    width: 250px;
+    display:none;
+  }
+  
+  #el_inet_graph{
+      background: url('../img/el_inet/fondo.png');
+      width: 613px;
+      height: 356px;
+      position: relative;
+      margin: auto;
+  }
+  
+  #el_inet_graph A{
+      position: absolute;
+      background-repeat: no-repeat;
+      padding: 5px;
+      text-decoration: none;
+      font-weight: bold;      
+  }
+  
+  #el_inet_graph A:hover{
+        background-repeat: no-repeat;
+        
+  }
+
+  
+  #graph_consejo_federal{
+      top: 25px;
+      left: 283px;
+      width: 157px;
+      height: 73px;
+      color: #391717;
+      background: url('../img/el_inet/box_marron.png');
+      padding-top: 18px !important;
+      font-size: 8pt;
+  }
+  
+  #graph_consejo_federal:hover, #graph_consejo_nacional:hover, #graph_comision:hover{
+      background: url('../img/el_inet/box_marron_hover.png');
+  }
+  
+  #graph_consejo_nacional{
+      font-size: 8pt;
+      top: 258px;
+      left: 60px;
+      width: 157px;
+      height: 73px;
+      color: #391717;
+      background: url('../img/el_inet/box_marron.png');
+  }
+  
+  
+  #graph_me{
+      top: 23px;
+      left: 39px;
+      width: 148px;
+      height: 78px;
+      background: url('../img/el_inet/box_azul_me.png');
+      color: white;
+      padding-top: 20px !important;
+  }
+  
+  #graph_me:hover{
+      background: url('../img/el_inet/box_azul_me_hover.png');
+  }
+  
+  #graph_inet{
+      padding-top: 20px !important;
+      color: white;
+      top: 140px;
+      left: 393px;
+      width: 181px;
+      height: 81px;
+      background: url('../img/el_inet/box_azul_inet.png');
+  }
+  
+  #graph_inet:hover{
+      background: url('../img/el_inet/box_azul_inet_hover.png');
+  }
+  
+  #graph_comision{
+      font-size: 8pt;
+      color: #391717;
+      top: 258px;
+      left: 396px;
+      width: 157px;
+      height: 73px;
+      background: url('../img/el_inet/box_marron.png');
+  }
+  
