@@ -1,10 +1,8 @@
 <?php  $paginator->options(array('update' => 'consoleResult', 'url' => $this->passedArgs,'indicator'=> 'ajax_paginator_indicator')); ?>
 
 <?php echo $html->css(array('catalogo.advanced_search', 'catalogo.instits'), $inline=false); ?>
-<div class="boxblanca" id="search_results">
-<h3>Listado de resultados</h3>
-<? if (sizeof($conditions)>0): ?>
-	Criterios de búsqueda seleccionados:
+<div id="search_results">
+<? if (sizeof($conditions)>0): ?>	
 	<dl class="criterios_busq">
 	<?
 
