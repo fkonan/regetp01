@@ -1,16 +1,18 @@
-<?php echo $html->css('catalogo.grafo_ley');?> 
+<?php 
+$this->pageTitle = "Las políticas para la Educación Técnico Profesional en Argentina";
+echo $html->css('catalogo.grafo_ley');?> 
 
 <script type="text/javascript">
-function viewDescription(este) {
-    $(este.hash).dialog({
-        width: 600,
-                //position: 'top',
-                zIndex: 3999,
-                title: este.text
-    });
-      
-    return false;
-}
+    function viewDescription(este) {
+        $(este.hash).dialog({
+            width: 600,
+                    //position: 'top',
+                    zIndex: 3999,
+                    title: este.text
+        });
+
+        return false;
+    }
 </script>
 
 <style type="text/css">
@@ -62,7 +64,7 @@ function viewDescription(este) {
           <div id="grafo">
                 <a onclick="return viewDescription(this)" id="graph_proceso" class="circulo" href="#txt_proceso">Procesos de Homologación</a>
                 <a onclick="return  viewDescription(this)" id="graph_registro" class="circulo" href="#txt_registro">Registro Federal de Instituciones de ETP</a>
-                <a onclick="return  viewDescription(this)" id="graph_catalogo" class="circulo" href="#txt_catalogo">Catálogo Nacional</a>
+                <a onclick="return  viewDescription(this)" id="graph_catalogo" class="circulo" href="#txt_catalogo">Catálogo Nacional de Títulos y Certificaciones</a>
                 <a onclick="return viewDescription(this)" id="graph_fondo" href="#txt_fondo">Fondo Nacional Para la ETP</a>
             </div>
         </div>
@@ -82,5 +84,3 @@ function viewDescription(este) {
         <br />
     </div>
 </div>
-</script>
-<script src="<?= $this->webroot ?>js/svg/svg.js" data-path="<?=$this->webroot.'js/svg/'?>" ></script>
