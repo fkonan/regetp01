@@ -23,12 +23,14 @@ $this->pageTitle= 'Agropecuaria';
 			<li>Forestal</li>
 			<li>Frutí­cola - Olivicultura</li>
 			<li>Hortícola
-                            
-                            <?php echo $html->link('Informe sectorial', '/files/pdfs/info_sectorial/horticultura_informe_final.pdf', array('target'=>'_blank')) ?>
-
-                        </li>
+				<ul>
+					<li><?php echo $html->link('Informe sectorial', '/files/pdfs/info_sectorial/horticultura_informe_final.pdf', array('target'=>'_blank')) ?></li>
+				</ul>
+			</li>
 			<li>Producción Lechera
-                        <?php echo $html->link('Informe sectorial', '/files/pdfs/info_sectorial/informe_lechero.pdf', array('target'=>'_blank')) ?>
+			<ul>
+				<li><?php echo $html->link('Informe sectorial', '/files/pdfs/info_sectorial/informe_lechero.pdf', array('target'=>'_blank')) ?></li>
+			</ul>
                         </li>
 			<li>Vitivinicultura</li>
 		</ul>
