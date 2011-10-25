@@ -24,7 +24,7 @@ secundario técnico, superior técnico y de formación profesional.<br />
 Promueve la mejora continua de la calidad de la ETP, asegurando mayores niveles de inclusión
 y adecuando en forma permanente la oferta educativa a las necesidades sociales, productivas y
 territoriales.<br/>
-La Ley de Educación Técnico Profesional 26058 en su art. 45. asigna las responsabilidades y
+La Ley de Educación Técnico Profesional 26.058 en su Art. Nº 45. asigna las responsabilidades y
 funciones del organismo.
 Cuenta con dos ámbitos permanentes de consulta y acuerdo: la Comisión Federal de ETP y
 el Consejo Nacional de Educación Trabajo y Producción (CoNETyP), con quienes elabora las
