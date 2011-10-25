@@ -60,7 +60,7 @@ $this->pageTitle =  $titulo['Titulo']['name'];
                 $tieneFiltro = true;
             }
             if ( $tieneFiltro ) {
-                 echo "<b>Mostrando con los siguientes filtros aplicados:</b><br />";
+                 echo "Criterios de búsqueda seleccionados:<br />";
             }
             echo $this->requestAction( $reqUrl, array('return') ); 
             ?>
