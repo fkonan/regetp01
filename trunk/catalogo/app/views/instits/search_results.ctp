@@ -1,4 +1,4 @@
-<?php  $paginator->options(array('update' => 'consoleResult', 'url' => $this->passedArgs,'indicator'=> 'ajax_paginator_indicator')); ?>
+<?php  $paginator->options(array('update' => 'search_results', 'url' => $this->passedArgs,'indicator'=> 'ajax_paginator_indicator')); ?>
 
 <?php echo $html->css(array('catalogo.advanced_search', 'catalogo.instits'), $inline=false); ?>
 <div id="search_results">
