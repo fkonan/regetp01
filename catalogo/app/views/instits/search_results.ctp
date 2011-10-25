@@ -19,27 +19,6 @@
 	</dl>
 <? endif; ?>
     <div class="list-header">
-        <div class="sorter">
-        <?php
-        $sort = 'cue';
-        if(isset($this->passedArgs['sort'])){
-        $sort = $this->passedArgs['sort'];
-        }
-        ?>
-            Ordenar por:
-            <? $class = ($sort == 'cue')?'marcada':'';?>
-            <span class="<?= $class?>"><?php echo $paginator->sort('CUE', 'cue');?></span>,
-
-            <? $class = ($sort == 'Jurisdiccion.name')?'marcada':'';?>
-            <span class="<?= $class?>"><?php echo $paginator->sort('Jurisdicción','Jurisdiccion.name');?></span>,
-
-            <? $class = ($sort == 'Departamento.name')?'marcada':'';?>
-            <span class="<?= $class?>"><?php echo $paginator->sort('Departamento','Departamento.name');?></span>,
-
-            <? $class = ($sort == 'Localidad.name')?'marcada':'';?>
-            <span class="<?= $class?>"><?php echo $paginator->sort('Localidad','Localidad.name');?></span>
-
-        </div>
         <div class="paging">
             <?php echo $paginator->counter(array(
                 'format' => __('Instituciones %start%-%end% de <strong>%count%</strong>', true))); ?>
