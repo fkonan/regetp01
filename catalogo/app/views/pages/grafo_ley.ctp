@@ -4,11 +4,12 @@ echo $html->css('catalogo.grafo_ley');?>
 
 <script type="text/javascript">
     function viewDescription(este) {
+        var title = $(este).html();
         $(este.hash).dialog({
             width: 600,
                     //position: 'top',
                     zIndex: 3999,
-                    title: este.text
+                    title: title
         });
 
         return false;
