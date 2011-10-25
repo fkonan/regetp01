@@ -105,7 +105,7 @@ class TitulosController extends AppController {
                         'model' => 'Instit',
                         'field' => 'localidad_id',
                         'friendlyName' => 'Localidad');
-                 } else {
+                 } elseif( !empty ($getParams['localidad_name']) ) {
                      $localidad['Localidad']['name'] =  $getParams['localidad_name'];
                      //      Localidad, pero por su nombre
                      $ops[] = array(
