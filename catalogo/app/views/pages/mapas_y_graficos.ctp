@@ -63,7 +63,7 @@ echo $html->css('catalogo.estaticas', false);
                             <area shape="poly" coords="68,505,126,502,125,510,134,521,148,523,151,541,138,547,126,563,124,579,108,590,108,608,118,632,96,625,71,626,65,612,67,601,63,597,56,601,49,592,47,570,56,568,55,561,62,552,56,541,64,527,62,521,67,518,65,507" onclick="viewJurisdiccion('<?php echo SUP_TEC_ID?>','78','Santa Cruz')" alt="Santa Cruz" title="Santa Cruz"   />
                             <area shape="poly" coords="113,640,113,683,132,683,142,687,156,677,143,675,136,669,128,664,121,653" onclick="viewJurisdiccion('<?php echo SUP_TEC_ID?>','94','Tierra del Fuego')" alt="Tierra del Fuego" title="Tierra del Fuego"   />
                       </map>
-                      <a href="<?php echo $html->url('/files/mapas/sup2011.pdf'); ?>" style="clear:both;">Descargar mapa</a>
+                      <a href="<?php echo $html->url('/files/mapas/sup2011.pdf'); ?>" target="_blank" style="clear:both;">Descargar mapa</a>
                     </div>
                     <br />
                     <div style="width: 65%; float: left;">
@@ -109,7 +109,7 @@ echo $html->css('catalogo.estaticas', false);
                             <area shape="poly" coords="65,507,123,504,122,512,130,525,145,525,148,543,135,549,123,565,121,583,106,593,102,609,110,634,93,627,67,631,62,614,64,603,60,599,50,607,45,595,44,572,53,570,52,563,59,554,53,543,61,529,59,523,64,520,62,509" onclick="viewJurisdiccion('<?php echo SEC_TEC_ID?>','78','Santa Cruz')" alt="Santa Cruz" title="Santa Cruz"   />
                             <area shape="poly" coords="109,645,109,688,128,688,138,692,152,682,139,680,132,674,124,669,117,658" onclick="viewJurisdiccion('<?php echo SEC_TEC_ID?>','94','Tierra del Fuego')" alt="Tierra del Fuego" title="Tierra del Fuego"   />
                       </map>
-                      <a href="<?php echo $html->url('/files/mapas/sectec2011.pdf'); ?>" style="clear:both;">Descargar mapa</a>
+                      <a href="<?php echo $html->url('/files/mapas/sectec2011.pdf'); ?>" target="_blank" style="clear:both;">Descargar mapa</a>
                     </div> 
                     <br />
                     <div style="width: 65%; float: left;">
@@ -155,7 +155,7 @@ echo $html->css('catalogo.estaticas', false);
                             <area shape="poly" coords="63,516,119,515,120,520,126,527,134,536,145,536,147,544,145,555,132,563,124,573,120,581,118,595,109,600,103,605,101,617,104,630,114,646,97,640,80,637,67,638,61,628,62,615,60,610,53,615,48,614,44,607,44,594,42,583,48,584,48,580,55,573,54,568,58,563,53,557,55,551,60,542,59,532,63,527,57,520" onclick="viewJurisdiccion('<?php echo FP_ID?>','78','Santa Cruz')" alt="Santa Cruz" title="Santa Cruz"   />
                             <area shape="poly" coords="110,653,112,696,129,696,141,698,151,696,152,692,153,690,141,689,134,683,124,676,118,665" onclick="viewJurisdiccion('<?php echo FP_ID?>','94','Tierra del Fuego')" alt="Tierra del Fuego" title="Tierra del Fuego"   />
                         </map>
-                        <a href="<?php echo $html->url('/files/mapas/cfp2011.pdf'); ?>" style="clear:both;">Descargar mapa</a>
+                        <a href="<?php echo $html->url('/files/mapas/cfp2011.pdf'); ?>" target="_blank" style="clear:both;">Descargar mapa</a>
                     </div> 
                     <br />
                     <div style="width: 65%; float: left;">
