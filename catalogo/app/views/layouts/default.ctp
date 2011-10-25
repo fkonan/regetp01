@@ -57,7 +57,6 @@ $javascript;
             'jquery.tooltip',
             'catalogo',
             'catalogo.menu',
-            'ui-redmond/jquery-ui-1.8.12.custom',
             'iconize',
             'catalogo.default_header',
         ));
@@ -76,6 +75,7 @@ $javascript;
 
         echo $combinator->scripts('css');
 
+        echo $html->css('ui-redmond/jquery-ui-1.8.12.custom','stylesheet');
         echo $html->css('printer','stylesheet', array('media'=>'print'));
         echo $html->css('catalogo800x600',
                         'stylesheet', array(
