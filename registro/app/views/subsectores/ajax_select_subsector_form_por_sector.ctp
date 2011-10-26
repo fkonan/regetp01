@@ -1,5 +1,6 @@
 <?php //debug($deptos);?>
-<option value="0">Seleccione</option>
+<option value="">Todos</option>
+<option value="0">Sin subsector</option>
 
 <?
 foreach($subsectores as $d):
