@@ -11,7 +11,7 @@
     </h2>
     <div class="tabs">
         <?php
-        if(!empty($ultimo_ciclo_actualizado) && 
+        if($instit['Instit']['activo'] && !empty($ultimo_ciclo_actualizado) && 
            $ultimo_ciclo_actualizado > 0 && $ultimo_ciclo_actualizado < (date('Y')-2)) { ?>
             <div class="ultima_act_ciclo">
                 Atención: La oferta educativa de la institución no ha sido actualizada en los últimos 2 años
