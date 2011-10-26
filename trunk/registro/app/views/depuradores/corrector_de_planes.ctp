@@ -52,11 +52,6 @@ echo $html->css(array('jquery.autocomplete'));
                 delay: 200,
                 max:30,
                 cacheLength:0,
-                extraParams: {
-                    oferta_id: function() { return jQuery('#FPlanOfertaId').val(); },
-                    sector_id: function() { return jQuery('#FPlanSectorId').val(); },
-                    subsector_id: function() { return jQuery('#FPlanSubsectorId').val(); }
-                } ,
                 parse: function(data) {
                     return jQuery.map(data, function(titulo) {
                         return {
