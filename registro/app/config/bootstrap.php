@@ -248,10 +248,6 @@ function convertir_texto_plano($text){
                 '/ó/' => $posiblesO,
                 '/ú/' => $posiblesU,
 
-                '/s/' => '(z|s|c)',
-                '/c/' => '(z|s|c)',
-                '/z/' => '(z|s|c)',
-
                 // Agregar aqui mas caracteres si es necesario
                 '/°/' => '',
                 '/º/' => '',
