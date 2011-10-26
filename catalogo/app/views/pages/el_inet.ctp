@@ -22,14 +22,14 @@ function viewDescription(este) {
         <div class="centrado">
                         
             <div id="el_inet_graph">
-                <a href="#txt_comision" class="box_roja" id="graph_comision" onclick="return viewDescription(this)"><span class="inner">Comisión Federal de Educación Técnico Profesional</span></a>
-                <a href="#txt_consejo_federal" class="box_roja" id="graph_consejo_federal" onclick="return  viewDescription(this)"><span class="inner">Consejo Federal de Educación</span></a>
-                <a href="#txt_consejo_nacional" class="box_roja" id="graph_consejo_nacional" onclick="return  viewDescription(this)"><span class="inner">Consejo Nacional de Educación Trabajo y Producción (CONETyP)</span></a>
-                <a href="#txt_inet" class="box_azul" id="graph_inet" onclick="return viewDescription(this)"><span class="inner">Instituto Nacional de<br />Educación Tecnológica</span></a>
-                <a href="http://www.me.gov.ar/" class="box_azul" target="_blank" id="graph_me"><span class="inner">Ministerio de Educación</span></a>
+                <a href="#txt_comision" class="box_roja" id="graph_comision" onclick="return viewDescription(this)">Comisión Federal de Educación Técnico Profesional</a>
+                <a href="#txt_consejo_federal" class="box_roja" id="graph_consejo_federal" onclick="return  viewDescription(this)">Consejo Federal de Educación</a>
+                <a href="#txt_consejo_nacional" class="box_roja" id="graph_consejo_nacional" onclick="return  viewDescription(this)">Consejo Nacional de Educación Trabajo y Producción (CONETyP)</a>
+                <a href="#txt_inet" class="box_azul" id="graph_inet" onclick="return viewDescription(this)">Instituto Nacional de<br />Educación Tecnológica</a>
+                <a href="http://www.me.gov.ar/" class="box_azul" target="_blank" id="graph_me">Ministerio de Educación</a>
                 
-                <span class="box_celeste" id="graph_secretaria_educacion"><span class="inner">Secretaria de Educación</span></span>
-                <span class="box_celeste" id="graph_secretaria_politicas_universitarias"><span class="inner">Secretaria de Políticas Universitarias</span></span>
+                <span class="box_celeste" id="graph_secretaria_educacion">Secretaria de<br />Educación</span>
+                <span class="box_celeste" id="graph_secretaria_politicas_universitarias">Secretaria de Políticas Universitarias</span>
             </div>
             
             <div class="show_in_dialog" id="txt_consejo_federal">
