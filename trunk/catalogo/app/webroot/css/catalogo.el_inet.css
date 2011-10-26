@@ -20,13 +20,14 @@
       height: 400px;
       position: relative;
       margin: auto;
+      text-align: left;
   }
   
   #el_inet_graph A, #el_inet_graph span{
       position: absolute;
       background-repeat: no-repeat;
       text-decoration: none;
-      
+      text-align: center;
       -webkit-transition: all 0.3s ease-in-out; 
       -moz-transition: all 0.3s ease-in-out; 
       -o-transition: all 0.3s ease-in-out; 
@@ -51,62 +52,50 @@
   #graph_consejo_federal{
       top: 32px;
       left: 323px;
+      padding-top: 29px;
   }
   
-  #graph_consejo_federal .inner{
-       padding-top: 18px;
-       padding-left: 10px;
-  }
   
   
   #graph_consejo_nacional{
       top: 298px;
       left: 60px;     
-  }
-  #graph_consejo_nacional .inner{
-      padding-top: 10px;
+      padding-top: 21px;
   }
   
   
   #graph_me{
       top: 32px;
       left: 39px;
+      padding-top:  29px;      
   }
-  #graph_me .inner{
-      padding-top:  18px;
-      padding-left: 32px;
-  }
-  
   
   
   #graph_inet{
       top: 156px;
       left: 434px;
-  }
-  #graph_inet .inner{
-      padding-top: 12px;
-      padding-left: 32px;
+      padding-top: 22px;
   }
   
   
   #graph_comision{
       top: 298px;
       left: 396px;
+      padding-top: 22px;
   }
   
-  #graph_comision .inner{
-      padding-top: 10px;
-  }
   
   #graph_secretaria_educacion{
       top: 157px;
       left: 54px;
+      padding-top: 22px;
   }
   
   
   #graph_secretaria_politicas_universitarias{
       top: 157px;
       left: 250px;
+      padding-top: 22px;
   }
   
   
