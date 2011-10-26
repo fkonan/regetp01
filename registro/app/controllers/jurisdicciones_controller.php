@@ -15,16 +15,29 @@ class JurisdiccionesController extends AppController {
 		$this->set('jurisdicciones', $this->paginate());
 	}
 
+
+	function comparar_cargo($a, $b)
+  	{
+    	return $b['Cargo'][0]["rango"] - $a['Cargo'][0]["rango"];
+  	}
+
 	function view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('La jurisdicción no existe', true));
 			$this->redirect(array('action'=>'listado'));
 		}
                 
-                $ministro = $this->Jurisdiccion->Autoridad->find('first',array('conditions'=>array('Autoridad.jurisdiccion_id'=>$id),'contain'=>array('Cargo'=>array('conditions'=>array('Cargo.rango'=> 1)))));
+        $ministros = $this->Jurisdiccion->Autoridad->find('all',
+        	array('conditions'=>array('Autoridad.jurisdiccion_id'=>$id),
+        		  'contain'=>array('Cargo'))
+        );
 
-                $this->Jurisdiccion->recursive = 0;
-                $this->set('ministro',$ministro);
+		usort($ministros, function($a, $b) {
+		    return($a['Cargo'][0]["rango"] > $b['Cargo'][0]["rango"]);
+		});
+
+        $this->Jurisdiccion->recursive = 0;
+        $this->set('ministro',$ministros[0]);
 		$this->set('jurisdiccion', $this->Jurisdiccion->read(null, $id));
 	}
 
