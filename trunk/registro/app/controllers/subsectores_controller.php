@@ -93,6 +93,7 @@ class SubsectoresController extends AppController {
 		 $this->layout = 'ajax';
                  Configure::write('debug',0);
                  $sector_id = 0;
+                 
                  if (!empty($this->data['Plan']['sector_id'])) {
                         $sector_id = $this->data['Plan']['sector_id'];
                  }
@@ -106,7 +107,7 @@ class SubsectoresController extends AppController {
                             endif;
                      endif;
                  }
-
+                 
                  $subsectores = $this->Subsector->con_sector('all',$sector_id);
 
                  $this->set('todos', ($sector_id != 0 )?false:true);

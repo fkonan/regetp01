@@ -46,18 +46,18 @@ class Subsector extends AppModel {
 
             $subsectores = $this->find('all',array('conditions' => $conditions));
 
-                // me lo prepara para el combo del select
+            // me lo prepara para el combo del select
             if($tipo == 'list')
             {
                 $ss_aux = array();
-                        foreach($subsectores as $ss):
-                                $sector = $ss['Sector']['name'];
-                                $ss_name = $ss['Subsector']['name']." ($sector)";
-                                $ss_aux[$ss['Subsector']['id']] = (strlen($ss_name)>60)? substr($ss_name,0,60)."..." : $ss_name;
-                        endforeach;
+                $ss_aux[0] = 'Sin subsector';
+                foreach($subsectores as $ss):
+                        $ss_name = $ss['Subsector']['name']." (".$ss['Sector']['name'].")";
+                        $ss_aux[$ss['Subsector']['id']] = (strlen($ss_name)>60)? substr($ss_name,0,60)."..." : $ss_name;
+                endforeach;
                 $subsectores = $ss_aux;
             }
-
+            
             // si no puse ni 'all', ni 'list', entonces que me devolverá un array vacio
             return $subsectores;
 	}

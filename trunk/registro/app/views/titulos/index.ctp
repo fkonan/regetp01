@@ -31,12 +31,12 @@ echo $html->css(array('jquery.loadmask', 'smoothness/jquery-ui-1.8.6.custom'));
         echo $form->input('sector_id', array(
             'div'=>array('style'=>'width:200px;float:left;clear:none;'),
             'class' => 'autosubmit',
-            'type'=>'select','empty'=>'Seleccione','options'=>$sectores,'label'=>'Sector','id'=>'sectorId','after'=>$meter)
+            'type'=>'select','empty'=>'Todos','options'=>$sectores,'label'=>'Sector','id'=>'sectorId','after'=>$meter)
         );
         echo $form->input('subsector_id', array(
             'div'=>array('style'=>'width:200px;float:left;clear:none;'),
             'class' => 'autosubmit',
-            'empty' => 'Seleccione','type'=>'select','label'=>'Subsector', 'id'=>'subsectorId','after'=> $meter)
+            'empty' => 'Todos','type'=>'select','label'=>'Subsector', 'id'=>'subsectorId','after'=> $meter)
         );
 
         echo $ajax->observeField('sectorId',
