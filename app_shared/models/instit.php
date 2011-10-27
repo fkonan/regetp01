@@ -586,8 +586,8 @@ class Instit extends AppModel {
                                             LEFT JOIN instits as i on (i.id = p.instit_id)
                                             WHERE
                                             i.id = $id
-                                            GROUP BY o.id, o.abrev
-                                            ORDER BY o.id, o.abrev";
+                                            GROUP BY o.order, o.id, o.abrev
+                                            ORDER BY o.order, o.id, o.abrev";
 
 
             $ciclos  = $this->query($data_cliclos_involucrados);
@@ -1558,8 +1558,8 @@ class Instit extends AppModel {
 		}
 
 		$sql .= "
-                        GROUP BY o.id, $group
-                        ORDER BY $group ASC
+                        GROUP BY o.id, o.order, $group
+                        ORDER BY o.order, $group ASC
                         ";
 
 
