@@ -73,28 +73,34 @@ data_fp = [["Informática", 94269 ],
         ["Energía", 76 ]];
 
 
-jQuery(document).ready(function(){
-        jQuery('.js-tabs-ofertas').tabs({
-            fx: { 
-            opacity: 'toggle' 
-            }
-        });
-                
-        jQuery('.mapa').maphilight({
-            fade: false,
-            fillColor: '045FB4',
-            fillOpacity: 0.2,
-            stroke: false
-        });
+google.load("visualization", "1", {packages:["corechart"]});
 
-        crear_cuadro('grafico_sup', data_sup);
-        crear_cuadro('grafico_sec', data_sec);
-        crear_cuadro('grafico_fp', data_fp);
+jQuery(document).ready(function(){
+
+    
+
+    jQuery('.mapa').maphilight({
+        fade: false,
+        fillColor: '045FB4',
+        fillOpacity: 0.2,
+        stroke: false
     });
+
+
+    crear_cuadro('grafico_sup', data_sup);
+    crear_cuadro('grafico_sec', data_sec);
+    crear_cuadro('grafico_fp', data_fp);
+
+    jQuery('.js-tabs-ofertas').tabs({
+        fx: { 
+        opacity: 'toggle' 
+        },
+    });
+});
     
 
 
-    google.load("visualization", "1", {packages:["corechart"]});
+    
     
 
     function viewJurisdiccion(oferta_id, jurisdiccion_id, titulo) {
