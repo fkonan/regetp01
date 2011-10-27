@@ -133,3 +133,7 @@ area:HOVER{
 .current-map-layer {
     left: 0;
 }
+
+#ver-oferta-sup,#ver-oferta-fp,#ver-oferta-sec{
+    height:1559px;
+}
