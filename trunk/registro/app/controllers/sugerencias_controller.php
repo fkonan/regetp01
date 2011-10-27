@@ -31,15 +31,16 @@ class SugerenciasController extends AppController {
         if (!empty($this->data)) {
             $this->Sugerencia->create();
             if ($this->Sugerencia->save($this->data)) {
-                $this->Session->setFlash(__('�Gracias por enviarnos una sugerencia!', true));
+                $this->Session->setFlash(__('Gracias por enviarnos una sugerencia', true));
 
                 $this->Sugerencia->User->recursive = 0;
                 $user = $this->Sugerencia->User->find('first', array(
                     'conditions' => array('User.id' => $this->data['Sugerencia']['user_id'])
                 ));
-                
+
                 // si el usuario tiene email en su perfil, se envia mail
                 if (!empty($user['User']['mail'])) {
+                    
                     $mensaje  = "Gracias por enviarnos su sugerencia."."\n\n";
                     //$mensaje .= "E-mail: ".$this->data['Correo']['mail']."\n";
 
@@ -54,14 +55,14 @@ class SugerenciasController extends AppController {
 
                     $this->Email->delivery = 'smtp';
                     $this->Email->from     = NOMBRE_CONTACTO.' <'.EMAIL_CONTACTO.'>';
-                    $this->Email->to       = $user['User']['mail'].' <'.$user['User']['username'].'>';
-                    $this->Email->subject  = 'Su sugerencia ha sido enviada con �xito!';
+                    $this->Email->to       = $user['User']['mail'];
+                    $this->Email->subject  = 'Su sugerencia ha sido enviada con Exito!';
                     $this->Email->template = 'simple';
                     $this->set("message", $mensaje);
-
+                    
                     $this->Email->send();
 
-                    $this->set('smtp_errors', $this->Email->smtpError);
+                    $this->log('smtp_errors: ' . $this->Email->smtpError, LOG_DEBUG);
                 }
                 $this->redirect('/');
             } else {
