@@ -47,14 +47,4 @@ Un listado completo de las modificaciones realizadas en esta última versión, pue
 <hr/>
 <br/>
 
-<p>
-Para realizar consultas sobre el funcionamiento del programa ó para 
-notificar problemas técnicos: Int. 2010
-</p>
-<p>
-Para realizar consultas sobre los contenidos de información del Registro 
-de Instituciones: Int. 4032/4033.
-</p>
-<p>
-Unidad de Información: Of. 311.
-</p>
+<?php echo $this->element('contacto'); ?>

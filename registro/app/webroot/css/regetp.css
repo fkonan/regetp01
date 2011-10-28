@@ -2544,3 +2544,33 @@ border-bottom-color: white !important;
     font-variant: small-caps;
     font-size: 13px;
 }
+
+#formas_contacto, #formas_contacto li ul{
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+
+#formas_contacto li{
+    border:2px solid #DBEBF6;
+    margin:10px;
+    padding:10px;
+
+    -moz-border-radius:5px;
+    -webkit-border-radius: 5px;
+    border-radius:5px;
+}
+
+#formas_contacto li ul li{
+    border:none;
+    margin:0
+}
+
+#formas_contacto h2,#formas_contacto h3{
+    display:block;
+    margin:0;
+}
+
+#formas_contacto h2 img{
+    margin:0 5px 0 0;
+}
