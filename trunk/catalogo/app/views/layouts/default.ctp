@@ -64,9 +64,6 @@ $javascript;
         $combinator->prepend_libs('js', array(
             'jquery-1.6.2.min',
             'adapt.min.js',
-//            'jquery.form',
-//            'jquery.tools.min',
-            'jquery-ui-1.8.16.custom.min',
             'views/layout/default',
         ));
 
@@ -86,7 +83,7 @@ $javascript;
         if (file_exists($jsView.'.js')) {
             echo $javascript->link($jsPoner);
         }
-
+        echo $javascript->link('jquery-ui-1.8.16.custom.min');
         echo $scripts_for_layout;
 
         ?>
