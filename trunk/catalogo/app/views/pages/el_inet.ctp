@@ -11,7 +11,7 @@ function viewDescription(este) {
 }
 </script>
 
-<?php echo $html->css('catalogo.el_inet');?> 
+<?php echo $html->css('catalogo.el_inet', false);?> 
 
 
 <div class="grid_12">

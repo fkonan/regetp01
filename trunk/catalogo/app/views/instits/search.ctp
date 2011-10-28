@@ -1,10 +1,7 @@
 <?
-echo $javascript->link(array(
-    'jquery.loadmask.min',
-    'views/instits/search'
-        ), false);
 
-echo $html->css(array('jquery.loadmask',
+echo $html->css(array(
+    'jquery.loadmask',
     'catalogo.advanced_search',
     'catalogo.instits',
         ), $inline = false);
@@ -33,7 +30,7 @@ echo $html->css(array('jquery.loadmask',
             'empty' => array('0' => 'Todas'),
             'id' => 'jurisdiccion_id'));
         echo $form->input('departamento_id', array(
-            'label' => 'Departamento',
+            'label' => 'Departamento'.$html->image('indicator.gif', array('style' =>'height: 23px; margin-bottom: -7px; display: none', 'id'=>'depto-loader')),
             'empty' => 'Todos',
             'id' => 'departamento_id',
         ));

@@ -64,12 +64,8 @@ $javascript;
         $combinator->prepend_libs('js', array(
             'jquery-1.6.2.min',
             'adapt.min.js',
-            'jquery.form',
-            'jquery.tools.min',
+//            'jquery.form',
             'jquery-ui-1.8.16.custom.min',
-            'jquery/jquery.bgiframe.min',
-            'jquery/jquery.superfish',
-            'jquery/jquery.history',
             'views/layout/default',
         ));
 
@@ -93,12 +89,6 @@ $javascript;
         echo $scripts_for_layout;
 
         ?>
-        <script type="text/javascript">
-//            $(function() {
-//                DD_belatedPNG.fix('.inet_logo');
-//            });
-        </script>
-            
         
         <!--[if IE 6]>
         <?php echo $html->css('catalogo.ie6_fix');?>

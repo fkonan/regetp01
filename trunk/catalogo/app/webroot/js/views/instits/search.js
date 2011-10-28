@@ -32,9 +32,13 @@
 
     function reloadCombo(jur, depto){
         var url = urlDomain+'/departamentos/ajax_select_departamento_form_por_jurisdiccion';
+        var loader = $('#depto-loader');
+        var domDepto = $('#departamento_id');
+        loader.show();
         $.post(url,{'data[jurisdiccion_id]':jur},function(data){
-            $('#departamento_id').html(data);
-            $('#departamento_id').val(depto);
+            domDepto.html(data);
+            domDepto.val(depto);
+            loader.hide();
         })
     }
 

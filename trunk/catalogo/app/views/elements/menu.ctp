@@ -50,13 +50,3 @@ function currentPara($view, $donde){
                                                 array('class'=>'menu-item'))?>
         </li>
 </ul>
-
-
-<script type="text/javascript">
-    // menu hover dropdown
-    $( function() {
-            $("ul.nav").superfish();
-            $("ul.nav").find('ul').bgIframe();
-    } );
-    
-</script>
