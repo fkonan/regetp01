@@ -119,7 +119,7 @@ if (empty($planes)) {
                 'class' => $class,
                 'plan'  => $plan,
                 'ciclo' => $ciclo_plan,
-                'hstaller'  => true,
+                'hstaller'  => $primer_anio["hs_taller"],
             ));
         }
     }

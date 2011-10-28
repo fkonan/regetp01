@@ -105,37 +105,38 @@ $cue_instit = $instit['cue'].$anexo;
                     &nbsp;
 		</dd>
 				
-		<? if((($plan['Plan']['duracion_hs']+$plan['Plan']['duracion_semanas']+$plan['Plan']['duracion_anios'])>0)){ ?>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Duración del plan:'); ?></dt>
-		<dd<?php echo $class;?>>
-			&nbsp;
-		</dd>
-		<? } ?>
-		
-		<? if(($plan['Plan']['duracion_hs']>0)){ ?>
-			<dt<?php echo $class;?>><?php __(' - Horas'); ?></dt>
+		<?php if ($plan['Plan']['oferta_id'] != FP_ID): //si es FP no muestro la duracion, Las horas varian de un ciclo a otro y este dato produce confusión?>
+			<? if((($plan['Plan']['duracion_hs']+$plan['Plan']['duracion_semanas']+$plan['Plan']['duracion_anios'])>0)){ ?>
+			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Duración del plan:'); ?></dt>
 			<dd<?php echo $class;?>>
-				<?php echo $plan['Plan']['duracion_hs']; ?>
 				&nbsp;
 			</dd>
-		<? } ?>
-		
-		<? if ($plan['Plan']['duracion_semanas']>0){ ?>
-			<dt<?php $class;?>><?php __(' - Semanas'); ?></dt>
-			<dd<?php echo $class;?>>
-				<?php echo $plan['Plan']['duracion_semanas']; ?>
-				&nbsp;
-			</dd>
-		<? } ?>
-		
-		<? if ($plan['Plan']['duracion_anios']>0){ ?>
-			<dt<?php $class;?>><?php __(' - Años'); ?></dt>
-			<dd<?php echo $class;?>>
-				<?php echo $plan['Plan']['duracion_anios']; ?>
-				&nbsp;
-			</dd>
-		<? } ?>
-		
+			<? } ?>
+			
+			<? if(($plan['Plan']['duracion_hs']>0)){ ?>
+				<dt<?php echo $class;?>><?php __(' - Horas'); ?></dt>
+				<dd<?php echo $class;?>>
+					<?php echo $plan['Plan']['duracion_hs']; ?>
+					&nbsp;
+				</dd>
+			<? } ?>
+			
+			<? if ($plan['Plan']['duracion_semanas']>0){ ?>
+				<dt<?php $class;?>><?php __(' - Semanas'); ?></dt>
+				<dd<?php echo $class;?>>
+					<?php echo $plan['Plan']['duracion_semanas']; ?>
+					&nbsp;
+				</dd>
+			<? } ?>
+			
+			<? if ($plan['Plan']['duracion_anios']>0){ ?>
+				<dt<?php $class;?>><?php __(' - Años'); ?></dt>
+				<dd<?php echo $class;?>>
+					<?php echo $plan['Plan']['duracion_anios']; ?>
+					&nbsp;
+				</dd>
+			<? } ?>
+		<?php endif ?>
 		
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Alta'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
