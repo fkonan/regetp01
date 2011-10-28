@@ -1,4 +1,3 @@
-<!--<script src="https://www.google.com/jsapi?key=ABQIAAAAB9-4gZ-EdgJfDxJFt0gpERTMa6vFho1POZQcegfZ_L_wbfYheBQjEPuUk3RRDdCPUjVvstGMAxLpRQ" type="text/javascript">mce:0</script>-->
 <?php 
 echo $html->css('catalogo.home', false);
 $this->pageTitle = "Inicio";

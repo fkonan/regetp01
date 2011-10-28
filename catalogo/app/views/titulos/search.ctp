@@ -1,8 +1,4 @@
-<?php
-    echo $javascript->link(array(
-    'jquery.loadmask.min',
-    'views/titulos/search'
-    ));
+<?php   
     echo $html->css(array('jquery.loadmask', 'catalogo.advanced_search', 'catalogo.titulos'), null, array(), false);
 ?>
 <script type="text/javascript">
@@ -38,8 +34,6 @@
                                                    ));
                 
                 
-                $meter = '<span id="ajax_indicator" style="display:none;">'.$html->image('ajax-loader.gif', array('style' => 'float:right; height: 19px;')).'</span>';
-
                 echo $form->input('SectoresTitulo.sector_id',array(
                     'label'=>'Sector',
                     'id'=>'SectorId',
@@ -49,7 +43,7 @@
                 echo $form->input('SectoresTitulo.subsector_id',array(
                     'type' => 'select',
                     'id'=>'SubsectorId',
-                    'label'=>'Subsector',
+                    'label'=>'Subsector'.$html->image('indicator.gif', array('style' =>'height: 23px; margin-bottom: -7px; display: none', 'id'=>'subsector-loader')),
                     'empty'=>'Todos',
                 ));
 
@@ -65,11 +59,10 @@
                                                                   'class' => 'autosubmit ',
                                                                   'empty' => array('0'=>'Todas'),
                                                                   'id'=>'jurisdiccion_id'));
-            echo '<span class="ajax_update" id="ajax_indicator" style="display:none; margin-top: -32px; float: right; clear: none">'.$html->image('ajax-loader.gif').'</span>';
                 
             echo $form->input('Instit.departamento_id', array(
                 'id' => 'departamento_id',
-                'label'=>'Departamento', 
+                'label'=>'Departamento'.$html->image('indicator.gif', array('style' =>'height: 23px; margin-bottom: -7px; display: none', 'id'=>'depto-loader')), 
                 'empty' => 'Todos'));
 
             $localidad_name =  "";
