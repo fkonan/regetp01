@@ -41,4 +41,6 @@ Desarrollo
         jquery.tmpl
         jquery.loadmask.min
         jquery.blockUI
+        jquery.maphilight
+        google charts para la seccion de los gráficos de los mapas
 

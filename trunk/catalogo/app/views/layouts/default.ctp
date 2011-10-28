@@ -65,6 +65,7 @@ $javascript;
             'jquery-1.6.2.min',
             'adapt.min.js',
 //            'jquery.form',
+//            'jquery.tools.min',
             'jquery-ui-1.8.16.custom.min',
             'views/layout/default',
         ));
