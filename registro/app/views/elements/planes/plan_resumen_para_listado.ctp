@@ -3,7 +3,7 @@
 $class; // si es par o impar: coloca el altow
 $ciclo; // si quiero ver TODOS me muestra el ciclo_lectivo de ultima actualizacion
 $plan; // array del modelo Plan
-$hstaller; // si muestra hs_taller (caso FP)
+$hstaller; // horas taller si hay que mostrarlas, sino ''
 
 
 
@@ -45,6 +45,11 @@ if (!empty($plan['Plan'])) {
         <?php
         }
         ?>
+        <?php if (!empty($hstaller)): ?>
+            <span class="plan_matricula_info">
+                hs: <?php echo $plan['Anio'][0]['hs_taller']; ?>
+            </span>
+        <?php endif ?>
         <span class="plan_sector_info">
             | Sector:
             <span class="plan_sector_name">

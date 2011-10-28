@@ -76,17 +76,21 @@ $paginator->options(array(
                 $class = 'altrow';
             }
             $ciclo_plan = '';
+            $hs_taller = '';
             if ($ciclo == 0) {
                 if (!empty($plan['Anio'][0]['ciclo_id'])) {
                     $ciclo_plan =  (!empty($plan['Anio'][0]['ciclo_id'])? $plan['Anio'][0]['ciclo_id']:"") ;
-                }
+                }                
+            }
+            if (!empty($plan['Anio'][0]['hs_taller'])) {
+                $hs_taller =  $plan['Anio'][0]['hs_taller'];
             }
 
             echo $this->element('planes/plan_resumen_para_listado', array(
                 'class' => $class,
                 'plan'  => $plan,
                 'ciclo' => $ciclo_plan,
-                'hstaller' => true,
+                'hstaller' => $hs_taller,
             ));            
          endforeach;
     ?>
