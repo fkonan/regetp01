@@ -111,6 +111,12 @@ $javascript;
                 </div>
               </div>
               <![endif]-->
+              
+              <!--[if !IE 7]>
+                    <style type="text/css">
+                            #wrap {display:table;height:100%}
+                    </style>
+            <![endif]-->
 
 
             
@@ -123,14 +129,17 @@ $javascript;
             
             <div id="container" class ="container_12">
                 <?php echo $content_for_layout; ?>
+                
+                <?php echo $cakeDebug; ?>
+                <div class="clear" style="height: 15px;"></div>
             </div> <!-- FIN div #container -->
 
-            <div class="clear" style="height: 15px;"></div>
             
             
+            
+    </div>  
 
-
-            <?php echo $cakeDebug; ?>
+            
             
             <div id="footer" class="no-print">                
                 <div class="container_12">
@@ -172,8 +181,6 @@ $javascript;
                 <div class="clear separador"></div>
             </div>
             
-        </div>
-
     </body>
 
 </html>
