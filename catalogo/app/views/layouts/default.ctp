@@ -54,7 +54,6 @@ $javascript;
         echo $html->meta('icon');
 
         $combinator->prepend_libs('css', array(
-            'jquery.tooltip',
             'catalogo',
             'catalogo.menu',
             'iconize',
