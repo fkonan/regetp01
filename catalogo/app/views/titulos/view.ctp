@@ -1,5 +1,5 @@
 <?php
-echo $html->css(array('catalogo.titulos'));
+echo $html->css('catalogo.titulos', false);
 
 $this->pageTitle =  $titulo['Titulo']['name'];
 ?>
@@ -67,4 +67,6 @@ $this->pageTitle =  $titulo['Titulo']['name'];
     
         </div>
     </div>
+    
+    <div class="clear"></div>
 </div>

@@ -11,7 +11,6 @@ $this->pageTitle =  $cue_instit.' '.$instit['Instit']['nombre_completo'];
         <?php echo $cue_instit ?> <?php echo $instit['Instit']['nombre_completo'] ?>
     </h1>
 
-    <div class="grid_12 alpha omega">
         <div class="boxblanca">
             <div class="ficha_info">
                 <h3>Datos generales de la institución</h3>
@@ -136,8 +135,7 @@ $this->pageTitle =  $cue_instit.' '.$instit['Instit']['nombre_completo'];
                 ?>                      
                             
             </div>
-            <div class="clear"></div>
-        </div>
+        <div class="clear"></div>
     </div>
 
     <div class="clear" style="height: 10px;"></div>

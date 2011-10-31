@@ -13,6 +13,8 @@ azules
 
 */
 
+* {margin:0;padding:0;} 
+
 html, body{
     height: 100%;
 }
@@ -32,8 +34,6 @@ margin-top:-32767px;/* thank you Erik J - negate effect of float*/
 }
 
 .wrapper {
-    height: 100%;
-    min-height: 100%;
 }
 
 
@@ -215,18 +215,24 @@ dd ul{
 #footer{
     border-top: solid 1px #0082ca;
     background: #dcddde;
+    background: -moz-linear-gradient(top, #dcddde 0%, #f1f1f2 100%, #7db9e8 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dcddde), color-stop(100%,#f1f1f2), color-stop(100%,#7db9e8)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #dcddde 0%,#f1f1f2 100%,#7db9e8 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #dcddde 0%,#f1f1f2 100%,#7db9e8 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #dcddde 0%,#f1f1f2 100%,#7db9e8 100%); /* IE10+ */
+    background: linear-gradient(top, #dcddde 0%,#f1f1f2 100%,#7db9e8 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dcddde', endColorstr='#7db9e8',GradientType=0 ); /* IE6-9 */
+
+
     text-align: center;
     font-size: x-small;
     color: #2a546b;
-    
     position: relative;
-    margin-top: -155px; /* negative value of footer height */
-    height: 155px;
+    height: 150px;
     clear:both;
 }
 
 #container{
-    padding-bottom: 155px;
 }
 
 

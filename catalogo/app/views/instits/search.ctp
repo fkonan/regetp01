@@ -11,12 +11,14 @@ echo $html->css(array(
         init__SearchFormJs("<? echo $html->url(array('controller' => 'localidades', 'action' => 'ajax_search_localidades')); ?>");
     });
 </script>
+
+<div class="grid_12 titulos search">
 <h1><? __('Búsqueda de Instituciones') ?></h1>
-<div class="boxblanca instits search_form grid_12 alpha omega">
+<div class="boxblanca instits search_form">
 
     <h3>Seleccione criterios de búsqueda</h3>
 
-    <div class="grid_6 alpha inputs_largos">
+    <div class="box_izquierda inputs_largos">
         <?php
         echo $form->create('Instit', array(
             'action' => $this->action,
@@ -50,7 +52,7 @@ echo $html->css(array(
         <input id="hiddenLocId" name="localidad_id" type="hidden" value="<?php echo $localidad_id?>" />
     </div>
 
-    <div class="grid_6 omega inputs_largos">
+    <div class="box_derecha inputs_largos">
 <?php
 echo $form->input('direccion', array('label' => 'Domicilio',));
 
@@ -60,13 +62,13 @@ echo $form->input('busqueda_libre', array(
 ));
 ?>
 
-        <div class="clear" style="height: 24px;"></div>
+        <div class="clear" style="height: 29px;"></div>
         <?php
         echo $form->end('Buscar');
         ?>
-        <div class="clear separador"></div>
+        
     </div>
-
+    <div class="clear separador"></div>
 </div>
 
 
@@ -194,3 +196,4 @@ if (!empty($vino_formulario)) {
             <?php } ?>
     </div>
         <?php } ?>
+</div>

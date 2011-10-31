@@ -140,11 +140,8 @@ $javascript;
     </div>  
 
             
-            
             <div id="footer" class="no-print">                
                 <div class="container_12">
-                    <div class="clear separador"></div>
-
                     <div class="sponsors grid_3">
                         <?php echo $html->link(
                                     $html->image('logoinet.gif', array(
@@ -178,7 +175,6 @@ $javascript;
                     </div>
 
                 </div>
-                <div class="clear separador"></div>
             </div>
             
     </body>
