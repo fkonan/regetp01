@@ -1,6 +1,7 @@
+
 .boxblanca .mas_info_gris, .boxblanca .mas_info_azul,
 .boxgris .mas_info_azul, .boxgris .mas_info_azul{
-    float: right;
+    float: right;    
 }
 
 .boxcontent {
@@ -13,9 +14,18 @@
 }
 
 
+.box_inet{
+    min-height: 336px;
+}
+
+.box_inet img{
+    float: left; 
+    height: 244px;
+}
+
 
 .box_home_buscadores {
-    height: 290px;
+    min-height: 290px;
 }
 
 .box_home_buscadores_separador {

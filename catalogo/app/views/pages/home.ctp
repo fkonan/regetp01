@@ -10,12 +10,12 @@ $this->pageTitle = "Inicio";
 <div class="grid_9 alpha">
     <div class="boxblanca inet">
         <h2>El Instituto Nacional de Educación Tecnológica</h2>
-        <div class="boxcontent" style="padding-bottom: 7px">
+        <div class="boxcontent box_inet" style="padding-bottom: 7px">
             <div class="picround" style="margin-right: 10px;">
-            <?php echo $html->image('material/fotoinet.jpg', array('style' => "float: left; height: 244px;" )) ?>
+            <?php echo $html->image('material/fotoinet.jpg') ?>
             </div>
 
-            <div style="height: 302px;">
+            <div>
                El INET es el organismo del Ministerio de Educación que tiene a su cargo la coordinación de la
 aplicación de las políticas públicas de manera concertada y concurrente con las provincias y la
 Ciudad Autónoma de Buenos Aires, relativas a la educación técnico profesional en los niveles
