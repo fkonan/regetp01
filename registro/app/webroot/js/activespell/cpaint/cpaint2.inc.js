@@ -726,11 +726,11 @@ function cpaint_call() {
       // remove ourselves from the stack
       remove_from_stack();
     
-    } else if (httpobj.readyState == 4
+    } /*else if (httpobj.readyState == 4
       && httpobj.status != 200) {
       // HTTP error of some kind
       debug('invalid HTTP response code \'' + Number(httpobj.status) + '\'', 0);
-    }
+    }*/
   }
 
   /**
