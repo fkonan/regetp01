@@ -15,7 +15,9 @@
 
 
 .box_inet{
-    min-height: 336px;
+    min-height: 323px;
+    padding-top: 6px;
+    padding-bottom: 7px
 }
 
 .box_inet img{
@@ -26,6 +28,7 @@
 
 .box_home_buscadores {
     min-height: 290px;
+    padding-bottom: 10px;
 }
 
 .box_home_buscadores_separador {

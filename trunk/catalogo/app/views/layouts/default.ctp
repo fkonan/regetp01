@@ -53,6 +53,8 @@ $javascript;
         <?php
         echo $html->meta('icon');
 
+        echo $javascript->link('http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js');
+        
         $combinator->prepend_libs('css', array(
             'catalogo',
             'catalogo.menu',
@@ -61,14 +63,15 @@ $javascript;
         ));
 
         $combinator->prepend_libs('js', array(
-            'jquery-1.6.2.min',
             'adapt.min.js',
             'views/layout/default',
         ));
 
         echo $combinator->scripts('css');
 
-        echo $html->css('ui-redmond/jquery-ui-1.8.12.custom','stylesheet');
+        
+        echo $html->css('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/redmond/jquery-ui.css','stylesheet');
+//        echo $html->css('ui-redmond/jquery-ui-1.8.12.custom','stylesheet');
         echo $html->css('printer','stylesheet', array('media'=>'print'));
         echo $html->css('catalogo800x600',
                         'stylesheet', array(
@@ -82,7 +85,10 @@ $javascript;
         if (file_exists($jsView.'.js')) {
             echo $javascript->link($jsPoner);
         }
-        echo $javascript->link('jquery-ui-1.8.16.custom.min');
+//        echo $javascript->link('jquery-ui-1.8.16.custom.min');
+        echo $javascript->link('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js');
+        
+        
         echo $scripts_for_layout;
 
         ?>
@@ -177,6 +183,21 @@ $javascript;
                 </div>
             </div>
             
+        <script type="text/javascript">
+
+         var _gaq = _gaq || [];
+         _gaq.push(['_setAccount', 'UA-15728470-2']);
+         _gaq.push(['_trackPageview']);
+
+         (function() {
+           var ga = document.createElement('script'); ga.type = 'text/javascript'; 
+           ga.async = true;
+           ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+           var s = document.getElementsByTagName('script')[0];
+           s.parentNode.insertBefore(ga, s);
+         })();
+
+        </script>
     </body>
 
 </html>
