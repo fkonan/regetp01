@@ -160,9 +160,6 @@ function convertir_para_busqueda_avanzada($text){
                 'ó' => $posiblesO,
                 'ú' => $posiblesU,
 
-                's' => '(z|s|c)',
-                'c' => '(z|s|c)',
-                'z' => '(z|s|c)',
                 'ñ' => '(n|ñ)',
 
                 // Agregar aqui mas caracteres si es necesario
