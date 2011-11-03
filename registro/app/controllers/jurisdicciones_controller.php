@@ -21,6 +21,8 @@ class JurisdiccionesController extends AppController {
     	return $b['Cargo'][0]["rango"] - $a['Cargo'][0]["rango"];
   	}
 
+
+
 	function view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('La jurisdicción no existe', true));
@@ -32,9 +34,11 @@ class JurisdiccionesController extends AppController {
         		  'contain'=>array('Cargo'))
         );
 
-		usort($ministros, function($a, $b) {
+	  	function __compare_rango($a, $b) {
 		    return($a['Cargo'][0]["rango"] > $b['Cargo'][0]["rango"]);
-		});
+		}
+		
+		usort($ministros, "__compare_rango");
 
         $this->Jurisdiccion->recursive = 0;
         $this->set('ministro',$ministros[0]);
