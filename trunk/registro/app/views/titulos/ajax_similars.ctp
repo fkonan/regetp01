@@ -22,7 +22,10 @@ if (!empty($similars)) {
             $abrio = true;
         }
     ?>
-            &bull; <?php if ($identicos) {?><span style="color:red;"><? }?><?=$titulo['Titulo']['name']?> (<?=$titulo['Oferta']['name']?>)<?php if ($identicos) {?></span><? }?><br />
+            &bull; <?php if ($identicos) {?><span style="color:red;"><? }?>
+            <? echo $html->link($titulo['Titulo']['name'] . "(" . $titulo['Oferta']['name'].")",
+                                array('controller'=>"Titulos", 'action'=>'view', $titulo['Titulo']['id']))?>
+            <?php if ($identicos) {?></span><? }?><br />
     <?php
     }
 
