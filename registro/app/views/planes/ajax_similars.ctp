@@ -22,7 +22,9 @@ if (!empty($similars)) {
             $abrio = true;
         }
     ?>
-            &bull; <?php if ($identicos) {?><span style="color:red;"><? }?><?=$plan['Plan']['nombre']?><?php if ($identicos) {?></span><? }?><br />
+            &bull; <?php if ($identicos) {?><span style="color:red;"><? }?>
+                <? echo $html->link($plan['Plan']['nombre'],array('controller'=>"Planes", 'action'=>'view', $plan['Plan']['id']))?>
+            <?php if ($identicos) {?></span><? }?><br />
     <?php
     }
 
