@@ -47,7 +47,7 @@ if (!empty($plan['Plan'])) {
         ?>
         <?php if (!empty($hstaller)): ?>
             <span class="plan_matricula_info">
-                hs: <?php echo $plan['Anio'][0]['hs_taller']; ?>
+                | <?php echo $plan['Anio'][0]['hs_taller']; ?> hs 
             </span>
         <?php endif ?>
         <span class="plan_sector_info">
