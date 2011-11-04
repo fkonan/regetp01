@@ -17,6 +17,7 @@ $paginator->options(array('url' => $url_conditions));
 <table cellpadding="0" cellspacing="0">
 <tr>
 	<th><?php echo $paginator->sort('Fecha Creación','Ticket.created');?></th>
+	<th><?php echo $paginator->sort('Fecha Modificación','Ticket.modified');?></th>
 	<th><?php echo $paginator->sort('Usuario','user.nombre');?></th>
 	<th><?php echo $paginator->sort('Cue','Instit.cue');?></th>
 	<th><?php echo $paginator->sort('Anexo','Instit.anexo');?></th>
@@ -35,6 +36,9 @@ foreach ($tickets as $ticket):
 	<tr<?php echo $class;?>>
 		<td>
 			<?php echo date('d/m/y H:i',strtotime($ticket['Ticket']['created']));?>
+		</td>
+		<td>
+			<?php echo date('d/m/y H:i',strtotime($ticket['Ticket']['modified']));?>
 		</td>
 		<td>
 			<?php echo $ticket['User']['nombre'] . " " . $ticket['User']['apellido']; ?>
