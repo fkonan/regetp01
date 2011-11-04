@@ -30,14 +30,12 @@ trabajo a partir del 3 de noviembre de 2011 se ha instalado la versión <?php ech
 sistema. Sus principales novedades son:
 </p>
     <ul>
-        <li>Se publicaron los Planes de Mejora del primer semestre de 2011.</li>
-        <li>Se mejoró la búsqueda de títulos de referencia.</li>
-        <li>Se incorporó el perfil Ministro, el cual poseé características especiales 
-        dentro de la aplicación: podrá realizar búsquedas de títulos y 
-        establecimientos en toda la Argentina, y podrá visualizar los planes de 
-        mejora otorgados a su provincia.</li>
-        <li>En Formación Profesional se muestra la duración en horas real y no la declarada.</li>
-        <li>Se realizaron todas las mejoras sugeridas por los editores mediante el formulario de <?php echo $html->link('sugerencias','/sugerencias/add');?>.</li>
+        <li>Se publicaron los Planes de Mejora del primer semestre del 2011.</li>
+        <li>Se ordenó la presentación de oferta educativa en toda la aplicación según el siguiente criterio: Secundaria técnica, Superior y Formación Profesional.</li>
+        <li>En la vista general de oferta de una institución para la Formación Profesional se agregó la duración en horas del curso para simplificar la consulta de la información.</li>
+        <li>Se corrigió error en la visualización de datos de los referentes y ministros.</li>
+        <li>Se mejoraron los datos de contacto para soporte e información sobre la aplicación.</li>
+        <li>Se incorporó el perfil de Ministro con la capacidad de visualizar los Planes de Mejora de la jurisdicción que le corresponde.</li>
     </ul>
 
 <br />

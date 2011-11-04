@@ -1,19 +1,19 @@
 <h1>RFIETP - Novedades de la versión 1.7.2</h1>
 <br>
 <ul>
-    <!--<li>Se publicaron los Planes de Mejora del primer semestre de 2011.</li>-->
-    <li>Se publicaron los planes de mejora del 1er semestre del 2011.</li>
-    <li>Se mejoró la búsqueda de títulos de referencia.</li>
-    <li>Se resolvió propblema con el envio de emails desde el formulario de contacto.</li>    
-    <li>Se mejoró el depurador de títulos, sectores y subsectores incorporando lógica planteada por equipo de editores de la Unidad de Información.</li>
-    <li>Se resolvieron errores CPAINT que les aparecia en la modificación de planes de estudio a los editores.</li>
-    <li>Se incorporó el perfil Ministro, el cual poseé características especiales 
-        dentro de la aplicación: podrá realizar búsqueda de títulos y 
-        establecimientos en toda la Argentina, y podrá visualizar los planes de 
-        mejora otorgados a su provincia.</li>
-    <li>Se resolvió bug en la visualización de datos de los referentes y ministros.</li>
-    <li>Se eliminó el cartel <i>"Atención: La oferta educativa de la institución no ha sido actualizada en los últimos 2 años"</i> cuando la institución no esta ingresada en el registro, o está inactiva.</li>
-    <li>En Formación Profesional se muestra la duración en horas real (la que dice el plan del último año), y no la declarada.</li>
+    <li>Se publicaron los Planes de Mejora del primer semestre del 2011.</li>
+    <li>Se mejoró la búsqueda por nombre de títulos de referencia. Se incorporó la opción para seleccionar todos aquellos títulos de referencia que no tengan asignado subsector.</li>
+    <li>Se resolvió problema con el envío de email desde el formulario de sugerencias.</li>
+    <li>Se corrigió error en la visualización de datos de los referentes y ministros.</li>
+    <li>Se mejoró el depurador Corrector de planes. Se habilitó la capacidad de imputar títulos a un conjunto de planes seleccionados sin tomar en cuenta los sectores y subsectores utilizados para el filtro de búsqueda inicial.</li>
+    <li>Se corrigió error de presentación que se producía al modificar planes de estudio (error CPAINT).</li>
+    <li>Se incorporó el perfil de Ministro con la capacidad de visualizar los Planes de Mejora de la jurisdicción que le corresponde.</li>
+    <li>Se eliminó el alerta sobre oferta educativa no actualizada en los últimos 2 años cuando se trata de instituciones no ingresadas al Registro de Instituciones de ETP.</li>
+    <li>En la vista general de oferta de una institución para la Formación Profesional se agregó la duración en horas del curso.</li>
+    <li>Se mejoraron las validaciones para la carga de Planes de estudio de educación superior (se impide que se repita un año de estudio para el mismo ciclo lectivo).</li>
+    <li>Se mejoraron los datos de contacto para soporte e información sobre la aplicación.</li>
+    <li>Se ordenó la presentación de oferta educativa en toda la aplicación según el siguiente criterio: Secundaria técnica, Superior y Formación Profesional.</li>
+    <li>Se mejoró la vista de información de Planes de estudio de Formación Profesional (se eliminó el campo de duración en horas general para que no presentara conflictos con la duración en horas asociada a cada ciclo lectivo y matrícula).</li>
 </ul>
 <br>
 
