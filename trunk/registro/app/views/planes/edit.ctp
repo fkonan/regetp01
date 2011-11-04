@@ -23,7 +23,7 @@ $cue_instit = $instit['cue'].$anexo;
 
         if (empty($this->data['Anio']))
         {
-            echo $form->input('oferta_id',array('empty'=>'Seleccione','onchange'=>'toggleTitulos();'));
+            echo $form->input('oferta_id',array('empty'=>'Seleccione','onchange'=>'oferta_change();'));
         ?>
             <div id="PlanEstructura">
                 <span id="selectEstructura" style="float:left">
@@ -150,7 +150,7 @@ $cue_instit = $instit['cue'].$anexo;
         echo "<br>Duración:";
         echo $form->input('duracion_hs',array('label'=>' - Horas','maxlength'=>9));
         //echo $form->input('duracion_semanas',array('label'=>' - Semanas','maxlength'=>9));
-        echo $form->input('duracion_anios',array('label'=>' - Años','maxlength'=>9));
+        echo $form->input('duracion_anios',array('label'=>' - Años','maxlength'=>9, 'div'=>array('id'=>"div_anios")));
 
 
         echo "<br>";

@@ -1,21 +1,26 @@
-function toggleTitulos(){
-     if (jQuery('#PlanOfertaId').val() != '') {
-        jQuery('#divPlanTituloName').show();
-    }
-    else {
-         jQuery('#divPlanTituloName').hide();
-    }
+function oferta_change(){
+  if (jQuery('#PlanOfertaId').val() != '') {
+      jQuery('#divPlanTituloName').show();
+  }
+  else {
+       jQuery('#divPlanTituloName').hide();
+  }
 
-    toggleEstructuraPlan();
-}
+  if (jQuery('#PlanOfertaId :selected').val() != 3 && jQuery('#PlanOfertaId').val() != 3) {
+      jQuery('#PlanEstructura').hide();
+  }
+  else {
+      jQuery('#PlanEstructura').show();
+  }
 
-function toggleEstructuraPlan() {
-    if (jQuery('#PlanOfertaId :selected').val() != 3 && jQuery('#PlanOfertaId').val() != 3) {
-        jQuery('#PlanEstructura').hide();
-    }
-    else {
-        jQuery('#PlanEstructura').show();
-    }
+  //si es FP oculto años
+  if (jQuery('#PlanOfertaId :selected').val() == 1 || jQuery('#PlanOfertaId').val() == 1) {
+    jQuery('#div_anios').hide();
+  }
+  else
+  {
+    jQuery('#div_anios').show();
+  }
 }
 
 
@@ -63,8 +68,7 @@ function init(autocomplete_url, searchSimilars_url) {
             }
         });
         
-        toggleTitulos();
-        toggleEstructuraPlan();
+        oferta_change();
 
         jQuery("#PlanEstructuraPlanId").change(function(){
             jQuery("div[estructura_plan_id]").hide();
