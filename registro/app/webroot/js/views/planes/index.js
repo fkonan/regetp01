@@ -78,4 +78,20 @@ function selectTabsInSession () {
 }
 
 
+jQuery(function() {
+    jQuery("#PlanNombre").live("change", function() {
+        if(jQuery(this).val()){
+            jQuery(this).addClass("buscado");
+        }else{
+            jQuery(this).removeClass("buscado");
+        }
+    });
 
+    jQuery("#SectorId").live("change", function() {
+        if(jQuery(this).val()){
+            jQuery(this).addClass("buscado");
+        }else{
+            jQuery(this).removeClass("buscado");
+        }
+   });
+});

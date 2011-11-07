@@ -36,8 +36,10 @@ $paginator->options(array(
                     'update' => $divOfertaFP,
                     )
                 );
-        echo $form->input('Plan.nombre', array('label'=>'Nombre'));
-        echo $form->input('Sector.id', array('label'=>'Sector',  'options'=> $sectores, 'empty'=>'Todos'));
+        $busca_plan = !empty($this->data["Plan"]["nombre"]);
+        $busca_sector = !empty($this->data["Sector"]["id"]);
+        echo $form->input('Plan.nombre', array('label'=>'Nombre', "class"=>$busca_plan?"buscado":""));
+        echo $form->input('Sector.id', array('label'=>'Sector',  'options'=> $sectores, 'empty'=>'Todos', "class"=>$busca_sector?"buscado":""));
         echo $form->end('Buscar');
 
         $sort = '';
