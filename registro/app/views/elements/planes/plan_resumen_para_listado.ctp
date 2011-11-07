@@ -45,7 +45,7 @@ if (!empty($plan['Plan'])) {
         <?php
         }
         ?>
-        <?php if (!empty($hstaller)): ?>
+        <?php if (!empty($hstaller) && $plan['Plan']['oferta_id'] == FP_ID): ?>
             <span class="plan_matricula_info">
                 | <?php echo $plan['Anio'][0]['hs_taller']; ?> hs.
             </span>
