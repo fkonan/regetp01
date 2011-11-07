@@ -32,6 +32,8 @@ echo $html->css(array('jquery.loadmask', 'spell_checker.css'));
                                                     'checked' => 1,
                                                     'options'=>array(1=>'Con Marco de Referencia', 0=>'Sin marco de Referencia'))
 		);
+                
+                echo $form->input('es_bb', array('options' => array( false => 'No', true => 'Si'), 'label' => 'Carrera prioritaria' ) );
 	?>
         <h2>Sectores/Subsectores</h2>
         <cite>Agregue los Sectores/Subsectores correspondientes y seleccione el prioritario</cite>
