@@ -34,6 +34,13 @@ echo $html->css('planes/ui_tabs.css',null, false);
 
 </script>
 
+<style type="text/css">
+.buscado{
+    background-color: #EEFFEE !important;
+    border: 1px solid #99CC99 !important;
+}
+</style>
+
 <div id="escuela_estado" class="<? echo $planes['Instit']['activo']? 'instit_activa':'instit_inactiva';?>"><? echo $planes['Instit']['activo']? 'Institución Ingresada al RFIETP':'Institución NO Ingresada al RFIETP';?></div>
 <?
 $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
