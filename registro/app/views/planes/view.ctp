@@ -105,7 +105,7 @@ $cue_instit = $instit['cue'].$anexo;
                     &nbsp;
 		</dd>
 				
-		<?php if ($plan['Plan']['oferta_id'] != FP_ID): //si es FP no muestro la duracion, Las horas varian de un ciclo a otro y este dato produce confusión?>
+		<?php if ($plan['Plan']['oferta_id'] == FP_ID): //muestro solo la durecion si es FP?>
 			<? if((($plan['Plan']['duracion_hs']+$plan['Plan']['duracion_semanas']+$plan['Plan']['duracion_anios'])>0)){ ?>
 			<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Duración del plan:'); ?></dt>
 			<dd<?php echo $class;?>>
