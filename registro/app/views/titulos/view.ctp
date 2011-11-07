@@ -34,7 +34,17 @@ jQuery(document).ready(function() {
 			<?php echo ($titulo['Titulo']['marco_ref']==1)? "Con marco de referencia":"Sin marco de referencia"; ?>
 			&nbsp;
 		</dd>
+                
+                <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Carrera prioritaria'); ?> <a href="#" onmouseout="jQuery('#help_es_bb').hide()" onmouseover="jQuery('#help_es_bb').show()">( info )</a></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo ($titulo['Titulo']['es_bb'])? "Si":"No"; ?>
+			&nbsp;
+		</dd>
 	</dl>
+
+<cite id="help_es_bb" style="display: none; position: absolute; background: white; border: 1px solid #000099; width: 400px; padding: 10px;">Las carreras prioritarias de RFIETP son tecnicaturas consideradas estratégicas 
+    para el desarrollo económico y productivo del país, son títulos incorporados 
+    al Programa Nacional de Becas Bicentenario para Carreras Científico Técnicas.</cite>
 
 <h2><?php  __('Sectores/Subsectores');?></h2>
     <?php

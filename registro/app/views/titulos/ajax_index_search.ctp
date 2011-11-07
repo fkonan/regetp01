@@ -19,6 +19,7 @@
                 <th><?php echo $paginator->sort('Nombre','name');?></th>
                 <th style="width:20px;"><?php echo $paginator->sort("Marco Ref.",'marco_ref');?></th>
                 <th style="width:67px;"><?php echo $paginator->sort("Oferta",'Oferta.name');?></th>
+                <th style="width:67px;"><?php echo $paginator->sort("Prioritario",'es_bb');?></th>
                 <th class="actions"></th>
             </tr>
         <?php
@@ -48,6 +49,13 @@
                         echo $form->input('oferta_'.$titulo['Titulo']['id'], array('type' => 'hidden', 'value' => $titulo['Titulo']['oferta_id']));
                         ?>
                 </td>
+                
+                <td>
+                        <?php
+                        echo ( $titulo['Titulo']['es_bb'] )? "Si" : "No";
+                        ?>
+                </td>
+                
                 <td class="actions">
                         <?php echo $html->link(__('Ver más','View', true), array('action'=>'view', $titulo['Titulo']['id'])); ?>
                 </td>

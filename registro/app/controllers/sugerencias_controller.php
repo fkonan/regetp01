@@ -41,7 +41,7 @@ class SugerenciasController extends AppController {
                 // si el usuario tiene email en su perfil, se envia mail
                 if (!empty($user['User']['mail'])) {
                     
-                    $mensaje  = "Gracias por enviarnos su sugerencia."."\n\n";
+                    $mensaje  = "Agradecemos que se haya tomado la molestia de enviarnos una sugerencia."."\n\nAtte.\nEquipo de Desarrollo";
                     //$mensaje .= "E-mail: ".$this->data['Correo']['mail']."\n";
 
                     /* SMTP Options */
@@ -56,7 +56,7 @@ class SugerenciasController extends AppController {
                     $this->Email->delivery = 'smtp';
                     $this->Email->from     = NOMBRE_CONTACTO.' <'.EMAIL_CONTACTO.'>';
                     $this->Email->to       = $user['User']['mail'];
-                    $this->Email->subject  = 'Su sugerencia ha sido enviada con Exito!';
+                    $this->Email->subject  = 'Sugerencia recibida';
                     $this->Email->template = 'simple';
                     $this->set("message", $mensaje);
                     

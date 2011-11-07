@@ -426,7 +426,7 @@ class TitulosController extends AppController {
         }
 
         //datos de paginacion
-        $this->paginate['fields'] = array('DISTINCT ("Titulo"."id")', 'Titulo.name','Titulo.marco_ref', 'Titulo.oferta_id', 'Oferta.abrev');
+        $this->paginate['fields'] = array('DISTINCT ("Titulo"."id")', 'Titulo.name','Titulo.marco_ref', 'Titulo.oferta_id', 'Oferta.abrev', 'Titulo.es_bb');
         $this->paginate['order'] = array('Titulo.name ASC, Titulo.oferta_id ASC');
  
         $titulos = $this->paginate();
