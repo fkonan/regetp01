@@ -36,8 +36,8 @@ echo $html->css('planes/ui_tabs.css',null, false);
 
 <style type="text/css">
 .buscado{
-    background-color: #EEFFEE !important;
-    border: 1px solid #99CC99 !important;
+    background-color: #fff8cc !important;
+    border: 2px solid #eee8bc !important;
 }
 </style>
 
