@@ -5,7 +5,6 @@
 <tr>
 	<th><?php echo $paginator->sort('cargo');?></th>
         <th><?php echo $paginator->sort('nombre');?></th>
-	<th><?php echo $paginator->sort('fecha_asuncion');?></th>
 	<th class="actions"></th>
 </tr>
 <?php
@@ -24,9 +23,6 @@ foreach ($autoridades as $autoridad):
 		</td>
 		<td>
 			<?php echo $autoridad['Autoridad']['titulo'] . ' ' . $autoridad['Autoridad']['nombre'] .  ' ' . $autoridad['Autoridad']['apellido']; ?>
-		</td>
-		<td>
-			<?php echo $time->format('d/m/Y', $autoridad['Autoridad']['fecha_asuncion']) ; ?>
 		</td>
 		<td class="actions">
 			<?php echo $html->link(__('Ver', true), array('action' => 'view', $autoridad['Autoridad']['id'])); ?>
