@@ -279,6 +279,7 @@ class PlanesController extends AppController {
     }
 
     function view_fp($instit_id, $oferta_id, $ciclo=0) {
+        Controller::disableCache();
         $es_una_busqueda = false;
 
         $sesNames = array(
