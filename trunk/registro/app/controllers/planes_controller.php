@@ -296,7 +296,7 @@ class PlanesController extends AppController {
             $es_una_busqueda = true;
             $this->Session->write($sesNames['instit'],$instit_id);
             $this->Session->write($sesNames['plan'], $this->data['Plan']['nombre']);
-            if (!empty($this->data['Sector']['id'])) $this->Session->write($sesNames['sector'], $this->data['Sector']['id']);
+            $this->Session->write($sesNames['sector'], $this->data['Sector']['id']);
             $this->Session->write('page', '');
         }
         else {
