@@ -29,6 +29,12 @@ svn
 ----registro
 -------*
 
+El SVN tiene la carpeta app_shared configurada como svn:externals
+entonces en cada carpeta model, tanto de catálogo como registro, debemos
+agregarle dentro de las svn:properties (en netbeans se verifica facilmente
+haciendo click derecho y viendo las propiedades del svn)
+svn:externals shared https://regetp01.googlecode.com/svn/trunk/app_shared/models/
+
 
 =========================================================================================================
 ENCODINGS
