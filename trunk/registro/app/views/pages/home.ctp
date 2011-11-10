@@ -26,18 +26,20 @@ Requerimientos mínimos para utilizar el <b>Sistema Gestión de Registro</b>:<br /
 Desde su puesta en funcionamiento en junio de 2009 el sistema RFIETP se encuentra
 en permanente actualización y mejoramiento, tanto del contenido de información de
 la base de datos como de la aplicación que permite su gestión. En esa línea de
-trabajo a partir del 3 de noviembre de 2011 se ha instalado la versión <?php echo Configure::read('regetpVersion');?> del
+trabajo a partir del 10 de noviembre de 2011 se ha instalado la versión <?php echo Configure::read('regetpVersion');?> del
 sistema. Sus principales novedades son:
 </p>
     <ul>
-        <li>Se publicaron los Planes de Mejora del primer semestre del 2011.</li>
-        <li>Se ordenó la presentación de oferta educativa en toda la aplicación según el siguiente criterio: Secundaria técnica, Superior y Formación Profesional.</li>
-        <li>En la vista general de oferta de una institución para la Formación Profesional se agregó la duración en horas del curso para simplificar la consulta de la información.</li>
-        <li>Se corrigió error en la visualización de datos de los referentes y ministros.</li>
-        <li>Se mejoraron los datos de contacto para soporte e información sobre la aplicación.</li>
-        <li>Se incorporó el perfil de Ministro con la capacidad de visualizar los Planes de Mejora de la jurisdicción que le corresponde.</li>
+    	<li>Se eliminó el campo "años" para la formación profesional</li>
+    	<li>Se agregó un atributo "carrera prioritaria" a los títulos de referencia</li>
+    	<li>Se eliminó la fecha de asunción del listado de autoridades de las jurisdicciones</li>
+    	<li>Se muestra la fecha de ultima modificación en el listado de pendientes</li>
+    	<li>Se agregó un link al plan correspondiente en la alerta de plan similar</li>
+    	<li>Se agregó un link al titulo correspondiente en la alerta de titulo similar</li>
+    	<li>Se agregó un color para diferenciar los filtros seleccionados en la vista de oferta</li>
+    	<li>Se corrigió un problema al actualizar el nombre de un plan</li>
+    	<li>Se eliminó el campo semanas de las descargas correspondientes</li>
     </ul>
-
 <br />
 <p>
 Un listado completo de las modificaciones realizadas en esta última versión, puede encontrarlas haciendo click
