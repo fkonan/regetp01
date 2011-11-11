@@ -1,15 +1,14 @@
 <h1>RFIETP - Novedades de la versión 1.7.3</h1>
 <br>
 <ul>
-    <li>Se eliminó el campo "años" para la formación profesional</li>
-    <li>Se agregó un atributo "carrera prioritaria" a los títulos de referencia</li>
-    <li>Se eliminó la fecha de asunción del listado de autoridades de las jurisdicciones</li>
-    <li>Se muestra la fecha de ultima modificación en el listado de pendientes</li>
-    <li>Se agregó un link al plan correspondiente en la alerta de plan similar</li>
-    <li>Se agregó un link al titulo correspondiente en la alerta de titulo similar</li>
-    <li>Se agregó un color para diferenciar los filtros seleccionados en la vista de oferta</li>
-    <li>Se corrigió un problema al actualizar el nombre de un plan</li>
-    <li>Se eliminó el campo semanas de las descargas correspondientes</li>
+    <li>Se eliminó el campo "años" para la formación profesional.</li>
+    <li>Se eliminó la fecha de asunción del listado de autoridades de las jurisdicciones.</li>
+    <li>Se muestra la fecha de última modificación en el listado de pendientes de actualización.</li>
+    <li>Se agregó un link al plan correspondiente en la alerta de plan similar.</li>
+    <li>Se agregó un link al título correspondiente en la alerta de título similar.</li>
+    <li>Se agregó un color para diferenciar los filtros seleccionados en la vista de oferta.</li>
+    <li>Se corrigió un problema de refresco de pantalla que se producía al modificar el nombre de un plan.</li>
+    <li>Se eliminó el campo semanas de planes de estudio de las descargas correspondientes.</li>
 </ul>
 
 <h1>RFIETP - Novedades de la versión 1.7.2</h1>
