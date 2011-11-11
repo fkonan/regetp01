@@ -2574,3 +2574,13 @@ border-bottom-color: white !important;
 #formas_contacto h2 img{
     margin:0 5px 0 0;
 }
+
+
+.msg-fiesta{
+    margin: auto; 
+    text-align: center; 
+    width: 36em; 
+    background-image: url(images/firulete_arg_mini.png); 
+    background-repeat: no-repeat; 
+    background-position: 50% 0%
+}
