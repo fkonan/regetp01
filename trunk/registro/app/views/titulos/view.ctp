@@ -35,7 +35,7 @@ jQuery(document).ready(function() {
 			&nbsp;
 		</dd>
                 
-                <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Carrera prioritaria'); ?> <a href="#" onmouseout="jQuery('#help_es_bb').hide()" onmouseover="jQuery('#help_es_bb').show()">( info )</a></dt>
+                <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Carrera prioritaria'); ?> <a href="#" onmouseout="jQuery('#help_es_bb').hide()" onmouseover="jQuery('#help_es_bb').show()">( * )</a></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo ($titulo['Titulo']['es_bb'])? "Si":"No"; ?>
 			&nbsp;
