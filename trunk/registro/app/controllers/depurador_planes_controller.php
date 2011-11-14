@@ -12,6 +12,10 @@ class DepuradorPlanesController extends AppController {
     var $layout = 'depurador';
 
     function index($id) {
+        //// dejo un log de ingreso
+        $username = $this->Auth->user('nombre').' '.$this->Auth->user('apellido').' ('.$this->Auth->user('username').')';
+        $grupo = $this->Session->read('User.group_alias');
+        $this->Instit->logDepuradores($username, $grupo, "estructura_planes");
         //Configure::write('debug', '0');
 
         if ($id) {

@@ -143,6 +143,27 @@ class AppModel extends Model {
 
         return $subQuery;
     }
+    
+    
+    /***************************
+         *
+         * log en archivo de texto
+         */
+        function logDepuradores($user, $group, $depurador){
+            $logTxt = $headTxt = '';
+            $logTxt .= '|'. $depurador; $headTxt .= '|'.'Depurador';
+            $logTxt .= '|'. $user; $headTxt .= '|'.'Usuario';
+            $logTxt .= '|'. $group; $headTxt .= '|'.'Rol';
+
+            $log_file_name = 'depuradores_'.date('m_Y',strtotime('now'));;
+            $archivo = APP . 'tmp' . DS . 'logs' . DS . $log_file_name.'.log';
+            if (!file_exists($archivo)){
+                 // armo el encabezado del CSV
+                 $this->log($headTxt,$log_file_name);
+            }
+            //meto la data en el log
+            $this->log($logTxt,$log_file_name);
+        }
    
 	
 }

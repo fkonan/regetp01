@@ -382,6 +382,11 @@ class DepuradoresController extends AppController {
     }
     
     function depurar_orientacion() {
+        //// dejo un log de ingreso
+        $username = $this->Auth->user('nombre').' '.$this->Auth->user('apellido').' ('.$this->Auth->user('username').')';
+        $grupo = $this->Session->read('User.group_alias');
+        $this->Instit->logDepuradores($username, $grupo, "orientacion");
+        
         $tipoinstit_seleccionado = 0;
 
 
@@ -461,6 +466,8 @@ class DepuradoresController extends AppController {
 
     // depurador de planes
     function depurar_estructura_planes() {
+        // no hace falta loguear, apunta a depurador_planes_controller, ahi si se loguea
+        // 
         // planes que contienen solo un ciclo con etapas mezcladas
         $planes_con_un_ciclo_de_etapas_mezclas = $this->Anio->find('all', array(
                     'fields' => array('plan_id'),
@@ -590,6 +597,11 @@ class DepuradoresController extends AppController {
 
 
     function depurar_planes_sin_titulo() {
+        //// dejo un log de ingreso
+        $username = $this->Auth->user('nombre').' '.$this->Auth->user('apellido').' ('.$this->Auth->user('username').')';
+        $grupo = $this->Session->read('User.group_alias');
+        $this->Instit->logDepuradores($username, $grupo, "planes_sin_titulo");
+                
         $this->Plan->recursive = -1;
         $this->paginate['contain'] = array('Instit'=>'Tipoinstit', 'Oferta' );
         $this->paginate['conditions'] = array('Plan.titulo_id' => 0);
@@ -599,6 +611,11 @@ class DepuradoresController extends AppController {
 
 
     function corrector_de_planes() {
+        //// dejo un log de ingreso
+        $username = $this->Auth->user('nombre').' '.$this->Auth->user('apellido').' ('.$this->Auth->user('username').')';
+        $grupo = $this->Session->read('User.group_alias');
+        $this->Instit->logDepuradores($username, $grupo, "corrector_de_planes");
+        
         /********************** GUARDADO DE LOS PLANES SELECCIONADOS *******/
         if (!empty($this->data['Plan'])) {
             $planesGuardar = array();
@@ -882,6 +899,11 @@ class DepuradoresController extends AppController {
 
 
     function fusionar_titulos() {
+        //// dejo un log de ingreso
+        $username = $this->Auth->user('nombre').' '.$this->Auth->user('apellido').' ('.$this->Auth->user('username').')';
+        $grupo = $this->Session->read('User.group_alias');
+        $this->Instit->logDepuradores($username, $grupo, "fusionar_titulos");
+        
         $ofertas = $this->Titulo->Oferta->find('list');
         $sectores = $this->Titulo->Sector->find('list',array('order'=>'Sector.name'));
 

@@ -292,12 +292,15 @@ class Plan extends AppModel {
                     ),
              );
 
+            if (empty($parameters['order']))
+                $parameters['order'] = array("Plan.nombre");
             $parametersForList = $parameters;
             $parametersForList['fields']= 'Plan.id';
-            $parametersForList['group']= 'Plan.id';
+            $parametersForList['group']= array('Plan.id', 'Plan.nombre');
             unset($parametersForList['contain']);
-            unset($parametersForList['order']);
+            //unset($parametersForList['order']);
             
+            //debug($parametersForList);
             $planesIds = parent::find('list', $parametersForList);
             if ($buscaroSoloContar == 'count') {
                 return count($planesIds);
