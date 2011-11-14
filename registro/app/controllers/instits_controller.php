@@ -505,9 +505,9 @@ class InstitsController extends AppController {
         }
         if(!empty($this->passedArgs['nombre_completo'])) {
             $this->paginate['Instit']['conditions'][
-                            "to_ascii(lower(Tipoinstit.name))||' n '||".
-                            "to_ascii(lower(Instit.nroinstit))||' '||".
-                            "to_ascii(lower(Instit.nombre)) SIMILAR TO ?"] = array(convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['nombre_completo'])));
+                            "lower(Tipoinstit.name) ||' n '||".
+                            "lower(Instit.nroinstit) ||' '||".
+                            "lower(Instit.nombre) SIMILAR TO ?"] = array(convertir_para_busqueda_avanzada(utf8_decode($this->passedArgs['nombre_completo'])));
 
             $this->paginate['viewConditions']['Tipo, Número o Nombre '] = utf8_decode($this->passedArgs['nombre_completo']);
         }
