@@ -49,7 +49,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
 
 <div>
     <?php
-    if(!empty($ultimo_ciclo_actualizado) &&  
+    if($planes['Instit']['activo'] && !empty($ultimo_ciclo_actualizado) &&  
        $ultimo_ciclo_actualizado > 0 && $ultimo_ciclo_actualizado < (date('Y')-2)) { ?>
         <div class="ultima_act_ciclo">
             Atención: La oferta educativa de la institución no ha sido actualizada en los últimos 2 años
