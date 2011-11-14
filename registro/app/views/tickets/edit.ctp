@@ -8,6 +8,10 @@ if(isset($script)){
 <div class="anios form">
 <?php echo $form->create('Ticket');?>
 	<fieldset>
+     <div>
+          <label>Última Modificacion</label>
+          <span><?php echo $this->data["Ticket"]["modified"]; ?></span>
+     </div>
 	<?php
 		echo $form->input('id');
 
@@ -19,11 +23,6 @@ if(isset($script)){
                     'label'     => 'Usuario responsable',
                     'value'     => $user['nombre']." ".$user['apellido']));
 
-		echo $form->input('modified', array(
-                    'readonly'  => !in_array($session->read('Auth.User.role'), $gruposConPermisos),
-                    'type'      => 'text',
-                    'label'     => 'Última modificación'));
-                
 		echo $form->input('observacion', array(
                     'readonly'  => !in_array($session->read('Auth.User.role'), $gruposConPermisos),
                             ));
