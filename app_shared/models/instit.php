@@ -130,6 +130,7 @@ class Instit extends AppModel {
 				'rule' => array('controlar_coincidencia_cue_jurisdiccion'),
 				'message'=> 'El CUE no corresponde a la Jurisdicción.'
 			),
+
 			
 			/*
 			 * Esta validacion controla que el cue sea ingersado correctamente. 
@@ -285,7 +286,22 @@ class Instit extends AppModel {
 				'message' => 'Debe ingresar formato de año, con 4 dígitos. Ej: 2008.'	
 			)
 		),
-		
+		'orientacion_id' => array(
+			/**
+			*controla que la oferta secundaria tenga orientacion
+			 */
+			'secundaria_con_orientacion' => array(
+				'rule' => array('controlar_secundaria_con_orientacion'),
+				'message'=> 'El tipo de Institución secundaria debe tener orientación asignada.'
+			),
+			/**
+			*controla que la oferta != secundaria no tenga orientacion
+			 */
+			'otros_sin_orientacion' => array(
+				'rule' => array('controlar_otros_sin_orientacion'),
+				'message'=> 'Solo el tipo de Institución secundaria puede tener orientación asignada.'
+			),
+		),
 		'jurisdiccion_id' => array(
 			'notEmpty' => array(
 				'rule' => VALID_NOT_EMPTY,
@@ -377,6 +393,28 @@ class Instit extends AppModel {
   		
   		return ($jur_id == $jur)?true:false;
         }
+
+    function controlar_secundaria_con_orientacion(){
+    	$oferta = $this->data[$this->name]['claseinstit_id'];
+    	$clase = $this->data[$this->name]['orientacion_id'];
+
+    	if($oferta == CLASE_SECUNDARIO_ID && empty($clase)){
+			return false;
+    	}
+
+    	return true;
+    }
+
+    function controlar_otros_sin_orientacion(){
+    	$oferta = $this->data[$this->name]['claseinstit_id'];
+    	$clase = $this->data[$this->name]['orientacion_id'];
+
+    	if($oferta != CLASE_SECUNDARIO_ID && !empty($clase)){
+			return false;
+    	}
+    	return true;
+    }
+
 
         /**
   	 * Callback que se ejecuta luego de cada find() del model Instit
@@ -905,6 +943,12 @@ class Instit extends AppModel {
   	private function __armarVectorSinInstitsRepetidas($vector1, $vector2)
   	{
   		$v_final = array();
+  		if(empty($vector2)){
+  			return $vector1;
+  		}
+  		if(empty($vector1)){
+  			return $vector2;
+  		}
   		foreach($vector2 as $v2):
   			$encontro = false;
   			foreach($vector1 as $v1):  				

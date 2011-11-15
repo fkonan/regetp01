@@ -57,7 +57,13 @@ define('SEC_ID',5);
 define('SUP_ID',6);
 define('SUP_TEC_ID',4);
 
-
+/**
+ * ID`s de CLASE_INSTIT
+ */
+define('CLASE_FP_ID',1);
+define('CLASE_CON_ITINERARIO_ID',2);
+define('CLASE_SECUNDARIO_ID',3);
+define('CLASE_SUPERIOR_ID',4);
 
 /**
  * ID`s de ETAPAS
