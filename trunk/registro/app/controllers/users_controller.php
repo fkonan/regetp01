@@ -2,6 +2,8 @@
 class UsersController extends AppController {
 
 	var $name = 'Users';
+	var $helpers = array('Html', 'Form', 'Text', 'Time');
+	var $components = array('Email');
 
 
         function verificar(){
@@ -34,28 +36,51 @@ class UsersController extends AppController {
 
 	function add() {
 		if (!empty($this->data)) {
-			if($this->Auth->password($this->data['User']['password_check'])==$this->data['User']['password']){
-				$this->User->create();
-                                
-				if ($this->User->save($this->data)) {
-					$this->Session->setFlash(__('Se ha agregado un nuevo usuario', true));
-					$this->redirect('/users/add');
-				} else {
-					$this->Session->setFlash(__('No se ha podio registrar. Por favor intente nuevamente.', true));
-				}
-			}
-			else{
-				$this->Session->setFlash('Los passwords no coinciden');
-                                $this->data['User']['password']='';
-                                $this->data['User']['password_check']='';
-			}
-		}
+			$this->data['User']['password']='';
+			$this->data['User']["password_reset_token"] = uniqid();
 
-                $jurisdicciones = $this->User->Jurisdiccion->find('list',array('order'=>'name'));
-                // AROS para combo
-                $this->Acl->Aro->recursive = 0;
-                $aros = $this->Acl->Aro->find('list', array('fields' => array('alias'), 'conditions'=>array('parent_id'=>1), 'order'=>'alias'));
-                $this->set(compact('aros','jurisdicciones'));
+			$this->User->create();
+			if ($this->User->save($this->data)) {
+
+				$url = Router::url(array('controller'=>'Users', 
+										 'action'=>'password_reset', 
+										 $this->data['User']["password_reset_token"]), true);
+
+                // si el usuario tiene email en su perfil, se envia mail
+                if (!empty($this->data['User']['mail'])) {
+                    $this->Email->smtpOptions = array(
+                            'port'    => Configure::read('Email.port'),
+                            'timeout' => Configure::read('Email.timeout'),
+                            'host'    => Configure::read('Email.host'),
+                            'username'=> Configure::read('Email.username'),
+                            'password'=> Configure::read('Email.password'),
+                    );
+
+                    $this->Email->delivery = 'smtp';
+                    $this->Email->from     = NOMBRE_CONTACTO.' <'.EMAIL_CONTACTO.'>';
+                    $this->Email->bcc 	   = array(EMAIL_CONTACTO); 
+                    $this->Email->to       = $this->data['User']['mail'];
+                    $this->Email->subject  = 'Usuario Generado';
+                    $this->Email->template = 'user_add';
+                    $this->Email->sendAs   = 'both';
+                    $this->set("url", $url);
+                    
+                    $this->Email->send();
+
+                    $this->log('smtp_errors: ' . $this->Email->smtpError, LOG_DEBUG);
+                }
+				$this->Session->setFlash(__('Se ha agregado un nuevo usuario ('.$url.')', true));
+				$this->redirect('/users/add');
+			} else {
+				$this->Session->setFlash(__('No se ha podio registrar. Por favor intente nuevamente.', true));
+			}
+
+		}
+        $jurisdicciones = $this->User->Jurisdiccion->find('list',array('order'=>'name'));
+        // AROS para combo
+        $this->Acl->Aro->recursive = 0;
+        $aros = $this->Acl->Aro->find('list', array('fields' => array('alias'), 'conditions'=>array('parent_id'=>1), 'order'=>'alias'));
+        $this->set(compact('aros','jurisdicciones'));
 	}
 
 	function edit($id = null) {
@@ -195,6 +220,70 @@ class UsersController extends AppController {
 		}
 		if (empty($this->data)) {
 			$this->data = $this->User->read(null, $id);
+		}
+	}
+
+	/**
+	 *  Este es para que un usuario resetee el password olvidado o la primera vez
+	 *  
+	 * @param password_reset_token
+	 */
+	function password_reset($token){
+		if (empty($this->data)) {
+			$this->data = $this->User->findByPasswordResetToken($token);
+		
+			if (!$token && empty($this->data)) {
+				$this->Session->setFlash(__('Link incorrecto o expirado. Comuniquese con la unidad de información para que le proporcionen un nuevo link.', true));
+				$this->redirect('/pages/home');
+			}
+		}else if (!empty($this->data)) {
+			if($this->comparePasswords()){ //me fijo que los passwords coincidan
+				if ($this->User->save($this->data, $validate = false)) {
+					$this->Session->setFlash(__('Se ha guardado el nuevo password correctamente', true));
+					$this->redirect('/pages/home');
+				} else {
+                                    debug($this->User->validationErrors);
+					$this->Session->setFlash(__('La contraseña no pudo ser guardada. Por favor, intente nuevamente.', true));
+				}
+			}
+			else $this->Session->setFlash('La contraseña no coincide, por favor reintente.');
+		}
+	}
+
+	function password_clear($id){
+		$user = $this->data = $this->User->read(null, $id);
+		$user["User"]["password"] = "";
+		$user["User"]["password_reset_token"] = uniqid();
+		if($this->User->save($this->data, $validate = false)) {
+			$url = Router::url(array('controller'=>'Users', 
+									 'action'=>'password_reset', 
+									 $this->data['User']["password_reset_token"]), true);
+
+            // si el usuario tiene email en su perfil, se envia mail
+            if (!empty($this->data['User']['mail'])) {
+                $this->Email->smtpOptions = array(
+                        'port'    => Configure::read('Email.port'),
+                        'timeout' => Configure::read('Email.timeout'),
+                        'host'    => Configure::read('Email.host'),
+                        'username'=> Configure::read('Email.username'),
+                        'password'=> Configure::read('Email.password'),
+                );
+
+                $this->Email->delivery = 'smtp';
+                $this->Email->from     = NOMBRE_CONTACTO.' <'.EMAIL_CONTACTO.'>';
+                $this->Email->bcc 	   = array(EMAIL_CONTACTO); 
+                $this->Email->to       = $this->data['User']['mail'];
+                $this->Email->subject  = 'Contraseña Reseteada';
+                $this->Email->template = 'user_password_reset';
+                $this->Email->sendAs   = 'both';
+                $this->set("url", $url);
+                
+                $this->Email->send();
+
+                $this->log('smtp_errors: ' . $this->Email->smtpError, LOG_DEBUG);
+            }
+			$this->Session->setFlash(__('Se ha reseteado la contraseña del usuario ('.$url.')', true));
+			$this->redirect(array('controller'=>'Users','action'=>'listadoUsuarios'));
 		}
 	}
 	

@@ -15,8 +15,6 @@ function RefreshRole() {
 		//echo $form->input('role',array('options'=>$opciones));
                 echo $form->input('grupo', array('options'=>$aros, 'id'=>'grupo', 'onchange'=>'Javascript: RefreshRole();'));
                 echo $form->input('jurisdiccion_id', array('empty' => array('0'=>' -- '),'id'=>'jurisdiccion_id','label'=>'Jurisdicción'));
-		echo $form->input('password');
-		echo $form->input('password_check',array('label'=>'Reingrese Password','type'=>'password'));
 		
 		echo $form->input('role',array('id'=>'role', 'type'=>'hidden'));
 		?><h2>Información Extra</h2><?

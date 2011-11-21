@@ -43,6 +43,7 @@ foreach ($users as $user):
 			<?php echo $html->link(__('View', true), array('action'=>'view', $user['User']['id'])); ?>
 			<?php echo $html->link(__('Edit', true), array('action'=>'edit', $user['User']['id'])); ?>
 			<?php echo $html->link(__('Delete', true), array('action'=>'delete', $user['User']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $user['User']['id'])); ?>
+			<?php echo $html->link(__('Reset', true), array('action'=>'password_clear', $user['User']['id']), null, sprintf(__('Seguro que desa resetear el password de %s?', true), $user['User']['username'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
