@@ -10,15 +10,11 @@
          - <?= $instit['Instit']['nombre_completo']?>
     </h2>
     <div class="tabs">
-        <?php
-        if($instit['Instit']['activo'] && !empty($ultimo_ciclo_actualizado) && 
-           $ultimo_ciclo_actualizado > 0 && $ultimo_ciclo_actualizado < (date('Y')-2)) { ?>
-            <div class="ultima_act_ciclo">
-                Atención: La oferta educativa de la institución no ha sido actualizada en los últimos 2 años
-            </div>
-        <?php } ?>
         <?php 
-        echo $this->element('menu_solapas_para_instit',array('instit_id' => $instit['Instit']['id']));
+        echo $this->element('menu_solapas_para_instit', array(
+                                            'instit_id' => $instit['Instit']['id'], 
+                                            'instit_activo' => $instit['Instit']['activo'], 
+                                            'ultimo_ciclo_actualizado' => $ultimo_ciclo_actualizado));
         ?>
         
             <div id="d_clip_button" class="my_clip_button2"></div>

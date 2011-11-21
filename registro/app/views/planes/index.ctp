@@ -49,14 +49,10 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
 
 <div>
     <?php
-    if($planes['Instit']['activo'] && !empty($ultimo_ciclo_actualizado) &&  
-       $ultimo_ciclo_actualizado > 0 && $ultimo_ciclo_actualizado < (date('Y')-2)) { ?>
-        <div class="ultima_act_ciclo">
-            Atención: La oferta educativa de la institución no ha sido actualizada en los últimos 2 años
-        </div>
-    <?php } ?>
-    <?php
-        echo $this->element('menu_solapas_para_instit',array('instit_id' => $planes['Instit']['id']));
+        echo $this->element('menu_solapas_para_instit', array(
+                                        'instit_id' => $planes['Instit']['id'], 
+                                        'instit_activo' => $planes['Instit']['activo'], 
+                                        'ultimo_ciclo_actualizado' => $ultimo_ciclo_actualizado));
     ?>
     <div id="d_clip_button" class="my_clip_button2"></div>
     <input id="infoToCopy" type="hidden" value="<?= ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'] . ' - ' .$planes['Instit']['nombre_completo'] . ' - ' . $planes['Instit']['direccion'] . ' - ' . $planes['Departamento']['name'] . ' - ' . $planes['Localidad']['name'] ?> "/>
