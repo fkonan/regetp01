@@ -125,14 +125,18 @@ class DepuradoresController extends AppController {
 		$this->Instit->recursive = 1;
 		$this->data =$this->Instit->find('first',array('conditions'=>$conditions,'order'=>'Instit.jurisdiccion_id DESC'));
 		$total =$this->Instit->find('count',array('conditions'=>$conditions));
-			
-		//le pongo el valor vacio para que la vista muestre vacio. Luego el beforeSave se va a encargar d eagregarle un CERO para que cumpla con el NOT NULL de la BD
-		if(isset($this->data['Instit']['anio_creacion']) && $this->data['Instit']['anio_creacion'] == 0){
-			$this->data['Instit']['anio_creacion'] = '';
-		}
+		
 
-		$tipoinstis = $this->Instit->Tipoinstit->find('list',array('conditions'=>'Tipoinstit.jurisdiccion_id = '.$this->data['Instit']['jurisdiccion_id'],'order'=>'Tipoinstit.name'));
-		$this->set('tipoinstits', $tipoinstis);
+		if (!empty($this->data['Instit'])) {
+                    //le pongo el valor vacio para que la vista muestre vacio. Luego el beforeSave se va a encargar d eagregarle un CERO para que cumpla con el NOT NULL de la BD
+                    if(isset($this->data['Instit']['anio_creacion']) && $this->data['Instit']['anio_creacion'] == 0){
+                            $this->data['Instit']['anio_creacion'] = '';
+                    }
+                    
+                    $tipoinstis = $this->Instit->Tipoinstit->find('list',array('conditions'=>'Tipoinstit.jurisdiccion_id = '.$this->data['Instit']['jurisdiccion_id'],'order'=>'Tipoinstit.name'));
+                    $this->set('tipoinstits', $tipoinstis);
+                }
+                
 		$this->set('falta_depurar',$total);
 
 	}

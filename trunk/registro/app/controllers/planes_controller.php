@@ -169,8 +169,22 @@ class PlanesController extends AppController {
         }
         if (!empty($this->data)) {
             $instit_id = $this->data['Plan']['instit_id'];
+            
+            // si la institucion tiene otro/s tipo/s de oferta, se marca para depurar tipoinstit
+            // (chequea antes de guardar la oferta)
+            $depurar_tipoinstit = false;
+            $ofertas = $this->Plan->Instit->getOfertas($instit_id);
+            if (!empty($ofertas) && !array_key_exists($this->data['Plan']['oferta_id'], $ofertas)) {
+                $depurar_tipoinstit = true;
+            }
+            
             $this->Plan->create();
-            if ($this->Plan->save($this->data)) {
+            if ($this->Plan->save($this->data)) {   
+                // marca para depurar tipoinstit
+                if ($depurar_tipoinstit) {
+                    $this->Plan->Instit->id = $instit_id;
+                    $this->Plan->Instit->saveField('depurar_tipoinstit', 1);
+                }
                 $this->Session->setFlash(__('Se ha creado un nuevo Plan', true));
                 $this->redirect(array('controller'=>'Planes','action'=>'view/'.$this->Plan->id));
             } else {
@@ -217,7 +231,23 @@ class PlanesController extends AppController {
             $this->redirect(array('controller'=>'Pages','action'=>'home'));
         }
         if (!empty($this->data)) {
+            $instit_id = $this->data['Plan']['instit_id'];
+            
+            // si la institucion tiene otro/s tipo/s de oferta, se marca para depurar tipoinstit
+            // (chequea antes de guardar la oferta)
+            $depurar_tipoinstit = false;
+            $ofertas = $this->Plan->Instit->getOfertas($instit_id);
+            if (!empty($ofertas) && !array_key_exists($this->data['Plan']['oferta_id'], $ofertas)) {
+                $depurar_tipoinstit = true;
+            }
+            
             if ($this->Plan->save($this->data)) {
+                // marca para depurar tipoinstit
+                if ($depurar_tipoinstit) {
+                    $this->Plan->Instit->id = $instit_id;
+                    $this->Plan->Instit->saveField('depurar_tipoinstit', 1);
+                }
+                
                 $this->Session->setFlash(__('El Plan ha sido guardado', true));
                 $this->redirect(array('action'=>'view/'.$this->data['Plan']['id']));
             } else {

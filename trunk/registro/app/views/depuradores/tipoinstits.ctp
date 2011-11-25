@@ -7,7 +7,8 @@ echo $javascript->link('scriptaculous-js-1.8.3/src/scriptaculous');
 ?>
 
 <div class="instits form">
-<h1>Editar Institución de <?php echo $this->data['Jurisdiccion']['name']?><br>  ¡¡ vamos que faltan solo <?php echo $falta_depurar?>!!</h1>
+<h1>Tipo de institución y Relación con ETP</h1>  
+¡¡ vamos que faltan solo <?php echo $falta_depurar?>!!
 
 <br> CUE: <?= $this->data['Instit']['cue']*100+$this->data['Instit']['anexo'] ?> (id:<?php echo $this->data['Instit']['id']?>) 
 <h2><?= $this->data['Instit']['nombre']?></h2>
