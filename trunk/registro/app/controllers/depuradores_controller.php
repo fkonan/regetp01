@@ -111,16 +111,21 @@ class DepuradoresController extends AppController {
 	 */
 	function tipoinstits(){				
 		if (!empty($this->data)) {
+			$this->data['Instit']['depurar_tipoinstit'] = 0; //la marco como "depurada"
 			if ($valor = $this->Instit->save($this->data)) {
 				$this->Session->setFlash(__('Se ha guardado la Institución correctamente', true));
 								
 			} else {
-				print_r($this->Instit->validationErrors);
+				debug($this->Instit->validationErrors);
 				$this->Session->setFlash(__('La Institución no pudo ser guardada. Escriba nuevamente el campo incorrecto.', true));
 			}
 		}			
 		
-		$conditions = array('Instit.activo'=>1,'Instit.tipoinstit_id'=>0);
+		$conditions = array('OR'=>array(
+								'AND'=>array('Instit.activo'=>1,'Instit.tipoinstit_id'=>0),
+								'Instit.depurar_tipoinstit'=>1
+			)
+		);
 		
 		$this->Instit->recursive = 1;
 		$this->data =$this->Instit->find('first',array('conditions'=>$conditions,'order'=>'Instit.jurisdiccion_id DESC'));
