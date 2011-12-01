@@ -32,20 +32,20 @@ Requerimientos mínimos para utilizar el <b>Sistema Gestión de Registro</b>:<br /
 Desde su puesta en funcionamiento en junio de 2009 el sistema RFIETP se encuentra
 en permanente actualización y mejoramiento, tanto del contenido de información de
 la base de datos como de la aplicación que permite su gestión. En esa línea de
-trabajo a partir del 10 de noviembre de 2011 se ha instalado la versión <?php echo Configure::read('regetpVersion');?> del
+trabajo a partir del 2 de diciembre de 2011 se ha instalado la versión <?php echo Configure::read('regetpVersion');?> del
 sistema. Sus principales novedades son:
 </p>
     <ul>
-        <li>Se agregó el atributo "Carrera prioritaria" a los Títulos de referencia para identificar los Títulos incorporados al Programa Nacional de Becas Bicentenario.</li>
-        <li>Se publicaron los Planes de Mejora del primer semestre del 2011.</li>
-        <li>Se ordenó la presentación de oferta educativa en toda la aplicación según el siguiente criterio: Secundaria técnica, Superior y Formación Profesional.</li>
-        <li>En la vista general de oferta de una institución para la Formación Profesional se agregó la duración en horas del curso para simplificar la consulta de la información.</li>
-        <li>Se incorporó el perfil de Ministro con la capacidad de visualizar los Planes de Mejora de la jurisdicción que le corresponde.</li>
+        <li>Se publicaron los Planes de Mejora correspondientes al 3er trimestre del 2011.</li>
+        <li>Se agregó nueva lógica en el registro de nuevos usuarios al sistema, con envío automático de email solicitando crear una contraseña, brindando mayor seguridad al sistema y confiabilidad al usuario.</li>
+        <li>Se modificó el alerta de "Oferta educativa desactualizada" para las instituciones, especificando el último ciclo en el cual su oferta fue actualizada.</li>
+        <li>Se corrigió el orden en que se muestra la Oferta educativa para Formación Profesional y Superior.</li>
+        <li>Se agregó lógica de validación en la carga de Instituciones.</li>
     </ul>
 <br />
 <p>
 Un listado completo de las modificaciones realizadas en esta última versión, puede encontrarlas haciendo click
-<? echo $html->link('aquí','/pages/detalle_v1_2')?>.
+<? echo $html->link('aquí','/pages/detalle_versiones')?>.
 </p>
 
 <br/>
