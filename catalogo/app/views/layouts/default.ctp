@@ -170,9 +170,18 @@ $javascript;
                         <br />
                         Saavedra 789 C1229ACE | (011) 4129-2000
                         <br /><br />
+                        
+                        
+                         <p>
+                            Fecha de actualización: <b><?php echo FECHA_ACTUALIZACION_DDBB ?></b>
+                        </p>
+                        
+                        
                         <?php echo $html->link('Mapa del sitio', array('controller' => 'pages', 'action' => 'mapa_del_sitio')); ?>
                          - 
                         <?php echo $html->link('Contacto', array('controller' => 'correos', 'action' => 'contacto')); ?>
+                         
+                         
                     </div>
 
 
