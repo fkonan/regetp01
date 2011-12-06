@@ -64,6 +64,7 @@ class UsersController extends AppController {
                     $this->Email->template = 'user_add';
                     $this->Email->sendAs   = 'both';
                     $this->set("url", $url);
+                    $this->set("user", $this->data['User']);
                     
                     $this->Email->send();
 
@@ -277,6 +278,7 @@ class UsersController extends AppController {
                 $this->Email->template = 'user_password_reset';
                 $this->Email->sendAs   = 'both';
                 $this->set("url", $url);
+                $this->set("user", $user['User']);
                 
                 $this->Email->send();
 
