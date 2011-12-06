@@ -1,15 +1,15 @@
 <h1>RFIETP - Novedades de la versión 1.7.4</h1>
 <br>
 <ul>
-    <li>Se publicaron los Planes de Mejora correspondientes al 3er trimestre del 2011.</li>
-    <li>Se agregó nueva lógica en el registro de nuevos usuarios al sistema, con envío automático de email solicitando crear una contraseña.</li>
-    <li>Se incorporó la fecha de modificación y creación a los tickets pendientes que utiliza la Unidad de Información.</li>
-    <li>Se modificó el alerta de "Oferta educativa desactualizada" para las instituciones, especificando el último ciclo en el cual su oferta fue actualizada.</li>
-    <li>Se corrigió el orden en que se muestra la Oferta educativa para Formación Profesional y Superior.</li>
-    <li>Se modificó y volvió a poner online el depurador de Tipo de instituciones para uso de la Unidad de Información.</li>
-    <li>Se corrigió bug de campo nombre en búsqueda avanzada.</li>
-    <li>Se incorporaron logs de uso de depuradores por parte de la Unidad de Información.</li>
-    <li>Se agregó lógica de validación en la carga de Instituciones. Si es secundario debe tener orientación, caso contrario no debe tener.</li>
+    <li>Se publicaron los Planes de Mejora correspondientes al tercer trimestre del 2011.</li>
+    <li>Se mejoró el procedimiento de registro de nuevos usuarios al sistema (con gestión automática de contraseña privada y segura).</li>
+    <li>Se mejoró la presentación de información sobre fecha de creación y de modificación de los tickets pendientes que utiliza la Unidad de Información.</li>
+    <li>Se mejoró el mensaje de alerta de oferta educativa desactualizada para las instituciones, especificando el último ciclo de actualización como referencia.</li>
+    <li>Se corrigió el orden en que se muestra la Oferta educativa para Formación Profesional y Educación Superior.</li>
+    <li>Se mejoró y reactivó el depurador de Tipo de institución para uso de la Unidad de Información.</li>
+    <li>Se corrigió error de búsqueda por nombre en la búsqueda avanzada.</li>
+    <li>Se incorporaron controles de uso de depuradores por parte de la Unidad de Información.</li>
+    <li>Se agregó lógica de validación en la carga de Institución (Si el Tipo de institución es Secundario se exige Orientación, para otros Tipos de institución la categoría no corresponde).</li>
 </ul>
 
 <h1>RFIETP - Novedades de la versión 1.7.3</h1>
