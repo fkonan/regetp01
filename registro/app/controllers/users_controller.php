@@ -60,7 +60,7 @@ class UsersController extends AppController {
                     $this->Email->from     = NOMBRE_CONTACTO.' <'.EMAIL_CONTACTO.'>';
                     $this->Email->bcc 	   = array(EMAIL_CONTACTO); 
                     $this->Email->to       = $this->data['User']['mail'];
-                    $this->Email->subject  = 'Usuario Generado';
+                    $this->Email->subject  = 'Usuario creado';
                     $this->Email->template = 'user_add';
                     $this->Email->sendAs   = 'both';
                     $this->set("url", $url);
@@ -232,13 +232,14 @@ class UsersController extends AppController {
 	function password_reset($token){
 		if (empty($this->data)) {
 			$this->data = $this->User->findByPasswordResetToken($token);
-		
-			if (!$token && empty($this->data)) {
+			debug($this->data);
+			if (empty($this->data)) {
 				$this->Session->setFlash(__('Link incorrecto o expirado. Comuniquese con la unidad de información para que le proporcionen un nuevo link.', true));
 				$this->redirect('/pages/home');
 			}
 		}else if (!empty($this->data)) {
 			if($this->comparePasswords()){ //me fijo que los passwords coincidan
+				$this->data["User"]["password_reset_token"] = "";
 				if ($this->User->save($this->data, $validate = false)) {
 					$this->Session->setFlash(__('Se ha guardado el nuevo password correctamente', true));
 					$this->redirect('/pages/home');
@@ -255,10 +256,10 @@ class UsersController extends AppController {
 		$user = $this->data = $this->User->read(null, $id);
 		$user["User"]["password"] = "";
 		$user["User"]["password_reset_token"] = uniqid();
-		if($this->User->save($this->data, $validate = false)) {
+		if($this->User->save($user, $validate = false)) {
 			$url = Router::url(array('controller'=>'Users', 
 									 'action'=>'password_reset', 
-									 $this->data['User']["password_reset_token"]), true);
+									 $user["User"]["password_reset_token"]), true);
 
             // si el usuario tiene email en su perfil, se envia mail
             if (!empty($this->data['User']['mail'])) {
@@ -274,7 +275,7 @@ class UsersController extends AppController {
                 $this->Email->from     = NOMBRE_CONTACTO.' <'.EMAIL_CONTACTO.'>';
                 $this->Email->bcc 	   = array(EMAIL_CONTACTO); 
                 $this->Email->to       = $this->data['User']['mail'];
-                $this->Email->subject  = 'Contraseña Reseteada';
+                $this->Email->subject  = 'Contraseña reseteada';
                 $this->Email->template = 'user_password_reset';
                 $this->Email->sendAs   = 'both';
                 $this->set("url", $url);
