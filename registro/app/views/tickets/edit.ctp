@@ -8,7 +8,11 @@ if(isset($script)){
 <div class="anios form">
 <?php echo $form->create('Ticket');?>
 	<fieldset>
-     <div>
+     <div style="float:left;width:48%;clear:none">
+          <label>Alta</label>
+          <span><?php echo $this->data["Ticket"]["created"]; ?></span>
+     </div>
+     <div style="float:right;width:48%;clear:none">
           <label>Última Modificacion</label>
           <span><?php echo $this->data["Ticket"]["modified"]; ?></span>
      </div>
