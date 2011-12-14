@@ -232,7 +232,6 @@ class UsersController extends AppController {
 	function password_reset($token){
 		if (empty($this->data)) {
 			$this->data = $this->User->findByPasswordResetToken($token);
-			debug($this->data);
 			if (empty($this->data)) {
 				$this->Session->setFlash(__('Link incorrecto o expirado. Comuniquese con la unidad de información para que le proporcionen un nuevo link.', true));
 				$this->redirect('/pages/home');

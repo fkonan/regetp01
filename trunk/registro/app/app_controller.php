@@ -80,7 +80,7 @@ class AppController extends Controller {
                 //Configure AuthComponent
                 //$this->Auth->allow('display','login','logout');
                 //$this->Auth->allow('*');return true;
-                $this->Auth->allowedActions = array('display','login','logout');
+                $this->Auth->allowedActions = array('display','login','logout', 'password_reset');
                 $this->Auth->loginError ='Usuario o Contraseña Incorrectos';
 		$this->Auth->authError = 'Usted no tiene permisos para acceder a esta página.';
                 $this->Auth->planesMejoraError = 'Usted no tiene acceso a los planes de mejora de otra jurisdicción';
