@@ -256,7 +256,18 @@ class DepuradoresController extends AppController {
 		$tipoinstit = $this->Instit->Tipoinstit->find('list', array('conditions'=>array('jurisdiccion_id'=>$this->data['Instit']['jurisdiccion_id']) ));
 		
 		$this->Instit->Plan->unbindModel(array('belongsTo' => array('Instit')));
-		$planes = $this->Instit->Plan->find('all',array('conditions'=>array('Plan.instit_id'=>$this->data['Instit']['id'])));
+		$planes = $this->Instit->Plan->find('all',array(
+                    'conditions' => array(
+                        'Plan.instit_id'=>$this->data['Instit']['id']),
+                    'contain' => array(
+                        'Oferta', 
+                        'Titulo' => array(
+                            'SectoresTitulo' => array( 'Sector', 'Subsector')
+                        ), 
+                        'EstructuraPlan', 
+                        'Anio'
+                    )
+                ));
 		
 		$claseinstits = $this->Instit->Claseinstit->find('list');
 		$claseinstits[0] = "Seleccione";
