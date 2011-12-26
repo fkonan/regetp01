@@ -27,6 +27,7 @@ echo $html->css('smoothness/jquery-ui-1.8.6.custom', false);
     </p>
 </div>
 
+<?php if ( $falta_depurar ) { ?>
 
 <div class="instits form">
 <h3>Editando Institución de <?php echo $this->data['Jurisdiccion']['name']?>
@@ -162,4 +163,10 @@ echo $html->css('smoothness/jquery-ui-1.8.6.custom', false);
 </div>
 
 
+<?php } else { ?>
 
+<div>
+    <p style="color: green; font-size: large; text-align: center; font-weight: bold; margin-top: 20px;}">
+        No hay nada que depurar</h1>
+</div>
+<?php } ?>
