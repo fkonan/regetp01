@@ -4,7 +4,8 @@
 echo $javascript->link('jquery-ui-1.8.5.custom.min.js',false);
 echo $html->css('ajaxtabs.css',null, false);
 echo $html->css('planes/ui_tabs.css',null, false);
-echo $html->css('smoothness/jquery-ui-inet.custom.css',null, false);
+echo $html->css('smoothness/jquery-ui-1.8.6.custom', false);
+//echo $html->css('smoothness/jquery-ui-inet.custom.css',null, false);
 ?>
 
 <script type="text/javascript">
@@ -21,33 +22,57 @@ echo $html->css('smoothness/jquery-ui-inet.custom.css',null, false);
         jQuery('.js-tabs-ofertas').tabs();
 
         jQuery('.descarga_mas_info').click(function(){
-            var $dialog = jQuery('<div id="create_dialog"></div>')
+            var dialog = jQuery('<div id="create_dialog"></div>')
                 .html('...Cargando vista previa de la descarga')
-		.dialog({
-                        width: 750,
-                        height:400,
-                        position: 'top',
-                        zIndex: 3999,
-			title: 'Vista Previa de la  Descarga',
-                        beforeclose: function(event, ui) {
-                            jQuery(".ui-dialog").remove();
-                            jQuery("#create_dialog").remove();
-                        }
-            }).parents('.ui-dialog:eq(0)').wrap('<div class="descarga-dialog"></div>');
+		        .dialog({
+                    width: 750,
+                    height:400,
+                    position: 'center',
+                    zIndex: 3999,
+		            title: 'Vista Previa de la  Descarga',
+                    beforeclose: function(event, ui) {
+                        jQuery("#create_dialog").remove();
+                }
+            });
 
             jQuery.ajax({
               url: jQuery(this).find('a').attr('href'),
               cache: false,
               success: function(data) {
-                $dialog.find('#create_dialog').html(data);
-
+                    dialog.html(data);
               }
             });
             return false;
         });        
-    })
-</script>
 
+        jQuery('.descarga_editar_descripcion a').click(function(){
+
+            
+            jQuery("<div id='edit_description_dialog'>Cargando...</div>").dialog({
+                title: "Editar Descripción",
+                width: 600,
+                height:300,
+                position: 'center',
+                beforeclose: function(event, ui) {
+                        jQuery("#edit_description_dialog").remove();
+                }
+            });
+            
+            jQuery.ajax({
+              url: jQuery(this).attr('href'),
+              cache: false,
+              success: function(data) {
+                    console.debug(data);
+                    jQuery('#edit_description_dialog').html(data);
+              }, 
+              error: function(data) {
+                    jQuery('#edit_description_dialog').dialog("close");
+              }
+            });
+            return false;
+        })
+    });
+</script>
 <div>
     <div class="js-tabs-ofertas tabs">
         <ul id="ofertas-tabs" class="horizontal-shadetabs">
@@ -101,6 +126,14 @@ echo $html->css('smoothness/jquery-ui-inet.custom.css',null, false);
                                                    );?>
                             </span>
                             <?php } ?>
+                            <span class="descarga_editar_descripcion">
+                                <? echo $html->link($html->image("modify.png"),
+                                                    array('action'=>'edit_description', $q['Query']['id']),
+                                                    array(),
+                                                    null,
+                                                    false
+                                                   );?>
+                            </span>
                         </div>
                         <div>
                             <label style="font-weight: bold">Descripción</label>

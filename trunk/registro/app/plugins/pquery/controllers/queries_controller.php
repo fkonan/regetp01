@@ -155,61 +155,77 @@ class QueriesController extends PqueryAppController {
 	}
 	
 
-        function list_view($id="") {
-            $this->layout = "sin_menu";
-            $this->CustomQuery =& ClassRegistry::init('Pquery.CustomQuery');
+    function list_view($id="") {
+        $this->layout = "sin_menu";
+        $this->CustomQuery =& ClassRegistry::init('Pquery.CustomQuery');
 
-            if (isset($this->passedArgs['query.id'])) {
-                $id = $this->passedArgs['query.id'];
-            }
-
-            if (!$id) {
-                $this->Session->setFlash(__('Invalid id for Query', true));
-                $this->redirect(array('action'=>'index'));
-            }
-
-            $this->rutaUrl_for_layout[] =array('name'=> 'Queries','link'=>'/Instits/add' );
-            $res = $this->Query->findById($id);
-
-            $this->CustomQuery->setSql($res['Query']['query']);
-
-            
-            if (!empty($this->passedArgs['viewAll'])) {
-                if ($this->passedArgs['viewAll'] == 'true') {
-                    $data = $this->CustomQuery->query();
-                    $viewAll = false;
-                }
-            }
-            else if (!empty($this->passedArgs['preview'])) {
-                if ($this->passedArgs['preview']) {
-                    $this->layout = null;
-                    $this->CustomQuery->setSql($res['Query']['query']. " LIMIT 5");
-                    $data = $this->CustomQuery->query();
-                    $viewAll = true;
-                }
-            } else {
-                $data = $this->paginate($this->CustomQuery);
-                $viewAll = true;
-            }
-
-            $precols = array_keys($data[0]);
-            //$cols = array_keys($data['0']['0']);
-            $this->set('cols', $precols);
-            $url_conditions['query.id'] = $id;
-            $this->set('queries', $data);
-            $this->set('url_conditions', $url_conditions);
-            $this->set('name', $res['Query']['name']);
-            $this->set('descripcion', $res['Query']['description']);
-            $this->set('viewAll', $viewAll);
-            $this->set('preview', !empty($this->passedArgs['preview']));
-
-
-            if ($this->RequestHandler->ext == 'xls') {
-                $this->layout = 'xls';
-                $this->render('xls/'.$this->action);
-            }
+        if (isset($this->passedArgs['query.id'])) {
+            $id = $this->passedArgs['query.id'];
         }
 
+        if (!$id) {
+            $this->Session->setFlash(__('Invalid id for Query', true));
+            $this->redirect(array('action'=>'index'));
+        }
 
+        $this->rutaUrl_for_layout[] =array('name'=> 'Queries','link'=>'/Instits/add' );
+        $res = $this->Query->findById($id);
+
+        $this->CustomQuery->setSql($res['Query']['query']);
+
+        
+        if (!empty($this->passedArgs['viewAll'])) {
+            if ($this->passedArgs['viewAll'] == 'true') {
+                $data = $this->CustomQuery->query();
+                $viewAll = false;
+            }
+        }
+        else if (!empty($this->passedArgs['preview'])) {
+            if ($this->passedArgs['preview']) {
+                $this->layout = null;
+                $this->CustomQuery->setSql($res['Query']['query']. " LIMIT 5");
+                $data = $this->CustomQuery->query();
+                $viewAll = true;
+            }
+        } else {
+            $data = $this->paginate($this->CustomQuery);
+            $viewAll = true;
+        }
+
+        $precols = array_keys($data[0]);
+        //$cols = array_keys($data['0']['0']);
+        $this->set('cols', $precols);
+        $url_conditions['query.id'] = $id;
+        $this->set('queries', $data);
+        $this->set('url_conditions', $url_conditions);
+        $this->set('name', $res['Query']['name']);
+        $this->set('descripcion', $res['Query']['description']);
+        $this->set('viewAll', $viewAll);
+        $this->set('preview', !empty($this->passedArgs['preview']));
+
+
+        if ($this->RequestHandler->ext == 'xls') {
+            $this->layout = 'xls';
+            $this->render('xls/'.$this->action);
+        }
+    }
+    
+    function edit_description($id = null) {
+        if (!$id && empty($this->data)) {
+            $this->Session->setFlash(__('Invalid Query', true));
+            $this->redirect(array('action'=>'index'));
+        }
+        if (!empty($this->data)) {
+            if ($this->Query->save($this->data)) {
+                    $this->Session->setFlash(__('The Query has been saved', true));
+            } else {
+                $this->Session->setFlash(__('The Query could not be saved. Please, try again.', true));
+            }
+            $this->redirect(array('action'=>'descargar_queries'));
+        }
+        if (empty($this->data)) {
+            $this->data = $this->Query->read(null, $id);
+        }
+    }
 }
 ?>
