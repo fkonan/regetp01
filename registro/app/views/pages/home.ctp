@@ -14,14 +14,6 @@ Requerimientos mínimos para utilizar el <b>Sistema Gestión de Registro</b>:<br /
 </p>
 <![endif]--> 
 
-<div style="color: #DF6300; font-weight: bolder; text-align: center">
-    <p class="msg-fiesta">
-    <?php echo $html->image('globos.png', array('style' => 'position: relative;  top: 15px')); ?>
-        ¡ Hemos alcanzado las <strong style="font-size: x-large ">4000</strong> intituciones ingresadas !
-    <?php echo $html->image('globos.png', array('style' => 'position: relative;  top: 15px')); ?>
-    </p>
-</div>
-
 <h1>Bienvenido al RFIETP</h1>
 
 <br />
