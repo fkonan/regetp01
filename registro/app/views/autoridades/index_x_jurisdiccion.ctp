@@ -55,7 +55,7 @@
                     else{
                     ?>
                         <br/>
-                        <p>No existen datos de referentes de la jurisdicción.</p>
+                        <p>No existen datos del equipo técnico de la jurisdicción.</p>
                     <?php
                     }
                     ?>

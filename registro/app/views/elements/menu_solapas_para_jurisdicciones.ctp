@@ -19,7 +19,7 @@ $menuOptions = array(
                 'link'=> array('controller'=>'Jurisdicciones','action'=>'view', $jurisdiccion_id),
         ),
         array(
-                'nombre'=> 'Referentes',
+                'nombre'=> 'Equipo técnico',
                 'link'=> array('controller'=>'Autoridades','action'=>'index_x_jurisdiccion', $jurisdiccion_id),
                 'options' => array(
                     'class'=>'',

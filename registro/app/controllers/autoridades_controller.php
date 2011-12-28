@@ -135,6 +135,7 @@ class AutoridadesController extends AppController {
 		}
 		else{
 			$this->data = $this->Autoridad->read(null, $id);
+            debug($this->data);
 
                         $this->rutaUrl_for_layout[] =array('name'=> 'Datos Jurisdicción','link'=>'/Jurisdicciones/view/' . $this->data['Autoridad']['jurisdiccion_id']);
                         $this->rutaUrl_for_layout[] =array('name'=> 'Autoridades','link'=>'/Autoridades/index/' . $this->data['Autoridad']['jurisdiccion_id'] );
