@@ -5,10 +5,19 @@ class TipoinstitsController extends AppController {
 	var $helpers = array('Html', 'Form','Ajax');
 	
 
+    var $paginate = array(
+        'order' => array(
+            'Jurisdiccion.name' => 'asc', 
+            'Tipoinstit.name' => 'asc'
+        )
+    );
+
+
 
 	function index() {
 		$this->Tipoinstit->recursive = 0;
-		$this->set('tipoinstits', $this->paginate());
+		$tipos = $this->paginate();
+		$this->set('tipoinstits', $tipos);
 	}
 
 	function view($id = null) {
