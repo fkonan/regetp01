@@ -1,3 +1,12 @@
+<h1>RFIETP - Novedades de la versión 1.7.5</h1>
+<br>
+<ul>
+    <li>Se actualizó la sección de descargas que utiliza la Unidad de Información, presentando un diseño más amigable y flexible, como así también, la incorporación de descargas "temporales". A partir de este rediseño, el usuario podrá modificar las descripciones de dichas descargas.</li>
+    <li>Se agregó la fecha de última modificación junto a la fecha de creación en los Tickets de la Unidad de Información</li>
+    <li>Se actualizó el depurador de tipo de institución</li>
+    <li>Se agregó lógica de validación en los Planes, si el alta o modificación cambia la “grilla de ofertas” de una institución se activa un “pendiente” para que la institución sea evaluada nuevamente.</li>
+</ul>
+
 <h1>RFIETP - Novedades de la versión 1.7.4</h1>
 <br>
 <ul>

@@ -8,6 +8,14 @@ echo $html->css('smoothness/jquery-ui-1.8.6.custom', false);
 //echo $html->css('smoothness/jquery-ui-inet.custom.css',null, false);
 ?>
 
+<style type="text/css">
+    .tooltip{
+        font-size:13px;
+        text-align:center;
+        padding-top:30px;
+    }    
+</style>
+
 <script type="text/javascript">
     jQuery(document).ready(function(){
         
@@ -71,7 +79,14 @@ echo $html->css('smoothness/jquery-ui-1.8.6.custom', false);
             });
             return false;
         })
+
+        jQuery(".tooltip_button[title]").tooltip({
+            effect: 'slide',
+            offset:[15,10]
+        });
+
     });
+
 </script>
 <div>
     <div class="js-tabs-ofertas tabs">
@@ -101,7 +116,9 @@ echo $html->css('smoothness/jquery-ui-1.8.6.custom', false);
                     <div>
                         <div style="border:3px solid #F0F7FC;background-color: #EDEAEA;margin: 1px; padding: 2px;float:right">
                             <span class="descarga_mas_info">
-                                <? echo $html->link($html->image("preview.png"),
+                                <? echo $html->link($html->image("preview.png", 
+                                                                 array("class"=>"tooltip_button", 
+                                                                       "title"=>"Haga click aqui para previsualizar los primeros 10 resultados de esta descarga")),
                                                     array('action'=>'list_view',$q['Query']['id'],'preview:true'),
                                                     array(),
                                                     null,
@@ -109,7 +126,9 @@ echo $html->css('smoothness/jquery-ui-1.8.6.custom', false);
                                                    );?>
                             </span>
                             <span>
-                                <? echo $html->link($html->image("download.png"),
+                                <? echo $html->link($html->image("download.png", 
+                                                                 array("class"=>"tooltip_button", 
+                                                                       "title"=>"Haga click aqui para bajar el archivo excel de esta descarga")),
                                                     array('action'=>'contruye_excel', 'ext'=>'xls', $q['Query']['id'], ),
                                                     array(),
                                                     null,
@@ -118,7 +137,9 @@ echo $html->css('smoothness/jquery-ui-1.8.6.custom', false);
                             </span>
                             <?php if($q['Query']['ver_online']){?>
                             <span>
-                                <? echo $html->link($html->image("view.png"),
+                                <? echo $html->link($html->image("view.png", 
+                                                                 array("class"=>"tooltip_button", 
+                                                                       "title"=>"Haga click aqui para ver online esta descarga sin bajar archivo")),
                                                     array('action'=>'list_view', $q['Query']['id']),
                                                     array(),
                                                     null,
@@ -127,7 +148,9 @@ echo $html->css('smoothness/jquery-ui-1.8.6.custom', false);
                             </span>
                             <?php } ?>
                             <span class="descarga_editar_descripcion">
-                                <? echo $html->link($html->image("modify.png"),
+                                <? echo $html->link($html->image("modify.png", 
+                                                                 array("class"=>"tooltip_button", 
+                                                                       "title"=>"Haga click aqui para modificar la descripcion de esta descarga")),
                                                     array('action'=>'edit_description', $q['Query']['id']),
                                                     array(),
                                                     null,

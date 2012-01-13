@@ -9,7 +9,7 @@ echo $html->css('prettify/prettify',null, false);
 <script type="text/javascript">
 jQuery(document).ready(function() {
     prettyPrint();
-    jQuery("#vigenciaDatePicker").datepicker({ minDate: 1, dateFormat: 'dd/mm/yy' });
+    jQuery("#vigenciaDatePicker").datepicker({ minDate: 1, dateFormat: 'yy-mm-dd' });
     toogleVigencia();
 });
 
