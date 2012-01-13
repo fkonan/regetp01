@@ -217,9 +217,9 @@ class QueriesController extends PqueryAppController {
         }
         if (!empty($this->data)) {
             if ($this->Query->save($this->data)) {
-                    $this->Session->setFlash(__('The Query has been saved', true));
+                    $this->Session->setFlash(__('La descripción ha sido modificada', true));
             } else {
-                $this->Session->setFlash(__('The Query could not be saved. Please, try again.', true));
+                $this->Session->setFlash(__('No se pudo guardar la descripción. Por favor, reintente', true));
             }
             $this->redirect(array('action'=>'descargar_queries'));
         }
