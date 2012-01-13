@@ -102,7 +102,7 @@ echo $html->css('smoothness/jquery-ui-1.8.6.custom', false);
                         <div style="border:3px solid #F0F7FC;background-color: #EDEAEA;margin: 1px; padding: 2px;float:right">
                             <span class="descarga_mas_info">
                                 <? echo $html->link($html->image("preview.png"),
-                                                    array('action'=>'list_view', $q['Query']['id'],'preview:true'),
+                                                    array('action'=>'list_view',$q['Query']['id'],'preview:true'),
                                                     array(),
                                                     null,
                                                     false
@@ -110,7 +110,7 @@ echo $html->css('smoothness/jquery-ui-1.8.6.custom', false);
                             </span>
                             <span>
                                 <? echo $html->link($html->image("download.png"),
-                                                    array('action'=>'contruye_excel', $q['Query']['id']),
+                                                    array('action'=>'contruye_excel', 'ext'=>'xls', $q['Query']['id'], ),
                                                     array(),
                                                     null,
                                                     false
