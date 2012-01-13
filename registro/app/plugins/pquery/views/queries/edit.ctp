@@ -19,6 +19,7 @@ function toogleVigencia() {
     }
     else {
         jQuery('.vigenciaDatePickerDiv').hide();
+        jQuery("#vigenciaDatePicker").val("");
     }
 }
 </script>
