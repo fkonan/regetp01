@@ -5,8 +5,6 @@
         <li><? echo $html->link("Planes sin Título","/depuradores/depurar_planes_sin_titulo") ?></li>
         <li><? echo $html->link("Corrector de Planes","/depuradores/corrector_de_planes") ?></li>
         <li><? echo $html->link("Fusionar Títulos","/depuradores/fusionar_titulos") ?></li>
-        <li><? echo $html->link("Tipo de institución","/depuradores/tipoinstits") ?></li>
-        
-        <li><? echo $html->link("Clase de Institución","/depuradores/clases_y_etp") ?></li>
+        <li><? echo $html->link("Tipo de institución","/depuradores/clases_y_etp") ?></li>
     </ul>
 </div>
