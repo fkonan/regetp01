@@ -1,13 +1,13 @@
 <?php
 echo $html->css('smoothness/jquery-ui-1.8.6.custom', false);
 ?>
-<h1>Depurador de Tipo de Institución de ETP <a href="#mostrar-help" class="help" style="float: right" onclick="jQuery('#mostrar-help').toggle(); return false;">(Ayuda?)</a></h1>
+<h1>Depurador de Tipo de institución y Relación con ETP <a href="#mostrar-help" class="help" style="float: right" onclick="jQuery('#mostrar-help').toggle(); return false;">(Ayuda?)</a></h1>
 
 <div id="mostrar-help" class="help-text" style="display: none;">
     <h2>Ayuda del depurador</h2>
     
     <p>
-        El Depurador de Tipo de Institución de ETP sirve para visualizar rápidamente
+        El depurador de Tipo de institución y Relación con ETP sirve para visualizar rápidamente
         aquellas instituciones que pueden haber cambiado su <cite>"tipo de institución"</cite>.
     </p>
     <p>
