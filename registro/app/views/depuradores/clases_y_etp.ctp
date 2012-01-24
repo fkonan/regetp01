@@ -124,27 +124,15 @@ echo $html->css('smoothness/jquery-ui-1.8.6.custom', false);
 		
 		echo $form->input('etp_estado_id',array('label'=>'Seleccione Relación de ETP'));
 
-		echo $form->input('tipoinstit_id',array('label'=>'Seleccione Tipo de Establecimiento',
+		/*echo $form->input('tipoinstit_id',array('label'=>'Seleccione Tipo de Establecimiento',
 												'after'=>'<br>Este combo lo incorporamos porque Ramiro dijo que aún faltaban depurar alguos tipos de establecimientos',
 												  'type'=>'select',
 												  'options'=>$tipoinstit
 		));
-     	
+     	*/
          /********************************************************************************/
-                                   
-		/**
-		 *    Campos extra para que al guardar sea validado el formulario
-		 */	
-		echo $form->hidden('nombre');
-		echo $form->hidden('nroinstit');		
-		echo $form->hidden('anio_creacion');
-		echo $form->hidden('direccion');
-		echo $form->hidden('cp');
-		echo $form->hidden('actualizacion');
-		echo $form->hidden('observacion');
-                
-		echo $form->hidden('ciclo_alta');
-		
+        
+
 	?>
 	<?php echo $form->submit('Guardar', array(
                                      'style'=>' display: block;
