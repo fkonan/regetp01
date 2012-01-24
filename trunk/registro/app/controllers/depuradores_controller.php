@@ -234,7 +234,7 @@ class DepuradoresController extends AppController {
 			
 			if($this->Instit->saveField('claseinstit_id',  $this->data['Instit']['claseinstit_id']) &&
 				$this->Instit->saveField('etp_estado_id',  $this->data['Instit']['etp_estado_id']) &&
-				$this->Instit->saveField('tipoinstit_id',  $this->data['Instit']['tipoinstit_id'])
+				$this->Instit->saveField('depurar_tipoinstit',  0)
 			)
 			{
 				$this->Session->setFlash(__('Se ha guardado la institución correctamente', true));
@@ -244,10 +244,7 @@ class DepuradoresController extends AppController {
 			}
 		}		
 		
-		$conditions = array('activo' =>1,
-							'OR'=>array(	'Instit.claseinstit_id'=>0,
-											'Instit.etp_estado_id' =>0)
-		);
+		$conditions = array('activo' =>1,'Instit.depurar_tipoinstit'=>1);
 		
 		
 		$falta_depurar = $this->Instit->find('count',array('conditions'=>$conditions));
