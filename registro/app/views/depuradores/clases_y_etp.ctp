@@ -1,29 +1,29 @@
 <?php
 echo $html->css('smoothness/jquery-ui-1.8.6.custom', false);
 ?>
-<h1>Depurador de Tipo de institución y Relación con ETP <a href="#mostrar-help" class="help" style="float: right" onclick="jQuery('#mostrar-help').toggle(); return false;">(Ayuda?)</a></h1>
+<h1>Depurador de Tipo de institución y Relación con ETP</h1>
 
-<div id="mostrar-help" class="help-text" style="display: none;">
+<div id="mostrar-help" class="help-text">
     <h2>Ayuda del depurador</h2>
     
     <p>
-        El depurador de Tipo de institución y Relación con ETP sirve para visualizar rápidamente
-        aquellas instituciones que pueden haber cambiado su <cite>"tipo de institución"</cite>.
+        Este depurador permite identificar rápidamente aquellas instituciones que han modificado 
+        recientemente su oferta educativa y debe ser evaluadas nuevamente respecto de su <cite>Tipo de Institución </cite>
+        (Secundario, Superior, Formación Profesional, Con Itinerario Formativo) y su <cite>Relación con la Educación 
+        Técnico Profesional</cite> (Institución de ETP ó Institución con Programa de ETP).
     </p>
     <p>
-        Llámese <cite>tipo de institución de ETP</cite> a la clase de institución relacionado con los planes
-        que la misma dicta. Por ejemplo: si una institución dicta sólo cursos de Formación Profesional,
-        entonces el tipo de ETP es: <b>"Formación Profesional"</b>.
-        Si dicta, 1 curso de FP y otro de Secundario Técnico, entonces la institución es 
-        del tipo: <b>"Secundario"</b>.        
+        Recuérdese que el <cite>Tipo de Institución</cite> se determina tomando en cuenta la oferta educativa. 
+        Por ejemplo, si una institución dicta sólo cursos de formación profesional entonces su tipo es 
+        <cite>"Formación Profesional"</cite>. Si ofrece educación técnica secundaria y además cursos de formación profesional 
+        entonces su tipo es <cite>"Secundario"</cite>. Las combinaciones y posibilidades son complejas y por eso la categorización 
+        requiere de una evaluación personalizada.
     </p>
     <p>
-        Aqui se visualizarán las instituciones cuyos planes hayan cambiado (ya sea porque se modificó 
-        uno que tenia, o se agregó un nuevo plan). Pero sólo aparecería en el depurador cuando haya
-        modificado el tipo de oferta del plan. Esto quiere decir que, si una institución tenía
-        solamente cursos de FP, y se le agregó uno de Secundario técnico, o Superior, entonces, dicha
-        institución pasará a formar parte del depurador.<br />
-        También sucederá lo mismo, si la institución tenía planes de Secundario técnico, y se le agrega uno de FP.
+        Este depurador permite la reevaluación y confirmación de aquellas instituciones cuya oferta haya cambiado 
+        recientemente de manera significativa (Puede ser un Secundario que ha incorporado formación profesional ó 
+        formación superior ó un Insituto de Formación Profesional que ha incorporado educación secundaria o superior, 
+        entre otros casos).
     </p>
 </div>
 
