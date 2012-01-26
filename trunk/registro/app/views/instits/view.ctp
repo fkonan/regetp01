@@ -99,6 +99,17 @@
 	                      } ?>
                         </dd>
                         <? } ?>
+                        <? if($instit['Modalidad']['name']) {?>
+                          <dt ><?php __('Modalidad'); ?></dt>
+                        <dd>
+	                    <?php 
+	                      if(!empty($instit['Modalidad']['name'])){
+	                            echo $instit['Modalidad']['name'];
+	                      }else{
+	                	        echo "<i>No declarado</i>";
+	                      } ?>
+                        </dd>
+                        <? } ?>
                         <dt ><?php __('Ámbito de Gestión'); ?></dt>
                         <dd>
 	                    <?php 

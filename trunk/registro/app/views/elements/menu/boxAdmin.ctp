@@ -31,6 +31,8 @@
 				<? echo $html->link("Subsectores","/Subsectores") ?></li>
 				<li class="acl acl-administradores acl-desarrolladores">
 				<? echo $html->link("Orientaciones","/Orientaciones") ?></li>
+                                <li class="acl acl-administradores acl-desarrolladores">
+				<? echo $html->link("Modalidades","/Modalidades") ?></li>
 				<li class="acl acl-administradores acl-desarrolladores">
 				<? echo $html->link("Títulos","/Titulos") ?></li>
 				

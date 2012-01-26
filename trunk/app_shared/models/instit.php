@@ -62,7 +62,13 @@ class Instit extends AppModel {
 								'order' => ''
 			),
                         'Orientacion',
-			'Gestion' => array('className' => 'Gestion',
+			'Modalidad' => array('className' => 'Modalidad',
+								'foreignKey' => 'modalidad_id',
+								'conditions' => '',
+								'fields' => '',
+								'order' => ''
+			),
+                        'Gestion' => array('className' => 'Gestion',
 								'foreignKey' => 'gestion_id',
 								'conditions' => '',
 								'fields' => '',

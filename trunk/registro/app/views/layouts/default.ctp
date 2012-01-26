@@ -58,7 +58,7 @@ $javascript;
         'jquery-ui-1.8.5.custom.min',
         ));
 
-        $jsPoner = 'views'.DS.Inflector::underscore($this->name).DS.$this->action;
+        $jsPoner = 'views/'.Inflector::underscore($this->name).'/'.$this->action;
         $jsView = WWW_ROOT.'js'.DS.$jsPoner;
         if (file_exists($jsView.'.js')) {
              echo $javascript->link($jsPoner);
