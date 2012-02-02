@@ -43,33 +43,34 @@ class UsersController extends AppController {
 			if ($this->User->save($this->data)) {
 
 				$url = Router::url(array('controller'=>'Users', 
-										 'action'=>'password_reset', 
-										 $this->data['User']["password_reset_token"]), true);
+                                                         'action'=>'password_reset', 
+                                                         $this->data['User']["password_reset_token"]), true);
 
-                // si el usuario tiene email en su perfil, se envia mail
-                if (!empty($this->data['User']['mail'])) {
-                    $this->Email->smtpOptions = array(
-                            'port'    => Configure::read('Email.port'),
-                            'timeout' => Configure::read('Email.timeout'),
-                            'host'    => Configure::read('Email.host'),
-                            'username'=> Configure::read('Email.username'),
-                            'password'=> Configure::read('Email.password'),
-                    );
+                                // si el usuario tiene email en su perfil, se envia mail
+                                if (!empty($this->data['User']['mail'])) {
+                                    $this->Email->smtpOptions = array(
+                                            'port'    => Configure::read('Email.port'),
+                                            'timeout' => Configure::read('Email.timeout'),
+                                            'host'    => Configure::read('Email.host'),
+                                            'username'=> Configure::read('Email.username'),
+                                            'password'=> Configure::read('Email.password'),
+                                    );
 
-                    $this->Email->delivery = 'smtp';
-                    $this->Email->from     = NOMBRE_CONTACTO.' <'.EMAIL_CONTACTO.'>';
-                    $this->Email->bcc 	   = array(EMAIL_CONTACTO); 
-                    $this->Email->to       = $this->data['User']['mail'];
-                    $this->Email->subject  = 'Usuario creado';
-                    $this->Email->template = 'user_add';
-                    $this->Email->sendAs   = 'both';
-                    $this->set("url", $url);
-                    $this->set("user", $this->data['User']);
-                    
-                    $this->Email->send();
+                                    $this->Email->delivery = 'smtp';
+                                    $this->Email->from     = NOMBRE_CONTACTO.' <'.EMAIL_CONTACTO.'>';
+                                    $this->Email->bcc 	   = array(EMAIL_CONTACTO); 
+                                    $this->Email->to       = $this->data['User']['mail'];
+                                    $this->Email->subject  = 'Usuario creado';
+                                    $this->Email->template = 'user_add';
+                                    $this->Email->sendAs   = 'both';
+                                    $this->set("url", $url);
+                                    $this->set("user", $this->data['User']);
 
-                    $this->log('smtp_errors: ' . $this->Email->smtpError, LOG_DEBUG);
-                }
+                                    $this->Email->send();
+
+                                    $this->log('smtp_errors: ' . $this->Email->smtpError, LOG_DEBUG);
+                                }
+                                
 				$this->Session->setFlash(__('Se ha agregado un nuevo usuario ('.$url.')', true));
 				$this->redirect('/users/add');
 			} else {

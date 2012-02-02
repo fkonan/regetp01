@@ -5,6 +5,14 @@
 
         jQuery(document).ready(function () {
 
+            if (jQuery('#InstitEtpEstadoId').val() == <?php echo ESTADO_ETP?>) {
+                jQuery('#InstitModalidadId').val(<?php echo MODALIDAD_TECNICO_PROF?>);
+                jQuery('#divModalidad').hide();
+            }
+            else if (jQuery('#InstitEtpEstadoId').val() == <?php echo ESTADO_CON_PROGRAMA_ETP?>) {
+                jQuery('#divModalidad').show();
+            }
+                
             jQuery('#InstitCue').change(function(){
                 var cue = this.value;
                 var send = false;
@@ -55,6 +63,16 @@
                           data: "data[Instit][jurisdiccion_id]=" + cue_jur
 
                     });
+                }
+            });
+            
+            jQuery('#InstitEtpEstadoId').change(function() {
+                if (jQuery('#InstitEtpEstadoId').val() == <?php echo ESTADO_ETP?>) {
+                    jQuery('#InstitModalidadId').val(<?php echo MODALIDAD_TECNICO_PROF?>);
+                    jQuery('#divModalidad').hide();
+                }
+                else if (jQuery('#InstitEtpEstadoId').val() == <?php echo ESTADO_CON_PROGRAMA_ETP?>) {
+                    jQuery('#divModalidad').show();
                 }
             });
         });
@@ -133,7 +151,16 @@
      */
     echo $form->input('etp_estado_id',array(
     'label'=>'Relación con ETP',
-    'default' => 2 //instit de ETP
+    'default' => ESTADO_ETP //instit de ETP
+    ));
+    
+    /**
+     *    Modalidad
+     */
+    echo $form->input('modalidad_id',array(
+    'label'=>'Modalidad',
+    'empty'=>'Seleccione una modalidad',
+    'div' => array('id' => 'divModalidad')
     ));
 
     

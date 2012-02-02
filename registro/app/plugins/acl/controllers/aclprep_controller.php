@@ -564,6 +564,16 @@ class AclprepController extends AclAppController {
 
         die('done 1.7.1');
     }
+    
+    function assignPermissions1Dot7Dot6() {
+        $this->Acl->allow('administradores', 'Modalidades/index');
+        $this->Acl->allow('administradores', 'Modalidades/add');
+        $this->Acl->allow('administradores', 'Modalidades/edit');
+        $this->Acl->allow('administradores', 'Modalidades/view');
+        $this->Acl->allow('administradores', 'Modalidades/delete');
+
+        die('done 1.7.6');
+    }
 
 
     

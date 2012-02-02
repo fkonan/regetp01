@@ -1,3 +1,29 @@
+<script type="text/javascript">
+        /*
+                    Este Script lo que hace es tomar la jurisdiccion en base al numero de CUE pasado
+         */
+
+        jQuery(document).ready(function () {
+
+            if (jQuery('#InstitEtpEstadoId').val() == <?php echo ESTADO_ETP?>) {
+                jQuery('#InstitModalidadId').val(<?php echo MODALIDAD_TECNICO_PROF?>);
+                jQuery('#divModalidad').hide();
+            }
+            else if (jQuery('#InstitEtpEstadoId').val() == <?php echo ESTADO_CON_PROGRAMA_ETP?>) {
+                jQuery('#divModalidad').show();
+            }
+                           
+            jQuery('#InstitEtpEstadoId').change(function() {
+                if (jQuery('#InstitEtpEstadoId').val() == <?php echo ESTADO_ETP?>) {
+                    jQuery('#InstitModalidadId').val(<?php echo MODALIDAD_TECNICO_PROF?>);
+                    jQuery('#divModalidad').hide();
+                }
+                else if (jQuery('#InstitEtpEstadoId').val() == <?php echo ESTADO_CON_PROGRAMA_ETP?>) {
+                    jQuery('#divModalidad').show();
+                }
+            });
+        });
+</script>
 <div class="instits form">
     <h1>Editar Institución </h1>
     <?php echo $form->create('Instit');?>
@@ -68,6 +94,15 @@
     'label'=>'Relación con ETP',
     'empty'=>'Seleccione un estado',
     'default' => 2 //instit de ETP
+    ));
+    
+    /**
+     *    Modalidad
+     */
+    echo $form->input('modalidad_id',array(
+    'label'=>'Modalidad',
+    'empty'=>'Seleccione una modalidad',
+    'div' => array('id' => 'divModalidad')
     ));
 
 

@@ -10,7 +10,6 @@ echo $paginator->counter(array(
 <tr>
 	<th><?php echo $paginator->sort('id');?></th>
 	<th><?php echo $paginator->sort('Nombre','name');?></th>
-	<th><?php echo $paginator->sort("Orientaciones",'Orientaciones.name');?></th>
 	<th class="actions"><?php __('Acciones');?></th>
 </tr>
 <?php
@@ -27,12 +26,6 @@ foreach ($modalidades as $modalidad):
 		</td>
 		<td>
 			<?php echo $modalidad['Modalidad']['name']; ?>
-		</td>
-		<td>
-			<?php 
-			$show = (empty($modalidad['Modalidad']['name']))? "" : $modalidad['Modalidad']['name'];
-			echo $show; 
-			?>
 		</td>
 		<td class="actions">
 			<?php echo $html->link(__('Ver', true), array('action'=>'view', $modalidad['Modalidad']['id'])); ?>

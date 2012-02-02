@@ -22,7 +22,9 @@ class User extends AppModel {
 				'required' => true,
 				'allowEmpty' => false,
 				//'on' => 'create', // or: 'update'
-				'message' => 'El Usuario no puede quedar vacío.'
+				'message' => 'El Usuario no puede quedar vacío.',
+                                'unique' => array('rule' => array('unique','username'),
+                                                  'message' => 'El username ya existe')
 			)
                 ),
             /*'password' => array(
@@ -92,6 +94,12 @@ class User extends AppModel {
                     }
                     $this->Aro->save($aro);
                 }
+        }
+        
+        function unique($data, $name){
+            $found = $this->find($this->name.".$name=\"".$data.'"');
+            $same = isset($this->id) && $found[$this->name]['id'] == $this->id;
+            return !$found || $found && $same;
         }
 }
 ?>
