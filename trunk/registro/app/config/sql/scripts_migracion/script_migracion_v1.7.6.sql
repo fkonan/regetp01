@@ -23,4 +23,4 @@ INSERT INTO modalidades(id, "name") VALUES (9, 'Otros');
 ALTER TABLE instits ADD COLUMN modalidad_id integer DEFAULT 0;
 
 /* Para todas las instituciones de ETP asignar modalidad ETP */
-update instits set modalidad_id=2 where etp_estado_id=2;
+update instits set modalidad_id=1 where etp_estado_id=2;

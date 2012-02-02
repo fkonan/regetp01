@@ -80,6 +80,16 @@ define('DEPENDENCIA_PROVINCIAL', 1);
 define('DEPENDENCIA_NACIONAL', 2);
 define('DEPENDENCIA_OTROS', 9);
 
+/**
+ * ID`s de ETP_ESTADOS
+ */
+define('ESTADO_CON_PROGRAMA_ETP',1);
+define('ESTADO_ETP',2);
+
+/**
+ * ID`s de MODALIDADES
+ */
+define('MODALIDAD_TECNICO_PROF',1);
 
 
 function limpiar_nombre($string) {

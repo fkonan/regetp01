@@ -98,12 +98,13 @@ class InstitsController extends AppController {
         $localidades = $this->Instit->Localidad->con_depto_y_jurisdiccion('list',0);
 
         $etp_estados = $this->Instit->EtpEstado->find('list');
+        $modalidades = $this->Instit->Modalidad->find('list');
         $this->Instit->Claseinstit->order = "Claseinstit.name DESC";
         $claseinstits = $this->Instit->Claseinstit->find('list');
         $tipoDocs = ClassRegistry::init('Tipodoc')->find('list',array('fields'=>array('id','abrev')));
         $ciclos = $this->Instit->Plan->Anio->Ciclo->find('list');
         
-        $this->set(compact('ciclos','tipoDocs','etp_estados','claseinstits','gestiones','dependencias','jurisdicciones','similares','tipoinstits','departamentos','localidades'));
+        $this->set(compact('ciclos','tipoDocs','etp_estados','claseinstits','gestiones','dependencias','jurisdicciones','similares','tipoinstits','departamentos','localidades','modalidades'));
         $this->set('force_save', $force_save);
         $this->set('orientaciones', $this->Instit->Orientacion->find('list'));
     }
@@ -168,12 +169,13 @@ class InstitsController extends AppController {
         $localidades = $this->Instit->Localidad->find('list',array('order'=>'name','conditions'=>$v_condiciones));
 
         $etp_estados = $this->Instit->EtpEstado->find('list');
+        $modalidades = $this->Instit->Modalidad->find('list');
         $this->Instit->Claseinstit->order = "Claseinstit.name DESC";
         $claseinstits = $this->Instit->Claseinstit->find('list');
         $tipoDocs = ClassRegistry::init('Tipodoc')->find('list',array('fields'=>array('id','abrev')));
         $ciclos = $this->Instit->Plan->Anio->Ciclo->find('list');
         
-        $this->set(compact('ciclos','tipoDocs','claseinstits','etp_estados','gestiones','dependencias','jurisdicciones','similares','tipoinstits','departamentos','localidades'));
+        $this->set(compact('ciclos','tipoDocs','claseinstits','etp_estados','gestiones','dependencias','jurisdicciones','similares','tipoinstits','departamentos','localidades','modalidades'));
 
         $this->set('orientaciones', $this->Instit->Orientacion->find('list'));
         $this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$id );
