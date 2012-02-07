@@ -68,6 +68,10 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
             </div>
             <div class="tooltip big"></div>
         <?php } ?>
+        <?php
+         if (!empty($planes['Instit']['observacion_oferta'])) { ?>
+            <div id="observacion_oferta" class="observacionOferta"><?php echo $planes['Instit']['observacion_oferta'] ?></div>
+        <?php } ?>
         <?
         //si el anexo tiene 1 solo digito le coloco un cero adelante
         $anexo = ($planes['Instit']['anexo']<10)?'0'.$planes['Instit']['anexo']:$planes['Instit']['anexo'];
@@ -220,8 +224,20 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                     }
 
                     echo $html->link("$hacer Pendiente", $urlTicklet, array(
-                            'onclick' => "window.open(this.href,'_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=260,height=360'); return false;",
+                            'onclick' => "window.open(this.href,'_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=305,height=283'); return false;",
                         ));
+                    ?>
+                </li>
+                <li>
+                    <?php 
+                    if (empty($planes['Instit']['observacion_oferta'])) {
+                        $hacer = 'Crear';
+                    } else {
+                        $hacer = 'Editar';
+                    }
+                    
+                    echo $html->link($hacer.' observación', array('controller'=> 'instits', 'action'=>'observar_oferta', $planes['Instit']['id']), 
+                            array('onclick' => "window.open(this.href,'_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=305,height=283'); return false;"))
                     ?>
                 </li>
                 </ul>

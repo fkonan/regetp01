@@ -1089,6 +1089,59 @@ class DepuradoresController extends AppController {
 
         $this->render('titulos_ajax_index_search');
     }
+    
+    
+    function modalidades()
+	{		
+		if (!empty($this->data)) 
+		{	
+			/*
+			if ($this->Instit->save($this->data ,false, array('claseinstit_id, etp_estado_id'))) {	
+				$this->Session->setFlash(__('Se ha guardado la institución correctamente', true));
+			} else {
+				debug($this->Instit->validationErrors);
+				$this->Session->setFlash(__('La institución no pudo ser guardada. Escriba nuevamente el campo incorrecto.', true));
+			}
+			*/
+			$this->Instit->id =  $this->data['Instit']['id'];
+			
+			
+			if($this->Instit->saveField('modalidad_id',  $this->data['Instit']['modalidad_id']))
+			{
+				$this->Session->setFlash(__('Se ha guardado la modalidad de la institución correctamente', true));
+			}else{
+				debug($this->Instit->validationErrors);
+				$this->Session->setFlash(__('La modalidad de la institución no pudo ser guardada. Escriba nuevamente el campo incorrecto.', true));
+			}
+		}		
+		
+		$conditions = array('activo' =>1,'Instit.modalidad_id'=>0);
+		
+		
+		$falta_depurar = $this->Instit->find('count',array('conditions'=>$conditions));
+		$this->data = $this->Instit->find('first',array('conditions'=>$conditions));
+		
+		$tipoinstit = $this->Instit->Tipoinstit->find('list', array('conditions'=>array('jurisdiccion_id'=>$this->data['Instit']['jurisdiccion_id']) ));
+		
+		$this->Instit->Plan->unbindModel(array('belongsTo' => array('Instit')));
+		$planes = $this->Instit->Plan->find('all',array(
+                    'conditions' => array(
+                        'Plan.instit_id'=>$this->data['Instit']['id']),
+                    'contain' => array(
+                        'Oferta', 
+                        'Titulo' => array(
+                            'SectoresTitulo' => array( 'Sector', 'Subsector')
+                        ), 
+                        'EstructuraPlan', 
+                        'Anio'
+                    )
+                ));
+				
+		$modalidades = $this->Instit->Modalidad->find('list');
+		
+		$this->set('falta_depurar', $falta_depurar);
+		$this->set(compact('modalidades', 'claseinstits','planes','tipoinstit'));
+	}
 
     
 }

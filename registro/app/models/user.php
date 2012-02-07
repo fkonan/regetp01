@@ -23,9 +23,9 @@ class User extends AppModel {
 				'allowEmpty' => false,
 				//'on' => 'create', // or: 'update'
 				'message' => 'El Usuario no puede quedar vacío.',
-                                'unique' => array('rule' => array('unique','username'),
-                                                  'message' => 'El username ya existe')
-			)
+			),
+                'unique' => array('rule' => array('unique','username'),
+                                                  'message' => 'El username ya existe'),
                 ),
             /*'password' => array(
                 'notEmpty' => array( // or: array('ruleName', 'param1', 'param2' ...)
@@ -97,7 +97,9 @@ class User extends AppModel {
         }
         
         function unique($data, $name){
-            $found = $this->find($this->name.".$name=\"".$data.'"');
+            $this->recursive = 0;
+            $found = $this->find($this->name.".$name='".$this->data['User']['username']."'");
+            
             $same = isset($this->id) && $found[$this->name]['id'] == $this->id;
             return !$found || $found && $same;
         }
