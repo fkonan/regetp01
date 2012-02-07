@@ -718,6 +718,38 @@ class InstitsController extends AppController {
 
         die(convertir_para_busqueda_avanzada("pepino"));
     }
+    
+    function observar_oferta($id=null) {
+        $this->layout = 'popup';
+
+        if ( $this->RequestHandler->isAjax() ) {
+          Configure::write ( 'debug', 1 );
+        }
+
+        if (!empty($this->data)) {   
+            $observacion_oferta = $this->data['Instit']['observacion_oferta'];
+            
+            $this->data = $this->Instit->read(null, $this->data['Instit']['id']);
+            $this->data['Instit']['observacion_oferta'] = $observacion_oferta;
+            
+            $this->Instit->save($this->data);
+            
+            $this->set('cerrar',true);
+        }
+        else {
+            $this->Instit->recursive = 0;
+            $instit = $this->Instit->find('first',array('conditions'=>array('Instit.id' => $id)));
+
+            $observacion_oferta = '';
+
+            if (!empty($instit)) {
+                $observacion_oferta = $instit['Instit']['observacion_oferta'];
+            }
+
+            $this->set('instit_id', $id);
+            $this->set('observacion_oferta', $observacion_oferta);
+        }   
+    }
 
 
     

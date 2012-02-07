@@ -24,3 +24,7 @@ ALTER TABLE instits ADD COLUMN modalidad_id integer DEFAULT 0;
 
 /* Para todas las instituciones de ETP asignar modalidad ETP */
 update instits set modalidad_id=1 where etp_estado_id=2;
+
+
+ALTER TABLE instits
+   ADD COLUMN observacion_oferta text;
