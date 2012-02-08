@@ -22,5 +22,8 @@ $this->pageTitle= 'Energía Eléctrica';
         );
         echo $this->element('foro', $vops);
 		?>
+        
+        <br />
+        <?php echo $html->link('Ver títulos del sector Energía Eléctrica', '/titulos-energia-electrica') ?>
     </div>
 </div>

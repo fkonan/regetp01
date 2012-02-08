@@ -28,5 +28,8 @@ $this->pageTitle= 'Estética Profesional';
         );
         echo $this->element('foro', $vops);
 		?>
+        
+        <br />
+        <?php echo $html->link('Ver títulos del sector Estética Profesional', '/titulos-estetica-profesional') ?>
     </div>
 </div>

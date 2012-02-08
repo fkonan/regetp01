@@ -18,7 +18,7 @@ class TitulosController extends AppController {
             'page' => 'Titulo.page',
         );
 
-    function search($oferta_id = 0) {
+    function search($oferta_id = 0, $sector_id = 0) {
         $localidad = "";
         $this->pageTitle = "Buscador de Títulos";
         
@@ -30,6 +30,11 @@ class TitulosController extends AppController {
         if (!empty($oferta_id)){
             $this->passedArgs['Titulo.oferta_id'] = $oferta_id;
             $this->set('oferta_id', $oferta_id);
+        }
+        
+        if (!empty($sector_id)){
+            $this->passedArgs['SectoresTitulo.sector_id'] = $sector_id;
+            $this->set('sector_id', $sector_id);
         }
         
         //para mostrar en vista los patrones de busqueda seleccionados
@@ -144,6 +149,10 @@ class TitulosController extends AppController {
         $sectAux = 0;
         if(!empty($getParams['sector_id'])) {
                 $sectAux = $getParams['sector_id'];
+        }
+        if (!empty($sector_id)){
+            $subsectores = $this->Titulo->Subsector->find('list', array('conditions'=> array(
+                                                                    'Subsector.sector_id' => $sector_id)));
         }
         if (empty($subsectores)) {
             $subsectores = $this->Titulo->Subsector->con_sector('list', $sectAux);

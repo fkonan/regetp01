@@ -45,6 +45,19 @@
         Router::connect('/titulos-nivel-secundario-tecnico', array('controller' => 'titulos', 'action' => 'search', 3));
         Router::connect('/titulos-nivel-superior-tecnico', array('controller' => 'titulos', 'action' => 'search', 4));
         Router::connect('/titulos-formacion-profesional', array('controller' => 'titulos', 'action' => 'search', 1));
+        
+        /* buscador con sector preseleccionado */
+        Router::connect('/titulos-agropecuarios', array('controller' => 'titulos', 'action' => 'search', 0, 3));
+        Router::connect('/titulos-automotriz', array('controller' => 'titulos', 'action' => 'search', 0, 4));
+        Router::connect('/titulos-construcciones', array('controller' => 'titulos', 'action' => 'search', 0, 8));
+        Router::connect('/titulos-energia-electrica', array('controller' => 'titulos', 'action' => 'search', 0, 7));
+        Router::connect('/titulos-estetica-profesional', array('controller' => 'titulos', 'action' => 'search', 0, 25));
+        Router::connect('/titulos-informatica', array('controller' => 'titulos', 'action' => 'search', 0, 16));
+        Router::connect('/titulos-madera-y-mueble', array('controller' => 'titulos', 'action' => 'search', 0, 17));
+        Router::connect('/titulos-metalmecanica', array('controller' => 'titulos', 'action' => 'search', 0, 18));
+        Router::connect('/titulos-salud', array('controller' => 'titulos', 'action' => 'search', 0, 30));
+        Router::connect('/titulos-textil-e-indumentaria', array('controller' => 'titulos', 'action' => 'search', 0, 40));
+        
 
         Router::connect('/buscador-de-titulos-y-certificaciones', array('controller' => 'titulos', 'action' => 'search'));
         Router::connect('/buscador-de-instituciones', array('controller' => 'instits', 'action' => 'search'));

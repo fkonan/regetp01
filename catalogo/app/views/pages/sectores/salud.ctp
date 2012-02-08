@@ -13,6 +13,9 @@ $this->pageTitle= 'Aeronáutica';
         );
         echo $this->element('foro', $vops);
 		?>
+        
+        <br />
+        <?php echo $html->link('Ver títulos del sector Salud', '/titulos-salud') ?>
     </div>
     
     

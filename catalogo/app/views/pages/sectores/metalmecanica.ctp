@@ -26,5 +26,8 @@ $this->pageTitle= 'Metalmecánica';
         );
         echo $this->element('foro', $vops);
 		?>
+        
+        <br />
+        <?php echo $html->link('Ver títulos del sector Metalmecánica', '/titulos-metalmecanica') ?>
     </div>
 </div>
