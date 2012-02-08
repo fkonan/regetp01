@@ -23,5 +23,8 @@ $this->pageTitle= 'Madera y Mueble';
         );
         echo $this->element('foro', $vops);
 		?>
+        
+        <br />
+        <?php echo $html->link('Ver títulos del sector Madera y Mueble', '/titulos-madera-y-mueble') ?>
     </div>
 </div>

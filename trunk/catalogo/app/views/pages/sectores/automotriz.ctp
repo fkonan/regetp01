@@ -32,5 +32,7 @@ $this->pageTitle= 'Automotríz';
 	        echo $this->element('foro', $vops);
                 
                 ?>
+        <br />
+        <?php echo $html->link('Ver títulos del sector Automotriz', '/titulos-automotriz') ?>
     </div>
 </div>

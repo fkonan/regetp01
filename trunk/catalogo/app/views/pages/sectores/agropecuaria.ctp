@@ -34,5 +34,8 @@ $this->pageTitle= 'Agropecuaria';
                         </li>
 			<li>Vitivinicultura</li>
 		</ul>
+    
+        <br />
+        <?php echo $html->link('Ver títulos del sector Agropecuario', array('controller'=>'titulos', 'action'=>'search', 0, 3)) ?>
     </div>
 </div>

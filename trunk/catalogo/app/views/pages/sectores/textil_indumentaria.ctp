@@ -26,5 +26,8 @@ $this->pageTitle= 'Textil / Indumentaria';
         );
         echo $this->element('foro', $vops);
 		?>
+        
+        <br />
+        <?php echo $html->link('Ver títulos del sector Textil e Indumentaria', '/titulos-textil-e-indumentaria') ?>
     </div>
 </div>
