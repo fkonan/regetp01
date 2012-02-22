@@ -59,18 +59,22 @@ echo $html->css('smoothness/jquery-ui-1.8.6.custom', false);
                             <dt>Sectores:</dt>				
                                 <dd>
                                     <?php 
-                                        $primero = true;
-
-                                        foreach ($p['Titulo']['SectoresTitulo'] as $sec) { 
-                                            if ( !$primero ) {
-                                                echo ", ";
+                                        if(!empty($p['Titulo']['SectoresTitulo'])){
+                                            $primero = true;
+                                            foreach ($p['Titulo']['SectoresTitulo'] as $sec) { 
+                                                if ( !$primero ) {
+                                                    echo ", ";
+                                                }
+                                                $primero = false;
+                                                echo $sec['Sector']['name'];
+                                                if (!empty($sec['Subsector']['name'])) {
+                                                    echo ' / '.$sec['Subsector']['name'];
+                                                }
                                             }
-                                            $primero = false;
-                                            echo $sec['Sector']['name'];
-                                            if (!empty($sec['Subsector']['name'])) {
-                                                echo ' / '.$sec['Subsector']['name'];
-                                            }
-                                        } ?>
+                                        }else{
+                                            echo "-";
+                                        }
+                                        ?>
                                     &nbsp;</dd>
                             <dt>Duración:</dt>				
                                 <dd><?php echo " - ";?>&nbsp;</dd>
@@ -90,17 +94,18 @@ echo $html->css('smoothness/jquery-ui-1.8.6.custom', false);
                                 <dd><?php echo date('d/m/Y',strtotime($p['Plan']['modified']))?>&nbsp;</dd>
 
                             <?php
+                            $ciclos = array();
                                     foreach ($p['Anio'] as $anio):
                                             $ciclos[$anio['ciclo_id']] = $anio['ciclo_id'];
                                     endforeach;
 
                                     $texto = '';
                                     foreach ($ciclos as $c):
-                                            $texto .= " - ".$c;
+                                            $texto .= ($texto?" - ":"").$c;
                                     endforeach;
                             ?>
                             <dt>Ciclos con información</dt>
-                                <dd><?php echo $texto?>&nbsp;</dd>
+                                <dd><?php echo $texto?$texto:"-" ?>&nbsp;</dd>
 
                     </dl> 
             </div>
