@@ -46,7 +46,7 @@ define('NOMBRE_CONTACTO', 'Unidad de Información');
 define('EMAIL_CONTACTO', 'desarrolloetp@inet.edu.ar');
 
 
-define('FECHA_ACTUALIZACION_DDBB','5 de Diciembre del 2011');
+define('FECHA_ACTUALIZACION_DDBB','Diciembre del 2011');
 
 /**
  * ID`s de OFERTAS
