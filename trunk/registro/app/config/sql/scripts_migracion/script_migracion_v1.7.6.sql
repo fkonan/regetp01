@@ -17,7 +17,7 @@ INSERT INTO modalidades(id, "name") VALUES (5, 'Educación Rural');
 INSERT INTO modalidades(id, "name") VALUES (6, 'Educación Intercultural Bilingüe');
 INSERT INTO modalidades(id, "name") VALUES (7, 'Educación en Contextos de Privación de Libertad');
 INSERT INTO modalidades(id, "name") VALUES (8, 'Educación Domiciliaria y Hospitalaria');
-INSERT INTO modalidades(id, "name") VALUES (9, 'Otros');
+INSERT INTO modalidades(id, "name") VALUES (9, 'No Corresponde');
 
 
 ALTER TABLE instits ADD COLUMN modalidad_id integer DEFAULT 0;
