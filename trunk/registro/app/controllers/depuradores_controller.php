@@ -1091,7 +1091,7 @@ class DepuradoresController extends AppController {
     }
     
     
-    function modalidades()
+    function modalidades($jur_id=0)
 	{		
 		if (!empty($this->data)) 
 		{	
@@ -1116,11 +1116,11 @@ class DepuradoresController extends AppController {
 		}		
 		
 		$conditions = array('activo' =>1,'Instit.modalidad_id'=>0);
-		
+		if($jur_id!=0) $conditions['Instit.jurisdiccion_id'] =  $jur_id;
 		
 		$falta_depurar = $this->Instit->find('count',array('conditions'=>$conditions));
 		$this->data = $this->Instit->find('first',array('conditions'=>$conditions));
-		
+		$jurisdicciones = $this->Jurisdiccion->find('list',array('order'=>'Jurisdiccion.name'));
 		$tipoinstit = $this->Instit->Tipoinstit->find('list', array('conditions'=>array('jurisdiccion_id'=>$this->data['Instit']['jurisdiccion_id']) ));
 		
 		$this->Instit->Plan->unbindModel(array('belongsTo' => array('Instit')));
@@ -1138,12 +1138,11 @@ class DepuradoresController extends AppController {
                 ));
 				
 		$modalidades = $this->Instit->Modalidad->find('list');
-		
+        
+		$this->set(compact('modalidades', 'claseinstts','planes','tipoinstit', 'jurisdicciones'));
 		$this->set('falta_depurar', $falta_depurar);
-		$this->set(compact('modalidades', 'claseinstits','planes','tipoinstit'));
+        $this->set('jur_id',$jur_id);
 	}
-
-    
 }
 
 ?>

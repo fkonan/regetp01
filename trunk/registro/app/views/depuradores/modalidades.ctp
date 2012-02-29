@@ -1,6 +1,16 @@
 <?php
 echo $html->css('smoothness/jquery-ui-1.8.6.custom', false);
 ?>
+
+<script type="text/javascript">
+    var url = '<?php print $html->url("/depuradores/modalidades/")?>'
+    jQuery(function() {
+        jQuery('#InstitJurisdiccionId').change(function() {
+            window.location = url + jQuery('#InstitJurisdiccionId').val()
+        });
+    });
+</script>
+
 <h1>Depurador de Modalidad de institución</h1>
 
 <div id="mostrar-help" class="help-text">
@@ -10,6 +20,20 @@ echo $html->css('smoothness/jquery-ui-1.8.6.custom', false);
         Este depurador permite identificar y editar rápidamente aquellas instituciones que no tienen una <cite>modalidad</cite>
         asignada.
     </p>
+</div>
+
+<div class="filtro_jurisdiccion">
+    <?php echo $form->create('Instit',array(  'url'=>'#',
+                                            'id'=>'FormJurisdiccion'));?>
+    <?php       
+            echo $form->input('Instit.jurisdiccion_id', array('empty' => 'Todas',
+                                                 'type'=>'select',
+                                                 'label'=>'Seleccione una Jurisdicción',
+                                                 'value'=>$jur_id,
+                                                 'options'=>$jurisdicciones,
+                                                 ));
+            echo $form->end(null);                                       
+    ?>
 </div>
 
 <?php if ( $falta_depurar ) { ?>
@@ -101,7 +125,7 @@ echo $html->css('smoothness/jquery-ui-1.8.6.custom', false);
         </table>
 
 
-<?php echo $form->create('Instit',array('url'=>'/depuradores/modalidades','id'=>'InstitDepurarForm'));?>
+<?php echo $form->create('Instit',array('url'=>'/depuradores/modalidades/'.$jur_id,'id'=>'InstitDepurarForm'));?>
 	<?php
 		echo $form->input('id');	
 				
