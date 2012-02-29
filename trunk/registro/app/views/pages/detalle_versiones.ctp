@@ -1,3 +1,14 @@
+<h1>RFIETP - Novedades de la versión 1.7.6</h1>
+<br>
+<ul>
+    <li>Se agregó la categoría Modalidad para clasificar a las Instituciones de acuerdo con las opciones previstas en la Ley de Educación Nacional (Ley Nº 26.206).</li>
+    <li>Se agregó un depurador de Modalidades para uso de la Unidad de Información.</li>
+    <li>Se agregó un campo de Observaciones Generales sobre la oferta educativa de una institución. Permite cargar comentarios generales sobre la oferta de una institución, no</li>
+    <li>vinculados a un plan de estudios específico.</li>
+    <li>Se mejoró el depurador de Tipo de institución y Relación con ETP.</li>
+    <li>Se mejoró el procedimiento de registro de nuevos usuarios al sistema.</li>
+</ul>
+
 <h1>RFIETP - Novedades de la versión 1.7.5</h1>
 <br>
 <ul>
