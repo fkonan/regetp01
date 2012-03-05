@@ -1,5 +1,21 @@
 Documentación de RFIETP:
 
+EL proyecto consiste en 2 páginas web: registro y catálogo, que se alimentan de la misma fuente de información, registro (o REGETP).
+Gracias a ello, los modelos Cake se comparten en ambas plataformas, y tienen una carpeta aparte configurada como svn external.
+
+
+=========================================================================================================
+SOBRE CADA UNA DE LAS CARPETAS
+=========================================================================================================
+
+- app_shared: contiene los Models que son compartidos en ambas aplicaciones.
+
+- catalogo: contiene toda una estructura CakePHP donde funciona la web de catálogo.
+
+- docs: contiene documentación de la plataforma, archivos de ayuda, manuales y tutoriales.
+
+- registro: contiene toda una estructura CakePHP donde funciona la web de registro o REGETP.
+
 =========================================================================================================
 TECNOLOGIAS UTILIZADAS
 =========================================================================================================
@@ -56,7 +72,7 @@ En caso de correr bajo Windows o simplemente no querer utilizar esta funcionalid
 [Para más información dirigirse a trunk/docs/instructivo_aspell.txt]
 
 =========================================================================================================
-PERMISOS
+PERMISOS DE USUARIOS DENTRO DE LA APLICACION
 =========================================================================================================
 La aplicación "Registro" utiliza ACL para controlar los permisos de los usuarios en la aplicación.
 
