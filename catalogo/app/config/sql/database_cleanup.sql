@@ -1,3 +1,23 @@
+/**
+ ============      CATALOGO       ==================================
+
+INICIALIZACION DE BASE DE DATOS
+
+El siguiente script tiene como objetivo realizar una "conversión" o "adaptación"
+de la base de datos de registro, para ser utilizada en el proyecto cátalogo.
+
+
+La idea original es mantener una copia de las 2 bases de datos, gracias a ello, catálogo y registro 
+podrán funcionar con la misma bbdd, y, lo más importante, los modelos Cake, se mantienen igual.
+
+Por cuestiones de seguridad e independencia la migración consiste en eliminar datos que no deberian ser tenidos
+en cuenta en catálogo.
+
+También se crea la tabla "matriculados" que son datos fijos, no serán modificados salvo que el jefe
+de la Unidad de Información asi lo requiera.
+
+*/
+
 begin transaction;
 
 /*borro toda la tabla "fondos"*/

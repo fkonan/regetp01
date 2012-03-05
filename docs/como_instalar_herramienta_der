@@ -1,9 +1,11 @@
 Instructivo para instalación de herramienta para DER.
 -----------------------------------------------------
 
-Bajar el plugin para NetBeans.
+Bajar el Mogwai ER Designer
+    http://mogwai.sourceforge.net/erdesignerng.html
 
-          http://sourceforge.net/projects/mogwai/files/Mogwai%20JDBC-Shell%20driver/
+Tambien se puede utilizar el postgresql_autodoc, que genera archivos .DIA para los diagramas (y no necesita el driver JDBC)
+
 
 Bajar el Driver para Postgresql 8.4
 
@@ -11,7 +13,7 @@ Bajar el Driver para Postgresql 8.4
 
 Una vez bajado copiar el driver en un directorio que no se mueva o modifique.
 
-          En Linux por ejemplo:
+          En Linux por ejemplo:/tnm
                    /opt/jdbc/
 
 Instalación del Plugin en NetBeans:
