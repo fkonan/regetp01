@@ -43,9 +43,6 @@ delete from planes where instit_id in (select id from instits where activo = 0);
 delete from instits where activo = 0;
 
 
-/*eliminar instituciones con programa de ETP*/
-delete from instits where etp_estado_id = 1;
-
 /*eliminar instituciones en especial (pedido de UI)*/
 delete from instits where id IN (470,719,748,920,926,1005,808);
 
