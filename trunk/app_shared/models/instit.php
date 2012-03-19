@@ -365,6 +365,10 @@ class Instit extends AppModel {
                         'rule' => 'dep_nacional',
                         'message' => 'Si la dependencia es Nacional, debe escribir su nombre',
                     ),
+                    'tipo_dependencia_provincial_y_nombre_dep_vacio' => array(
+                        'rule' => array('tipo_dependencia_provincial_y_nombre_dep_vacio'),
+                        'message' => 'Si la dependencia es Provincial, el nombre de la dependencia debe estar vacio',
+                    )
                 ),
 	);
 	
@@ -1674,5 +1678,25 @@ class Instit extends AppModel {
             }
             return true;
         }
+        
+        
+        /**
+         * Si el tipo de dependencia es provincial 
+         * entonces el nombre de la dependencia debe estar vacio
+         * @return boolean 
+         * 
+         */
+        function tipo_dependencia_provincial_y_nombre_dep_vacio(){
+            if ( !empty($this->data['Instit']['dependencia_id']) ){
+                if ( $this->data['Instit']['dependencia_id'] == DEPENDENCIA_PROVINCIAL ){
+                    // es provincial
+                    if ( empty( $this->data['Instit']['nombre_dep'] ) ) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        
 }
 ?>
