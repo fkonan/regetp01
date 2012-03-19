@@ -6,7 +6,7 @@ class Instit extends AppModel {
         var $order = array('Instit.cue', 'Instit.anexo');
 
         /* @var $nombreCompleto String */
-        /* es el nombre de la institucion adicionandole el tipoinstit + nº instit + nombre propio */
+        /* es el nombre de la institucion adicionandole el tipoinstit + n° instit + nombre propio */
         var $nombreCompleto = '';
 	
 	/**
@@ -197,7 +197,17 @@ class Instit extends AppModel {
 				'allowEmpty' => false,
 				'message' => 'Válidos: 0 a 99.'
 			
-			)	
+			),
+                        'instit_con_anexo_marcado' => array(
+                            'rule' => array('instit_con_anexo_marcado'),
+                            'message' => 'El número de anexo es igual a 0, sin embargo está tildada la opción "es anexo". Verificar inconsistencia.',
+                            
+                        ),
+                        'instit_con_anexo_desmarcado' => array(
+                            'rule' => array('instit_con_anexo_desmarcado'),
+                            'message' => 'El número de anexo es mayor a 0, sin embargo no esta tildada la opción "es anexo". Verificar inconsistencia.',
+                            
+                        ),
    		),
    		'anio_creacion' => array(
    			'year' => array(
@@ -501,7 +511,7 @@ class Instit extends AppModel {
 
 
         /**
-         * Arma el nombre completo con el Tipo instit + Nº + nombre propio
+         * Arma el nombre completo con el Tipo instit + N° + nombre propio
          * se le pueden pasar los parametros para concatenar el nombre, o bien
          * pasarle un array al final, si no se le pasa nuingun array, toma el
          * $this->data para extraer la info
@@ -521,14 +531,14 @@ class Instit extends AppModel {
             
             if (!empty($tipoinstit)) {
                 $nombreCompleto = $tipoinstit.' ';
-                $nombreCompleto .= ($nroinstit > 0 || $nroinstit != '')?"Nº $nroinstit ":"";
+                $nombreCompleto .= ($nroinstit > 0 || $nroinstit != '')?"N° $nroinstit ":"";
                 if (($tipoinstit != 'SIN DATOS' ||  $nroinstit > 0) && $nombre){
                     $nombreCompleto .= " ";
                 }
                 $nombreCompleto .= ($nombre != '')?'"'.$nombre.'"':"";
             }
             else {
-                $nombreCompleto .= ($nroinstit > 0 || $nroinstit != '')?"Nº $nroinstit ":"";
+                $nombreCompleto .= ($nroinstit > 0 || $nroinstit != '')?"N° $nroinstit ":"";
                 $nombreCompleto .= ($nombre != '')?'"'.$nombre.'"':"";
             }
 
@@ -598,9 +608,9 @@ class Instit extends AppModel {
                     
                     la matriz que formo teiene que ser para armar una tabla de la siguiente forma:
                     
-                    ¬ OFERTA   -    Ciclo 2006    -   Ciclo 2007
-                    ¬   FP     -        12        -      100
-                    ¬   MT     -        154       -      44
+                    - OFERTA   -    Ciclo 2006    -   Ciclo 2007
+                    -   FP     -        12        -      100
+                    -   MT     -        154       -      44
 
 
 
@@ -1642,6 +1652,27 @@ class Instit extends AppModel {
                 }
             }
             return $max_ciclo;
+        }
+        
+        
+        
+        function instit_con_anexo_desmarcado(){
+            if ( empty($this->data['Instit']['es_anexo']) ){
+                if (empty($this->data['Instit']['anexo']) ){
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        
+        function instit_con_anexo_marcado(){
+            if ( !empty($this->data['Instit']['es_anexo']) ){
+                if (empty($this->data['Instit']['anexo']) ){
+                    return false;
+                }
+            }
+            return true;
         }
 }
 ?>
