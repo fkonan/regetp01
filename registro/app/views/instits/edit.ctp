@@ -4,6 +4,34 @@
          */
 
         jQuery(document).ready(function () {
+            
+            /**
+             * combo de dependencia y visibilidad de nombre de 
+             * la dependencia que depende de este valor
+             */ 
+            (function(){
+                var $dependenciaId = jQuery('#InstitDependenciaId');
+                
+                function mostrar_ocultar_nombre_dependencia(){
+                    
+                    var $nombreDep = jQuery('#InstitNombreDep').parent('div'),
+                        depNacionalId = <?php echo DEPENDENCIA_NACIONAL ?>;
+                    console.info("cambio "+depNacionalId);
+                    console.info("es "+ $dependenciaId.val());
+                    if ( $dependenciaId.val() == depNacionalId ) {
+                        $nombreDep.show();
+                    } else {
+                        $nombreDep.hide();
+                    }
+                }
+                
+                $dependenciaId.change( mostrar_ocultar_nombre_dependencia );
+                
+                mostrar_ocultar_nombre_dependencia();
+            })();
+            
+            
+            
 
             if (jQuery('#InstitEtpEstadoId').val() == <?php echo ESTADO_ETP?>) {
                 jQuery('#InstitModalidadId').val(<?php echo MODALIDAD_TECNICO_PROF?>);
