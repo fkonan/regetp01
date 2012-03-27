@@ -224,7 +224,7 @@ $cue_instit = ($planes['Instit']['cue']*100)+$planes['Instit']['anexo'];
                     }
 
                     echo $html->link("$hacer Pendiente", $urlTicklet, array(
-                            'onclick' => "window.open(this.href,'_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=305,height=283'); return false;",
+                            'onclick' => "window.open(this.href,'_blank' , 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=325,height=340'); return false;",
                         ));
                     ?>
                 </li>
