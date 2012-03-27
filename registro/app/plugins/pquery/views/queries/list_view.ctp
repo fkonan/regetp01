@@ -72,7 +72,7 @@ echo $javascript->link('jquery.jeditable.mini', false);
         <?php echo $html->link('Imprimir','#Imprimir',array('class'=>'clearTag','onclick'=>'window.print()'));?>
 
         <?php echo " | "?>
-        <?php echo $html->link('descargar excel','/pquery/Queries/list_view/'.$url_conditions['query.id'].'.xls' ,array('class'=>'clearTag'));?>
+        <?php echo $html->link('descargar excel','/pquery/Queries/construye_excel/'.$url_conditions['query.id'].'.xls' ,array('class'=>'clearTag'));?>
 
         <?php echo " | "?>
         <?php echo $html->link('Volver','/pquery/Queries/descargar_queries/',array('class'=>'clearTag'));?>
