@@ -739,18 +739,18 @@ class DepuradoresController extends AppController {
         /**
          *     SUBSECTOR
          */
-        $subsector_id = '';
-        if(!empty($this->data['FPlan']['subsector_id'])) {
+        if(isset($this->data['FPlan']['subsector_id'])) {
             $subsector_id = $this->data['FPlan']['subsector_id'];
         }
-        elseif(!empty($this->passedArgs['Titulo.subsector_id'])) {
+        elseif(isset($this->passedArgs['Titulo.subsector_id'])) {
             $subsector_id = $this->passedArgs['Titulo.subsector_id'];
             $this->data['FPlan']['subsector_id'] = $subsector_id;
         }
-
-        if(!empty($subsector_id)) {
+        if( isset($subsector_id)  ) {
             $this->paginate['conditions']['SectoresTitulo.subsector_id'] = $subsector_id;
             $url_conditions['Titulo.subsector_id'] = $subsector_id;
+        } else {
+            $subsector_id = '';
         }
 
         /**
@@ -832,9 +832,9 @@ class DepuradoresController extends AppController {
             $url_conditions['Plan.con_titulo'] = $this->data['FPlan']['con_titulo'];
         }
 
-        /***********************************************************************/
-        /*                               Busqueda                              */
-        /***********************************************************************/
+        //-----------------------------------------------------------------    */
+        //                               Busqueda                              */
+        //-----------------------------------------------------------------    */
 
         //datos de paginacion
         $this->paginate['order'] = array('Plan.nombre' => 'ASC');
@@ -888,7 +888,7 @@ class DepuradoresController extends AppController {
         $this->Titulo->SectoresTitulo->Sector->order ='Sector.name';
         $sectores = $this->Titulo->SectoresTitulo->Sector->find('list');
 
-        $subsectores = '';
+        $subsectores = array();
         if (!empty($this->data['FPlan']['sector_id'])) {
             $subsecConditions = array();
             if (!empty($this->data['FPlan']['sector_id'])) {
@@ -897,7 +897,9 @@ class DepuradoresController extends AppController {
             $this->Titulo->SectoresTitulo->Subsector->recursive = -1;
             $this->Titulo->SectoresTitulo->Subsector->order ='Subsector.name';
             $subsectores = $this->Titulo->SectoresTitulo->Subsector->find('list', array('conditions'=>$subsecConditions));
+            $subsectores[0] = 'Sin Subsector';
         }
+        
         $this->Titulo->Plan->Instit->Jurisdiccion->recursive = -1;
         $this->Titulo->Plan->Instit->Jurisdiccion->order = 'Jurisdiccion.name';
         $jurisdicciones = $this->Titulo->Plan->Instit->Jurisdiccion->find('list');
