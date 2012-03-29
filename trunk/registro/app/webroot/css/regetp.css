@@ -771,11 +771,14 @@ input[type=button]:ACTIVE, input[type=submit]:ACTIVE {
 /* Notices and Errors */
 div.message {
     clear: both;
-    color: #900;
+    color: white;
     font-size: 140%;
     font-weight: bold;
     margin: 1em 0;
     text-align: center;
+    text-shadow: 1px 1px brown;
+    border: 1px solid black;
+    background: red;
 }
 div.error-message {
     clear: both;
