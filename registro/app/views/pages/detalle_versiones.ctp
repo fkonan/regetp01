@@ -1,3 +1,11 @@
+<h1>RFIETP - Novedades de la versión 1.7.7</h1>
+<br>
+<ul>
+    <li>Se agregó un filtro por jurisdicción al depurador de Modalidades para uso de la Unidad de Información.</li>
+    <li>Se mejoro el corrector de planes</li>
+    <li>Se mejoro la presentación de los "pendientes"</li>
+</ul>
+
 <h1>RFIETP - Novedades de la versión 1.7.6</h1>
 <br>
 <ul>
