@@ -360,35 +360,17 @@ class Instit extends AppModel {
 			)
 		),
             
-                'nombre_dep' => array(
-                    'dep_nacional' => array(
-                        'rule' => 'dep_nacional',
-                        'message' => 'Si la dependencia es Nacional, debe escribir su nombre',
-                    ),
-                    'tipo_dependencia_provincial_y_nombre_dep_vacio' => array(
-                        'rule' => array('tipo_dependencia_provincial_y_nombre_dep_vacio'),
-                        'message' => 'Si la dependencia es Provincial, el nombre de la dependencia debe estar vacio',
-                    )
-                ),
+        'dependencia_id' => array(
+            'tipo_dependencia_provincial_y_nombre_dep_vacio' => array(
+                'rule' => array('tipo_dependencia_provincial_y_nombre_dep_vacio'),
+                'message' => 'Si la dependencia es Provincial, el nombre de la dependencia debe estar vacio',
+            ),
+            'tipo_dependencia_nacional_y_nombre_dep_no_vacio' => array(
+                'rule' => array('tipo_dependencia_nacional_y_nombre_dep_no_vacio'),
+                'message' => 'Si la dependencia es Nacional, el nombre de la dependencia no debe estar vacio',
+            )
+        ),
 	);
-	
-        
-        /**
-         * Si la dependencia es del tipo Nacional, entonces debe de haberse ingresado el 
-         * nombre si o si.
-         * Esta funcion verifica que eso ocurra
-         * @return boolean
-         */
-        function dep_nacional(){
-            if ( $this->data['Instit']['dependencia_id'] == DEPENDENCIA_NACIONAL ){
-                if (empty( $this->data['Instit']['nombre_dep'] )){
-                    return false;
-                }
-            }
-            return true;
-            
-        }
-        
 	
   	/**
   	 * Validacion de CUE por jurisdiccion
@@ -1687,15 +1669,27 @@ class Instit extends AppModel {
          * 
          */
         function tipo_dependencia_provincial_y_nombre_dep_vacio(){
-            if ( !empty($this->data['Instit']['dependencia_id']) ){
-                if ( $this->data['Instit']['dependencia_id'] == DEPENDENCIA_PROVINCIAL ){
-                    // es provincial
-                    if ( empty( $this->data['Instit']['nombre_dep'] ) ) {
-                        return true;
-                    }
+            if ( $this->data['Instit']['dependencia_id'] == DEPENDENCIA_PROVINCIAL ){
+                if ( $this->data['Instit']['nombre_dep']) {
+                    return false;
                 }
             }
-            return false;
+            return true;
+        }
+
+        /**
+         * Si el tipo de dependencia es nacional
+         * entonces el nombre de la dependencia no debe estar vacio
+         * @return boolean 
+         * 
+         */
+        function tipo_dependencia_nacional_y_nombre_dep_no_vacio(){
+            if ( $this->data['Instit']['dependencia_id'] == DEPENDENCIA_NACIONAL ){
+                if (!$this->data['Instit']['nombre_dep']){
+                    return false;
+                }
+            }
+            return true;
         }
         
 }
