@@ -1660,19 +1660,19 @@ class Instit extends AppModel {
         
         
         
-        function instit_con_anexo_desmarcado(){
-            if ( empty($this->data['Instit']['es_anexo']) ){
-                if (empty($this->data['Instit']['anexo']) ){
-                    return true;
+        function instit_con_anexo_marcado(){
+            if ( $this->data['Instit']['esanexo']){
+                if (!$this->data['Instit']['anexo']){
+                    return false;
                 }
             }
-            return false;
+            return true;
         }
         
         
-        function instit_con_anexo_marcado(){
-            if ( !empty($this->data['Instit']['es_anexo']) ){
-                if (empty($this->data['Instit']['anexo']) ){
+        function instit_con_anexo_desmarcado(){
+            if ( !$this->data['Instit']['esanexo']){
+                if ($this->data['Instit']['anexo']){
                     return false;
                 }
             }
