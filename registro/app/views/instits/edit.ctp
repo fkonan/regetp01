@@ -22,6 +22,7 @@
                         $nombreDep.show();
                     } else {
                         $nombreDep.hide();
+                        jQuery('#InstitNombreDep').val("");
                     }
                 }
                 
