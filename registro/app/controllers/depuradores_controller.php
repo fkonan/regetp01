@@ -740,20 +740,16 @@ class DepuradoresController extends AppController {
          *     SUBSECTOR
          */
         if(isset($this->data['FPlan']['subsector_id']) && $this->data['FPlan']['subsector_id']!=="") {
-        	debug("entro 1");
             $subsector_id = $this->data['FPlan']['subsector_id'];
         }
         elseif(isset($this->passedArgs['Titulo.subsector_id'])) {
-        	debug("entro 2");
             $subsector_id = $this->passedArgs['Titulo.subsector_id'];
             $this->data['FPlan']['subsector_id'] = $subsector_id;
         }
         if( isset($subsector_id)  ) {
-        	debug("entro 3");
             $this->paginate['conditions']['SectoresTitulo.subsector_id'] = $subsector_id;
             $url_conditions['Titulo.subsector_id'] = $subsector_id;
         } else {
-        	debug("entro 4");
             $subsector_id = '';
         }
 
