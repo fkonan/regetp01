@@ -34,6 +34,7 @@ function toogleVigencia() {
 	<?php
 		echo $form->input('id');
 		echo $form->input('name');
+        echo $form->input('filename');
 		echo $form->input('description');
 
                 echo $form->input('pquery_category_id', array(

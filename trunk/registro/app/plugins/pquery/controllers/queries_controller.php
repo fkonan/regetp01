@@ -119,7 +119,7 @@ class QueriesController extends PqueryAppController {
 			$columnas[] = $key;
 		endwhile;
 
-		$this->set('nombre',limpiar_nombre($res['Query']['name']));
+		$this->set('name',limpiar_nombre($res['Query']['filename']));
 		$this->set('columnas',$columnas);
 		$this->set('filas',$consulta_ejecutada);
 	}
