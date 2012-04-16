@@ -25,7 +25,8 @@ function toogleVigencia() {
 	<fieldset>
 	<?php
 		echo $form->input('name');
-		echo $form->input('description');
+		echo $form->input('filename');
+        echo $form->input('description');
                 echo $form->input('pquery_category_id', array(
                                             'label' => 'Category',
                                             'type' => 'select',

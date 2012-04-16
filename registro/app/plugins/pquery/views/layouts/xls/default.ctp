@@ -1,8 +1,8 @@
 <?php
 
-$name = (empty($name)) ? 'regetp' : $name;
+$name = (empty($name)) ? 'descarga' : $name;
 //header("Content-type: application/vnd.ms-excel");
-header("Content-Disposition: attachment; filename=".date("d-M-Y")."-".Inflector::slug($name).".xls");
+header("Content-Disposition: attachment; filename=".Inflector::slug($name)."-".date("d-m-Y").".xls");
 //header("Pragma: no-cache");
 //header("Expires: 0");
 
