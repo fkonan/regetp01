@@ -10,11 +10,11 @@ if(isset($script)){
 	<fieldset>
      <div style="float:left;width:48%;clear:none">
           <label>Alta</label>
-          <span><?php echo $this->data["Ticket"]["created"]; ?></span>
+          <span><?php echo date('d-m-Y',strtotime($this->data['Ticket']['created'])); ?></span>
      </div>
      <div style="float:right;width:48%;clear:none">
           <label>Última Modificacion</label>
-          <span><?php echo $this->data["Ticket"]["modified"]; ?></span>
+          <span><?php echo date('d-m-Y',strtotime($this->data['Ticket']['modified'])); ?></span>
      </div>
 	<?php
 		echo $form->input('id');
