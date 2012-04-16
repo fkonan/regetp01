@@ -15,10 +15,10 @@
     </p>
     <div >
         <span style="float:left;">
-            Alta: <?php echo "( ".date('d-m-Y',strtotime($this->data['Ticket']['created']))." )"; ?>
+            Alta: <?php echo date('d-m-Y',strtotime($this->data['Ticket']['created'])); ?>
         </span>
         <span style="float:right;">
-            Modificacion: <?php echo "( ".date('d-m-Y',strtotime($this->data['Ticket']['modified']))." )"; ?>
+            Modificacion: <?php echo date('d-m-Y',strtotime($this->data['Ticket']['modified'])); ?>
         </span>
     </div>
 </div>
