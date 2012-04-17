@@ -51,7 +51,7 @@ if (empty($planes)) {
 
             <table class="tabla_plan" cellpadding="2px" cellspacing="0px">
                 <caption class="plan_title">
-x                     <?php 
+                     <?php 
                         $nombre = $plan['Plan']['nombre'];
                         if($plan['PlanEstado']['id'] != PLAN_ESTADO_ACTIVO) $nombre .= ' (' . $plan['PlanEstado']['nombre'] . ')';
                         if($plan['PlanTurno']['id'] != PLAN_TURNO_DIURNO) $nombre .= ' (' . $plan['PlanTurno']['nombre'] . ')';  
