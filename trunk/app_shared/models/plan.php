@@ -57,7 +57,9 @@ class Plan extends AppModel {
 			'Instit' ,
 			'Oferta',
 			'Titulo',
-                        'EstructuraPlan'
+      'EstructuraPlan', 
+      'PlanEstado',
+      'PlanTurno'
             );
 
 	var $hasMany = array(
@@ -326,6 +328,8 @@ class Plan extends AppModel {
                         'Orientacion'
                         ),
                     'EstructuraPlan' => array('Etapa'),
+                    'PlanEstado',
+                    'PlanTurno',
                     'Oferta',
                     'Titulo' => array(
                         'SectoresTitulo' => array(

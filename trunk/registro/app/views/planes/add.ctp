@@ -130,6 +130,12 @@ $cue_instit = $instit['cue'].$anexo;
                     echo $form->input('titulo_id',array('type'=>'hidden'));
                     ?>
                 </div>
+
+        <?php  
+            echo $form->input('plan_estado_id',array('label'=>'Estado'));
+            echo $form->input('plan_turno_id',array('label'=>'Turno'));
+        ?>
+        
                 <?php
 		echo "<br>Duración:";
 		echo $form->input('duracion_hs',array('label'=>'- Horas','maxlength'=>9));

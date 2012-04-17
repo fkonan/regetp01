@@ -98,6 +98,8 @@ class PlanesController extends AppController {
         $this->Plan->contain(array(
             'Anio' => array('EstructuraPlanesAnio'),
             'Oferta',
+            'PlanEstado',
+            'PlanTurno',
             'EstructuraPlan' => array('Etapa'),
             'Titulo' => array(
                 'SectoresTitulo' => array('Sector','Subsector','order'=>array('SectoresTitulo.prioridad DESC'))
@@ -203,7 +205,8 @@ class PlanesController extends AppController {
         $sectores = $this->Plan->Titulo->Sector->find('list',array('order'=>'Sector.name'));
         $subsectores = $this->Plan->Titulo->Subsector->con_sector('list');
         $ciclos = $this->Plan->Anio->Ciclo->find('list');
-
+        $plan_estados = $this->Plan->PlanEstado->find('list');
+        $plan_turnos = $this->Plan->PlanTurno->find('list');
 
         $estructuraPlanesGrafico = $this->Plan->EstructuraPlan->JurisdiccionesEstructuraPlan->find('all',array(
                 'contain'=>array(
@@ -220,7 +223,7 @@ class PlanesController extends AppController {
             $estructura_planes[$estructura['EstructuraPlan']['id']] = $estructura['EstructuraPlan']['name'];
         }
 
-        $this->set(compact('subsectores','sectores','titulos', 'ciclos', 'estructura_planes','estructuraPlanesGrafico'));
+        $this->set(compact('subsectores','sectores','titulos', 'ciclos', 'estructura_planes','estructuraPlanesGrafico','plan_estados','plan_turnos'));
 
         $this->rutaUrl_for_layout[] =array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$instit['Instit']['id'] );
     }
@@ -266,6 +269,9 @@ class PlanesController extends AppController {
 
         $sectores = $this->Plan->Titulo->Sector->find('list',array('order'=>'Sector.name'));
 
+        $plan_estados = $this->Plan->PlanEstado->find('list');
+        $plan_turnos = $this->Plan->PlanTurno->find('list');
+
         if(!isset($this->data['Plan']['sector_id'])) {
             $this->data['Plan']['sector_id'] = 0;
         }
@@ -289,7 +295,7 @@ class PlanesController extends AppController {
 
         $estructuraSugeridaId = $this->Plan->getEstructuraSugerida();
 
-        $this->set(compact('ofertas','subsectores','sectores','titulos','ciclos', 'estructura_planes','estructuraPlanesGrafico', 'estructuraSugeridaId'));
+        $this->set(compact('ofertas','subsectores','sectores','titulos','ciclos', 'estructura_planes','estructuraPlanesGrafico', 'estructuraSugeridaId', 'plan_estados', 'plan_turnos'));
 
         $this->rutaUrl_for_layout[] = array('name'=> 'Datos Institución','link'=>'/Instits/view/'.$this->data['Plan']['instit_id'] );
         $this->rutaUrl_for_layout[] = array('name'=> 'Oferta Educativa','link'=>'/Planes/index/'.$this->data['Plan']['instit_id'] );

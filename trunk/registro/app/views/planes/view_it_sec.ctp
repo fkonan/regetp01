@@ -25,8 +25,11 @@ if (empty($planes)) {
                             ?>
                             </span>
                             
-                            <?php echo $html->link(
-                            $plan['Plan']['nombre'],
+                            <?php 
+                            $nombre = $plan['Plan']['nombre'];
+                            if($plan['PlanEstado']['id'] != PLAN_ESTADO_ACTIVO) $nombre .= ' (' . $plan['PlanEstado']['nombre'] . ')';
+                            if($plan['PlanTurno']['id'] != PLAN_TURNO_DIURNO) $nombre .= ' (' . $plan['PlanTurno']['nombre'] . ')';  
+                            echo $html->link($nombre,
                             array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']),
                             null,null,false);
                             ?>

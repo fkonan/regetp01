@@ -91,6 +91,19 @@ define('ESTADO_ETP',2);
  */
 define('MODALIDAD_TECNICO_PROF',1);
 
+/**
+ * ID`s de PLAN_TURNOS
+ */
+define('PLAN_TURNO_DIURNO',1);
+define('PLAN_TURNO_VESPERTINO',2);
+define('PLAN_TURNO_NOCTURNO',3);
+
+/**
+ * ID`s de PLAN_ESTADOS
+ */
+define('PLAN_ESTADO_ACTIVO',1);
+define('PLAN_ESTADO_RESIDUAL',2);
+define('PLAN_ESTADO_INACTIVO',3);
 
 function limpiar_nombre($string) {
     // replace accented chars
