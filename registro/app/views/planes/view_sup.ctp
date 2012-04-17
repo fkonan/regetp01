@@ -15,7 +15,7 @@ if (empty($planes)) {
             if (!empty($plan['Anio'])) {
         ?>
             <div class="plan_item">
-                
+                mbre
                 <table class="tabla_plan" width="100%"border="2" cellpadding="2" cellspacing="0">
                     <caption class="plan_title">
                         <span class="plan_mas_info btn-ir">
@@ -23,9 +23,11 @@ if (empty($planes)) {
                             array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']), array('title'=>'Ver más información del plan'));
                         ?>
                         </span>
-                        
-                        <?php echo $html->link(
-                                $plan['Plan']['nombre'],
+                        <?php                         
+                                $nombre = $plan['Plan']['nombre'];
+                                if($plan['PlanEstado']['id'] != PLAN_ESTADO_ACTIVO) $nombre .= ' (' . $plan['PlanEstado']['nombre'] . ')';
+                                if($plan['PlanTurno']['id'] != PLAN_TURNO_DIURNO) $nombre .= ' (' . $plan['PlanTurno']['nombre'] . ')';  
+                                echo $html->link($nombre,
                                 array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']),
                                 null,null,false);
                         ?>

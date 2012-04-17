@@ -51,7 +51,11 @@ if (empty($planes)) {
 
             <table class="tabla_plan" cellpadding="2px" cellspacing="0px">
                 <caption class="plan_title">
-                     <?php echo $html->link($plan['Plan']['nombre'],
+x                     <?php 
+                        $nombre = $plan['Plan']['nombre'];
+                        if($plan['PlanEstado']['id'] != PLAN_ESTADO_ACTIVO) $nombre .= ' (' . $plan['PlanEstado']['nombre'] . ')';
+                        if($plan['PlanTurno']['id'] != PLAN_TURNO_DIURNO) $nombre .= ' (' . $plan['PlanTurno']['nombre'] . ')';  
+                        echo $html->link($nombre,
                         array('controller'=> 'planes', 'action'=>'view', $plan['Plan']['id']),
                         null,null,false);
                     ?>
