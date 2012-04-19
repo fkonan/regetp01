@@ -88,7 +88,6 @@
 
 
         <tr <?php echo $class;?> >
-            <td style="border-top: 1px silver solid;"></td>
             <td style="border-top: 1px silver solid;"><?php echo '<b>Totales</b>';?></td>
             <td style="border-top: 1px silver solid;" class="js-opcional"></td>
             <td style="border-top: 1px silver solid;" class="js-opcional"></td>
