@@ -180,7 +180,8 @@
      */
     echo $form->input('etp_estado_id',array(
     'label'=>'Relación con ETP',
-    'default' => ESTADO_ETP //instit de ETP
+        'empty'=>'Seleccione Relación con ETP',
+    'default' => 0 //instit de ETP
     ));
     
     /**
@@ -335,7 +336,7 @@
     'class'=>'input_text_peque'));
     echo $form->input('dir_tipodoc_id',array('label'=>'Tipo de Documento',
     'options'=>$tipoDocs,
-    'empty'=>array('Seleccionar')));
+    'empty'=>'Seleccionar'));
     echo $form->input('dir_nrodoc',array('label'=>array('text'=> 'Nº de Documento',
             'class'=>'input_label'),
     'class'=>'input_text_peque'

@@ -257,15 +257,30 @@ class Instit extends AppModel {
 				'rule' => VALID_EMAIL,
 				'required' => false,
 				'allowEmpty' => true,
-				//'on' => 'create', // or: 'update'
 				'message' => 'La dirección de e-mail no es válida.'
 			)
+		),
+   		'dir_nombre' => array(
+   			'nombre' => array(
+				'rule' => VALID_NOT_EMPTY,
+				'required' => true,
+				'allowEmpty' => false,
+				'message' => 'Debe ingresar un Nombre y Apellido del director.'
+			),
+		),
+		'dir_tipodoc_id' => array(
+			'notEmpty' => array(
+				'rule' => VALID_NOT_EMPTY,
+				'required' => true,
+				'allowEmpty' => false,
+				'message' => 'Seleccione un Tipo de Documento.'
+			),
 		),
    		'dir_nrodoc' => array(
    			'number' => array(
 				'rule' => VALID_NUMBER,
-				'required' => false,
-				'allowEmpty' => true,
+				'required' => true,
+				'allowEmpty' => false,
 				'message' => 'Debe ingresar un valor numérico.'
 			),
 		),
@@ -318,6 +333,14 @@ class Instit extends AppModel {
 				'message'=> 'Solo el tipo de Institución secundaria puede tener orientación asignada.'
 			),
 		),
+		'claseinstit_id' => array(
+			'notEmpty' => array(
+				'rule' => VALID_NOT_EMPTY,
+				'required' => true,
+				'allowEmpty' => false,
+				'message' => 'Seleccione un Tipo de Institución de ETP.'
+			),
+		),
 		'jurisdiccion_id' => array(
 			'notEmpty' => array(
 				'rule' => VALID_NOT_EMPTY,
@@ -352,12 +375,18 @@ class Instit extends AppModel {
 		),
 		
 		'etp_estado_id' => array(
+			'notEmpty' => array(
+				'rule' => VALID_NOT_EMPTY,
+				'required' => true,
+				'allowEmpty' => false,
+				'message' => 'Seleccione una Relación con ETP.'
+			),
 			'coincidente_con_claseinstit' => array(
 				'rule' => 'coincidente_con_claseinstit',
 				'required' => true,
 				'allowEmpty' => true,
 				'message' => 'Si la institución es del tipo Itinerario Formativo deberia ser "con programa de ETP".'
-			)
+			), 
 		),
             
         'dependencia_id' => array(
