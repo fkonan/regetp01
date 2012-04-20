@@ -66,6 +66,10 @@ class Anio extends AppModel {
 			),
 		),
 		'secciones'=>array(
+			'seccion_it_sup'=>array(
+				'rule' => 'seccion_it_sup',
+				'message' => 'Debe ingresar un valor en Secciones.'
+			),
 			'notEmpty'=> array(
 				'rule' => VALID_NUMBER,
 				'required' => false,
@@ -75,6 +79,10 @@ class Anio extends AppModel {
 			),
 		),
 		'hs_taller'=>array(
+			'horas_fp'=>array(
+				'rule' => 'horas_fp',
+				'message' => 'Debe ingresar un valor de Duración en Horas.'
+			),
 			'notEmpty'=> array(
 				'rule' => VALID_NUMBER,
 				'required' => false,
@@ -84,13 +92,17 @@ class Anio extends AppModel {
 			),
 		),
 		'matricula'=>array(
+			'matricula_it_sup'=>array(
+				'rule' => 'matricula_it_sup',
+				'message' => 'Debe ingresar valor en Matrícula.'
+			),
 			'notEmpty'=> array(
 				'rule' => VALID_NUMBER,
 				'required' => false,
 				'allowEmpty' => true,
 				//'on' => 'create', // or: 'update'
 				'message' => 'Debe ingresar un valor numérico.'	
-			),
+			)
 		),
         'etapa_id' => array(
             'it_es_polimodal' => array(
@@ -116,6 +128,40 @@ class Anio extends AppModel {
 	);
         
         
+    function matricula_it_sup(){
+    	$this->Plan->recursive = -1;
+    	$plan = $this->Plan->findById($this->data['Anio']['plan_id']);
+    	if($plan['Plan']['oferta_id'] == FP_ID || 
+    		$plan['Plan']['oferta_id'] == SUP_ID || 
+    		$plan['Plan']['oferta_id'] == SUP_TEC_ID ){
+    		if(empty($this->data['Anio']['matricula'])){
+    			return false;
+    		}
+    	}
+    	return true;
+    }
+    function seccion_it_sup(){
+    	$this->Plan->recursive = -1;
+    	$plan = $this->Plan->findById($this->data['Anio']['plan_id']);
+    	if($plan['Plan']['oferta_id'] == FP_ID || 
+    		$plan['Plan']['oferta_id'] == SUP_ID || 
+    		$plan['Plan']['oferta_id'] == SUP_TEC_ID ){
+    		if(empty($this->data['Anio']['secciones'])){
+    			return false;
+    		}
+    	}
+    	return true;
+    }
+    function horas_fp(){
+    	$this->Plan->recursive = -1;
+    	$plan = $this->Plan->findById($this->data['Anio']['plan_id']);
+    	if($plan['Plan']['oferta_id'] == FP_ID){
+    		if(empty($this->data['Anio']['hs_taller'])){
+    			return false;
+    		}
+    	}
+    	return true;
+    }
         /**
          * Devuelve true en caso de que un itinerario sea con etapa Polimodal
          * caso contrario devuelve false.
