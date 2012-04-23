@@ -105,7 +105,7 @@ $javascript;
     </head>
 
 
-    <body>
+    <body class="<?php if (Configure::read('debug')): ?>debug<?php endif ?>">
         <?
         /*
             if (strpos($_SERVER['HTTP_HOST'], '168.83.20.') !== false) {
