@@ -53,6 +53,7 @@ delete from instits where etp_estado_id = 1;
 
 /*borro planes residuales*/
 delete from planes where lower(nombre) like '%residual%';
+delete from planes where plan_estado_id = 1;
 
 /*Borro EGB3*/
 delete from planes where estructura_plan_id in(select id from estructura_planes where etapa_id = 1);
