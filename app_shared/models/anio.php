@@ -162,22 +162,23 @@ class Anio extends AppModel {
     	}
     	return true;
     }
-        /**
-         * Devuelve true en caso de que un itinerario sea con etapa Polimodal
-         * caso contrario devuelve false.
-         * sirve para validar ya que todos los IT deberian ser Polimodales
-         * @return boolean
-         */
-        function it_es_polimodal(){
-        	if($this->data['Plan']['Oferta']['abrev_character']!="IT")
-        		return true;
-            if ($this->data['Anio']['etapa_id'] == ETAPA_POLIMODAL) {
-                return true;
-            }
-            return false;
-        }
 
-	
+    /**
+     * Devuelve true en caso de que un itinerario sea con etapa Polimodal
+     * caso contrario devuelve false.
+     * sirve para validar ya que todos los IT deberian ser Polimodales
+     * @return boolean
+     */
+    function it_es_polimodal(){
+		$this->Plan->recursive = -1;
+    	$plan = $this->Plan->findById($this->data['Anio']['plan_id']);
+    	if($plan['Plan']['oferta_id'] == ITINERARIO_ID){
+            if ($this->data['Anio']['etapa_id'] != ETAPA_POLIMODAL) {
+                return false;
+            }
+        }
+        return true;
+    }
 	
 	/**
 	 * Me devuelve un array con el total de matriculas del plan
