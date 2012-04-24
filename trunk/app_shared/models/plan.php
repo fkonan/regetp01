@@ -176,7 +176,7 @@ class Plan extends AppModel {
         'rule'   =>'coincidir_con_oferta',
         'message'=>'El título seleccionado no corresponde a la oferta indicada.' )
     ),
-    'tituloName' => array(
+    'titulo_id' => array(
       'number'=> array(
         'rule' => VALID_NOT_EMPTY,
         'required' => true,
