@@ -41,9 +41,7 @@ body {
 }
 
 body.debug{
-    /*background-color: #7C0000;*/
-    background-image: url(images/fondo_debug.png);
-    background-repeat:repeat;
+    background: url(images/fondo_debug.png) repeat, url(images/fondo_blue.gif) repeat-x #87AEC5;
 }
 
 p {
