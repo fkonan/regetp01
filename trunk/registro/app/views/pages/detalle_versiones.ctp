@@ -1,3 +1,23 @@
+<h1>RFIETP - Novedades de la versión 1.7.9</h1>
+<br>
+<ul>
+    <li>Se corrigió un error en la visualización de datos históricos de matrícula, en la vista de Planes de Estudio </li>
+    <li>Se agregó validación a los campos Normativa, Título de Referencia, Duración Horas y Duración Años de Planes de Estudio</li>
+    <li>Se agregó validación a los campos Matrícula y Secciones de Años</li>
+    <li>Se agregó validación a los campos Tipo de Institución de ETP, Relación con ETP, Tipo de Establecimiento, Nombre del Director y Nro doc. Del Director de Instituciones</li>
+</ul>
+
+<h1>RFIETP - Novedades de la versión 1.7.8</h1>
+<br>
+<ul>
+    <li>Se agregó validación a los campos Nro de Anexo y Tipo de Dependencia de Instituciones</li>
+    <li>Se corrigió un error en el depurador "Corrector de Títulos de Planes" al traer planes sin subsector</li>
+    <li>Se agregó la posibilidad de cambiar el nombre del archivo de las descargas</li>
+    <li>Se cambió el formato de fechas de los Tickets pendientes de actualización</li>
+    <li>Se agregó la categoría "estado" a los planes de estudio, analizando el contenido actual del nombre de título y las observaciones, y aplicando la categoría cuando corresponde.</li>
+    <li>Se agregó la categoría "turno" a los planes de estudio, analizando el contenido actual del nombre de título y las observaciones, y aplicando la categoría cuando corresponde.</li>
+</ul>
+
 <h1>RFIETP - Novedades de la versión 1.7.7</h1>
 <br>
 <ul>
