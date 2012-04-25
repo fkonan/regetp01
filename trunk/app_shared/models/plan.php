@@ -181,7 +181,14 @@ class Plan extends AppModel {
         'rule'   =>'tiene_titulo',
         'message' => 'Debe seleccionar un Título de Referencia.'
       )
+    ), 
+    "estructura_plan_id" => array(
+      'estructura_para_sec'=> array(
+        'rule'   =>'estructura_para_sec',
+        'message' => 'Debe seleccionar una Estructura Plan.'
+      )
     )
+
   );
 
 
@@ -225,6 +232,14 @@ class Plan extends AppModel {
       if(empty($this->data['Plan']['duracion_anios'])){
         return false;
       }
+    }
+    return true;
+  }
+
+  function estructura_para_sec(){
+    if($this->data['Plan']['oferta_id'] == SEC_TEC_ID){
+      if(empty($this->data['Plan']['estructura_plan_id']))
+        return false;
     }
     return true;
   }
