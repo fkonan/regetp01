@@ -138,10 +138,10 @@ class Plan extends AppModel {
       )
     ),
     'duracion_hs' => array(
-      'horas_para_sec_sup' => array(
-        'rule'   => 'horas_para_sec_sup',
-        'message'=>'Debe cargar una duracion en horas para las ofertas Secundario y Superior'
-      ),
+      'hs_para_fp_it' => array(
+        'rule'   => 'hs_para_fp_it',
+        'message'=>'Debe cargar una duracion en horas para las ofertas Formación Profesional e Itinerario Formativo' 
+        ),
       'number' => array(
         'rule' => VALID_NUMBER,
         'allowEmpty' => true,
@@ -154,10 +154,10 @@ class Plan extends AppModel {
       )
     ),
     'duracion_anios' => array(
-      'anio_para_fp_it' => array(
-        'rule'   => 'anio_para_fp_it',
-        'message'=>'Debe cargar una duracion en años para las ofertas Formación Profesional e Itinerario Formativo' 
-        ),
+      'anio_para_sec_sup' => array(
+        'rule'   => 'anio_para_sec_sup',
+        'message'=> 'Debe cargar una duracion en años para las ofertas Secundario y Superior'
+      ),
       'number' => array(
         'rule' => VALID_NUMBER,
         'required' => true,
@@ -176,11 +176,9 @@ class Plan extends AppModel {
         'rule'   =>'coincidir_con_oferta',
         'message'=>'El título seleccionado no corresponde a la oferta indicada.' )
     ),
-    'titulo_id' => array(
-      'number'=> array(
-        'rule' => VALID_NOT_EMPTY,
-        'required' => true,
-        'allowEmpty' => false,
+    'tituloName' => array(
+      'tiene_titulo'=> array(
+        'rule'   =>'tiene_titulo',
         'message' => 'Debe seleccionar un Título de Referencia.'
       )
     )
@@ -210,8 +208,20 @@ class Plan extends AppModel {
     }
   }
 
-  function anio_para_fp_it() {
-    if($this->data['Plan']['oferta_id'] == ITINERARIO_ID/* || $this->data['Plan']['oferta_id'] == FP_ID*/){
+  function hs_para_fp_it() {
+    if($this->data['Plan']['oferta_id'] == ITINERARIO_ID || $this->data['Plan']['oferta_id'] == FP_ID){
+      if(empty($this->data['Plan']['duracion_hs'])){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function anio_para_sec_sup() {
+    if($this->data['Plan']['oferta_id'] == SEC_ID 
+       || $this->data['Plan']['oferta_id'] == SEC_TEC_ID 
+       || $this->data['Plan']['oferta_id'] == SUP_ID
+       || $this->data['Plan']['oferta_id'] == SUP_TEC_ID){
       if(empty($this->data['Plan']['duracion_anios'])){
         return false;
       }
@@ -219,14 +229,9 @@ class Plan extends AppModel {
     return true;
   }
 
-  function horas_para_sec_sup() {
-    if($this->data['Plan']['oferta_id'] == SEC_ID 
-       || $this->data['Plan']['oferta_id'] == SEC_TEC_ID 
-       || $this->data['Plan']['oferta_id'] == SUP_ID
-       || $this->data['Plan']['oferta_id'] == SUP_TEC_ID){
-      if(empty($this->data['Plan']['duracion_hs'])){
+  function tiene_titulo() {
+    if(empty($this->data['Plan']['titulo_id'])){
         return false;
-      }
     }
     return true;
   }
