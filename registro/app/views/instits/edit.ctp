@@ -108,15 +108,6 @@
 
 
     /**
-     *    Clase de Instituicion
-     */
-
-    echo $form->input('claseinstit_id',array(
-    'label'=>'Tipo de Institución de ETP',
-    'empty'=>'Seleccione una clase'
-    ));
-
-    /**
      *    Estado de la institucion respecto del programa ETP
      */
     echo $form->input('etp_estado_id',array(
@@ -124,6 +115,16 @@
     'empty'=>'Seleccione un estado',
     'default' => 2 //instit de ETP
     ));
+    
+    /**
+     *    Clase de Instituicion
+     */
+
+    echo $form->input('claseinstit_id',array(
+    'label'=>'Tipo de Institución de ETP',
+    'empty'=>'Seleccione una clase'
+    ));
+    
     
     /**
      *    Modalidad
