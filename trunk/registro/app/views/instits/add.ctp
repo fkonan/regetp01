@@ -166,15 +166,6 @@
     echo $form->input('nombre_dep',array('label'=>'Nombre de la Dependencia'));
 
 
-
-    /**
-     *    Clase de Instituicion
-     */
-    echo $form->input('claseinstit_id',array(
-    'label'=>'Tipo de Institución de ETP',
-    'empty'=>'Seleccione una clase'
-    ));
-
     /**
      *    Estado de la institucion respecto del programa ETP
      */
@@ -182,6 +173,14 @@
     'label'=>'Relación con ETP',
         'empty'=>'Seleccione Relación con ETP',
     'default' => 0 //instit de ETP
+    ));
+    
+    /**
+     *    Clase de Instituicion
+     */
+    echo $form->input('claseinstit_id',array(
+    'label'=>'Tipo de Institución de ETP',
+    'empty'=>'Seleccione una clase'
     ));
     
     /**

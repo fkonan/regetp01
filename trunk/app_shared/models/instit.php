@@ -333,14 +333,6 @@ class Instit extends AppModel {
 				'message'=> 'Solo el tipo de Institución secundaria puede tener orientación asignada.'
 			),
 		),
-		'claseinstit_id' => array(
-			'notEmpty' => array(
-				'rule' => VALID_NOT_EMPTY,
-				'required' => true,
-				'allowEmpty' => false,
-				'message' => 'Seleccione un Tipo de Institución de ETP.'
-			),
-		),
 		'jurisdiccion_id' => array(
 			'notEmpty' => array(
 				'rule' => VALID_NOT_EMPTY,
@@ -380,12 +372,26 @@ class Instit extends AppModel {
 				'required' => true,
 				'allowEmpty' => false,
 				'message' => 'Seleccione una Relación con ETP.'
+			)
+		),
+                'claseinstit_id' => array(
+			'notEmpty' => array(
+				'rule' => VALID_NOT_EMPTY,
+				'required' => true,
+				'allowEmpty' => false,
+				'message' => 'Seleccione un Tipo de Institución de ETP.'
 			),
-			'coincidente_con_claseinstit' => array(
-				'rule' => 'coincidente_con_claseinstit',
+			'claseinstits_con_programa_etp' => array(
+				'rule' => 'claseinstits_con_programa_etp',
 				'required' => true,
 				'allowEmpty' => true,
-				'message' => 'Si la institución es del tipo Itinerario Formativo deberia ser "con programa de ETP".'
+				'message' => 'Si se trata de "Institución con programa de ETP" debe ser de tipo "Secundario No Técnico", "Superior No Técnico", "con Itinerario Formativo" o "Formación Profesional".'
+			), 
+                        'claseinstits_de_etp' => array(
+				'rule' => 'claseinstits_de_etp',
+				'required' => true,
+				'allowEmpty' => true,
+				'message' => 'Si se trata de "Institución de ETP" debe ser de tipo "Secundario Técnico", "Superior Técnico" o "Formación Profesional".'
 			), 
 		),
             
@@ -1233,7 +1239,7 @@ class Instit extends AppModel {
 	
 	
 	
-	/**
+        /**
 	 * validaciones
 	 * 
 	 * esta funcion lo que hace es comprobar que si yo puse a una institucion que es del 
@@ -1242,20 +1248,37 @@ class Instit extends AppModel {
 	 * 
 	 * @return boolean
 	 */
-	function coincidente_con_claseinstit()
+	function claseinstits_con_programa_etp()
 	{
-		
-		if (!empty($this->data['Instit']['etp_estado_id']) && !empty($this->data['Instit']['claseinstit_id'])){
-			if($this->data['Instit']['claseinstit_id'] == 2){ //tipo Itinerario formativo
-				if($this->data['Instit']['etp_estado_id'] == 1){ //con programa de ETP
-					return true;					
-				}
-				else return false;
-			}			
-		}
-		return true;
+            if (!empty($this->data['Instit']['etp_estado_id']) && !empty($this->data['Instit']['claseinstit_id'])){
+                    if($this->data['Instit']['etp_estado_id'] == 1) { // con programa de ETP
+                        if($this->data['Instit']['claseinstit_id'] == 1 || // FP
+                            $this->data['Instit']['claseinstit_id'] == 2 || // con itinerario formativo
+                            $this->data['Instit']['claseinstit_id'] == 5 || // Sec No Tec
+                            $this->data['Instit']['claseinstit_id'] == 6) {  // Sup No Tec 
+                                    return true;					
+                            }
+                            else return false;
+                    }
+            }
+            return true;
 	}
-	
+        
+        function claseinstits_de_etp()
+	{
+            if (!empty($this->data['Instit']['etp_estado_id']) && !empty($this->data['Instit']['claseinstit_id'])){
+                    if($this->data['Instit']['etp_estado_id'] == 2) {   // de ETP
+                        if($this->data['Instit']['claseinstit_id'] == 1 || // FP
+                            $this->data['Instit']['claseinstit_id'] == 3 || // Sec Tec
+                            $this->data['Instit']['claseinstit_id'] == 4) { // Sup Tec
+                            return true;
+                        }
+                        else 
+                            return false;
+                    }
+            }
+            return true;
+	}
 	
 	
 	/**
