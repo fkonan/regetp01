@@ -394,6 +394,14 @@ class Instit extends AppModel {
 				'message' => 'Si se trata de "Institución de ETP" debe ser de tipo "Secundario Técnico", "Superior Técnico" o "Formación Profesional".'
 			), 
 		),
+		'modalidad_id' => array(
+			'modalidad_con_programa_etp' => array(
+				'rule' => 'modalidad_con_programa_etp',
+				'required' => true,
+				'allowEmpty' => true,
+				'message' => 'Si se trata de "Institución con programa de ETP" no puede tener Modalidad "Educación Técnico Profesional".'
+			),
+		),
             
         'dependencia_id' => array(
             'tipo_dependencia_provincial_y_nombre_dep_vacio' => array(
@@ -1242,9 +1250,8 @@ class Instit extends AppModel {
         /**
 	 * validaciones
 	 * 
-	 * esta funcion lo que hace es comprobar que si yo puse a una institucion que es del 
-	 * tipo Itinerario formativo, entonces la relacion con ETP
-	 * es que la institucion esta con programa de ETP
+	 * esta funcion lo que hace es comprobar que si una institucion es de tipo "Con programa ETP"
+	 * la Clase puede ser FP, Itinerario, Sec No Tec o Sup No Tec
 	 * 
 	 * @return boolean
 	 */
@@ -1264,6 +1271,14 @@ class Instit extends AppModel {
             return true;
 	}
         
+	/**
+	 * validaciones
+	 * 
+	 * esta funcion lo que hace es comprobar que si una institucion es de tipo "ETP"
+	 * la Clase puede ser FP, Sec Tec o Sup Tec
+	 * 
+	 * @return boolean
+	 */
         function claseinstits_de_etp()
 	{
             if (!empty($this->data['Instit']['etp_estado_id']) && !empty($this->data['Instit']['claseinstit_id'])){
@@ -1276,6 +1291,25 @@ class Instit extends AppModel {
                         else 
                             return false;
                     }
+            }
+            return true;
+	}
+
+	/**
+	 * validaciones
+	 * 
+	 * esta funcion lo que hace es comprobar que si la institucion es de tipo "Con programa de ETP"
+	 * entonces no puede tener Modalidad "Educación Técnico Profesional"
+	 * 
+	 * @return boolean
+	 */
+	function modalidad_con_programa_etp()
+	{
+            if (!empty($this->data['Instit']['etp_estado_id']) && $this->data['Instit']['etp_estado_id'] == 1){  // con programa de ETP
+                if($this->data['Instit']['modalidad_id'] != 1) {  // NO es modalidad ETP
+                    return true;					
+		}
+		else return false;
             }
             return true;
 	}
