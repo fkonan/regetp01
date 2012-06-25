@@ -1,3 +1,9 @@
+<h1>RFIETP - Novedades de la versión 1.7.10</h1>
+<br>
+<ul>
+    <li>Se agregaron nuevas categorías para Tipo de Institución (Secundario Técnico, Superior Técnico, Secundario No Técnico y Superior No Técnico) y se reajustaron las validaciones de Tipo de Institución y Relación con ETP.</li>
+</ul>
+
 <h1>RFIETP - Novedades de la versión 1.7.9</h1>
 <br>
 <ul>
