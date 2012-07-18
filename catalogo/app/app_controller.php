@@ -1,6 +1,6 @@
 <?php
 /* SVN FILE: $Id: app_controller.php 7945 2008-12-19 02:16:01Z gwoo $ */
-/**
+/** prueba
  * Short description for file.
  *
  * This file is application-wide controller file. You can put all
