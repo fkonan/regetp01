@@ -80,7 +80,7 @@ jQuery(document).ready(function() {
         }
     ?>
     <ul>
-        <li><?php echo $planResumen['Plan']['nombre']." (".$planResumen[0]['count'].")"; ?></li>
+        <li><?php echo $html->link($planResumen['Plan']['nombre']." (".$planResumen[0]['count'].")", array('controller'=>'planes','action'=>'index_x_nombre', $planResumen['Plan']['nombre'])); ?></li>
     </ul>
     <?php
     }
