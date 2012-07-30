@@ -191,6 +191,14 @@ class Plan extends AppModel {
 
   );
 
+  
+    function beforeSave() {
+        if (!empty($this->data['Plan']['nombre'])) {
+            $this->data['Plan']['nombre'] = trim($this->data['Plan']['nombre']);
+        }
+        
+        return true;
+    }
 
   /**
    * Me dice si el titulo de referencia

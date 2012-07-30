@@ -97,19 +97,19 @@ echo $html->css('smoothness/jquery-ui-1.8.6.custom',null, false);
                                                                          'style' => 'width:20%; clear:none; float:left;'
                                                                         ),
                                                          'style' => 'clear:none; float:left;'));
-		echo $form->input('telefono_personal',array(
-                                        'label' => 'Teléfono Personal',
-                                            'div'=>array('style'=>'width:35%; float: left; clear: none'),
-                                            'style'=> 'float: left'));
 		echo $form->input('telefono_institucional',array(
                                         'label' => 'Teléfono Institucional',
                                             'div'=>array('style'=>'width:36%; float: left; clear: none'),
                                             'style'=> 'float: left'));
+                echo $form->input('telefono_personal',array(
+                                        'label' => 'Teléfono Personal',
+                                            'div'=>array('style'=>'width:35%; float: left; clear: none'),
+                                            'style'=> 'float: left'));
+                echo $form->input('email_institucional',array(
+                                            'div'=>array('style'=>'width:46%; float: left; clear: none'),
+                                            'style'=> 'float: left'));
 		echo $form->input('email_personal',array(
                                             'div'=>array('style'=>'width:47%; float: left; clear: none'),
-                                            'style'=> 'float: left'));
-		echo $form->input('email_institucional',array(
-                                            'div'=>array('style'=>'width:46%; float: left; clear: none'),
                                             'style'=> 'float: left'));
 		echo $form->input('direccion', array(
                                             'label' => 'Dirección',

@@ -87,6 +87,23 @@ class PlanesController extends AppController {
         $this->set('ofertasControllers', $ofertasControllers);
         $this->set('ultimo_ciclo_actualizado',$this->Plan->Instit->getUltimoCiclo($id));
     }
+    
+    
+    /**
+     * Listado de planes por nombre
+     * @param $id ID de institucion
+     */
+    function index_x_nombre($nombre = null) {
+
+        $this->paginate = array(
+                'limit'    => 50,
+                'conditions' => array('Plan.nombre' => $nombre),
+                'contain' => array('Instit' => array('Tipoinstit', 'Jurisdiccion(name)')),
+                'order'    => array('Instit.nombre' => 'asc')
+        );
+        $planes = $this->paginate('Plan');
+        $this->set(compact('planes', 'nombre'));
+    }
 
     function view($id = null) {
         if (!$id) {
