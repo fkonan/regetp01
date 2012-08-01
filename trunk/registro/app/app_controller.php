@@ -1,6 +1,6 @@
 <?php
 /* SVN FILE: $Id: app_controller.php 7945 2008-12-19 02:16:01Z gwoo $ */
-/** prueba 
+/** 
  * Short description for file.
  *
  * This file is application-wide controller file. You can put all
@@ -67,7 +67,7 @@ class AppController extends Controller {
 		 *  REGETP VERSION
 		 * 
 		 */
-		Configure::write('regetpVersion', '1.7.10');
+		Configure::write('regetpVersion', '1.7.11');
                 /*
 		$this->Auth->autoRedirect = false;
 		$this->Auth->loginError ='Usuario o Contraseña Incorrectos';
