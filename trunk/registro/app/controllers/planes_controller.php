@@ -95,6 +95,7 @@ class PlanesController extends AppController {
      */
     function index_x_nombre($nombre = null) {
 
+        $nombre = urldecode($nombre);
         $this->paginate = array(
                 'limit'    => 50,
                 'conditions' => array('Plan.nombre' => $nombre),
