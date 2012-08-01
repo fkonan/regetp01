@@ -1,3 +1,11 @@
+<h1>RFIETP - Novedades de la versión 1.7.11</h1>
+<br>
+<ul>
+	<li>Se agregaron validaciones para la carga de nombres de Planes de Estudio por parte de la Unidad de Información</li>
+        <li>Se mejoró la lista de "Resúmen de Planes de Estudio" asociados a cada Título y se agregó mayor detalle y accesibilidad para facilitar el trabajo de la Unidad de Información</li>
+        <li>Cambio de orden de aparición de campos de autoridades jurisdiccionales</li>
+</ul>
+
 <h1>RFIETP - Novedades de la versión 1.7.10</h1>
 <br>
 <ul>

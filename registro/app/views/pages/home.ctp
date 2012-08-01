@@ -20,9 +20,10 @@ Requerimientos mínimos para utilizar el <b>Sistema Gestión de Registro</b>:<br /
 
 <h2>Versión <?php echo Configure::read('regetpVersion');?></h2>
 
-<p>Desde su puesta en funcionamiento en junio de 2009 el sistema RFIETP se encuentra en permanente actualización y mejoramiento, tanto del contenido de información de la base de datos como de la aplicación que permite su gestión. En esa línea de trabajo a partir del 25 de Junio de 2012 se ha instalado la versión  <?php echo Configure::read('regetpVersion');?> del sistema. Sus principales novedades son:</p>
+<p>Desde su puesta en funcionamiento en junio de 2009 el sistema RFIETP se encuentra en permanente actualización y mejoramiento, tanto del contenido de información de la base de datos como de la aplicación que permite su gestión. En esa línea de trabajo a partir del 1 de Agosto de 2012 se ha instalado la versión  <?php echo Configure::read('regetpVersion');?> del sistema. Sus principales novedades son:</p>
 <ul>
-	<li>Se agregaron nuevas categorías para Tipo de Institución (Secundario Técnico, Superior Técnico, Secundario No Técnico y Superior No Técnico) y se reajustaron las validaciones de Tipo de Institución y Relación con ETP.</li>
+	<li>Se agregaron validaciones para la carga de nombres de Planes de Estudio por parte de la Unidad de Información</li>
+        <li>Se mejoró la lista de "Resúmen de Planes de Estudio" asociados a cada Título y se agregó mayor detalle y accesibilidad para facilitar el trabajo de la Unidad de Información</li>
 </ul>
 
 
