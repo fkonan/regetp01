@@ -10,6 +10,17 @@ $this->pageTitle= 'Hotelería y Gastronomía';
 		<?php  
         $vops = array(
             'foroName' => 'Hotelería y Gastronomía',
+            'participantes' => array(
+                'Escuela de Cocineros ?Gato Dumas?',
+                'FEDUTEC',
+                'Ministerio de TESS',
+                'UTHGRA',
+                'FEHGRA',
+                'Unión Docentes Argentinos',
+                'CTERA' ,
+                'CAIEP',
+                'AMET',
+            ),
             'fliaProfesional' => array('nombre'=>'Hotelería y Gastronomía',
                            'link'=>'/pages/flias/hoteleria_gastronomia')
         );
