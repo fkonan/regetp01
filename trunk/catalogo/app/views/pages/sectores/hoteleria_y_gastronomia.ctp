@@ -11,7 +11,7 @@ $this->pageTitle= 'Hotelería y Gastronomía';
         $vops = array(
             'foroName' => 'Hotelería y Gastronomía',
             'participantes' => array(
-                'Escuela de Cocineros ?Gato Dumas?',
+                'Escuela de Cocineros "Gato Dumas"',
                 'FEDUTEC',
                 'Ministerio de TESS',
                 'UTHGRA',
