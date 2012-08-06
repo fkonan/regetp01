@@ -88,7 +88,7 @@
       <td>Organizador de operaciones gastronómicas</td>
       <td>Organizador de operaciones gastronómicas</td>
       <td></td>
-    </tr>S
+    </tr>
   </tbody>
 </table>
 
