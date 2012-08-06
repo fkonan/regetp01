@@ -17,6 +17,7 @@
                             </ul>
                         </li>
 -->
+                        <li><?php echo $html->link('Administración', array('controller' => 'pages', 'action' => 'display', 'sectores/administracion'));?></li>
 <!--                        <li><?php echo $html->link('Aeronáutica', array('controller' => 'pages', 'action' => 'display', 'sectores/aeronautica'));?></li>-->
                         
                         <li>
