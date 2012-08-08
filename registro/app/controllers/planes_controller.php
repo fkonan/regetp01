@@ -93,7 +93,7 @@ class PlanesController extends AppController {
      * Listado de planes por nombre
      * @param $id ID de institucion
      */
-    function index_x_nombre($nombre = null) {
+    function index_x_nombre($nombre=null, $titulo_id=null) {
 
         $nombre = urldecode($nombre);
         $this->paginate = array(
@@ -102,6 +102,12 @@ class PlanesController extends AppController {
                 'contain' => array('Instit' => array('Tipoinstit', 'Jurisdiccion(name)')),
                 'order'    => array('Instit.nombre' => 'asc')
         );
+        
+        if (!empty($titulo_id)) {
+            // que sean del mismo título
+            $this->paginate['conditions']['Plan.titulo_id'] = $titulo_id; 
+        }
+        
         $planes = $this->paginate('Plan');
         $this->set(compact('planes', 'nombre'));
     }

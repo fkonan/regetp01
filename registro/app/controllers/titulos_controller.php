@@ -110,7 +110,7 @@ class TitulosController extends AppController {
         $conditions['conditions'] = array('Plan.titulo_id' => $id);
         $conditions['fields'] = array('Plan.nombre', 'count(*)');
         $conditions['group'] = array('Plan.nombre');
-        $conditions['order'] = array('count(*) desc', 'Plan.nombre');
+        $conditions['order'] = array('Plan.nombre', 'count(*) desc');
         $planesResumen = $this->Titulo->Plan->find('all', $conditions);
 
         $this->set(compact('titulo','planes','planesResumen'));
