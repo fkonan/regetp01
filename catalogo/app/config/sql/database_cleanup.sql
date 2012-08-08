@@ -46,14 +46,13 @@ delete from instits where activo = 0;
 /*eliminar instituciones en especial (pedido de UI)*/
 delete from instits where id IN (470,719,748,920,926,1005,808);
 
-/* eliminar instituciones con programa de ETP*/
-delete from planes where instit_id in (select id from instits where etp_estado_id = 1);
-delete from instits where etp_estado_id = 1;
+/* eliminar instituciones que no son de ETP*/
+delete from planes where instit_id in (select id from instits where etp_estado_id <> 2);
+delete from instits where etp_estado_id <> 2;
 
 
 /*borro planes residuales*/
-delete from planes where lower(nombre) like '%residual%';
-delete from planes where plan_estado_id = 1;
+delete from planes where plan_estado_id <> 1;
 
 /*Borro EGB3*/
 delete from planes where estructura_plan_id in(select id from estructura_planes where etapa_id = 1);
