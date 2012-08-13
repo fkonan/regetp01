@@ -403,16 +403,31 @@ class Instit extends AppModel {
 			),
 		),
             
-        'dependencia_id' => array(
-            'tipo_dependencia_provincial_y_nombre_dep_vacio' => array(
-                'rule' => array('tipo_dependencia_provincial_y_nombre_dep_vacio'),
-                'message' => 'Si la dependencia es Provincial, el nombre de la dependencia debe estar vacio',
-            ),
-            'tipo_dependencia_nacional_y_nombre_dep_no_vacio' => array(
-                'rule' => array('tipo_dependencia_nacional_y_nombre_dep_no_vacio'),
-                'message' => 'Si la dependencia es Nacional, el nombre de la dependencia no debe estar vacio',
-            )
-        ),
+                'dependencia_id' => array(
+                    'tipo_dependencia_provincial_y_nombre_dep_vacio' => array(
+                        'rule' => array('tipo_dependencia_provincial_y_nombre_dep_vacio'),
+                        'message' => 'Si la dependencia es Provincial, el nombre de la dependencia debe estar vacio',
+                    ),
+                    'tipo_dependencia_nacional_y_nombre_dep_no_vacio' => array(
+                        'rule' => array('tipo_dependencia_nacional_y_nombre_dep_no_vacio'),
+                        'message' => 'Si la dependencia es Nacional, el nombre de la dependencia no debe estar vacio',
+                    )
+                ),
+            
+                'modalidad_id' => array(
+                    'modalidad_estado_de_etp' => array(
+                            'rule' => 'modalidad_estado_de_etp',
+                            'required' => true,
+                            'allowEmpty' => true,
+                            'message' => 'Si se trata de una "Institución de ETP" debe tener la modalidad "Educación Técnico Profesional".'
+                    ), 
+                    'modalidad_estado_programa_de_etp' => array(
+                            'rule' => 'modalidad_estado_programa_de_etp',
+                            'required' => true,
+                            'allowEmpty' => true,
+                            'message' => 'Si se trata de una "Institución con Programa de ETP" no puede tener la modalidad "Educación Técnico Profesional".'
+                    ), 
+                ),
 	);
 	
   	/**
@@ -1314,6 +1329,47 @@ class Instit extends AppModel {
             return true;
 	}
 	
+        /**
+	 * validaciones
+	 * 
+	 * si la institucion es con programa de ETP, debe tener modalidad Educación Tecnico Profesional
+       	 * 
+	 * @return boolean
+	 */
+        function modalidad_estado_de_etp() {
+            if (!empty($this->data['Instit']['etp_estado_id']) && !empty($this->data['Instit']['modalidad_id'])){
+                    if($this->data['Instit']['etp_estado_id'] == 2) {   // de ETP
+                        if($this->data['Instit']['modalidad_id'] == 1) {
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+            }
+            return true;
+        }
+        /**
+	 * validaciones
+	 * 
+         * Si es con Programa de ETP cualquiera de las otras modalidades menos Educación Tecnico Prof.
+	 * 
+	 * @return boolean
+	 */
+        function modalidad_estado_programa_de_etp() {
+            if (!empty($this->data['Instit']['etp_estado_id']) && !empty($this->data['Instit']['modalidad_id'])){
+                    if($this->data['Instit']['etp_estado_id'] == 1) {   // programa de ETP
+                        if($this->data['Instit']['modalidad_id'] > 1) {
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+            }
+            return true;
+        }
+
 	
 	/**
 	 * 
