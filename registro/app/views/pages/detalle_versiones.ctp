@@ -1,3 +1,11 @@
+<h1>RFIETP - Novedades de la versión 1.7.12</h1>
+<br>
+<ul>
+	<li>Se han publicado los Planes de Mejora del 4° Trimestre de 2011</li>
+        <li>Se agregaron y optimizaron validaciones para la carga de Instituciones por parte de la Unidad de Información</li>
+        <li>Se mejoró la lista de "Resúmen de Planes de Estudio" asociados a cada Título y se agregó mayor detalle y accesibilidad para facilitar el trabajo de la Unidad de Información</li>
+</ul>
+
 <h1>RFIETP - Novedades de la versión 1.7.11</h1>
 <br>
 <ul>
